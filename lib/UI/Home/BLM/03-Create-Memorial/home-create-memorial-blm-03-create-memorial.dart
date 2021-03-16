@@ -1,26 +1,71 @@
-// import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
-// import 'package:facesbyplaces/API/BLM/04-Create-Memorial/api-create-memorial-blm-01-create-memorial.dart';
+import 'package:facesbyplaces/API/BLM/04-Create-Memorial/api-create-memorial-blm-01-create-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:facesbyplaces/Configurations/date-conversion.dart';
-// import 'home-create-memorial-blm-01-create-memorial.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:location/location.dart' as Location;
-// import 'package:loader_overlay/loader_overlay.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
 class HomeBLMCreateMemorial3 extends StatefulWidget{
+  final String relationship;
+  final String locationOfIncident;
+  final String precinct;
+  final String dob;
+  final String rip;
+  final String country;
+  final String state;
+  final String description;
+  final String memorialName;
+  final List<dynamic> imagesOrVideos;
 
-  HomeBLMCreateMemorial3State createState() => HomeBLMCreateMemorial3State();
+  HomeBLMCreateMemorial3({
+    required this.relationship, 
+    required this.locationOfIncident, 
+    required this.precinct, 
+    required this.dob, 
+    required this.rip, 
+    required this.country, 
+    required this.state,
+    required this.description,
+    required this.memorialName,
+    required this.imagesOrVideos,
+  });
+
+  HomeBLMCreateMemorial3State createState() => HomeBLMCreateMemorial3State(relationship: relationship, locationOfIncident: locationOfIncident, precinct: precinct, dob: dob, rip: rip, country: country, state: state, description: description, memorialName: memorialName, imagesOrVideos: imagesOrVideos);
 }
 
 class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
+
+  final String relationship;
+  final String locationOfIncident;
+  final String precinct;
+  final String dob;
+  final String rip;
+  final String country;
+  final String state;
+  final String description;
+  final String memorialName;
+  final List<dynamic> imagesOrVideos;
+
+  HomeBLMCreateMemorial3State({
+    required this.relationship, 
+    required this.locationOfIncident, 
+    required this.precinct, 
+    required this.dob, 
+    required this.rip, 
+    required this.country, 
+    required this.state,
+    required this.description,
+    required this.memorialName,
+    required this.imagesOrVideos,
+  });
 
   File? backgroundImage;
   File? profileImage;
@@ -49,7 +94,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // BLMCreateMemorialValues? newValue = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
@@ -271,26 +315,32 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     Location.PermissionStatus permissionGranted = await location.hasPermission();
 
                     if (permissionGranted != Location.PermissionStatus.granted) {
-                      await showDialog(
+                      // await showOkAlertDialog(
+                      //   context: context,
+                      //   title: 'Error',
+                      //   message: 'FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                      // );
+                      var confirmation = await showOkCancelAlertDialog(
                         context: context,
-                        builder: (_) => 
-                        Container()
-                        //   AssetGiffyDialog(
-                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        //   entryAnimation: EntryAnimation.DEFAULT,
-                        //   description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
-                        //     textAlign: TextAlign.center,
-                        //     style: TextStyle(),
-                        //   ),
-                        //   onlyOkButton: true,
-                        //   buttonOkColor: Colors.red,
-                        //   onOkButtonPressed: () {
-                        //     Navigator.pop(context, true);
-                        //   },
-                        // )
+                        title: 'Confirm',
+                        message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                        okLabel: 'Yes',
+                        cancelLabel: 'No',
                       );
+
+                      if(confirmation == OkCancelResult.ok){
+                        permissionGranted = await location.requestPermission();
+
+                        // context.showLoaderOverlay();
+                        // Location.LocationData locationData = await location.getLocation();
+                        // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                        // context.hideLoaderOverlay();
+
+                        // Navigator.pop(context);
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
+                      }
                     }else{
+
                       if(profileImage == null){
                         final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
                         final Uint8List list = bytes.buffer.asUint8List();
@@ -304,7 +354,40 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                         });
                       }
 
-                      // Location.LocationData locationData = await location.getLocation();
+                      Location.LocationData locationData = await location.getLocation();
+
+                      // String blmMemorialName;
+                      // String blmDescription;
+                      // String blmLocationOfIncident;
+                      // String blmDob;
+                      // String blmRip;
+                      // String blmState;
+                      // String blmCountry;
+                      // String blmPrecinct;
+                      // String blmRelationship;
+                      // dynamic blmBackgroundImage;
+                      // dynamic blmProfileImage;
+                      // List<dynamic> blmImagesOrVideos;
+                      // String blmLatitude;
+                      // String blmLongitude;
+
+
+                      APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
+                        blmMemorialName: memorialName,
+                        blmDescription: description,
+                        blmLocationOfIncident: locationOfIncident,
+                        blmDob: dob,
+                        blmRip: rip,
+                        blmState: state,
+                        blmCountry: country,
+                        blmPrecinct: precinct,
+                        blmRelationship: relationship,
+                        blmBackgroundImage: backgroundImage,
+                        blmProfileImage: profileImage,
+                        blmImagesOrVideos: imagesOrVideos,
+                        blmLatitude: '${locationData.latitude}',
+                        blmLongitude: '${locationData.longitude}',
+                      );
 
                       // APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
                       //   blmRelationship: newValue.relationship,
@@ -323,12 +406,14 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                       //   blmLongitude: locationData.longitude.toString()
                       // );
 
-                      // context.showLoaderOverlay();
-                      // int result = await apiBLMCreateMemorial(blmMemorial: memorial);
-                      // context.hideLoaderOverlay();
+                      context.showLoaderOverlay();
+                      int result = await apiBLMCreateMemorial(blmMemorial: memorial);
+                      print('The result is $result');
+                      context.hideLoaderOverlay();
 
-                      // Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result, managed: true, newlyCreated: true, relationship: newValue.relationship,));
-                      // Navigator.pushReplacement(context, newRoute);
+                      Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result, managed: true, newlyCreated: true, relationship: relationship,));
+                      Navigator.pushReplacement(context, newRoute);
+                      
                     }
                     
                   },

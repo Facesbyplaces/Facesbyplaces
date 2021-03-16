@@ -46,7 +46,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('No more posts to show'),
+              content: Text('No more memorials to show'),
               duration: Duration(seconds: 1),
               backgroundColor: Color(0xff4EC9D4),
             ),
@@ -146,13 +146,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           ),
         );
       }
-
-      // if(mounted)
-      // setState(() {});
-      // page1++;
     }
-
-    // page1 = 1;
 
     if(memorialFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
@@ -183,21 +177,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       setState(() {});
       page1++;
 
-      // if(memorialFamilyItemsRemaining == 0){
-      //   addMemorials2();
-      //   setState(() {
-      //     flag1 = true;
-      //   });
-      //   onLoading();
-      // } 
-
       if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
         addMemorials2();
       }
     }
-
-    // refreshController.loadComplete();
-
   }
 
   void onLoading2() async{
@@ -226,13 +209,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           ),
         );
       }
-
-      // if(mounted)
-      // setState(() {});
-      // page2++;
     }
-
-    // page2 = 1;
 
     if(memorialFriendsItemsRemaining != 0){
       context.showLoaderOverlay();
@@ -263,7 +240,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       setState(() {});
       page2++;
     }
-    // refreshController.loadComplete();
   }
 
   @override
@@ -283,36 +259,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           itemBuilder: (c, i) => finalMemorials[i],
         )
       )
-      // ? Container()
-      // ? SmartRefresher(
-      //   enablePullDown: true,
-      //   enablePullUp: true,
-      //   header: MaterialClassicHeader(
-      //     color: Color(0xffffffff),
-      //     backgroundColor: Color(0xff4EC9D4),
-      //   ),
-      //   footer: CustomFooter(
-      //     loadStyle: LoadStyle.ShowWhenLoading,
-      //     builder: (BuildContext context, LoadStatus mode){
-      //       Widget body = Container();
-      //       if(mode == LoadStatus.loading){
-      //         body = CircularProgressIndicator();
-      //       }
-      //       return Center(child: body);
-      //     },
-      //   ),
-      //   controller: refreshController,
-      //   onRefresh: onRefresh,
-      //   onLoading: onLoading,
-      //   child: ListView.separated(
-      //     physics: ClampingScrollPhysics(),
-      //     itemBuilder: (c, i) {
-      //       return finalMemorials[i];
-      //     },
-      //     separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
-      //     itemCount: finalMemorials.length,
-      //   ),
-      // )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

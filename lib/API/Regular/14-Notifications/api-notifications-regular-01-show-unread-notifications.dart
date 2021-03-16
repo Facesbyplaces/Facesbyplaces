@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<int> apiRegularShowUnreadNotifications() async{
 
@@ -9,22 +8,25 @@ Future<int> apiRegularShowUnreadNotifications() async{
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/numOfUnread', ''),
-    // Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/numOfUnread', ''),
-    Uri.http('fbp.dev1.koda.ws', '/api/v1/notifications/numOfUnread',),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/notifications/numOfUnread', 
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
+  print('The status code of show unread notifications is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var value = json.decode(response.body);
-    return value['number_of_unread_notifs'];
+    var newData = Map<String, dynamic>.from(response.data);
+    return newData['number_of_unread_notifs'];
   }else{
-    return 0;
+    throw Exception('Failed to get the user information');
   }
 }

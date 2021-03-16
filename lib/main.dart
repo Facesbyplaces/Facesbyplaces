@@ -14,8 +14,7 @@ import 'UI/Home/Regular/07-Search/home-search-regular-01-search.dart';
 import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
 // import 'UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
-import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart';
-import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-03-create-memorial.dart';
+// import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart';
 // import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart';
@@ -38,7 +37,6 @@ import 'UI/Regular/regular-05-upload-photo.dart';
 import 'UI/BLM/blm-01-join.dart';
 import 'UI/BLM/blm-02-login.dart';
 import 'UI/BLM/blm-03-register.dart';
-import 'UI/BLM/blm-04-verify-email.dart';
 import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
@@ -55,20 +53,7 @@ void main() async{
   runApp(
      GlobalLoaderOverlay(
       useDefaultLoading: false,
-      // overlayWidget: Center(
-      //   child: Container(
-      //     color: Colors.red,
-      //   ),
-      // ),
       overlayWidget: Center(child: SpinKitThreeBounce(color: Color(0xff000000)),),
-      // overlayWidget: Container(
-      //   color: Colors.grey,
-      //   // child: Center(
-      //   //   child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,),
-      //   // ),
-      //   // child: SpinKitThreeBounce(color: Color(0xff000000)),
-      //   child: Center(child: SpinKitThreeBounce(color: Color(0xff000000)),),
-      // ),
       overlayOpacity: 0.5,
       overlayColor: Colors.grey,
       child: MaterialApp(
@@ -83,20 +68,6 @@ void main() async{
             return UIGetStarted();
           }
         }()),
-        // builder: (context, widget) => ResponsiveWrapper.builder(
-        //   BouncingScrollWrapper.builder(context, widget),
-        //   maxWidth: 1200,
-        //   minWidth: 450,
-        //   defaultScale: true,
-        //   breakpoints: [
-        //     ResponsiveBreakpoint.resize(450, name: MOBILE),
-        //     ResponsiveBreakpoint.autoScale(800, name: TABLET),
-        //     ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-        //     ResponsiveBreakpoint.resize(1200, name: DESKTOP),
-        //     ResponsiveBreakpoint.autoScale(2460, name: "4K"),
-        //   ],
-        //   background: Container(color: Color(0xFFF5F5F5))
-        // ),
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
           cardColor: Color(0xffffffff),
@@ -108,7 +79,7 @@ void main() async{
           '/blm/join': (BuildContext context) => BLMJoin(),
           '/blm/login': (BuildContext context) => BLMLogin(),
           '/blm/register': (BuildContext context) => BLMRegister(),
-          '/blm/verify-email': (BuildContext context) => BLMVerifyEmail(),
+          // '/blm/verify-email': (BuildContext context) => BLMVerifyEmail(),
           '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(), // BLM START
 
           '/regular/join': (BuildContext context) => RegularJoin(),
@@ -123,8 +94,8 @@ void main() async{
           '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
           '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
           '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
-          '/home/blm/create-memorial-2': (BuildContext context) => HomeBLMCreateMemorial2(),
-          '/home/blm/create-memorial-3': (BuildContext context) => HomeBLMCreateMemorial3(),
+          // '/home/blm/create-memorial-2': (BuildContext context) => HomeBLMCreateMemorial2(),
+          // '/home/blm/create-memorial-3': (BuildContext context) => HomeBLMCreateMemorial3(),
           '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
           '/home/blm/donation-paypal': (BuildContext context) => HomeBLMPaypal(),
           // '/home/blm/profile-settings': (BuildContext context) => HomeBLMUserProfileDetails(),

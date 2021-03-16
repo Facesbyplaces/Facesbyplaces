@@ -1,19 +1,18 @@
-// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-push-notifications.dart';
-// import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-// import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
-// import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-// import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
+import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
+import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
 // import 'package:overlay_support/overlay_support.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-// import 'Regular/regular-07-password-reset.dart';
-// import 'BLM/blm-07-password-reset.dart';
+import 'Regular/regular-07-password-reset.dart';
+import 'BLM/blm-07-password-reset.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -71,80 +70,80 @@ class UIGetStarted extends StatefulWidget{
 
 class UIGetStartedState extends State<UIGetStarted>{
 
-  // StreamSubscription<Map>? streamSubscription;
+  StreamSubscription<Map>? streamSubscription;
   // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   // PushNotificationService? pushNotificationService;
 
-  // void listenDeepLinkData(){
-  //   streamSubscription = FlutterBranchSdk.initSession().listen((data) {
-  //     if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
-  //       initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
-  //     }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
-  //       initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
-  //     }else if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
-  //       initUnit(resetType: data["reset-type"]);
-  //     }
-  //   }, onError: (error) {
-  //     PlatformException platformException = error as PlatformException;
-  //     print('InitSession error: ${platformException.code} - ${platformException.message}');
-  //   });
-  // }
+  void listenDeepLinkData(){
+    streamSubscription = FlutterBranchSdk.initSession().listen((data) {
+      if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
+        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
+      }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
+        initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
+      }else if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
+        initUnit(resetType: data["reset-type"]);
+      }
+    }, onError: (error) {
+      PlatformException platformException = error as PlatformException;
+      print('InitSession error: ${platformException.code} - ${platformException.message}');
+    });
+  }
 
-  // initUnit({required String resetType}) async{
-  //   bool login = await FlutterBranchSdk.isUserIdentified();
+  initUnit({required String resetType}) async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
 
-  //   if(login){
-  //     var value1 = await FlutterBranchSdk.getLatestReferringParams();
+    if(login){
+      var value1 = await FlutterBranchSdk.getLatestReferringParams();
 
-  //     if(resetType == 'Regular'){
-  //       FlutterBranchSdk.logout();
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
-  //     }else{
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset(resetToken: value1['reset_password_token'],)));
-  //     }
-  //   }
-  // }
+      if(resetType == 'Regular'){
+        FlutterBranchSdk.logout();
+        Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
+      }else{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset(resetToken: value1['reset_password_token'],)));
+      }
+    }
+  }
 
 
-  // initUnitSharePost({required int postId, required bool likeStatus, required int numberOfLikes, required String pageType}) async{
-  //   bool login = await FlutterBranchSdk.isUserIdentified();
+  initUnitSharePost({required int postId, required bool likeStatus, required int numberOfLikes, required String pageType}) async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
 
-  //   if(login){
-  //     FlutterBranchSdk.logout();
+    if(login){
+      FlutterBranchSdk.logout();
 
-  //     if(pageType == 'Blm'){
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
-  //     }else{
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
-  //     }
-  //   }
-  // }
+      if(pageType == 'Blm'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
+      }else{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
+      }
+    }
+  }
 
-  // initUnitShareMemorial({required int memorialId, required String pageType, required bool follower}) async{
-  //   bool login = await FlutterBranchSdk.isUserIdentified();
+  initUnitShareMemorial({required int memorialId, required String pageType, required bool follower}) async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
 
-  //   if(login){
-  //     FlutterBranchSdk.logout();
-  //     if(pageType == 'Blm'){
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
-  //     }else{
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
-  //     }
-  //   }
-  // }
+    if(login){
+      FlutterBranchSdk.logout();
+      if(pageType == 'Blm'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      }else{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      }
+    }
+  }
 
-  // void initState(){
-  //   super.initState();
-  //   PushNotificationService(_firebaseMessaging);
-  //   pushNotificationService!.initialise();
-  //   // listenDeepLinkData();
-  // }
+  void initState(){
+    super.initState();
+    // PushNotificationService(_firebaseMessaging);
+    // pushNotificationService!.initialise();
+    listenDeepLinkData();
+  }
 
-  // @override
-  // void dispose() {
-  //   streamSubscription!.cancel();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    streamSubscription!.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

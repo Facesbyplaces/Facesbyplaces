@@ -1,10 +1,10 @@
-// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class RegularPasswordResetEmail extends StatefulWidget{
@@ -15,31 +15,31 @@ class RegularPasswordResetEmail extends StatefulWidget{
 class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  // BranchUniversalObject? buo;
-  // BranchLinkProperties? lp;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
 
-  // void initBranchReferences(){
-  //   buo = BranchUniversalObject(
-  //     canonicalIdentifier: 'FacesbyPlaces',
-  //     title: 'FacesbyPlaces Link',
-  //     imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-  //     contentDescription: 'FacesbyPlaces link to the app',
-  //     keywords: ['FacesbyPlaces', 'Link', 'App'],
-  //     publiclyIndex: true,
-  //     locallyIndex: true,
-  //     contentMetadata: BranchContentMetaData()
-  //       ..addCustomMetadata('custom_string', 'fbp-link')
-  //       ..addCustomMetadata('reset-type', 'Regular')
-  //   );
+  void initBranchReferences(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Link', 'App'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('custom_string', 'fbp-link')
+        ..addCustomMetadata('reset-type', 'Regular')
+    );
 
-  //   lp = BranchLinkProperties(
-  //     channel: 'facebook',
-  //     feature: 'sharing',
-  //     stage: 'new share',
-  //     tags: ['one', 'two', 'three']
-  //   );
-  //   lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  // }
+    lp = BranchLinkProperties(
+      channel: 'facebook',
+      feature: 'sharing',
+      stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,118 +125,51 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                         bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
 
                         if(_key1.currentState!.controller.text == ''){
-                          await showDialog(
+                          await showOkAlertDialog(
                             context: context,
-                            builder: (_) => 
-                            Container()
-                            //   AssetGiffyDialog(
-                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //   entryAnimation: EntryAnimation.DEFAULT,
-                            //   description: Text('Please complete the form before submitting.',
-                            //     textAlign: TextAlign.center,
-                            //     style: TextStyle(),
-                            //   ),
-                            //   onlyOkButton: true,
-                            //   buttonOkColor: Colors.red,
-                            //   onOkButtonPressed: () {
-                            //     Navigator.pop(context, true);
-                            //   },
-                            // )
+                            title: 'Error',
+                            message: 'Please complete the form before submitting.',
                           );
                         }else if(!validEmail){
-                          await showDialog(
+                          await showOkAlertDialog(
                             context: context,
-                            builder: (_) => 
-                            Container()
-                            //   AssetGiffyDialog(
-                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //   entryAnimation: EntryAnimation.DEFAULT,
-                            //   description: Text('Invalid email address. Please try again.',
-                            //     textAlign: TextAlign.center,
-                            //     style: TextStyle(),
-                            //   ),
-                            //   onlyOkButton: true,
-                            //   buttonOkColor: Colors.red,
-                            //   onOkButtonPressed: () {
-                            //     Navigator.pop(context, true);
-                            //   },
-                            // )
+                            title: 'Error',
+                            message: 'Invalid email address. Please try again.',
                           );
                         }else{
-                          // context.showLoaderOverlay();
+                          context.showLoaderOverlay();
                           
-                          // initBranchReferences();
-                          // FlutterBranchSdk.setIdentity('alm-user-forgot-password');
-                          // BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
+                          initBranchReferences();
+                          FlutterBranchSdk.setIdentity('alm-user-forgot-password');
+                          BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
 
-                          // context.hideLoaderOverlay();
+                          context.hideLoaderOverlay();
                           
-                          // if(response.success){
-                          //   context.showLoaderOverlay();
-                          //   bool result = await apiRegularPasswordReset(email: _key1.currentState!.controller.text, redirectLink: response.result);
-                          //   context.hideLoaderOverlay();
+                          if(response.success){
+                            context.showLoaderOverlay();
+                            bool result = await apiRegularPasswordReset(email: _key1.currentState!.controller.text, redirectLink: response.result);
+                            context.hideLoaderOverlay();
                             
-                          //   if(result == true){
-                          //     await showDialog(
-                          //       context: context,
-                          //       builder: (_) => 
-                          //         AssetGiffyDialog(
-                          //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //         title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          //         entryAnimation: EntryAnimation.DEFAULT,
-                          //         description: Text('An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
-                          //           textAlign: TextAlign.center,
-                          //           style: TextStyle(),
-                          //         ),
-                          //         onlyOkButton: true,
-                          //         buttonOkColor: Colors.green,
-                          //         onOkButtonPressed: () {
-                          //           Navigator.pop(context, true);
-                          //         },
-                          //       )
-                          //     );
-                          //   }else{
-                          //     await showDialog(
-                          //       context: context,
-                          //       builder: (_) => 
-                          //         AssetGiffyDialog(
-                          //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          //         entryAnimation: EntryAnimation.DEFAULT,
-                          //         description: Text('Something went wrong. Please try again.',
-                          //           textAlign: TextAlign.center,
-                          //           style: TextStyle(),
-                          //         ),
-                          //         onlyOkButton: true,
-                          //         buttonOkColor: Colors.red,
-                          //         onOkButtonPressed: () {
-                          //           Navigator.pop(context, true);
-                          //         },
-                          //       )
-                          //     );
-                          //   }
-                          // }else{
-                          //   await showDialog(
-                          //     context: context,
-                          //     builder: (_) => 
-                          //       AssetGiffyDialog(
-                          //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          //       entryAnimation: EntryAnimation.DEFAULT,
-                          //       description: Text('Something went wrong. Please try again.',
-                          //         textAlign: TextAlign.center,
-                          //         style: TextStyle(),
-                          //       ),
-                          //       onlyOkButton: true,
-                          //       buttonOkColor: Colors.red,
-                          //       onOkButtonPressed: () {
-                          //         Navigator.pop(context, true);
-                          //       },
-                          //     )
-                          //   );
-                          // }
+                            if(result == true){
+                              await showOkAlertDialog(
+                                context: context,
+                                title: 'Success',
+                                message: 'An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
+                              );
+                            }else{
+                              await showOkAlertDialog(
+                                context: context,
+                                title: 'Error',
+                                message: 'Something went wrong. Please try again.',
+                              );
+                            }
+                          }else{
+                            await showOkAlertDialog(
+                              context: context,
+                              title: 'Error',
+                              message: 'Something went wrong. Please try again.',
+                            );
+                          }
                         }
 
                       },

@@ -11,8 +11,8 @@ Future<bool> apiBLMAddFriends({required int memorialId, required int userId, req
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
     
     formData.files.addAll([
       MapEntry('page_type', MultipartFile.fromString('Blm'),),

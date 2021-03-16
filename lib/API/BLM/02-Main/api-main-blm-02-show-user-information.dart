@@ -1,8 +1,4 @@
-
-
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
@@ -26,7 +22,6 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
   );
 
   print('The status code of user is ${response.statusCode}');
-
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

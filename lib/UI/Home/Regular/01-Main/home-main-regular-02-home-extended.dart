@@ -89,11 +89,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
         }
       }
     }else{
-      await showOkCancelAlertDialog(
+      await showOkAlertDialog(
         context: context,
         title: 'Error',
         message: 'Something went wrong. Please try again.',
-        isDestructiveAction: true,
       );
     }
   }

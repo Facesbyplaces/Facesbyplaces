@@ -2,8 +2,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:date_time_picker/date_time_picker.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
+import 'home-create-memorial-blm-02-create-memorial.dart';
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -108,68 +109,67 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                     SizedBox(height: 20,),
 
-                    // DateTimePicker(
-                    //   type: DateTimePickerType.date,
-                    //   controller: controller1,
-                    //   cursorColor: Color(0xff000000),
-                    //   firstDate: DateTime(1000),
-                    //   lastDate: DateTime.now(),
-                    //   decoration: InputDecoration(
-                    //     alignLabelWithHint: true,
-                    //     labelText: 'DOB',
-                    //     labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                    //     focusedBorder: UnderlineInputBorder(
-                    //       borderSide: BorderSide(
-                    //         color: Color(0xff000000),
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   selectableDayPredicate: (date) {
-
-                    //     if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
-                    //       return true;
-                    //     }else{
-                    //       return false;
-                    //     }
-                    //   },
-                    //   onChanged: (changed){
-                    //     setState(() {
-                    //       dob = DateTime.parse(changed);
-                    //     });
-                    //   },
-                    // ),
+                    DateTimePicker(
+                      type: DateTimePickerType.date,
+                      controller: controller1,
+                      cursorColor: Color(0xff000000),
+                      firstDate: DateTime(1000),
+                      lastDate: DateTime.now(),
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'DOB',
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),
+                      selectableDayPredicate: (date) {
+                        if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      },
+                      onChanged: (changed){
+                        setState(() {
+                          dob = DateTime.parse(changed);
+                        });
+                      },
+                    ),
 
                     SizedBox(height: 20,),
 
-                    // DateTimePicker(
-                    //   type: DateTimePickerType.date,
-                    //   controller: controller2,
-                    //   cursorColor: Color(0xff000000),
-                    //   firstDate: DateTime(1000),
-                    //   lastDate: DateTime.now(),
-                    //   decoration: InputDecoration(
-                    //     alignLabelWithHint: true,
-                    //     labelText: 'RIP',
-                    //     labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                    //     focusedBorder: UnderlineInputBorder(
-                    //       borderSide: BorderSide(
-                    //         color: Color(0xff000000),
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   selectableDayPredicate: (date) {
-                    //     if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
-                    //       return true;
-                    //     }else{
-                    //       return false;
-                    //     }
-                    //   },
-                    //   onChanged: (changed){
-                    //     setState(() {
-                    //       rip = DateTime.parse(changed);
-                    //     });
-                    //   },
-                    // ),
+                    DateTimePicker(
+                      type: DateTimePickerType.date,
+                      controller: controller2,
+                      cursorColor: Color(0xff000000),
+                      firstDate: DateTime(1000),
+                      lastDate: DateTime.now(),
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'RIP',
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),
+                      selectableDayPredicate: (date) {
+                        if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      },
+                      onChanged: (changed){
+                        setState(() {
+                          rip = DateTime.parse(changed);
+                        });
+                      },
+                    ),
 
                     SizedBox(height: 20,),
 
@@ -185,38 +185,54 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                       onPressed: () async{
 
                         if(_key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
-                          await showDialog(
+                          await showOkAlertDialog(
                             context: context,
-                            builder: (_) => 
-                            Container()
-                            //   AssetGiffyDialog(
-                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //   entryAnimation: EntryAnimation.DEFAULT,
-                            //   description: Text('Please complete the form before submitting.',
-                            //     textAlign: TextAlign.center,
-                            //     style: TextStyle(),
-                            //   ),
-                            //   onlyOkButton: true,
-                            //   buttonOkColor: Colors.red,
-                            //   onOkButtonPressed: () {
-                            //     Navigator.pop(context, true);
-                            //   },
-                            // )
+                            title: 'Error',
+                            message: 'Please complete the form before submitting.',
                           );
                         }else{
-                          Navigator.pushNamed(
-                            context, '/home/blm/create-memorial-2',
-                            // arguments: BLMCreateMemorialValues(
-                            //   relationship: _key1.currentState!.currentSelection,
-                            //   location: _key2.currentState!.controller.text,
-                            //   precinct: _key3.currentState!.controller.text,
-                            //   dob: controller1.text,
-                            //   rip: controller2.text,
-                            //   country: _key6.currentState!.controller.text,
-                            //   state: _key7.currentState!.controller.text,
-                            // ),
+                          print('The relationship is ${_key1.currentState!.currentSelection}');
+                          print('The location of incident is ${_key2.currentState!.controller.text}');
+                          print('The precinct is ${_key3.currentState!.controller.text}');
+                          print('The dob is ${controller1.text}');
+                          print('The rip is ${controller2.text}');
+                          print('The country is ${_key6.currentState!.controller.text}');
+                          print('The state is ${_key7.currentState!.controller.text}');
+
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => 
+                              HomeBLMCreateMemorial2(
+                                relationship: _key1.currentState!.currentSelection,
+                                locationOfIncident: _key2.currentState!.controller.text,
+                                precinct: _key3.currentState!.controller.text,
+                                dob: controller1.text,
+                                rip: controller2.text,
+                                country: _key6.currentState!.controller.text,
+                                state: _key7.currentState!.controller.text,
+                              ),
+                            )
                           );
+
+                          // final String relationship;
+                          // final String location;
+                          // final String precinct;
+                          // final String dob;
+                          // final String rip;
+                          // final String country;
+                          // final String state;
+
+                          // Navigator.pushNamed(
+                          //   context, '/home/blm/create-memorial-2',
+                          //   arguments: BLMCreateMemorialValues(
+                          //     relationship: _key1.currentState!.currentSelection,
+                          //     location: _key2.currentState!.controller.text,
+                          //     precinct: _key3.currentState!.controller.text,
+                          //     dob: controller1.text,
+                          //     rip: controller2.text,
+                          //     country: _key6.currentState!.controller.text,
+                          //     state: _key7.currentState!.controller.text,
+                          //   ),
+                          // );
                         }
 
                       }, 

@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 Future<bool> apiBLMModifyFollowPage({required String pageType, required int pageId, required bool follow}) async{
 
@@ -20,19 +20,20 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  final http.Response response = await http.put(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/followers', ''),
-    headers: <String, String>{
-      'access-token': getAccessToken!,
-      'uid': getUID!,
-      'client': getClient!,
-    },
-    body: <String, dynamic>{
-      'page_type': '$pageType',
-      'page_id': '$pageId',
-      'follow': '$follow',
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
+
+  print('The status code of follow page is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

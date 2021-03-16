@@ -10,16 +10,6 @@ Future<bool> apiBLMLogout() async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  // final http.Response response = await http.delete(
-  //   Uri.http('http://fbp.dev1.koda.ws/auth/sign_out', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/auth/sign_out',
@@ -33,23 +23,7 @@ Future<bool> apiBLMLogout() async{
     ),  
   );
 
-
   if(response.statusCode == 200){
-
-    // sharedPrefs.remove('blm-user-id');
-    // sharedPrefs.remove('blm-access-token');
-    // sharedPrefs.remove('blm-uid');
-    // sharedPrefs.remove('blm-client');
-    // sharedPrefs.remove('blm-user-session');
-
-    // sharedPrefs.remove('regular-user-id');
-    // sharedPrefs.remove('regular-access-token');
-    // sharedPrefs.remove('regular-uid');
-    // sharedPrefs.remove('regular-client');
-    // sharedPrefs.remove('regular-user-session');
-
-    // sharedPrefs.remove('user-guest-session');
-
     sharedPrefs.remove('blm-user-id');
     sharedPrefs.remove('blm-access-token');
     sharedPrefs.remove('blm-uid');

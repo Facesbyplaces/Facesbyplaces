@@ -2,17 +2,15 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-14-update-switch-status-family.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-15-update-switch-status-friends.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-16-update-switch-status-followers.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-setting-detail.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_framework/responsive_framework.dart';
 import 'home-settings-memorial-blm-02-page-details.dart';
 import 'home-settings-memorial-blm-03-update-memorial-image.dart';
 import 'home-settings-memorial-blm-04-page-managers.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
 import 'home-settings-memorial-blm-06-page-friends.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMMemorialSettings extends StatefulWidget{
@@ -62,74 +60,59 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           },
         ),
       ),
-      // body: ResponsiveWrapper(
-      //   maxWidth: SizeConfig.screenWidth,
-      //   defaultScale: true,
-      //   breakpoints: [
-      //     ResponsiveBreakpoint.resize(480, name: MOBILE),
-      //     ResponsiveBreakpoint.autoScale(800, name: TABLET),
-      //     ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-      //     ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-      //   ],
-      //   child: SingleChildScrollView(
-      //     child: Container(
-      //       height: SizeConfig.screenHeight! - kToolbarHeight,
-      //       child: Column(
-      //         children: [
-      //           Container(
-      //             alignment: Alignment.centerLeft,
-      //             width: SizeConfig.screenWidth,
-      //             height: 70,
-      //             child: DefaultTabController(
-      //               length: 2,
-      //               child: TabBar(
-      //                 labelColor: Color(0xff04ECFF),
-      //                 unselectedLabelColor: Color(0xff000000),
-      //                 indicatorColor: Color(0xff04ECFF),
-      //                 onTap: (int index){
-      //                   setState(() {
-      //                     toggle = index;
-      //                   });
-      //                 },
-      //                 tabs: [
+      body: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            width: SizeConfig.screenWidth,
+            height: 70,
+            child: DefaultTabController(
+              length: 2,
+              child: TabBar(
+                labelColor: Color(0xff04ECFF),
+                unselectedLabelColor: Color(0xff000000),
+                indicatorColor: Color(0xff04ECFF),
+                onTap: (int index){
+                  setState(() {
+                    toggle = index;
+                  });
+                },
+                tabs: [
 
-      //                   Center(
-      //                     child: Text('Page',
-      //                       style: TextStyle(
-      //                         fontSize: 16,
-      //                         fontWeight: FontWeight.w400,
-      //                       ),
-      //                     ),
-      //                   ),
+                  Center(
+                    child: Text('Page',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
 
-      //                   Center(child: Text('Privacy',
-      //                       style: TextStyle(
-      //                         fontSize: 16,
-      //                         fontWeight: FontWeight.w400,
-      //                       ),
-      //                     ),
-      //                   ),
+                  Center(child: Text('Privacy',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
 
-      //                 ],
-      //               ),
-      //             ),
-      //           ),
+                ],
+              ),
+            ),
+          ),
 
-      //           Expanded(
-      //             child: Container(
-      //               child: ((){
-      //                 switch(toggle){
-      //                   case 0: return settingsTab1(memorialId);
-      //                   case 1: return settingsTab2(memorialId);
-      //                 }
-      //               }()),
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
+          Expanded(
+            child: Container(
+              child: ((){
+                switch(toggle){
+                  case 0: return settingsTab1(memorialId);
+                  case 1: return settingsTab2(memorialId);
+                }
+              }()),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -138,69 +121,122 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
       physics: ClampingScrollPhysics(),
       children: [
 
-        MiscBLMSettingDetailTemplate(
+        ListTile(
+          tileColor: Color(0xffffffff),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageDetails(memorialId: memorialId,)));
           },
+          title: Text('Page Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Update page details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
+
+        // MiscBLMSettingDetailTemplate(
+        //   onTap: (){
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageDetails(memorialId: memorialId,)));
+        //   },
+        // ),
 
         Container(height: 5, color: Color(0xffeeeeee),),
 
-        MiscBLMSettingDetailTemplate(
+        // MiscBLMSettingDetailTemplate(
+        //   onTap: (){
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialPageImage(memorialId: memorialId,)));
+        //   }, 
+        //   titleDetail: 'Page Image', 
+        //   contentDetail: 'Update Page image and background image',
+        // ),
+
+        ListTile(
+          tileColor: Color(0xffffffff),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialPageImage(memorialId: memorialId,)));
-          }, 
-          titleDetail: 'Page Image', 
-          contentDetail: 'Update Page image and background image',
+          },
+          title: Text('Page Image', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Update Page image and background image', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
 
         Container(height: 5, color: Color(0xffeeeeee),),
 
-        MiscBLMSettingDetailTemplate(
+        ListTile(
+          tileColor: Color(0xffffffff),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageManagers(memorialId: memorialId,)));
-          }, 
-          titleDetail: 'Admins', 
-          contentDetail: 'Add or remove admins of this page',
+          },
+          title: Text('Admins', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Add or remove admins of this page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
+
+        // MiscBLMSettingDetailTemplate(
+        //   onTap: (){
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageManagers(memorialId: memorialId,)));
+        //   }, 
+        //   titleDetail: 'Admins', 
+        //   contentDetail: 'Add or remove admins of this page',
+        // ),
 
         Container(height: 5, color: Color(0xffeeeeee),),
 
-        MiscBLMSettingDetailTemplate(
+        ListTile(
+          tileColor: Color(0xffffffff),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,)));
-          }, 
-          titleDetail: 'Family', 
-          contentDetail: 'Add or remove family of this page',
+          },
+          title: Text('Family', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Add or remove family of this page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
+
+        // MiscBLMSettingDetailTemplate(
+        //   onTap: (){
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,)));
+        //   }, 
+        //   titleDetail: 'Family', 
+        //   contentDetail: 'Add or remove family of this page',
+        // ),
 
         Container(height: 5, color: Color(0xffeeeeee),),
 
-        MiscBLMSettingDetailTemplate(
+        ListTile(
+          tileColor: Color(0xffffffff),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,)));
-          }, 
-          titleDetail: 'Friends', 
-          contentDetail: 'Add or remove friends of this page',
+          },
+          title: Text('Friends', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Add or remove friends of this page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
+
+        // MiscBLMSettingDetailTemplate(
+        //   onTap: (){
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,)));
+        //   }, 
+        //   titleDetail: 'Friends', 
+        //   contentDetail: 'Add or remove friends of this page',
+        // ),
 
         Container(height: 5, color: Color(0xffeeeeee),),
 
-        MiscBLMSettingDetailTemplate(
+        ListTile(
+          tileColor: Color(0xffffffff),
           onTap: (){
             Navigator.pushNamed(context, '/home/blm/donation-paypal');
-          }, 
-          titleDetail: 'Paypal', 
-          contentDetail: 'Manage cards that receives the memorial gifts.',
+          },
+          title: Text('Paypal', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Manage cards that receives the memorial gifts', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
+
+        // MiscBLMSettingDetailTemplate(
+        //   onTap: (){
+        //     Navigator.pushNamed(context, '/home/blm/donation-paypal');
+        //   }, 
+        //   titleDetail: 'Paypal', 
+        //   contentDetail: 'Manage cards that receives the memorial gifts.',
+        // ),
 
         Container(height: 5, color: Color(0xffeeeeee),),
 
-        MiscBLMSettingDetailTemplate(
+        ListTile(
+          tileColor: Color(0xffffffff),
           onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(
-              content: 'Are you sure you want to delete "$memorialName"?',
-            ),);
+            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(content: 'Are you sure you want to delete "$memorialName"?',),);
             if(confirmResult){
 
               context.showLoaderOverlay();
@@ -210,31 +246,57 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
               if(result){
                 Navigator.popAndPushNamed(context, '/home/blm');
               }else{
-                await showDialog(
+                await showOkAlertDialog(
                   context: context,
-                  builder: (_) => 
-                  Container()
-                  //   AssetGiffyDialog(
-                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                  //   entryAnimation: EntryAnimation.DEFAULT,
-                  //   description: Text('Something went wrong. Please try again.',
-                  //     textAlign: TextAlign.center,
-                  //     style: TextStyle(),
-                  //   ),
-                  //   onlyOkButton: true,
-                  //   buttonOkColor: Colors.red,
-                  //   onOkButtonPressed: () {
-                  //     Navigator.pop(context, true);
-                  //   },
-                  // )
+                  title: 'Error',
+                  message: 'Something went wrong. Please try again.'
                 );
               }
             }
-          }, 
-          titleDetail: 'Delete Page', 
-          contentDetail: 'Completely remove the page. This is irreversible',
+          },
+          title: Text('Delete Page', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Completely remove the page. This is irreversible', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
+
+        // MiscBLMSettingDetailTemplate(
+        //   onTap: () async{
+        //     bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(
+        //       content: 'Are you sure you want to delete "$memorialName"?',
+        //     ),);
+        //     if(confirmResult){
+
+        //       context.showLoaderOverlay();
+        //       bool result = await apiBLMDeleteMemorial(memorialId: memorialId);
+        //       context.hideLoaderOverlay();
+
+        //       if(result){
+        //         Navigator.popAndPushNamed(context, '/home/blm');
+        //       }else{
+        //         await showDialog(
+        //           context: context,
+        //           builder: (_) => 
+        //           Container()
+        //           //   AssetGiffyDialog(
+        //           //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+        //           //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+        //           //   entryAnimation: EntryAnimation.DEFAULT,
+        //           //   description: Text('Something went wrong. Please try again.',
+        //           //     textAlign: TextAlign.center,
+        //           //     style: TextStyle(),
+        //           //   ),
+        //           //   onlyOkButton: true,
+        //           //   buttonOkColor: Colors.red,
+        //           //   onOkButtonPressed: () {
+        //           //     Navigator.pop(context, true);
+        //           //   },
+        //           // )
+        //         );
+        //       }
+        //     }
+        //   }, 
+        //   titleDetail: 'Delete Page', 
+        //   contentDetail: 'Completely remove the page. This is irreversible',
+        // ),
 
         SizedBox(height: 10,),
 
@@ -251,11 +313,17 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
       physics: ClampingScrollPhysics(),
       children: [
 
-        MiscBLMSettingDetailTemplate(
-          onTap: (){}, 
-          titleDetail: 'Customize shown info', 
-          contentDetail: 'Customize what others see on your page',
+        ListTile(
+          tileColor: Color(0xffffffff),
+          title: Text('Customize shown info', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Customize what others see on your page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
+
+        // MiscBLMSettingDetailTemplate(
+        //   onTap: (){}, 
+        //   titleDetail: 'Customize shown info', 
+        //   contentDetail: 'Customize what others see on your page',
+        // ),
 
         Container(height: 5, color: Color(0xffeeeeee),),
 
@@ -264,7 +332,18 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           color: Color(0xffffffff),
           child: Row(
             children: [
-              Expanded(child: MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Family', contentDetail: 'Show or hide family details'),),
+              Expanded(
+                child: ListTile(
+                  tileColor: Color(0xffffffff),
+                  title: Text('Hide Family', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                  subtitle: Text('Show or hide family details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                ),
+                // child: MiscBLMSettingDetailTemplate(
+                //   onTap: (){}, 
+                //   titleDetail: 'Hide Family', 
+                //   contentDetail: 'Show or hide family details',
+                // ),
+              ),
 
               Switch(
                 value: isSwitched1,
@@ -292,13 +371,18 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           child: Row(
             children: [
               Expanded(
-                child: MiscBLMSettingDetailTemplate(
-                  onTap: (){
-
-                  }, 
-                  titleDetail: 'Hide Friends', 
-                  contentDetail: 'Show or hide friends details',
+                child: ListTile(
+                  tileColor: Color(0xffffffff),
+                  title: Text('Hide Friends', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                  subtitle: Text('Show or hide friends details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
                 ),
+                // child: MiscBLMSettingDetailTemplate(
+                //   onTap: (){
+
+                //   }, 
+                //   titleDetail: 'Hide Friends', 
+                //   contentDetail: 'Show or hide friends details',
+                // ),
               ),
 
 
@@ -328,7 +412,18 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           color: Color(0xffffffff),
           child: Row(
             children: [
-              Expanded(child: MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Followers', contentDetail: 'Show or hide your followers'),),
+              Expanded(
+                child: ListTile(
+                  tileColor: Color(0xffffffff),
+                  title: Text('Hide Followers', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                  subtitle: Text('Show or hide your followers', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                ),
+                // child: MiscBLMSettingDetailTemplate(
+                //   onTap: (){}, 
+                //   titleDetail: 'Hide Followers', 
+                //   contentDetail: 'Show or hide your followers',
+                // ),
+              ),
 
               Switch(
                 value: isSwitched3,

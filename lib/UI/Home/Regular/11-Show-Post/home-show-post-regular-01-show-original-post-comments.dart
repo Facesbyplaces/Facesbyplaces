@@ -166,7 +166,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
         
         if(repliesRemaining != 0){
+          context.showLoaderOverlay();
           var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.almCommentsList[i].showListOfCommentsCommentId, page: page2);
+          context.hideLoaderOverlay();
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
@@ -338,7 +340,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                 }
                                               }
                                             },
-                                            // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
                                             child: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != ''
                                             ? CircleAvatar(
                                               backgroundColor: Color(0xff888888),
@@ -589,9 +590,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                       children: [
                                         SizedBox(height: 20),
 
-                                      // padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                      // alignment: Alignment.centerLeft, 
-
                                         Padding(
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                           child: Row(
@@ -682,6 +680,62 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                     Column(
                                       children: List.generate(
                                         comments.length, (i) => ListTile(
+                                          onTap: (){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId, accountType: comments[i].userAccountType,)));
+                                          },
+                                          onLongPress: () async{
+                                            await showMaterialModalBottomSheet(
+                                              context: context, 
+                                              builder: (context) => 
+                                                SafeArea(
+                                                top: false,
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    ListTile(
+                                                      title: Text('Edit'),
+                                                      leading: Icon(Icons.edit),
+                                                      onTap: () async{
+                                                        controller.text = controller.text + comments[i].commentBody;
+                                                        await showModalBottomSheet(
+                                                          context: context, 
+                                                          builder: (context) => showKeyboardEdit(isEdit: true, editId: comments[i].commentId),
+                                                        );
+                                                      },
+                                                    ),
+                                                    ListTile(
+                                                      title: Text('Delete'),
+                                                      leading: Icon(Icons.delete),
+                                                      onTap: () async{  
+                                                        context.showLoaderOverlay();
+                                                        await apiRegularDeleteComment(commentId: comments[i].commentId);
+                                                        context.hideLoaderOverlay();
+
+                                                        controller.clear();
+                                                        itemRemaining = 1;
+                                                        repliesRemaining = 1;
+                                                        comments = [];
+                                                        replies = [];
+                                                        numberOfReplies = 0;
+                                                        page1 = 1;
+                                                        page2 = 1;
+                                                        count = 0;
+                                                        commentsLikes = [];
+                                                        commentsNumberOfLikes = [];
+                                                        repliesLikes = [];
+                                                        repliesNumberOfLikes = [];
+                                                        isComment = true;
+                                                        numberOfLikes = 0;
+                                                        numberOfComments = 0;
+                                                        getOriginalPostInformation();
+                                                        onLoading();
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            );
+                                          },
                                           visualDensity: VisualDensity(vertical: 4.0),
                                           leading: CircleAvatar(
                                             backgroundImage: NetworkImage(comments[i].image),
@@ -690,20 +744,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                           title: Row(
                                             children: [
                                               Expanded(
-                                                child: GestureDetector(
-                                                  onTap: (){
-                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId, accountType: comments[i].userAccountType,)));
-                                                  },
-                                                  child: currentUserId == comments[i].userId && currentAccountType == comments[i].userAccountType
-                                                  ? Text('You',
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                  )
-                                                  : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
+                                                child: currentUserId == comments[i].userId && currentAccountType == comments[i].userAccountType
+                                                ? Text('You',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )
+                                                : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
@@ -737,80 +786,25 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                           ),
                                           subtitle: Column(
                                             children: [
-                                              GestureDetector(
-                                                onLongPress: () async{
-                                                  await showMaterialModalBottomSheet(
-                                                    context: context, 
-                                                    builder: (context) => 
-                                                      SafeArea(
-                                                      top: false,
-                                                      child: Column(
-                                                        mainAxisSize: MainAxisSize.min,
-                                                        children: <Widget>[
-                                                          ListTile(
-                                                            title: Text('Edit'),
-                                                            leading: Icon(Icons.edit),
-                                                            onTap: () async{
-                                                              controller.text = controller.text + comments[i].commentBody;
-                                                              await showModalBottomSheet(
-                                                                context: context, 
-                                                                builder: (context) => showKeyboardEdit(isEdit: true, editId: comments[i].commentId),
-                                                              );
-                                                            },
-                                                          ),
-                                                          ListTile(
-                                                            title: Text('Delete'),
-                                                            leading: Icon(Icons.delete),
-                                                            onTap: () async{  
-                                                              context.showLoaderOverlay();
-                                                              await apiRegularDeleteComment(commentId: comments[i].commentId);
-                                                              context.hideLoaderOverlay();
+                                              Row(
+                                                children: [
 
-                                                              controller.clear();
-                                                              itemRemaining = 1;
-                                                              repliesRemaining = 1;
-                                                              comments = [];
-                                                              replies = [];
-                                                              numberOfReplies = 0;
-                                                              page1 = 1;
-                                                              page2 = 1;
-                                                              count = 0;
-                                                              commentsLikes = [];
-                                                              commentsNumberOfLikes = [];
-                                                              repliesLikes = [];
-                                                              repliesNumberOfLikes = [];
-                                                              isComment = true;
-                                                              numberOfLikes = 0;
-                                                              numberOfComments = 0;
-                                                              getOriginalPostInformation();
-                                                              onLoading();
-                                                            },
-                                                          )
-                                                        ],
+                                                  Expanded(
+                                                    child: Container(
+                                                      padding: EdgeInsets.all(10.0),
+                                                      child: Text(
+                                                        comments[i].commentBody,
+                                                        style: TextStyle(
+                                                          color: Color(0xffffffff),
+                                                        ),
                                                       ),
-                                                    )
-                                                  );
-                                                },
-                                                child: Row(
-                                                  children: [
-
-                                                    Expanded(
-                                                      child: Container(
-                                                        padding: EdgeInsets.all(10.0),
-                                                        child: Text(
-                                                          comments[i].commentBody,
-                                                          style: TextStyle(
-                                                            color: Color(0xffffffff),
-                                                          ),
-                                                        ),
-                                                        decoration: BoxDecoration(
-                                                          color: Color(0xff4EC9D4),
-                                                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                                        ),
+                                                      decoration: BoxDecoration(
+                                                        color: Color(0xff4EC9D4),
+                                                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
 
                                               SizedBox(height: 5,),
@@ -851,6 +845,63 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   ListTile(
                                                     contentPadding: EdgeInsets.zero,
                                                     visualDensity: VisualDensity(vertical: 4.0),
+                                                    onTap: (){
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId, accountType: currentAccountType,)));
+                                                    },
+                                                    onLongPress: () async{
+                                                      print('Nice!');
+                                                      await showMaterialModalBottomSheet(
+                                                        context: context, 
+                                                        builder: (context) => 
+                                                          SafeArea(
+                                                          top: false,
+                                                          child: Column(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: <Widget>[
+                                                              ListTile(
+                                                                title: Text('Edit'),
+                                                                leading: Icon(Icons.edit),
+                                                                onTap: () async{
+                                                                  controller.text = controller.text + comments[i].listOfReplies[index].replyBody;
+                                                                  await showModalBottomSheet(
+                                                                    context: context, 
+                                                                    builder: (context) => showKeyboardEdit(isEdit: false, editId: comments[i].listOfReplies[index].replyId),
+                                                                  );
+                                                                },
+                                                              ),
+                                                              ListTile(
+                                                                title: Text('Delete'),
+                                                                leading: Icon(Icons.delete),
+                                                                onTap: () async{  
+                                                                  context.showLoaderOverlay();
+                                                                  await apiRegularDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
+                                                                  context.hideLoaderOverlay();
+
+                                                                  controller.clear();
+                                                                  itemRemaining = 1;
+                                                                  repliesRemaining = 1;
+                                                                  comments = [];
+                                                                  replies = [];
+                                                                  numberOfReplies = 0;
+                                                                  page1 = 1;
+                                                                  page2 = 1;
+                                                                  count = 0;
+                                                                  commentsLikes = [];
+                                                                  commentsNumberOfLikes = [];
+                                                                  repliesLikes = [];
+                                                                  repliesNumberOfLikes = [];
+                                                                  isComment = true;
+                                                                  numberOfLikes = 0;
+                                                                  numberOfComments = 0;
+                                                                  getOriginalPostInformation();
+                                                                  onLoading();
+                                                                },
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      );
+                                                    },
                                                     leading: CircleAvatar(
                                                       backgroundImage: NetworkImage(comments[i].listOfReplies[index].image),
                                                       backgroundColor: Color(0xff888888),
@@ -858,20 +909,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     title: Row(
                                                       children: [
                                                         Expanded(
-                                                          child: GestureDetector(
-                                                            onTap: (){
-                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId, accountType: currentAccountType,)));
-                                                            },
-                                                            child: currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType
-                                                            ? Text('You',
-                                                              style: TextStyle(
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
-                                                            )
-                                                            : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                                              style: TextStyle(
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
+                                                          child: currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType
+                                                          ? Text('You',
+                                                            style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                            ),
+                                                          )
+                                                          : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
+                                                            style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
                                                             ),
                                                           ),
                                                         ),
@@ -905,80 +951,24 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     ),
                                                     subtitle: Column(
                                                       children: [
-                                                        GestureDetector(
-                                                          onLongPress: () async{
-                                                            print('Nice!');
-                                                            await showMaterialModalBottomSheet(
-                                                              context: context, 
-                                                              builder: (context) => 
-                                                                SafeArea(
-                                                                top: false,
-                                                                child: Column(
-                                                                  mainAxisSize: MainAxisSize.min,
-                                                                  children: <Widget>[
-                                                                    ListTile(
-                                                                      title: Text('Edit'),
-                                                                      leading: Icon(Icons.edit),
-                                                                      onTap: () async{
-                                                                        controller.text = controller.text + comments[i].listOfReplies[index].replyBody;
-                                                                        await showModalBottomSheet(
-                                                                          context: context, 
-                                                                          builder: (context) => showKeyboardEdit(isEdit: false, editId: comments[i].listOfReplies[index].replyId),
-                                                                        );
-                                                                      },
-                                                                    ),
-                                                                    ListTile(
-                                                                      title: Text('Delete'),
-                                                                      leading: Icon(Icons.delete),
-                                                                      onTap: () async{  
-                                                                        context.showLoaderOverlay();
-                                                                        await apiRegularDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
-                                                                        context.hideLoaderOverlay();
-
-                                                                        controller.clear();
-                                                                        itemRemaining = 1;
-                                                                        repliesRemaining = 1;
-                                                                        comments = [];
-                                                                        replies = [];
-                                                                        numberOfReplies = 0;
-                                                                        page1 = 1;
-                                                                        page2 = 1;
-                                                                        count = 0;
-                                                                        commentsLikes = [];
-                                                                        commentsNumberOfLikes = [];
-                                                                        repliesLikes = [];
-                                                                        repliesNumberOfLikes = [];
-                                                                        isComment = true;
-                                                                        numberOfLikes = 0;
-                                                                        numberOfComments = 0;
-                                                                        getOriginalPostInformation();
-                                                                        onLoading();
-                                                                      },
-                                                                    )
-                                                                  ],
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child: Container(
+                                                                padding: EdgeInsets.all(10.0),
+                                                                child: Text(
+                                                                  comments[i].listOfReplies[index].replyBody,
+                                                                  style: TextStyle(
+                                                                    color: Color(0xffffffff),
+                                                                  ),
                                                                 ),
-                                                              )
-                                                            );
-                                                          },
-                                                          child: Row(
-                                                            children: [
-                                                              Expanded(
-                                                                child: Container(
-                                                                  padding: EdgeInsets.all(10.0),
-                                                                  child: Text(
-                                                                    comments[i].listOfReplies[index].replyBody,
-                                                                    style: TextStyle(
-                                                                      color: Color(0xffffffff),
-                                                                    ),
-                                                                  ),
-                                                                  decoration: BoxDecoration(
-                                                                    color: Color(0xff4EC9D4),
-                                                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                                                  ),
+                                                                decoration: BoxDecoration(
+                                                                  color: Color(0xff4EC9D4),
+                                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                                                 ),
                                                               ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                          ],
                                                         ),
 
                                                         SizedBox(height: 5,),

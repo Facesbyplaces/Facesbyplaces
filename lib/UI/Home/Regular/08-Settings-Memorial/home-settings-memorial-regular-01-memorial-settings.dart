@@ -229,11 +229,17 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
       physics: ClampingScrollPhysics(),
       children: [
 
-        MiscRegularSettingDetailTemplate(
-          onTap: (){}, 
-          titleDetail: 'Customize shown info', 
-          contentDetail: 'Customize what others see on your page',
+        ListTile(
+          tileColor: Color(0xffffffff),
+          title: Text('Customize shown info', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+          subtitle: Text('Customize what others see on your page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
+
+        // MiscRegularSettingDetailTemplate(
+        //   onTap: (){}, 
+        //   titleDetail: 'Customize shown info', 
+        //   contentDetail: 'Customize what others see on your page',
+        // ),
 
         Container(height: 5, color: Color(0xffeeeeee),),
 
@@ -242,7 +248,13 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           color: Color(0xffffffff),
           child: Row(
             children: [
-              Expanded(child: MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Family', contentDetail: 'Show or hide family details'),),
+              Expanded(
+                child: ListTile(
+                  tileColor: Color(0xffffffff),
+                  title: Text('Hide Family', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                  subtitle: Text('Show or hide family details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                ),
+              ),
 
               Switch(
                 value: isSwitched1,
@@ -270,13 +282,18 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           child: Row(
             children: [
               Expanded(
-                child: MiscRegularSettingDetailTemplate(
-                  onTap: (){
-
-                  }, 
-                  titleDetail: 'Hide Friends', 
-                  contentDetail: 'Show or hide friends details',
+                child: ListTile(
+                  tileColor: Color(0xffffffff),
+                  title: Text('Hide Friends', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                  subtitle: Text('Show or hide friends details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
                 ),
+                // child: MiscRegularSettingDetailTemplate(
+                //   onTap: (){
+
+                //   }, 
+                //   titleDetail: 'Hide Friends', 
+                //   contentDetail: 'Show or hide friends details',
+                // ),
               ),
 
 
@@ -306,7 +323,18 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           color: Color(0xffffffff),
           child: Row(
             children: [
-              Expanded(child: MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Followers', contentDetail: 'Show or hide your followers'),),
+              Expanded(
+                child: ListTile(
+                  tileColor: Color(0xffffffff),
+                  title: Text('Hide Followers', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                  subtitle: Text('Show or hide your followers', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                ),
+                // child: MiscRegularSettingDetailTemplate(
+                //   onTap: (){}, 
+                //   titleDetail: 'Hide Followers', 
+                //   contentDetail: 'Show or hide your followers'
+                // ),
+              ),
 
               Switch(
                 value: isSwitched3,

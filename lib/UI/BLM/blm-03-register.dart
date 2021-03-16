@@ -4,16 +4,17 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'blm-04-verify-email.dart';
 
 class BLMRegister extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key3 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberPickerTemplateState> _key3 = GlobalKey<MiscBLMPhoneNumberPickerTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key5 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key6 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -60,7 +61,7 @@ class BLMRegister extends StatelessWidget{
 
                             SizedBox(height: 20,),
 
-                            MiscBLMPhoneNumberTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
+                            MiscBLMPhoneNumberPickerTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                             SizedBox(height: 20,),
 
@@ -87,72 +88,89 @@ class BLMRegister extends StatelessWidget{
                                 bool validEmail = false;
                                 validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text );
 
-                                if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
-                                  await showDialog(
+                                if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller2.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
+                                  await showOkAlertDialog(
                                     context: context,
-                                    builder: (_) => 
-                                    Container()
-                                    //   AssetGiffyDialog(
-                                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    //   entryAnimation: EntryAnimation.DEFAULT,
-                                    //   description: Text('Please complete the form before submitting.',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: TextStyle(),
-                                    //   ),
-                                    //   onlyOkButton: true,
-                                    //   buttonOkColor: Colors.red,
-                                    //   onOkButtonPressed: () {
-                                    //     Navigator.pop(context, true);
-                                    //   },
-                                    // )
+                                    title: 'Error',
+                                    message: 'Please complete the form before submitting.',
                                   );
+                                  // await showDialog(
+                                  //   context: context,
+                                  //   builder: (_) => 
+                                  //   Container()
+                                  //   //   AssetGiffyDialog(
+                                  //   //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //   //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //   //   entryAnimation: EntryAnimation.DEFAULT,
+                                  //   //   description: Text('Please complete the form before submitting.',
+                                  //   //     textAlign: TextAlign.center,
+                                  //   //     style: TextStyle(),
+                                  //   //   ),
+                                  //   //   onlyOkButton: true,
+                                  //   //   buttonOkColor: Colors.red,
+                                  //   //   onOkButtonPressed: () {
+                                  //   //     Navigator.pop(context, true);
+                                  //   //   },
+                                  //   // )
+                                  // );
                                 }else if(!validEmail){
-                                  await showDialog(
+                                  await showOkAlertDialog(
                                     context: context,
-                                    builder: (_) => 
-                                    Container()
-                                    //   AssetGiffyDialog(
-                                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    //   entryAnimation: EntryAnimation.DEFAULT,
-                                    //   description: Text('Invalid email address. Please try again.',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: TextStyle(),
-                                    //   ),
-                                    //   onlyOkButton: true,
-                                    //   buttonOkColor: Colors.red,
-                                    //   onOkButtonPressed: () {
-                                    //     Navigator.pop(context, true);
-                                    //   },
-                                    // )
+                                    title: 'Error',
+                                    message: 'Invalid email address. Please try again.',
                                   );
-                                }else if(!_key3.currentState!.valid){
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => 
-                                    Container()
-                                    //   AssetGiffyDialog(
-                                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    //   entryAnimation: EntryAnimation.DEFAULT,
-                                    //   description: Text('Invalid phone number. Please try again.',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: TextStyle(),
-                                    //   ),
-                                    //   onlyOkButton: true,
-                                    //   buttonOkColor: Colors.red,
-                                    //   onOkButtonPressed: () {
-                                    //     Navigator.pop(context, true);
-                                    //   },
-                                    // )
-                                  );
-                                }else{
+                                  // await showDialog(
+                                  //   context: context,
+                                  //   builder: (_) => 
+                                  //   Container()
+                                  //   //   AssetGiffyDialog(
+                                  //   //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //   //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //   //   entryAnimation: EntryAnimation.DEFAULT,
+                                  //   //   description: Text('Invalid email address. Please try again.',
+                                  //   //     textAlign: TextAlign.center,
+                                  //   //     style: TextStyle(),
+                                  //   //   ),
+                                  //   //   onlyOkButton: true,
+                                  //   //   buttonOkColor: Colors.red,
+                                  //   //   onOkButtonPressed: () {
+                                  //   //     Navigator.pop(context, true);
+                                  //   //   },
+                                  //   // )
+                                  // );
+                                }
+                                // else if(!_key3.currentState!.valid){
+                                //   await showOkAlertDialog(
+                                //     context: context,
+                                //     title: 'Error',
+                                //     message: 'Invalid phone number. Please try again.',
+                                //   );
+                                //   // await showDialog(
+                                //   //   context: context,
+                                //   //   builder: (_) => 
+                                //   //   Container()
+                                //   //   //   AssetGiffyDialog(
+                                //   //   //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                //   //   //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                //   //   //   entryAnimation: EntryAnimation.DEFAULT,
+                                //   //   //   description: Text('Invalid phone number. Please try again.',
+                                //   //   //     textAlign: TextAlign.center,
+                                //   //   //     style: TextStyle(),
+                                //   //   //   ),
+                                //   //   //   onlyOkButton: true,
+                                //   //   //   buttonOkColor: Colors.red,
+                                //   //   //   onOkButtonPressed: () {
+                                //   //   //     Navigator.pop(context, true);
+                                //   //   //   },
+                                //   //   // )
+                                //   // );
+                                // }
+                                else{
 
                                   APIBLMAccountRegistration account = APIBLMAccountRegistration(
                                     firstName: _key1.currentState!.controller.text, 
                                     lastName: _key2.currentState!.controller.text,
-                                    phoneNumber: _key3.currentState!.controller.text,
+                                    phoneNumber: _key3.currentState!.controller2.text,
                                     email: _key4.currentState!.controller.text,
                                     username: _key5.currentState!.controller.text,
                                     password: _key6.currentState!.controller.text,
@@ -165,27 +183,33 @@ class BLMRegister extends StatelessWidget{
                                   if(result == 'Success'){
                                     final sharedPrefs = await SharedPreferences.getInstance();
                                     String verificationCode = sharedPrefs.getString('blm-verification-code')!;
-                                    Navigator.pushNamed(context, '/blm/verify-email', arguments: verificationCode);
+                                    // Navigator.pushNamed(context, '/blm/verify-email', arguments: verificationCode);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => BLMVerifyEmail(verificationCode: verificationCode)));
                                   }else{
-                                    await showDialog(
+                                    await showOkAlertDialog(
                                       context: context,
-                                      builder: (_) => 
-                                      Container()
-                                      //   AssetGiffyDialog(
-                                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      //   entryAnimation: EntryAnimation.DEFAULT,
-                                      //   description: Text('$result',
-                                      //     textAlign: TextAlign.center,
-                                      //     style: TextStyle(),
-                                      //   ),
-                                      //   onlyOkButton: true,
-                                      //   buttonOkColor: Colors.red,
-                                      //   onOkButtonPressed: () {
-                                      //     Navigator.pop(context, true);
-                                      //   },
-                                      // )
+                                      title: 'Error',
+                                      message: '$result',
                                     );
+                                    // await showDialog(
+                                    //   context: context,
+                                    //   builder: (_) => 
+                                    //   Container()
+                                    //   //   AssetGiffyDialog(
+                                    //   //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    //   //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    //   //   entryAnimation: EntryAnimation.DEFAULT,
+                                    //   //   description: Text('$result',
+                                    //   //     textAlign: TextAlign.center,
+                                    //   //     style: TextStyle(),
+                                    //   //   ),
+                                    //   //   onlyOkButton: true,
+                                    //   //   buttonOkColor: Colors.red,
+                                    //   //   onOkButtonPressed: () {
+                                    //   //     Navigator.pop(context, true);
+                                    //   //   },
+                                    //   // )
+                                    // );
                                   }
                                 }
 

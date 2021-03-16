@@ -11,8 +11,8 @@ Future<bool> apiBLMUpdatePageImages({required int memorialId, required dynamic b
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    final formData = FormData.fromMap({});
+    Dio dioRequest = Dio();
+    FormData formData = FormData.fromMap({});
 
     if(backgroundImage != null){
       var file = await dio.MultipartFile.fromFile(backgroundImage.path, filename: backgroundImage.path);

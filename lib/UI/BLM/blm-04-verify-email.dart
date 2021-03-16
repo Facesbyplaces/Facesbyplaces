@@ -3,26 +3,33 @@ import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-10-verification-cod
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
-// import 'package:pinput/pin_put/pin_put.dart';
+import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class BLMVerifyEmail extends StatefulWidget{
+  final String verificationCode;
+  BLMVerifyEmail({required this.verificationCode});
 
-  BLMVerifyEmailState createState() => BLMVerifyEmailState();
+  BLMVerifyEmailState createState() => BLMVerifyEmailState(verificationCode: verificationCode);
 }
 
 class BLMVerifyEmailState extends State<BLMVerifyEmail>{
+  final String verificationCode;
+  BLMVerifyEmailState({required this.verificationCode});
 
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController(text: '');
+
+  void initState(){
+    super.initState();
+    controller.text = verificationCode;
+  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // String verificationCode = ModalRoute.of(context).settings.arguments;
-    // controller.text = verificationCode;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -75,25 +82,25 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
 
                       Padding(
                         padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        // child: PinPut(
-                        //   fieldsAlignment: MainAxisAlignment.spaceEvenly,
-                        //   controller: controller,
-                        //   fieldsCount: 3,
-                        //   textStyle: TextStyle(
-                        //     fontSize: 56,
-                        //     fontWeight: FontWeight.bold,
-                        //     color: Color(0xff000000)
-                        //   ),
-                        //   followingFieldDecoration: BoxDecoration(
-                        //     border: Border(bottom: BorderSide(color: Color(0xff000000),),)
-                        //   ),
-                        //   selectedFieldDecoration: BoxDecoration(
-                        //     border: Border(bottom: BorderSide(color: Color(0xff000000),),)
-                        //   ),
-                        //   submittedFieldDecoration: BoxDecoration(
-                        //     border: Border(bottom: BorderSide(color: Color(0xff000000),),)
-                        //   ),
-                        // ),
+                        child: PinPut(
+                          fieldsAlignment: MainAxisAlignment.spaceEvenly,
+                          controller: controller,
+                          fieldsCount: 3,
+                          textStyle: TextStyle(
+                            fontSize: 56,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff000000)
+                          ),
+                          followingFieldDecoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: Color(0xff000000),),)
+                          ),
+                          selectedFieldDecoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: Color(0xff000000),),)
+                          ),
+                          submittedFieldDecoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: Color(0xff000000),),)
+                          ),
+                        ),
                       ),
 
                       SizedBox(height: 80,),
@@ -125,44 +132,16 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                 context.hideLoaderOverlay();
 
                                 if(result == true){
-                                  await showDialog(
+                                  await showOkAlertDialog(
                                     context: context,
-                                    builder: (_) => 
-                                    Container()
-                                    //   AssetGiffyDialog(
-                                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    //   entryAnimation: EntryAnimation.DEFAULT,
-                                    //   description: Text('Another code has been sent to your email address. Please check your inbox.',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: TextStyle(),
-                                    //   ),
-                                    //   onlyOkButton: true,
-                                    //   buttonOkColor: Colors.green,
-                                    //   onOkButtonPressed: () {
-                                    //     Navigator.pop(context, true);
-                                    //   },
-                                    // )
+                                    title: 'Success',
+                                    message: 'Another code has been sent to your email address. Please check your inbox.',
                                   );
                                 }else{
-                                  await showDialog(
+                                  await showOkAlertDialog(
                                     context: context,
-                                    builder: (_) => 
-                                    Container()
-                                    //   AssetGiffyDialog(
-                                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    //   entryAnimation: EntryAnimation.DEFAULT,
-                                    //   description: Text('Something went wrong. Please try again.',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: TextStyle(),
-                                    //   ),
-                                    //   onlyOkButton: true,
-                                    //   buttonOkColor: Colors.red,
-                                    //   onOkButtonPressed: () {
-                                    //     Navigator.pop(context, true);
-                                    //   },
-                                    // )
+                                    title: 'Error',
+                                    message: 'Something went wrong. Please try again.',
                                   );
                                 }
                               }
@@ -178,24 +157,10 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                         buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),), 
                         onPressed: () async{
                           if(controller.text.length != 3){
-                            await showDialog(
+                            await showOkAlertDialog(
                               context: context,
-                              builder: (_) => 
-                              Container()
-                              //   AssetGiffyDialog(
-                              //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              //   entryAnimation: EntryAnimation.DEFAULT,
-                              //   description: Text('Please enter the verification code.',
-                              //     textAlign: TextAlign.center,
-                              //     style: TextStyle(),
-                              //   ),
-                              //   onlyOkButton: true,
-                              //   buttonOkColor: Colors.red,
-                              //   onOkButtonPressed: () {
-                              //     Navigator.pop(context, true);
-                              //   },
-                              // )
+                              title: 'Error',
+                              message: 'Please enter the verification code.',
                             );
                           }else{
 
@@ -206,30 +171,14 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                             if(result){
                               Navigator.pushNamed(context, '/blm/upload-photo'); 
                             }else{
-                              await showDialog(
+                              await showOkAlertDialog(
                                 context: context,
-                                builder: (_) => 
-                                Container()
-                                //   AssetGiffyDialog(
-                                //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                //   entryAnimation: EntryAnimation.DEFAULT,
-                                //   description: Text('Something went wrong. Please try again.',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(),
-                                //   ),
-                                //   onlyOkButton: true,
-                                //   buttonOkColor: Colors.red,
-                                //   onOkButtonPressed: () {
-                                //     Navigator.pop(context, true);
-                                //   },
-                                // )
+                                title: 'Error',
+                                message: 'Something went wrong. Please try again.',
                               );
                             }
-
                           }
-
-                        }, 
+                        },
                         width: SizeConfig.screenWidth! / 2, 
                         height: 45,
                         buttonColor: Color(0xff000000),

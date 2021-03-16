@@ -11,7 +11,7 @@ Future<int> apiBLMShowUnreadNotifications() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/image_show', 
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/notifications/numOfUnread', 
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
@@ -26,10 +26,8 @@ Future<int> apiBLMShowUnreadNotifications() async{
 
 
   if(response.statusCode == 200){
-    // var value = json.decode(response.data);
     var newData = Map<String, dynamic>.from(response.data);
-    return 1;
-    // return value['number_of_unread_notifs'];
+    return newData['number_of_unread_notifs'];
   }else{
     throw Exception('Failed to get the user information');
   }

@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 Future<bool> apiBLMUpdateSwitchStatusFollowers({required int memorialId, required bool status}) async{
 
@@ -8,15 +8,20 @@ Future<bool> apiBLMUpdateSwitchStatusFollowers({required int memorialId, require
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.put(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFollowers/Blm/$memorialId?hide=$status', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFollowers/Blm/$memorialId?hide=$status',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
+
+  print('The status code of switch followers status is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

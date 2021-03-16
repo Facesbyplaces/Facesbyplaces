@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
 
 Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, required int page}) async{
 
@@ -9,22 +10,44 @@ Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, requi
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
+  print('The status code of users posts is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMShowUsersPostsMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIBLMShowUsersPostsMain.fromJson(newData);
   }else{
     throw Exception('Failed to get the post');
   }
+
+  // final http.Response response = await http.get(
+  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page', ''),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIBLMShowUsersPostsMain.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the post');
+  // }
 }
 
 class APIBLMShowUsersPostsMain{
@@ -100,10 +123,11 @@ class APIBLMShowUsersPostsExtendedPage{
   APIBLMShowUsersPostsExtendedPageCreator showUsersPostsPagePageCreator;
   bool showUsersPostsPageFollower;
   bool showUsersPostsPageManage;
+  bool showUsersPostsPageFamOrFriends;
   String showUsersPostsPagePageType;
   String showUsersPostsPagePrivacy;
 
-  APIBLMShowUsersPostsExtendedPage({required this.showUsersPostsPageId, required this.showUsersPostsPageName, required this.showUsersPostsPageDetails, required this.showUsersPostsPageBackgroundImage, required this.showUsersPostsPageProfileImage, required this.showUsersPostsPageImagesOrVideos, required this.showUsersPostsPageRelationship, required this.showUsersPostsPagePageCreator, required this.showUsersPostsPageFollower, required this.showUsersPostsPageManage, required this.showUsersPostsPagePageType, required this.showUsersPostsPagePrivacy});
+  APIBLMShowUsersPostsExtendedPage({required this.showUsersPostsPageId, required this.showUsersPostsPageName, required this.showUsersPostsPageDetails, required this.showUsersPostsPageBackgroundImage, required this.showUsersPostsPageProfileImage, required this.showUsersPostsPageImagesOrVideos, required this.showUsersPostsPageRelationship, required this.showUsersPostsPagePageCreator, required this.showUsersPostsPageFamOrFriends, required this.showUsersPostsPageFollower, required this.showUsersPostsPageManage, required this.showUsersPostsPagePageType, required this.showUsersPostsPagePrivacy});
 
   factory APIBLMShowUsersPostsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUsersPostsExtendedPage(
@@ -117,6 +141,7 @@ class APIBLMShowUsersPostsExtendedPage{
       showUsersPostsPagePageCreator: APIBLMShowUsersPostsExtendedPageCreator.fromJson(parsedJson['page_creator']),
       showUsersPostsPageFollower: parsedJson['follower'],
       showUsersPostsPageManage: parsedJson['manage'],
+      showUsersPostsPageFamOrFriends: parsedJson['famOrFriends'],
       showUsersPostsPagePageType: parsedJson['page_type'],
       showUsersPostsPagePrivacy: parsedJson['privacy'],
     );

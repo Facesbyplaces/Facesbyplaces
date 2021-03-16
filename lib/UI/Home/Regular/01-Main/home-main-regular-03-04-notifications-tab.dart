@@ -26,6 +26,7 @@ class HomeRegularNotificationsTab extends StatefulWidget{
 
 class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab>{
 
+  ScrollController scrollController = ScrollController();
   List<RegularMainPagesNotifications> notifications = [];
   int itemRemaining = 1;
   int page = 1;
@@ -34,6 +35,23 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
   void initState(){
     super.initState();
     onLoading();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(itemRemaining != 0){
+          setState(() {
+            onLoading();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more notifications to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   Future<void> onRefresh() async{
@@ -70,7 +88,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       if(mounted)
       setState(() {});
       page++;
-      
     }
   }
 
@@ -84,6 +101,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       ? RefreshIndicator(
         onRefresh: onRefresh,
         child: ListView.separated(
+          controller: scrollController,
           physics: ClampingScrollPhysics(),
           itemCount: count,
           separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),

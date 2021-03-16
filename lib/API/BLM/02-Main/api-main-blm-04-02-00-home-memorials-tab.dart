@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({required int page}) as
   }else{
     throw Exception('Failed to get the memorials');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMHomeTabMemorialMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the memorials');
-  // }
 }
 
 class APIBLMHomeTabMemorialMain{
@@ -94,9 +75,6 @@ class APIBLMHomeTabMemorialFamilyExtended{
       newMemorialList = [];
     }
 
-    // List<APIBLMHomeTabMemorialExtendedPage> newBLMList = blmList.map((e) => APIBLMHomeTabMemorialExtendedPage.fromJson(e)).toList();
-    // List<APIBLMHomeTabMemorialExtendedPage> newMemorialList = memorialList.map((e) => APIBLMHomeTabMemorialExtendedPage.fromJson(e)).toList();
-
     return APIBLMHomeTabMemorialFamilyExtended(
       blmHomeTabMemorialPage: newBLMList,
       memorialHomeTabMemorialPage: newMemorialList,
@@ -133,9 +111,6 @@ class APIBLMHomeTabMemorialFriendsExtended{
     }else{
       newMemorialList = [];
     }
-
-    // List<APIBLMHomeTabMemorialExtendedPage> newBLMList = blmList.map((e) => APIBLMHomeTabMemorialExtendedPage.fromJson(e)).toList();
-    // List<APIBLMHomeTabMemorialExtendedPage> newMemorialList = memorialList.map((e) => APIBLMHomeTabMemorialExtendedPage.fromJson(e)).toList();
 
     return APIBLMHomeTabMemorialFriendsExtended(
       blmHomeTabMemorialPage: newBLMList,

@@ -1,9 +1,9 @@
-// import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-blm-01-user-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
-// import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
-// import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-// import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
+import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
@@ -11,21 +11,21 @@ import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home-main-blm-03-01-feed-tab.dart';
 import 'home-main-blm-03-02-memorial-list-tab.dart';
 import 'home-main-blm-03-03-post-tab.dart';
 import 'home-main-blm-03-04-notifications-tab.dart';
 import '../../../ui-01-get-started.dart';
-// import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 // import 'package:badges/badges.dart';
 import 'dart:async';
@@ -45,7 +45,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   List<bool> bottomTab = [true, false, false, false];
   Future<APIBLMShowProfileInformation>? drawerSettings;
   int unreadNotifications = 0;
-  // String _scanBarcode = 'Error';
+  String _scanBarcode = 'Error';
 
   Future<APIBLMShowProfileInformation> getDrawerInformation() async{
     return await apiBLMShowProfileInformation();
@@ -60,56 +60,43 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   }
 
   Future<void> scanQR() async {
-    // String barcodeScanRes;
-    // try {
-    //   barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
-    //   print(barcodeScanRes);
-    // } on PlatformException {
-    //   barcodeScanRes = 'Failed to get platform version.';
-    // }
+    String barcodeScanRes;
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
 
-    // if (!mounted) return;
+    if (!mounted) return;
 
-    // setState(() {
-    //   _scanBarcode = barcodeScanRes;
-    // });
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
 
-    // List<dynamic> newValue = _scanBarcode.split('-');
+    List<dynamic> newValue = _scanBarcode.split('-');
 
-    // if(_scanBarcode != 'Error'){
-    //   if(newValue[0] == 'Memorial'){
-    //     if(newValue[2] == 'Blm'){
-    //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
-    //     }else{
-    //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
-    //     }
-    //   }else{
-    //     if(newValue[4] == 'Blm'){
-    //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]),)));
-    //     }else{
-    //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
-    //     }
-    //   }
-    // }else{
-    //   await showDialog(
-    //     context: context,
-    //     builder: (_) => 
-    //       AssetGiffyDialog(
-    //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-    //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-    //       entryAnimation: EntryAnimation.DEFAULT,
-    //       description: Text('Something went wrong. Please try again.',
-    //         textAlign: TextAlign.center,
-    //         style: TextStyle(),
-    //       ),
-    //       onlyOkButton: true,
-    //       buttonOkColor: Colors.red,
-    //       onOkButtonPressed: () {
-    //         Navigator.pop(context, true);
-    //       },
-    //     )
-    //   );
-    // }
+    if(_scanBarcode != 'Error'){
+      if(newValue[0] == 'Memorial'){
+        if(newValue[2] == 'Blm'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
+        }else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
+        }
+      }else{
+        if(newValue[4] == 'Blm'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]),)));
+        }else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
+        }
+      }
+    }else{
+      await showOkAlertDialog(
+        context: context,
+        title: 'Error',
+        message: 'Something went wrong. Please try again.',
+      );
+    }
   }
 
   void initState(){
@@ -147,13 +134,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                         icon: CircleAvatar(
                           backgroundColor: Color(0xff888888),
                           backgroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
-                          // backgroundImage: ((){
-                          //   if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
-                          //     return NetworkImage(profileImage.data.showProfileInformationImage);
-                          //   }else{
-                          //     return AssetImage('assets/icons/app-icon.png');
-                          //   }
-                          // }()),
                         ),
                         onPressed: () async{
                           Scaffold.of(context).openDrawer();
@@ -230,7 +210,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     child: Column(
                       children: [
                         Icon(MdiIcons.fire,),
-                        // Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Feed', style: TextStyle(fontSize: 12,),),
                       ],
@@ -242,7 +221,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     child: Column(
                       children: [
                         Icon(MdiIcons.graveStone),
-                        // Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Memorials', style: TextStyle(fontSize: 12,),),
                       ],
@@ -254,31 +232,11 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     child: Column(
                       children: [
                         Icon(MdiIcons.post),
-                        // Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Post', style: TextStyle(fontSize: 12,),),
                       ],
                     ),
                   ),
-
-                  // Container(
-                  //   width: SizeConfig.screenWidth! / 4,
-                  //   child: Column(
-                  //     children: [
-                  //       Icon(Icons.fireplace),
-                  //       // Badge(
-                  //       //   position: BadgePosition.topEnd(top: 0, end: -10),
-                  //       //   animationDuration: Duration(milliseconds: 300),
-                  //       //   animationType: BadgeAnimationType.fade,
-                  //       //   badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
-                  //       //   badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
-                  //       //   child: Icon(MdiIcons.heart),
-                  //       // ),
-                  //       SizedBox(height: 5),
-                  //       Text('Notification', style: TextStyle(fontSize: 12,),),
-                  //     ],
-                  //   ),
-                  // ),
 
                   Container(
                     width: SizeConfig.screenWidth! / 4,

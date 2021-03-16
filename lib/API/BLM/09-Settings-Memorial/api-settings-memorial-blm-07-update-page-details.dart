@@ -11,8 +11,8 @@ Future<bool> apiBLMUpdatePageDetails({required int memorialId, required String n
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
     
     formData.files.addAll([
       MapEntry('name', MultipartFile.fromString(name,),),

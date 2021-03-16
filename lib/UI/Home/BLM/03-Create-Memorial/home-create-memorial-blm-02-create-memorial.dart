@@ -2,23 +2,39 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'home-create-memorial-blm-01-create-memorial.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
-// import 'package:better_player/better_player.dart';
+import 'home-create-memorial-blm-03-create-memorial.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
 class HomeBLMCreateMemorial2 extends StatefulWidget{
+  final String relationship;
+  final String locationOfIncident;
+  final String precinct;
+  final String dob;
+  final String rip;
+  final String country;
+  final String state;
 
-  HomeBLMCreateMemorial2State createState() => HomeBLMCreateMemorial2State();
+  HomeBLMCreateMemorial2({required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.state});
+
+  HomeBLMCreateMemorial2State createState() => HomeBLMCreateMemorial2State(relationship: relationship, locationOfIncident: locationOfIncident, precinct: precinct, dob: dob, rip: rip, country: country, state: state);
 }
 
 class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
+  final String relationship;
+  final String locationOfIncident;
+  final String precinct;
+  final String dob;
+  final String rip;
+  final String country;
+  final String state;
+
+  HomeBLMCreateMemorial2State({required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.state});
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   TextEditingController controllerStory = TextEditingController();
-  // BetterPlayerController? videoPlayerController;
   List<File> slideImages = [];
   int toggle = 0;
   File? videoFile;
@@ -31,23 +47,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
     if(pickedFile != null){
       setState(() {
         videoFile = File(pickedFile.path);
-        // BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.file, videoFile!.path);
-        // videoPlayerController = BetterPlayerController(
-        //   BetterPlayerConfiguration(
-        //     autoPlay: true,
-        //     controlsConfiguration: BetterPlayerControlsConfiguration(
-        //       showControls: false,
-        //     ),
-        //     aspectRatio: 1 / 2,
-        //   ), 
-        //   betterPlayerDataSource: betterPlayerDataSource, 
-        // );
-        // videoPlayerController = VideoPlayerController.file(videoFile)
-        // ..initialize().then((_){
-        //   setState(() {
-        //     videoPlayerController.play();
-        //   });
-        // });
+
       });
     }
   }
@@ -182,24 +182,10 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                     MiscBLMButtonTemplate(
                       onPressed: () async{
                         if(_key1.currentState!.controller.text == ''){
-                          await showDialog(
+                          await showOkAlertDialog(
                             context: context,
-                            builder: (_) => 
-                            Container()
-                            //   AssetGiffyDialog(
-                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //   entryAnimation: EntryAnimation.DEFAULT,
-                            //   description: Text('Please complete the form before submitting.',
-                            //     textAlign: TextAlign.center,
-                            //     style: TextStyle(),
-                            //   ),
-                            //   onlyOkButton: true,
-                            //   buttonOkColor: Colors.red,
-                            //   onOkButtonPressed: () {
-                            //     Navigator.pop(context, true);
-                            //   },
-                            // )
+                            title: 'Error',
+                            message: 'Please complete the form before submitting.',
                           );
                         }else{
                           List<File> newFiles = [];
@@ -211,6 +197,38 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                           if(slideImages != []){
                             newFiles.addAll(slideImages);
                           }
+
+                          print('The relationship is $relationship');
+                          print('The location of incident is $locationOfIncident');
+                          print('The precinct is $precinct');
+                          print('The dob is $dob');
+                          print('The rip is $rip');
+                          print('The country is $country');
+                          print('The state is $state');
+                          print('The description is ${controllerStory.text}');
+                          print('The memorialName is ${_key1.currentState!.controller.text}');
+                          
+                          for(int i = 0; i < newFiles.length; i++){
+                            print('The imagesOrVideos is ${newFiles[i]}');
+                          }
+
+
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => 
+                              HomeBLMCreateMemorial3(
+                                relationship: relationship,
+                                locationOfIncident: locationOfIncident,
+                                precinct: precinct,
+                                dob: dob,
+                                rip: rip,
+                                country: country,
+                                state: state,
+                                description: controllerStory.text,
+                                memorialName: _key1.currentState!.controller.text,
+                                imagesOrVideos: newFiles,
+                              ),
+                            )
+                          );
 
                           // newValue.description = controllerStory.text;
                           // newValue.blmName = _key1.currentState!.controller.text;
@@ -389,9 +407,10 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                 radius: 25,
                                 backgroundColor: Color(0xffffffff).withOpacity(.5),
                                 child: Text(
-                                  index.toString(),
+                                  // index.toString(),
+                                  '$index',
                                   style: TextStyle(
-                                    fontSize: 60,
+                                    fontSize: 40,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xffffffff),
                                   ),

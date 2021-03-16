@@ -1,8 +1,6 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-04-home-notifications-tab.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-notification-display.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-notification-display.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
@@ -28,7 +26,7 @@ class HomeBLMNotificationsTab extends StatefulWidget{
 
 class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
-  // RefreshController refreshController = RefreshController(initialRefresh: true);
+  ScrollController scrollController = ScrollController();
   List<BLMMainPagesNotifications> notifications = [];
   int itemRemaining = 1;
   int page = 1;
@@ -37,6 +35,23 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   void initState(){
     super.initState();
     onLoading();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(itemRemaining != 0){
+          setState(() {
+            onLoading();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more notifications to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   Future<void> onRefresh() async{
@@ -44,11 +59,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       onLoading();
     });
   }
-
-  // void onRefresh() async{
-  //   await Future.delayed(Duration(milliseconds: 1000));
-  //   refreshController.refreshCompleted();
-  // }
 
   void onLoading() async{
     if(itemRemaining != 0){
@@ -78,7 +88,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       if(mounted)
       setState(() {});
       page++;
-      
     }
   }
 
@@ -92,6 +101,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       ? RefreshIndicator(
         onRefresh: onRefresh,
         child: ListView.separated(
+          controller: scrollController,
           physics: ClampingScrollPhysics(),
           itemCount: count,
           separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
@@ -107,45 +117,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
           },
         )
       )
-      // ? Container()
-      // ? SmartRefresher(
-      //   enablePullDown: true,
-      //   enablePullUp: true,
-      //   header: MaterialClassicHeader(
-      //     color: Color(0xffffffff),
-      //     backgroundColor: Color(0xff4EC9D4),
-      //   ),
-      //   footer: CustomFooter(
-      //     loadStyle: LoadStyle.ShowWhenLoading,
-      //     builder: (BuildContext context, LoadStatus mode){
-      //       Widget body = Container();
-      //       if(mode == LoadStatus.loading){
-      //         body = CircularProgressIndicator();
-      //       }
-      //       return Center(child: body);
-      //     },
-      //   ),
-      //   controller: refreshController,
-      //   onRefresh: onRefresh,
-      //   onLoading: onLoading,
-      //   child: ListView.separated(
-      //     physics: ClampingScrollPhysics(),
-      //     itemBuilder: (c, i) {
-
-      //       return MiscBLMNotificationDisplayTemplate(
-      //         imageIcon: notifications[i].actorImage,
-      //         postId: notifications[i].postId,
-      //         notification: notifications[i].action,
-      //         dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
-      //         notificationType: notifications[i].notificationType,
-      //         readStatus: notifications[i].read,
-      //       );
-            
-      //     },
-      //     separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
-      //     itemCount: notifications.length,
-      //   ),
-      // )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(
@@ -170,4 +141,3 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
     );
   }
 }
-
