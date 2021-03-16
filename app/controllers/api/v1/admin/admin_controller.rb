@@ -668,15 +668,46 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
     # Delete Memorial
     def deleteMemorial
-        memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
-        if memorial
-            memorial.page.destroy 
-            render json: {status: :deleted}
-        else
-            render json: {status: "page not found"}
+        if params[:page] == "Memorial"
+            memorial = Memorial.find(params[:id])
+            memorial.destroy()
+
+            adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
+
+            adminsRaw.each do |admin_id|
+                AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: params[:id]).first.destroy 
+            end
+            
+            render json: {status: "deleted"}
+        elsif params[:page] == "Memorial"
+            blm = Blm.find(params[:id])
+            blm.destroy()
+
+            adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
+
+            adminsRaw.each do |admin_id|
+                User.find(admin_id).roles.where(resource_type: 'Blm', resource_id: params[:id]).first.destroy 
+            end
+            
+            render json: {status: "deleted"}
         end
+
+        # memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
+        # if memorial
+        #     memorial.page.destroy 
+        #     adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
+
+        #     adminsRaw.each do |admin_id|
+        #         AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: params[:id]).first.destroy 
+        #     end
+        #     render json: {status: :deleted}
+        # else
+        #     render json: {status: "page not found"}
+        # end
     end
 
+    # Report
+    # Index Report
     def allReports
         reports = Report.all 
                             
@@ -693,11 +724,114 @@ class Api::V1::Admin::AdminController < ApplicationController
                         reports: reports
                     }
     end
+    # Create Report
+    def createReport
+        @report = Report.new(report_params)
+        @report.save!
 
+        render json: {
+            success: true,
+            report_id:          @report.id,
+            reportable_type:    @report.reportable_type,
+            reportable_id:      @report.reportable_id,
+            subject:            @report.subject,
+            description:        @report.description }, status: 200
+    end
+
+    def fetchData
+        case params[:reportable_type]
+            when "Memorial"
+                    #ALM Memorials
+                    alm_memorials = Memorial.all
+
+                    render json: { memorials: alm_memorials }
+            when "AlmUser"
+                    users = AlmUser.all
+                    render json: { alm_users: users }
+            when "Blm"
+                    #ALM Memorials
+                    blm_memorials = Blm.all
+
+                    render json: { blms: blm_memorials }
+            when "User"
+                    users = User.all.where.not(guest: true, username: "admin")
+                    render json: { blm_users: users }
+            when "Post"
+                    posts = Post.all
+                    render json: { posts: posts }
+        end
+    end 
+
+    # Show Report
     def showReport
         report = Report.find(params[:id])
+        case report.reportable_type
+            when "Memorial"
+                reportable = Memorial.find(report.reportable_id)
+                reported = reportable.name
+            when "AlmUser"
+                reportable = AlmUser.find(report.reportable_id)
+                reported = reportable.first_name + " " + reportable.last_name
+            when "Blm"
+                reportable = Blm.find(report.reportable_id)
+                reported = reportable.name
+            when "User"
+                reportable = User.find(report.reportable_id)
+                reported = reportable.first_name + " " + reportable.last_name
+            when "Post"
+                reportable = Post.find(report.reportable_id)
+                reported = reportable.body
+        end
+        render json: { report: report, reported: reported }, status: 200
+    end
+    # Edit Report
+    def editReport
+        report = Report.find(params[:id])
 
-        render json: report
+         # check if data sent is empty or not
+         check = params_presence(params)
+         if check == true
+             # Update memorial details
+             report.update(report_params)
+ 
+             return render json: {success: "Report updated", report: report}, status: 200
+         else
+             return render json: {error: "#{check} is empty"}
+         end
+    end
+    # Delete Report
+    def deleteReport
+        report = Report.find(params[:id])
+
+        if report
+            report.destroy 
+            render json: {status: :deleted}
+        else
+            render json: {status: "Report not found"}
+        end
+    end
+    # Searh Report
+    def searchReport
+        reportsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Report').pluck('searchable_id')
+        puts reportsId
+        reports = Report.where(id: reportsId)
+        
+        reports = reports.page(params[:page]).per(numberOfPage)
+        if reports.total_count == 0 || (reports.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif reports.total_count < numberOfPage
+            itemsremaining = reports.total_count 
+        else
+            itemsremaining = reports.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        reports: reports
+                        # reports: ActiveModel::SerializableResource.new(
+                        #     reports, 
+                        #     each_serializer: PostSerializer
+                        # )
+                    }
     end
 
     def transactions
@@ -770,6 +904,10 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def blm_details_params
         params.permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country, :longitude, :latitude)
+    end
+
+    def report_params
+        params.require(:report).permit(:subject, :description, :reportable_type, :reportable_id)
     end
 
     def admin_only

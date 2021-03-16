@@ -258,8 +258,18 @@ Rails.application.routes.draw do
   
         # all reports
         get 'reports', to: 'admin#allReports'
+        # fetch all datas
+        get 'reports/fetchData/:reportable_type', to: 'admin#fetchData'
+        # add report
+        post 'reports/create', to: 'admin#createReport'
         # show report
         get 'reports/:id', to: 'admin#showReport'
+        # edit report
+        put 'reports/edit/:id', to: 'admin#editReport'
+        # delete report
+        delete 'reports/delete/:id', to: 'admin#deleteReport'
+        # search post
+        get 'search/report', to: 'admin#searchReport'
 
         # all transactions
         get 'transactions', to: 'admin#transactions'
