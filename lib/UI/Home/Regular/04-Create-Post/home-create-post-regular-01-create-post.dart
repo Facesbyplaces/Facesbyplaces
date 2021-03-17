@@ -2,9 +2,9 @@ import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
-// import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
@@ -189,24 +189,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   if(result){
                     Navigator.popAndPushNamed(context, '/home/regular');
                   }else{
-                    await showDialog(
+                    await showOkAlertDialog(
                       context: context,
-                      builder: (_) => 
-                      Container()
-                      //   AssetGiffyDialog(
-                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      //   entryAnimation: EntryAnimation.DEFAULT,
-                      //   description: Text('Something went wrong. Please try again.',
-                      //     textAlign: TextAlign.center,
-                      //     style: TextStyle(),
-                      //   ),
-                      //   onlyOkButton: true,
-                      //   buttonOkColor: Colors.red,
-                      //   onOkButtonPressed: () {
-                      //     Navigator.pop(context, true);
-                      //   },
-                      // )
+                      title: 'Error',
+                      message: 'Something went wrong. Please try again.',
                     );
                   }
 

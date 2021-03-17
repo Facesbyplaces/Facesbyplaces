@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 
 Future<bool> apiBLMModifyFollowPage({required String pageType, required int pageId, required bool follow}) async{
 
+  bool result = false;
+
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -20,24 +22,28 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  Dio dioRequest = Dio();
+  try{
+    Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers',
-    options: Options(
-      headers: <String, dynamic>{
-        'Content-Type': 'application/json',
-        'access-token': getAccessToken,
-        'uid': getUID,
-        'client': getClient,
-      }
-    ),  
-  );
+    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers',
+      options: Options(
+        headers: <String, dynamic>{
+          'Content-Type': 'application/json',
+          'access-token': getAccessToken,
+          'uid': getUID,
+          'client': getClient,
+        }
+      ),  
+    );
 
-  print('The status code of follow page is ${response.statusCode}');
+    print('The status code of follow page is ${response.statusCode}');
 
-  if(response.statusCode == 200){
-    return true;
-  }else{
-    return false;
+    if(response.statusCode == 200){
+      result = true;
+    }
+    return result;
+  }catch(e){
+    print('The error is: $e');
+    return result;
   }
 }

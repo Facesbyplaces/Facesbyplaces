@@ -92,12 +92,14 @@ class APIBLMShowMemorialExtended{
 
 class APIBLMShowMemorialExtendedDetails{
   String memorialDetailsDescription;
+  String memorialDetailsLocation;
+  String memorialDetailsPrecinct;
   String memorialDetailsDob;
   String memorialDetailsRip;
   String memorialDetailsState;
   String memorialDetailsCountry;
 
-  APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsDob, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry});
+  APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsDob, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
 
@@ -108,6 +110,8 @@ class APIBLMShowMemorialExtendedDetails{
 
     return APIBLMShowMemorialExtendedDetails(
       memorialDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      memorialDetailsLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      memorialDetailsPrecinct: parsedJson['precinct'] != null ? parsedJson['precinct'] : '',
       memorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
       memorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
       memorialDetailsState: parsedJson['state'] != null ? parsedJson['state'] : '',

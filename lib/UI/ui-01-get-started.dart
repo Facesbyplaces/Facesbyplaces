@@ -16,6 +16,8 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:io';
 
+import 'ui-02-login.dart';
+
 const double pi = 3.1415926535897932;
 
 class PushNotificationService {
@@ -598,7 +600,9 @@ class UIGetStartedState extends State<UIGetStarted>{
                                     color: Color(0xffffffff),
                                   ), 
                                   onPressed: (){
-                                    Navigator.pushNamed(context, '/login');
+                                    print('ljasdflkjasfkj');
+                                    // Navigator.pushNamed(context, '/login');
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => UILogin01()));
                                   },
                                   width: 200,
                                   height: 45,

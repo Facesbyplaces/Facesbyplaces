@@ -5,7 +5,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-backgroun
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:facesbyplaces/Configurations/date-conversion.dart';
 // import 'home-create-memorial-regular-01-create-memorial.dart';
-import 'package:location/location.dart' as Location;
+// import 'package:location/location.dart' as Location;
 // import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
@@ -258,81 +258,81 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                   height: 45,
                   onPressed: () async{
 
-                    Location.Location location = new Location.Location();
+                    // Location.Location location = new Location.Location();
 
-                    bool serviceEnabled = await location.serviceEnabled();
+                    // bool serviceEnabled = await location.serviceEnabled();
 
-                    if (!serviceEnabled) {
-                      serviceEnabled = await location.requestService();
-                      if (!serviceEnabled) {
-                        return;
-                      }
-                    }
+                    // if (!serviceEnabled) {
+                    //   serviceEnabled = await location.requestService();
+                    //   if (!serviceEnabled) {
+                    //     return;
+                    //   }
+                    // }
 
-                    Location.PermissionStatus permissionGranted = await location.hasPermission();
+                    // Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                    if (permissionGranted != Location.PermissionStatus.granted) {
-                      await showDialog(
-                        context: context,
-                        builder: (_) => 
-                        Container()
-                        //   AssetGiffyDialog(
-                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        //   entryAnimation: EntryAnimation.DEFAULT,
-                        //   description: Text('FacesbyPlaces needs to access the location for the memorial to be located. Do you wish to turn it on?',
-                        //     textAlign: TextAlign.center,
-                        //     style: TextStyle(),
-                        //   ),
-                        //   buttonOkColor: Colors.green,
-                        //   onOkButtonPressed: () async{
-                        //     permissionGranted = await location.requestPermission();
-                        //     Navigator.pop(context, true);
-                        //   },
-                        //   onCancelButtonPressed: (){
-                        //     Navigator.pop(context, true);
-                        //   },
-                        // )
-                      );
-                    }else{
-                      if(profileImage == File('')){
-                        final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
-                        final Uint8List list = bytes.buffer.asUint8List();
+                    // if (permissionGranted != Location.PermissionStatus.granted) {
+                    //   await showDialog(
+                    //     context: context,
+                    //     builder: (_) => 
+                    //     Container()
+                    //     //   AssetGiffyDialog(
+                    //     //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    //     //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    //     //   entryAnimation: EntryAnimation.DEFAULT,
+                    //     //   description: Text('FacesbyPlaces needs to access the location for the memorial to be located. Do you wish to turn it on?',
+                    //     //     textAlign: TextAlign.center,
+                    //     //     style: TextStyle(),
+                    //     //   ),
+                    //     //   buttonOkColor: Colors.green,
+                    //     //   onOkButtonPressed: () async{
+                    //     //     permissionGranted = await location.requestPermission();
+                    //     //     Navigator.pop(context, true);
+                    //     //   },
+                    //     //   onCancelButtonPressed: (){
+                    //     //     Navigator.pop(context, true);
+                    //     //   },
+                    //     // )
+                    //   );
+                    // }else{
+                    //   if(profileImage == File('')){
+                    //     final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
+                    //     final Uint8List list = bytes.buffer.asUint8List();
 
-                        final tempDir = await getTemporaryDirectory();
-                        final file = await new File('${tempDir.path}/regular-profile-image.png').create();
-                        file.writeAsBytesSync(list);
+                    //     final tempDir = await getTemporaryDirectory();
+                    //     final file = await new File('${tempDir.path}/regular-profile-image.png').create();
+                    //     file.writeAsBytesSync(list);
 
-                        setState(() {
-                          profileImage = file;
-                        });
-                      }
+                    //     setState(() {
+                    //       profileImage = file;
+                    //     });
+                    //   }
 
-                      // Location.LocationData locationData = await location.getLocation();
+                    //   // Location.LocationData locationData = await location.getLocation();
 
-                      // APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
-                      //   almRelationship: newValue.relationship,
-                      //   almBirthPlace: newValue.birthplace,
-                      //   almDob: convertDate(newValue.dob),
-                      //   almRip: convertDate(newValue.rip),
-                      //   almCemetery: newValue.cemetery,
-                      //   almCountry: newValue.country,
-                      //   almMemorialName: newValue.memorialName,
-                      //   almDescription: newValue.description,
-                      //   almBackgroundImage: backgroundImage,
-                      //   almProfileImage: profileImage,
-                      //   almImagesOrVideos: newValue.imagesOrVideos,
-                      //   almLatitude: '${locationData.latitude}',
-                      //   almLongitude: '${locationData.longitude}',
-                      // );
+                    //   // APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
+                    //   //   almRelationship: newValue.relationship,
+                    //   //   almBirthPlace: newValue.birthplace,
+                    //   //   almDob: convertDate(newValue.dob),
+                    //   //   almRip: convertDate(newValue.rip),
+                    //   //   almCemetery: newValue.cemetery,
+                    //   //   almCountry: newValue.country,
+                    //   //   almMemorialName: newValue.memorialName,
+                    //   //   almDescription: newValue.description,
+                    //   //   almBackgroundImage: backgroundImage,
+                    //   //   almProfileImage: profileImage,
+                    //   //   almImagesOrVideos: newValue.imagesOrVideos,
+                    //   //   almLatitude: '${locationData.latitude}',
+                    //   //   almLongitude: '${locationData.longitude}',
+                    //   // );
 
-                      // context.showLoaderOverlay();
-                      // int result = await apiRegularCreateMemorial(memorial: memorial);
-                      // context.hideLoaderOverlay();
+                    //   // context.showLoaderOverlay();
+                    //   // int result = await apiRegularCreateMemorial(memorial: memorial);
+                    //   // context.hideLoaderOverlay();
 
-                      // Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: newValue.relationship,));
-                      // Navigator.pushReplacement(context, newRoute);
-                    }
+                    //   // Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: newValue.relationship,));
+                    //   // Navigator.pushReplacement(context, newRoute);
+                    // }
                   },
                 ),
 

@@ -315,11 +315,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     Location.PermissionStatus permissionGranted = await location.hasPermission();
 
                     if (permissionGranted != Location.PermissionStatus.granted) {
-                      // await showOkAlertDialog(
-                      //   context: context,
-                      //   title: 'Error',
-                      //   message: 'FacesbyPlaces needs to access the location. Turn on the access on the settings.',
-                      // );
                       var confirmation = await showOkCancelAlertDialog(
                         context: context,
                         title: 'Confirm',
@@ -356,22 +351,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                       Location.LocationData locationData = await location.getLocation();
 
-                      // String blmMemorialName;
-                      // String blmDescription;
-                      // String blmLocationOfIncident;
-                      // String blmDob;
-                      // String blmRip;
-                      // String blmState;
-                      // String blmCountry;
-                      // String blmPrecinct;
-                      // String blmRelationship;
-                      // dynamic blmBackgroundImage;
-                      // dynamic blmProfileImage;
-                      // List<dynamic> blmImagesOrVideos;
-                      // String blmLatitude;
-                      // String blmLongitude;
-
-
                       APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
                         blmMemorialName: memorialName,
                         blmDescription: description,
@@ -388,23 +367,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                         blmLatitude: '${locationData.latitude}',
                         blmLongitude: '${locationData.longitude}',
                       );
-
-                      // APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
-                      //   blmRelationship: newValue.relationship,
-                      //   blmLocationOfIncident: newValue.location,
-                      //   blmPrecinct: newValue.precinct,
-                      //   blmDob: convertDate(newValue.dob),
-                      //   blmRip: convertDate(newValue.rip),
-                      //   blmCountry: newValue.country,
-                      //   blmState: newValue.state,
-                      //   blmMemorialName: newValue.blmName,
-                      //   blmDescription: newValue.description,
-                      //   blmBackgroundImage: backgroundImage,
-                      //   blmProfileImage: profileImage,
-                      //   blmImagesOrVideos: newValue.imagesOrVideos,
-                      //   blmLatitude: locationData.latitude.toString(),
-                      //   blmLongitude: locationData.longitude.toString()
-                      // );
 
                       context.showLoaderOverlay();
                       int result = await apiBLMCreateMemorial(blmMemorial: memorial);

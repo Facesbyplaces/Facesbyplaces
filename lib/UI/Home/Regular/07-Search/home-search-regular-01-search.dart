@@ -107,49 +107,49 @@ class HomeRegularSearch extends StatelessWidget{
                       ),
                       suffixIcon: IconButton(
                         onPressed: () async{
-                          Location.Location location = new Location.Location();
+                          // Location.Location location = new Location.Location();
 
-                          bool serviceEnabled = await location.serviceEnabled();
+                          // bool serviceEnabled = await location.serviceEnabled();
 
-                          if (!serviceEnabled) {
-                            serviceEnabled = await location.requestService();
-                            if (!serviceEnabled) {
-                              return;
-                            }
-                          }
+                          // if (!serviceEnabled) {
+                          //   serviceEnabled = await location.requestService();
+                          //   if (!serviceEnabled) {
+                          //     return;
+                          //   }
+                          // }
 
-                          Location.PermissionStatus permissionGranted = await location.hasPermission();
+                          // Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                          if (permissionGranted != Location.PermissionStatus.granted) {
-                            var confirmation = await showOkCancelAlertDialog(
-                              context: context,
-                              title: 'Confirm',
-                              message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                              okLabel: 'Yes',
-                              cancelLabel: 'No',
-                            );
+                          // if (permissionGranted != Location.PermissionStatus.granted) {
+                          //   var confirmation = await showOkCancelAlertDialog(
+                          //     context: context,
+                          //     title: 'Confirm',
+                          //     message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                          //     okLabel: 'Yes',
+                          //     cancelLabel: 'No',
+                          //   );
 
-                            print('The confirmation is $confirmation');
+                          //   print('The confirmation is $confirmation');
 
-                            if(confirmation == OkCancelResult.ok){
-                              permissionGranted = await location.requestPermission();
+                          //   if(confirmation == OkCancelResult.ok){
+                          //     permissionGranted = await location.requestPermission();
 
-                              context.showLoaderOverlay();
-                              Location.LocationData locationData = await location.getLocation();
-                              List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                              context.hideLoaderOverlay();
+                          //     context.showLoaderOverlay();
+                          //     Location.LocationData locationData = await location.getLocation();
+                          //     List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                          //     context.hideLoaderOverlay();
 
-                              Navigator.pop(context);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                            }
-                          }else{
-                            context.showLoaderOverlay();
-                            Location.LocationData locationData = await location.getLocation();
-                            List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                            context.hideLoaderOverlay();
+                          //     Navigator.pop(context);
+                          //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
+                          //   }
+                          // }else{
+                          //   context.showLoaderOverlay();
+                          //   Location.LocationData locationData = await location.getLocation();
+                          //   List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                          //   context.hideLoaderOverlay();
 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                          }
+                          //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
+                          // }
                         },
                         icon: Icon(Icons.search, color: Color(0xff888888),),
                       ),
