@@ -1,8 +1,6 @@
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
-import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart';
-import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-03-create-memorial.dart';
 // import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart';
@@ -32,7 +30,6 @@ import 'package:flutter/material.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
 import 'UI/Regular/regular-03-register.dart';
-import 'UI/Regular/regular-04-verify-email.dart';
 import 'UI/Regular/regular-05-upload-photo.dart';
 import 'UI/BLM/blm-01-join.dart';
 import 'UI/BLM/blm-02-login.dart';
@@ -86,7 +83,7 @@ void main() async{
           '/regular/join': (BuildContext context) => RegularJoin(),
           '/regular/login': (BuildContext context) => RegularLogin(),
           '/regular/register': (BuildContext context) => RegularRegister(),
-          '/regular/verify-email': (BuildContext context) => RegularVerifyEmail(),
+          // '/regular/verify-email': (BuildContext context) => RegularVerifyEmail(),
           '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
 
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
@@ -107,8 +104,8 @@ void main() async{
           '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
           '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
           '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
-          '/home/regular/create-memorial-2': (BuildContext context) => HomeRegularCreateMemorial2(),
-          '/home/regular/create-memorial-3': (BuildContext context) => HomeRegularCreateMemorial3(),
+          // '/home/regular/create-memorial-2': (BuildContext context) => HomeRegularCreateMemorial2(),
+          // '/home/regular/create-memorial-3': (BuildContext context) => HomeRegularCreateMemorial3(),
           // '/home/regular/notification-settings': (BuildContext context) => HomeRegularNotificationSettings(),
           // '/home/regular/donation': (BuildContext context) => HomeRegularUserDonate(),
           '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),

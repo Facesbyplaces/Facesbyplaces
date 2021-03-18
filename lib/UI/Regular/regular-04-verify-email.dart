@@ -3,26 +3,33 @@ import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-10-verifica
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
-// import 'package:pinput/pin_put/pin_put.dart';
+import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegularVerifyEmail extends StatefulWidget{
+  final String verificationCode;
+  RegularVerifyEmail({required this.verificationCode});
 
-  RegularVerifyEmailState createState() => RegularVerifyEmailState();
+  RegularVerifyEmailState createState() => RegularVerifyEmailState(verificationCode: verificationCode);
 }
 
 class RegularVerifyEmailState extends State<RegularVerifyEmail>{
+  final String verificationCode;
+  RegularVerifyEmailState({required this.verificationCode});
 
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController(text: '');
+
+  void initState(){
+    super.initState();
+    controller.text = verificationCode;
+  }
   
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // String verificationCode = ModalRoute.of(context).settings.arguments;
-    // controller.text = verificationCode;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -71,25 +78,25 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
 
                       Padding(
                         padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        // child: PinPut(
-                        //   fieldsAlignment: MainAxisAlignment.spaceEvenly,
-                        //   controller: controller,
-                        //   fieldsCount: 3,
-                        //   textStyle: TextStyle(
-                        //     fontSize: 56,
-                        //     fontWeight: FontWeight.bold,
-                        //     color: Color(0xff000000)
-                        //   ),
-                        //   followingFieldDecoration: BoxDecoration(
-                        //     border: Border(bottom: BorderSide(color: Color(0xff000000),),)
-                        //   ),
-                        //   selectedFieldDecoration: BoxDecoration(
-                        //     border: Border(bottom: BorderSide(color: Color(0xff000000),),)
-                        //   ),
-                        //   submittedFieldDecoration: BoxDecoration(
-                        //     border: Border(bottom: BorderSide(color: Color(0xff000000),),)
-                        //   ),
-                        // ),
+                        child: PinPut(
+                          fieldsAlignment: MainAxisAlignment.spaceEvenly,
+                          controller: controller,
+                          fieldsCount: 3,
+                          textStyle: TextStyle(
+                            fontSize: 56,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff000000)
+                          ),
+                          followingFieldDecoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: Color(0xff000000),),)
+                          ),
+                          selectedFieldDecoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: Color(0xff000000),),)
+                          ),
+                          submittedFieldDecoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: Color(0xff000000),),)
+                          ),
+                        ),
                       ),
 
                       SizedBox(height: 80),
@@ -121,44 +128,16 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                   context.hideLoaderOverlay();
 
                                   if(result == true){
-                                    await showDialog(
+                                    await showOkAlertDialog(
                                       context: context,
-                                      builder: (_) => 
-                                      Container()
-                                      //   AssetGiffyDialog(
-                                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      //   entryAnimation: EntryAnimation.DEFAULT,
-                                      //   description: Text('Another code has been sent to your email address. Please check your inbox.',
-                                      //     textAlign: TextAlign.center,
-                                      //     style: TextStyle(),
-                                      //   ),
-                                      //   onlyOkButton: true,
-                                      //   buttonOkColor: Colors.green,
-                                      //   onOkButtonPressed: () {
-                                      //     Navigator.pop(context, true);
-                                      //   },
-                                      // )
+                                      title: 'Success',
+                                      message: 'Another code has been sent to your email address. Please check your inbox.',
                                     );
                                   }else{
-                                    await showDialog(
+                                    await showOkAlertDialog(
                                       context: context,
-                                      builder: (_) => 
-                                      Container()
-                                      //   AssetGiffyDialog(
-                                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      //   entryAnimation: EntryAnimation.DEFAULT,
-                                      //   description: Text('Something went wrong. Please try again.',
-                                      //     textAlign: TextAlign.center,
-                                      //     style: TextStyle(),
-                                      //   ),
-                                      //   onlyOkButton: true,
-                                      //   buttonOkColor: Colors.red,
-                                      //   onOkButtonPressed: () {
-                                      //     Navigator.pop(context, true);
-                                      //   },
-                                      // )
+                                      title: 'Error',
+                                      message: 'Something went wrong. Please try again.',
                                     );
                                   }
                                 }
@@ -179,24 +158,10 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                         onPressed: () async{
 
                           if(controller.text.length != 3){
-                            await showDialog(
+                            await showOkAlertDialog(
                               context: context,
-                              builder: (_) => 
-                              Container()
-                              //   AssetGiffyDialog(
-                              //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              //   entryAnimation: EntryAnimation.DEFAULT,
-                              //   description: Text('Please enter the verification code.',
-                              //     textAlign: TextAlign.center,
-                              //     style: TextStyle(),
-                              //   ),
-                              //   onlyOkButton: true,
-                              //   buttonOkColor: Colors.red,
-                              //   onOkButtonPressed: () {
-                              //     Navigator.pop(context, true);
-                              //   },
-                              // )
+                              title: 'Error',
+                              message: 'Please enter the verification code.',
                             );
                           }else{
 
@@ -207,24 +172,10 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                             if(result){
                               Navigator.pushNamed(context, '/regular/upload-photo');
                             }else{
-                              await showDialog(
+                              await showOkAlertDialog(
                                 context: context,
-                                builder: (_) => 
-                                Container()
-                                //   AssetGiffyDialog(
-                                //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                //   entryAnimation: EntryAnimation.DEFAULT,
-                                //   description: Text('Something went wrong. Please try again.',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(),
-                                //   ),
-                                //   onlyOkButton: true,
-                                //   buttonOkColor: Colors.red,
-                                //   onOkButtonPressed: () {
-                                //     Navigator.pop(context, true);
-                                //   },
-                                // )
+                                title: 'Error',
+                                message: 'Something went wrong. Please try again.',
                               );
                             }
                           }

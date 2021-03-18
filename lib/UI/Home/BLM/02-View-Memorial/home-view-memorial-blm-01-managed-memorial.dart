@@ -269,20 +269,26 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                       Column(
                                         children: [
-                                          ((){
-                                            if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
-                                              return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                    showControls: false,
-                                                  ),
-                                                  aspectRatio: 16 / 9,
-                                                ),
-                                              );
-                                            }else{
-                                              return Container(height: 0,);
-                                            }
-                                          }()),
+                                          Container(
+                                            child: ((){
+                                              if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
+                                                if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                  return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                      controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                        showControls: false,
+                                                      ),
+                                                      aspectRatio: 16 / 9,
+                                                    ),
+                                                  );
+                                                }else{
+                                                  return Container(height: 0,);
+                                                }
+                                              }else{
+                                                return Container(height: 0,);
+                                              }
+                                            }()),
+                                          ),
 
                                           SizedBox(height: 20,),
 

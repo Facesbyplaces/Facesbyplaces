@@ -94,78 +94,13 @@ class BLMRegister extends StatelessWidget{
                                     title: 'Error',
                                     message: 'Please complete the form before submitting.',
                                   );
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => 
-                                  //   Container()
-                                  //   //   AssetGiffyDialog(
-                                  //   //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   //   description: Text('Please complete the form before submitting.',
-                                  //   //     textAlign: TextAlign.center,
-                                  //   //     style: TextStyle(),
-                                  //   //   ),
-                                  //   //   onlyOkButton: true,
-                                  //   //   buttonOkColor: Colors.red,
-                                  //   //   onOkButtonPressed: () {
-                                  //   //     Navigator.pop(context, true);
-                                  //   //   },
-                                  //   // )
-                                  // );
                                 }else if(!validEmail){
                                   await showOkAlertDialog(
                                     context: context,
                                     title: 'Error',
                                     message: 'Invalid email address. Please try again.',
                                   );
-                                  // await showDialog(
-                                  //   context: context,
-                                  //   builder: (_) => 
-                                  //   Container()
-                                  //   //   AssetGiffyDialog(
-                                  //   //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   //   description: Text('Invalid email address. Please try again.',
-                                  //   //     textAlign: TextAlign.center,
-                                  //   //     style: TextStyle(),
-                                  //   //   ),
-                                  //   //   onlyOkButton: true,
-                                  //   //   buttonOkColor: Colors.red,
-                                  //   //   onOkButtonPressed: () {
-                                  //   //     Navigator.pop(context, true);
-                                  //   //   },
-                                  //   // )
-                                  // );
-                                }
-                                // else if(!_key3.currentState!.valid){
-                                //   await showOkAlertDialog(
-                                //     context: context,
-                                //     title: 'Error',
-                                //     message: 'Invalid phone number. Please try again.',
-                                //   );
-                                //   // await showDialog(
-                                //   //   context: context,
-                                //   //   builder: (_) => 
-                                //   //   Container()
-                                //   //   //   AssetGiffyDialog(
-                                //   //   //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //   //   //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                //   //   //   entryAnimation: EntryAnimation.DEFAULT,
-                                //   //   //   description: Text('Invalid phone number. Please try again.',
-                                //   //   //     textAlign: TextAlign.center,
-                                //   //   //     style: TextStyle(),
-                                //   //   //   ),
-                                //   //   //   onlyOkButton: true,
-                                //   //   //   buttonOkColor: Colors.red,
-                                //   //   //   onOkButtonPressed: () {
-                                //   //   //     Navigator.pop(context, true);
-                                //   //   //   },
-                                //   //   // )
-                                //   // );
-                                // }
-                                else{
+                                }else{
 
                                   APIBLMAccountRegistration account = APIBLMAccountRegistration(
                                     firstName: _key1.currentState!.controller.text, 
@@ -183,7 +118,6 @@ class BLMRegister extends StatelessWidget{
                                   if(result == 'Success'){
                                     final sharedPrefs = await SharedPreferences.getInstance();
                                     String verificationCode = sharedPrefs.getString('blm-verification-code')!;
-                                    // Navigator.pushNamed(context, '/blm/verify-email', arguments: verificationCode);
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => BLMVerifyEmail(verificationCode: verificationCode)));
                                   }else{
                                     await showOkAlertDialog(
@@ -191,25 +125,6 @@ class BLMRegister extends StatelessWidget{
                                       title: 'Error',
                                       message: '$result',
                                     );
-                                    // await showDialog(
-                                    //   context: context,
-                                    //   builder: (_) => 
-                                    //   Container()
-                                    //   //   AssetGiffyDialog(
-                                    //   //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //   //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    //   //   entryAnimation: EntryAnimation.DEFAULT,
-                                    //   //   description: Text('$result',
-                                    //   //     textAlign: TextAlign.center,
-                                    //   //     style: TextStyle(),
-                                    //   //   ),
-                                    //   //   onlyOkButton: true,
-                                    //   //   buttonOkColor: Colors.red,
-                                    //   //   onOkButtonPressed: () {
-                                    //   //     Navigator.pop(context, true);
-                                    //   //   },
-                                    //   // )
-                                    // );
                                   }
                                 }
 

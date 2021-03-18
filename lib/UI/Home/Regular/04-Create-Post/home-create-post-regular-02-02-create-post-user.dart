@@ -1,9 +1,8 @@
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:substring_highlight/substring_highlight.dart';
-// import 'home-create-post-regular-01-create-post.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
+
+import 'home-create-post-regular-01-create-post.dart';
 
 class RegularSearchUsers{
   int userId;
@@ -23,18 +22,41 @@ class HomeRegularCreatePostSearchUser extends StatefulWidget{
 }
 
 class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSearchUser>{
-  
-  // RefreshController refreshController = RefreshController(initialRefresh: true);
+
+  ScrollController scrollController = ScrollController();
   TextEditingController controller = TextEditingController();
   List<RegularSearchUsers> users = [];
   int itemRemaining = 1;
   bool empty = true;
   int page = 1;
 
-  // void onRefresh() async{
-  //   await Future.delayed(Duration(milliseconds: 1000));
-  //   refreshController.refreshCompleted();
-  // }  
+  void initState(){
+    super.initState();
+    onLoading();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(itemRemaining != 0){
+          setState(() {
+            onLoading();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more users to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+  }
+
+  Future<void> onRefresh() async{
+    setState(() {
+      onLoading();
+    });
+  }
 
   void onLoading() async{
     if(itemRemaining != 0){
@@ -57,10 +79,6 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
       if(mounted)
       setState(() {});
       page++;
-      
-      // refreshController.loadComplete();
-    }else{
-      // refreshController.loadNoData();
     }
   }
 
@@ -136,11 +154,40 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
             backgroundColor: Color(0xff04ECFF),
           ),
-          body: Container(
-            height: SizeConfig.screenHeight! - kToolbarHeight,
+          body: empty == false
+          ? RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              padding: EdgeInsets.all(10.0),
+              physics: ClampingScrollPhysics(),
+              itemCount: users.length,
+              separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+              itemBuilder: (c, i) {
+                return ListTile(
+                  onTap: (){
+                    Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
+                  },
+                  leading: users[i].image != '' 
+                  ? CircleAvatar(
+                    maxRadius: 40,
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: NetworkImage(users[i].image),
+                  )
+                  : CircleAvatar(
+                    maxRadius: 40,
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                  ),
+                  title: Text(users[i].firstName + ' ' + users[i].lastName,),
+                  subtitle: Text(users[i].email, style: TextStyle(fontSize: 12, color: Color(0xff888888),),),
+                );
+              }
+            ),
+          )
+          : Container(
             width: SizeConfig.screenWidth,
-            child: empty
-            ? SingleChildScrollView(
+            child: SingleChildScrollView(
               physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
@@ -156,78 +203,6 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                 ],
               ),
             )
-            : Container(
-              height: SizeConfig.screenHeight,
-              width: SizeConfig.screenWidth,
-              // child: SmartRefresher(
-              //   enablePullDown: true,
-              //   enablePullUp: true,
-              //   header: MaterialClassicHeader(
-              //     color: Color(0xffffffff),
-              //     backgroundColor: Color(0xff4EC9D4),
-              //   ),
-              //   footer: CustomFooter(
-              //     loadStyle: LoadStyle.ShowWhenLoading,
-              //     builder: (BuildContext context, LoadStatus mode){
-              //       Widget body = Container();
-              //       if(mode == LoadStatus.loading){
-              //         body = CircularProgressIndicator();
-              //       }
-              //       return Center(child: body);
-              //     },
-              //   ),
-              //   controller: refreshController,
-              //   onRefresh: onRefresh,
-              //   onLoading: onLoading,
-              //   child: ListView.separated(
-              //     padding: EdgeInsets.all(10.0),
-              //     physics: ClampingScrollPhysics(),
-              //     itemBuilder: (c, i) {
-              //       return GestureDetector(
-              //         onTap: (){
-              //           Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
-              //         },
-              //         child: Container(
-              //           padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-              //           child: Row(
-              //             children: [
-
-              //               CircleAvatar(
-              //                 maxRadius: 40,
-              //                 backgroundColor: Color(0xff888888),
-              //                 // backgroundImage: users[i].image != null ? NetworkImage(users[i].image) : AssetImage('assets/icons/app-icon.png'),
-              //                 backgroundImage: NetworkImage(users[i].image),
-              //               ),
-
-              //               SizedBox(width: 25,),
-
-              //               Expanded(
-              //                 child: Column(
-              //                   mainAxisAlignment: MainAxisAlignment.start,
-              //                   crossAxisAlignment: CrossAxisAlignment.start,
-              //                   children: [
-              //                     SubstringHighlight(
-              //                       text: users[i].firstName + ' ' + users[i].lastName,
-              //                       term: controller.text,
-              //                       textStyle: TextStyle(color: Color(0xff000000),),
-              //                       textStyleHighlight: TextStyle(color: Color(0xff04ECFF),),
-              //                     ),
-
-              //                     Text(users[i].email, style: TextStyle(fontSize: 12, color: Color(0xff888888),),),
-
-              //                   ],
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       );
-              //     },
-              //     separatorBuilder: (c, i) => Divider(height: 10, color: Color(0xff888888)),
-              //     itemCount: users.length,
-              //   ),
-              // )
-            ),
           ),
         ),
       ),

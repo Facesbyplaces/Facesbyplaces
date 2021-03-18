@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
 
+import 'home-create-post-regular-02-01-create-post-location.dart';
+import 'home-create-post-regular-02-02-create-post-user.dart';
+
 class RegularTaggedUsers{
   String name;
   int userId;
@@ -52,7 +55,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   File videoFile = File('');
   final picker = ImagePicker();
-  // BetterPlayerController betterPlayerController = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 1 / 2, controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),),);
   String newLocation = '';
   String person = '';
   int removeAttachment = 0;
@@ -88,16 +90,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
       setState(() {
         slideImages.add(File(pickedFile.path));
         videoFile = File(pickedFile.path);
-        // BetterPlayerDataSource betterPlayerDataSource =BetterPlayerDataSource(BetterPlayerDataSourceType.file, '${pickedFile.path}');
-        // betterPlayerController = BetterPlayerController(
-        //   BetterPlayerConfiguration(
-        //     aspectRatio: 1 / 2,
-        //     controlsConfiguration: BetterPlayerControlsConfiguration(
-        //       showControls: false,
-        //     ),
-        //   ), 
-        //   betterPlayerDataSource: betterPlayerDataSource,
-        // );
       });
     }
   }
@@ -343,6 +335,23 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                   SizedBox(height: 10,),
 
+                  newLocation != ''
+                  ? Container(
+                    child: Chip(
+                      labelPadding: const EdgeInsets.only(left: 8.0),
+                      label: Text(newLocation),
+                      deleteIcon: Icon(Icons.close, size: 18,),
+                      onDeleted: () {
+                        setState(() {
+                          newLocation = '';
+                        });
+                      },
+                    ),
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                    alignment: Alignment.centerLeft,
+                  )
+                  : Container(height: 0,),
+
                   Container(
                     child: ((){
                       if(slideImages.length != 0){
@@ -373,11 +382,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                       border: Border.all(color: Color(0xff000000),),
                                     ),
                                     child: Stack(
-                                      children: [
-                                        // BetterPlayer(
-                                        //   controller: betterPlayerController,
-                                        // ),
-                                        
+                                      children: [                                        
                                         
                                         Center(
                                           child: CircleAvatar(
@@ -477,9 +482,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-                              var result = await Navigator.pushNamed(context, '/home/regular/create-post-location');
+                              // var result = await Navigator.pushNamed(context, '/home/regular/create-post-location');
+                              String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchLocation()));
 
-                              newLocation = result.toString();
+                              newLocation = result;
                             },
                             child: Container(
                               color: Colors.transparent,
@@ -498,8 +504,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-                              
-                              RegularTaggedUsers? result = await Navigator.pushNamed(context, '/home/regular/create-post-user');
+                              RegularTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchUser()));
 
                               if(result != null){
                                 users.add(result);

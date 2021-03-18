@@ -1,52 +1,42 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<bool> apiRegularLogin({required String email, required String password, required String deviceToken}) async{
 
-  bool value = false;
-
-  print('The email in api is $email');
-  print('The password in api is $password');
-  print('The deviceToken in api is $deviceToken');
+  bool result = false;
 
   try{
-    final http.Response response = await http.post(
-      // 'http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
-      // Uri.http('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken', ''),
-      // Uri.http('fbp.dev1.koda.ws', '/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken'),
-      Uri.http('fbp.dev1.koda.ws', '/alm_auth/sign_in', {'account_type' : '2', 'email': '$email', 'password' : '$password', 'device_token' : '$deviceToken'}),
+    Dio dioRequest = Dio();
 
-      // sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken
-
-      // Uri.http("example.org", "/path", { "q" : "dart" });
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      }
+    var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
+      options: Options(
+        headers: <String, dynamic>{
+          'Content-Type': 'application/json',
+        }
+      ),  
     );
 
-    print('The status code of login is ${response.statusCode}');
-    print('The status code of login is ${response.body}');
+    print('The status code of registration is ${response.statusCode}');
 
     if(response.statusCode == 200){
-      var value = json.decode(response.body);
-      var user = value['user'];
+      var newData = Map<String, dynamic>.from(response.data);
+
+      var user = newData['user'];
       int userId = user['id'];
 
       final sharedPrefs = await SharedPreferences.getInstance();
 
       sharedPrefs.setInt('regular-user-id', userId);
-      sharedPrefs.setString('regular-access-token', response.headers['access-token']!);
-      sharedPrefs.setString('regular-uid', response.headers['uid']!);
-      sharedPrefs.setString('regular-client', response.headers['client']!);
+      sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
+      sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
+      sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
       sharedPrefs.setBool('regular-user-session', true);
       sharedPrefs.setBool('user-guest-session', false);
-
-      return true;
+      result = true;
     }
+    return result;
   }catch(e){
-    throw Exception('Something went wrong. $e');
+    print('The error of login is: $e');
+    return result;
   }
-
-  return value;
 }

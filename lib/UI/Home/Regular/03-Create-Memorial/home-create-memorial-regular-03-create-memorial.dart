@@ -1,12 +1,13 @@
-// import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
-// import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial-regular-01-create-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
+import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial-regular-01-create-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:facesbyplaces/Configurations/date-conversion.dart';
 // import 'home-create-memorial-regular-01-create-memorial.dart';
-// import 'package:location/location.dart' as Location;
-// import 'package:loader_overlay/loader_overlay.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:location/location.dart' as Location;
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,11 +17,33 @@ import 'dart:typed_data';
 import 'dart:io';
 
 class HomeRegularCreateMemorial3 extends StatefulWidget{
+  final String relationship;
+  final String birthplace;
+  final String dob;
+  final String rip;
+  final String cemetery;
+  final String country;
+  final String description;
+  final String memorialName;
+  final List<dynamic> imagesOrVideos;
 
-  HomeRegularCreateMemorial3State createState() => HomeRegularCreateMemorial3State();
+  HomeRegularCreateMemorial3({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.description, required this.memorialName, required this.imagesOrVideos});
+
+  HomeRegularCreateMemorial3State createState() => HomeRegularCreateMemorial3State(relationship: relationship, birthplace: birthplace, dob: dob, rip: rip, cemetery: cemetery, country: country, description: description, memorialName: memorialName, imagesOrVideos: imagesOrVideos);
 }
 
 class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
+  final String relationship;
+  final String birthplace;
+  final String dob;
+  final String rip;
+  final String cemetery;
+  final String country;
+  final String description;
+  final String memorialName;
+  final List<dynamic> imagesOrVideos;
+
+  HomeRegularCreateMemorial3State({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.description, required this.memorialName, required this.imagesOrVideos});
 
   File backgroundImage = File('');
   File profileImage = File('');
@@ -49,7 +72,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // RegularCreateMemorialValues newValue = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
@@ -103,12 +125,14 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             backgroundColor: Color(0xffffffff),
                             child: Padding(
                               padding: EdgeInsets.all(5),
-                              child: CircleAvatar(
+                              child: profileImage.path != ''
+                              ? CircleAvatar(
                                 radius: 60,
                                 backgroundImage: FileImage(profileImage),
-                                // backgroundImage: profileImage != null
-                                // ? FileImage(profileImage)
-                                // : AssetImage('assets/icons/cover-icon.png'),
+                              )
+                              : CircleAvatar(
+                                radius: 60,
+                                backgroundImage: AssetImage('assets/icons/cover-icon.png'),
                               ),
                             ),
                           ),
@@ -258,81 +282,77 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                   height: 45,
                   onPressed: () async{
 
-                    // Location.Location location = new Location.Location();
+                    Location.Location location = new Location.Location();
 
-                    // bool serviceEnabled = await location.serviceEnabled();
+                    bool serviceEnabled = await location.serviceEnabled();
 
-                    // if (!serviceEnabled) {
-                    //   serviceEnabled = await location.requestService();
-                    //   if (!serviceEnabled) {
-                    //     return;
-                    //   }
-                    // }
+                    if (!serviceEnabled) {
+                      serviceEnabled = await location.requestService();
+                      if (!serviceEnabled) {
+                        return;
+                      }
+                    }
 
-                    // Location.PermissionStatus permissionGranted = await location.hasPermission();
+                    Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                    // if (permissionGranted != Location.PermissionStatus.granted) {
-                    //   await showDialog(
-                    //     context: context,
-                    //     builder: (_) => 
-                    //     Container()
-                    //     //   AssetGiffyDialog(
-                    //     //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //     //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //     //   entryAnimation: EntryAnimation.DEFAULT,
-                    //     //   description: Text('FacesbyPlaces needs to access the location for the memorial to be located. Do you wish to turn it on?',
-                    //     //     textAlign: TextAlign.center,
-                    //     //     style: TextStyle(),
-                    //     //   ),
-                    //     //   buttonOkColor: Colors.green,
-                    //     //   onOkButtonPressed: () async{
-                    //     //     permissionGranted = await location.requestPermission();
-                    //     //     Navigator.pop(context, true);
-                    //     //   },
-                    //     //   onCancelButtonPressed: (){
-                    //     //     Navigator.pop(context, true);
-                    //     //   },
-                    //     // )
-                    //   );
-                    // }else{
-                    //   if(profileImage == File('')){
-                    //     final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
-                    //     final Uint8List list = bytes.buffer.asUint8List();
+                    if (permissionGranted != Location.PermissionStatus.granted) {
+                      var confirmation = await showOkCancelAlertDialog(
+                        context: context,
+                        title: 'Confirm',
+                        message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                        okLabel: 'Yes',
+                        cancelLabel: 'No',
+                      );
 
-                    //     final tempDir = await getTemporaryDirectory();
-                    //     final file = await new File('${tempDir.path}/regular-profile-image.png').create();
-                    //     file.writeAsBytesSync(list);
+                      if(confirmation == OkCancelResult.ok){
+                        permissionGranted = await location.requestPermission();
+                      }
+                    }else{
+                      if(profileImage.path == ''){
+                        final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
+                        final Uint8List list = bytes.buffer.asUint8List();
 
-                    //     setState(() {
-                    //       profileImage = file;
-                    //     });
-                    //   }
+                        final tempDir = await getTemporaryDirectory();
+                        final file = await new File('${tempDir.path}/regular-profile-image.png').create();
+                        file.writeAsBytesSync(list);
 
-                    //   // Location.LocationData locationData = await location.getLocation();
+                        setState(() {
+                          profileImage = file;
+                        });
+                      }
 
-                    //   // APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
-                    //   //   almRelationship: newValue.relationship,
-                    //   //   almBirthPlace: newValue.birthplace,
-                    //   //   almDob: convertDate(newValue.dob),
-                    //   //   almRip: convertDate(newValue.rip),
-                    //   //   almCemetery: newValue.cemetery,
-                    //   //   almCountry: newValue.country,
-                    //   //   almMemorialName: newValue.memorialName,
-                    //   //   almDescription: newValue.description,
-                    //   //   almBackgroundImage: backgroundImage,
-                    //   //   almProfileImage: profileImage,
-                    //   //   almImagesOrVideos: newValue.imagesOrVideos,
-                    //   //   almLatitude: '${locationData.latitude}',
-                    //   //   almLongitude: '${locationData.longitude}',
-                    //   // );
+                      Location.LocationData locationData = await location.getLocation();
 
-                    //   // context.showLoaderOverlay();
-                    //   // int result = await apiRegularCreateMemorial(memorial: memorial);
-                    //   // context.hideLoaderOverlay();
+                      // relationship: _key1.currentState!.currentSelection,
+                      // birthplace: _key2.currentState!.controller.text,
+                      // dob: controller1.text,
+                      // rip: controller2.text,
+                      // cemetery: _key5.currentState!.controller.text,
+                      // country: _key6.currentState!.controller.text,
 
-                    //   // Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: newValue.relationship,));
-                    //   // Navigator.pushReplacement(context, newRoute);
-                    // }
+                      APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
+                        almRelationship: relationship,
+                        almBirthPlace: birthplace,
+                        almDob: dob,
+                        almRip: rip,
+                        almCemetery: cemetery,
+                        almCountry: country,
+                        almMemorialName: memorialName,
+                        almDescription: description,
+                        almBackgroundImage: backgroundImage,
+                        almProfileImage: profileImage,
+                        almImagesOrVideos: imagesOrVideos,
+                        almLatitude: '${locationData.latitude}',
+                        almLongitude: '${locationData.longitude}',
+                      );
+
+                      context.showLoaderOverlay();
+                      int result = await apiRegularCreateMemorial(memorial: memorial);
+                      context.hideLoaderOverlay();
+
+                      Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: relationship,));
+                      Navigator.pushReplacement(context, newRoute);
+                    }
                   },
                 ),
 

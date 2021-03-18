@@ -30,45 +30,85 @@ Future<bool> apiRegularPasswordChange({required String password, required String
   //   return false;
   // }
 
-  Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/alm_auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',);
 
-  print('The status code of password change is ${response.statusCode}');
 
-  if(response.statusCode == 200){
-    // var value = json.decode(response.data);
-    // var user = value['data'];
-    // int userId = user['id'];
+  // Dio dioRequest = Dio();
 
-    var newData = Map<String, dynamic>.from(response.data);
+  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/alm_auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',);
 
-    print('The newData is $newData');
+  // print('The status code of password change is ${response.statusCode}');
 
-    var user = newData['data'];
-    int userId = user['id'];
+  // if(response.statusCode == 200){
+  //   // var value = json.decode(response.data);
+  //   // var user = value['data'];
+  //   // int userId = user['id'];
 
-    // final sharedPrefs = await SharedPreferences.getInstance();
+  //   var newData = Map<String, dynamic>.from(response.data);
 
-    // sharedPrefs.setInt('blm-user-id', userId);
-    // // sharedPrefs.setString('blm-access-token', response.headers['access-token']!);
-    // // sharedPrefs.setString('blm-uid', response.headers['uid']!);
-    // // sharedPrefs.setString('blm-client', response.headers['client']!);
-    // sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
-    // sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
-    // sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
-    // sharedPrefs.setBool('blm-user-session', true);
+  //   print('The newData is $newData');
 
-    final sharedPrefs = await SharedPreferences.getInstance();
+  //   var user = newData['data'];
+  //   int userId = user['id'];
 
-    sharedPrefs.setInt('regular-user-id', userId);
-    sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
-    sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
-    sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
-    sharedPrefs.setBool('regular-user-session', true);
+  //   // final sharedPrefs = await SharedPreferences.getInstance();
+
+  //   // sharedPrefs.setInt('blm-user-id', userId);
+  //   // // sharedPrefs.setString('blm-access-token', response.headers['access-token']!);
+  //   // // sharedPrefs.setString('blm-uid', response.headers['uid']!);
+  //   // // sharedPrefs.setString('blm-client', response.headers['client']!);
+  //   // sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
+  //   // sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
+  //   // sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
+  //   // sharedPrefs.setBool('blm-user-session', true);
+
+  //   final sharedPrefs = await SharedPreferences.getInstance();
+
+  //   sharedPrefs.setInt('regular-user-id', userId);
+  //   sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
+  //   sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
+  //   sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
+  //   sharedPrefs.setBool('regular-user-session', true);
     
-    return true;
-  }else{
-    return false;
+  //   return true;
+  // }else{
+  //   return false;
+  // }
+
+
+  bool result = false;
+
+  try{
+    Dio dioRequest = Dio();
+
+    var response = await dioRequest.put('http://fbp.dev1.koda.ws/alm_auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
+      options: Options(
+        headers: <String, dynamic>{
+          'Content-Type': 'application/json',
+        }
+      ),  
+    );
+
+    print('The status code of password change is ${response.statusCode}');
+
+    if(response.statusCode == 200){
+      var newData = Map<String, dynamic>.from(response.data);
+      var user = newData['user'];
+      int userId = user['id'];
+
+      final sharedPrefs = await SharedPreferences.getInstance();
+
+      sharedPrefs.setInt('regular-user-id', userId);
+      sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
+      sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
+      sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
+      sharedPrefs.setBool('regular-user-session', true);
+      sharedPrefs.setBool('user-guest-session', false);
+      result = true;
+    }
+    return result;
+  }catch(e){
+    print('The error of password change is: $e');
+    return result;
   }
 }

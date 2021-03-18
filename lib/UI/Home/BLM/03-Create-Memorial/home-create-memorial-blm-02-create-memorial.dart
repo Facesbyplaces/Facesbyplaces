@@ -64,7 +64,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // BLMCreateMemorialValues newValue = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

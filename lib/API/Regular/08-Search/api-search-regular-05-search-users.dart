@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keywords, required int page}) async{
 
@@ -9,22 +8,51 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keyword
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
-  );
+  APIRegularSearchUsersMain? result;
 
-  if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularSearchUsersMain.fromJson(newValue);
-  }else{
-    throw Exception('Failed to get the user information');
+  try{
+    Dio dioRequest = Dio();
+
+    var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords',
+      options: Options(
+        headers: <String, dynamic>{
+          'Content-Type': 'application/json',
+          'access-token': getAccessToken,
+          'uid': getUID,
+          'client': getClient,
+        },
+      ),
+    );
+
+    print('The status code of search users is ${response.statusCode}');
+    print('The status code of search users is ${response.data}');
+
+    if(response.statusCode == 200){
+      var newData = Map<String, dynamic>.from(response.data);
+      result = APIRegularSearchUsersMain.fromJson(newData);
+    }
+
+    return result!;
+  }on DioError catch(e){
+    return Future.error('The error of search users is: $e');
   }
+
+  // final http.Response response = await http.get(
+  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords', ''),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIRegularSearchUsersMain.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the user information');
+  // }
 }
 
 class APIRegularSearchUsersMain{
@@ -58,11 +86,11 @@ class APIBLMSearchUsersExtended{
 
     return APIBLMSearchUsersExtended(
       searchUsersId: parsedJson['id'],
-      searchUsersFirstName: parsedJson['first_name'],
-      searchUsersLastName: parsedJson['last_name'],
-      searchUsersEmail: parsedJson['email'],
+      searchUsersFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      searchUsersLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      searchUsersEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
       searchUsersAccountType: parsedJson['account_type'],
-      searchUsersImage: parsedJson['image'],
+      searchUsersImage: parsedJson['image'] != null ? parsedJson['image'] : '',
     );
   }
 }

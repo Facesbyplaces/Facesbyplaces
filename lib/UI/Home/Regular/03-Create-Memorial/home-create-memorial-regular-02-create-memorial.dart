@@ -2,6 +2,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 // import 'home-create-memorial-regular-01-create-memorial.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,21 +10,38 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class HomeRegularCreateMemorial2 extends StatefulWidget{
+import 'home-create-memorial-regular-03-create-memorial.dart';
 
-  HomeRegularCreateMemorial2State createState() => HomeRegularCreateMemorial2State();
+class HomeRegularCreateMemorial2 extends StatefulWidget{
+  final String relationship;
+  final String birthplace;
+  final String dob;
+  final String rip;
+  final String cemetery;
+  final String country;
+
+  HomeRegularCreateMemorial2({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country});
+
+  HomeRegularCreateMemorial2State createState() => HomeRegularCreateMemorial2State(relationship: relationship, birthplace: birthplace, dob: dob, rip: rip, cemetery: cemetery, country: country);
 }
 
 class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
+  final String relationship;
+  final String birthplace;
+  final String dob;
+  final String rip;
+  final String cemetery;
+  final String country;
+
+  HomeRegularCreateMemorial2State({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   TextEditingController controllerStory = TextEditingController();
-  // VideoPlayerController videoPlayerController;
   List<File> slideImages = [];
   int toggle = 0;
-  File? videoFile;
-  File? imageFile;
-  File? newFile;
+  File videoFile = File('');
+  File imageFile = File('');
+  File newFile = File('');
   final picker = ImagePicker();
 
   Future getVideo() async{
@@ -31,12 +49,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
     if(pickedFile != null){
       setState(() {
         videoFile = File(pickedFile.path);
-        // videoPlayerController = VideoPlayerController.file(videoFile)
-        // ..initialize().then((_){
-        //   setState(() {
-        //     videoPlayerController.play();
-        //   });
-        // });
       });
     }
   }
@@ -53,7 +65,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // RegularCreateMemorialValues newValue = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -171,30 +182,16 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     MiscRegularButtonTemplate(
                       onPressed: () async{
                         if(_key1.currentState!.controller.text == ''){
-                          await showDialog(
+                          await showOkAlertDialog(
                             context: context,
-                            builder: (_) => 
-                            Container()
-                            //   AssetGiffyDialog(
-                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //   entryAnimation: EntryAnimation.DEFAULT,
-                            //   description: Text('Please complete the form before submitting.',
-                            //     textAlign: TextAlign.center,
-                            //     style: TextStyle(),
-                            //   ),
-                            //   onlyOkButton: true,
-                            //   buttonOkColor: Colors.red,
-                            //   onOkButtonPressed: () {
-                            //     Navigator.pop(context, true);
-                            //   },
-                            // )
+                            title: 'Error',
+                            message: 'Please complete the form before submitting.',
                           );
                         }else{
                           List<File> newFiles = [];
 
-                          if(videoFile != File('')){
-                            newFiles.add(videoFile!);
+                          if(videoFile.path != ''){
+                            newFiles.add(videoFile);
                           }
 
                           if(slideImages != []){
@@ -206,6 +203,22 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                           // newValue.imagesOrVideos = newFiles;
 
                           // Navigator.pushNamed(context, '/home/regular/create-memorial-3', arguments: newValue);
+
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => 
+                              HomeRegularCreateMemorial3(
+                                relationship: relationship,
+                                birthplace: birthplace,
+                                dob: dob,
+                                rip: rip,
+                                cemetery: cemetery,
+                                country: country,
+                                description: controllerStory.text,
+                                memorialName: _key1.currentState!.controller.text,
+                                imagesOrVideos: newFiles,
+                              ),
+                            )
+                          );
                         }
                       }, 
                       width: 150,
@@ -297,7 +310,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
             child: IconButton(
               iconSize: 25,
               onPressed: (){
-                videoFile!.delete();
+                videoFile.delete();
 
                 setState(() {
                   
@@ -369,9 +382,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                 radius: 25,
                                 backgroundColor: Color(0xffffffff).withOpacity(.5),
                                 child: Text(
-                                  index.toString(),
+                                  '$index',
                                   style: TextStyle(
-                                    fontSize: 60,
+                                    fontSize: 40,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xffffffff),
                                   ),

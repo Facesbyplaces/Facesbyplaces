@@ -4,16 +4,18 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import 'regular-04-verify-email.dart';
 
 class RegularRegister extends StatelessWidget{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key3 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
+  final GlobalKey<MiscRegularPhoneNumberPickerTemplateState> _key3 = GlobalKey<MiscRegularPhoneNumberPickerTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -93,7 +95,7 @@ class RegularRegister extends StatelessWidget{
 
                           SizedBox(height: 20),
                           
-                          MiscRegularPhoneNumberTemplate(
+                          MiscRegularPhoneNumberPickerTemplate(
                             key: _key3, 
                             labelText: 'Mobile #', 
                             type: TextInputType.phone, 
@@ -158,70 +160,29 @@ class RegularRegister extends StatelessWidget{
                               validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text );
 
                               if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Please complete the form before submitting.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.red,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Error',
+                                  message: 'Please complete the form before submitting.',
                                 );
                               }else if(!validEmail){
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Invalid email address. Please try again.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.red,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
-                                );
-                              }else if(!_key3.currentState!.valid){
-                                await showDialog(
-                                  context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Invalid phone number. Please try again.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.red,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Error',
+                                  message: 'Invalid email address. Please try again.',
                                 );
                               }else{
+                                print('The value is ${_key1.currentState!.controller.text}');
+                                print('The value is ${_key2.currentState!.controller.text}');
+                                print('The value is ${_key3.currentState!.controller2.text}');
+                                print('The value is ${_key4.currentState!.controller.text}');
+                                print('The value is ${_key5.currentState!.controller.text}');
+                                print('The value is ${_key6.currentState!.controller.text}');
+
                                 APIRegularAccountRegistration account = APIRegularAccountRegistration(
-                                  firstName: _key1.currentState!.controller.text, 
+                                  firstName: _key1.currentState!.controller.text,
                                   lastName: _key2.currentState!.controller.text,
-                                  phoneNumber: _key3.currentState!.controller.text,
+                                  phoneNumber: _key3.currentState!.controller2.text,
                                   email: _key4.currentState!.controller.text,
                                   username: _key5.currentState!.controller.text,
                                   password: _key6.currentState!.controller.text,
@@ -234,26 +195,12 @@ class RegularRegister extends StatelessWidget{
                                 if(result == 'Success'){
                                   final sharedPrefs = await SharedPreferences.getInstance();
                                   String verificationCode = sharedPrefs.getString('regular-verification-code')!;
-                                  Navigator.pushNamed(context, '/regular/verify-email', arguments: verificationCode);
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegularVerifyEmail(verificationCode: verificationCode)));
                                 }else{
-                                  await showDialog(
+                                  await showOkAlertDialog(
                                     context: context,
-                                    builder: (_) => 
-                                    Container()
-                                    //   AssetGiffyDialog(
-                                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    //   entryAnimation: EntryAnimation.DEFAULT,
-                                    //   description: Text('$result',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: TextStyle(),
-                                    //   ),
-                                    //   onlyOkButton: true,
-                                    //   buttonOkColor: Colors.red,
-                                    //   onOkButtonPressed: () {
-                                    //     Navigator.pop(context, true);
-                                    //   },
-                                    // )
+                                    title: 'Error',
+                                    message: '$result',
                                   );
                                 }
                               }

@@ -2,10 +2,12 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:date_time_picker/date_time_picker.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'home-create-memorial-regular-02-create-memorial.dart';
 
 class RegularCreateMemorialValues{
   String memorialName;
@@ -100,68 +102,68 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                     SizedBox(height: 20,),
 
-                    // DateTimePicker(
-                    //   type: DateTimePickerType.date,
-                    //   controller: controller1,
-                    //   cursorColor: Color(0xff000000),
-                    //   firstDate: DateTime(1000),
-                    //   lastDate: DateTime.now(),
-                    //   decoration: InputDecoration(
-                    //     alignLabelWithHint: true,
-                    //     labelText: 'DOB',
-                    //     labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                    //     focusedBorder: UnderlineInputBorder(
-                    //       borderSide: BorderSide(
-                    //         color: Color(0xff000000),
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   selectableDayPredicate: (date) {
+                    DateTimePicker(
+                      type: DateTimePickerType.date,
+                      controller: controller1,
+                      cursorColor: Color(0xff000000),
+                      firstDate: DateTime(1000),
+                      lastDate: DateTime.now(),
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'DOB',
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),
+                      selectableDayPredicate: (date) {
 
-                    //     if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
-                    //       return true;
-                    //     }else{
-                    //       return false;
-                    //     }
-                    //   },
-                    //   onChanged: (changed){
-                    //     setState(() {
-                    //       dob = DateTime.parse(changed);
-                    //     });
-                    //   },
-                    // ),
+                        if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      },
+                      onChanged: (changed){
+                        setState(() {
+                          dob = DateTime.parse(changed);
+                        });
+                      },
+                    ),
 
                     SizedBox(height: 20,),
 
-                    // DateTimePicker(
-                    //   type: DateTimePickerType.date,
-                    //   controller: controller2,
-                    //   cursorColor: Color(0xff000000),
-                    //   firstDate: DateTime(1000),
-                    //   lastDate: DateTime.now(),
-                    //   decoration: InputDecoration(
-                    //     alignLabelWithHint: true,
-                    //     labelText: 'RIP',
-                    //     labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                    //     focusedBorder: UnderlineInputBorder(
-                    //       borderSide: BorderSide(
-                    //         color: Color(0xff000000),
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   selectableDayPredicate: (date) {
-                    //     if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
-                    //       return true;
-                    //     }else{
-                    //       return false;
-                    //     }
-                    //   },
-                    //   onChanged: (changed){
-                    //     setState(() {
-                    //       rip = DateTime.parse(changed);
-                    //     });
-                    //   },
-                    // ),
+                    DateTimePicker(
+                      type: DateTimePickerType.date,
+                      controller: controller2,
+                      cursorColor: Color(0xff000000),
+                      firstDate: DateTime(1000),
+                      lastDate: DateTime.now(),
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'RIP',
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),
+                      selectableDayPredicate: (date) {
+                        if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      },
+                      onChanged: (changed){
+                        setState(() {
+                          rip = DateTime.parse(changed);
+                        });
+                      },
+                    ),
 
                     SizedBox(height: 20,),
 
@@ -177,26 +179,26 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       onPressed: () async{
 
                         if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' ||  _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
-                          await showDialog(
+                          await showOkAlertDialog(
                             context: context,
-                            builder: (_) => 
-                            Container()
-                            //   AssetGiffyDialog(
-                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //   entryAnimation: EntryAnimation.DEFAULT,
-                            //   description: Text('Please complete the form before submitting.',
-                            //     textAlign: TextAlign.center,
-                            //     style: TextStyle(),
-                            //   ),
-                            //   onlyOkButton: true,
-                            //   buttonOkColor: Colors.red,
-                            //   onOkButtonPressed: () {
-                            //     Navigator.pop(context, true);
-                            //   },
-                            // )
+                            title: 'Error',
+                            message: 'Please complete the form before submitting.',
                           );
                         }else{
+
+                          // String almMemorialName;
+                          // String almDescription;
+                          // String almBirthPlace;
+                          // String almDob;
+                          // String almRip;
+                          // String almCemetery;
+                          // String almCountry;
+                          // String almRelationship;
+                          // dynamic almBackgroundImage;
+                          // dynamic almProfileImage;
+                          // List<dynamic> almImagesOrVideos;
+                          // String almLatitude;
+                          // String almLongitude;
 
                           // Navigator.pushNamed(context, '/home/regular/create-memorial-2', 
                           //   arguments: RegularCreateMemorialValues(
@@ -208,6 +210,27 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           //     country: _key6.currentState!.controller.text,
                           //   ),
                           // );
+
+                          // final String relationship;
+                          // final String birthplace;
+                          // final String dob;
+                          // final String rip;
+                          // final String cemetery;
+                          // final String country;
+
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => 
+                              HomeRegularCreateMemorial2(
+                                relationship: _key1.currentState!.currentSelection,
+                                birthplace: _key2.currentState!.controller.text,
+                                dob: controller1.text,
+                                rip: controller2.text,
+                                cemetery: _key5.currentState!.controller.text,
+                                country: _key6.currentState!.controller.text,
+                              ),
+                            )
+                          );
+
                         }
 
                       }, 

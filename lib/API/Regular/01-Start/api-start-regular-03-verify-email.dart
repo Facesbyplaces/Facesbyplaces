@@ -1,22 +1,30 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 Future<bool> apiRegularVerifyEmail({required String verificationCode}) async{
-
+  bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
   int prefsUserID = sharedPrefs.getInt('regular-user-id')!;
 
-  final http.Response response = await http.post(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode&account_type=2', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
+  try{
+    Dio dioRequest = Dio();
+
+    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode&account_type=2',
+      options: Options(
+        headers: <String, dynamic>{
+          'Content-Type': 'application/json',
+        }
+      ),  
+    );
+
+    print('The status code of verify email is ${response.statusCode}');
+
+    if(response.statusCode == 200){
+      result = true;
     }
-  );
-
-  if(response.statusCode == 200){
-
-    return true;
-  }else{
-    return false;
+    return result;
+  }catch(e){
+    print('The error of verify email is: $e');
+    return result;
   }
 }

@@ -31,8 +31,7 @@ Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) asyn
       'tag_people': tagPeopleValue,
     });
 
-    // if(post.almImagesOrVideos != null || post.almImagesOrVideos != ['']){
-      if(post.almImagesOrVideos != []){
+    if(post.almImagesOrVideos != []){
       for(int i = 0; i < post.almImagesOrVideos.length; i++){
         if(post.almImagesOrVideos[i].path != null || post.almImagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(post.almImagesOrVideos[i].path, filename: post.almImagesOrVideos[i].path);

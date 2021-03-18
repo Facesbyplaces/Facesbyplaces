@@ -1,23 +1,26 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<String> apiRegularRegistration({required APIRegularAccountRegistration account}) async{
 
-  String result = 'Success';
+  String result = 'Something went wrong. Please try again.';
 
   try{
-    final http.Response response = await http.post(
-      // 'http://fbp.dev1.koda.ws/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
-      Uri.http('http://fbp.dev1.koda.ws/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2', ''),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      }
+    Dio dioRequest = Dio();
+
+    var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
+      options: Options(
+        headers: <String, dynamic>{
+          'Content-Type': 'application/json',
+        }
+      ),  
     );
 
+    print('The status code of registration is ${response.statusCode}');
+
     if(response.statusCode == 200){
-      var value = json.decode(response.body);
-      var user = value['data'];
+      var newData = Map<String, dynamic>.from(response.data);
+      var user = newData['data'];
       int userId = user['id'];
       String verificationCode = user['verification_code'];
 
@@ -25,32 +28,25 @@ Future<String> apiRegularRegistration({required APIRegularAccountRegistration ac
 
       sharedPrefs.setInt('regular-user-id', userId);
       sharedPrefs.setString('regular-verification-code', verificationCode);
-      sharedPrefs.setString('regular-access-token', response.headers['access-token']!);
-      sharedPrefs.setString('regular-uid', response.headers['uid']!);
-      sharedPrefs.setString('regular-client', response.headers['client']!);
-
-    }else{
-      var value = json.decode(response.body);
-      var data = value['errors'];
-      String message = data['full_messages'][0];
-
-      result = message;
+      sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
+      sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
+      sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
+      result = 'Success';
     }
+    return result;
   }catch(e){
-    print('Error in registration: $e');
-    result = 'Something went wrong. Please try again.';
+    print('The error of registration is: $e');
+    return result;
   }
-
-  return result;
 }
 
 class APIRegularAccountRegistration{
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String username;
-  String password;
+  final String firstName;
+  final String lastName;
+  final String phoneNumber;
+  final String email;
+  final String username;
+  final String password;
 
   APIRegularAccountRegistration({required this.firstName, required this.lastName, required this.phoneNumber, required this.email, required this.username, required this.password});
 }

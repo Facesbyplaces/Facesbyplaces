@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-reg
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-03-show-switch-status.dart';
 import 'package:facesbyplaces/UI/Home/Regular/01-Main/home-main-regular-02-home-extended.dart';
+import 'package:facesbyplaces/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
@@ -268,20 +269,26 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                       Column(
                                         children: [
-                                          ((){
-                                            if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty){
-                                              return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                    showControls: false,
-                                                  ),
-                                                  aspectRatio: 16 / 9,
-                                                ),
-                                              );
-                                            }else{
-                                              return Container(height: 0,);
-                                            }
-                                          }()),
+                                          Container(
+                                            child: ((){
+                                              if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty){
+                                                if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
+                                                  return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
+                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                      controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                        showControls: false,
+                                                      ),
+                                                      aspectRatio: 16 / 9,
+                                                    ),
+                                                  );
+                                                }else{
+                                                  return Container(height: 0,);
+                                                }
+                                              }else{
+                                                return Container(height: 0,);
+                                              }
+                                            }()),
+                                          ),
 
                                           SizedBox(height: 20,),
 
@@ -730,9 +737,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         child: managed == true
                                         ? MaterialButton(
                                           onPressed: () async{
-
-                                            // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
-
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
                                           },
                                           shape: StadiumBorder(),
                                           color: Colors.green,

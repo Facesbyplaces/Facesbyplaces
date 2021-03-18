@@ -11,8 +11,8 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
   int prefsUserID = sharedPrefs.getInt('regular-user-id')!;
   
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData = FormData.fromMap({
       'user_id': prefsUserID,
@@ -32,10 +32,9 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
     if(response.statusCode == 200){
       result = true;
     }
-    
+    return result;
   }catch(e){
     print('Error in upload photo: $e');
-    result = false;
+    return result;
   }
-  return result;
 }
