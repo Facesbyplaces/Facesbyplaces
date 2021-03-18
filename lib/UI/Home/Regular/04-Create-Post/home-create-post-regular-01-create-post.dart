@@ -2,18 +2,15 @@ import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-create-post-regular-02-01-create-post-location.dart';
+import 'home-create-post-regular-02-02-create-post-user.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
 import 'package:image_picker/image_picker.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
-// import 'package:badges/badges.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
-
-import 'home-create-post-regular-02-01-create-post-location.dart';
-import 'home-create-post-regular-02-02-create-post-user.dart';
 
 class RegularTaggedUsers{
   String name;
@@ -235,9 +232,14 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               
                               child: Row(
                                 children: [
-                                  CircleAvatar(
-                                    backgroundColor: Color(0xff888888), 
+                                  value.image != ''
+                                  ? CircleAvatar(
+                                    backgroundColor: Color(0xff888888),
                                     backgroundImage: NetworkImage(value.image),
+                                  )
+                                  : CircleAvatar(
+                                    backgroundColor: Color(0xff888888),
+                                    backgroundImage: AssetImage('assets/icons/app-icon.png'),
                                   ),
 
                                   SizedBox(width: 20,),
@@ -312,6 +314,25 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                   SizedBox(height: 10,),
 
+                  newLocation != ''
+                  ? Container(
+                    child: Chip(
+                      labelPadding: const EdgeInsets.only(left: 8.0),
+                      label: Text(newLocation),
+                      deleteIcon: Icon(Icons.close, size: 18,),
+                      onDeleted: () {
+                        setState(() {
+                          newLocation = '';
+                        });
+                      },
+                    ),
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                    alignment: Alignment.centerLeft,
+                  )
+                  : Container(height: 0,),
+
+                  SizedBox(height: 10,),
+
                   Container(
                     child: Wrap(
                       spacing: 5.0,
@@ -334,23 +355,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   ),
 
                   SizedBox(height: 10,),
-
-                  newLocation != ''
-                  ? Container(
-                    child: Chip(
-                      labelPadding: const EdgeInsets.only(left: 8.0),
-                      label: Text(newLocation),
-                      deleteIcon: Icon(Icons.close, size: 18,),
-                      onDeleted: () {
-                        setState(() {
-                          newLocation = '';
-                        });
-                      },
-                    ),
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
-                    alignment: Alignment.centerLeft,
-                  )
-                  : Container(height: 0,),
 
                   Container(
                     child: ((){
@@ -485,7 +489,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               // var result = await Navigator.pushNamed(context, '/home/regular/create-post-location');
                               String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchLocation()));
 
-                              newLocation = result;
+                              // newLocation = result;
+                              setState(() {
+                                newLocation = result;
+                              });
                             },
                             child: Container(
                               color: Colors.transparent,
@@ -507,10 +514,12 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               RegularTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchUser()));
 
                               if(result != null){
-                                users.add(result);
+                                setState(() {
+                                  users.add(result);
+                                });
                               }
 
-                              setState(() {});
+                              
                             },
                             child: Container(
                               color: Colors.transparent,

@@ -133,7 +133,6 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
       if(mounted)
       setState(() {});
       page++;
-      
     }
   }
 
@@ -147,7 +146,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
         onRefresh: onRefresh,
         child: ListView.separated(
           controller: scrollController,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           physics: ClampingScrollPhysics(),
           itemCount: posts.length,
           separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
@@ -546,7 +545,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       if(mounted)
       setState(() {});
       page2++;
-
     }
   }
 

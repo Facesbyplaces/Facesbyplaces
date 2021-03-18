@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-01-home-feed-tab.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-image-display.dart';
@@ -153,7 +154,203 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         itemCount: count,
         separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) {
-          return MiscRegularPost(
+          return feeds[i].pageType == 'Blm'
+          ? MiscBLMPost(
+            userId: feeds[i].userId,
+            postId: feeds[i].postId,
+            memorialId: feeds[i].memorialId,
+            memorialName: feeds[i].memorialName,
+            timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
+            managed: feeds[i].managed,
+            joined: feeds[i].joined,
+            profileImage: feeds[i].profileImage,
+            numberOfComments: feeds[i].numberOfComments,
+            numberOfLikes: feeds[i].numberOfLikes,
+            likeStatus: feeds[i].likeStatus,
+            numberOfTagged: feeds[i].numberOfTagged,
+            taggedFirstName: feeds[i].taggedFirstName,
+            taggedLastName: feeds[i].taggedLastName,
+            taggedId: feeds[i].taggedId,
+            pageType: feeds[i].pageType,
+            famOrFriends: feeds[i].famOrFriends,
+            relationship: feeds[i].relationship,
+            contents: [
+              Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+
+              feeds[i].imagesOrVideos.isNotEmpty
+              ? Column(
+                children: [
+                  SizedBox(height: 20),
+
+                  Container(
+                    child: ((){
+                      if(feeds[i].imagesOrVideos.length == 1){
+                        if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
+                          return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
+                            betterPlayerConfiguration: BetterPlayerConfiguration(
+                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                                showControls: false,
+                              ),
+                              aspectRatio: 16 / 9,
+                            ),
+                          );
+                        }else{
+                          return CachedNetworkImage(
+                            fit: BoxFit.contain,
+                            imageUrl: feeds[i].imagesOrVideos[0],
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                          );
+                        }
+                      }else if(feeds[i].imagesOrVideos.length == 2){
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 2,
+                          itemBuilder: (BuildContext context, int index) =>  
+                            lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                            ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  showControls: false,
+                                ),
+                                aspectRatio: 16 / 9,
+                              ),
+                            )
+                            : CachedNetworkImage(
+                              fit: BoxFit.contain,
+                              imageUrl: feeds[i].imagesOrVideos[index],
+                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                            ),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        );
+                      }else{
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 3,
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                          itemBuilder: (BuildContext context, int index) => ((){
+                            if(index != 1){
+                              return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.contain,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              );
+                            }else{
+                              return ((){
+                                if(feeds[i].imagesOrVideos.length - 3 > 0){
+                                  if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                    return Stack(
+                                      children: [
+                                        BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
+                                          ),
+                                        ),
+
+                                        Container(color: Colors.black.withOpacity(0.5),),
+
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '${feeds[i].imagesOrVideos.length - 3}',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }else{
+                                    return Stack(
+                                      children: [
+                                        CachedNetworkImage(
+                                          fit: BoxFit.fill,
+                                          imageUrl: feeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                        ),
+
+                                        Container(color: Colors.black.withOpacity(0.5),),
+
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '${feeds[i].imagesOrVideos.length - 3}',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                }else{
+                                  if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                    return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          showControls: false,
+                                        ),
+                                        aspectRatio: 16 / 9,
+                                      ),
+                                    );
+                                  }else{
+                                    return CachedNetworkImage(
+                                      fit: BoxFit.fill,
+                                      imageUrl: feeds[i].imagesOrVideos[index],
+                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                    );
+                                  }
+                                }
+                              }());
+                            }
+                          }()),
+                        );
+                      }
+                    }()),
+                  ),
+                ],
+              )
+              : Container(height: 0),
+
+            ],
+          )
+          : MiscRegularPost(
             userId: feeds[i].userId,
             postId: feeds[i].postId,
             memorialId: feeds[i].memorialId,
@@ -348,6 +545,202 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
             ],
           );
+
+          // return MiscRegularPost(
+          //   userId: feeds[i].userId,
+          //   postId: feeds[i].postId,
+          //   memorialId: feeds[i].memorialId,
+          //   memorialName: feeds[i].memorialName,
+          //   timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
+          //   managed: feeds[i].managed,
+          //   joined: feeds[i].joined,
+          //   profileImage: feeds[i].profileImage,
+          //   numberOfComments: feeds[i].numberOfComments,
+          //   numberOfLikes: feeds[i].numberOfLikes,
+          //   likeStatus: feeds[i].likeStatus,
+          //   numberOfTagged: feeds[i].numberOfTagged,
+          //   taggedFirstName: feeds[i].taggedFirstName,
+          //   taggedLastName: feeds[i].taggedLastName,
+          //   taggedId: feeds[i].taggedId,
+          //   pageType: feeds[i].pageType,
+          //   famOrFriends: feeds[i].famOrFriends,
+          //   relationship: feeds[i].relationship,
+          //   contents: [
+          //     Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+
+          //     feeds[i].imagesOrVideos.isNotEmpty
+          //     ? Column(
+          //       children: [
+          //         SizedBox(height: 20),
+
+          //         Container(
+          //           child: ((){
+          //             if(feeds[i].imagesOrVideos.length == 1){
+          //               if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
+          //                 return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
+          //                   betterPlayerConfiguration: BetterPlayerConfiguration(
+          //                     controlsConfiguration: BetterPlayerControlsConfiguration(
+          //                       showControls: false,
+          //                     ),
+          //                     aspectRatio: 16 / 9,
+          //                   ),
+          //                 );
+          //               }else{
+          //                 return CachedNetworkImage(
+          //                   fit: BoxFit.contain,
+          //                   imageUrl: feeds[i].imagesOrVideos[0],
+          //                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+          //                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+          //                 );
+          //               }
+          //             }else if(feeds[i].imagesOrVideos.length == 2){
+          //               return StaggeredGridView.countBuilder(
+          //                 padding: EdgeInsets.zero,
+          //                 shrinkWrap: true,
+          //                 physics: NeverScrollableScrollPhysics(),
+          //                 crossAxisCount: 4,
+          //                 itemCount: 2,
+          //                 itemBuilder: (BuildContext context, int index) =>  
+          //                   lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+          //                   ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+          //                     betterPlayerConfiguration: BetterPlayerConfiguration(
+          //                       controlsConfiguration: BetterPlayerControlsConfiguration(
+          //                         showControls: false,
+          //                       ),
+          //                       aspectRatio: 16 / 9,
+          //                     ),
+          //                   )
+          //                   : CachedNetworkImage(
+          //                     fit: BoxFit.contain,
+          //                     imageUrl: feeds[i].imagesOrVideos[index],
+          //                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+          //                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+          //                   ),
+          //                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+          //                 mainAxisSpacing: 4.0,
+          //                 crossAxisSpacing: 4.0,
+          //               );
+          //             }else{
+          //               return StaggeredGridView.countBuilder(
+          //                 padding: EdgeInsets.zero,
+          //                 shrinkWrap: true,
+          //                 physics: NeverScrollableScrollPhysics(),
+          //                 crossAxisCount: 4,
+          //                 itemCount: 3,
+          //                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+          //                 mainAxisSpacing: 4.0,
+          //                 crossAxisSpacing: 4.0,
+          //                 itemBuilder: (BuildContext context, int index) => ((){
+          //                   if(index != 1){
+          //                     return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+          //                     ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+          //                       betterPlayerConfiguration: BetterPlayerConfiguration(
+          //                         controlsConfiguration: BetterPlayerControlsConfiguration(
+          //                           showControls: false,
+          //                         ),
+          //                         aspectRatio: 16 / 9,
+          //                       ),
+          //                     )
+          //                     : CachedNetworkImage(
+          //                       fit: BoxFit.contain,
+          //                       imageUrl: feeds[i].imagesOrVideos[index],
+          //                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+          //                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+          //                     );
+          //                   }else{
+          //                     return ((){
+          //                       if(feeds[i].imagesOrVideos.length - 3 > 0){
+          //                         if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+          //                           return Stack(
+          //                             children: [
+          //                               BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+          //                                 betterPlayerConfiguration: BetterPlayerConfiguration(
+          //                                   controlsConfiguration: BetterPlayerControlsConfiguration(
+          //                                     showControls: false,
+          //                                   ),
+          //                                   aspectRatio: 16 / 9,
+          //                                 ),
+          //                               ),
+
+          //                               Container(color: Colors.black.withOpacity(0.5),),
+
+          //                               Center(
+          //                                 child: CircleAvatar(
+          //                                   radius: 25,
+          //                                   backgroundColor: Color(0xffffffff).withOpacity(.5),
+          //                                   child: Text(
+          //                                     '${feeds[i].imagesOrVideos.length - 3}',
+          //                                     style: TextStyle(
+          //                                       fontSize: 40,
+          //                                       fontWeight: FontWeight.bold,
+          //                                       color: Color(0xffffffff),
+          //                                     ),
+          //                                   ),
+          //                                 ),
+          //                               ),
+          //                             ],
+          //                           );
+          //                         }else{
+          //                           return Stack(
+          //                             children: [
+          //                               CachedNetworkImage(
+          //                                 fit: BoxFit.fill,
+          //                                 imageUrl: feeds[i].imagesOrVideos[index],
+          //                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+          //                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+          //                               ),
+
+          //                               Container(color: Colors.black.withOpacity(0.5),),
+
+          //                               Center(
+          //                                 child: CircleAvatar(
+          //                                   radius: 25,
+          //                                   backgroundColor: Color(0xffffffff).withOpacity(.5),
+          //                                   child: Text(
+          //                                     '${feeds[i].imagesOrVideos.length - 3}',
+          //                                     style: TextStyle(
+          //                                       fontSize: 40,
+          //                                       fontWeight: FontWeight.bold,
+          //                                       color: Color(0xffffffff),
+          //                                     ),
+          //                                   ),
+          //                                 ),
+          //                               ),
+          //                             ],
+          //                           );
+          //                         }
+          //                       }else{
+          //                         if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+          //                           return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+          //                             betterPlayerConfiguration: BetterPlayerConfiguration(
+          //                               controlsConfiguration: BetterPlayerControlsConfiguration(
+          //                                 showControls: false,
+          //                               ),
+          //                               aspectRatio: 16 / 9,
+          //                             ),
+          //                           );
+          //                         }else{
+          //                           return CachedNetworkImage(
+          //                             fit: BoxFit.fill,
+          //                             imageUrl: feeds[i].imagesOrVideos[index],
+          //                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+          //                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+          //                           );
+          //                         }
+          //                       }
+          //                     }());
+          //                   }
+          //                 }()),
+          //               );
+          //             }
+          //           }()),
+          //         ),
+          //       ],
+          //     )
+          //     : Container(height: 0),
+
+          //   ],
+          // );
         }
       ),
     )

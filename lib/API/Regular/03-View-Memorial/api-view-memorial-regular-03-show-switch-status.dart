@@ -27,23 +27,6 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({required int memo
   }else{
     throw Exception('Error occurred: ${response.statusMessage}');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Memorial/$memorialId', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularShowSwitchStatus.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIRegularShowSwitchStatus{

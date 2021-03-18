@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:date_time_format/date_time_format.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularShowUserInformation> apiRegularShowUserInformation({required int userId, required int accountType}) async{
 
@@ -10,19 +9,24 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({required in
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
+  print('The status code of registration is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowUserInformation.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularShowUserInformation.fromJson(newData);
   }else{
     throw Exception('Failed to get the user profile');
   }

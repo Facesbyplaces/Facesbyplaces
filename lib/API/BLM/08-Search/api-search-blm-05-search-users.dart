@@ -21,7 +21,7 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers({required String keywords, requi
     ),  
   );
 
-  print('The status code of feed is ${response.statusCode}');
+  print('The status code of search users is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -62,11 +62,11 @@ class APIBLMSearchUsersExtended{
 
     return APIBLMSearchUsersExtended(
       searchUsersUserId: parsedJson['id'],
-      searchUsersFirstName: parsedJson['first_name'],
-      searchUsersLastName: parsedJson['last_name'],
-      searchUsersEmail: parsedJson['email'],
+      searchUsersFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      searchUsersLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      searchUsersEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
       searchUsersAccountType: parsedJson['account_type'],
-      searchUsersImage: parsedJson['image'],
+      searchUsersImage: parsedJson['image'] != null ? parsedJson['image'] : '',
     );
   }
 }

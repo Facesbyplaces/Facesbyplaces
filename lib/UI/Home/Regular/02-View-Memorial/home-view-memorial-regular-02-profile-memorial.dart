@@ -279,20 +279,26 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                             Column(
                                               children: [
-                                                ((){
-                                                  if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty){
-                                                    return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                          showControls: false,
-                                                        ),
-                                                        aspectRatio: 16 / 9,
-                                                      ),
-                                                    );
-                                                  }else{
-                                                    return Container(height: 0,);
-                                                  }
-                                                }()),
+                                                Container(
+                                                  child: ((){
+                                                    if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty){
+                                                      if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
+                                                        return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
+                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                              showControls: false,
+                                                            ),
+                                                            aspectRatio: 16 / 9,
+                                                          ),
+                                                        );
+                                                      }else{
+                                                        return Container(height: 0,);
+                                                      }
+                                                    }else{
+                                                      return Container(height: 0,);
+                                                    }
+                                                  }()),
+                                                ),
 
                                                 SizedBox(height: 20,),
 

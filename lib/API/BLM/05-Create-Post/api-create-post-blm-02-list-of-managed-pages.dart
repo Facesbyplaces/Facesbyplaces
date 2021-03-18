@@ -16,7 +16,8 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
+  var response = await dioRequest.get(
+    'http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
@@ -35,23 +36,6 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
   }else{
     throw Exception('Failed to get the lists.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowListOfManagedPages.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIBLMShowListOfManagedPages{
@@ -73,15 +57,15 @@ class APIBLMShowListOfManagedPages{
 class APIBLMShowListOfManagedPagesExtended{
   int blmManagedPagesId;
   String blmManagedPagesName;
-  dynamic blmManagedPagesProfileImage;
+  String blmManagedPagesProfileImage;
 
   APIBLMShowListOfManagedPagesExtended({required this.blmManagedPagesId, required this.blmManagedPagesName, required this.blmManagedPagesProfileImage});
 
   factory APIBLMShowListOfManagedPagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfManagedPagesExtended(
       blmManagedPagesId: parsedJson['id'],
-      blmManagedPagesName: parsedJson['name'],
-      blmManagedPagesProfileImage: parsedJson['profileImage'],
+      blmManagedPagesName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      blmManagedPagesProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
     );
   }
 }

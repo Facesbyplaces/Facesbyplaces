@@ -4,6 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.d
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:we_slide/we_slide.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -23,6 +24,10 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
   Future<APIRegularShowUserInformation>? showProfile;
 
+  WeSlideController controller = WeSlideController();
+  int currentIndex = 0;
+  List<Widget> children = [];
+
   Future<APIRegularShowUserInformation> getProfileInformation() async{
     return await apiRegularShowUserInformation(userId: userId, accountType: accountType);
   }
@@ -30,6 +35,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   void initState(){
     super.initState();
     showProfile = getProfileInformation();
+    children = [MiscRegularDraggablePost(userId: userId,), MiscRegularDraggableMemorials(userId: userId,)];
   }
 
   @override
@@ -40,260 +46,587 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
         future: showProfile,
         builder: (context, profile){
           if(profile.hasData){
-            return Stack(
-              children: [
-
-                Container(height: SizeConfig.screenHeight, color: Color(0xffffffff),),
-
-                Container(
-                  height: SizeConfig.screenHeight! / 2.5,
-                  child: Stack(
-                    children: [
-
-                      CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
-
-                      Container(
-                        padding: EdgeInsets.only(bottom: 20.0),
-                        alignment: Alignment.bottomCenter,
-                        child: CircleAvatar(
-                          radius: 100, 
-                          backgroundColor: Color(0xff888888), 
-                          backgroundImage: NetworkImage(profile.data!.showUserInformationImage)
-                        ),
-                      ),
-
-                    ],
+            return WeSlide(
+              controller: controller,
+              panelMaxSize: SizeConfig.screenHeight! / 1.5,
+              panelBackground: Color(0xffffffff),
+              panel: Container(
+                height: SizeConfig.screenHeight! / 1.5,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(blurRadius: 0.5, offset: Offset(0, 1)),
+                  ],
+                  color: Color(0xffffffff),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50.0),
+                    topRight: Radius.circular(50.0),
                   ),
                 ),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: SizeConfig.screenWidth,
+                      height: 70,
+                      child: DefaultTabController(
+                        length: 2,
+                        initialIndex: currentIndex,
+                        child: TabBar(
+                          isScrollable: false,
+                          labelColor: Color(0xff04ECFF),
+                          unselectedLabelColor: Color(0xffCDEAEC),
+                          indicatorColor: Color(0xff04ECFF),
+                          onTap: (int number){
+                            print('The currentIndex is $currentIndex');
+                            setState(() {
+                              currentIndex = number;
+                            });
+                          },
+                          tabs: [
 
-                Container(
-                  height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 10.0),
-                          alignment: Alignment.centerLeft,
-                            child: IconButton(
-                            onPressed: (){
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 30), 
-                          ),
+                            Container(
+                              width: SizeConfig.screenWidth! / 2.5,
+                              child: Center(
+                                child: Text('Post',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            Container(
+                              width: SizeConfig.screenWidth! / 2.5,
+                              child: Center(
+                                child: Text('Memorials',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                          ],
                         ),
                       ),
-                      Expanded(
-                        child: Container(height: 0,),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
 
-                Positioned(
-                  top: SizeConfig.screenHeight! / 2.5,
-                  child: Container(
-                    width: SizeConfig.screenWidth,
-                    child: Column(
+                    Expanded(
+                      child: Container(
+                        child: IndexedStack(
+                          index: currentIndex,
+                          children: children,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              body: Stack(
+                children: [
+
+                  Container(height: SizeConfig.screenHeight, color: Color(0xffffffff),),
+
+                  Container(
+                    height: SizeConfig.screenHeight! / 2.5,
+                    child: Stack(
                       children: [
-                        Text('${profile.data!.showUserInformationFirstName + ' ' + profile.data!.showUserInformationLastName}',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
+                        CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
+
+                        Container(
+                          padding: EdgeInsets.only(bottom: 20.0),
+                          alignment: Alignment.bottomCenter,
+                          child: profile.data!.showUserInformationImage != '' 
+                          ? CircleAvatar(
+                            radius: 100, 
+                            backgroundColor: Color(0xff888888), 
+                            backgroundImage: NetworkImage(profile.data!.showUserInformationImage),
+                          )
+                          : CircleAvatar(
+                            radius: 100, 
+                            backgroundColor: Color(0xff888888), 
+                            backgroundImage: AssetImage('assets/icons/app-icon.png'),
                           ),
-                        ),
 
-                        SizedBox(height: 20,),
-
-                        Text('${profile.data!.showUserInformationEmailAddress}',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-
-                        SizedBox(height: 40,),
-
-                        Text('About',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff04ECFF),
-                          ),
-                        ),
-
-                        SizedBox(height: 40,),
-
-                        Padding(
-                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
-
-                                        SizedBox(width: 20,),
-
-                                        Text('Birthdate',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xffBDC3C7),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text('${profile.data!.showUserInformationBirthdate}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xff000000),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(height: 20,),
-
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
-
-                                        SizedBox(width: 20,),
-
-                                        Text('Birthplace',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xffBDC3C7),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text('${profile.data!.showUserInformationBirthplace}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xff000000),
-                                      ),
-                                    )
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(height: 20,),
-
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.home, color: Color(0xffBDC3C7), size: 20,),
-
-                                        SizedBox(width: 20,),
-
-                                        Text('Home Address',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xffBDC3C7),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text('${profile.data!.showUserInformationHomeAddress}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xff000000),
-                                      ),
-                                    )
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(height: 20,),
-
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
-
-                                        SizedBox(width: 20,),
-
-                                        Text('Email Address',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xffBDC3C7),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text('${profile.data!.showUserInformationEmailAddress}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xff000000),
-                                      ),
-                                    )
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(height: 20,),
-
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
-
-                                        SizedBox(width: 20,),
-
-                                        Text('Contact Number',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xffBDC3C7),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text('${profile.data!.showUserInformationContactNumber}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xff000000),
-                                      ),
-                                    )
-                                  ),
-                                ],
-                              ),
-
-                            ],
-                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
 
-                MiscRegularUserProfileDraggableSwitchTabs(userId: userId,),
+                  SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: IconButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 30), 
+                      ),
+                    ),
+                  ),
 
-              ],
+                  Positioned(
+                    top: SizeConfig.screenHeight! / 2.5,
+                    child: Container(
+                      width: SizeConfig.screenWidth,
+                      child: Column(
+                        children: [
+                          Text('${profile.data!.showUserInformationFirstName + ' ' + profile.data!.showUserInformationLastName}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff000000),
+                            ),
+                          ),
+
+                          SizedBox(height: 20,),
+
+                          Text('${profile.data!.showUserInformationEmailAddress}',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w300,
+                              color: Color(0xff000000),
+                            ),
+                          ),
+
+                          SizedBox(height: 40,),
+
+                          Text('About',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff04ECFF),
+                            ),
+                          ),
+
+                          SizedBox(height: 40,),
+
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
+
+                                          SizedBox(width: 20,),
+
+                                          Text('Birthdate',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xffBDC3C7),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text('${profile.data!.showUserInformationBirthdate}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xff000000),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(height: 20,),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
+
+                                          SizedBox(width: 20,),
+
+                                          Text('Birthplace',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xffBDC3C7),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text('${profile.data!.showUserInformationBirthplace}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xff000000),
+                                        ),
+                                      )
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(height: 20,),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
+
+                                          SizedBox(width: 20),
+
+                                          Text('Home Address',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xffBDC3C7),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: 
+                                      Text('${profile.data!.showUserInformationHomeAddress}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xff000000),
+                                        ),
+                                      )
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(height: 20,),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
+
+                                          SizedBox(width: 20),
+
+                                          Text('Email Address',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xffBDC3C7),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text('${profile.data!.showUserInformationEmailAddress}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xff000000),
+                                        ),
+                                      )
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(height: 20,),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
+
+                                          SizedBox(width: 20,),
+
+                                          Text('Contact Number',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xffBDC3C7),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text('${profile.data!.showUserInformationContactNumber}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xff000000),
+                                        ),
+                                      )
+                                    ),
+                                  ],
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
             );
+
+            // return Stack(
+            //   children: [
+
+            //     Container(height: SizeConfig.screenHeight, color: Color(0xffffffff),),
+
+            //     Container(
+            //       height: SizeConfig.screenHeight! / 2.5,
+            //       child: Stack(
+            //         children: [
+
+            //           CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
+
+            //           Container(
+            //             padding: EdgeInsets.only(bottom: 20.0),
+            //             alignment: Alignment.bottomCenter,
+            //             child: CircleAvatar(
+            //               radius: 100, 
+            //               backgroundColor: Color(0xff888888), 
+            //               backgroundImage: NetworkImage(profile.data!.showUserInformationImage)
+            //             ),
+            //           ),
+
+            //         ],
+            //       ),
+            //     ),
+
+            //     Container(
+            //       height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
+            //       child: Row(
+            //         children: [
+            //           Expanded(
+            //             child: Container(
+            //               padding: EdgeInsets.only(left: 10.0),
+            //               alignment: Alignment.centerLeft,
+            //                 child: IconButton(
+            //                 onPressed: (){
+            //                   Navigator.pop(context);
+            //                 },
+            //                 icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 30), 
+            //               ),
+            //             ),
+            //           ),
+            //           Expanded(
+            //             child: Container(height: 0,),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+
+            //     Positioned(
+            //       top: SizeConfig.screenHeight! / 2.5,
+            //       child: Container(
+            //         width: SizeConfig.screenWidth,
+            //         child: Column(
+            //           children: [
+            //             Text('${profile.data!.showUserInformationFirstName + ' ' + profile.data!.showUserInformationLastName}',
+            //               style: TextStyle(
+            //                 fontSize: 20,
+            //                 fontWeight: FontWeight.bold,
+            //                 color: Color(0xff000000),
+            //               ),
+            //             ),
+
+            //             SizedBox(height: 20,),
+
+            //             Text('${profile.data!.showUserInformationEmailAddress}',
+            //               style: TextStyle(
+            //                 fontSize: 14,
+            //                 fontWeight: FontWeight.w300,
+            //                 color: Color(0xff000000),
+            //               ),
+            //             ),
+
+            //             SizedBox(height: 40,),
+
+            //             Text('About',
+            //               style: TextStyle(
+            //                 fontSize: 16,
+            //                 fontWeight: FontWeight.bold,
+            //                 color: Color(0xff04ECFF),
+            //               ),
+            //             ),
+
+            //             SizedBox(height: 40,),
+
+            //             Padding(
+            //               padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            //               child: Column(
+            //                 children: [
+            //                   Row(
+            //                     children: [
+            //                       Expanded(
+            //                         child: Row(
+            //                           children: [
+            //                             Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
+
+            //                             SizedBox(width: 20,),
+
+            //                             Text('Birthdate',
+            //                               style: TextStyle(
+            //                                 fontSize: 14,
+            //                                 color: Color(0xffBDC3C7),
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       ),
+            //                       Expanded(
+            //                         child: Text('${profile.data!.showUserInformationBirthdate}',
+            //                           style: TextStyle(
+            //                             fontSize: 14,
+            //                             color: Color(0xff000000),
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ],
+            //                   ),
+
+            //                   SizedBox(height: 20,),
+
+            //                   Row(
+            //                     children: [
+            //                       Expanded(
+            //                         child: Row(
+            //                           children: [
+            //                             Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
+
+            //                             SizedBox(width: 20,),
+
+            //                             Text('Birthplace',
+            //                               style: TextStyle(
+            //                                 fontSize: 14,
+            //                                 color: Color(0xffBDC3C7),
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       ),
+            //                       Expanded(
+            //                         child: Text('${profile.data!.showUserInformationBirthplace}',
+            //                           style: TextStyle(
+            //                             fontSize: 14,
+            //                             color: Color(0xff000000),
+            //                           ),
+            //                         )
+            //                       ),
+            //                     ],
+            //                   ),
+
+            //                   SizedBox(height: 20,),
+
+            //                   Row(
+            //                     children: [
+            //                       Expanded(
+            //                         child: Row(
+            //                           children: [
+            //                             Icon(Icons.home, color: Color(0xffBDC3C7), size: 20,),
+
+            //                             SizedBox(width: 20,),
+
+            //                             Text('Home Address',
+            //                               style: TextStyle(
+            //                                 fontSize: 14,
+            //                                 color: Color(0xffBDC3C7),
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       ),
+            //                       Expanded(
+            //                         child: Text('${profile.data!.showUserInformationHomeAddress}',
+            //                           style: TextStyle(
+            //                             fontSize: 14,
+            //                             color: Color(0xff000000),
+            //                           ),
+            //                         )
+            //                       ),
+            //                     ],
+            //                   ),
+
+            //                   SizedBox(height: 20,),
+
+            //                   Row(
+            //                     children: [
+            //                       Expanded(
+            //                         child: Row(
+            //                           children: [
+            //                             Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
+
+            //                             SizedBox(width: 20,),
+
+            //                             Text('Email Address',
+            //                               style: TextStyle(
+            //                                 fontSize: 14,
+            //                                 color: Color(0xffBDC3C7),
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       ),
+            //                       Expanded(
+            //                         child: Text('${profile.data!.showUserInformationEmailAddress}',
+            //                           style: TextStyle(
+            //                             fontSize: 14,
+            //                             color: Color(0xff000000),
+            //                           ),
+            //                         )
+            //                       ),
+            //                     ],
+            //                   ),
+
+            //                   SizedBox(height: 20,),
+
+            //                   Row(
+            //                     children: [
+            //                       Expanded(
+            //                         child: Row(
+            //                           children: [
+            //                             Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
+
+            //                             SizedBox(width: 20,),
+
+            //                             Text('Contact Number',
+            //                               style: TextStyle(
+            //                                 fontSize: 14,
+            //                                 color: Color(0xffBDC3C7),
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       ),
+            //                       Expanded(
+            //                         child: Text('${profile.data!.showUserInformationContactNumber}',
+            //                           style: TextStyle(
+            //                             fontSize: 14,
+            //                             color: Color(0xff000000),
+            //                           ),
+            //                         )
+            //                       ),
+            //                     ],
+            //                   ),
+
+            //                 ],
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+
+            //     MiscRegularUserProfileDraggableSwitchTabs(userId: userId,),
+
+            //   ],
+            // );
           }else if(profile.hasError){
             return MiscRegularErrorMessageTemplate();
           }else{

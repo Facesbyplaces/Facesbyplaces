@@ -276,20 +276,26 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                             Column(
                                               children: [
-                                                ((){
-                                                  if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
-                                                    return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                          showControls: false,
-                                                        ),
-                                                        aspectRatio: 16 / 9,
-                                                      ),
-                                                    );
-                                                  }else{
-                                                    return Container(height: 0,);
-                                                  }
-                                                }()),
+                                                Container(
+                                                  child: ((){
+                                                    if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
+                                                      if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                        return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                              showControls: false,
+                                                            ),
+                                                            aspectRatio: 16 / 9,
+                                                          ),
+                                                        );
+                                                      }else{
+                                                        return Container(height: 0,);
+                                                      }
+                                                    }else{
+                                                      return Container(height: 0,);
+                                                    }
+                                                  }()),
+                                                ),
 
                                                 SizedBox(height: 20,),
 
@@ -313,6 +319,46 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                 }()),
                                               ],
                                             ),
+
+                                            // Column(
+                                            //   children: [
+                                            //     ((){
+                                            //       if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
+                                            //         return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                            //           betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            //             controlsConfiguration: BetterPlayerControlsConfiguration(
+                                            //               showControls: false,
+                                            //             ),
+                                            //             aspectRatio: 16 / 9,
+                                            //           ),
+                                            //         );
+                                            //       }else{
+                                            //         return Container(height: 0,);
+                                            //       }
+                                            //     }()),
+
+                                            //     SizedBox(height: 20,),
+
+                                            //     ((){
+                                            //       if(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription != ''){
+                                            //         return Container(
+                                            //           alignment: Alignment.center,
+                                            //           padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                            //           child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription,
+                                            //             textAlign: TextAlign.center,
+                                            //             style: TextStyle(
+                                            //               fontSize: 16,
+                                            //               fontWeight: FontWeight.w300,
+                                            //               color: Color(0xff000000),
+                                            //             ),
+                                            //           ),
+                                            //         );
+                                            //       }else{
+                                            //         return Container(height: 0,);
+                                            //       }
+                                            //     }()),
+                                            //   ],
+                                            // ),
 
                                             SizedBox(height: 20,),
 

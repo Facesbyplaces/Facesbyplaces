@@ -23,8 +23,8 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
   HomeBLMUserProfileState({required this.userId, required this.accountType});
 
   Future<APIBLMShowUserInformation>? showProfile;
+  
   WeSlideController controller = WeSlideController();
-
   int currentIndex = 0;
   List<Widget> children = [];
 

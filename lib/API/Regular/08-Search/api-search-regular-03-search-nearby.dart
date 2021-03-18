@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
 
 Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, required double latitude, required double longitude}) async{
 
@@ -9,25 +10,47 @@ Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, re
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page', ''),
-    Uri.http('fbp.dev1.koda.ws', '/api/v1/search/nearby', {'page' : '$page', 'longitude': '$longitude', 'latitude': '$latitude'}),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
-  print('The status code of nearby in alm is ${response.statusCode}');
+  print('The status code of feed is ${response.statusCode}');
 
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularSearchNearbyMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularSearchNearbyMain.fromJson(newData);
   }else{
-    throw Exception('Failed to get the feed');
+    throw Exception('Failed to get the nearby list');
   }
+
+  // final http.Response response = await http.get(
+  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page', ''),
+  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/search/nearby', {'page' : '$page', 'longitude': '$longitude', 'latitude': '$latitude'}),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  // print('The status code of nearby in alm is ${response.statusCode}');
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIRegularSearchNearbyMain.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the feed');
+  // }
 }
 
 class APIRegularSearchNearbyMain{

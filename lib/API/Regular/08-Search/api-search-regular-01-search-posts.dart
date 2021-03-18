@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords, required int page}) async{
 
@@ -9,25 +8,47 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords', ''),
-    Uri.http('fbp.dev1.koda.ws', '/api/v1/search/posts', {'page' : '$page', 'keywords': '$keywords'}),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
-  print('The status code of posts in alm is ${response.statusCode}');
+  print('The status code of feed is ${response.statusCode}');
 
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularSearchPostMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularSearchPostMain.fromJson(newData);
   }else{
-    throw Exception('Failed to get the posts.');
+    throw Exception('Failed to get the posts');
   }
+
+  // final http.Response response = await http.get(
+  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords', ''),
+  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/search/posts', {'page' : '$page', 'keywords': '$keywords'}),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  // print('The status code of posts in alm is ${response.statusCode}');
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIRegularSearchPostMain.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the posts.');
+  // }
 }
 
 class APIRegularSearchPostMain{
@@ -51,17 +72,14 @@ class APIRegularSearchPostExtended{
   int searchPostId;
   APIRegularSearchPostExtendedPage searchPostPage;
   String searchPostBody;
-  String searchPostLocation;
-  double searchPostLatitude;
-  double searchPostLongitude;
   List<dynamic> searchPostImagesOrVideos;
   List<APIRegularSearchPostExtendedTagged> searchPostPostTagged;
-  String searchPostCreateAt;
+  String searchPostCreatedAt;
   int searchPostNumberOfLikes;
   int searchPostNumberOfComments;
   bool searchPostLikeStatus;
 
-  APIRegularSearchPostExtended({required this.searchPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostLocation, required this.searchPostLatitude, required this.searchPostLongitude, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreateAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
+  APIRegularSearchPostExtended({required this.searchPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
 
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -79,12 +97,9 @@ class APIRegularSearchPostExtended{
       searchPostId: parsedJson['id'],
       searchPostPage: APIRegularSearchPostExtendedPage.fromJson(parsedJson['page']),
       searchPostBody: parsedJson['body'],
-      searchPostLocation: parsedJson['location'],
-      searchPostLatitude: parsedJson['latitude'],
-      searchPostLongitude: parsedJson['longitude'],
       searchPostImagesOrVideos: newList1 != null ? newList1 : [],
       searchPostPostTagged: taggedList,
-      searchPostCreateAt: parsedJson['created_at'],
+      searchPostCreatedAt: parsedJson['created_at'],
       searchPostNumberOfLikes: parsedJson['numberOfLikes'],
       searchPostNumberOfComments: parsedJson['numberOfComments'],
       searchPostLikeStatus: parsedJson['likeStatus'],
@@ -95,33 +110,27 @@ class APIRegularSearchPostExtended{
 class APIRegularSearchPostExtendedPage{
   int searchPostPageId;
   String searchPostPageName;
-  dynamic searchPostPageBackgroundImage;
-  dynamic searchPostPageProfileImage;
-  dynamic searchPostPageImagesOrVideos;
+  String searchPostPageProfileImage;
   String searchPostPageRelationship;
   APIRegularSearchPostExtendedPageCreator searchPostPagePageCreator;
   bool searchPostPageManage;
   bool searchPostPageFamOrFriends;
   bool searchPostPageFollower;
   String searchPostPagePageType;
-  String searchPostPagePrivacy;
 
-  APIRegularSearchPostExtendedPage({required this.searchPostPageId, required this.searchPostPageName, required this.searchPostPageBackgroundImage, required this.searchPostPageProfileImage, required this.searchPostPageImagesOrVideos, required this.searchPostPageRelationship, required this.searchPostPagePageCreator, required this.searchPostPageManage, required this.searchPostPageFamOrFriends, required this.searchPostPageFollower, required this.searchPostPagePageType, required this.searchPostPagePrivacy});
+  APIRegularSearchPostExtendedPage({required this.searchPostPageId, required this.searchPostPageName, required this.searchPostPageProfileImage, required this.searchPostPageRelationship, required this.searchPostPagePageCreator, required this.searchPostPageManage, required this.searchPostPageFamOrFriends, required this.searchPostPageFollower, required this.searchPostPagePageType,});
 
   factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedPage(
       searchPostPageId: parsedJson['id'],
-      searchPostPageName: parsedJson['name'],
-      searchPostPageBackgroundImage: parsedJson['backgroundImage'],
-      searchPostPageProfileImage: parsedJson['profileImage'],
-      searchPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
-      searchPostPageRelationship: parsedJson['relationship'],
+      searchPostPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      searchPostPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      searchPostPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
       searchPostPagePageCreator: APIRegularSearchPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchPostPageManage: parsedJson['manage'],
       searchPostPageFamOrFriends: parsedJson['famOrFriends'],
       searchPostPageFollower: parsedJson['follower'],
-      searchPostPagePageType: parsedJson['page_type'],
-      searchPostPagePrivacy: parsedJson['privacy'],
+      searchPostPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
     );
   }
 }
@@ -148,9 +157,9 @@ class APIRegularSearchPostExtendedTagged{
   factory APIRegularSearchPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedTagged(
       searchPostTaggedId: parsedJson['id'],
-      searchPostTaggedFirstName: parsedJson['first_name'],
-      searchPostTaggedLastName: parsedJson['last_name'],
-      searchPostTaggedImage: parsedJson['image']
+      searchPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      searchPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      searchPostTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
     );
   }
 }

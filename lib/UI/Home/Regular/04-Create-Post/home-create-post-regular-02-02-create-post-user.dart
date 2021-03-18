@@ -23,8 +23,8 @@ class HomeRegularCreatePostSearchUser extends StatefulWidget{
 
 class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSearchUser>{
 
-  ScrollController scrollController = ScrollController();
   TextEditingController controller = TextEditingController();
+  ScrollController scrollController = ScrollController();
   List<RegularSearchUsers> users = [];
   int itemRemaining = 1;
   bool empty = true;
@@ -32,7 +32,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
   void initState(){
     super.initState();
-    onLoading();
+    // onLoading();
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(itemRemaining != 0){

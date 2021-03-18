@@ -30,8 +30,7 @@ Future<bool> apiBLMHomeCreatePost({required APIBLMCreatePost post}) async{
       'tag_people': tagPeopleValue,
     });
     
-    // if(post.blmPostImagesOrVideos != null || post.blmPostImagesOrVideos != ['']){
-      if(post.blmPostImagesOrVideos != []){
+    if(post.blmPostImagesOrVideos != []){
       for(int i = 0; i < post.blmPostImagesOrVideos.length; i++){
         if(post.blmPostImagesOrVideos[i].path != null || post.blmPostImagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(post.blmPostImagesOrVideos[i].path, filename: post.blmPostImagesOrVideos[i].path);

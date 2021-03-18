@@ -2,16 +2,17 @@ import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-crea
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:better_player/better_player.dart';
+import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
-// import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
-// import 'package:badges/badges.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
+
+import 'home-create-post-blm-02-01-create-post-location.dart';
+import 'home-create-post-blm-02-02-create-post-user.dart';
 
 class BLMTaggedUsers{
   String name;
@@ -50,8 +51,19 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   List<File> slideImages = [];
   TextEditingController controller = TextEditingController();
   int maxLines = 5;
-  int removeAttachment = 0 ;
-  // BetterPlayerController? betterPlayerController;
+
+  File? videoFile;
+  final picker = ImagePicker();
+  String newLocation = '';
+  String person = '';
+  int removeAttachment = 0;
+
+  void initState(){
+    super.initState();
+    currentSelection = name;
+    currentIdSelected = memorialId;
+    getManagedPages();
+  }
 
   void getManagedPages() async{
     context.showLoaderOverlay();
@@ -70,25 +82,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     setState(() {});
   }
 
-  File? videoFile;
-  final picker = ImagePicker();
-  // VideoPlayerController videoPlayerController;
-  String newLocation = '';
-  String person = '';
-
   Future getVideo() async{
     final pickedFile = await picker.getVideo(source: ImageSource.gallery);
     if(pickedFile != null){
       setState(() {
         slideImages.add(File(pickedFile.path));
-
         videoFile = File(pickedFile.path);
-        // videoPlayerController = VideoPlayerController.file(videoFile)
-        // ..initialize().then((_){
-        //   setState(() {
-        //     videoPlayerController.play();
-        //   });
-        // });
       });
     }
   }
@@ -101,19 +100,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
       });
     }
   }
-
-  void initState(){
-    super.initState();
-    currentSelection = name;
-    currentIdSelected = memorialId;
-    getManagedPages();
-  }
-
-  // @override
-  // void dispose() {
-  //   videoPlayerController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -193,24 +179,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   if(result){
                     Navigator.popAndPushNamed(context, '/home/blm');
                   }else{
-                    await showDialog(
+                    await showOkAlertDialog(
                       context: context,
-                      builder: (_) => 
-                      Container()
-                      //   AssetGiffyDialog(
-                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      //   entryAnimation: EntryAnimation.DEFAULT,
-                      //   description: Text('Something went wrong. Please try again.',
-                      //     textAlign: TextAlign.center,
-                      //     style: TextStyle(),
-                      //   ),
-                      //   onlyOkButton: true,
-                      //   buttonOkColor: Colors.red,
-                      //   onOkButtonPressed: () {
-                      //     Navigator.pop(context, true);
-                      //   },
-                      // )
+                      title: 'Error',
+                      message: 'Something went wrong. Please try again.',
                     );
                   }
 
@@ -261,10 +233,14 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               
                               child: Row(
                                 children: [
-                                  CircleAvatar(
+                                  value.image != ''
+                                  ? CircleAvatar(
                                     backgroundColor: Color(0xff888888),
-                                    // backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
                                     backgroundImage: NetworkImage(value.image),
+                                  )
+                                  : CircleAvatar(
+                                    backgroundColor: Color(0xff888888),
+                                    backgroundImage: AssetImage('assets/icons/app-icon.png'),
                                   ),
 
                                   SizedBox(width: 20,),
@@ -339,6 +315,25 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                   SizedBox(height: 10,),
 
+                  newLocation != ''
+                  ? Container(
+                    child: Chip(
+                      labelPadding: const EdgeInsets.only(left: 8.0),
+                      label: Text(newLocation),
+                      deleteIcon: Icon(Icons.close, size: 18,),
+                      onDeleted: () {
+                        setState(() {
+                          newLocation = '';
+                        });
+                      },
+                    ),
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                    alignment: Alignment.centerLeft,
+                  )
+                  : Container(height: 0,),
+
+                  SizedBox(height: 10,),
+
                   Container(
                     child: Wrap(
                       spacing: 5.0,
@@ -387,10 +382,14 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     });
                                   },
                                   child: lookupMimeType(slideImages[index].path)?.contains('video') == true
-                                  // ? BetterPlayer(
-                                  //   controller: betterPlayerController!,
-                                  // )
-                                  ? Container()
+                                  ? BetterPlayer.network('${slideImages[index].path}',
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      controlsConfiguration: BetterPlayerControlsConfiguration(
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
+                                    ),
+                                  )
                                   : Container(
                                     width: 80,
                                     decoration: BoxDecoration(
@@ -456,9 +455,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-                              var result = await Navigator.pushNamed(context, '/home/blm/create-post-location');
+                              // var result = await Navigator.pushNamed(context, '/home/blm/create-post-location');
+                              String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
 
-                              newLocation = result.toString();
+                              
+                              setState(() {
+                                newLocation = result;
+                              });
                             },
                             child: Container(
                               color: Colors.transparent,
@@ -478,13 +481,16 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                           child: GestureDetector(
                             onTap: () async{
                               
-                              BLMTaggedUsers? result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
+                              // BLMTaggedUsers? result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
+                              BLMTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchUser()));
 
                               if(result != null){
-                                users.add(result);
+                                setState(() {
+                                  users.add(result);
+                                });
                               }
 
-                              setState(() {});
+                              
                             },
                             child: Container(
                               color: Colors.transparent,

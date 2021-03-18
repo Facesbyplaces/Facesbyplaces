@@ -33,7 +33,12 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
           'uid': getUID,
           'client': getClient,
         }
-      ),  
+      ),
+      queryParameters: <String, dynamic>{
+        'page_type': '$pageType',
+        'page_id': '$pageId',
+        'follow': '$follow',
+      }
     );
 
     print('The status code of follow page is ${response.statusCode}');

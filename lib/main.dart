@@ -40,7 +40,7 @@ import 'UI/ui-02-login.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
+  // SharedPreferences.setMockInitialValues({});
   await Firebase.initializeApp();
   await FlutterLibphonenumber().init();
 

@@ -21,6 +21,8 @@ Future<bool> apiRegularLogin({required String email, required String password, r
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);
 
+      print('The newData is $newData');
+
       var user = newData['user'];
       int userId = user['id'];
 
