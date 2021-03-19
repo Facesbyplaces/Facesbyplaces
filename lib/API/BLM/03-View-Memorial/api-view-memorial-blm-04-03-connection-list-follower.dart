@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({required int memorialId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({require
   }else{
     throw Exception('Failed to get the lists.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/followers/index?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   },
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMConnectionListFollowersMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIBLMConnectionListFollowersMain{
@@ -73,7 +54,7 @@ class APIBLMConnectionListFollowersExtendedDetails{
   int connectionListFollowersId;
   String connectionListFollowersFirstName;
   String connectionListFollowersLastName;
-  dynamic connectionListFollowersImage;
+  String connectionListFollowersImage;
   int connectionListFollowersAccountType;
 
   APIBLMConnectionListFollowersExtendedDetails({required this.connectionListFollowersId, required this.connectionListFollowersFirstName, required this.connectionListFollowersLastName, required this.connectionListFollowersImage, required this.connectionListFollowersAccountType});
@@ -81,9 +62,9 @@ class APIBLMConnectionListFollowersExtendedDetails{
   factory APIBLMConnectionListFollowersExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFollowersExtendedDetails(
       connectionListFollowersId: parsedJson['id'],
-      connectionListFollowersFirstName: parsedJson['first_name'],
-      connectionListFollowersLastName: parsedJson['last_name'],
-      connectionListFollowersImage: parsedJson['image'],
+      connectionListFollowersFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      connectionListFollowersLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      connectionListFollowersImage: parsedJson['image'] != null ? parsedJson['image'] : '',
       connectionListFollowersAccountType: parsedJson['account_type'],
     );
   }

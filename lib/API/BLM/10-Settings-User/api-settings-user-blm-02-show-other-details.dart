@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({required int userId}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({required int userId}) asy
   }else{
     throw Exception('Failed to get the account details');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId&account_type=1', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowOtherDetails.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the details.');
-  // }
 }
 
 class APIBLMShowOtherDetails{

@@ -27,13 +27,11 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
       MapEntry('relationship', MultipartFile.fromString(blmMemorial.blmRelationship,),),
     ]);
 
-    // if(blmMemorial.blmLatitude != null){
-      if(blmMemorial.blmLatitude != ''){
+    if(blmMemorial.blmLatitude != ''){
       MapEntry('blm[latitude]', MultipartFile.fromString(blmMemorial.blmLatitude,),);
     }
 
-    // if(blmMemorial.blmLongitude != null){
-      if(blmMemorial.blmLongitude != ''){
+    if(blmMemorial.blmLongitude != ''){
       MapEntry('blm[longitude]', MultipartFile.fromString(blmMemorial.blmLongitude,),);
     }
 
@@ -47,8 +45,7 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
       formData.files.add(MapEntry('blm[profileImage]', file));
     }
     
-    // if(blmMemorial.blmImagesOrVideos != null || blmMemorial.blmImagesOrVideos != ['']){
-      if(blmMemorial.blmImagesOrVideos != []){
+    if(blmMemorial.blmImagesOrVideos != []){
       for(int i = 0; i < blmMemorial.blmImagesOrVideos.length; i++){
         if(blmMemorial.blmImagesOrVideos[i].path != null || blmMemorial.blmImagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(blmMemorial.blmImagesOrVideos[i].path, filename: blmMemorial.blmImagesOrVideos[i].path);

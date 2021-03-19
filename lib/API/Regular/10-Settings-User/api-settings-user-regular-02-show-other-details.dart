@@ -41,11 +41,11 @@ class APIRegularShowOtherDetails{
 
   factory APIRegularShowOtherDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOtherDetails(
-      showOtherDetailsBirthdate: parsedJson['birthdate'],
-      showOtherDetailsBirthplace: parsedJson['birthplace'],
-      showOtherDetailsEmail: parsedJson['email'],
-      showOtherDetailsAddress: parsedJson['address'],
-      showOtherDetailsPhoneNumber: parsedJson['phone_number'],
+      showOtherDetailsBirthdate: parsedJson['birthdate'] != null ? parsedJson['birthdate'] : '',
+      showOtherDetailsBirthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
+      showOtherDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showOtherDetailsAddress: parsedJson['address'] != null ? parsedJson['address'] : '',
+      showOtherDetailsPhoneNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
     );
   }
 }

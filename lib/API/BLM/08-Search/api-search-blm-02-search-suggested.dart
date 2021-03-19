@@ -99,7 +99,7 @@ class APIBLMSearchSuggestedPageDetails{
 
   factory APIBLMSearchSuggestedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchSuggestedPageDetails(
-      searchSuggestedPageDetailsDescription: parsedJson['description'],
+      searchSuggestedPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
     );
   }
 }

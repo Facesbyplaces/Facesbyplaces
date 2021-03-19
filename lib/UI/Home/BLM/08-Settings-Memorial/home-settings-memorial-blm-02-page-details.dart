@@ -5,10 +5,10 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMPageDetails extends StatefulWidget{
@@ -28,13 +28,16 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldDropDownState> _key3 = GlobalKey<MiscBLMInputFieldDropDownState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  // final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key5 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
-  // final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key6 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key7 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key8 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key9 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
   Future<APIBLMShowPageDetailsMain>? futureMemorialSettings;
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+
+  DateTime dob = DateTime.now();
+  DateTime rip = DateTime.now();
 
   void initState(){
     super.initState();
@@ -100,11 +103,67 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             SizedBox(height: 20,),
 
-                            // MiscBLMInputFieldDateTimeTemplate(key: _key5, labelText: 'DOB', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob,),
+                            DateTimePicker(
+                              type: DateTimePickerType.date,
+                              controller: controller1,
+                              cursorColor: Color(0xff000000),
+                              firstDate: DateTime(1000),
+                              lastDate: DateTime.now(),
+                              decoration: InputDecoration(
+                                alignLabelWithHint: true,
+                                labelText: 'DOB',
+                                labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xff000000),
+                                  ),
+                                ),
+                              ),
+                              selectableDayPredicate: (date) {
+                                if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
+                                  return true;
+                                }else{
+                                  return false;
+                                }
+                              },
+                              onChanged: (changed){
+                                setState(() {
+                                  dob = DateTime.parse(changed);
+                                });
+                              },
+                            ),
 
                             SizedBox(height: 20,),
 
-                            // MiscBLMInputFieldDateTimeTemplate(key: _key6, labelText: 'RIP', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip,),
+                            DateTimePicker(
+                              type: DateTimePickerType.date,
+                              controller: controller2,
+                              cursorColor: Color(0xff000000),
+                              firstDate: DateTime(1000),
+                              lastDate: DateTime.now(),
+                              decoration: InputDecoration(
+                                alignLabelWithHint: true,
+                                labelText: 'RIP',
+                                labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xff000000),
+                                  ),
+                                ),
+                              ),
+                              selectableDayPredicate: (date) {
+                                if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                                  return true;
+                                }else{
+                                  return false;
+                                }
+                              },
+                              onChanged: (changed){
+                                setState(() {
+                                  rip = DateTime.parse(changed);
+                                });
+                              },
+                            ),
 
                             SizedBox(height: 20,),
 
@@ -132,13 +191,19 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               buttonColor: Color(0xff04ECFF),
                               onPressed: () async{
 
+                                print('The dob 1 is ${memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob}');
+                                print('The rip 1 is ${memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip}');
+
+                                print('The dob 2 is ${controller1.text}');
+                                print('The rip 2 is ${controller2.text}');
+
                                 if(
                                   memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription !=  _key2.currentState!.controller.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text ||
-                                  // convertDate(memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key5.currentState!.controller.text) ||
-                                  // convertDate(memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key6.currentState!.controller.text) ||
+                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text ||
+                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text
@@ -154,10 +219,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       description: _key2.currentState!.controller.text,
                                       relationship: _key3.currentState!.currentSelection,
                                       location: _key4.currentState!.controller.text ,
-                                      // dob: convertDate(_key5.currentState!.controller.text),
-                                      // rip: convertDate(_key6.currentState!.controller.text),
-                                      dob: '1/1/2021',
-                                      rip: '1/1/2021',
+                                      dob: controller1.text,
+                                      rip: controller2.text,
                                       state: _key7.currentState!.controller.text,
                                       country: _key8.currentState!.controller.text,
                                       precinct: _key9.currentState!.controller.text,
@@ -166,48 +229,19 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                     context.hideLoaderOverlay();
 
                                     if(result){
-                                      await showDialog(
+                                      await showOkAlertDialog(
                                         context: context,
-                                        builder: (_) => 
-                                        Container()
-                                        //   AssetGiffyDialog(
-                                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        //   entryAnimation: EntryAnimation.DEFAULT,
-                                        //   description: Text('Successfully updated the account details.',
-                                        //     textAlign: TextAlign.center,
-                                        //     style: TextStyle(),
-                                        //   ),
-                                        //   onlyOkButton: true,
-                                        //   buttonOkColor: Colors.green,
-                                        //   onOkButtonPressed: () {
-                                        //     Navigator.pop(context, true);
-                                        //   },
-                                        // )
+                                        title: 'Success',
+                                        message: 'Successfully updated the account details.'
                                       );
-
                                       Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,));
                                       Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                                       
                                     }else{
-                                      await showDialog(
+                                      await showOkAlertDialog(
                                         context: context,
-                                        builder: (_) => 
-                                        Container()
-                                        //   AssetGiffyDialog(
-                                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        //   entryAnimation: EntryAnimation.DEFAULT,
-                                        //   description: Text('Something went wrong. Please try again.',
-                                        //     textAlign: TextAlign.center,
-                                        //     style: TextStyle(),
-                                        //   ),
-                                        //   onlyOkButton: true,
-                                        //   buttonOkColor: Colors.red,
-                                        //   onOkButtonPressed: () {
-                                        //     Navigator.pop(context, true);
-                                        //   },
-                                        // )
+                                        title: 'Error',
+                                        message: 'Something went wrong. Please try again.'
                                       );
                                     }
                                   }

@@ -48,10 +48,10 @@ class APIBLMShowProfileInformation{
 
     return APIBLMShowProfileInformation(
       showProfileInformationUserId: newValue['id'],
-      showProfileInformationFirstName: newValue['first_name'],
-      showProfileInformationLastName: newValue['last_name'],
-      showProfileInformationImage: newValue['image'],
-      showProfileInformationEmail: newValue['email'],
+      showProfileInformationFirstName: newValue['first_name'] != null ? newValue['first_name'] : '',
+      showProfileInformationLastName: newValue['last_name'] != null ? newValue['last_name'] : '',
+      showProfileInformationImage: newValue['image'] != null ? newValue['image'] : '',
+      showProfileInformationEmail: newValue['email'] != null ? newValue['email'] : '',
       showProfileInformationGuest: newValue['guest'],
       showProfileInformationAccountType: newValue['account_type'],
     );

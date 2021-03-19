@@ -154,49 +154,96 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
             numberOfTagged != 0
             ? Column(
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 10),
 
-                Row(
-                  children: [
-                    Text('with'),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                      
+                      children: [
+                        TextSpan(
+                          style: TextStyle(color: Color(0xff888888)),
+                          text: 'with '
+                        ),
 
-                    Container(
-                      child: Wrap(
-                        direction: Axis.vertical,
-                        spacing: 5.0,
-                        children: List.generate(
-                          numberOfTagged,
-                          (index) => GestureDetector(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index], accountType: pageType == 'BLM' ? 1 : 2)));
-                            },
-                            child: RichText(
-                              text: TextSpan(
-                                style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
-                                children: <TextSpan>[
-                                  TextSpan(text: taggedFirstName[index],),
+                        TextSpan(
+                          children: List.generate(numberOfTagged, 
+                            (index) => TextSpan(
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
+                              children: <TextSpan>[
+                                TextSpan(text: taggedFirstName[index],),
 
-                                  TextSpan(text: ' '),
+                                TextSpan(text: ' '),
 
-                                  TextSpan(text: taggedLastName[index],),
+                                TextSpan(text: taggedLastName[index],),
 
-                                  index < numberOfTagged - 1
-                                  ? TextSpan(text: ',')
-                                  : TextSpan(text: ''),
-                                ],
-                              ),
+                                index < numberOfTagged - 1
+                                ? TextSpan(text: ', ')
+                                : TextSpan(text: ''),
+                              ],
+                              recognizer: TapGestureRecognizer()
+                              ..onTap = (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index], accountType: pageType == 'BLM' ? 1 : 2)));
+                              }
                             ),
                           ),
                         ),
-                      ),
-                      padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
-                      alignment: Alignment.centerLeft,
+                      ],
                     ),
-                  ],
+                  )
                 )
+
               ],
             )
             : Container(height: 0,),
+
+            // numberOfTagged != 0
+            // ? Column(
+            //   children: [
+            //     SizedBox(height: 20),
+
+            //     Row(
+            //       children: [
+            //         Text('with'),
+
+            //         Container(
+            //           child: Wrap(
+            //             direction: Axis.horizontal,
+            //             spacing: 5.0,
+            //             children: List.generate(
+            //               numberOfTagged,
+            //               (index) => GestureDetector(
+            //                 onTap: (){
+            //                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index], accountType: pageType == 'BLM' ? 1 : 2)));
+            //                 },
+            //                 child: RichText(
+            //                   text: TextSpan(
+            //                     style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
+            //                     children: <TextSpan>[
+            //                       TextSpan(text: taggedFirstName[index],),
+
+            //                       TextSpan(text: ' '),
+
+            //                       TextSpan(text: taggedLastName[index],),
+
+            //                       index < numberOfTagged - 1
+            //                       ? TextSpan(text: ',')
+            //                       : TextSpan(text: ''),
+            //                     ],
+            //                   ),
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //           padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
+            //           alignment: Alignment.centerLeft,
+            //         ),
+            //       ],
+            //     )
+            //   ],
+            // )
+            // : Container(height: 0,),
 
             Row(
               children: [

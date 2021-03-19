@@ -93,6 +93,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
           body: FutureBuilder<APIRegularShowOtherDetails>(
             future: otherDetails,
             builder: (context, details){
+              print('The error is ${details.error}');
               if(details.hasData){
                 return SingleChildScrollView(
                   padding: EdgeInsets.all(20.0),

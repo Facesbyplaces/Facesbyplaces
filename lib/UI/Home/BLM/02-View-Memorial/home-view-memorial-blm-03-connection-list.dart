@@ -365,7 +365,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   }
 
   connectionListFamilyWidget(){
-    return RefreshIndicator(
+    return Container(
+      child: RefreshIndicator(
       onRefresh: onRefresh1,
       child: GridView.count(
         controller: scrollController1,
@@ -446,6 +447,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           // ),
         ),
       ),
+    ),
     );
     // return Container(
     //   // child: SmartRefresher(

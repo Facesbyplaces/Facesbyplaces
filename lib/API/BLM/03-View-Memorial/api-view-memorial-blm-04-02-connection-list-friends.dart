@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({required int memorialId, required int page}) async{
 
@@ -9,23 +7,6 @@ Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({required in
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/friends/index?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-  
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMConnectionListFriendsMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 
   Dio dioRequest = Dio();
 
@@ -77,7 +58,7 @@ class APIBLMConnectionListFriendsExtended{
   factory APIBLMConnectionListFriendsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtended(
       connectionListFriendsUser: APIBLMConnectionListFriendsExtendedDetails.fromJson(parsedJson['user']),
-      connectionListFriendsRelationship: parsedJson['relationship'],
+      connectionListFriendsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
     );
   }
 }
@@ -87,7 +68,7 @@ class APIBLMConnectionListFriendsExtendedDetails{
   int connectionListFriendsDetailsId;
   String connectionListFriendsDetailsFirstName;
   String connectionListFriendsDetailsLastName;
-  dynamic connectionListFriendsDetailsImage;
+  String connectionListFriendsDetailsImage;
   int connectionListFriendsAccountType;
 
   APIBLMConnectionListFriendsExtendedDetails({required this.connectionListFriendsDetailsId, required this.connectionListFriendsDetailsFirstName, required this.connectionListFriendsDetailsLastName, required this.connectionListFriendsDetailsImage, required this.connectionListFriendsAccountType});
@@ -95,9 +76,9 @@ class APIBLMConnectionListFriendsExtendedDetails{
   factory APIBLMConnectionListFriendsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtendedDetails(
       connectionListFriendsDetailsId: parsedJson['id'],
-      connectionListFriendsDetailsFirstName: parsedJson['first_name'],
-      connectionListFriendsDetailsLastName: parsedJson['last_name'],
-      connectionListFriendsDetailsImage: parsedJson['image'],
+      connectionListFriendsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      connectionListFriendsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      connectionListFriendsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
       connectionListFriendsAccountType: parsedJson['account_type'],
     );
   }

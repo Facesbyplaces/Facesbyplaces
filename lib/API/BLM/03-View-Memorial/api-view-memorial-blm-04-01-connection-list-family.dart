@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({required int memorialId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({required int 
   }else{
     throw Exception('Failed to show list of family members');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/family/index?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMConnectionListFamilyMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to show list of family members');
-  // }
 }
 
 class APIBLMConnectionListFamilyMain{
@@ -77,7 +58,7 @@ class APIBLMConnectionListFamilyExtended{
   factory APIBLMConnectionListFamilyExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFamilyExtended(
       connectionListFamilyUser: APIBLMConnectionListFamilyExtendedDetails.fromJson(parsedJson['user']),
-      connectionListFamilyRelationship: parsedJson['relationship'],
+      connectionListFamilyRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
     );
   }
 }
@@ -87,7 +68,7 @@ class APIBLMConnectionListFamilyExtendedDetails{
   int connectionListFamilyDetailsId;
   String connectionListFamilyDetailsFirstName;
   String connectionListFamilyDetailsLastName;
-  dynamic connectionListFamilyDetailsImage;
+  String connectionListFamilyDetailsImage;
   int connectionListFamilyAccountType;
 
   APIBLMConnectionListFamilyExtendedDetails({required this.connectionListFamilyDetailsId, required this.connectionListFamilyDetailsFirstName, required this.connectionListFamilyDetailsLastName, required this.connectionListFamilyDetailsImage, required this.connectionListFamilyAccountType});
@@ -95,9 +76,9 @@ class APIBLMConnectionListFamilyExtendedDetails{
   factory APIBLMConnectionListFamilyExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFamilyExtendedDetails(
       connectionListFamilyDetailsId: parsedJson['id'],
-      connectionListFamilyDetailsFirstName: parsedJson['first_name'],
-      connectionListFamilyDetailsLastName: parsedJson['last_name'],
-      connectionListFamilyDetailsImage: parsedJson['image'],
+      connectionListFamilyDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      connectionListFamilyDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      connectionListFamilyDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
       connectionListFamilyAccountType: parsedJson['account_type'],
     );
   }

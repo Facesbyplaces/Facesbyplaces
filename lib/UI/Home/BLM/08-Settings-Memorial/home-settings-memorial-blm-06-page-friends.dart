@@ -1,8 +1,10 @@
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-05-show-friends-settings.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-13-remove-friends-or-family.dart';
 // import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-13-remove-friends-or-family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-07-search-user-settings.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
@@ -29,31 +31,90 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   final int memorialId;
   HomeBLMPageFriendsState({required this.memorialId});
 
-  // RefreshController refreshController = RefreshController(initialRefresh: true);
+  ScrollController scrollController = ScrollController();
   List<BLMShowFriendsSettings> friendsList = [];
   int friendsItemsRemaining = 1;
+  List<Widget> friends = [];
   int page = 1;
 
-  // void onRefresh() async{
-  //   await Future.delayed(Duration(milliseconds: 1000));
-  //   refreshController.refreshCompleted();
-  // }
+  void initState(){
+    super.initState();
+    onLoading1();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(friendsItemsRemaining != 0){
+          setState(() {
+            onLoading1();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more users to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+  }
+
+  Future<void> onRefresh() async{
+    setState(() {
+      onLoading1();
+    });
+  }
 
   void onLoading1() async{
     if(friendsItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiBLMShowFriendsSettings(memorialId: memorialId, page: page);
+      context.hideLoaderOverlay();
+
       friendsItemsRemaining = newValue.blmItemsRemaining;
 
       for(int i = 0; i < newValue.blmFriendsList.length; i++){
-        friendsList.add(
-          BLMShowFriendsSettings(
-            userId: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId,
-            firstName: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName,
-            lastName: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName,
-            image: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage,
-            relationship: newValue.blmFriendsList[i].showFriendsSettingsRelationship,
-            accountType: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType,
+        friends.add(
+          ListTile(
+            leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}'),),
+            title: Text('${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}'),
+            subtitle: Text('${newValue.blmFriendsList[i].showFriendsSettingsRelationship}'),
+            trailing: MaterialButton(
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              padding: EdgeInsets.zero,
+              textColor: Color(0xffffffff),
+              splashColor: Color(0xff04ECFF),
+              onPressed: () async{
+                context.showLoaderOverlay();
+                bool result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: friendsList[i].userId, accountType: friendsList[i].accountType);
+                context.hideLoaderOverlay();
+                
+                if(result == true){
+                  await showOkAlertDialog(
+                    context: context,
+                    title: 'Success',
+                    message: 'Successfully removed a user from Friends list.'
+                  );
+                }else{
+                  await showOkAlertDialog(
+                    context: context,
+                    title: 'Error',
+                    message: 'Something went wrong. Please try again.'
+                  );
+                }
+
+                friendsItemsRemaining = 1;
+                friendsList = [];
+                page = 1;
+                onLoading1();
+              },
+              child: Text('Remove', style: TextStyle(fontSize: 14,),),
+              height: 40,
+              shape: StadiumBorder(
+                side: BorderSide(color: Color(0xffE74C3C)),
+              ),
+                color: Color(0xffE74C3C),
+            ),
           ),
         );
       }
@@ -61,17 +122,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
       if(mounted)
       setState(() {});
       page++;
-      
-      // refreshController.loadComplete();
-      context.hideLoaderOverlay();
-    }else{
-      // refreshController.loadNoData();
     }
-  }
-
-  void initState(){
-    super.initState();
-    onLoading1();
   }
 
   @override
@@ -93,7 +144,19 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
         ],
       ),
       body: Container(
-        child: Container(),
+        width: SizeConfig.screenWidth,
+        child: RefreshIndicator(
+          onRefresh: onRefresh,
+          child: ListView.separated(
+            controller: scrollController,
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: ClampingScrollPhysics(),
+            itemCount: friends.length,
+            separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => friends[i],
+          )
+        ),
+      ),
         // child: SmartRefresher(
         //   enablePullDown: true,
         //   enablePullUp: true,
@@ -216,7 +279,6 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
         //     itemCount: friendsList.length,
         //   ),
         // ),
-      ),
     );
   }
 }

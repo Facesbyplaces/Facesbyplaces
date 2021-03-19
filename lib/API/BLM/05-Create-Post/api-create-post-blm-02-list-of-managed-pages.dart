@@ -14,8 +14,7 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',

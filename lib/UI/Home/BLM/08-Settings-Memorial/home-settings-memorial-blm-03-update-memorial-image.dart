@@ -5,11 +5,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
@@ -31,8 +31,8 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
   final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
   int backgroundImageToggle  = 0;
   final picker = ImagePicker();
-  File? backgroundImage;
-  File? profileImage;
+  File backgroundImage = File('');
+  File profileImage = File('');
   Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
 
   Future getProfileImage() async{
@@ -104,12 +104,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: CachedNetworkImageProvider('${memorialImageSettings.data!.blmMemorial.showPageImagesBackgroundImage}'),
-                            // image: backgroundImage != null
-                            // ? AssetImage(backgroundImage.path)
-                            // : CachedNetworkImageProvider(
-                            //   memorialImageSettings.data.blmMemorial.showPageImagesBackgroundImage.toString(),
-                            // ),
+                            image: CachedNetworkImageProvider('${memorialImageSettings.data!.blmMemorial.showPageImagesBackgroundImage}')
                           ),
                         ),
                         child: Stack(
@@ -125,16 +120,17 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                   backgroundColor: Color(0xffffffff),
                                   child: Padding(
                                     padding: EdgeInsets.all(5),
-                                    child: CircleAvatar(
+                                    child: profileImage.path != ''
+                                    ? CircleAvatar(
                                       radius: 50,
                                       backgroundColor: Color(0xff888888),
                                       backgroundImage: CachedNetworkImageProvider('${memorialImageSettings.data!.blmMemorial.showPageImagesProfileImage}'),
-                                      // backgroundImage: profileImage != null
-                                      // ? AssetImage(profileImage.path)
-                                      // : CachedNetworkImageProvider(
-                                      //   memorialImageSettings.data.blmMemorial.showPageImagesProfileImage.toString()
-                                      // ),
-                                    ),
+                                    )
+                                    : CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: Color(0xff888888),
+                                      backgroundImage: AssetImage('assets/icons/cover-icon.png'),
+                                    )
                                   ),
                                 ),
                               ),
@@ -287,53 +283,24 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                         ),
                         onPressed: () async{
 
-                          if(profileImage != null || backgroundImage != null){
+                          if(profileImage.path != '' || backgroundImage.path != ''){
                             context.showLoaderOverlay();
                             bool result = await apiBLMUpdatePageImages(memorialId: memorialId, backgroundImage: backgroundImage, profileImage: profileImage);
                             context.hideLoaderOverlay();
 
                             if(result){
-                              await showDialog(
+                              await showOkAlertDialog(
                                 context: context,
-                                builder: (_) => 
-                                Container()
-                                //   AssetGiffyDialog(
-                                //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                //   entryAnimation: EntryAnimation.DEFAULT,
-                                //   description: Text('Successfully updated the account details.',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(),
-                                //   ),
-                                //   onlyOkButton: true,
-                                //   buttonOkColor: Colors.green,
-                                //   onOkButtonPressed: () {
-                                //     Navigator.pop(context, true);
-                                //   },
-                                // )
+                                title: 'Success',
+                                message: 'Successfully updated the account details.'
                               );
-
                               Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.blmMemorial.showPageImagesRelationship,));
                               Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                             }else{
-                              await showDialog(
+                              await showOkAlertDialog(
                                 context: context,
-                                builder: (_) => 
-                                Container()
-                                //   AssetGiffyDialog(
-                                //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                //   entryAnimation: EntryAnimation.DEFAULT,
-                                //   description: Text('Something went wrong. Please try again.',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(),
-                                //   ),
-                                //   onlyOkButton: true,
-                                //   buttonOkColor: Colors.red,
-                                //   onOkButtonPressed: () {
-                                //     Navigator.pop(context, true);
-                                //   },
-                                // )
+                                title: 'Error',
+                                message: 'Something went wrong. Please try again.'
                               );
                             }
                           }
