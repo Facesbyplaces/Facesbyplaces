@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
 Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) async{
@@ -11,8 +10,8 @@ Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) a
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    var dioRequest = dio.Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData = FormData.fromMap({
       'post_id': postId,

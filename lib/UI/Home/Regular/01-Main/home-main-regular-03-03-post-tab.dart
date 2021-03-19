@@ -125,7 +125,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             userId: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPagePageCreator.homeTabPostPageCreatorId, 
             postId: newValue.familyMemorialList[i].homeTabPostId,
             memorialId: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageId,
-            timeCreated: newValue.familyMemorialList[i].homeTabPostCreateAt,
+            timeCreated: newValue.familyMemorialList[i].homeTabPostCreatedAt,
             memorialName: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageName,
             postBody: newValue.familyMemorialList[i].homeTabPostBody,
             profileImage: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageProfileImage,

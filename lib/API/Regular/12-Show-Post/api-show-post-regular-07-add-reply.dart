@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularAddReply({required int commentId, required dynamic replyBody}) async{
@@ -11,8 +10,8 @@ Future<bool> apiRegularAddReply({required int commentId, required dynamic replyB
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = dio.Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData = FormData.fromMap({
       'comment_id': commentId,

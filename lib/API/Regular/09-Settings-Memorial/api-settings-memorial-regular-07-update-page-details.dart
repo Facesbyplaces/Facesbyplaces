@@ -11,8 +11,8 @@ Future<bool> apiRegularUpdatePageDetails({required String name, required String 
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
     
     formData.files.addAll([
       MapEntry('name', MultipartFile.fromString(name,),),

@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 Future<bool> apiRegularModifyFollowPage({required String pageType, required int pageId, required bool follow}) async{
 
@@ -20,26 +20,29 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  final http.Response response = await http.put(
-    // Uri.http('http://fbp.dev1.koda.ws/api/v1/followers', ''),
-    Uri.http('fbp.dev1.koda.ws', '/api/v1/followers',),
-    headers: <String, String>{
-      'access-token': getAccessToken!,
-      'uid': getUID!,
-      'client': getClient!,
-    },
-    body: <String, dynamic>{
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers',
+    options: Options(
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
+    queryParameters: <String, dynamic>{
       'page_type': '$pageType',
       'page_id': '$pageId',
       'follow': '$follow',
     }
   );
 
-  print('The status code is ${response.statusCode}');
+  print('The status code of follow page ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;
   }else{
+    print('Error occurred of follow page ${response.statusMessage}');
     return false;
   }
 }

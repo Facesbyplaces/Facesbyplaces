@@ -694,7 +694,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                 SizedBox(height: 20,),
 
                                                 Container(
-                                                  key: dataKey,
                                                   padding: EdgeInsets.only(left: 20.0),
                                                   alignment: Alignment.centerLeft,
                                                   child: Text('Post',
@@ -910,6 +909,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                   ),
 
                   SliverToBoxAdapter(
+                    key: dataKey,
                     child: postCount != 0
                     ? Padding(
                       padding: EdgeInsets.all(20.0),

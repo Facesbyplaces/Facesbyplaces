@@ -583,7 +583,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                           SizedBox(height: 20,),
 
                                           Container(
-                                            key: dataKey,
                                             padding: EdgeInsets.only(left: 20.0),
                                             alignment: Alignment.centerLeft,
                                             child: Text('Post',
@@ -818,6 +817,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
             ),
 
             SliverToBoxAdapter(
+              key: dataKey,
               child: postCount != 0
               ? Padding(
                 padding: EdgeInsets.all(20.0),

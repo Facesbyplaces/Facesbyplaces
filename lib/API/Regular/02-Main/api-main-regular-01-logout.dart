@@ -1,7 +1,7 @@
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 Future<bool> apiRegularLogout() async{
 
@@ -10,21 +10,22 @@ Future<bool> apiRegularLogout() async{
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.delete(
-    // Uri.http('http://fbp.dev1.koda.ws/alm_auth/sign_out', ''),
-    Uri.http('fbp.dev1.koda.ws', '/alm_auth/sign_out',),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.delete('http://fbp.dev1.koda.ws/alm_auth/sign_out',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
-  print('The status code of logout is ${response.statusCode}');
+  print('The status code of regular logout is ${response.statusCode}');
 
   if(response.statusCode == 200){
-
     sharedPrefs.remove('blm-user-id');
     sharedPrefs.remove('blm-access-token');
     sharedPrefs.remove('blm-uid');

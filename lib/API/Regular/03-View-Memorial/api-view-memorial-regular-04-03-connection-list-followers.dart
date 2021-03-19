@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
 
 Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers({required int memorialId, required int page}) async{
 
@@ -9,22 +10,44 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/followers/index?page=$page', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    },
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/followers/index?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
+  print('The status code of feed is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularConnectionListFollowersMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularConnectionListFollowersMain.fromJson(newData);
   }else{
-    throw Exception('Failed to get the lists.');
+    throw Exception('Failed to show the connection list followers.');
   }
+
+  // final http.Response response = await http.get(
+  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/followers/index?page=$page', ''),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   },
+  // );
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIRegularConnectionListFollowersMain.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the lists.');
+  // }
 }
 
 class APIRegularConnectionListFollowersMain{
@@ -58,9 +81,9 @@ class APIRegularConnectionListFollowersExtendedDetails{
   factory APIRegularConnectionListFollowersExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularConnectionListFollowersExtendedDetails(
       connectionListFollowersDetailsId: parsedJson['id'],
-      connectionListFollowersDetailsFirstName: parsedJson['first_name'],
-      connectionListFollowersDetailsLastName: parsedJson['last_name'],
-      connectionListFollowersDetailsImage: parsedJson['image'],
+      connectionListFollowersDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      connectionListFollowersDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      connectionListFollowersDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
       connectionListFollowersAccountType: parsedJson['account_type'],
     );
   }

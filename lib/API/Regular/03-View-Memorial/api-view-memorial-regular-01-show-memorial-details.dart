@@ -30,27 +30,6 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
   }else{
     throw Exception('Failed to show the memorial details');
   }
-
-  // final http.Response response = await http.get(
-  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId', ''),
-  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/pages/memorials/$memorialId',),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // print('The status code of show memorial is ${response.statusCode}');
-  // // print('The status code of show memorial is ${response.body}');
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularShowMemorialMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the events');
-  // }
 }
 
 class APIRegularShowMemorialMain{
@@ -73,16 +52,13 @@ class APIRegularShowMemorialExtended{
   String showMemorialBackgroundImage;
   String showMemorialProfileImage;
   List<dynamic> showMemorialImagesOrVideos;
-  String showMemorialRelationship;
-  bool showMemorialManage;
-  bool showMemorialFamOrFriends;
   bool showMemorialFollower;
   int showMemorialPostsCount;
   int showMemorialFamilyCount;
   int showMemorialFriendsCount;
   int showMemorialFollowersCount;
 
-  APIRegularShowMemorialExtended({required this.showMemorialId, required this.showMemorialName, required this.showMemorialDetails, required this.showMemorialBackgroundImage, required this.showMemorialProfileImage, required this.showMemorialImagesOrVideos, required this.showMemorialRelationship, required this.showMemorialManage, required this.showMemorialFamOrFriends, required this.showMemorialFollower, required this.showMemorialPostsCount, required this.showMemorialFamilyCount, required this.showMemorialFriendsCount, required this.showMemorialFollowersCount});
+  APIRegularShowMemorialExtended({required this.showMemorialId, required this.showMemorialName, required this.showMemorialDetails, required this.showMemorialBackgroundImage, required this.showMemorialProfileImage, required this.showMemorialImagesOrVideos, required this.showMemorialFollower, required this.showMemorialPostsCount, required this.showMemorialFamilyCount, required this.showMemorialFriendsCount, required this.showMemorialFollowersCount});
 
   factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -100,9 +76,6 @@ class APIRegularShowMemorialExtended{
       showMemorialBackgroundImage: parsedJson['backgroundImage'],
       showMemorialProfileImage: parsedJson['profileImage'],
       showMemorialImagesOrVideos: newList1 != null ? newList1 : [],
-      showMemorialRelationship: parsedJson['relationship'],
-      showMemorialManage: parsedJson['manage'],
-      showMemorialFamOrFriends: parsedJson['famOrFriends'],
       showMemorialFollower: parsedJson['follower'],
       showMemorialPostsCount: parsedJson['postsCount'],
       showMemorialFamilyCount: parsedJson['familyCount'],

@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularAddMemorialAdmin({required String pageType, required int pageId, required int userId}) async{
@@ -11,8 +10,8 @@ Future<bool> apiRegularAddMemorialAdmin({required String pageType, required int 
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = dio.Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData = FormData.fromMap({
       'page_type': pageType,

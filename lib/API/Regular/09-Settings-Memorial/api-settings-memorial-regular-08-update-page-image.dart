@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularUpdatePageImages({required int memorialId, required dynamic backgroundImage, required dynamic profileImage}) async{
@@ -11,16 +10,16 @@ Future<bool> apiRegularUpdatePageImages({required int memorialId, required dynam
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    final formData = FormData.fromMap({});
+    Dio dioRequest = Dio();
+    FormData formData = FormData.fromMap({});
 
     if(backgroundImage != null){
-      var file = await dio.MultipartFile.fromFile(backgroundImage.path, filename: backgroundImage.path);
+      var file = await MultipartFile.fromFile(backgroundImage.path, filename: backgroundImage.path);
       formData.files.add(MapEntry('backgroundImage', file));
     }
     
     if(profileImage != null){
-      var file = await dio.MultipartFile.fromFile(profileImage.path, filename: profileImage.path);
+      var file = await MultipartFile.fromFile(profileImage.path, filename: profileImage.path);
       formData.files.add(MapEntry('profileImage', file));
     }
 

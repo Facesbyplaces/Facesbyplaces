@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:async';
 
+import 'home-view-memorial-regular-03-connection-list.dart';
+
 class RegularProfilePosts{
   int userId;
   int postId;
@@ -481,7 +483,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: (){
-                                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 0)));
+                                                  print('The memorialId is $memorialId');
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 0)));
                                                 },
                                                 child: Column(
                                                   children: [
@@ -511,7 +514,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: (){
-                                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 1)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 1)));
                                                 },
                                                 child: Column(
                                                   children: [
@@ -540,7 +543,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: (){
-                                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 2)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 2)));
                                                 },
                                                 child: Column(
                                                   children: [
@@ -802,6 +805,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
             ),
 
             SliverToBoxAdapter(
+              key: dataKey,
               child: postCount != 0
               ? Padding(
                 padding: EdgeInsets.all(20.0),

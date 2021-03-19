@@ -1,17 +1,30 @@
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
-Future<bool> apiRegularPaypal({required String pageType, required int pageId, required double amount, required String token}) async{
+Future<bool> apiRegularPaypal() async{
 
-  final http.Response response = await http.get(
-    Uri.http('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=www.google.com', ''),
-  );
+  Dio dioRequest = Dio();
 
-  print('The status code of paypal is ${response.statusCode}');
-  print('The status code of paypal is ${response.body}');
+  var response = await dioRequest.get('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=www.google.com',);
+
+  print('The status code of regular paypal is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;
   }else{
     return false;
   }
+
+  // final http.Response response = await http.get(
+  //   Uri.http('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=www.google.com', ''),
+  // );
+
+  // print('The status code of paypal is ${response.statusCode}');
+  // print('The status code of paypal is ${response.body}');
+
+  // if(response.statusCode == 200){
+  //   return true;
+  // }else{
+  //   return false;
+  // }
 }

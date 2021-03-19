@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, required double latitude, required double longitude}) async{
 

@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
 Future<bool> apiBLMHomeCreatePost({required APIBLMCreatePost post}) async{
@@ -11,8 +10,8 @@ Future<bool> apiBLMHomeCreatePost({required APIBLMCreatePost post}) async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    var dioRequest = dio.Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     List<Map<String, dynamic>> tagPeopleValue = [];
 
@@ -33,7 +32,7 @@ Future<bool> apiBLMHomeCreatePost({required APIBLMCreatePost post}) async{
     if(post.blmPostImagesOrVideos != []){
       for(int i = 0; i < post.blmPostImagesOrVideos.length; i++){
         if(post.blmPostImagesOrVideos[i].path != null || post.blmPostImagesOrVideos != ['']){
-          var file = await dio.MultipartFile.fromFile(post.blmPostImagesOrVideos[i].path, filename: post.blmPostImagesOrVideos[i].path);
+          var file = await MultipartFile.fromFile(post.blmPostImagesOrVideos[i].path, filename: post.blmPostImagesOrVideos[i].path);
           formData.files.add(MapEntry('post[imagesOrVideos][]', file));
         }
       }

@@ -33,6 +33,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   HomeRegularConnectionListState({required this.memorialId, required this.newToggle});
 
   // RefreshController refreshController = RefreshController(initialRefresh: true);
+  ScrollController scrollController1 = ScrollController();
+  ScrollController scrollController2 = ScrollController();
+  ScrollController scrollController3 = ScrollController();
   List<RegularConnectionListItem> listsFamily = [];
   List<RegularConnectionListItem> listsFriends = [];
   List<RegularConnectionListItem> listsFollowers = [];
@@ -52,13 +55,76 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
     onLoading1();
     onLoading2();
     onLoading3();
+    scrollController1.addListener(() {
+      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
+        if(itemRemaining1 != 0){
+          setState(() {
+            onLoading1();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more connection list family to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+    scrollController2.addListener(() {
+      if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
+        if(itemRemaining2 != 0){
+          setState(() {
+            onLoading1();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more connection list friends to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+    scrollController3.addListener(() {
+      if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
+        if(itemRemaining3 != 0){
+          setState(() {
+            onLoading1();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more connection list followers to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
+  Future<void> onRefresh1() async{
+    setState(() {
+      onLoading1();
+    });
+  }
 
-  // void onRefresh() async{
-  //   await Future.delayed(Duration(milliseconds: 1000));
-  //   refreshController.refreshCompleted();
-  // }
+  Future<void> onRefresh2() async{
+    setState(() {
+      onLoading2();
+    });
+  }
+
+  Future<void> onRefresh3() async{
+    setState(() {
+      onLoading3();
+    });
+  }
 
   void onLoading1() async{
     if(itemRemaining1 != 0){
@@ -85,11 +151,6 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       if(mounted)
       setState(() {});
       page1++;
-      
-      // refreshController.loadComplete();
-      
-    }else{
-      // refreshController.loadNoData();
     }
   }
 
@@ -116,12 +177,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
       if(mounted)
       setState(() {});
-      page2++;
-      
-      // refreshController.loadComplete();
-      
-    }else{
-      // refreshController.loadNoData();
+      page2++; 
     }
   }
 
@@ -148,12 +204,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
       if(mounted)
       setState(() {});
-      page3++;
-      
-      // refreshController.loadComplete();
-      
-    }else{
-      // refreshController.loadNoData();
+      page3++; 
     }
   }
 
@@ -313,7 +364,89 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   }
 
   connectionListFamilyWidget(){
-    return Container(
+    return RefreshIndicator(
+      onRefresh: onRefresh1,
+      child: GridView.count(
+        controller: scrollController1,
+        padding: EdgeInsets.all(10.0),
+        physics: ClampingScrollPhysics(),
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 20,
+        crossAxisCount: 4,
+        children: List.generate(
+          onSearch ? searches.length : listsFamily.length, (int index) => 
+          TextButton.icon(
+            onPressed: (){
+
+            }, 
+            icon: searches[index].image != ''
+            ? CircleAvatar(
+              radius: 40,
+              backgroundColor: Color(0xff888888),
+              backgroundImage: NetworkImage(searches[index].image),
+              // backgroundImage: searches[index].image != null && searches[index].image != ''
+              // ? NetworkImage(searches[index].image)
+              // : AssetImage('assets/icons/app-icon.png'),
+            )
+            : CircleAvatar(
+              radius: 40,
+              backgroundColor: Color(0xff888888),
+              backgroundImage: AssetImage('assets/icons/app-icon.png'),
+            ),
+            label: onSearch
+            ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
+            : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+          ),
+          // Column(
+          //   children: [
+          //     Expanded(
+          //       child: GestureDetector(
+          //         onTap: (){
+          //           if(onSearch){
+          //             if(searches[index].accountType == 1){
+          //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType,)));
+          //             }else{
+          //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+          //             }
+          //           }else{
+          //             if(listsFamily[index].accountType == 1){
+          //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
+          //             }else{
+          //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
+          //             }
+          //           }
+          //         },
+          //         child: onSearch
+          //         ? CircleAvatar(
+          //           radius: 40,
+          //           backgroundColor: Color(0xff888888),
+          //           backgroundImage: NetworkImage(searches[index].image),
+          //           // backgroundImage: searches[index].image != null && searches[index].image != ''
+          //           // ? NetworkImage(searches[index].image)
+          //           // : AssetImage('assets/icons/app-icon.png'),
+          //         )
+          //         : CircleAvatar(
+          //           radius: 40,
+          //           backgroundColor: Color(0xff888888),
+          //           backgroundImage: NetworkImage(listsFamily[index].image),
+          //           // backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
+          //           // ? NetworkImage(listsFamily[index].image)
+          //           // : AssetImage('assets/icons/app-icon.png'),
+          //         ),
+          //       ),
+          //     ),
+
+          //     onSearch
+          //     ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
+          //     : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+
+          //     Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 12, color: Color(0xff888888))),
+          //   ],
+          // ),
+        ),
+      ),
+    );
+    // return Container(
       // child: SmartRefresher(
       //   enablePullDown: true,
       //   enablePullUp: true,
@@ -390,7 +523,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       //     ),
       //   ),
       // )
-    );
+    // );
   }
 
   connectionListFriendsWidget(){

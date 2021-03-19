@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({required int memorialId, required int page}) async{
 
@@ -31,27 +29,6 @@ Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({required int memori
   }else{
     throw Exception('Failed to get the post');
   }
-
-  // final http.Response response = await http.get(
-  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId?page=$page', ''),
-  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/posts/page/Memorial/$memorialId', {'page' : '$page',}),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // print('The status code is ${response.statusCode}');
-  // print('The status code is ${response.body}');
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularHomeProfilePostMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the post');
-  // }
 }
 
 class APIRegularHomeProfilePostMain{

@@ -10,8 +10,8 @@ Future<bool> apiRegularAddFamily({required int memorialId, required int userId, 
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData.files.addAll([
       MapEntry('page_type', MultipartFile.fromString('Memorial'),),

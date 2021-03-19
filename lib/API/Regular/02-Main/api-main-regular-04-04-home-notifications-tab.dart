@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({required int page}) async{
 
@@ -9,22 +8,25 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({requir
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // Uri.http('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page', ''),
-    Uri.http('fbp.dev1.koda.ws', '/api/v1/mainpages/notifications', {'page' : '$page',}),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
   );
 
+  print('The status code of main page - notifications is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularHomeTabNotificationMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularHomeTabNotificationMain.fromJson(newData);
   }else{
-    throw Exception('Failed to get the notifications');
+    throw Exception('Error occurred in main page - notifications: ${response.statusMessage}');
   }
 }
 
@@ -63,14 +65,14 @@ class APIRegularHomeTabNotificationExtended{
 
     return APIRegularHomeTabNotificationExtended(
       homeTabNotificationId: parsedJson['id'],
-      homeTabNotificationCreatedAt: parsedJson['created_at'],
-      homeTabNotificationUpdatedAt: parsedJson['updated_at'],
+      homeTabNotificationCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      homeTabNotificationUpdatedAt: parsedJson['updated_at'] != null ? parsedJson['updated_at'] : '',
       homeTabNotificationRecipientId: parsedJson['recipient_id'],
       homeTabNotificationActor: APIRegularHomeTabNotificationExtendedActor.fromJson(parsedJson['actor']),
       homeTabNotificationRead: parsedJson['read'],
-      homeTabNotificationAction: parsedJson['action'],
+      homeTabNotificationAction: parsedJson['action'] != null ? parsedJson['action'] : '',
       homeTabNotificationPostId: parsedJson['postId'],
-      homeTabNotificationNotificationType: parsedJson['notif_type'],
+      homeTabNotificationNotificationType: parsedJson['notif_type'] != null ? parsedJson['notif_type'] : '',
     );
   }
 }

@@ -140,7 +140,15 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     context.hideLoaderOverlay();
 
                     if(result){
-                      Navigator.popAndPushNamed(context, '/home/blm');
+                      setState(() {
+                        followButton = false;
+                      });
+
+                      await showOkAlertDialog(
+                        context: context,
+                        title: 'Success',
+                        message: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                      );
                     }else{
                       await showOkAlertDialog(
                         context: context,
@@ -159,7 +167,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                 ),
                 color: Color(0xff04ECFF),
               );
-            }else if(follower == true){
+            }else if(followButton == true){
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
@@ -182,7 +190,17 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     context.hideLoaderOverlay();
 
                     if(result){
-                      Navigator.popAndPushNamed(context, '/home/blm');
+                      // Navigator.popAndPushNamed(context, '/home/blm');
+                      setState(() {
+                        followButton = false;
+                      });
+
+                      await showOkAlertDialog(
+                        context: context,
+                        title: 'Success',
+                        message: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                      );
+
                     }else{
                       await showOkAlertDialog(
                         context: context,
@@ -212,7 +230,17 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   context.hideLoaderOverlay();
 
                   if(result){
-                    Navigator.popAndPushNamed(context, '/home/blm');
+                    // Navigator.popAndPushNamed(context, '/home/blm');
+
+                    setState(() {
+                      followButton = true;
+                    });
+
+                    await showOkAlertDialog(
+                      context: context,
+                      title: 'Success',
+                      message: 'Successfully followed the page. You will receive notifications from this page.',
+                    );
                   }else{
                     await showOkAlertDialog(
                       context: context,

@@ -12,9 +12,8 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
 
   try{
 
-    var dioRequest = Dio();
-    var formData;
-    formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData = FormData.fromMap({
       'user_id': prefsUserID,

@@ -113,7 +113,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
             userId: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageCreator.homeTabFeedPageCreatorId, 
             postId: newValue.almFamilyMemorialList[i].homeTabFeedId,
             memorialId: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageId,
-            timeCreated: newValue.almFamilyMemorialList[i].homeTabFeedCreateAt,
+            timeCreated: newValue.almFamilyMemorialList[i].homeTabFeedCreatedAt,
             memorialName: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageName,
             postBody: newValue.almFamilyMemorialList[i].homeTabFeedBody,
             profileImage: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageProfileImage,

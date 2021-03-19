@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) async{
 
@@ -9,21 +8,25 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('fbp.dev1.koda.ws', '/api/v1/mainpages/feed/', {'page' : '$page',}),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
   );
-  
+
+  print('The status code of main page - feed is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularHomeTabFeedMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularHomeTabFeedMain.fromJson(newData);
   }else{
-    throw Exception('Failed to get the feed');
+    throw Exception('Error occurred in main page - feed: ${response.statusMessage}');
   }
 }
 
@@ -50,12 +53,12 @@ class APIRegularHomeTabFeedExtended{
   String homeTabFeedBody;
   List<dynamic> homeTabFeedImagesOrVideos;
   List<APIRegularHomeTabFeedExtendedTagged> homeTabFeedPostTagged;
-  String homeTabFeedCreateAt;
+  String homeTabFeedCreatedAt;
   int homeTabFeedNumberOfLikes;
   int homeTabFeedNumberOfComments;
   bool homeTabFeedLikeStatus;
 
-  APIRegularHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreateAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
+  APIRegularHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
 
   factory APIRegularHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -75,7 +78,7 @@ class APIRegularHomeTabFeedExtended{
       homeTabFeedBody: parsedJson['body'] != null ? parsedJson['body'] : '',
       homeTabFeedImagesOrVideos: newList1 != null ? newList1 : [],
       homeTabFeedPostTagged: taggedList,
-      homeTabFeedCreateAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      homeTabFeedCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
       homeTabFeedNumberOfLikes: parsedJson['numberOfLikes'],
       homeTabFeedNumberOfComments: parsedJson['numberOfComments'],
       homeTabFeedLikeStatus: parsedJson['likeStatus'],

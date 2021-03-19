@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() async{
 
@@ -30,24 +28,6 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
   }else{
     throw Exception('Error occurred: ${response.statusMessage}');
   }
-
-  // final http.Response response = await http.get(
-  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/users/image_show', ''),
-  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/users/image_show',),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularShowProfileInformation.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the user information');
-  // }
 }
 
 class APIRegularShowProfileInformation{
@@ -67,10 +47,10 @@ class APIRegularShowProfileInformation{
 
     return APIRegularShowProfileInformation(
       showProfileInformationUserId: newValue['id'],
-      showProfileInformationFirstName: newValue['first_name'],
-      showProfileInformationLastName: newValue['last_name'],
-      showProfileInformationImage: newValue['image'],
-      showProfileInformationEmail: newValue['email'],
+      showProfileInformationFirstName: newValue['first_name'] != null ? newValue['first_name'] : '',
+      showProfileInformationLastName: newValue['last_name'] != null ? newValue['last_name'] : '',
+      showProfileInformationImage: newValue['image'] != null ? newValue['image'] : '',
+      showProfileInformationEmail: newValue['email'] != null ? newValue['email'] : '',
       showProfileInformationGuest: newValue['guest'],
       showProfileInformationAccountType: newValue['account_type'],
     );

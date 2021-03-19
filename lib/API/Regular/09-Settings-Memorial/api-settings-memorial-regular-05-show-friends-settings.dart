@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
 
 Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({required int memorialId, required int page}) async{
 
@@ -9,28 +10,49 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({require
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  APIRegularShowFriendsSettingsMain? returnValue;
+  Dio dioRequest = Dio();
 
-  try{
-    final http.Response response = await http.get(
-      Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page', ''),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
       }
-    );
+    ),
+  );
 
-    if(response.statusCode == 200){
-      var newValue = json.decode(response.body);
-      return APIRegularShowFriendsSettingsMain.fromJson(newValue);
-    }
-  }catch(e){
-    throw Exception('$e');
+  print('The page friends settings is ${response.statusCode}');
+
+  if(response.statusCode == 200){
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularShowFriendsSettingsMain.fromJson(newData);
+  }else{
+    throw Exception('Error occurred: ${response.statusMessage}');
   }
 
-  return returnValue!;
+  // APIRegularShowFriendsSettingsMain? returnValue;
+
+  // try{
+  //   final http.Response response = await http.get(
+  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page', ''),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json',
+  //       'access-token': getAccessToken,
+  //       'uid': getUID,
+  //       'client': getClient,
+  //     }
+  //   );
+
+  //   if(response.statusCode == 200){
+  //     var newValue = json.decode(response.body);
+  //     return APIRegularShowFriendsSettingsMain.fromJson(newValue);
+  //   }
+  // }catch(e){
+  //   throw Exception('$e');
+  // }
+
+  // return returnValue!;
 }
 
 class APIRegularShowFriendsSettingsMain{

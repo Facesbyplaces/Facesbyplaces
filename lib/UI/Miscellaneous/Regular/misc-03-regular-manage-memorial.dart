@@ -5,6 +5,7 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-bl
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -125,55 +126,37 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
 
-                  bool confirmResult = await showDialog(
+                  var confirmation = await showOkCancelAlertDialog(
                     context: context,
-                    builder: (_) => 
-                    Container()
-                    //   AssetGiffyDialog(
-                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //   entryAnimation: EntryAnimation.DEFAULT,
-                    //   description: Text('Are you sure you want to leave this page?',
-                    //     textAlign: TextAlign.center,
-                    //     style: TextStyle(),
-                    //   ),
-                    //   onlyOkButton: false,
-                    //   onOkButtonPressed: () {
-                    //     Navigator.pop(context, true);
-                    //   },
-                    //   onCancelButtonPressed: () {
-                    //     Navigator.pop(context, false);
-                    //   },
-                    // )
+                    title: 'Confirm',
+                    message: 'Are you sure you want to leave this page?',
+                    okLabel: 'Yes',
+                    cancelLabel: 'No',
                   );
 
-                  if(confirmResult){
+                  print('The confirmation is $confirmation');
+
+                  if(confirmation == OkCancelResult.ok){
 
                     context.showLoaderOverlay();
                     bool result = await apiRegularLeavePage(memorialId: memorialId);
                     context.hideLoaderOverlay();
 
                     if(result){
-                      Navigator.popAndPushNamed(context, '/home/regular');
-                    }else{
-                      await showDialog(
+                      setState(() {
+                        followButton = false;
+                      });
+
+                      await showOkAlertDialog(
                         context: context,
-                        builder: (_) => 
-                        Container()
-                        //   AssetGiffyDialog(
-                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        //   entryAnimation: EntryAnimation.DEFAULT,
-                        //   description: Text('Something went wrong. Please try again.',
-                        //     textAlign: TextAlign.center,
-                        //     style: TextStyle(),
-                        //   ),
-                        //   onlyOkButton: true,
-                        //   buttonOkColor: Colors.red,
-                        //   onOkButtonPressed: () {
-                        //     Navigator.pop(context, true);
-                        //   },
-                        // )
+                        title: 'Success',
+                        message: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                      );
+                    }else{
+                      await showOkAlertDialog(
+                        context: context,
+                        title: 'Error',
+                        message: 'Something went wrong. Please try again.',
                       );
                     }
                   }
@@ -186,7 +169,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 ),
                 color: Color(0xff04ECFF),
               );
-            }else if(follower == true){
+            }else if(followButton == true){
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
@@ -194,55 +177,40 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
 
-                  bool confirmResult = await showDialog(
+                  var confirmation = await showOkCancelAlertDialog(
                     context: context,
-                    builder: (_) => 
-                    Container()
-                    //   AssetGiffyDialog(
-                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //   entryAnimation: EntryAnimation.DEFAULT,
-                    //   description: Text('Are you sure you want to leave this page?',
-                    //     textAlign: TextAlign.center,
-                    //     style: TextStyle(),
-                    //   ),
-                    //   onlyOkButton: false,
-                    //   onOkButtonPressed: () {
-                    //     Navigator.pop(context, true);
-                    //   },
-                    //   onCancelButtonPressed: () {
-                    //     Navigator.pop(context, false);
-                    //   },
-                    // )
+                    title: 'Confirm',
+                    message: 'Are you sure you want to leave this page?',
+                    okLabel: 'Yes',
+                    cancelLabel: 'No',
                   );
 
-                  if(confirmResult){
+                  if(confirmation == OkCancelResult.ok){
+
+// join != true
+//                                                               ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.'
+//                                                               : 'Successfully followed the page. You will receive notifications from this page.',
 
                     context.showLoaderOverlay();
                     bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
                     context.hideLoaderOverlay();
 
                     if(result){
-                      Navigator.popAndPushNamed(context, '/home/regular');
-                    }else{
-                      await showDialog(
+                      // Navigator.popAndPushNamed(context, '/home/regular');
+                      setState(() {
+                        followButton = false;
+                      });
+
+                      await showOkAlertDialog(
                         context: context,
-                        builder: (_) => 
-                        Container()
-                        //   AssetGiffyDialog(
-                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        //   entryAnimation: EntryAnimation.DEFAULT,
-                        //   description: Text('Something went wrong. Please try again.',
-                        //     textAlign: TextAlign.center,
-                        //     style: TextStyle(),
-                        //   ),
-                        //   onlyOkButton: true,
-                        //   buttonOkColor: Colors.red,
-                        //   onOkButtonPressed: () {
-                        //     Navigator.pop(context, true);
-                        //   },
-                        // )
+                        title: 'Success',
+                        message: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                      );
+                    }else{
+                      await showOkAlertDialog(
+                        context: context,
+                        title: 'Error',
+                        message: 'Something went wrong. Please try again.',
                       );
                     }
                   }
@@ -262,31 +230,27 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 textColor: Color(0xff4EC9D4),
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
+
                   context.showLoaderOverlay();
                   bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
                   context.hideLoaderOverlay();
 
                   if(result){
-                    Navigator.popAndPushNamed(context, '/home/regular');
-                  }else{
-                    await showDialog(
+                    // Navigator.popAndPushNamed(context, '/home/regular');
+                    setState(() {
+                      followButton = true;
+                    });
+
+                    await showOkAlertDialog(
                       context: context,
-                      builder: (_) => 
-                      Container()
-                      //   AssetGiffyDialog(
-                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      //   entryAnimation: EntryAnimation.DEFAULT,
-                      //   description: Text('Something went wrong. Please try again.',
-                      //     textAlign: TextAlign.center,
-                      //     style: TextStyle(),
-                      //   ),
-                      //   onlyOkButton: true,
-                      //   buttonOkColor: Colors.red,
-                      //   onOkButtonPressed: () {
-                      //     Navigator.pop(context, true);
-                      //   },
-                      // )
+                      title: 'Success',
+                      message: 'Successfully followed the page. You will receive notifications from this page.',
+                    );
+                  }else{
+                    await showOkAlertDialog(
+                      context: context,
+                      title: 'Error',
+                      message: 'Something went wrong. Please try again.',
                     );
                   }
                 },
