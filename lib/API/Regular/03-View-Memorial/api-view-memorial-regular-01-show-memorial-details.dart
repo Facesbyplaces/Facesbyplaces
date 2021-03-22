@@ -71,10 +71,10 @@ class APIRegularShowMemorialExtended{
 
     return APIRegularShowMemorialExtended(
       showMemorialId: parsedJson['id'],
-      showMemorialName: parsedJson['name'],
+      showMemorialName: parsedJson['name'] != null ? parsedJson['name'] : '',
       showMemorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
-      showMemorialBackgroundImage: parsedJson['backgroundImage'],
-      showMemorialProfileImage: parsedJson['profileImage'],
+      showMemorialBackgroundImage: parsedJson['backgroundImage'] != null ? parsedJson['backgroundImage'] : '',
+      showMemorialProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
       showMemorialImagesOrVideos: newList1 != null ? newList1 : [],
       showMemorialFollower: parsedJson['follower'],
       showMemorialPostsCount: parsedJson['postsCount'],
@@ -102,12 +102,12 @@ class APIRegularShowMemorialExtendedDetails{
     String newRIP = parsedJson['rip'];
     DateTime rip = DateTime.parse(newRIP);
     return APIRegularShowMemorialExtendedDetails(
-      showMemorialDetailsDescription: parsedJson['description'],
-      showMemorialDetailsBirthPlace: parsedJson['birthplace'],
+      showMemorialDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      showMemorialDetailsBirthPlace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
       showMemorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
       showMemorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
-      showMemorialDetailsCemetery: parsedJson['cemetery'],
-      showMemorialDetailsCountry: parsedJson['country'],
+      showMemorialDetailsCemetery: parsedJson['cemetery'] != null ? parsedJson['cemetery'] : '',
+      showMemorialDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
     );
   }
 }

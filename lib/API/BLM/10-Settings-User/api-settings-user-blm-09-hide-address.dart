@@ -28,29 +28,4 @@ Future<bool> apiBLMHideAddress({required bool hide}) async{
   }else{
     return false;
   }
-
-
-  // try{
-  //   final http.Response response = await http.put(
-  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideAddress?hide=$hide', ''),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json',
-  //       'access-token': getAccessToken,
-  //       'uid': getUID,
-  //       'client': getClient,
-  //     }
-  //   );
-
-  //   print('The status code of hide address is ${response.statusCode}');
-
-  //   if(response.statusCode == 200){
-  //     result = true;
-  //   }
-      
-  // }catch(e){
-  //   print('Error in settings hide address: $e');
-  //   result = false;
-  // }
-
-  // return result;
 }

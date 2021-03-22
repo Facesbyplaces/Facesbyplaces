@@ -390,7 +390,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     Expanded(
                                                       child: Align(
                                                         alignment: Alignment.topLeft,
-                                                        child: Text(timeago.format(DateTime.parse(originalPost.data!.blmPost.showOriginalPostCreateAt)),
+                                                        child: Text(timeago.format(DateTime.parse(originalPost.data!.blmPost.showOriginalPostCreatedAt)),
                                                           maxLines: 1,
                                                           style: TextStyle(
                                                             fontSize: 14,

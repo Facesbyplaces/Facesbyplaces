@@ -28,28 +28,4 @@ Future<bool> apiBLMHidePhoneNumber({required bool hide}) async{
   }else{
     return false;
   }
-
-  // try{
-  //   final http.Response response = await http.put(
-  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhidePhonenumber?hide=$hide', ''),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json',
-  //       'access-token': getAccessToken,
-  //       'uid': getUID,
-  //       'client': getClient,
-  //     }
-  //   );
-
-  //   print('The status code of hide phone number is ${response.statusCode}');
-
-  //   if(response.statusCode == 200){
-  //     result = true;
-  //   }
-      
-  // }catch(e){
-  //   print('Error in settings hide phone number: $e');
-  //   result = false;
-  // }
-
-  // return result;
 }

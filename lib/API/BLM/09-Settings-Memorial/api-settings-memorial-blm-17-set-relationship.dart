@@ -32,23 +32,4 @@ Future<bool> apiBLMMemorialSetRelationship({required int memorialId, required St
   }else{
     return false;
   }
-
-  // final http.Response response = await http.post(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/relationship', ''),
-  //   headers: <String, String>{
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   },
-  //   body: <String, dynamic>{
-  //     'id': '$memorialId',
-  //     'relationship': '$relationship',
-  //   },
-  // );
-
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
 }

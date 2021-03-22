@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularDeleteMemorial({required int memorialId}) async{
@@ -28,21 +27,4 @@ Future<bool> apiRegularDeleteMemorial({required int memorialId}) async{
   }else{
     return false;
   }
-
-
-  // final http.Response response = await http.delete(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
 }

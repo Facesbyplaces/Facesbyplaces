@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memorialId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memori
   }else{
     throw Exception('Failed to get the admin settings.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/adminIndex/index?page=$page&page_id=$memorialId', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowAdminsSettingMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIBLMShowAdminsSettingMain{
@@ -85,27 +66,25 @@ class APIBLMShowAdminsSettingExtended{
   factory APIBLMShowAdminsSettingExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAdminsSettingExtended(
       showAdminsSettingsUser: APIBLMShowAdminsSettingExtendedUser.fromJson(parsedJson['user']),
-      showAdminsSettingsRelationship: parsedJson['relationship']
+      showAdminsSettingsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
     );
   }
 }
 
 class APIBLMShowAdminsSettingExtendedUser{
-  int showAdminsSettingsUserId;
   String showAdminsSettingsUserFirstName;
   String showAdminsSettingsUserLastName;
-  dynamic showAdminsSettingsUserImage;
+  String showAdminsSettingsUserImage;
   String showAdminsSettingsUserEmail;
 
-  APIBLMShowAdminsSettingExtendedUser({required this.showAdminsSettingsUserId, required this.showAdminsSettingsUserFirstName, required this.showAdminsSettingsUserLastName, required this.showAdminsSettingsUserImage, required this.showAdminsSettingsUserEmail});
+  APIBLMShowAdminsSettingExtendedUser({required this.showAdminsSettingsUserFirstName, required this.showAdminsSettingsUserLastName, required this.showAdminsSettingsUserImage, required this.showAdminsSettingsUserEmail});
 
   factory APIBLMShowAdminsSettingExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAdminsSettingExtendedUser(
-      showAdminsSettingsUserId: parsedJson['id'],
-      showAdminsSettingsUserFirstName: parsedJson['first_name'],
-      showAdminsSettingsUserLastName: parsedJson['last_name'],
-      showAdminsSettingsUserImage: parsedJson['image'],
-      showAdminsSettingsUserEmail: parsedJson['email'],
+      showAdminsSettingsUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showAdminsSettingsUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showAdminsSettingsUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showAdminsSettingsUserEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
     );
   }
 }

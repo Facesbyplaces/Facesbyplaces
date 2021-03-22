@@ -29,23 +29,6 @@ Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({required int postId})
   }else{
     throw Exception('Failed to get the post');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/$postId', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowOriginalPostMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the post');
-  // }
 }
 
 class APIBLMShowOriginalPostMain{
@@ -64,17 +47,13 @@ class APIBLMShowOriginalPostExtended{
   int showOriginalPostId;
   APIBLMShowOriginalPostExtendedPage showOriginalPostPage;
   String showOriginalPostBody;
-  String showOriginalPostLocation;
-  double showOriginalPostLatitude;
-  double showOriginalPostLongitude;
   List<dynamic> showOriginalPostImagesOrVideos;
   List<APIBLMShowOriginalPostExtendedTagged> showOriginalPostPostTagged;
-  String showOriginalPostCreateAt;
+  String showOriginalPostCreatedAt;
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
-  bool showOriginalPostLikeStatus;
 
-  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostLocation, required this.showOriginalPostLatitude, required this.showOriginalPostLongitude, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreateAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
+  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments,});
 
   factory APIBLMShowOriginalPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -92,15 +71,11 @@ class APIBLMShowOriginalPostExtended{
       showOriginalPostId: parsedJson['id'],
       showOriginalPostPage: APIBLMShowOriginalPostExtendedPage.fromJson(parsedJson['page']),
       showOriginalPostBody: parsedJson['body'],
-      showOriginalPostLocation: parsedJson['location'],
-      showOriginalPostLatitude: parsedJson['latitude'],
-      showOriginalPostLongitude: parsedJson['longitude'],
-      showOriginalPostImagesOrVideos: newList!,
+      showOriginalPostImagesOrVideos: newList != null ? newList : [],
       showOriginalPostPostTagged: taggedList,
-      showOriginalPostCreateAt: parsedJson['created_at'],
+      showOriginalPostCreatedAt: parsedJson['created_at'],
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
       showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
-      showOriginalPostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
@@ -108,82 +83,38 @@ class APIBLMShowOriginalPostExtended{
 class APIBLMShowOriginalPostExtendedPage{
   int showOriginalPostPageId;
   String showOriginalPostPageName;
-  APIRegularShowOriginalPostExtendedPageDetails showOriginalPostPageDetails;
-  dynamic showOriginalPostPageBackgroundImage;
-  dynamic showOriginalPostPageProfileImage;
-  dynamic showOriginalPostPageImagesOrVideos;
+  String showOriginalPostPageProfileImage;
   String showOriginalPostPageRelationship;
   APIBLMShowOriginalPostExtendedPageCreator showOriginalPostPagePageCreator;
   bool showOriginalPostPageManage;
   bool showOriginalPostPageFamOrFriends;
   bool showOriginalPostPageFollower;
   String showOriginalPostPagePageType;
-  String showOriginalPostPagePrivacy;
 
-  APIBLMShowOriginalPostExtendedPage({required this.showOriginalPostPageId, required this.showOriginalPostPageName, required this.showOriginalPostPageDetails, required this.showOriginalPostPageBackgroundImage, required this.showOriginalPostPageProfileImage, required this.showOriginalPostPageImagesOrVideos, required this.showOriginalPostPageRelationship, required this.showOriginalPostPagePageCreator, required this.showOriginalPostPageManage, required this.showOriginalPostPageFamOrFriends, required this.showOriginalPostPageFollower, required this.showOriginalPostPagePageType, required this.showOriginalPostPagePrivacy});
+  APIBLMShowOriginalPostExtendedPage({required this.showOriginalPostPageId, required this.showOriginalPostPageName, required this.showOriginalPostPageProfileImage, required this.showOriginalPostPageRelationship, required this.showOriginalPostPagePageCreator, required this.showOriginalPostPageManage, required this.showOriginalPostPageFamOrFriends, required this.showOriginalPostPageFollower, required this.showOriginalPostPagePageType,});
 
   factory APIBLMShowOriginalPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostExtendedPage(
       showOriginalPostPageId: parsedJson['id'],
       showOriginalPostPageName: parsedJson['name'],
-      showOriginalPostPageDetails: APIRegularShowOriginalPostExtendedPageDetails.fromJson(parsedJson['details']),
-      showOriginalPostPageBackgroundImage: parsedJson['backgroundImage'],
       showOriginalPostPageProfileImage: parsedJson['profileImage'],
-      showOriginalPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
       showOriginalPostPageRelationship: parsedJson['relationship'],
       showOriginalPostPagePageCreator: APIBLMShowOriginalPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       showOriginalPostPageManage: parsedJson['manage'],
       showOriginalPostPageFamOrFriends: parsedJson['famOrFriends'],
       showOriginalPostPageFollower: parsedJson['follower'],
       showOriginalPostPagePageType: parsedJson['page_type'],
-      showOriginalPostPagePrivacy: parsedJson['privacy'],
-    );
-  }
-}
-
-class APIRegularShowOriginalPostExtendedPageDetails{
-  String showOriginalPostPageDetailsDescription;
-  String showOriginalPostPageDetailsBirthPlace;
-  String showOriginalPostPageDetailsDob;
-  String showOriginalPostPageDetailsRip;
-  String showOriginalPostPageDetailsCemetery;
-  String showOriginalPostPageDetailsCountry;
-
-  APIRegularShowOriginalPostExtendedPageDetails({required this.showOriginalPostPageDetailsDescription, required this.showOriginalPostPageDetailsBirthPlace, required this.showOriginalPostPageDetailsDob, required this.showOriginalPostPageDetailsRip, required this.showOriginalPostPageDetailsCemetery, required this.showOriginalPostPageDetailsCountry});
-
-  factory APIRegularShowOriginalPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularShowOriginalPostExtendedPageDetails(
-      showOriginalPostPageDetailsDescription: parsedJson['description'],
-      showOriginalPostPageDetailsBirthPlace: parsedJson['birthplace'],
-      showOriginalPostPageDetailsDob: parsedJson['dob'],
-      showOriginalPostPageDetailsRip: parsedJson['rip'],
-      showOriginalPostPageDetailsCemetery: parsedJson['cemetery'],
-      showOriginalPostPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIBLMShowOriginalPostExtendedPageCreator{
-  int showOriginalPostPageCreatorId;
-  String showOriginalPostPageCreatorFirstName;
-  String showOriginalPostPageCreatorLastName;
-  String showOriginalPostPageCreatorPhoneNumber;
-  String showOriginalPostPageCreatorEmail;
-  String showOriginalPostPageCreatorUserName;
-  dynamic showOriginalPostPageCreatorImage;
   int showOriginalPostPageCreatorAccountType;
 
-  APIBLMShowOriginalPostExtendedPageCreator({required this.showOriginalPostPageCreatorId, required this.showOriginalPostPageCreatorFirstName, required this.showOriginalPostPageCreatorLastName, required this.showOriginalPostPageCreatorPhoneNumber, required this.showOriginalPostPageCreatorEmail, required this.showOriginalPostPageCreatorUserName, this.showOriginalPostPageCreatorImage, required this.showOriginalPostPageCreatorAccountType});
+  APIBLMShowOriginalPostExtendedPageCreator({required this.showOriginalPostPageCreatorAccountType});
 
   factory APIBLMShowOriginalPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostExtendedPageCreator(
-      showOriginalPostPageCreatorId: parsedJson['id'],
-      showOriginalPostPageCreatorFirstName: parsedJson['first_name'],
-      showOriginalPostPageCreatorLastName: parsedJson['last_name'],
-      showOriginalPostPageCreatorPhoneNumber: parsedJson['phone_number'],
-      showOriginalPostPageCreatorEmail: parsedJson['email'],
-      showOriginalPostPageCreatorUserName: parsedJson['username'],
-      showOriginalPostPageCreatorImage: parsedJson['image'],
       showOriginalPostPageCreatorAccountType: parsedJson['account_type'],
     );
   }
@@ -193,16 +124,14 @@ class APIBLMShowOriginalPostExtendedTagged{
   int showOriginalPostTaggedId;
   String showOriginalPostTaggedFirstName;
   String showOriginalPostTaggedLastName;
-  String showOriginalPostTaggedImage;
 
-  APIBLMShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName, required this.showOriginalPostTaggedImage});
+  APIBLMShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName});
 
   factory APIBLMShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostExtendedTagged(
       showOriginalPostTaggedId: parsedJson['id'],
-      showOriginalPostTaggedFirstName: parsedJson['first_name'],
-      showOriginalPostTaggedLastName: parsedJson['last_name'],
-      showOriginalPostTaggedImage: parsedJson['image']
+      showOriginalPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showOriginalPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) async{
@@ -13,8 +12,8 @@ Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) asyn
 
   try{
 
-    var dioRequest = dio.Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
     List<Map<String, dynamic>> tagPeopleValue = [];
 
     for(int i = 0; i < post.almTagPeople.length; i++){
@@ -34,7 +33,7 @@ Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) asyn
     if(post.almImagesOrVideos != []){
       for(int i = 0; i < post.almImagesOrVideos.length; i++){
         if(post.almImagesOrVideos[i].path != null || post.almImagesOrVideos != ['']){
-          var file = await dio.MultipartFile.fromFile(post.almImagesOrVideos[i].path, filename: post.almImagesOrVideos[i].path);
+          var file = await MultipartFile.fromFile(post.almImagesOrVideos[i].path, filename: post.almImagesOrVideos[i].path);
           formData.files.add(MapEntry('post[imagesOrVideos][]', file));
         }
       }

@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({required int memorialId}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({required int memorialId
   }else{
     throw Exception('Failed to get the page details.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowPageDetailsMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the events');
-  // }
 }
 
 class APIBLMShowPageDetailsMain{
@@ -65,27 +46,17 @@ class APIBLMShowPageDetailsMain{
 
 
 class APIBLMShowPageDetailsExtended{
-  int showPageDetailsId;
   String showPageDetailsName;
   APIBLMShowPageDetailsExtendedDetails showPageDetailsDetails;
-  dynamic showPageDetailsBackgroundImage;
-  dynamic showPageDetailsProfileImage;
-  dynamic showPageDetailsImagesOrVideos;
   String showPageDetailsRelationship;
-  APIBLMShowPageDetailsExtendedPageCreator showPageDetailsPageCreator;
 
-  APIBLMShowPageDetailsExtended({required this.showPageDetailsId, required this.showPageDetailsName, required this.showPageDetailsDetails, required this.showPageDetailsBackgroundImage, required this.showPageDetailsProfileImage, required this.showPageDetailsImagesOrVideos, required this.showPageDetailsRelationship, required this.showPageDetailsPageCreator});
+  APIBLMShowPageDetailsExtended({required this.showPageDetailsName, required this.showPageDetailsDetails, required this.showPageDetailsRelationship,});
 
   factory APIBLMShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtended(
-      showPageDetailsId: parsedJson['id'],
       showPageDetailsName: parsedJson['name'],
       showPageDetailsDetails: APIBLMShowPageDetailsExtendedDetails.fromJson(parsedJson['details']),
-      showPageDetailsBackgroundImage: parsedJson['backgroundImage'],
-      showPageDetailsProfileImage: parsedJson['profileImage'],
-      showPageDetailsImagesOrVideos: parsedJson['imagesOrVideos'],
       showPageDetailsRelationship: parsedJson['relationship'],
-      showPageDetailsPageCreator: APIBLMShowPageDetailsExtendedPageCreator.fromJson(parsedJson['page_creator'])
     );
   }
 }
@@ -104,37 +75,13 @@ class APIBLMShowPageDetailsExtendedDetails{
 
   factory APIBLMShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtendedDetails(
-      showPageDetailsDetailsDescription: parsedJson['description'],
-      showPageDetailsDetailsLocation: parsedJson['location'],
-      showPageDetailsDetailsPrecinct: parsedJson['precinct'],
-      showPageDetailsDetailsDob: parsedJson['dob'],
-      showPageDetailsDetailsRip: parsedJson['rip'],
-      showPageDetailsDetailsState: parsedJson['state'],
-      showPageDetailsDetailsCountry: parsedJson['country'],
-    );
-  }
-}
-
-class APIBLMShowPageDetailsExtendedPageCreator{
-  int showPageDetailsPageCreatorId;
-  String showPageDetailsPageCreatorFirstName;
-  String showPageDetailsPageCreatorLastName;
-  String showPageDetailsPageCreatorPhoneNumber;
-  String showPageDetailsPageCreatorEmail;
-  String showPageDetailsPageCreatorUserName;
-  dynamic showPageDetailsPageCreatorImage;
-
-  APIBLMShowPageDetailsExtendedPageCreator({required this.showPageDetailsPageCreatorId, required this.showPageDetailsPageCreatorFirstName, required this.showPageDetailsPageCreatorLastName, required this.showPageDetailsPageCreatorPhoneNumber, required this.showPageDetailsPageCreatorEmail, required this.showPageDetailsPageCreatorUserName, required this.showPageDetailsPageCreatorImage});
-
-  factory APIBLMShowPageDetailsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowPageDetailsExtendedPageCreator(
-      showPageDetailsPageCreatorId: parsedJson['id'],
-      showPageDetailsPageCreatorFirstName: parsedJson['first_name'],
-      showPageDetailsPageCreatorLastName: parsedJson['last_name'],
-      showPageDetailsPageCreatorPhoneNumber: parsedJson['phone_number'],
-      showPageDetailsPageCreatorEmail: parsedJson['email'],
-      showPageDetailsPageCreatorUserName: parsedJson['username'],
-      showPageDetailsPageCreatorImage: parsedJson['image']
+      showPageDetailsDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      showPageDetailsDetailsLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      showPageDetailsDetailsPrecinct: parsedJson['precinct'] != null ? parsedJson['precinct'] : '',
+      showPageDetailsDetailsDob: parsedJson['dob'] != null ? parsedJson['dob'] : '',
+      showPageDetailsDetailsRip: parsedJson['rip'] != null ? parsedJson['rip'] : '',
+      showPageDetailsDetailsState: parsedJson['state'] != null ? parsedJson['state'] : '',
+      showPageDetailsDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
     );
   }
 }

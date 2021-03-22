@@ -29,26 +29,6 @@ Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, re
   }else{
     throw Exception('Failed to get the nearby list');
   }
-
-  // final http.Response response = await http.get(
-  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page', ''),
-  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/search/nearby', {'page' : '$page', 'longitude': '$longitude', 'latitude': '$latitude'}),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // print('The status code of nearby in alm is ${response.statusCode}');
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularSearchNearbyMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the feed');
-  // }
 }
 
 class APIRegularSearchNearbyMain{

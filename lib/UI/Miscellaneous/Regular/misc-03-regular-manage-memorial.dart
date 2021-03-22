@@ -77,9 +77,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
-        print('The memorial id is $memorialId');
-        print('The relationship is $relationship');
-        print('The managed is $managed');
         if(pageType == 'Memorial'){
           if(managed == true || famOrFriends == true){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
@@ -187,16 +184,11 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
 
                   if(confirmation == OkCancelResult.ok){
 
-// join != true
-//                                                               ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.'
-//                                                               : 'Successfully followed the page. You will receive notifications from this page.',
-
                     context.showLoaderOverlay();
                     bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
                     context.hideLoaderOverlay();
 
                     if(result){
-                      // Navigator.popAndPushNamed(context, '/home/regular');
                       setState(() {
                         followButton = false;
                       });
@@ -236,7 +228,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                   context.hideLoaderOverlay();
 
                   if(result){
-                    // Navigator.popAndPushNamed(context, '/home/regular');
                     setState(() {
                       followButton = true;
                     });

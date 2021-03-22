@@ -32,23 +32,4 @@ Future<bool> apiBLMEditReply({required int replyId, required String replyBody}) 
   }else{
     return false;
   }
-
-  // final http.Response response = await http.put(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/reply', ''),
-  //   headers: <String, String>{
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   },
-  //   body: <String, dynamic>{
-  //     'reply_id': '$replyId',
-  //     'body': '$replyBody',
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
 }

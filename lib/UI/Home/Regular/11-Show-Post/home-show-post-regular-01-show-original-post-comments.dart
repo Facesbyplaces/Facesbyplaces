@@ -386,7 +386,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     Expanded(
                                                       child: Align(
                                                         alignment: Alignment.topLeft,
-                                                        child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreateAt)),
+                                                        child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreatedAt)),
                                                           maxLines: 1,
                                                           style: TextStyle(
                                                             fontSize: 14,

@@ -8,12 +8,6 @@ Future<bool> apiBLMUpdateOtherDetails({required String birthdate, required Strin
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The birthdate is $birthdate');
-  print('The birthplace is $birthplace');
-  print('The email is $email');
-  print('The address is $address');
-  print('The phoneNumber is $phoneNumber');
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
@@ -34,28 +28,4 @@ Future<bool> apiBLMUpdateOtherDetails({required String birthdate, required Strin
   }else{
     return false;
   }
-
-  // try{
-
-  //   final http.Response response = await http.put(
-  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber', ''),
-  //     headers: <String, String>{
-  //       'access-token': getAccessToken,
-  //       'uid': getUID,
-  //       'client': getClient,
-  //     },
-  //   );
-
-  //   print('The status of other details is ${response.statusCode}');
-
-  //   if(response.statusCode == 200){
-  //     result = true;
-  //   }
-    
-  // }catch(e){
-  //   print('Error in settings update other details: $e');
-  //   result = false;
-  // }
-
-  // return result;
 }

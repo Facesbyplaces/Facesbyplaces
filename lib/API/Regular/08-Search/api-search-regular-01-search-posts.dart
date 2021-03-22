@@ -29,26 +29,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords
   }else{
     throw Exception('Failed to get the posts');
   }
-
-  // final http.Response response = await http.get(
-  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords', ''),
-  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/search/posts', {'page' : '$page', 'keywords': '$keywords'}),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // print('The status code of posts in alm is ${response.statusCode}');
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularSearchPostMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the posts.');
-  // }
 }
 
 class APIRegularSearchPostMain{

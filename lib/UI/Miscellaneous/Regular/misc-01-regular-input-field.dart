@@ -1,8 +1,4 @@
-// import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:date_time_picker/date_time_picker.dart';
-// import 'package:intl_phone_field/intl_phone_field.dart';
-// import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:country_picker/country_picker.dart';
@@ -76,102 +72,6 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   }
 }
 
-class MiscRegularPhoneNumberTemplate extends StatefulWidget{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final bool obscureText;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final bool includeSuffixIcon;
-  final String displayText;
-
-  MiscRegularPhoneNumberTemplate({
-    required Key key,
-    this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-    this.obscureText = false, 
-    this.type = TextInputType.text, 
-    this.maxLines = 1, 
-    this.readOnly = false,
-    this.includeSuffixIcon = false,
-    this.displayText = '',
-  }) : super(key: key);
-  
-  MiscRegularPhoneNumberTemplateState createState() => MiscRegularPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
-}
-
-class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTemplate>{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final bool obscureText;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final bool includeSuffixIcon;
-  final String displayText;
-
-  MiscRegularPhoneNumberTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
-
-  TextEditingController controller = TextEditingController(text: '');
-  bool valid = false;
-
-  void initState(){
-    super.initState();
-    controller = TextEditingController(text: displayText);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return Container();
-    // return IntlPhoneField(
-    //   // selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
-    //   // textFieldController: controller,
-    //   // onInputChanged: (PhoneNumber number){
-    //   //   print(number.phoneNumber);
-    //   // },
-    //   // onInputValidated: (bool value) {
-    //   //   setState(() {
-    //   //     valid = value;
-    //   //   });
-    //   // },
-    //   decoration: InputDecoration(
-    //     alignLabelWithHint: true,
-    //     labelText: labelText,
-    //     labelStyle: labelTextStyle,
-    //     focusedBorder: UnderlineInputBorder(
-    //       borderSide: BorderSide(
-    //         color: Color(0xff000000),
-    //       ),
-    //     ),
-    //   ),
-    // );
-    // return InternationalPhoneNumberInput(
-    //   selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
-    //   textFieldController: controller,
-    //   onInputChanged: (PhoneNumber number){
-    //     print(number.phoneNumber);
-    //   },
-    //   onInputValidated: (bool value) {
-    //     setState(() {
-    //       valid = value;
-    //     });
-    //   },
-    //   inputDecoration: InputDecoration(
-    //     alignLabelWithHint: true,
-    //     labelText: labelText,
-    //     labelStyle: labelTextStyle,
-    //     focusedBorder: UnderlineInputBorder(
-    //       borderSide: BorderSide(
-    //         color: Color(0xff000000),
-    //       ),
-    //     ),
-    //   ),
-    // );
-  }
-}
-
 class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget{
   final String labelText;
   final TextStyle labelTextStyle;
@@ -232,74 +132,6 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
             color: Color(0xff000000),
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-      ),
-    );
-  }
-}
-
-class MiscRegularInputFieldMultiTextPostTemplate extends StatefulWidget{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final Color backgroundColor;
-
-  MiscRegularInputFieldMultiTextPostTemplate({
-    required Key key,
-    this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-    this.type = TextInputType.text, 
-    this.maxLines = 10,
-    this.readOnly = false,
-    this.backgroundColor = const Color(0xffffffff),
-  }) : super(key: key);
-  
-  MiscRegularInputFieldMultiTextPostTemplateState createState() => MiscRegularInputFieldMultiTextPostTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
-}
-
-class MiscRegularInputFieldMultiTextPostTemplateState extends State<MiscRegularInputFieldMultiTextPostTemplate>{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final Color backgroundColor;
-
-  MiscRegularInputFieldMultiTextPostTemplateState({required this.labelText, required this.labelTextStyle, required this.type, required this.maxLines, required this.readOnly, required this.backgroundColor});
-
-  TextEditingController controller = TextEditingController(text: '');
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return TextFormField(
-      controller: controller,
-      cursorColor: Color(0xff000000),
-      maxLines: maxLines,
-      keyboardType: type,
-      readOnly: readOnly,
-      decoration: InputDecoration(
-        fillColor: backgroundColor,
-        alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: labelTextStyle,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.transparent,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.transparent,
-          ),
         ),
       ),
     );
@@ -485,7 +317,6 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
   }
 }
 
-
 class MiscRegularPhoneNumberPickerTemplate extends StatefulWidget{
   final String labelText;
   final TextStyle labelTextStyle;
@@ -584,7 +415,6 @@ class MiscRegularPhoneNumberPickerTemplateState extends State<MiscRegularPhoneNu
         
         Expanded(
           child: TextFormField(
-            // textAlign: TextAlign.,
             keyboardType: TextInputType.phone,
             controller: controller2,
             cursorColor: Color(0xff000000),

@@ -6,9 +6,9 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/gestures.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc-12-blm-dropdown.dart';
 
@@ -105,7 +105,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId, userId: userId,)));
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
       },
       child: Container(
@@ -147,10 +146,14 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                         }
                       }
                     },
-                    child: CircleAvatar(
+                    child: profileImage != null
+                    ? CircleAvatar(
                       backgroundColor: Color(0xff888888), 
-                      // backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png'),
                       backgroundImage: NetworkImage(profileImage),
+                    )
+                    : CircleAvatar(
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
                   Expanded(
@@ -211,8 +214,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
             Column(children: contents,),
 
-            // SizedBox(height: 20,),
-
             numberOfTagged != 0
             ? Column(
               children: [
@@ -260,127 +261,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
             )
             : Container(height: 0,),
 
-            // numberOfTagged != 0
-            // ? Column(
-            //   children: [
-            //     SizedBox(height: 20),
-
-            //     Row(
-            //       children: [
-            //         Text('with'),
-
-            //         Container(
-            //           child: Wrap(
-            //             direction: Axis.vertical,
-            //             spacing: 5.0,
-            //             children: List.generate(
-            //               numberOfTagged,
-            //               (index) => GestureDetector(
-            //                 onTap: (){
-            //                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: taggedId[index], accountType: pageType == 'BLM' ? 1 : 2)));
-            //                 },
-            //                 child: RichText(
-            //                   text: TextSpan(
-            //                     style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
-            //                     children: <TextSpan>[
-            //                       TextSpan(text: taggedFirstName[index],),
-
-            //                       TextSpan(text: ' '),
-
-            //                       TextSpan(text: taggedLastName[index],),
-
-            //                       index < numberOfTagged - 1
-            //                       ? TextSpan(text: ',')
-            //                       : TextSpan(text: ''),
-            //                     ],
-            //                   ),
-            //                 ),
-            //               ),
-            //             ),
-            //           ),
-            //           padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
-            //           alignment: Alignment.centerLeft,
-            //         ),
-            //       ],
-            //     )
-            //   ],
-            // )
-            // : Container(height: 0,),
-
-            // Container(
-            //   height: 65,
-            //   child: Row(
-            //     children: [
-            //       GestureDetector(
-            //         onTap: () async{
-
-            //           setState(() {
-            //             likePost = !likePost;
-
-            //             if(likePost == true){
-            //               pressedLike = true;
-            //               likesCount++;
-            //             }else{
-            //               pressedLike = false;
-            //               likesCount--;
-            //             }
-            //           });
-
-            //           await apiBLMLikeOrUnlikePost(postId: postId, like: likePost);
-            //         },
-            //         child: Row(
-            //           children: [
-            //             likePost == true
-            //             ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
-            //             : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
-
-            //             SizedBox(width: 10),
-
-            //             Text('$likesCount', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
-            //           ],
-            //         ),
-            //       ),
-
-            //       SizedBox(width: 20),
-
-            //       Row(
-            //         children: [
-            //           Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
-
-            //           SizedBox(width: 10),
-
-            //           Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
-            //         ],
-            //       ),
-            //       Expanded(
-            //         child: GestureDetector(
-            //           onTap: () async{
-            //             // initBranchShare();
-
-            //             // FlutterBranchSdk.setIdentity('blm-share-link');
-
-            //             // BranchResponse response = await FlutterBranchSdk.showShareSheet(
-            //             //   buo: buo!,
-            //             //   linkProperties: lp!,
-            //             //   messageText: 'FacesbyPlaces App',
-            //             //   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-            //             //   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-            //             // );
-
-            //             // if (response.success) {
-            //             //   print('Link generated: ${response.result}');
-            //             // } else {
-            //             //   FlutterBranchSdk.logout();
-            //             //   print('Error : ${response.errorCode} - ${response.errorMessage}');
-            //             // }
-            //           },
-            //           child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: 50, height: 50,),),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-
             Row(
               children: [
                 TextButton.icon(
@@ -399,9 +279,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                     await apiBLMLikeOrUnlikePost(postId: postId, like: likePost);
                   },
-                  // Color(0xff04ECFF)
-                  // Color(0xffE74C3C)
-                  // Color(0xff4EC9D4)
                   icon: likePost == true ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,) : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
                   label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                 ),

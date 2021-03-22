@@ -156,7 +156,7 @@ class APIBLMHomeTabMemorialExtendedPageDetails{
 
   factory APIBLMHomeTabMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabMemorialExtendedPageDetails(
-      blmHomeTabMemorialPageDetailsDescription: parsedJson['description'],
+      blmHomeTabMemorialPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
     );
   }
 }

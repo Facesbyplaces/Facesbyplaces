@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
 Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial}) async{
@@ -11,8 +10,8 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = dio.Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData.files.addAll([
       MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
@@ -34,21 +33,20 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
     }
 
     if(memorial.almBackgroundImage != null || memorial.almBackgroundImage != ''){
-      var file = await dio.MultipartFile.fromFile(memorial.almBackgroundImage.path, filename: memorial.almBackgroundImage.path);
+      var file = await MultipartFile.fromFile(memorial.almBackgroundImage.path, filename: memorial.almBackgroundImage.path);
       formData.files.add(MapEntry('memorial[backgroundImage]', file));
     }
     
     if(memorial.almProfileImage != null || memorial.almProfileImage != ''){
-      var file = await dio.MultipartFile.fromFile(memorial.almProfileImage.path, filename: memorial.almProfileImage.path);
+      var file = await MultipartFile.fromFile(memorial.almProfileImage.path, filename: memorial.almProfileImage.path);
       formData.files.add(MapEntry('memorial[profileImage]', file));
     }
     
-    // if(memorial.almImagesOrVideos != null || memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
     if(memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
 
       for(int i = 0; i < memorial.almImagesOrVideos.length; i++){
         if(memorial.almImagesOrVideos[i].path != null || memorial.almImagesOrVideos != ['']){
-          var file = await dio.MultipartFile.fromFile(memorial.almImagesOrVideos[i].path, filename: memorial.almImagesOrVideos[i].path);
+          var file = await MultipartFile.fromFile(memorial.almImagesOrVideos[i].path, filename: memorial.almImagesOrVideos[i].path);
           formData.files.add(MapEntry('memorial[imagesOrVideos][]', file));
         }
       }

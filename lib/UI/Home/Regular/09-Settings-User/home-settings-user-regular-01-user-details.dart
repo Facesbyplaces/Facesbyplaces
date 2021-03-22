@@ -10,15 +10,14 @@ import 'package:facesbyplaces/UI/ui-01-get-started.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-user-regular-02-user-update-details.dart';
 import 'home-settings-user-regular-03-change-password.dart';
+import 'home-settings-user-regular-04-other-details.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:we_slide/we_slide.dart';
+import 'package:flutter/material.dart';
 import 'dart:io';
-
-import 'home-settings-user-regular-04-other-details.dart';
 
 class HomeRegularUserProfileDetails extends StatefulWidget{
   final int userId;

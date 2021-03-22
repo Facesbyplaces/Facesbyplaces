@@ -108,7 +108,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           userId: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPagePageCreator.showUsersPostsPageCreatorId, 
           postId: newValue.blmFamilyMemorialList[i].showUsersPostsId,
           memorialId: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageId,
-          timeCreated: newValue.blmFamilyMemorialList[i].showUsersPostsCreateAt,
+          timeCreated: newValue.blmFamilyMemorialList[i].showUsersPostsCreatedAt,
           memorialName: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageName,
           postBody: newValue.blmFamilyMemorialList[i].showUsersPostsBody,
           profileImage: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageProfileImage,

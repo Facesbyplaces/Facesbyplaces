@@ -27,22 +27,4 @@ Future<bool> apiRegularLikeOrUnlikeCommentReply({required String commentableType
   }else{
     return false;
   }
-
-
-
-  // final http.Response response = await http.put(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/comment/unlikeOrLikeComment?commentable_type=$commentableType&commentable_id=$commentableId&like=$likeStatus', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
 }

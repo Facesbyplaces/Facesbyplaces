@@ -249,7 +249,6 @@ class MiscBLMConfirmDialog extends StatelessWidget{
     this.confirmColor_2 = const Color(0xff04ECFF),
   });
 
-
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Dialog(

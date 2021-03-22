@@ -29,26 +29,6 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int pa
   }else{
     throw Exception('Failed to get the suggestions');
   }
-
-//   final http.Response response = await http.get(
-//     // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page', ''),
-//     Uri.http('fbp.dev1.koda.ws', '/api/v1/search/suggested/', {'page' : '$page',}),
-//     headers: <String, String>{
-//       'Content-Type': 'application/json',
-//       'access-token': getAccessToken,
-//       'uid': getUID,
-//       'client': getClient,
-//     }
-//   );
-
-//   print('The status code of suggested in alm is ${response.statusCode}');
-
-//   if(response.statusCode == 200){
-//     var newValue = json.decode(response.body);
-//     return APIRegularSearchSuggestedMain.fromJson(newValue);
-//   }else{
-//     throw Exception('Failed to get the feed');
-//   }
 }
 
 class APIRegularSearchSuggestedMain{

@@ -28,28 +28,4 @@ Future<bool> apiBLMHideBirthdate({required bool hide}) async{
   }else{
     return false;
   }
-
-  // try{
-  //   final http.Response response = await http.put(
-  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideBirthdate?hide=$hide', ''),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json',
-  //       'access-token': getAccessToken,
-  //       'uid': getUID,
-  //       'client': getClient,
-  //     }
-  //   );
-
-  //   print('The status code of hide birthdate is ${response.statusCode}');
-
-  //   if(response.statusCode == 200){
-  //     result = true;
-  //   }
-      
-  // }catch(e){
-  //   print('Error in settings hide birthdate: $e');
-  //   result = false;
-  // }
-
-  // return result;
 }

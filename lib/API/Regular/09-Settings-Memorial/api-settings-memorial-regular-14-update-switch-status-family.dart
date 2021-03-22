@@ -27,20 +27,4 @@ Future<bool> apiRegularUpdateSwitchStatusFamily({required int memorialId, requir
   }else{
     return false;
   }
-
-  // final http.Response response = await http.put(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFamily/Memorial/$memorialId?hide=$status', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
 }

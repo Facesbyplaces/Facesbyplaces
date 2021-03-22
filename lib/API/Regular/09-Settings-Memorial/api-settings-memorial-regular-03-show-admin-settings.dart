@@ -8,29 +8,6 @@ Future<APIRegularShowAdminsSettingsMain> apiRegularShowAdminSettings({required i
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  // APIRegularShowAdminsSettingsMain? returnValue;
-
-  // try{
-  //   final http.Response response = await http.get(
-  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId', ''),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json',
-  //       'access-token': getAccessToken,
-  //       'uid': getUID,
-  //       'client': getClient,
-  //     }
-  //   );
-
-  //   if(response.statusCode == 200){
-  //     var newValue = json.decode(response.body);
-  //     returnValue = APIRegularShowAdminsSettingsMain.fromJson(newValue);
-  //   }
-  // }catch(e){
-  //   throw Exception('$e');
-  // }
-
-  // return returnValue!;
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
@@ -97,7 +74,7 @@ class APIRegularShowAdminsSettingsExtendedUser{
   int showAdminsSettingsUserId;
   String showAdminsSettingsUserFirstName;
   String showAdminsSettingsUserLastName;
-  dynamic showAdminsSettingsUserImage;
+  String showAdminsSettingsUserImage;
   String showAdminsSettingsUserEmail;
 
   APIRegularShowAdminsSettingsExtendedUser({required this.showAdminsSettingsUserId, required this.showAdminsSettingsUserFirstName, required this.showAdminsSettingsUserLastName, required this.showAdminsSettingsUserImage, required this.showAdminsSettingsUserEmail});
@@ -105,10 +82,10 @@ class APIRegularShowAdminsSettingsExtendedUser{
   factory APIRegularShowAdminsSettingsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowAdminsSettingsExtendedUser(
       showAdminsSettingsUserId: parsedJson['id'],
-      showAdminsSettingsUserFirstName: parsedJson['first_name'],
-      showAdminsSettingsUserLastName: parsedJson['last_name'],
-      showAdminsSettingsUserImage: parsedJson['image'],
-      showAdminsSettingsUserEmail: parsedJson['email'],
+      showAdminsSettingsUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showAdminsSettingsUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showAdminsSettingsUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showAdminsSettingsUserEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
     );
   }
 }

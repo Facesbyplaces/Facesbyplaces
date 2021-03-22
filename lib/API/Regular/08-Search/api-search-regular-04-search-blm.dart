@@ -29,27 +29,6 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({required String key
   }else{
     throw Exception('Failed to get the blm list');
   }
-
-
-  // final http.Response response = await http.get(
-  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page', ''),
-  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/search/memorials', {'page' : '$page', 'keywords': '$keywords'}),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // print('The status code of blm in alm is ${response.statusCode}');
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularSearchBLMMemorialMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the memorials.');
-  // }
 }
 
 class APIRegularSearchBLMMemorialMain{

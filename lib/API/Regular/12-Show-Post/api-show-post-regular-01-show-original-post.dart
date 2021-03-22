@@ -47,11 +47,11 @@ class APIRegularShowOriginalPostMainExtended{
   String showOriginalPostBody;
   List<dynamic> showOriginalPostImagesOrVideos;
   List<APIRegularShowOriginalPostExtendedTagged> showOriginalPostPostTagged;
-  String showOriginalPostCreateAt;
+  String showOriginalPostCreatedAt;
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
 
-  APIRegularShowOriginalPostMainExtended({required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreateAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments});
+  APIRegularShowOriginalPostMainExtended({required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments});
 
   factory APIRegularShowOriginalPostMainExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -70,7 +70,7 @@ class APIRegularShowOriginalPostMainExtended{
       showOriginalPostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
       showOriginalPostImagesOrVideos: newList1 != null ? newList1 : [],
       showOriginalPostPostTagged: taggedList,
-      showOriginalPostCreateAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      showOriginalPostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
       showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
     );
@@ -80,7 +80,7 @@ class APIRegularShowOriginalPostMainExtended{
 class APIRegularShowOriginalPostMainExtendedPage{
   int showOriginalPostPageId;
   String showOriginalPostPageName;
-  dynamic showOriginalPostPageProfileImage;
+  String showOriginalPostPageProfileImage;
   String showOriginalPostPageRelationship;
   APIRegularShowOriginalPostMainExtendedPageCreator showOriginalPostPagePageCreator;
   bool showOriginalPostPageManage;
@@ -93,14 +93,14 @@ class APIRegularShowOriginalPostMainExtendedPage{
   factory APIRegularShowOriginalPostMainExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostMainExtendedPage(
       showOriginalPostPageId: parsedJson['id'],
-      showOriginalPostPageName: parsedJson['name'],
-      showOriginalPostPageProfileImage: parsedJson['profileImage'],
-      showOriginalPostPageRelationship: parsedJson['relationship'],
+      showOriginalPostPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      showOriginalPostPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      showOriginalPostPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
       showOriginalPostPagePageCreator: APIRegularShowOriginalPostMainExtendedPageCreator.fromJson(parsedJson['page_creator']),
       showOriginalPostPageManage: parsedJson['manage'],
       showOriginalPostPageFamOrFriends: parsedJson['famOrFriends'],
       showOriginalPostPageFollower: parsedJson['follower'],
-      showOriginalPostPagePageType: parsedJson['page_type'],
+      showOriginalPostPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
     );
   }
 }
@@ -127,8 +127,8 @@ class APIRegularShowOriginalPostExtendedTagged{
   factory APIRegularShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostExtendedTagged(
       showOriginalPostTaggedId: parsedJson['id'],
-      showOriginalPostTaggedFirstName: parsedJson['first_name'],
-      showOriginalPostTaggedLastName: parsedJson['last_name'],
+      showOriginalPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showOriginalPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
     );
   }
 }

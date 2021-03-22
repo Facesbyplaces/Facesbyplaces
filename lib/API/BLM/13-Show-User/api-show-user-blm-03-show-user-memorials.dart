@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({required int userId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({required int userId
   }else{
     throw Exception('Failed to get the memorials');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=1', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowUserMemorialsMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the memorials');
-  // }
 }
 
 class APIBLMShowUserMemorialsMain{
@@ -93,74 +74,38 @@ class APIBLMShowUserMemorialsExtendedPage{
   int showUserMemorialsPageId;
   String showUserMemorialsPageName;
   APIBLMShowUserMemorialsExtendedPageDetails showUserMemorialsPageDetails;
-  dynamic showUserMemorialsPageBackgroundImage;
-  dynamic showUserMemorialsPageProfileImage;
-  dynamic showUserMemorialsPageImagesOrVideos;
+  String showUserMemorialsPageProfileImage;
   String showUserMemorialsPageRelationship;
-  APIBLMShowUserMemorialsExtendedPageCreator showUserMemorialsPageCreator;
   bool showUserMemorialsPageManage;
   bool showUserMemorialsPageFamOrFriends;
   bool showUserMemorialsPageFollower;
   String showUserMemorialsPageType;
-  String showUserMemorialsPagePrivacy;
 
-  APIBLMShowUserMemorialsExtendedPage({required this.showUserMemorialsPageId, required this.showUserMemorialsPageName, required this.showUserMemorialsPageDetails, required this.showUserMemorialsPageBackgroundImage, required this.showUserMemorialsPageProfileImage, required this.showUserMemorialsPageImagesOrVideos, required this.showUserMemorialsPageRelationship, required this.showUserMemorialsPageCreator, required this.showUserMemorialsPageManage, required this.showUserMemorialsPageFamOrFriends, required this.showUserMemorialsPageFollower, required this.showUserMemorialsPageType, required this.showUserMemorialsPagePrivacy});
+  APIBLMShowUserMemorialsExtendedPage({required this.showUserMemorialsPageId, required this.showUserMemorialsPageName, required this.showUserMemorialsPageDetails, required this.showUserMemorialsPageProfileImage, required this.showUserMemorialsPageRelationship, required this.showUserMemorialsPageManage, required this.showUserMemorialsPageFamOrFriends, required this.showUserMemorialsPageFollower, required this.showUserMemorialsPageType,});
 
   factory APIBLMShowUserMemorialsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPage(
       showUserMemorialsPageId: parsedJson['id'],
-      showUserMemorialsPageName: parsedJson['name'],
+      showUserMemorialsPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
       showUserMemorialsPageDetails: APIBLMShowUserMemorialsExtendedPageDetails.fromJson(parsedJson['details']),
-      showUserMemorialsPageBackgroundImage: parsedJson['backgroundImage'],
-      showUserMemorialsPageProfileImage: parsedJson['profileImage'],
-      showUserMemorialsPageImagesOrVideos: parsedJson['imagesOrVideos'],
-      showUserMemorialsPageRelationship: parsedJson['relationship'],
-      showUserMemorialsPageCreator: APIBLMShowUserMemorialsExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      showUserMemorialsPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      showUserMemorialsPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
       showUserMemorialsPageManage: parsedJson['manage'],
       showUserMemorialsPageFamOrFriends: parsedJson['famOrFriends'],
       showUserMemorialsPageFollower: parsedJson['follower'],
-      showUserMemorialsPageType: parsedJson['page_type'],
-      showUserMemorialsPagePrivacy: parsedJson['privacy'],
+      showUserMemorialsPageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
     );
   }
 }
 
 class APIBLMShowUserMemorialsExtendedPageDetails{
   String showUserMemorialsPageDetailsDescription;
-  String showUserMemorialsPageDetailsDob;
-  String showUserMemorialsPageDetailsRip;
 
-  APIBLMShowUserMemorialsExtendedPageDetails({required this.showUserMemorialsPageDetailsDescription, required this.showUserMemorialsPageDetailsDob, required this.showUserMemorialsPageDetailsRip,});
+  APIBLMShowUserMemorialsExtendedPageDetails({required this.showUserMemorialsPageDetailsDescription});
   
   factory APIBLMShowUserMemorialsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPageDetails(
-      showUserMemorialsPageDetailsDescription: parsedJson['description'],
-      showUserMemorialsPageDetailsDob: parsedJson['dob'],
-      showUserMemorialsPageDetailsRip: parsedJson['rip'],
-    );
-  }
-}
-
-class APIBLMShowUserMemorialsExtendedPageCreator{
-  int showUserMemorialsPageCreatorId;
-  String showUserMemorialsPageCreatorFirstName;
-  String showUserMemorialsPageCreatorLastName;
-  String showUserMemorialsPageCreatorPhoneNumber;
-  String showUserMemorialsPageCreatorEmail;
-  String showUserMemorialsPageCreatorUserName;
-  dynamic showUserMemorialsPageCreatorImage;
-
-  APIBLMShowUserMemorialsExtendedPageCreator({required this.showUserMemorialsPageCreatorId, required this.showUserMemorialsPageCreatorFirstName, required this.showUserMemorialsPageCreatorLastName, required this.showUserMemorialsPageCreatorPhoneNumber, required this.showUserMemorialsPageCreatorEmail, required this.showUserMemorialsPageCreatorUserName, required this.showUserMemorialsPageCreatorImage});
-
-  factory APIBLMShowUserMemorialsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowUserMemorialsExtendedPageCreator(
-      showUserMemorialsPageCreatorId: parsedJson['id'],
-      showUserMemorialsPageCreatorFirstName: parsedJson['first_name'],
-      showUserMemorialsPageCreatorLastName: parsedJson['last_name'],
-      showUserMemorialsPageCreatorPhoneNumber: parsedJson['phone_number'],
-      showUserMemorialsPageCreatorEmail: parsedJson['email'],
-      showUserMemorialsPageCreatorUserName: parsedJson['username'],
-      showUserMemorialsPageCreatorImage: parsedJson['image']
+      showUserMemorialsPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
     );
   }
 }

@@ -8,7 +8,6 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import 'regular-04-verify-email.dart';
 
 class RegularRegister extends StatelessWidget{
@@ -172,13 +171,6 @@ class RegularRegister extends StatelessWidget{
                                   message: 'Invalid email address. Please try again.',
                                 );
                               }else{
-                                print('The value is ${_key1.currentState!.controller.text}');
-                                print('The value is ${_key2.currentState!.controller.text}');
-                                print('The value is ${_key3.currentState!.controller2.text}');
-                                print('The value is ${_key4.currentState!.controller.text}');
-                                print('The value is ${_key5.currentState!.controller.text}');
-                                print('The value is ${_key6.currentState!.controller.text}');
-
                                 APIRegularAccountRegistration account = APIRegularAccountRegistration(
                                   firstName: _key1.currentState!.controller.text,
                                   lastName: _key2.currentState!.controller.text,

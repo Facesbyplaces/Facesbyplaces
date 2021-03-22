@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIRegularConnectionListFriendsMain> apiRegularConnectionListFriends({required int memorialId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIRegularConnectionListFriendsMain> apiRegularConnectionListFriends({req
   }else{
     throw Exception('Failed to show the connection list friends.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularConnectionListFriendsMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIRegularConnectionListFriendsMain{

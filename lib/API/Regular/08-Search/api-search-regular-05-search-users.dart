@@ -25,7 +25,6 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keyword
     );
 
     print('The status code of search users is ${response.statusCode}');
-    print('The status code of search users is ${response.data}');
 
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);
@@ -36,23 +35,6 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keyword
   }on DioError catch(e){
     return Future.error('The error of search users is: $e');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularSearchUsersMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the user information');
-  // }
 }
 
 class APIRegularSearchUsersMain{

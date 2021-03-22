@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers({required int memorialId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
   }else{
     throw Exception('Failed to show the connection list followers.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/followers/index?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   },
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularConnectionListFollowersMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIRegularConnectionListFollowersMain{
@@ -73,7 +54,7 @@ class APIRegularConnectionListFollowersExtendedDetails{
   int connectionListFollowersDetailsId;
   String connectionListFollowersDetailsFirstName;
   String connectionListFollowersDetailsLastName;
-  dynamic connectionListFollowersDetailsImage;
+  String connectionListFollowersDetailsImage;
   int connectionListFollowersAccountType;
 
   APIRegularConnectionListFollowersExtendedDetails({required this.connectionListFollowersDetailsId, required this.connectionListFollowersDetailsFirstName, required this.connectionListFollowersDetailsLastName, required this.connectionListFollowersDetailsImage, required this.connectionListFollowersAccountType});

@@ -34,25 +34,4 @@ Future<bool> apiRegularDonate({required String pageType, required int pageId, re
   }else{
     return false;
   }
-
-  // final http.Response response = await http.post(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/payment_intent', ''),
-  //   headers: <String, String>{
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   },
-  //   body: <String, dynamic>{
-  //     'page_type': '$pageType',
-  //     'page_id': '$pageId',
-  //     'amount': '$amount',
-  //     'token': '$token',
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
 }

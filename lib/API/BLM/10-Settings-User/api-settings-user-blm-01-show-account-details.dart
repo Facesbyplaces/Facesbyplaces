@@ -29,23 +29,6 @@ Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({required int userId})
   }else{
     throw Exception('Failed to get the account details');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowAccountDetails.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the post');
-  // }
 }
 
 class APIBLMShowAccountDetails{

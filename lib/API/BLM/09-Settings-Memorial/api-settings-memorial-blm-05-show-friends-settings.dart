@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings({required int memorialId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings({required int me
   }else{
     throw Exception('Failed to get the friends settings.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/friends/index?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowFriendsSettingsMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIBLMShowFriendsSettingsMain{
@@ -77,13 +58,12 @@ class APIBLMShowFriendsSettingsExtended{
   factory APIBLMShowFriendsSettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFriendsSettingsExtended(
       showFriendsSettingsUser: APIBLMShowFriendsSettingsExtendedDetails.fromJson(parsedJson['user']),
-      showFriendsSettingsRelationship: parsedJson['relationship'],
+      showFriendsSettingsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
     );
   }
 }
 
 class APIBLMShowFriendsSettingsExtendedDetails{
-
   int showFriendsSettingsDetailsId;
   String showFriendsSettingsDetailsFirstName;
   String showFriendsSettingsDetailsLastName;
@@ -96,10 +76,10 @@ class APIBLMShowFriendsSettingsExtendedDetails{
   factory APIBLMShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFriendsSettingsExtendedDetails(
       showFriendsSettingsDetailsId: parsedJson['id'],
-      showFriendsSettingsDetailsFirstName: parsedJson['first_name'],
-      showFriendsSettingsDetailsLastName: parsedJson['last_name'],
-      showFriendsSettingsDetailsImage: parsedJson['image'],
-      showFriendsSettingsDetailsEmail: parsedJson['email'],
+      showFriendsSettingsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showFriendsSettingsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showFriendsSettingsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showFriendsSettingsDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
       showFriendsSettingsDetailsAccountType: parsedJson['account_type'],
     );
   }

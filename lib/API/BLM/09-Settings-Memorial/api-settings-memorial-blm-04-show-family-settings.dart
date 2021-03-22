@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings({required int memorialId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings({required int memo
   }else{
     throw Exception('Failed to get the family settings.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/family/index?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowFamilySettingsMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIBLMShowFamilySettingsMain{
@@ -77,17 +58,16 @@ class APIBLMShowFamilySettingsExtended{
   factory APIBLMShowFamilySettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFamilySettingsExtended(
       showFamilySettingsUser: APIBLMShowFamilySettingsExtendedDetails.fromJson(parsedJson['user']),
-      showFamilySettingsRelationship: parsedJson['relationship'],
+      showFamilySettingsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
     );
   }
 }
 
 class APIBLMShowFamilySettingsExtendedDetails{
-
   int showFamilySettingsDetailsId;
   String showFamilySettingsDetailsFirstName;
   String showFamilySettingsDetailsLastName;
-  dynamic showFamilySettingsDetailsImage;
+  String showFamilySettingsDetailsImage;
   String showFamilySettingsDetailsEmail;
   int showFamilySettingsDetailsAccountType;
 
@@ -96,10 +76,10 @@ class APIBLMShowFamilySettingsExtendedDetails{
   factory APIBLMShowFamilySettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFamilySettingsExtendedDetails(
       showFamilySettingsDetailsId: parsedJson['id'],
-      showFamilySettingsDetailsFirstName: parsedJson['first_name'],
-      showFamilySettingsDetailsLastName: parsedJson['last_name'],
-      showFamilySettingsDetailsImage: parsedJson['image'],
-      showFamilySettingsDetailsEmail: parsedJson['email'],
+      showFamilySettingsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showFamilySettingsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showFamilySettingsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showFamilySettingsDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
       showFamilySettingsDetailsAccountType: parsedJson['account_type'],
     );
   }

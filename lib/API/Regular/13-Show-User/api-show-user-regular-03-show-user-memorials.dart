@@ -75,7 +75,7 @@ class APIRegularShowUserMemorialsExtendedPage{
   int showUserMemorialsPageId;
   String showUserMemorialsPageName;
   APIRegularShowUserMemorialsExtendedPageDetails showUserMemorialsPageDetails;
-  dynamic showUserMemorialsPageProfileImage;
+  String showUserMemorialsPageProfileImage;
   String showUserMemorialsPageRelationship;
   bool showUserMemorialsPageManage;
   bool showUserMemorialsPageFamOrFriends;
@@ -89,7 +89,7 @@ class APIRegularShowUserMemorialsExtendedPage{
       showUserMemorialsPageId: parsedJson['id'],
       showUserMemorialsPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
       showUserMemorialsPageDetails: APIRegularShowUserMemorialsExtendedPageDetails.fromJson(parsedJson['details']),
-      showUserMemorialsPageProfileImage: parsedJson['profileImage'],
+      showUserMemorialsPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
       showUserMemorialsPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
       showUserMemorialsPageManage: parsedJson['manage'],
       showUserMemorialsPageFamOrFriends: parsedJson['famOrFriends'],

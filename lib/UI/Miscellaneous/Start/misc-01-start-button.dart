@@ -78,9 +78,6 @@ class MiscStartButtonTemplate extends StatelessWidget{
     return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: onPressed,
-      // onPressed: (){
-        
-      // },
       child: Text(buttonText,
         style: buttonTextStyle,
       ),

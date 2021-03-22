@@ -7,30 +7,7 @@ Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({required 
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-
-  // APIRegularShowFamilySettingsMain? returnValue;
-
-  // try{
-  //   final http.Response response = await http.get(
-  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page', ''),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json',
-  //       'access-token': getAccessToken,
-  //       'uid': getUID,
-  //       'client': getClient,
-  //     }
-  //   );
-
-  //   if(response.statusCode == 200){
-  //     var newValue = json.decode(response.body);
-  //     return APIRegularShowFamilySettingsMain.fromJson(newValue);
-  //   }
-  // }catch(e){
-  //   throw Exception('$e');
-  // }
-
-  // return returnValue!;
-
+  
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
@@ -91,7 +68,7 @@ class APIRegularShowFamilySettingsExtendedDetails{
   int showFamilySettingsDetailsId;
   String showFamilySettingsDetailsFirstName;
   String showFamilySettingsDetailsLastName;
-  dynamic showFamilySettingsDetailsImage;
+  String showFamilySettingsDetailsImage;
   String showFamilySettingsDetailsEmail;
   int showFamilySettingsDetailsAccountType;
 
@@ -100,10 +77,10 @@ class APIRegularShowFamilySettingsExtendedDetails{
   factory APIRegularShowFamilySettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFamilySettingsExtendedDetails(
       showFamilySettingsDetailsId: parsedJson['id'],
-      showFamilySettingsDetailsFirstName: parsedJson['first_name'],
-      showFamilySettingsDetailsLastName: parsedJson['last_name'],
-      showFamilySettingsDetailsImage: parsedJson['image'],
-      showFamilySettingsDetailsEmail: parsedJson['email'],
+      showFamilySettingsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showFamilySettingsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showFamilySettingsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showFamilySettingsDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
       showFamilySettingsDetailsAccountType: parsedJson['account_type'],
     );
   }

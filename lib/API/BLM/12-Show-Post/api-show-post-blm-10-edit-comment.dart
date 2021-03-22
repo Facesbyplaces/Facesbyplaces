@@ -32,23 +32,4 @@ Future<bool> apiBLMEditComment({required int commentId, required String commentB
   }else{
     return false;
   }
-
-  // final http.Response response = await http.put(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/comment', ''),
-  //   headers: <String, String>{
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   },
-  //   body: <String, dynamic>{
-  //     'comment_id': '$commentId',
-  //     'body': '$commentBody',
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
 }

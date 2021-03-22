@@ -198,53 +198,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
             )
             : Container(height: 0,),
 
-            // numberOfTagged != 0
-            // ? Column(
-            //   children: [
-            //     SizedBox(height: 20),
-
-            //     Row(
-            //       children: [
-            //         Text('with'),
-
-            //         Container(
-            //           child: Wrap(
-            //             direction: Axis.horizontal,
-            //             spacing: 5.0,
-            //             children: List.generate(
-            //               numberOfTagged,
-            //               (index) => GestureDetector(
-            //                 onTap: (){
-            //                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index], accountType: pageType == 'BLM' ? 1 : 2)));
-            //                 },
-            //                 child: RichText(
-            //                   text: TextSpan(
-            //                     style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
-            //                     children: <TextSpan>[
-            //                       TextSpan(text: taggedFirstName[index],),
-
-            //                       TextSpan(text: ' '),
-
-            //                       TextSpan(text: taggedLastName[index],),
-
-            //                       index < numberOfTagged - 1
-            //                       ? TextSpan(text: ',')
-            //                       : TextSpan(text: ''),
-            //                     ],
-            //                   ),
-            //                 ),
-            //               ),
-            //             ),
-            //           ),
-            //           padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
-            //           alignment: Alignment.centerLeft,
-            //         ),
-            //       ],
-            //     )
-            //   ],
-            // )
-            // : Container(height: 0,),
-
             Row(
               children: [
                 TextButton.icon(
@@ -263,9 +216,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                     await apiRegularLikeOrUnlikePost(postId: postId, like: likePost);
                   },
-                  // Color(0xff04ECFF)
-                  // Color(0xffE74C3C)
-                  // Color(0xff4EC9D4)
                   icon: likePost == true ? Icon(Icons.favorite, color: Color(0xffE74C3C), size: 25) : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C), size: 25),
                   label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                 ),
@@ -305,7 +255,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       print('The post id is $postId');
                     } else {
                       FlutterBranchSdk.logout();
-                      // print('Error : ${response.errorCode} - ${response.errorMessage}');
                     }
                   },
                 ),

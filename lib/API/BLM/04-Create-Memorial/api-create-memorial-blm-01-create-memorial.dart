@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
 Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) async{
@@ -11,10 +10,9 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    var dioRequest = dio.Dio();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
-    var formData;
-    formData = FormData();
     formData.files.addAll([
       MapEntry('blm[name]', MultipartFile.fromString(blmMemorial.blmMemorialName,),),
       MapEntry('blm[description]', MultipartFile.fromString(blmMemorial.blmDescription,),),
@@ -36,19 +34,19 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
     }
 
     if(blmMemorial.blmBackgroundImage != null || blmMemorial.blmBackgroundImage != ''){
-      var file = await dio.MultipartFile.fromFile(blmMemorial.blmBackgroundImage.path, filename: blmMemorial.blmBackgroundImage.path);
+      var file = await MultipartFile.fromFile(blmMemorial.blmBackgroundImage.path, filename: blmMemorial.blmBackgroundImage.path);
       formData.files.add(MapEntry('blm[backgroundImage]', file));
     }
     
     if(blmMemorial.blmProfileImage != null || blmMemorial.blmProfileImage != ''){
-      var file = await dio.MultipartFile.fromFile(blmMemorial.blmProfileImage.path, filename: blmMemorial.blmProfileImage.path);
+      var file = await MultipartFile.fromFile(blmMemorial.blmProfileImage.path, filename: blmMemorial.blmProfileImage.path);
       formData.files.add(MapEntry('blm[profileImage]', file));
     }
     
     if(blmMemorial.blmImagesOrVideos != []){
       for(int i = 0; i < blmMemorial.blmImagesOrVideos.length; i++){
         if(blmMemorial.blmImagesOrVideos[i].path != null || blmMemorial.blmImagesOrVideos != ['']){
-          var file = await dio.MultipartFile.fromFile(blmMemorial.blmImagesOrVideos[i].path, filename: blmMemorial.blmImagesOrVideos[i].path);
+          var file = await MultipartFile.fromFile(blmMemorial.blmImagesOrVideos[i].path, filename: blmMemorial.blmImagesOrVideos[i].path);
           formData.files.add(MapEntry('blm[imagesOrVideos][]', file));
         }
       }

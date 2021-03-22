@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({required int memorialId, required int page}) async{
 
@@ -30,29 +28,6 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({require
   }else{
     throw Exception('Error occurred: ${response.statusMessage}');
   }
-
-  // APIRegularShowFriendsSettingsMain? returnValue;
-
-  // try{
-  //   final http.Response response = await http.get(
-  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page', ''),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json',
-  //       'access-token': getAccessToken,
-  //       'uid': getUID,
-  //       'client': getClient,
-  //     }
-  //   );
-
-  //   if(response.statusCode == 200){
-  //     var newValue = json.decode(response.body);
-  //     return APIRegularShowFriendsSettingsMain.fromJson(newValue);
-  //   }
-  // }catch(e){
-  //   throw Exception('$e');
-  // }
-
-  // return returnValue!;
 }
 
 class APIRegularShowFriendsSettingsMain{
@@ -93,7 +68,7 @@ class APIRegularShowFriendsSettingsExtendedDetails{
   int showFriendsSettingsDetailsId;
   String showFriendsSettingsDetailsFirstName;
   String showFriendsSettingsDetailsLastName;
-  dynamic showFriendsSettingsDetailsImage;
+  String showFriendsSettingsDetailsImage;
   String showFriendsSettingsDetailsEmail;
   int showFriendsSettingsDetailsAccountType;
 
@@ -102,10 +77,10 @@ class APIRegularShowFriendsSettingsExtendedDetails{
   factory APIRegularShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFriendsSettingsExtendedDetails(
       showFriendsSettingsDetailsId: parsedJson['id'],
-      showFriendsSettingsDetailsFirstName: parsedJson['first_name'],
-      showFriendsSettingsDetailsLastName: parsedJson['last_name'],
-      showFriendsSettingsDetailsImage: parsedJson['image'],
-      showFriendsSettingsDetailsEmail: parsedJson['email'],
+      showFriendsSettingsDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showFriendsSettingsDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showFriendsSettingsDetailsImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showFriendsSettingsDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
       showFriendsSettingsDetailsAccountType: parsedJson['account_type'],
     );
   }

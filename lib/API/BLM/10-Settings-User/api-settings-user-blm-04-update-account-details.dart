@@ -11,8 +11,8 @@ Future<bool> apiBLMUpdateAccountDetails({required String firstName, required Str
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
     
     formData.files.addAll([
       MapEntry('first_name', MultipartFile.fromString(firstName),),

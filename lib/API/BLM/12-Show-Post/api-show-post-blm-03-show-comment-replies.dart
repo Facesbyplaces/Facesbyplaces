@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 
 Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, required int page}) async{
 
@@ -31,23 +29,6 @@ Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, re
   }else{
     throw Exception('Failed to get the replies.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/index/replies/$postId?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMShowListOfReplies.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the replies.');
-  // }
 }
 
 class APIBLMShowListOfReplies{
@@ -82,8 +63,8 @@ class APIBLMShowListOfRepliesExtended{
       showListRepliesReplyId: parsedJson['id'],
       showListRepliesCommentId: parsedJson['comment_id'],
       showListRepliesUser: APIBLMShowListOfRepliesExtendedUser.fromJson(parsedJson['user']),
-      showListRepliesReplyBody: parsedJson['body'],
-      showListRepliesCreatedAt: parsedJson['created_at'],
+      showListRepliesReplyBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      showListRepliesCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
     );
   }
 }
@@ -92,7 +73,7 @@ class APIBLMShowListOfRepliesExtendedUser{
   int showListRepliesUserUserId;
   String showListRepliesUserFirstName;
   String showListRepliesUserLastName;
-  dynamic showListRepliesUserImage;
+  String showListRepliesUserImage;
   int showListRepliesUserAccountType;
 
   APIBLMShowListOfRepliesExtendedUser({required this.showListRepliesUserUserId, required this.showListRepliesUserFirstName, required this.showListRepliesUserLastName, required this.showListRepliesUserImage, required this.showListRepliesUserAccountType});
@@ -100,9 +81,9 @@ class APIBLMShowListOfRepliesExtendedUser{
   factory APIBLMShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfRepliesExtendedUser(
       showListRepliesUserUserId: parsedJson['id'],
-      showListRepliesUserFirstName: parsedJson['first_name'],
-      showListRepliesUserLastName: parsedJson['last_name'],
-      showListRepliesUserImage: parsedJson['image'],
+      showListRepliesUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showListRepliesUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showListRepliesUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',
       showListRepliesUserAccountType: parsedJson['account_type'],
     );
   }

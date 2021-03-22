@@ -110,7 +110,7 @@ class APIRegularShowUsersPostsExtendedPage{
       showUsersPostsPageFollower: parsedJson['follower'],
       showUsersPostsPageManage: parsedJson['manage'],
       showUsersPostsPageFamOrFriends: parsedJson['famOrFriends'],
-      showUsersPostsPagePageType: parsedJson['page_type'],
+      showUsersPostsPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
     );
   }
 }

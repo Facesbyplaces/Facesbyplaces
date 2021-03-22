@@ -190,7 +190,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     context.hideLoaderOverlay();
 
                     if(result){
-                      // Navigator.popAndPushNamed(context, '/home/blm');
                       setState(() {
                         followButton = false;
                       });
@@ -230,8 +229,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   context.hideLoaderOverlay();
 
                   if(result){
-                    // Navigator.popAndPushNamed(context, '/home/blm');
-
                     setState(() {
                       followButton = true;
                     });

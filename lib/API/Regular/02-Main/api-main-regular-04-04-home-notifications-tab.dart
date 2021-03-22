@@ -87,7 +87,7 @@ class APIRegularHomeTabNotificationExtendedActor{
 
     return APIRegularHomeTabNotificationExtendedActor(
       homeTabNotificationActorId: parsedJson['id'],
-      homeTabNotificationActorImage: parsedJson['image'],
+      homeTabNotificationActorImage: parsedJson['image'] != null ? parsedJson['image'] : '',
     );
   }
 }

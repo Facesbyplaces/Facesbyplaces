@@ -27,21 +27,4 @@ Future<bool> apiRegularReadUnreadNotifications() async{
   }else{
     return false;
   }
-
-  // final http.Response response = await http.get(
-  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/read', ''),
-  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/notifications/read',),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
 }
