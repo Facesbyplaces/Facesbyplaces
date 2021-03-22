@@ -315,10 +315,16 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           children: [
                             SizedBox(height: 20),
 
-                            CircleAvatar(
+                            manageDrawer.data!.showProfileInformationImage != ''
+                            ? CircleAvatar(
                               radius: 100,
                               backgroundColor: Color(0xff888888),
                               backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                            )
+                            : CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: AssetImage('assets/icons/app-icon.png'),
                             ),
 
                             SizedBox(height: 20),
@@ -429,7 +435,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           children: [
                             SizedBox(height: 20,),
 
-                            CircleAvatar(
+                            manageDrawer.data!.showProfileInformationImage != ''
+                            ? CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                            )
+                            : CircleAvatar(
                               radius: 100,
                               backgroundColor: Color(0xff888888),
                               backgroundImage: AssetImage('assets/icons/app-icon.png'),

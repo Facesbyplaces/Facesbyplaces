@@ -197,21 +197,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                             newFiles.addAll(slideImages);
                           }
 
-                          print('The relationship is $relationship');
-                          print('The location of incident is $locationOfIncident');
-                          print('The precinct is $precinct');
-                          print('The dob is $dob');
-                          print('The rip is $rip');
-                          print('The country is $country');
-                          print('The state is $state');
-                          print('The description is ${controllerStory.text}');
-                          print('The memorialName is ${_key1.currentState!.controller.text}');
-                          
-                          for(int i = 0; i < newFiles.length; i++){
-                            print('The imagesOrVideos is ${newFiles[i]}');
-                          }
-
-
                           Navigator.push(
                             context, MaterialPageRoute(builder: (context) => 
                               HomeBLMCreateMemorial3(
@@ -228,12 +213,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                               ),
                             )
                           );
-
-                          // newValue.description = controllerStory.text;
-                          // newValue.blmName = _key1.currentState!.controller.text;
-                          // newValue.imagesOrVideos = newFiles;
-                          
-                          // Navigator.pushNamed(context, '/home/blm/create-memorial-3', arguments: newValue);
                         }
                       }, 
                       width: 150,
@@ -297,34 +276,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                 border: Border.all(color: Color(0xff000000),),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              // child: BetterPlayer.file(videoFile!.path,
-              //   betterPlayerConfiguration: BetterPlayerConfiguration(
-              //     controlsConfiguration: BetterPlayerControlsConfiguration(
-              //       showControls: false,
-              //     ),
-              //     aspectRatio: 16 / 9,
-              //   ),
-              // ),
-
-              // child: videoFile == null 
-              // ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 160,)
-              // : GestureDetector(
-              //   onTap: (){
-              //     // if(videoPlayerController.value.isPlaying){
-              //     //   videoPlayerController.pause();
-              //     // }else{
-              //     //   videoPlayerController.play();
-              //     // }
-                  
-              //   },
-              //   onDoubleTap: () async{
-              //     await getVideo();
-              //   },
-              //   child: AspectRatio(
-              //     aspectRatio: videoPlayerController!.value.aspectRatio,
-              //     child: VideoPlayer(videoPlayerController),
-              //   ),
-              // ),
             ),
           ),
 

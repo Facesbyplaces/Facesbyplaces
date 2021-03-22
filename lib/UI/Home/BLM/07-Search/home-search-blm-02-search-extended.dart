@@ -4,8 +4,6 @@ import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-03-search-nearby.
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-02-search-suggested.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
@@ -107,8 +105,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   final double longitude;
   final String currentLocation;
   HomeBLMPostState({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
-
-  // RefreshController refreshController = RefreshController(initialRefresh: true);
 
   ScrollController scrollController1 = ScrollController();
   ScrollController scrollController2 = ScrollController();

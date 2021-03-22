@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-02-
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-06-update-other-details.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-07-hide-birthdate.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-08-hide-birthplace.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-10-hide-email.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-09-hide-address.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-10-hide-email.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-11-hide-phone-number.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
@@ -231,19 +231,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
-
-                          print('The birthdate is ${details.data!.blmShowOtherDetailsBirthdate}');
-                          print('The birthplace is ${details.data!.blmShowOtherDetailsBirthplace}');
-                          print('The address is ${details.data!.blmShowOtherDetailsAddress}');
-                          print('The email is ${details.data!.blmShowOtherDetailsEmail}');
-                          print('The phoneNumber is ${details.data!.blmShowOtherDetailsPhoneNumber}');
-
-                          print('The birthdate is ${_key1.currentState!.controller.text}');
-                          print('The birthplace is ${_key2.currentState!.controller.text}');
-                          print('The address is ${_key3.currentState!.controller.text}');
-                          print('The email is ${_key4.currentState!.controller.text}');
-                          print('The phoneNumber is ${_key5.currentState!.controller2.text}');
-
                           if(
                             details.data!.blmShowOtherDetailsBirthdate != _key1.currentState!.controller.text ||
                             details.data!.blmShowOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
@@ -251,8 +238,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                             details.data!.blmShowOtherDetailsEmail != _key4.currentState!.controller.text ||
                             details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller2.text
                           ){
-                            print('test');
-
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
                             if(confirmResult){

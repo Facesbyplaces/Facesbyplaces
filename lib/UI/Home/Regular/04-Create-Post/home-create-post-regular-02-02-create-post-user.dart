@@ -1,8 +1,7 @@
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
-
 import 'home-create-post-regular-01-create-post.dart';
+import 'package:flutter/material.dart';
 
 class RegularSearchUsers{
   int userId;
@@ -32,7 +31,6 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
   void initState(){
     super.initState();
-    // onLoading();
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(itemRemaining != 0){

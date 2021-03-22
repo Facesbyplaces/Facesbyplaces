@@ -1,8 +1,5 @@
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:substring_highlight/substring_highlight.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
-// import 'home-create-post-blm-01-create-post.dart';
 import 'package:flutter/material.dart';
 
 import 'home-create-post-blm-01-create-post.dart';
@@ -35,7 +32,6 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
 
   void initState(){
     super.initState();
-    // onLoading();
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(itemRemaining != 0){
@@ -207,98 +203,6 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
               ),
             )
           ),
-          // body: Container(
-          //   height: SizeConfig.screenHeight! - kToolbarHeight,
-          //   width: SizeConfig.screenWidth,
-          //   child: empty
-          //   ? SingleChildScrollView(
-          //     physics: ClampingScrollPhysics(),
-          //     child: Column(
-          //       children: [
-          //         SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-
-          //         Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
-
-          //         SizedBox(height: 20,),
-
-          //         Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
-
-          //         SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-          //       ],
-          //     ),
-          //   )
-          //   : Container(
-          //     height: SizeConfig.screenHeight,
-          //     width: SizeConfig.screenWidth,
-          //     // child: SmartRefresher(
-          //     //   enablePullDown: true,
-          //     //   enablePullUp: true,
-          //     //   header: MaterialClassicHeader(
-          //     //     color: Color(0xffffffff),
-          //     //     backgroundColor: Color(0xff4EC9D4),
-          //     //   ),
-          //     //   footer: CustomFooter(
-          //     //     loadStyle: LoadStyle.ShowWhenLoading,
-          //     //     builder: (BuildContext context, LoadStatus mode){
-          //     //       Widget body = Container();
-          //     //       if(mode == LoadStatus.loading){
-          //     //         body = CircularProgressIndicator();
-          //     //       }
-          //     //       return Center(child: body);
-          //     //     },
-          //     //   ),
-          //     //   controller: refreshController,
-          //     //   onRefresh: onRefresh,
-          //     //   onLoading: onLoading,
-          //     //   child: ListView.separated(
-          //     //     padding: EdgeInsets.all(10.0),
-          //     //     physics: ClampingScrollPhysics(),
-          //     //     itemBuilder: (c, i) {
-          //     //       return GestureDetector(
-          //     //         onTap: (){
-          //     //           Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
-          //     //         },
-          //     //         child: Container(
-          //     //           padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-          //     //           child: Row(
-          //     //             children: [
-          //     //               CircleAvatar(
-          //     //                 maxRadius: 40,
-          //     //                 backgroundColor: Color(0xff888888),
-          //     //                 // backgroundImage: users[i].image != null ? NetworkImage(users[i].image) : AssetImage('assets/icons/app-icon.png'),
-          //     //                 backgroundImage: NetworkImage(users[i].image),
-          //     //               ),
-
-          //     //               SizedBox(width: 25,),
-
-          //     //               Expanded(
-          //     //                 child: Column(
-          //     //                   mainAxisAlignment: MainAxisAlignment.start,
-          //     //                   crossAxisAlignment: CrossAxisAlignment.start,
-          //     //                   children: [
-          //     //                     SubstringHighlight(
-          //     //                       text: users[i].firstName + ' ' + users[i].lastName,
-          //     //                       term: controller.text,
-          //     //                       textStyle: TextStyle(color: Color(0xff000000),),
-          //     //                       textStyleHighlight: TextStyle(color: Color(0xff04ECFF),),
-          //     //                     ),
-
-          //     //                     Text(users[i].email, style: TextStyle(fontSize: 12, color: Color(0xff888888),),),
-
-          //     //                   ],
-          //     //                 ),
-          //     //               ),
-          //     //             ],
-          //     //           ),
-          //     //         ),
-          //     //       );
-          //     //     },
-          //     //     separatorBuilder: (c, i) => Divider(height: 10, color: Color(0xff888888)),
-          //     //     itemCount: users.length,
-          //     //   ),
-          //     // ),
-          //   )
-          // ),
         ),
       ),
     );

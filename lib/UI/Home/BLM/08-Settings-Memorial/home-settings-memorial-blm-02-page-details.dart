@@ -191,12 +191,6 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               buttonColor: Color(0xff04ECFF),
                               onPressed: () async{
 
-                                print('The dob 1 is ${memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob}');
-                                print('The rip 1 is ${memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip}');
-
-                                print('The dob 2 is ${controller1.text}');
-                                print('The rip 2 is ${controller2.text}');
-
                                 if(
                                   memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription !=  _key2.currentState!.controller.text ||

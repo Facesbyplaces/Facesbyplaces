@@ -325,14 +325,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                       if(confirmation == OkCancelResult.ok){
                         permissionGranted = await location.requestPermission();
-
-                        // context.showLoaderOverlay();
-                        // Location.LocationData locationData = await location.getLocation();
-                        // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                        // context.hideLoaderOverlay();
-
-                        // Navigator.pop(context);
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                       }
                     }else{
 

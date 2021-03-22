@@ -2,12 +2,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-create-memorial-regular-02-create-memorial.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
-import 'home-create-memorial-regular-02-create-memorial.dart';
 
 class RegularCreateMemorialValues{
   String memorialName;
@@ -185,41 +184,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             message: 'Please complete the form before submitting.',
                           );
                         }else{
-
-                          // String almMemorialName;
-                          // String almDescription;
-                          // String almBirthPlace;
-                          // String almDob;
-                          // String almRip;
-                          // String almCemetery;
-                          // String almCountry;
-                          // String almRelationship;
-                          // dynamic almBackgroundImage;
-                          // dynamic almProfileImage;
-                          // List<dynamic> almImagesOrVideos;
-                          // String almLatitude;
-                          // String almLongitude;
-
-                          // Navigator.pushNamed(context, '/home/regular/create-memorial-2', 
-                          //   arguments: RegularCreateMemorialValues(
-                          //     relationship: _key1.currentState!.currentSelection,
-                          //     birthplace: _key2.currentState!.controller.text,
-                          //     dob: controller1.text,
-                          //     rip: controller2.text,
-                          //     cemetery: _key5.currentState!.controller.text,
-                          //     country: _key6.currentState!.controller.text,
-                          //   ),
-                          // );
-
-                          // final String relationship;
-                          // final String birthplace;
-                          // final String dob;
-                          // final String rip;
-                          // final String cemetery;
-                          // final String country;
-
-                          Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => 
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => 
                               HomeRegularCreateMemorial2(
                                 relationship: _key1.currentState!.currentSelection,
                                 birthplace: _key2.currentState!.controller.text,
@@ -230,7 +195,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                               ),
                             )
                           );
-
                         }
 
                       }, 

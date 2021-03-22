@@ -388,7 +388,7 @@ packages:
     source: hosted
     version: "0.15.0"
   http:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -847,6 +847,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  webview_flutter:
+    dependency: "direct dev"
+    description:
+      name: webview_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   win32:
     dependency: transitive
     description:

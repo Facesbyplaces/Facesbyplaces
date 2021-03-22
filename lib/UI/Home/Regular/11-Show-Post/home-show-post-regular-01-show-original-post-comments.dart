@@ -244,31 +244,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     return await apiRegularShowOriginalPost(postId: postId);
   }
 
-  void initBranchShare(){
-    // buo = BranchUniversalObject(
-    //   canonicalIdentifier: 'FacesbyPlaces',
-    //   title: 'FacesbyPlaces Link',
-    //   imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-    //   contentDescription: 'FacesbyPlaces link to the app',
-    //   keywords: ['FacesbyPlaces', 'Share', 'Link'],
-    //   publiclyIndex: true,
-    //   locallyIndex: true,
-    //   contentMetadata: BranchContentMetaData()
-    //     ..addCustomMetadata('link-category', 'Post')
-    //     ..addCustomMetadata('link-post-id', postId)
-    //     ..addCustomMetadata('link-like-status', likePost)
-    //     ..addCustomMetadata('link-number-of-likes', likesCount)
-    //     ..addCustomMetadata('link-type-of-account', 'Memorial')
-    // );
-
-    // lp = BranchLinkProperties(
-    //     feature: 'sharing',
-    //     stage: 'new share',
-    //   tags: ['one', 'two', 'three']
-    // );
-    // lp?.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
-
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);

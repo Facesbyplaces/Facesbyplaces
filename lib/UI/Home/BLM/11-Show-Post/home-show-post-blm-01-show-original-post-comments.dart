@@ -10,11 +10,11 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-09-delete-c
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-10-edit-comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-11-delete-reply.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-12-edit-reply.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-dropdown.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -245,31 +245,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
   Future<APIBLMShowOriginalPostMain> getOriginalPost(postId) async{
     return await apiBLMShowOriginalPost(postId: postId);
-  }
-
-  void initBranchShare(){
-    // buo = BranchUniversalObject(
-    //   canonicalIdentifier: 'FacesbyPlaces',
-    //   title: 'FacesbyPlaces Link',
-    //   imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-    //   contentDescription: 'FacesbyPlaces link to the app',
-    //   keywords: ['FacesbyPlaces', 'Share', 'Link'],
-    //   publiclyIndex: true,
-    //   locallyIndex: true,
-    //   contentMetadata: BranchContentMetaData()
-    //     ..addCustomMetadata('link-category', 'Post')
-    //     ..addCustomMetadata('link-post-id', postId)
-    //     ..addCustomMetadata('link-like-status', likePost)
-    //     ..addCustomMetadata('link-number-of-likes', likesCount)
-    //     ..addCustomMetadata('link-type-of-account', 'Memorial')
-    // );
-
-    // lp = BranchLinkProperties(
-    //     feature: 'sharing',
-    //     stage: 'new share',
-    //   tags: ['one', 'two', 'three']
-    // );
-    // lp?.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   @override
@@ -594,9 +569,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                       children: [
                                         SizedBox(height: 20),
 
-                                      // padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                      // alignment: Alignment.centerLeft, 
-
                                         Padding(
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                           child: Row(
@@ -855,7 +827,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId, accountType: currentAccountType,)));
                                                     },
                                                     onLongPress: () async{
-                                                      print('Nice!');
                                                       await showMaterialModalBottomSheet(
                                                         context: context, 
                                                         builder: (context) => 

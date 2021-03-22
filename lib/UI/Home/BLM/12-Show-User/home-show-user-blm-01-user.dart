@@ -77,7 +77,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                           unselectedLabelColor: Color(0xffCDEAEC),
                           indicatorColor: Color(0xff04ECFF),
                           onTap: (int number){
-                            print('The currentIndex is $currentIndex');
                             setState(() {
                               currentIndex = number;
                             });

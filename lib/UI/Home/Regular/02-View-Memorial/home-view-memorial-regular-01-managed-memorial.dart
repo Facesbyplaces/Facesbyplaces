@@ -11,6 +11,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
@@ -18,8 +19,6 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:async';
-
-import 'home-view-memorial-regular-03-connection-list.dart';
 
 class RegularProfilePosts{
   int userId;
@@ -483,7 +482,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: (){
-                                                  print('The memorialId is $memorialId');
                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 0)));
                                                 },
                                                 child: Column(

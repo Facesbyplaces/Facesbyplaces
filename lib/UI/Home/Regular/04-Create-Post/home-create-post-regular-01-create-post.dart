@@ -486,10 +486,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-                              // var result = await Navigator.pushNamed(context, '/home/regular/create-post-location');
                               String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchLocation()));
 
-                              // newLocation = result;
                               setState(() {
                                 newLocation = result;
                               });

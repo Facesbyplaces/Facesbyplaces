@@ -3,13 +3,10 @@ import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:facesbyplaces/Configurations/date-conversion.dart';
-// import 'home-create-memorial-regular-01-create-memorial.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -322,13 +319,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       }
 
                       Location.LocationData locationData = await location.getLocation();
-
-                      // relationship: _key1.currentState!.currentSelection,
-                      // birthplace: _key2.currentState!.controller.text,
-                      // dob: controller1.text,
-                      // rip: controller2.text,
-                      // cemetery: _key5.currentState!.controller.text,
-                      // country: _key6.currentState!.controller.text,
 
                       APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
                         almRelationship: relationship,

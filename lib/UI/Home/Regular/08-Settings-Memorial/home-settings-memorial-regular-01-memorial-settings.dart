@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-14-update-switch-status-family.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-15-update-switch-status-friends.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-16-update-switch-status-followers.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-regular-02-page-details.dart';
 import 'home-settings-memorial-regular-03-update-memorial-image.dart';
 import 'home-settings-memorial-regular-04-page-managers.dart';
@@ -234,12 +234,6 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           subtitle: Text('Customize what others see on your page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
 
-        // MiscRegularSettingDetailTemplate(
-        //   onTap: (){}, 
-        //   titleDetail: 'Customize shown info', 
-        //   contentDetail: 'Customize what others see on your page',
-        // ),
-
         Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
@@ -286,13 +280,6 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                   title: Text('Hide Friends', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
                   subtitle: Text('Show or hide friends details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
                 ),
-                // child: MiscRegularSettingDetailTemplate(
-                //   onTap: (){
-
-                //   }, 
-                //   titleDetail: 'Hide Friends', 
-                //   contentDetail: 'Show or hide friends details',
-                // ),
               ),
 
 
@@ -328,11 +315,6 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                   title: Text('Hide Followers', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
                   subtitle: Text('Show or hide your followers', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
                 ),
-                // child: MiscRegularSettingDetailTemplate(
-                //   onTap: (){}, 
-                //   titleDetail: 'Hide Followers', 
-                //   contentDetail: 'Show or hide your followers'
-                // ),
               ),
 
               Switch(

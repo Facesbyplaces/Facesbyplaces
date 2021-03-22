@@ -104,23 +104,12 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             subtitle: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
           ),
         );
-        // adminList.add(
-        //   RegularShowAdminSettings(
-        //     userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId,
-        //     firstName: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName,
-        //     lastName: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName,
-        //     image: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage,
-        //     relationship: newValue.almAdminList[i].showAdminsSettingsRelationship,
-        //     email: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
-        //   ),
-        // );
       }
+
+      if(mounted)
+      setState(() {});
+      page1++;
     }
-
-
-    if(mounted)
-    setState(() {});
-    page1++;
   }
 
   void onLoading2() async{
@@ -133,16 +122,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       familyItemsRemaining = newValue.almFamilyItemsRemaining;
 
       for(int i = 0; i < newValue.almFamilyList.length; i++){
-        // familyList.add(
-        //   RegularShowAdminSettings(
-        //     userId: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId,
-        //     firstName: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName,
-        //     lastName: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName,
-        //     image: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage,
-        //     relationship: newValue.almFamilyList[i].showAdminsSettingsRelationship,
-        //     email: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
-        //   ),
-        // );
         managers.add(
           ListTile(
             leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
@@ -151,10 +130,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
           ),
         );
       }
-    }
+      
       if(mounted)
       setState(() {});
       page2++;
+    }
   }
 
   @override
@@ -186,195 +166,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
           )
         ),
       ),
-      // body: Column(
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   children: [
-      //     Expanded(
-      //       child: Container(),
-      //       // child: SmartRefresher(
-      //       //   enablePullDown: true,
-      //       //   enablePullUp: true,
-      //       //   header: MaterialClassicHeader(
-      //       //     color: Color(0xffffffff),
-      //       //     backgroundColor: Color(0xff4EC9D4),
-      //       //   ),
-      //       //   footer: CustomFooter(
-      //       //     loadStyle: LoadStyle.ShowWhenLoading,
-      //       //     builder: (BuildContext context, LoadStatus mode){
-      //       //       Widget body = Container();
-      //       //       if(mode == LoadStatus.loading){
-      //       //         body = CircularProgressIndicator();
-      //       //       }
-      //       //       return Center(child: body);
-      //       //     },
-      //       //   ),
-      //       //   controller: refreshController,
-      //       //   onRefresh: onRefresh,
-      //       //   onLoading: onLoading1,
-      //       //   child: ListView.separated(
-      //       //     physics: ClampingScrollPhysics(),
-      //       //     itemBuilder: (c, i) {
-      //       //       return Container(
-      //       //         padding: EdgeInsets.all(10.0),
-      //       //         child: Row(
-      //       //           children: [
-      //       //             CircleAvatar(
-      //       //               radius: 40,
-      //       //               backgroundColor: Color(0xff888888), 
-      //       //               backgroundImage: NetworkImage(adminList[i].image),
-      //       //             ),
-
-      //       //             SizedBox(width: 25,),
-
-      //       //             Expanded(
-      //       //               child: Container(
-      //       //                 child: Column(
-      //       //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //       //                 children: [
-      //       //                   Text(adminList[i].firstName + ' ' + adminList[i].lastName, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
-
-      //       //                   Text(adminList[i].relationship, style: TextStyle(fontSize: 12, color: Color(0xff888888)),),
-      //       //                 ],
-      //       //               ),
-      //       //               ),
-      //       //             ),
-
-      //       //             SizedBox(width: 25,),
-
-      //       //             MaterialButton(
-      //       //               minWidth: SizeConfig.screenWidth! / 3.5,
-      //       //               padding: EdgeInsets.zero,
-      //       //               textColor: Color(0xffffffff),
-      //       //               splashColor: Color(0xffE74C3C),
-      //       //               onPressed: () async{
-      //       //                 context.showLoaderOverlay();
-      //       //                 await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: adminList[i].userId);
-      //       //                 context.hideLoaderOverlay();
-
-      //       //                 adminList = [];
-      //       //                 familyList = [];
-      //       //                 adminItemsRemaining = 1;
-      //       //                 familyItemsRemaining = 1;
-      //       //                 page1 = 1;
-      //       //                 page2 = 1;
-      //       //                 onLoading1();
-      //       //                 onLoading2();
-      //       //               },
-      //       //               child: Text('Remove', style: TextStyle(fontSize: 14,),),
-      //       //               height: 40,
-      //       //               shape: StadiumBorder(
-      //       //                 side: BorderSide(color: Color(0xffE74C3C)),
-      //       //               ),
-      //       //                 color: Color(0xffE74C3C),
-      //       //             ),
-
-      //       //           ],
-      //       //         ),
-      //       //       );
-      //       //     },
-      //       //     separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
-      //       //     itemCount: adminList.length,
-      //       //   ),
-      //       // ),
-      //     ),
-
-      //     SizedBox(height: 20,),
-
-      //     Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: 14, color: Color(0xff888888)),),),
-
-      //     Expanded(
-      //       child: Container(),
-      //       // child: SmartRefresher(
-      //       //   enablePullDown: true,
-      //       //   enablePullUp: true,
-      //       //   header: MaterialClassicHeader(
-      //       //     color: Color(0xffffffff),
-      //       //     backgroundColor: Color(0xff4EC9D4),
-      //       //   ),
-      //       //   footer: CustomFooter(
-      //       //     loadStyle: LoadStyle.ShowWhenLoading,
-      //       //     builder: (BuildContext context, LoadStatus mode){
-      //       //       Widget body = Container();
-      //       //       if(mode == LoadStatus.loading){
-      //       //         body = CircularProgressIndicator();
-      //       //       }
-      //       //       return Center(child: body);
-      //       //     },
-      //       //   ),
-      //       //   controller: refreshController,
-      //       //   onRefresh: onRefresh,
-      //       //   onLoading: onLoading2,
-      //       //   child: ListView.separated(
-      //       //     physics: ClampingScrollPhysics(),
-      //       //     itemBuilder: (c, i) {
-      //       //       return Container(
-      //       //         padding: EdgeInsets.all(10.0),
-      //       //         child: Row(
-      //       //           children: [
-
-      //       //             CircleAvatar(
-      //       //               radius: 40,
-      //       //               backgroundColor: Color(0xff888888), 
-      //       //               backgroundImage: NetworkImage(familyList[i].image),
-      //       //             ),
-
-      //       //             SizedBox(width: 25,),
-
-      //       //             Expanded(
-      //       //               child: Container(
-      //       //                 child: Column(
-      //       //                   crossAxisAlignment: CrossAxisAlignment.start,
-      //       //                   children: [
-      //       //                     Text(familyList[i].firstName + ' ' + familyList[i].lastName, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
-
-      //       //                     Text(familyList[i].relationship, style: TextStyle(fontSize: 12, color: Color(0xff888888)),),
-                                
-      //       //                   ],
-      //       //                 ),
-      //       //               ),
-      //       //             ),
-
-      //       //             SizedBox(width: 25,),
-
-      //       //             MaterialButton(
-      //       //               minWidth: SizeConfig.screenWidth! / 3.5,
-      //       //               padding: EdgeInsets.zero,
-      //       //               textColor: Color(0xffffffff),
-      //       //               splashColor: Color(0xff04ECFF),
-      //       //               onPressed: () async{
-      //       //                 context.showLoaderOverlay();
-      //       //                 await apiRegularAddMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: familyList[i].userId);
-      //       //                 context.hideLoaderOverlay();
-
-      //       //                 adminList = [];
-      //       //                 familyList = [];
-      //       //                 adminItemsRemaining = 1;
-      //       //                 familyItemsRemaining = 1;
-      //       //                 page1 = 1;
-      //       //                 page2 = 1;
-      //       //                 onLoading1();
-      //       //                 onLoading2();
-      //       //               },
-      //       //               child: Text('Make Manager', style: TextStyle(fontSize: 14,),),
-      //       //               height: 40,
-      //       //               shape: StadiumBorder(
-      //       //                 side: BorderSide(color: Color(0xff04ECFF)),
-      //       //               ),
-      //       //                 color: Color(0xff04ECFF),
-      //       //             ),
-
-      //       //           ],
-      //       //         ),
-      //       //       );
-                  
-      //       //     },
-      //       //     separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
-      //       //     itemCount: familyList.length,
-      //       //   ),
-      //       // ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

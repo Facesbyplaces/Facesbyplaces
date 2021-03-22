@@ -6,8 +6,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
-import 'package:facesbyplaces/UI/ui-01-get-started.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/ui-01-get-started.dart';
 import 'home-settings-user-regular-02-user-update-details.dart';
 import 'home-settings-user-regular-03-change-password.dart';
 import 'home-settings-user-regular-04-other-details.dart';

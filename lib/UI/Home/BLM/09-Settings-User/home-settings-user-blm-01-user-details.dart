@@ -7,16 +7,16 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-custom-drawings.d
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-settings-user-blm-02-user-update-details.dart';
+import 'home-settings-user-blm-03-change-password.dart';
+import 'home-settings-user-blm-04-other-details.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../ui-01-get-started.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
-import '../../../ui-01-get-started.dart';
-import 'home-settings-user-blm-02-user-update-details.dart';
-import 'home-settings-user-blm-03-change-password.dart';
-import 'home-settings-user-blm-04-other-details.dart';
 import 'dart:io';
 
 class HomeBLMUserProfileDetails extends StatefulWidget{

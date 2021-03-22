@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-memorial-details.dart';
+import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-dropdown.dart';
@@ -9,6 +10,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -331,7 +333,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate(pageType: pageType, pageId: memorialId,)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate(pageType: pageType, pageId: memorialId,)));
                                                       },
                                                       child: CircleAvatar(
                                                         radius: 25,
@@ -556,7 +558,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 0)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 0)));
                                                       },
                                                       child: Column(
                                                         children: [
@@ -585,7 +587,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 1)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 1)));
                                                       },
                                                       child: Column(
                                                         children: [
@@ -614,7 +616,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 2)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 2)));
                                                       },
                                                       child: Column(
                                                         children: [

@@ -2,6 +2,8 @@ import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-crea
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-create-post-blm-02-01-create-post-location.dart';
+import 'home-create-post-blm-02-02-create-post-user.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
@@ -10,9 +12,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
-
-import 'home-create-post-blm-02-01-create-post-location.dart';
-import 'home-create-post-blm-02-02-create-post-user.dart';
 
 class BLMTaggedUsers{
   String name;
@@ -480,8 +479,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-                              
-                              // BLMTaggedUsers? result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
                               BLMTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchUser()));
 
                               if(result != null){

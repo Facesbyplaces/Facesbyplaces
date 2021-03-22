@@ -18,8 +18,8 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   HomeBLMPageFamilyState({required this.memorialId});
 
   ScrollController scrollController = ScrollController();
-  List<Widget> family = [];
   int familyItemsRemaining = 1;
+  List<Widget> family = [];
   int page = 1;
 
   void initState(){

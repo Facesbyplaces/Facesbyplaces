@@ -415,7 +415,6 @@ class MiscBLMPhoneNumberPickerTemplateState extends State<MiscBLMPhoneNumberPick
         
         Expanded(
           child: TextFormField(
-            // textAlign: TextAlign.,
             keyboardType: TextInputType.phone,
             controller: controller2,
             cursorColor: Color(0xff000000),

@@ -191,14 +191,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                             message: 'Please complete the form before submitting.',
                           );
                         }else{
-                          print('The relationship is ${_key1.currentState!.currentSelection}');
-                          print('The location of incident is ${_key2.currentState!.controller.text}');
-                          print('The precinct is ${_key3.currentState!.controller.text}');
-                          print('The dob is ${controller1.text}');
-                          print('The rip is ${controller2.text}');
-                          print('The country is ${_key6.currentState!.controller.text}');
-                          print('The state is ${_key7.currentState!.controller.text}');
-
                           Navigator.push(
                             context, MaterialPageRoute(builder: (context) => 
                               HomeBLMCreateMemorial2(
@@ -212,27 +204,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                               ),
                             )
                           );
-
-                          // final String relationship;
-                          // final String location;
-                          // final String precinct;
-                          // final String dob;
-                          // final String rip;
-                          // final String country;
-                          // final String state;
-
-                          // Navigator.pushNamed(
-                          //   context, '/home/blm/create-memorial-2',
-                          //   arguments: BLMCreateMemorialValues(
-                          //     relationship: _key1.currentState!.currentSelection,
-                          //     location: _key2.currentState!.controller.text,
-                          //     precinct: _key3.currentState!.controller.text,
-                          //     dob: controller1.text,
-                          //     rip: controller2.text,
-                          //     country: _key6.currentState!.controller.text,
-                          //     state: _key7.currentState!.controller.text,
-                          //   ),
-                          // );
                         }
 
                       }, 

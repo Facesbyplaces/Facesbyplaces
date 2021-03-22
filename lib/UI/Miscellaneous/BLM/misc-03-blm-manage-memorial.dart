@@ -131,8 +131,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     cancelLabel: 'No',
                   );
 
-                  print('The confirmation is $confirmation');
-
                   if(confirmation == OkCancelResult.ok){
 
                     context.showLoaderOverlay();

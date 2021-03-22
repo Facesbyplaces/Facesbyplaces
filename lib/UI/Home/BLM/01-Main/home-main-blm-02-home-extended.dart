@@ -4,22 +4,21 @@ import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-setting
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
-// import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'home-main-blm-03-01-feed-tab.dart';
 import 'home-main-blm-03-02-memorial-list-tab.dart';
 import 'home-main-blm-03-03-post-tab.dart';
@@ -27,7 +26,6 @@ import 'home-main-blm-03-04-notifications-tab.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-// import 'package:badges/badges.dart';
 import 'dart:async';
 
 class HomeBLMScreenExtended extends StatefulWidget{
@@ -315,17 +313,16 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           children: [
                             SizedBox(height: 20),
 
-                            CircleAvatar(
+                            manageDrawer.data!.showProfileInformationImage != ''
+                            ? CircleAvatar(
                               radius: 100,
                               backgroundColor: Color(0xff888888),
                               backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
-                              // backgroundImage: ((){
-                              //   if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                              //     return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                              //   }else{
-                              //     return AssetImage('assets/icons/app-icon.png');
-                              //   }
-                              // }()),
+                            )
+                            : CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: AssetImage('assets/icons/app-icon.png'),
                             ),
 
                             SizedBox(height: 20),
@@ -408,24 +405,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                                   Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                                 }else{
-                                  await showDialog(
+                                  await showOkAlertDialog(
                                     context: context,
-                                    builder: (_) => 
-                                    Container()
-                                    //   AssetGiffyDialog(
-                                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    //   entryAnimation: EntryAnimation.DEFAULT,
-                                    //   description: Text('Something went wrong. Please try again.',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: TextStyle(),
-                                    //   ),
-                                    //   onlyOkButton: true,
-                                    //   buttonOkColor: Colors.red,
-                                    //   onOkButtonPressed: () {
-                                    //     Navigator.pop(context, true);
-                                    //   },
-                                    // )
+                                    title: 'Error',
+                                    message: 'Something went wrong. Please try again.',
                                   );
                                 }
                                 
@@ -449,17 +432,16 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           children: [
                             SizedBox(height: 20),
 
-                            CircleAvatar(
+                            manageDrawer.data!.showProfileInformationImage != ''
+                            ? CircleAvatar(
                               radius: 100,
                               backgroundColor: Color(0xff888888),
                               backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
-                              // backgroundImage: ((){
-                              //   if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                              //     return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                              //   }else{
-                              //     return AssetImage('assets/icons/app-icon.png');
-                              //   }
-                              // }()),
+                            )
+                            : CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: AssetImage('assets/icons/app-icon.png'),
                             ),
 
                             SizedBox(height: 20),

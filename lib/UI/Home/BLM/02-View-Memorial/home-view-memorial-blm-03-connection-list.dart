@@ -4,7 +4,6 @@ import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-04-
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +31,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   final int newToggle;
   HomeBLMConnectionListState({required this.memorialId, required this.newToggle});
 
-  // RefreshController refreshController = RefreshController(initialRefresh: true);
   ScrollController scrollController1 = ScrollController();
   ScrollController scrollController2 = ScrollController();
   ScrollController scrollController3 = ScrollController();
@@ -365,8 +363,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   }
 
   connectionListFamilyWidget(){
-    return Container(
-      child: RefreshIndicator(
+    return RefreshIndicator(
       onRefresh: onRefresh1,
       child: GridView.count(
         controller: scrollController1,
@@ -375,316 +372,157 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         crossAxisSpacing: 2,
         mainAxisSpacing: 20,
         crossAxisCount: 4,
-        children: List.generate(
-          onSearch ? searches.length : listsFamily.length, (index) => 
-          TextButton.icon(
-            onPressed: (){
+        children: List.generate(onSearch ? searches.length : listsFamily.length, (index) =>           
+          Column(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: (){
+                    if(onSearch){
+                      if(searches[index].accountType == 1){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType,)));
+                      }else{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+                      }
+                    }else{
+                      if(listsFamily[index].accountType == 1){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
+                      }else{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
+                      }
+                    }
+                  },
+                  child: onSearch
+                  ? CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: NetworkImage(searches[index].image),
+                  )
+                  : CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: NetworkImage(listsFamily[index].image),
+                  ),
+                ),
+              ),
 
-            }, 
-            icon: searches[index].image != ''
-            ? CircleAvatar(
-              radius: 40,
-              backgroundColor: Color(0xff888888),
-              backgroundImage: NetworkImage(searches[index].image),
-              // backgroundImage: searches[index].image != null && searches[index].image != ''
-              // ? NetworkImage(searches[index].image)
-              // : AssetImage('assets/icons/app-icon.png'),
-            )
-            : CircleAvatar(
-              radius: 40,
-              backgroundColor: Color(0xff888888),
-              backgroundImage: AssetImage('assets/icons/app-icon.png'),
-            ),
-            label: onSearch
-            ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
-            : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+              onSearch
+              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
+              : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+
+              Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 12, color: Color(0xff888888))),
+            ],
           ),
-          // Column(
-          //   children: [
-          //     Expanded(
-          //       child: GestureDetector(
-          //         onTap: (){
-          //           if(onSearch){
-          //             if(searches[index].accountType == 1){
-          //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType,)));
-          //             }else{
-          //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-          //             }
-          //           }else{
-          //             if(listsFamily[index].accountType == 1){
-          //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
-          //             }else{
-          //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
-          //             }
-          //           }
-          //         },
-          //         child: onSearch
-          //         ? CircleAvatar(
-          //           radius: 40,
-          //           backgroundColor: Color(0xff888888),
-          //           backgroundImage: NetworkImage(searches[index].image),
-          //           // backgroundImage: searches[index].image != null && searches[index].image != ''
-          //           // ? NetworkImage(searches[index].image)
-          //           // : AssetImage('assets/icons/app-icon.png'),
-          //         )
-          //         : CircleAvatar(
-          //           radius: 40,
-          //           backgroundColor: Color(0xff888888),
-          //           backgroundImage: NetworkImage(listsFamily[index].image),
-          //           // backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
-          //           // ? NetworkImage(listsFamily[index].image)
-          //           // : AssetImage('assets/icons/app-icon.png'),
-          //         ),
-          //       ),
-          //     ),
-
-          //     onSearch
-          //     ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
-          //     : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
-
-          //     Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 12, color: Color(0xff888888))),
-          //   ],
-          // ),
         ),
       ),
-    ),
     );
-    // return Container(
-    //   // child: SmartRefresher(
-    //   //   enablePullDown: true,
-    //   //   enablePullUp: true,
-    //   //   header: MaterialClassicHeader(
-    //   //     color: Color(0xffffffff),
-    //   //     backgroundColor: Color(0xff4EC9D4),
-    //   //   ),
-    //   //   footer: CustomFooter(
-    //   //     loadStyle: LoadStyle.ShowWhenLoading,
-    //   //     builder: (BuildContext context, LoadStatus mode){
-    //   //       Widget body = Container();
-    //   //       if(mode == LoadStatus.loading){
-    //   //         body = CircularProgressIndicator();
-    //   //       }
-    //   //       return Center(child: body);
-    //   //     },
-    //   //   ),
-    //   //   controller: refreshController,
-    //   //   onRefresh: onRefresh,
-    //   //   onLoading: onLoading1,
-    //   //   child: GridView.count(
-    //   //     padding: EdgeInsets.all(10.0),
-    //   //     physics: ClampingScrollPhysics(),
-    //   //     crossAxisSpacing: 2,
-    //   //     mainAxisSpacing: 20,
-    //   //     crossAxisCount: 4,
-    //   //     children: List.generate(
-    //   //       onSearch ? searches.length : listsFamily.length, (index) => Column(
-    //   //         children: [
-    //   //           Expanded(
-    //   //             child: GestureDetector(
-    //   //               onTap: (){
-    //   //                 if(onSearch){
-    //   //                   if(searches[index].accountType == 1){
-    //   //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType,)));
-    //   //                   }else{
-    //   //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-    //   //                   }
-    //   //                 }else{
-    //   //                   if(listsFamily[index].accountType == 1){
-    //   //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
-    //   //                   }else{
-    //   //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
-    //   //                   }
-    //   //                 }
-    //   //               },
-    //   //               child: onSearch
-    //   //               ? CircleAvatar(
-    //   //                 radius: 40,
-    //   //                 backgroundColor: Color(0xff888888),
-    //   //                 backgroundImage: NetworkImage(searches[index].image),
-    //   //                 // backgroundImage: searches[index].image != null && searches[index].image != ''
-    //   //                 // ? NetworkImage(searches[index].image)
-    //   //                 // : AssetImage('assets/icons/app-icon.png'),
-    //   //               )
-    //   //               : CircleAvatar(
-    //   //                 radius: 40,
-    //   //                 backgroundColor: Color(0xff888888),
-    //   //                 backgroundImage: NetworkImage(listsFamily[index].image),
-    //   //                 // backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
-    //   //                 // ? NetworkImage(listsFamily[index].image)
-    //   //                 // : AssetImage('assets/icons/app-icon.png'),
-    //   //               ),
-    //   //             ),
-    //   //           ),
-
-    //   //           onSearch
-    //   //           ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
-    //   //           : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
-
-    //   //           Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 12, color: Color(0xff888888))),
-    //   //         ],
-    //   //       ),
-    //   //     ),
-    //   //   ),
-    //   // )
-    // );
   }
 
   connectionListFriendsWidget(){
-    return Container(
-      // child: SmartRefresher(
-      //   enablePullDown: true,
-      //   enablePullUp: true,
-      //   header: MaterialClassicHeader(
-      //     color: Color(0xffffffff),
-      //     backgroundColor: Color(0xff4EC9D4),
-      //   ),
-      //   footer: CustomFooter(
-      //     loadStyle: LoadStyle.ShowWhenLoading,
-      //     builder: (BuildContext context, LoadStatus mode){
-      //       Widget body = Container();
-      //       if(mode == LoadStatus.loading){
-      //         body = CircularProgressIndicator();
-      //       }
-      //       return Center(child: body);
-      //     },
-      //   ),
-      //   controller: refreshController,
-      //   onRefresh: onRefresh,
-      //   onLoading: onLoading2,
-      //   child: GridView.count(
-      //     padding: EdgeInsets.all(10.0),
-      //     physics: ClampingScrollPhysics(),
-      //     crossAxisSpacing: 2,
-      //     mainAxisSpacing: 20,
-      //     crossAxisCount: 4,
-      //     children: List.generate(
-      //       onSearch ? searches.length : listsFriends.length, (index) => Column(
-      //         children: [
-      //           Expanded(
-      //             child: GestureDetector(
-      //               onTap: (){
-      //                 if(onSearch){
-      //                   if(searches[index].accountType == 1){
-      //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-      //                   }else{
-      //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-      //                   }
-      //                 }else{
-      //                   if(listsFriends[index].accountType == 1){
-      //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
-      //                   }else{
-      //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
-      //                   }
-      //                 }
-      //               },
-      //               child: onSearch
-      //               ? CircleAvatar(
-      //                 radius: 40,
-      //                 backgroundColor: Color(0xff888888),
-      //                 backgroundImage: NetworkImage(searches[index].image),
-      //                 // backgroundImage: searches[index].image != null && searches[index].image != ''
-      //                 // ? NetworkImage(searches[index].image) 
-      //                 // : AssetImage('assets/icons/app-icon.png'),
-      //               )
-      //               : CircleAvatar(
-      //                 radius: 40,
-      //                 backgroundColor: Color(0xff888888),
-      //                 backgroundImage: NetworkImage(listsFriends[index].image),
-      //                 // backgroundImage: listsFriends[index].image != null && listsFriends[index].image != ''
-      //                 // ? NetworkImage(listsFriends[index].image) 
-      //                 // : AssetImage('assets/icons/app-icon.png'),
-      //               ),
-      //             ),
-      //           ),
+    return RefreshIndicator(
+      onRefresh: onRefresh2,
+      child: GridView.count(
+        controller: scrollController2,
+        padding: EdgeInsets.all(10.0),
+        physics: ClampingScrollPhysics(),
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 20,
+        crossAxisCount: 4,
+        children: List.generate(onSearch ? searches.length : listsFriends.length, (index) =>           
+          Column(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: (){
+                    if(onSearch){
+                      if(searches[index].accountType == 1){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+                      }else{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+                      }
+                    }else{
+                      if(listsFriends[index].accountType == 1){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
+                      }else{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
+                      }
+                    }
+                  },
+                  child: onSearch
+                  ? CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: NetworkImage(searches[index].image),
+                  )
+                  : CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: NetworkImage(listsFriends[index].image),
+                  ),
+                ),
+              ),
 
-      //           onSearch
-      //           ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
-      //           : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // )
+              onSearch
+              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
+              : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
   connectionListFollowersWidget(){
-    return Container(
-      // child: SmartRefresher(
-      //   enablePullDown: true,
-      //   enablePullUp: true,
-      //   header: MaterialClassicHeader(
-      //     color: Color(0xffffffff),
-      //     backgroundColor: Color(0xff4EC9D4),
-      //   ),
-      //   footer: CustomFooter(
-      //     loadStyle: LoadStyle.ShowWhenLoading,
-      //     builder: (BuildContext context, LoadStatus mode){
-      //       Widget body = Container();
-      //       if(mode == LoadStatus.loading){
-      //         body = CircularProgressIndicator();
-      //       }
-      //       return Center(child: body);
-      //     },
-      //   ),
-      //   controller: refreshController,
-      //   onRefresh: onRefresh,
-      //   onLoading: onLoading3,
-      //   child: GridView.count(
-      //     padding: EdgeInsets.all(10.0),
-      //     physics: ClampingScrollPhysics(),
-      //     crossAxisSpacing: 2,
-      //     mainAxisSpacing: 20,
-      //     crossAxisCount: 4,
-      //     children: List.generate(
-      //       onSearch ? searches.length : listsFollowers.length, (index) => Column(
-      //         children: [
-      //           Expanded(
-      //             child: GestureDetector(
-      //               onTap: (){
-      //                 if(onSearch){
-      //                   if(searches[index].accountType == 1){
-      //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-      //                   }else{
-      //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-      //                   }
-      //                 }else{
-      //                   if(listsFollowers[index].accountType == 1){
-      //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
-      //                   }else{
-      //                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
-      //                   }
-      //                 }
-      //               },
-      //               child: onSearch
-      //               ? CircleAvatar(
-      //                 radius: 40,
-      //                 backgroundColor: Color(0xff888888),
-      //                 backgroundImage: NetworkImage(searches[index].image),
-      //                 // backgroundImage: searches[index].image != null && searches[index].image != ''
-      //                 // ? NetworkImage(searches[index].image) 
-      //                 // : AssetImage('assets/icons/app-icon.png'),
-      //               )
-      //               : CircleAvatar(
-      //                 radius: 40,
-      //                 backgroundColor: Color(0xff888888),
-      //                 backgroundImage: NetworkImage(listsFollowers[index].image),
-      //                 // backgroundImage: listsFollowers[index].image != null && listsFollowers[index].image != ''
-      //                 // ? NetworkImage(listsFollowers[index].image) 
-      //                 // : AssetImage('assets/icons/app-icon.png'),
-      //               ),
-      //             ),
-      //           ),
+    return RefreshIndicator(
+      onRefresh: onRefresh3,
+      child: GridView.count(
+        controller: scrollController3,
+        padding: EdgeInsets.all(10.0),
+        physics: ClampingScrollPhysics(),
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 20,
+        crossAxisCount: 4,
+        children: List.generate(onSearch ? searches.length : listsFollowers.length, (index) =>           
+          Column(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: (){
+                    if(onSearch){
+                      if(searches[index].accountType == 1){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+                      }else{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+                      }
+                    }else{
+                      if(listsFollowers[index].accountType == 1){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
+                      }else{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
+                      }
+                    }
+                  },
+                  child: onSearch
+                  ? CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: NetworkImage(searches[index].image),
+                  )
+                  : CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: NetworkImage(listsFollowers[index].image),
+                  ),
+                ),
+              ),
 
-      //           onSearch
-      //           ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
-      //           : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // )
+              onSearch
+              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
+              : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+            ],
+          ),
+        ),
+      ),
     );
   }
-
 }

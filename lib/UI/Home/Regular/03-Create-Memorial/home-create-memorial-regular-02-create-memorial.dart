@@ -2,15 +2,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-create-memorial-regular-03-create-memorial.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-// import 'home-create-memorial-regular-01-create-memorial.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
-import 'home-create-memorial-regular-03-create-memorial.dart';
 
 class HomeRegularCreateMemorial2 extends StatefulWidget{
   final String relationship;
@@ -180,6 +176,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     SizedBox(height: 80,),
 
                     MiscRegularButtonTemplate(
+                      width: 150,
+                      height: 45,
                       onPressed: () async{
                         if(_key1.currentState!.controller.text == ''){
                           await showOkAlertDialog(
@@ -198,14 +196,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                             newFiles.addAll(slideImages);
                           }
 
-                          // newValue.description = controllerStory.text;
-                          // newValue.memorialName = _key1.currentState!.controller.text;
-                          // newValue.imagesOrVideos = newFiles;
-
-                          // Navigator.pushNamed(context, '/home/regular/create-memorial-3', arguments: newValue);
-
-                          Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => 
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => 
                               HomeRegularCreateMemorial3(
                                 relationship: relationship,
                                 birthplace: birthplace,
@@ -220,9 +211,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                             )
                           );
                         }
-                      }, 
-                      width: 150,
-                      height: 45,
+                      },
                     ),
 
                   ],
@@ -282,25 +271,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                 border: Border.all(color: Color(0xff000000),),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              // child: videoFile == null 
-              // ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 160,)
-              // : GestureDetector(
-              //   onTap: (){
-              //     if(videoPlayerController.value.isPlaying){
-              //       videoPlayerController.pause();
-              //     }else{
-              //       videoPlayerController.play();
-              //     }
-                  
-              //   },
-              //   onDoubleTap: () async{
-              //     await getVideo();
-              //   },
-              //   child: AspectRatio(
-              //     aspectRatio: videoPlayerController.value.aspectRatio,
-              //     child: VideoPlayer(videoPlayerController),
-              //   ),
-              // ),
             ),
           ),
 

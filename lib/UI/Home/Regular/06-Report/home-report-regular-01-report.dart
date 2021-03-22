@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/Regular/07-Report/api-report-regular-01-report
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularReport extends StatelessWidget{
@@ -76,24 +76,10 @@ class HomeRegularReport extends StatelessWidget{
                   onPressed: () async{
 
                     if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
-                      await showDialog(
+                      await showOkAlertDialog(
                         context: context,
-                        builder: (_) => 
-                        Container()
-                        //   AssetGiffyDialog(
-                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        //   entryAnimation: EntryAnimation.DEFAULT,
-                        //   description: Text('Please complete the form before submitting.',
-                        //     textAlign: TextAlign.center,
-                        //     style: TextStyle(),
-                        //   ),
-                        //   onlyOkButton: true,
-                        //   buttonOkColor: Colors.red,
-                        //   onOkButtonPressed: () {
-                        //     Navigator.pop(context, true);
-                        //   },
-                        // )
+                        title: 'Error',
+                        message: 'Please complete the form before submitting.',
                       );
                     }else{
 
@@ -102,45 +88,17 @@ class HomeRegularReport extends StatelessWidget{
                       context.hideLoaderOverlay();
 
                       if(result){
-                        await showDialog(
+                        await showOkAlertDialog(
                           context: context,
-                          builder: (_) => 
-                          Container()
-                          //   AssetGiffyDialog(
-                          //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          //   entryAnimation: EntryAnimation.DEFAULT,
-                          //   description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(),
-                          //   ),
-                          //   onlyOkButton: true,
-                          //   buttonOkColor: Colors.green,
-                          //   onOkButtonPressed: () {
-                          //     Navigator.pop(context, true);
-                          //   },
-                          // )
+                          title: 'Success',
+                          message: 'Successfully submitted a report. Your report will be reviewed by the administrator.',
                         );
                         Navigator.pushReplacementNamed(context, '/home/regular');
                       }else{
-                        await showDialog(
+                        await showOkAlertDialog(
                           context: context,
-                          builder: (_) => 
-                          Container()
-                          //   AssetGiffyDialog(
-                          //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          //   entryAnimation: EntryAnimation.DEFAULT,
-                          //   description: Text('Something went wrong. Please try again.',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(),
-                          //   ),
-                          //   onlyOkButton: true,
-                          //   buttonOkColor: Colors.red,
-                          //   onOkButtonPressed: () {
-                          //     Navigator.pop(context, true);
-                          //   },
-                          // )
+                          title: 'Error',
+                          message: 'Something went wrong. Please try again.',
                         );
                       }
                     }
