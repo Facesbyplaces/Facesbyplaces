@@ -35,7 +35,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
           ),
           body: WebView(
-            initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com',
+            initialUrl: 'https://www.sandbox.paypal.com',
           ),
         ),
       ),

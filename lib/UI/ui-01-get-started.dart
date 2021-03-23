@@ -4,10 +4,10 @@ import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dar
 import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
-// import 'package:overlay_support/overlay_support.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'Regular/regular-07-password-reset.dart';
 import 'BLM/blm-07-password-reset.dart';
@@ -38,6 +38,64 @@ class PushNotificationService {
     // bool newResult = await apiRegularNewNotifications(deviceToken: token, title: 'Sample title - FacesbyPlaces', body: 'Sample body - FacesbyPlaces');
 
     // print('The notification result is $newResult');
+
+    NotificationSettings settings = await fcm.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    print('User granted permission: ${settings.authorizationStatus}');
+
+    FirebaseMessaging.onMessage.listen((message) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+
+    Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+      // If you're going to use other Firebase services in the background, such as Firestore,
+      // make sure you call `initializeApp` before using other Firebase services.
+      await Firebase.initializeApp();
+
+      print("Handling a background message: ${message.messageId}");
+    }
+
+
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    // var newMessage = await fcm.getNotificationSettings();
+
+    // print('done getting message');
+    // print('The newMessage is ${newMessage}');
+
+    // extractMessage(Map<String, dynamic> message) async{
+    //   print("notification: $message");
+    //   // showSimpleNotification(
+    //   //   Container(child: Text(message['notification']['body'])),
+    //   //   position: NotificationPosition.top,
+    //   // );
+    // }
+
+    // print('extract');
+
+    // print('The message is ${newMessage}');
+
+    // extractMessage(newMessage!.data);
+
+    // print('last');
+
+
+
+
+    
 
     // fcm.configure(
     //   onMessage: (Map<String, dynamic> message) async {
@@ -73,8 +131,8 @@ class UIGetStarted extends StatefulWidget{
 class UIGetStartedState extends State<UIGetStarted>{
 
   StreamSubscription<Map>? streamSubscription;
-  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-  // PushNotificationService? pushNotificationService;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  PushNotificationService? pushNotificationService;
 
   void listenDeepLinkData(){
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
@@ -136,8 +194,11 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   void initState(){
     super.initState();
-    // PushNotificationService(_firebaseMessaging);
+    var newMessage = PushNotificationService(_firebaseMessaging);
     // pushNotificationService!.initialise();
+    print('start');
+    newMessage.initialise();
+    print('lkjasdflkj');
     listenDeepLinkData();
   }
 
@@ -600,8 +661,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                                     color: Color(0xffffffff),
                                   ), 
                                   onPressed: (){
-                                    print('ljasdflkjasfkj');
-                                    // Navigator.pushNamed(context, '/login');
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => UILogin01()));
                                   },
                                   width: 200,

@@ -6,6 +6,7 @@ import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regula
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -216,7 +217,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                     await apiRegularLikeOrUnlikePost(postId: postId, like: likePost);
                   },
-                  icon: likePost == true ? Icon(Icons.favorite, color: Color(0xffE74C3C), size: 25) : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C), size: 25),
+                  icon: likePost == true ? FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),) : FaIcon(FontAwesomeIcons.heart, color: Colors.grey,),
                   label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                 ),
 
@@ -224,15 +225,13 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                 TextButton.icon(
                   onPressed: () async{
-                    
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
                   },
-                  icon: Icon(Icons.comment_rounded, color: Color(0xff4EC9D4), size: 25),
+                  icon: FaIcon(FontAwesomeIcons.solidComment, color: Color(0xff4EC9D4),),
                   label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                 ),
 
-                Expanded(
-                  child: Container(),
-                ),
+                Expanded(child: Container(),),
 
                 IconButton(
                   alignment: Alignment.centerRight,

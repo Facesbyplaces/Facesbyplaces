@@ -287,15 +287,13 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                 TextButton.icon(
                   onPressed: () async{
-                    
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
                   },
-                  icon: Icon(Icons.comment_rounded, color: Color(0xff4EC9D4), size: 25),
+                  icon: FaIcon(FontAwesomeIcons.solidComment, color: Color(0xff4EC9D4),),
                   label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                 ),
 
-                Expanded(
-                  child: Container(),
-                ),
+                Expanded(child: Container(),),
 
                 IconButton(
                   alignment: Alignment.centerRight,

@@ -13,6 +13,7 @@ import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
 import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,7 +29,18 @@ import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
+}
+
 void main() async{
+  print('test');
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  print('new test');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FlutterLibphonenumber().init();

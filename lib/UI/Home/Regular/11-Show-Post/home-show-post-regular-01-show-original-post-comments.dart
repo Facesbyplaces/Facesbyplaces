@@ -17,6 +17,7 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-dropdown.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -397,9 +398,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                 return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                    controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                      showControls: false,
-                                                    ),
                                                     aspectRatio: 16 / 9,
                                                   ),
                                                 );
@@ -422,9 +420,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                   ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                     betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                        showControls: false,
-                                                      ),
                                                       aspectRatio: 16 / 9,
                                                     ),
                                                   )
@@ -453,9 +448,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                     ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                          showControls: false,
-                                                        ),
                                                         aspectRatio: 16 / 9,
                                                       ),
                                                     )
@@ -473,9 +465,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             children: [
                                                               BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                                    showControls: false,
-                                                                  ),
                                                                   aspectRatio: 16 / 9,
                                                                 ),
                                                               ),
@@ -531,9 +520,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                           return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                              controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                                showControls: false,
-                                                              ),
                                                               aspectRatio: 16 / 9,
                                                             ),
                                                           );
@@ -563,49 +549,46 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                     originalPost.data!.almPost.showOriginalPostPostTagged.length != 0
                                     ? Column(
                                       children: [
-                                        SizedBox(height: 20),
+                                        SizedBox(height: 10),
 
-                                        Padding(
+                                        Container(
+                                          alignment: Alignment.centerLeft,
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                          child: Row(
-                                            children: [
-                                              Text('with'),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              
+                                              children: [
+                                                TextSpan(
+                                                  style: TextStyle(color: Color(0xff888888)),
+                                                  text: 'with '
+                                                ),
 
-                                              Container(
-                                                child: Wrap(
-                                                  direction: Axis.vertical,
-                                                  spacing: 5.0,
-                                                  children: List.generate(
-                                                    originalPost.data!.almPost.showOriginalPostPostTagged.length,
-                                                    (index) => GestureDetector(
-                                                      onTap: (){
+                                                TextSpan(
+                                                  children: List.generate(originalPost.data!.almPost.showOriginalPostPostTagged.length,
+                                                    (index) => TextSpan(
+                                                      style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
+                                                      children: <TextSpan>[
+                                                        TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
+
+                                                        TextSpan(text: ' '),
+
+                                                        TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
+
+                                                        index < originalPost.data!.almPost.showOriginalPostPostTagged.length - 1
+                                                        ? TextSpan(text: ', ')
+                                                        : TextSpan(text: ''),
+                                                      ],
+                                                      recognizer: TapGestureRecognizer()
+                                                      ..onTap = (){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
-                                                      },
-                                                      child: RichText(
-                                                        text: TextSpan(
-                                                          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
-                                                          children: <TextSpan>[
-                                                            TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
-
-                                                            TextSpan(text: ' '),
-
-                                                            TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
-
-                                                            index < originalPost.data!.almPost.showOriginalPostPostTagged.length - 1
-                                                            ? TextSpan(text: ',')
-                                                            : TextSpan(text: ''),
-                                                          ],
-                                                        ),
-                                                      ),
+                                                      }
                                                     ),
                                                   ),
                                                 ),
-                                                padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
-                                                alignment: Alignment.centerLeft,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                              ],
+                                            ),
+                                          )
+                                        )
 
                                       ],
                                     )
@@ -620,7 +603,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                           Row(
                                             children: [
-                                              Icon(Icons.favorite_border_outlined, color: Color(0xff000000),),
+                                              FaIcon(FontAwesomeIcons.heart, color: Color(0xff000000),),
 
                                               SizedBox(width: 10,),
 
@@ -633,7 +616,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                           Row(
                                             children: [
-                                              Icon(Icons.chat_bubble_outline_outlined, color: Color(0xff000000),),
+                                              FaIcon(FontAwesomeIcons.comment, color: Color(0xff000000),),
 
                                               SizedBox(width: 10,),
 
