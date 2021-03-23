@@ -10,7 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'misc-12-regular-dropdown.dart';
+import 'misc-11-regular-dropdown.dart';
 
 class MiscRegularPost extends StatefulWidget{
   final List<Widget> contents;

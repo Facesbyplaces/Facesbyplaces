@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-01-show-user-information.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-user-details.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:we_slide/we_slide.dart';

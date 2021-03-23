@@ -1,6 +1,6 @@
-import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+// import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularLogout() async{
@@ -40,17 +40,17 @@ Future<bool> apiRegularLogout() async{
 
     sharedPrefs.remove('user-guest-session');
 
-    GoogleSignIn googleSignIn = GoogleSignIn(
-      scopes: [
-        'profile',
-        'email',
-        'openid'
-      ],
-    );
-    await googleSignIn.signOut();
+    // GoogleSignIn googleSignIn = GoogleSignIn(
+    //   scopes: [
+    //     'profile',
+    //     'email',
+    //     'openid'
+    //   ],
+    // );
+    // await googleSignIn.signOut();
 
-    FacebookLogin fb = FacebookLogin();
-    await fb.logOut();
+    // FacebookLogin fb = FacebookLogin();
+    // await fb.logOut();
 
     return true;
   }else{

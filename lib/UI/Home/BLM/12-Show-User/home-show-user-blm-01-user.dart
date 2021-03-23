@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-01-show-user-information.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-user-details.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:we_slide/we_slide.dart';
