@@ -42,7 +42,6 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
   }on DioError catch(e){
     print('The error 1 is ${e.response!.data}');
     print('The error 2 is ${e.response!.headers}');
-    print('The error 3 is ${e.response!.request}');
     print('The error 4 is');
     print('The error 5 is ${e.message}');
 

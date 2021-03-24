@@ -48,7 +48,7 @@ dev_dependencies:
   firebase_core: ^1.0.0
   better_player: ^0.0.62
   mime: ^1.0.0
-  flutter_branch_sdk: ^2.0.0
+  flutter_branch_sdk: ^3.0.0
   material_design_icons_flutter: ^5.0.5955-rc.1
   flutter_barcode_scanner: ^2.0.0-nullsafety.0
   geocoding: ^2.0.0

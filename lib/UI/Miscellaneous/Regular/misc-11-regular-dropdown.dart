@@ -69,10 +69,15 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
   Future<void> shareQRCode() async {
     try {
+      print('Shared the QR Code');
       RenderRepaintBoundary? boundary = qrKey.currentContext!.findRootAncestorStateOfType();
+      print('adsfzxcvlk');
       var image = await boundary!.toImage();
+      print('1 - number');
       ByteData byteData = (await image.toByteData(format: ImageByteFormat.png))!;
       Uint8List pngBytes = byteData.buffer.asUint8List();
+
+      print('sample');
 
       final tempDir = await getTemporaryDirectory();
       final file = await new File('${tempDir.path}/qr-image.png').create();
