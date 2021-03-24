@@ -1,18 +1,18 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
-// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
-// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
-// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -109,74 +109,74 @@ class RegularLoginState extends State<RegularLogin>{
                                 height: 45,
                                 onPressed: () async{
 
-                                  // final fb = FacebookLogin();
+                                  final fb = FacebookLogin();
 
-                                  // // await fb.logOut();
-                                  // // print('facebook logout'); // TO LOGOUT THE FACEBOOK ACCOUNT FOR TESTING
+                                  // await fb.logOut();
+                                  // print('facebook logout'); // TO LOGOUT THE FACEBOOK ACCOUNT FOR TESTING
 
-                                  // bool isLoggedIn = await fb.isLoggedIn;
+                                  bool isLoggedIn = await fb.isLoggedIn;
 
-                                  // print('The value of isLoggedIn in facebook is $isLoggedIn');
+                                  print('The value of isLoggedIn in facebook is $isLoggedIn');
 
-                                  // if(isLoggedIn == true){
-                                  //   context.showLoaderOverlay();
+                                  if(isLoggedIn == true){
+                                    context.showLoaderOverlay();
 
-                                  //   FacebookUserProfile profile = (await fb.getUserProfile())!;
-                                  //   String email = (await fb.getUserEmail())!;
-                                  //   String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
-                                  //   FacebookAccessToken token = (await fb.accessToken)!;
+                                    FacebookUserProfile profile = (await fb.getUserProfile())!;
+                                    String email = (await fb.getUserEmail())!;
+                                    String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                                    FacebookAccessToken token = (await fb.accessToken)!;
 
-                                  //   bool apiResult = await apiRegularSignInWithFacebook(
-                                  //     firstName: profile.firstName.toString(), 
-                                  //     lastName: profile.lastName.toString(), 
-                                  //     email: email, 
-                                  //     username: email,
-                                  //     facebookId: token.token,
-                                  //     image: image
-                                  //   );
-                                  //   context.hideLoaderOverlay();
+                                    bool apiResult = await apiRegularSignInWithFacebook(
+                                      firstName: profile.firstName.toString(), 
+                                      lastName: profile.lastName.toString(), 
+                                      email: email, 
+                                      username: email,
+                                      facebookId: token.token,
+                                      image: image
+                                    );
+                                    context.hideLoaderOverlay();
 
-                                  //   if(apiResult == true){
-                                  //     Navigator.pushReplacementNamed(context, '/home/regular');
-                                  //   }else{
-                                  //     await showOkAlertDialog(
-                                  //       context: context,
-                                  //       title: 'Error',
-                                  //       message: 'Invalid email or password. Please try again.',
-                                  //     );
-                                  //   }
+                                    if(apiResult == true){
+                                      Navigator.pushReplacementNamed(context, '/home/regular');
+                                    }else{
+                                      await showOkAlertDialog(
+                                        context: context,
+                                        title: 'Error',
+                                        message: 'Invalid email or password. Please try again.',
+                                      );
+                                    }
 
-                                  // }else{
-                                  //   final result = await fb.logIn(permissions: [
-                                  //     FacebookPermission.publicProfile,
-                                  //     FacebookPermission.email,
-                                  //     FacebookPermission.userFriends,
-                                  //   ]);
+                                  }else{
+                                    final result = await fb.logIn(permissions: [
+                                      FacebookPermission.publicProfile,
+                                      FacebookPermission.email,
+                                      FacebookPermission.userFriends,
+                                    ]);
 
-                                  //   final email = await fb.getUserEmail();
-                                  //   final profile = await fb.getUserProfile();
-                                  //   final image = await fb.getProfileImageUrl(width: 50, height: 50);
+                                    final email = await fb.getUserEmail();
+                                    final profile = await fb.getUserProfile();
+                                    final image = await fb.getProfileImageUrl(width: 50, height: 50);
 
-                                  //   if(result.status != FacebookLoginStatus.cancel){
-                                  //     context.showLoaderOverlay();
+                                    if(result.status != FacebookLoginStatus.cancel){
+                                      context.showLoaderOverlay();
                                       
-                                  //     bool apiResult = await apiRegularSignInWithFacebook(
-                                  //       firstName: profile!.firstName.toString(), 
-                                  //       lastName: profile.lastName.toString(), 
-                                  //       email: email!, 
-                                  //       username: email,
-                                  //       facebookId: result.accessToken!.token,
-                                  //       image: image!,
-                                  //     );
-                                  //     context.hideLoaderOverlay();
+                                      bool apiResult = await apiRegularSignInWithFacebook(
+                                        firstName: profile!.firstName.toString(), 
+                                        lastName: profile.lastName.toString(), 
+                                        email: email!, 
+                                        username: email,
+                                        facebookId: result.accessToken!.token,
+                                        image: image!,
+                                      );
+                                      context.hideLoaderOverlay();
 
-                                  //     if(apiResult == false){
-                                  //       await fb.logOut();
-                                  //     }else{
-                                  //       Navigator.pushReplacementNamed(context, '/home/regular');
-                                  //     }
-                                  //   }
-                                  // }
+                                      if(apiResult == false){
+                                        await fb.logOut();
+                                      }else{
+                                        Navigator.pushReplacementNamed(context, '/home/regular');
+                                      }
+                                    }
+                                  }
 
                                 }, 
                               ),
@@ -197,69 +197,69 @@ class RegularLoginState extends State<RegularLogin>{
                                 height: 45,
                                 image: 'assets/icons/google.png',
                                 onPressed: () async {
-                                  // GoogleSignIn googleSignIn = GoogleSignIn(
-                                  //   scopes: [
-                                  //     'profile',
-                                  //     'email',
-                                  //     'openid'
-                                  //   ],
-                                  // );
+                                  GoogleSignIn googleSignIn = GoogleSignIn(
+                                    scopes: [
+                                      'profile',
+                                      'email',
+                                      'openid'
+                                    ],
+                                  );
 
-                                  // // await googleSignIn.signOut();
-                                  // // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
+                                  // await googleSignIn.signOut();
+                                  // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
 
-                                  // bool isLoggedIn = await googleSignIn.isSignedIn();
+                                  bool isLoggedIn = await googleSignIn.isSignedIn();
 
-                                  // if(isLoggedIn == true){
-                                  //   context.showLoaderOverlay();
-                                  //   GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
-                                  //   GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
+                                  if(isLoggedIn == true){
+                                    context.showLoaderOverlay();
+                                    GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
+                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
                                     
-                                  //   bool result = await apiRegularSignInWithGoogle(
-                                  //     firstName: accountSignedIn!.displayName!, 
-                                  //     lastName: '', 
-                                  //     email: accountSignedIn.email, 
-                                  //     username: accountSignedIn.email,
-                                  //     googleId: auth.idToken!,
-                                  //     image: accountSignedIn.photoUrl!,
-                                  //   );
-                                  //   context.hideLoaderOverlay();
+                                    bool result = await apiRegularSignInWithGoogle(
+                                      firstName: accountSignedIn!.displayName!, 
+                                      lastName: '', 
+                                      email: accountSignedIn.email, 
+                                      username: accountSignedIn.email,
+                                      googleId: auth.idToken!,
+                                      image: accountSignedIn.photoUrl!,
+                                    );
+                                    context.hideLoaderOverlay();
 
-                                  //   if(result == true){
-                                  //     Navigator.pushReplacementNamed(context, '/home/regular');
-                                  //   }else{
-                                  //     await showOkCancelAlertDialog(
-                                  //       context: context,
-                                  //       title: 'Error',
-                                  //       message: 'Invalid email or password. Please try again.',
-                                  //       isDestructiveAction: true,
-                                  //     );
-                                  //   }
-                                  // }else{
-                                  //   GoogleSignInAccount? signIn = await googleSignIn.signIn();
-                                  //   GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
+                                    if(result == true){
+                                      Navigator.pushReplacementNamed(context, '/home/regular');
+                                    }else{
+                                      await showOkCancelAlertDialog(
+                                        context: context,
+                                        title: 'Error',
+                                        message: 'Invalid email or password. Please try again.',
+                                        isDestructiveAction: true,
+                                      );
+                                    }
+                                  }else{
+                                    GoogleSignInAccount? signIn = await googleSignIn.signIn();
+                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
 
-                                  //   context.showLoaderOverlay();
-                                  //   bool result = await apiRegularSignInWithGoogle(
-                                  //     firstName: signIn!.displayName!, 
-                                  //     lastName: '',
-                                  //     email: signIn.email, 
-                                  //     username: signIn.email,
-                                  //     googleId: auth.idToken!,
-                                  //     image: signIn.photoUrl!,
-                                  //   );
-                                  //   context.hideLoaderOverlay();
+                                    context.showLoaderOverlay();
+                                    bool result = await apiRegularSignInWithGoogle(
+                                      firstName: signIn!.displayName!, 
+                                      lastName: '',
+                                      email: signIn.email, 
+                                      username: signIn.email,
+                                      googleId: auth.idToken!,
+                                      image: signIn.photoUrl!,
+                                    );
+                                    context.hideLoaderOverlay();
 
-                                  //   if(result == true){
-                                  //     Navigator.pushReplacementNamed(context, '/home/regular');
-                                  //   }else{
-                                  //     await showOkAlertDialog(
-                                  //       context: context,
-                                  //       title: 'Error',
-                                  //       message: 'Invalid email or password. Please try again.',
-                                  //     );
-                                  //   }
-                                  // }
+                                    if(result == true){
+                                      Navigator.pushReplacementNamed(context, '/home/regular');
+                                    }else{
+                                      await showOkAlertDialog(
+                                        context: context,
+                                        title: 'Error',
+                                        message: 'Invalid email or password. Please try again.',
+                                      );
+                                    }
+                                  }
                                   
                                 },
                               ),
@@ -270,31 +270,31 @@ class RegularLoginState extends State<RegularLogin>{
 
                       SizedBox(height: 40),
 
-                      // SignInWithAppleButton(
-                      //   height: 45,
-                      //   onPressed: () async {
-                      //     AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
-                      //       scopes: [
-                      //         AppleIDAuthorizationScopes.email,
-                      //         AppleIDAuthorizationScopes.fullName,
-                      //       ],
-                      //     );
+                      SignInWithAppleButton(
+                        height: 45,
+                        onPressed: () async {
+                          AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
+                            scopes: [
+                              AppleIDAuthorizationScopes.email,
+                              AppleIDAuthorizationScopes.fullName,
+                            ],
+                          );
 
-                      //     context.showLoaderOverlay();
-                      //     bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
-                      //     context.hideLoaderOverlay();
+                          context.showLoaderOverlay();
+                          bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
+                          context.hideLoaderOverlay();
 
-                      //     if(result == true){
-                      //       Navigator.pushReplacementNamed(context, '/home/regular');
-                      //     }else{
-                      //       await showOkAlertDialog(
-                      //         context: context,
-                      //         title: 'Error',
-                      //         message: 'Invalid email or password. Please try again.',
-                      //       );
-                      //     }
-                      //   },
-                      // ),
+                          if(result == true){
+                            Navigator.pushReplacementNamed(context, '/home/regular');
+                          }else{
+                            await showOkAlertDialog(
+                              context: context,
+                              title: 'Error',
+                              message: 'Invalid email or password. Please try again.',
+                            );
+                          }
+                        },
+                      ),
 
                       SizedBox(height: 40),
 

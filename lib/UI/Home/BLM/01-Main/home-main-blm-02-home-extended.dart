@@ -13,11 +13,9 @@ import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-main-blm-03-01-feed-tab.dart';
 import 'home-main-blm-03-02-memorial-list-tab.dart';

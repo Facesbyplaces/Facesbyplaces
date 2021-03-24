@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-set
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
-// import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-01-show-unread-notifications.dart';
@@ -13,7 +13,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-backgroun
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-// import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home-main-regular-03-01-feed-tab.dart';
 import 'home-main-regular-03-02-memorial-list-tab.dart';
@@ -21,7 +20,6 @@ import 'home-main-regular-03-03-post-tab.dart';
 import 'home-main-regular-03-04-notifications-tab.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/services.dart';
@@ -386,34 +384,21 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             GestureDetector(
                               onTap: () async{
 
-                                // context.showLoaderOverlay();
-                                // bool result = await apiRegularLogout();
+                                context.showLoaderOverlay();
+                                bool result = await apiRegularLogout();
+                                context.hideLoaderOverlay();
 
-                                // GoogleSignIn googleSignIn = GoogleSignIn(
-                                //   scopes: [
-                                //     'profile',
-                                //     'email',
-                                //     'openid'
-                                //   ],
-                                // );
-                                // await googleSignIn.signOut();
-
-                                // // FacebookLogin fb = FacebookLogin();
-                                // // await fb.logOut();
-
-                                // context.hideLoaderOverlay();
-
-                                // if(result){
-                                //   Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                                //   Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                // }else{
-                                //   await showOkCancelAlertDialog(
-                                //     context: context,
-                                //     title: 'Error',
-                                //     message: 'Something went wrong. Please try again.',
-                                //     isDestructiveAction: true,
-                                //   );
-                                // }
+                                if(result){
+                                  Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                  Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                }else{
+                                  await showOkCancelAlertDialog(
+                                    context: context,
+                                    title: 'Error',
+                                    message: 'Something went wrong. Please try again.',
+                                    isDestructiveAction: true,
+                                  );
+                                }
                                 
                               },
                               child: Text('Log Out', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),

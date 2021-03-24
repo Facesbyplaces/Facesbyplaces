@@ -25,17 +25,11 @@ class PushNotificationService {
 
   Future initialise() async {
     if (Platform.isIOS) {
-      // fcm.requestNotificationPermissions(IosNotificationSettings());
       fcm.requestPermission();
     }
 
-    // String token = await fcm.getToken();
     String token = (await fcm.getToken())!;
     print("FirebaseMessaging token: $token");
-
-    // bool newResult = await apiRegularNewNotifications(deviceToken: token, title: 'Sample title - FacesbyPlaces', body: 'Sample body - FacesbyPlaces');
-
-    // print('The notification result is $newResult');
 
     NotificationSettings settings = await fcm.requestPermission(
       alert: true,
@@ -59,65 +53,11 @@ class PushNotificationService {
     });
 
     Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-      // If you're going to use other Firebase services in the background, such as Firestore,
-      // make sure you call `initializeApp` before using other Firebase services.
       await Firebase.initializeApp();
-
       print("Handling a background message: ${message.messageId}");
     }
 
-
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-    // var newMessage = await fcm.getNotificationSettings();
-
-    // print('done getting message');
-    // print('The newMessage is ${newMessage}');
-
-    // extractMessage(Map<String, dynamic> message) async{
-    //   print("notification: $message");
-    //   // showSimpleNotification(
-    //   //   Container(child: Text(message['notification']['body'])),
-    //   //   position: NotificationPosition.top,
-    //   // );
-    // }
-
-    // print('extract');
-
-    // print('The message is ${newMessage}');
-
-    // extractMessage(newMessage!.data);
-
-    // print('last');
-
-
-
-
-    
-
-    // fcm.configure(
-    //   onMessage: (Map<String, dynamic> message) async {
-    //     print("onMessage notification: $message");
-    //     showSimpleNotification(
-    //       Container(child: Text(message['notification']['body'])),
-    //       position: NotificationPosition.top,
-    //     );
-    //   },
-    //   onLaunch: (Map<String, dynamic> message) async {
-    //     print("onLaunch notification: $message");
-    //     showSimpleNotification(
-    //       Container(child: Text(message['notification']['body'])),
-    //       position: NotificationPosition.top,
-    //     );
-    //   },
-    //   onResume: (Map<String, dynamic> message) async {
-    //     print("onResume notification: $message");
-    //     showSimpleNotification(
-    //       Container(child: Text(message['notification']['body'])),
-    //       position: NotificationPosition.top,
-    //     );
-    //   },
-    // );
   }
 }
 

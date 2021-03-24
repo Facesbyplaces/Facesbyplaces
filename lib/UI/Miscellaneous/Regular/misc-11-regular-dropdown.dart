@@ -2,14 +2,15 @@ import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-r
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-regular-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:images_picker/images_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'misc-06-regular-button.dart';
-import 'package:share/share.dart';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:io';
@@ -67,27 +68,62 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
     lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
-  Future<void> shareQRCode() async {
+  Future<void> shareQRCode(String qrData) async {
     try {
-      print('Shared the QR Code');
-      RenderRepaintBoundary? boundary = qrKey.currentContext!.findRootAncestorStateOfType();
-      print('adsfzxcvlk');
-      var image = await boundary!.toImage();
-      print('1 - number');
-      ByteData byteData = (await image.toByteData(format: ImageByteFormat.png))!;
-      Uint8List pngBytes = byteData.buffer.asUint8List();
+      QrValidationResult qrValidationResult = QrValidator.validate(
+        data: qrData,
+        version: QrVersions.auto,
+        errorCorrectionLevel: QrErrorCorrectLevel.L,
+      );
 
-      print('sample');
+      if(qrValidationResult.status == QrValidationStatus.valid){
+        QrCode? qrCode = qrValidationResult.qrCode;
 
-      final tempDir = await getTemporaryDirectory();
-      final file = await new File('${tempDir.path}/qr-image.png').create();
-      await file.writeAsBytes(pngBytes);
+        final painter = QrPainter.withQr(
+          qr: qrCode!,
+          color: Colors.black,
+          gapless: true,
+          embeddedImageStyle: null,
+          embeddedImage: null,
+        );
 
-      print(pngBytes);
+        Directory tempDir = await getTemporaryDirectory();
+        String tempPath = tempDir.path;
+        final ts = DateTime.now().millisecondsSinceEpoch.toString();
+        String path = '$tempPath/$ts.png';
 
-      Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the post from FacesbyPlaces');
+        Future<void> writeToFile(ByteData data, String path) async {
+          final buffer = data.buffer;
 
-    } catch(e) {
+          File qrImage = await File(path).writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+          bool result = await ImagesPicker.saveImageToAlbum(qrImage, albumName: "");
+
+          if(result == true){
+            await showOkAlertDialog(
+              context: context,
+              title: 'Success',
+              message: 'Successfully saved the image to the gallery.',
+            );
+          }else{
+            await showOkAlertDialog(
+              context: context,
+              title: 'Error',
+              message: 'Something went wrong. Please try again.',
+            );
+          }
+        }
+
+        final picData = await painter.toImageData(2048, format: ImageByteFormat.png);
+        await writeToFile(picData!, path);
+
+      }else{
+        await showOkAlertDialog(
+          context: context,
+          title: 'Error',
+          message: 'Invalid QR Code.',
+        );
+      }
+    }catch(e) {
       print(e.toString());
     }
   }
@@ -195,7 +231,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                               height: 45,
                               buttonColor: Color(0xff04ECFF), 
                               onPressed: () async{
-                                await shareQRCode();
+                                await shareQRCode(qrData);
                               },
                             ),
 
@@ -278,21 +314,61 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
     lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
-  Future<void> shareQRCode() async {
+  Future<void> shareQRCode(String qrData) async {
     try {
-      RenderRepaintBoundary? boundary = qrKey.currentContext!.findRootAncestorStateOfType();
-      var image = await boundary!.toImage();
-      ByteData byteData = (await image.toByteData(format: ImageByteFormat.png))!;
-      Uint8List pngBytes = byteData.buffer.asUint8List();
+      QrValidationResult qrValidationResult = QrValidator.validate(
+        data: qrData,
+        version: QrVersions.auto,
+        errorCorrectionLevel: QrErrorCorrectLevel.L,
+      );
 
-      final tempDir = await getTemporaryDirectory();
-      final file = await new File('${tempDir.path}/qr-image.png').create();
-      await file.writeAsBytes(pngBytes);
+      if(qrValidationResult.status == QrValidationStatus.valid){
+        QrCode? qrCode = qrValidationResult.qrCode;
 
-      print(pngBytes);
+        final painter = QrPainter.withQr(
+          qr: qrCode!,
+          color: Colors.black,
+          gapless: true,
+          embeddedImageStyle: null,
+          embeddedImage: null,
+        );
 
-      Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the memorial of $memorialName');
+        Directory tempDir = await getTemporaryDirectory();
+        String tempPath = tempDir.path;
+        final ts = DateTime.now().millisecondsSinceEpoch.toString();
+        String path = '$tempPath/$ts.png';
 
+        Future<void> writeToFile(ByteData data, String path) async {
+          final buffer = data.buffer;
+
+          File qrImage = await File(path).writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+          bool result = await ImagesPicker.saveImageToAlbum(qrImage, albumName: "");
+
+          if(result == true){
+            await showOkAlertDialog(
+              context: context,
+              title: 'Success',
+              message: 'Successfully saved the image to the gallery.',
+            );
+          }else{
+            await showOkAlertDialog(
+              context: context,
+              title: 'Error',
+              message: 'Something went wrong. Please try again.',
+            );
+          }
+        }
+
+        final picData = await painter.toImageData(2048, format: ImageByteFormat.png);
+        await writeToFile(picData!, path);
+
+      }else{
+        await showOkAlertDialog(
+          context: context,
+          title: 'Error',
+          message: 'Invalid QR Code.',
+        );
+      }
     } catch(e) {
       print(e.toString());
     }
@@ -401,7 +477,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                               height: 45,
                               buttonColor: Color(0xff04ECFF), 
                               onPressed: () async{
-                                await shareQRCode();
+                                await shareQRCode(qrData);
                               },
                             ),
 

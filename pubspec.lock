@@ -272,6 +272,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  flutter_login_facebook:
+    dependency: "direct dev"
+    description:
+      name: flutter_login_facebook
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -352,6 +359,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  google_sign_in:
+    dependency: "direct dev"
+    description:
+      name: google_sign_in
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.1"
+  google_sign_in_platform_interface:
+    dependency: transitive
+    description:
+      name: google_sign_in_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
+  google_sign_in_web:
+    dependency: transitive
+    description:
+      name: google_sign_in_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.0"
   html:
     dependency: transitive
     description:
@@ -401,6 +429,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  images_picker:
+    dependency: "direct dev"
+    description:
+      name: images_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   intl:
     dependency: transitive
     description:
@@ -422,6 +457,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  list_ext:
+    dependency: transitive
+    description:
+      name: list_ext
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   loader_overlay:
     dependency: "direct dev"
     description:
@@ -611,6 +653,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   responsive_framework:
     dependency: "direct dev"
     description:
@@ -674,6 +723,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  sign_in_with_apple:
+    dependency: "direct dev"
+    description:
+      name: sign_in_with_apple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
