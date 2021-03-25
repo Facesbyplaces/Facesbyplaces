@@ -12,8 +12,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
     Dio dioRequest = Dio();
 
     var response = await dioRequest.get(
-      // 'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
-      'http://fbp.dev1.koda.ws/api/v1//feed/?page=$page',
+      'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
       options: Options(
         headers: <String, dynamic>{
           'access-token': getAccessToken,
