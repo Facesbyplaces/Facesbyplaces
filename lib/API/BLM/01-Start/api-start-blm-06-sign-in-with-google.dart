@@ -14,6 +14,7 @@ Future<bool> apiBLMSignInWithGoogle({required String firstName, required String 
   );
 
   print('The status code of login in google is ${response.statusCode}');
+  print('The status data of login in google is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

@@ -109,7 +109,7 @@ class RegularLoginState extends State<RegularLogin>{
                                 height: 45,
                                 onPressed: () async{
 
-                                  final fb = FacebookLogin();
+                                  final fb = FacebookLogin(debug: true);
 
                                   // await fb.logOut();
                                   // print('facebook logout'); // TO LOGOUT THE FACEBOOK ACCOUNT FOR TESTING
@@ -127,8 +127,8 @@ class RegularLoginState extends State<RegularLogin>{
                                     FacebookAccessToken token = (await fb.accessToken)!;
 
                                     bool apiResult = await apiRegularSignInWithFacebook(
-                                      firstName: profile.firstName.toString(), 
-                                      lastName: profile.lastName.toString(), 
+                                      firstName: '${profile.name}',
+                                      lastName: '',
                                       email: email, 
                                       username: email,
                                       facebookId: token.token,
@@ -153,20 +153,20 @@ class RegularLoginState extends State<RegularLogin>{
                                       FacebookPermission.userFriends,
                                     ]);
 
-                                    final email = await fb.getUserEmail();
-                                    final profile = await fb.getUserProfile();
-                                    final image = await fb.getProfileImageUrl(width: 50, height: 50);
+                                    final email = (await fb.getUserEmail())!;
+                                    final profile = (await fb.getUserProfile())!;
+                                    final image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
 
                                     if(result.status != FacebookLoginStatus.cancel){
                                       context.showLoaderOverlay();
                                       
                                       bool apiResult = await apiRegularSignInWithFacebook(
-                                        firstName: profile!.firstName.toString(), 
-                                        lastName: profile.lastName.toString(), 
-                                        email: email!, 
+                                        firstName: '${profile.name}',
+                                        lastName: '',
+                                        email: email, 
                                         username: email,
                                         facebookId: result.accessToken!.token,
-                                        image: image!,
+                                        image: image,
                                       );
                                       context.hideLoaderOverlay();
 

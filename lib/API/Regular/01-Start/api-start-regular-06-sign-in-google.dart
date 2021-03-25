@@ -17,6 +17,7 @@ Future<bool> apiRegularSignInWithGoogle({required String firstName, required Str
     );
 
     print('The status code of login with google is ${response.statusCode}');
+    print('The status data of login with google is ${response.data}');
 
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);

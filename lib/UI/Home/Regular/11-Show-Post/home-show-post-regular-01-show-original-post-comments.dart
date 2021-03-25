@@ -398,7 +398,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                 return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                    aspectRatio: 16 / 9,
+                                                    aspectRatio: 1,
                                                   ),
                                                 );
                                               }else{
@@ -420,7 +420,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                   ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                     betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      aspectRatio: 16 / 9,
+                                                      aspectRatio: 1,
                                                     ),
                                                   )
                                                   : CachedNetworkImage(
@@ -448,7 +448,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                     ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                        aspectRatio: 16 / 9,
+                                                        aspectRatio: 1,
                                                       ),
                                                     )
                                                     : CachedNetworkImage(
@@ -465,7 +465,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             children: [
                                                               BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                  aspectRatio: 16 / 9,
+                                                                  aspectRatio: 1,
                                                                 ),
                                                               ),
 
@@ -520,7 +520,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                           return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                              aspectRatio: 16 / 9,
+                                                              aspectRatio: 1,
                                                             ),
                                                           );
                                                         }else{

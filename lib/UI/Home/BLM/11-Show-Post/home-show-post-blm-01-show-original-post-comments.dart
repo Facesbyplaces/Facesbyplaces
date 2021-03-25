@@ -402,7 +402,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                               if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                 return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                    aspectRatio: 16 / 9,
+                                                    aspectRatio: 1,
                                                   ),
                                                 );
                                               }else{
@@ -424,7 +424,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                   ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                     betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      aspectRatio: 16 / 9,
+                                                      aspectRatio: 1,
                                                     ),
                                                   )
                                                   : CachedNetworkImage(
@@ -452,7 +452,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                     ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                        aspectRatio: 16 / 9,
+                                                        aspectRatio: 1,
                                                       ),
                                                     )
                                                     : CachedNetworkImage(
@@ -469,7 +469,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             children: [
                                                               BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                  aspectRatio: 16 / 9,
+                                                                  aspectRatio: 1,
                                                                 ),
                                                               ),
 
@@ -524,7 +524,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                         if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                           return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                              aspectRatio: 16 / 9,
+                                                              aspectRatio: 1,
                                                             ),
                                                           );
                                                         }else{

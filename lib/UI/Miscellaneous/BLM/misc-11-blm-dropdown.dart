@@ -10,7 +10,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 import 'misc-06-blm-button.dart';
 import 'dart:typed_data';
 import 'dart:io';

@@ -92,18 +92,18 @@ class BLMLoginState extends State<BLMLogin>{
                                   if(isLoggedIn == true){
                                     context.showLoaderOverlay();
 
-                                    FacebookUserProfile? profile = await fb.getUserProfile();
-                                    String? email = await fb.getUserEmail();
-                                    String? image = await fb.getProfileImageUrl(width: 50, height: 50);
-                                    FacebookAccessToken? token = await fb.accessToken;
+                                    FacebookUserProfile profile = (await fb.getUserProfile())!;
+                                    String email = (await fb.getUserEmail())!;
+                                    String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                                    FacebookAccessToken token = (await fb.accessToken)!;
 
                                     bool apiResult = await apiBLMSignInWithFacebook(
-                                      firstName: profile!.firstName.toString(), 
-                                      lastName: profile.lastName.toString(), 
-                                      email: email!,
+                                      firstName: '${profile.name}',
+                                      lastName: '',
+                                      email: email,
                                       username: email,
-                                      facebookId: token!.token,
-                                      image: image!,
+                                      facebookId: token.token,
+                                      image: image,
                                     );
                                     context.hideLoaderOverlay();
 
