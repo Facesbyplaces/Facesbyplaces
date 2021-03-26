@@ -400,7 +400,6 @@ class RegularLoginState extends State<RegularLogin>{
                               );
                             }
                           }
-                          
                         },
                       ),
 
