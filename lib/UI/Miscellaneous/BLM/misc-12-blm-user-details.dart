@@ -469,7 +469,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   }
 
   void onLoading() async{
-
     if(flag1 == false){
       onLoading1();
     }else{
@@ -509,9 +508,8 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       page1++;
 
       if(ownedItemsRemaining == 0){
-        onLoading();
+        addMemorials2();
       }
-
     }
   }
 

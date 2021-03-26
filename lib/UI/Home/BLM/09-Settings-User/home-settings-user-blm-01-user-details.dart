@@ -71,117 +71,114 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
               panelBackground: Color(0xffECF0F1),
               panel: Container(
                 height: SizeConfig.screenHeight! / 1.5,
+                padding: EdgeInsets.only(left: 50.0, right: 50.0),
                 decoration: BoxDecoration(
                   color: Color(0xffffffff),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.0),
                   ),
                 ),
-                child: SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.only(left: 50.0, right: 50.0),
-                  child: Column(
-                    children: [
+                child: Column(
+                  children: [
 
-                      SizedBox(height: 50,),
+                    Expanded(child: Container(),),
 
-                      ListTile(
-                        onTap: (){
-                          print('The user id is $userId');
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserUpdateDetails(userId: userId,)));
-                        },
-                        title: Text('Update Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                        subtitle: Text('Update your account details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                    ListTile(
+                      onTap: (){
+                        print('The user id is $userId');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserUpdateDetails(userId: userId,)));
+                      },
+                      title: Text('Update Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                      subtitle: Text('Update your account details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                    ),
+
+                    Divider(height: 20, color: Color(0xff888888),),
+
+                    ListTile(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserChangePassword(userId: userId,)));
+                      },
+                      title: Text('Password', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                      subtitle: Text('Change your login password', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                    ),
+
+                    Divider(height: 20, color: Color(0xff888888),),
+
+                    ListTile(
+                      onTap: () async{
+                        context.showLoaderOverlay();
+                        APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: userId);
+                        context.hideLoaderOverlay();
+
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                        HomeBLMUserOtherDetails(
+                          userId: userId, 
+                          toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, 
+                          toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, 
+                          toggleAddress: result.showOtherDetailsStatusHideAddress, 
+                          toggleEmail: result.showOtherDetailsStatusHideEmail, 
+                          toggleNumber: result.showOtherDetailsStatusHidePhoneNumber)));
+                      },
+                      title: Text('Other info', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                      subtitle: Text('Optional informations you can share', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                    ),
+
+                    Divider(height: 20, color: Color(0xff888888),),
+
+                    ListTile(
+                      onTap: (){
+                        
+                      },
+                      title: Text('Privacy Settings', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                      subtitle: Text('Control what others see', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                    ),
+
+                    Divider(height: 20, color: Color(0xff888888),),
+
+                    SizedBox(height: 20,),
+
+                    MiscBLMButtonTemplate(
+                      buttonText: 'Logout',
+                      buttonTextStyle: TextStyle(
+                        fontSize: 16, 
+                        fontWeight: FontWeight.bold, 
+                        color: Color(0xffffffff),
                       ),
+                      width: SizeConfig.screenWidth! / 2,
+                      height: 45,
+                      onPressed: () async{
 
-                      Divider(height: 20, color: Color(0xff888888),),
+                        bool logoutResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
-                      ListTile(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserChangePassword(userId: userId,)));
-                        },
-                        title: Text('Password', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                        subtitle: Text('Change your login password', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
-                      ),
+                        print('The logoutResult is $logoutResult');
 
-                      Divider(height: 20, color: Color(0xff888888),),
-
-                      ListTile(
-                        onTap: () async{
+                        if(logoutResult){
                           context.showLoaderOverlay();
-                          APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: userId);
+                          bool result = await apiBLMLogout();
                           context.hideLoaderOverlay();
 
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                          HomeBLMUserOtherDetails(
-                            userId: userId, 
-                            toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, 
-                            toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, 
-                            toggleAddress: result.showOtherDetailsStatusHideAddress, 
-                            toggleEmail: result.showOtherDetailsStatusHideEmail, 
-                            toggleNumber: result.showOtherDetailsStatusHidePhoneNumber)));
-                        },
-                        title: Text('Other info', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                        subtitle: Text('Optional informations you can share', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
-                      ),
-
-                      Divider(height: 20, color: Color(0xff888888),),
-
-                      ListTile(
-                        onTap: (){
-                          
-                        },
-                        title: Text('Privacy Settings', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                        subtitle: Text('Control what others see', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
-                      ),
-
-                      Divider(height: 20, color: Color(0xff888888),),
-
-                      SizedBox(height: 20,),
-
-                      MiscBLMButtonTemplate(
-                        buttonText: 'Logout',
-                        buttonTextStyle: TextStyle(
-                          fontSize: 16, 
-                          fontWeight: FontWeight.bold, 
-                          color: Color(0xffffffff),
-                        ),
-                        width: SizeConfig.screenWidth! / 2,
-                        height: 45,
-                        onPressed: () async{
-
-                          bool logoutResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
-
-                          print('The logoutResult is $logoutResult');
-
-                          if(logoutResult){
-                            context.showLoaderOverlay();
-                            bool result = await apiBLMLogout();
-                            context.hideLoaderOverlay();
-
-                            if(result){
-                              Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                              Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                            }else{
-                              await showOkAlertDialog(
-                                context: context,
-                                title: 'Error',
-                                message: 'Something went wrong. Please try again.',
-                              );
-                            }
+                          if(result){
+                            Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                            Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                          }else{
+                            await showOkAlertDialog(
+                              context: context,
+                              title: 'Error',
+                              message: 'Something went wrong. Please try again.',
+                            );
                           }
-                        },
-                        buttonColor: Color(0xff04ECFF),
-                      ),
+                        }
+                      },
+                      buttonColor: Color(0xff04ECFF),
+                    ),
 
-                      SizedBox(height: 20,),
-                      
-                      Text('V.1.1.0', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
+                    SizedBox(height: 20,),
+                    
+                    Text('V.1.1.0', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
 
-                      SizedBox(height: 20,),
+                    Expanded(child: Container(),),
 
-                    ],
-                  ),
+                  ],
                 ),
               ),
               body: Stack(

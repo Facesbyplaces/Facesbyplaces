@@ -7,6 +7,7 @@ import 'home-create-post-regular-02-02-create-post-user.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
+import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
@@ -50,7 +51,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   TextEditingController controller = TextEditingController();
   int maxLines = 5;
 
-  File videoFile = File('');
+  // File videoFile = File('');
   final picker = ImagePicker();
   String newLocation = '';
   String person = '';
@@ -65,7 +66,15 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   void getManagedPages() async{
     context.showLoaderOverlay();
-    var newValue = await apiRegularShowListOfManagedPages();
+    var newValue = await apiRegularShowListOfManagedPages().onError((error, stackTrace) async{
+      context.hideLoaderOverlay();
+      await showOkAlertDialog(
+        context: context,
+        title: 'Error',
+        message: 'Something went wrong. Please try again.',
+      );
+      return Future.error('Error occurred: $error');
+    });
     context.hideLoaderOverlay();
 
     for(int i = 0; i < newValue.almPagesList.length; i++){
@@ -86,7 +95,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     if(pickedFile != null){
       setState(() {
         slideImages.add(File(pickedFile.path));
-        videoFile = File(pickedFile.path);
+        // videoFile = File(pickedFile.path);
       });
     }
   }
@@ -378,48 +387,49 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                     });
                                   },
                                   child: lookupMimeType(slideImages[index].path)?.contains('video') == true
-                                  ? Container(
-                                    width: 80,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Color(0xffcccccc),
-                                      border: Border.all(color: Color(0xff000000),),
-                                    ),
-                                    child: Stack(
-                                      children: [                                        
-                                        
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                            child: Text('$index',
-                                              style: TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
-                                              ),
+                                  ? Stack(
+                                    children: [
+                                      BetterPlayer.file('${slideImages[index].path}',
+                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                            showControls: false,
+                                          ),
+                                          aspectRatio: 1,
+                                        ),
+                                      ),
+
+                                      Center(
+                                        child: CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                          child: Text('$index',
+                                            style: TextStyle(
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xffffffff),
                                             ),
                                           ),
                                         ),
+                                      ),
 
-                                        removeAttachment == index
-                                        ? GestureDetector(
+                                      removeAttachment == index
+                                      ? Positioned(
+                                        top: 0,
+                                        right: 0,
+                                        child: GestureDetector(
                                           onTap: (){
                                             setState(() {
                                               slideImages.removeAt(index);
                                             });
                                           },
-                                          // child: Badge(
-                                          //   position: BadgePosition.topEnd(top: 0, end: 0),
-                                          //   animationDuration: Duration(milliseconds: 300),
-                                          //   animationType: BadgeAnimationType.fade,
-                                          //   badgeColor: Color(0xff000000),
-                                          //   badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
-                                          // ),
-                                        )
-                                        : Container(height: 0),
-                                      ],
-                                    ),
+                                          child: CircleAvatar(
+                                            backgroundColor: Color(0xff000000),
+                                            child: Icon(Icons.close, color: Color(0xffffffff),),
+                                          ),
+                                        ),
+                                      )
+                                      : Container(height: 0),
+                                    ],
                                   )
                                   : Container(
                                     width: 80,
@@ -449,19 +459,20 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                         ),
 
                                         removeAttachment == index
-                                        ? GestureDetector(
-                                          onTap: (){
-                                            setState(() {
-                                              slideImages.removeAt(index);
-                                            });
-                                          },
-                                          // child: Badge(
-                                          //   position: BadgePosition.topEnd(top: 0, end: 0),
-                                          //   animationDuration: Duration(milliseconds: 300),
-                                          //   animationType: BadgeAnimationType.fade,
-                                          //   badgeColor: Color(0xff000000),
-                                          //   badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
-                                          // ),
+                                        ? Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: GestureDetector(
+                                            onTap: (){
+                                              setState(() {
+                                                slideImages.removeAt(index);
+                                              });
+                                            },
+                                            child: CircleAvatar(
+                                              backgroundColor: Color(0xff000000),
+                                              child: Icon(Icons.close, color: Color(0xffffffff),),
+                                            ),
+                                          ),
                                         )
                                         : Container(height: 0),
                                       ],

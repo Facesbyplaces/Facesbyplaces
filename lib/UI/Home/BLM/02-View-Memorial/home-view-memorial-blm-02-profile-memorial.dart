@@ -282,9 +282,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
                                                         return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
                                                           betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                            controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                              showControls: false,
-                                                            ),
                                                             aspectRatio: 16 / 9,
                                                           ),
                                                         );
@@ -747,43 +744,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                       );
                                                                     },
                                                                   );
-
-                                                                  // showGeneralDialog(
-                                                                  //   context: context,
-                                                                  //   barrierColor: Colors.black12.withOpacity(0.7),
-                                                                  //   barrierDismissible: true,
-                                                                  //   barrierLabel: 'Dialog',
-                                                                  //   transitionDuration: Duration(milliseconds: 0),
-                                                                  //   pageBuilder: (_, __, ___) {
-                                                                  //     return SizedBox.expand(
-                                                                  //       child: SafeArea(
-                                                                  //         child: Column(
-                                                                  //           children: [
-                                                                  //             Container(
-                                                                  //               height: 50,
-                                                                  //               padding: EdgeInsets.only(right: 20.0),
-                                                                  //               alignment: Alignment.centerRight,
-                                                                  //               child: GestureDetector(
-                                                                  //                 onTap: (){
-                                                                  //                   Navigator.pop(context);
-                                                                  //                 },
-                                                                  //                 child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
-                                                                  //               ),
-                                                                  //             ),
-                                                                  //             Expanded(
-                                                                  //               child: CachedNetworkImage(
-                                                                  //                 fit: BoxFit.cover,
-                                                                  //                 imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
-                                                                  //                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                  //                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                  //               ),
-                                                                  //             ),
-                                                                  //           ],
-                                                                  //         ),
-                                                                  //       ),
-                                                                  //     );
-                                                                  //   },
-                                                                  // );
                                                                 },
                                                                 child: Container(
                                                                   width: 100,

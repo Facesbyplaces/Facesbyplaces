@@ -77,7 +77,6 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                           unselectedLabelColor: Color(0xffCDEAEC),
                           indicatorColor: Color(0xff04ECFF),
                           onTap: (int number){
-                            print('The currentIndex is $currentIndex');
                             setState(() {
                               currentIndex = number;
                             });

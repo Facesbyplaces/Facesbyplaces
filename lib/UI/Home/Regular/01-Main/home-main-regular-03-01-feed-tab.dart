@@ -7,6 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -52,7 +53,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   int itemRemaining = 1;
   int count = 0;
   int page = 1;
-  bool error = false;
 
   void initState(){
     super.initState();
@@ -91,7 +91,15 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeFeedTab(page: page);
+      var newValue = await apiRegularHomeFeedTab(page: page).onError((error, stackTrace) async{
+        context.hideLoaderOverlay();
+        await showOkAlertDialog(
+          context: context,
+          title: 'Error',
+          message: 'Something went wrong. Please try again.',
+        );
+        return Future.error('Error occurred: $error');
+      });
       context.hideLoaderOverlay();
       
 

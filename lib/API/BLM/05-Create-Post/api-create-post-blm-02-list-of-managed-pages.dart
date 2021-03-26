@@ -22,6 +22,7 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
   );
 
   print('The status code of managed pages is ${response.statusCode}');
+  print('The status data of managed pages is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

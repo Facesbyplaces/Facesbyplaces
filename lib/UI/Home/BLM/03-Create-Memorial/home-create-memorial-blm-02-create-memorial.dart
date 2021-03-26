@@ -4,6 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-blm-03-create-memorial.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -37,9 +38,9 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   TextEditingController controllerStory = TextEditingController();
   List<File> slideImages = [];
   int toggle = 0;
-  File? videoFile;
-  File? imageFile;
-  File? newFile;
+  File videoFile = File('');
+  File imageFile = File('');
+  File newFile = File('');
   final picker = ImagePicker();
 
   Future getVideo() async{
@@ -189,8 +190,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                         }else{
                           List<File> newFiles = [];
 
-                          if(videoFile != null){
-                            newFiles.add(videoFile!);
+                          if(videoFile.path != ''){
+                            newFiles.add(videoFile);
                           }
 
                           if(slideImages != []){
@@ -258,46 +259,52 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
     );
   }
 
-  shareStory2(){
-    return Container(
+  shareStory2(){    return Container(
       width: SizeConfig.screenWidth,
-      child: Stack(
-        children: [
-
-          GestureDetector(
-            onTap: () async{
-              await getVideo();
-            },
-            child: Container(
-              height: 260,
-              width: SizeConfig.screenWidth,
-              decoration: BoxDecoration(
-                color: Color(0xffcccccc),
-                border: Border.all(color: Color(0xff000000),),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+      child: GestureDetector(
+        onTap: () async{
+          await getVideo();
+        },
+        child: videoFile.path != ''
+        ? Stack(
+          children: [
+            BetterPlayer.file(
+              videoFile.path,
+              betterPlayerConfiguration: BetterPlayerConfiguration(
+                controlsConfiguration: BetterPlayerControlsConfiguration(
+                  enableOverflowMenu: false,
+                  enableMute: false,
+                ),
+                aspectRatio: 16 / 9,
               ),
             ),
-          ),
 
-          videoFile != null
-          ? Positioned(
-            right: 0,
-            child: IconButton(
-              iconSize: 25,
-              onPressed: (){
-                videoFile!.delete();
-
-                setState(() {
-                  
-                });
-              },
-              icon: Icon(Icons.close),
-              color: Colors.red,
+            Positioned(
+              right: 0,
+              child: IconButton(
+                iconSize: 25,
+                onPressed: (){
+                  setState(() {
+                    videoFile = File('');  
+                  });
+                },
+                icon: CircleAvatar(
+                  backgroundColor: Color(0xff000000),
+                  child: Icon(Icons.close, color: Color(0xffffffff),),
+                ),
+              ),
             ),
-          )
-          : Container(height: 0,),
-
-        ],
+          ],
+        )
+        : Container(
+          height: 260,
+          width: SizeConfig.screenWidth,
+          decoration: BoxDecoration(
+            color: Color(0xffcccccc),
+            border: Border.all(color: Color(0xff000000),),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+        ),
       ),
     );
   }
@@ -380,7 +387,10 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
         SizedBox(height: 5,),
 
-        Text('Double tap to remove images.',style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text('Double tap to remove images.',style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+        ),
       ],
     );
   }

@@ -119,14 +119,12 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   }
 
   void onLoading1() async{
-
     if(memorialFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiRegularHomeMemorialsTab(page: page1);
       context.hideLoaderOverlay();
 
       memorialFamilyItemsRemaining = newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining;
-
       count = count + newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length; i++){
@@ -148,7 +146,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     }
 
     if(blmFamilyItemsRemaining != 0){
-
       context.showLoaderOverlay();
       var newValue = await apiRegularHomeMemorialsTab(page: page1);
       context.hideLoaderOverlay();
@@ -181,7 +178,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
       addMemorials2();
     }
-
   }
 
   void onLoading2() async{

@@ -51,7 +51,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   TextEditingController controller = TextEditingController();
   int maxLines = 5;
 
-  File? videoFile;
   final picker = ImagePicker();
   String newLocation = '';
   String person = '';
@@ -66,7 +65,15 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
   void getManagedPages() async{
     context.showLoaderOverlay();
-    var newValue = await apiBLMShowListOfManagedPages();
+    var newValue = await apiBLMShowListOfManagedPages().onError((error, stackTrace) async{
+      context.hideLoaderOverlay();
+      await showOkAlertDialog(
+        context: context,
+        title: 'Error',
+        message: 'Something went wrong. Please try again.',
+      );
+      return Future.error('Error occurred: $error');
+    });
     context.hideLoaderOverlay();
 
     for(int i = 0; i < newValue.blmPagesList.length; i++){
@@ -86,7 +93,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     if(pickedFile != null){
       setState(() {
         slideImages.add(File(pickedFile.path));
-        videoFile = File(pickedFile.path);
       });
     }
   }
@@ -381,13 +387,49 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     });
                                   },
                                   child: lookupMimeType(slideImages[index].path)?.contains('video') == true
-                                  ? BetterPlayer.network('${slideImages[index].path}',
-                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                      controlsConfiguration: BetterPlayerControlsConfiguration(
-                                        showControls: false,
+                                  ? Stack(
+                                    children: [
+                                      BetterPlayer.file('${slideImages[index].path}',
+                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                            showControls: false,
+                                          ),
+                                          aspectRatio: 1,
+                                        ),
                                       ),
-                                      aspectRatio: 16 / 9,
-                                    ),
+
+                                      Center(
+                                        child: CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                          child: Text('$index',
+                                            style: TextStyle(
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                      removeAttachment == index
+                                      ? Positioned(
+                                        top: 0,
+                                        right: 0,
+                                        child: GestureDetector(
+                                          onTap: (){
+                                            setState(() {
+                                              slideImages.removeAt(index);
+                                            });
+                                          },
+                                          child: CircleAvatar(
+                                            backgroundColor: Color(0xff000000),
+                                            child: Icon(Icons.close, color: Color(0xffffffff),),
+                                          ),
+                                        ),
+                                      )
+                                      : Container(height: 0),
+                                    ],
                                   )
                                   : Container(
                                     width: 80,
@@ -417,19 +459,20 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         ),
 
                                         removeAttachment == index
-                                        ? GestureDetector(
-                                          onTap: (){
-                                            setState(() {
-                                              slideImages.removeAt(index);
-                                            });
-                                          },
-                                          // child: Badge(
-                                          //   position: BadgePosition.topEnd(top: 0, end: 0),
-                                          //   animationDuration: Duration(milliseconds: 300),
-                                          //   animationType: BadgeAnimationType.fade,
-                                          //   badgeColor: Color(0xff000000),
-                                          //   badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
-                                          // ),
+                                        ? Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: GestureDetector(
+                                            onTap: (){
+                                              setState(() {
+                                                slideImages.removeAt(index);
+                                              });
+                                            },
+                                            child: CircleAvatar(
+                                              backgroundColor: Color(0xff000000),
+                                              child: Icon(Icons.close, color: Color(0xffffffff),),
+                                            ),
+                                          ),
                                         )
                                         : Container(height: 0),
                                       ],
@@ -454,9 +497,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-                              // var result = await Navigator.pushNamed(context, '/home/blm/create-post-location');
                               String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
-
                               
                               setState(() {
                                 newLocation = result;

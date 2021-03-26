@@ -6,8 +6,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:flutter/material.dart';
 import 'misc-03-regular-manage-memorial.dart';
+import 'package:flutter/material.dart';
 import 'misc-04-regular-post.dart';
 import 'package:mime/mime.dart';
 
@@ -345,7 +345,6 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                   ],
                 )
                 : Container(height: 0),
-
               ],
             );
           },
@@ -358,7 +357,6 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
@@ -391,9 +389,9 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   List<Widget> finalMemorials = [];
   int ownedItemsRemaining = 1;
   int followedItemsRemaining = 1;
+  bool flag1 = false;
   int page1 = 1;
   int page2 = 1;
-  bool flag1 = false;
   int count = 0;
 
   void initState(){
@@ -471,7 +469,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   }
 
   void onLoading() async{
-
     if(flag1 == false){
       onLoading1();
     }else{
@@ -480,7 +477,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   }
 
   void onLoading1() async{
-
     if(ownedItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiRegularShowUserMemorials(userId: userId, page: page1);
@@ -511,14 +507,12 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
       page1++;
 
       if(ownedItemsRemaining == 0){
-        onLoading();
+        addMemorials2();
       }
-
     }
   }
 
   void onLoading2() async{
-
     if(followedItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiRegularShowUserMemorials(userId: userId, page: page2);
