@@ -107,9 +107,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   bool pressedLike = false;
   int likesCount = 0;
   bool isGuestLoggedIn = true;
-
   CarouselController buttonCarouselController = CarouselController();
-  // BetterPlayerController betterPlayerController = BetterPlayerController();
 
   void initState(){
     super.initState();
@@ -993,7 +991,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
                                                       }
                                                     }, 
-                                                    icon: commentsLikes[i] == true ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,) : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
+                                                    icon: commentsLikes[i] == true ? FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),) : FaIcon(FontAwesomeIcons.heart, color: Colors.grey,),
                                                     label: Text('${commentsNumberOfLikes[i]}', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
                                                   ),
                                                 ),
@@ -1158,7 +1156,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
                                                                 }
                                                               }, 
-                                                              icon: repliesLikes[i][index] == true ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,) : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
+                                                              icon: repliesLikes[i][index] == true ? FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),) : FaIcon(FontAwesomeIcons.heart, color: Colors.grey,),
                                                               label: Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
                                                             ),
                                                           ),

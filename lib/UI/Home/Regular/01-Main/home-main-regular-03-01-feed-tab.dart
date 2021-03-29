@@ -201,7 +201,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              // aspectRatio: 16 / 9,
                               aspectRatio: 1,
                             ),
                           );
@@ -227,7 +226,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                // aspectRatio: 16 / 9,
                                 aspectRatio: 1,
                               ),
                             )
@@ -259,7 +257,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  // aspectRatio: 16 / 9,
                                   aspectRatio: 1,
                                 ),
                               )
@@ -280,7 +277,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            // aspectRatio: 16 / 9,
                                             aspectRatio: 1,
                                           ),
                                         ),
@@ -339,7 +335,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        // aspectRatio: 16 / 9,
                                         aspectRatio: 1,
                                       ),
                                     );
@@ -401,7 +396,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              // aspectRatio: 16 / 9,
                               aspectRatio: 1,
                             ),
                           );
@@ -427,7 +421,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                // aspectRatio: 16 / 9,
                                 aspectRatio: 1,
                               ),
                             )
@@ -459,7 +452,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  // aspectRatio: 16 / 9,
                                   aspectRatio: 1,
                                 ),
                               )
@@ -480,7 +472,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            // aspectRatio: 16 / 9,
                                             aspectRatio: 1,
                                           ),
                                         ),
@@ -539,7 +530,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        // aspectRatio: 16 / 9,
                                         aspectRatio: 1,
                                       ),
                                     );

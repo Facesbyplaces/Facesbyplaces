@@ -11,6 +11,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -75,6 +76,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
   bool isGuestLoggedIn = false;
+  CarouselController buttonCarouselController = CarouselController();
 
   Future<void> onRefresh() async{
     setState(() {
@@ -679,88 +681,118 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         },
                                                         itemCount: profile.data!.blmMemorial.memorialImagesOrVideos.length,
                                                         itemBuilder: (context, index){
-                                                          return ((){
-                                                            if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[index])?.contains('video') == true){
-                                                              return Container(
-                                                                width: 100,
-                                                                height: 100,
-                                                                decoration: BoxDecoration(
-                                                                  borderRadius: BorderRadius.circular(10),
-                                                                  color: Color(0xff888888),
-                                                                ),
-                                                                child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                                      showControls: false,
-                                                                    ),
-                                                                    aspectRatio: 16 / 9,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }else{
-                                                              return GestureDetector(
-                                                                onTap: (){
-
-                                                                  showGeneralDialog(
-                                                                    context: context,
-                                                                    barrierColor: Colors.black12.withOpacity(0.7),
-                                                                    barrierDismissible: true,
-                                                                    barrierLabel: 'Dialog',
-                                                                    transitionDuration: Duration(milliseconds: 0),
-                                                                    pageBuilder: (_, __, ___) {
-                                                                      return SizedBox.expand(
-                                                                        child: SafeArea(
-                                                                          child: Column(
-                                                                            children: [
-                                                                              Container(
-                                                                                height: 50,
-                                                                                padding: EdgeInsets.only(right: 20.0),
-                                                                                alignment: Alignment.centerRight,
-                                                                                child: GestureDetector(
-                                                                                  onTap: (){
-                                                                                    Navigator.pop(context);
-                                                                                  },
-                                                                                  child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
+                                                          return GestureDetector(
+                                                            onTap: (){
+                                                              showGeneralDialog(
+                                                                context: context,
+                                                                barrierDismissible: true,
+                                                                barrierLabel: 'Dialog',
+                                                                transitionDuration: Duration(milliseconds: 0),
+                                                                pageBuilder: (_, __, ___) {
+                                                                  return Scaffold(
+                                                                    backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                    body: SizedBox.expand(
+                                                                      child: SafeArea(
+                                                                        child: Column(
+                                                                          children: [
+                                                                            Container(
+                                                                              alignment: Alignment.centerRight,
+                                                                              padding: EdgeInsets.only(right: 20.0),
+                                                                              child: GestureDetector(
+                                                                                onTap: (){
+                                                                                  Navigator.pop(context);
+                                                                                },
+                                                                                child: CircleAvatar(
+                                                                                  radius: 20,
+                                                                                  backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                                                  child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
                                                                                 ),
                                                                               ),
+                                                                            ),
 
-                                                                              Expanded(
-                                                                                child: Container(
-                                                                                  color: Color(0xffffffff),
-                                                                                  child: CachedNetworkImage(
-                                                                                    fit: BoxFit.cover,
-                                                                                    imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
-                                                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                  ),
+                                                                            Expanded(
+                                                                              child: CarouselSlider(
+                                                                                carouselController: buttonCarouselController,
+                                                                                items: List.generate(profile.data!.blmMemorial.memorialImagesOrVideos.length, (next) =>
+                                                                                  ((){
+                                                                                    if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[next])?.contains('video') == true){
+                                                                                      return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
+                                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                          autoDispose: false,
+                                                                                          aspectRatio: 1,
+                                                                                        ),
+                                                                                      );
+                                                                                    }else{
+                                                                                      return CachedNetworkImage(
+                                                                                        fit: BoxFit.contain,
+                                                                                        imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
+                                                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                      );
+                                                                                    }
+                                                                                  }()),
+                                                                                ),
+                                                                                options: CarouselOptions(
+                                                                                  autoPlay: false,
+                                                                                  enlargeCenterPage: true,
+                                                                                  aspectRatio: 1,
+                                                                                  viewportFraction: 1,
+                                                                                  initialPage: index,
                                                                                 ),
                                                                               ),
+                                                                            ),
 
-                                                                              SizedBox(height: 85,),
+                                                                            Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                              children: [
+                                                                                IconButton(
+                                                                                  onPressed: () => buttonCarouselController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                  icon: Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                                ),
 
-                                                                            ],
-                                                                          ),
+                                                                                IconButton(
+                                                                                  onPressed: () => buttonCarouselController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                  icon: Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+
+                                                                            SizedBox(height: 85,),
+
+                                                                          ],
                                                                         ),
-                                                                      );
-                                                                    },
+                                                                      ),
+                                                                    ),
                                                                   );
                                                                 },
-                                                                child: Container(
+                                                              );
+                                                            },
+                                                            child: ((){
+                                                              if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[index])?.contains('video') == true){
+                                                                return Container(
                                                                   width: 100,
-                                                                  decoration: BoxDecoration(
-                                                                    borderRadius: BorderRadius.circular(10),
-                                                                    color: Color(0xff888888),
+                                                                  height: 100,
+                                                                  child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
+                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                      aspectRatio: 1,
+                                                                      controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                                        showControls: false,
+                                                                      ),
+                                                                    ),
                                                                   ),
+                                                                );
+                                                              }else{
+                                                                return Container(
                                                                   child: CachedNetworkImage(
-                                                                    fit: BoxFit.cover,
+                                                                    fit: BoxFit.contain,
                                                                     imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
                                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                   ),
-                                                                ),
-                                                              );
-                                                            }
-                                                          }());
+                                                                );
+                                                              }
+                                                            }()),
+                                                          );
                                                         },
                                                       ),
                                                     ),
@@ -921,7 +953,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                       showControls: false,
                                                     ),
-                                                    aspectRatio: 16 / 9,
+                                                    aspectRatio: 1,
                                                   ),
                                                 );
                                               }else{
@@ -946,7 +978,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       controlsConfiguration: BetterPlayerControlsConfiguration(
                                                         showControls: false,
                                                       ),
-                                                      aspectRatio: 16 / 9,
+                                                      aspectRatio: 1,
                                                     ),
                                                   )
                                                   : CachedNetworkImage(
@@ -977,7 +1009,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                                           showControls: false,
                                                         ),
-                                                        aspectRatio: 16 / 9,
+                                                        aspectRatio: 1,
                                                       ),
                                                     )
                                                     : CachedNetworkImage(
@@ -997,7 +1029,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                     showControls: false,
                                                                   ),
-                                                                  aspectRatio: 16 / 9,
+                                                                  aspectRatio: 1,
                                                                 ),
                                                               ),
 
@@ -1055,7 +1087,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                 showControls: false,
                                                               ),
-                                                              aspectRatio: 16 / 9,
+                                                              aspectRatio: 1,
                                                             ),
                                                           );
                                                         }else{

@@ -17,7 +17,12 @@ Future<bool> apiRegularLogin({required String email, required String password, r
     );
 
     print('The status code of login is ${response.statusCode}');
-    print('The status data of login is ${response.data}');
+    // print('The status data of login is ${response.data}');
+
+      print('The headers is ${response.headers['access-token']}');
+      print('The uid is ${response.headers['uid']}');
+      print('The client is ${response.headers['client']}');
+    
 
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);

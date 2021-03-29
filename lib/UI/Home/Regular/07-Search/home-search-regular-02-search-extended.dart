@@ -678,7 +678,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 16 / 9,
+                              aspectRatio: 1,
                             ),
                           );
                         }else{
@@ -703,7 +703,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 16 / 9,
+                                aspectRatio: 1,
                               ),
                             )
                             : CachedNetworkImage(
@@ -734,7 +734,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 16 / 9,
+                                  aspectRatio: 1,
                                 ),
                               )
                               : CachedNetworkImage(
@@ -754,7 +754,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 16 / 9,
+                                            aspectRatio: 1,
                                           ),
                                         ),
 
@@ -812,7 +812,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 16 / 9,
+                                        aspectRatio: 1,
                                       ),
                                     );
                                   }else{
@@ -873,7 +873,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 16 / 9,
+                              aspectRatio: 1,
                             ),
                           );
                         }else{
@@ -898,7 +898,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 16 / 9,
+                                aspectRatio: 1,
                               ),
                             )
                             : CachedNetworkImage(
@@ -929,7 +929,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 16 / 9,
+                                  aspectRatio: 1,
                                 ),
                               )
                               : CachedNetworkImage(
@@ -949,7 +949,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 16 / 9,
+                                            aspectRatio: 1,
                                           ),
                                         ),
 
@@ -1007,7 +1007,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 16 / 9,
+                                        aspectRatio: 1,
                                       ),
                                     );
                                   }else{

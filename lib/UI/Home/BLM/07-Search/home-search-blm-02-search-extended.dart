@@ -675,7 +675,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 16 / 9,
+                              aspectRatio: 1,
                             ),
                           );
                         }else{
@@ -700,7 +700,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 16 / 9,
+                                aspectRatio: 1,
                               ),
                             )
                             : CachedNetworkImage(
@@ -731,7 +731,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 16 / 9,
+                                  aspectRatio: 1,
                                 ),
                               )
                               : CachedNetworkImage(
@@ -751,7 +751,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 16 / 9,
+                                            aspectRatio: 1,
                                           ),
                                         ),
 
@@ -809,7 +809,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 16 / 9,
+                                        aspectRatio: 1,
                                       ),
                                     );
                                   }else{
@@ -870,7 +870,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 16 / 9,
+                              aspectRatio: 1,
                             ),
                           );
                         }else{
@@ -895,7 +895,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 16 / 9,
+                                aspectRatio: 1,
                               ),
                             )
                             : CachedNetworkImage(
@@ -926,7 +926,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 16 / 9,
+                                  aspectRatio: 1,
                                 ),
                               )
                               : CachedNetworkImage(
@@ -946,7 +946,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 16 / 9,
+                                            aspectRatio: 1,
                                           ),
                                         ),
 
@@ -1004,7 +1004,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 16 / 9,
+                                        aspectRatio: 1,
                                       ),
                                     );
                                   }else{

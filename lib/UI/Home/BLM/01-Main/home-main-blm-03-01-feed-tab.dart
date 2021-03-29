@@ -191,7 +191,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              // aspectRatio: 16 / 9,
                               aspectRatio: 1,
                             ),
                           );
@@ -217,7 +216,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                // aspectRatio: 16 / 9,
                                 aspectRatio: 1,
                               ),
                             )
@@ -249,7 +247,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  // aspectRatio: 16 / 9,
                                   aspectRatio: 1,
                                 ),
                               )
@@ -270,7 +267,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            // aspectRatio: 16 / 9,
                                             aspectRatio: 1,
                                           ),
                                         ),
@@ -329,7 +325,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        // aspectRatio: 16 / 9,
                                         aspectRatio: 1,
                                       ),
                                     );
@@ -391,7 +386,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              // aspectRatio: 16 / 9,
                               aspectRatio: 1,
                             ),
                           );
@@ -417,7 +411,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                // aspectRatio: 16 / 9,
                                 aspectRatio: 1,
                               ),
                             )
@@ -449,7 +442,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  // aspectRatio: 16 / 9,
                                   aspectRatio: 1,
                                 ),
                               )
@@ -470,7 +462,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            // aspectRatio: 16 / 9,
                                             aspectRatio: 1,
                                           ),
                                         ),
@@ -529,7 +520,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        // aspectRatio: 16 / 9,
                                         aspectRatio: 1,
                                       ),
                                     );

@@ -13,6 +13,7 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -75,6 +76,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
   bool isGuestLoggedIn = false;
+  CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
     super.initState();
@@ -677,87 +679,118 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                         },
                                                         itemCount: profile.data!.almMemorial.showMemorialImagesOrVideos.length,
                                                         itemBuilder: (context, index){
-                                                          return ((){
-                                                            if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[index])?.contains('video') == true){
-                                                              return Container(
-                                                                width: 100,
-                                                                height: 100,
-                                                                decoration: BoxDecoration(
-                                                                  borderRadius: BorderRadius.circular(10),
-                                                                  color: Color(0xff888888),
-                                                                ),
-                                                                child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                                      showControls: false,
-                                                                    ),
-                                                                    aspectRatio: 16 / 9,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }else{
-                                                              return GestureDetector(
-                                                                onTap: (){
-                                                                  showGeneralDialog(
-                                                                    context: context,
-                                                                    barrierColor: Colors.black12.withOpacity(0.7),
-                                                                    barrierDismissible: true,
-                                                                    barrierLabel: 'Dialog',
-                                                                    transitionDuration: Duration(milliseconds: 0),
-                                                                    pageBuilder: (_, __, ___) {
-                                                                      return SizedBox.expand(
-                                                                        child: SafeArea(
-                                                                          child: Column(
-                                                                            children: [
-                                                                              Container(
-                                                                                height: 50,
-                                                                                padding: EdgeInsets.only(right: 20.0),
-                                                                                alignment: Alignment.centerRight,
-                                                                                child: GestureDetector(
-                                                                                  onTap: (){
-                                                                                    Navigator.pop(context);
-                                                                                  },
-                                                                                  child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
+                                                          return GestureDetector(
+                                                            onTap: (){
+                                                              showGeneralDialog(
+                                                                context: context,
+                                                                barrierDismissible: true,
+                                                                barrierLabel: 'Dialog',
+                                                                transitionDuration: Duration(milliseconds: 0),
+                                                                pageBuilder: (_, __, ___) {
+                                                                  return Scaffold(
+                                                                    backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                    body: SizedBox.expand(
+                                                                      child: SafeArea(
+                                                                        child: Column(
+                                                                          children: [
+                                                                            Container(
+                                                                              alignment: Alignment.centerRight,
+                                                                              padding: EdgeInsets.only(right: 20.0),
+                                                                              child: GestureDetector(
+                                                                                onTap: (){
+                                                                                  Navigator.pop(context);
+                                                                                },
+                                                                                child: CircleAvatar(
+                                                                                  radius: 20,
+                                                                                  backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                                                  child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
                                                                                 ),
                                                                               ),
+                                                                            ),
 
-                                                                              Expanded(
-                                                                                child: Container(
-                                                                                  color: Color(0xffffffff),
-                                                                                  child: CachedNetworkImage(
-                                                                                    fit: BoxFit.cover,
-                                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
-                                                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                  ),
+                                                                            Expanded(
+                                                                              child: CarouselSlider(
+                                                                                carouselController: buttonCarouselController,
+                                                                                items: List.generate(profile.data!.almMemorial.showMemorialImagesOrVideos.length, (next) =>
+                                                                                  ((){
+                                                                                    if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
+                                                                                      return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
+                                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                          autoDispose: false,
+                                                                                          aspectRatio: 1,
+                                                                                        ),
+                                                                                      );
+                                                                                    }else{
+                                                                                      return CachedNetworkImage(
+                                                                                        fit: BoxFit.contain,
+                                                                                        imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
+                                                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                      );
+                                                                                    }
+                                                                                  }()),
+                                                                                ),
+                                                                                options: CarouselOptions(
+                                                                                  autoPlay: false,
+                                                                                  enlargeCenterPage: true,
+                                                                                  aspectRatio: 1,
+                                                                                  viewportFraction: 1,
+                                                                                  initialPage: index,
                                                                                 ),
                                                                               ),
+                                                                            ),
 
-                                                                              SizedBox(height: 85,),
+                                                                            Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                              children: [
+                                                                                IconButton(
+                                                                                  onPressed: () => buttonCarouselController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                  icon: Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                                ),
 
-                                                                            ],
-                                                                          ),
+                                                                                IconButton(
+                                                                                  onPressed: () => buttonCarouselController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                  icon: Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+
+                                                                            SizedBox(height: 85,),
+
+                                                                          ],
                                                                         ),
-                                                                      );
-                                                                    },
+                                                                      ),
+                                                                    ),
                                                                   );
                                                                 },
-                                                                child: Container(
+                                                              );
+                                                            },
+                                                            child: ((){
+                                                              if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[index])?.contains('video') == true){
+                                                                return Container(
                                                                   width: 100,
-                                                                  decoration: BoxDecoration(
-                                                                    borderRadius: BorderRadius.circular(10),
-                                                                    color: Color(0xff888888),
+                                                                  height: 100,
+                                                                  child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
+                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                      aspectRatio: 1,
+                                                                      controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                                        showControls: false,
+                                                                      ),
+                                                                    ),
                                                                   ),
+                                                                );
+                                                              }else{
+                                                                return Container(
                                                                   child: CachedNetworkImage(
-                                                                    fit: BoxFit.cover,
+                                                                    fit: BoxFit.contain,
                                                                     imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
                                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                   ),
-                                                                ),
-                                                              );
-                                                            }
-                                                          }());
+                                                                );
+                                                              }
+                                                            }()),
+                                                          );
                                                         },
                                                       ),
                                                     ),
@@ -894,7 +927,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
-                                                          aspectRatio: 16 / 9,
+                                                          aspectRatio: 1,
                                                         ),
                                                       );
                                                     }else{
@@ -919,7 +952,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                                               showControls: false,
                                                             ),
-                                                            aspectRatio: 16 / 9,
+                                                            aspectRatio: 1,
                                                           ),
                                                         )
                                                         : CachedNetworkImage(
@@ -950,7 +983,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                 showControls: false,
                                                               ),
-                                                              aspectRatio: 16 / 9,
+                                                              aspectRatio: 1,
                                                             ),
                                                           )
                                                           : CachedNetworkImage(
@@ -970,7 +1003,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                           showControls: false,
                                                                         ),
-                                                                        aspectRatio: 16 / 9,
+                                                                        aspectRatio: 1,
                                                                       ),
                                                                     ),
 
@@ -1028,7 +1061,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                       showControls: false,
                                                                     ),
-                                                                    aspectRatio: 16 / 9,
+                                                                    aspectRatio: 1,
                                                                   ),
                                                                 );
                                                               }else{

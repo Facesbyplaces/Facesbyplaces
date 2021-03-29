@@ -107,7 +107,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   bool pressedLike = false;
   int likesCount = 0;
   bool isGuestLoggedIn = true;
-
   CarouselController buttonCarouselController = CarouselController();
 
   void initState(){

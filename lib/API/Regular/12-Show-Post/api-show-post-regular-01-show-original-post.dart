@@ -21,6 +21,17 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
   );
 
   print('The status code of original post is ${response.statusCode}');
+  print('The access token is $getAccessToken}');
+  print('The uid is $getUID}');
+  print('The client is $getClient}');
+
+  // print('The access token is ${response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', '')}');
+  // print('The uid is ${response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', '')}');
+  // print('The client is ${response.headers['client'].toString().replaceAll(']', '').replaceAll('[', '')}');
+  // print('The status headers of original post is ${response.headers}');
+      // sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
+      // sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
+      // sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
