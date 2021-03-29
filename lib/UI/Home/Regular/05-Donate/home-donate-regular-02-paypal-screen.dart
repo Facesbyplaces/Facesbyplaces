@@ -39,7 +39,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
             onWebViewCreated: (WebViewController webViewController){
               controller = webViewController;
             },
-            initialUrl: 'https://www.sandbox.paypal.com',
+            initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&scope=openid profile email&redirect_uri=https://www.google.com',
             // javascriptChannels: Set.from([
             //   name: 'Print', onMessageReceived: (JavascriptMessage message) { print(message.message); }
             // ]),
@@ -55,10 +55,19 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
             //     },
             //   )
             // ]),
-            javascriptChannels: <JavascriptChannel>[
-              JavascriptChannel(name: 'Print', onMessageReceived: (JavascriptMessage msg) { print(msg); }),
-            ].toSet(),
-            javascriptMode: JavascriptMode.unrestricted,
+            // javascriptChannels: <JavascriptChannel>[
+            //   JavascriptChannel(name: 'Print', onMessageReceived: (JavascriptMessage msg) { print(msg); }),
+            // ].toSet(),
+            // javascriptMode: JavascriptMode.unrestricted,
+            navigationDelegate: (request){
+              print('The request is ${request.url}');
+              print('The request is ${request.isForMainFrame}');
+
+              return NavigationDecision.navigate;
+            },
+            onPageFinished: (value){
+              print('The value is $value');
+            },
           ),
         ),
       ),
