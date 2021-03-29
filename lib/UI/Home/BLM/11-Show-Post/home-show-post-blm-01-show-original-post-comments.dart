@@ -17,7 +17,6 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-bl
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-dropdown.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -25,10 +24,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keyboard_attachable/keyboard_attachable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';
@@ -101,12 +102,13 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   int numberOfComments = 0;
   GlobalKey profileKey = GlobalKey<HomeBLMShowOriginalPostCommentsState>();
 
-
   Future<APIBLMShowOriginalPostMain>? showOriginalPost;
   bool likePost = false;
   bool pressedLike = false;
   int likesCount = 0;
   bool isGuestLoggedIn = true;
+
+  CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
     super.initState();
@@ -399,20 +401,84 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                         Container(
                                           child: ((){
                                             if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 1){
-                                              if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
-                                                return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                    aspectRatio: 1,
-                                                  ),
-                                                );
-                                              }else{
-                                                return CachedNetworkImage(
-                                                  fit: BoxFit.contain,
-                                                  imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                );
-                                              }
+                                              return GestureDetector(
+                                                onTap: (){
+                                                  showGeneralDialog(
+                                                    context: context,
+                                                    barrierDismissible: true,
+                                                    barrierLabel: 'Dialog',
+                                                    transitionDuration: Duration(milliseconds: 0),
+                                                    pageBuilder: (_, __, ___) {
+                                                      return Scaffold(
+                                                        backgroundColor: Colors.black12.withOpacity(0.7),
+                                                        body: SizedBox.expand(
+                                                          child: SafeArea(
+                                                            child: Column(
+                                                              children: [
+                                                                Container(
+                                                                  alignment: Alignment.centerRight,
+                                                                  padding: EdgeInsets.only(right: 20.0),
+                                                                  child: GestureDetector(
+                                                                    onTap: (){
+                                                                      Navigator.pop(context);
+                                                                    },
+                                                                    child: CircleAvatar(
+                                                                      radius: 20,
+                                                                      backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                                      child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                                    ),
+                                                                  ),
+                                                                ),
+
+                                                                Expanded(
+                                                                  child: ((){
+                                                                    if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
+                                                                      return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
+                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                          aspectRatio: 1,
+                                                                        ),
+                                                                      );
+                                                                    }else{
+                                                                      return CachedNetworkImage(
+                                                                        fit: BoxFit.contain,
+                                                                        imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
+                                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                      );
+                                                                    }
+                                                                  }()),
+                                                                ),
+
+                                                                SizedBox(height: 85,),
+
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                child: ((){
+                                                  if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
+                                                    return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
+                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                        aspectRatio: 1,
+                                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                          showControls: false,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }else{
+                                                    return CachedNetworkImage(
+                                                      fit: BoxFit.contain,
+                                                      imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
+                                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                    );
+                                                  }
+                                                }()),
+                                              );
                                             }else if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 2){
                                               return StaggeredGridView.countBuilder(
                                                 padding: EdgeInsets.zero,
@@ -420,19 +486,113 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 physics: NeverScrollableScrollPhysics(),
                                                 crossAxisCount: 4,
                                                 itemCount: 2,
-                                                itemBuilder: (BuildContext context, int index) =>  
-                                                  lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
-                                                  ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      aspectRatio: 1,
-                                                    ),
-                                                  )
-                                                  : CachedNetworkImage(
-                                                    fit: BoxFit.contain,
-                                                    imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                  ),
+                                                itemBuilder: (BuildContext context, int index) =>
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    showGeneralDialog(
+                                                      context: context,
+                                                      barrierDismissible: true,
+                                                      barrierLabel: 'Dialog',
+                                                      transitionDuration: Duration(milliseconds: 0),
+                                                      pageBuilder: (_, __, ___) {
+                                                        return Scaffold(
+                                                          backgroundColor: Colors.black12.withOpacity(0.7),
+                                                          body: SizedBox.expand(
+                                                            child: SafeArea(
+                                                              child: Column(
+                                                                children: [
+                                                                  Container(
+                                                                    alignment: Alignment.centerRight,
+                                                                    padding: EdgeInsets.only(right: 20.0),
+                                                                    child: GestureDetector(
+                                                                      onTap: (){
+                                                                        Navigator.pop(context);
+                                                                      },
+                                                                      child: CircleAvatar(
+                                                                        radius: 20,
+                                                                        backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                                        child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+
+                                                                  Expanded(
+                                                                    child: CarouselSlider(
+                                                                      carouselController: buttonCarouselController,
+                                                                      items: List.generate(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                        ((){
+                                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
+                                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                autoDispose: false,
+                                                                                aspectRatio: 1,
+                                                                              ),
+                                                                            );
+                                                                          }else{
+                                                                            return CachedNetworkImage(
+                                                                              fit: BoxFit.contain,
+                                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                            );
+                                                                          }
+                                                                        }()),
+                                                                      ),
+                                                                      options: CarouselOptions(
+                                                                        autoPlay: false,
+                                                                        enlargeCenterPage: true,
+                                                                        aspectRatio: 1,
+                                                                        viewportFraction: 1,
+                                                                        initialPage: index,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+
+                                                                   Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                    children: [
+                                                                      IconButton(
+                                                                        onPressed: () => buttonCarouselController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
+                                                                        icon: Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                      ),
+
+                                                                      IconButton(
+                                                                        onPressed: () => buttonCarouselController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
+                                                                        icon: Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+
+                                                                  SizedBox(height: 85,),
+
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: ((){
+                                                    if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                      return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                          aspectRatio: 1,
+                                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                            showControls: false,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }else{
+                                                      return CachedNetworkImage(
+                                                        fit: BoxFit.contain,
+                                                        imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                      );
+                                                    }
+                                                  }()),
+                                                ),
                                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
                                                 mainAxisSpacing: 4.0,
                                                 crossAxisSpacing: 4.0,
@@ -447,98 +607,195 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                                                 mainAxisSpacing: 4.0,
                                                 crossAxisSpacing: 4.0,
-                                                itemBuilder: (BuildContext context, int index) => ((){
-                                                  if(index != 1){
-                                                    return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
-                                                    ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                        aspectRatio: 1,
-                                                      ),
-                                                    )
-                                                    : CachedNetworkImage(
-                                                      fit: BoxFit.contain,
-                                                      imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                    );
-                                                  }else{
-                                                    return ((){
-                                                      if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3 > 0){
-                                                        if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                          return Stack(
-                                                            children: [
-                                                              BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                  aspectRatio: 1,
-                                                                ),
-                                                              ),
-
-                                                              Container(color: Colors.black.withOpacity(0.5),),
-
-                                                              Center(
-                                                                child: CircleAvatar(
-                                                                  radius: 25,
-                                                                  backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                                  child: Text(
-                                                                    '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
-                                                                    style: TextStyle(
-                                                                      fontSize: 40,
-                                                                      fontWeight: FontWeight.bold,
-                                                                      color: Color(0xffffffff),
+                                                itemBuilder: (BuildContext context, int index) => 
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    showGeneralDialog(
+                                                      context: context,
+                                                      barrierDismissible: true,
+                                                      barrierLabel: 'Dialog',
+                                                      transitionDuration: Duration(milliseconds: 0),
+                                                      pageBuilder: (_, __, ___) {
+                                                        return Scaffold(
+                                                          backgroundColor: Colors.black12.withOpacity(0.7),
+                                                          body: SizedBox.expand(
+                                                            child: SafeArea(
+                                                              child: Column(
+                                                                children: [
+                                                                  Container(
+                                                                    alignment: Alignment.centerRight,
+                                                                    padding: EdgeInsets.only(right: 20.0),
+                                                                    child: GestureDetector(
+                                                                      onTap: (){
+                                                                        Navigator.pop(context);
+                                                                      },
+                                                                      child: CircleAvatar(
+                                                                        radius: 20,
+                                                                        backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                                        child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        }else{
-                                                          return Stack(
-                                                            children: [
-                                                              CachedNetworkImage(
-                                                                fit: BoxFit.fill,
-                                                                imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                              ),
 
-                                                              Container(color: Colors.black.withOpacity(0.5),),
-
-                                                              Center(
-                                                                child: CircleAvatar(
-                                                                  radius: 25,
-                                                                  backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                                  child: Text(
-                                                                    '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
-                                                                    style: TextStyle(
-                                                                      fontSize: 40,
-                                                                      fontWeight: FontWeight.bold,
-                                                                      color: Color(0xffffffff),
+                                                                  Expanded(
+                                                                    child: CarouselSlider(
+                                                                      carouselController: buttonCarouselController,
+                                                                      items: List.generate(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                        ((){
+                                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
+                                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                autoDispose: false,
+                                                                                aspectRatio: 1,
+                                                                              ),
+                                                                            );
+                                                                          }else{
+                                                                            return CachedNetworkImage(
+                                                                              fit: BoxFit.contain,
+                                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                            );
+                                                                          }
+                                                                        }()),
+                                                                      ),
+                                                                      options: CarouselOptions(
+                                                                        autoPlay: false,
+                                                                        enlargeCenterPage: true,
+                                                                        aspectRatio: 1,
+                                                                        viewportFraction: 1,
+                                                                        initialPage: index,
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
+
+                                                                  Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                    children: [
+                                                                      IconButton(
+                                                                        onPressed: () => buttonCarouselController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
+                                                                        icon: Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                      ),
+
+                                                                      IconButton(
+                                                                        onPressed: () => buttonCarouselController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
+                                                                        icon: Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+
+                                                                  SizedBox(height: 85,),
+
+                                                                ],
                                                               ),
-                                                            ],
-                                                          );
-                                                        }
-                                                      }else{
-                                                        if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                          return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                              aspectRatio: 1,
                                                             ),
-                                                          );
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: ((){
+                                                    if(index != 1){
+                                                      return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
+                                                      ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                          aspectRatio: 1,
+                                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                            showControls: false,
+                                                          ),
+                                                        ),
+                                                      )
+                                                      : CachedNetworkImage(
+                                                        fit: BoxFit.contain,
+                                                        imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                      );
+                                                    }else{
+                                                      return ((){
+                                                        if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3 > 0){
+                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                            return Stack(
+                                                              children: [
+                                                                BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                    aspectRatio: 1,
+                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                                      showControls: false,
+                                                                    ),
+                                                                  ),
+                                                                ),
+
+                                                                Container(color: Colors.black.withOpacity(0.5),),
+
+                                                                Center(
+                                                                  child: CircleAvatar(
+                                                                    radius: 25,
+                                                                    backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                                                    child: Text(
+                                                                      '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                      style: TextStyle(
+                                                                        fontSize: 40,
+                                                                        fontWeight: FontWeight.bold,
+                                                                        color: Color(0xffffffff),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }else{
+                                                            return Stack(
+                                                              children: [
+                                                                CachedNetworkImage(
+                                                                  fit: BoxFit.fill,
+                                                                  imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                ),
+
+                                                                Container(color: Colors.black.withOpacity(0.5),),
+
+                                                                Center(
+                                                                  child: CircleAvatar(
+                                                                    radius: 25,
+                                                                    backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                                                    child: Text(
+                                                                      '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                      style: TextStyle(
+                                                                        fontSize: 40,
+                                                                        fontWeight: FontWeight.bold,
+                                                                        color: Color(0xffffffff),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }
                                                         }else{
-                                                          return CachedNetworkImage(
-                                                            fit: BoxFit.fill,
-                                                            imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                          );
+                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                aspectRatio: 1,
+                                                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                                  showControls: false,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }else{
+                                                            return CachedNetworkImage(
+                                                              fit: BoxFit.fill,
+                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                            );
+                                                          }
                                                         }
-                                                      }
-                                                    }());
-                                                  }
-                                                }()),
+                                                      }());
+                                                    }
+                                                  }()),
+                                                ),
                                               );
                                             }
                                           }()),

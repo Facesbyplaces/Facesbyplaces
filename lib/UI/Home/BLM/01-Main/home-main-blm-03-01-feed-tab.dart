@@ -191,7 +191,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 16 / 9,
+                              // aspectRatio: 16 / 9,
+                              aspectRatio: 1,
                             ),
                           );
                         }else{
@@ -216,7 +217,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 16 / 9,
+                                // aspectRatio: 16 / 9,
+                                aspectRatio: 1,
                               ),
                             )
                             : CachedNetworkImage(
@@ -247,7 +249,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 16 / 9,
+                                  // aspectRatio: 16 / 9,
+                                  aspectRatio: 1,
                                 ),
                               )
                               : CachedNetworkImage(
@@ -267,7 +270,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 16 / 9,
+                                            // aspectRatio: 16 / 9,
+                                            aspectRatio: 1,
                                           ),
                                         ),
 
@@ -325,7 +329,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 16 / 9,
+                                        // aspectRatio: 16 / 9,
+                                        aspectRatio: 1,
                                       ),
                                     );
                                   }else{
@@ -386,7 +391,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 16 / 9,
+                              // aspectRatio: 16 / 9,
+                              aspectRatio: 1,
                             ),
                           );
                         }else{
@@ -411,7 +417,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 16 / 9,
+                                // aspectRatio: 16 / 9,
+                                aspectRatio: 1,
                               ),
                             )
                             : CachedNetworkImage(
@@ -442,7 +449,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 16 / 9,
+                                  // aspectRatio: 16 / 9,
+                                  aspectRatio: 1,
                                 ),
                               )
                               : CachedNetworkImage(
@@ -462,7 +470,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 16 / 9,
+                                            // aspectRatio: 16 / 9,
+                                            aspectRatio: 1,
                                           ),
                                         ),
 
@@ -520,7 +529,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 16 / 9,
+                                        // aspectRatio: 16 / 9,
+                                        aspectRatio: 1,
                                       ),
                                     );
                                   }else{

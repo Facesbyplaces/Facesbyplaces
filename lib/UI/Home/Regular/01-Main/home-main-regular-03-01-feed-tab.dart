@@ -201,7 +201,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 16 / 9,
+                              // aspectRatio: 16 / 9,
+                              aspectRatio: 1,
                             ),
                           );
                         }else{
@@ -226,7 +227,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 16 / 9,
+                                // aspectRatio: 16 / 9,
+                                aspectRatio: 1,
                               ),
                             )
                             : CachedNetworkImage(
@@ -257,7 +259,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 16 / 9,
+                                  // aspectRatio: 16 / 9,
+                                  aspectRatio: 1,
                                 ),
                               )
                               : CachedNetworkImage(
@@ -277,7 +280,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 16 / 9,
+                                            // aspectRatio: 16 / 9,
+                                            aspectRatio: 1,
                                           ),
                                         ),
 
@@ -335,7 +339,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 16 / 9,
+                                        // aspectRatio: 16 / 9,
+                                        aspectRatio: 1,
                                       ),
                                     );
                                   }else{
@@ -396,7 +401,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 16 / 9,
+                              // aspectRatio: 16 / 9,
+                              aspectRatio: 1,
                             ),
                           );
                         }else{
@@ -421,7 +427,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 16 / 9,
+                                // aspectRatio: 16 / 9,
+                                aspectRatio: 1,
                               ),
                             )
                             : CachedNetworkImage(
@@ -452,7 +459,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 16 / 9,
+                                  // aspectRatio: 16 / 9,
+                                  aspectRatio: 1,
                                 ),
                               )
                               : CachedNetworkImage(
@@ -472,7 +480,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 16 / 9,
+                                            // aspectRatio: 16 / 9,
+                                            aspectRatio: 1,
                                           ),
                                         ),
 
@@ -530,7 +539,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 16 / 9,
+                                        // aspectRatio: 16 / 9,
+                                        aspectRatio: 1,
                                       ),
                                     );
                                   }else{
