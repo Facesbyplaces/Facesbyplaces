@@ -343,6 +343,8 @@ Rails.application.routes.draw do
         #Set Account ID Stripe
         post 'payment_intent', to: 'payment_intent#set_payment_intent'
         get 'stripe_connect', to: 'stripe_connect#success_stripe_connect'
+        #Set Paypal Account to Memorial
+        post 'paypal', to: 'paypal#createPayPalAccount'
         #Braintree Paypal
         resources :paypal, only: [:new, :create, :show]
       end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_082531) do
+ActiveRecord::Schema.define(version: 2021_03_29_074142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,6 +210,22 @@ ActiveRecord::Schema.define(version: 2021_03_03_082531) do
     t.bigint "account_id"
     t.index ["account_type", "account_id"], name: "index_pageowners_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_pageowners_on_page_type_and_page_id"
+  end
+
+  create_table "paypal_accounts", force: :cascade do |t|
+    t.string "paypal_user_id"
+    t.string "name"
+    t.string "given_name"
+    t.string "family_name"
+    t.string "payer_id"
+    t.string "address", default: [], array: true
+    t.boolean "verified_account"
+    t.string "emails"
+    t.string "paypalable_type"
+    t.bigint "paypalable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["paypalable_type", "paypalable_id"], name: "index_paypal_accounts_on_paypalable_type_and_paypalable_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|

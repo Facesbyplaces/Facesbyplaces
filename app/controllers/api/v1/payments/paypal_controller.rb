@@ -10,6 +10,17 @@ class Api::V1::Payments::PaypalController < ApplicationController
     Braintree::Transaction::Status::SubmittedForSettlement,
   ]
 
+  def createPayPalAccount
+    @paypal_account = PaypalAccount.new(paypal_account_params)
+    
+    if @paypal_account.save
+      render json: { success: true, account: @paypal_account }, status: 200
+    else
+      render json: { success: false, errors: @paypal_account.errors.full_messages }, status: 200
+    end
+    
+  end
+
   def new
     @client_token = gateway.client_token.generate
     render json: { success: true, client_token: @client_token }, status: 200
@@ -74,6 +85,12 @@ class Api::V1::Payments::PaypalController < ApplicationController
       :public_key => Rails.application.credentials.dig(:braintree, :public_key),
       :private_key => Rails.application.credentials.dig(:braintree, :private_key),
     )
+  end
+
+  private
+
+  def paypal_account_params
+    params.permit(:paypalable_id, :paypalable_type, :paypal_user_id, :name, :given_name, :family_name, :payer_id, :verified_account)
   end
 
 end

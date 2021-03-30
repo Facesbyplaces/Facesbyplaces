@@ -4,6 +4,9 @@ class Blm < ApplicationRecord
   has_one_attached :profileImage
   has_many_attached :imagesOrVideos
 
+  # Paypal Account
+  has_one :paypal_account, as: :paypalable
+
   # Page Owner
   has_one :pageowner, as: :page, dependent: :destroy
 
