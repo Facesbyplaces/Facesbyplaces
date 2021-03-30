@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+// import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMPaypal extends StatefulWidget{
@@ -42,9 +43,12 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
               },
             ),
           ),
-          body: WebView(
-            initialUrl: 'https://www.sandbox.paypal.com',
+          body: InAppWebView(
+            initialUrlRequest: URLRequest(url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com')),
           ),
+          // body: WebView(
+          //   initialUrl: 'https://www.sandbox.paypal.com',
+          // ),
         ),
       ),
     );

@@ -34,6 +34,10 @@ target 'Runner' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Messaging'
   pod 'Firebase/Core'
+  pod 'Braintree'
+  pod 'BraintreeDropIn'
+  pod 'Braintree/PayPal'
+  pod 'Braintree/Apple-Pay'
   
   use_frameworks!
   use_modular_headers!

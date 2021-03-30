@@ -24,6 +24,10 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
 
     print('The status code of main page - feed is ${response.statusCode}');
 
+    print('The access token in feed is $getAccessToken');
+    print('The uid in feed is $getUID');
+    print('The client in feed is $getClient');
+
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);
       return APIRegularHomeTabFeedMain.fromJson(newData);

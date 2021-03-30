@@ -218,7 +218,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                     await apiRegularLikeOrUnlikePost(postId: postId, like: likePost);
                   },
                   icon: likePost == true ? FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),) : FaIcon(FontAwesomeIcons.heart, color: Colors.grey,),
-                  label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
+                  label: Text('$likesCount', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                 ),
 
                 SizedBox(width: 20),

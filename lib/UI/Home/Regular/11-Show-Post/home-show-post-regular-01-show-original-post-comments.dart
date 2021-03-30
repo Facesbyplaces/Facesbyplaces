@@ -812,7 +812,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                           child: RichText(
                                             text: TextSpan(
-                                              
                                               children: [
                                                 TextSpan(
                                                   style: TextStyle(color: Color(0xff888888)),
@@ -836,6 +835,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       ],
                                                       recognizer: TapGestureRecognizer()
                                                       ..onTap = (){
+                                                        print('Go');
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
                                                       }
                                                     ),

@@ -10,6 +10,8 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
 
   Dio dioRequest = Dio();
 
+  print('The post id is $postId');
+
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/$postId',
     options: Options(
       headers: <String, dynamic>{
@@ -21,9 +23,9 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
   );
 
   print('The status code of original post is ${response.statusCode}');
-  print('The access token is $getAccessToken}');
-  print('The uid is $getUID}');
-  print('The client is $getClient}');
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
 
   // print('The access token is ${response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', '')}');
   // print('The uid is ${response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', '')}');

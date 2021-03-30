@@ -5,6 +5,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:mad_pay/mad_pay.dart';
 // import 'package:flutter_braintree/flutter_braintree.dart';
 
 class HomeRegularUserDonate extends StatefulWidget{
@@ -23,19 +24,20 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   HomeRegularUserDonateState({required this.pageType, required this.pageId});
 
   int donateToggle = 0;
+  final MadPay pay = MadPay();
   // Token paymentToken;
 
-  @override
-  initState() {
-    super.initState();
-    // StripePayment.setOptions(
-    //   StripeOptions(
-    //     publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
-    //     merchantId: "merchant.com.app.facesbyplaces", 
-    //     androidPayMode: 'test',
-    //   ),
-    // );
-  }
+  // @override
+  // initState() {
+  //   super.initState();
+  //   // StripePayment.setOptions(
+  //   //   StripeOptions(
+  //   //     publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
+  //   //     merchantId: "merchant.com.app.facesbyplaces", 
+  //   //     androidPayMode: 'test',
+  //   //   ),
+  //   // );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +140,79 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ), 
                     onPressed: () async{
 
-                      print('The amount is $donateToggle');
+                      double amount = 0.0;
+
+                      print('The donateToggle is $donateToggle');
+
+                      // switch(donateToggle){
+                      //   case 0: amount = 0.99; return amount;
+                      //   case 1: amount = 5.00; return amount;
+                      //   case 2: amount = 15.00; return amount;
+                      //   case 3: amount = 25.00; return amount;
+                      //   case 4: amount = 50.00; return amount;
+                      //   case 5: amount = 100.00; return amount;
+                      // }
+
+                      if(donateToggle == 0){
+                        amount = 0.99;
+                      }else if(donateToggle == 1){
+                        amount = 5.00;
+                      }else if(donateToggle == 2){
+                        amount = 15.00;
+                      }else if(donateToggle == 3){
+                        amount = 25.00;
+                      }else if(donateToggle == 4){
+                        amount = 50.00;
+                      }else if(donateToggle == 5){
+                        amount = 100.00;
+                      }
+
+
+                      print('The amount is $amount');
+
+                      bool result1 = await pay.checkPayments();
+
+                      print('The result1 is $result1');
+
+                      bool result2 = await pay.checkActiveCard(
+                        paymentNetworks: <PaymentNetwork>[
+                          PaymentNetwork.visa,
+                          PaymentNetwork.mastercard,
+                        ],
+                      );
+
+                      print('The result2 is $result2');
+                      
+                      var result3 = await pay.processingPayment(
+                        google: GoogleParameters(
+                          gatewayName: 'Your Gateway',
+                          gatewayMerchantId: 'Your id',
+                        ),
+                        apple: AppleParameters(
+                          merchantIdentifier: 'merchant.com.app.facesbyplaces',
+                        ),
+                        currencyCode: 'USD',
+                        countryCode: 'US',
+                        // paymentItems: <PaymentItem>[
+                        //   PaymentItem(name: 'T-Shirt', price: 2.98),
+                        //   PaymentItem(name: 'Trousers', price: 15.24),
+                        // ],
+                        paymentItems: <PaymentItem>[
+                          PaymentItem(
+                            name: 'Donation', price: amount,
+                          ),
+                        ],
+                        paymentNetworks: <PaymentNetwork>[
+                          PaymentNetwork.visa,
+                          PaymentNetwork.mastercard,
+                        ],
+                      );
+
+                      print('The result3 is $result3');
+
+
+
+                      // print('The amount is $donateToggle');
 
                       // var request = BraintreeDropInRequest(
                       //   tokenizationKey: 'sandbox_7bgm8qq9_8dgh8ybmnjb6x85h',
