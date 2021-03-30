@@ -244,6 +244,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.4-nullsafety.0"
+  flutter_braintree:
+    dependency: "direct dev"
+    description:
+      name: flutter_braintree
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0+1"
   flutter_branch_sdk:
     dependency: "direct dev"
     description:
