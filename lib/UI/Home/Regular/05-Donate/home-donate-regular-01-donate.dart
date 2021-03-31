@@ -1,11 +1,14 @@
 // import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
+import 'dart:convert';
+
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-03-tokenization.dart';
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-04-process-payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:loader_overlay/loader_overlay.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
-// import 'package:flutter_braintree/flutter_braintree.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:flutter_braintree/flutter_braintree.dart';
 import 'package:flutter/material.dart';
 import 'package:mad_pay/mad_pay.dart';
 
@@ -141,24 +144,58 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ), 
                     onPressed: () async{
 
-                      await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(),
-                          ),
-                          onlyOkButton: true,
-                          buttonOkColor: Colors.red,
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                        )
+                      String token = await apiRegularTokenization();
+
+                      print('The new token is $token');
+
+                      var request = BraintreeDropInRequest(
+                        tokenizationKey: token,
+                        collectDeviceData: true,
+                        googlePaymentRequest: BraintreeGooglePaymentRequest(
+                          totalPrice: ((){
+                            switch(donateToggle){
+                              case 0: return '0.99';
+                              case 1: return '5.00';
+                              case 2: return '15.00';
+                              case 3: return '25.00';
+                              case 4: return '50.00';
+                              case 5: return '100.00';
+                            }
+                          }()),
+                          currencyCode: 'USD',
+                          billingAddressRequired: false,
+                        ),
+                        paypalRequest: BraintreePayPalRequest(
+                          amount: ((){
+                            switch(donateToggle){
+                              case 0: return '0.99';
+                              case 1: return '5.00';
+                              case 2: return '15.00';
+                              case 3: return '25.00';
+                              case 4: return '50.00';
+                              case 5: return '100.00';
+                            }
+                          }()),
+                          displayName: 'Example company',
+                        ),
+                        cardEnabled: true,
                       );
+
+                      BraintreeDropInResult result = await BraintreeDropIn.start(request);
+
+                      print('The amount is ${request.paypalRequest.amount}');
+                      print('The nonce is ${result.paymentMethodNonce.nonce}');
+
+                      var newValue = json.decode(result.deviceData);
+                      var deviceToken = newValue['correlation_id'];
+
+                      print('The newValue is $newValue');
+                      print('The deviceToken is $deviceToken');
+
+                      bool paymentResult = await apiRegularProcessToken(amount: request.paypalRequest.amount, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
+
+                      print('The paymentResult is $paymentResult');
+
 
                       // var request = BraintreeDropInRequest(
                       //   tokenizationKey: 'sandbox_7bgm8qq9_8dgh8ybmnjb6x85h',

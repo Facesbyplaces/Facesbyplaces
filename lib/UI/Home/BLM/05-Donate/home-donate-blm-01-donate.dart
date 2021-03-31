@@ -1,4 +1,7 @@
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-03-tokenization.dart';
+import 'dart:convert';
+
+import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-03-tokenization.dart';
+import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-04-process-payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_braintree/flutter_braintree.dart';
@@ -132,7 +135,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     buttonText: 'Send Gift',
                     onPressed: () async{
 
-                      String token = await apiRegularTokenization();
+                      String token = await apiBLMTokenization();
 
                       print('The new token is $token');
 
@@ -170,18 +173,19 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       );
 
                       BraintreeDropInResult result = await BraintreeDropIn.start(request);
-                      if (result != null) {
-                        print('The payment method nonce is ${result.paymentMethodNonce}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.description}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.isDefault}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.nonce}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.typeLabel}');
-                        print('The payment method nonce is ${result.deviceData}');
-                      }
 
-                      print('The value of request is $request');
-                      print('The value of request is ${request.paypalRequest.displayName}');
-                      print('The value of request is ${request.paypalRequest.amount}');
+                      print('The amount is ${request.paypalRequest.amount}');
+                      print('The nonce is ${result.paymentMethodNonce.nonce}');
+
+                      var newValue = json.decode(result.deviceData);
+                      var deviceToken = newValue['correlation_id'];
+
+                      print('The newValue is $newValue');
+                      print('The deviceToken is $deviceToken');
+
+                      bool paymentResult = await apiBLMProcessToken(amount: request.paypalRequest.amount, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
+
+                      print('The paymentResult is $paymentResult');
                     },
                     height: 45,
                     width: SizeConfig.screenWidth! / 2, 
