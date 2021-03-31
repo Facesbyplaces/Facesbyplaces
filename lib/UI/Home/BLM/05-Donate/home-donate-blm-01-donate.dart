@@ -1,5 +1,7 @@
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-03-tokenization.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_braintree/flutter_braintree.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserDonate extends StatefulWidget{
@@ -130,6 +132,56 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     buttonText: 'Send Gift',
                     onPressed: () async{
 
+                      String token = await apiRegularTokenization();
+
+                      print('The new token is $token');
+
+                      var request = BraintreeDropInRequest(
+                        tokenizationKey: token,
+                        collectDeviceData: true,
+                        googlePaymentRequest: BraintreeGooglePaymentRequest(
+                          totalPrice: ((){
+                            switch(donateToggle){
+                              case 0: return '0.99';
+                              case 1: return '5.00';
+                              case 2: return '15.00';
+                              case 3: return '25.00';
+                              case 4: return '50.00';
+                              case 5: return '100.00';
+                            }
+                          }()),
+                          currencyCode: 'USD',
+                          billingAddressRequired: false,
+                        ),
+                        paypalRequest: BraintreePayPalRequest(
+                          amount: ((){
+                            switch(donateToggle){
+                              case 0: return '0.99';
+                              case 1: return '5.00';
+                              case 2: return '15.00';
+                              case 3: return '25.00';
+                              case 4: return '50.00';
+                              case 5: return '100.00';
+                            }
+                          }()),
+                          displayName: 'Example company',
+                        ),
+                        cardEnabled: true,
+                      );
+
+                      BraintreeDropInResult result = await BraintreeDropIn.start(request);
+                      if (result != null) {
+                        print('The payment method nonce is ${result.paymentMethodNonce}');
+                        print('The payment method nonce is ${result.paymentMethodNonce.description}');
+                        print('The payment method nonce is ${result.paymentMethodNonce.isDefault}');
+                        print('The payment method nonce is ${result.paymentMethodNonce.nonce}');
+                        print('The payment method nonce is ${result.paymentMethodNonce.typeLabel}');
+                        print('The payment method nonce is ${result.deviceData}');
+                      }
+
+                      print('The value of request is $request');
+                      print('The value of request is ${request.paypalRequest.displayName}');
+                      print('The value of request is ${request.paypalRequest.amount}');
                     },
                     height: 45,
                     width: SizeConfig.screenWidth! / 2, 

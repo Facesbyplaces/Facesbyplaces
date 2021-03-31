@@ -4,7 +4,8 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:loader_overlay/loader_overlay.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:flutter_braintree/flutter_braintree.dart';
+// import 'package:flutter_braintree/flutter_braintree.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mad_pay/mad_pay.dart';
 
@@ -140,52 +141,71 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ), 
                     onPressed: () async{
 
-                      var request = BraintreeDropInRequest(
-                        tokenizationKey: 'sandbox_7bgm8qq9_8dgh8ybmnjb6x85h',
-                        collectDeviceData: true,
-                        googlePaymentRequest: BraintreeGooglePaymentRequest(
-                          totalPrice: ((){
-                            switch(donateToggle){
-                              case 0: return '0.99';
-                              case 1: return '5.00';
-                              case 2: return '15.00';
-                              case 3: return '25.00';
-                              case 4: return '50.00';
-                              case 5: return '100.00';
-                            }
-                          }()),
-                          currencyCode: 'USD',
-                          billingAddressRequired: false,
-                        ),
-                        paypalRequest: BraintreePayPalRequest(
-                          amount: ((){
-                            switch(donateToggle){
-                              case 0: return '0.99';
-                              case 1: return '5.00';
-                              case 2: return '15.00';
-                              case 3: return '25.00';
-                              case 4: return '50.00';
-                              case 5: return '100.00';
-                            }
-                          }()),
-                          displayName: 'Example company',
-                        ),
-                        cardEnabled: true,
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
                       );
 
-                      BraintreeDropInResult result = await BraintreeDropIn.start(request);
-                      if (result != null) {
-                        print('The payment method nonce is ${result.paymentMethodNonce}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.description}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.isDefault}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.nonce}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.typeLabel}');
-                        print('The payment method nonce is ${result.deviceData}');
-                      }
+                      // var request = BraintreeDropInRequest(
+                      //   tokenizationKey: 'sandbox_7bgm8qq9_8dgh8ybmnjb6x85h',
+                      //   collectDeviceData: true,
+                      //   googlePaymentRequest: BraintreeGooglePaymentRequest(
+                      //     totalPrice: ((){
+                      //       switch(donateToggle){
+                      //         case 0: return '0.99';
+                      //         case 1: return '5.00';
+                      //         case 2: return '15.00';
+                      //         case 3: return '25.00';
+                      //         case 4: return '50.00';
+                      //         case 5: return '100.00';
+                      //       }
+                      //     }()),
+                      //     currencyCode: 'USD',
+                      //     billingAddressRequired: false,
+                      //   ),
+                      //   paypalRequest: BraintreePayPalRequest(
+                      //     amount: ((){
+                      //       switch(donateToggle){
+                      //         case 0: return '0.99';
+                      //         case 1: return '5.00';
+                      //         case 2: return '15.00';
+                      //         case 3: return '25.00';
+                      //         case 4: return '50.00';
+                      //         case 5: return '100.00';
+                      //       }
+                      //     }()),
+                      //     displayName: 'Example company',
+                      //   ),
+                      //   cardEnabled: true,
+                      // );
 
-                      print('The value of request is $request');
-                      print('The value of request is ${request.paypalRequest.displayName}');
-                      print('The value of request is ${request.paypalRequest.amount}');
+                      // BraintreeDropInResult result = await BraintreeDropIn.start(request);
+                      // if (result != null) {
+                      //   print('The payment method nonce is ${result.paymentMethodNonce}');
+                      //   print('The payment method nonce is ${result.paymentMethodNonce.description}');
+                      //   print('The payment method nonce is ${result.paymentMethodNonce.isDefault}');
+                      //   print('The payment method nonce is ${result.paymentMethodNonce.nonce}');
+                      //   print('The payment method nonce is ${result.paymentMethodNonce.typeLabel}');
+                      //   print('The payment method nonce is ${result.deviceData}');
+                      // }
+
+                      // print('The value of request is $request');
+                      // print('The value of request is ${request.paypalRequest.displayName}');
+                      // print('The value of request is ${request.paypalRequest.amount}');
 
 
 
