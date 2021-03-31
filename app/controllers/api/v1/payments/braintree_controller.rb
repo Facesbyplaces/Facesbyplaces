@@ -1,4 +1,4 @@
-class Api::V1::Payments::PaypalController < ApplicationController
+class Api::V1::Payments::BraintreeController < ApplicationController
 
     TRANSACTION_SUCCESS_STATUSES = [
     Braintree::Transaction::Status::Authorizing,
@@ -39,6 +39,36 @@ class Api::V1::Payments::PaypalController < ApplicationController
     result = gateway.transaction.sale(
       amount: amount,
       payment_method_nonce: nonce,
+      :options => {
+        :submit_for_settlement => true
+      }
+    )
+
+    if result.success? || result.transaction
+        render json: { success: true, result: result }, status: 200
+    else
+        error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
+        render json: { success: false, error_messages: error_messages }, status: 400
+    end
+
+    # if result.success? || result.transaction
+    #   redirect_to checkout_path(result.transaction.id)
+    # else
+    #   error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
+    #   flash[:error] = error_messages
+    #   redirect_to new_checkout_path
+    # end
+  end
+
+  def createAppleOrGooglePayTransaction
+    amount        = params[:amount] # In production you should not take amounts directly from clients
+    nonce         = params[:payment_method_nonce]
+    device_data   = params[:device_data]
+
+    result = gateway.transaction.sale(
+      :amount => amount,
+      :payment_method_nonce => nonce,
+      :device_data => device_data,
       :options => {
         :submit_for_settlement => true
       }
