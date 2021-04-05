@@ -3,6 +3,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'home-search-regular-02-search-extended.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
+import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
@@ -37,49 +38,61 @@ class HomeRegularSearch extends StatelessWidget{
                   child: TextFormField(
                     controller: controller,
                     onFieldSubmitted: (String keyword) async{
+                      print('Submitted!');
+
                       Location.Location location = new Location.Location();
 
-                      bool serviceEnabled = await location.serviceEnabled();
+                      print('1!');
 
-                      if (!serviceEnabled) {
-                        serviceEnabled = await location.requestService();
-                        if (!serviceEnabled) {
-                          return;
-                        }
-                      }
+                      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
-                      Location.PermissionStatus permissionGranted = await location.hasPermission();
+                      // bool serviceEnabled = await location.serviceEnabled();
+                      // bool serviceEnabled = await location.ena();
 
-                      if (permissionGranted != Location.PermissionStatus.granted) {
-                        var confirmation = await showOkCancelAlertDialog(
-                          context: context,
-                          title: 'Confirm',
-                          message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                          okLabel: 'Yes',
-                          cancelLabel: 'No',
-                        );
 
-                        print('The confirmation is $confirmation');
+                      print('2!');
 
-                        if(confirmation == OkCancelResult.ok){
-                          permissionGranted = await location.requestPermission();
+                      print('The value of serviceEnabled $serviceEnabled');
 
-                          context.showLoaderOverlay();
-                          Location.LocationData locationData = await location.getLocation();
-                          List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                          context.hideLoaderOverlay();
+                      // if (!serviceEnabled) {
+                      //   serviceEnabled = await location.requestService();
+                      //   if (!serviceEnabled) {
+                      //     return;
+                      //   }
+                      // }
 
-                          Navigator.pop(context);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                        }
-                      }else{
-                        context.showLoaderOverlay();
-                        Location.LocationData locationData = await location.getLocation();
-                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                        context.hideLoaderOverlay();
+                      // Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                      }
+                      // if (permissionGranted != Location.PermissionStatus.granted) {
+                      //   var confirmation = await showOkCancelAlertDialog(
+                      //     context: context,
+                      //     title: 'Confirm',
+                      //     message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                      //     okLabel: 'Yes',
+                      //     cancelLabel: 'No',
+                      //   );
+
+                      //   print('The confirmation is $confirmation');
+
+                      //   if(confirmation == OkCancelResult.ok){
+                      //     permissionGranted = await location.requestPermission();
+
+                      //     context.showLoaderOverlay();
+                      //     Location.LocationData locationData = await location.getLocation();
+                      //     List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                      //     context.hideLoaderOverlay();
+
+                      //     Navigator.pop(context);
+                      //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
+                      //   }
+                      // }else{
+                      //   context.showLoaderOverlay();
+                      //   Location.LocationData locationData = await location.getLocation();
+                      //   List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                      //   context.hideLoaderOverlay();
+
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
+                      // }
                     },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(15.0),

@@ -499,11 +499,12 @@ PODS:
 DEPENDENCIES:
   - better_player (from `.symlinks/plugins/better_player/ios`)
   - Braintree
+  - Braintree/Apple-Pay
   - Braintree/DataCollector
+  - Braintree/PayPalDataCollector
   - BraintreeDropIn
   - Firebase/Analytics
   - Firebase/Auth
-  - Firebase/Core
   - Firebase/Firestore
   - Firebase/Messaging
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -681,6 +682,6 @@ SPEC CHECKSUMS:
   wakelock: b0843b2479edbf6504d8d262c2959446f35373aa
   ZLPhotoBrowser: 559062abac47b41ef140cff6ea2370e73623b05f
 
-PODFILE CHECKSUM: a2ee576719e8f315dc29afdc765506830991417b
+PODFILE CHECKSUM: b8abbe79f6f97328147ff11eaccfbb700ae60282
 
 COCOAPODS: 1.10.1

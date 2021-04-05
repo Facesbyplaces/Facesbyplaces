@@ -148,20 +148,54 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                       print('The new token is $token');
 
+                      String amount = '0.99';
+
+                      if(donateToggle == 0){
+                        amount = '0.99';
+                      }else if(donateToggle == 1){
+                        amount = '5.00';
+                      }else if(donateToggle == 2){
+                        amount = '15.00';
+                      }else if(donateToggle == 3){
+                        amount = '25.00';
+                      }else if(donateToggle == 4){
+                        amount = '50.00';
+                      }else if(donateToggle == 5){
+                        amount = '100.00';
+                      }
+
                       var request = BraintreeDropInRequest(
                         tokenizationKey: token,
                         collectDeviceData: true,
+                        applePayRequest: BraintreeApplePayRequest(
+                          countryCode: 'US',
+                          currencyCode: 'USD',
+                          appleMerchantID: 'merchant.com.app.facesbyplaces',
+                          amount: double.parse(amount),
+                          displayName: 'FacesbyPlaces'
+                        ),
                         googlePaymentRequest: BraintreeGooglePaymentRequest(
-                          totalPrice: ((){
-                            switch(donateToggle){
-                              case 0: return '0.99';
-                              case 1: return '5.00';
-                              case 2: return '15.00';
-                              case 3: return '25.00';
-                              case 4: return '50.00';
-                              case 5: return '100.00';
-                            }
-                          }()),
+                          totalPrice: amount,
+                          // totalPrice: ((){
+                          //   switch(donateToggle){
+                          //     case 0: return '0.99';
+                          //     case 1: return '5.00';
+                          //     case 2: return '15.00';
+                          //     case 3: return '25.00';
+                          //     case 4: return '50.00';
+                          //     case 5: return '100.00';
+                          //   }
+                          // }()),
+                          // totalPrice: ((){
+                          //   switch(donateToggle){
+                          //     case 0: return '0.99';
+                          //     case 1: return '5.00';
+                          //     case 2: return '15.00';
+                          //     case 3: return '25.00';
+                          //     case 4: return '50.00';
+                          //     case 5: return '100.00';
+                          //   }
+                          // }()),
                           currencyCode: 'USD',
                           billingAddressRequired: false,
                         ),
@@ -181,18 +215,18 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                         cardEnabled: true,
                       );
 
-                      BraintreeDropInResult result = await BraintreeDropIn.start(request);
+                      BraintreeDropInResult result = (await BraintreeDropIn.start(request))!;
 
-                      print('The amount is ${request.paypalRequest.amount}');
+                      print('The amount is ${request.paypalRequest!.amount}');
                       print('The nonce is ${result.paymentMethodNonce.nonce}');
 
-                      var newValue = json.decode(result.deviceData);
+                      var newValue = json.decode(result.deviceData!);
                       var deviceToken = newValue['correlation_id'];
 
                       print('The newValue is $newValue');
                       print('The deviceToken is $deviceToken');
 
-                      bool paymentResult = await apiRegularProcessToken(amount: request.paypalRequest.amount, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
+                      bool paymentResult = await apiRegularProcessToken(amount: request.paypalRequest!.amount!, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
 
                       print('The paymentResult is $paymentResult');
 
