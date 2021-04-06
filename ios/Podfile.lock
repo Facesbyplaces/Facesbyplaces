@@ -297,6 +297,10 @@ PODS:
   - Firebase/Messaging (7.3.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 7.3.0)
+  - firebase_auth (1.0.1):
+    - Firebase/Auth (= 7.3.0)
+    - firebase_core
+    - Flutter
   - firebase_core (1.0.2):
     - Firebase/CoreOnly (= 7.3.0)
     - Flutter
@@ -376,9 +380,6 @@ PODS:
     - OrderedSet (~> 5.0)
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
-  - flutter_libphonenumber (0.0.1):
-    - Flutter
-    - PhoneNumberKit/PhoneNumberKitCore (~> 3.3.3)
   - flutter_login_facebook (0.5.0):
     - FBSDKLoginKit (~> 9.1)
     - Flutter
@@ -465,6 +466,14 @@ PODS:
   - KTVHTTPCache (2.0.1):
     - KTVCocoaHTTPServer
   - leveldb-library (1.22.1)
+  - libphonenumber (0.0.1):
+    - Flutter
+    - libPhoneNumber-iOS
+  - libPhoneNumber-iOS (0.9.15)
+  - libphonenumber_plugin (0.0.1):
+    - Flutter
+    - libphonenumber
+    - libPhoneNumber-iOS
   - location (0.0.1):
     - Flutter
   - nanopb (2.30906.0):
@@ -475,7 +484,6 @@ PODS:
   - OrderedSet (5.0.0)
   - path_provider (0.0.1):
     - Flutter
-  - PhoneNumberKit/PhoneNumberKitCore (3.3.3)
   - PromisesObjC (1.2.12)
   - share (0.0.1):
     - Flutter
@@ -503,6 +511,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Firestore
   - Firebase/Messaging
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
@@ -511,13 +520,14 @@ DEPENDENCIES:
   - flutter_branch_sdk (from `.symlinks/plugins/flutter_branch_sdk/ios`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
-  - flutter_libphonenumber (from `.symlinks/plugins/flutter_libphonenumber/ios`)
   - flutter_login_facebook (from `.symlinks/plugins/flutter_login_facebook/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
   - geolocator (from `.symlinks/plugins/geolocator/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - images_picker (from `.symlinks/plugins/images_picker/ios`)
+  - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
+  - libphonenumber_plugin (from `.symlinks/plugins/libphonenumber_plugin/ios`)
   - location (from `.symlinks/plugins/location/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - share (from `.symlinks/plugins/share/ios`)
@@ -558,15 +568,17 @@ SPEC REPOS:
     - KTVCocoaHTTPServer
     - KTVHTTPCache
     - leveldb-library
+    - libPhoneNumber-iOS
     - nanopb
     - OrderedSet
-    - PhoneNumberKit
     - PromisesObjC
     - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
   better_player:
     :path: ".symlinks/plugins/better_player/ios"
+  firebase_auth:
+    :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
@@ -583,8 +595,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_inappwebview/ios"
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
-  flutter_libphonenumber:
-    :path: ".symlinks/plugins/flutter_libphonenumber/ios"
   flutter_login_facebook:
     :path: ".symlinks/plugins/flutter_login_facebook/ios"
   geocoding:
@@ -597,6 +607,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker/ios"
   images_picker:
     :path: ".symlinks/plugins/images_picker/ios"
+  libphonenumber:
+    :path: ".symlinks/plugins/libphonenumber/ios"
+  libphonenumber_plugin:
+    :path: ".symlinks/plugins/libphonenumber_plugin/ios"
   location:
     :path: ".symlinks/plugins/location/ios"
   path_provider:
@@ -624,6 +638,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: a00fe2efd780c195a5e09201bf51c56106245b40
   FBSDKLoginKit: d98498c598ec09de657385a9349a1f21119b7f86
   Firebase: 26223c695fe322633274198cb19dca8cb7e54416
+  firebase_auth: 9f6491ea8e44570323361ae713a2ae3175b3f21a
   firebase_core: e6cbb0d1f7091edfcae31559e58224bfc1e455dc
   firebase_messaging: 446f8b30023ace26f162a9309b5bd1fdff78c011
   FirebaseAnalytics: 2580c2d62535ae7b644143d48941fcc239ea897a
@@ -640,7 +655,6 @@ SPEC CHECKSUMS:
   flutter_branch_sdk: 81dc6de699f84f074ddae8806feb97b4bc9ac315
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
-  flutter_libphonenumber: 6a23afdf063b34d1e53e6dbd6c6bc905d18e8e46
   flutter_login_facebook: 41fcf15687d2ce7a75bb89aa3476df54a00845a3
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
@@ -659,11 +673,13 @@ SPEC CHECKSUMS:
   KTVCocoaHTTPServer: df8d7b861e603ff8037e9b2138aca2563a6b768d
   KTVHTTPCache: 588c3eb16f6bd1e6fde1e230dabfb7bd4e490a4d
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
+  libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
+  libphonenumber_plugin: 7cf755ad1656145935d6c208173a476bd3f12898
   location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
-  PhoneNumberKit: 4ce83273551c4d2ae10b7361162f4283dd02835f
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
@@ -672,6 +688,6 @@ SPEC CHECKSUMS:
   wakelock: b0843b2479edbf6504d8d262c2959446f35373aa
   ZLPhotoBrowser: 559062abac47b41ef140cff6ea2370e73623b05f
 
-PODFILE CHECKSUM: b8abbe79f6f97328147ff11eaccfbb700ae60282
+PODFILE CHECKSUM: a494ff880d83a1900bc8e9a2d04563967f0795d0
 
 COCOAPODS: 1.10.1

@@ -124,7 +124,7 @@
 		<string>4n5z1.test-app.link</string>
 		<string>4n5z1-alternate.test-app.link</string>
 	</array>
-    <key>io.flutter.embedded_views_preview</key>
-    <true/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>
