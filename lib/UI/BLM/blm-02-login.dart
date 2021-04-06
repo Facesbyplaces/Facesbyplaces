@@ -124,20 +124,23 @@ class BLMLoginState extends State<BLMLogin>{
                                       FacebookPermission.userFriends,
                                     ]);
 
-                                    final email = await fb.getUserEmail();
-                                    final profile = await fb.getUserProfile();
-                                    final image = await fb.getProfileImageUrl(width: 50, height: 50);
+                                    // final email = await fb.getUserEmail();
+                                    // final profile = await fb.getUserProfile();
+                                    // final image = await fb.getProfileImageUrl(width: 50, height: 50);
+                                    FacebookUserProfile profile = (await fb.getUserProfile())!;
+                                    String email = (await fb.getUserEmail())!;
+                                    String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
 
                                     if(result.status != FacebookLoginStatus.cancel){
                                       context.showLoaderOverlay();
                                       
                                       bool apiResult = await apiBLMSignInWithFacebook(
-                                        firstName: '${profile!.firstName}',
-                                        lastName: '${profile.lastName}',
-                                        email: email!,
+                                        firstName: '${profile.name}',
+                                        lastName: '',
+                                        email: email,
                                         username: email,
                                         facebookId: result.accessToken!.token,
-                                        image: image!,
+                                        image: image,
                                       );
                                       context.hideLoaderOverlay();
 

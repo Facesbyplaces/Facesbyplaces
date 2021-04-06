@@ -14,7 +14,7 @@ class BLMRegister extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberPickerTemplateState> _key3 = GlobalKey<MiscBLMPhoneNumberPickerTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key3 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key5 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key6 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -61,7 +61,7 @@ class BLMRegister extends StatelessWidget{
 
                             SizedBox(height: 20,),
 
-                            MiscBLMPhoneNumberPickerTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
+                            MiscBLMPhoneNumberTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                             SizedBox(height: 20,),
 
@@ -88,7 +88,7 @@ class BLMRegister extends StatelessWidget{
                                 bool validEmail = false;
                                 validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text );
 
-                                if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller2.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
+                                if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                                   await showOkAlertDialog(
                                     context: context,
                                     title: 'Error',
@@ -105,7 +105,7 @@ class BLMRegister extends StatelessWidget{
                                   APIBLMAccountRegistration account = APIBLMAccountRegistration(
                                     firstName: _key1.currentState!.controller.text, 
                                     lastName: _key2.currentState!.controller.text,
-                                    phoneNumber: _key3.currentState!.controller2.text,
+                                    phoneNumber: _key3.currentState!.controller.text,
                                     email: _key4.currentState!.controller.text,
                                     username: _key5.currentState!.controller.text,
                                     password: _key6.currentState!.controller.text,

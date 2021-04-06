@@ -210,13 +210,24 @@ class RegularLoginState extends State<RegularLogin>{
 
                                   bool isLoggedIn = await googleSignIn.isSignedIn();
 
+                                  print('The value of isLoggedIn is $isLoggedIn');
+
                                   if(isLoggedIn == true){
                                     context.showLoaderOverlay();
                                     GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
                                     GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
+
+                                    print('The accountSignIn is ${accountSignedIn!.displayName}');
+                                    print('The accountSignIn is ${accountSignedIn.email}');
+                                    print('The accountSignIn is ${accountSignedIn.id}');
+                                    print('The accountSignIn is ${accountSignedIn.photoUrl}');
+
+                                    print('The auth is ${auth.accessToken}');
+                                    print('The auth is ${auth.idToken}');
+                                    print('The auth is ${auth.serverAuthCode}');
                                     
                                     bool result = await apiRegularSignInWithGoogle(
-                                      firstName: accountSignedIn!.displayName!, 
+                                      firstName: accountSignedIn.displayName!, 
                                       lastName: '', 
                                       email: accountSignedIn.email, 
                                       username: accountSignedIn.email,
@@ -228,25 +239,33 @@ class RegularLoginState extends State<RegularLogin>{
                                     if(result == true){
                                       Navigator.pushReplacementNamed(context, '/home/regular');
                                     }else{
-                                      await showOkCancelAlertDialog(
+                                      await showOkAlertDialog(
                                         context: context,
                                         title: 'Error',
                                         message: 'Invalid email or password. Please try again.',
-                                        isDestructiveAction: true,
                                       );
                                     }
                                   }else{
-                                    GoogleSignInAccount? signIn = await googleSignIn.signIn();
+                                    GoogleSignInAccount? accountSignedIn = await googleSignIn.signIn();
                                     GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
+
+                                    print('The accountSignIn is ${accountSignedIn!.displayName}');
+                                    print('The accountSignIn is ${accountSignedIn.email}');
+                                    print('The accountSignIn is ${accountSignedIn.id}');
+                                    print('The accountSignIn is ${accountSignedIn.photoUrl}');
+
+                                    print('The auth is ${auth.accessToken}');
+                                    print('The auth is ${auth.idToken}');
+                                    print('The auth is ${auth.serverAuthCode}');
 
                                     context.showLoaderOverlay();
                                     bool result = await apiRegularSignInWithGoogle(
-                                      firstName: signIn!.displayName!, 
+                                      firstName: accountSignedIn.displayName!, 
                                       lastName: '',
-                                      email: signIn.email, 
-                                      username: signIn.email,
+                                      email: accountSignedIn.email, 
+                                      username: accountSignedIn.email,
                                       googleId: auth.idToken!,
-                                      image: signIn.photoUrl!,
+                                      image: accountSignedIn.photoUrl!,
                                     );
                                     context.hideLoaderOverlay();
 
@@ -385,6 +404,8 @@ class RegularLoginState extends State<RegularLogin>{
                             final pushNotificationService = PushNotificationService(_firebaseMessaging);
                             pushNotificationService.initialise();
                             deviceToken = (await pushNotificationService.fcm.getToken())!;
+
+                            print('The device token is $deviceToken');
                             
                             bool result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
                             

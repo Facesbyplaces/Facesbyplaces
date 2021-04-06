@@ -24,7 +24,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberPickerTemplateState> _key4 = GlobalKey<MiscBLMPhoneNumberPickerTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key4 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
   final GlobalKey<MiscBLMInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscBLMInputFieldSecurityQuestionsState>();
 
   Future<APIBLMShowAccountDetails>? accountDetails;
@@ -90,7 +90,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                       SizedBox(height: 20,),
 
-                      MiscBLMPhoneNumberPickerTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data!.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
+                      MiscBLMPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data!.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                       SizedBox(height: 20,),
 
@@ -114,7 +114,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                             details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text ||
                             details.data!.showAccountDetailsLastName !=  _key2.currentState!.controller.text ||
                             details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text ||
-                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller2.text || 
+                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || 
                             details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
@@ -126,7 +126,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                 firstName: _key1.currentState!.controller.text,
                                 lastName: _key2.currentState!.controller.text,
                                 email: _key3.currentState!.controller.text,
-                                phoneNumber: _key4.currentState!.controller2.text,
+                                phoneNumber: _key4.currentState!.controller.text,
                                 question: _key5.currentState!.currentSelection,
                               );
                               context.hideLoaderOverlay();

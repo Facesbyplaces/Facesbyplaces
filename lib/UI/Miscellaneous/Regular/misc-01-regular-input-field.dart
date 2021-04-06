@@ -1,7 +1,8 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
+// import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:country_picker/country_picker.dart';
+// import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
@@ -317,7 +318,131 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
   }
 }
 
-class MiscRegularPhoneNumberPickerTemplate extends StatefulWidget{
+// class MiscRegularPhoneNumberPickerTemplate extends StatefulWidget{
+//   final String labelText;
+//   final TextStyle labelTextStyle;
+//   final bool obscureText;
+//   final TextInputType type;
+//   final int maxLines;
+//   final bool readOnly;
+//   final bool includeSuffixIcon;
+//   final String displayText;
+
+//   MiscRegularPhoneNumberPickerTemplate({
+//     required Key key,
+//     this.labelText = '',
+//     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+//     this.obscureText = false, 
+//     this.type = TextInputType.text, 
+//     this.maxLines = 1, 
+//     this.readOnly = false,
+//     this.includeSuffixIcon = false,
+//     this.displayText = '',
+//   }) : super(key: key);
+  
+//   MiscRegularPhoneNumberPickerTemplateState createState() => MiscRegularPhoneNumberPickerTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
+// }
+
+// class MiscRegularPhoneNumberPickerTemplateState extends State<MiscRegularPhoneNumberPickerTemplate>{
+//   final String labelText;
+//   final TextStyle labelTextStyle;
+//   final bool obscureText;
+//   final TextInputType type;
+//   final int maxLines;
+//   final bool readOnly;
+//   final bool includeSuffixIcon;
+//   final String displayText;
+
+//   MiscRegularPhoneNumberPickerTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
+
+//   TextEditingController controller1 = TextEditingController(text: '+1');
+//   TextEditingController controller2 = TextEditingController(text: '');
+
+//   var globalPhoneType = PhoneNumberType.mobile;
+//   var globalPhoneFormat = PhoneNumberFormat.international;
+
+//   String get overrideCountryCode {
+//     if (controller1.text.isNotEmpty) {
+//       try {
+//         return CountryManager().countries.firstWhere((element) => element.phoneCode == controller1.text.replaceAll(RegExp(r'[^\d]+'), '')).countryCode;
+//       } catch (_) {
+//         return '';
+//       }
+//     } else {
+//       return '';
+//     }
+//   }
+
+//   void initState(){
+//     super.initState();
+//     controller2 = TextEditingController(text: displayText);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     SizeConfig.init(context);
+//     return Row(
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//       children: [
+//         Container(
+//           width: 50,
+//           child: TextFormField(
+//             onTap: (){
+//             showCountryPicker(
+//               context: context,
+//               showPhoneCode: true,
+//               onSelect: (Country country) {
+//                 setState(() {
+//                   controller1.text = '+${country.phoneCode}';
+//                 });
+//               },
+//             );
+//             },
+//             readOnly: true,
+//             controller: controller1,
+//             decoration: InputDecoration(
+//               hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+//               focusedBorder: UnderlineInputBorder(
+//                 borderSide: BorderSide(
+//                   color: Color(0xff000000),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+
+//         SizedBox(width: 20,),
+        
+//         Expanded(
+//           child: TextFormField(
+//             keyboardType: TextInputType.phone,
+//             controller: controller2,
+//             cursorColor: Color(0xff000000),
+//             decoration: InputDecoration(
+//               focusedBorder: UnderlineInputBorder(
+//                 borderSide: BorderSide(
+//                   color: Color(0xff000000),
+//                 ),
+//               ),
+//             ),
+            
+//             inputFormatters: [
+//               LibPhonenumberTextFormatter(
+//                 phoneNumberType: globalPhoneType,
+//                 phoneNumberFormat: globalPhoneFormat,
+//                 overrideSkipCountryCode: overrideCountryCode,
+//               ),
+//             ],
+//           ),
+//         ),
+
+//       ],
+//     );
+//   }
+// }
+
+class MiscRegularPhoneNumberTemplate extends StatefulWidget{
   final String labelText;
   final TextStyle labelTextStyle;
   final bool obscureText;
@@ -327,7 +452,7 @@ class MiscRegularPhoneNumberPickerTemplate extends StatefulWidget{
   final bool includeSuffixIcon;
   final String displayText;
 
-  MiscRegularPhoneNumberPickerTemplate({
+  MiscRegularPhoneNumberTemplate({
     required Key key,
     this.labelText = '',
     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
@@ -339,10 +464,10 @@ class MiscRegularPhoneNumberPickerTemplate extends StatefulWidget{
     this.displayText = '',
   }) : super(key: key);
   
-  MiscRegularPhoneNumberPickerTemplateState createState() => MiscRegularPhoneNumberPickerTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
+  MiscRegularPhoneNumberTemplateState createState() => MiscRegularPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
 }
 
-class MiscRegularPhoneNumberPickerTemplateState extends State<MiscRegularPhoneNumberPickerTemplate>{
+class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTemplate>{
   final String labelText;
   final TextStyle labelTextStyle;
   final bool obscureText;
@@ -352,91 +477,40 @@ class MiscRegularPhoneNumberPickerTemplateState extends State<MiscRegularPhoneNu
   final bool includeSuffixIcon;
   final String displayText;
 
-  MiscRegularPhoneNumberPickerTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
+  MiscRegularPhoneNumberTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
 
-  TextEditingController controller1 = TextEditingController(text: '+1');
-  TextEditingController controller2 = TextEditingController(text: '');
-
-  var globalPhoneType = PhoneNumberType.mobile;
-  var globalPhoneFormat = PhoneNumberFormat.international;
-
-  String get overrideCountryCode {
-    if (controller1.text.isNotEmpty) {
-      try {
-        return CountryManager().countries.firstWhere((element) => element.phoneCode == controller1.text.replaceAll(RegExp(r'[^\d]+'), '')).countryCode;
-      } catch (_) {
-        return '';
-      }
-    } else {
-      return '';
-    }
-  }
+  TextEditingController controller = TextEditingController(text: '');
+  bool valid = false;
 
   void initState(){
     super.initState();
-    controller2 = TextEditingController(text: displayText);
+    controller = TextEditingController(text: displayText);
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          width: 50,
-          child: TextFormField(
-            onTap: (){
-            showCountryPicker(
-              context: context,
-              showPhoneCode: true,
-              onSelect: (Country country) {
-                setState(() {
-                  controller1.text = '+${country.phoneCode}';
-                });
-              },
-            );
-            },
-            readOnly: true,
-            controller: controller1,
-            decoration: InputDecoration(
-              hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Color(0xff000000),
-                ),
-              ),
-            ),
+    return InternationalPhoneNumberInput(
+      selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
+      textFieldController: controller,
+      onInputChanged: (PhoneNumber number){
+        print(number.phoneNumber);
+      },
+      onInputValidated: (bool value) {
+        setState(() {
+          valid = value;
+        });
+      },
+      inputDecoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: labelText,
+        labelStyle: labelTextStyle,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
           ),
         ),
-
-        SizedBox(width: 20,),
-        
-        Expanded(
-          child: TextFormField(
-            keyboardType: TextInputType.phone,
-            controller: controller2,
-            cursorColor: Color(0xff000000),
-            decoration: InputDecoration(
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Color(0xff000000),
-                ),
-              ),
-            ),
-            
-            inputFormatters: [
-              LibPhonenumberTextFormatter(
-                phoneNumberType: globalPhoneType,
-                phoneNumberFormat: globalPhoneFormat,
-                overrideSkipCountryCode: overrideCountryCode,
-              ),
-            ],
-          ),
-        ),
-
-      ],
+      ),
     );
   }
 }

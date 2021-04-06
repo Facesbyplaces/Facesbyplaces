@@ -41,7 +41,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberPickerTemplateState> _key5 = GlobalKey<MiscBLMPhoneNumberPickerTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key5 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
 
   Future<APIBLMShowOtherDetails>? otherDetails;
   bool toggle1 = false;
@@ -198,7 +198,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                       Row(
                         children: [
-                          Expanded(child: MiscBLMPhoneNumberPickerTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone),),
+                          Expanded(child: MiscBLMPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone),),
 
                           SizedBox(width: 20,),
 
@@ -236,7 +236,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                             details.data!.blmShowOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
                             details.data!.blmShowOtherDetailsAddress != _key3.currentState!.controller.text ||
                             details.data!.blmShowOtherDetailsEmail != _key4.currentState!.controller.text ||
-                            details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller2.text
+                            details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller.text
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
@@ -248,7 +248,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 birthplace: _key2.currentState!.controller.text,
                                 address: _key3.currentState!.controller.text,
                                 email: _key4.currentState!.controller.text,
-                                phoneNumber: _key5.currentState!.controller2.text,
+                                phoneNumber: _key5.currentState!.controller.text,
                               );
                               context.hideLoaderOverlay();
 

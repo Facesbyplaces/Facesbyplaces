@@ -14,7 +14,7 @@ class RegularRegister extends StatelessWidget{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularPhoneNumberPickerTemplateState> _key3 = GlobalKey<MiscRegularPhoneNumberPickerTemplateState>();
+  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key3 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -94,7 +94,7 @@ class RegularRegister extends StatelessWidget{
 
                           SizedBox(height: 20),
                           
-                          MiscRegularPhoneNumberPickerTemplate(
+                          MiscRegularPhoneNumberTemplate(
                             key: _key3, 
                             labelText: 'Mobile #', 
                             type: TextInputType.phone, 
@@ -174,7 +174,7 @@ class RegularRegister extends StatelessWidget{
                                 APIRegularAccountRegistration account = APIRegularAccountRegistration(
                                   firstName: _key1.currentState!.controller.text,
                                   lastName: _key2.currentState!.controller.text,
-                                  phoneNumber: _key3.currentState!.controller2.text,
+                                  phoneNumber: _key3.currentState!.controller.text,
                                   email: _key4.currentState!.controller.text,
                                   username: _key5.currentState!.controller.text,
                                   password: _key6.currentState!.controller.text,

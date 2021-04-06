@@ -10,7 +10,6 @@ import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-locati
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart';
 import 'UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
-import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -38,7 +37,6 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
-  await FlutterLibphonenumber().init();
 
   final sharedPrefs = await SharedPreferences.getInstance();
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;

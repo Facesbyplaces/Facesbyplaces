@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "436631194271-7en716jior5go3lm6bac1e0p9plkbo4f.apps.googleusercontent.com",
+          "client_id": "436631194271-2k1g57h3gte9fpoa0v7924qs03hs5ti1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.app.facesbyplaces",
-            "certificate_hash": "99052615bed4c3b5c5f9dbc75deef66bef35f0ef"
+            "certificate_hash": "85aeddc686697db445614b1c9d9adbb9e3bef353"
           }
         },
         {

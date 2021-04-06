@@ -24,7 +24,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularPhoneNumberPickerTemplateState> _key4 = GlobalKey<MiscRegularPhoneNumberPickerTemplateState>();
+  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key4 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
   final GlobalKey<MiscRegularInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscRegularInputFieldSecurityQuestionsState>();
 
   Future<APIRegularShowAccountDetails>? accountDetails;
@@ -90,7 +90,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                       SizedBox(height: 20,),
 
-                      MiscRegularPhoneNumberPickerTemplate(key: _key4, labelText: 'Phone Number', displayText: details.data!.showAccountDetailsPhoneNumber,),
+                      MiscRegularPhoneNumberTemplate(key: _key4, labelText: 'Phone Number', displayText: details.data!.showAccountDetailsPhoneNumber,),
 
                       SizedBox(height: 20,),
 
@@ -114,7 +114,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                             details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text ||
                             details.data!.showAccountDetailsLastName !=  _key2.currentState!.controller.text ||
                             details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text ||
-                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller2.text ||
+                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text ||
                             details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
@@ -126,7 +126,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                 firstName: _key1.currentState!.controller.text,
                                 lastName: _key2.currentState!.controller.text,
                                 email: _key3.currentState!.controller.text,
-                                phoneNumber: _key4.currentState!.controller2.text,
+                                phoneNumber: _key4.currentState!.controller.text,
                                 question: _key5.currentState!.currentSelection
                               );
                               context.hideLoaderOverlay();
