@@ -1,16 +1,10 @@
-// import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
-import 'dart:convert';
-
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-03-tokenization.dart';
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-04-process-payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:stripe_payment/stripe_payment.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_braintree/flutter_braintree.dart';
 import 'package:flutter/material.dart';
-import 'package:mad_pay/mad_pay.dart';
+import 'dart:convert';
 
 class HomeRegularUserDonate extends StatefulWidget{
   final String pageType;
@@ -28,20 +22,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   HomeRegularUserDonateState({required this.pageType, required this.pageId});
 
   int donateToggle = 0;
-  final MadPay pay = MadPay();
-  // Token paymentToken;
-
-  // @override
-  // initState() {
-  //   super.initState();
-  //   // StripePayment.setOptions(
-  //   //   StripeOptions(
-  //   //     publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
-  //   //     merchantId: "merchant.com.app.facesbyplaces", 
-  //   //     androidPayMode: 'test',
-  //   //   ),
-  //   // );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +40,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
         child: Scaffold(
           backgroundColor: Color(0xff888888),
           body: Padding(
-            // padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
             padding: EdgeInsets.all(20.0),
             child: Container(
               decoration: BoxDecoration(
