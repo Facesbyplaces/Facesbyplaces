@@ -5,8 +5,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
 import 'home-settings-memorial-blm-06-page-friends.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class BLMSearchUsers{
@@ -239,10 +239,23 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                             Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                           }else{
-                            await showOkAlertDialog(
+                            await showDialog(
                               context: context,
-                              title: 'Error',
-                              message: 'This user may not accept invite requests as of the moment. Please try again later.'
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('This user may not accept invite requests as of the moment. Please try again later.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
                             );
                           }
                         }else{
@@ -254,10 +267,23 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                             Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                           }else{
-                            await showOkAlertDialog(
+                            await showDialog(
                               context: context,
-                              title: 'Error',
-                              message: 'This user may not accept invite requests as of the moment. Please try again later.'
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('This user may not accept invite requests as of the moment. Please try again later.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
                             );
                           }
                         }

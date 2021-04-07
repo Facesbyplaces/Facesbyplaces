@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-search-blm-02-search-extended.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
@@ -59,15 +59,28 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                       print('The permissionGranted is $permissionGranted');
 
                       if (permissionGranted != Location.PermissionStatus.granted) {
-                        var confirmation = await showOkCancelAlertDialog(
+                        bool confirmation = await showDialog(
                           context: context,
-                          title: 'Confirm',
-                          message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                          okLabel: 'Yes',
-                          cancelLabel: 'No',
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: false,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                            onCancelButtonPressed: () {
+                              Navigator.pop(context, false);
+                            },
+                          )
                         );
 
-                        if(confirmation == OkCancelResult.ok){
+                        if(confirmation == true){
                           permissionGranted = await location.requestPermission();
 
                           context.showLoaderOverlay();
@@ -128,15 +141,28 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                           print('The permissionGranted is $permissionGranted');
 
                           if (permissionGranted != Location.PermissionStatus.granted) {
-                            var confirmation = await showOkCancelAlertDialog(
+                            bool confirmation = await showDialog(
                               context: context,
-                              title: 'Confirm',
-                              message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                              okLabel: 'Yes',
-                              cancelLabel: 'No',
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: false,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                                onCancelButtonPressed: () {
+                                  Navigator.pop(context, false);
+                                },
+                              )
                             );
 
-                            if(confirmation == OkCancelResult.ok){
+                            if(confirmation == true){
                               permissionGranted = await location.requestPermission();
 
                               context.showLoaderOverlay();

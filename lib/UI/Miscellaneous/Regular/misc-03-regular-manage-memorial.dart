@@ -5,8 +5,8 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-bl
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularManageMemorialTab extends StatefulWidget{
@@ -123,17 +123,28 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
 
-                  var confirmation = await showOkCancelAlertDialog(
+                  bool confirmResult = await showDialog(
                     context: context,
-                    title: 'Confirm',
-                    message: 'Are you sure you want to leave this page?',
-                    okLabel: 'Yes',
-                    cancelLabel: 'No',
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Are you sure you want to leave this page?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: false,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                      onCancelButtonPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                    )
                   );
 
-                  print('The confirmation is $confirmation');
-
-                  if(confirmation == OkCancelResult.ok){
+                  if(confirmResult == true){
 
                     context.showLoaderOverlay();
                     bool result = await apiRegularLeavePage(memorialId: memorialId);
@@ -144,16 +155,41 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         followButton = false;
                       });
 
-                      await showOkAlertDialog(
+                      await showDialog(
                         context: context,
-                        title: 'Success',
-                        message: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
                       );
                     }else{
-                      await showOkAlertDialog(
+                      await showDialog(
                         context: context,
-                        title: 'Error',
-                        message: 'Something went wrong. Please try again.',
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
                       );
                     }
                   }
@@ -174,15 +210,28 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
 
-                  var confirmation = await showOkCancelAlertDialog(
+                  bool confirmResult = await showDialog(
                     context: context,
-                    title: 'Confirm',
-                    message: 'Are you sure you want to leave this page?',
-                    okLabel: 'Yes',
-                    cancelLabel: 'No',
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Are you sure you want to leave this page?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: false,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                      onCancelButtonPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                    )
                   );
 
-                  if(confirmation == OkCancelResult.ok){
+                  if(confirmResult == true){
 
                     context.showLoaderOverlay();
                     bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
@@ -193,16 +242,41 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         followButton = false;
                       });
 
-                      await showOkAlertDialog(
+                      await showDialog(
                         context: context,
-                        title: 'Success',
-                        message: 'Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
                       );
                     }else{
-                      await showOkAlertDialog(
+                      await showDialog(
                         context: context,
-                        title: 'Error',
-                        message: 'Something went wrong. Please try again.',
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
                       );
                     }
                   }
@@ -232,16 +306,41 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       followButton = true;
                     });
 
-                    await showOkAlertDialog(
+                    await showDialog(
                       context: context,
-                      title: 'Success',
-                      message: 'Successfully followed the page. You will receive notifications from this page.',
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully followed the page. You will receive notifications from this page.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
                     );
                   }else{
-                    await showOkAlertDialog(
+                    await showDialog(
                       context: context,
-                      title: 'Error',
-                      message: 'Something went wrong. Please try again.',
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Something went wrong. Please try again.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
                     );
                   }
                 },

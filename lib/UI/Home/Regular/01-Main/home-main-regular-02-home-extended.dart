@@ -19,8 +19,8 @@ import 'home-main-regular-03-02-memorial-list-tab.dart';
 import 'home-main-regular-03-03-post-tab.dart';
 import 'home-main-regular-03-04-notifications-tab.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -87,10 +87,23 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
         }
       }
     }else{
-      await showOkAlertDialog(
+      await showDialog(
         context: context,
-        title: 'Error',
-        message: 'Something went wrong. Please try again.',
+        builder: (_) => 
+          AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          entryAnimation: EntryAnimation.DEFAULT,
+          description: Text('Something went wrong. Please try again.',
+            textAlign: TextAlign.center,
+            style: TextStyle(),
+          ),
+          onlyOkButton: true,
+          buttonOkColor: Colors.red,
+          onOkButtonPressed: () {
+            Navigator.pop(context, true);
+          },
+        )
       );
     }
   }
@@ -392,11 +405,23 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                                   Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                                 }else{
-                                  await showOkCancelAlertDialog(
+                                  await showDialog(
                                     context: context,
-                                    title: 'Error',
-                                    message: 'Something went wrong. Please try again.',
-                                    isDestructiveAction: true,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
                                   );
                                 }
                                 

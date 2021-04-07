@@ -12,11 +12,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';
@@ -360,18 +360,43 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                           print('The value of result is $result');
 
                                                           if(result){
-                                                            await showOkAlertDialog(
+                                                            await showDialog(
                                                               context: context,
-                                                              title: 'Success',
-                                                              message: join != true
-                                                              ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.'
-                                                              : 'Successfully followed the page. You will receive notifications from this page.',
+                                                              builder: (_) => 
+                                                                AssetGiffyDialog(
+                                                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                                entryAnimation: EntryAnimation.DEFAULT,
+                                                                description: Text(join != true
+                                                                  ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.'
+                                                                  : 'Successfully followed the page. You will receive notifications from this page.',
+                                                                  textAlign: TextAlign.center,
+                                                                  style: TextStyle(),
+                                                                ),
+                                                                onlyOkButton: true,
+                                                                onOkButtonPressed: () {
+                                                                  Navigator.pop(context, true);
+                                                                },
+                                                              )
                                                             );
                                                           }else{
-                                                            await showOkAlertDialog(
+                                                            await showDialog(
                                                               context: context,
-                                                              title: 'Error',
-                                                              message: 'Something went wrong. Please try again.',
+                                                              builder: (_) => 
+                                                                AssetGiffyDialog(
+                                                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                                entryAnimation: EntryAnimation.DEFAULT,
+                                                                description: Text('Something went wrong. Please try again.',
+                                                                  textAlign: TextAlign.center,
+                                                                  style: TextStyle(),
+                                                                ),
+                                                                onlyOkButton: true,
+                                                                buttonOkColor: Colors.red,
+                                                                onOkButtonPressed: () {
+                                                                  Navigator.pop(context, true);
+                                                                },
+                                                              )
                                                             );
                                                           }
                                                           

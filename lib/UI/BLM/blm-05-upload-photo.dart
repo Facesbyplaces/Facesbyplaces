@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-04-upload-photo.dar
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -137,17 +137,43 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                   if(result){
                     Navigator.pushReplacementNamed(context, '/home/blm');
                   }else{
-                    await showOkAlertDialog(
+                    await showDialog(
                       context: context,
-                      title: 'Error',
-                      message: 'Something went wrong. Please try again.',
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Something went wrong. Please try again.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
                     );
                   }
                 }else{
-                  await showOkAlertDialog(
+                  await showDialog(
                     context: context,
-                    title: 'Error',
-                    message: 'Please upload a photo.',
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Please upload a photo.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      buttonOkColor: Colors.red,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
                   );
                 }
               }, 

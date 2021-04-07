@@ -5,10 +5,10 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -289,18 +289,43 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                             context.hideLoaderOverlay();
 
                             if(result){
-                              await showOkAlertDialog(
+                              await showDialog(
                                 context: context,
-                                title: 'Success',
-                                message: 'Successfully updated the account details.'
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Successfully updated the memorial image.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
                               );
                               Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.blmMemorial.showPageImagesRelationship,));
                               Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                             }else{
-                              await showOkAlertDialog(
+                              await showDialog(
                                 context: context,
-                                title: 'Error',
-                                message: 'Something went wrong. Please try again.'
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Something went wrong. Please try again.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
                               );
                             }
                           }

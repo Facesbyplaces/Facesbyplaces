@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-blm-02-create-memorial.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -185,10 +185,23 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                       onPressed: () async{
 
                         if(_key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
-                          await showOkAlertDialog(
+                          await showDialog(
                             context: context,
-                            title: 'Error',
-                            message: 'Please complete the form before submitting.',
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Please complete the form before submitting.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
                           );
                         }else{
                           Navigator.push(

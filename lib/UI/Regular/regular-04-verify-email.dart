@@ -3,8 +3,8 @@ import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-10-verifica
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -122,25 +122,50 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                 decoration: TextDecoration.underline,
                               ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () async{
-                                  context.showLoaderOverlay();
-                                  bool result = await apiRegularVerificationCodeResend();
-                                  context.hideLoaderOverlay();
+                              ..onTap = () async{
+                                context.showLoaderOverlay();
+                                bool result = await apiRegularVerificationCodeResend();
+                                context.hideLoaderOverlay();
 
-                                  if(result == true){
-                                    await showOkAlertDialog(
-                                      context: context,
-                                      title: 'Success',
-                                      message: 'Another code has been sent to your email address. Please check your inbox.',
-                                    );
-                                  }else{
-                                    await showOkAlertDialog(
-                                      context: context,
-                                      title: 'Error',
-                                      message: 'Something went wrong. Please try again.',
-                                    );
-                                  }
+                                if(result == true){
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Another code has been sent to your email address. Please check your inbox.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
                                 }
+                              }
                             ),
                           ],
                         ),
@@ -158,10 +183,23 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                         onPressed: () async{
 
                           if(controller.text.length != 3){
-                            await showOkAlertDialog(
+                            await showDialog(
                               context: context,
-                              title: 'Error',
-                              message: 'Please enter the verification code.',
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Please enter the verification code.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
                             );
                           }else{
 
@@ -172,10 +210,23 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                             if(result){
                               Navigator.pushNamed(context, '/regular/upload-photo');
                             }else{
-                              await showOkAlertDialog(
+                              await showDialog(
                                 context: context,
-                                title: 'Error',
-                                message: 'Something went wrong. Please try again.',
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Something went wrong. Please try again.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
                               );
                             }
                           }

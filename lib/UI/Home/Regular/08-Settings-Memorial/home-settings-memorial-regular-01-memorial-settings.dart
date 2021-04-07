@@ -9,8 +9,8 @@ import 'home-settings-memorial-regular-03-update-memorial-image.dart';
 import 'home-settings-memorial-regular-04-page-managers.dart';
 import 'home-settings-memorial-regular-05-page-family.dart';
 import 'home-settings-memorial-regular-06-page-friends.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularMemorialSettings extends StatefulWidget{
@@ -201,10 +201,23 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
               if(result){
                 Navigator.popAndPushNamed(context, '/home/regular');
               }else{
-                await showOkAlertDialog(
+                await showDialog(
                   context: context,
-                  title: 'Error',
-                  message: 'Something went wrong. Please try again.'
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    buttonOkColor: Colors.red,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
                 );
               }
             }

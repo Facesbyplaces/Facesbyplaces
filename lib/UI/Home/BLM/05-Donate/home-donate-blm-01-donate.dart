@@ -1,32 +1,41 @@
-import 'dart:convert';
-
-import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-03-tokenization.dart';
-import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-04-process-payment.dart';
+// import 'dart:convert';
+// import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-03-tokenization.dart';
+// import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-04-process-payment.dart';
+import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_braintree/flutter_braintree.dart';
+// import 'package:flutter_braintree/flutter_braintree.dart';
+import 'package:stripe_payment/stripe_payment.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserDonate extends StatefulWidget{
   final String pageType;
   final int pageId;
+  final String pageName;
 
-  HomeBLMUserDonate({required this.pageType, required this.pageId});
+  HomeBLMUserDonate({required this.pageType, required this.pageId, required this.pageName});
 
-  HomeBLMUserDonateState createState() => HomeBLMUserDonateState(pageType: pageType, pageId: pageId);
+  HomeBLMUserDonateState createState() => HomeBLMUserDonateState(pageType: pageType, pageId: pageId, pageName: pageName);
 }
 
 class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   final String pageType;
   final int pageId;
+  final String pageName;
 
-  HomeBLMUserDonateState({required this.pageType, required this.pageId});
+  HomeBLMUserDonateState({required this.pageType, required this.pageId, required this.pageName});
 
   int donateToggle = 0;
 
   @override
   initState() {
     super.initState();
+    // 'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik',
+    // "pk_test_aSaULNS8cJU6Tvo20VAXy6rp"
+    StripePayment.setOptions(StripeOptions(publishableKey: 'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik', merchantId: 'merchant.com.app.facesbyplaces', androidPayMode: 'test'));
   }
 
   @override
@@ -130,48 +139,21 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                   SizedBox(height: 20,),
 
+                  // Image.asset('assets/icons/apple-pay-mark.svg'),
+                  Container(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+                    alignment: Alignment.topLeft,
+                    child: SvgPicture.asset('assets/icons/apple-pay-mark.svg', semanticsLabel: 'Apple Pay Mark', height: 50, width: 50,),
+                  ),
+
                   MiscBLMButtonTemplate(
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
                     onPressed: () async{
 
-                      String token = await apiBLMTokenization();
-
-                      // print('The new token is $token');
-
-                      String amount = '0.99';
-
-                      if(donateToggle == 0){
-                        amount = '0.99';
-                      }else if(donateToggle == 1){
-                        amount = '5.00';
-                      }else if(donateToggle == 2){
-                        amount = '15.00';
-                      }else if(donateToggle == 3){
-                        amount = '25.00';
-                      }else if(donateToggle == 4){
-                        amount = '50.00';
-                      }else if(donateToggle == 5){
-                        amount = '100.00';
-                      }
-
-                      var request = BraintreeDropInRequest(
-                        tokenizationKey: token,
-                        collectDeviceData: true,
-                        applePayRequest: BraintreeApplePayRequest(
-                          countryCode: 'US',
-                          currencyCode: 'USD',
-                          appleMerchantID: 'merchant.com.app.facesbyplaces',
-                          amount: double.parse(amount),
-                          displayName: 'FacesbyPlaces'
-                        ),
-                        googlePaymentRequest: BraintreeGooglePaymentRequest(
-                          totalPrice: amount,
-                          currencyCode: 'USD',
-                          billingAddressRequired: false,
-                        ),
-                        paypalRequest: BraintreePayPalRequest(
-                          amount: ((){
+                      var paymentToken = await StripePayment.paymentRequestWithNativePay(
+                        androidPayOptions: AndroidPayPaymentRequest(
+                          totalPrice: ((){
                             switch(donateToggle){
                               case 0: return '0.99';
                               case 1: return '5.00';
@@ -181,30 +163,162 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                               case 5: return '100.00';
                             }
                           }()),
-                          displayName: 'Example company',
+                          currencyCode: 'USD',
                         ),
-                        cardEnabled: true,
+                        applePayOptions: ApplePayPaymentOptions(
+                          countryCode: 'US',
+                          currencyCode: 'USD',
+                          items: [
+                            ApplePayItem(
+                              label: '$pageName',
+                              amount: ((){
+                                switch(donateToggle){
+                                  case 0: return '0.99';
+                                  case 1: return '5.00';
+                                  case 2: return '15.00';
+                                  case 3: return '25.00';
+                                  case 4: return '50.00';
+                                  case 5: return '100.00';
+                                }
+                              }()),
+                            )
+                          ],
+                        ),
                       );
 
-                      BraintreeDropInResult result = (await BraintreeDropIn.start(request))!;
+                      StripePayment.completeNativePayRequest();
+                      double amount = 0.99;
 
-                      print('The amount is ${request.paypalRequest!.amount}');
-                      print('The nonce is ${result.paymentMethodNonce.nonce}');
-                      print('The device token is ${result.deviceData}');
-                      print('The description is ${result.paymentMethodNonce.description}');
-                      print('The description is ${result.paymentMethodNonce.isDefault}');
-                      print('The description is ${result.paymentMethodNonce.nonce}');
-                      print('The description is ${result.paymentMethodNonce.typeLabel}');
+                      if(donateToggle == 0){
+                        amount = 0.99;
+                      }else if(donateToggle == 1){
+                        amount = 5.00;
+                      }else if(donateToggle == 2){
+                        amount = 15.00;
+                      }else if(donateToggle == 3){
+                        amount = 25.00;
+                      }else if(donateToggle == 4){
+                        amount = 50.00;
+                      }else if(donateToggle == 5){
+                        amount = 100.00;
+                      }
 
-                      var newValue = json.decode(result.deviceData!);
-                      var deviceToken = newValue['correlation_id'];
+                      print('The amount is $amount');
 
-                      print('The newValue is $newValue');
-                      print('The deviceToken is $deviceToken');
+                      context.showLoaderOverlay();
+                      bool result = await apiBLMDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      context.hideLoaderOverlay();
 
-                      bool paymentResult = await apiBLMProcessToken(amount: request.paypalRequest!.amount!, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
+                      if(result == true){
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                        );
+                      }else{
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.red,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
+                      }
 
-                      print('The paymentResult is $paymentResult');
+
+                      // String token = await apiBLMTokenization();
+
+                      // // print('The new token is $token');
+
+                      // String amount = '0.99';
+
+                      // if(donateToggle == 0){
+                      //   amount = '0.99';
+                      // }else if(donateToggle == 1){
+                      //   amount = '5.00';
+                      // }else if(donateToggle == 2){
+                      //   amount = '15.00';
+                      // }else if(donateToggle == 3){
+                      //   amount = '25.00';
+                      // }else if(donateToggle == 4){
+                      //   amount = '50.00';
+                      // }else if(donateToggle == 5){
+                      //   amount = '100.00';
+                      // }
+
+                      // var request = BraintreeDropInRequest(
+                      //   tokenizationKey: token,
+                      //   collectDeviceData: true,
+                      //   applePayRequest: BraintreeApplePayRequest(
+                      //     countryCode: 'US',
+                      //     currencyCode: 'USD',
+                      //     appleMerchantID: 'merchant.com.app.facesbyplaces',
+                      //     amount: double.parse(amount),
+                      //     displayName: 'FacesbyPlaces'
+                      //   ),
+                      //   googlePaymentRequest: BraintreeGooglePaymentRequest(
+                      //     totalPrice: amount,
+                      //     currencyCode: 'USD',
+                      //     billingAddressRequired: false,
+                      //   ),
+                      //   paypalRequest: BraintreePayPalRequest(
+                      //     amount: ((){
+                      //       switch(donateToggle){
+                      //         case 0: return '0.99';
+                      //         case 1: return '5.00';
+                      //         case 2: return '15.00';
+                      //         case 3: return '25.00';
+                      //         case 4: return '50.00';
+                      //         case 5: return '100.00';
+                      //       }
+                      //     }()),
+                      //     displayName: 'Example company',
+                      //   ),
+                      //   cardEnabled: true,
+                      // );
+
+                      // BraintreeDropInResult result = (await BraintreeDropIn.start(request))!;
+
+                      // print('The amount is ${request.paypalRequest!.amount}');
+                      // print('The nonce is ${result.paymentMethodNonce.nonce}');
+                      // print('The device token is ${result.deviceData}');
+                      // print('The description is ${result.paymentMethodNonce.description}');
+                      // print('The description is ${result.paymentMethodNonce.isDefault}');
+                      // print('The description is ${result.paymentMethodNonce.nonce}');
+                      // print('The description is ${result.paymentMethodNonce.typeLabel}');
+
+                      // var newValue = json.decode(result.deviceData!);
+                      // var deviceToken = newValue['correlation_id'];
+
+                      // print('The newValue is $newValue');
+                      // print('The deviceToken is $deviceToken');
+
+                      // bool paymentResult = await apiBLMProcessToken(amount: request.paypalRequest!.amount!, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
+
+                      // print('The paymentResult is $paymentResult');
                     },
                     height: 45,
                     width: SizeConfig.screenWidth! / 2, 

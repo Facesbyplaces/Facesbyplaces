@@ -3,8 +3,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-backgroun
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-regular-03-create-memorial.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:better_player/better_player.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -181,10 +181,23 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                       height: 45,
                       onPressed: () async{
                         if(_key1.currentState!.controller.text == ''){
-                          await showOkAlertDialog(
+                          await showDialog(
                             context: context,
-                            title: 'Error',
-                            message: 'Please complete the form before submitting.',
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Please complete the form before submitting.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
                           );
                         }else{
                           List<File> newFiles = [];

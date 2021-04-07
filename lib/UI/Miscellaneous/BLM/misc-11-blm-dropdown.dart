@@ -2,9 +2,10 @@ import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc-blm-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
+// import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:images_picker/images_picker.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
@@ -97,16 +98,41 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
           bool result = await ImagesPicker.saveImageToAlbum(qrImage, albumName: "");
 
           if(result == true){
-            await showOkAlertDialog(
+            await showDialog(
               context: context,
-              title: 'Success',
-              message: 'Successfully saved the image to the gallery.',
+              builder: (_) => 
+                AssetGiffyDialog(
+                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                entryAnimation: EntryAnimation.DEFAULT,
+                description: Text('Successfully saved the image to the gallery.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+                onlyOkButton: true,
+                onOkButtonPressed: () {
+                  Navigator.pop(context, true);
+                },
+              )
             );
           }else{
-            await showOkAlertDialog(
+            await showDialog(
               context: context,
-              title: 'Error',
-              message: 'Something went wrong. Please try again.',
+              builder: (_) => 
+                AssetGiffyDialog(
+                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                entryAnimation: EntryAnimation.DEFAULT,
+                description: Text('Something went wrong. Please try again.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+                onlyOkButton: true,
+                buttonOkColor: Colors.red,
+                onOkButtonPressed: () {
+                  Navigator.pop(context, true);
+                },
+              )
             );
           }
         }
@@ -115,10 +141,23 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
         await writeToFile(picData!, path);
 
       }else{
-        await showOkAlertDialog(
+        await showDialog(
           context: context,
-          title: 'Error',
-          message: 'Invalid QR Code.',
+          builder: (_) => 
+            AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Invalid QR Code.',
+              textAlign: TextAlign.center,
+              style: TextStyle(),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: Colors.red,
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+            },
+          )
         );
       }
     } catch(e) {
@@ -344,16 +383,41 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
           bool result = await ImagesPicker.saveImageToAlbum(qrImage, albumName: "");
 
           if(result == true){
-            await showOkAlertDialog(
+            await showDialog(
               context: context,
-              title: 'Success',
-              message: 'Successfully saved the image to the gallery.',
+              builder: (_) => 
+                AssetGiffyDialog(
+                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                entryAnimation: EntryAnimation.DEFAULT,
+                description: Text('Successfully saved the image to the gallery.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+                onlyOkButton: true,
+                onOkButtonPressed: () {
+                  Navigator.pop(context, true);
+                },
+              )
             );
           }else{
-            await showOkAlertDialog(
+            await showDialog(
               context: context,
-              title: 'Error',
-              message: 'Something went wrong. Please try again.',
+              builder: (_) => 
+                AssetGiffyDialog(
+                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                entryAnimation: EntryAnimation.DEFAULT,
+                description: Text('Something went wrong. Please try again.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+                onlyOkButton: true,
+                buttonOkColor: Colors.red,
+                onOkButtonPressed: () {
+                  Navigator.pop(context, true);
+                },
+              )
             );
           }
         }
@@ -362,10 +426,23 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
         await writeToFile(picData!, path);
 
       }else{
-        await showOkAlertDialog(
+        await showDialog(
           context: context,
-          title: 'Error',
-          message: 'Invalid QR Code.',
+          builder: (_) => 
+            AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Invalid QR Code.',
+              textAlign: TextAlign.center,
+              style: TextStyle(),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: Colors.red,
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+            },
+          )
         );
       }
     } catch(e) {

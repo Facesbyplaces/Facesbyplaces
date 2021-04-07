@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leav
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-17-set-relationship.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularMemorialSettingsWithHidden extends StatefulWidget{
@@ -150,16 +150,41 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               bool result = await apiRegularMemorialSetRelationship(memorialId: memorialId, relationship: choice);
 
               if(result == true){
-                await showOkAlertDialog(
+                await showDialog(
                   context: context,
-                  title: 'Success',
-                  message: 'Successfully updated the relationship setting.'
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Successfully updated the relationship setting.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
                 );
               }else{
-                await showOkAlertDialog(
+                await showDialog(
                   context: context,
-                  title: 'Error',
-                  message: 'Something went wrong. Please try again.'
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    buttonOkColor: Colors.red,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
                 );
               }
             }
@@ -180,10 +205,23 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               if(result){
                 Navigator.popAndPushNamed(context, '/home/regular');
               }else{
-                await showOkAlertDialog(
+                await showDialog(
                   context: context,
-                  title: 'Error',
-                  message: 'Something went wrong. Please try again.'
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    buttonOkColor: Colors.red,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
                 );
               }
             }

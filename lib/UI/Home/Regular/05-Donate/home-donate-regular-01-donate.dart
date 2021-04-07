@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-03-tokenization.dart';
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-04-process-payment.dart';
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_braintree/flutter_braintree.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:stripe_payment/stripe_payment.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 
 class HomeRegularUserDonate extends StatefulWidget{
   final String pageType;
@@ -22,6 +22,12 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   HomeRegularUserDonateState({required this.pageType, required this.pageId});
 
   int donateToggle = 0;
+
+  @override
+  initState() {
+    super.initState();
+    StripePayment.setOptions(StripeOptions(publishableKey: 'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik', merchantId: 'merchant.com.app.facesbyplaces', androidPayMode: 'test'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,63 +129,9 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ), 
                     onPressed: () async{
 
-                      String token = await apiRegularTokenization();
-
-                      print('The new token is $token');
-
-                      String amount = '0.99';
-
-                      if(donateToggle == 0){
-                        amount = '0.99';
-                      }else if(donateToggle == 1){
-                        amount = '5.00';
-                      }else if(donateToggle == 2){
-                        amount = '15.00';
-                      }else if(donateToggle == 3){
-                        amount = '25.00';
-                      }else if(donateToggle == 4){
-                        amount = '50.00';
-                      }else if(donateToggle == 5){
-                        amount = '100.00';
-                      }
-
-                      var request = BraintreeDropInRequest(
-                        tokenizationKey: token,
-                        collectDeviceData: true,
-                        applePayRequest: BraintreeApplePayRequest(
-                          countryCode: 'US',
-                          currencyCode: 'USD',
-                          appleMerchantID: 'merchant.com.app.facesbyplaces',
-                          amount: double.parse(amount),
-                          displayName: 'FacesbyPlaces'
-                        ),
-                        googlePaymentRequest: BraintreeGooglePaymentRequest(
-                          totalPrice: amount,
-                          // totalPrice: ((){
-                          //   switch(donateToggle){
-                          //     case 0: return '0.99';
-                          //     case 1: return '5.00';
-                          //     case 2: return '15.00';
-                          //     case 3: return '25.00';
-                          //     case 4: return '50.00';
-                          //     case 5: return '100.00';
-                          //   }
-                          // }()),
-                          // totalPrice: ((){
-                          //   switch(donateToggle){
-                          //     case 0: return '0.99';
-                          //     case 1: return '5.00';
-                          //     case 2: return '15.00';
-                          //     case 3: return '25.00';
-                          //     case 4: return '50.00';
-                          //     case 5: return '100.00';
-                          //   }
-                          // }()),
-                          currencyCode: 'USD',
-                          billingAddressRequired: false,
-                        ),
-                        paypalRequest: BraintreePayPalRequest(
-                          amount: ((){
+                      var paymentToken = await StripePayment.paymentRequestWithNativePay(
+                        androidPayOptions: AndroidPayPaymentRequest(
+                          totalPrice: ((){
                             switch(donateToggle){
                               case 0: return '0.99';
                               case 1: return '5.00';
@@ -189,25 +141,177 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                               case 5: return '100.00';
                             }
                           }()),
-                          displayName: 'Example company',
+                          currencyCode: 'USD',
                         ),
-                        cardEnabled: true,
+                        applePayOptions: ApplePayPaymentOptions(
+                          countryCode: 'US',
+                          currencyCode: 'USD',
+                          items: [
+                            ApplePayItem(
+                              label: 'Donation',
+                              amount: ((){
+                                switch(donateToggle){
+                                  case 0: return '0.99';
+                                  case 1: return '5.00';
+                                  case 2: return '15.00';
+                                  case 3: return '25.00';
+                                  case 4: return '50.00';
+                                  case 5: return '100.00';
+                                }
+                              }()),
+                            )
+                          ],
+                        ),
                       );
 
-                      BraintreeDropInResult result = (await BraintreeDropIn.start(request))!;
+                      StripePayment.completeNativePayRequest();
+                      double amount = 0.99;
 
-                      print('The amount is ${request.paypalRequest!.amount}');
-                      print('The nonce is ${result.paymentMethodNonce.nonce}');
+                      if(donateToggle == 0){
+                        amount = 0.99;
+                      }else if(donateToggle == 1){
+                        amount = 5.00;
+                      }else if(donateToggle == 2){
+                        amount = 15.00;
+                      }else if(donateToggle == 3){
+                        amount = 25.00;
+                      }else if(donateToggle == 4){
+                        amount = 50.00;
+                      }else if(donateToggle == 5){
+                        amount = 100.00;
+                      }
 
-                      var newValue = json.decode(result.deviceData!);
-                      var deviceToken = newValue['correlation_id'];
+                      context.showLoaderOverlay();
+                      bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      context.hideLoaderOverlay();
 
-                      print('The newValue is $newValue');
-                      print('The deviceToken is $deviceToken');
+                      if(result == true){
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                        );
+                      }else{
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.red,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
+                      }
 
-                      bool paymentResult = await apiRegularProcessToken(amount: request.paypalRequest!.amount!, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
 
-                      print('The paymentResult is $paymentResult');
+                      // ===============================================
+
+                      // String token = await apiRegularTokenization();
+
+                      // print('The new token is $token');
+
+                      // String amount = '0.99';
+
+                      // if(donateToggle == 0){
+                      //   amount = '0.99';
+                      // }else if(donateToggle == 1){
+                      //   amount = '5.00';
+                      // }else if(donateToggle == 2){
+                      //   amount = '15.00';
+                      // }else if(donateToggle == 3){
+                      //   amount = '25.00';
+                      // }else if(donateToggle == 4){
+                      //   amount = '50.00';
+                      // }else if(donateToggle == 5){
+                      //   amount = '100.00';
+                      // }
+
+                      // var request = BraintreeDropInRequest(
+                      //   tokenizationKey: token,
+                      //   collectDeviceData: true,
+                      //   applePayRequest: BraintreeApplePayRequest(
+                      //     countryCode: 'US',
+                      //     currencyCode: 'USD',
+                      //     appleMerchantID: 'merchant.com.app.facesbyplaces',
+                      //     amount: double.parse(amount),
+                      //     displayName: 'FacesbyPlaces'
+                      //   ),
+                      //   googlePaymentRequest: BraintreeGooglePaymentRequest(
+                      //     totalPrice: amount,
+                      //     // totalPrice: ((){
+                      //     //   switch(donateToggle){
+                      //     //     case 0: return '0.99';
+                      //     //     case 1: return '5.00';
+                      //     //     case 2: return '15.00';
+                      //     //     case 3: return '25.00';
+                      //     //     case 4: return '50.00';
+                      //     //     case 5: return '100.00';
+                      //     //   }
+                      //     // }()),
+                      //     // totalPrice: ((){
+                      //     //   switch(donateToggle){
+                      //     //     case 0: return '0.99';
+                      //     //     case 1: return '5.00';
+                      //     //     case 2: return '15.00';
+                      //     //     case 3: return '25.00';
+                      //     //     case 4: return '50.00';
+                      //     //     case 5: return '100.00';
+                      //     //   }
+                      //     // }()),
+                      //     currencyCode: 'USD',
+                      //     billingAddressRequired: false,
+                      //   ),
+                      //   paypalRequest: BraintreePayPalRequest(
+                      //     amount: ((){
+                      //       switch(donateToggle){
+                      //         case 0: return '0.99';
+                      //         case 1: return '5.00';
+                      //         case 2: return '15.00';
+                      //         case 3: return '25.00';
+                      //         case 4: return '50.00';
+                      //         case 5: return '100.00';
+                      //       }
+                      //     }()),
+                      //     displayName: 'Example company',
+                      //   ),
+                      //   cardEnabled: true,
+                      // );
+
+                      // BraintreeDropInResult result = (await BraintreeDropIn.start(request))!;
+
+                      // print('The amount is ${request.paypalRequest!.amount}');
+                      // print('The nonce is ${result.paymentMethodNonce.nonce}');
+
+                      // var newValue = json.decode(result.deviceData!);
+                      // var deviceToken = newValue['correlation_id'];
+
+                      // print('The newValue is $newValue');
+                      // print('The deviceToken is $deviceToken');
+
+                      // bool paymentResult = await apiRegularProcessToken(amount: request.paypalRequest!.amount!, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
+
+                      // print('The paymentResult is $paymentResult');
 
 
                       // var request = BraintreeDropInRequest(

@@ -6,9 +6,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMPageDetails extends StatefulWidget{
@@ -223,19 +223,44 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                     context.hideLoaderOverlay();
 
                                     if(result){
-                                      await showOkAlertDialog(
+                                      await showDialog(
                                         context: context,
-                                        title: 'Success',
-                                        message: 'Successfully updated the account details.'
+                                        builder: (_) => 
+                                          AssetGiffyDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          entryAnimation: EntryAnimation.DEFAULT,
+                                          description: Text('Successfully updated the account details.',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(),
+                                          ),
+                                          onlyOkButton: true,
+                                          onOkButtonPressed: () {
+                                            Navigator.pop(context, true);
+                                          },
+                                        )
                                       );
                                       Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,));
                                       Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                                       
                                     }else{
-                                      await showOkAlertDialog(
+                                      await showDialog(
                                         context: context,
-                                        title: 'Error',
-                                        message: 'Something went wrong. Please try again.'
+                                        builder: (_) => 
+                                          AssetGiffyDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          entryAnimation: EntryAnimation.DEFAULT,
+                                          description: Text('Something went wrong. Please try again.',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(),
+                                          ),
+                                          onlyOkButton: true,
+                                          buttonOkColor: Colors.red,
+                                          onOkButtonPressed: () {
+                                            Navigator.pop(context, true);
+                                          },
+                                        )
                                       );
                                     }
                                   }

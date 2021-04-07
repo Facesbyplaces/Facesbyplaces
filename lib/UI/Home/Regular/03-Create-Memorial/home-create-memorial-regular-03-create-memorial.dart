@@ -3,10 +3,10 @@ import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -293,15 +293,28 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     Location.PermissionStatus permissionGranted = await location.hasPermission();
 
                     if (permissionGranted != Location.PermissionStatus.granted) {
-                      var confirmation = await showOkCancelAlertDialog(
+                      bool confirmation = await showDialog(
                         context: context,
-                        title: 'Confirm',
-                        message: 'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                        okLabel: 'Yes',
-                        cancelLabel: 'No',
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: false,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                          onCancelButtonPressed: () {
+                            Navigator.pop(context, false);
+                          },
+                        )
                       );
 
-                      if(confirmation == OkCancelResult.ok){
+                      if(confirmation == true){
                         permissionGranted = await location.requestPermission();
                       }
                     }else{
