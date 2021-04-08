@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-00-home
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RegularMainPagesMemorials{
@@ -121,7 +122,28 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   void onLoading1() async{
     if(memorialFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeMemorialsTab(page: page1);
+      var newValue = await apiRegularHomeMemorialsTab(page: page1).onError((error, stackTrace) async{
+        context.hideLoaderOverlay();
+        await showDialog(
+          context: context,
+          builder: (_) => 
+            AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Something went wrong. Please try again.',
+              textAlign: TextAlign.center,
+              style: TextStyle(),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: Colors.red,
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+            },
+          )
+        );
+        return Future.error('Error occurred: $error');
+      });
       context.hideLoaderOverlay();
 
       memorialFamilyItemsRemaining = newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining;

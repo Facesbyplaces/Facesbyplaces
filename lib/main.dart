@@ -34,6 +34,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 void main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
@@ -43,7 +44,7 @@ void main() async{
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
 
   runApp(
-     GlobalLoaderOverlay(
+    GlobalLoaderOverlay(
       useDefaultLoading: false,
       overlayWidget: Center(child: SpinKitThreeBounce(color: Color(0xff000000)),),
       overlayOpacity: 0.5,
@@ -107,7 +108,6 @@ void main() async{
 
         },
       ),
-    ),    
+    ),
   );
 }
-

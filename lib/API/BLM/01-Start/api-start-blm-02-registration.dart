@@ -33,7 +33,6 @@ Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) 
       var newData = Map<String, dynamic>.from(response.data);
       var user = newData['data'];
       String message = user['full_messages'][0];
-      print('The message is $message');
 
       result = message; 
     }

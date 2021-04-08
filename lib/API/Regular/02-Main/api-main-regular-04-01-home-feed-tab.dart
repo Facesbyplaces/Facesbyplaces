@@ -8,11 +8,14 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
+
   try{
     Dio dioRequest = Dio();
 
-    var response = await dioRequest.get(
-      'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
+    var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
       options: Options(
         headers: <String, dynamic>{
           'access-token': getAccessToken,

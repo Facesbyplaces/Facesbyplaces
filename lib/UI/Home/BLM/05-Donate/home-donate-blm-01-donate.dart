@@ -5,7 +5,9 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class HomeBLMUserDonate extends StatefulWidget{
   final String pageType;
@@ -25,6 +27,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   HomeBLMUserDonateState({required this.pageType, required this.pageId, required this.pageName});
 
   int donateToggle = 0;
+  final Widget donateWithGoogle = SvgPicture.asset('assets/icons/donation-google-pay.svg', semanticsLabel: 'Donate with Google',);
 
   @override
   initState() {
@@ -241,7 +244,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                         height: 44,
                         minWidth: 280,
                         color: Color(0xff000000),
-                        child: Row(
+                        child: Platform.isIOS
+                        ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -249,7 +253,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                             SizedBox(width: 8.0,),
                             Icon(FontAwesome5.apple_pay, color: Color(0xffffffff), size: 40),
                           ],
-                        ),
+                        )
+                        : donateWithGoogle
                       ),
                     ],
                   ),

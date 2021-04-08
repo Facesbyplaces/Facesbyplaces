@@ -3,6 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-notificat
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RegularMainPagesNotifications{
@@ -63,7 +64,28 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeNotificationsTab(page: page);
+      var newValue = await apiRegularHomeNotificationsTab(page: page).onError((error, stackTrace) async{
+        context.hideLoaderOverlay();
+        await showDialog(
+          context: context,
+          builder: (_) => 
+            AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Something went wrong. Please try again.',
+              textAlign: TextAlign.center,
+              style: TextStyle(),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: Colors.red,
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+            },
+          )
+        );
+        return Future.error('Error occurred: $error');
+      });
       context.hideLoaderOverlay();
 
       itemRemaining = newValue.almItemsRemaining;
