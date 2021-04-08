@@ -235,36 +235,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                       SizedBox(height: 20,),
 
-
-                                      Container(
-                                        width: 100,
-                                        height: 40,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: CircleAvatar(
-                                                radius: 15,
-                                                backgroundColor: Color(0xff000000),
-                                                child: CircleAvatar(
-                                                  radius: 10,
-                                                  backgroundColor: Colors.transparent,
-                                                  backgroundImage: AssetImage('assets/icons/fist.png'),
-                                                ),
-                                              ),
-                                            ),
-
-                                            SizedBox(width: 10,),
-
-                                            Expanded(
-                                              child: Text('${profile.data!.almMemorial.showMemorialFollowersCount}',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xff000000),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                      TextButton.icon(
+                                        onPressed: (){}, 
+                                        icon: CircleAvatar(radius: 15, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: 18,),),
+                                        label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color(0xff000000),
+                                          ),
                                         ),
                                       ),
 

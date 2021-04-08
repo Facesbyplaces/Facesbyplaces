@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
 
   String url = "";
   double progress = 0;
-  // WebViewController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -38,73 +36,9 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
           ),
           body: InAppWebView(
             initialUrlRequest: URLRequest(
-              // url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com'),
               url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AWLin_bJ6V3b0F7WJVam90ow5ffcqWp9aEfQOHYuQtl5nqoSoH47WJKE24dCLiY-Xmg2UmKaj8v9WkWv&response_type=code&redirect_uri=https://www.google.com'),
             ),
-            onReceivedHttpAuthRequest: (InAppWebViewController controller, URLAuthenticationChallenge url) async{
-              print('The controller is $controller');
-              print('The controller is ${controller.android}');
-              print('The controller is ${controller.ios}');
-              print('The controller is ${controller.javaScriptHandlersMap}');
-              print('The controller is ${controller.webStorage}');
-              print('The url is $url');
-              print('The url is ${url.protectionSpace}');
-            },
-            onConsoleMessage: (InAppWebViewController controller, ConsoleMessage onConsoleMessage){
-              print('The console message is $onConsoleMessage');
-              print('The console message is ${onConsoleMessage.message}');
-              print('The console message is ${onConsoleMessage.messageLevel}');
-              print('The controller is $controller');
-              print('The controller is ${controller.android}');
-              print('The controller is ${controller.ios}');
-              print('The controller is ${controller.javaScriptHandlersMap}');
-              print('The controller is ${controller.webStorage}');
-            },
-            onPrint: (InAppWebViewController controller, Uri? url){
-              print('The url is ${url!}');
-              print('The url is ${url.authority}');
-              print('The url is ${url.data!.uri}');
-              print('The url is ${url.path}');
-              print('The controller is ${controller.android}');
-              print('The controller is ${controller.ios}');
-              print('The controller is ${controller.javaScriptHandlersMap}');
-              print('The controller is ${controller.webStorage}');
-            },
           ),
-          // body: WebView(
-          //   onWebViewCreated: (WebViewController webViewController){
-          //     controller = webViewController;
-          //   },
-          //   initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&scope=openid profile email&redirect_uri=https://www.google.com',
-          //   // javascriptChannels: Set.from([
-          //   //   name: 'Print', onMessageReceived: (JavascriptMessage message) { print(message.message); }
-          //   // ]),
-          //   // javascriptChannels: Set.from([
-          //   //   JavascriptChannel(
-          //   //     name: 'Print',
-          //   //     onMessageReceived: (JavascriptMessage message) {
-          //   //       //This is where you receive message from 
-          //   //       //javascript code and handle in Flutter/Dart
-          //   //       //like here, the message is just being printed
-          //   //       //in Run/LogCat window of android studio
-          //   //       print(message.message);
-          //   //     },
-          //   //   )
-          //   // ]),
-          //   // javascriptChannels: <JavascriptChannel>[
-          //   //   JavascriptChannel(name: 'Print', onMessageReceived: (JavascriptMessage msg) { print(msg); }),
-          //   // ].toSet(),
-          //   // javascriptMode: JavascriptMode.unrestricted,
-          //   navigationDelegate: (request){
-          //     print('The request is ${request.url}');
-          //     print('The request is ${request.isForMainFrame}');
-
-          //     return NavigationDecision.navigate;
-          //   },
-          //   onPageFinished: (value){
-          //     print('The value is $value');
-          //   },
-          // ),
         ),
       ),
     );

@@ -334,7 +334,6 @@ class RegularLoginState extends State<RegularLogin>{
                       SizedBox(height: 40),
 
                       SignInWithAppleButton(
-                        height: 45,
                         onPressed: () async {
                           AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
                             scopes: [

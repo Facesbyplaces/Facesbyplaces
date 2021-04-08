@@ -321,7 +321,6 @@ class BLMLoginState extends State<BLMLogin>{
                           }
 
                         },
-                        height: 45,
                       ),
 
                       SizedBox(height: 40),
