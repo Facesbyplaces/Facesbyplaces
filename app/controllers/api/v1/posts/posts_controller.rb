@@ -166,7 +166,7 @@ class Api::V1::Posts::PostsController < ApplicationController
     # pages that the user can manage
     def listOfPages
         if user().account_type == 1
-            pagesId = user().roles.select('id')
+            pagesId = user().roles.select('resource_id')
 
             pages = pagesId.collect do |page|
                 page = Blm.find(page.id)
