@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:436631194271:android:b2362a405d20a01121f0aa",
+        "mobilesdk_app_id": "1:436631194271:android:5ca47f2ee7fafc4d21f0aa",
         "android_client_info": {
           "package_name": "com.app.facesbyplaces"
         }
       },
       "oauth_client": [
         {
-          "client_id": "436631194271-590gb6rfi18qmjtkdvk6ohngoo1dlu26.apps.googleusercontent.com",
+          "client_id": "436631194271-s5g5g799tgnco853t861cpvge5s47qip.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.app.facesbyplaces",
-            "certificate_hash": "0f8f2ce3ac600e79055b491ead5eeb43c04049b4"
+            "certificate_hash": "85aeddc686697db445614b1c9d9adbb9e3bef353"
           }
         },
         {

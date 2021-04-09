@@ -10,7 +10,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.d
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -76,8 +76,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   int postCount = 0;
   bool empty = true;
   int page = 1;
-  BranchUniversalObject? buo;
-  BranchLinkProperties? lp;
+  // BranchUniversalObject? buo;
+  // BranchLinkProperties? lp;
   CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
@@ -150,28 +150,28 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     return await apiRegularShowMemorial(memorialId: memorialId);
   }
 
-  void initBranchShare(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Share', 'Link'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Memorial')
-        ..addCustomMetadata('link-memorial-id', memorialId)
-        ..addCustomMetadata('link-type-of-account', 'Memorial')
-    );
+  // void initBranchShare(){
+  //   buo = BranchUniversalObject(
+  //     canonicalIdentifier: 'FacesbyPlaces',
+  //     title: 'FacesbyPlaces Link',
+  //     imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+  //     contentDescription: 'FacesbyPlaces link to the app',
+  //     keywords: ['FacesbyPlaces', 'Share', 'Link'],
+  //     publiclyIndex: true,
+  //     locallyIndex: true,
+  //     contentMetadata: BranchContentMetaData()
+  //       ..addCustomMetadata('link-category', 'Memorial')
+  //       ..addCustomMetadata('link-memorial-id', memorialId)
+  //       ..addCustomMetadata('link-type-of-account', 'Memorial')
+  //   );
 
-    lp = BranchLinkProperties(
-      feature: 'sharing',
-      stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
+  //   lp = BranchLinkProperties(
+  //     feature: 'sharing',
+  //     stage: 'new share',
+  //     tags: ['one', 'two', 'three']
+  //   );
+  //   lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -336,24 +336,24 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () async{
-                                                  initBranchShare();
+                                                  // initBranchShare();
 
-                                                  FlutterBranchSdk.setIdentity('alm-share-link');
+                                                  // FlutterBranchSdk.setIdentity('alm-share-link');
 
-                                                  BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                                                    buo: buo!,
-                                                    linkProperties: lp!,
-                                                    messageText: 'FacesbyPlaces App',
-                                                    androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                                                    androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-                                                  );
+                                                  // BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                                                  //   buo: buo!,
+                                                  //   linkProperties: lp!,
+                                                  //   messageText: 'FacesbyPlaces App',
+                                                  //   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                                  //   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                                                  // );
 
-                                                  if (response.success) {
-                                                    print('Link generated: ${response.result}');
-                                                  } else {
-                                                    FlutterBranchSdk.logout();
-                                                    print('Error : ${response.errorCode} - ${response.errorMessage}');
-                                                  }
+                                                  // if (response.success) {
+                                                  //   print('Link generated: ${response.result}');
+                                                  // } else {
+                                                  //   FlutterBranchSdk.logout();
+                                                  //   print('Error : ${response.errorCode} - ${response.errorMessage}');
+                                                  // }
 
                                                 },
                                                 child: CircleAvatar(

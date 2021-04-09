@@ -240,6 +240,14 @@ class RegularLoginState extends State<RegularLogin>{
                                     print('The accountSignIn is ${accountSignedIn.id}');
                                     print('The accountSignIn is ${accountSignedIn.photoUrl}');
 
+                                    var value1 = await accountSignedIn.authHeaders;
+                                    var value2 = await accountSignedIn.authentication;
+
+                                    print('The value1 is $value1');
+                                    print('The value2 is ${value2.accessToken}');
+                                    print('The value2 is ${value2.idToken}');
+                                    print('The value2 is ${value2.serverAuthCode}');
+
                                     print('The auth is ${auth.accessToken}');
                                     print('The auth is ${auth.idToken}');
                                     print('The auth is ${auth.serverAuthCode}');
@@ -250,6 +258,7 @@ class RegularLoginState extends State<RegularLogin>{
                                       email: accountSignedIn.email, 
                                       username: accountSignedIn.email,
                                       googleId: auth.idToken!,
+                                      // googleId: value2.idToken!,
                                       image: accountSignedIn.photoUrl!,
                                     );
                                     context.hideLoaderOverlay();
@@ -284,6 +293,16 @@ class RegularLoginState extends State<RegularLogin>{
                                     print('The accountSignIn is ${accountSignedIn.email}');
                                     print('The accountSignIn is ${accountSignedIn.id}');
                                     print('The accountSignIn is ${accountSignedIn.photoUrl}');
+                                    // print('The accountSignIn is ${accountSignedIn.authHeaders}');
+                                    // print('The accountSignIn is ${accountSignedIn.authentication}');
+
+                                    var value1 = await accountSignedIn.authHeaders;
+                                    var value2 = await accountSignedIn.authentication;
+
+                                    print('The value1 is $value1');
+                                    print('The value2 is ${value2.accessToken}');
+                                    print('The value2 is ${value2.idToken}');
+                                    print('The value2 is ${value2.serverAuthCode}');
 
                                     print('The auth is ${auth.accessToken}');
                                     print('The auth is ${auth.idToken}');
@@ -296,6 +315,7 @@ class RegularLoginState extends State<RegularLogin>{
                                       email: accountSignedIn.email, 
                                       username: accountSignedIn.email,
                                       googleId: auth.idToken!,
+                                      // googleId: value2.idToken!,
                                       image: accountSignedIn.photoUrl!,
                                     );
                                     context.hideLoaderOverlay();
