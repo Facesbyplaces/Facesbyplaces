@@ -8,10 +8,18 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
+
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
@@ -28,7 +36,8 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowListOfManagedPages.fromJson(newData);
   }else{
-    throw Exception('Failed to get the lists.');
+    // throw Exception('Failed to get the lists.');
+    return Future.error('Failed to get the lists.');
   }
 }
 

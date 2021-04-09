@@ -35,7 +35,6 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   Future<APIBLMShowPageDetailsMain>? futureMemorialSettings;
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
-
   DateTime dob = DateTime.now();
   DateTime rip = DateTime.now();
 
@@ -45,6 +44,9 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   }
 
   Future<APIBLMShowPageDetailsMain> getMemorialSettings(int memorialId) async{
+    var newValue = await apiBLMShowPageDetails(memorialId: memorialId);
+    controller1 = TextEditingController(text: newValue.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob);
+    controller2 = TextEditingController(text: newValue.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip);
     return await apiBLMShowPageDetails(memorialId: memorialId);
   }
 
@@ -109,6 +111,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               cursorColor: Color(0xff000000),
                               firstDate: DateTime(1000),
                               lastDate: DateTime.now(),
+                              dateLabelText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob,
                               decoration: InputDecoration(
                                 alignLabelWithHint: true,
                                 labelText: 'DOB',
@@ -129,6 +132,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               onChanged: (changed){
                                 setState(() {
                                   dob = DateTime.parse(changed);
+                                  controller1.text = dob.toString();
                                 });
                               },
                             ),
@@ -152,15 +156,21 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                 ),
                               ),
                               selectableDayPredicate: (date) {
-                                if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
-                                  return true;
-                                }else{
-                                  return false;
+                                try{
+                                  if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                                    return true;
+                                  }else{
+                                    return false;
+                                  }
+                                }catch(e){
+                                  print('The error is $e');
                                 }
+                                return true;
                               },
                               onChanged: (changed){
                                 setState(() {
                                   rip = DateTime.parse(changed);
+                                  controller2.text = dob.toString();
                                 });
                               },
                             ),

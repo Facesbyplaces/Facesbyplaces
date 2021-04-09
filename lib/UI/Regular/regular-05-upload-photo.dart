@@ -99,6 +99,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                               child: Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
+                                    fit: BoxFit.cover,
                                     image: FileImage(image!),
                                   ),
                                 ),

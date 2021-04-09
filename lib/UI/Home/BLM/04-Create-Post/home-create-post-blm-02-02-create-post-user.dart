@@ -1,8 +1,9 @@
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
-
+import 'package:loader_overlay/loader_overlay.dart';
 import 'home-create-post-blm-01-create-post.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:flutter/material.dart';
 
 class BLMSearchUsers{
   int userId;
@@ -59,7 +60,28 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiBLMSearchUsers(keywords: controller.text, page: page);
+      var newValue = await apiBLMSearchUsers(keywords: controller.text, page: page).onError((error, stackTrace) async{
+        context.hideLoaderOverlay();
+        await showDialog(
+          context: context,
+          builder: (_) => 
+            AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Something went wrong. Please try again.',
+              textAlign: TextAlign.center,
+              style: TextStyle(),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: Colors.red,
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+            },
+          )
+        );
+        return Future.error('Error occurred in list of managed pages: $error');
+      });
       itemRemaining = newValue.blmItemsRemaining;
 
       for(int i = 0; i < newValue.blmUsers.length; i++){

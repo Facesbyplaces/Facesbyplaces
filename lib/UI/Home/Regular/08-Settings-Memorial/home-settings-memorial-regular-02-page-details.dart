@@ -5,7 +5,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -26,12 +26,14 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldDropDownState> _key2 = GlobalKey<MiscRegularInputFieldDropDownState>();
-  final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key3 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
-  final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key4 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
   Future<APIRegularShowPageDetailsMain>? futureMemorialSettings;
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+  DateTime dob = DateTime.now();
+  DateTime rip = DateTime.now();
 
   void initState(){
     super.initState();
@@ -39,6 +41,9 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
   }
 
   Future<APIRegularShowPageDetailsMain> getMemorialSettings(int memorialId) async{
+    var newValue = await apiRegularShowPageDetails(memorialId: memorialId);
+    controller1 = TextEditingController(text: newValue.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob);
+    controller2 = TextEditingController(text: newValue.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip);
     return await apiRegularShowPageDetails(memorialId: memorialId);
   }
 
@@ -71,7 +76,6 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
           body: FutureBuilder<APIRegularShowPageDetailsMain>(
             future: futureMemorialSettings,
             builder: (context, memorialSettings){
-              print('The memorial settings is ${memorialSettings.error}');
               if(memorialSettings.hasData){
                 return Stack(
                   children: [
@@ -89,11 +93,74 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           SizedBox(height: 20,),
 
-                          MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB', displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob),
+                          DateTimePicker(
+                            type: DateTimePickerType.date,
+                            controller: controller1,
+                            cursorColor: Color(0xff000000),
+                            firstDate: DateTime(1000),
+                            lastDate: DateTime.now(),
+                            decoration: InputDecoration(
+                              alignLabelWithHint: true,
+                              labelText: 'DOB',
+                              labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                            ),
+                            selectableDayPredicate: (date) {
+                              if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
+                                return true;
+                              }else{
+                                return false;
+                              }
+                            },
+                            onChanged: (changed){
+                              setState(() {
+                                dob = DateTime.parse(changed);
+                                controller1.text = dob.toString();
+                              });
+                            },
+                          ),
 
                           SizedBox(height: 20,),
 
-                          MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP', displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip),
+                          DateTimePicker(
+                            type: DateTimePickerType.date,
+                            controller: controller2,
+                            cursorColor: Color(0xff000000),
+                            firstDate: DateTime(1000),
+                            lastDate: DateTime.now(),
+                            decoration: InputDecoration(
+                              alignLabelWithHint: true,
+                              labelText: 'RIP',
+                              labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                            ),
+                            selectableDayPredicate: (date) {
+                              try{
+                                if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                                  return true;
+                                }else{
+                                  return false;
+                                }
+                              }catch(e){
+                                print('The error is $e');
+                              }
+                              return true;
+                            },
+                            onChanged: (changed){
+                              setState(() {
+                                rip = DateTime.parse(changed);
+                                controller2.text = dob.toString();
+                              });
+                            },
+                          ),
 
                           SizedBox(height: 20,),
 
@@ -117,8 +184,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                               if(
                                 memorialSettings.data!.almMemorial.showPageDetailsName != _key1.currentState!.controller.text ||
                                 memorialSettings.data!.almMemorial.showPageDetailsRelationship != _key2.currentState!.currentSelection ||
-                                convertDate(memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key3.currentState!.controller.text) ||
-                                convertDate(memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key4.currentState!.controller.text) ||
+                                memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text ||
+                                memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text ||
                                 memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry !=  _key5.currentState!.controller.text ||
                                 memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery !=  _key6.currentState!.controller.text
                               ){
@@ -129,8 +196,8 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                   bool result = await apiRegularUpdatePageDetails(
                                     name: _key1.currentState!.controller.text,
                                     relationship: _key2.currentState!.currentSelection,
-                                    dob: convertDate(_key3.currentState!.controller.text),
-                                    rip: convertDate(_key4.currentState!.controller.text),
+                                    dob: controller1.text,
+                                    rip: controller2.text,
                                     country: _key5.currentState!.controller.text,
                                     cemetery: _key6.currentState!.controller.text,
                                     memorialId: memorialId,

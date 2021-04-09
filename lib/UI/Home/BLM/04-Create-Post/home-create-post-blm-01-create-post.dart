@@ -85,7 +85,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
           },
         )
       );
-      return Future.error('Error occurred: $error');
+      return Future.error('Error occurred in list of managed pages: $error');
     });
     context.hideLoaderOverlay();
 
