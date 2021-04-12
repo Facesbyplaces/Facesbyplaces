@@ -170,19 +170,19 @@ class Api::V1::Posts::PostsController < ApplicationController
 
             pages = pagesId.collect do |page|
                 page = Blm.find(page.id)
-                if page.nil?
-                    page = Blm.find(page.id - 1)
 
-                    ActiveModel::SerializableResource.new(
+                ActiveModel::SerializableResource.new(
                     page, 
-                    each_serializer: BlmSerializer
+                    each_serializer: MemorialSerializer
                 )
-                else
-                    ActiveModel::SerializableResource.new(
+    
+            rescue ActiveRecord::RecordNotFound                    
+                page = Blm.find(page.id - 1)
+
+                ActiveModel::SerializableResource.new(
                     page, 
-                    each_serializer: BlmSerializer
+                    each_serializer: MemorialSerializer
                 )
-                end
             end
         else
             pagesId = user().roles.select('id')
