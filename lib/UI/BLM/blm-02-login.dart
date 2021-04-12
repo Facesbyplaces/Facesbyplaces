@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-06-sign-in-with-google.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-07-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-11-google-authentication.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
@@ -12,6 +13,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'blm-06-password-reset-email.dart';
 import 'package:flutter/material.dart';
@@ -185,94 +187,124 @@ class BLMLoginState extends State<BLMLogin>{
                                 height: 45,
                                 image: 'assets/icons/google.png',
                                 onPressed: () async{
-                                  GoogleSignIn googleSignIn = GoogleSignIn(
-                                    scopes: [
-                                      'profile',
-                                      'email',
-                                      'openid'
-                                    ],
-                                  );
 
-                                  // await googleSignIn.signOut();
-                                  // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
+                                  User? user = await BLMGoogleAuthentication.signInWithGoogle(context: context);
 
-                                  bool isLoggedIn = await googleSignIn.isSignedIn();
-
-                                  if(isLoggedIn == true){
-                                    context.showLoaderOverlay();
-                                    GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
-                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
-                                    
-                                    bool result = await apiBLMSignInWithGoogle(
-                                      firstName: accountSignedIn!.displayName!,
-                                      lastName: '', 
-                                      email: accountSignedIn.email, 
-                                      username: accountSignedIn.email,
-                                      googleId: auth.idToken!,
-                                      image: accountSignedIn.photoUrl!,
-                                    );
-                                    context.hideLoaderOverlay();
-
-                                    if(result == true){
-                                      Navigator.pushReplacementNamed(context, '/home/blm');
-                                    }else{
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Invalid email or password. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
-                                      );
-                                    }
+                                  if (user != null) {
+                                    Navigator.pushReplacementNamed(context, '/home/blm');
                                   }else{
-                                    GoogleSignInAccount? signIn = await googleSignIn.signIn();
-                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
-
-                                    context.showLoaderOverlay();
-                                    bool result = await apiBLMSignInWithGoogle(
-                                      firstName: signIn!.displayName!, 
-                                      lastName: '',
-                                      email: signIn.email, 
-                                      username: signIn.email,
-                                      googleId: auth.idToken!,
-                                      image: signIn.photoUrl!,
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Invalid email or password. Please try again.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.red,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
                                     );
-                                    context.hideLoaderOverlay();
-
-                                    if(result == true){
-                                      Navigator.pushReplacementNamed(context, '/home/blm');
-                                    }else{
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Invalid email or password. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
-                                      );
-                                    }
                                   }
+
+
+                                  // ==========================================================================
+
+
+                                  // GoogleSignIn googleSignIn = GoogleSignIn(
+                                  //   scopes: [
+                                  //     'profile',
+                                  //     'email',
+                                  //     'openid'
+                                  //   ],
+                                  // );
+
+                                  // // await googleSignIn.signOut();
+                                  // // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
+
+                                  // bool isLoggedIn = await googleSignIn.isSignedIn();
+
+                                  // if(isLoggedIn == true){
+                                  //   context.showLoaderOverlay();
+                                  //   GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
+                                  //   GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
+                                    
+                                  //   bool result = await apiBLMSignInWithGoogle(
+                                  //     firstName: accountSignedIn!.displayName!,
+                                  //     lastName: '', 
+                                  //     email: accountSignedIn.email, 
+                                  //     username: accountSignedIn.email,
+                                  //     googleId: auth.idToken!,
+                                  //     image: accountSignedIn.photoUrl!,
+                                  //   );
+                                  //   context.hideLoaderOverlay();
+
+                                  //   if(result == true){
+                                  //     Navigator.pushReplacementNamed(context, '/home/blm');
+                                  //   }else{
+                                  //     await showDialog(
+                                  //       context: context,
+                                  //       builder: (_) => 
+                                  //         AssetGiffyDialog(
+                                  //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //         entryAnimation: EntryAnimation.DEFAULT,
+                                  //         description: Text('Invalid email or password. Please try again.',
+                                  //           textAlign: TextAlign.center,
+                                  //           style: TextStyle(),
+                                  //         ),
+                                  //         onlyOkButton: true,
+                                  //         buttonOkColor: Colors.red,
+                                  //         onOkButtonPressed: () {
+                                  //           Navigator.pop(context, true);
+                                  //         },
+                                  //       )
+                                  //     );
+                                  //   }
+                                  // }else{
+                                  //   GoogleSignInAccount? signIn = await googleSignIn.signIn();
+                                  //   GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
+
+                                  //   context.showLoaderOverlay();
+                                  //   bool result = await apiBLMSignInWithGoogle(
+                                  //     firstName: signIn!.displayName!, 
+                                  //     lastName: '',
+                                  //     email: signIn.email, 
+                                  //     username: signIn.email,
+                                  //     googleId: auth.idToken!,
+                                  //     image: signIn.photoUrl!,
+                                  //   );
+                                  //   context.hideLoaderOverlay();
+
+                                  //   if(result == true){
+                                  //     Navigator.pushReplacementNamed(context, '/home/blm');
+                                  //   }else{
+                                  //     await showDialog(
+                                  //       context: context,
+                                  //       builder: (_) => 
+                                  //         AssetGiffyDialog(
+                                  //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //         entryAnimation: EntryAnimation.DEFAULT,
+                                  //         description: Text('Invalid email or password. Please try again.',
+                                  //           textAlign: TextAlign.center,
+                                  //           style: TextStyle(),
+                                  //         ),
+                                  //         onlyOkButton: true,
+                                  //         buttonOkColor: Colors.red,
+                                  //         onOkButtonPressed: () {
+                                  //           Navigator.pop(context, true);
+                                  //         },
+                                  //       )
+                                  //     );
+                                  //   }
+                                  // }
 
                                 },
                               ),

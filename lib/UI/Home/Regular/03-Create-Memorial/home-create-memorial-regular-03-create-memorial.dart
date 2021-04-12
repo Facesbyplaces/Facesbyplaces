@@ -106,7 +106,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       fit: BoxFit.cover,
                       image: backgroundImage != File('')
                       ? AssetImage(backgroundImage.path)
-                      : AssetImage('assets/icons/profile_post1.png'),
+                      : AssetImage('assets/icons/alm-background1.png'),
                     ),
                   ),
                   child: Stack(

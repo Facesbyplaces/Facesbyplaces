@@ -1,7 +1,8 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
-import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
+// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-12-google-authentication.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
@@ -13,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -215,134 +217,189 @@ class RegularLoginState extends State<RegularLogin>{
                                 height: 45,
                                 image: 'assets/icons/google.png',
                                 onPressed: () async {
-                                  GoogleSignIn googleSignIn = GoogleSignIn(
-                                    scopes: [
-                                      'profile',
-                                      'email',
-                                      'openid'
-                                    ],
-                                  );
 
-                                  // await googleSignIn.signOut();
-                                  // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
+                                  User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
 
-                                  bool isLoggedIn = await googleSignIn.isSignedIn();
-
-                                  print('The value of isLoggedIn is $isLoggedIn');
-
-                                  if(isLoggedIn == true){
-                                    context.showLoaderOverlay();
-                                    GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
-                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
-
-                                    print('The accountSignIn is ${accountSignedIn!.displayName}');
-                                    print('The accountSignIn is ${accountSignedIn.email}');
-                                    print('The accountSignIn is ${accountSignedIn.id}');
-                                    print('The accountSignIn is ${accountSignedIn.photoUrl}');
-
-                                    var value1 = await accountSignedIn.authHeaders;
-                                    var value2 = await accountSignedIn.authentication;
-
-                                    print('The value1 is $value1');
-                                    print('The value2 is ${value2.accessToken}');
-                                    print('The value2 is ${value2.idToken}');
-                                    print('The value2 is ${value2.serverAuthCode}');
-
-                                    print('The auth is ${auth.accessToken}');
-                                    print('The auth is ${auth.idToken}');
-                                    print('The auth is ${auth.serverAuthCode}');
-                                    
-                                    bool result = await apiRegularSignInWithGoogle(
-                                      firstName: accountSignedIn.displayName!, 
-                                      lastName: '', 
-                                      email: accountSignedIn.email, 
-                                      username: accountSignedIn.email,
-                                      googleId: auth.idToken!,
-                                      // googleId: value2.idToken!,
-                                      image: accountSignedIn.photoUrl!,
-                                    );
-                                    context.hideLoaderOverlay();
-
-                                    if(result == true){
-                                      Navigator.pushReplacementNamed(context, '/home/regular');
-                                    }else{
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Invalid email or password. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
-                                      );
-                                    }
+                                  if (user != null) {
+                                    Navigator.pushReplacementNamed(context, '/home/regular');
                                   }else{
-                                    GoogleSignInAccount? accountSignedIn = await googleSignIn.signIn();
-                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
-
-                                    print('The accountSignIn is ${accountSignedIn!.displayName}');
-                                    print('The accountSignIn is ${accountSignedIn.email}');
-                                    print('The accountSignIn is ${accountSignedIn.id}');
-                                    print('The accountSignIn is ${accountSignedIn.photoUrl}');
-                                    // print('The accountSignIn is ${accountSignedIn.authHeaders}');
-                                    // print('The accountSignIn is ${accountSignedIn.authentication}');
-
-                                    var value1 = await accountSignedIn.authHeaders;
-                                    var value2 = await accountSignedIn.authentication;
-
-                                    print('The value1 is $value1');
-                                    print('The value2 is ${value2.accessToken}');
-                                    print('The value2 is ${value2.idToken}');
-                                    print('The value2 is ${value2.serverAuthCode}');
-
-                                    print('The auth is ${auth.accessToken}');
-                                    print('The auth is ${auth.idToken}');
-                                    print('The auth is ${auth.serverAuthCode}');
-
-                                    context.showLoaderOverlay();
-                                    bool result = await apiRegularSignInWithGoogle(
-                                      firstName: accountSignedIn.displayName!, 
-                                      lastName: '',
-                                      email: accountSignedIn.email, 
-                                      username: accountSignedIn.email,
-                                      googleId: auth.idToken!,
-                                      // googleId: value2.idToken!,
-                                      image: accountSignedIn.photoUrl!,
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Invalid email or password. Please try again.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.red,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
                                     );
-                                    context.hideLoaderOverlay();
-
-                                    if(result == true){
-                                      Navigator.pushReplacementNamed(context, '/home/regular');
-                                    }else{
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Invalid email or password. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
-                                      );
-                                    }
                                   }
+
+
+                                  // ==========================================================================
+
+
+                                  // GoogleSignIn googleSignIn = GoogleSignIn(
+                                  //   scopes: [
+                                  //     'profile',
+                                  //     'email',
+                                  //     'openid'
+                                  //   ],
+                                  // );
+
+                                  // // await googleSignIn.signOut();
+                                  // // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
+
+                                  // bool isLoggedIn = await googleSignIn.isSignedIn();
+
+                                  // print('The value of isLoggedIn is $isLoggedIn');
+
+                                  // if(isLoggedIn == true){
+                                  //   context.showLoaderOverlay();
+                                  //   GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
+                                  //   GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
+
+                                  //   print('Start here');
+
+                                  //   FirebaseAuth authorization = FirebaseAuth.instance;
+                                  //   // String newResult = authorization.currentUser!.refreshToken;
+                                  //   print('The refresh token is ${authorization.currentUser!.refreshToken}');
+                                  //   print('The refresh token length is ${authorization.currentUser!.refreshToken!.length}');
+                                  //   print('The display name is ${authorization.currentUser!.displayName}');
+
+                                  //   // print('The current user is $newResult');
+                                  //   // print('The current user length is ${newResult.length}');
+
+                                  //   print('The accountSignIn xzcvoiuasdfoiu is ${accountSignedIn!.displayName}');
+                                  //   print('The accountSignIn is ${accountSignedIn.email}');
+                                  //   print('The accountSignIn is ${accountSignedIn.id}');
+                                  //   print('The accountSignIn is ${accountSignedIn.photoUrl}');
+
+                                  //   var value1 = await accountSignedIn.authHeaders;
+                                  //   var value2 = await accountSignedIn.authentication;
+
+                                  //   print('The value1 is $value1');
+                                  //   print('The value2 is ${value2.accessToken}');
+                                  //   print('The value2 is ${value2.idToken}');
+                                  //   print('The length of id token is ${value2.idToken!.length}');
+                                  //   print('The value2 is ${value2.serverAuthCode}');
+
+                                  //   print('The auth is ${auth.accessToken}');
+                                  //   print('The auth is ${auth.idToken}');
+                                  //   print('The auth is ${auth.serverAuthCode}');
+                                    
+                                  //   bool result = await apiRegularSignInWithGoogle(
+                                  //     firstName: accountSignedIn.displayName!, 
+                                  //     lastName: '', 
+                                  //     email: accountSignedIn.email, 
+                                  //     username: accountSignedIn.email,
+                                  //     googleId: auth.idToken!,
+                                  //     // googleId: value2.idToken!,
+                                  //     image: accountSignedIn.photoUrl!,
+                                  //   );
+                                  //   context.hideLoaderOverlay();
+
+                                  //   if(result == true){
+                                  //     Navigator.pushReplacementNamed(context, '/home/regular');
+                                  //   }else{
+                                  //     await showDialog(
+                                  //       context: context,
+                                  //       builder: (_) => 
+                                  //         AssetGiffyDialog(
+                                  //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //         entryAnimation: EntryAnimation.DEFAULT,
+                                  //         description: Text('Invalid email or password. Please try again.',
+                                  //           textAlign: TextAlign.center,
+                                  //           style: TextStyle(),
+                                  //         ),
+                                  //         onlyOkButton: true,
+                                  //         buttonOkColor: Colors.red,
+                                  //         onOkButtonPressed: () {
+                                  //           Navigator.pop(context, true);
+                                  //         },
+                                  //       )
+                                  //     );
+                                  //   }
+                                  // }else{
+                                  //   GoogleSignInAccount? accountSignedIn = await googleSignIn.signIn();
+                                  //   GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
+
+                                  //   print('Start here');
+
+                                  //   FirebaseAuth authorization = FirebaseAuth.instance;
+                                  //   print('The refresh token is ${authorization.currentUser!.refreshToken}');
+                                  //   print('The refresh token length is ${authorization.currentUser!.refreshToken!.length}');
+                                  //   print('The display name is ${authorization.currentUser!.displayName}');
+
+                                  //   // String newResult = await authorization.currentUser!.getIdToken();
+
+                                  //   // print('The current user is $newResult');
+                                  //   // print('The current user length is ${newResult.length}');
+
+                                  //   print('The accountSignIn sample is ${accountSignedIn!.displayName}');
+                                  //   print('The accountSignIn is ${accountSignedIn.email}');
+                                  //   print('The accountSignIn is ${accountSignedIn.id}');
+                                  //   print('The accountSignIn is ${accountSignedIn.photoUrl}');
+                                  //   // print('The accountSignIn is ${accountSignedIn.authHeaders}');
+                                  //   // print('The accountSignIn is ${accountSignedIn.authentication}');
+
+                                  //   var value1 = await accountSignedIn.authHeaders;
+                                  //   var value2 = await accountSignedIn.authentication;
+
+                                  //   print('The value1 is $value1');
+                                  //   print('The value2 is ${value2.accessToken}');
+                                  //   print('The value2 is ${value2.idToken}');
+                                  //   print('The length of id token is ${value2.idToken!.length}');
+                                  //   print('The value2 is ${value2.serverAuthCode}');
+
+                                  //   print('The auth is ${auth.accessToken}');
+                                  //   print('The auth is ${auth.idToken}');
+                                  //   print('The auth is ${auth.serverAuthCode}');
+
+                                  //   context.showLoaderOverlay();
+                                  //   bool result = await apiRegularSignInWithGoogle(
+                                  //     firstName: accountSignedIn.displayName!, 
+                                  //     lastName: '',
+                                  //     email: accountSignedIn.email, 
+                                  //     username: accountSignedIn.email,
+                                  //     googleId: auth.idToken!,
+                                  //     // googleId: value2.idToken!,
+                                  //     image: accountSignedIn.photoUrl!,
+                                  //   );
+                                  //   context.hideLoaderOverlay();
+
+                                  //   if(result == true){
+                                  //     Navigator.pushReplacementNamed(context, '/home/regular');
+                                  //   }else{
+                                  //     await showDialog(
+                                  //       context: context,
+                                  //       builder: (_) => 
+                                  //         AssetGiffyDialog(
+                                  //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //         entryAnimation: EntryAnimation.DEFAULT,
+                                  //         description: Text('Invalid email or password. Please try again.',
+                                  //           textAlign: TextAlign.center,
+                                  //           style: TextStyle(),
+                                  //         ),
+                                  //         onlyOkButton: true,
+                                  //         buttonOkColor: Colors.red,
+                                  //         onOkButtonPressed: () {
+                                  //           Navigator.pop(context, true);
+                                  //         },
+                                  //       )
+                                  //     );
+                                  //   }
+                                  // }
                                   
                                 },
                               ),
