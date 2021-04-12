@@ -169,7 +169,7 @@ class Api::V1::Posts::PostsController < ApplicationController
             pagesId = user().roles.select('id')
 
             pages = pagesId.collect do |page|
-                page = Blm.find(page.id - 1)
+                page = Blm.find(page.id) ? Blm.find(page.id) : Blm.find(page.id - 1)
                 ActiveModel::SerializableResource.new(
                     page, 
                     each_serializer: BlmSerializer
