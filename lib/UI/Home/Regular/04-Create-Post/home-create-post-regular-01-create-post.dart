@@ -428,7 +428,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                         child: CircleAvatar(
                                           radius: 25,
                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                          child: Text('$index',
+                                          child: Text('${index + 1}',
                                             style: TextStyle(
                                               fontSize: 40,
                                               fontWeight: FontWeight.bold,
@@ -474,7 +474,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                           child: CircleAvatar(
                                             radius: 25,
                                             backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                            child: Text('$index',
+                                            child: Text('${index + 1}',
                                               style: TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,

@@ -2,11 +2,11 @@ import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-nearby.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-posts.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -678,15 +678,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 1,
+                              aspectRatio: 16 / 9,
                             ),
                           );
                         }else{
                           return CachedNetworkImage(
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
                             imageUrl: feeds[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           );
                         }
                       }else if(feeds[i].imagesOrVideos.length == 2){
@@ -703,14 +703,14 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 1,
+                                aspectRatio: 16 / 9,
                               ),
                             )
                             : CachedNetworkImage(
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                               imageUrl: feeds[i].imagesOrVideos[index],
                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             ),
                           staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
                           mainAxisSpacing: 4.0,
@@ -734,27 +734,28 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 1,
+                                  aspectRatio: 16 / 9,
                                 ),
                               )
                               : CachedNetworkImage(
-                                fit: BoxFit.contain,
+                                fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[index],
                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }else{
                               return ((){
                                 if(feeds[i].imagesOrVideos.length - 3 > 0){
                                   if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                     return Stack(
+                                      fit: StackFit.expand,
                                       children: [
                                         BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 1,
+                                            aspectRatio: 16 / 9,
                                           ),
                                         ),
 
@@ -778,12 +779,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     );
                                   }else{
                                     return Stack(
+                                      fit: StackFit.expand,
                                       children: [
                                         CachedNetworkImage(
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.cover,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
 
                                         Container(color: Colors.black.withOpacity(0.5),),
@@ -812,15 +814,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 1,
+                                        aspectRatio: 16 / 9,
                                       ),
                                     );
                                   }else{
                                     return CachedNetworkImage(
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       imageUrl: feeds[i].imagesOrVideos[index],
                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     );
                                   }
                                 }
@@ -873,15 +875,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
-                              aspectRatio: 1,
+                              aspectRatio: 16 / 9,
                             ),
                           );
                         }else{
                           return CachedNetworkImage(
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
                             imageUrl: feeds[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           );
                         }
                       }else if(feeds[i].imagesOrVideos.length == 2){
@@ -898,14 +900,14 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
-                                aspectRatio: 1,
+                                aspectRatio: 16 / 9,
                               ),
                             )
                             : CachedNetworkImage(
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                               imageUrl: feeds[i].imagesOrVideos[index],
                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             ),
                           staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
                           mainAxisSpacing: 4.0,
@@ -929,27 +931,28 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
-                                  aspectRatio: 1,
+                                  aspectRatio: 16 / 9,
                                 ),
                               )
                               : CachedNetworkImage(
-                                fit: BoxFit.contain,
+                                fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[index],
                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }else{
                               return ((){
                                 if(feeds[i].imagesOrVideos.length - 3 > 0){
                                   if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                     return Stack(
+                                      fit: StackFit.expand,
                                       children: [
                                         BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
-                                            aspectRatio: 1,
+                                            aspectRatio: 16 / 9,
                                           ),
                                         ),
 
@@ -973,12 +976,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     );
                                   }else{
                                     return Stack(
+                                      fit: StackFit.expand,
                                       children: [
                                         CachedNetworkImage(
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.cover,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
 
                                         Container(color: Colors.black.withOpacity(0.5),),
@@ -1007,15 +1011,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
-                                        aspectRatio: 1,
+                                        aspectRatio: 16 / 9,
                                       ),
                                     );
                                   }else{
                                     return CachedNetworkImage(
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       imageUrl: feeds[i].imagesOrVideos[index],
                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     );
                                   }
                                 }

@@ -252,7 +252,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                             SizedBox(height: 20,),
 
                                             TextButton.icon(
-                                              onPressed: (){}, 
+                                              onPressed: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: memorialId, newToggle: 2)));
+                                              }, 
                                               icon: CircleAvatar(radius: 15, backgroundColor: Color(0xffE67E22), child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: 18,),),
                                               label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}',
                                                 style: TextStyle(
@@ -731,10 +733,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                                       );
                                                                                     }else{
                                                                                       return CachedNetworkImage(
-                                                                                        fit: BoxFit.contain,
+                                                                                        fit: BoxFit.cover,
                                                                                         imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
                                                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                       );
                                                                                     }
                                                                                   }()),
@@ -781,7 +783,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                   height: 100,
                                                                   child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                     betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                      aspectRatio: 1,
+                                                                      aspectRatio: 16 / 9,
                                                                       controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                         showControls: false,
                                                                       ),
@@ -791,10 +793,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               }else{
                                                                 return Container(
                                                                   child: CachedNetworkImage(
-                                                                    fit: BoxFit.contain,
+                                                                    fit: BoxFit.cover,
                                                                     imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
                                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                   ),
                                                                 );
                                                               }
@@ -936,15 +938,15 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
-                                                          aspectRatio: 1,
+                                                          aspectRatio: 16 / 9,
                                                         ),
                                                       );
                                                     }else{
                                                       return CachedNetworkImage(
-                                                        fit: BoxFit.contain,
+                                                        fit: BoxFit.cover,
                                                         imageUrl: posts[i].imagesOrVideos[0],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       );
                                                     }
                                                   }else if(posts[i].imagesOrVideos.length == 2){
@@ -961,14 +963,14 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             controlsConfiguration: BetterPlayerControlsConfiguration(
                                                               showControls: false,
                                                             ),
-                                                            aspectRatio: 1,
+                                                            aspectRatio: 16 / 9,
                                                           ),
                                                         )
                                                         : CachedNetworkImage(
-                                                          fit: BoxFit.contain,
+                                                          fit: BoxFit.cover,
                                                           imageUrl: posts[i].imagesOrVideos[index],
                                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                         ),
                                                       staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
                                                       mainAxisSpacing: 4.0,
@@ -992,27 +994,28 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                 showControls: false,
                                                               ),
-                                                              aspectRatio: 1,
+                                                              aspectRatio: 16 / 9,
                                                             ),
                                                           )
                                                           : CachedNetworkImage(
-                                                            fit: BoxFit.contain,
+                                                            fit: BoxFit.cover,
                                                             imageUrl: posts[i].imagesOrVideos[index],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                           );
                                                         }else{
                                                           return ((){
                                                             if(posts[i].imagesOrVideos.length - 3 > 0){
                                                               if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                                                 return Stack(
+                                                                  fit: StackFit.expand,
                                                                   children: [
                                                                     BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                           showControls: false,
                                                                         ),
-                                                                        aspectRatio: 1,
+                                                                        aspectRatio: 16 / 9,
                                                                       ),
                                                                     ),
 
@@ -1036,12 +1039,13 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                 );
                                                               }else{
                                                                 return Stack(
+                                                                  fit: StackFit.expand,
                                                                   children: [
                                                                     CachedNetworkImage(
-                                                                      fit: BoxFit.fill,
+                                                                      fit: BoxFit.cover,
                                                                       imageUrl: posts[i].imagesOrVideos[index],
                                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                     ),
 
                                                                     Container(color: Colors.black.withOpacity(0.5),),
@@ -1070,15 +1074,15 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                       showControls: false,
                                                                     ),
-                                                                    aspectRatio: 1,
+                                                                    aspectRatio: 16 / 9,
                                                                   ),
                                                                 );
                                                               }else{
                                                                 return CachedNetworkImage(
-                                                                  fit: BoxFit.fill,
+                                                                  fit: BoxFit.cover,
                                                                   imageUrl: posts[i].imagesOrVideos[index],
                                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 );
                                                               }
                                                             }

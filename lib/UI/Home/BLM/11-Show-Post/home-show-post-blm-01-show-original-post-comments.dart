@@ -439,10 +439,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                       );
                                                                     }else{
                                                                       return CachedNetworkImage(
-                                                                        fit: BoxFit.contain,
+                                                                        fit: BoxFit.cover,
                                                                         imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
                                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                       );
                                                                     }
                                                                   }()),
@@ -462,7 +462,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                     return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                        aspectRatio: 1,
+                                                        aspectRatio: 16 / 9,
                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                                           showControls: false,
                                                         ),
@@ -470,10 +470,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     );
                                                   }else{
                                                     return CachedNetworkImage(
-                                                      fit: BoxFit.contain,
+                                                      fit: BoxFit.cover,
                                                       imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                     );
                                                   }
                                                 }()),
@@ -529,10 +529,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                             );
                                                                           }else{
                                                                             return CachedNetworkImage(
-                                                                              fit: BoxFit.contain,
+                                                                              fit: BoxFit.cover,
                                                                               imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
                                                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                             );
                                                                           }
                                                                         }()),
@@ -576,7 +576,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                       return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                         betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                          aspectRatio: 1,
+                                                          aspectRatio: 16 / 9,
                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
@@ -584,10 +584,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       );
                                                     }else{
                                                       return CachedNetworkImage(
-                                                        fit: BoxFit.contain,
+                                                        fit: BoxFit.cover,
                                                         imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       );
                                                     }
                                                   }()),
@@ -650,10 +650,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                             );
                                                                           }else{
                                                                             return CachedNetworkImage(
-                                                                              fit: BoxFit.contain,
+                                                                              fit: BoxFit.cover,
                                                                               imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
                                                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                             );
                                                                           }
                                                                         }()),
@@ -698,27 +698,28 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                       ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                         betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                          aspectRatio: 1,
+                                                          aspectRatio: 16 / 9,
                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
                                                         ),
                                                       )
                                                       : CachedNetworkImage(
-                                                        fit: BoxFit.contain,
+                                                        fit: BoxFit.cover,
                                                         imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       );
                                                     }else{
                                                       return ((){
                                                         if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3 > 0){
                                                           if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                             return Stack(
+                                                              fit: StackFit.expand,
                                                               children: [
                                                                 BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    aspectRatio: 1,
+                                                                    aspectRatio: 16 / 9,
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                       showControls: false,
                                                                     ),
@@ -745,12 +746,13 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             );
                                                           }else{
                                                             return Stack(
+                                                              fit: StackFit.expand,
                                                               children: [
                                                                 CachedNetworkImage(
-                                                                  fit: BoxFit.fill,
+                                                                  fit: BoxFit.cover,
                                                                   imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
                                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 ),
 
                                                                 Container(color: Colors.black.withOpacity(0.5),),
@@ -776,7 +778,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                             return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                aspectRatio: 1,
+                                                                aspectRatio: 16 / 9,
                                                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                   showControls: false,
                                                                 ),
@@ -784,10 +786,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             );
                                                           }else{
                                                             return CachedNetworkImage(
-                                                              fit: BoxFit.fill,
+                                                              fit: BoxFit.cover,
                                                               imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
                                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             );
                                                           }
                                                         }
@@ -825,23 +827,22 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
                                                 TextSpan(
                                                   children: List.generate(originalPost.data!.blmPost.showOriginalPostPostTagged.length,
-                                                    (index) => TextSpan(
+                                                    (index) => 
+                                                    TextSpan(
                                                       style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
                                                       children: <TextSpan>[
-                                                        TextSpan(text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
-
-                                                        TextSpan(text: ' '),
-
-                                                        TextSpan(text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
+                                                        TextSpan(
+                                                          text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
+                                                          recognizer: TapGestureRecognizer()
+                                                          ..onTap = (){
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
+                                                          }
+                                                        ),
 
                                                         index < originalPost.data!.blmPost.showOriginalPostPostTagged.length - 1
                                                         ? TextSpan(text: ', ')
                                                         : TextSpan(text: ''),
                                                       ],
-                                                      recognizer: TapGestureRecognizer()
-                                                      ..onTap = (){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
-                                                      }
                                                     ),
                                                   ),
                                                 ),

@@ -27,7 +27,6 @@ import 'UI/BLM/blm-03-register.dart';
 import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
-import 'authentication-ui.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -79,6 +78,7 @@ void main() async{
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
           cardColor: Color(0xffffffff),
+          fontFamily: 'Roboto',
         ),
         routes: <String, WidgetBuilder>{ // NAMED ROUTES USED FOR NAVIGATING
           '/start': (BuildContext context) => UIGetStarted(),

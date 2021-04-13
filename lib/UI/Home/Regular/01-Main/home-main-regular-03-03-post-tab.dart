@@ -232,10 +232,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                             );
                           }else{
                             return CachedNetworkImage(
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                               imageUrl: posts[i].imagesOrVideos[0],
                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             );
                           }
                         }else if(posts[i].imagesOrVideos.length == 2){
@@ -256,10 +256,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                 ),
                               )
                               : CachedNetworkImage(
-                                fit: BoxFit.contain,
+                                fit: BoxFit.cover,
                                 imageUrl: posts[i].imagesOrVideos[index],
                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               ),
                             staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
                             mainAxisSpacing: 4.0,
@@ -287,16 +287,17 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                   ),
                                 )
                                 : CachedNetworkImage(
-                                  fit: BoxFit.contain,
+                                  fit: BoxFit.cover,
                                   imageUrl: posts[i].imagesOrVideos[index],
                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 );
                               }else{
                                 return ((){
                                   if(posts[i].imagesOrVideos.length - 3 > 0){
                                     if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                       return Stack(
+                                        fit: StackFit.expand,
                                         children: [
                                           BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                             betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -327,12 +328,13 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                       );
                                     }else{
                                       return Stack(
+                                        fit: StackFit.expand,
                                         children: [
                                           CachedNetworkImage(
-                                            fit: BoxFit.fill,
+                                            fit: BoxFit.cover,
                                             imageUrl: posts[i].imagesOrVideos[index],
                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           ),
 
                                           Container(color: Colors.black.withOpacity(0.5),),
@@ -366,10 +368,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                       );
                                     }else{
                                       return CachedNetworkImage(
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.cover,
                                         imageUrl: posts[i].imagesOrVideos[index],
                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       );
                                     }
                                   }

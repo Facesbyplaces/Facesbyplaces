@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
-// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-12-google-authentication.dart';
@@ -12,7 +11,6 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';

@@ -435,10 +435,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                       );
                                                                     }else{
                                                                       return CachedNetworkImage(
-                                                                        fit: BoxFit.contain,
+                                                                        fit: BoxFit.cover,
                                                                         imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
                                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                       );
                                                                     }
                                                                   }()),
@@ -458,7 +458,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                        aspectRatio: 1,
+                                                        aspectRatio: 16 / 9,
                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                                           showControls: false,
                                                         ),
@@ -466,10 +466,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     );
                                                   }else{
                                                     return CachedNetworkImage(
-                                                      fit: BoxFit.contain,
+                                                      fit: BoxFit.cover,
                                                       imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                     );
                                                   }
                                                 }()),
@@ -525,10 +525,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             );
                                                                           }else{
                                                                             return CachedNetworkImage(
-                                                                              fit: BoxFit.contain,
+                                                                              fit: BoxFit.cover,
                                                                               imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
                                                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                             );
                                                                           }
                                                                         }()),
@@ -572,7 +572,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                       return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                         betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                          aspectRatio: 1,
+                                                          aspectRatio: 16 / 9,
                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
@@ -580,10 +580,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       );
                                                     }else{
                                                       return CachedNetworkImage(
-                                                        fit: BoxFit.contain,
+                                                        fit: BoxFit.cover,
                                                         imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       );
                                                     }
                                                   }()),
@@ -646,10 +646,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             );
                                                                           }else{
                                                                             return CachedNetworkImage(
-                                                                              fit: BoxFit.contain,
+                                                                              fit: BoxFit.cover,
                                                                               imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
                                                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                             );
                                                                           }
                                                                         }()),
@@ -694,27 +694,28 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                       ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                         betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                          aspectRatio: 1,
+                                                          aspectRatio: 16 / 9,
                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
                                                         ),
                                                       )
                                                       : CachedNetworkImage(
-                                                        fit: BoxFit.contain,
+                                                        fit: BoxFit.cover,
                                                         imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       );
                                                     }else{
                                                       return ((){
                                                         if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3 > 0){
                                                           if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                             return Stack(
+                                                              fit: StackFit.expand,
                                                               children: [
                                                                 BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    aspectRatio: 1,
+                                                                    aspectRatio: 16 / 9,
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                       showControls: false,
                                                                     ),
@@ -741,12 +742,13 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             );
                                                           }else{
                                                             return Stack(
+                                                              fit: StackFit.expand,
                                                               children: [
                                                                 CachedNetworkImage(
-                                                                  fit: BoxFit.fill,
+                                                                  fit: BoxFit.cover,
                                                                   imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
                                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 ),
 
                                                                 Container(color: Colors.black.withOpacity(0.5),),
@@ -772,7 +774,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                             return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                aspectRatio: 1,
+                                                                aspectRatio: 16 / 9,
                                                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                   showControls: false,
                                                                 ),
@@ -780,10 +782,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             );
                                                           }else{
                                                             return CachedNetworkImage(
-                                                              fit: BoxFit.fill,
+                                                              fit: BoxFit.cover,
                                                               imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
                                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             );
                                                           }
                                                         }
@@ -820,31 +822,29 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                 TextSpan(
                                                   children: List.generate(originalPost.data!.almPost.showOriginalPostPostTagged.length,
-                                                    (index) => TextSpan(
+                                                    (index) => 
+                                                    TextSpan(
                                                       style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
                                                       children: <TextSpan>[
-                                                        TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
-
-                                                        TextSpan(text: ' '),
-
-                                                        TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
+                                                        TextSpan(
+                                                          text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
+                                                          recognizer: TapGestureRecognizer()
+                                                          ..onTap = (){
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
+                                                          }
+                                                        ),
 
                                                         index < originalPost.data!.almPost.showOriginalPostPostTagged.length - 1
                                                         ? TextSpan(text: ', ')
                                                         : TextSpan(text: ''),
                                                       ],
-                                                      recognizer: TapGestureRecognizer()
-                                                      ..onTap = (){
-                                                        print('Go');
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
-                                                      }
                                                     ),
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           )
-                                        )
+                                        ),
 
                                       ],
                                     )

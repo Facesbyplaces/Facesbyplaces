@@ -246,31 +246,25 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                             SizedBox(height: 20,),
 
-                                            Container(
-                                              width: 100,
-                                              height: 40,
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: CircleAvatar(
-                                                      radius: 15,
-                                                      backgroundColor: Color(0xffE67E22),
-                                                      child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: 15,),
-                                                    ),
-                                                  ),
-
-                                                  SizedBox(width: 20,),
-
-                                                  Expanded(
-                                                    child: Text('${profile.data!.blmMemorial.memorialFollowersCount}',
-                                                      style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: Color(0xff000000),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                            TextButton.icon(
+                                              onPressed: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 2)));
+                                              }, 
+                                              icon: CircleAvatar(
+                                                radius: 15,
+                                                backgroundColor: Color(0xff000000),
+                                                child: CircleAvatar(
+                                                  radius: 10,
+                                                  backgroundColor: Colors.transparent,
+                                                  backgroundImage: AssetImage('assets/icons/fist.png'),
+                                                ),
+                                              ),
+                                              label: Text('${profile.data!.blmMemorial.memorialFollowersCount}',
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color(0xff000000),
+                                                ),
                                               ),
                                             ),
 
@@ -749,10 +743,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                       );
                                                                                     }else{
                                                                                       return CachedNetworkImage(
-                                                                                        fit: BoxFit.contain,
+                                                                                        fit: BoxFit.cover,
                                                                                         imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
                                                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                       );
                                                                                     }
                                                                                   }()),
@@ -809,10 +803,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                               }else{
                                                                 return Container(
                                                                   child: CachedNetworkImage(
-                                                                    fit: BoxFit.contain,
+                                                                    fit: BoxFit.cover,
                                                                     imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
                                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                   ),
                                                                 );
                                                               }
@@ -978,15 +972,15 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                       showControls: false,
                                                     ),
-                                                    aspectRatio: 1,
+                                                    aspectRatio: 16 / 9,
                                                   ),
                                                 );
                                               }else{
                                                 return CachedNetworkImage(
-                                                  fit: BoxFit.contain,
+                                                  fit: BoxFit.cover,
                                                   imageUrl: posts[i].imagesOrVideos[0],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 );
                                               }
                                             }else if(posts[i].imagesOrVideos.length == 2){
@@ -1003,14 +997,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       controlsConfiguration: BetterPlayerControlsConfiguration(
                                                         showControls: false,
                                                       ),
-                                                      aspectRatio: 1,
+                                                      aspectRatio: 16 / 9,
                                                     ),
                                                   )
                                                   : CachedNetworkImage(
-                                                    fit: BoxFit.contain,
+                                                    fit: BoxFit.cover,
                                                     imageUrl: posts[i].imagesOrVideos[index],
                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   ),
                                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
                                                 mainAxisSpacing: 4.0,
@@ -1034,27 +1028,28 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                                           showControls: false,
                                                         ),
-                                                        aspectRatio: 1,
+                                                        aspectRatio: 16 / 9,
                                                       ),
                                                     )
                                                     : CachedNetworkImage(
-                                                      fit: BoxFit.contain,
+                                                      fit: BoxFit.cover,
                                                       imageUrl: posts[i].imagesOrVideos[index],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                     );
                                                   }else{
                                                     return ((){
                                                       if(posts[i].imagesOrVideos.length - 3 > 0){
                                                         if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                                           return Stack(
+                                                            fit: StackFit.expand,
                                                             children: [
                                                               BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                   controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                     showControls: false,
                                                                   ),
-                                                                  aspectRatio: 1,
+                                                                  aspectRatio: 16 / 9,
                                                                 ),
                                                               ),
 
@@ -1078,12 +1073,13 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           );
                                                         }else{
                                                           return Stack(
+                                                            fit: StackFit.expand,
                                                             children: [
                                                               CachedNetworkImage(
-                                                                fit: BoxFit.fill,
+                                                                fit: BoxFit.cover,
                                                                 imageUrl: posts[i].imagesOrVideos[index],
                                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               ),
 
                                                               Container(color: Colors.black.withOpacity(0.5),),
@@ -1112,15 +1108,15 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                 showControls: false,
                                                               ),
-                                                              aspectRatio: 1,
+                                                              aspectRatio: 16 / 9,
                                                             ),
                                                           );
                                                         }else{
                                                           return CachedNetworkImage(
-                                                            fit: BoxFit.fill,
+                                                            fit: BoxFit.cover,
                                                             imageUrl: posts[i].imagesOrVideos[index],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                           );
                                                         }
                                                       }
