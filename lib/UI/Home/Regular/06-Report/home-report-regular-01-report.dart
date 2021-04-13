@@ -115,10 +115,10 @@ class HomeRegularReport extends StatelessWidget{
                             onlyOkButton: true,
                             onOkButtonPressed: () {
                               Navigator.pop(context, true);
+                              Navigator.pop(context, true);
                             },
                           )
                         );
-                        Navigator.pushReplacementNamed(context, '/home/regular');
                       }else{
                         await showDialog(
                           context: context,

@@ -702,6 +702,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                           );
                                                         }else{
                                                           return Container(
+                                                            width: 100,
+                                                            height: 100,
                                                             child: CachedNetworkImage(
                                                               fit: BoxFit.cover,
                                                               imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],

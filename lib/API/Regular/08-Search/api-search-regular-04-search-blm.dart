@@ -21,7 +21,7 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({required String key
     ),  
   );
 
-  print('The status code of feed is ${response.statusCode}');
+  print('The status code of search blm is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

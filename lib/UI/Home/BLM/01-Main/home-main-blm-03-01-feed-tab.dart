@@ -56,24 +56,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   void initState(){
     super.initState();
     isGuest();
-    onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-        if(itemRemaining != 0){
-          setState(() {
-            onLoading();
-          });
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more posts to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
-        }
-      }
-    });
   }
 
   Future<void> onRefresh() async{
@@ -84,7 +66,29 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
-    isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
+    setState(() {
+      isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
+    });
+    if(isGuestLoggedIn != true){
+      onLoading();
+      scrollController.addListener(() {
+        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+          if(itemRemaining != 0){
+            setState(() {
+              onLoading();
+            });
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No more feeds to show'),
+                duration: Duration(seconds: 1),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
+            );
+          }
+        }
+      });
+    }
   }
 
   void onLoading() async{

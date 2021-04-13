@@ -8,6 +8,15 @@ Future<bool> apiRegularReport({required int postId, required String reportType, 
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('The access token in report is $getAccessToken');
+  print('The uid report is $getUID');
+  print('The client is $getClient');
+
+  print('The postId is $postId');
+  print('The reportType is $reportType');
+  print('The subject is $subject');
+  print('The body is $body');
+
   Dio dioRequest = Dio();
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/reports/report?report[reportable_type]=$reportType&report[reportable_id]=$postId&report[subject]=$subject&report[description]=$body',

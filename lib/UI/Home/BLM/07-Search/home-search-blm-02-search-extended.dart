@@ -128,7 +128,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   int tabCount2 = 0;
   int tabCount3 = 0;
   int tabCount4 = 0;
-  bool isGuestLoggedIn = false;
+  bool isGuestLoggedIn = true;
 
   Future<void> onRefresh1() async{
     setState(() {
@@ -335,85 +335,86 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     setState(() {
       isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
     });
+    if(isGuestLoggedIn != true){
+      onLoading1();
+      onLoading2();
+      onLoading3();
+      onLoading4();
+      scrollController1.addListener(() {
+        if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
+          if(postItemRemaining != 0){
+            setState(() {
+              onLoading1();
+            });
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No more posts to show'),
+                duration: Duration(seconds: 1),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
+            );
+          }
+        }
+      });
+      scrollController2.addListener(() {
+        if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
+          if(suggestedItemRemaining != 0){
+            setState(() {
+              onLoading2();
+            });
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No more suggested memorials to show'),
+                duration: Duration(seconds: 1),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
+            );
+          }
+        }
+      });
+      scrollController3.addListener(() {
+        if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
+          if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
+            setState(() {
+              onLoading3();
+            });
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No more nearby memorials to show'),
+                duration: Duration(seconds: 1),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
+            );
+          }
+        }
+      });
+      scrollController4.addListener(() {
+        if (scrollController4.position.pixels == scrollController4.position.maxScrollExtent) {
+          if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
+            setState(() {
+              onLoading4();
+            });
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No more BLM memorials to show'),
+                duration: Duration(seconds: 1),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
+            );
+          }
+        }
+      });
+    }
   }
 
   void initState(){
     super.initState();
-    isGuestLoggedIn = false;
     isGuest();
     toggle = newToggle;
-    onLoading1();
-    onLoading2();
-    onLoading3();
-    onLoading4();
-    scrollController1.addListener(() {
-      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
-        if(postItemRemaining != 0){
-          setState(() {
-            onLoading1();
-          });
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more posts to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
-        }
-      }
-    });
-    scrollController2.addListener(() {
-      if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
-        if(suggestedItemRemaining != 0){
-          setState(() {
-            onLoading2();
-          });
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more suggested memorials to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
-        }
-      }
-    });
-    scrollController3.addListener(() {
-      if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
-        if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
-          setState(() {
-            onLoading3();
-          });
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more nearby memorials to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
-        }
-      }
-    });
-    scrollController4.addListener(() {
-      if (scrollController4.position.pixels == scrollController4.position.maxScrollExtent) {
-        if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
-          setState(() {
-            onLoading4();
-          });
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more BLM memorials to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
-        }
-      }
-    });
   }
 
   @override

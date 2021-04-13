@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-04-home-notifications-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-notification-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
@@ -28,30 +29,41 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
   ScrollController scrollController = ScrollController();
   List<BLMMainPagesNotifications> notifications = [];
+  bool isGuestLoggedIn = true;
   int itemRemaining = 1;
   int page = 1;
   int count = 0;
 
   void initState(){
     super.initState();
-    onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-        if(itemRemaining != 0){
-          setState(() {
-            onLoading();
-          });
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more notifications to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
-        }
-      }
+    isGuest();
+  }
+
+  void isGuest() async{
+    final sharedPrefs = await SharedPreferences.getInstance();
+    setState(() {
+      isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
     });
+    if(isGuestLoggedIn != true){
+      onLoading();
+      scrollController.addListener(() {
+        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+          if(itemRemaining != 0){
+            setState(() {
+              onLoading();
+            });
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No more notifications to show'),
+                duration: Duration(seconds: 1),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
+            );
+          }
+        }
+      });
+    }
   }
 
   Future<void> onRefresh() async{

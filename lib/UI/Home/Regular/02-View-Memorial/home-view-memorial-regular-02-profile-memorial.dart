@@ -783,7 +783,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                   height: 100,
                                                                   child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                     betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                      aspectRatio: 16 / 9,
+                                                                      aspectRatio: 1,
                                                                       controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                         showControls: false,
                                                                       ),
@@ -792,6 +792,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                 );
                                                               }else{
                                                                 return Container(
+                                                                  width: 100,
+                                                                  height: 100,
                                                                   child: CachedNetworkImage(
                                                                     fit: BoxFit.cover,
                                                                     imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],

@@ -460,7 +460,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
         builder: (context, dropDownList){
           return DropdownButton<String>(
             underline: Container(height: 0),
-            icon: Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
+            icon: Center(child: Icon(Icons.more_vert, color: Color(0xffffffff)),),
             style: TextStyle(
               fontFamily: 'Roboto',
               fontSize: 14,

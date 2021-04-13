@@ -60,7 +60,6 @@ void main() async{
             return UIGetStarted();
           }
         }()),
-        // home: SignInScreen(),
         builder: (context, widget) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, widget!),
           maxWidth: 1200,

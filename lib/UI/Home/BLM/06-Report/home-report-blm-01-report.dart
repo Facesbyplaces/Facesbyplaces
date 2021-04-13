@@ -117,10 +117,10 @@ class HomeBLMReport extends StatelessWidget{
                               onlyOkButton: true,
                               onOkButtonPressed: () {
                                 Navigator.pop(context, true);
+                                Navigator.pop(context, true);
                               },
                             )
                           );
-                          Navigator.pushReplacementNamed(context, '/home/blm');
                         }else{
                           await showDialog(
                             context: context,
