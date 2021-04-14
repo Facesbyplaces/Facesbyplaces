@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "436631194271",
-    "project_id": "facesbyplaces-75612",
-    "storage_bucket": "facesbyplaces-75612.appspot.com"
+    "project_number": "397895894656",
+    "project_id": "fbp-test-a6d57",
+    "storage_bucket": "fbp-test-a6d57.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:436631194271:android:5ca47f2ee7fafc4d21f0aa",
+        "mobilesdk_app_id": "1:397895894656:android:a9d0654cded2fc025a0865",
         "android_client_info": {
           "package_name": "com.app.facesbyplaces"
         }
       },
       "oauth_client": [
         {
-          "client_id": "436631194271-e2dogjsbr2es37jhk65ireiu196b3jmh.apps.googleusercontent.com",
+          "client_id": "397895894656-ciuq98avvkq406hb3i15o7n29bo2prog.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.app.facesbyplaces",
@@ -22,28 +22,21 @@
           }
         },
         {
-          "client_id": "436631194271-aa9aemrndds1usi7vhb6dgnj88in5bsu.apps.googleusercontent.com",
+          "client_id": "397895894656-ti7oq6veuucvg2l066p9d05c9gk9mfuu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCNcL2Vd708NGGjOCQzlvAW-hl6ssRLBdc"
+          "current_key": "AIzaSyB2E57jctj8RO3Qc76m1aAn34rFru_FZDI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "436631194271-aa9aemrndds1usi7vhb6dgnj88in5bsu.apps.googleusercontent.com",
+              "client_id": "397895894656-ti7oq6veuucvg2l066p9d05c9gk9mfuu.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "436631194271-pc53hk5b4ecam0ien8gekt9iv910bg9r.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.app.facesbyplaces"
-              }
             }
           ]
         }

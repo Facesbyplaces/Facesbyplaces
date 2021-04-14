@@ -29,19 +29,9 @@
 			<array>
 				<string>facesbyplaces-uri</string>
 				<string>fb674832526555519</string>
-				<string>com.googleusercontent.apps.436631194271-pc53hk5b4ecam0ien8gekt9iv910bg9r</string>
+				<string>com.googleusercontent.apps.397895894656-r4iliof6ms3fk7ca06ni4dnujjc9up5h</string>
 				<string>http</string>
 				<string>schemefacesbyplaces</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.app.facesbyplaces.braintree</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.app.facesbyplaces.braintree</string>
 			</array>
 		</dict>
 	</array>

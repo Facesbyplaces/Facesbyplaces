@@ -94,7 +94,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                       SizedBox(height: 20,),
 
-                      MiscBLMInputFieldSecurityQuestions(key: _key5, displayText: details.data!.showAccountDetailsQuestion,),
+                      MiscBLMInputFieldSecurityQuestions(key: _key5, displayText: details.data!.showAccountDetailsQuestion != '' ? details.data!.showAccountDetailsQuestion : 'What\'s the name of your first dog?'),
 
                       SizedBox(height: 80,),
 

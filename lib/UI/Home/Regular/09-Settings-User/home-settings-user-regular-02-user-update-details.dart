@@ -94,7 +94,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                       SizedBox(height: 20,),
 
-                      MiscRegularInputFieldSecurityQuestions(key: _key5, displayText: details.data!.showAccountDetailsQuestion,),
+                      MiscRegularInputFieldSecurityQuestions(key: _key5, displayText: details.data!.showAccountDetailsQuestion != '' ? details.data!.showAccountDetailsQuestion : 'What\'s the name of your first dog?',),
 
                       SizedBox(height: 80,),
 

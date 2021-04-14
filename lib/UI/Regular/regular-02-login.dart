@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -92,321 +93,130 @@ class RegularLoginState extends State<RegularLogin>{
 
                       SizedBox(height: 25),
 
-                      Padding(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: MiscRegularButtonSignInWithTemplate(
-                                buttonText: 'Facebook', 
-                                buttonColor: Color(0xff3A559F), 
-                                buttonTextStyle: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300, 
-                                  color: Color(0xffffffff),
-                                ),
-                                width: SizeConfig.screenWidth! / 1.5, 
-                                height: 45,
-                                onPressed: () async{
+                      FacebookAuthButton(
+                        height: 44,
+                        width: SizeConfig.screenWidth,
+                        onPressed: () async{
 
-                                  final fb = FacebookLogin(debug: true);
+                          final fb = FacebookLogin(debug: true);
+                          bool isLoggedIn = await fb.isLoggedIn;
 
-                                  // await fb.logOut();
-                                  // print('facebook logout'); // TO LOGOUT THE FACEBOOK ACCOUNT FOR TESTING
+                          if(isLoggedIn == true){
+                            context.showLoaderOverlay();
 
-                                  bool isLoggedIn = await fb.isLoggedIn;
+                            FacebookUserProfile profile = (await fb.getUserProfile())!;
+                            String email = (await fb.getUserEmail())!;
+                            String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                            FacebookAccessToken token = (await fb.accessToken)!;
 
-                                  print('The value of isLoggedIn in facebook is $isLoggedIn');
+                            bool apiResult = await apiRegularSignInWithFacebook(
+                              firstName: '${profile.name}',
+                              lastName: '',
+                              email: email, 
+                              username: email,
+                              facebookId: token.token,
+                              image: image
+                            );
+                            context.hideLoaderOverlay();
 
-                                  if(isLoggedIn == true){
-                                    context.showLoaderOverlay();
+                            if(apiResult == true){
+                              final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
+                              await FirebaseAuth.instance.signInWithCredential(credential);
+                              Navigator.pushReplacementNamed(context, '/home/regular');
+                            }else{
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Invalid email or password. Please try again.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
+                            }
 
-                                    FacebookUserProfile profile = (await fb.getUserProfile())!;
-                                    String email = (await fb.getUserEmail())!;
-                                    String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
-                                    FacebookAccessToken token = (await fb.accessToken)!;
+                          }else{
+                            final result = await fb.logIn(permissions: [
+                              FacebookPermission.publicProfile,
+                              FacebookPermission.email,
+                              FacebookPermission.userFriends,
+                            ]);
 
-                                    bool apiResult = await apiRegularSignInWithFacebook(
-                                      firstName: '${profile.name}',
-                                      lastName: '',
-                                      email: email, 
-                                      username: email,
-                                      facebookId: token.token,
-                                      image: image
-                                    );
-                                    context.hideLoaderOverlay();
+                            context.showLoaderOverlay();
 
-                                    if(apiResult == true){
-                                      Navigator.pushReplacementNamed(context, '/home/regular');
-                                    }else{
-                                      // await showOkAlertDialog(
-                                      //   context: context,
-                                      //   title: 'Error',
-                                      //   message: 'Invalid email or password. Please try again.',
-                                      // );
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Invalid email or password. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
-                                      );
-                                    }
+                            final email = (await fb.getUserEmail())!;
+                            final profile = (await fb.getUserProfile())!;
+                            final image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                            FacebookAccessToken token = (await fb.accessToken)!;
 
-                                  }else{
-                                    final result = await fb.logIn(permissions: [
-                                      FacebookPermission.publicProfile,
-                                      FacebookPermission.email,
-                                      FacebookPermission.userFriends,
-                                    ]);
+                            if(result.status != FacebookLoginStatus.cancel){  
+                              bool apiResult = await apiRegularSignInWithFacebook(
+                                firstName: '${profile.name}',
+                                lastName: '',
+                                email: email, 
+                                username: email,
+                                facebookId: result.accessToken!.token,
+                                image: image,
+                              );
+                              context.hideLoaderOverlay();
 
-                                    final email = (await fb.getUserEmail())!;
-                                    final profile = (await fb.getUserProfile())!;
-                                    final image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                              if(apiResult == false){
+                                await fb.logOut();
+                              }else{
+                                final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
+                                await FirebaseAuth.instance.signInWithCredential(credential);
+                                Navigator.pushReplacementNamed(context, '/home/regular');
+                              }
+                            }
+                          }
 
-                                    if(result.status != FacebookLoginStatus.cancel){
-                                      context.showLoaderOverlay();
-                                      
-                                      bool apiResult = await apiRegularSignInWithFacebook(
-                                        firstName: '${profile.name}',
-                                        lastName: '',
-                                        email: email, 
-                                        username: email,
-                                        facebookId: result.accessToken!.token,
-                                        image: image,
-                                      );
-                                      context.hideLoaderOverlay();
-
-                                      if(apiResult == false){
-                                        await fb.logOut();
-                                      }else{
-                                        Navigator.pushReplacementNamed(context, '/home/regular');
-                                      }
-                                    }
-                                  }
-
-                                }, 
-                              ),
-                            ),
-
-                            SizedBox(width: 50),
-
-                            Expanded(
-                              child: MiscRegularButtonSignInWithTemplate(
-                                buttonText: 'Google', 
-                                buttonColor: Color(0xffF5F5F5),
-                                buttonTextStyle: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300, 
-                                  color: Color(0xff000000),
-                                ),
-                                width: SizeConfig.screenWidth! / 1.5, 
-                                height: 45,
-                                image: 'assets/icons/google.png',
-                                onPressed: () async {
-
-                                  User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
-
-                                  if (user != null) {
-                                    Navigator.pushReplacementNamed(context, '/home/regular');
-                                  }else{
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text('Invalid email or password. Please try again.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(),
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: Colors.red,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                  }
-
-
-                                  // ==========================================================================
-
-
-                                  // GoogleSignIn googleSignIn = GoogleSignIn(
-                                  //   scopes: [
-                                  //     'profile',
-                                  //     'email',
-                                  //     'openid'
-                                  //   ],
-                                  // );
-
-                                  // // await googleSignIn.signOut();
-                                  // // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
-
-                                  // bool isLoggedIn = await googleSignIn.isSignedIn();
-
-                                  // print('The value of isLoggedIn is $isLoggedIn');
-
-                                  // if(isLoggedIn == true){
-                                  //   context.showLoaderOverlay();
-                                  //   GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
-                                  //   GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
-
-                                  //   print('Start here');
-
-                                  //   FirebaseAuth authorization = FirebaseAuth.instance;
-                                  //   // String newResult = authorization.currentUser!.refreshToken;
-                                  //   print('The refresh token is ${authorization.currentUser!.refreshToken}');
-                                  //   print('The refresh token length is ${authorization.currentUser!.refreshToken!.length}');
-                                  //   print('The display name is ${authorization.currentUser!.displayName}');
-
-                                  //   // print('The current user is $newResult');
-                                  //   // print('The current user length is ${newResult.length}');
-
-                                  //   print('The accountSignIn xzcvoiuasdfoiu is ${accountSignedIn!.displayName}');
-                                  //   print('The accountSignIn is ${accountSignedIn.email}');
-                                  //   print('The accountSignIn is ${accountSignedIn.id}');
-                                  //   print('The accountSignIn is ${accountSignedIn.photoUrl}');
-
-                                  //   var value1 = await accountSignedIn.authHeaders;
-                                  //   var value2 = await accountSignedIn.authentication;
-
-                                  //   print('The value1 is $value1');
-                                  //   print('The value2 is ${value2.accessToken}');
-                                  //   print('The value2 is ${value2.idToken}');
-                                  //   print('The length of id token is ${value2.idToken!.length}');
-                                  //   print('The value2 is ${value2.serverAuthCode}');
-
-                                  //   print('The auth is ${auth.accessToken}');
-                                  //   print('The auth is ${auth.idToken}');
-                                  //   print('The auth is ${auth.serverAuthCode}');
-                                    
-                                  //   bool result = await apiRegularSignInWithGoogle(
-                                  //     firstName: accountSignedIn.displayName!, 
-                                  //     lastName: '', 
-                                  //     email: accountSignedIn.email, 
-                                  //     username: accountSignedIn.email,
-                                  //     googleId: auth.idToken!,
-                                  //     // googleId: value2.idToken!,
-                                  //     image: accountSignedIn.photoUrl!,
-                                  //   );
-                                  //   context.hideLoaderOverlay();
-
-                                  //   if(result == true){
-                                  //     Navigator.pushReplacementNamed(context, '/home/regular');
-                                  //   }else{
-                                  //     await showDialog(
-                                  //       context: context,
-                                  //       builder: (_) => 
-                                  //         AssetGiffyDialog(
-                                  //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //         entryAnimation: EntryAnimation.DEFAULT,
-                                  //         description: Text('Invalid email or password. Please try again.',
-                                  //           textAlign: TextAlign.center,
-                                  //           style: TextStyle(),
-                                  //         ),
-                                  //         onlyOkButton: true,
-                                  //         buttonOkColor: Colors.red,
-                                  //         onOkButtonPressed: () {
-                                  //           Navigator.pop(context, true);
-                                  //         },
-                                  //       )
-                                  //     );
-                                  //   }
-                                  // }else{
-                                  //   GoogleSignInAccount? accountSignedIn = await googleSignIn.signIn();
-                                  //   GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
-
-                                  //   print('Start here');
-
-                                  //   FirebaseAuth authorization = FirebaseAuth.instance;
-                                  //   print('The refresh token is ${authorization.currentUser!.refreshToken}');
-                                  //   print('The refresh token length is ${authorization.currentUser!.refreshToken!.length}');
-                                  //   print('The display name is ${authorization.currentUser!.displayName}');
-
-                                  //   // String newResult = await authorization.currentUser!.getIdToken();
-
-                                  //   // print('The current user is $newResult');
-                                  //   // print('The current user length is ${newResult.length}');
-
-                                  //   print('The accountSignIn sample is ${accountSignedIn!.displayName}');
-                                  //   print('The accountSignIn is ${accountSignedIn.email}');
-                                  //   print('The accountSignIn is ${accountSignedIn.id}');
-                                  //   print('The accountSignIn is ${accountSignedIn.photoUrl}');
-                                  //   // print('The accountSignIn is ${accountSignedIn.authHeaders}');
-                                  //   // print('The accountSignIn is ${accountSignedIn.authentication}');
-
-                                  //   var value1 = await accountSignedIn.authHeaders;
-                                  //   var value2 = await accountSignedIn.authentication;
-
-                                  //   print('The value1 is $value1');
-                                  //   print('The value2 is ${value2.accessToken}');
-                                  //   print('The value2 is ${value2.idToken}');
-                                  //   print('The length of id token is ${value2.idToken!.length}');
-                                  //   print('The value2 is ${value2.serverAuthCode}');
-
-                                  //   print('The auth is ${auth.accessToken}');
-                                  //   print('The auth is ${auth.idToken}');
-                                  //   print('The auth is ${auth.serverAuthCode}');
-
-                                  //   context.showLoaderOverlay();
-                                  //   bool result = await apiRegularSignInWithGoogle(
-                                  //     firstName: accountSignedIn.displayName!, 
-                                  //     lastName: '',
-                                  //     email: accountSignedIn.email, 
-                                  //     username: accountSignedIn.email,
-                                  //     googleId: auth.idToken!,
-                                  //     // googleId: value2.idToken!,
-                                  //     image: accountSignedIn.photoUrl!,
-                                  //   );
-                                  //   context.hideLoaderOverlay();
-
-                                  //   if(result == true){
-                                  //     Navigator.pushReplacementNamed(context, '/home/regular');
-                                  //   }else{
-                                  //     await showDialog(
-                                  //       context: context,
-                                  //       builder: (_) => 
-                                  //         AssetGiffyDialog(
-                                  //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //         entryAnimation: EntryAnimation.DEFAULT,
-                                  //         description: Text('Invalid email or password. Please try again.',
-                                  //           textAlign: TextAlign.center,
-                                  //           style: TextStyle(),
-                                  //         ),
-                                  //         onlyOkButton: true,
-                                  //         buttonOkColor: Colors.red,
-                                  //         onOkButtonPressed: () {
-                                  //           Navigator.pop(context, true);
-                                  //         },
-                                  //       )
-                                  //     );
-                                  //   }
-                                  // }
-                                  
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                        },
                       ),
 
-                      SizedBox(height: 40),
+                      SizedBox(height: 25),
+
+                      GoogleAuthButton(
+                        splashColor: Colors.white,
+                        height: 44,
+                        width: SizeConfig.screenWidth,
+                        onPressed: () async{
+                          User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
+
+                          if (user != null) {
+                            Navigator.pushReplacementNamed(context, '/home/regular');
+                          }else{
+                            await showDialog(
+                              context: context,
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Invalid email or password. Please try again.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
+                            );
+                          }
+                        },
+                      ),
+
+                      SizedBox(height: 25),
 
                       SignInWithAppleButton(
                         onPressed: () async {
@@ -422,6 +232,8 @@ class RegularLoginState extends State<RegularLogin>{
                           context.hideLoaderOverlay();
 
                           if(result == true){
+                            final OAuthCredential cred = FacebookAuthProvider.credential('${credential.identityToken}');
+                            await FirebaseAuth.instance.signInWithCredential(cred);
                             Navigator.pushReplacementNamed(context, '/home/regular');
                           }else{
                             await showDialog(
@@ -561,11 +373,8 @@ class RegularLoginState extends State<RegularLogin>{
                             final pushNotificationService = PushNotificationService(_firebaseMessaging);
                             pushNotificationService.initialise();
                             deviceToken = (await pushNotificationService.fcm.getToken())!;
-
-                            print('The device token is $deviceToken');
-                            
                             bool result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
-                            
+
                             context.hideLoaderOverlay();
 
                             if(result){

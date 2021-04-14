@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -54,16 +56,25 @@ class RegularGoogleAuthentication {
       );
 
       print('The result is $result');
+      print('The access token is ${googleSignInAuthentication.accessToken}'); 
+      print('The id token is ${googleSignInAuthentication.idToken}');
+      print('The id token is ${googleSignInAuthentication.serverAuthCode}');
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
 
+      print('The credential is $credential');
+      print('The user is $user');
+
       try {
+        print('asdflkjasdflkj');
         final UserCredential userCredential = await auth.signInWithCredential(credential);
+        print('The userCredential is $userCredential');
         user = userCredential.user;
       } on FirebaseAuthException catch (e) {
+        print('The firebase error is $e');
         if (e.code == 'account-exists-with-different-credential') {
           await showDialog(
             context: context,
