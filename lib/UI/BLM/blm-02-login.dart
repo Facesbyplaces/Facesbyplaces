@@ -208,8 +208,8 @@ class BLMLoginState extends State<BLMLogin>{
                           context.hideLoaderOverlay();
 
                           if(result == true){
-                            final OAuthCredential cred = FacebookAuthProvider.credential('${credential.identityToken}');
-                            await FirebaseAuth.instance.signInWithCredential(cred);
+                            // final OAuthCredential cred = FacebookAuthProvider.credential('${credential.identityToken}');
+                            // await FirebaseAuth.instance.signInWithCredential(cred);
                             Navigator.pushReplacementNamed(context, '/home/blm');
                           }else{
                               await showDialog(

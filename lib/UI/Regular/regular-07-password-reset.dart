@@ -185,10 +185,11 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                   onlyOkButton: true,
                                   onOkButtonPressed: () {
                                     Navigator.pop(context, true);
+                                    Navigator.popUntil(context, ModalRoute.withName('/login'));
                                   },
                                 )
                               );
-                              Navigator.popUntil(context, ModalRoute.withName('/login'));
+                              // Navigator.popUntil(context, ModalRoute.withName('/login'));
                             }else{
                               await showDialog(
                                 context: context,
