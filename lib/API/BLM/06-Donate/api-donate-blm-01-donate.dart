@@ -8,11 +8,6 @@ Future<bool> apiBLMDonate({required String pageType, required int pageId, requir
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The page type is $pageType');
-  print('The pageId is $pageId');
-  print('The amount is $amount');
-  print('The token is $token');
-
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
@@ -23,9 +18,7 @@ Future<bool> apiBLMDonate({required String pageType, required int pageId, requir
     'token': '$token',
   });
 
-  var response = await dioRequest.post(
-    // 'http://fbp.dev1.koda.ws/api/v1/payment_intent',
-    'http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
+  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
     options: Options(
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
@@ -37,7 +30,7 @@ Future<bool> apiBLMDonate({required String pageType, required int pageId, requir
     data: formData,
   );
 
-  print('The status code of regular donate is ${response.statusCode}');
+  print('The status code of blm donate is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

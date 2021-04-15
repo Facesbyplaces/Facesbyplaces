@@ -8,6 +8,7 @@ import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc-11-regular-dropdown.dart';
@@ -251,7 +252,23 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                     );
 
                     if (response.success) {
-                      print('The post id is $postId');
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Successfully shared the link.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
                     } else {
                       FlutterBranchSdk.logout();
                     }

@@ -21,7 +21,7 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers({required String keywords, requi
     ),  
   );
 
-  print('The status code of search users is ${response.statusCode}');
+  print('The status code of blm search users is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

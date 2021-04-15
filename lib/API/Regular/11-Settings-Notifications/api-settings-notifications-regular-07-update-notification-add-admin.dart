@@ -20,7 +20,7 @@ Future<bool> apiRegularUpdateNotificationAddAdmin({required bool hide}) async{
     ),  
   );
 
-  print('The status code of update notification 7 is ${response.statusCode}');
+  print('The status code of regular update notification add admin is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

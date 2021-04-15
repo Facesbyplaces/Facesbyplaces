@@ -21,7 +21,7 @@ Future<int> apiRegularShowUnreadNotifications() async{
     ),  
   );
 
-  print('The status code of show unread notifications is ${response.statusCode}');
+  print('The status code of regular show unread notifications is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

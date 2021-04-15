@@ -21,7 +21,7 @@ Future<bool> apiBLMHideBirthplace({required bool hide}) async{
     ),  
   );
 
-  print('The status code of hide birthplace is ${response.statusCode}');
+  print('The status code of blm hide birthplace is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

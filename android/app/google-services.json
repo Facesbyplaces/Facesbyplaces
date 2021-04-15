@@ -37,6 +37,13 @@
             {
               "client_id": "397895894656-ti7oq6veuucvg2l066p9d05c9gk9mfuu.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "397895894656-r4iliof6ms3fk7ca06ni4dnujjc9up5h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.facesbyplaces"
+              }
             }
           ]
         }

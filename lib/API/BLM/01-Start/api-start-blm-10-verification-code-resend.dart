@@ -22,7 +22,7 @@ Future<bool> apiBLMVerificationCodeResend() async{
     ),
   );
 
-  print('The status code of verification code resend is ${response.statusCode}');
+  print('The status code of blm verification code resend is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

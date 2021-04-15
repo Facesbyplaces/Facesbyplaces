@@ -21,7 +21,7 @@ Future<bool> apiBLMDeleteMemorialFriendsOrFamily({required int memorialId, requi
     ),  
   );
 
-  print('The status code of switch family status is ${response.statusCode}');
+  print('The status code of blm remove friends is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

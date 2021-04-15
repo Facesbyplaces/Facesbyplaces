@@ -193,25 +193,6 @@ class RegularLoginState extends State<RegularLogin>{
 
                           if (user != null) {
                             Navigator.pushReplacementNamed(context, '/home/regular');
-                          }else{
-                            await showDialog(
-                              context: context,
-                              builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Invalid email or password. Please try again.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.red,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              )
-                            );
                           }
                         },
                       ),

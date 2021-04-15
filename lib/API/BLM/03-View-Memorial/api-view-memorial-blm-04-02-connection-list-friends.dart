@@ -21,7 +21,7 @@ Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({required in
     ),  
   );
 
-  print('The status code of connection list friends is ${response.statusCode}');
+  print('The status code of blm connection list friends is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

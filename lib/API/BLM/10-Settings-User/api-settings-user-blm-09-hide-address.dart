@@ -21,7 +21,7 @@ Future<bool> apiBLMHideAddress({required bool hide}) async{
     ),  
   );
 
-  print('The status code of hide address is ${response.statusCode}');
+  print('The status code of blm hide address is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

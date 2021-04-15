@@ -20,7 +20,7 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({require
     ),
   );
 
-  print('The page friends settings is ${response.statusCode}');
+  print('The status code of regular show friends settings is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

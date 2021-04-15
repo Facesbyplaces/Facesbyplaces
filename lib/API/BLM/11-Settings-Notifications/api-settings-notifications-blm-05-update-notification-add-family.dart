@@ -20,7 +20,7 @@ Future<bool> apiBLMUpdateNotificationAddFamily({required bool hide}) async{
     ),  
   );
 
-  print('The status code of update notification 5 is ${response.statusCode}');
+  print('The status code of blm update notification add family is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

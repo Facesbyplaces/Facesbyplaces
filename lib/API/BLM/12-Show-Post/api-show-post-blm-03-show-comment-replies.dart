@@ -4,9 +4,21 @@ import 'package:dio/dio.dart';
 Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
+  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
+  String? getAccessToken;
+  String? getUID;
+  String? getClient;
+
+  if(userSessionRegular == true){
+    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  }else if(userSessionBLM == true){
+    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  }
 
   Dio dioRequest = Dio();
 
@@ -21,7 +33,7 @@ Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, re
     ),  
   );
 
-  print('The status code of feed is ${response.statusCode}');
+  print('The status code of blm show comments replies is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

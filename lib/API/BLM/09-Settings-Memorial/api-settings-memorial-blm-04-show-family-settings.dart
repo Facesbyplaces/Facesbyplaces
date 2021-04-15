@@ -21,7 +21,7 @@ Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings({required int memo
     ),  
   );
 
-  print('The status code of show family settings is ${response.statusCode}');
+  print('The status code of blm show family settings is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

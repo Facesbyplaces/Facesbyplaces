@@ -8,6 +8,7 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-post-lik
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc-11-blm-dropdown.dart';
@@ -313,7 +314,23 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     );
 
                     if (response.success) {
-                      print('Link generated: ${response.result}');
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Successfully shared the link.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
                     } else {
                       FlutterBranchSdk.logout();
                       print('Error : ${response.errorCode} - ${response.errorMessage}');

@@ -7,7 +7,7 @@ Future<bool> apiBLMPasswordChange({required String password, required String pas
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',);
 
-  print('The status code of password change is ${response.statusCode}');
+  print('The status code of blm password change is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

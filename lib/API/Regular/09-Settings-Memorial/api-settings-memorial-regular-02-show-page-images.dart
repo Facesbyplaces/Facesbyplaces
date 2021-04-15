@@ -20,7 +20,7 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({required int memo
     ),
   );
 
-  print('The page images is ${response.statusCode}');
+  print('The status code of regular show page images is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

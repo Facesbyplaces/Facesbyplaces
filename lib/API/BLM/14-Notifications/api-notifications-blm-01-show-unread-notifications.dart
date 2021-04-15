@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 Future<int> apiBLMShowUnreadNotifications() async{
@@ -22,8 +21,7 @@ Future<int> apiBLMShowUnreadNotifications() async{
     ),  
   );
 
-  print('The status code of user is ${response.statusCode}');
-
+  print('The status code of blm show unread notifications is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -31,21 +29,4 @@ Future<int> apiBLMShowUnreadNotifications() async{
   }else{
     throw Exception('Failed to get the user information');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/numOfUnread', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-
-  // if(response.statusCode == 200){
-  //   var value = json.decode(response.body);
-  //   return value['number_of_unread_notifs'];
-  // }else{
-  //   return 0;
-  // }
 }

@@ -5,9 +5,21 @@ Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) a
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
-  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
+  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
+  String? getAccessToken;
+  String? getUID;
+  String? getClient;
+
+  if(userSessionRegular == true){
+    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  }else if(userSessionBLM == true){
+    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  }
 
   try{
     Dio dioRequest = Dio();
@@ -21,12 +33,14 @@ Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) a
     var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/posts/likePost/unlikeOrLike', data: formData,
       options: Options(
         headers: <String, String>{
-          'access-token': getAccessToken,
-          'uid': getUID,
-          'client': getClient,
+          'access-token': getAccessToken!,
+          'uid': getUID!,
+          'client': getClient!,
         }
       ),  
     );
+
+    print('The status code of blm post like or unlike is ${response.statusCode}');
 
     if(response.statusCode == 200){
       result = true;

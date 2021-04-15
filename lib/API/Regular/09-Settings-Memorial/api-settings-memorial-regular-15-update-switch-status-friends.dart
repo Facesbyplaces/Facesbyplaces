@@ -20,7 +20,7 @@ Future<bool> apiRegularUpdateSwitchStatusFriends({required int memorialId, requi
     ),
   );
 
-  print('The page friends settings is ${response.statusCode}');
+  print('The status code of regular update switch status friends is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

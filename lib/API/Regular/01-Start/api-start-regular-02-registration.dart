@@ -16,7 +16,7 @@ Future<String> apiRegularRegistration({required APIRegularAccountRegistration ac
       ),  
     );
 
-    print('The status code of registration is ${response.statusCode}');
+    print('The status code of regular registration is ${response.statusCode}');
 
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);

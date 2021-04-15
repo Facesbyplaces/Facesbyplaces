@@ -21,7 +21,7 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required in
     ),  
   );
 
-  print('The status code of registration is ${response.statusCode}');
+  print('The status code of regular show user memorials is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

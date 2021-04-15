@@ -43,10 +43,12 @@ class PushNotificationService {
 
     print('User granted permission: ${settings.authorizationStatus}');
 
+    fcm.getInitialMessage();
+
     FirebaseMessaging.onMessage.listen((message) {
       print('Got a message whilst in the foreground!');
+      print('Message data: $message');
       print('Message data: ${message.data}');
-
       if (message.notification != null) {
         print('Message also contained a notification: ${message.notification}');
       }
@@ -58,6 +60,12 @@ class PushNotificationService {
     }
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      print('Pressed!');
+      print('The message on pressed is ${event.data}');
+      print('The message on pressed is $event');
+    });
   }
 }
 
@@ -70,11 +78,12 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   StreamSubscription<Map>? streamSubscription;
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-  PushNotificationService? pushNotificationService;
 
   void listenDeepLinkData(){
+    print('The start of deep linking');
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
       if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
+        print('Shared post start');
         initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
       }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
         initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
@@ -133,10 +142,7 @@ class UIGetStartedState extends State<UIGetStarted>{
   void initState(){
     super.initState();
     var newMessage = PushNotificationService(_firebaseMessaging);
-    // pushNotificationService!.initialise();
-    print('start');
     newMessage.initialise();
-    print('lkjasdflkj');
     listenDeepLinkData();
   }
 

@@ -20,7 +20,7 @@ Future<bool> apiBLMUpdateNotificationPostComments({required bool hide}) async{
     ),  
   );
 
-  print('The status code of update notification 4 is ${response.statusCode}');
+  print('The status code of blm update notification post comments is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

@@ -20,7 +20,7 @@ Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails({required int user
     ),
   );
 
-  print('The status code of other details is ${response.statusCode}');
+  print('The status code of regular show other details is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

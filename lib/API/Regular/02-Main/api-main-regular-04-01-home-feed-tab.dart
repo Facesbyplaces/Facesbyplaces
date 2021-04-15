@@ -8,10 +8,6 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
   try{
     Dio dioRequest = Dio();
 
@@ -25,11 +21,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
       ),
     );
 
-    print('The status code of main page - feed is ${response.statusCode}');
-
-    print('The access token in feed is $getAccessToken');
-    print('The uid in feed is $getUID');
-    print('The client in feed is $getClient');
+    print('The status code of regular home feed tab is ${response.statusCode}');
 
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);
@@ -38,9 +30,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
       throw Exception('Error occurred in main page: ${response.statusMessage}');
     }
   }catch(e){
-    // print('Error in login: $e');
     throw Exception('Error occurred in main page - feed: $e');
-    // return Future.error('Error occurred in main page - feed: $e');
   }
 }
 

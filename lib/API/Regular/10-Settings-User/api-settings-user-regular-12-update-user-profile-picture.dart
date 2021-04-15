@@ -27,7 +27,7 @@ Future<bool> apiRegularUpdateUserProfilePicture({required dynamic image, require
       ),
     );
 
-    print('The status code of update picture is ${response.statusCode}');
+    print('The status code of regular update user profile picture is ${response.statusCode}');
 
     if(response.statusCode == 200){
       result = true;

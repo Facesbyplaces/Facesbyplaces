@@ -21,7 +21,7 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memori
     ),  
   );
 
-  print('The status code of show admin settings is ${response.statusCode}');
+  print('The status code of blm show admin settings is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

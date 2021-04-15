@@ -21,7 +21,7 @@ Future<bool> apiBLMUpdateSwitchStatusFriends({required int memorialId, required 
     ),  
   );
 
-  print('The status code of switch friends status is ${response.statusCode}');
+  print('The status code of blm update switch status friends is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

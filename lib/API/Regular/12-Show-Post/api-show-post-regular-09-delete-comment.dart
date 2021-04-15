@@ -4,9 +4,21 @@ import 'package:dio/dio.dart';
 Future<bool> apiRegularDeleteComment({required int commentId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
+  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
+  String? getAccessToken;
+  String? getUID;
+  String? getClient;
+
+  if(userSessionRegular == true){
+    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  }else if(userSessionBLM == true){
+    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  }
 
   Dio dioRequest = Dio();
 
@@ -20,7 +32,7 @@ Future<bool> apiRegularDeleteComment({required int commentId}) async{
     ),
   );
 
-  print('The page friends settings is ${response.statusCode}');
+  print('The status code of regular delete comment is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

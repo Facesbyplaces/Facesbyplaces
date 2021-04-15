@@ -49,6 +49,8 @@ Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) asyn
       ),  
     );
 
+    print('The status code of regular create post is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

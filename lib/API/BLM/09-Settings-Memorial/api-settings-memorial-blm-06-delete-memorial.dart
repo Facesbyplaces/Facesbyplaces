@@ -21,7 +21,7 @@ Future<bool> apiBLMDeleteMemorial({required int memorialId}) async{
     ),  
   );
 
-  print('The status code of delete memorial is ${response.statusCode}');
+  print('The status code of blm delete memorial is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

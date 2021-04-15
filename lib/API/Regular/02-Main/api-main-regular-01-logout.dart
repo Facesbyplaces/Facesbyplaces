@@ -50,13 +50,7 @@ Future<bool> apiRegularLogout() async{
     await googleSignIn.signOut();
 
     FacebookLogin fb = FacebookLogin();
-    bool isLoggedIn = await fb.isLoggedIn;
-
-    if(isLoggedIn == true){
-      print('Logged in');
-      await fb.logOut();
-    }
-    
+    await fb.logOut();    
 
     return true;
   }else{

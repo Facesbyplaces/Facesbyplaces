@@ -13,7 +13,7 @@ Future<bool> apiBLMSignInWithApple({required String userIdentification, required
     ),  
   );
 
-  print('The status code of login in with apple is ${response.statusCode}');
+  print('The status code of blm login with apple is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

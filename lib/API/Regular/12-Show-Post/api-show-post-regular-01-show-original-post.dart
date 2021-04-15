@@ -4,13 +4,23 @@ import 'package:dio/dio.dart';
 Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int postId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
+  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
+  String? getAccessToken;
+  String? getUID;
+  String? getClient;
+
+  if(userSessionRegular == true){
+    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  }else if(userSessionBLM == true){
+    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  }
 
   Dio dioRequest = Dio();
-
-  print('The post id is $postId');
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/$postId',
     options: Options(
@@ -22,18 +32,7 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
     ),
   );
 
-  print('The status code of original post is ${response.statusCode}');
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
-  // print('The access token is ${response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', '')}');
-  // print('The uid is ${response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', '')}');
-  // print('The client is ${response.headers['client'].toString().replaceAll(']', '').replaceAll('[', '')}');
-  // print('The status headers of original post is ${response.headers}');
-      // sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
-      // sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
-      // sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
+  print('The status code of regular show original post is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

@@ -113,27 +113,42 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     super.initState();
     isGuest();
     likesCount = numberOfLikes;
-    showOriginalPost = getOriginalPost(postId);
-    getProfilePicture();
-    getOriginalPostInformation();
-    onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-        if(itemRemaining != 0){
-          setState(() {
-            onLoading();
-          });
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more comments to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-          );
-        }
+  }
+
+  void isGuest() async{
+    final sharedPrefs = await SharedPreferences.getInstance();
+    bool regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
+    bool blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
+
+    setState(() {
+      if(regularSession == true || blmSession == true){
+        isGuestLoggedIn = false;
       }
     });
+
+    if(isGuestLoggedIn != true){
+      showOriginalPost = getOriginalPost(postId);
+      getProfilePicture();
+      getOriginalPostInformation();
+      onLoading();
+      scrollController.addListener(() {
+        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+          if(itemRemaining != 0){
+            setState(() {
+              onLoading();
+            });
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No more comments to show'),
+                duration: Duration(seconds: 1),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
+            );
+          }
+        }
+      });
+    }
   }
 
   Future<void> onRefresh() async{
@@ -236,13 +251,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       page1++;
       
     }
-  }
-
-  void isGuest() async{
-    final sharedPrefs = await SharedPreferences.getInstance();
-    setState(() {
-      isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? true;
-    });
   }
 
   Future<APIBLMShowOriginalPostMain> getOriginalPost(postId) async{

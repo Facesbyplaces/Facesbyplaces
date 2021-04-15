@@ -20,12 +20,10 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int me
     ),
   );
 
-  print('The page details is ${response.statusCode}');
+  print('The status code of regular show page details is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
-
-    print('The newdata of page details is $newData');
     return APIRegularShowPageDetailsMain.fromJson(newData);
   }else{
     throw Exception('Error occurred: ${response.statusMessage}');

@@ -20,7 +20,7 @@ Future<bool> apiRegularHideEmail({required bool hide}) async{
     ),  
   );
 
-  print('The status code of hide email is ${response.statusCode}');
+  print('The status code of regular hide email is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

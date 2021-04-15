@@ -21,7 +21,7 @@ Future<APIBLMShowOtherDetailsStatus> apiBLMShowOtherDetailsStatus({required int 
     ),  
   );
 
-  print('The status code of other details status is ${response.statusCode}');
+  print('The status code of blm show other details status is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

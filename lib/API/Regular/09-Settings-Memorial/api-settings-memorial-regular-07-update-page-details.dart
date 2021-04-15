@@ -33,6 +33,8 @@ Future<bool> apiRegularUpdatePageDetails({required String name, required String 
       ),
     );
 
+    print('The status code of regular update page details is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

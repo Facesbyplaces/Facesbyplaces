@@ -32,6 +32,8 @@ Future<bool> apiBLMAddFriends({required int memorialId, required int userId, req
       ),  
     );
 
+    print('The status code of blm add friends is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

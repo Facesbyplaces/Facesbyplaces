@@ -31,6 +31,8 @@ Future<bool> apiRegularAddFamily({required int memorialId, required int userId, 
       ),  
     );
 
+    print('The status code of regular add family is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

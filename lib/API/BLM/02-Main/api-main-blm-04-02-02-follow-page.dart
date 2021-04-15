@@ -41,7 +41,7 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
       }
     );
 
-    print('The status code of follow page is ${response.statusCode}');
+    print('The status code of blm follow page is ${response.statusCode}');
 
     if(response.statusCode == 200){
       result = true;

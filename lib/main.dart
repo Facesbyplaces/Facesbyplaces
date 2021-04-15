@@ -43,6 +43,8 @@ void main() async{
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
 
+  
+
   runApp(
     GlobalLoaderOverlay(
       useDefaultLoading: false,

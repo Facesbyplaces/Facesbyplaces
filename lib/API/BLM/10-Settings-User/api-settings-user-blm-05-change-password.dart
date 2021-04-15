@@ -29,7 +29,7 @@ Future<bool> apiBLMChangePassword({required String currentPassword, required Str
       ),  
     );
 
-    print('The status of change password is ${response.statusCode}');
+    print('The status code of blm change password is ${response.statusCode}');
 
     if(response.statusCode == 200){
       result = true;

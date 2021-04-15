@@ -21,7 +21,7 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({requi
     ),  
   );
 
-  print('The status code of feed is ${response.statusCode}');
+  print('The status code of regular connection list family is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -29,23 +29,6 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({requi
   }else{
     throw Exception('Failed to show the connection list family.');
   }
-
-  // final http.Response response = await http.get(
-  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page', ''),
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-  
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIRegularConnectionListFamilyMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the lists.');
-  // }
 }
 
 class APIRegularConnectionListFamilyMain{

@@ -20,7 +20,7 @@ Future<bool> apiRegularAddFriends({required int memorialId, required int userId,
     ),
   );
 
-  print('The page friends settings is ${response.statusCode}');
+  print('The status code of regular add friends is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

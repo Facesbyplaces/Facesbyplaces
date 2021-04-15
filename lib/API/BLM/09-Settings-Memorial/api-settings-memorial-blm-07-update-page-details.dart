@@ -36,6 +36,8 @@ Future<bool> apiBLMUpdatePageDetails({required int memorialId, required String n
       ),  
     );
 
+    print('The status code of blm update page details is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

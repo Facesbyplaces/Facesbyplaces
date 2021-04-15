@@ -21,7 +21,7 @@ Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, requi
     ),  
   );
 
-  print('The status code of users posts is ${response.statusCode}');
+  print('The status code of blm show user posts is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

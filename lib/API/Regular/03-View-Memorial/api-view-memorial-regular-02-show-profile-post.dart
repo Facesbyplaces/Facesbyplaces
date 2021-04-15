@@ -21,7 +21,7 @@ Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({required int memori
     ),  
   );
 
-  print('The status code of feed is ${response.statusCode}');
+  print('The status code of regular show profile post is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

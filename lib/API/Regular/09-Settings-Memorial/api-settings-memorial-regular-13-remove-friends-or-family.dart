@@ -20,7 +20,7 @@ Future<bool> apiRegularDeleteMemorialFriendsOrFamily({required int memorialId, r
     ),
   );
 
-  print('The page friends settings is ${response.statusCode}');
+  print('The status code of regular remove friends or family is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

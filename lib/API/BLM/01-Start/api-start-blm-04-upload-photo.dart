@@ -30,6 +30,8 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
       ),
     );
 
+    print('The status code of blm upload photo is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

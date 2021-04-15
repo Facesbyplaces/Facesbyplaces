@@ -15,7 +15,7 @@ Future<bool> apiRegularPasswordReset({required String email, required String red
       ),  
     );
 
-    print('The status code of password reset is ${response.statusCode}');
+    print('The status code of regular password reset is ${response.statusCode}');
 
     if(response.statusCode == 200){
       result = true;

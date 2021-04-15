@@ -48,6 +48,8 @@ Future<bool> apiBLMHomeCreatePost({required APIBLMCreatePost post}) async{
       ),  
     );
 
+    print('The status code of blm create post is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

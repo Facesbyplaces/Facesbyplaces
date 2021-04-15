@@ -20,9 +20,10 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails({required int 
     ),
   );
 
+  print('The status code of regular show account details is ${response.statusCode}');
+
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
-    print('The first name is ${response.data}');
     return APIRegularShowAccountDetails.fromJson(newData);
   }else{
     throw Exception('Error occurred: ${response.statusMessage}');

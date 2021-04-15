@@ -20,9 +20,10 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({required int memo
     ),
   );
 
+  print('The status code of regular show switch status is ${response.statusCode}');
+
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
-    print('The first name is ${response.data}');
     return APIRegularShowSwitchStatus.fromJson(newData);
   }else{
     throw Exception('Error occurred: ${response.statusMessage}');

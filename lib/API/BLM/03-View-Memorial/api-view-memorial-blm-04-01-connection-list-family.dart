@@ -21,7 +21,7 @@ Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({required int 
     ),  
   );
 
-  print('The status code of connection list family is ${response.statusCode}');
+  print('The status code of blm connection list family is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

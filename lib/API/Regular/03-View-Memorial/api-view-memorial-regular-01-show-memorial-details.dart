@@ -22,7 +22,7 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
     ),  
   );
 
-  print('The status code of feed is ${response.statusCode}');
+  print('The status code of regular show memorial details is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

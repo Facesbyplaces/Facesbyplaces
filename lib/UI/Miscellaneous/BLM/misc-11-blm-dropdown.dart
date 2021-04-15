@@ -2,7 +2,6 @@ import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc-blm-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:images_picker/images_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -204,7 +203,23 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                 );
 
                 if (response.success) {
-                  print('Link generated: ${response.result}');
+                  await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully shared the link.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
+                  );
                 } else {
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -286,7 +301,23 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
 
                 BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
                 if (response.success) {
-                  print('Link generated: ${response.result}');
+                  await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully copied the link.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
+                  );
                 } else {
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -488,7 +519,23 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
                 );
                 if (response.success) {
-                  print('Link generated: ${response.result}');
+                  await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully shared the link.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
+                  );
                 } else {
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -570,7 +617,23 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
 
                 BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
                 if (response.success) {
-                  print('Link generated: ${response.result}');
+                  await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully copied the link.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
+                  );
                 } else {
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');

@@ -29,6 +29,8 @@ Future<bool> apiRegularAddMemorialAdmin({required String pageType, required int 
       ),  
     );
 
+    print('The status code of regular add admin is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

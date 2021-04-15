@@ -21,7 +21,7 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int pa
     ),  
   );
 
-  print('The status code of search suggested is ${response.statusCode}');
+  print('The status code of regular search suggested is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

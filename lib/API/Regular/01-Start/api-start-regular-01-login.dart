@@ -13,15 +13,10 @@ Future<bool> apiRegularLogin({required String email, required String password, r
         headers: <String, dynamic>{
           'Content-Type': 'application/json',
         }
-      ),  
+      ),
     );
 
-    print('The status code of login is ${response.statusCode}');
-
-    print('The headers is ${response.headers['access-token']}');
-    print('The uid is ${response.headers['uid']}');
-    print('The client is ${response.headers['client']}');
-    
+    print('The status code of regular login is ${response.statusCode}');
 
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);
@@ -30,10 +25,6 @@ Future<bool> apiRegularLogin({required String email, required String password, r
       int userId = user['id'];
 
       final sharedPrefs = await SharedPreferences.getInstance();
-
-      print('The new headers is ${response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', '')}');
-      print('The new uid is ${response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', '')}');
-      print('The new client is ${response.headers['client'].toString().replaceAll(']', '').replaceAll('[', '')}');
 
       sharedPrefs.setInt('regular-user-id', userId);
       sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));

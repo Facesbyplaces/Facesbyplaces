@@ -33,6 +33,8 @@ Future<bool> apiBLMUpdatePageImages({required int memorialId, required dynamic b
       ),
     );
 
+    print('The status code of blm update page image is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }
