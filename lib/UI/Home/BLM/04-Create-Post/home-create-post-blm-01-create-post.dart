@@ -407,10 +407,64 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               mainAxisSpacing: 4,
                               children: List.generate(slideImages.length, (index){
                                 return GestureDetector(
-                                  onTap: (){
+                                  onDoubleTap: (){
                                     setState(() {
                                       removeAttachment = index;
                                     });
+                                  },
+                                  onTap: (){
+                                    showGeneralDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      barrierLabel: 'Dialog',
+                                      transitionDuration: Duration(milliseconds: 0),
+                                      pageBuilder: (_, __, ___) {
+                                        return Scaffold(
+                                          backgroundColor: Colors.black12.withOpacity(0.7),
+                                          body: SizedBox.expand(
+                                            child: SafeArea(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.centerRight,
+                                                    padding: EdgeInsets.only(right: 20.0),
+                                                    child: GestureDetector(
+                                                      onTap: (){
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: CircleAvatar(
+                                                        radius: 20,
+                                                        backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                        child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                      ),
+                                                    ),
+                                                  ),
+
+                                                  SizedBox(height: 20,),
+
+                                                  Expanded(
+                                                    child: ((){
+                                                      if(lookupMimeType(slideImages[index].path)?.contains('video') == true){
+                                                        return BetterPlayer.file('${slideImages[index].path}',
+                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                            autoDispose: false,
+                                                            aspectRatio: 1,
+                                                          ),
+                                                        );
+                                                      }else{
+                                                        return Image.asset(slideImages[index].path, fit: BoxFit.cover, scale: 1.0,);
+                                                      }
+                                                    }()),
+                                                  ),
+
+                                                  SizedBox(height: 80,),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
                                   },
                                   child: lookupMimeType(slideImages[index].path)?.contains('video') == true
                                   ? Stack(

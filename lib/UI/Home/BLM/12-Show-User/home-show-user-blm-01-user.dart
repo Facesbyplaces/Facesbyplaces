@@ -3,6 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-custom-drawings.d
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:we_slide/we_slide.dart';
 import 'package:flutter/rendering.dart';
@@ -134,21 +135,70 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                       children: [
                         CustomPaint(size: Size.infinite, painter: MiscBLMCurvePainter(),),
 
-                        Container(
-                          padding: EdgeInsets.only(bottom: 20.0),
-                          alignment: Alignment.bottomCenter,
-                          child: profile.data!.showUserInformationImage != '' 
-                          ? CircleAvatar(
-                            radius: 100, 
-                            backgroundColor: Color(0xff888888), 
-                            backgroundImage: NetworkImage(profile.data!.showUserInformationImage),
-                          )
-                          : CircleAvatar(
-                            radius: 100, 
-                            backgroundColor: Color(0xff888888), 
-                            backgroundImage: AssetImage('assets/icons/app-icon.png'),
-                          ),
+                        GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                          onTap: (){
+                            showGeneralDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierLabel: 'Dialog',
+                              transitionDuration: Duration(milliseconds: 0),
+                              pageBuilder: (_, __, ___) {
+                                return Scaffold(
+                                  backgroundColor: Colors.black12.withOpacity(0.7),
+                                  body: SizedBox.expand(
+                                    child: SafeArea(
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.centerRight,
+                                            padding: EdgeInsets.only(right: 20.0),
+                                            child: GestureDetector(
+                                              onTap: (){
+                                                Navigator.pop(context);
+                                              },
+                                              child: CircleAvatar(
+                                                radius: 20,
+                                                backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                              ),
+                                            ),
+                                          ),
 
+                                          SizedBox(height: 20,),
+
+                                          Expanded(
+                                            child: CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: profile.data!.showUserInformationImage,
+                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            )
+                                          ),
+
+                                          SizedBox(height: 80,),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(bottom: 20.0),
+                            alignment: Alignment.bottomCenter,
+                            child: profile.data!.showUserInformationImage != '' 
+                            ? CircleAvatar(
+                              radius: 100, 
+                              backgroundColor: Color(0xff888888), 
+                              backgroundImage: NetworkImage(profile.data!.showUserInformationImage),
+                            )
+                            : CircleAvatar(
+                              radius: 100, 
+                              backgroundColor: Color(0xff888888), 
+                              backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -190,7 +240,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                             ),
                           ),
 
-                          SizedBox(height: 40,),
+                          SizedBox(height: 20,),
 
                           Text('About',
                             style: TextStyle(

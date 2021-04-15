@@ -359,6 +359,49 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                           slideImages.removeAt(index);
                         });
                       },
+                      onTap: (){
+                        showGeneralDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          barrierLabel: 'Dialog',
+                          transitionDuration: Duration(milliseconds: 0),
+                          pageBuilder: (_, __, ___) {
+                            return Scaffold(
+                              backgroundColor: Colors.black12.withOpacity(0.7),
+                              body: SizedBox.expand(
+                                child: SafeArea(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.centerRight,
+                                        padding: EdgeInsets.only(right: 20.0),
+                                        child: GestureDetector(
+                                          onTap: (){
+                                            Navigator.pop(context);
+                                          },
+                                          child: CircleAvatar(
+                                            radius: 20,
+                                            backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                            child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                          ),
+                                        ),
+                                      ),
+
+                                      SizedBox(height: 20,),
+
+                                      Expanded(
+                                        child: Image.asset(slideImages[index].path, fit: BoxFit.cover, scale: 1.0,),
+                                      ),
+
+                                      SizedBox(height: 80,),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
                       child: Container(
                         width: 80,
                         decoration: BoxDecoration(
@@ -377,8 +420,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                 radius: 25,
                                 backgroundColor: Color(0xffffffff).withOpacity(.5),
                                 child: Text(
-                                  // index.toString(),
-                                  '$index',
+                                  '${index + 1}',
                                   style: TextStyle(
                                     fontSize: 40,
                                     fontWeight: FontWeight.bold,

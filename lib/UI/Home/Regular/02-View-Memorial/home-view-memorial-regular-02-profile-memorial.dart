@@ -203,6 +203,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             children: [
                               Stack(
                                 children: [
+
                                   Container(
                                     height: SizeConfig.screenHeight! / 3,
                                     width: SizeConfig.screenWidth,
@@ -222,8 +223,57 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                   Column(
                                     children: [
+                                      GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                                        onTap: (){
+                                          showGeneralDialog(
+                                            context: context,
+                                            barrierDismissible: true,
+                                            barrierLabel: 'Dialog',
+                                            transitionDuration: Duration(milliseconds: 0),
+                                            pageBuilder: (_, __, ___) {
+                                              return Scaffold(
+                                                backgroundColor: Colors.black12.withOpacity(0.7),
+                                                body: SizedBox.expand(
+                                                  child: SafeArea(
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          alignment: Alignment.centerRight,
+                                                          padding: EdgeInsets.only(right: 20.0),
+                                                          child: GestureDetector(
+                                                            onTap: (){
+                                                              Navigator.pop(context);
+                                                            },
+                                                            child: CircleAvatar(
+                                                              radius: 20,
+                                                              backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                              child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                            ),
+                                                          ),
+                                                        ),
 
-                                      Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
+                                                        SizedBox(height: 20,),
+
+                                                        Expanded(
+                                                          child: CachedNetworkImage(
+                                                            fit: BoxFit.cover,
+                                                            imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
+                                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                          )
+                                                        ),
+
+                                                        SizedBox(height: 80,),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
+                                      ),
 
                                       Container(
                                         width: SizeConfig.screenWidth,
