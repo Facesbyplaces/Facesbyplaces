@@ -1,8 +1,7 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-// import 'package:country_picker/country_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
@@ -14,6 +13,7 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
   final bool readOnly;
   final bool includeSuffixIcon;
   final String displayText;
+  final bool edited;
 
   MiscRegularInputFieldTemplate({
     required Key key,
@@ -25,9 +25,10 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
     this.readOnly = false,
     this.includeSuffixIcon = false,
     this.displayText = '',
+    this.edited = false,
   }) : super(key: key);
   
-  MiscRegularInputFieldTemplateState createState() => MiscRegularInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
+  MiscRegularInputFieldTemplateState createState() => MiscRegularInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText, edited: edited);
 }
 
 class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemplate>{
@@ -39,8 +40,9 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   final bool readOnly;
   final bool includeSuffixIcon;
   final String displayText;
+  final bool edited;
 
-  MiscRegularInputFieldTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
+  MiscRegularInputFieldTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText, required this.edited});
 
   TextEditingController controller = TextEditingController(text: '');
 

@@ -1,6 +1,9 @@
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-03-show-admin-settings.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-09-add-admin.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-10-remove-admin.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RegularShowAdminSettings{
@@ -60,13 +63,13 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     if(flag1 == false){
       onLoading1();
     }else{
+      print('onLoading2');
       onLoading2();
     }
   }
 
   Future<void> onRefresh() async{
     if(adminItemsRemaining == 0 && flag1 == false){
-      addManagers2();
       setState(() {
         flag1 = true;
       });
@@ -102,13 +105,66 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
             title: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
             subtitle: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
+            trailing: MaterialButton(
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              padding: EdgeInsets.zero,
+              textColor: Color(0xffffffff),
+              splashColor: Color(0xff04ECFF),
+              onPressed: () async{
+                context.showLoaderOverlay();
+                await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId).onError((error, stackTrace) async{
+                  context.hideLoaderOverlay();
+                  await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Something went wrong. Please try again.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      buttonOkColor: Colors.red,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
+                  );
+                  return Future.error('Error occurred: $error');
+                });
+                context.hideLoaderOverlay();
+                
+                managers = [];
+                adminItemsRemaining = 1;
+                familyItemsRemaining = 1;
+                page1 = 1;
+                page2 = 1;
+                flag1 = false;
+                addManagers1();
+                onLoading();
+              },
+              child: Text('Remove', style: TextStyle(fontSize: 14,),),
+              height: 40,
+              shape: StadiumBorder(
+                side: BorderSide(color: Color(0xffE74C3C)),
+              ),
+              color: Color(0xffE74C3C),
+            ),
           ),
         );
       }
+    }
 
-      if(mounted)
-      setState(() {});
-      page1++;
+    if(mounted)
+    setState(() {});
+    page1++;
+
+    if(adminItemsRemaining == 0){
+      addManagers2();
+      flag1 = true;
+      onLoading();
     }
   }
 
@@ -124,9 +180,56 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       for(int i = 0; i < newValue.almFamilyList.length; i++){
         managers.add(
           ListTile(
-            leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
-            title: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
-            subtitle: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
+            leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
+            title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
+            subtitle: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
+            trailing: MaterialButton(
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              padding: EdgeInsets.zero,
+              textColor: Color(0xffffffff),
+              splashColor: Color(0xff04ECFF),
+              onPressed: () async{
+                context.showLoaderOverlay();
+                await apiRegularAddMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId).onError((error, stackTrace) async{
+                  context.hideLoaderOverlay();
+                  await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Something went wrong. Please try again.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      buttonOkColor: Colors.red,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
+                  );
+                  return Future.error('Error occurred: $error');
+                });
+                context.hideLoaderOverlay();
+
+                managers = [];
+                adminItemsRemaining = 1;
+                familyItemsRemaining = 1;
+                page1 = 1;
+                page2 = 1;
+                flag1 = false;
+                addManagers1();
+                onLoading();
+              },
+              child: Text('Make Manager', style: TextStyle(fontSize: 14,),),
+              height: 40,
+              shape: StadiumBorder(
+                side: BorderSide(color: Color(0xff04ECFF)),
+              ),
+              color: Color(0xff04ECFF),
+            ),
           ),
         );
       }

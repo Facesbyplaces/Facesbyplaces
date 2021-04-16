@@ -82,28 +82,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
               splashColor: Color(0xff04ECFF),
               onPressed: () async{
                 context.showLoaderOverlay();
-                bool result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType);
-                context.hideLoaderOverlay();
-
-                if(result == true){
-                  await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Successfully removed a user from Family list.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
-                  );
-                }else{
+                await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType).onError((error, stackTrace) async{
+                  context.hideLoaderOverlay();
                   await showDialog(
                     context: context,
                     builder: (_) => 
@@ -122,8 +102,11 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                       },
                     )
                   );
-                }
+                  return Future.error('Error occurred: $error');
+                });
+                context.hideLoaderOverlay();
 
+                family = [];
                 familyItemsRemaining = 1;
                 page = 1;
                 onLoading();

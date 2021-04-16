@@ -179,6 +179,9 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                               fontWeight: FontWeight.bold, 
                               color: Color(0xffffffff),
                             ),
+                            width: 150,
+                            height: 45,
+                            buttonColor: Color(0xff04ECFF),
                             onPressed: () async{
 
                               if(
@@ -246,11 +249,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                   }
                                 }
                               }
-
-                            }, 
-                            width: 150,
-                            height: 45,
-                            buttonColor: Color(0xff04ECFF),
+                            },
                           ),
 
                         ],
@@ -270,4 +269,3 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
     );
   }
 }
-

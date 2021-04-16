@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-02-show-page-images.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-08-update-page-image.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -31,8 +32,10 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
   List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
   int backgroundImageToggle = 0;
   final picker = ImagePicker();
-  File? backgroundImage;
-  File? profileImage;
+  // File? backgroundImage;
+  // File? profileImage;
+  File backgroundImage = File('');
+  File profileImage = File('');
   Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
 
   Future getProfileImage() async{
@@ -72,8 +75,15 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-          onPressed: (){
-            Navigator.pop(context);
+          onPressed: () async{
+            if(profileImage.path != '' || (backgroundImage.path != '' && backgroundImageToggle != 0)){
+              bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+              if(confirmResult){
+                Navigator.pop(context);
+              }
+            }else{
+              Navigator.pop(context);
+            }
           },
         ),
       ),
@@ -102,10 +112,10 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                         height: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: backgroundImage != null
+                          image: backgroundImage.path != ''
                           ? DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('${backgroundImage!.path}'),
+                            image: AssetImage('${backgroundImage.path}'),
                           )
                           : DecorationImage(
                             fit: BoxFit.cover,
@@ -119,16 +129,22 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               onTap: () async{
                                 await getProfileImage();
                               },
-                              child: Center(                                  
+                              child: Center(
                                 child: CircleAvatar(
                                   radius: 50,
                                   backgroundColor: Color(0xffffffff),
                                   child: Padding(
                                     padding: EdgeInsets.all(5),
-                                    child: CircleAvatar(
-                                      radius: 50,
+                                    child: profileImage.path != ''
+                                    ? CircleAvatar(
+                                      radius: 120,
                                       backgroundColor: Color(0xff888888),
-                                      backgroundImage: CachedNetworkImageProvider('${memorialImageSettings.data!.almMemorial.showPageImagesProfileImage}'),
+                                      backgroundImage: AssetImage(profileImage.path),
+                                    )
+                                    : CircleAvatar(
+                                      radius: 120,
+                                      backgroundColor: Color(0xff888888),
+                                      backgroundImage: NetworkImage(memorialImageSettings.data!.almMemorial.showPageImagesProfileImage),
                                     ),
                                   ),
                                 ),
@@ -283,7 +299,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                         ),
                         onPressed: () async{
 
-                          if(profileImage != File('') || backgroundImage != File('')){
+                          if(profileImage.path != '' || backgroundImage.path != ''){
                             context.showLoaderOverlay();
                             bool result = await apiRegularUpdatePageImages(memorialId: memorialId, backgroundImage: backgroundImage, profileImage: profileImage);
                             context.hideLoaderOverlay();

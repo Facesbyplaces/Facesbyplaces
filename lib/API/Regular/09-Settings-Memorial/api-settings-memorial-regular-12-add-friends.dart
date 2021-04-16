@@ -9,14 +9,23 @@ Future<bool> apiRegularAddFriends({required int memorialId, required int userId,
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   Dio dioRequest = Dio();
+  FormData formData = FormData();
 
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFriend',
+  formData = FormData.fromMap({
+    'page_type': 'Memorial',
+    'page_id': '$memorialId',
+    'user_id': '$userId',
+    'relationship': 'Friend',
+     'account_type': '$accountType',
+  });
+  
+  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFriend', data: formData,
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      }
+      },
     ),
   );
 

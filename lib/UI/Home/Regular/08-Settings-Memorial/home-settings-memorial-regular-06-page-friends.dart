@@ -82,28 +82,8 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
               splashColor: Color(0xff04ECFF),
               onPressed: () async{
                 context.showLoaderOverlay();
-                bool result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId, accountType: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType);
-                context.hideLoaderOverlay();
-
-                if(result == true){
-                  await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Successfully removed a user from Friends list.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
-                  );
-                }else{
+                await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId, accountType: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType).onError((error, stackTrace) async{
+                  context.hideLoaderOverlay();
                   await showDialog(
                     context: context,
                     builder: (_) => 
@@ -122,8 +102,11 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                       },
                     )
                   );
-                }
+                  return Future.error('Error occurred: $error');
+                });
+                context.hideLoaderOverlay();
 
+                friends = [];
                 friendsItemsRemaining = 1;
                 page = 1; 
                 onLoading();

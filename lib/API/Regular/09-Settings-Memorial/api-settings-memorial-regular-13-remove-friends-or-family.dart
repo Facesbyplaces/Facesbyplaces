@@ -9,8 +9,18 @@ Future<bool> apiRegularDeleteMemorialFriendsOrFamily({required int memorialId, r
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   Dio dioRequest = Dio();
+  String pageType = 'Memorial';
 
-  var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pageadmin/removeFamilyorFriend?page_type=Memorial&page_id=$memorialId&user_id=$userId&account_type=$accountType',
+  if(accountType == 1){
+    pageType = 'Blm';
+  }
+
+  print('The memorialId is $memorialId');
+  print('The userId is $userId');
+  print('The pageType is $pageType');
+  print('The accountType is $accountType');
+
+  var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pageadmin/removeFamilyorFriend?page_type=$pageType&page_id=$memorialId&user_id=$userId&account_type=$accountType',
     options: Options(
       headers: <String, dynamic>{
         'access-token': getAccessToken,

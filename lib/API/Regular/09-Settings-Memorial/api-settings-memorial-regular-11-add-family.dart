@@ -15,10 +15,10 @@ Future<bool> apiRegularAddFamily({required int memorialId, required int userId, 
 
     formData.files.addAll([
       MapEntry('page_type', MultipartFile.fromString('Memorial'),),
-      MapEntry('page_id', MultipartFile.fromString(memorialId.toString())),
-      MapEntry('user_id', MultipartFile.fromString(userId.toString()),),
-      MapEntry('relationship', MultipartFile.fromString(relationship),),
-      MapEntry('account_type', MultipartFile.fromString(accountType.toString()),),
+      MapEntry('page_id', MultipartFile.fromString('$memorialId')),
+      MapEntry('user_id', MultipartFile.fromString('$userId'),),
+      MapEntry('relationship', MultipartFile.fromString('$relationship'),),
+      MapEntry('account_type', MultipartFile.fromString('$accountType'),),
     ]);
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFamily', data: formData,

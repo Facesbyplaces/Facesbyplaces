@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-08-update-page-image.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-02-show-page-images.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -72,8 +73,15 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-          onPressed: (){
-            Navigator.pop(context);
+          onPressed: () async{
+            if(profileImage.path != '' || (backgroundImage.path != '' && backgroundImageToggle != 0)){
+              bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+              if(confirmResult){
+                Navigator.pop(context);
+              }
+            }else{
+              Navigator.pop(context);
+            }
           },
         ),
       ),
@@ -120,17 +128,17 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                   backgroundColor: Color(0xffffffff),
                                   child: Padding(
                                     padding: EdgeInsets.all(5),
-                                    child: profileImage.path != ''
+                                   child: profileImage.path != ''
                                     ? CircleAvatar(
-                                      radius: 50,
+                                      radius: 120,
                                       backgroundColor: Color(0xff888888),
-                                      backgroundImage: CachedNetworkImageProvider('${memorialImageSettings.data!.blmMemorial.showPageImagesProfileImage}'),
+                                      backgroundImage: AssetImage(profileImage.path),
                                     )
                                     : CircleAvatar(
-                                      radius: 50,
+                                      radius: 120,
                                       backgroundColor: Color(0xff888888),
-                                      backgroundImage: AssetImage('assets/icons/cover-icon.png'),
-                                    )
+                                      backgroundImage: NetworkImage(memorialImageSettings.data!.blmMemorial.showPageImagesProfileImage),
+                                    ),
                                   ),
                                 ),
                               ),
