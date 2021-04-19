@@ -8,14 +8,22 @@ import 'package:flutter/material.dart';
 
 class HomeBLMPageFamily extends StatefulWidget{
   final int memorialId;
-  HomeBLMPageFamily({required this.memorialId});
+  final String memorialName;
+  final bool switchFamily;
+  final bool switchFriends;
+  final bool switchFollowers;
+  HomeBLMPageFamily({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers,});
 
-  HomeBLMPageFamilyState createState() => HomeBLMPageFamilyState(memorialId: memorialId);
+  HomeBLMPageFamilyState createState() => HomeBLMPageFamilyState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
 
 class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   final int memorialId;
-  HomeBLMPageFamilyState({required this.memorialId});
+  final String memorialName;
+  final bool switchFamily;
+  final bool switchFriends;
+  final bool switchFollowers;
+  HomeBLMPageFamilyState({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers,});
 
   ScrollController scrollController = ScrollController();
   int familyItemsRemaining = 1;
@@ -24,12 +32,12 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
 
   void initState(){
     super.initState();
-    onLoading1();
+    onLoading();
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(familyItemsRemaining != 0){
           setState(() {
-            onLoading1();
+            onLoading();
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
@@ -46,11 +54,11 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
 
   Future<void> onRefresh() async{
     setState(() {
-      onLoading1();
+      onLoading();
     });
   }
 
-  void onLoading1() async{
+  void onLoading() async{
     if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiBLMShowFamilySettings(memorialId: memorialId, page: page);
@@ -70,52 +78,124 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
               textColor: Color(0xffffffff),
               splashColor: Color(0xff04ECFF),
               onPressed: () async{
-                context.showLoaderOverlay();
-                bool result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType);
-                context.hideLoaderOverlay();
 
-                if(result == true){
-                  await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Successfully removed a user from Family list.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
-                  );
-                }else{
-                  await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Something went wrong. Please try again.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      buttonOkColor: Colors.red,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
-                  );
+                bool confirmation = await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Are you sure you want to remove this user?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: false,
+                    onOkButtonPressed: () async{
+                      Navigator.pop(context, true);
+                    },
+                    onCancelButtonPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                  )
+                );
+
+                if(confirmation){
+                  context.showLoaderOverlay();
+                  String result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType);
+                  context.hideLoaderOverlay();
+
+                  if(result != 'Success'){
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Error: $result.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }else{
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        onOkButtonPressed: () {
+                          family = [];
+                          familyItemsRemaining = 1;
+                          page = 1;
+                          onLoading();
+
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }
                 }
 
-                familyItemsRemaining = 1;
-                page = 1;
-                onLoading1();
+                // context.showLoaderOverlay();
+                // bool result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType);
+                // context.hideLoaderOverlay();
+
+                // if(result == true){
+                //   await showDialog(
+                //     context: context,
+                //     builder: (_) => 
+                //       AssetGiffyDialog(
+                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                //       title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                //       entryAnimation: EntryAnimation.DEFAULT,
+                //       description: Text('Successfully removed a user from Family list.',
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(),
+                //       ),
+                //       onlyOkButton: true,
+                //       onOkButtonPressed: () {
+                //         Navigator.pop(context, true);
+                //       },
+                //     )
+                //   );
+                // }else{
+                //   await showDialog(
+                //     context: context,
+                //     builder: (_) => 
+                //       AssetGiffyDialog(
+                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                //       entryAnimation: EntryAnimation.DEFAULT,
+                //       description: Text('Something went wrong. Please try again.',
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(),
+                //       ),
+                //       onlyOkButton: true,
+                //       buttonOkColor: Colors.red,
+                //       onOkButtonPressed: () {
+                //         Navigator.pop(context, true);
+                //       },
+                //     )
+                //   );
+                // }
+
+                // familyItemsRemaining = 1;
+                // page = 1;
+                // onLoading1();
               },
               child: Text('Remove', style: TextStyle(fontSize: 14,),),
               height: 40,
@@ -146,7 +226,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: memorialId,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
             },
             child: Center(child: Text('Add Family', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),),
           ),

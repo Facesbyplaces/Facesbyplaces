@@ -63,7 +63,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     if(flag1 == false){
       onLoading1();
     }else{
-      print('onLoading2');
       onLoading2();
     }
   }
@@ -111,39 +110,81 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               textColor: Color(0xffffffff),
               splashColor: Color(0xff04ECFF),
               onPressed: () async{
-                context.showLoaderOverlay();
-                await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId).onError((error, stackTrace) async{
+
+                bool confirmation = await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Are you sure you want to remove this user?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: false,
+                    onOkButtonPressed: () async{
+                      Navigator.pop(context, true);                  
+                    },
+                    onCancelButtonPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                  )
+                );
+
+                if(confirmation){
+                  context.showLoaderOverlay();
+                  String result = await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.hideLoaderOverlay();
-                  await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Something went wrong. Please try again.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      buttonOkColor: Colors.red,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
-                  );
-                  return Future.error('Error occurred: $error');
-                });
-                context.hideLoaderOverlay();
-                
-                managers = [];
-                adminItemsRemaining = 1;
-                familyItemsRemaining = 1;
-                page1 = 1;
-                page2 = 1;
-                flag1 = false;
-                addManagers1();
-                onLoading();
+
+                  if(result != 'Success'){
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Error: $result.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }else{
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        onOkButtonPressed: () {
+                          managers = [];
+                          adminItemsRemaining = 1;
+                          familyItemsRemaining = 1;
+                          page1 = 1;
+                          page2 = 1;
+                          flag1 = false;
+                          addManagers1();
+                          onLoading();
+
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }
+                }
               },
               child: Text('Remove', style: TextStyle(fontSize: 14,),),
               height: 40,
@@ -189,39 +230,81 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               textColor: Color(0xffffffff),
               splashColor: Color(0xff04ECFF),
               onPressed: () async{
-                context.showLoaderOverlay();
-                await apiRegularAddMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId).onError((error, stackTrace) async{
-                  context.hideLoaderOverlay();
-                  await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Something went wrong. Please try again.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      buttonOkColor: Colors.red,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
-                  );
-                  return Future.error('Error occurred: $error');
-                });
-                context.hideLoaderOverlay();
 
-                managers = [];
-                adminItemsRemaining = 1;
-                familyItemsRemaining = 1;
-                page1 = 1;
-                page2 = 1;
-                flag1 = false;
-                addManagers1();
-                onLoading();
+                bool confirmation = await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Are you sure you want to make this user a manager?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: false,
+                    onOkButtonPressed: () async{
+                      Navigator.pop(context, true);                  
+                    },
+                    onCancelButtonPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                  )
+                );
+
+                if(confirmation){
+                  context.showLoaderOverlay();
+                  String result = await apiRegularAddMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
+                  context.hideLoaderOverlay();
+
+                  if(result != 'Success'){
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Error: $result.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }else{
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        onOkButtonPressed: () {
+                          managers = [];
+                          adminItemsRemaining = 1;
+                          familyItemsRemaining = 1;
+                          page1 = 1;
+                          page2 = 1;
+                          flag1 = false;
+                          addManagers1();
+                          onLoading();
+
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }
+                }
               },
               child: Text('Make Manager', style: TextStyle(fontSize: 14,),),
               height: 40,

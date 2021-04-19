@@ -10,10 +10,11 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memori
 
   Dio dioRequest = Dio();
 
+  print('The memorial id is $memorialId');
+
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/adminIndex/index?page=$page&page_id=$memorialId',
     options: Options(
       headers: <String, dynamic>{
-        'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
@@ -72,15 +73,17 @@ class APIBLMShowAdminsSettingExtended{
 }
 
 class APIBLMShowAdminsSettingExtendedUser{
+  int showAdminsSettingsUserId;
   String showAdminsSettingsUserFirstName;
   String showAdminsSettingsUserLastName;
   String showAdminsSettingsUserImage;
   String showAdminsSettingsUserEmail;
 
-  APIBLMShowAdminsSettingExtendedUser({required this.showAdminsSettingsUserFirstName, required this.showAdminsSettingsUserLastName, required this.showAdminsSettingsUserImage, required this.showAdminsSettingsUserEmail});
+  APIBLMShowAdminsSettingExtendedUser({required this.showAdminsSettingsUserId, required this.showAdminsSettingsUserFirstName, required this.showAdminsSettingsUserLastName, required this.showAdminsSettingsUserImage, required this.showAdminsSettingsUserEmail});
 
   factory APIBLMShowAdminsSettingExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAdminsSettingExtendedUser(
+      showAdminsSettingsUserId: parsedJson['id'],
       showAdminsSettingsUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
       showAdminsSettingsUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
       showAdminsSettingsUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',

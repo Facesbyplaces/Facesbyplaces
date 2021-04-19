@@ -1,7 +1,9 @@
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-03-show-admin-settings.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-09-add-admin.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-10-remove-admin.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class BLMShowAdminSettings{
@@ -28,8 +30,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
   ScrollController scrollController = ScrollController();
   List<Widget> managers = [];
-  List<BLMShowAdminSettings> adminList = [];
-  List<BLMShowAdminSettings> familyList = [];
   int adminItemsRemaining = 1;
   int familyItemsRemaining = 1;
   int page1 = 1;
@@ -67,10 +67,8 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     }
   }
 
-
   Future<void> onRefresh() async{
     if(adminItemsRemaining == 0 && flag1 == false){
-      addManagers2();
       setState(() {
         flag1 = true;
       });
@@ -112,33 +110,102 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
               textColor: Color(0xffffffff),
               splashColor: Color(0xff04ECFF),
               onPressed: () async{
-                context.showLoaderOverlay();
-                await apiBLMAddMemorialAdmin(pageType: 'Blm', pageId: memorialId, userId: familyList[i].userId);
-                context.hideLoaderOverlay();
 
-                adminList = [];
-                familyList = [];
-                adminItemsRemaining = 1;
-                familyItemsRemaining = 1;
-                page1 = 1;
-                page2 = 1;
-                onLoading1();
-                onLoading2();
+                bool confirmation = await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Are you sure you want to remove this user?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: false,
+                    onOkButtonPressed: () async{
+                      Navigator.pop(context, true);                  
+                    },
+                    onCancelButtonPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                  )
+                );
+
+                if(confirmation){
+                  context.showLoaderOverlay();
+                  String result = await apiBLMDeleteMemorialAdmin(pageType: 'Blm', pageId: memorialId, userId: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
+                  context.hideLoaderOverlay();
+
+                  if(result != 'Success'){
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Error: $result.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }else{
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        onOkButtonPressed: () {
+                          managers = [];
+                          adminItemsRemaining = 1;
+                          familyItemsRemaining = 1;
+                          page1 = 1;
+                          page2 = 1;
+                          flag1 = false;
+                          addManagers1();
+                          onLoading();
+
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }
+                }
               },
-              child: Text('Make Manager', style: TextStyle(fontSize: 14,),),
+              child: Text('Remove', style: TextStyle(fontSize: 14,),),
               height: 40,
               shape: StadiumBorder(
-                side: BorderSide(color: Color(0xff04ECFF)),
+                side: BorderSide(color: Color(0xffE74C3C)),
               ),
-                color: Color(0xff04ECFF),
+              color: Color(0xffE74C3C),
             ),
           ),
         );
       }
+    }
 
-      if(mounted)
-      setState(() {});
-      page1++;
+    if(mounted)
+    setState(() {});
+    page1++;
+
+    if(adminItemsRemaining == 0){
+      addManagers2();
+      flag1 = true;
+      onLoading();
     }
   }
 
@@ -157,6 +224,95 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
             leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
             title: Text('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
             subtitle: Text('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
+            trailing: MaterialButton(
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              padding: EdgeInsets.zero,
+              textColor: Color(0xffffffff),
+              splashColor: Color(0xff04ECFF),
+              onPressed: () async{
+
+                bool confirmation = await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Are you sure you want to make this user a manager?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: false,
+                    onOkButtonPressed: () async{
+                      Navigator.pop(context, true);                  
+                    },
+                    onCancelButtonPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                  )
+                );
+
+                if(confirmation){
+                  context.showLoaderOverlay();
+                  String result = await apiBLMAddMemorialAdmin(pageType: 'Blm', pageId: memorialId, userId: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
+                  context.hideLoaderOverlay();
+
+                  if(result != 'Success'){
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Error: $result.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }else{
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        onOkButtonPressed: () {
+                          managers = [];
+                          adminItemsRemaining = 1;
+                          familyItemsRemaining = 1;
+                          page1 = 1;
+                          page2 = 1;
+                          flag1 = false;
+                          addManagers1();
+                          onLoading();
+
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }
+                }
+              },
+              child: Text('Make Manager', style: TextStyle(fontSize: 14,),),
+              height: 40,
+              shape: StadiumBorder(
+                side: BorderSide(color: Color(0xff04ECFF)),
+              ),
+              color: Color(0xff04ECFF),
+            ),
           ),
         );
       }

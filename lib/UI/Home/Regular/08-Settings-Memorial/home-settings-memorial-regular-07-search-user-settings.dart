@@ -23,16 +23,26 @@ class RegularSearchUsers{
 class HomeRegularSearchUser extends StatefulWidget{
   final bool isFamily;
   final int memorialId;
-  HomeRegularSearchUser({required this.isFamily, required this.memorialId});
+  final String memorialName;
+  final bool switchFamily;
+  final bool switchFriends;
+  final bool switchFollowers;
+
+  HomeRegularSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   @override
-  HomeRegularSearchUserState createState() => HomeRegularSearchUserState(isFamily: isFamily, memorialId: memorialId);
+  HomeRegularSearchUserState createState() => HomeRegularSearchUserState(isFamily: isFamily, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
 
 class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   final bool isFamily;
   final int memorialId;
-  HomeRegularSearchUserState({required this.isFamily, required this.memorialId});
+  final String memorialName;
+  final bool switchFamily;
+  final bool switchFriends;
+  final bool switchFollowers;
+
+  HomeRegularSearchUserState({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
   
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
@@ -113,7 +123,12 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
               children: [
                 Expanded(
                   flex: 2,
-                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back, color: Color(0xffffffff),),
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
                 Container(
                   width: SizeConfig.screenWidth! / 1.3,
@@ -228,13 +243,10 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                           String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
 
                           context.showLoaderOverlay();
-                          bool result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
+                          String result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
                           context.hideLoaderOverlay();
 
-                          if(result){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
-                            Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-                          }else{
+                          if(result != 'Success'){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -242,7 +254,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('This user may not accept invite requests as of the moment. Please try again later.',
+                                description: Text('Error: $result.',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(),
                                 ),
@@ -253,16 +265,16 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                 },
                               )
                             );
+                          }else{
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')),);
+                            Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                           }
                         }else{
                           context.showLoaderOverlay();
-                          bool result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
+                          String result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
                           context.hideLoaderOverlay();
 
-                          if(result){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
-                            Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-                          }else{
+                          if(result != 'Success'){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -270,7 +282,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('This user may not accept invite requests as of the moment. Please try again later.',
+                                description: Text('Error: $result.',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(),
                                 ),
@@ -281,6 +293,11 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                 },
                               )
                             );
+                          }else{
+                            Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers));
+                            
+                            Navigator.pop(context);
+                            Navigator.push(context, newRoute);
                           }
                         }
                       },

@@ -19,14 +19,24 @@ class RegularShowFriendsSettings{
 
 class HomeRegularPageFriends extends StatefulWidget{
   final int memorialId;
-  HomeRegularPageFriends({required this.memorialId});
+  final String memorialName;
+  final bool switchFamily;
+  final bool switchFriends;
+  final bool switchFollowers;
 
-  HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState(memorialId: memorialId);
+  HomeRegularPageFriends({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
+
+  HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
 
 class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
   final int memorialId;
-  HomeRegularPageFriendsState({required this.memorialId});
+  final String memorialName;
+  final bool switchFamily;
+  final bool switchFriends;
+  final bool switchFollowers;
+
+  HomeRegularPageFriendsState({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   ScrollController scrollController = ScrollController();
   int friendsItemsRemaining = 1;
@@ -81,35 +91,77 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
               textColor: Color(0xffffffff),
               splashColor: Color(0xff04ECFF),
               onPressed: () async{
-                context.showLoaderOverlay();
-                await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId, accountType: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType).onError((error, stackTrace) async{
-                  context.hideLoaderOverlay();
-                  await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Something went wrong. Please try again.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      buttonOkColor: Colors.red,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
-                  );
-                  return Future.error('Error occurred: $error');
-                });
-                context.hideLoaderOverlay();
+                bool confirmation = await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Are you sure you want to remove this user?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: false,
+                    onOkButtonPressed: () async{
+                      Navigator.pop(context, true);
+                    },
+                    onCancelButtonPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                  )
+                );
 
-                friends = [];
-                friendsItemsRemaining = 1;
-                page = 1; 
-                onLoading();
+                if(confirmation){
+                  context.showLoaderOverlay();
+                  String result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId, accountType: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType);
+                  context.hideLoaderOverlay();
+
+                  if(result != 'Success'){
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Error: $result.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }else{
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        onOkButtonPressed: () {
+                          friends = [];
+                          friendsItemsRemaining = 1;
+                          page = 1; 
+                          onLoading();
+
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }
+                }
+
               },
               child: Text('Remove', style: TextStyle(fontSize: 14,),),
               height: 40,
@@ -136,11 +188,18 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
         backgroundColor: Color(0xff04ECFF),
         title: Text('Page Friends', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
         centerTitle: true,
-        leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, 
+          color: Color(0xffffffff),
+        ), 
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: false, memorialId: memorialId,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: false, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
             },
             child: Center(child: Text('Add Friends', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),),
           ),

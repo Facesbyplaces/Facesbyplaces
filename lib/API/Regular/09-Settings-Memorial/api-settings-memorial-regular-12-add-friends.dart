@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularAddFriends({required int memorialId, required int userId, required int accountType}) async{
+Future<String> apiRegularAddFriends({required int memorialId, required int userId, required int accountType}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -21,6 +21,10 @@ Future<bool> apiRegularAddFriends({required int memorialId, required int userId,
   
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFriend', data: formData,
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
@@ -30,10 +34,14 @@ Future<bool> apiRegularAddFriends({required int memorialId, required int userId,
   );
 
   print('The status code of regular add friends is ${response.statusCode}');
+  print('The status data of regular add friends is ${response.data}');
 
   if(response.statusCode == 200){
-    return true;
+    return 'Success';
+  }else if(response.statusCode == 409){
+    return 'This user is already part of the memorial page';
   }else{
-    return false;
+    var newData = Map<String, dynamic>.from(response.data);
+    return newData['error'];
   }
 }
