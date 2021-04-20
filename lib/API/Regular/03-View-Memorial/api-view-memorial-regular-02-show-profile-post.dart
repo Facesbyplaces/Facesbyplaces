@@ -12,6 +12,10 @@ Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({required int memori
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId?page=$page',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

@@ -3,40 +3,39 @@ import 'package:dio/dio.dart';
 
 Future<bool> apiRegularUploadPhoto({dynamic image}) async{
 
-  bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
   int prefsUserID = sharedPrefs.getInt('regular-user-id')!;
   
-  try{
-    Dio dioRequest = Dio();
-    FormData formData = FormData();
+  Dio dioRequest = Dio();
+  FormData formData = FormData();
 
-    formData = FormData.fromMap({
-      'user_id': prefsUserID,
-      'image': await MultipartFile.fromFile(image.path, filename: image.path),
-    });
+  formData = FormData.fromMap({
+    'user_id': prefsUserID,
+    'image': await MultipartFile.fromFile(image.path, filename: image.path),
+  });
 
-    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
-      options: Options(
-        headers: <String, String>{
-          'access-token': getAccessToken,
-          'uid': getUID,
-          'client': getClient,
-        }
-      ),
-    );
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, String>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
+  );
 
-    print('The status code of regular upload photo is ${response.statusCode}');
+  print('The status code of regular upload photo is ${response.statusCode}');
 
-    if(response.statusCode == 200){
-      result = true;
-    }
-    return result;
-  }catch(e){
-    print('Error in upload photo: $e');
-    return result;
+  if(response.statusCode == 200){
+    return true;
+  }else{
+    return false;
   }
 }

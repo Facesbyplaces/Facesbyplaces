@@ -12,6 +12,10 @@ Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({required int userId
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=1',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

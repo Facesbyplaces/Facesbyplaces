@@ -14,6 +14,10 @@ Future<bool> apiRegularLogout() async{
 
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/alm_auth/sign_out',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

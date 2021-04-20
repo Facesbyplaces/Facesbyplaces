@@ -34,7 +34,6 @@ Future<String> apiRegularAddFriends({required int memorialId, required int userI
   );
 
   print('The status code of regular add friends is ${response.statusCode}');
-  print('The status data of regular add friends is ${response.data}');
 
   if(response.statusCode == 200){
     return 'Success';

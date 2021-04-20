@@ -24,6 +24,10 @@ Future<bool> apiBLMLikeOrUnlikeCommentReply({required String commentableType, re
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/posts/comment/unlikeOrLikeComment?commentable_type=$commentableType&commentable_id=$commentableId&like=$likeStatus',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

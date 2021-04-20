@@ -12,6 +12,10 @@ Future<bool> apiRegularUpdateSwitchStatusFamily({required int memorialId, requir
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFamily/Memorial/$memorialId?hide=$status',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

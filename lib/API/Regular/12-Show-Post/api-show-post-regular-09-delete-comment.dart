@@ -24,6 +24,10 @@ Future<bool> apiRegularDeleteComment({required int commentId}) async{
 
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/posts/comment?comment_id=$commentId',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

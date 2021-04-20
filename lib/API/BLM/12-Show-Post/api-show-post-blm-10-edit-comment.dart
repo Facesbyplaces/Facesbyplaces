@@ -24,6 +24,10 @@ Future<bool> apiBLMEditComment({required int commentId, required String commentB
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/posts/comment',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

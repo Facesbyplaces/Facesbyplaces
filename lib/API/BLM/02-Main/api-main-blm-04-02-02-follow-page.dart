@@ -3,8 +3,6 @@ import 'package:dio/dio.dart';
 
 Future<bool> apiBLMModifyFollowPage({required String pageType, required int pageId, required bool follow}) async{
 
-  bool result = false;
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -22,33 +20,33 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  try{
-    Dio dioRequest = Dio();
+  Dio dioRequest = Dio();
 
-    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers',
-      options: Options(
-        headers: <String, dynamic>{
-          'Content-Type': 'application/json',
-          'access-token': getAccessToken,
-          'uid': getUID,
-          'client': getClient,
-        }
-      ),
-      queryParameters: <String, dynamic>{
-        'page_type': '$pageType',
-        'page_id': '$pageId',
-        'follow': '$follow',
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers',
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
       }
-    );
-
-    print('The status code of blm follow page is ${response.statusCode}');
-
-    if(response.statusCode == 200){
-      result = true;
+    ),
+    queryParameters: <String, dynamic>{
+      'page_type': '$pageType',
+      'page_id': '$pageId',
+      'follow': '$follow',
     }
-    return result;
-  }catch(e){
-    print('The error is: $e');
-    return result;
+  );
+
+  print('The status code of blm follow page is ${response.statusCode}');
+
+  if(response.statusCode == 200){
+    return true;
+  }else{
+    return false;
   }
 }

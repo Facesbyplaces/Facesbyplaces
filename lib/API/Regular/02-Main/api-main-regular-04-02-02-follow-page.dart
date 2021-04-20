@@ -24,6 +24,10 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

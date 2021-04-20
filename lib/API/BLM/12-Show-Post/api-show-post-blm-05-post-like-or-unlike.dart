@@ -21,34 +21,33 @@ Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) a
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  try{
-    Dio dioRequest = Dio();
-    FormData formData = FormData();
+  Dio dioRequest = Dio();
+  FormData formData = FormData();
 
-    formData = FormData.fromMap({
-      'post_id': postId,
-      'like': like,
-    });
+  formData = FormData.fromMap({
+    'post_id': postId,
+    'like': like,
+  });
 
-    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/posts/likePost/unlikeOrLike', data: formData,
-      options: Options(
-        headers: <String, String>{
-          'access-token': getAccessToken!,
-          'uid': getUID!,
-          'client': getClient!,
-        }
-      ),  
-    );
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/posts/likePost/unlikeOrLike', data: formData,
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, String>{
+        'access-token': getAccessToken!,
+        'uid': getUID!,
+        'client': getClient!,
+      }
+    ),  
+  );
 
-    print('The status code of blm post like or unlike is ${response.statusCode}');
+  print('The status code of blm post like or unlike is ${response.statusCode}');
 
-    if(response.statusCode == 200){
-      result = true;
-    }
-  }catch(e){
-    print('Error in show post - post like or unlike: $e');
-    result = false;
+  if(response.statusCode == 200){
+    return true;
+  }else{
+    return false;
   }
-
-  return result;
 }

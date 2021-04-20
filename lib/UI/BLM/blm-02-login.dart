@@ -330,11 +330,11 @@ class BLMLoginState extends State<BLMLogin>{
                             final pushNotificationService = PushNotificationService(_firebaseMessaging);
                             pushNotificationService.initialise();
                             deviceToken = (await pushNotificationService.fcm.getToken())!;
-                            bool result = await apiBLMLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
+                            String result = await apiBLMLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
                             
                             context.hideLoaderOverlay();
 
-                            if(result){
+                            if(result == 'Success'){
                               Navigator.pushReplacementNamed(context, '/home/blm');
                             }else{
                               await showDialog(

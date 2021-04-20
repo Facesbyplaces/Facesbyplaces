@@ -9,30 +9,28 @@ Future<bool> apiRegularVerificationCodeResend() async{
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
   int prefsUserID = sharedPrefs.getInt('regular-user-id')!;
 
-  bool result = false;
+  Dio dioRequest = Dio();
 
-  try{
-    Dio dioRequest = Dio();
+  var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth/password?/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=2',
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient, 
+      }
+    ),  
+  );
 
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth/password?/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=2',
-      options: Options(
-        headers: <String, dynamic>{
-          'Content-Type': 'application/json',
-          'access-token': getAccessToken,
-          'uid': getUID,
-          'client': getClient, 
-        }
-      ),  
-    );
+  print('The status code of regular verification code resend is ${response.statusCode}');
 
-    print('The status code of regular verification code resend is ${response.statusCode}');
-
-    if(response.statusCode == 200){
-      result = true;
-    }
-    return result;
-  }catch(e){
-    print('The error of verification code resend is: $e');
-    return result;
+  if(response.statusCode == 200){
+    return true;
+  }else{
+    return false;
   }
 }

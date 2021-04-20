@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 
 Future<bool> apiRegularAddComment({required int postId, required dynamic commentBody}) async{
 
-  bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -21,34 +20,33 @@ Future<bool> apiRegularAddComment({required int postId, required dynamic comment
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  try{
-    Dio dioRequest = Dio();
-    FormData formData = FormData();
+  Dio dioRequest = Dio();
+  FormData formData = FormData();
 
-    formData = FormData.fromMap({
-      'post_id': postId,
-      'body': commentBody,
-    });
+  formData = FormData.fromMap({
+    'post_id': postId,
+    'body': commentBody,
+  });
 
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/posts/comment', data: formData,
-      options: Options(
-        headers: <String, String>{
-          'access-token': getAccessToken!,
-          'uid': getUID!,
-          'client': getClient!,
-        }
-      ),  
-    );
+  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/posts/comment', data: formData,
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, String>{
+        'access-token': getAccessToken!,
+        'uid': getUID!,
+        'client': getClient!,
+      }
+    ),  
+  );
 
-    print('The status code of regular add comment is ${response.statusCode}');
+  print('The status code of regular add comment is ${response.statusCode}');
 
-    if(response.statusCode == 200){
-      result = true;
-    }
-  }catch(e){
-    print('Error in show post - add comment: $e');
-    result = false;
+  if(response.statusCode == 200){
+    return true;
+  }else{
+    return false;
   }
-
-  return result;
 }

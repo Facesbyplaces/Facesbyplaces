@@ -12,6 +12,10 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required in
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=2',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
@@ -29,7 +33,6 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required in
   }else{
     throw Exception('Failed to get the memorials');
   }
-
 }
 
 class APIRegularShowUserMemorialsMain{

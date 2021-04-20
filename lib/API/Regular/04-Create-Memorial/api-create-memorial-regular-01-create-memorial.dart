@@ -3,80 +3,78 @@ import 'package:dio/dio.dart';
 
 Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial}) async{
   
-  int result = 0;
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  try{
-    Dio dioRequest = Dio();
-    FormData formData = FormData();
+  Dio dioRequest = Dio();
+  FormData formData = FormData();
 
-    formData.files.addAll([
-      MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
-      MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),
-      MapEntry('memorial[dob]', MultipartFile.fromString(memorial.almDob,),),
-      MapEntry('memorial[rip]', MultipartFile.fromString(memorial.almRip,),),
-      MapEntry('memorial[cemetery]', MultipartFile.fromString(memorial.almCemetery)),
-      MapEntry('memorial[country]', MultipartFile.fromString(memorial.almCountry,),),
-      MapEntry('memorial[description]', MultipartFile.fromString(memorial.almDescription,),),
-      MapEntry('relationship', MultipartFile.fromString(memorial.almRelationship,),),
-    ]);
+  formData.files.addAll([
+    MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
+    MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),
+    MapEntry('memorial[dob]', MultipartFile.fromString(memorial.almDob,),),
+    MapEntry('memorial[rip]', MultipartFile.fromString(memorial.almRip,),),
+    MapEntry('memorial[cemetery]', MultipartFile.fromString(memorial.almCemetery)),
+    MapEntry('memorial[country]', MultipartFile.fromString(memorial.almCountry,),),
+    MapEntry('memorial[description]', MultipartFile.fromString(memorial.almDescription,),),
+    MapEntry('relationship', MultipartFile.fromString(memorial.almRelationship,),),
+  ]);
 
-    if(memorial.almLatitude != ''){
-      MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.almLatitude,),);
-    }
-
-    if(memorial.almLongitude != ''){
-      MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),);
-    }
-
-    if(memorial.almBackgroundImage != null || memorial.almBackgroundImage != ''){
-      var file = await MultipartFile.fromFile(memorial.almBackgroundImage.path, filename: memorial.almBackgroundImage.path);
-      formData.files.add(MapEntry('memorial[backgroundImage]', file));
-    }
-    
-    if(memorial.almProfileImage != null || memorial.almProfileImage != ''){
-      var file = await MultipartFile.fromFile(memorial.almProfileImage.path, filename: memorial.almProfileImage.path);
-      formData.files.add(MapEntry('memorial[profileImage]', file));
-    }
-    
-    if(memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
-
-      for(int i = 0; i < memorial.almImagesOrVideos.length; i++){
-        if(memorial.almImagesOrVideos[i].path != null || memorial.almImagesOrVideos != ['']){
-          var file = await MultipartFile.fromFile(memorial.almImagesOrVideos[i].path, filename: memorial.almImagesOrVideos[i].path);
-          formData.files.add(MapEntry('memorial[imagesOrVideos][]', file));
-        }
-      }
-    }
-
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorials', data: formData,
-      options: Options(
-        headers: <String, dynamic>{
-          'access-token': getAccessToken,
-          'uid': getUID,
-          'client': getClient,
-        }
-      ),  
-    );
-
-    print('The status code of regular create memorial is ${response.statusCode}');
-
-    if(response.statusCode == 200){
-      var value = response.data;
-      var user = value['memorial'];
-      int userId = user['id'];
-      
-      result = userId;
-    }
-  }catch(e){
-    print('Error in create memorial: $e');
-    result = 0;
+  if(memorial.almLatitude != ''){
+    MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.almLatitude,),);
   }
 
-  return result;
+  if(memorial.almLongitude != ''){
+    MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),);
+  }
+
+  if(memorial.almBackgroundImage != null || memorial.almBackgroundImage != ''){
+    var file = await MultipartFile.fromFile(memorial.almBackgroundImage.path, filename: memorial.almBackgroundImage.path);
+    formData.files.add(MapEntry('memorial[backgroundImage]', file));
+  }
+  
+  if(memorial.almProfileImage != null || memorial.almProfileImage != ''){
+    var file = await MultipartFile.fromFile(memorial.almProfileImage.path, filename: memorial.almProfileImage.path);
+    formData.files.add(MapEntry('memorial[profileImage]', file));
+  }
+  
+  if(memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
+
+    for(int i = 0; i < memorial.almImagesOrVideos.length; i++){
+      if(memorial.almImagesOrVideos[i].path != null || memorial.almImagesOrVideos != ['']){
+        var file = await MultipartFile.fromFile(memorial.almImagesOrVideos[i].path, filename: memorial.almImagesOrVideos[i].path);
+        formData.files.add(MapEntry('memorial[imagesOrVideos][]', file));
+      }
+    }
+  }
+
+  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorials', data: formData,
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
+  );
+
+  print('The status code of regular create memorial is ${response.statusCode}');
+
+  if(response.statusCode == 200){
+    var value = response.data;
+    var user = value['memorial'];
+    int userId = user['id'];
+    
+    return userId;
+  }else{
+    return 0;
+  }
 }
 
 class APIRegularCreateMemorial{

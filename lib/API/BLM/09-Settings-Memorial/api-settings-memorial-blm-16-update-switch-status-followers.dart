@@ -12,6 +12,10 @@ Future<bool> apiBLMUpdateSwitchStatusFollowers({required int memorialId, require
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFollowers/Blm/$memorialId?hide=$status',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

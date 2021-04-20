@@ -12,6 +12,10 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({required int userId}) asy
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId&account_type=1',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

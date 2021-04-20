@@ -8,29 +8,29 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  try{
-    Dio dioRequest = Dio();
+  Dio dioRequest = Dio();
 
-    var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
-      options: Options(
-        headers: <String, dynamic>{
-          'access-token': getAccessToken,
-          'uid': getUID,
-          'client': getClient,
-        }
-      ),
-    );
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
+  );
 
-    print('The status code of regular home feed tab is ${response.statusCode}');
+  print('The status code of regular home feed tab is ${response.statusCode}');
 
-    if(response.statusCode == 200){
-      var newData = Map<String, dynamic>.from(response.data);
-      return APIRegularHomeTabFeedMain.fromJson(newData);
-    }else{
-      throw Exception('Error occurred in main page: ${response.statusMessage}');
-    }
-  }catch(e){
-    throw Exception('Error occurred in main page - feed: $e');
+  if(response.statusCode == 200){
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularHomeTabFeedMain.fromJson(newData);
+  }else{
+    throw Exception('Error occurred in main page: ${response.statusMessage}');
   }
 }
 

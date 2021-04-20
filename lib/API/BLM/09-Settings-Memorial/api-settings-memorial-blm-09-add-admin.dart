@@ -20,14 +20,6 @@ Future<String> apiBLMAddMemorialAdmin({required String pageType, required int pa
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
-  print('The page type is $pageType');
-  print('The page id is $pageId');
-  print('The user id is $userId');
-
   Dio dioRequest = Dio();
   FormData formData = FormData();
 

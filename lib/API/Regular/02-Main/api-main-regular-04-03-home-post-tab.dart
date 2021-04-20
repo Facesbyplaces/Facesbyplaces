@@ -12,6 +12,10 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab({required int page}) asy
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=$page',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

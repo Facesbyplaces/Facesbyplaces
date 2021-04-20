@@ -12,6 +12,10 @@ Future<bool> apiRegularUpdateNotificationMemorial({required bool hide}) async{
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/notifications/newMemorial?setting=$hide', 
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

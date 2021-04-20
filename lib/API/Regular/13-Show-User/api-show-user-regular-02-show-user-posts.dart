@@ -12,6 +12,10 @@ Future<APIRegularShowUsersPostsMain> apiRegularShowUserPosts({required int userI
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

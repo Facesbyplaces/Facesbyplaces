@@ -12,6 +12,10 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({required String keywords, requir
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

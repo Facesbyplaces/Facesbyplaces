@@ -3,13 +3,14 @@ import 'package:dio/dio.dart';
 
 Future<String> apiRegularRegistration({required APIRegularAccountRegistration account}) async{
 
-  String result = 'Something went wrong. Please try again.';
-
-  try{
     Dio dioRequest = Dio();
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
       options: Options(
+        followRedirects: false,
+        validateStatus: (status) {
+          return status! < 600;
+        },
         headers: <String, dynamic>{
           'Content-Type': 'application/json',
         }
@@ -17,27 +18,32 @@ Future<String> apiRegularRegistration({required APIRegularAccountRegistration ac
     );
 
     print('The status code of regular registration is ${response.statusCode}');
+    print('The status data of regular registration is ${response.data}');
 
     if(response.statusCode == 200){
       var newData = Map<String, dynamic>.from(response.data);
       var user = newData['data'];
       int userId = user['id'];
-      String verificationCode = user['verification_code'];
 
       final sharedPrefs = await SharedPreferences.getInstance();
 
       sharedPrefs.setInt('regular-user-id', userId);
-      sharedPrefs.setString('regular-verification-code', verificationCode);
       sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
       sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
       sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
-      result = 'Success';
+
+      return 'Success';
+    }else if(response.statusCode == 422){
+      var newData = Map<String, dynamic>.from(response.data);
+      var errors = newData['errors'];
+      var message = errors['full_messages'][0];
+
+      print('The message is $message');
+
+      return '${errors['full_messages'][0]}.';
+    }else{
+      return 'Something went wrong. Please try again.';
     }
-    return result;
-  }catch(e){
-    print('The error of registration is: $e');
-    return result;
-  }
 }
 
 class APIRegularAccountRegistration{

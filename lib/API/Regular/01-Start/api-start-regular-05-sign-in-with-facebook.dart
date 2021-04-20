@@ -3,40 +3,38 @@ import 'package:dio/dio.dart';
 
 Future<bool> apiRegularSignInWithFacebook({required String firstName, required String lastName, required String email, required String username, required String facebookId, required String image}) async{
 
-  bool result = false;
+  Dio dioRequest = Dio();
 
-  try{
-    Dio dioRequest = Dio();
+  var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+      }
+    ),  
+  );
 
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
-      options: Options(
-        headers: <String, dynamic>{
-          'Content-Type': 'application/json',
-        }
-      ),  
-    );
+  print('The status code of regular login with facebook is ${response.statusCode}');
 
-    print('The status code of regular login with facebook is ${response.statusCode}');
+  if(response.statusCode == 200){
+    var newData = Map<String, dynamic>.from(response.data);
+    var user = newData['user'];
+    int userId = user['id'];
 
-    if(response.statusCode == 200){
-      var newData = Map<String, dynamic>.from(response.data);
-      var user = newData['user'];
-      int userId = user['id'];
+    final sharedPrefs = await SharedPreferences.getInstance();
 
-      final sharedPrefs = await SharedPreferences.getInstance();
+    sharedPrefs.setInt('regular-user-id', userId);
+    sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
+    sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
+    sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
+    sharedPrefs.setBool('regular-user-session', true);
+    sharedPrefs.setBool('user-guest-session', false);
 
-      sharedPrefs.setInt('regular-user-id', userId);
-      sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll(']', '').replaceAll('[', ''));
-      sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll(']', '').replaceAll('[', ''));
-      sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll(']', '').replaceAll('[', ''));
-      sharedPrefs.setBool('regular-user-session', true);
-      sharedPrefs.setBool('user-guest-session', false);
-
-      result = true;
-    }
-    return result;
-  }catch(e){
-    print('The error of login with facebook is: $e');
-    return result;
+    return true;
+  }else{
+    return false;
   }
 }

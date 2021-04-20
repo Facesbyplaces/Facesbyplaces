@@ -10,10 +10,12 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memori
 
   Dio dioRequest = Dio();
 
-  print('The memorial id is $memorialId');
-
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/adminIndex/index?page=$page&page_id=$memorialId',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

@@ -5,7 +5,17 @@ Future<bool> apiBLMPasswordChange({required String password, required String pas
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',);
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+      }
+    ),
+  );
 
   print('The status code of blm password change is ${response.statusCode}');
 

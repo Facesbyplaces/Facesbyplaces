@@ -10,22 +10,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class BLMVerifyEmail extends StatefulWidget{
-  final String verificationCode;
-  BLMVerifyEmail({required this.verificationCode});
 
-  BLMVerifyEmailState createState() => BLMVerifyEmailState(verificationCode: verificationCode);
+  BLMVerifyEmailState createState() => BLMVerifyEmailState();
 }
 
 class BLMVerifyEmailState extends State<BLMVerifyEmail>{
-  final String verificationCode;
-  BLMVerifyEmailState({required this.verificationCode});
 
   final TextEditingController controller = TextEditingController(text: '');
-
-  void initState(){
-    super.initState();
-    controller.text = verificationCode;
-  }
 
   @override
   Widget build(BuildContext context) {

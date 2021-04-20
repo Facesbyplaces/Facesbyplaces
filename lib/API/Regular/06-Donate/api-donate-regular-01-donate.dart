@@ -12,6 +12,10 @@ Future<bool> apiRegularDonate({required String pageType, required int pageId, re
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

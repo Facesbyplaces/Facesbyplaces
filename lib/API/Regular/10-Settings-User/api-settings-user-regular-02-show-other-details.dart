@@ -12,6 +12,10 @@ Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails({required int user
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

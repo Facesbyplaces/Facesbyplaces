@@ -12,6 +12,10 @@ Future<bool> apiRegularMemorialSetRelationship({required int memorialId, require
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorials/relationship',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

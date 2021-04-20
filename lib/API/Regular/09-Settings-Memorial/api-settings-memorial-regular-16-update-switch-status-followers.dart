@@ -12,6 +12,10 @@ Future<bool> apiRegularUpdateSwitchStatusFollowers({required int memorialId, req
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFollowers/Memorial/$memorialId?hide=$status',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

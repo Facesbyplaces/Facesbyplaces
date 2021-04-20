@@ -142,9 +142,7 @@ class BLMRegister extends StatelessWidget{
                                   context.hideLoaderOverlay();
 
                                   if(result == 'Success'){
-                                    final sharedPrefs = await SharedPreferences.getInstance();
-                                    String verificationCode = sharedPrefs.getString('blm-verification-code')!;
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => BLMVerifyEmail(verificationCode: verificationCode)));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => BLMVerifyEmail()));
                                   }else{
                                     await showDialog(
                                       context: context,

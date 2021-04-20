@@ -4,26 +4,18 @@ import 'package:dio/dio.dart';
 Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
-  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
-  String? getAccessToken;
-  String? getUID;
-  String? getClient;
-
-  if(userSessionRegular == true){
-    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-  }else if(userSessionBLM == true){
-    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-  }
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

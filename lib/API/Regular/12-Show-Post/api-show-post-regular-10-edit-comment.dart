@@ -24,6 +24,10 @@ Future<bool> apiRegularEditComment({required int commentId, required String comm
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/posts/comment',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

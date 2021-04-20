@@ -211,9 +211,7 @@ class RegularRegister extends StatelessWidget{
                                 context.hideLoaderOverlay();
 
                                 if(result == 'Success'){
-                                  final sharedPrefs = await SharedPreferences.getInstance();
-                                  String verificationCode = sharedPrefs.getString('regular-verification-code')!;
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegularVerifyEmail(verificationCode: verificationCode)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegularVerifyEmail()));
                                 }else{
                                   await showDialog(
                                     context: context,

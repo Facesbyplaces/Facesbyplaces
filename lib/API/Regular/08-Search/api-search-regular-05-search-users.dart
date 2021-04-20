@@ -8,32 +8,30 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keyword
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  APIRegularSearchUsersMain? result;
+  Dio dioRequest = Dio();
 
-  try{
-    Dio dioRequest = Dio();
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords',
+    options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      },
+    ),
+  );
 
-    var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords',
-      options: Options(
-        headers: <String, dynamic>{
-          'Content-Type': 'application/json',
-          'access-token': getAccessToken,
-          'uid': getUID,
-          'client': getClient,
-        },
-      ),
-    );
+  print('The status code of regular search users is ${response.statusCode}');
 
-    print('The status code of regular search users is ${response.statusCode}');
-
-    if(response.statusCode == 200){
-      var newData = Map<String, dynamic>.from(response.data);
-      result = APIRegularSearchUsersMain.fromJson(newData);
-    }
-
-    return result!;
-  }on DioError catch(e){
-    return Future.error('The error of search users is: $e');
+  if(response.statusCode == 200){
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularSearchUsersMain.fromJson(newData);
+  }else{
+    throw Exception('Failed to get the list of users');
   }
 }
 

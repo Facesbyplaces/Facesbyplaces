@@ -7,6 +7,10 @@ Future<bool> apiBLMSignInWithApple({required String userIdentification, required
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=', 
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
       }

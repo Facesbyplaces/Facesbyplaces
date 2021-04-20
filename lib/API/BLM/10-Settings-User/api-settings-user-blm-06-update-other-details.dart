@@ -12,6 +12,10 @@ Future<bool> apiBLMUpdateOtherDetails({required String birthdate, required Strin
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

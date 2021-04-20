@@ -12,6 +12,10 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails({required int 
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,

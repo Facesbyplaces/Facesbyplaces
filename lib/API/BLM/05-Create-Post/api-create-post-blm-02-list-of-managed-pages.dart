@@ -31,7 +31,7 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
     var newData = Map<String, dynamic>.from(response.data);
     return APIBLMShowListOfManagedPages.fromJson(newData);
   }else{
-    return Future.error('Failed to get the lists.');
+    throw Exception('Failed to get the list of pages');
   }
 }
 

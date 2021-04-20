@@ -12,6 +12,10 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
@@ -27,7 +31,7 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
     var newData = Map<String, dynamic>.from(response.data);
     return APIRegularShowListOfManagedPages.fromJson(newData);
   }else{
-    throw Exception('Failed to get the lists.');
+    throw Exception('Failed to get the list of pages.');
   }
 }
 

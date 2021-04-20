@@ -12,6 +12,10 @@ Future<bool> apiRegularDeleteMemorial({required int memorialId}) async{
 
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
     options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return status! < 600;
+      },
       headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
