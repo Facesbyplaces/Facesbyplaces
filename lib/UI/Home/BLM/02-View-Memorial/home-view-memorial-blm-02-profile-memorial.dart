@@ -779,6 +779,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                               ),
                                                                             ),
 
+                                                                            SizedBox(height: 10,),
+
                                                                             Expanded(
                                                                               child: CarouselSlider(
                                                                                 carouselController: buttonCarouselController,

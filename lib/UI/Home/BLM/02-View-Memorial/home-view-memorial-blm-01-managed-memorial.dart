@@ -679,6 +679,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                         ),
                                                                       ),
 
+                                                                      SizedBox(height: 10,),
+
                                                                       Expanded(
                                                                         child: CarouselSlider(
                                                                           carouselController: buttonCarouselController,

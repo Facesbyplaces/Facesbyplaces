@@ -284,7 +284,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully removed the user from the list.',
+                        description: Text('Successfully added the user from the list.',
                           textAlign: TextAlign.center,
                           style: TextStyle(),
                         ),

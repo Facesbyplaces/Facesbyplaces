@@ -281,7 +281,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     await apiBLMLikeOrUnlikePost(postId: postId, like: likePost);
                   },
                   icon: likePost == true ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,) : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
-                  label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
+                  label: Text('$likesCount', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                 ),
 
                 SizedBox(width: 20),

@@ -437,6 +437,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   ),
                                                                 ),
 
+                                                                SizedBox(height: 10,),
+
                                                                 Expanded(
                                                                   child: ((){
                                                                     if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
@@ -522,6 +524,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                       ),
                                                                     ),
                                                                   ),
+
+                                                                  SizedBox(height: 10,),
 
                                                                   Expanded(
                                                                     child: CarouselSlider(
@@ -643,6 +647,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                       ),
                                                                     ),
                                                                   ),
+
+                                                                  SizedBox(height: 10,),
 
                                                                   Expanded(
                                                                     child: CarouselSlider(

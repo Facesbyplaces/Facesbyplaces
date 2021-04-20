@@ -433,6 +433,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   ),
                                                                 ),
 
+                                                                SizedBox(height: 10,),
+
                                                                 Expanded(
                                                                   child: ((){
                                                                     if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
@@ -518,6 +520,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                       ),
                                                                     ),
                                                                   ),
+
+                                                                  SizedBox(height: 10,),
 
                                                                   Expanded(
                                                                     child: CarouselSlider(
@@ -639,6 +643,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                       ),
                                                                     ),
                                                                   ),
+
+                                                                  SizedBox(height: 10,),
 
                                                                   Expanded(
                                                                     child: CarouselSlider(

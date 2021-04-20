@@ -769,6 +769,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                               ),
                                                                             ),
 
+                                                                            SizedBox(height: 10,),
+
                                                                             Expanded(
                                                                               child: CarouselSlider(
                                                                                 carouselController: buttonCarouselController,

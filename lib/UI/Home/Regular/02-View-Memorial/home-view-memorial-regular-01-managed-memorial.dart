@@ -663,6 +663,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                         ),
                                                                       ),
 
+                                                                      SizedBox(height: 10,),
+
                                                                       Expanded(
                                                                         child: CarouselSlider(
                                                                           carouselController: buttonCarouselController,

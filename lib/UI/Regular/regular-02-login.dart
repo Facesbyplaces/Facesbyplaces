@@ -206,7 +206,21 @@ class RegularLoginState extends State<RegularLogin>{
                               AppleIDAuthorizationScopes.email,
                               AppleIDAuthorizationScopes.fullName,
                             ],
-                          );
+                            webAuthenticationOptions: WebAuthenticationOptions( 
+                              clientId: 'com.app.facesbyplaces',
+                              redirectUri: Uri.parse('https://com.app.facesbyplaces.glitch.me/callbacks/sign_in_with_apple')));
+                              final oAuthProvider = OAuthProvider('apple.com');
+                              final newCredentials = oAuthProvider.credential(idToken: credential.identityToken, accessToken: credential.authorizationCode);
+
+                              print('The newCredentials is $newCredentials');
+                              print('The newCredentials is ${newCredentials.accessToken}');
+                              print('The newCredentials is ${newCredentials.idToken}');
+                              print('The newCredentials is ${newCredentials.rawNonce}');
+                              print('The newCredentials is ${newCredentials.secret}');
+                              print('The newCredentials is ${newCredentials.providerId}');
+                              print('The newCredentials is ${newCredentials.signInMethod}');
+                              print('The newCredentials is ${newCredentials.token}');
+                              // final credential = oAuthProvider.getCredential(idToken: credential.identityToken, accessToken: credential.authorizationCode,);
 
                           context.showLoaderOverlay();
                           bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
