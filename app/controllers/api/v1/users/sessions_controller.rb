@@ -19,8 +19,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.password = @user.password_confirmation = params[:password]
           @user.update({ device_token: params[:device_token] })
           @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
-          super
+          super do |resource|
+            if resource
+              render json: { success: true, user:  @user, status: 200 }, status: 200
+            end
+          end
         else
           if account_type == 1
             @user = User.new(sign_up_params)
@@ -49,16 +52,21 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
           @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
 
           Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
-          super
+          super do |resource|
+            if resource
+              render json: { success: true, user:  @user, status: 200 }, status: 200
+            end
+          end
         end
 
       #Google Login
       elsif params[:google_id].present?
         validator = GoogleIDToken::Validator.new
-        required_audience = JWT.decode(params[:google_id], nil, false)[0]['aud'] 
+        required_audience = JWT.decode(params[:google_id], nil, false)
+        # required_client = JWT.decode(params[:google_id], nil, false)[0]['azp']
+        puts required_audience
 
         begin
           payload = validator.check(params[:google_id], required_audience, required_audience)
@@ -72,7 +80,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         rescue GoogleIDToken::ValidationError => e
           @user = nil
           return render json: {status: "Cannot validate: #{e}"}, status: 422
-
         end
 
         if @user
@@ -81,8 +88,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.password = @user.password_confirmation = params[:password]
           @user.update({ device_token: params[:device_token] })
           @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
-          super
+          super do |resource|
+            if resource
+              render json: { success: true, user:  @user, status: 200 }, status: 200
+            end
+          end
         else
 
           if account_type == 1
@@ -117,12 +127,14 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
             params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
             @user.password = @user.password_confirmation = params[:password]
-
             @user.save!
-            # render json: { success: true, user:  @user, status: 200 }, status: 200
 
             Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
-            super
+            super do |resource|
+              if resource
+                render json: { success: true, user:  @user, status: 200 }, status: 200
+              end
+            end
           rescue GoogleIDToken::ValidationError => e
             return render json: {status: "Cannot validate: #{e}"}, status: 422
           end
@@ -144,8 +156,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.password = @user.password_confirmation = params[:password]
           @user.update({ device_token: params[:device_token] })
           @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
-          super
+          super do |resource|
+            if resource
+              render json: { success: true, user:  @user, status: 200 }, status: 200
+            end
+          end
         else
 
           if account_type == 1
@@ -176,10 +191,13 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
           @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
 
           Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
-          super
+          super do |resource|
+            if resource
+              render json: { success: true, user:  @user, status: 200 }, status: 200
+            end
+          end
         end
         
       # Fbp Login
@@ -202,9 +220,12 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end 
 
         if user.is_verified?
-          user.update({ device_token: params[:device_token] })
-          render json: { success: true, user:  UserSerializer.new( user ).attributes }, status: 200
-          super
+          user.update({ device_token: params[:device_token] }) 
+          super do |resource|
+            if resource
+              render json: { success: true, user:  UserSerializer.new( user ).attributes }, status: 200
+            end
+          end
         else
           render json: {
               message: "Verify email to login to the app.",
