@@ -2,7 +2,7 @@ class Api::V1::Users::ImageShowController < ApplicationController
     before_action :check_user 
 
     def index
-        if check_user?
+        if check_user
             render json: {
                 success: true, 
                 user: {
