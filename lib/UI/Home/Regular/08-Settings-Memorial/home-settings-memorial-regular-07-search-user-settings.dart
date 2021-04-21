@@ -239,36 +239,38 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                     itemBuilder: (c, index) => ListTile(
                       onTap: () async{
                         if(isFamily){
+                          String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog()) ?? '';
 
-                          String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
+                          if(choice != ''){
+                            context.showLoaderOverlay();
+                            String result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
+                            context.hideLoaderOverlay();
 
-                          context.showLoaderOverlay();
-                          String result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
-                          context.hideLoaderOverlay();
-
-                          if(result != 'Success'){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Error: $result.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.red,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              )
-                            );
-                          }else{
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')),);
-                            Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                            if(result != 'Success'){
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Error: $result.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
+                            }else{
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')),);
+                              Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                            }
                           }
+
                         }else{
                           context.showLoaderOverlay();
                           String result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);

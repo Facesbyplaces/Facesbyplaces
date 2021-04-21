@@ -24,7 +24,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
   @override
   void initState(){
     super.initState();
-    FlutterBranchSdk.logout();
+    FlutterBranchSdk.logout(); // TO RESET THE BRANCH
   }
 
   @override
@@ -170,6 +170,8 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                             );
                             context.hideLoaderOverlay();
 
+                            print('The result is $result');
+
                             if(result){
                               await showDialog(
                                 context: context,
@@ -185,11 +187,10 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                   onlyOkButton: true,
                                   onOkButtonPressed: () {
                                     Navigator.pop(context, true);
-                                    Navigator.popUntil(context, ModalRoute.withName('/login'));
+                                    Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
                                   },
                                 )
                               );
-                              // Navigator.popUntil(context, ModalRoute.withName('/login'));
                             }else{
                               await showDialog(
                                 context: context,

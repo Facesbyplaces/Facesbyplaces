@@ -83,7 +83,6 @@ class UIGetStartedState extends State<UIGetStarted>{
     print('The start of deep linking');
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
       if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
-        print('Shared post start');
         initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
       }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
         initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
@@ -103,7 +102,6 @@ class UIGetStartedState extends State<UIGetStarted>{
       var value1 = await FlutterBranchSdk.getLatestReferringParams();
 
       if(resetType == 'Regular'){
-        FlutterBranchSdk.logout();
         Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
       }else{
         Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset(resetToken: value1['reset_password_token'],)));

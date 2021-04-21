@@ -69,7 +69,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
       for(int i = 0; i < newValue.blmFamilyList.length; i++){
         family.add(
           ListTile(
-            leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}'),),
+            leading: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != '' ? CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}')) : CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png'),),
             title: Text('${newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}'),
             subtitle: Text('${newValue.blmFamilyList[i].showFamilySettingsRelationship}'),
             trailing: MaterialButton(
@@ -149,53 +149,6 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                     );
                   }
                 }
-
-                // context.showLoaderOverlay();
-                // bool result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType);
-                // context.hideLoaderOverlay();
-
-                // if(result == true){
-                //   await showDialog(
-                //     context: context,
-                //     builder: (_) => 
-                //       AssetGiffyDialog(
-                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                //       title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                //       entryAnimation: EntryAnimation.DEFAULT,
-                //       description: Text('Successfully removed a user from Family list.',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(),
-                //       ),
-                //       onlyOkButton: true,
-                //       onOkButtonPressed: () {
-                //         Navigator.pop(context, true);
-                //       },
-                //     )
-                //   );
-                // }else{
-                //   await showDialog(
-                //     context: context,
-                //     builder: (_) => 
-                //       AssetGiffyDialog(
-                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                //       entryAnimation: EntryAnimation.DEFAULT,
-                //       description: Text('Something went wrong. Please try again.',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(),
-                //       ),
-                //       onlyOkButton: true,
-                //       buttonOkColor: Colors.red,
-                //       onOkButtonPressed: () {
-                //         Navigator.pop(context, true);
-                //       },
-                //     )
-                //   );
-                // }
-
-                // familyItemsRemaining = 1;
-                // page = 1;
-                // onLoading1();
               },
               child: Text('Remove', style: TextStyle(fontSize: 14,),),
               height: 40,
@@ -222,11 +175,16 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
         backgroundColor: Color(0xff04ECFF),
         title: Text('Page Family', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
         centerTitle: true,
-        leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
             },
             child: Center(child: Text('Add Family', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),),
           ),

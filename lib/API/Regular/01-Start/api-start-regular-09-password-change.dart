@@ -18,10 +18,11 @@ Future<bool> apiRegularPasswordChange({required String password, required String
   );
 
   print('The status code of regular password change is ${response.statusCode}');
+  print('The status data of regular password change is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
-    var user = newData['user'];
+    var user = newData['data'];
     int userId = user['id'];
 
     final sharedPrefs = await SharedPreferences.getInstance();

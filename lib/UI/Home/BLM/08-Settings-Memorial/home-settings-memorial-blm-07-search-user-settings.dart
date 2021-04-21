@@ -236,69 +236,43 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                     itemBuilder: (c, index) => ListTile(
                       onTap: () async{
                         if(isFamily){
-                          String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
+                          String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
 
-                          context.showLoaderOverlay();
-                          String result = await apiBLMAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
-                          context.hideLoaderOverlay();
+                          if(choice != ''){
+                            context.showLoaderOverlay();
+                            String result = await apiBLMAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
+                            context.hideLoaderOverlay();
 
-                          if(result != 'Success'){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Error: $result.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.red,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              )
-                            );
-                          }else{
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')),);
-                            Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                            if(result != 'Success'){
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Error: $result.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
+                            }else{
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')),);
+
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')));
+                              // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                              print('User settings');
+                            }
                           }
 
-
-                          // String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
-
-                          // context.showLoaderOverlay();
-                          // bool result = await apiBLMAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
-                          // context.hideLoaderOverlay();
-
-                          // if(result){
-                          //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
-                          //   Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-                          // }else{
-                          //   await showDialog(
-                          //     context: context,
-                          //     builder: (_) => 
-                          //       AssetGiffyDialog(
-                          //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          //       entryAnimation: EntryAnimation.DEFAULT,
-                          //       description: Text('This user may not accept invite requests as of the moment. Please try again later.',
-                          //         textAlign: TextAlign.center,
-                          //         style: TextStyle(),
-                          //       ),
-                          //       onlyOkButton: true,
-                          //       buttonOkColor: Colors.red,
-                          //       onOkButtonPressed: () {
-                          //         Navigator.pop(context, true);
-                          //       },
-                          //     )
-                          //   );
-                          // }
                         }else{
                           context.showLoaderOverlay();
-                          // String result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
                           String result = await apiBLMAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
                           context.hideLoaderOverlay();
 
@@ -327,34 +301,6 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                             Navigator.pop(context);
                             Navigator.push(context, newRoute);
                           }
-
-                          // context.showLoaderOverlay();
-                          // bool result = await apiBLMAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
-                          // context.hideLoaderOverlay();
-
-                          // if(result){
-                          //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
-                          //   Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-                          // }else{
-                          //   await showDialog(
-                          //     context: context,
-                          //     builder: (_) => 
-                          //       AssetGiffyDialog(
-                          //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          //       entryAnimation: EntryAnimation.DEFAULT,
-                          //       description: Text('This user may not accept invite requests as of the moment. Please try again later.',
-                          //         textAlign: TextAlign.center,
-                          //         style: TextStyle(),
-                          //       ),
-                          //       onlyOkButton: true,
-                          //       buttonOkColor: Colors.red,
-                          //       onOkButtonPressed: () {
-                          //         Navigator.pop(context, true);
-                          //       },
-                          //     )
-                          //   );
-                          // }
                         }
                       },
                       leading: users[index].image != ''

@@ -183,7 +183,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                                   onlyOkButton: true,
                                   onOkButtonPressed: () {
                                     Navigator.pop(context, true);
-                                    Navigator.popUntil(context, ModalRoute.withName('/login'));
+                                    Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
                                   },
                                 )
                               );

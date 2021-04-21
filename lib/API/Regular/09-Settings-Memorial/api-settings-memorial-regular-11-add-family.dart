@@ -49,6 +49,8 @@ Future<String> apiRegularAddFamily({required int memorialId, required int userId
 
   if(response.statusCode == 200){
     return 'Success';
+  }else if(response.statusCode == 409){
+    return 'This user is already part of the memorial page';
   }else{
     var newData = Map<String, dynamic>.from(response.data);
     return newData['error'];
