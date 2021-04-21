@@ -10,6 +10,7 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-09-delete-c
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-10-edit-comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-11-delete-reply.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-12-edit-reply.dart';
+import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
@@ -29,6 +30,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
@@ -80,7 +82,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   HomeBLMShowOriginalPostCommentsState({required this.postId});
 
   ScrollController scrollController = ScrollController();
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController(text: '');
   List<BLMOriginalComment> comments = [];
   List<BLMOriginalReply> replies = [];
   int itemRemaining = 1;
@@ -917,57 +919,79 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].userId, accountType: comments[i].userAccountType,)));
                                           },
                                           onLongPress: () async{
-                                            await showMaterialModalBottomSheet(
-                                              context: context, 
-                                              builder: (context) => 
-                                                SafeArea(
-                                                top: false,
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    ListTile(
-                                                      title: Text('Edit'),
-                                                      leading: Icon(Icons.edit),
-                                                      onTap: () async{
-                                                        controller.text = controller.text + comments[i].commentBody;
-                                                        await showModalBottomSheet(
-                                                          context: context, 
-                                                          builder: (context) => showKeyboardEdit(isEdit: true, editId: comments[i].commentId),
-                                                        );
-                                                      },
-                                                    ),
-                                                    ListTile(
-                                                      title: Text('Delete'),
-                                                      leading: Icon(Icons.delete),
-                                                      onTap: () async{  
-                                                        context.showLoaderOverlay();
-                                                        await apiBLMDeleteComment(commentId: comments[i].commentId);
-                                                        context.hideLoaderOverlay();
+                                            if(currentUserId == comments[i].userId && currentAccountType == comments[i].userAccountType){
+                                              await showMaterialModalBottomSheet(
+                                                context: context, 
+                                                builder: (context) => 
+                                                  SafeArea(
+                                                  top: false,
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      ListTile(
+                                                        title: Text('Edit'),
+                                                        leading: Icon(Icons.edit),
+                                                        onTap: () async{
+                                                          controller.text = controller.text + comments[i].commentBody;
+                                                          await showModalBottomSheet(
+                                                            context: context, 
+                                                            builder: (context) => showKeyboardEdit(isEdit: true, editId: comments[i].commentId),
+                                                          );
+                                                        },
+                                                      ),
+                                                      ListTile(
+                                                        title: Text('Delete'),
+                                                        leading: Icon(Icons.delete),
+                                                        onTap: () async{  
+                                                          context.showLoaderOverlay();
+                                                          await apiBLMDeleteComment(commentId: comments[i].commentId);
+                                                          context.hideLoaderOverlay();
 
-                                                        controller.clear();
-                                                        itemRemaining = 1;
-                                                        repliesRemaining = 1;
-                                                        comments = [];
-                                                        replies = [];
-                                                        numberOfReplies = 0;
-                                                        page1 = 1;
-                                                        page2 = 1;
-                                                        count = 0;
-                                                        commentsLikes = [];
-                                                        commentsNumberOfLikes = [];
-                                                        repliesLikes = [];
-                                                        repliesNumberOfLikes = [];
-                                                        isComment = true;
-                                                        numberOfLikes = 0;
-                                                        numberOfComments = 0;
-                                                        getOriginalPostInformation();
-                                                        onLoading();
-                                                      },
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            );
+                                                          controller.clear();
+                                                          itemRemaining = 1;
+                                                          repliesRemaining = 1;
+                                                          comments = [];
+                                                          replies = [];
+                                                          numberOfReplies = 0;
+                                                          page1 = 1;
+                                                          page2 = 1;
+                                                          count = 0;
+                                                          commentsLikes = [];
+                                                          commentsNumberOfLikes = [];
+                                                          repliesLikes = [];
+                                                          repliesNumberOfLikes = [];
+                                                          isComment = true;
+                                                          numberOfLikes = 0;
+                                                          numberOfComments = 0;
+                                                          getOriginalPostInformation();
+                                                          onLoading();
+                                                        },
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              );
+                                            }else{
+                                              await showMaterialModalBottomSheet(
+                                                context: context, 
+                                                builder: (context) => 
+                                                  SafeArea(
+                                                  top: false,
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      ListTile(
+                                                        title: Text('Report'),
+                                                        leading: Icon(Icons.edit),
+                                                        onTap: (){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: 'Post')));
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              );
+                                            }
                                           },
                                           visualDensity: VisualDensity(vertical: 4.0),
                                           leading: CircleAvatar(
@@ -1081,57 +1105,79 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId, accountType: currentAccountType,)));
                                                     },
                                                     onLongPress: () async{
-                                                      await showMaterialModalBottomSheet(
-                                                        context: context, 
-                                                        builder: (context) => 
-                                                          SafeArea(
-                                                          top: false,
-                                                          child: Column(
-                                                            mainAxisSize: MainAxisSize.min,
-                                                            children: <Widget>[
-                                                              ListTile(
-                                                                title: Text('Edit'),
-                                                                leading: Icon(Icons.edit),
-                                                                onTap: () async{
-                                                                  controller.text = controller.text + comments[i].listOfReplies[index].replyBody;
-                                                                  await showModalBottomSheet(
-                                                                    context: context, 
-                                                                    builder: (context) => showKeyboardEdit(isEdit: false, editId: comments[i].listOfReplies[index].replyId),
-                                                                  );
-                                                                },
-                                                              ),
-                                                              ListTile(
-                                                                title: Text('Delete'),
-                                                                leading: Icon(Icons.delete),
-                                                                onTap: () async{  
-                                                                  context.showLoaderOverlay();
-                                                                  await apiBLMDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
-                                                                  context.hideLoaderOverlay();
+                                                      if(currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType){
+                                                        await showMaterialModalBottomSheet(
+                                                          context: context, 
+                                                          builder: (context) => 
+                                                            SafeArea(
+                                                            top: false,
+                                                            child: Column(
+                                                              mainAxisSize: MainAxisSize.min,
+                                                              children: <Widget>[
+                                                                ListTile(
+                                                                  title: Text('Edit'),
+                                                                  leading: Icon(Icons.edit),
+                                                                  onTap: () async{
+                                                                    controller.text = controller.text + comments[i].listOfReplies[index].replyBody;
+                                                                    await showModalBottomSheet(
+                                                                      context: context, 
+                                                                      builder: (context) => showKeyboardEdit(isEdit: false, editId: comments[i].listOfReplies[index].replyId),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                                ListTile(
+                                                                  title: Text('Delete'),
+                                                                  leading: Icon(Icons.delete),
+                                                                  onTap: () async{  
+                                                                    context.showLoaderOverlay();
+                                                                    await apiBLMDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
+                                                                    context.hideLoaderOverlay();
 
-                                                                  controller.clear();
-                                                                  itemRemaining = 1;
-                                                                  repliesRemaining = 1;
-                                                                  comments = [];
-                                                                  replies = [];
-                                                                  numberOfReplies = 0;
-                                                                  page1 = 1;
-                                                                  page2 = 1;
-                                                                  count = 0;
-                                                                  commentsLikes = [];
-                                                                  commentsNumberOfLikes = [];
-                                                                  repliesLikes = [];
-                                                                  repliesNumberOfLikes = [];
-                                                                  isComment = true;
-                                                                  numberOfLikes = 0;
-                                                                  numberOfComments = 0;
-                                                                  getOriginalPostInformation();
-                                                                  onLoading();
-                                                                },
-                                                              )
-                                                            ],
-                                                          ),
-                                                        )
-                                                      );
+                                                                    controller.clear();
+                                                                    itemRemaining = 1;
+                                                                    repliesRemaining = 1;
+                                                                    comments = [];
+                                                                    replies = [];
+                                                                    numberOfReplies = 0;
+                                                                    page1 = 1;
+                                                                    page2 = 1;
+                                                                    count = 0;
+                                                                    commentsLikes = [];
+                                                                    commentsNumberOfLikes = [];
+                                                                    repliesLikes = [];
+                                                                    repliesNumberOfLikes = [];
+                                                                    isComment = true;
+                                                                    numberOfLikes = 0;
+                                                                    numberOfComments = 0;
+                                                                    getOriginalPostInformation();
+                                                                    onLoading();
+                                                                  },
+                                                                )
+                                                              ],
+                                                            ),
+                                                          )
+                                                        );
+                                                      }else{
+                                                        await showMaterialModalBottomSheet(
+                                                          context: context, 
+                                                          builder: (context) => 
+                                                            SafeArea(
+                                                            top: false,
+                                                            child: Column(
+                                                              mainAxisSize: MainAxisSize.min,
+                                                              children: <Widget>[
+                                                                ListTile(
+                                                                  title: Text('Report'),
+                                                                  leading: Icon(Icons.edit),
+                                                                  onTap: (){
+                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: 'Post')));
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          )
+                                                        );
+                                                      }
                                                     },
                                                     leading: CircleAvatar(
                                                       backgroundImage: NetworkImage(comments[i].listOfReplies[index].image),
@@ -1341,7 +1387,28 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
             GestureDetector(
               onTap: () async{
-                if(isComment == true){
+                print('comment');
+
+                if(controller.text == ''){
+                  await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Please input a comment.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      buttonOkColor: Colors.red,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
+                  );
+                }else if(isComment == true){
                   context.showLoaderOverlay();
                   await apiBLMAddComment(postId: postId, commentBody: controller.text);
                   context.hideLoaderOverlay();
@@ -1452,7 +1519,26 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
             GestureDetector(
               onTap: () async{
-                if(isEdit == true){
+                if(controller.text == ''){
+                  await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Please input a comment.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: true,
+                      buttonOkColor: Colors.red,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    )
+                  );
+                }else if(isEdit == true){
                   context.showLoaderOverlay();
                   await apiBLMEditComment(commentId: editId, commentBody: controller.text);
                   context.hideLoaderOverlay();

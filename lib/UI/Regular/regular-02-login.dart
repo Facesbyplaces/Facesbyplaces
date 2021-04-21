@@ -360,42 +360,6 @@ class RegularLoginState extends State<RegularLogin>{
                               )
                             );
                           }else{
-
-                            // context.showLoaderOverlay();
-
-                            // String deviceToken = '';
-                            // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-                            // final pushNotificationService = PushNotificationService(_firebaseMessaging);
-                            // pushNotificationService.initialise();
-                            // deviceToken = (await pushNotificationService.fcm.getToken())!;
-                            // bool result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
-
-                            // context.hideLoaderOverlay();
-
-                            // if(result){
-                            //   Navigator.pushReplacementNamed(context, '/home/regular');
-                            // }else{
-                            //   await showDialog(
-                            //     context: context,
-                            //     builder: (_) => 
-                            //       AssetGiffyDialog(
-                            //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //       entryAnimation: EntryAnimation.DEFAULT,
-                            //       description: Text('Invalid email, password or type of account. Please try again.',
-                            //         textAlign: TextAlign.center,
-                            //         style: TextStyle(),
-                            //       ),
-                            //       onlyOkButton: true,
-                            //       buttonOkColor: Colors.red,
-                            //       onOkButtonPressed: () {
-                            //         Navigator.pop(context, true);
-                            //       },
-                            //     )
-                            //   );
-                            // }
-
-
                             context.showLoaderOverlay();
 
                             String deviceToken = '';

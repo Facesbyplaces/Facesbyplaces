@@ -5,6 +5,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
 class RegularPasswordResetEmail extends StatefulWidget{
@@ -175,6 +176,8 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                             context.showLoaderOverlay();
                             bool result = await apiRegularPasswordReset(email: _key1.currentState!.controller.text, redirectLink: response.result);
                             context.hideLoaderOverlay();
+
+                            FlutterClipboard.copy('${response.result}').then(( value ) => print('Url copied!'));
                             
                             if(result == true){
                               await showDialog(

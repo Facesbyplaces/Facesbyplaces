@@ -101,6 +101,8 @@ class UIGetStartedState extends State<UIGetStarted>{
     if(login){
       var value1 = await FlutterBranchSdk.getLatestReferringParams();
 
+      print('Reset password start');
+
       if(resetType == 'Regular'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
       }else{

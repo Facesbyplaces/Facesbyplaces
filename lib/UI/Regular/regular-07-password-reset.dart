@@ -187,7 +187,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                   onlyOkButton: true,
                                   onOkButtonPressed: () {
                                     Navigator.pop(context, true);
-                                    Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                                    Navigator.of(context).pushNamedAndRemoveUntil('/start', (Route<dynamic> route) => false);
                                   },
                                 )
                               );
