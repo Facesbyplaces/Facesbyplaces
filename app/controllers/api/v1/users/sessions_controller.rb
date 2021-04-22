@@ -183,13 +183,13 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         account_type = params[:account_type].to_i
 
         if account_type == 1
-          user = User.find_by(email: params[:email])
+          @user = User.find_by(email: params[:email])
         else
-          user = AlmUser.find_by(email: params[:email])
+          @user = AlmUser.find_by(email: params[:email])
         end 
 
         # Check if account exist or not
-        if user == nil
+        if @user == nil
           if account_type == 1
             return render json: { message: "BLM account not found. Register to login to the page.", status: 401 }, status: 401
           elsif account_type == 2
@@ -197,8 +197,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           end
         end 
 
-        if user.is_verified?
-          user.update({ device_token: params[:device_token] })
+        if @user.is_verified?
+          @user.update({ device_token: params[:device_token] })
           # render json: { success: true, user:  user, status: 200 }, status: 200
           super || render_create_success2 && super
         else
@@ -225,7 +225,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     end
 
     def render_create_success2
-      render json: { success: true, user:  user, status: 200 }, status: 200
+      render json: { success: true, user:  @user, status: 200 }, status: 200
     end
     
 end
