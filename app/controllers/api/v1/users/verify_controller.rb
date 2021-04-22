@@ -16,9 +16,9 @@ class Api::V1::Users::VerifyController < ApplicationController
             @user.update_attribute(:is_verified, true)
             render json: {success: true, message: "Successfully Verified", status: 200}, status: 200
         elsif verify_code_params[:verification_code] != @user.verification_code  
-            render json: {success: false, message: "Invalid Code", status: 200}, status: 200
+            render json: {success: false, message: "Invalid Code", status: 401}, status: 401
         elsif @user.errors.present?
-            render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 200 
+            render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404
         end
     end
 

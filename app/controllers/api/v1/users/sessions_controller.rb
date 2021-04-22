@@ -1,9 +1,5 @@
 class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
-    def render_create_success
-      # render json: { success: true, user:  user, status: 200 }, status: 200
-    end
-
     def create
       #Facebook Login
       account_type = params[:account_type].to_i
@@ -202,13 +198,13 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end 
 
         if user.is_verified?
-          user.update({ device_token: params[:device_token] }) 
+          user.update({ device_token: params[:device_token] })
           render json: { success: true, user:  user, status: 200 }, status: 200
           super
         else
           render json: {
               message: "Verify email to login to the app.",
-          }, status: 200
+          }, status: 401
         end
       end
       
@@ -223,4 +219,13 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def valid_params?(key, val)
       params[:facebook_id].present? || params[:google_id].present? ? "" : resource_params[:password] && key && val
     end
+
+    def render_create_success
+      # render json: { success: true, user:  user, status: 200 }, status: 200
+    end
+
+    def render_create_success2
+      render json: { success: true, user:  user, status: 200 }, status: 200
+    end
+    
 end
