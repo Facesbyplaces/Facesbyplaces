@@ -90,6 +90,9 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                             List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                             context.hideLoaderOverlay();
 
+                            print('The latitude is ${locationData.latitude}');
+                            print('The latitude is ${locationData.longitude}');
+
                             Navigator.pop(context);
                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                           }
@@ -98,6 +101,9 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                           Location.LocationData locationData = await location.getLocation();
                           List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                           context.hideLoaderOverlay();
+
+                          print('The latitude is ${locationData.latitude}');
+                          print('The latitude is ${locationData.longitude}');
 
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                         }
@@ -171,6 +177,9 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                 List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                                 context.hideLoaderOverlay();
 
+                                print('The latitude is ${locationData.latitude}');
+                                print('The latitude is ${locationData.longitude}');
+
                                 Navigator.pop(context);
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                               }
@@ -179,6 +188,9 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                               Location.LocationData locationData = await location.getLocation();
                               List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                               context.hideLoaderOverlay();
+
+                              print('The latitude is ${locationData.latitude}');
+                              print('The latitude is ${locationData.longitude}');
 
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                             }

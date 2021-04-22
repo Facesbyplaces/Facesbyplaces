@@ -3,13 +3,14 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc-blm-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:images_picker/images_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:share/share.dart';
 import 'misc-06-blm-button.dart';
 import 'dart:typed_data';
 import 'dart:io';
@@ -81,64 +82,16 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
           qr: qrCode!,
           color: Colors.black,
           gapless: true,
-          embeddedImageStyle: null,
-          embeddedImage: null,
         );
 
-        Directory tempDir = await getTemporaryDirectory();
-        String tempPath = tempDir.path;
-        final ts = DateTime.now().millisecondsSinceEpoch.toString();
-        String path = '$tempPath/$ts.png';
+        final ByteData bytes = (await painter.toImageData(320))!;
+        final Uint8List list = bytes.buffer.asUint8List();
 
-        Future<void> writeToFile(ByteData data, String path) async {
-          final buffer = data.buffer;
+        final tempDir = await getTemporaryDirectory();
+        final file = await new File('${tempDir.path}/qr-code.png').create();
+        file.writeAsBytesSync(list);
 
-          File qrImage = await File(path).writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
-          bool result = await ImagesPicker.saveImageToAlbum(qrImage, albumName: "");
-
-          if(result == true){
-            await showDialog(
-              context: context,
-              builder: (_) => 
-                AssetGiffyDialog(
-                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                entryAnimation: EntryAnimation.DEFAULT,
-                description: Text('Successfully saved the image to the gallery.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(),
-                ),
-                onlyOkButton: true,
-                onOkButtonPressed: () {
-                  Navigator.pop(context, true);
-                },
-              )
-            );
-          }else{
-            await showDialog(
-              context: context,
-              builder: (_) => 
-                AssetGiffyDialog(
-                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                entryAnimation: EntryAnimation.DEFAULT,
-                description: Text('Something went wrong. Please try again.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(),
-                ),
-                onlyOkButton: true,
-                buttonOkColor: Colors.red,
-                onOkButtonPressed: () {
-                  Navigator.pop(context, true);
-                },
-              )
-            );
-          }
-        }
-
-        final picData = await painter.toImageData(2048, format: ImageByteFormat.png);
-        await writeToFile(picData!, path);
-
+        Share.shareFiles(['${file.path}'], text: 'QR Code');
       }else{
         await showDialog(
           context: context,
@@ -402,60 +355,14 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
           embeddedImage: null,
         );
 
-        Directory tempDir = await getTemporaryDirectory();
-        String tempPath = tempDir.path;
-        final ts = DateTime.now().millisecondsSinceEpoch.toString();
-        String path = '$tempPath/$ts.png';
+        final ByteData bytes = (await painter.toImageData(320))!;
+        final Uint8List list = bytes.buffer.asUint8List();
 
-        Future<void> writeToFile(ByteData data, String path) async {
-          final buffer = data.buffer;
+        final tempDir = await getTemporaryDirectory();
+        final file = await new File('${tempDir.path}/qr-code.png').create();
+        file.writeAsBytesSync(list);
 
-          File qrImage = await File(path).writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
-          bool result = await ImagesPicker.saveImageToAlbum(qrImage, albumName: "");
-
-          if(result == true){
-            await showDialog(
-              context: context,
-              builder: (_) => 
-                AssetGiffyDialog(
-                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                entryAnimation: EntryAnimation.DEFAULT,
-                description: Text('Successfully saved the image to the gallery.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(),
-                ),
-                onlyOkButton: true,
-                onOkButtonPressed: () {
-                  Navigator.pop(context, true);
-                },
-              )
-            );
-          }else{
-            await showDialog(
-              context: context,
-              builder: (_) => 
-                AssetGiffyDialog(
-                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                entryAnimation: EntryAnimation.DEFAULT,
-                description: Text('Something went wrong. Please try again.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(),
-                ),
-                onlyOkButton: true,
-                buttonOkColor: Colors.red,
-                onOkButtonPressed: () {
-                  Navigator.pop(context, true);
-                },
-              )
-            );
-          }
-        }
-
-        final picData = await painter.toImageData(2048, format: ImageByteFormat.png);
-        await writeToFile(picData!, path);
-
+        Share.shareFiles(['${file.path}'], text: 'QR Code');
       }else{
         await showDialog(
           context: context,

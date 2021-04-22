@@ -39,7 +39,7 @@ dev_dependencies:
   loader_overlay: ^2.0.0
   image_picker: ^0.7.2
   font_awesome_flutter: ^9.0.0-nullsafety
-  share: ^2.0.0
+  share: ^2.0.1
   timeago: ^3.0.2
   cached_network_image: ^3.0.0-nullsafety
   flutter_spinkit: ^5.0.0

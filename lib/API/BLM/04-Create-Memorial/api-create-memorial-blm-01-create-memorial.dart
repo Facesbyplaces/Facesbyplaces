@@ -11,6 +11,9 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
+  print('The latitude in create memorial in blm is ${blmMemorial.blmLatitude}');
+  print('The longitude in create memorial in blm is ${blmMemorial.blmLongitude}');
+
   formData.files.addAll([
     MapEntry('blm[name]', MultipartFile.fromString(blmMemorial.blmMemorialName,),),
     MapEntry('blm[description]', MultipartFile.fromString(blmMemorial.blmDescription,),),

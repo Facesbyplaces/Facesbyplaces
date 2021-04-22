@@ -11,6 +11,9 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
+  print('The latitude in create memorial in regular is ${memorial.almLatitude}');
+  print('The longitude in create memorial in regular is ${memorial.almLongitude}');
+
   formData.files.addAll([
     MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
     MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),

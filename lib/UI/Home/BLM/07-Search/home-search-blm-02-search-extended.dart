@@ -106,6 +106,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   final String currentLocation;
   HomeBLMPostState({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
 
+  TextEditingController controller = TextEditingController();
   ScrollController scrollController1 = ScrollController();
   ScrollController scrollController2 = ScrollController();
   ScrollController scrollController3 = ScrollController();
@@ -449,6 +450,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                   child: Container(
                     child: TextFormField(
                       keyboardType: TextInputType.text,
+                      controller: controller,
                       onChanged: (search){
                         if(search == ''){
                           onSearch = false;
@@ -512,7 +514,54 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         hintStyle: TextStyle(
                           fontSize: 14,
                         ),
-                        prefixIcon: Icon(Icons.search, color: Colors.grey),
+                        suffixIcon: IconButton(
+                          onPressed: () async{
+                            if(controller.text == ''){
+                              setState(() {
+                                onSearch = false;
+                                searchFeeds = [];
+                                searchSuggested = [];
+                                searchNearby = [];
+                                searchBlm = [];
+                              });
+                            }else{
+                              if(toggle == 0){
+                                for(int i = 0; i < feeds.length; i++){
+                                  if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch == false){
+                                    print('The ${feeds[i].memorialName} contains ${controller.text}');
+                                    searchFeeds.add(feeds[i]);
+                                  }
+                                }
+                              }else if(toggle == 1){
+                                for(int i = 0; i < suggested.length; i++){
+                                  if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch == false){
+                                    print('The ${suggested[i].memorialName} contains ${controller.text}');
+                                    searchSuggested.add(suggested[i]);
+                                  }
+                                }
+                              }else if(toggle == 2){
+                                for(int i = 0; i < nearby.length; i++){
+                                  if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch == false){
+                                    print('The ${nearby[i].memorialName} contains ${controller.text}');
+                                    searchNearby.add(nearby[i]);
+                                  }
+                                }
+                              }else if(toggle == 3){
+                                for(int i = 0; i < blm.length; i++){
+                                  if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch == false){
+                                    print('The ${blm[i].memorialName} contains ${controller.text}');
+                                    searchBlm.add(blm[i]);
+                                  }
+                                }
+                              }
+
+                              setState(() {
+                                onSearch = true;
+                              });
+                            }
+                          },
+                          icon: Icon(Icons.search, color: Color(0xff888888),),
+                        ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: Color(0xffffffff)),
                           borderRadius: BorderRadius.all(Radius.circular(25)),

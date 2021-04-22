@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularVerifyEmail({required String verificationCode}) async{
+Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
   final sharedPrefs = await SharedPreferences.getInstance();
   int prefsUserID = sharedPrefs.getInt('regular-user-id')!;
 
@@ -25,8 +25,9 @@ Future<bool> apiRegularVerifyEmail({required String verificationCode}) async{
   print('The status code of regular verify email is ${response.statusCode}');
 
   if(response.statusCode == 200){
-    return true;
+    return 'Success';
   }else{
-    return false;
+    var newData = Map<String, dynamic>.from(response.data);
+    return newData['message'];
   }
 }

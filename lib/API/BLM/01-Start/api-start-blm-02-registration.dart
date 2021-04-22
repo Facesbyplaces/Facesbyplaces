@@ -18,6 +18,7 @@ Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) 
   );
 
   print('The status code of blm registration is ${response.statusCode}');
+  print('The status body of blm registration is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

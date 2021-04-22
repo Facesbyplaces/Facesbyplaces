@@ -13,6 +13,7 @@ import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -341,17 +342,79 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                         children: [
                           SizedBox(height: 20),
 
-                          manageDrawer.data!.showProfileInformationImage != ''
-                          ? CircleAvatar(
-                            radius: 100,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
-                          )
-                          : CircleAvatar(
-                            radius: 100,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          GestureDetector(
+                            onTap: (){
+                              showGeneralDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                barrierLabel: 'Dialog',
+                                transitionDuration: Duration(milliseconds: 0),
+                                pageBuilder: (_, __, ___) {
+                                  return Scaffold(
+                                    backgroundColor: Colors.black12.withOpacity(0.7),
+                                    body: SizedBox.expand(
+                                      child: SafeArea(
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              alignment: Alignment.centerRight,
+                                              padding: EdgeInsets.only(right: 20.0),
+                                              child: GestureDetector(
+                                                onTap: (){
+                                                  Navigator.pop(context);
+                                                },
+                                                child: CircleAvatar(
+                                                  radius: 20,
+                                                  backgroundColor: Color(0xff000000).withOpacity(0.8),
+                                                  child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                ),
+                                              ),
+                                            ),
+
+                                            SizedBox(height: 20,),
+
+                                            Expanded(
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: manageDrawer.data!.showProfileInformationImage,
+                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              )
+                                            ),
+
+                                            SizedBox(height: 80,),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: manageDrawer.data!.showProfileInformationImage != ''
+                            ? CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                            )
+                            : CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                            ),
                           ),
+
+                          // manageDrawer.data!.showProfileInformationImage != ''
+                          // ? CircleAvatar(
+                          //   radius: 100,
+                          //   backgroundColor: Color(0xff888888),
+                          //   backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                          // )
+                          // : CircleAvatar(
+                          //   radius: 100,
+                          //   backgroundColor: Color(0xff888888),
+                          //   backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          // ),
 
                           SizedBox(height: 20),
 

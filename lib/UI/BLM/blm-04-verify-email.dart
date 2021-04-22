@@ -194,10 +194,10 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                           }else{
 
                             context.showLoaderOverlay();
-                            bool result = await apiBLMVerifyEmail(verificationCode: controller.text);
+                            String result = await apiBLMVerifyEmail(verificationCode: controller.text);
                             context.hideLoaderOverlay();
 
-                            if(result){
+                            if(result == 'Success'){
                               Navigator.pushNamed(context, '/blm/upload-photo'); 
                             }else{
                               await showDialog(
@@ -207,7 +207,7 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Something went wrong. Please try again.',
+                                  description: Text('Error: $result',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(),
                                   ),

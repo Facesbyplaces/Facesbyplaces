@@ -10,7 +10,9 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({required String key
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page',
+  var response = await dioRequest.get(
+    // 'http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page',
+    'http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status) {

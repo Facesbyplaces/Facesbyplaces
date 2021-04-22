@@ -18,10 +18,10 @@ Future<String> apiBLMLogin({required String email, required String password, req
   );
 
   print('The status code of blm login is ${response.statusCode}');
+  print('The status body of blm login is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
-
     var user = newData['user'];
     int userId = user['id'];
 
@@ -36,6 +36,7 @@ Future<String> apiBLMLogin({required String email, required String password, req
     
     return 'Success';
   }else{
-    return 'Failed';
+    var newData = Map<String, dynamic>.from(response.data);
+    return newData['message'];
   }
 }

@@ -189,8 +189,6 @@ class BLMLoginState extends State<BLMLogin>{
                           context.hideLoaderOverlay();
 
                           if(result == true){
-                            // final OAuthCredential cred = FacebookAuthProvider.credential('${credential.identityToken}');
-                            // await FirebaseAuth.instance.signInWithCredential(cred);
                             Navigator.pushReplacementNamed(context, '/home/blm');
                           }else{
                               await showDialog(
@@ -344,7 +342,7 @@ class BLMLoginState extends State<BLMLogin>{
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Invalid email, password or type of account. Please try again.',
+                                  description: Text('Error: $result',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(),
                                   ),

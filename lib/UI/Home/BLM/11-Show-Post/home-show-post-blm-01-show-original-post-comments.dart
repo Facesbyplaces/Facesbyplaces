@@ -103,6 +103,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   int numberOfLikes = 0;
   int numberOfComments = 0;
   GlobalKey profileKey = GlobalKey<HomeBLMShowOriginalPostCommentsState>();
+  int maxLines = 2;
 
   Future<APIBLMShowOriginalPostMain>? showOriginalPost;
   bool likePost = false;
@@ -291,7 +292,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
           backgroundColor: Color(0xffffffff),
           body: Stack(
             children: [
-              IgnorePointer(
+              isGuestLoggedIn
+              ? Container(height: 0,)
+              : IgnorePointer(
                 ignoring: isGuestLoggedIn,
                 child: FutureBuilder<APIBLMShowOriginalPostMain>(
                   future: showOriginalPost,
@@ -399,8 +402,66 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                     Container(
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       alignment: Alignment.centerLeft, 
-                                      child: Text(originalPost.data!.blmPost.showOriginalPostBody),
+                                      // child: Text(originalPost.data!.blmPost.showOriginalPostBody),
+                                      child: RichText(
+                                        maxLines: maxLines,
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: '${originalPost.data!.blmPost.showOriginalPostBody}',
+                                                  style: TextStyle(
+                                                    color: Color(0xff000000)
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+
+                                          ],
+                                        ),
+                                      ),
+                                      // child: RichText(
+                                      //   maxLines: 2,
+                                      //   overflow: TextOverflow.ellipsis,
+                                      //   text: TextSpan(
+                                      //     text: '${originalPost.data!.blmPost.showOriginalPostBody}',
+                                      //     style: TextStyle(
+                                      //       color: Color(0xff000000)
+                                      //     ),
+                                      //     children: <TextSpan>[
+                                      //       // TextSpan(
+                                      //       //   text: '${originalPost.data!.blmPost.showOriginalPostBody}',
+                                      //       //   style: TextStyle(
+                                      //       //     color: Color(0xff000000)
+                                      //       //   ),
+                                      //       // ),
+
+                                      //       TextSpan(
+                                      //         text: 'See more',
+                                      //         style: TextStyle(
+                                      //           color: Color(0xff000000)
+                                      //         ),
+                                      //       ),
+                                      //     ],
+                                      //   ),
+                                      // ),
                                     ),
+
+                                      RichText(
+                                        text: TextSpan(
+                                          text: originalPost.data!.blmPost.showOriginalPostBody.length > 120
+                                          ? 'See more'
+                                          : 'See less'
+                                        ),
+                                    //     text: TextSpan(
+                                    //   text: 'See more',
+                                    //   style: TextStyle(
+                                    //     color: Color(0xff000000)
+                                    //   ),
+                                    // ),
+                                      ),
 
                                     originalPost.data!.blmPost.showOriginalPostImagesOrVideos.isNotEmpty
                                     ? Column(
@@ -1387,8 +1448,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
             GestureDetector(
               onTap: () async{
-                print('comment');
-
                 if(controller.text == ''){
                   await showDialog(
                     context: context,

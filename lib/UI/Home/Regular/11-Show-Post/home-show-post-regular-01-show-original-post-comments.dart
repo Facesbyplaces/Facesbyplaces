@@ -288,7 +288,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
           backgroundColor: Color(0xffffffff),
           body: Stack(
             children: [
-              IgnorePointer(
+              isGuestLoggedIn
+              ? Container(height: 0,)
+              : IgnorePointer(
                 ignoring: isGuestLoggedIn,
                 child: FutureBuilder<APIRegularShowOriginalPostMain>(
                   future: showOriginalPost,

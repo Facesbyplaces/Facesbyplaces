@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMVerifyEmail({required String verificationCode}) async{
+Future<String> apiBLMVerifyEmail({required String verificationCode}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   int prefsUserID = sharedPrefs.getInt('blm-user-id')!;
@@ -23,8 +23,9 @@ Future<bool> apiBLMVerifyEmail({required String verificationCode}) async{
   print('The status code of blm verify email is ${response.statusCode}');
 
   if(response.statusCode == 200){
-    return true;
+    return 'Success';
   }else{
-    return false;
+    var newData = Map<String, dynamic>.from(response.data);
+    return newData['message'];
   }
 }
