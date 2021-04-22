@@ -199,8 +199,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
         if user.is_verified?
           user.update({ device_token: params[:device_token] })
-          render json: { success: true, user:  user, status: 200 }, status: 200
-          super
+          # render json: { success: true, user:  user, status: 200 }, status: 200
+          super || render_create_success2 && super
         else
           render json: {
               message: "Verify email to login to the app.",
