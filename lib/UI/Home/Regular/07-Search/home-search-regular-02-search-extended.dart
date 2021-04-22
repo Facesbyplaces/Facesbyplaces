@@ -113,14 +113,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   List<RegularSearchMainSuggested> suggested = [];
   List<RegularSearchMainNearby> nearby = [];
   List<RegularSearchMainBLM> blm = [];
-
   List<RegularSearchMainPosts> searchFeeds = [];
   List<RegularSearchMainSuggested> searchSuggested = [];
   List<RegularSearchMainNearby> searchNearby = [];
   List<RegularSearchMainBLM> searchBlm = [];
-
   bool onSearch = false;
-
   int postItemRemaining = 1;
   int suggestedItemRemaining = 1;
   int nearbyBlmItemsRemaining = 1;
@@ -214,7 +211,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       if(mounted)
       setState(() {});
       page1++;
-      
     }
   }
 
@@ -245,7 +241,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       if(mounted)
       setState(() {});
       page2++;
-      
     }
   }
  
@@ -337,7 +332,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       if(mounted)
       setState(() {});
       page4++;
-      
     }
   }
 
@@ -446,75 +440,97 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           appBar: AppBar(
             flexibleSpace: Row(
               children: [
-                Expanded(
-                  flex: 2,
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
-                Container(
-                  width: SizeConfig.screenWidth! / 1.3,
-                  child: TextFormField(
-                    onChanged: (search){
-                      // if(search == ''){
-                      //   setState(() {
-                      //     onSearch = false;
-                      //   });
-                      // }
-                      setState(() {
+
+                Expanded(
+                  child: Container(
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      onChanged: (search){
                         if(search == ''){
                           onSearch = false;
                           searchFeeds = [];
                           searchSuggested = [];
+                          searchNearby = [];
+                          searchBlm = [];
                         }
-                      });
-                    },
-                    onFieldSubmitted: (search){
-                      if(toggle == 0){
-                        for(int i = 0; i < feeds.length; i++){
-                          if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
-                            print('The ${feeds[i].memorialName} contains $search');
-                            searchFeeds.add(feeds[i]);
+                      },
+                      onFieldSubmitted: (search){
+                        if(search == ''){
+                          setState(() {
+                            onSearch = false;
+                            searchFeeds = [];
+                            searchSuggested = [];
+                            searchNearby = [];
+                            searchBlm = [];
+                          });
+                        }else{
+                          if(toggle == 0){
+                            for(int i = 0; i < feeds.length; i++){
+                              if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
+                                print('The ${feeds[i].memorialName} contains $search');
+                                searchFeeds.add(feeds[i]);
+                              }
+                            }
+                          }else if(toggle == 1){
+                            for(int i = 0; i < suggested.length; i++){
+                              if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
+                                print('The ${suggested[i].memorialName} contains $search');
+                                searchSuggested.add(suggested[i]);
+                              }
+                            }
+                          }else if(toggle == 2){
+                            for(int i = 0; i < nearby.length; i++){
+                              if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
+                                print('The ${nearby[i].memorialName} contains $search');
+                                searchNearby.add(nearby[i]);
+                              }
+                            }
+                          }else if(toggle == 3){
+                            for(int i = 0; i < blm.length; i++){
+                              if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
+                                print('The ${blm[i].memorialName} contains $search');
+                                searchBlm.add(blm[i]);
+                              }
+                            }
                           }
-                        }
-                      }else if(toggle == 1){
-                        for(int j = 0; j < suggested.length; j++){
-                          if(suggested[j].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
-                            print('The ${suggested[j].memorialName} contains $search');
-                            searchSuggested.add(suggested[j]);
-                          }
-                        }
-                      }
 
-                      setState(() {
-                        onSearch = true;
-                      });
-
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(15.0),
-                      filled: true,
-                      fillColor: Color(0xffffffff),
-                      focusColor: Color(0xffffffff),
-                      hintText: 'Search Memorial',
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                      ),
-                      prefixIcon: Icon(Icons.search, color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                      ),
-                      enabledBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                      ),
-                      focusedBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                          setState(() {
+                            onSearch = true;
+                          });
+                        }
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(15.0),
+                        filled: true,
+                        fillColor: Color(0xffffffff),
+                        focusColor: Color(0xffffffff),
+                        hintText: 'Search Memorial',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                        ),
+                        prefixIcon: Icon(Icons.search, color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        enabledBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        focusedBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Expanded(child: Container()),
+
+                SizedBox(width: 20,),
               ],
             ),
             leading: Container(),
@@ -545,6 +561,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               toggle = number;
                               searchFeeds = [];
                               searchSuggested = [];
+                              searchNearby = [];
+                              searchBlm = [];
                             });
                           },
                           tabs: [
@@ -1584,7 +1602,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     return tabCount3 != 0
     ? RefreshIndicator(
       onRefresh: onRefresh3,
-      child: ListView.separated(
+      child: onSearch != true
+      ? ListView.separated(
         controller: scrollController3,
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
         physics: ClampingScrollPhysics(),
@@ -1602,6 +1621,26 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           pageType: nearby[i].pageType,
           relationship: nearby[i].relationship,
           famOrFriends: nearby[i].famOrFriends,
+        ),
+      )
+      : ListView.separated(
+        controller: scrollController3,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: ClampingScrollPhysics(),
+        itemCount: searchNearby.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) => 
+          MiscRegularManageMemorialTab(
+          index: i,
+          memorialName: searchNearby[i].memorialName,
+          description: searchNearby[i].memorialDescription,
+          image: searchNearby[i].image,
+          memorialId: searchNearby[i].memorialId,
+          managed: searchNearby[i].managed,
+          follower: searchNearby[i].follower,
+          pageType: searchNearby[i].pageType,
+          relationship: searchNearby[i].relationship,
+          famOrFriends: searchNearby[i].famOrFriends,
         ),
       )
     )
@@ -1632,7 +1671,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     return tabCount4 != 0
     ? RefreshIndicator(
       onRefresh: onRefresh3,
-      child: ListView.separated(
+      child: onSearch != true
+      ? ListView.separated(
         controller: scrollController3,
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
         physics: ClampingScrollPhysics(),
@@ -1652,6 +1692,26 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           famOrFriends: blm[i].famOrFriends,
         ),
       )
+      : ListView.separated(
+        controller: scrollController3,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: ClampingScrollPhysics(),
+        itemCount: searchBlm.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) => 
+        MiscRegularManageMemorialTab(
+          index: i,
+          memorialName: searchBlm[i].memorialName,
+          description: searchBlm[i].memorialDescription,
+          image: searchBlm[i].image,
+          memorialId: searchBlm[i].memorialId,
+          managed: searchBlm[i].managed,
+          follower: searchBlm[i].follower,
+          pageType: searchBlm[i].pageType,
+          relationship: searchBlm[i].relationship,
+          famOrFriends: searchBlm[i].famOrFriends,
+        ),
+      ),
     )
     : SingleChildScrollView(
       physics: ClampingScrollPhysics(),

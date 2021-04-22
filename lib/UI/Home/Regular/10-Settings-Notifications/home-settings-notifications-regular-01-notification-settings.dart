@@ -7,7 +7,7 @@ import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularNotificationSettings extends StatefulWidget{
@@ -101,14 +101,32 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle1,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle1 = value;
-                                });
-                                
+                                bool result = await apiRegularUpdateNotificationMemorial(hide: toggle1);
 
-                                context.showLoaderOverlay();
-                                await apiRegularUpdateNotificationMemorial(hide: toggle1);
-                                context.hideLoaderOverlay();
+                                if(result){
+                                  setState(() {
+                                    toggle1 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -124,13 +142,32 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle2,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle2 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiRegularUpdateNotificationActivities(hide: toggle2);
-                                context.hideLoaderOverlay();
+                                bool result = await apiRegularUpdateNotificationActivities(hide: toggle2);
+
+                                if(result){
+                                  setState(() {
+                                    toggle2 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -145,13 +182,32 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle3,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle3 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiRegularUpdateNotificationPostLikes(hide: toggle3);
-                                context.hideLoaderOverlay();
+                                bool result = await apiRegularUpdateNotificationPostLikes(hide: toggle3);
+
+                                if(result){
+                                  setState(() {
+                                    toggle3 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -166,13 +222,32 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle4,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle4 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiRegularUpdateNotificationPostComments(hide: toggle4);
-                                context.hideLoaderOverlay();
+                                bool result = await apiRegularUpdateNotificationPostComments(hide: toggle4);
+
+                                if(result){
+                                  setState(() {
+                                    toggle4 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -202,13 +277,32 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle5,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle5 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiRegularUpdateNotificationAddFamily(hide: toggle5);
-                                context.hideLoaderOverlay();
+                                bool result = await apiRegularUpdateNotificationAddFamily(hide: toggle5);
+
+                                if(result){
+                                  setState(() {
+                                    toggle5 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -223,13 +317,32 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle6,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle6 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiRegularUpdateNotificationAddFriends(hide: toggle6);
-                                context.hideLoaderOverlay();
+                                bool result = await apiRegularUpdateNotificationAddFriends(hide: toggle6);
+
+                                if(result){
+                                  setState(() {
+                                    toggle6 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -244,13 +357,32 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle7,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle7 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiRegularUpdateNotificationAddAdmin(hide: toggle7);
-                                context.hideLoaderOverlay();
+                                bool result = await apiRegularUpdateNotificationAddAdmin(hide: toggle7);
+
+                                if(result){
+                                  setState(() {
+                                    toggle7 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),

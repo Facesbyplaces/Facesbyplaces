@@ -7,7 +7,7 @@ import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-not
 import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMNotificationSettings extends StatefulWidget{
@@ -93,18 +93,36 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle1,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle1 = value;
-                                });
+                                bool result = await apiBLMUpdateNotificationMemorial(hide: toggle1);
 
-                                context.showLoaderOverlay();
-                                await apiBLMUpdateNotificationMemorial(hide: toggle1);
-                                context.hideLoaderOverlay();
+                                if(result){
+                                  setState(() {
+                                    toggle1 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
                             ),
-
                           ],
                         ),
 
@@ -115,13 +133,32 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle2,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle2 = value;
-                                });
+                                bool result = await apiBLMUpdateNotificationActivities(hide: toggle2);
 
-                                context.showLoaderOverlay();
-                                await apiBLMUpdateNotificationActivities(hide: toggle2);
-                                context.hideLoaderOverlay();
+                                if(result){
+                                  setState(() {
+                                    toggle2 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -136,13 +173,32 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle3,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle3 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiBLMUpdateNotificationPostLikes(hide: toggle3);
-                                context.hideLoaderOverlay();
+                                bool result = await apiBLMUpdateNotificationPostLikes(hide: toggle3);
+
+                                if(result){
+                                  setState(() {
+                                    toggle3 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -157,13 +213,32 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle4,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle4 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiBLMUpdateNotificationPostComments(hide: toggle4);
-                                context.hideLoaderOverlay();
+                                bool result = await apiBLMUpdateNotificationPostComments(hide: toggle4);
+
+                                if(result){
+                                  setState(() {
+                                    toggle4 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -193,13 +268,32 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle5,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle5 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiBLMUpdateNotificationAddFamily(hide: toggle5);
-                                context.hideLoaderOverlay();
+                                bool result = await apiBLMUpdateNotificationAddFamily(hide: toggle5);
+
+                                if(result){
+                                  setState(() {
+                                    toggle5 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -214,13 +308,32 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle6,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle6 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiBLMUpdateNotificationAddFriends(hide: toggle6);
-                                context.hideLoaderOverlay();
+                                bool result = await apiBLMUpdateNotificationAddFriends(hide: toggle6);
+
+                                if(result){
+                                  setState(() {
+                                    toggle6 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),
@@ -235,13 +348,32 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle7,
                               onChanged: (value) async{
-                                setState(() {
-                                  toggle7 = value;
-                                });
-                                
-                                context.showLoaderOverlay();
-                                await apiBLMUpdateNotificationAddAdmin(hide: toggle7);
-                                context.hideLoaderOverlay();
+                                bool result = await apiBLMUpdateNotificationAddAdmin(hide: toggle7);
+
+                                if(result){
+                                  setState(() {
+                                    toggle7 = value;
+                                  });
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               },
                               activeColor: Color(0xff2F353D),
                               activeTrackColor: Color(0xff3498DB),

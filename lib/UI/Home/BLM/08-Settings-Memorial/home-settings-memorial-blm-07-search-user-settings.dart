@@ -27,6 +27,7 @@ class HomeBLMSearchUser extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
+
   HomeBLMSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   @override
@@ -40,6 +41,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
+
   HomeBLMSearchUserState({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   TextEditingController controller = TextEditingController();
@@ -83,8 +85,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
       context.showLoaderOverlay();
       var newValue = await apiBLMSearchUsers(keywords: keywords, page: page);
       context.hideLoaderOverlay();
-      
+
       itemRemaining = newValue.blmItemsRemaining;
+
       for(int i = 0; i < newValue.blmUsers.length; i++){
         users.add(
           BLMSearchUsers(
@@ -120,16 +123,18 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
         },
         child: Scaffold(
           appBar: AppBar(
-            flexibleSpace: SafeArea(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
-                  ),
-                  Container(
-                    width: SizeConfig.screenWidth! / 1.3,
+            flexibleSpace: Row(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                ),
+
+                Expanded(
+                  child: Container(
                     child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      controller: controller,
                       onChanged: (newPlaces){
                         setState(() {
                           keywords = newPlaces;
@@ -195,9 +200,10 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                       ),
                     ),
                   ),
-                  Expanded(child: Container()),
-                ],
-              ), 
+                ),
+
+                SizedBox(width: 20,),
+              ],
             ),
             leading: Container(),
             backgroundColor: Color(0xff04ECFF),
@@ -263,14 +269,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                                 )
                               );
                             }else{
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')),);
-
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')));
-                              // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-                              print('User settings');
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)),);
                             }
                           }
-
                         }else{
                           context.showLoaderOverlay();
                           String result = await apiBLMAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
@@ -296,10 +297,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                               )
                             );
                           }else{
-                            Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers));
-                            
-                            Navigator.pop(context);
-                            Navigator.push(context, newRoute);
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)),);
                           }
                         }
                       },

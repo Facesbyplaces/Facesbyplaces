@@ -82,8 +82,12 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   
   void onLoading() async{
     if(itemRemaining != 0){
+      context.showLoaderOverlay();
       var newValue = await apiRegularSearchUsers(keywords: keywords, page: page);
+      context.hideLoaderOverlay();
+      
       itemRemaining = newValue.almItemsRemaining;
+
       for(int i = 0; i < newValue.almSearchUsers.length; i++){
         users.add(
           RegularSearchUsers(
@@ -121,84 +125,84 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
           appBar: AppBar(
             flexibleSpace: Row(
               children: [
-                Expanded(
-                  flex: 2,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Color(0xffffffff),),
-                    onPressed: (){
-                      Navigator.pop(context);
-                    },
-                  ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
-                Container(
-                  width: SizeConfig.screenWidth! / 1.3,
-                  child: TextFormField(
-                    onChanged: (newPlaces){
-                      setState(() {
-                        keywords = newPlaces;
-                      });                
 
-                      if(newPlaces != ''){
+                Expanded(
+                  child: Container(
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      controller: controller,
+                      onChanged: (newPlaces){
                         setState(() {
-                          empty = false;
-                          itemRemaining = 1;
-                          page = 1;
-                          keywords = '';
-                        });
-                      }else{
-                        empty = true;
-                        setState(() {
-                          users = [];
-                        });
-                      }
-                      
-                    },
-                    onFieldSubmitted: (newPlaces){
-                      setState(() {
-                        keywords = newPlaces;
-                      });
+                          keywords = newPlaces;
+                        });                
 
-                      if(newPlaces != ''){
-                        onLoading();
-                      }                
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(15.0),
-                      filled: true,
-                      fillColor: Color(0xffffffff),
-                      focusColor: Color(0xffffffff),
-                      hintText: 'Search User',
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: (){
+                        if(newPlaces != ''){
                           setState(() {
-                            keywords = controller.text;
+                            empty = false;
+                            itemRemaining = 1;
+                            page = 1;
+                            keywords = '';
                           });
+                        }else{
+                          empty = true;
+                          setState(() {
+                            users = [];
+                          });
+                        }
+                        
+                      },
+                      onFieldSubmitted: (newPlaces){
+                        setState(() {
+                          keywords = newPlaces;
+                        });
 
-                          if(controller.text != ''){
-                            onLoading();
-                          }
-                        },
-                        icon: Icon(Icons.search, color: Colors.grey),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                      ),
-                      enabledBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                      ),
-                      focusedBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        if(newPlaces != ''){
+                          onLoading();
+                        }                
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(15.0),
+                        filled: true,
+                        fillColor: Color(0xffffffff),
+                        focusColor: Color(0xffffffff),
+                        hintText: 'Search User',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: (){
+                            setState(() {
+                              keywords = controller.text;
+                            });
+
+                            if(controller.text != ''){
+                              onLoading();
+                            }
+                          },
+                          icon: Icon(Icons.search, color: Colors.grey),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        enabledBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        focusedBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Expanded(child: Container()),
+
+                SizedBox(width: 20,),
               ],
             ), 
             leading: Container(),
@@ -222,7 +226,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                   Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
                   SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-
                 ],
               ),
             )
@@ -266,11 +269,9 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                 )
                               );
                             }else{
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'newRoute')),);
-                              Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)),);
                             }
                           }
-
                         }else{
                           context.showLoaderOverlay();
                           String result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
@@ -296,10 +297,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                               )
                             );
                           }else{
-                            Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers));
-                            
-                            Navigator.pop(context);
-                            Navigator.push(context, newRoute);
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)),);
                           }
                         }
                       },

@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 
 Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) async{
 
-  bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;

@@ -114,6 +114,11 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   List<BLMSearchMainSuggested> suggested = [];
   List<BLMSearchMainNearby> nearby = [];
   List<BLMSearchMainBLM> blm = [];
+  List<BLMSearchMainPosts> searchFeeds = [];
+  List<BLMSearchMainSuggested> searchSuggested = [];
+  List<BLMSearchMainNearby> searchNearby = [];
+  List<BLMSearchMainBLM> searchBlm = [];
+  bool onSearch = false;
   int postItemRemaining = 1;
   int suggestedItemRemaining = 1;
   int nearbyBlmItemsRemaining = 1;
@@ -435,42 +440,97 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           appBar: AppBar(
             flexibleSpace: Row(
               children: [
-                Expanded(
-                  flex: 2,
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
-                Container(
-                  width: SizeConfig.screenWidth! / 1.3,
-                  child: TextFormField(
-                    onChanged: (search){
-                      
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(15.0),
-                      filled: true,
-                      fillColor: Color(0xffffffff),
-                      focusColor: Color(0xffffffff),
-                      hintText: 'Search Memorial',
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                      ),
-                      prefixIcon: Icon(Icons.search, color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                      ),
-                      enabledBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                      ),
-                      focusedBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+
+                Expanded(
+                  child: Container(
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      onChanged: (search){
+                        if(search == ''){
+                          onSearch = false;
+                          searchFeeds = [];
+                          searchSuggested = [];
+                          searchNearby = [];
+                          searchBlm = [];
+                        }
+                      },
+                      onFieldSubmitted: (search){
+                        if(search == ''){
+                          setState(() {
+                            onSearch = false;
+                            searchFeeds = [];
+                            searchSuggested = [];
+                            searchNearby = [];
+                            searchBlm = [];
+                          });
+                        }else{
+                          if(toggle == 0){
+                            for(int i = 0; i < feeds.length; i++){
+                              if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
+                                print('The ${feeds[i].memorialName} contains $search');
+                                searchFeeds.add(feeds[i]);
+                              }
+                            }
+                          }else if(toggle == 1){
+                            for(int i = 0; i < suggested.length; i++){
+                              if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
+                                print('The ${suggested[i].memorialName} contains $search');
+                                searchSuggested.add(suggested[i]);
+                              }
+                            }
+                          }else if(toggle == 2){
+                            for(int i = 0; i < nearby.length; i++){
+                              if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
+                                print('The ${nearby[i].memorialName} contains $search');
+                                searchNearby.add(nearby[i]);
+                              }
+                            }
+                          }else if(toggle == 3){
+                            for(int i = 0; i < blm.length; i++){
+                              if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
+                                print('The ${blm[i].memorialName} contains $search');
+                                searchBlm.add(blm[i]);
+                              }
+                            }
+                          }
+
+                          setState(() {
+                            onSearch = true;
+                          });
+                        }
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(15.0),
+                        filled: true,
+                        fillColor: Color(0xffffffff),
+                        focusColor: Color(0xffffffff),
+                        hintText: 'Search Memorial',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                        ),
+                        prefixIcon: Icon(Icons.search, color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        enabledBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        focusedBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xffffffff)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Expanded(child: Container()),
+
+                SizedBox(width: 20,),
               ],
             ),
             leading: Container(),
@@ -499,6 +559,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           onTap: (int number){
                             setState(() {
                               toggle = number;
+                              searchFeeds = [];
+                              searchSuggested = [];
+                              searchNearby = [];
+                              searchBlm = [];
                             });
                           },
                           tabs: [
@@ -632,7 +696,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     return tabCount1 != 0
     ? RefreshIndicator(
       onRefresh: onRefresh1,
-      child: ListView.separated(
+      child: onSearch != true
+      ? ListView.separated(
         controller: scrollController1,
         padding: EdgeInsets.all(10.0),
         physics: ClampingScrollPhysics(),
@@ -1035,6 +1100,410 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             ],
           );
         }
+      )
+       : ListView.separated(
+        controller: scrollController1,
+        padding: EdgeInsets.all(10.0),
+        physics: ClampingScrollPhysics(),
+        itemCount: searchFeeds.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) {
+          return searchFeeds[i].pageType == 'Blm'
+          ? MiscBLMPost(
+            userId: searchFeeds[i].userId,
+            postId: searchFeeds[i].postId,
+            memorialId: searchFeeds[i].memorialId,
+            memorialName: searchFeeds[i].memorialName,
+            timeCreated: timeago.format(DateTime.parse(searchFeeds[i].timeCreated)),
+            managed: searchFeeds[i].managed,
+            joined: searchFeeds[i].follower,
+            profileImage: searchFeeds[i].profileImage,
+            numberOfComments: searchFeeds[i].numberOfComments,
+            numberOfLikes: searchFeeds[i].numberOfLikes,
+            likeStatus: searchFeeds[i].likeStatus,
+            numberOfTagged: searchFeeds[i].numberOfTagged,
+            taggedFirstName: searchFeeds[i].taggedFirstName,
+            taggedLastName: searchFeeds[i].taggedLastName,
+            taggedId: searchFeeds[i].taggedId,
+            pageType: searchFeeds[i].pageType,
+            famOrFriends: searchFeeds[i].famOrFriends,
+            relationship: searchFeeds[i].relationship,
+            contents: [
+              Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+
+              searchFeeds[i].imagesOrVideos.isNotEmpty
+              ? Column(
+                children: [
+                  SizedBox(height: 20),
+
+                  Container(
+                    child: ((){
+                      if(searchFeeds[i].imagesOrVideos.length == 1){
+                        if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
+                          return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
+                            betterPlayerConfiguration: BetterPlayerConfiguration(
+                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                                showControls: false,
+                              ),
+                              aspectRatio: 16 / 9,
+                            ),
+                          );
+                        }else{
+                          return CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: searchFeeds[i].imagesOrVideos[0],
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                          );
+                        }
+                      }else if(searchFeeds[i].imagesOrVideos.length == 2){
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 2,
+                          itemBuilder: (BuildContext context, int index) =>  
+                            lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                            ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  showControls: false,
+                                ),
+                                aspectRatio: 16 / 9,
+                              ),
+                            )
+                            : CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: searchFeeds[i].imagesOrVideos[index],
+                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            ),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        );
+                      }else{
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 3,
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                          itemBuilder: (BuildContext context, int index) => ((){
+                            if(index != 1){
+                              return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              );
+                            }else{
+                              return ((){
+                                if(searchFeeds[i].imagesOrVideos.length - 3 > 0){
+                                  if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                    return Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
+                                          ),
+                                        ),
+
+                                        Container(color: Colors.black.withOpacity(0.5),),
+
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '${searchFeeds[i].imagesOrVideos.length - 3}',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }else{
+                                    return Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        ),
+
+                                        Container(color: Colors.black.withOpacity(0.5),),
+
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '${searchFeeds[i].imagesOrVideos.length - 3}',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                }else{
+                                  if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                    return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          showControls: false,
+                                        ),
+                                        aspectRatio: 16 / 9,
+                                      ),
+                                    );
+                                  }else{
+                                    return CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    );
+                                  }
+                                }
+                              }());
+                            }
+                          }()),
+                        );
+                      }
+                    }()),
+                  ),
+                ],
+              )
+              : Container(height: 0),
+
+            ],
+          )
+          : MiscRegularPost(
+            userId: searchFeeds[i].userId,
+            postId: searchFeeds[i].postId,
+            memorialId: searchFeeds[i].memorialId,
+            memorialName: searchFeeds[i].memorialName,
+            timeCreated: timeago.format(DateTime.parse(searchFeeds[i].timeCreated)),
+            managed: searchFeeds[i].managed,
+            joined: searchFeeds[i].follower,
+            profileImage: searchFeeds[i].profileImage,
+            numberOfComments: searchFeeds[i].numberOfComments,
+            numberOfLikes: searchFeeds[i].numberOfLikes,
+            likeStatus: searchFeeds[i].likeStatus,
+            numberOfTagged: searchFeeds[i].numberOfTagged,
+            taggedFirstName: searchFeeds[i].taggedFirstName,
+            taggedLastName: searchFeeds[i].taggedLastName,
+            taggedId: searchFeeds[i].taggedId,
+            pageType: searchFeeds[i].pageType,
+            famOrFriends: searchFeeds[i].famOrFriends,
+            relationship: searchFeeds[i].relationship,
+            contents: [
+              Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+
+              searchFeeds[i].imagesOrVideos.isNotEmpty
+              ? Column(
+                children: [
+                  SizedBox(height: 20),
+
+                  Container(
+                    child: ((){
+                      if(searchFeeds[i].imagesOrVideos.length == 1){
+                        if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
+                          return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
+                            betterPlayerConfiguration: BetterPlayerConfiguration(
+                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                                showControls: false,
+                              ),
+                              aspectRatio: 16 / 9,
+                            ),
+                          );
+                        }else{
+                          return CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: searchFeeds[i].imagesOrVideos[0],
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                          );
+                        }
+                      }else if(searchFeeds[i].imagesOrVideos.length == 2){
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 2,
+                          itemBuilder: (BuildContext context, int index) =>  
+                            lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                            ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  showControls: false,
+                                ),
+                                aspectRatio: 16 / 9,
+                              ),
+                            )
+                            : CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: searchFeeds[i].imagesOrVideos[index],
+                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            ),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        );
+                      }else{
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 3,
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                          itemBuilder: (BuildContext context, int index) => ((){
+                            if(index != 1){
+                              return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              );
+                            }else{
+                              return ((){
+                                if(searchFeeds[i].imagesOrVideos.length - 3 > 0){
+                                  if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                    return Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
+                                          ),
+                                        ),
+
+                                        Container(color: Colors.black.withOpacity(0.5),),
+
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '${searchFeeds[i].imagesOrVideos.length - 3}',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }else{
+                                    return Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        ),
+
+                                        Container(color: Colors.black.withOpacity(0.5),),
+
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '${searchFeeds[i].imagesOrVideos.length - 3}',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                }else{
+                                  if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                    return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          showControls: false,
+                                        ),
+                                        aspectRatio: 16 / 9,
+                                      ),
+                                    );
+                                  }else{
+                                    return CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    );
+                                  }
+                                }
+                              }());
+                            }
+                          }()),
+                        );
+                      }
+                    }()),
+                  ),
+                ],
+              )
+              : Container(height: 0),
+
+            ],
+          );
+        }
       ),
     )
     : SingleChildScrollView(
@@ -1064,7 +1533,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     return tabCount2 != 0
     ? RefreshIndicator(
       onRefresh: onRefresh2,
-      child: ListView.separated(
+      child: onSearch != true
+      ? ListView.separated(
         controller: scrollController2,
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
         physics: ClampingScrollPhysics(),
@@ -1084,6 +1554,26 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           famOrFriends: suggested[i].famOrFriends,
         ),
       )
+      : ListView.separated(
+        controller: scrollController2,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: ClampingScrollPhysics(),
+        itemCount: searchSuggested.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) => 
+          MiscBLMManageMemorialTab(
+          index: i,
+          memorialName: searchSuggested[i].memorialName,
+          description: searchSuggested[i].memorialDescription,
+          image: searchSuggested[i].image,
+          memorialId: searchSuggested[i].memorialId,
+          managed: searchSuggested[i].managed,
+          follower: searchSuggested[i].follower,
+          pageType: searchSuggested[i].pageType,
+          relationship: searchSuggested[i].relationship,
+          famOrFriends: searchSuggested[i].famOrFriends,
+        ),
+      ),
     )
     : SingleChildScrollView(
       physics: ClampingScrollPhysics(),
@@ -1112,7 +1602,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     return tabCount3 != 0
     ? RefreshIndicator(
       onRefresh: onRefresh3,
-      child: ListView.separated(
+      child: onSearch != true
+      ? ListView.separated(
         controller: scrollController3,
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
         physics: ClampingScrollPhysics(),
@@ -1132,6 +1623,26 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           famOrFriends: nearby[i].famOrFriends,
         ),
       )
+      : ListView.separated(
+        controller: scrollController3,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: ClampingScrollPhysics(),
+        itemCount: searchNearby.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) => 
+          MiscBLMManageMemorialTab(
+          index: i,
+          memorialName: searchNearby[i].memorialName,
+          description: searchNearby[i].memorialDescription,
+          image: searchNearby[i].image,
+          memorialId: searchNearby[i].memorialId,
+          managed: searchNearby[i].managed,
+          follower: searchNearby[i].follower,
+          pageType: searchNearby[i].pageType,
+          relationship: searchNearby[i].relationship,
+          famOrFriends: searchNearby[i].famOrFriends,
+        ),
+      ),
     )
     : SingleChildScrollView(
       physics: ClampingScrollPhysics(),
@@ -1160,7 +1671,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     return tabCount4 != 0
     ? RefreshIndicator(
       onRefresh: onRefresh3,
-      child: ListView.separated(
+      child: onSearch != true
+      ? ListView.separated(
         controller: scrollController3,
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
         physics: ClampingScrollPhysics(),
@@ -1180,6 +1692,26 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           famOrFriends: blm[i].famOrFriends,
         ),
       )
+      : ListView.separated(
+        controller: scrollController3,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: ClampingScrollPhysics(),
+        itemCount: searchBlm.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) => 
+        MiscBLMManageMemorialTab(
+          index: i,
+          memorialName: searchBlm[i].memorialName,
+          description: searchBlm[i].memorialDescription,
+          image: searchBlm[i].image,
+          memorialId: searchBlm[i].memorialId,
+          managed: searchBlm[i].managed,
+          follower: searchBlm[i].follower,
+          pageType: searchBlm[i].pageType,
+          relationship: searchBlm[i].relationship,
+          famOrFriends: searchBlm[i].famOrFriends,
+        ),
+      ),
     )
     : SingleChildScrollView(
       physics: ClampingScrollPhysics(),
