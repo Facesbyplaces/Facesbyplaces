@@ -54,7 +54,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       #Google Login
       elsif params[:google_id].present?
         validator = GoogleIDToken::Validator.new
-        required_audience = JWT.decode(params[:google_id], nil, false)
+        required_audience = JWT.decode(params[:google_id], nil, false)[0]['aud']
+
         # required_client = JWT.decode(params[:google_id], nil, false)[0]['azp']
         puts required_audience
 
