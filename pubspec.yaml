@@ -68,11 +68,11 @@ dev_dependencies:
   giffy_dialog: ^1.8.0
   fluttericon: ^2.0.0
   flutter_svg: ^0.21.0+1
-  google_sign_in: ^5.0.1
-  firebase_core: ^1.0.3
-  firebase_auth: ^1.0.3
   flutter_branch_sdk: ^3.0.0
   auth_buttons: ^1.0.0
+  firebase_core: ^1.0.3
+  firebase_auth: ^1.0.3
+  google_sign_in: ^5.0.2
   flutter_login_facebook: ^1.0.1
 
 # For information on the generic Dart part of this file, see the

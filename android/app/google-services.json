@@ -1,45 +1,41 @@
 {
   "project_info": {
-    "project_number": "397895894656",
-    "project_id": "fbp-test-a6d57",
-    "storage_bucket": "fbp-test-a6d57.appspot.com"
+    "project_number": "818046219126",
+    "project_id": "facesbyplaces-329d2",
+    "storage_bucket": "facesbyplaces-329d2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:397895894656:android:a9d0654cded2fc025a0865",
+        "mobilesdk_app_id": "1:818046219126:android:71f7017aed084b5bae4057",
         "android_client_info": {
           "package_name": "com.app.facesbyplaces"
         }
       },
       "oauth_client": [
         {
-          "client_id": "397895894656-ciuq98avvkq406hb3i15o7n29bo2prog.apps.googleusercontent.com",
+          "client_id": "818046219126-15tv4ka976v17t37uil9rm37o27o99vm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.app.facesbyplaces",
             "certificate_hash": "85aeddc686697db445614b1c9d9adbb9e3bef353"
           }
-        },
-        {
-          "client_id": "397895894656-ti7oq6veuucvg2l066p9d05c9gk9mfuu.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB2E57jctj8RO3Qc76m1aAn34rFru_FZDI"
+          "current_key": "AIzaSyCerm2d_trla9ZzlpvQos1i6JP7ErqUo8M"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "397895894656-ti7oq6veuucvg2l066p9d05c9gk9mfuu.apps.googleusercontent.com",
+              "client_id": "818046219126-0of9fq4i6hqg05fb8ngt3tessgdf9ce9.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "397895894656-r4iliof6ms3fk7ca06ni4dnujjc9up5h.apps.googleusercontent.com",
+              "client_id": "818046219126-qc9bv74pvnti5siskl4dkt5rff1oldhs.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.app.facesbyplaces"

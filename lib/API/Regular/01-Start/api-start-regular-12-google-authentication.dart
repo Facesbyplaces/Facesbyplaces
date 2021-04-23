@@ -37,11 +37,16 @@ class RegularGoogleAuthentication {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile', 'openid']);
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+      print('The authorization code is ${googleSignInAuthentication.accessToken}');
+      print('The authorization code is ${googleSignInAuthentication.serverAuthCode}');
+
+      // googleSignIn.requestScopes(scopes)
+
       FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('Token copied!'));
 
       bool result = await apiRegularSignInWithGoogle(
