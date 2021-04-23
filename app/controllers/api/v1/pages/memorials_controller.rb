@@ -41,6 +41,9 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             # save memorial
             memorial.save
 
+            memorial.update(latitude: memorial_params[:latitude], longitude: memorial_params[:longitude])
+            logger.info "Memorial Latitude ==>> #{memorial_params[:latitude]}"
+
             # save the owner of the user
             pageowner = Pageowner.new(account_type:  "AlmUser", account_id: user().id, view: 0)
             memorial.pageowner = pageowner

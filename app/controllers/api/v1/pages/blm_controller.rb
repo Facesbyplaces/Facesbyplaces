@@ -41,6 +41,7 @@ class Api::V1::Pages::BlmController < ApplicationController
                 pageowner = Pageowner.new(account_type:  "User", account_id: user().id, view: 0)
                 blm.pageowner = pageowner
 
+                blm.update(latitude: blm_params[:latitude], longitude: blm_params[:longitude])
                 # save relationship of the user to the page
                 relationship = blm.relationships.new(account: user(), relationship: params[:relationship])
                 if relationship.save 

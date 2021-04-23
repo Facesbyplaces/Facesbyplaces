@@ -61,7 +61,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
         begin
           payload = validator.check(params[:google_id], required_audience, required_audience)
-          
+          logger.info "Payload ==> #{payload}"
+          puts payload
           if params[:account_type] == "1"
             @user = User.where(email: payload['email'], account_type: params[:account_type]).first 
           else
