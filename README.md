@@ -28,3 +28,7 @@
         * ALM (Regular)
         * Start
     * ALM (Regular)
+
+### Additional Information
+ - This app has been migrated to null safety. However, this app is dependent on plugins that haven't migrated yet to null safety, namely: giffy_dialog and stripe_payment.
+ To run this app, use the command: flutter run --no-sound-null-safety
