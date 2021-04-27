@@ -44,6 +44,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
 
   void initState(){
     super.initState();
+    print('The newMemorial is $newMemorial');
+    print('The newActivities is $newActivities');
+    print('The postLikes is $postLikes');
+    print('The postComments is $postComments');
+    print('The addFamily is $addFamily');
+    print('The addFriends is $addFriends');
+    print('The addAdmin is $addAdmin');
     toggle1 = newMemorial;
     toggle2 = newActivities;
     toggle3 = postLikes;
@@ -101,7 +108,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle1,
                               onChanged: (value) async{
-                                bool result = await apiRegularUpdateNotificationMemorial(hide: toggle1);
+                                bool result = await apiRegularUpdateNotificationMemorial(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -142,7 +149,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle2,
                               onChanged: (value) async{
-                                bool result = await apiRegularUpdateNotificationActivities(hide: toggle2);
+                                bool result = await apiRegularUpdateNotificationActivities(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -182,7 +189,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle3,
                               onChanged: (value) async{
-                                bool result = await apiRegularUpdateNotificationPostLikes(hide: toggle3);
+                                bool result = await apiRegularUpdateNotificationPostLikes(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -222,7 +229,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle4,
                               onChanged: (value) async{
-                                bool result = await apiRegularUpdateNotificationPostComments(hide: toggle4);
+                                bool result = await apiRegularUpdateNotificationPostComments(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -277,7 +284,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle5,
                               onChanged: (value) async{
-                                bool result = await apiRegularUpdateNotificationAddFamily(hide: toggle5);
+                                bool result = await apiRegularUpdateNotificationAddFamily(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -317,7 +324,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle6,
                               onChanged: (value) async{
-                                bool result = await apiRegularUpdateNotificationAddFriends(hide: toggle6);
+                                bool result = await apiRegularUpdateNotificationAddFriends(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -357,7 +364,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             Switch(
                               value: toggle7,
                               onChanged: (value) async{
-                                bool result = await apiRegularUpdateNotificationAddAdmin(hide: toggle7);
+                                bool result = await apiRegularUpdateNotificationAddAdmin(hide: value);
 
                                 if(result){
                                   setState(() {

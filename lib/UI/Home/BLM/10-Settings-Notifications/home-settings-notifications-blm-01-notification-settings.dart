@@ -93,7 +93,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle1,
                               onChanged: (value) async{
-                                bool result = await apiBLMUpdateNotificationMemorial(hide: toggle1);
+                                bool result = await apiBLMUpdateNotificationMemorial(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -133,7 +133,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle2,
                               onChanged: (value) async{
-                                bool result = await apiBLMUpdateNotificationActivities(hide: toggle2);
+                                bool result = await apiBLMUpdateNotificationActivities(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -173,7 +173,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle3,
                               onChanged: (value) async{
-                                bool result = await apiBLMUpdateNotificationPostLikes(hide: toggle3);
+                                bool result = await apiBLMUpdateNotificationPostLikes(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -213,7 +213,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle4,
                               onChanged: (value) async{
-                                bool result = await apiBLMUpdateNotificationPostComments(hide: toggle4);
+                                bool result = await apiBLMUpdateNotificationPostComments(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -268,7 +268,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle5,
                               onChanged: (value) async{
-                                bool result = await apiBLMUpdateNotificationAddFamily(hide: toggle5);
+                                bool result = await apiBLMUpdateNotificationAddFamily(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -308,7 +308,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle6,
                               onChanged: (value) async{
-                                bool result = await apiBLMUpdateNotificationAddFriends(hide: toggle6);
+                                bool result = await apiBLMUpdateNotificationAddFriends(hide: value);
 
                                 if(result){
                                   setState(() {
@@ -348,7 +348,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                             Switch(
                               value: toggle7,
                               onChanged: (value) async{
-                                bool result = await apiBLMUpdateNotificationAddAdmin(hide: toggle7);
+                                bool result = await apiBLMUpdateNotificationAddAdmin(hide: value);
 
                                 if(result){
                                   setState(() {

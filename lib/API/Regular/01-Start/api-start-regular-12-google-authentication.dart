@@ -68,6 +68,17 @@ class RegularGoogleAuthentication {
       try {
         final UserCredential userCredential = await auth.signInWithCredential(credential);
         user = userCredential.user;
+
+        print('The user is $user');
+        print('The user is ${user!.displayName}');
+        print('The user is ${user.email}');
+        print('The user is ${user.refreshToken}');
+
+        IdTokenResult anotherToken = await user.getIdTokenResult();
+
+        print('The anotherToken is ${anotherToken.claims}');
+        print('The anotherToken is ${anotherToken.token}');
+
       } on FirebaseAuthException catch (e) {
         print('The firebase error is $e');
         if (e.code == 'account-exists-with-different-credential') {
