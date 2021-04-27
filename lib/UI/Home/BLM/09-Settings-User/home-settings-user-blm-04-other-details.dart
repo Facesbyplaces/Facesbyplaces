@@ -112,9 +112,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 toggle1 = !toggle1;
                               });
 
-                              context.showLoaderOverlay();
                               await apiBLMHideBirthdate(hide: toggle1);
-                              context.hideLoaderOverlay();
                             },
                             icon: Icon(Icons.remove_red_eye_rounded),
                             color: toggle1 ? Color(0xff85DBF1) : Color(0xff888888),
@@ -136,9 +134,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 toggle2 = !toggle2;
                               });
 
-                              context.showLoaderOverlay();
                               await apiBLMHideBirthplace(hide: toggle2);
-                              context.hideLoaderOverlay();
                             },
                             icon: Icon(Icons.remove_red_eye_rounded),
                             color: toggle2 ? Color(0xff85DBF1) : Color(0xff888888),
@@ -160,9 +156,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 toggle3 = !toggle3;
                               });
 
-                              context.showLoaderOverlay();
                               await apiBLMHideAddress(hide: toggle3);
-                              context.hideLoaderOverlay();
                             },
                             icon: Icon(Icons.remove_red_eye_rounded),
                             color: toggle3 ? Color(0xff85DBF1) : Color(0xff888888),
@@ -184,9 +178,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 toggle4 = !toggle4;
                               });
 
-                              context.showLoaderOverlay();
                               await apiBLMHideEmail(hide: toggle4);
-                              context.hideLoaderOverlay();
                             },
                             icon: Icon(Icons.remove_red_eye_rounded),
                             color: toggle4 ? Color(0xff85DBF1) : Color(0xff888888),
@@ -208,9 +200,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 toggle5 = !toggle5;
                               });
 
-                              context.showLoaderOverlay();
                               await apiBLMHidePhoneNumber(hide: toggle5);
-                              context.hideLoaderOverlay();
                             },
                             icon: Icon(Icons.remove_red_eye_rounded),
                             color: toggle5 ? Color(0xff85DBF1) : Color(0xff888888),

@@ -147,14 +147,13 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   if(confirmResult == true){
 
                     context.showLoaderOverlay();
-                    bool result = await apiBLMLeavePage(memorialId: memorialId);
+                    String result = await apiBLMLeavePage(memorialId: memorialId);
                     context.hideLoaderOverlay();
 
-                    if(result){
+                    if(result != 'Failed'){
                       setState(() {
                         followButton = false;
                       });
-
 
                       await showDialog(
                         context: context,

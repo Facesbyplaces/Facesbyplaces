@@ -103,7 +103,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
       children: [
 
         ListTile(
-          tileColor: Color(0xffffffff),
+          tileColor: Color(0xffaaaaaa),
           title: Text('Page Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
           subtitle: Text('Update page details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
@@ -111,7 +111,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         Container(height: 5, color: Color(0xffeeeeee),),
 
         ListTile(
-          tileColor: Color(0xffffffff),
+          tileColor: Color(0xffaaaaaa),
           title: Text('Page Image', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
           subtitle: Text('Update Page image and background image', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
@@ -119,7 +119,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         Container(height: 5, color: Color(0xffeeeeee),),
 
         ListTile(
-          tileColor: Color(0xffffffff),
+          tileColor: Color(0xffaaaaaa),
           title: Text('Admins', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
           subtitle: Text('Add or remove admins of this page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
@@ -127,7 +127,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         Container(height: 5, color: Color(0xffeeeeee),),
 
         ListTile(
-          tileColor: Color(0xffffffff),
+          tileColor: Color(0xffaaaaaa),
           title: Text('Family', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
           subtitle: Text('Add or remove family of this page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
@@ -135,7 +135,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         Container(height: 5, color: Color(0xffeeeeee),),
 
         ListTile(
-          tileColor: Color(0xffffffff),
+          tileColor: Color(0xffaaaaaa),
           title: Text('Friends', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
           subtitle: Text('Add or remove friends of this page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
@@ -201,11 +201,15 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
             if(confirmResult){
 
               context.showLoaderOverlay();
-              bool result = await apiBLMLeavePage(memorialId: memorialId);
+              String result = await apiBLMLeavePage(memorialId: memorialId);
               context.hideLoaderOverlay();
 
-              if(result){
-                Navigator.popAndPushNamed(context, '/home/blm');
+              if(result != 'Failed'){
+                if(result == 'Blm'){
+                  Navigator.popAndPushNamed(context, '/home/blm');
+                }else{
+                  Navigator.popAndPushNamed(context, '/home/regular');
+                }
               }else{
                 await showDialog(
                   context: context,
@@ -235,7 +239,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         Container(height: 5, color: Color(0xffeeeeee),),
 
         ListTile(
-          tileColor: Color(0xffffffff),
+          tileColor: Color(0xffaaaaaa),
           title: Text('Paypal', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
           subtitle: Text('Manage cards that receives the memorial gifts.', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
@@ -243,7 +247,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         Container(height: 5, color: Color(0xffeeeeee),),
 
         ListTile(
-          tileColor: Color(0xffffffff),
+          tileColor: Color(0xffaaaaaa),
           title: Text('Delete Page', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
           subtitle: Text('Completely remove the page. This is irreversible', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
@@ -264,7 +268,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
       children: [
 
         ListTile(
-          tileColor: Color(0xffffffff),
+          tileColor: Color(0xffaaaaaa),
           title: Text('Customize shown info', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
           subtitle: Text('Customize what others see on your page', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
         ),
@@ -278,7 +282,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
             children: [
               Expanded(
                 child: ListTile(
-                  tileColor: Color(0xffffffff),
+                  tileColor: Color(0xffaaaaaa),
                   title: Text('Hide Family', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
                   subtitle: Text('Show or hide family details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
                 ),
@@ -305,7 +309,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
             children: [
               Expanded(
                 child: ListTile(
-                  tileColor: Color(0xffffffff),
+                  tileColor: Color(0xffaaaaaa),
                   title: Text('Hide Friends', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
                   subtitle: Text('Show or hide friends details', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
                 ),
@@ -334,7 +338,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
             children: [
               Expanded(
                 child: ListTile(
-                  tileColor: Color(0xffffffff),
+                  tileColor: Color(0xffaaaaaa),
                   title: Text('Hide Followers', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
                   subtitle: Text('Show or hide your followers', style: TextStyle(fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
                 ),

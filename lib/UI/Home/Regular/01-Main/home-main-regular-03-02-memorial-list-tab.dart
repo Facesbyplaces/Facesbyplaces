@@ -134,28 +134,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   void onLoading1() async{
     if(memorialFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeMemorialsTab(page: page1).onError((error, stackTrace) async{
-        context.hideLoaderOverlay();
-        await showDialog(
-          context: context,
-          builder: (_) => 
-            AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-            entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Something went wrong. Please try again.',
-              textAlign: TextAlign.center,
-              style: TextStyle(),
-            ),
-            onlyOkButton: true,
-            buttonOkColor: Colors.red,
-            onOkButtonPressed: () {
-              Navigator.pop(context, true);
-            },
-          )
-        );
-        return Future.error('Error occurred: $error');
-      });
+      var newValue = await apiRegularHomeMemorialsTab(page: page1);
       context.hideLoaderOverlay();
 
       memorialFamilyItemsRemaining = newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining;
@@ -211,11 +190,12 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
     if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
       addMemorials2();
+      flag1 = true;
+      onLoading();
     }
   }
 
   void onLoading2() async{
-
     if(memorialFriendsItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiRegularHomeMemorialsTab(page: page2);

@@ -44,13 +44,6 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
 
   void initState(){
     super.initState();
-    print('The newMemorial is $newMemorial');
-    print('The newActivities is $newActivities');
-    print('The postLikes is $postLikes');
-    print('The postComments is $postComments');
-    print('The addFamily is $addFamily');
-    print('The addFriends is $addFriends');
-    print('The addAdmin is $addAdmin');
     toggle1 = newMemorial;
     toggle2 = newActivities;
     toggle3 = postLikes;

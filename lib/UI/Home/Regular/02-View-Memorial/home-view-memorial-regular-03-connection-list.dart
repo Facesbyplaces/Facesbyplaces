@@ -222,73 +222,81 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: TextFormField(
-              onChanged: (search){
-                if(toggle == 0){
-                  for(int i = 0; i < listsFamily.length; i++){
-                    if(listsFamily[i].firstName == search || listsFamily[i].lastName == search){
-                      searches.add(listsFamily[i]);
-                    }
-                  }
-                }else if(toggle == 1){
-                  for(int i = 0; i < listsFriends.length; i++){
-                    if(listsFriends[i].firstName == search || listsFriends[i].lastName == search){
-                      searches.add(listsFriends[i]);
-                    }
-                  }
-                }else if(toggle == 2){
-                  for(int i = 0; i < listsFollowers.length; i++){
-                    if(listsFollowers[i].firstName == search || listsFollowers[i].lastName == search){
-                      searches.add(listsFollowers[i]);
-                    }
-                  }
-                }
+            flexibleSpace: Row(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                ),
 
-                if(search == ''){
-                  setState(() {
-                    onSearch = false;
-                    searches = [];
-                  });
-                }else{
-                  setState(() {
-                    onSearch = true;
-                  });
-                }
-              },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                filled: true,
-                fillColor: Color(0xffffffff),
-                focusColor: Color(0xffffffff),
-                hintText: ((){
-                  switch(toggle){
-                    case 0: return 'Search Family';
-                    case 1: return 'Search Friends';
-                    case 2: return 'Search Followers';
-                  }
-                }()),
-                hintStyle: TextStyle(fontSize: 16,),
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                Expanded(
+                  child: TextFormField(
+                    onChanged: (search){
+                      if(toggle == 0){
+                        for(int i = 0; i < listsFamily.length; i++){
+                          if(listsFamily[i].firstName == search || listsFamily[i].lastName == search){
+                            searches.add(listsFamily[i]);
+                          }
+                        }
+                      }else if(toggle == 1){
+                        for(int i = 0; i < listsFriends.length; i++){
+                          if(listsFriends[i].firstName == search || listsFriends[i].lastName == search){
+                            searches.add(listsFriends[i]);
+                          }
+                        }
+                      }else if(toggle == 2){
+                        for(int i = 0; i < listsFollowers.length; i++){
+                          if(listsFollowers[i].firstName == search || listsFollowers[i].lastName == search){
+                            searches.add(listsFollowers[i]);
+                          }
+                        }
+                      }
+
+                      if(search == ''){
+                        setState(() {
+                          onSearch = false;
+                          searches = [];
+                        });
+                      }else{
+                        setState(() {
+                          onSearch = true;
+                        });
+                      }
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15.0),
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      focusColor: Color(0xffffffff),
+                      hintText: ((){
+                        switch(toggle){
+                          case 0: return 'Search Family';
+                          case 1: return 'Search Friends';
+                          case 2: return 'Search Followers';
+                        }
+                      }()),
+                      hintStyle: TextStyle(fontSize: 16,),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      focusedBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                  ),
                 ),
-                enabledBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-              ),
+
+                SizedBox(width: 20,),
+              ],
             ),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
+            leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
           body: Column(
@@ -392,17 +400,37 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       }
                     }
                   },
-                  child: onSearch
-                  ? CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888),
-                    backgroundImage: NetworkImage(searches[index].image),
-                  )
-                  : CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888),
-                    backgroundImage: NetworkImage(listsFamily[index].image),
-                  ),
+                  child: ((){
+                    if(onSearch){
+                      if(searches[index].image != ''){
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: NetworkImage(searches[index].image),
+                        );
+                      }else{
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                        );
+                      }
+                    }else{
+                      if(listsFamily[index].image != ''){
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: NetworkImage(listsFamily[index].image),
+                        );
+                      }else{
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                        );
+                      }
+                    }
+                  }()),
                 ),
               ),
 
@@ -448,17 +476,37 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       }
                     }
                   },
-                  child: onSearch
-                  ? CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888),
-                    backgroundImage: NetworkImage(searches[index].image),
-                  )
-                  : CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888),
-                    backgroundImage: NetworkImage(listsFriends[index].image),
-                  ),
+                  child: ((){
+                    if(onSearch){
+                      if(searches[index].image != ''){
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: NetworkImage(searches[index].image),
+                        );
+                      }else{
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                        );
+                      }
+                    }else{
+                      if(listsFriends[index].image != ''){
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: NetworkImage(listsFriends[index].image),
+                        );
+                      }else{
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                        );
+                      }
+                    }
+                  }()),
                 ),
               ),
 
@@ -502,17 +550,37 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       }
                     }
                   },
-                  child: onSearch
-                  ? CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888),
-                    backgroundImage: NetworkImage(searches[index].image),
-                  )
-                  : CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888),
-                    backgroundImage: NetworkImage(listsFollowers[index].image),
-                  ),
+                  child: ((){
+                    if(onSearch){
+                      if(searches[index].image != ''){
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: NetworkImage(searches[index].image),
+                        );
+                      }else{
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                        );
+                      }
+                    }else{
+                      if(listsFollowers[index].image != ''){
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: NetworkImage(listsFollowers[index].image),
+                        );
+                      }else{
+                        return CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                        );
+                      }
+                    }
+                  }()),
                 ),
               ),
 

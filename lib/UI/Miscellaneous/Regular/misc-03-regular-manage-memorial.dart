@@ -147,10 +147,10 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                   if(confirmResult == true){
 
                     context.showLoaderOverlay();
-                    bool result = await apiRegularLeavePage(memorialId: memorialId);
+                    String result = await apiRegularLeavePage(memorialId: memorialId);
                     context.hideLoaderOverlay();
 
-                    if(result){
+                    if(result != 'Failed'){
                       setState(() {
                         followButton = false;
                       });

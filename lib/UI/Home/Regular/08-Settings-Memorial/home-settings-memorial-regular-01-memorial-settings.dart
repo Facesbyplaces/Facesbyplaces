@@ -271,9 +271,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     isSwitched1 = value;
                   });
                   
-                  context.showLoaderOverlay();      
                   await apiRegularUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
-                  context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),
@@ -305,9 +303,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     isSwitched2 = value;
                   });
 
-                  context.showLoaderOverlay();
                   await apiRegularUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
-                  context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),
@@ -339,9 +335,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     isSwitched3 = value;
                   });
 
-                  context.showLoaderOverlay();
                   await apiRegularUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
-                  context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),

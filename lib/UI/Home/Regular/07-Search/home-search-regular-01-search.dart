@@ -39,64 +39,51 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                 ),
 
                 Expanded(
-                  child: Container(
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      controller: controller,
-                      onFieldSubmitted: (String keyword) async{
-                        Location.Location location = new Location.Location();
-                        bool serviceEnabled = await location.serviceEnabled();
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    controller: controller,
+                    onFieldSubmitted: (String keyword) async{
+                      Location.Location location = new Location.Location();
+                      bool serviceEnabled = await location.serviceEnabled();
 
-                        print('The value of serviceEnabled $serviceEnabled');
+                      print('The value of serviceEnabled $serviceEnabled');
 
+                      if (!serviceEnabled) {
+                        serviceEnabled = await location.requestService();
                         if (!serviceEnabled) {
-                          serviceEnabled = await location.requestService();
-                          if (!serviceEnabled) {
-                            return;
-                          }
+                          return;
                         }
+                      }
 
-                        Location.PermissionStatus permissionGranted = await location.hasPermission();
+                      Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                        print('The permissionGranted is $permissionGranted');
+                      print('The permissionGranted is $permissionGranted');
 
-                        if (permissionGranted != Location.PermissionStatus.granted) {
-                          bool confirmation = await showDialog(
-                            context: context,
-                            builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: false,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                              onCancelButtonPressed: () {
-                                Navigator.pop(context, false);
-                              },
-                            )
-                          );
+                      if (permissionGranted != Location.PermissionStatus.granted) {
+                        bool confirmation = await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: false,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                            onCancelButtonPressed: () {
+                              Navigator.pop(context, false);
+                            },
+                          )
+                        );
 
-                          if(confirmation == true){
-                            permissionGranted = await location.requestPermission();
+                        if(confirmation == true){
+                          permissionGranted = await location.requestPermission();
 
-                            context.showLoaderOverlay();
-                            Location.LocationData locationData = await location.getLocation();
-                            List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                            context.hideLoaderOverlay();
-
-                            print('The latitude is ${locationData.latitude}');
-                            print('The latitude is ${locationData.longitude}');
-
-                            Navigator.pop(context);
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                          }
-                        }else{
                           context.showLoaderOverlay();
                           Location.LocationData locationData = await location.getLocation();
                           List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
@@ -105,85 +92,85 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                           print('The latitude is ${locationData.latitude}');
                           print('The latitude is ${locationData.longitude}');
 
+                          Navigator.pop(context);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                         }
-                      },
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(15.0),
-                        filled: true,
-                        fillColor: Color(0xffffffff),
-                        focusColor: Color(0xffffffff),
-                        hintText: 'Search a Memorial',
-                        hintStyle: TextStyle(
-                          fontSize: 14,
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffffffff)),
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                        ),
-                        enabledBorder:  OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffffffff)),
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                        ),
-                        focusedBorder:  OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffffffff)),
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                        ),
-                        suffixIcon: IconButton(
-                          onPressed: () async{
-                            Location.Location location = new Location.Location();
-                            bool serviceEnabled = await location.serviceEnabled();
+                      }else{
+                        context.showLoaderOverlay();
+                        Location.LocationData locationData = await location.getLocation();
+                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                        context.hideLoaderOverlay();
 
-                            print('The serviceEnabled is $serviceEnabled');
+                        print('The latitude is ${locationData.latitude}');
+                        print('The latitude is ${locationData.longitude}');
 
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
+                      }
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15.0),
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      focusColor: Color(0xffffffff),
+                      hintText: 'Search a Memorial',
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      focusedBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () async{
+                          Location.Location location = new Location.Location();
+                          bool serviceEnabled = await location.serviceEnabled();
+
+                          print('The serviceEnabled is $serviceEnabled');
+
+                          if (!serviceEnabled) {
+                            serviceEnabled = await location.requestService();
                             if (!serviceEnabled) {
-                              serviceEnabled = await location.requestService();
-                              if (!serviceEnabled) {
-                                return;
-                              }
+                              return;
                             }
+                          }
 
-                            Location.PermissionStatus permissionGranted = await location.hasPermission();
+                          Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                            print('The permissionGranted is $permissionGranted');
+                          print('The permissionGranted is $permissionGranted');
 
-                            if (permissionGranted != Location.PermissionStatus.granted) {
-                              bool confirmation = await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                  onlyOkButton: false,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                  onCancelButtonPressed: () {
-                                    Navigator.pop(context, false);
-                                  },
-                                )
-                              );
+                          if (permissionGranted != Location.PermissionStatus.granted) {
+                            bool confirmation = await showDialog(
+                              context: context,
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: false,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                                onCancelButtonPressed: () {
+                                  Navigator.pop(context, false);
+                                },
+                              )
+                            );
 
-                              if(confirmation == true){
-                                permissionGranted = await location.requestPermission();
+                            if(confirmation == true){
+                              permissionGranted = await location.requestPermission();
 
-                                context.showLoaderOverlay();
-                                Location.LocationData locationData = await location.getLocation();
-                                List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                                context.hideLoaderOverlay();
-
-                                print('The latitude is ${locationData.latitude}');
-                                print('The latitude is ${locationData.longitude}');
-
-                                Navigator.pop(context);
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
-                              }
-                            }else{
                               context.showLoaderOverlay();
                               Location.LocationData locationData = await location.getLocation();
                               List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
@@ -192,11 +179,22 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                               print('The latitude is ${locationData.latitude}');
                               print('The latitude is ${locationData.longitude}');
 
+                              Navigator.pop(context);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                             }
-                          },
-                          icon: Icon(Icons.search, color: Color(0xff888888),),
-                        ),
+                          }else{
+                            context.showLoaderOverlay();
+                            Location.LocationData locationData = await location.getLocation();
+                            List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
+                            context.hideLoaderOverlay();
+
+                            print('The latitude is ${locationData.latitude}');
+                            print('The latitude is ${locationData.longitude}');
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
+                          }
+                        },
+                        icon: Icon(Icons.search, color: Color(0xff888888),),
                       ),
                     ),
                   ),

@@ -509,6 +509,8 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
 
       if(ownedItemsRemaining == 0){
         addMemorials2();
+        flag1 = true;
+        onLoading();
       }
     }
   }

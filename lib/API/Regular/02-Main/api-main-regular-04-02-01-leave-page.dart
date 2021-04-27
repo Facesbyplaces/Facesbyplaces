@@ -1,16 +1,33 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularLeavePage({required int memorialId}) async{
+Future<String> apiRegularLeavePage({required int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
+  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
+  String? getAccessToken;
+  String? getUID;
+  String? getClient;
+  String result = 'Failed';
+
+  if(userSessionRegular == true){
+    result = 'Memorial';
+    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  }else if(userSessionBLM == true){
+    result = 'Blm';
+    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  }
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/relationship/leave',
+  print('The memorial id in regular is $memorialId');
+
+  var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/relationship/leave',
     options: Options(
       followRedirects: false,
       validateStatus: (status) {
@@ -27,9 +44,8 @@ Future<bool> apiRegularLeavePage({required int memorialId}) async{
   print('The status code of regular leave page is ${response.statusCode}');
 
   if(response.statusCode == 200){
-    return true;
+    return result;
   }else{
-    print('Error occurred of leave page ${response.statusMessage}');
-    return false;
+    return 'Failed';
   }
 }
