@@ -51,7 +51,9 @@ Future<bool> apiBLMLogout() async{
         'openid'
       ],
     );
+    
     await googleSignIn.signOut();
+    await googleSignIn.disconnect();
 
     FacebookLogin fb = FacebookLogin();
     await fb.logOut();

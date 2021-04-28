@@ -786,6 +786,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
                             betterPlayerConfiguration: BetterPlayerConfiguration(
                               controlsConfiguration: BetterPlayerControlsConfiguration(
+                                loadingColor: Color(0xff4EC9D4),
+                                loadingWidget: Center(child: CircularProgressIndicator(),),
                                 showControls: false,
                               ),
                               aspectRatio: 16 / 9,
@@ -811,6 +813,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  loadingColor: Color(0xff4EC9D4),
+                                  loadingWidget: Center(child: CircularProgressIndicator(),),
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -842,6 +846,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    loadingColor: Color(0xff4EC9D4),
+                                    loadingWidget: Center(child: CircularProgressIndicator(),),
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -863,6 +869,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              loadingColor: Color(0xff4EC9D4),
+                                              loadingWidget: Center(child: CircularProgressIndicator(),),
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
@@ -922,6 +930,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          loadingColor: Color(0xff4EC9D4),
+                                          loadingWidget: Center(child: CircularProgressIndicator(),),
                                           showControls: false,
                                         ),
                                         aspectRatio: 16 / 9,
@@ -983,6 +993,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
                             betterPlayerConfiguration: BetterPlayerConfiguration(
                               controlsConfiguration: BetterPlayerControlsConfiguration(
+                                loadingColor: Color(0xff4EC9D4),
+                                loadingWidget: Center(child: CircularProgressIndicator(),),
                                 showControls: false,
                               ),
                               aspectRatio: 16 / 9,
@@ -1008,6 +1020,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  loadingColor: Color(0xff4EC9D4),
+                                  loadingWidget: Center(child: CircularProgressIndicator(),),
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -1039,6 +1053,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    loadingColor: Color(0xff4EC9D4),
+                                    loadingWidget: Center(child: CircularProgressIndicator(),),
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -1060,6 +1076,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              loadingColor: Color(0xff4EC9D4),
+                                              loadingWidget: Center(child: CircularProgressIndicator(),),
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
@@ -1119,6 +1137,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          loadingColor: Color(0xff4EC9D4),
+                                          loadingWidget: Center(child: CircularProgressIndicator(),),
                                           showControls: false,
                                         ),
                                         aspectRatio: 16 / 9,
@@ -1190,6 +1210,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
                             betterPlayerConfiguration: BetterPlayerConfiguration(
                               controlsConfiguration: BetterPlayerControlsConfiguration(
+                                loadingColor: Color(0xff4EC9D4),
+                                loadingWidget: Center(child: CircularProgressIndicator(),),
                                 showControls: false,
                               ),
                               aspectRatio: 16 / 9,
@@ -1215,6 +1237,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  loadingColor: Color(0xff4EC9D4),
+                                  loadingWidget: Center(child: CircularProgressIndicator(),),
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -1246,6 +1270,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    loadingColor: Color(0xff4EC9D4),
+                                    loadingWidget: Center(child: CircularProgressIndicator(),),
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -1267,6 +1293,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              loadingColor: Color(0xff4EC9D4),
+                                              loadingWidget: Center(child: CircularProgressIndicator(),),
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
@@ -1326,6 +1354,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          loadingColor: Color(0xff4EC9D4),
+                                          loadingWidget: Center(child: CircularProgressIndicator(),),
                                           showControls: false,
                                         ),
                                         aspectRatio: 16 / 9,
@@ -1387,6 +1417,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
                             betterPlayerConfiguration: BetterPlayerConfiguration(
                               controlsConfiguration: BetterPlayerControlsConfiguration(
+                                loadingColor: Color(0xff4EC9D4),
+                                loadingWidget: Center(child: CircularProgressIndicator(),),
                                 showControls: false,
                               ),
                               aspectRatio: 16 / 9,
@@ -1412,6 +1444,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  loadingColor: Color(0xff4EC9D4),
+                                  loadingWidget: Center(child: CircularProgressIndicator(),),
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -1443,6 +1477,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    loadingColor: Color(0xff4EC9D4),
+                                    loadingWidget: Center(child: CircularProgressIndicator(),),
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -1464,6 +1500,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              loadingColor: Color(0xff4EC9D4),
+                                              loadingWidget: Center(child: CircularProgressIndicator(),),
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
@@ -1523,6 +1561,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                         controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          loadingColor: Color(0xff4EC9D4),
+                                          loadingWidget: Center(child: CircularProgressIndicator(),),
                                           showControls: false,
                                         ),
                                         aspectRatio: 16 / 9,

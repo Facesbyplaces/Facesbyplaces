@@ -8,39 +8,9 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
-class RegularPasswordResetEmail extends StatefulWidget{
-
-  RegularPasswordResetEmailState createState() => RegularPasswordResetEmailState();
-}
-
-class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
+class RegularPasswordResetEmail extends StatelessWidget{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  BranchUniversalObject? buo;
-  BranchLinkProperties? lp;
-
-  void initBranchReferences(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Link', 'App'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('custom_string', 'fbp-link')
-        ..addCustomMetadata('reset-type', 'Regular')
-    );
-
-    lp = BranchLinkProperties(
-      channel: 'facebook',
-      feature: 'sharing',
-      stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,10 +135,30 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                           );
                         }else{
                           context.showLoaderOverlay();
-                          
-                          initBranchReferences();
+
+                          BranchUniversalObject buo = BranchUniversalObject(
+                            canonicalIdentifier: 'FacesbyPlaces',
+                            title: 'FacesbyPlaces Link',
+                            imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+                            contentDescription: 'FacesbyPlaces link to the app',
+                            keywords: ['FacesbyPlaces', 'Link', 'App'],
+                            publiclyIndex: true,
+                            locallyIndex: true,
+                            contentMetadata: BranchContentMetaData()
+                              ..addCustomMetadata('custom_string', 'fbp-link')
+                              ..addCustomMetadata('reset-type', 'Regular')
+                          );
+
+                          BranchLinkProperties lp = BranchLinkProperties(
+                            channel: 'facebook',
+                            feature: 'sharing',
+                            stage: 'new share',
+                            tags: ['one', 'two', 'three']
+                          );
+                          lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+
                           FlutterBranchSdk.setIdentity('alm-user-forgot-password');
-                          BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
+                          BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
 
                           context.hideLoaderOverlay();
                           
@@ -247,7 +237,6 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                   ],
                 ),
               ),
-
             ],
           ),
         ),

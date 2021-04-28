@@ -9,12 +9,7 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class RegularVerifyEmail extends StatefulWidget{
-
-  RegularVerifyEmailState createState() => RegularVerifyEmailState();
-}
-
-class RegularVerifyEmailState extends State<RegularVerifyEmail>{
+class RegularVerifyEmail extends StatelessWidget{
 
   final TextEditingController controller = TextEditingController(text: '');
   
@@ -128,7 +123,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Another code has been sent to your email address. Please check your inbox.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
                                       onOkButtonPressed: () {
@@ -146,7 +140,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
                                       buttonOkColor: Colors.red,
@@ -171,6 +164,9 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                           fontWeight: FontWeight.bold, 
                           color: Color(0xffffffff),
                         ),
+                        width: SizeConfig.screenWidth! / 2, 
+                        height: 45,
+                        buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
 
                           if(controller.text.length != 3){
@@ -195,8 +191,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                           }else{
 
                             context.showLoaderOverlay();
-                            print('The inputted code is ${controller.text}');
-
                             String result = await apiRegularVerifyEmail(verificationCode: controller.text);
                             context.hideLoaderOverlay();
 
@@ -212,7 +206,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Error: $result',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
                                   buttonOkColor: Colors.red,
@@ -223,11 +216,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                               );
                             }
                           }
-
-                        }, 
-                        width: SizeConfig.screenWidth! / 2, 
-                        height: 45,
-                        buttonColor: Color(0xff04ECFF),
+                        },
                       ),
 
                       SizedBox(height: 40),

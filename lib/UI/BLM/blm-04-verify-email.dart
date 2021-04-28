@@ -9,12 +9,7 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class BLMVerifyEmail extends StatefulWidget{
-
-  BLMVerifyEmailState createState() => BLMVerifyEmailState();
-}
-
-class BLMVerifyEmailState extends State<BLMVerifyEmail>{
+class BLMVerifyEmail extends StatelessWidget{
 
   final TextEditingController controller = TextEditingController(text: '');
 

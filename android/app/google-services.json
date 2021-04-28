@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "60204403274",
-    "project_id": "facesbyplaces-63b7a",
-    "storage_bucket": "facesbyplaces-63b7a.appspot.com"
+    "project_number": "1032401585355",
+    "project_id": "fbp-sign-in",
+    "storage_bucket": "fbp-sign-in.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:60204403274:android:7f74445c92d23f662b74b3",
+        "mobilesdk_app_id": "1:1032401585355:android:ce751f4265667d1152474e",
         "android_client_info": {
           "package_name": "com.app.facesbyplaces"
         }
       },
       "oauth_client": [
         {
-          "client_id": "60204403274-uqoa6ss587df5fi7v4son2tuafgai1tu.apps.googleusercontent.com",
+          "client_id": "1032401585355-c6c5srm6h38511gucs068o578n4ldd85.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.app.facesbyplaces",
@@ -22,28 +22,21 @@
           }
         },
         {
-          "client_id": "60204403274-7uh25jv2drppaae3qqhrue33cdnuvdrq.apps.googleusercontent.com",
+          "client_id": "1032401585355-3h3sa4i3fflsec9q3e4ptl00q3c5iegv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAbvh6rB-7_hdSEEIocsHbSn0OO2iiFQFA"
+          "current_key": "AIzaSyDhOSSSX-aiBQFGZMnXJVRcSRaAWVVeoFk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "60204403274-7uh25jv2drppaae3qqhrue33cdnuvdrq.apps.googleusercontent.com",
+              "client_id": "1032401585355-3h3sa4i3fflsec9q3e4ptl00q3c5iegv.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "60204403274-jvgooi7o4r3mk21rp9mev3f50jhjjavf.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.app.facesbyplaces"
-              }
             }
           ]
         }

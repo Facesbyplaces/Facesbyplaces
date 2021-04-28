@@ -39,7 +39,7 @@ class RegularRegister extends StatelessWidget{
               SingleChildScrollView(
                 physics: NeverScrollableScrollPhysics(), 
                 child: Container(
-                  height: SizeConfig.screenHeight, 
+                  height: SizeConfig.screenHeight,
                   child: MiscRegularBackgroundTemplate(
                     image: AssetImage('assets/icons/background2.png'),
                   ),
@@ -153,6 +153,9 @@ class RegularRegister extends StatelessWidget{
                               fontWeight: FontWeight.bold, 
                               color: Color(0xffffffff),
                             ),
+                            width: SizeConfig.screenWidth! / 2, 
+                            height: 45,
+                            buttonColor: Color(0xff04ECFF),
                             onPressed: () async{
                               bool validEmail = false;
                               validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text );
@@ -232,11 +235,7 @@ class RegularRegister extends StatelessWidget{
                                   );
                                 }
                               }
-
-                            }, 
-                            width: SizeConfig.screenWidth! / 2, 
-                            height: 45,
-                            buttonColor: Color(0xff04ECFF),
+                            },
                           ),
 
                           SizedBox(height: 25),

@@ -121,6 +121,9 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                           fontWeight: FontWeight.bold, 
                           color: Color(0xffffffff),
                         ),
+                        width: SizeConfig.screenWidth! / 2, 
+                        height: 45,
+                        buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
 
                           if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
@@ -133,7 +136,6 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Please complete the form before submitting.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
                                 buttonOkColor: Colors.red,
@@ -152,7 +154,6 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Passwords don\'t match. Please try again.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
                                 buttonOkColor: Colors.red,
@@ -170,8 +171,6 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                             );
                             context.hideLoaderOverlay();
 
-                            print('The result is $result');
-
                             if(result){
                               await showDialog(
                                 context: context,
@@ -182,7 +181,6 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Successfully updated the password.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
                                   onOkButtonPressed: () {
@@ -201,7 +199,6 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Something went wrong. Please try again.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
                                   buttonOkColor: Colors.red,
@@ -214,9 +211,6 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                           }
                           
                         },
-                        width: SizeConfig.screenWidth! / 2, 
-                        height: 45,
-                        buttonColor: Color(0xff04ECFF),
                       ),
 
                       SizedBox(height: 20),

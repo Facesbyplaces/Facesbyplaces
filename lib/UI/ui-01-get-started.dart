@@ -4,15 +4,15 @@ import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dar
 import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'Miscellaneous/Start/misc-03-image.dart';
 import 'Regular/regular-07-password-reset.dart';
 import 'BLM/blm-07-password-reset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'ui-02-login.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -101,8 +101,6 @@ class UIGetStartedState extends State<UIGetStarted>{
     if(login){
       var value1 = await FlutterBranchSdk.getLatestReferringParams();
 
-      print('Reset password start');
-
       if(resetType == 'Regular'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
       }else{
@@ -176,47 +174,23 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: 0,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image3.png'),
-                              ),
+                              child: MiscStartImageTemplate(),
                             ),
                           ),
                           Positioned(
                             top: (SizeConfig.screenHeight! / 2) / 4,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image4.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
                             bottom: (SizeConfig.screenHeight! / 2) / 4,
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              color: Color(0xffffffff),
-                              height: 100,
-                              width: 100,
-                              child: Image.asset('assets/icons/frontpage-image5.png'),
-                            ),
+                            child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
                           ),
                           Positioned(
                             bottom: 0,
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              color: Color(0xffffffff),
-                              height: 100,
-                              width: 100,
-                              child: Image.asset('assets/icons/frontpage-image7.png'),
-                            ),
+                            child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
                           ),
 
 
@@ -224,12 +198,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: Container(
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image3.png',),
-                              ),
+                              child: MiscStartImageTemplate(),
                             ),
                           ),
                           Positioned(
@@ -237,13 +206,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image7.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -251,13 +214,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image4.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -265,13 +222,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: -pi / 80,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image5.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
 
@@ -280,13 +231,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image7.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -294,13 +239,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image5.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
                           Positioned(
@@ -308,13 +247,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image3.png'),
-                              ),
+                              child: MiscStartImageTemplate(),
                             ),
                           ),
                           Positioned(
@@ -322,13 +255,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: pi / 45,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image4.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
 
@@ -337,13 +264,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image4.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -351,13 +272,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image7.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -365,13 +280,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image5.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
                           Positioned(
@@ -379,13 +288,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: pi / 50,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image7.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
 
@@ -394,13 +297,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image3.png'),
-                              ),
+                              child: MiscStartImageTemplate(),
                             ),
                           ),
                           Positioned(
@@ -408,13 +305,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image4.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -422,13 +313,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image5.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
                           Positioned(
@@ -436,13 +321,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: -pi / 50,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image7.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
 
@@ -451,13 +330,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image7.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -465,13 +338,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image5.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
                           Positioned(
@@ -479,13 +346,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: -pi / 12,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image3.png'),
-                              ),
+                              child: MiscStartImageTemplate(),
                             ),
                           ),
                           Positioned(
@@ -493,13 +354,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image4.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
 
@@ -508,13 +363,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: -20,
                             child: Transform.rotate(
                               angle: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image4.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -522,13 +371,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: -20,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image7.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -536,12 +379,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: -20,
                             child: Transform.rotate(
                               angle: -pi / 12,
-                              child: Container(
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image4.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -549,12 +387,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: -20,
                             child: Transform.rotate(
                               angle: 0,
-                              child: Container(
-                                color: Color(0xffffffff),
-                                height: 100,
-                                width: 100,
-                                child: Image.asset('assets/icons/frontpage-image5.png'),
-                              ),
+                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
 
@@ -562,63 +395,58 @@ class UIGetStartedState extends State<UIGetStarted>{
                       ),
                     ),
 
-                    Container(
-                      child: Column(
-                        children: [
+                    Column(
+                      children: [
 
-                          Container(
-                            height: SizeConfig.screenHeight! / 2,
-                            child: Image.asset('assets/icons/logo.png', height: 200, width: 200,),
-                          ),
+                        Container(
+                          height: SizeConfig.screenHeight! / 2,
+                          child: Image.asset('assets/icons/logo.png', height: 200, width: 200,),
+                        ),
 
-                          Expanded(
-                            child: Column(
-                              children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
 
-                                Expanded(child: Container(),),
+                              Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff04ECFF),),),),
 
-                                Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff04ECFF),),),),
+                              SizedBox(height: 20),
 
-                                SizedBox(height: 20),
-
-                                Padding(
-                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: Center(
-                                    child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations', 
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: 'Roboto',
-                                        color: Color(0xffffffff),
-                                      ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                child: Center(
+                                  child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations', 
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: 'Roboto',
+                                      color: Color(0xffffffff),
                                     ),
                                   ),
                                 ),
+                              ),
 
-                                Expanded(child: Container(),),
+                              SizedBox(height: 50),
 
-                                MiscStartButtonTemplate(
-                                  buttonText: 'Get Started', 
-                                  buttonTextStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold, 
-                                    color: Color(0xffffffff),
-                                  ), 
-                                  onPressed: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => UILogin01()));
-                                  },
-                                  width: 200,
-                                  height: 45,
-                                  buttonColor: Color(0xff04ECFF),
+                              MiscStartButtonTemplate(
+                                buttonText: 'Get Started', 
+                                buttonTextStyle: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold, 
+                                  color: Color(0xffffffff),
                                 ),
+                                width: 200,
+                                height: 45,
+                                buttonColor: Color(0xff04ECFF), 
+                                onPressed: (){
+                                  Navigator.pushNamed(context, '/login');
+                                },
+                              ),
 
-                                Expanded(child: Container(),),
-
-                              ],
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
 
                   ],

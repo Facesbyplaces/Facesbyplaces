@@ -20,12 +20,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import '../ui-01-get-started.dart';
 
-class BLMLogin extends StatefulWidget{
-
-  BLMLoginState createState() => BLMLoginState();
-}
-
-class BLMLoginState extends State<BLMLogin>{
+class BLMLogin extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();

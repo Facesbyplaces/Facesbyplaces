@@ -20,13 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../ui-01-get-started.dart';
 
-
-class RegularLogin extends StatefulWidget{
-
-  RegularLoginState createState() => RegularLoginState();
-}
-
-class RegularLoginState extends State<RegularLogin>{
+class RegularLogin extends StatelessWidget{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -49,186 +43,82 @@ class RegularLoginState extends State<RegularLogin>{
           body: Stack(
             children: [
 
-              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+              SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(), 
+                child: Container(
+                  height: SizeConfig.screenHeight, 
+                  child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                ),
+              ), // BACKGROUND IMAGE
 
-              Container(
+              SingleChildScrollView(
                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                height: SizeConfig.screenHeight,
-                child: SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
-                    child: Column(
-                    
-                    children: [
+                physics: ClampingScrollPhysics(),
+                child: Column(
+                  children: [
 
-                      SizedBox(height: 40),
+                    SizedBox(height: 40),
 
-                      Align(
-                        alignment: Alignment.centerLeft, 
-                        child: IconButton(
-                          onPressed: (){
-                            Navigator.pop(context);
-                          }, 
-                          icon: Icon(
-                            Icons.arrow_back, 
-                            color: Color(0xff000000), 
-                            size: 30,
-                          ),
+                    Align(
+                      alignment: Alignment.centerLeft, 
+                      child: IconButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        }, 
+                        icon: Icon(
+                          Icons.arrow_back, 
+                          color: Color(0xff000000), 
+                          size: 30,
                         ),
                       ),
+                    ),
 
-                      SizedBox(height: 25),
+                    SizedBox(height: 25),
 
-                      Container(
-                        padding: EdgeInsets.only(left: 20.0), 
-                        alignment: Alignment.centerLeft, 
-                        child: Text(
-                          'Login', 
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xff000000),
-                          ),
+                    Container(
+                      padding: EdgeInsets.only(left: 20.0), 
+                      alignment: Alignment.centerLeft, 
+                      child: Text(
+                        'Login', 
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xff000000),
                         ),
                       ),
+                    ),
 
-                      SizedBox(height: 25),
+                    SizedBox(height: 25),
 
-                      FacebookAuthButton(
-                        height: 44,
-                        width: SizeConfig.screenWidth,
-                        onPressed: () async{
+                    FacebookAuthButton(
+                      height: 44,
+                      width: SizeConfig.screenWidth,
+                      onPressed: () async{
 
-                          final fb = FacebookLogin(debug: true);
-                          bool isLoggedIn = await fb.isLoggedIn;
+                        final fb = FacebookLogin(debug: true);
+                        bool isLoggedIn = await fb.isLoggedIn;
 
-                          if(isLoggedIn == true){
-                            context.showLoaderOverlay();
-
-                            FacebookUserProfile profile = (await fb.getUserProfile())!;
-                            String email = (await fb.getUserEmail())!;
-                            String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
-                            FacebookAccessToken token = (await fb.accessToken)!;
-
-                            bool apiResult = await apiRegularSignInWithFacebook(
-                              firstName: '${profile.name}',
-                              lastName: '',
-                              email: email, 
-                              username: email,
-                              facebookId: token.token,
-                              image: image
-                            );
-                            context.hideLoaderOverlay();
-
-                            if(apiResult == true){
-                              final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
-                              await FirebaseAuth.instance.signInWithCredential(credential);
-                              Navigator.pushReplacementNamed(context, '/home/regular');
-                            }else{
-                              await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Invalid email or password. Please try again.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
-                              );
-                            }
-
-                          }else{
-                            final result = await fb.logIn(permissions: [
-                              FacebookPermission.publicProfile,
-                              FacebookPermission.email,
-                              FacebookPermission.userFriends,
-                            ]);
-
-                            context.showLoaderOverlay();
-
-                            final email = (await fb.getUserEmail())!;
-                            final profile = (await fb.getUserProfile())!;
-                            final image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
-                            FacebookAccessToken token = (await fb.accessToken)!;
-
-                            if(result.status != FacebookLoginStatus.cancel){  
-                              bool apiResult = await apiRegularSignInWithFacebook(
-                                firstName: '${profile.name}',
-                                lastName: '',
-                                email: email, 
-                                username: email,
-                                facebookId: result.accessToken!.token,
-                                image: image,
-                              );
-                              context.hideLoaderOverlay();
-
-                              if(apiResult == false){
-                                await fb.logOut();
-                              }else{
-                                final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
-                                await FirebaseAuth.instance.signInWithCredential(credential);
-                                Navigator.pushReplacementNamed(context, '/home/regular');
-                              }
-                            }
-                          }
-
-                        },
-                      ),
-
-                      SizedBox(height: 25),
-
-                      GoogleAuthButton(
-                        splashColor: Colors.white,
-                        height: 44,
-                        width: SizeConfig.screenWidth,
-                        onPressed: () async{
-                          User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
-
-                          if (user != null) {
-                            Navigator.pushReplacementNamed(context, '/home/regular');
-                          }
-                        },
-                      ),
-
-                      SizedBox(height: 25),
-
-                      SignInWithAppleButton(
-                        onPressed: () async {
-                          AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
-                            scopes: [
-                              AppleIDAuthorizationScopes.email,
-                              AppleIDAuthorizationScopes.fullName,
-                            ],
-                            webAuthenticationOptions: WebAuthenticationOptions( 
-                              clientId: 'com.app.facesbyplaces',
-                              redirectUri: Uri.parse('https://com.app.facesbyplaces.glitch.me/callbacks/sign_in_with_apple')));
-                              final oAuthProvider = OAuthProvider('apple.com');
-                              final newCredentials = oAuthProvider.credential(idToken: credential.identityToken, accessToken: credential.authorizationCode);
-
-                              print('The newCredentials is $newCredentials');
-                              print('The newCredentials is ${newCredentials.accessToken}');
-                              print('The newCredentials is ${newCredentials.idToken}');
-                              print('The newCredentials is ${newCredentials.rawNonce}');
-                              print('The newCredentials is ${newCredentials.secret}');
-                              print('The newCredentials is ${newCredentials.providerId}');
-                              print('The newCredentials is ${newCredentials.signInMethod}');
-                              print('The newCredentials is ${newCredentials.token}');
-                              // final credential = oAuthProvider.getCredential(idToken: credential.identityToken, accessToken: credential.authorizationCode,);
-
+                        if(isLoggedIn == true){
                           context.showLoaderOverlay();
-                          bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
+
+                          FacebookUserProfile profile = (await fb.getUserProfile())!;
+                          String email = (await fb.getUserEmail())!;
+                          String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                          FacebookAccessToken token = (await fb.accessToken)!;
+
+                          bool apiResult = await apiRegularSignInWithFacebook(
+                            firstName: '${profile.name}',
+                            lastName: '',
+                            email: email, 
+                            username: email,
+                            facebookId: token.token,
+                            image: image
+                          );
                           context.hideLoaderOverlay();
 
-                          if(result == true){
-                            // final OAuthCredential cred = FacebookAuthProvider.credential('${credential.identityToken}');
-                            // await FirebaseAuth.instance.signInWithCredential(cred);
+                          if(apiResult == true){
+                            final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
+                            await FirebaseAuth.instance.signInWithCredential(credential);
                             Navigator.pushReplacementNamed(context, '/home/regular');
                           }else{
                             await showDialog(
@@ -250,242 +140,343 @@ class RegularLoginState extends State<RegularLogin>{
                               )
                             );
                           }
-                        },
-                      ),
 
-                      SizedBox(height: 40),
+                        }else{
+                          final result = await fb.logIn(permissions: [
+                            FacebookPermission.publicProfile,
+                            FacebookPermission.email,
+                            FacebookPermission.userFriends,
+                          ]);
 
-                      Center(
-                        child: Text('or log in with email', 
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300, 
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
+                          context.showLoaderOverlay();
 
-                      Padding(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0), 
-                        child: MiscRegularInputFieldTemplate(
-                          key: _key1, 
-                          labelText: 'Email Address', 
-                          type: TextInputType.emailAddress,
-                        ),
-                      ),
+                          final email = (await fb.getUserEmail())!;
+                          final profile = (await fb.getUserProfile())!;
+                          final image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                          FacebookAccessToken token = (await fb.accessToken)!;
 
-                      SizedBox(height: 20),
-
-                      Padding(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0), 
-                        child: MiscRegularInputFieldTemplate(
-                          key: _key2, 
-                          labelText: 'Password', 
-                          type: TextInputType.text, 
-                          obscureText: true,
-                        ),
-                      ),
-
-                      SizedBox(height: 20),
-
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordResetEmail()));
-                        },
-                        child: Align(
-                          alignment: Alignment.centerRight, 
-                          child: Text('Forgot Password?', 
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(height: 20),
-
-                      MiscRegularButtonTemplate(
-                        buttonText: 'Login', 
-                        buttonTextStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold, 
-                          color: Color(0xffffffff),
-                        ),
-                        width: SizeConfig.screenWidth! / 2, 
-                        height: 45,
-                        buttonColor: Color(0xff4EC9D4),
-                        onPressed: () async{
-                          
-                          bool validEmail = false;
-                          validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text );
-
-                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Please complete the form before submitting.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.red,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              )
+                          if(result.status != FacebookLoginStatus.cancel){  
+                            bool apiResult = await apiRegularSignInWithFacebook(
+                              firstName: '${profile.name}',
+                              lastName: '',
+                              email: email, 
+                              username: email,
+                              facebookId: result.accessToken!.token,
+                              image: image,
                             );
-                          }else if(!validEmail){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Invalid email address. Please try again.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.red,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              )
-                            );
-                          }else{
-                            context.showLoaderOverlay();
-
-                            String deviceToken = '';
-                            final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-                            final pushNotificationService = PushNotificationService(_firebaseMessaging);
-                            pushNotificationService.initialise();
-                            deviceToken = (await pushNotificationService.fcm.getToken())!;
-                            String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
-
                             context.hideLoaderOverlay();
 
-                            print('The result is $result');
-
-                            if(result == 'Success'){
-                              Navigator.pushReplacementNamed(context, '/home/regular');
+                            if(apiResult == false){
+                              await fb.logOut();
                             }else{
-                              await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Error: $result',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
-                              );
+                              final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
+                              await FirebaseAuth.instance.signInWithCredential(credential);
+                              Navigator.pushReplacementNamed(context, '/home/regular');
                             }
                           }
-                        },
-                      ),
+                        }
 
-                      SizedBox(height: 40),
+                      },
+                    ),
 
-                      RichText(
-                        text: TextSpan(
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'Don\'t have an Account? ', 
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Color(0xff000000),
-                              ),
-                            ),
+                    SizedBox(height: 25),
 
-                            TextSpan(
-                              text: 'Sign Up', 
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff4EC9D4),
-                              ),
-                              recognizer: TapGestureRecognizer()
-                              ..onTap = (){
-                                Navigator.pushNamed(context, '/regular/register');
-                              }
-                            ),
+                    GoogleAuthButton(
+                      splashColor: Colors.white,
+                      height: 44,
+                      width: SizeConfig.screenWidth,
+                      onPressed: () async{
+                        User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
+                        
+                        if (user != null) {
+                          Navigator.pushReplacementNamed(context, '/home/regular');
+                        }
+                      },
+                    ),
 
+                    SizedBox(height: 25),
+
+                    SignInWithAppleButton(
+                      onPressed: () async {
+                        AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
+                          scopes: [
+                            AppleIDAuthorizationScopes.email,
+                            AppleIDAuthorizationScopes.fullName,
                           ],
+                          webAuthenticationOptions: WebAuthenticationOptions( 
+                            clientId: 'com.app.facesbyplaces',
+                            redirectUri: Uri.parse('https://com.app.facesbyplaces.glitch.me/callbacks/sign_in_with_apple'),
+                          ),
+                        );
+                        final oAuthProvider = OAuthProvider('apple.com');
+                        final newCredentials = oAuthProvider.credential(idToken: credential.identityToken, accessToken: credential.authorizationCode);
+
+                        print('The newCredentials is $newCredentials');
+                        // final credential = oAuthProvider.getCredential(idToken: credential.identityToken, accessToken: credential.authorizationCode,);
+
+                        context.showLoaderOverlay();
+                        bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
+                        context.hideLoaderOverlay();
+
+                        if(result == true){
+                          // final OAuthCredential cred = FacebookAuthProvider.credential('${credential.identityToken}');
+                          // await FirebaseAuth.instance.signInWithCredential(cred);
+                          Navigator.pushReplacementNamed(context, '/home/regular');
+                        }else{
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Invalid email or password. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }
+                      },
+                    ),
+
+                    SizedBox(height: 40),
+
+                    Center(
+                      child: Text('or log in with email', 
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300, 
+                          color: Color(0xff000000),
                         ),
                       ),
+                    ),
 
-                      SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0), 
+                      child: MiscRegularInputFieldTemplate(
+                        key: _key1, 
+                        labelText: 'Email Address', 
+                        type: TextInputType.emailAddress,
+                      ),
+                    ),
 
-                      GestureDetector(
-                        onTap: () async{
-                          final sharedPrefs = await SharedPreferences.getInstance();
-                          sharedPrefs.setBool('user-guest-session', true);
-                          Navigator.pushReplacementNamed(context, '/home/regular');
-                        },
-                        child: Text('Sign in as Guest',
+                    SizedBox(height: 20),
+
+                    Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0), 
+                      child: MiscRegularInputFieldTemplate(
+                        key: _key2, 
+                        labelText: 'Password', 
+                        type: TextInputType.text, 
+                        obscureText: true,
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordResetEmail()));
+                      },
+                      child: Align(
+                        alignment: Alignment.centerRight, 
+                        child: Text('Forgot Password?', 
                           style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff4EC9D4),
                             decoration: TextDecoration.underline,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
+                    ),
 
-                      SizedBox(height: 10),
+                    SizedBox(height: 20),
 
-                      RichText(
-                        text: TextSpan(
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'Connect    /    ', 
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xff888888),
+                    MiscRegularButtonTemplate(
+                      buttonText: 'Login', 
+                      buttonTextStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold, 
+                        color: Color(0xffffffff),
+                      ),
+                      width: SizeConfig.screenWidth! / 2, 
+                      height: 45,
+                      buttonColor: Color(0xff4EC9D4),
+                      onPressed: () async{
+                        
+                        bool validEmail = false;
+                        validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text );
+
+                        if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Please complete the form before submitting.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
                               ),
-                            ),
-
-                            TextSpan(
-                              text: 'Remember    /    ',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xff888888),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }else if(!validEmail){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Invalid email address. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
                               ),
-                            ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }else{
+                          context.showLoaderOverlay();
 
-                            TextSpan(
-                              text: 'Honor',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xff888888),
-                              ),
+                          String deviceToken = '';
+                          final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+                          final pushNotificationService = PushNotificationService(_firebaseMessaging);
+                          pushNotificationService.initialise();
+                          deviceToken = (await pushNotificationService.fcm.getToken())!;
+                          String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
+
+                          context.hideLoaderOverlay();
+
+                          print('The result is $result');
+
+                          if(result == 'Success'){
+                            Navigator.pushReplacementNamed(context, '/home/regular');
+                          }else{
+                            await showDialog(
+                              context: context,
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Error: $result',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
+                            );
+                          }
+                        }
+                      },
+                    ),
+
+                    SizedBox(height: 40),
+
+                    RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Don\'t have an Account? ', 
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xff000000),
                             ),
-                          ],
+                          ),
+
+                          TextSpan(
+                            text: 'Sign Up', 
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff4EC9D4),
+                            ),
+                            recognizer: TapGestureRecognizer()
+                            ..onTap = (){
+                              Navigator.pushNamed(context, '/regular/register');
+                            }
+                          ),
+
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 10),
+
+                    GestureDetector(
+                      onTap: () async{
+                        final sharedPrefs = await SharedPreferences.getInstance();
+                        sharedPrefs.setBool('user-guest-session', true);
+                        Navigator.pushReplacementNamed(context, '/home/regular');
+                      },
+                      child: Text('Sign in as Guest',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff4EC9D4),
+                          decoration: TextDecoration.underline,
                         ),
                       ),
+                    ),
 
-                      SizedBox(height: 20),
-                      
-                    ],
-                  ),
+                    SizedBox(height: 10),
+
+                    RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Connect    /    ', 
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                              color: Color(0xff888888),
+                            ),
+                          ),
+
+                          TextSpan(
+                            text: 'Remember    /    ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                              color: Color(0xff888888),
+                            ),
+                          ),
+
+                          TextSpan(
+                            text: 'Honor',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                              color: Color(0xff888888),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+                    
+                  ],
                 ),
               ),
             ],
