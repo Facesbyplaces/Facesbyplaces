@@ -47,179 +47,176 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
 
               SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Column(
-                    children: [
-                      Column(
-                        children: [
-                          SizedBox(height: 40),
-                          
-                          Align(
-                            alignment: Alignment.topLeft, 
-                            child: IconButton(
-                              onPressed: (){
-                                Navigator.pop(context);
-                              }, 
-                              icon: Icon(
-                                Icons.arrow_back, 
-                                size: 30,
-                              ),
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(height: 40),
+                        
+                        Align(
+                          alignment: Alignment.topLeft, 
+                          child: IconButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            }, 
+                            icon: Icon(
+                              Icons.arrow_back, 
+                              size: 30,
                             ),
                           ),
-                        ],
-                      ),
-
-                      SizedBox(height: 80),
-
-                      Center(child: Text('Change Password', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
-
-                      SizedBox(height: 40,),
-
-                      Center(child: Text('Please enter your new password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
-
-                      SizedBox(height: 80,),
-
-                      Padding(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        child: MiscRegularInputFieldTemplate(
-                          key: _key1, 
-                          labelText: 'New Password', 
-                          type: TextInputType.emailAddress, 
-                          labelTextStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400, 
-                            color: Color(0xff000000),
-                          ),
-                          obscureText: true,
                         ),
-                      ),
+                      ],
+                    ),
 
-                      SizedBox(height: 40,),
+                    SizedBox(height: 80),
 
-                      Padding(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        child: MiscRegularInputFieldTemplate(
-                          key: _key2, 
-                          labelText: 'Confirm Password', 
-                          type: TextInputType.emailAddress, 
-                          labelTextStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400, 
-                            color: Color(0xff000000),
-                          ),
-                          obscureText: true,
-                        ),
-                      ),
+                    Center(child: Text('Change Password', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                      SizedBox(height: 80,),
+                    SizedBox(height: 40,),
 
-                      MiscRegularButtonTemplate(
-                        buttonText: 'Change',
-                        buttonTextStyle: TextStyle(
+                    Center(child: Text('Please enter your new password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+
+                    SizedBox(height: 80,),
+
+                    Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: MiscRegularInputFieldTemplate(
+                        key: _key1, 
+                        labelText: 'New Password', 
+                        type: TextInputType.emailAddress, 
+                        labelTextStyle: TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.bold, 
-                          color: Color(0xffffffff),
+                          fontWeight: FontWeight.w400, 
+                          color: Color(0xff000000),
                         ),
-                        width: SizeConfig.screenWidth! / 2, 
-                        height: 45,
-                        buttonColor: Color(0xff04ECFF),
-                        onPressed: () async{
+                        obscureText: true,
+                      ),
+                    ),
 
-                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
+                    SizedBox(height: 40,),
+
+                    Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: MiscRegularInputFieldTemplate(
+                        key: _key2, 
+                        labelText: 'Confirm Password', 
+                        type: TextInputType.emailAddress, 
+                        labelTextStyle: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400, 
+                          color: Color(0xff000000),
+                        ),
+                        obscureText: true,
+                      ),
+                    ),
+
+                    SizedBox(height: 80,),
+
+                    MiscRegularButtonTemplate(
+                      buttonText: 'Change',
+                      buttonTextStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold, 
+                        color: Color(0xffffffff),
+                      ),
+                      width: SizeConfig.screenWidth! / 2, 
+                      height: 45,
+                      buttonColor: Color(0xff04ECFF),
+                      onPressed: () async{
+
+                        if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Please complete the form before submitting.',
+                                textAlign: TextAlign.center,
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }else if(_key1.currentState!.controller.text != _key2.currentState!.controller.text){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Passwords don\'t match. Please try again.',
+                                textAlign: TextAlign.center,
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }else{
+                          context.showLoaderOverlay();
+                          bool result = await apiRegularPasswordChange(
+                            password: _key1.currentState!.controller.text, 
+                            passwordConfirmation: _key2.currentState!.controller.text,
+                            resetToken: resetToken,
+                          );
+                          context.hideLoaderOverlay();
+
+                          if(result){
                             await showDialog(
                               context: context,
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Please complete the form before submitting.',
+                                description: Text('Successfully updated the password.',
                                   textAlign: TextAlign.center,
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
-                                },
-                              )
-                            );
-                          }else if(_key1.currentState!.controller.text != _key2.currentState!.controller.text){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Passwords don\'t match. Please try again.',
-                                  textAlign: TextAlign.center,
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.red,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
+                                  Navigator.of(context).pushNamedAndRemoveUntil('/start', (Route<dynamic> route) => false);
                                 },
                               )
                             );
                           }else{
-                            context.showLoaderOverlay();
-                            bool result = await apiRegularPasswordChange(
-                              password: _key1.currentState!.controller.text, 
-                              passwordConfirmation: _key2.currentState!.controller.text,
-                              resetToken: resetToken,
+                            await showDialog(
+                              context: context,
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Something went wrong. Please try again.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
                             );
-                            context.hideLoaderOverlay();
-
-                            if(result){
-                              await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Successfully updated the password.',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  onlyOkButton: true,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                    Navigator.of(context).pushNamedAndRemoveUntil('/start', (Route<dynamic> route) => false);
-                                  },
-                                )
-                              );
-                            }else{
-                              await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Something went wrong. Please try again.',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
-                              );
-                            }
                           }
-                          
-                        },
-                      ),
+                        }
+                        
+                      },
+                    ),
 
-                      SizedBox(height: 20),
-                      
-                    ],
-                  ),
+                    SizedBox(height: 20),
+                    
+                  ],
                 ),
               ),
-
             ],
           ),
         ),

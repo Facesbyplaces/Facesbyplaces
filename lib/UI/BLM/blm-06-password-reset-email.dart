@@ -7,41 +7,10 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class BLMPasswordResetEmail extends StatefulWidget{
-
-  BLMPasswordResetEmailState createState() => BLMPasswordResetEmailState();
-}
-
-class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
+class BLMPasswordResetEmail extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
-
-  BranchUniversalObject? buo;
-  BranchLinkProperties? lp;
-
-  void initBranchReferences(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Link', 'App'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('custom_string', 'fbp-link')
-        ..addCustomMetadata('reset-type', 'Blm')
-    );
-
-    lp = BranchLinkProperties(
-        channel: 'facebook',
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -168,9 +137,29 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                           }else{
                             context.showLoaderOverlay();
 
-                            initBranchReferences();
+                            BranchUniversalObject buo = BranchUniversalObject(
+                              canonicalIdentifier: 'FacesbyPlaces',
+                              title: 'FacesbyPlaces Link',
+                              imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+                              contentDescription: 'FacesbyPlaces link to the app',
+                              keywords: ['FacesbyPlaces', 'Link', 'App'],
+                              publiclyIndex: true,
+                              locallyIndex: true,
+                              contentMetadata: BranchContentMetaData()
+                                ..addCustomMetadata('custom_string', 'fbp-link')
+                                ..addCustomMetadata('reset-type', 'Blm')
+                            );
+
+                            BranchLinkProperties lp = BranchLinkProperties(
+                                channel: 'facebook',
+                                feature: 'sharing',
+                                stage: 'new share',
+                              tags: ['one', 'two', 'three']
+                            );
+                            lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+
                             FlutterBranchSdk.setIdentity('blm-user-forgot-password');
-                            BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
+                            BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
 
                             context.hideLoaderOverlay();
                             
@@ -189,7 +178,6 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(),
                                     ),
                                     onlyOkButton: true,
                                     onOkButtonPressed: () {
@@ -207,7 +195,6 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('Something went wrong. Please try again.',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(),
                                     ),
                                     onlyOkButton: true,
                                     buttonOkColor: Colors.red,
@@ -227,7 +214,6 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Something went wrong. Please try again.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
                                   buttonOkColor: Colors.red,

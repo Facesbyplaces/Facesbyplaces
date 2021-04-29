@@ -1,11 +1,11 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class MiscStartImageTemplate extends StatelessWidget{
+class MiscStartImageRegularTemplate extends StatelessWidget{
 
   final String image;
   
-  MiscStartImageTemplate({
+  MiscStartImageRegularTemplate({
     this.image = 'assets/icons/frontpage-image3.png',
   });
 

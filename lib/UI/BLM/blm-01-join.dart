@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Start/misc-02-image-blm.dart';
 import 'package:flutter/material.dart';
 
 class BLMJoin extends StatelessWidget {
@@ -87,37 +88,15 @@ class BLMJoin extends StatelessWidget {
                         top: 25,
                         child: Transform.rotate(
                           angle: 75,
-                          child: Container(
-                            height: 150,
-                            width: 150,
-                            color: Color(0xffF4F3EB),
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Transform.rotate(
-                                angle: 25,
-                                child: Image.asset('assets/icons/blm-image2.png'),
-                              ),
-                            ),
-                          ),
+                          child: MiscStartImageBlmTemplate(),
                         ),
                       ),
 
                       Positioned(
                         left: 200,
                         child: Transform.rotate(
-                          angle: 101, 
-                          child: Container(
-                            height: 150,
-                            width: 150,
-                            color: Color(0xffF4F3EB),
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Transform.rotate(
-                                angle: 25,
-                                child: Image.asset('assets/icons/blm-image2.png'),
-                              ),
-                            ),
-                          ),
+                          angle: 101,
+                          child: MiscStartImageBlmTemplate(),
                         ),
                       ),
 
@@ -125,72 +104,28 @@ class BLMJoin extends StatelessWidget {
                         top: 100,
                         right: 0,
                         child: Transform.rotate(
-                          angle: 101, 
-                          child: Container(
-                            height: 150,
-                            width: 150,
-                            color: Color(0xffF4F3EB),
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Transform.rotate(
-                                angle: 25,
-                                child: Image.asset('assets/icons/blm-image2.png'),
-                              ),
-                            ),
-                          ),
+                          angle: 101,
+                          child: MiscStartImageBlmTemplate(),
                         ),
                       ),
 
                       Positioned(
                         top: 200,
                         child: Transform.rotate(
-                          angle: 101, 
-                          child: Container(
-                            height: 150,
-                            width: 150,
-                            color: Color(0xffF4F3EB),
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Transform.rotate(
-                                angle: 25,
-                                child: Image.asset('assets/icons/blm-image2.png'),
-                              ),
-                            ),
-                          ),
+                          angle: 101,
+                          child: MiscStartImageBlmTemplate(),
                         ),
                       ),
 
                       Positioned(
                         top: 200,
                         right: 0,
-                        child: Container(
-                          height: 150,
-                          width: 150,
-                          color: Color(0xffF4F3EB),
-                          child: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Transform.rotate(
-                              angle: 25,
-                              child: Image.asset('assets/icons/blm-image2.png'),
-                            ),
-                          ),
-                        ),
+                        child: MiscStartImageBlmTemplate(),
                       ),
 
                       Positioned(
                         bottom: 0,
-                        child: Container(
-                          height: 150,
-                          width: 150,
-                          color: Color(0xffF4F3EB),
-                          child: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Transform.rotate(
-                              angle: 25,
-                              child: Image.asset('assets/icons/blm-image2.png'),
-                            ),
-                          ),
-                        ),
+                        child: MiscStartImageBlmTemplate(),
                       ),
 
                       Positioned(
@@ -217,19 +152,8 @@ class BLMJoin extends StatelessWidget {
                         bottom: 0,
                         right: 0,
                         child: Transform.rotate(
-                          angle: 101, 
-                          child: Container(
-                            height: 150,
-                            width: 150,
-                            color: Color(0xffF4F3EB),
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Transform.rotate(
-                                angle: 25,
-                                child: Image.asset('assets/icons/blm-image2.png'),
-                              ),
-                            ),
-                          ),
+                          angle: 101,
+                          child: MiscStartImageBlmTemplate(),
                         ),
                       ),
 

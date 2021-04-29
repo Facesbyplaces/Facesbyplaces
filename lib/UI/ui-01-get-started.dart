@@ -5,10 +5,8 @@ import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'Miscellaneous/Start/misc-01-start-button.dart';
-import 'Miscellaneous/Start/misc-02-start-background.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'Miscellaneous/Start/misc-03-image.dart';
+import 'Miscellaneous/Start/misc-01-image-regular.dart';
 import 'Regular/regular-07-password-reset.dart';
 import 'BLM/blm-07-password-reset.dart';
 import 'package:flutter/material.dart';
@@ -162,7 +160,16 @@ class UIGetStartedState extends State<UIGetStarted>{
             Stack(
               alignment: Alignment.topCenter,
               children: [
-                MiscStartBackgroundTemplate(),
+                // MiscStartBackgroundTemplate(),
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/icons/background.png'),
+                      colorFilter: ColorFilter.srgbToLinearGamma(),
+                    ),
+                  ),
+                ),
 
                 Stack(
                   children: [
@@ -174,23 +181,23 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: 0,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: MiscStartImageTemplate(),
+                              child: MiscStartImageRegularTemplate(),
                             ),
                           ),
                           Positioned(
                             top: (SizeConfig.screenHeight! / 2) / 4,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
                             bottom: (SizeConfig.screenHeight! / 2) / 4,
-                            child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
+                            child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
                           ),
                           Positioned(
                             bottom: 0,
-                            child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
+                            child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
                           ),
 
 
@@ -198,7 +205,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: MiscStartImageTemplate(),
+                              child: MiscStartImageRegularTemplate(),
                             ),
                           ),
                           Positioned(
@@ -206,7 +213,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: 0,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -214,7 +221,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -222,7 +229,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: -pi / 80,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
 
@@ -231,7 +238,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -239,7 +246,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: 0,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
                           Positioned(
@@ -247,7 +254,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: MiscStartImageTemplate(),
+                              child: MiscStartImageRegularTemplate(),
                             ),
                           ),
                           Positioned(
@@ -255,7 +262,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: pi / 45,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
 
@@ -264,7 +271,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -272,7 +279,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: 0,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -280,7 +287,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
                           Positioned(
@@ -288,7 +295,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: pi / 50,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
 
@@ -297,7 +304,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: MiscStartImageTemplate(),
+                              child: MiscStartImageRegularTemplate(),
                             ),
                           ),
                           Positioned(
@@ -305,7 +312,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: 0,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -313,7 +320,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: 0,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
                           Positioned(
@@ -321,7 +328,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: -pi / 50,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
 
@@ -330,7 +337,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -338,7 +345,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: 0,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
                           Positioned(
@@ -346,7 +353,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: -pi / 12,
-                              child: MiscStartImageTemplate(),
+                              child: MiscStartImageRegularTemplate(),
                             ),
                           ),
                           Positioned(
@@ -354,7 +361,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: pi / 30,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
 
@@ -363,7 +370,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: -20,
                             child: Transform.rotate(
                               angle: 0,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -371,7 +378,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: -20,
                             child: Transform.rotate(
                               angle: -pi / 30,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image7.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
                             ),
                           ),
                           Positioned(
@@ -379,7 +386,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: -20,
                             child: Transform.rotate(
                               angle: -pi / 12,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image4.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
                             ),
                           ),
                           Positioned(
@@ -387,7 +394,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             right: -20,
                             child: Transform.rotate(
                               angle: 0,
-                              child: MiscStartImageTemplate(image: 'assets/icons/frontpage-image5.png'),
+                              child: MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
                             ),
                           ),
 
@@ -428,16 +435,13 @@ class UIGetStartedState extends State<UIGetStarted>{
 
                               SizedBox(height: 50),
 
-                              MiscStartButtonTemplate(
-                                buttonText: 'Get Started', 
-                                buttonTextStyle: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold, 
-                                  color: Color(0xffffffff),
-                                ),
-                                width: 200,
+                              MaterialButton(
+                                padding: EdgeInsets.zero,
+                                child: Text('Get Started', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xffffffff),),),
+                                minWidth: 200,
                                 height: 45,
-                                buttonColor: Color(0xff04ECFF), 
+                                shape: StadiumBorder(),
+                                color: Color(0xff04ECFF),
                                 onPressed: (){
                                   Navigator.pushNamed(context, '/login');
                                 },

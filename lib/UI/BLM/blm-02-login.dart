@@ -103,7 +103,6 @@ class BLMLogin extends StatelessWidget{
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Invalid email or password. Please try again.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
                                   buttonOkColor: Colors.red,
@@ -148,7 +147,6 @@ class BLMLogin extends StatelessWidget{
                               }
                             }
                           }
-
                         },
                       ),
 
@@ -171,7 +169,6 @@ class BLMLogin extends StatelessWidget{
 
                       SignInWithAppleButton(
                         onPressed: () async {
-
                           AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
                             scopes: [
                               AppleIDAuthorizationScopes.email,
@@ -195,7 +192,6 @@ class BLMLogin extends StatelessWidget{
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Invalid email or password. Please try again.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
                                 buttonOkColor: Colors.red,
@@ -205,7 +201,6 @@ class BLMLogin extends StatelessWidget{
                               )
                             );
                           }
-
                         },
                       ),
 
@@ -246,9 +241,6 @@ class BLMLogin extends StatelessWidget{
                       SizedBox(height: 20),
 
                       GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordResetEmail()));
-                        },
                         child: Align(
                           alignment: Alignment.centerRight, 
                           child: Text('Forgot Password?', 
@@ -259,6 +251,9 @@ class BLMLogin extends StatelessWidget{
                             ),
                           ),
                         ),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordResetEmail()));
+                        },
                       ),
 
                       SizedBox(height: 20),
@@ -287,7 +282,6 @@ class BLMLogin extends StatelessWidget{
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Please complete the form before submitting.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
                                 buttonOkColor: Colors.red,
@@ -306,7 +300,6 @@ class BLMLogin extends StatelessWidget{
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Invalid email address. Please try again.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
                                 buttonOkColor: Colors.red,
@@ -339,7 +332,6 @@ class BLMLogin extends StatelessWidget{
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Error: $result',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
                                   buttonOkColor: Colors.red,
@@ -350,7 +342,6 @@ class BLMLogin extends StatelessWidget{
                               );
                             }
                           }
-
                         },
                       ),
 
@@ -386,11 +377,6 @@ class BLMLogin extends StatelessWidget{
                       SizedBox(height: 10),
 
                       GestureDetector(
-                        onTap: () async{
-                          final sharedPrefs = await SharedPreferences.getInstance();
-                          sharedPrefs.setBool('user-guest-session', true);
-                          Navigator.pushReplacementNamed(context, '/home/blm');
-                        },
                         child: Text('Sign in as Guest',
                           style: TextStyle(
                             fontSize: 16,
@@ -399,6 +385,11 @@ class BLMLogin extends StatelessWidget{
                             decoration: TextDecoration.underline,
                           ),
                         ),
+                        onTap: () async{
+                          final sharedPrefs = await SharedPreferences.getInstance();
+                          sharedPrefs.setBool('user-guest-session', true);
+                          Navigator.pushReplacementNamed(context, '/home/blm');
+                        },
                       ),
 
                       SizedBox(height: 20),

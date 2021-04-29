@@ -35,8 +35,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async{
 
-  
-
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
@@ -44,8 +42,6 @@ void main() async{
   final sharedPrefs = await SharedPreferences.getInstance();
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
-
-  
 
   runApp(
     GlobalLoaderOverlay(
@@ -81,7 +77,6 @@ void main() async{
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
           cardColor: Color(0xffffffff),
-          fontFamily: 'Roboto',
         ),
         routes: <String, WidgetBuilder>{ // NAMED ROUTES USED FOR NAVIGATING
           '/start': (BuildContext context) => UIGetStarted(),

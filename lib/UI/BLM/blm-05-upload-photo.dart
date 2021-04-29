@@ -85,17 +85,17 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                         ? Stack(
                           children: [
                             Container(color: Color(0xffffffff),),
-                          Align(
-                            alignment: Alignment.center, 
-                            child: Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: FileImage(image!),
+                            Align(
+                              alignment: Alignment.center, 
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: FileImage(image!),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
                           ],
                         )
                         : Stack(
@@ -128,6 +128,11 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
             MiscBLMButtonTemplate(
               buttonText: image != null ? 'Sign Up' : 'Speak Now',
               buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+              width: SizeConfig.screenWidth! / 2,
+              height: 45,
+              buttonColor: image != null
+              ? Color(0xff04ECFF)
+              : Color(0xff000000),
               onPressed: () async{
                 if(image != null){
 
@@ -147,7 +152,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                         entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Something went wrong. Please try again.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
                         buttonOkColor: Colors.red,
@@ -167,7 +171,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                       entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Please upload a photo.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(),
                       ),
                       onlyOkButton: true,
                       buttonOkColor: Colors.red,
@@ -177,12 +180,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                     )
                   );
                 }
-              }, 
-              width: SizeConfig.screenWidth! / 2,
-              height: 45,
-              buttonColor: image != null
-              ? Color(0xff04ECFF)
-              : Color(0xff000000),
+              },
             ),
 
             SizedBox(height: 10,),

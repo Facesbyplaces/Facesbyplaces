@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -31,15 +30,32 @@ class UILogin01 extends StatelessWidget {
 
             SizedBox(height: 5),
 
-            MiscStartButtonIconTemplate(
-              height: 50,
-              buttonText: 'Speak for a loved one killed by law enforcement', 
-              width: SizeConfig.screenWidth! / 1.5,
-              buttonTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),
-              buttonColor: Color(0xffF2F2F2),
-              image: Image.asset('assets/icons/fist.png', height: 20,),
+            MaterialButton(
+              padding: EdgeInsets.zero,
+              minWidth: SizeConfig.screenWidth! / 1.5,
+              height: 35,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    minRadius: 35,
+                    backgroundColor: Color(0xff000000),
+                    child: Center(child: Image.asset('assets/icons/fist.png', height: 20,),),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+                      alignment: Alignment.centerLeft,
+                      child: Text('Speak for a loved one killed by law enforcement', 
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              shape: StadiumBorder(),
+              color: Color(0xffF2F2F2),
               onPressed: (){
-                Navigator.pushNamed(context, '/blm/join');
+                Navigator.pushNamed(context, '/regular/join');
               },
             ),
 
@@ -49,14 +65,30 @@ class UILogin01 extends StatelessWidget {
 
             SizedBox(height: 5),
 
-            MiscStartButtonIconTemplate(
+            MaterialButton(
+              padding: EdgeInsets.zero,
+              minWidth: SizeConfig.screenWidth! / 1.5,
               height: 35,
-              buttonText: 'Remembering friends and family', 
-              width: SizeConfig.screenWidth! / 1.5,
-              buttonTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),
-              buttonColor: Color(0xffE6FDFF),
-              backgroundColor: Color(0xff04ECFF),
-              image: Icon(Icons.favorite, size: 20, color: Color(0xffffffff),),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    minRadius: 35,
+                    backgroundColor: Color(0xff04ECFF),
+                    child: Center(child: Icon(Icons.favorite, size: 20, color: Color(0xffffffff),)),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+                      alignment: Alignment.centerLeft,
+                      child: Text('Remembering friends and family',
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              shape: StadiumBorder(),
+              color: Color(0xffE6FDFF),
               onPressed: (){
                 Navigator.pushNamed(context, '/regular/join');
               },
