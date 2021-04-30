@@ -1,3 +1,5 @@
+import 'package:flutter/rendering.dart';
+
 import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
@@ -35,6 +37,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async{
 
+  debugProfileBuildsEnabled = true;
+  debugRepaintRainbowEnabled = true;
+  debugRepaintTextRainbowEnabled = true;
+
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
@@ -44,69 +50,73 @@ void main() async{
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
 
   runApp(
-    GlobalLoaderOverlay(
-      useDefaultLoading: false,
-      overlayWidget: Center(child: SpinKitThreeBounce(color: Color(0xff000000)),),
-      overlayOpacity: 0.5,
-      overlayColor: Colors.grey,
-      child: MaterialApp(
-        title: 'Faces by Places',
-        home: ((){
-          if(blmSession){
-            return HomeBLMScreen();
-          }else if(regularSession){
-            return HomeRegularScreen();
-          }else{
-            return UIGetStarted();
-          }
-        }()),
-        builder: (context, widget) => ResponsiveWrapper.builder(
-          BouncingScrollWrapper.builder(context, widget!),
-          maxWidth: 1200,
-          minWidth: 450,
-          defaultScale: true,
-          breakpoints: [
-            ResponsiveBreakpoint.resize(450, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(800, name: TABLET),
-            ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-            ResponsiveBreakpoint.resize(1200, name: DESKTOP),
-            ResponsiveBreakpoint.autoScale(2460, name: "4K"),
-          ],
-          background: Container(color: Color(0xFFF5F5F5))
+    RepaintBoundary(
+      child: GlobalLoaderOverlay(
+        useDefaultLoading: false,
+        overlayWidget: const Center(child: const SpinKitThreeBounce(color: const Color(0xff000000)),),
+        overlayOpacity: 0.5,
+        overlayColor: Colors.grey,
+        child: MaterialApp(
+          checkerboardRasterCacheImages: true,
+          showPerformanceOverlay: true,
+          title: 'Faces by Places',
+          home: ((){
+            if(blmSession){
+              return const HomeBLMScreen();
+            }else if(regularSession){
+              return const HomeRegularScreen();
+            }else{
+              return const UIGetStarted();
+            }
+          }()),
+          builder: (context, widget) => ResponsiveWrapper.builder(
+            BouncingScrollWrapper.builder(context, widget!),
+            maxWidth: 1200,
+            minWidth: 450,
+            defaultScale: true,
+            breakpoints: [
+              const ResponsiveBreakpoint.resize(450, name: MOBILE),
+              const ResponsiveBreakpoint.autoScale(800, name: TABLET),
+              const ResponsiveBreakpoint.autoScale(1000, name: TABLET),
+              const ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+              const ResponsiveBreakpoint.autoScale(2460, name: "4K"),
+            ],
+            background: Container(color: const Color(0xFFF5F5F5))
+          ),
+          theme: ThemeData(
+            accentColor: const Color(0xff4EC9D4),
+            cardColor: const Color(0xffffffff),
+          ),
+          // routes: <String, WidgetBuilder>{ // NAMED ROUTES USED FOR NAVIGATING
+          //   '/start': (BuildContext context) => UIGetStarted(),
+          //   '/login': (BuildContext context) => UILogin01(), // START
+
+          //   '/blm/join': (BuildContext context) => BLMJoin(),
+          //   '/blm/login': (BuildContext context) => BLMLogin(),
+          //   '/blm/register': (BuildContext context) => BLMRegister(),
+          //   '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(), // BLM START
+
+          //   '/regular/join': (BuildContext context) => RegularJoin(),
+          //   '/regular/login': (BuildContext context) => RegularLogin(),
+          //   '/regular/register': (BuildContext context) => RegularRegister(),
+          //   '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
+
+          //   '/home/blm': (BuildContext context) => HomeBLMScreen(),
+          //   '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
+          //   '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
+          //   '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
+          //   '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
+          //   '/home/blm/donation-paypal': (BuildContext context) => HomeBLMPaypal(), // BLM HOME SCREEN
+
+          //   '/home/regular': (BuildContext context) => HomeRegularScreen(),
+          //   '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
+          //   '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
+          //   '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
+          //   '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
+          //   '/home/regular/search': (BuildContext context) => HomeRegularSearch(), // ALM HOME SCREEN
+
+          // },
         ),
-        theme: ThemeData(
-          accentColor: Color(0xff4EC9D4),
-          cardColor: Color(0xffffffff),
-        ),
-        routes: <String, WidgetBuilder>{ // NAMED ROUTES USED FOR NAVIGATING
-          '/start': (BuildContext context) => UIGetStarted(),
-          '/login': (BuildContext context) => UILogin01(), // START
-
-          '/blm/join': (BuildContext context) => BLMJoin(),
-          '/blm/login': (BuildContext context) => BLMLogin(),
-          '/blm/register': (BuildContext context) => BLMRegister(),
-          '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(), // BLM START
-
-          '/regular/join': (BuildContext context) => RegularJoin(),
-          '/regular/login': (BuildContext context) => RegularLogin(),
-          '/regular/register': (BuildContext context) => RegularRegister(),
-          '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
-
-          '/home/blm': (BuildContext context) => HomeBLMScreen(),
-          '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
-          '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
-          '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
-          '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
-          '/home/blm/donation-paypal': (BuildContext context) => HomeBLMPaypal(), // BLM HOME SCREEN
-
-          '/home/regular': (BuildContext context) => HomeRegularScreen(),
-          '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
-          '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
-          '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
-          '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
-          '/home/regular/search': (BuildContext context) => HomeRegularSearch(), // ALM HOME SCREEN
-
-        },
       ),
     ),
   );

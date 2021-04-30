@@ -14,7 +14,7 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
   final String displayText;
   final bool edited;
 
-  MiscRegularInputFieldTemplate({
+  const MiscRegularInputFieldTemplate({
     required Key key,
     this.labelText = '',
     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
@@ -82,7 +82,7 @@ class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget{
   final bool readOnly;
   final Color backgroundColor;
 
-  MiscRegularInputFieldMultiTextTemplate({
+  const MiscRegularInputFieldMultiTextTemplate({
     required Key key,
     this.labelText = '',
     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
@@ -144,7 +144,7 @@ class MiscRegularInputFieldDropDown extends StatefulWidget{
 
   final String displayText;
 
-  MiscRegularInputFieldDropDown({
+  const MiscRegularInputFieldDropDown({
     required Key key,
     this.displayText = 'Father',
   }) : super(key: key);
@@ -205,7 +205,7 @@ class MiscRegularInputFieldSecurityQuestions extends StatefulWidget{
 
   final String displayText;
 
-  MiscRegularInputFieldSecurityQuestions({
+  const MiscRegularInputFieldSecurityQuestions({
     required Key key,
     this.displayText = 'What\'s the name of your first dog?',
   }) : super(key: key);

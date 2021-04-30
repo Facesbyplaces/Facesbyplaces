@@ -1,9 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-// import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-// import 'package:country_picker/country_picker.dart';
-
 import 'package:flutter/material.dart';
 
 class MiscBLMInputFieldTemplate extends StatefulWidget{

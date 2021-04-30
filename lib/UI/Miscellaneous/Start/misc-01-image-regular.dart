@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class MiscStartImageRegularTemplate extends StatelessWidget{
 
   final String image;
-  
-  MiscStartImageRegularTemplate({
+  const MiscStartImageRegularTemplate({
     this.image = 'assets/icons/frontpage-image3.png',
   });
 

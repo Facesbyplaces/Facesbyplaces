@@ -5,6 +5,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Start/misc-02-image-blm.dart';
 import 'package:flutter/material.dart';
 
 class BLMJoin extends StatelessWidget {
+  const BLMJoin();
 
   @override
   Widget build(BuildContext context) {

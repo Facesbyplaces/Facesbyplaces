@@ -5,8 +5,7 @@ class MiscRegularBackgroundTemplate extends StatelessWidget{
 
   final AssetImage image;
   final ColorFilter filter;
-  
-  MiscRegularBackgroundTemplate({
+  const MiscRegularBackgroundTemplate({
     this.image = const AssetImage('assets/icons/background.png'),
     this.filter = const ColorFilter.srgbToLinearGamma(),
   });

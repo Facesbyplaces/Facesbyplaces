@@ -41,119 +41,140 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-      backgroundColor: Color(0xffffffff),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        physics: ClampingScrollPhysics(),
-        child: Column(
-          children: [
+    return RepaintBoundary(
+      child: Scaffold(
+        backgroundColor: Color(0xffffffff),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          physics: ClampingScrollPhysics(),
+          child: Column(
+            children: [
 
-            SizedBox(height: 40),
+              SizedBox(height: 40),
 
-            Center(
-              child: Text('Upload Photo',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold, 
-                  color: Color(0xff000000),
+              Center(
+                child: Text('Upload Photo',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold, 
+                    color: Color(0xff000000),
+                  ),
                 ),
               ),
-            ),
 
-            SizedBox(height: 40),
+              SizedBox(height: 40),
 
-            GestureDetector(
-              onTap: () async{
+              GestureDetector(
+                onTap: () async{
 
-                var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
+                  var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
 
-                if(choice == null){
-                  choice = 0;
-                }else{
-                  if(choice == 1){
-                    await openCamera();
+                  if(choice == null){
+                    choice = 0;
                   }else{
-                    await getImage();
+                    if(choice == 1){
+                      await openCamera();
+                    }else{
+                      await getImage();
+                    }
                   }
-                }
-                
-              },
-              child: Container(
-                height: SizeConfig.screenWidth! / 1.2,
-                width: SizeConfig.screenWidth! / 1.2,
-                color: Color(0xffF9F8EE),
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: image != null
-                        ? Stack(
-                          children: [
-                            Container(color: Color(0xffffffff),),
+                  
+                },
+                child: Container(
+                  height: SizeConfig.screenWidth! / 1.2,
+                  width: SizeConfig.screenWidth! / 1.2,
+                  color: Color(0xffF9F8EE),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: image != null
+                          ? Stack(
+                            children: [
+                              Container(color: Color(0xffffffff),),
 
-                            Align(
-                              alignment: Alignment.center, 
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: FileImage(image!),
+                              Align(
+                                alignment: Alignment.center, 
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: FileImage(image!),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )
-                        : Stack(
-                          children: [
-                            Container(color: Color(0xffffffff),),
+                            ],
+                          )
+                          : Stack(
+                            children: [
+                              Container(color: Color(0xffffffff),),
 
-                            Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Text('Add a photo',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff000000),
+                              Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),),
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Center(
+                          child: Text('Add a photo',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color(0xff000000),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-            SizedBox(height: 80),
+              SizedBox(height: 80),
 
-            MiscRegularButtonTemplate(
-              buttonText: image != null
-              ? 'Sign Up'
-              : 'Next',
-              buttonTextStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold, 
-                color: Color(0xffffffff),
-              ),
-              width: SizeConfig.screenWidth! / 2,
-              height: 45,
-              buttonColor: Color(0xff04ECFF),
-              onPressed: () async{
-                if(image != null){
+              MiscRegularButtonTemplate(
+                buttonText: image != null
+                ? 'Sign Up'
+                : 'Next',
+                buttonTextStyle: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold, 
+                  color: Color(0xffffffff),
+                ),
+                width: SizeConfig.screenWidth! / 2,
+                height: 45,
+                buttonColor: Color(0xff04ECFF),
+                onPressed: () async{
+                  if(image != null){
 
-                  context.showLoaderOverlay();
-                  bool result = await apiRegularUploadPhoto(image: image);
-                  context.hideLoaderOverlay();
+                    context.showLoaderOverlay();
+                    bool result = await apiRegularUploadPhoto(image: image);
+                    context.hideLoaderOverlay();
 
-                  if(result){
-                    Navigator.pushReplacementNamed(context, '/home/regular');
+                    if(result){
+                      Navigator.pushReplacementNamed(context, '/home/regular');
+                    }else{
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
+                    }
                   }else{
                     await showDialog(
                       context: context,
@@ -162,7 +183,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
+                        description: Text('Please upload a photo.',
                           textAlign: TextAlign.center,
                           style: TextStyle(),
                         ),
@@ -174,67 +195,48 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                       )
                     );
                   }
-                }else{
-                  await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Please upload a photo.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      buttonOkColor: Colors.red,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
-                  );
-                }
-              },
-            ),
-
-            SizedBox(height: 20),
-
-            RichText(
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'Connect / ', 
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xff888888),
-                    ),
-                  ),
-
-                  TextSpan(
-                    text: 'Remember / ',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xff888888),
-                    ),
-                  ),
-
-                  TextSpan(
-                    text: 'Honor',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xff888888),
-                    ),
-                  ),
-                ],
+                },
               ),
-            ),
 
-            SizedBox(height: 20),
+              SizedBox(height: 20),
 
-          ],
+              RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Connect / ', 
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xff888888),
+                      ),
+                    ),
+
+                    TextSpan(
+                      text: 'Remember / ',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xff888888),
+                      ),
+                    ),
+
+                    TextSpan(
+                      text: 'Honor',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xff888888),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 20),
+
+            ],
+          ),
         ),
       ),
     );

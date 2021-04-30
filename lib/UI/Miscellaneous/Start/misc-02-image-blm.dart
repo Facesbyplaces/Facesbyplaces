@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class MiscStartImageBlmTemplate extends StatelessWidget{
 
   final String image;
-  
-  MiscStartImageBlmTemplate({
+  const MiscStartImageBlmTemplate({
     this.image = 'assets/icons/blm-image2.png',
   });
 
