@@ -369,7 +369,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                               child: Row(
                                                 children: [
                                                   Expanded(
-                                                    child: GestureDetector(
+                                                    child: profile.data!.blmMemorial.memorialDetails.memorialAcceptDonations == true
+                                                    ? GestureDetector(
                                                       onTap: (){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: pageType, pageId: memorialId, pageName: profile.data!.blmMemorial.memorialName)));
                                                       },
@@ -378,7 +379,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         backgroundColor: Color(0xffE67E22),
                                                         child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: 25,),
                                                       ),
-                                                    ),
+                                                    )
+                                                    : Container(),
                                                   ),
                                                   Expanded(
                                                     flex: 2,

@@ -35,6 +35,7 @@ Future<bool> apiBLMDonate({required String pageType, required int pageId, requir
   );
 
   print('The status code of blm donate is ${response.statusCode}');
+  print('The status data of blm donate is ${response.data}');
 
   if(response.statusCode == 200){
     return true;

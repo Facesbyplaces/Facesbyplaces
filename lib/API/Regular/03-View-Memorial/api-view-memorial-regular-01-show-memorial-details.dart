@@ -27,6 +27,7 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
   );
 
   print('The status code of regular show memorial details is ${response.statusCode}');
+  print('The status data of regular show memorial details is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -96,8 +97,9 @@ class APIRegularShowMemorialExtendedDetails{
   String showMemorialDetailsRip;
   String showMemorialDetailsCemetery;
   String showMemorialDetailsCountry;
+  bool showMemorialAcceptDonations;
 
-  APIRegularShowMemorialExtendedDetails({required this.showMemorialDetailsDescription, required this.showMemorialDetailsBirthPlace, required this.showMemorialDetailsDob, required this.showMemorialDetailsRip, required this.showMemorialDetailsCemetery, required this.showMemorialDetailsCountry});
+  APIRegularShowMemorialExtendedDetails({required this.showMemorialDetailsDescription, required this.showMemorialDetailsBirthPlace, required this.showMemorialDetailsDob, required this.showMemorialDetailsRip, required this.showMemorialDetailsCemetery, required this.showMemorialDetailsCountry, required this.showMemorialAcceptDonations});
 
   factory APIRegularShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     String newDOB = parsedJson['dob'];
@@ -112,6 +114,7 @@ class APIRegularShowMemorialExtendedDetails{
       showMemorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
       showMemorialDetailsCemetery: parsedJson['cemetery'] != null ? parsedJson['cemetery'] : '',
       showMemorialDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
+      showMemorialAcceptDonations: parsedJson['accept_donations'] != null ? parsedJson['accept_donations'] : false,
     );
   }
 }

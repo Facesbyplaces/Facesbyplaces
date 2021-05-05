@@ -34,51 +34,62 @@ class UINewlyInstalledState extends State<UINewlyInstalled>{
         child: Scaffold(
           body: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: Column(
+            child: Stack(
               children: [
                 Container(
-                  height: SizeConfig.screenHeight,
+                  height: SizeConfig.screenHeight! + 100,
                   child: TabBarView(
                     children: screens,
                   ),
                 ),
 
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      width: 100,
-                      child: TabBar(
-                        isScrollable: false,
-                        labelColor: Color(0xff04ECFF),
-                        unselectedLabelColor: Color(0xffCDEAEC),
-                        indicatorColor: Color(0xff04ECFF),
-                        indicator: BoxDecoration(
-                          color: Colors.transparent
-                        ),
-                        indicatorSize: TabBarIndicatorSize.label,
-                        tabs: [
-
-                          Icon(Icons.circle, size: 15,),
-
-                          Icon(Icons.circle, size: 15,),
-
-                          Icon(Icons.circle, size: 15,),
-                        ],
+                Container(
+                  height: SizeConfig.screenHeight! + 50,
+                  width: SizeConfig.screenWidth,
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 50,
+                    width: 100,
+                    child: TabBar(
+                      isScrollable: false,
+                      labelColor: Color(0xff04ECFF),
+                      unselectedLabelColor: Color(0xffCDEAEC),
+                      indicatorColor: Color(0xff04ECFF),
+                      indicator: BoxDecoration(
+                        color: Colors.transparent
                       ),
-                    ),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      tabs: [
 
-                    MaterialButton(
-                      onPressed: (){
-                        Navigator.pushReplacementNamed(context, '/start');
-                      },
-                      color: Color(0xff04ECFF),
-                      child: Text('Next', style: TextStyle(color: Color(0xffffffff)),)
+                        Icon(Icons.circle, size: 15,),
+
+                        Icon(Icons.circle, size: 15,),
+
+                        Icon(Icons.circle, size: 15,),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
+
+
+                Container(
+                  height: SizeConfig.screenHeight! + 100,
+                  width: SizeConfig.screenWidth,
+                  alignment: Alignment.bottomCenter,
+                  child: MaterialButton(
+                    padding: EdgeInsets.zero,
+                    child: const Text('Next', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                    minWidth: 200,
+                    height: 45,
+                    shape: const StadiumBorder(),
+                    color: const Color(0xff04ECFF),
+                    onPressed: (){
+                      Navigator.pushReplacementNamed(context, '/start');
+                    },
+                  ),
+                ),
+
               ],
             ),
           ),

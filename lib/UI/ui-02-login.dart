@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'Regular/regular-01-join.dart';
 
 class UILogin01 extends StatelessWidget {
 
@@ -9,7 +8,6 @@ class UILogin01 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SizeConfig.init(context);
     return RepaintBoundary(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -59,7 +57,7 @@ class UILogin01 extends StatelessWidget {
                 shape: const StadiumBorder(),
                 color: const Color(0xffF2F2F2),
                 onPressed: (){
-                  // Navigator.pushNamed(context, '/blm/join');
+                  Navigator.pushNamed(context, '/blm/join');
                 },
               ),
 
@@ -94,8 +92,7 @@ class UILogin01 extends StatelessWidget {
                 shape: const StadiumBorder(),
                 color: const Color(0xffE6FDFF),
                 onPressed: (){
-                  // Navigator.pushNamed(context, '/regular/join');
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegularJoin()));
+                  Navigator.pushNamed(context, '/regular/join');
                 },
               ),
               
@@ -120,7 +117,7 @@ class UILogin01 extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                       ..onTap = (){
-                        // Navigator.pushNamed(context, '/regular/login');
+                        Navigator.pushNamed(context, '/regular/login');
                       }
                     ),
                   ],

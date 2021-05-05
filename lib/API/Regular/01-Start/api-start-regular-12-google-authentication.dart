@@ -35,19 +35,48 @@ class RegularGoogleAuthentication {
     context.showLoaderOverlay();
 
     FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
+    User? user = FirebaseAuth.instance.currentUser;
 
     final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile', 'openid']);
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-      print('The authorization code is ${googleSignInAuthentication.accessToken}');
-      print('The authorization code is ${googleSignInAuthentication.serverAuthCode}');
+      // print('The authorization code is ${googleSignInAuthentication.accessToken}');
+      // print('The authorization code is ${googleSignInAuthentication.serverAuthCode}');
 
-      // googleSignIn.requestScopes(scopes)
+      // FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('Token copied!'));
 
-      FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('Token copied!'));
+
+
+      // ==============================================================================================================
+
+
+      // String newToken = await auth.currentUser!.getIdToken();
+      // FlutterClipboard.copy('$newToken').then(( value ) => print('Token copied!'));
+
+      // print('The new token is $newToken');
+      // print('Another token is ${googleSignInAuthentication.idToken}');
+
+      // GoogleSignInAuthentication newToken = await googleSignInAccount.authentication;
+      // FlutterClipboard.copy('$newToken').then(( value ) => print('GoogleSignInAuthentication newToken copied'));
+
+
+
+
+
+
+      String newToken = await auth.currentUser!.getIdToken();
+      FlutterClipboard.copy('$newToken').then(( value ) => print('Auth token copied!')); // verified on node
+
+      // GoogleSignInAuthentication newToken = await googleSignIn.currentUser!.authentication;
+      // FlutterClipboard.copy('${newToken.idToken}').then(( value ) => print('GoogleSignInAuthentication newToken copied!')); // verified on gem
+
+      // GoogleSignInAuthentication newToken = await googleSignInAccount.authentication;
+      // FlutterClipboard.copy('${newToken.idToken}').then(( value ) => print('GoogleSignInAuthentication newToken copied!')); // verified on gem
+
+      // String newToken = await user!.getIdToken();
+      // FlutterClipboard.copy('$newToken').then(( value ) => print('User token copied!')); // verified on node
 
       bool result = await apiRegularSignInWithGoogle(
         firstName: googleSignInAccount.displayName!, 

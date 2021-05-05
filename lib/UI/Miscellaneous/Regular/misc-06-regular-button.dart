@@ -10,7 +10,7 @@ class MiscRegularButtonTemplate extends StatelessWidget{
   final double height;
   final Color buttonColor;
 
-  MiscRegularButtonTemplate({
+  const MiscRegularButtonTemplate({
     this.buttonText = 'Next',
     this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
     required this.onPressed,
@@ -46,7 +46,7 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
   final Color buttonColor;
   final String image;
 
-  MiscRegularButtonSignInWithTemplate({
+  const MiscRegularButtonSignInWithTemplate({
     this.buttonText = '',
     this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),
     required this.onPressed,

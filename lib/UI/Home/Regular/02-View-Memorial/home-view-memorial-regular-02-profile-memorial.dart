@@ -366,7 +366,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                               child: Row(
                                                 children: [
                                                   Expanded(
-                                                    child: GestureDetector(
+                                                    child: profile.data!.almMemorial.showMemorialDetails.showMemorialAcceptDonations == true
+                                                    ? GestureDetector(
                                                       onTap: (){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate(pageType: pageType, pageId: memorialId, pageName: profile.data!.almMemorial.showMemorialName)));
                                                       },
@@ -375,7 +376,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                         backgroundColor: Color(0xffE67E22),
                                                         child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: 25,),
                                                       ),
-                                                    ),
+                                                    )
+                                                    : Container(),
                                                   ),
                                                   Expanded(
                                                     flex: 2,

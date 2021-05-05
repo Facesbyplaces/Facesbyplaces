@@ -109,7 +109,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                     ),
                     Expanded(
                       child: Center(
-                        child: Text('Select a photo',
+                        child: Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w300,

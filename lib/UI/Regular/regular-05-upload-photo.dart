@@ -119,7 +119,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                       ),
                       Expanded(
                         child: Center(
-                          child: Text('Add a photo',
+                          child: Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 18,
                               color: Color(0xff000000),

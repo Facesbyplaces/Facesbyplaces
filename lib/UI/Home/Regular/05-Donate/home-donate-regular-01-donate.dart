@@ -28,11 +28,16 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   int donateToggle = 0;
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/donation-google-pay.svg', semanticsLabel: 'Donate with Google',);
 
-  @override
-  initState() {
-    super.initState();
-    StripePayment.setOptions(StripeOptions(publishableKey: 'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik', merchantId: 'merchant.com.app.facesbyplaces', androidPayMode: 'test'));
-  }
+  // @override
+  // initState() {
+  //   super.initState();
+  //     StripePayment.setOptions(StripeOptions(
+  //       publishableKey: 'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik', 
+  //       merchantId: 'merchant.com.app.facesbyplaces', 
+  //       androidPayMode: 'test',
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +105,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                   Container(
                                     child: ((){
                                       switch(index){
-                                        case 0: return Text('\$0.99', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+                                        case 0: return Text('\$1.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
                                         case 1: return Text('\$5.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
                                         case 2: return Text('\$15.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
                                         case 3: return Text('\$25.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
@@ -129,11 +134,44 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     children: [
                       MaterialButton(
                         onPressed: () async{
+
+                          StripePayment.setOptions(
+                            StripeOptions(
+                              publishableKey: 'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik', 
+                              merchantId: 'merchant.com.app.facesbyplaces', 
+                              androidPayMode: 'test',
+                            ),
+                          );                    
+
+                         double amount = 1.00;
+
+                          if(donateToggle == 0){
+                            amount = 1.00;
+                          }else if(donateToggle == 1){
+                            amount = 5.00;
+                          }else if(donateToggle == 2){
+                            amount = 15.00;
+                          }else if(donateToggle == 3){
+                            amount = 25.00;
+                          }else if(donateToggle == 4){
+                            amount = 50.00;
+                          }else if(donateToggle == 5){
+                            amount = 100.00;
+                          }
+
+                          print('The donateToggle is $donateToggle');
+
                           var paymentToken = await StripePayment.paymentRequestWithNativePay(
                             androidPayOptions: AndroidPayPaymentRequest(
+                              lineItems: [
+                                LineItem(
+                                  currencyCode: 'USD',
+                                  description: 'Donation of $amount for $pageName'
+                                ),
+                              ],
                               totalPrice: ((){
                                 switch(donateToggle){
-                                  case 0: return '0.99';
+                                  case 0: return '1.00';
                                   case 1: return '5.00';
                                   case 2: return '15.00';
                                   case 3: return '25.00';
@@ -151,7 +189,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                   label: '$pageName',
                                   amount: ((){
                                     switch(donateToggle){
-                                      case 0: return '0.99';
+                                      case 0: return '1.00';
                                       case 1: return '5.00';
                                       case 2: return '15.00';
                                       case 3: return '25.00';
@@ -165,23 +203,11 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                           );
 
                           StripePayment.completeNativePayRequest();
-                          double amount = 0.99;
 
-                          if(donateToggle == 0){
-                            amount = 0.99;
-                          }else if(donateToggle == 1){
-                            amount = 5.00;
-                          }else if(donateToggle == 2){
-                            amount = 15.00;
-                          }else if(donateToggle == 3){
-                            amount = 25.00;
-                          }else if(donateToggle == 4){
-                            amount = 50.00;
-                          }else if(donateToggle == 5){
-                            amount = 100.00;
-                          }
-
-                          print('The amount is $amount');
+                          print('The payment token in regular donate is is ${paymentToken.tokenId}');
+                          print('The pageType in regular donate is $pageType');
+                          print('The pageId in regular donate is $pageId');
+                          print('The amount in regular donate is $amount');
 
                           context.showLoaderOverlay();
                           bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
@@ -197,7 +223,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
                                   onOkButtonPressed: () {
@@ -215,7 +240,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Something went wrong. Please try again.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
                                 buttonOkColor: Colors.red,

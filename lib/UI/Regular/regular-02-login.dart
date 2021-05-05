@@ -20,8 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../ui-01-get-started.dart';
 
-// class RegularLogin extends StatelessWidget{
-
 class RegularLogin extends StatefulWidget{
 
   RegularLoginState createState() => RegularLoginState();
@@ -32,15 +30,8 @@ class RegularLoginState extends State<RegularLogin>{
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
-  final TextEditingController controller = TextEditingController(text: '');
-  // final GlobalKey<ScaffoldState> newKey = GlobalKey<ScaffoldState>();
-
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
-    // SizeConfig.init(context);
-    print('Regular login screen');
     return RepaintBoundary(
       child: WillPopScope(
         onWillPop: () async{
@@ -296,7 +287,7 @@ class RegularLoginState extends State<RegularLogin>{
                       //   ),
                       // ),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       Padding(
                         padding: EdgeInsets.only(left: 20.0, right: 20.0), 
@@ -308,7 +299,7 @@ class RegularLoginState extends State<RegularLogin>{
                         ),
                       ),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       GestureDetector(
                         onTap: (){
@@ -316,8 +307,8 @@ class RegularLoginState extends State<RegularLogin>{
                         },
                         child: Align(
                           alignment: Alignment.centerRight, 
-                          child: Text('Forgot Password?', 
-                            style: TextStyle(
+                          child: const Text('Forgot Password?', 
+                            style: const TextStyle(
                               decoration: TextDecoration.underline,
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -326,18 +317,18 @@ class RegularLoginState extends State<RegularLogin>{
                         ),
                       ),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       MiscRegularButtonTemplate(
                         buttonText: 'Login', 
-                        buttonTextStyle: TextStyle(
+                        buttonTextStyle: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold, 
-                          color: Color(0xffffffff),
+                          color: const Color(0xffffffff),
                         ),
                         width: SizeConfig.screenWidth! / 2, 
                         height: 45,
-                        buttonColor: Color(0xff4EC9D4),
+                        buttonColor: const Color(0xff4EC9D4),
                         onPressed: () async{
                           
                           bool validEmail = false;
@@ -349,11 +340,10 @@ class RegularLoginState extends State<RegularLogin>{
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Please complete the form before submitting.',
+                                description: const Text('Please complete the form before submitting.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
                                 buttonOkColor: Colors.red,
@@ -368,11 +358,10 @@ class RegularLoginState extends State<RegularLogin>{
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Invalid email address. Please try again.',
+                                description: const Text('Invalid email address. Please try again.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
                                 buttonOkColor: Colors.red,
@@ -403,11 +392,10 @@ class RegularLoginState extends State<RegularLogin>{
                                 builder: (_) => 
                                   AssetGiffyDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Error: $result',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
                                   buttonOkColor: Colors.red,
@@ -421,25 +409,25 @@ class RegularLoginState extends State<RegularLogin>{
                         },
                       ),
 
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
 
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
-                            TextSpan(
+                            const TextSpan(
                               text: 'Don\'t have an Account? ', 
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
-                                color: Color(0xff000000),
+                                color: const Color(0xff000000),
                               ),
                             ),
 
                             TextSpan(
                               text: 'Sign Up', 
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xff4EC9D4),
+                                color: const Color(0xff4EC9D4),
                               ),
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
@@ -451,7 +439,7 @@ class RegularLoginState extends State<RegularLogin>{
                         ),
                       ),
 
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
                       GestureDetector(
                         onTap: () async{
@@ -459,52 +447,52 @@ class RegularLoginState extends State<RegularLogin>{
                           sharedPrefs.setBool('user-guest-session', true);
                           Navigator.pushReplacementNamed(context, '/home/regular');
                         },
-                        child: Text('Sign in as Guest',
-                          style: TextStyle(
+                        child: const Text('Sign in as Guest',
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xff4EC9D4),
+                            color: const Color(0xff4EC9D4),
                             decoration: TextDecoration.underline,
                           ),
                         ),
                       ),
 
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
                       RichText(
-                        text: TextSpan(
+                        text: const TextSpan(
                           children: <TextSpan>[
-                            TextSpan(
+                            const TextSpan(
                               text: 'Connect    /    ', 
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
-                                color: Color(0xff888888),
+                                color: const Color(0xff888888),
                               ),
                             ),
 
-                            TextSpan(
+                            const TextSpan(
                               text: 'Remember    /    ',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
-                                color: Color(0xff888888),
+                                color: const Color(0xff888888),
                               ),
                             ),
 
-                            TextSpan(
+                            const TextSpan(
                               text: 'Honor',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
-                                color: Color(0xff888888),
+                                color: const Color(0xff888888),
                               ),
                             ),
                           ],
                         ),
                       ),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       
                     ],
                   ),

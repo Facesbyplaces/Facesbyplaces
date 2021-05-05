@@ -38,21 +38,21 @@ class RegularRegister extends StatelessWidget{
               children: [
 
                 SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(), 
+                  physics: const NeverScrollableScrollPhysics(), 
                   child: Container(
                     height: SizeConfig.screenHeight,
-                    child: MiscRegularBackgroundTemplate(
-                      image: AssetImage('assets/icons/background2.png'),
+                    child: const MiscRegularBackgroundTemplate(
+                      image: const AssetImage('assets/icons/background2.png'),
                     ),
                   ),
                 ),
 
                 Container(
                   height: SizeConfig.screenHeight! / 6, 
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
+                  decoration: const BoxDecoration(
+                    image: const DecorationImage(
                       fit: BoxFit.cover, 
-                      image: AssetImage('assets/icons/regular-background.png'),
+                      image: const AssetImage('assets/icons/regular-background.png'),
                     ),
                   ),
                 ),

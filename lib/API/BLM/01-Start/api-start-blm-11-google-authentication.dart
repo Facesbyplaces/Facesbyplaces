@@ -40,6 +40,8 @@ class BLMGoogleAuthentication {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
+    
+
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
       FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('copied!'));
