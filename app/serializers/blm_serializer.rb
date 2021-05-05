@@ -6,29 +6,31 @@ class BlmSerializer < ActiveModel::Serializer
     case object.privacy
     when "public"
       {
-        description:  object.description,
-        location:     object.location,
-        precinct:     object.precinct,
-        dob:          object.dob.to_date,
-        rip:          object.rip.to_date,
-        state:        object.state,
-        country:      object.country,
-        longitude:      object.longitude,
-        latitude:       object.latitude
+        description:        object.description,
+        location:           object.location,
+        precinct:           object.precinct,
+        dob:                object.dob.to_date,
+        rip:                object.rip.to_date,
+        state:              object.state,
+        country:            object.country,
+        longitude:          object.longitude,
+        latitude:           object.latitude,
+        accept_donations:   object.stripe_connect_account_id.present? ? true : false
       }
     when "followers"
       if object.currentUser
         if object.followers.where(account: object.currentUser).first || object.relationships.where(account: object.currentUser).first 
           {
-            description:  object.description,
-            location:     object.location,
-            precinct:     object.precinct,
-            dob:          object.dob.to_date,
-            rip:          object.rip.to_date,
-            state:        object.state,
-            country:      object.country,
-            longitude:      object.longitude,
-            latitude:       object.latitude
+            description:        object.description,
+            location:           object.location,
+            precinct:           object.precinct,
+            dob:                object.dob.to_date,
+            rip:                object.rip.to_date,
+            state:              object.state,
+            country:            object.country,
+            longitude:          object.longitude,
+            latitude:           object.latitude,
+            accept_donations:   object.stripe_connect_account_id.present? ? true : false
           }
         end
       end
@@ -36,15 +38,16 @@ class BlmSerializer < ActiveModel::Serializer
       if object.currentUser
         if object.relationships.where(account: object.currentUser).first 
           {
-            description:  object.description,
-            location:     object.location,
-            precinct:     object.precinct,
-            dob:          object.dob.to_date,
-            rip:          object.rip.to_date,
-            state:        object.state,
-            country:      object.country,
-            longitude:      object.longitude,
-            latitude:       object.latitude
+            description:        object.description,
+            location:           object.location,
+            precinct:           object.precinct,
+            dob:                object.dob.to_date,
+            rip:                object.rip.to_date,
+            state:              object.state,
+            country:            object.country,
+            longitude:          object.longitude,
+            latitude:           object.latitude,
+            accept_donations:   object.stripe_connect_account_id.present? ? true : false
           }
         end
       end

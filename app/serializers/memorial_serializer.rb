@@ -6,27 +6,29 @@ class MemorialSerializer < ActiveModel::Serializer
     case object.privacy
     when "public"
       {
-        description:    object.description,
-        birthplace:     object.birthplace,
-        dob:            object.dob.to_date,
-        rip:            object.rip.to_date,
-        cemetery:       object.cemetery,
-        country:        object.country,
-        longitude:      object.longitude,
-        latitude:       object.latitude
+        description:        object.description,
+        birthplace:         object.birthplace,
+        dob:                object.dob.to_date,
+        rip:                object.rip.to_date,
+        cemetery:           object.cemetery,
+        country:            object.country,
+        longitude:          object.longitude,
+        latitude:           object.latitude,
+        accept_donations:   object.stripe_connect_account_id.present? ? true : false
       }
     when "followers"
       if object.currentUser
         if object.followers.where(user_id: object.currentUser.id).first || object.relationships.where(user_id: object.currentUser.id).first 
           {
-            description:    object.description,
-            birthplace:     object.birthplace,
-            dob:            object.dob.to_date,
-            rip:            object.rip.to_date,
-            cemetery:       object.cemetery,
-            country:        object.country,
-            longitude:      object.longitude,
-            latitude:       object.latitude
+            description:        object.description,
+            birthplace:         object.birthplace,
+            dob:                object.dob.to_date,
+            rip:                object.rip.to_date,
+            cemetery:           object.cemetery,
+            country:            object.country,
+            longitude:          object.longitude,
+            latitude:           object.latitude,
+            accept_donations:   object.stripe_connect_account_id.present? ? true : false
           }
         end
       end
@@ -34,14 +36,15 @@ class MemorialSerializer < ActiveModel::Serializer
       if object.currentUser
         if object.relationships.where(user_id: object.currentUser.id).first 
           {
-            description:    object.description,
-            birthplace:     object.birthplace,
-            dob:            object.dob.to_date,
-            rip:            object.rip.to_date,
-            cemetery:       object.cemetery,
-            country:        object.country,
-            longitude:      object.longitude,
-            latitude:       object.latitude
+            description:        object.description,
+            birthplace:         object.birthplace,
+            dob:                object.dob.to_date,
+            rip:                object.rip.to_date,
+            cemetery:           object.cemetery,
+            country:            object.country,
+            longitude:          object.longitude,
+            latitude:           object.latitude,
+            accept_donations:   object.stripe_connect_account_id.present? ? true : false
           }
         end
       end
