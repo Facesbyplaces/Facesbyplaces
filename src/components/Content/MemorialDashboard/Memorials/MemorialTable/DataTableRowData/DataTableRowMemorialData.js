@@ -88,6 +88,11 @@ export default function DataTableRowMemorialData({
           ALM
         </span>
       </td>
+      <td>
+        <span className="label label-lg label-light-warning label-inline">
+          {memorial.stripe_connect_account_id == null ? "False" : "True"}
+        </span>
+      </td>
       <td className="pr-2 text-left">
         {/* View User Icon */}
         <a

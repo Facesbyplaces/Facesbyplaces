@@ -57,7 +57,7 @@ export default function MemorialDataTable({
         setLoader(false);
         setMemorials(response.data.memorials.alm);
         setBlms(response.data.memorials.blm);
-        console.log("Response: ", response.data.memorials);
+        console.log("Response: ", response.data);
       })
       .catch((error) => {
         console.log(error.response);
@@ -90,6 +90,7 @@ export default function MemorialDataTable({
             <th style={{ minWidth: "150px" }}>country</th>
             <th style={{ minWidth: "150px" }}>privacy</th>
             <th style={{ minWidth: "130px" }}>page type</th>
+            <th style={{ minWidth: "130px" }}>accept donations</th>
             <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
               action
             </th>
