@@ -113,9 +113,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularHomePostTab(page: page).onError((error, stackTrace) async{
-        context.hideLoaderOverlay();
+        context.loaderOverlay.hide();
         await showDialog(
           context: context,
           builder: (_) => 
@@ -136,7 +136,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
         );
         return Future.error('Error occurred: $error');
       });
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       itemRemaining = newValue.almItemsRemaining;
       count = count + newValue.familyMemorialList.length;

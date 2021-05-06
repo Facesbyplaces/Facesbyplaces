@@ -50,7 +50,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
             return WeSlide(
               controller: controller,
               panelMaxSize: SizeConfig.screenHeight! / 1.5,
-              panelBackground: Color(0xffffffff),
+              backgroundColor: Color(0xffffffff),
               panel: Container(
                 height: SizeConfig.screenHeight! / 1.5,
                 decoration: BoxDecoration(

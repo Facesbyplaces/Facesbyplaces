@@ -92,9 +92,9 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
 
   void onLoading1() async{
     if(adminItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page1);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       adminItemsRemaining = newValue.almAdminItemsRemaining;
 
@@ -133,9 +133,9 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 );
 
                 if(confirmation){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   String result = await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   if(result != 'Success'){
                     await showDialog(
@@ -212,9 +212,9 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   void onLoading2() async{
     
     if(familyItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page2);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.almFamilyItemsRemaining;
 
@@ -253,9 +253,9 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 );
 
                 if(confirmation){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   String result = await apiRegularAddMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   if(result != 'Success'){
                     await showDialog(

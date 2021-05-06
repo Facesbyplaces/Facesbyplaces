@@ -3,7 +3,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-me
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RegularMainPagesMemorials{
@@ -133,9 +132,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
   void onLoading1() async{
     if(memorialFamilyItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularHomeMemorialsTab(page: page1);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       memorialFamilyItemsRemaining = newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining;
       count = count + newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length;
@@ -159,9 +158,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     }
 
     if(blmFamilyItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularHomeMemorialsTab(page: page1);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       blmFamilyItemsRemaining = newValue.almFamilyMemorialList.blmHomeTabMemorialFamilyItemsRemaining;
       count = count + newValue.almFamilyMemorialList.blmHomeTabMemorialPage.length;
@@ -197,9 +196,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
   void onLoading2() async{
     if(memorialFriendsItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularHomeMemorialsTab(page: page2);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       memorialFriendsItemsRemaining = newValue.almFriendsMemorialList.memorialHomeTabMemorialFriendsItemsRemaining;
       count = count + newValue.almFriendsMemorialList.memorialHomeTabMemorialPage.length;
@@ -223,9 +222,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     }
 
     if(blmFriendsItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularHomeMemorialsTab(page: page2);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       blmFriendsItemsRemaining = newValue.almFriendsMemorialList.blmHomeTabMemorialFriendsItemsRemaining;
       count = count + newValue.almFriendsMemorialList.blmHomeTabMemorialPage.length;

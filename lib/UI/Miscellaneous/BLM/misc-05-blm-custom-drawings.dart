@@ -5,7 +5,7 @@ class MiscBLMCurvePainter extends CustomPainter{
   @override
   void paint(Canvas canvas, Size size){
     var paint = Paint();
-    paint.color = Color(0xff04ECFF);
+    paint.color = const Color(0xff04ECFF);
     paint.style = PaintingStyle.fill;
 
     var path = Path();

@@ -3,7 +3,6 @@ import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
   final String notificationType;
   final bool readStatus;
 
-  MiscRegularNotificationDisplayTemplate({
+  const MiscRegularNotificationDisplayTemplate({
     this.imageIcon = '',
     required this.notification,
     required this.dateCreated,
@@ -26,22 +25,21 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-      tileColor: readStatus == true ? Color(0xffffffff) : Color(0xffdddddd),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      tileColor: readStatus == true ? const Color(0xffffffff) : const Color(0xffdddddd),
       onTap: () async{
 
         if(notificationType == 'Memorial'){
-          context.showLoaderOverlay();
+          context.loaderOverlay.show();
           var memorialProfile = await apiRegularShowMemorial(memorialId: postId);
-          context.hideLoaderOverlay();
+          context.loaderOverlay.hide();
 
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: memorialProfile.almMemorial.showMemorialFollower,)));
         }else if(notificationType == 'Blm'){
-          context.showLoaderOverlay();
+          context.loaderOverlay.show();
           var blmProfile = await apiBLMShowMemorial(memorialId: postId);
-          context.hideLoaderOverlay();
+          context.loaderOverlay.hide();
 
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: blmProfile.blmMemorial.memorialFollower,)));
         }else if(notificationType == 'Post'){
@@ -50,14 +48,14 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
       },
       leading: imageIcon != ''
       ? CircleAvatar(
-        backgroundColor: Color(0xff888888), 
+        backgroundColor: const Color(0xff888888), 
         backgroundImage: NetworkImage(imageIcon),
       )
-      : CircleAvatar(
-        backgroundColor: Color(0xff888888), 
-        backgroundImage: AssetImage('assets/icons/app-icon.png'),
+      : const CircleAvatar(
+        backgroundColor: const Color(0xff888888), 
+        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
       ),
-      title: Text(notification, style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),),
+      title: Text(notification, style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 16),),
       subtitle: Text(dateCreated),
     );
   }

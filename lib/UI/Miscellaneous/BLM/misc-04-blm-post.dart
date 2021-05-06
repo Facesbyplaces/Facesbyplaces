@@ -5,7 +5,6 @@ import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-use
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-post-like-or-unlike.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -34,7 +33,7 @@ class MiscBLMPost extends StatefulWidget{
   final bool famOrFriends;
   final String relationship;
 
-  MiscBLMPost({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  const MiscBLMPost({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 
   MiscBLMPostState createState() => MiscBLMPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId, pageType: pageType, famOrFriends: famOrFriends, relationship: relationship);
 }
@@ -103,22 +102,21 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
   @override
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
       },
       child: Container(
-        padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
         decoration: BoxDecoration(
-          color: Color(0xffffffff),
-          borderRadius: BorderRadius.all(Radius.circular(15),),
+          color: const Color(0xffffffff),
+          borderRadius: const BorderRadius.all(Radius.circular(15),),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: const Color(0xff888888).withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 5,
-              offset: Offset(0, 0)
+              offset: const Offset(0, 0)
             ),
           ],
         ),
@@ -149,17 +147,17 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     },
                     child: profileImage != null
                     ? CircleAvatar(
-                      backgroundColor: Color(0xff888888), 
+                      backgroundColor: const Color(0xff888888), 
                       backgroundImage: NetworkImage(profileImage),
                     )
-                    : CircleAvatar(
-                      backgroundColor: Color(0xff888888), 
-                      backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                    : const CircleAvatar(
+                      backgroundColor: const Color(0xff888888), 
+                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.only(left: 10.0),
+                      padding: const EdgeInsets.only(left: 10.0),
                       child: GestureDetector(
                         onTap: (){
                           if(pageType == 'Memorial'){
@@ -182,10 +180,10 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                               child: Align(alignment: Alignment.bottomLeft,
                                 child: Text(memorialName,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xff000000),
+                                    color: const Color(0xff000000),
                                   ),
                                 ),
                               ),
@@ -195,10 +193,10 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                                 alignment: Alignment.topLeft,
                                 child: Text(timeCreated,
                                   maxLines: 1,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0xffaaaaaa)
+                                    color: const Color(0xffaaaaaa)
                                   ),
                                 ),
                               ),
@@ -218,7 +216,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
             numberOfTagged != 0
             ? Column(
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 Align(
                   alignment: Alignment.centerLeft,
@@ -226,25 +224,25 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     text: TextSpan(
                       
                       children: [
-                        TextSpan(
-                          style: TextStyle(color: Color(0xff888888)),
+                        const TextSpan(
+                          style: const TextStyle(color: const Color(0xff888888)),
                           text: 'with '
                         ),
 
                         TextSpan(
                           children: List.generate(numberOfTagged, 
                             (index) => TextSpan(
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
                               children: <TextSpan>[
                                 TextSpan(text: taggedFirstName[index],),
 
-                                TextSpan(text: ' '),
+                                const TextSpan(text: ' '),
 
                                 TextSpan(text: taggedLastName[index],),
 
                                 index < numberOfTagged - 1
-                                ? TextSpan(text: ', ')
-                                : TextSpan(text: ''),
+                                ? const TextSpan(text: ', ')
+                                : const TextSpan(text: ''),
                               ],
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
@@ -280,18 +278,18 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                     await apiBLMLikeOrUnlikePost(postId: postId, like: likePost);
                   },
-                  icon: likePost == true ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,) : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
-                  label: Text('$likesCount', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
+                  icon: likePost == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
+                  label: Text('$likesCount', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
                 ),
 
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
 
                 TextButton.icon(
                   onPressed: () async{
                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
                   },
-                  icon: FaIcon(FontAwesomeIcons.solidComment, color: Color(0xff4EC9D4),),
-                  label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
+                  icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
+                  label: Text('$numberOfComments', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
                 ),
 
                 Expanded(child: Container(),),
@@ -299,7 +297,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                 IconButton(
                   alignment: Alignment.centerRight,
                   splashColor: Colors.transparent,
-                  icon: CircleAvatar(backgroundColor: Color(0xff4EC9D4), child: Icon(Icons.share_rounded, color: Color(0xffffffff)),),
+                  icon: CircleAvatar(backgroundColor: const Color(0xff4EC9D4), child: const Icon(Icons.share_rounded, color: const Color(0xffffffff)),),
                   onPressed: () async{
                     initBranchShare();
 
@@ -319,11 +317,10 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Successfully shared the link.',
+                          description: const Text('Successfully shared the link.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: true,
                           onOkButtonPressed: () {

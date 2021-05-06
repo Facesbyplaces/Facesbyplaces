@@ -31,13 +31,13 @@ class HomeBLMReport extends StatelessWidget{
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Report', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Report', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   onPressed: (){
                     Navigator.pop(context);
                   },
@@ -46,35 +46,35 @@ class HomeBLMReport extends StatelessWidget{
             ),
           ),
           body: Container(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             height: SizeConfig.screenHeight,
             child: SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
 
-                  Align(alignment: Alignment.centerLeft, child: Text('Inform us about what happened.', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),
+                  const Align(alignment: Alignment.centerLeft, child: const Text('Inform us about what happened.', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
 
-                  SizedBox(height: 25,),
+                  const SizedBox(height: 25,),
 
                   MiscBLMInputFieldTemplate(key: _key1, labelText: 'Subject', type: TextInputType.text,),
                   
-                  SizedBox(height: 25,),
+                  const SizedBox(height: 25,),
 
                   MiscBLMInputFieldMultiTextTemplate(key: _key2, labelText: 'Body',),
 
-                  SizedBox(height: 50,),
+                  const SizedBox(height: 50,),
 
                   MiscBLMButtonTemplate(
                     buttonText: 'Report', 
-                    buttonTextStyle: TextStyle(
+                    buttonTextStyle: const TextStyle(
                       fontSize: 16, 
                       fontWeight: FontWeight.bold, 
-                      color: Color(0xffffffff),
+                      color: const Color(0xffffffff),
                     ),
                     width: SizeConfig.screenWidth! / 2, 
                     height: 45, 
-                    buttonColor: Color(0xff04ECFF),
+                    buttonColor: const Color(0xff04ECFF),
                     onPressed: () async{
 
                       if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
@@ -83,14 +83,13 @@ class HomeBLMReport extends StatelessWidget{
                           builder: (_) => 
                             AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Please complete the form before submitting.',
+                            description: const Text('Please complete the form before submitting.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(),
                             ),
                             onlyOkButton: true,
-                            buttonOkColor: Colors.red,
+                            buttonOkColor: const Color(0xffff0000),
                             onOkButtonPressed: () {
                               Navigator.pop(context, true);
                             },
@@ -98,9 +97,9 @@ class HomeBLMReport extends StatelessWidget{
                         );
                       }else{
 
-                        context.showLoaderOverlay();
+                        context.loaderOverlay.show();
                         bool result = await apiBLMReport(postId: postId, reportType: reportType, subject: _key1.currentState!.controller.text, body: _key2.currentState!.controller.text);
-                        context.hideLoaderOverlay();
+                        context.loaderOverlay.hide();
 
                         if(result){
                           await showDialog(
@@ -108,11 +107,10 @@ class HomeBLMReport extends StatelessWidget{
                             builder: (_) => 
                               AssetGiffyDialog(
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.',
+                              description: const Text('Successfully submitted a report. Your report will be reviewed by the administrator.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(),
                               ),
                               onlyOkButton: true,
                               onOkButtonPressed: () {
@@ -127,14 +125,13 @@ class HomeBLMReport extends StatelessWidget{
                             builder: (_) => 
                               AssetGiffyDialog(
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Something went wrong. Please try again.',
+                              description: const Text('Something went wrong. Please try again.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(),
                               ),
                               onlyOkButton: true,
-                              buttonOkColor: Colors.red,
+                              buttonOkColor: const Color(0xffff0000),
                               onOkButtonPressed: () {
                                 Navigator.pop(context, true);
                               },
@@ -142,12 +139,10 @@ class HomeBLMReport extends StatelessWidget{
                           );
                         }
                       }
-
                     }, 
                   ),
 
-                  SizedBox(height: 25,),
-
+                  const SizedBox(height: 25,),
                 ],
               ),
             ),

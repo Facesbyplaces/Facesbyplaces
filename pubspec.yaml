@@ -67,7 +67,7 @@ dev_dependencies:
   stripe_payment: ^1.0.11
   giffy_dialog: ^1.8.0
   fluttericon: ^2.0.0
-  flutter_svg: ^0.21.0+1
+  flutter_svg: ^0.22.0
   flutter_branch_sdk: ^3.0.0
   auth_buttons: ^1.0.0
   firebase_core: ^1.0.3

@@ -300,9 +300,9 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                         onPressed: () async{
 
                           if(profileImage.path != '' || backgroundImage.path != ''){
-                            context.showLoaderOverlay();
+                            context.loaderOverlay.show();
                             bool result = await apiRegularUpdatePageImages(memorialId: memorialId, backgroundImage: backgroundImage, profileImage: profileImage);
-                            context.hideLoaderOverlay();
+                            context.loaderOverlay.hide();
 
                             if(result){
                               await showDialog(

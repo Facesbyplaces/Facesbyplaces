@@ -230,7 +230,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
                             if(confirmResult){
-                              context.showLoaderOverlay();
+                              context.loaderOverlay.show();
 
                               bool result = await apiRegularUpdateOtherDetails(
                                 birthdate: _key1.currentState!.controller.text,
@@ -240,7 +240,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 phoneNumber: _key5.currentState!.controller.text,
                               );
 
-                              context.hideLoaderOverlay();
+                              context.loaderOverlay.hide();
 
                               if(result){
                                 await showDialog(

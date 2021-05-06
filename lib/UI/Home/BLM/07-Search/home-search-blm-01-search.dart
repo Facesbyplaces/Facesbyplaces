@@ -35,7 +35,7 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                  child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
 
                 Expanded(
@@ -65,11 +65,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                           builder: (_) => 
                             AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                            description: const Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
                               textAlign: TextAlign.center,
-                              style: TextStyle(),
                             ),
                             onlyOkButton: false,
                             onOkButtonPressed: () {
@@ -84,10 +83,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                         if(confirmation == true){
                           permissionGranted = await location.requestPermission();
 
-                          context.showLoaderOverlay();
+                          context.loaderOverlay.show();
                           Location.LocationData locationData = await location.getLocation();
                           List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                          context.hideLoaderOverlay();
+                          context.loaderOverlay.hide();
 
                           print('The latitude is ${locationData.latitude}');
                           print('The latitude is ${locationData.longitude}');
@@ -96,10 +95,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                         }
                       }else{
-                        context.showLoaderOverlay();
+                        context.loaderOverlay.show();
                         Location.LocationData locationData = await location.getLocation();
                         List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                        context.hideLoaderOverlay();
+                        context.loaderOverlay.hide();
 
                         print('The latitude is ${locationData.latitude}');
                         print('The latitude is ${locationData.longitude}');
@@ -108,25 +107,25 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                       }
                     },
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(15.0),
+                      contentPadding: const EdgeInsets.all(15.0),
                       filled: true,
-                      fillColor: Color(0xffffffff),
-                      focusColor: Color(0xffffffff),
+                      fillColor: const Color(0xffffffff),
+                      focusColor: const Color(0xffffffff),
                       hintText: 'Search a Memorial',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         fontSize: 14,
                       ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      border: const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
-                      enabledBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      enabledBorder:  const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
-                      focusedBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      focusedBorder:  const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
                       suffixIcon: IconButton(
                         onPressed: () async{
@@ -152,11 +151,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                                description: const Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: false,
                                 onOkButtonPressed: () {
@@ -171,10 +169,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                             if(confirmation == true){
                               permissionGranted = await location.requestPermission();
 
-                              context.showLoaderOverlay();
+                              context.loaderOverlay.show();
                               Location.LocationData locationData = await location.getLocation();
                               List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                              context.hideLoaderOverlay();
+                              context.loaderOverlay.hide();
 
                               print('The latitude is ${locationData.latitude}');
                               print('The latitude is ${locationData.longitude}');
@@ -183,10 +181,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                             }
                           }else{
-                            context.showLoaderOverlay();
+                            context.loaderOverlay.show();
                             Location.LocationData locationData = await location.getLocation();
                             List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                            context.hideLoaderOverlay();
+                            context.loaderOverlay.hide();
 
                             print('The latitude is ${locationData.latitude}');
                             print('The latitude is ${locationData.longitude}');
@@ -194,13 +192,13 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                           }
                         },
-                        icon: Icon(Icons.search, color: Color(0xff888888),),
+                        icon:const  Icon(Icons.search, color: const Color(0xff888888),),
                       ),
                     ),
                   ),
                 ),
                 
-                SizedBox(width: 20,),
+                const SizedBox(width: 20,),
               ],
             ), 
             leading: Container(),
@@ -210,16 +208,16 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
             height: SizeConfig.screenHeight! - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
                   SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
-                  Icon(Icons.search, color: Color(0xff4EC9D4), size: 240),
+                  const Icon(Icons.search, color: const Color(0xff4EC9D4), size: 240),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
 
-                  Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                  const Padding(padding: const EdgeInsets.only(left: 20.0, right: 20.0), child: const Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),),
 
                   SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],

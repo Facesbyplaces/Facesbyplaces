@@ -73,9 +73,9 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
 
   void onLoading() async{
     if(familyItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularShowFamilySettings(memorialId: memorialId, page: page);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.almItemsRemaining;
 
@@ -114,9 +114,9 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                 );
 
                 if(confirmation){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   String result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   if(result != 'Success'){
                     await showDialog(

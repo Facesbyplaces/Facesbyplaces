@@ -185,9 +185,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
         
         if(repliesRemaining != 0){
-          context.showLoaderOverlay();
+          context.loaderOverlay.show();
           var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.almCommentsList[i].showListOfCommentsCommentId, page: page2);
-          context.hideLoaderOverlay();
+          context.loaderOverlay.hide();
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
@@ -940,9 +940,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         title: Text('Delete'),
                                                         leading: Icon(Icons.delete),
                                                         onTap: () async{  
-                                                          context.showLoaderOverlay();
+                                                          context.loaderOverlay.show();
                                                           await apiRegularDeleteComment(commentId: comments[i].commentId);
-                                                          context.hideLoaderOverlay();
+                                                          context.loaderOverlay.hide();
 
                                                           controller.clear();
                                                           itemRemaining = 1;
@@ -1127,9 +1127,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   title: Text('Delete'),
                                                                   leading: Icon(Icons.delete),
                                                                   onTap: () async{  
-                                                                    context.showLoaderOverlay();
+                                                                    context.loaderOverlay.show();
                                                                     await apiRegularDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
-                                                                    context.hideLoaderOverlay();
+                                                                    context.loaderOverlay.hide();
 
                                                                     controller.clear();
                                                                     itemRemaining = 1;
@@ -1410,9 +1410,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                     )
                   );
                 }else if(isComment == true && controller.text != ''){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   await apiRegularAddComment(postId: postId, commentBody: controller.text);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   controller.clear();
                   itemRemaining = 1;
@@ -1433,9 +1433,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   getOriginalPostInformation();
                   onLoading();
                 }else{
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   controller.clear();
                   itemRemaining = 1;
@@ -1540,9 +1540,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                     )
                   );
                 }else if(isEdit == true){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   await apiRegularEditComment(commentId: editId, commentBody: controller.text);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   controller.clear();
                   itemRemaining = 1;
@@ -1563,9 +1563,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   getOriginalPostInformation();
                   onLoading();
                 }else{
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   await apiRegularEditReply(replyId: editId, replyBody: controller.text);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   controller.clear();
                   itemRemaining = 1;

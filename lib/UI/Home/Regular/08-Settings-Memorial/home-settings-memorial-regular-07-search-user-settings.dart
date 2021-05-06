@@ -82,9 +82,9 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   
   void onLoading() async{
     if(itemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularSearchUsers(keywords: keywords, page: page);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       
       itemRemaining = newValue.almItemsRemaining;
 
@@ -245,9 +245,9 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                           String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog()) ?? '';
 
                           if(choice != ''){
-                            context.showLoaderOverlay();
+                            context.loaderOverlay.show();
                             String result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
-                            context.hideLoaderOverlay();
+                            context.loaderOverlay.hide();
 
                             if(result != 'Success'){
                               await showDialog(
@@ -273,9 +273,9 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                             }
                           }
                         }else{
-                          context.showLoaderOverlay();
+                          context.loaderOverlay.show();
                           String result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
-                          context.hideLoaderOverlay();
+                          context.loaderOverlay.hide();
 
                           if(result != 'Success'){
                             await showDialog(

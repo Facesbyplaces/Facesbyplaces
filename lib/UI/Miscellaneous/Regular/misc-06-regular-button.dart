@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularButtonTemplate extends StatelessWidget{
@@ -21,7 +20,6 @@ class MiscRegularButtonTemplate extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: onPressed,
@@ -30,7 +28,7 @@ class MiscRegularButtonTemplate extends StatelessWidget{
       ),
       minWidth: width,
       height: height,
-      shape: StadiumBorder(),
+      shape: const StadiumBorder(),
       color: buttonColor,
     );
   }
@@ -48,7 +46,7 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
 
   const MiscRegularButtonSignInWithTemplate({
     this.buttonText = '',
-    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),
+    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: const Color(0xff000000),),
     required this.onPressed,
     required this.width,
     required this.height,
@@ -74,7 +72,7 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
           Expanded(
             flex: 2, 
             child: Padding(
-              padding: EdgeInsets.only(left: 5),
+              padding: const EdgeInsets.only(left: 5),
               child: Text(buttonText,
                 style: buttonTextStyle,
               ),
@@ -82,7 +80,7 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
           ),
         ],
       ),
-      shape: StadiumBorder(),
+      shape: const StadiumBorder(),
       color: buttonColor,
     );
   }

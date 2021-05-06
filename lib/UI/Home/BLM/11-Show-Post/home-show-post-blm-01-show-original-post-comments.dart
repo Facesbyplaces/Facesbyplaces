@@ -189,9 +189,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
         commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
         
         if(repliesRemaining != 0){
-          context.showLoaderOverlay();
+          context.loaderOverlay.show();
           var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.blmCommentsList[i].showListCommentsCommentId, page: page2);
-          context.hideLoaderOverlay();
+          context.loaderOverlay.hide();
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
@@ -1004,9 +1004,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                         title: Text('Delete'),
                                                         leading: Icon(Icons.delete),
                                                         onTap: () async{  
-                                                          context.showLoaderOverlay();
+                                                          context.loaderOverlay.show();
                                                           await apiBLMDeleteComment(commentId: comments[i].commentId);
-                                                          context.hideLoaderOverlay();
+                                                          context.loaderOverlay.hide();
 
                                                           controller.clear();
                                                           itemRemaining = 1;
@@ -1190,9 +1190,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   title: Text('Delete'),
                                                                   leading: Icon(Icons.delete),
                                                                   onTap: () async{  
-                                                                    context.showLoaderOverlay();
+                                                                    context.loaderOverlay.show();
                                                                     await apiBLMDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
-                                                                    context.hideLoaderOverlay();
+                                                                    context.loaderOverlay.hide();
 
                                                                     controller.clear();
                                                                     itemRemaining = 1;
@@ -1468,9 +1468,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                     )
                   );
                 }else if(isComment == true){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   await apiBLMAddComment(postId: postId, commentBody: controller.text);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   controller.clear();
                   itemRemaining = 1;
@@ -1491,9 +1491,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   getOriginalPostInformation();
                   onLoading();
                 }else{
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   controller.clear();
                   itemRemaining = 1;
@@ -1598,9 +1598,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                     )
                   );
                 }else if(isEdit == true){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   await apiBLMEditComment(commentId: editId, commentBody: controller.text);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   controller.clear();
                   itemRemaining = 1;
@@ -1621,9 +1621,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   getOriginalPostInformation();
                   onLoading();
                 }else{
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   await apiBLMEditReply(replyId: editId, replyBody: controller.text);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   controller.clear();
                   itemRemaining = 1;

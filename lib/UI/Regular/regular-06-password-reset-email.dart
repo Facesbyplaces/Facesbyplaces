@@ -10,21 +10,16 @@ import 'package:flutter/material.dart';
 
 class RegularPasswordResetEmail extends StatelessWidget{
 
-  // final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final TextEditingController controller = TextEditingController(text: '');
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
-    // SizeConfig.init(context);
-    print('Rebuilding password reset screen');
     return WillPopScope(
       onWillPop: () async{
-        print('heheheh');
         return Navigator.canPop(context);
       },
       child: GestureDetector(
         onTap: (){
-          print('nice!');
           FocusNode currentFocus = FocusScope.of(context);
           if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
@@ -32,13 +27,13 @@ class RegularPasswordResetEmail extends StatelessWidget{
         },
         child: Scaffold(
           body: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             child: Column(
               children: [
                 Column(
                   children: [
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     
                     Align(
                       alignment: Alignment.topLeft, 
@@ -46,7 +41,7 @@ class RegularPasswordResetEmail extends StatelessWidget{
                         onPressed: (){
                           Navigator.pop(context);
                         }, 
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back, 
                           size: 30,
                         ),
@@ -56,204 +51,179 @@ class RegularPasswordResetEmail extends StatelessWidget{
                   ],
                 ),
 
-                SizedBox(height: 80,),
+                const SizedBox(height: 80,),
 
-                Center(child: Text('Verify Email', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                const Center(child: const Text('Verify Email', style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),
 
-                SizedBox(height: 40,),
+                const SizedBox(height: 40,),
 
-                Center(child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                const Center(child: const Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),),
 
-                SizedBox(height: 80,),
-
-                // Padding(
-                //   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                //   // child: MiscRegularInputFieldTemplate(
-                //   //   key: _key1, 
-                //   //   labelText: 'Email Address', 
-                //   //   type: TextInputType.emailAddress, 
-                //   //   labelTextStyle: TextStyle(
-                //   //     fontSize: 16,
-                //   //     fontWeight: FontWeight.w400, 
-                //   //     color: Color(0xff000000),
-                //   //   ),
-                //   // ),
-                // ),
+                const SizedBox(height: 80,),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: RepaintBoundary(
-                    child: TextFormField(
-                      controller: controller,
-                      keyboardType: TextInputType.emailAddress,
-                      cursorColor: Color(0xff000000),
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        labelText: 'Email Address',
-                        labelStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400, 
-                          color: Color(0xff000000),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: MiscRegularInputFieldTemplate(
+                    key: _key1, 
+                    labelText: 'Email Address', 
+                    type: TextInputType.emailAddress, 
+                    labelTextStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400, 
+                      color: const Color(0xff000000),
                     ),
                   ),
                 ),
 
-                SizedBox(height: 80,),
+                const SizedBox(height: 80,),
 
                 MiscRegularButtonTemplate(
                   buttonText: 'Next',
-                  buttonTextStyle: TextStyle(
+                  buttonTextStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold, 
-                    color: Color(0xffffffff),
+                    color: const Color(0xffffffff),
                   ),
                   width: SizeConfig.screenWidth! / 2, 
                   height: 45,
-                  buttonColor: Color(0xff04ECFF),
+                  buttonColor: const Color(0xff04ECFF),
                   onPressed: () async{
 
-                    // bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
+                    bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
 
-                    // if(_key1.currentState!.controller.text == ''){
-                    //   await showDialog(
-                    //     context: context,
-                    //     builder: (_) => 
-                    //       AssetGiffyDialog(
-                    //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //       entryAnimation: EntryAnimation.DEFAULT,
-                    //       description: Text('Please complete the form before submitting.',
-                    //         textAlign: TextAlign.center,
-                    //       ),
-                    //       onlyOkButton: true,
-                    //       buttonOkColor: Colors.red,
-                    //       onOkButtonPressed: () {
-                    //         Navigator.pop(context, true);
-                    //       },
-                    //     )
-                    //   );
-                    // }else if(!validEmail){
-                    //   await showDialog(
-                    //     context: context,
-                    //     builder: (_) => 
-                    //       AssetGiffyDialog(
-                    //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //       entryAnimation: EntryAnimation.DEFAULT,
-                    //       description: Text('Invalid email address. Please try again.',
-                    //         textAlign: TextAlign.center,
-                    //       ),
-                    //       onlyOkButton: true,
-                    //       buttonOkColor: Colors.red,
-                    //       onOkButtonPressed: () {
-                    //         Navigator.pop(context, true);
-                    //       },
-                    //     )
-                    //   );
-                    // }else{
-                    //   context.showLoaderOverlay();
+                    if(_key1.currentState!.controller.text == ''){
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: const Text('Please complete the form before submitting.',
+                            textAlign: TextAlign.center,
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: const Color(0xffff0000),
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
+                    }else if(!validEmail){
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: const Text('Invalid email address. Please try again.',
+                            textAlign: TextAlign.center,
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: const Color(0xffff0000),
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
+                    }else{
+                      context.loaderOverlay.show();
 
-                    //   BranchUniversalObject buo = BranchUniversalObject(
-                    //     canonicalIdentifier: 'FacesbyPlaces',
-                    //     title: 'FacesbyPlaces Link',
-                    //     imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-                    //     contentDescription: 'FacesbyPlaces link to the app',
-                    //     keywords: ['FacesbyPlaces', 'Link', 'App'],
-                    //     publiclyIndex: true,
-                    //     locallyIndex: true,
-                    //     contentMetadata: BranchContentMetaData()
-                    //       ..addCustomMetadata('custom_string', 'fbp-link')
-                    //       ..addCustomMetadata('reset-type', 'Regular')
-                    //   );
+                      BranchUniversalObject buo = BranchUniversalObject(
+                        canonicalIdentifier: 'FacesbyPlaces',
+                        title: 'FacesbyPlaces Link',
+                        imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+                        contentDescription: 'FacesbyPlaces link to the app',
+                        keywords: ['FacesbyPlaces', 'Link', 'App'],
+                        publiclyIndex: true,
+                        locallyIndex: true,
+                        contentMetadata: BranchContentMetaData()
+                          ..addCustomMetadata('custom_string', 'fbp-link')
+                          ..addCustomMetadata('reset-type', 'Regular')
+                      );
 
-                    //   BranchLinkProperties lp = BranchLinkProperties(
-                    //     channel: 'facebook',
-                    //     feature: 'sharing',
-                    //     stage: 'new share',
-                    //     tags: ['one', 'two', 'three']
-                    //   );
-                    //   lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+                      BranchLinkProperties lp = BranchLinkProperties(
+                        channel: 'facebook',
+                        feature: 'sharing',
+                        stage: 'new share',
+                        tags: ['one', 'two', 'three']
+                      );
+                      lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
 
-                    //   FlutterBranchSdk.setIdentity('alm-user-forgot-password');
-                    //   BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                      FlutterBranchSdk.setIdentity('alm-user-forgot-password');
+                      BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
 
-                    //   context.hideLoaderOverlay();
+                      context.loaderOverlay.hide();
                       
-                    //   if(response.success){
-                    //     context.showLoaderOverlay();
-                    //     bool result = await apiRegularPasswordReset(email: _key1.currentState!.controller.text, redirectLink: response.result);
-                    //     context.hideLoaderOverlay();
+                      if(response.success){
+                        context.loaderOverlay.show();
+                        bool result = await apiRegularPasswordReset(email: _key1.currentState!.controller.text, redirectLink: response.result);
+                        context.loaderOverlay.hide();
 
-                    //     FlutterClipboard.copy('${response.result}').then(( value ) => print('Url copied!'));
+                        FlutterClipboard.copy('${response.result}').then(( value ) => print('Url copied!'));
                         
-                    //     if(result == true){
-                    //       await showDialog(
-                    //         context: context,
-                    //         builder: (_) => 
-                    //           AssetGiffyDialog(
-                    //           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //           title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //           entryAnimation: EntryAnimation.DEFAULT,
-                    //           description: Text('An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
-                    //             textAlign: TextAlign.center,
-                    //           ),
-                    //           onlyOkButton: true,
-                    //           onOkButtonPressed: () {
-                    //             Navigator.pop(context, true);
-                    //           },
-                    //         )
-                    //       );
-                    //     }else{
-                    //       await showDialog(
-                    //         context: context,
-                    //         builder: (_) => 
-                    //           AssetGiffyDialog(
-                    //           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //           title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //           entryAnimation: EntryAnimation.DEFAULT,
-                    //           description: Text('Something went wrong. Please try again.',
-                    //             textAlign: TextAlign.center,
-                    //           ),
-                    //           onlyOkButton: true,
-                    //           buttonOkColor: Colors.red,
-                    //           onOkButtonPressed: () {
-                    //             Navigator.pop(context, true);
-                    //           },
-                    //         )
-                    //       );
-                    //     }
-                    //   }else{
-                    //     await showDialog(
-                    //       context: context,
-                    //       builder: (_) => 
-                    //         AssetGiffyDialog(
-                    //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //         entryAnimation: EntryAnimation.DEFAULT,
-                    //         description: Text('Something went wrong. Please try again.',
-                    //           textAlign: TextAlign.center,
-                    //         ),
-                    //         onlyOkButton: true,
-                    //         buttonOkColor: Colors.red,
-                    //         onOkButtonPressed: () {
-                    //           Navigator.pop(context, true);
-                    //         },
-                    //       )
-                    //     );
-                    //   }
-                    // }
+                        if(result == true){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
+                                textAlign: TextAlign.center,
+                              ),
+                              onlyOkButton: true,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }else{
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: const Text('Something went wrong. Please try again.',
+                                textAlign: TextAlign.center,
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: const Color(0xffff0000),
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }
+                      }else{
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: const Color(0xffff0000),
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
+                      }
+                    }
 
                   },
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
               ],
             ),

@@ -349,9 +349,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         almLongitude: '${locationData.longitude}',
                       );
 
-                      context.showLoaderOverlay();
+                      context.loaderOverlay.show();
                       int result = await apiRegularCreateMemorial(memorial: memorial);
-                      context.hideLoaderOverlay();
+                      context.loaderOverlay.hide();
 
                       Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: relationship,));
                       Navigator.pushReplacement(context, newRoute);

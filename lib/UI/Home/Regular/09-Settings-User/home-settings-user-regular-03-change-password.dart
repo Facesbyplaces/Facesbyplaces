@@ -71,9 +71,9 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                     ),
                     onPressed: () async{
 
-                      context.showLoaderOverlay();
+                      context.loaderOverlay.show();
                       bool result = await apiRegularChangePassword(currentPassword: _key1.currentState!.controller.text, newPassword: _key2.currentState!.controller.text);
-                      context.hideLoaderOverlay();
+                      context.loaderOverlay.hide();
 
                       if(result){
                         await showDialog(

@@ -127,9 +127,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   void onLoading1() async{
     if(itemRemaining1 != 0){
 
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularConnectionListFamily(memorialId: memorialId, page: page1);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       itemRemaining1 = newValue.almItemsRemaining;
 
@@ -154,9 +154,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
   void onLoading2() async{
     if(itemRemaining2 != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularConnectionListFriends(memorialId: memorialId, page: page2);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       itemRemaining2 = newValue.almItemsRemaining;
 
@@ -181,9 +181,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
   void onLoading3() async{
     if(itemRemaining3 != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularConnectionListFollowers(memorialId: memorialId, page: page3);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       itemRemaining3 = newValue.almItemsRemaining;
 

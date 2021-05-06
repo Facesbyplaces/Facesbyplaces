@@ -196,9 +196,9 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(content: 'Are you sure you want to delete "$memorialName"?',),);
             if(confirmResult){
 
-              context.showLoaderOverlay();
+              context.loaderOverlay.show();
               bool result = await apiRegularDeleteMemorial(memorialId: memorialId);
-              context.hideLoaderOverlay();
+              context.loaderOverlay.hide();
 
               if(result){
                 Navigator.popAndPushNamed(context, '/home/regular');

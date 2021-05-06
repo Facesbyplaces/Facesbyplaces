@@ -4,7 +4,6 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-02-follow-page.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
   final String pageType;
   final String relationship;
 
-  MiscBLMManageMemorialTab({
+  const MiscBLMManageMemorialTab({
     required this.index, 
     this.memorialName = '',
     this.description = '',
@@ -74,7 +73,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
 
   @override
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
         if(pageType == 'Blm'){
@@ -93,25 +91,25 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
       },
       child: Container(
         height: 80,
-        color: Color(0xffffffff),
+        color: const Color(0xffffffff),
         child: ListTile(
-          leading: image != '' ? CircleAvatar(radius: 30, backgroundColor: Color(0xff888888), backgroundImage: NetworkImage(image)) : CircleAvatar(radius: 30, backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png')),
+          leading: image != '' ? CircleAvatar(radius: 30, backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage(image)) : const CircleAvatar(radius: 30, backgroundColor: const Color(0xff888888), backgroundImage: const AssetImage('assets/icons/app-icon.png')),
           title: Text(memorialName,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Color(0xff000000),
+              color: const Color(0xff000000),
             ),
           ),
           subtitle: Text(description,
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w200,
-              color: Colors.grey,
+              color: const Color(0xff888888),
             ),
           ),
           trailing: ((){
@@ -119,8 +117,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
-                textColor: Color(0xffffffff),
-                splashColor: Color(0xff4EC9D4),
+                textColor: const Color(0xffffffff),
+                splashColor: const Color(0xff4EC9D4),
                 onPressed: () async{
 
                   bool confirmResult = await showDialog(
@@ -128,11 +126,10 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     builder: (_) => 
                       AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Are you sure you want to leave this page?',
+                      description: const Text('Are you sure you want to leave this page?',
                         textAlign: TextAlign.center,
-                        style: TextStyle(),
                       ),
                       onlyOkButton: false,
                       onOkButtonPressed: () {
@@ -146,9 +143,9 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
 
                   if(confirmResult == true){
 
-                    context.showLoaderOverlay();
+                    context.loaderOverlay.show();
                     String result = await apiBLMLeavePage(memorialId: memorialId);
-                    context.hideLoaderOverlay();
+                    context.loaderOverlay.hide();
 
                     if(result != 'Failed'){
                       setState(() {
@@ -160,11 +157,10 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                          description: const Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: true,
                           onOkButtonPressed: () {
@@ -178,14 +174,13 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
+                          description: const Text('Something went wrong. Please try again.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: true,
-                          buttonOkColor: Colors.red,
+                          buttonOkColor: const Color(0xffff0000),
                           onOkButtonPressed: () {
                             Navigator.pop(context, true);
                           },
@@ -195,20 +190,20 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   }
 
                 },
-                child: Text('Leave', style: TextStyle(fontSize: 14,),),
+                child: const Text('Leave', style: const TextStyle(fontSize: 14,),),
                 height: 35,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  side: BorderSide(color: Color(0xff04ECFF)),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                  side: const BorderSide(color: const Color(0xff04ECFF)),
                 ),
-                color: Color(0xff04ECFF),
+                color: const Color(0xff04ECFF),
               );
             }else if(followButton == true){
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
-                textColor: Color(0xffffffff),
-                splashColor: Color(0xff4EC9D4),
+                textColor: const Color(0xffffffff),
+                splashColor: const Color(0xff4EC9D4),
                 onPressed: () async{
 
                   bool confirmResult = await showDialog(
@@ -216,11 +211,10 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     builder: (_) => 
                       AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Are you sure you want to leave this page?',
+                      description: const Text('Are you sure you want to leave this page?',
                         textAlign: TextAlign.center,
-                        style: TextStyle(),
                       ),
                       onlyOkButton: false,
                       onOkButtonPressed: () {
@@ -234,9 +228,9 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
 
                   if(confirmResult == true){
 
-                    context.showLoaderOverlay();
+                    context.loaderOverlay.show();
                     bool result = await apiBLMModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
-                    context.hideLoaderOverlay();
+                    context.loaderOverlay.hide();
 
                     if(result){
                       setState(() {
@@ -248,11 +242,10 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                          description: const Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: true,
                           onOkButtonPressed: () {
@@ -267,14 +260,13 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
+                          description: const Text('Something went wrong. Please try again.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: true,
-                          buttonOkColor: Colors.red,
+                          buttonOkColor: const Color(0xffff0000),
                           onOkButtonPressed: () {
                             Navigator.pop(context, true);
                           },
@@ -283,24 +275,24 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     }
                   }
                 },
-                child: Text('Leave', style: TextStyle(fontSize: 14,),),
+                child: const Text('Leave', style: const TextStyle(fontSize: 14,),),
                 height: 35,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  side: BorderSide(color: Color(0xff04ECFF)),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                  side: const BorderSide(color: const Color(0xff04ECFF)),
                 ),
-                color: Color(0xff04ECFF),
+                color: const Color(0xff04ECFF),
               );
             }else{
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
-                textColor: Color(0xff4EC9D4),
-                splashColor: Color(0xff4EC9D4),
+                textColor: const Color(0xff4EC9D4),
+                splashColor: const Color(0xff4EC9D4),
                 onPressed: () async{
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   bool result = await apiBLMModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   if(result){
                     setState(() {
@@ -312,11 +304,10 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully followed the page. You will receive notifications from this page.',
+                        description: const Text('Successfully followed the page. You will receive notifications from this page.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
                         onOkButtonPressed: () {
@@ -330,14 +321,13 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
+                        description: const Text('Something went wrong. Please try again.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
-                        buttonOkColor: Colors.red,
+                        buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
                         },
@@ -345,13 +335,13 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     );
                   }
                 },
-                child: Text('Join', style: TextStyle(fontSize: 14,),),
+                child: const Text('Join', style: const TextStyle(fontSize: 14,),),
                 height: 35,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  side: BorderSide(color: Color(0xff4EC9D4)),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                  side: const BorderSide(color: const Color(0xff4EC9D4)),
                 ),
-                color: Color(0xffffffff),
+                color: const Color(0xffffffff),
               );
             }
           }()),

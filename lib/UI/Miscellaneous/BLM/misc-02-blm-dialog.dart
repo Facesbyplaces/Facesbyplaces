@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscBLMUploadFromDialog extends StatelessWidget{
@@ -6,29 +5,28 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
   final String choice_1;
   final String choice_2;
 
-  MiscBLMUploadFromDialog({this.choice_1 = 'Camera', this.choice_2 = 'Gallery'});
+  const MiscBLMUploadFromDialog({this.choice_1 = 'Camera', this.choice_2 = 'Gallery'});
 
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5))
+      shape: const RoundedRectangleBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(5))
       ),
       child: Container(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Upload From',
-              style: TextStyle(
+            const Text('Upload From',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w300,
-                color: Color(0xff000000),
+                color: const Color(0xff000000),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -38,7 +36,7 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
@@ -53,7 +51,7 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
@@ -66,29 +64,30 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
 
 class MiscBLMRelationshipFromDialog extends StatelessWidget{
 
+  const MiscBLMRelationshipFromDialog();
+
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5))
+      shape: const RoundedRectangleBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(5))
       ),
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(20.0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.all(20.0),
+        physics: const ClampingScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Choose the relationship of this person:',
+            const Text('Choose the relationship of this person:',
             textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w200,
-                color: Color(0xff000000),
+                color: const Color(0xff000000),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -98,12 +97,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -113,12 +112,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -128,12 +127,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -143,12 +142,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -158,12 +157,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -173,7 +172,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
@@ -188,7 +187,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
@@ -203,12 +202,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -218,12 +217,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff000000).withOpacity(0.5),
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
           ],
         ),
       ),
@@ -240,7 +239,7 @@ class MiscBLMConfirmDialog extends StatelessWidget{
   final Color confirmColor_1;
   final Color confirmColor_2;
 
-  MiscBLMConfirmDialog({
+  const MiscBLMConfirmDialog({
     this.title = 'Confirm Delete',
     this.content = 'Are you sure you want to delete "Mark Jacksons Memorial"?',
     this.confirm_1 = 'Yes',
@@ -250,37 +249,36 @@ class MiscBLMConfirmDialog extends StatelessWidget{
   });
 
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5))
+      shape: const RoundedRectangleBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(5))
       ),
       child: Container(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xff000000),
+                color: const Color(0xff000000),
               ),
             ),
 
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
             Text(content,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: Color(0xff000000),
+                color: const Color(0xff000000),
               ),
             ),
 
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
             Row(
               children: [

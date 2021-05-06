@@ -18,7 +18,8 @@ class HomeBLMNotificationSettings extends StatefulWidget{
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
-  HomeBLMNotificationSettings({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
+
+  const HomeBLMNotificationSettings({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
 
   @override
   HomeBLMNotificationSettingsState createState() => HomeBLMNotificationSettingsState(newMemorial: newMemorial, newActivities: newActivities, postLikes: postLikes, postComments: postComments, addFamily: addFamily, addFriends: addFriends, addAdmin: addAdmin);
@@ -32,6 +33,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
+
   HomeBLMNotificationSettingsState({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
 
   bool toggle1 = false;
@@ -69,14 +71,14 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Notification Settings', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Notification Settings', style: const TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+            leading: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
           ),
           body: Stack(
             children: [
-              MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+              const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
 
               SingleChildScrollView(
                 physics: ClampingScrollPhysics(),

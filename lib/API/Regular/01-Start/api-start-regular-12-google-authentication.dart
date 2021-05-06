@@ -32,7 +32,7 @@ class RegularGoogleAuthentication {
   }
 
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
-    context.showLoaderOverlay();
+    context.loaderOverlay.show();
 
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user = FirebaseAuth.instance.currentUser;
@@ -172,7 +172,7 @@ class RegularGoogleAuthentication {
       }
     }
 
-    context.hideLoaderOverlay();
+    context.loaderOverlay.hide();
 
     return user;
   }

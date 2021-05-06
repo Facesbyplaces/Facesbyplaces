@@ -22,7 +22,7 @@ class MiscRegularDropDownTemplate extends StatefulWidget{
   final String reportType;
   final String pageType;
 
-  MiscRegularDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
+  const MiscRegularDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
 
   MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState(postId: postId, likePost: likePost, likesCount: likesCount, reportType: reportType, pageType: pageType);
 }
@@ -37,7 +37,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
   MiscRegularDropDownTemplateState({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
 
-  final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
+  final snackBar = const SnackBar(content: const Text('Link copied!'), backgroundColor: const Color(0xff4EC9D4), duration: const Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
   GlobalKey qrKey = new GlobalKey();
   BranchUniversalObject? buo;
@@ -81,7 +81,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
         final painter = QrPainter.withQr(
           qr: qrCode!,
-          color: Colors.black,
+          color: const Color(0xff000000),
           gapless: true,
           embeddedImageStyle: null,
           embeddedImage: null,
@@ -101,14 +101,13 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
           builder: (_) => 
             AssetGiffyDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Invalid QR Code.',
+            description: const Text('Invalid QR Code.',
               textAlign: TextAlign.center,
-              style: TextStyle(),
             ),
             onlyOkButton: true,
-            buttonOkColor: Colors.red,
+            buttonOkColor: const Color(0xffff0000),
             onOkButtonPressed: () {
               Navigator.pop(context, true);
             },
@@ -135,7 +134,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
               fontSize: 14,
               color: Color(0xff888888)
             ),
-            items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
+            items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 value: value,
                 child: Container(
@@ -308,7 +307,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
   MiscRegularDropDownMemorialTemplateState({required this.memorialName, required this.memorialId, required this.pageType, required this.reportType});
 
-  final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
+  final snackBar = const SnackBar(content: const Text('Link copied!'), backgroundColor: const Color(0xff4EC9D4), duration: const Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
@@ -371,14 +370,13 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
           builder: (_) => 
             AssetGiffyDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Invalid QR Code.',
+            description: const Text('Invalid QR Code.',
               textAlign: TextAlign.center,
-              style: TextStyle(),
             ),
             onlyOkButton: true,
-            buttonOkColor: Colors.red,
+            buttonOkColor: const Color(0xffff0000),
             onOkButtonPressed: () {
               Navigator.pop(context, true);
             },
@@ -399,13 +397,13 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
         builder: (context, dropDownList){
           return DropdownButton<String>(
             underline: Container(height: 0),
-            icon: Center(child: Icon(Icons.more_vert, color: Color(0xffffffff)),),
-            style: TextStyle(
+            icon: const Center(child: const Icon(Icons.more_vert, color: const Color(0xffffffff)),),
+            style: const TextStyle(
               fontFamily: 'Roboto',
               fontSize: 14,
-              color: Color(0xff888888)
+              color: const Color(0xff888888)
             ),
-              items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
+              items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 value: value,
                 child: Container(
@@ -434,11 +432,10 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                     builder: (_) => 
                       AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Successfully shared the link.',
+                      description: const Text('Successfully shared the link.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(),
                       ),
                       onlyOkButton: true,
                       onOkButtonPressed: () {
@@ -468,20 +465,20 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                           children: [
                             Container(
                               height: 50,
-                              padding: EdgeInsets.only(right: 20.0),
+                              padding: const EdgeInsets.only(right: 20.0),
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
                                 onTap: (){
                                   Navigator.pop(context);
                                 },
-                                child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
+                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                               ),
                             ),
 
                             Expanded(
                               child: Container(
                                 height: SizeConfig.screenHeight! - 400,
-                                color: Color(0xffffffff),
+                                color: const Color(0xffffffff),
                                 child: Center(
                                   child: RepaintBoundary(
                                     key: qrKey,
@@ -496,24 +493,24 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                               ),
                             ),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             MiscRegularButtonTemplate(
                               buttonText: 'Share',
-                              buttonTextStyle: TextStyle(
+                              buttonTextStyle: const TextStyle(
                                 fontSize: 16, 
                                 fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
+                                color: const Color(0xffffffff),
                               ),
                               width: SizeConfig.screenWidth! / 2,
                               height: 45,
-                              buttonColor: Color(0xff04ECFF), 
+                              buttonColor: const Color(0xff04ECFF), 
                               onPressed: () async{
                                 await shareQRCode(qrData);
                               },
                             ),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                           ],
                         ),
@@ -532,11 +529,10 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                     builder: (_) => 
                       AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Successfully copied the link.',
+                      description: const Text('Successfully copied the link.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(),
                       ),
                       onlyOkButton: true,
                       onOkButtonPressed: () {
@@ -549,7 +545,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
 
-                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
+                FlutterClipboard.copy(response.result).then((value) => const ScaffoldMessenger(child: const Text('Link copied!'),));
               }
             },
           );

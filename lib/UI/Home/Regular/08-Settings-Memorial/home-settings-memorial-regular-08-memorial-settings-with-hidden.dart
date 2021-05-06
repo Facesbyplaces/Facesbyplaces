@@ -198,9 +198,9 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
             if(confirmResult){
 
-              context.showLoaderOverlay();
+              context.loaderOverlay.show();
               String result = await apiRegularLeavePage(memorialId: memorialId);
-              context.hideLoaderOverlay();
+              context.loaderOverlay.hide();
 
               if(result != 'Failed'){
                 if(result == 'Blm'){

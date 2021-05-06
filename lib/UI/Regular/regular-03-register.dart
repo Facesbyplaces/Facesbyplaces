@@ -63,8 +63,8 @@ class RegularRegister extends StatelessWidget{
 
                     Expanded(
                       child: SingleChildScrollView(
-                        physics: ClampingScrollPhysics(),
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                        physics: const ClampingScrollPhysics(),
+                        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                         child: Column(
                           children: [
 
@@ -72,62 +72,62 @@ class RegularRegister extends StatelessWidget{
                               key: _key1, 
                               labelText: 'Your Name', 
                               type: TextInputType.name, 
-                              labelTextStyle: TextStyle(
+                              labelTextStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400, 
-                                color: Colors.grey,
+                                color: const Color(0xff888888),
                               ),
                             ),
                             
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             
                             MiscRegularInputFieldTemplate(
                               key: _key2, 
                               labelText: 'Last Name', 
                               type: TextInputType.name, 
-                              labelTextStyle: TextStyle(
+                              labelTextStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey,
+                                color: const Color(0xff888888),
                               ),
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             
                             MiscRegularPhoneNumberTemplate(
                               key: _key3, 
                               labelText: 'Mobile #', 
                               type: TextInputType.phone, 
-                              labelTextStyle: TextStyle(
+                              labelTextStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400, 
-                                color: Colors.grey,
+                                color: const Color(0xff888888),
                               ),
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
                             MiscRegularInputFieldTemplate(
                               key: _key4, 
                               labelText: 'Email Address', 
                               type: TextInputType.emailAddress, 
-                              labelTextStyle: TextStyle(
+                              labelTextStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400, 
-                                color: Colors.grey,
+                                color: const Color(0xff888888),
                               ),
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
                             MiscRegularInputFieldTemplate(
                               key: _key5, 
                               labelText: 'Username', 
                               type: TextInputType.text, 
-                              labelTextStyle: TextStyle(
+                              labelTextStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400, 
-                                color: Colors.grey,
+                                color: const Color(0xff888888),
                               ),
                             ),
 
@@ -137,10 +137,10 @@ class RegularRegister extends StatelessWidget{
                               key: _key6, 
                               labelText: 'Password', 
                               type: TextInputType.text, 
-                              labelTextStyle: TextStyle(
+                              labelTextStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400, 
-                                color: Colors.grey,
+                                color: const Color(0xff888888),
                               ), 
                               obscureText: true,
                             ),
@@ -149,14 +149,14 @@ class RegularRegister extends StatelessWidget{
 
                             MiscRegularButtonTemplate(
                               buttonText: 'Next', 
-                              buttonTextStyle: TextStyle(
+                              buttonTextStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
+                                color: const Color(0xffffffff),
                               ),
                               width: SizeConfig.screenWidth! / 2, 
                               height: 45,
-                              buttonColor: Color(0xff04ECFF),
+                              buttonColor: const Color(0xff04ECFF),
                               onPressed: () async{
                                 bool validEmail = false;
                                 validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text );
@@ -167,14 +167,13 @@ class RegularRegister extends StatelessWidget{
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Please complete the form before submitting.',
+                                      description: const Text('Please complete the form before submitting.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -186,14 +185,13 @@ class RegularRegister extends StatelessWidget{
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Invalid email address. Please try again.',
+                                      description: const Text('Invalid email address. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -209,9 +207,9 @@ class RegularRegister extends StatelessWidget{
                                     password: _key6.currentState!.controller.text,
                                   );
 
-                                  context.showLoaderOverlay();
+                                  context.loaderOverlay.show();
                                   String result = await apiRegularRegistration(account: account);
-                                  context.hideLoaderOverlay();
+                                  context.loaderOverlay.hide();
 
                                   if(result == 'Success'){
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => RegularVerifyEmail()));
@@ -221,14 +219,13 @@ class RegularRegister extends StatelessWidget{
                                       builder: (_) => 
                                         AssetGiffyDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         description: Text('$result',
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(),
                                         ),
                                         onlyOkButton: true,
-                                        buttonOkColor: Colors.red,
+                                        buttonOkColor: const Color(0xffff0000),
                                         onOkButtonPressed: () {
                                           Navigator.pop(context, true);
                                         },
@@ -244,19 +241,19 @@ class RegularRegister extends StatelessWidget{
                             RichText(
                               text: TextSpan(
                                 children: <TextSpan>[
-                                  TextSpan(
+                                  const TextSpan(
                                     text: 'Already have an account? ', 
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16,
-                                      color: Color(0xff000000),
+                                      color: const Color(0xff000000),
                                     ),
                                   ),
 
                                   TextSpan(
                                     text: 'Login', 
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16,
-                                      color: Color(0xff04ECFF),
+                                      color: const Color(0xff04ECFF),
                                     ),
                                     recognizer: TapGestureRecognizer()
                                     ..onTap = (){
@@ -267,7 +264,7 @@ class RegularRegister extends StatelessWidget{
                               ),
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             
                           ],
                         ),
@@ -278,7 +275,7 @@ class RegularRegister extends StatelessWidget{
 
                 Column(
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     
                     SafeArea(
                       child: Align(
@@ -287,9 +284,9 @@ class RegularRegister extends StatelessWidget{
                           onPressed: (){
                             Navigator.pop(context);
                           }, 
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back, 
-                            color: Color(0xffffffff), 
+                            color: const Color(0xffffffff), 
                             size: 30,
                           ),
                         ),

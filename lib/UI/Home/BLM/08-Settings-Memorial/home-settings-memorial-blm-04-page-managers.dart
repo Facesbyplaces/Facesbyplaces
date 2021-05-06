@@ -14,12 +14,12 @@ class BLMShowAdminSettings{
   final String relationship;
   final String email;
 
-  BLMShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
+  const BLMShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
 }
 
 class HomeBLMPageManagers extends StatefulWidget{
   final int memorialId;
-  HomeBLMPageManagers({required this.memorialId});
+  const HomeBLMPageManagers({required this.memorialId});
 
   HomeBLMPageManagersState createState() => HomeBLMPageManagersState(memorialId: memorialId);
 }
@@ -48,10 +48,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more users to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more users to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -80,35 +80,35 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
   void addManagers1(){
     managers.add(
-      Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: 14, color: Color(0xff888888)),),),
+      const Padding(padding: const EdgeInsets.only(left: 20.0,), child: const Text('Admin', style: const TextStyle(fontSize: 14, color: const Color(0xff888888)),),),
     );
   }
 
   void addManagers2(){
     managers.add(
-      Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: 14, color: Color(0xff888888)),),),
+      const Padding(padding: const EdgeInsets.only(left: 20.0,), child: const Text('Family', style: const TextStyle(fontSize: 14, color: const Color(0xff888888)),),),
     );
   }
 
   void onLoading1() async{
     if(adminItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMShowAdminSettings(memorialId: memorialId, page: page1);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       adminItemsRemaining = newValue.blmAdminItemsRemaining;
 
       for(int i = 0; i < newValue.blmAdminList.length; i++){
         managers.add(
           ListTile(
-            leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
+            leading: CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
             title: Text('${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
             subtitle: Text('${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,
-              textColor: Color(0xffffffff),
-              splashColor: Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
+              splashColor: const Color(0xff04ECFF),
               onPressed: () async{
 
                 bool confirmation = await showDialog(
@@ -116,11 +116,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Are you sure you want to remove this user?',
+                    description: const Text('Are you sure you want to remove this user?',
                       textAlign: TextAlign.center,
-                      style: TextStyle(),
                     ),
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
@@ -133,9 +132,9 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                 );
 
                 if(confirmation){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   String result = await apiBLMDeleteMemorialAdmin(pageType: 'Blm', pageId: memorialId, userId: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   if(result != 'Success'){
                     await showDialog(
@@ -143,14 +142,13 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
-                        buttonOkColor: Colors.red,
+                        buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
                         },
@@ -162,11 +160,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully removed the user from the list.',
+                        description: const Text('Successfully removed the user from the list.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
                         onOkButtonPressed: () {
@@ -186,12 +183,12 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   }
                 }
               },
-              child: Text('Remove', style: TextStyle(fontSize: 14,),),
+              child: const Text('Remove', style: const TextStyle(fontSize: 14,),),
               height: 40,
-              shape: StadiumBorder(
-                side: BorderSide(color: Color(0xffE74C3C)),
+              shape: const StadiumBorder(
+                side: const BorderSide(color: const Color(0xffE74C3C)),
               ),
-              color: Color(0xffE74C3C),
+              color: const Color(0xffE74C3C),
             ),
           ),
         );
@@ -212,23 +209,23 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
   void onLoading2() async{
     
     if(familyItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMShowAdminSettings(memorialId: memorialId, page: page2);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.blmFamilyItemsRemaining;
 
       for(int i = 0; i < newValue.blmFamilyList.length; i++){
         managers.add(
           ListTile(
-            leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
+            leading: CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
             title: Text('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
             subtitle: Text('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,
-              textColor: Color(0xffffffff),
-              splashColor: Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
+              splashColor: const Color(0xff04ECFF),
               onPressed: () async{
 
                 bool confirmation = await showDialog(
@@ -236,11 +233,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Are you sure you want to make this user a manager?',
+                    description: const Text('Are you sure you want to make this user a manager?',
                       textAlign: TextAlign.center,
-                      style: TextStyle(),
                     ),
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
@@ -253,9 +249,9 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                 );
 
                 if(confirmation){
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   String result = await apiBLMAddMemorialAdmin(pageType: 'Blm', pageId: memorialId, userId: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   if(result != 'Success'){
                     await showDialog(
@@ -263,14 +259,13 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
-                        buttonOkColor: Colors.red,
+                        buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
                         },
@@ -282,11 +277,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully added the user from the list.',
+                        description: const Text('Successfully added the user from the list.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
                         onOkButtonPressed: () {
@@ -306,12 +300,12 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   }
                 }
               },
-              child: Text('Make Manager', style: TextStyle(fontSize: 14,),),
+              child: const Text('Make Manager', style: const TextStyle(fontSize: 14,),),
               height: 40,
-              shape: StadiumBorder(
-                side: BorderSide(color: Color(0xff04ECFF)),
+              shape: const StadiumBorder(
+                side: const BorderSide(color: const Color(0xff04ECFF)),
               ),
-              color: Color(0xff04ECFF),
+              color: const Color(0xff04ECFF),
             ),
           ),
         );
@@ -328,11 +322,11 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff04ECFF),
-        title:  Text('Memorial Settings', style: TextStyle(fontSize: 16, color: Color(0xffffffff),),),
+        backgroundColor: const Color(0xff04ECFF),
+        title: const Text('Memorial Settings', style: TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
         centerTitle: true,
           leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: (){
             Navigator.pop(context);
           },
@@ -344,10 +338,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            physics: ClampingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
             itemCount: managers.length,
-            separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => managers[i],
           )
         ),

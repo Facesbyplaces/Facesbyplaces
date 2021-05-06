@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
@@ -52,21 +51,20 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
       keyboardType: type,
       maxLines: maxLines,
       readOnly: readOnly,
-      cursorColor: Color(0xff000000),
+      cursorColor: const Color(0xff000000),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),
@@ -110,10 +108,9 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return TextFormField(
       controller: controller,
-      cursorColor: Color(0xff000000),
+      cursorColor: const Color(0xff000000),
       maxLines: maxLines,
       keyboardType: type,
       readOnly: readOnly,
@@ -123,17 +120,17 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        border: const OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
       ),
     );
@@ -170,13 +167,13 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
   @override
   Widget build(BuildContext context){
     return InputDecorator(
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),
@@ -237,20 +234,20 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
   @override
   Widget build(BuildContext context){
     return InputDecorator(
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Security Question',
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          style: TextStyle(
-            fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000)
+          style: const TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff000000)
           ),
           value: currentSelection,
           isDense: true,
@@ -277,7 +274,7 @@ class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
   final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
+  const MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
 
   MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
 }
@@ -298,150 +295,25 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return DateTimePicker(
       type: dateTimePickerType,
       controller: controller,
-      cursorColor: Color(0xff000000),
+      cursorColor: const Color(0xff000000),
       firstDate: DateTime(1000),
       lastDate: DateTime.now(),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),
     );
   }
 }
-
-// class MiscRegularPhoneNumberPickerTemplate extends StatefulWidget{
-//   final String labelText;
-//   final TextStyle labelTextStyle;
-//   final bool obscureText;
-//   final TextInputType type;
-//   final int maxLines;
-//   final bool readOnly;
-//   final bool includeSuffixIcon;
-//   final String displayText;
-
-//   MiscRegularPhoneNumberPickerTemplate({
-//     required Key key,
-//     this.labelText = '',
-//     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-//     this.obscureText = false, 
-//     this.type = TextInputType.text, 
-//     this.maxLines = 1, 
-//     this.readOnly = false,
-//     this.includeSuffixIcon = false,
-//     this.displayText = '',
-//   }) : super(key: key);
-  
-//   MiscRegularPhoneNumberPickerTemplateState createState() => MiscRegularPhoneNumberPickerTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
-// }
-
-// class MiscRegularPhoneNumberPickerTemplateState extends State<MiscRegularPhoneNumberPickerTemplate>{
-//   final String labelText;
-//   final TextStyle labelTextStyle;
-//   final bool obscureText;
-//   final TextInputType type;
-//   final int maxLines;
-//   final bool readOnly;
-//   final bool includeSuffixIcon;
-//   final String displayText;
-
-//   MiscRegularPhoneNumberPickerTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
-
-//   TextEditingController controller1 = TextEditingController(text: '+1');
-//   TextEditingController controller2 = TextEditingController(text: '');
-
-//   var globalPhoneType = PhoneNumberType.mobile;
-//   var globalPhoneFormat = PhoneNumberFormat.international;
-
-//   String get overrideCountryCode {
-//     if (controller1.text.isNotEmpty) {
-//       try {
-//         return CountryManager().countries.firstWhere((element) => element.phoneCode == controller1.text.replaceAll(RegExp(r'[^\d]+'), '')).countryCode;
-//       } catch (_) {
-//         return '';
-//       }
-//     } else {
-//       return '';
-//     }
-//   }
-
-//   void initState(){
-//     super.initState();
-//     controller2 = TextEditingController(text: displayText);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     SizeConfig.init(context);
-//     return Row(
-//       crossAxisAlignment: CrossAxisAlignment.center,
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         Container(
-//           width: 50,
-//           child: TextFormField(
-//             onTap: (){
-//             showCountryPicker(
-//               context: context,
-//               showPhoneCode: true,
-//               onSelect: (Country country) {
-//                 setState(() {
-//                   controller1.text = '+${country.phoneCode}';
-//                 });
-//               },
-//             );
-//             },
-//             readOnly: true,
-//             controller: controller1,
-//             decoration: InputDecoration(
-//               hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-//               focusedBorder: UnderlineInputBorder(
-//                 borderSide: BorderSide(
-//                   color: Color(0xff000000),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-
-//         SizedBox(width: 20,),
-        
-//         Expanded(
-//           child: TextFormField(
-//             keyboardType: TextInputType.phone,
-//             controller: controller2,
-//             cursorColor: Color(0xff000000),
-//             decoration: InputDecoration(
-//               focusedBorder: UnderlineInputBorder(
-//                 borderSide: BorderSide(
-//                   color: Color(0xff000000),
-//                 ),
-//               ),
-//             ),
-            
-//             inputFormatters: [
-//               LibPhonenumberTextFormatter(
-//                 phoneNumberType: globalPhoneType,
-//                 phoneNumberFormat: globalPhoneFormat,
-//                 overrideSkipCountryCode: overrideCountryCode,
-//               ),
-//             ],
-//           ),
-//         ),
-
-//       ],
-//     );
-//   }
-// }
 
 class MiscRegularPhoneNumberTemplate extends StatefulWidget{
   final String labelText;
@@ -453,7 +325,7 @@ class MiscRegularPhoneNumberTemplate extends StatefulWidget{
   final bool includeSuffixIcon;
   final String displayText;
 
-  MiscRegularPhoneNumberTemplate({
+  const MiscRegularPhoneNumberTemplate({
     required Key key,
     this.labelText = '',
     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
@@ -490,9 +362,8 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return InternationalPhoneNumberInput(
-      selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
+      selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,
       onInputChanged: (PhoneNumber number){
         print(number.phoneNumber);
@@ -506,9 +377,9 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),

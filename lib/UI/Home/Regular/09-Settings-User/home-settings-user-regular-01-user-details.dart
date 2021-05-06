@@ -68,7 +68,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
             return WeSlide(
               controller: controller,
               panelMaxSize: SizeConfig.screenHeight! / 1.5,
-              panelBackground: Color(0xffECF0F1),
+              // panelBackground: Color(0xffECF0F1),
+              backgroundColor: Color(0xffECF0F1),
               panel: Container(
                 height: SizeConfig.screenHeight! / 1.5,
                 padding: EdgeInsets.only(left: 50.0, right: 50.0),
@@ -106,9 +107,9 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                     ListTile(
                       onTap: () async{
-                        context.showLoaderOverlay();
+                        context.loaderOverlay.show();
                         APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: userId);
-                        context.hideLoaderOverlay();
+                        context.loaderOverlay.hide();
 
                         Navigator.push(context, MaterialPageRoute(builder: (context) => 
                         HomeRegularUserOtherDetails(
@@ -153,9 +154,9 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         print('The logoutResult is $logoutResult');
 
                         if(logoutResult){
-                          context.showLoaderOverlay();
+                          context.loaderOverlay.show();
                           bool result = await apiRegularLogout();
-                          context.hideLoaderOverlay();
+                          context.loaderOverlay.hide();
 
                           if(result){
                             Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
@@ -214,9 +215,9 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               bool getImage = await getProfileImage();
 
                               if(getImage){
-                                context.showLoaderOverlay();
+                                context.loaderOverlay.show();
                                 bool result = await apiRegularUpdateUserProfilePicture(image: profileImage, userId: userId);
-                                context.hideLoaderOverlay();
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   await showDialog(

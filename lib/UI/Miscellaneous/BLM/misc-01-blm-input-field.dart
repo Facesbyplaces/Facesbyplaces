@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +12,10 @@ class MiscBLMInputFieldTemplate extends StatefulWidget{
   final bool includeSuffixIcon;
   final String displayText;
 
-  MiscBLMInputFieldTemplate({
+  const MiscBLMInputFieldTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
     this.obscureText = false, 
     this.type = TextInputType.text, 
     this.maxLines = 1, 
@@ -49,21 +48,20 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
       keyboardType: type,
       maxLines: maxLines,
       readOnly: readOnly,
-      cursorColor: Color(0xff000000),
+      cursorColor: const Color(0xff000000),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),
@@ -79,17 +77,16 @@ class MiscBLMInputFieldMultiTextTemplate extends StatefulWidget{
   final bool readOnly;
   final Color backgroundColor;
 
-  MiscBLMInputFieldMultiTextTemplate({
+  const MiscBLMInputFieldMultiTextTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
     this.type = TextInputType.text, 
     this.maxLines = 10,
     this.readOnly = false,
     this.backgroundColor = const Color(0xffffffff),
   }) : super(key: key);
   
-
   MiscBLMInputFieldMultiTextTemplateState createState() => MiscBLMInputFieldMultiTextTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
 }
 
@@ -107,10 +104,9 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return TextFormField(
       controller: controller,
-      cursorColor: Color(0xff000000),
+      cursorColor: const Color(0xff000000),
       maxLines: maxLines,
       keyboardType: type,
       readOnly: readOnly,
@@ -120,17 +116,17 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        border: const OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
       ),
     );
@@ -140,11 +136,7 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
 class MiscBLMInputFieldDropDown extends StatefulWidget{
 
   final String displayText;
-
-  MiscBLMInputFieldDropDown({
-    required Key key,
-    this.displayText = 'Father',
-  }) : super(key: key);
+  const MiscBLMInputFieldDropDown({required Key key, this.displayText = 'Father',}) : super(key: key);
 
   @override
   MiscBLMInputFieldDropDownState createState() => MiscBLMInputFieldDropDownState(displayText: displayText);
@@ -153,7 +145,6 @@ class MiscBLMInputFieldDropDown extends StatefulWidget{
 class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
 
   final String displayText;
-
   MiscBLMInputFieldDropDownState({required this.displayText});
 
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
@@ -167,10 +158,10 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
   @override
   Widget build(BuildContext context){
     return InputDecorator(
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Security Question',
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff000000),
@@ -201,11 +192,7 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
 class MiscBLMInputFieldSecurityQuestions extends StatefulWidget{
 
   final String displayText;
-
-  MiscBLMInputFieldSecurityQuestions({
-    required Key key,
-    this.displayText = 'What\'s the name of your first dog?',
-  }) : super(key: key);
+  const MiscBLMInputFieldSecurityQuestions({required Key key, this.displayText = 'What\'s the name of your first dog?',}) : super(key: key);
 
   @override
   MiscBLMInputFieldSecurityQuestionsState createState() => MiscBLMInputFieldSecurityQuestionsState(displayText: displayText);
@@ -214,7 +201,6 @@ class MiscBLMInputFieldSecurityQuestions extends StatefulWidget{
 class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSecurityQuestions>{
 
   final String displayText;
-
   MiscBLMInputFieldSecurityQuestionsState({required this.displayText});
 
   List<String> securityQuestions = [
@@ -234,20 +220,20 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
   @override
   Widget build(BuildContext context){
     return InputDecorator(
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          style: TextStyle(
-            fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000)
+          style: const TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff000000)
           ),
           value: currentSelection,
           isDense: true,
@@ -274,7 +260,7 @@ class MiscBLMInputFieldDateTimeTemplate extends StatefulWidget{
   final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  MiscBLMInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
+  const MiscBLMInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
 
   MiscBLMInputFieldDateTimeTemplateState createState() => MiscBLMInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
 }
@@ -295,150 +281,25 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return DateTimePicker(
       type: dateTimePickerType,
       controller: controller,
-      cursorColor: Color(0xff000000),
+      cursorColor: const Color(0xff000000),
       firstDate: DateTime(1000),
       lastDate: DateTime.now(),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),
     );
   }
 }
-
-// class MiscBLMPhoneNumberPickerTemplate extends StatefulWidget{
-//   final String labelText;
-//   final TextStyle labelTextStyle;
-//   final bool obscureText;
-//   final TextInputType type;
-//   final int maxLines;
-//   final bool readOnly;
-//   final bool includeSuffixIcon;
-//   final String displayText;
-
-//   MiscBLMPhoneNumberPickerTemplate({
-//     required Key key,
-//     this.labelText = '',
-//     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-//     this.obscureText = false, 
-//     this.type = TextInputType.text, 
-//     this.maxLines = 1, 
-//     this.readOnly = false,
-//     this.includeSuffixIcon = false,
-//     this.displayText = '',
-//   }) : super(key: key);
-  
-//   MiscBLMPhoneNumberPickerTemplateState createState() => MiscBLMPhoneNumberPickerTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
-// }
-
-// class MiscBLMPhoneNumberPickerTemplateState extends State<MiscBLMPhoneNumberPickerTemplate>{
-//   final String labelText;
-//   final TextStyle labelTextStyle;
-//   final bool obscureText;
-//   final TextInputType type;
-//   final int maxLines;
-//   final bool readOnly;
-//   final bool includeSuffixIcon;
-//   final String displayText;
-
-//   MiscBLMPhoneNumberPickerTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
-
-//   TextEditingController controller1 = TextEditingController(text: '+1');
-//   TextEditingController controller2 = TextEditingController(text: '');
-
-//   var globalPhoneType = PhoneNumberType.mobile;
-//   var globalPhoneFormat = PhoneNumberFormat.international;
-
-//   String get overrideCountryCode {
-//     if (controller1.text.isNotEmpty) {
-//       try {
-//         return CountryManager().countries.firstWhere((element) => element.phoneCode == controller1.text.replaceAll(RegExp(r'[^\d]+'), '')).countryCode;
-//       } catch (_) {
-//         return '';
-//       }
-//     } else {
-//       return '';
-//     }
-//   }
-
-//   void initState(){
-//     super.initState();
-//     controller2 = TextEditingController(text: displayText);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     SizeConfig.init(context);
-//     return Row(
-//       crossAxisAlignment: CrossAxisAlignment.center,
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         Container(
-//           width: 50,
-//           child: TextFormField(
-//             onTap: (){
-//             showCountryPicker(
-//               context: context,
-//               showPhoneCode: true,
-//               onSelect: (Country country) {
-//                 setState(() {
-//                   controller1.text = '+${country.phoneCode}';
-//                 });
-//               },
-//             );
-//             },
-//             readOnly: true,
-//             controller: controller1,
-//             decoration: InputDecoration(
-//               hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-//               focusedBorder: UnderlineInputBorder(
-//                 borderSide: BorderSide(
-//                   color: Color(0xff000000),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-
-//         SizedBox(width: 20,),
-        
-//         Expanded(
-//           child: TextFormField(
-//             keyboardType: TextInputType.phone,
-//             controller: controller2,
-//             cursorColor: Color(0xff000000),
-//             decoration: InputDecoration(
-//               focusedBorder: UnderlineInputBorder(
-//                 borderSide: BorderSide(
-//                   color: Color(0xff000000),
-//                 ),
-//               ),
-//             ),
-            
-//             inputFormatters: [
-//               LibPhonenumberTextFormatter(
-//                 phoneNumberType: globalPhoneType,
-//                 phoneNumberFormat: globalPhoneFormat,
-//                 overrideSkipCountryCode: overrideCountryCode,
-//               ),
-//             ],
-//           ),
-//         ),
-
-//       ],
-//     );
-//   }
-// }
 
 class MiscBLMPhoneNumberTemplate extends StatefulWidget{
   final String labelText;
@@ -450,10 +311,10 @@ class MiscBLMPhoneNumberTemplate extends StatefulWidget{
   final bool includeSuffixIcon;
   final String displayText;
 
-  MiscBLMPhoneNumberTemplate({
+  const MiscBLMPhoneNumberTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
     this.obscureText = false, 
     this.type = TextInputType.text, 
     this.maxLines = 1, 
@@ -487,9 +348,8 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return InternationalPhoneNumberInput(
-      selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
+      selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,
       onInputChanged: (PhoneNumber number){
         print(number.phoneNumber);
@@ -503,9 +363,9 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
         ),
       ),

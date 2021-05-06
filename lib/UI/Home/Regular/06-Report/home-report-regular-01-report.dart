@@ -96,9 +96,9 @@ class HomeRegularReport extends StatelessWidget{
                       );
                     }else{
 
-                      context.showLoaderOverlay();
+                      context.loaderOverlay.show();
                       bool result = await apiRegularReport(postId: postId, reportType: reportType, subject: _key1.currentState!.controller.text, body: _key2.currentState!.controller.text);
-                      context.hideLoaderOverlay();
+                      context.loaderOverlay.hide();
 
                       if(result){
                         await showDialog(

@@ -45,24 +45,24 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
       child: Scaffold(
         backgroundColor: Color(0xffffffff),
         body: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-          physics: ClampingScrollPhysics(),
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+          physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
 
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
 
-              Center(
-                child: Text('Upload Photo',
-                  style: TextStyle(
+              const Center(
+                child: const Text('Upload Photo',
+                  style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold, 
-                    color: Color(0xff000000),
+                    color: const Color(0xff000000),
                   ),
                 ),
               ),
 
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
 
               GestureDetector(
                 onTap: () async{
@@ -83,17 +83,17 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 child: Container(
                   height: SizeConfig.screenWidth! / 1.2,
                   width: SizeConfig.screenWidth! / 1.2,
-                  color: Color(0xffF9F8EE),
+                  color: const Color(0xffF9F8EE),
                   child: Column(
                     children: [
                       Expanded(
                         flex: 4,
                         child: Padding(
-                          padding: EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(15.0),
                           child: image != null
                           ? Stack(
                             children: [
-                              Container(color: Color(0xffffffff),),
+                              Container(color: const Color(0xffffffff),),
 
                               Align(
                                 alignment: Alignment.center, 
@@ -110,20 +110,20 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                           )
                           : Stack(
                             children: [
-                              Container(color: Color(0xffffffff),),
+                              Container(color: const Color(0xffffffff),),
 
-                              Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),),
+                              Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
                             ],
                           ),
                         ),
                       ),
                       Expanded(
-                        child: Center(
-                          child: Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                        child: const Center(
+                          child: const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
-                              color: Color(0xff000000),
+                              color: const Color(0xff000000),
                             ),
                           ),
                         ),
@@ -133,26 +133,26 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 ),
               ),
 
-              SizedBox(height: 80),
+              const SizedBox(height: 80),
 
               MiscRegularButtonTemplate(
                 buttonText: image != null
                 ? 'Sign Up'
                 : 'Next',
-                buttonTextStyle: TextStyle(
+                buttonTextStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold, 
-                  color: Color(0xffffffff),
+                  color: const Color(0xffffffff),
                 ),
                 width: SizeConfig.screenWidth! / 2,
                 height: 45,
-                buttonColor: Color(0xff04ECFF),
+                buttonColor: const Color(0xff04ECFF),
                 onPressed: () async{
                   if(image != null){
 
-                    context.showLoaderOverlay();
+                    context.loaderOverlay.show();
                     bool result = await apiRegularUploadPhoto(image: image);
-                    context.hideLoaderOverlay();
+                    context.loaderOverlay.hide();
 
                     if(result){
                       Navigator.pushReplacementNamed(context, '/home/regular');
@@ -162,11 +162,10 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
+                          description: const Text('Something went wrong. Please try again.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: true,
                           buttonOkColor: Colors.red,
@@ -182,11 +181,10 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Please upload a photo.',
+                        description: const Text('Please upload a photo.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
                         buttonOkColor: Colors.red,
@@ -199,42 +197,42 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 },
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               RichText(
-                text: TextSpan(
+                text: const TextSpan(
                   children: <TextSpan>[
-                    TextSpan(
+                    const TextSpan(
                       text: 'Connect / ', 
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
+                        color: const Color(0xff888888),
                       ),
                     ),
 
-                    TextSpan(
+                    const TextSpan(
                       text: 'Remember / ',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
+                        color: const Color(0xff888888),
                       ),
                     ),
 
-                    TextSpan(
+                    const TextSpan(
                       text: 'Honor',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
+                        color: const Color(0xff888888),
                       ),
                     ),
                   ],
                 ),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
             ],
           ),

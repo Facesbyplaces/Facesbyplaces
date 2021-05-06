@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter/material.dart';
 
@@ -31,13 +30,13 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
           }
         },
         child: Scaffold(
-          backgroundColor: Color(0xffECF0F1),
+          backgroundColor: const Color(0xffECF0F1),
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Paypal', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Paypal', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -46,9 +45,6 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
           body: InAppWebView(
             initialUrlRequest: URLRequest(url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com')),
           ),
-          // body: WebView(
-          //   initialUrl: 'https://www.sandbox.paypal.com',
-          // ),
         ),
       ),
     );

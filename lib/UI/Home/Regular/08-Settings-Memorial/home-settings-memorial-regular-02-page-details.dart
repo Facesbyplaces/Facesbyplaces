@@ -195,7 +195,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
                                 if(confirmResult){
-                                  context.showLoaderOverlay();
+                                  context.loaderOverlay.show();
                                   bool result = await apiRegularUpdatePageDetails(
                                     name: _key1.currentState!.controller.text,
                                     relationship: _key2.currentState!.currentSelection,
@@ -205,7 +205,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                     cemetery: _key6.currentState!.controller.text,
                                     memorialId: memorialId,
                                   );
-                                  context.hideLoaderOverlay();
+                                  context.loaderOverlay.hide();
 
                                   if(result){
                                     await showDialog(

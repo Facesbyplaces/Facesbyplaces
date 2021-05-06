@@ -17,7 +17,7 @@ class BLMSearchUsers{
   final String email;
   final int accountType;
 
-  BLMSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
+  const BLMSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
 }
 
 class HomeBLMSearchUser extends StatefulWidget{
@@ -28,7 +28,7 @@ class HomeBLMSearchUser extends StatefulWidget{
   final bool switchFriends;
   final bool switchFollowers;
 
-  HomeBLMSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
+  const HomeBLMSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   @override
   HomeBLMSearchUserState createState() => HomeBLMSearchUserState(isFamily: isFamily, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
@@ -63,10 +63,10 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more users to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more users to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -82,9 +82,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMSearchUsers(keywords: keywords, page: page);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;
 
@@ -127,7 +127,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                  child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
 
                 Expanded(
@@ -165,12 +165,12 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                         }                
                       },
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(15.0),
+                        contentPadding: const EdgeInsets.all(15.0),
                         filled: true,
-                        fillColor: Color(0xffffffff),
-                        focusColor: Color(0xffffffff),
+                        fillColor: const Color(0xffffffff),
+                        focusColor: const Color(0xffffffff),
                         hintText: 'Search User',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           fontSize: 14,
                         ),
                         suffixIcon: IconButton(
@@ -183,37 +183,37 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                               onLoading();
                             }
                           },
-                          icon: Icon(Icons.search, color: Colors.grey),
+                          icon: const Icon(Icons.search, color: const Color(0xff888888)),
                         ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffffffff)),
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        border: const OutlineInputBorder(
+                          borderSide: const BorderSide(color: const Color(0xffffffff)),
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
                         ),
-                        enabledBorder:  OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffffffff)),
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: const BorderSide(color: const Color(0xffffffff)),
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
                         ),
-                        focusedBorder:  OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffffffff)),
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: const BorderSide(color: const Color(0xffffffff)),
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
                         ),
                       ),
                     ),
                   ),
                 ),
 
-                SizedBox(width: 20,),
+                const SizedBox(width: 20,),
               ],
             ),
             leading: Container(),
-            backgroundColor: Color(0xff04ECFF),
+            backgroundColor: const Color(0xff04ECFF),
           ),
           body: Container(
             height: SizeConfig.screenHeight! - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: empty
             ? SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               padding: EdgeInsets.zero,
               child: Column(
                 children: [
@@ -221,9 +221,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
 
                   Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
 
-                  Text('Search to add users', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+                  const Text('Search to add users', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
 
                   SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],
@@ -235,19 +235,19 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                   onRefresh: onRefresh,
                   child: ListView.separated(
                     controller: scrollController,
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                    physics: ClampingScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                    physics: const ClampingScrollPhysics(),
                     itemCount: users.length,
-                    separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+                    separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                     itemBuilder: (c, index) => ListTile(
                       onTap: () async{
                         if(isFamily){
                           String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
 
                           if(choice != ''){
-                            context.showLoaderOverlay();
+                            context.loaderOverlay.show();
                             String result = await apiBLMAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
-                            context.hideLoaderOverlay();
+                            context.loaderOverlay.hide();
 
                             if(result != 'Success'){
                               await showDialog(
@@ -255,14 +255,13 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                                 builder: (_) => 
                                   AssetGiffyDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Error: $result.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(),
                                   ),
                                   onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
+                                  buttonOkColor: const Color(0xffff0000),
                                   onOkButtonPressed: () {
                                     Navigator.pop(context, true);
                                   },
@@ -273,9 +272,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                             }
                           }
                         }else{
-                          context.showLoaderOverlay();
+                          context.loaderOverlay.show();
                           String result = await apiBLMAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
-                          context.hideLoaderOverlay();
+                          context.loaderOverlay.hide();
 
                           if(result != 'Success'){
                             await showDialog(
@@ -283,14 +282,13 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Error: $result.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
+                                buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
                                 },
@@ -303,12 +301,12 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                       },
                       leading: users[index].image != ''
                       ? CircleAvatar(
-                        backgroundColor: Color(0xff888888), 
+                        backgroundColor: const Color(0xff888888), 
                         backgroundImage: NetworkImage('${users[index].image}'),
                       )
-                      : CircleAvatar(
-                        backgroundColor: Color(0xff888888), 
-                        backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                      : const CircleAvatar(
+                        backgroundColor: const Color(0xff888888), 
+                        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                       ),
                       title: Text('${users[index].firstName} ${users[index].lastName}'),
                       subtitle: Text('${users[index].email}',

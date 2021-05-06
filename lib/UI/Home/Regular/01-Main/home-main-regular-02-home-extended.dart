@@ -433,9 +433,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                           GestureDetector(
                             onTap: () async{
-                              context.showLoaderOverlay();
+                              context.loaderOverlay.show();
                               APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
-                              context.hideLoaderOverlay();
+                              context.loaderOverlay.hide();
 
                               Navigator.pop(context);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularNotificationSettings(
@@ -465,9 +465,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           GestureDetector(
                             onTap: () async{
 
-                              context.showLoaderOverlay();
+                              context.loaderOverlay.show();
                               bool result = await apiRegularLogout();
-                              context.hideLoaderOverlay();
+                              context.loaderOverlay.hide();
 
                               if(result){
                                 Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());

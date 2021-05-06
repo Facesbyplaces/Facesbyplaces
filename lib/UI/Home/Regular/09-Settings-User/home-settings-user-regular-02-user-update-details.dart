@@ -121,7 +121,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                             if(confirmResult){
 
-                              context.showLoaderOverlay();
+                              context.loaderOverlay.show();
                               bool result = await apiRegularUpdateAccountDetails(
                                 firstName: _key1.currentState!.controller.text,
                                 lastName: _key2.currentState!.controller.text,
@@ -129,7 +129,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                 phoneNumber: _key4.currentState!.controller.text,
                                 question: _key5.currentState!.currentSelection
                               );
-                              context.hideLoaderOverlay();
+                              context.loaderOverlay.hide();
 
                               if(result){
                                 await showDialog(

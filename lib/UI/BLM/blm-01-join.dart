@@ -14,16 +14,16 @@ class BLMJoin extends StatelessWidget {
       body: Stack(
         children: [
 
-          MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+          const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
 
           SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
 
                 Align(
                   alignment: Alignment.centerLeft, 
@@ -31,53 +31,53 @@ class BLMJoin extends StatelessWidget {
                     onPressed: (){
                       Navigator.pop(context);
                     }, 
-                    icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: 30),
+                    icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 30),
                   ),
                 ),
 
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 Container(
                   height: 45,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text('BLACK',
-                        style: TextStyle(
+                      const Text('BLACK',
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xff000000),
+                          color: const Color(0xff000000),
                         ),
                       ),
 
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         alignment: Alignment.center,
-                        child: Text('LIVES',
-                          style: TextStyle(
+                        child: const Text('LIVES',
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xffffffff),
+                            color: const Color(0xffffffff),
                           ),
                         ),
-                        decoration: BoxDecoration(
-                          color: Color(0xff000000),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        decoration: const BoxDecoration(
+                          color: const Color(0xff000000),
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
 
-                      Text('MATTER',
-                        style: TextStyle(
+                      const Text('MATTER',
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xff000000),
+                          color: const Color(0xff000000),
                         ),
                       ),
                     ],
                   ),
                 ),
 
-                SizedBox(height: 50,),
+                const SizedBox(height: 50,),
 
                 Container(
                   width: 500,
@@ -89,7 +89,7 @@ class BLMJoin extends StatelessWidget {
                         top: 25,
                         child: Transform.rotate(
                           angle: 75,
-                          child: MiscStartImageBlmTemplate(),
+                          child: const MiscStartImageBlmTemplate(),
                         ),
                       ),
 
@@ -97,7 +97,7 @@ class BLMJoin extends StatelessWidget {
                         left: 200,
                         child: Transform.rotate(
                           angle: 101,
-                          child: MiscStartImageBlmTemplate(),
+                          child: const MiscStartImageBlmTemplate(),
                         ),
                       ),
 
@@ -106,7 +106,7 @@ class BLMJoin extends StatelessWidget {
                         right: 0,
                         child: Transform.rotate(
                           angle: 101,
-                          child: MiscStartImageBlmTemplate(),
+                          child: const MiscStartImageBlmTemplate(),
                         ),
                       ),
 
@@ -114,19 +114,19 @@ class BLMJoin extends StatelessWidget {
                         top: 200,
                         child: Transform.rotate(
                           angle: 101,
-                          child: MiscStartImageBlmTemplate(),
+                          child: const MiscStartImageBlmTemplate(),
                         ),
                       ),
 
                       Positioned(
                         top: 200,
                         right: 0,
-                        child: MiscStartImageBlmTemplate(),
+                        child: const MiscStartImageBlmTemplate(),
                       ),
 
                       Positioned(
                         bottom: 0,
-                        child: MiscStartImageBlmTemplate(),
+                        child: const MiscStartImageBlmTemplate(),
                       ),
 
                       Positioned(
@@ -139,7 +139,7 @@ class BLMJoin extends StatelessWidget {
                             width: 150,
                             color: Color(0xffF4F3EB),
                             child: Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Transform.rotate(
                                 angle: 25,
                                 child: Image.asset('assets/icons/blm-image2.png'),
@@ -154,7 +154,7 @@ class BLMJoin extends StatelessWidget {
                         right: 0,
                         child: Transform.rotate(
                           angle: 101,
-                          child: MiscStartImageBlmTemplate(),
+                          child: const MiscStartImageBlmTemplate(),
                         ),
                       ),
 
@@ -164,28 +164,28 @@ class BLMJoin extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 50,),
+                const SizedBox(height: 50,),
 
-                Center(child: Text('Remembering the Victims', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                const Center(child: const Text('Remembering the Victims', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),
 
-                SizedBox(height: SizeConfig.blockSizeVertical! * 5,),
+                const SizedBox(height: 50,),
             
                 MiscBLMButtonTemplate(
                   buttonText: 'Join', 
-                  buttonTextStyle: TextStyle(
+                  buttonTextStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold, 
-                    color: Color(0xffffffff),
+                    color: const Color(0xffffffff),
                   ),
                   width: SizeConfig.screenWidth! / 2, 
                   height: 45,
-                  buttonColor: Color(0xff4EC9D4),
+                  buttonColor: const Color(0xff4EC9D4),
                   onPressed: (){
                     Navigator.pushNamed(context, '/blm/login');
                   },
                 ),
 
-                SizedBox(height: 80,),
+                const SizedBox(height: 80,),
 
               ],
             ),

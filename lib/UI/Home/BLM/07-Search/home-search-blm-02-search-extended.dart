@@ -19,73 +19,72 @@ import 'package:mime/mime.dart';
 import 'dart:ui';
 
 class BLMSearchMainPosts{
-  int userId;
-  int postId;
-  int memorialId;
-  String memorialName;
-  String timeCreated;
-  String postBody;
-  dynamic profileImage;
-  List<dynamic> imagesOrVideos;
-  bool managed;
-  bool follower;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
-  int numberOfTagged;
-  List<String> taggedFirstName;
-  List<String> taggedLastName;
-  List<String> taggedImage;
-  List<int> taggedId;
-  String pageType;
-  bool famOrFriends;
-  String relationship;
+  final int userId;
+  final int postId;
+  final int memorialId;
+  final String memorialName;
+  final String timeCreated;
+  final String postBody;
+  final dynamic profileImage;
+  final List<dynamic> imagesOrVideos;
+  final bool managed;
+  final bool follower;
+  final int numberOfLikes;
+  final int numberOfComments;
+  final bool likeStatus;
+  final int numberOfTagged;
+  final List<String> taggedFirstName;
+  final List<String> taggedLastName;
+  final List<String> taggedImage;
+  final List<int> taggedId;
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
 
-  BLMSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  const BLMSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class BLMSearchMainSuggested{
-  int memorialId;
-  String memorialName;
-  String memorialDescription;
-  String image;
-  bool managed;
-  bool follower;
-  String pageType;
-  bool famOrFriends;
-  String relationship;
+  final int memorialId;
+  final String memorialName;
+  final String memorialDescription;
+  final String image;
+  final bool managed;
+  final bool follower;
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
 
-  BLMSearchMainSuggested({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
+  const BLMSearchMainSuggested({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class BLMSearchMainNearby{
-  int memorialId;
-  String memorialName;
-  String memorialDescription;
-  String image;
-  bool managed;
-  bool follower;
-  String pageType;
-  bool famOrFriends;
-  String relationship;
+  final int memorialId;
+  final String memorialName;
+  final String memorialDescription;
+  final String image;
+  final bool managed;
+  final bool follower;
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
 
-  BLMSearchMainNearby({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
+  const BLMSearchMainNearby({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class BLMSearchMainBLM{
-  int memorialId;
-  String memorialName;
-  String memorialDescription;
-  String image;
-  bool managed;
-  bool follower;
-  String pageType;
-  bool famOrFriends;
-  String relationship;
+  final int memorialId;
+  final String memorialName;
+  final String memorialDescription;
+  final String image;
+  final bool managed;
+  final bool follower;
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
 
-  BLMSearchMainBLM({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
+  const BLMSearchMainBLM({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
-
 
 class HomeBLMPost extends StatefulWidget{
   final String keyword;
@@ -93,7 +92,7 @@ class HomeBLMPost extends StatefulWidget{
   final double latitude;
   final double longitude;
   final String currentLocation;
-  HomeBLMPost({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
+  const HomeBLMPost({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
 
   HomeBLMPostState createState() => HomeBLMPostState(keyword: keyword, newToggle: newToggle, latitude: latitude, longitude: longitude, currentLocation: currentLocation);
 }
@@ -163,9 +162,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   void onLoading1() async{
 
     if(postItemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMSearchPosts(keywords: keyword, page: page1);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       postItemRemaining = newValue.blmItemsRemaining;
       tabCount1 = tabCount1 + newValue.blmSearchPostList.length;
 
@@ -217,9 +216,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   void onLoading2() async{
     if(suggestedItemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMSearchSuggested(page: page2);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       suggestedItemRemaining = newValue.blmItemsRemaining;
       tabCount2 = tabCount2 + newValue.blmPages.length;
 
@@ -248,9 +247,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   void onLoading3() async{
     if(nearbyBlmItemsRemaining != 0){
 
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
       tabCount3 = tabCount3 + newValue.blmList.length;
 
@@ -278,9 +277,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     page3 = 1;
     
     if(nearbyMemorialItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
       tabCount3 = tabCount3 + newValue.memorialList.length;
       
@@ -308,9 +307,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   void onLoading4() async{
     if(blmItemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMSearchBLM(page: page4, keywords: keyword);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       blmItemRemaining = newValue.blmItemsRemaining;
       tabCount4 = tabCount4 + newValue.blmMemorialList.length;
 
@@ -354,10 +353,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more posts to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more posts to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -371,10 +370,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more suggested memorials to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more suggested memorials to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -388,10 +387,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more nearby memorials to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more nearby memorials to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -405,10 +404,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more BLM memorials to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more BLM memorials to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -443,7 +442,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                  child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
 
                 Expanded(
@@ -505,12 +504,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       }
                     },
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(15.0),
+                      contentPadding: const EdgeInsets.all(15.0),
                       filled: true,
-                      fillColor: Color(0xffffffff),
-                      focusColor: Color(0xffffffff),
+                      fillColor: const Color(0xffffffff),
+                      focusColor: const Color(0xffffffff),
                       hintText: 'Search Memorial',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         fontSize: 14,
                       ),
                       suffixIcon: IconButton(
@@ -559,33 +558,33 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             });
                           }
                         },
-                        icon: Icon(Icons.search, color: Color(0xff888888),),
+                        icon: const Icon(Icons.search, color: const Color(0xff888888),),
                       ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      border: const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
-                      enabledBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      enabledBorder:  const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
-                      focusedBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      focusedBorder:  const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
                     ),
                   ),
                 ),
 
-                SizedBox(width: 20,),
+                const SizedBox(width: 20,),
               ],
             ),
             leading: Container(),
-            backgroundColor: Color(0xff04ECFF),
+            backgroundColor: const Color(0xff04ECFF),
           ),
           body: Stack(
             children: [
-              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+              SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
 
               Column(
                 children: [
@@ -595,14 +594,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                     child: Container(
                       alignment: Alignment.center,
                       height: 55,
-                      color: Color(0xffffffff),
+                      color: const Color(0xffffffff),
                       child: DefaultTabController(
                         length: 4,
                         child: TabBar(
                           isScrollable: true,
-                          labelColor: Color(0xff04ECFF),
-                          unselectedLabelColor: Color(0xff000000),
-                          indicatorColor: Color(0xff04ECFF),
+                          labelColor: const Color(0xff04ECFF),
+                          unselectedLabelColor: const Color(0xff000000),
+                          indicatorColor: const Color(0xff04ECFF),
                           onTap: (int number){
                             setState(() {
                               toggle = number;
@@ -614,36 +613,36 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           },
                           tabs: [
 
-                            Center(
-                              child: Text('Post',
-                                style: TextStyle(
+                            const Center(
+                              child: const Text('Post',
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
 
-                            Center(
-                              child: Text('Suggested',
-                                style: TextStyle(
+                            const Center(
+                              child: const Text('Suggested',
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
 
-                            Center(
-                              child: Text('Nearby',
-                                style: TextStyle(
+                            const Center(
+                              child: const Text('Nearby',
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
 
-                            Center(
-                              child: Text('BLM',
-                                style: TextStyle(
+                            const Center(
+                              child: const Text('BLM',
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -667,17 +666,17 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             alignment: Alignment.centerLeft,
                             child: Row(
                               children: [
-                                SizedBox(width: 20,),
+                                const SizedBox(width: 20,),
 
-                                Icon(Icons.location_pin, color: Color(0xff979797),),
+                                const Icon(Icons.location_pin, color: const Color(0xff979797),),
 
-                                SizedBox(width: 20,),
+                                const SizedBox(width: 20,),
 
                                 ((){
                                   if(currentLocation != ''){
-                                    return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: 12),);
+                                    return Text(currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12),);
                                   }else{
-                                    return Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
+                                    return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
                                   }
                                 }()),
                               ],
@@ -691,17 +690,17 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             alignment: Alignment.centerLeft,
                             child: Row(
                               children: [
-                                SizedBox(width: 20,),
+                                const SizedBox(width: 20,),
 
-                                Icon(Icons.location_pin, color: Color(0xff979797),),
+                                const Icon(Icons.location_pin, color: const Color(0xff979797),),
 
-                                SizedBox(width: 20,),
+                                const SizedBox(width: 20,),
 
                                 ((){
                                   if(currentLocation != ''){
-                                    return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
+                                    return Text(currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
                                   }else{
-                                    return Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
+                                    return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
                                   }
                                 }()),
                               ],
@@ -729,7 +728,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       }()),
                     ),
                   ),
-
                 ],
               ),
             ],
@@ -746,10 +744,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       child: onSearch != true
       ? ListView.separated(
         controller: scrollController1,
-        padding: EdgeInsets.all(10.0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.all(10.0),
+        physics: const ClampingScrollPhysics(),
         itemCount: feeds.length,
-        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) {
           return feeds[i].pageType == 'Blm'
           ? MiscBLMPost(
@@ -784,8 +782,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       if(feeds[i].imagesOrVideos.length == 1){
                         if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
                           return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                              controlsConfiguration: const BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
                               aspectRatio: 16 / 9,
@@ -795,7 +793,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           return CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl: feeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           );
                         }
@@ -803,14 +801,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 4,
                           itemCount: 2,
                           itemBuilder: (BuildContext context, int index) =>  
                             lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                             ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                controlsConfiguration: const BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -819,10 +817,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             : CachedNetworkImage(
                               fit: BoxFit.cover,
                               imageUrl: feeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             ),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
                         );
@@ -830,7 +828,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 4,
                           itemCount: 3,
                           staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
@@ -840,8 +838,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             if(index != 1){
                               return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -850,7 +848,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               : CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }else{
@@ -861,26 +859,26 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                       fit: StackFit.expand,
                                       children: [
                                         BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
                                           ),
                                         ),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                         Center(
                                           child: CircleAvatar(
                                             radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -894,22 +892,22 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: feeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                         Center(
                                           child: CircleAvatar(
                                             radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -920,8 +918,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 }else{
                                   if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                     return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
                                         aspectRatio: 16 / 9,
@@ -931,7 +929,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                     return CachedNetworkImage(
                                       fit: BoxFit.cover,
                                       imageUrl: feeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     );
                                   }
@@ -981,8 +979,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       if(feeds[i].imagesOrVideos.length == 1){
                         if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
                           return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                              controlsConfiguration: const BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
                               aspectRatio: 16 / 9,
@@ -992,7 +990,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           return CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl: feeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            placeholder: (context, url) => const Center(child:const  CircularProgressIndicator(),),
                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           );
                         }
@@ -1000,14 +998,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 4,
                           itemCount: 2,
                           itemBuilder: (BuildContext context, int index) =>  
                             lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                             ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                controlsConfiguration: const BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -1016,10 +1014,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             : CachedNetworkImage(
                               fit: BoxFit.cover,
                               imageUrl: feeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             ),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
                         );
@@ -1027,7 +1025,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 4,
                           itemCount: 3,
                           staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
@@ -1037,8 +1035,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             if(index != 1){
                               return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -1047,7 +1045,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               : CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }else{
@@ -1058,26 +1056,26 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                       fit: StackFit.expand,
                                       children: [
                                         BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
                                           ),
                                         ),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                         Center(
                                           child: CircleAvatar(
                                             radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -1091,22 +1089,22 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: feeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          placeholder: (context, url) => const Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                         Center(
                                           child: CircleAvatar(
                                             radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -1117,8 +1115,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 }else{
                                   if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                     return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
                                         aspectRatio: 16 / 9,
@@ -1128,7 +1126,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                     return CachedNetworkImage(
                                       fit: BoxFit.cover,
                                       imageUrl: feeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     );
                                   }
@@ -1143,17 +1141,16 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 ],
               )
               : Container(height: 0),
-
             ],
           );
         }
       )
        : ListView.separated(
         controller: scrollController1,
-        padding: EdgeInsets.all(10.0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.all(10.0),
+        physics: const ClampingScrollPhysics(),
         itemCount: searchFeeds.length,
-        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) {
           return searchFeeds[i].pageType == 'Blm'
           ? MiscBLMPost(
@@ -1181,15 +1178,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               searchFeeds[i].imagesOrVideos.isNotEmpty
               ? Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   Container(
                     child: ((){
                       if(searchFeeds[i].imagesOrVideos.length == 1){
                         if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
                           return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
-                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                              controlsConfiguration: const BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
                               aspectRatio: 16 / 9,
@@ -1199,7 +1196,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           return CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl: searchFeeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            placeholder: (context, url) => const Center(child: CircularProgressIndicator(),),
                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           );
                         }
@@ -1207,14 +1204,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 4,
                           itemCount: 2,
                           itemBuilder: (BuildContext context, int index) =>  
                             lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                             ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                controlsConfiguration: const BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -1223,10 +1220,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             : CachedNetworkImage(
                               fit: BoxFit.cover,
                               imageUrl: searchFeeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             ),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
                         );
@@ -1234,7 +1231,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 4,
                           itemCount: 3,
                           staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
@@ -1244,8 +1241,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             if(index != 1){
                               return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration:const BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -1254,7 +1251,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               : CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }else{
@@ -1265,26 +1262,26 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                       fit: StackFit.expand,
                                       children: [
                                         BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
                                           ),
                                         ),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                         Center(
                                           child: CircleAvatar(
                                             radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -1298,22 +1295,22 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                         Center(
                                           child: CircleAvatar(
                                             radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -1324,8 +1321,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 }else{
                                   if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
                                     return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
                                         aspectRatio: 16 / 9,
@@ -1335,7 +1332,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                     return CachedNetworkImage(
                                       fit: BoxFit.cover,
                                       imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     );
                                   }
@@ -1350,7 +1347,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 ],
               )
               : Container(height: 0),
-
             ],
           )
           : MiscRegularPost(
@@ -1378,15 +1374,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               searchFeeds[i].imagesOrVideos.isNotEmpty
               ? Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   Container(
                     child: ((){
                       if(searchFeeds[i].imagesOrVideos.length == 1){
                         if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
                           return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
-                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                              controlsConfiguration: const BetterPlayerControlsConfiguration(
                                 showControls: false,
                               ),
                               aspectRatio: 16 / 9,
@@ -1396,7 +1392,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           return CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl: searchFeeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           );
                         }
@@ -1404,14 +1400,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 4,
                           itemCount: 2,
                           itemBuilder: (BuildContext context, int index) =>  
                             lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                             ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                controlsConfiguration: const BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -1420,10 +1416,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             : CachedNetworkImage(
                               fit: BoxFit.cover,
                               imageUrl: searchFeeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             ),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
                         );
@@ -1431,7 +1427,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 4,
                           itemCount: 3,
                           staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
@@ -1441,8 +1437,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             if(index != 1){
                               return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -1451,7 +1447,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               : CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }else{
@@ -1462,26 +1458,26 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                       fit: StackFit.expand,
                                       children: [
                                         BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
                                           ),
                                         ),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                         Center(
                                           child: CircleAvatar(
                                             radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            backgroundColor:const  Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -1495,22 +1491,22 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                         Center(
                                           child: CircleAvatar(
                                             radius: 25,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -1521,8 +1517,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 }else{
                                   if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
                                     return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
                                           showControls: false,
                                         ),
                                         aspectRatio: 16 / 9,
@@ -1532,7 +1528,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                     return CachedNetworkImage(
                                       fit: BoxFit.cover,
                                       imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     );
                                   }
@@ -1547,14 +1543,13 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 ],
               )
               : Container(height: 0),
-
             ],
           );
         }
       ),
     )
     : SingleChildScrollView(
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -1565,9 +1560,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-            SizedBox(height: 45,),
+            const SizedBox(height: 45,),
 
-            Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+            const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
             SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
           ],
@@ -1583,10 +1578,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       child: onSearch != true
       ? ListView.separated(
         controller: scrollController2,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: const ClampingScrollPhysics(),
         itemCount: suggested.length,
-        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) => 
           MiscBLMManageMemorialTab(
           index: i,
@@ -1603,10 +1598,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       )
       : ListView.separated(
         controller: scrollController2,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: const ClampingScrollPhysics(),
         itemCount: searchSuggested.length,
-        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) => 
           MiscBLMManageMemorialTab(
           index: i,
@@ -1623,7 +1618,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       ),
     )
     : SingleChildScrollView(
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -1634,9 +1629,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-            SizedBox(height: 45,),
+            const SizedBox(height: 45,),
 
-            Text('Suggested is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+            const Text('Suggested is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
             SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],
@@ -1652,10 +1647,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       child: onSearch != true
       ? ListView.separated(
         controller: scrollController3,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: const ClampingScrollPhysics(),
         itemCount: nearby.length,
-        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) => 
           MiscBLMManageMemorialTab(
           index: i,
@@ -1672,10 +1667,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       )
       : ListView.separated(
         controller: scrollController3,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: const ClampingScrollPhysics(),
         itemCount: searchNearby.length,
-        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) => 
           MiscBLMManageMemorialTab(
           index: i,
@@ -1703,9 +1698,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-            SizedBox(height: 45,),
+            const SizedBox(height: 45,),
 
-            Text('Nearby is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+            const Text('Nearby is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
             SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],
@@ -1721,10 +1716,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       child: onSearch != true
       ? ListView.separated(
         controller: scrollController3,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: const ClampingScrollPhysics(),
         itemCount: blm.length,
-        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) => 
         MiscBLMManageMemorialTab(
           index: i,
@@ -1741,10 +1736,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       )
       : ListView.separated(
         controller: scrollController3,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: const ClampingScrollPhysics(),
         itemCount: searchBlm.length,
-        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
         itemBuilder: (c, i) => 
         MiscBLMManageMemorialTab(
           index: i,
@@ -1761,7 +1756,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       ),
     )
     : SingleChildScrollView(
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -1772,9 +1767,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-            SizedBox(height: 45,),
+            const SizedBox(height: 45,),
 
-            Text('BLM is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+            const Text('BLM is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
             SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],

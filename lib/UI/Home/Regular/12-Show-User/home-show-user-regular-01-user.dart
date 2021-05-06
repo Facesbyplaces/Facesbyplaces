@@ -50,7 +50,8 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
             return WeSlide(
               controller: controller,
               panelMaxSize: SizeConfig.screenHeight! / 1.5,
-              panelBackground: Color(0xffffffff),
+              // panelBackground: Color(0xffffffff),
+              backgroundColor: Color(0xffffffff),
               panel: Container(
                 height: SizeConfig.screenHeight! / 1.5,
                 decoration: BoxDecoration(

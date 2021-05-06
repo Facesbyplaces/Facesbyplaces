@@ -12,34 +12,34 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 
 class BLMMiscDraggablePost{
-  int userId;
-  int postId;
-  int memorialId;
-  String memorialName;
-  String timeCreated;
-  String postBody;
-  dynamic profileImage;
-  List<dynamic> imagesOrVideos;
-  bool managed;
-  bool joined;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
-  int numberOfTagged;
-  List<String> taggedFirstName;
-  List<String> taggedLastName;
-  List<String> taggedImage;
-  List<int> taggedId;
-  String pageType;
-  bool famOrFriends;
-  String relationship;
+  final int userId;
+  final int postId;
+  final int memorialId;
+  final String memorialName;
+  final String timeCreated;
+  final String postBody;
+  final dynamic profileImage;
+  final List<dynamic> imagesOrVideos;
+  final bool managed;
+  final bool joined;
+  final int numberOfLikes;
+  final int numberOfComments;
+  final bool likeStatus;
+  final int numberOfTagged;
+  final List<String> taggedFirstName;
+  final List<String> taggedLastName;
+  final List<String> taggedImage;
+  final List<int> taggedId;
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
 
-  BLMMiscDraggablePost({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  const BLMMiscDraggablePost({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class MiscBLMDraggablePost extends StatefulWidget{
   final int userId;
-  MiscBLMDraggablePost({required this.userId});
+  const MiscBLMDraggablePost({required this.userId});
 
   MiscBLMDraggablePostState createState() => MiscBLMDraggablePostState(userId: userId);
 }
@@ -65,10 +65,10 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more posts to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more posts to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -84,18 +84,18 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMShowUserPosts(userId: userId, page: page);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;
       count = count + newValue.blmFamilyMemorialList.length;
 
       for(int i = 0; i < newValue.blmFamilyMemorialList.length; i++){
-        List<String> newList1 = [];
-        List<String> newList2 = [];
-        List<String> newList3 = [];
-        List<int> newList4 = [];
+        const List<String> newList1 = [];
+        const List<String> newList2 = [];
+        const List<String> newList3 = [];
+        const List<int> newList4 = [];
 
         for(int j = 0; j < newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged.length; j++){
           newList1.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].showUsersPostsTaggedFirstName);
@@ -146,10 +146,10 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
         onRefresh: onRefresh,
         child: ListView.separated(
           controller: scrollController,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          physics: ClampingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          physics: const ClampingScrollPhysics(),
           itemCount: posts.length,
-          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i){
             return MiscBLMPost(
               userId: posts[i].userId,
@@ -176,15 +176,15 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                 posts[i].imagesOrVideos.isNotEmpty
                 ? Column(
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     Container(
                       child: ((){
                         if(posts[i].imagesOrVideos.length == 1){
                           if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                             return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                controlsConfiguration: const BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -194,7 +194,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                             return CachedNetworkImage(
                               fit: BoxFit.contain,
                               imageUrl: posts[i].imagesOrVideos[0],
-                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                             );
                           }
@@ -202,14 +202,14 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                           return StaggeredGridView.countBuilder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             crossAxisCount: 4,
                             itemCount: 2,
                             itemBuilder: (BuildContext context, int index) =>  
                               lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -218,10 +218,10 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                               : CachedNetworkImage(
                                 fit: BoxFit.contain,
                                 imageUrl: posts[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                               ),
-                            staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                            staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,
                           );
@@ -229,7 +229,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                           return StaggeredGridView.countBuilder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             crossAxisCount: 4,
                             itemCount: 3,
                             staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
@@ -239,8 +239,8 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                               if(index != 1){
                                 return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
                                       showControls: false,
                                     ),
                                     aspectRatio: 16 / 9,
@@ -249,7 +249,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                 : CachedNetworkImage(
                                   fit: BoxFit.contain,
                                   imageUrl: posts[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                 );
                               }else{
@@ -259,26 +259,26 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                       return Stack(
                                         children: [
                                           BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                              controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                 showControls: false,
                                               ),
                                               aspectRatio: 16 / 9,
                                             ),
                                           ),
 
-                                          Container(color: Colors.black.withOpacity(0.5),),
+                                          Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                           Center(
                                             child: CircleAvatar(
                                               radius: 25,
-                                              backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                              backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                               child: Text(
                                                 '${posts[i].imagesOrVideos.length - 3}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 40,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Color(0xffffffff),
+                                                  color: const Color(0xffffffff),
                                                 ),
                                               ),
                                             ),
@@ -291,22 +291,22 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                           CachedNetworkImage(
                                             fit: BoxFit.fill,
                                             imageUrl: posts[i].imagesOrVideos[index],
-                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                           ),
 
-                                          Container(color: Colors.black.withOpacity(0.5),),
+                                          Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                           Center(
                                             child: CircleAvatar(
                                               radius: 25,
-                                              backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                              backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                               child: Text(
                                                 '${posts[i].imagesOrVideos.length - 3}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 40,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Color(0xffffffff),
+                                                  color: const Color(0xffffffff),
                                                 ),
                                               ),
                                             ),
@@ -317,8 +317,8 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                   }else{
                                     if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                       return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
                                             showControls: false,
                                           ),
                                           aspectRatio: 16 / 9,
@@ -328,7 +328,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                       return CachedNetworkImage(
                                         fit: BoxFit.fill,
                                         imageUrl: posts[i].imagesOrVideos[index],
-                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                       );
                                     }
@@ -350,7 +350,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
         )
       )
       : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -361,9 +361,9 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-              Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+              const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
               SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
             ],
@@ -376,7 +376,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
 
 class MiscBLMDraggableMemorials extends StatefulWidget{
   final int userId;
-  MiscBLMDraggableMemorials({required this.userId});
+  const MiscBLMDraggableMemorials({required this.userId});
 
   MiscBLMDraggableMemorialsState createState() => MiscBLMDraggableMemorialsState(userId: userId);
 }
@@ -406,10 +406,10 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more memorials to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more memorials to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -432,15 +432,15 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     finalMemorials.add(
       Container(
         height: 80,
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        color: Color(0xffeeeeee),
-        child: Align(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        color: const Color(0xffeeeeee),
+        child: const Align(
           alignment: Alignment.centerLeft,
-          child: Text('Owned',
-            style: TextStyle(
+          child: const Text('Owned',
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Color(0xff000000),
+              color: const Color(0xff000000),
             ),
           ),
         ),
@@ -452,15 +452,15 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     finalMemorials.add(
       Container(
         height: 80,
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        color: Color(0xffeeeeee),
-        child: Align(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        color: const Color(0xffeeeeee),
+        child: const Align(
           alignment: Alignment.centerLeft,
-          child: Text('Followed',
-            style: TextStyle(
+          child: const Text('Followed',
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Color(0xff000000),
+              color: const Color(0xff000000),
             ),
           ),
         ),
@@ -479,9 +479,9 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   void onLoading1() async{
 
     if(ownedItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page1);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       ownedItemsRemaining = newValue.blmOwnedItemsRemaining;
       count = count + newValue.blmOwned.length;
@@ -518,9 +518,9 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   void onLoading2() async{
 
     if(followedItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page2);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       followedItemsRemaining = newValue.blmFollowedItemsRemaining;
       count = count + newValue.blmFollowed.length;
@@ -559,15 +559,15 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
         onRefresh: onRefresh,
         child: ListView.separated(
           controller: scrollController,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-          physics: ClampingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+          physics: const ClampingScrollPhysics(),
           itemCount: finalMemorials.length,
-          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i) => finalMemorials[i],
         )
       )
       : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -578,9 +578,9 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-              Text('Memorial is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+              const Text('Memorial is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
               SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
             ],

@@ -360,9 +360,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                   padding: EdgeInsets.zero,
                                                   onPressed: () async{
                                                     if(managed == true){
-                                                      context.showLoaderOverlay();
+                                                      context.loaderOverlay.show();
                                                       APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId: memorialId);
-                                                      context.hideLoaderOverlay();
+                                                      context.loaderOverlay.hide();
 
                                                       if(result.showSwitchStatusSuccess){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers)));

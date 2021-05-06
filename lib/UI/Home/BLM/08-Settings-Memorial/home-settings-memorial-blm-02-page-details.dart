@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 class HomeBLMPageDetails extends StatefulWidget{
 
   final int memorialId;
-  HomeBLMPageDetails({required this.memorialId});
+  const HomeBLMPageDetails({required this.memorialId});
 
   HomeBLMPageDetailsState createState() => HomeBLMPageDetailsState(memorialId: memorialId);
 }
@@ -66,11 +66,11 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Memorial Settings', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Memorial Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -86,39 +86,39 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: ListView(
-                          physics: ClampingScrollPhysics(),
+                          physics: const ClampingScrollPhysics(),
                           children: [
 
                             MiscBLMInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data!.blmMemorial.showPageDetailsName,),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             MiscBLMInputFieldTemplate(key: _key2, labelText: 'Description', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription,),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             MiscBLMInputFieldDropDown(key: _key3, displayText: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             MiscBLMInputFieldTemplate(key: _key4, labelText: 'Location', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation,),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             DateTimePicker(
                               type: DateTimePickerType.date,
                               controller: controller1,
-                              cursorColor: Color(0xff000000),
+                              cursorColor: const Color(0xff000000),
                               firstDate: DateTime(1000),
                               lastDate: DateTime.now(),
                               dateLabelText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 alignLabelWithHint: true,
                                 labelText: 'DOB',
-                                labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff000000),
+                                labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: const Color(0xff000000),
                                   ),
                                 ),
                               ),
@@ -137,21 +137,21 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               },
                             ),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             DateTimePicker(
                               type: DateTimePickerType.date,
                               controller: controller2,
-                              cursorColor: Color(0xff000000),
+                              cursorColor: const Color(0xff000000),
                               firstDate: DateTime(1000),
                               lastDate: DateTime.now(),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 alignLabelWithHint: true,
                                 labelText: 'RIP',
-                                labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff000000),
+                                labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: const Color(0xff000000),
                                   ),
                                 ),
                               ),
@@ -175,30 +175,30 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               },
                             ),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             MiscBLMInputFieldTemplate(key: _key7, labelText: 'State', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState,),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             MiscBLMInputFieldTemplate(key: _key8, labelText: 'Country', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry,),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             MiscBLMInputFieldTemplate(key: _key9, labelText: 'Precinct', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct,),
 
-                            SizedBox(height: 80,),
+                            const SizedBox(height: 80,),
 
                             MiscBLMButtonTemplate(
                               buttonText: 'Update', 
-                              buttonTextStyle: TextStyle(
+                              buttonTextStyle: const TextStyle(
                                 fontSize: 16, 
                                 fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
+                                color: const Color(0xffffffff),
                               ),
                               width: 150,
                               height: 45,
-                              buttonColor: Color(0xff04ECFF),
+                              buttonColor: const Color(0xff04ECFF),
                               onPressed: () async{
 
                                 if(
@@ -215,7 +215,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                   bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
                                   if(confirmResult){
-                                    context.showLoaderOverlay();
+                                    context.loaderOverlay.show();
 
                                     bool result = await apiBLMUpdatePageDetails(
                                       memorialId: memorialId,
@@ -230,7 +230,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       precinct: _key9.currentState!.controller.text,
                                     );
 
-                                    context.hideLoaderOverlay();
+                                    context.loaderOverlay.hide();
 
                                     if(result){
                                       await showDialog(
@@ -238,11 +238,10 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                         builder: (_) => 
                                           AssetGiffyDialog(
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                           entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Successfully updated the account details.',
+                                          description: const Text('Successfully updated the account details.',
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(),
                                           ),
                                           onlyOkButton: true,
                                           onOkButtonPressed: () {
@@ -252,21 +251,19 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       );
                                       Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,));
                                       Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
-                                      
                                     }else{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => 
                                           AssetGiffyDialog(
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                           entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Something went wrong. Please try again.',
+                                          description: const Text('Something went wrong. Please try again.',
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(),
                                           ),
                                           onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
+                                          buttonOkColor: const Color(0xffff0000),
                                           onOkButtonPressed: () {
                                             Navigator.pop(context, true);
                                           },
@@ -278,7 +275,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               },
                             ),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                           ],
                         ),
@@ -286,9 +283,9 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                     ],
                   );
                 }else if(memorialSettings.hasError){
-                  return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
+                  return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),));
                 }else{
-                  return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
+                  return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                 }
               },
             ),

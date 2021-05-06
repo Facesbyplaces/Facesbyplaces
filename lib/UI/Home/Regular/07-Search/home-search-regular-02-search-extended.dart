@@ -162,9 +162,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   void onLoading1() async{
 
     if(postItemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularSearchPosts(keywords: keyword, page: page1);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       postItemRemaining = newValue.almItemsRemaining;
       tabCount1 = tabCount1 + newValue.almSearchPostList.length;
@@ -217,9 +217,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   void onLoading2() async{
     if(suggestedItemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularSearchSuggested(page: page2);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       suggestedItemRemaining = newValue.almItemsRemaining;
       tabCount2 = tabCount2 + newValue.almSearchSuggestedPages.length;
 
@@ -248,9 +248,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   void onLoading3() async{
     if(nearbyBlmItemsRemaining != 0){
 
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularSearchNearby(page: page3, latitude: latitude, longitude: longitude);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
       tabCount3 = tabCount3 + newValue.blmList.length;
 
@@ -278,9 +278,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     page3 = 1;
     
     if(nearbyMemorialItemsRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularSearchNearby(page: page3, latitude: latitude, longitude: longitude);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
       tabCount3 = tabCount3 + newValue.memorialList.length;
       
@@ -308,9 +308,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   void onLoading4() async{
     if(blmItemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularSearchBLM(page: page4, keywords: keyword);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       blmItemRemaining = newValue.almItemsRemaining;
       tabCount4 = tabCount4 + newValue.almMemorialList.length;
 

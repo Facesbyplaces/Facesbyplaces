@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscBLMButtonTemplate extends StatelessWidget{
@@ -12,7 +11,7 @@ class MiscBLMButtonTemplate extends StatelessWidget{
 
   MiscBLMButtonTemplate({
     this.buttonText = 'Next',
-    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,color: Color(0xffffffff),),
+    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,color: const Color(0xffffffff),),
     required this.onPressed,
     required this.width,
     required this.height,
@@ -21,7 +20,6 @@ class MiscBLMButtonTemplate extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    SizeConfig.init(context);
     return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: onPressed,
@@ -30,7 +28,7 @@ class MiscBLMButtonTemplate extends StatelessWidget{
       ),
       minWidth: width,
       height: height,
-      shape: StadiumBorder(),
+      shape: const StadiumBorder(),
       color: buttonColor,
     );
   }
@@ -48,7 +46,7 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
 
   MiscBLMButtonSignInWithTemplate({
     this.buttonText = '',
-    this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300, color: Color(0xff000000),),
+    this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300, color: const Color(0xff000000),),
     required this.onPressed,
     required this.width,
     required this.height,
@@ -71,7 +69,7 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
           Expanded(
             flex: 2, 
             child: Padding(
-              padding: EdgeInsets.only(left: 5), 
+              padding: const EdgeInsets.only(left: 5), 
               child: Text(buttonText, 
                 style: buttonTextStyle,
               ),
@@ -79,7 +77,7 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
           ),
         ],
       ),
-      shape: StadiumBorder(),
+      shape: const StadiumBorder(),
       color: buttonColor,
     );
   }

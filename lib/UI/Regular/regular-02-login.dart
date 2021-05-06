@@ -95,15 +95,17 @@ class RegularLoginState extends State<RegularLogin>{
                       const SizedBox(height: 25),
 
                       FacebookAuthButton(
-                        height: 44,
-                        width: SizeConfig.screenWidth,
+                        style: AuthButtonStyle(
+                          height: 44,
+                          width: SizeConfig.screenWidth,
+                        ),
                         onPressed: () async{
 
                           final fb = FacebookLogin(debug: true);
                           bool isLoggedIn = await fb.isLoggedIn;
 
                           if(isLoggedIn == true){
-                            context.showLoaderOverlay();
+                            context.loaderOverlay.show();
 
                             FacebookUserProfile profile = (await fb.getUserProfile())!;
                             String email = (await fb.getUserEmail())!;
@@ -118,7 +120,7 @@ class RegularLoginState extends State<RegularLogin>{
                               facebookId: token.token,
                               image: image
                             );
-                            context.hideLoaderOverlay();
+                            context.loaderOverlay.hide();
 
                             if(apiResult == true){
                               final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
@@ -136,7 +138,7 @@ class RegularLoginState extends State<RegularLogin>{
                                     textAlign: TextAlign.center,
                                   ),
                                   onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
+                                  buttonOkColor: const Color(0xffff0000),
                                   onOkButtonPressed: () {
                                     Navigator.pop(context, true);
                                   },
@@ -151,7 +153,7 @@ class RegularLoginState extends State<RegularLogin>{
                               FacebookPermission.userFriends,
                             ]);
 
-                            context.showLoaderOverlay();
+                            context.loaderOverlay.show();
 
                             final email = (await fb.getUserEmail())!;
                             final profile = (await fb.getUserProfile())!;
@@ -167,7 +169,7 @@ class RegularLoginState extends State<RegularLogin>{
                                 facebookId: result.accessToken!.token,
                                 image: image,
                               );
-                              context.hideLoaderOverlay();
+                              context.loaderOverlay.hide();
 
                               if(apiResult == false){
                                 await fb.logOut();
@@ -185,9 +187,10 @@ class RegularLoginState extends State<RegularLogin>{
                       const SizedBox(height: 25),
 
                       GoogleAuthButton(
-                        splashColor: Colors.white,
-                        height: 44,
-                        width: SizeConfig.screenWidth,
+                        style: AuthButtonStyle(
+                          splashColor: const Color(0xffffffff),
+                          height: 44,
+                        ),
                         onPressed: () async{
                           User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
                           
@@ -217,9 +220,9 @@ class RegularLoginState extends State<RegularLogin>{
                           print('The newCredentials is $newCredentials');
                           // final credential = oAuthProvider.getCredential(idToken: credential.identityToken, accessToken: credential.authorizationCode,);
 
-                          context.showLoaderOverlay();
+                          context.loaderOverlay.show();
                           bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
-                          context.hideLoaderOverlay();
+                          context.loaderOverlay.hide();
 
                           if(result == true){
                             // final OAuthCredential cred = FacebookAuthProvider.credential('${credential.identityToken}');
@@ -237,7 +240,7 @@ class RegularLoginState extends State<RegularLogin>{
                                   textAlign: TextAlign.center,
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
+                                buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
                                 },
@@ -346,7 +349,7 @@ class RegularLoginState extends State<RegularLogin>{
                                   textAlign: TextAlign.center,
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
+                                buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
                                 },
@@ -364,14 +367,14 @@ class RegularLoginState extends State<RegularLogin>{
                                   textAlign: TextAlign.center,
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
+                                buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
                                 },
                               )
                             );
                           }else{
-                            context.showLoaderOverlay();
+                            context.loaderOverlay.show();
 
                             String deviceToken = '';
                             final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -380,7 +383,7 @@ class RegularLoginState extends State<RegularLogin>{
                             deviceToken = (await pushNotificationService.fcm.getToken())!;
                             String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
 
-                            context.hideLoaderOverlay();
+                            context.loaderOverlay.hide();
 
                             print('The result is $result');
 
@@ -398,7 +401,7 @@ class RegularLoginState extends State<RegularLogin>{
                                     textAlign: TextAlign.center,
                                   ),
                                   onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
+                                  buttonOkColor: const Color(0xffff0000),
                                   onOkButtonPressed: () {
                                     Navigator.pop(context, true);
                                   },

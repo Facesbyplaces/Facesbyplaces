@@ -42,23 +42,23 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: const Color(0xffffffff),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
-            Center(child: Text('Upload Photo', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+            const Center(child: const Text('Upload Photo', style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),
 
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
             GestureDetector(
               onTap: () async{
 
-                var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog());
+                var choice = await showDialog(context: (context), builder: (build) => const MiscBLMUploadFromDialog());
 
                 if(choice == null){
                   choice = 0;
@@ -74,17 +74,17 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
               child: Container(
                 height: SizeConfig.screenWidth! / 1.2,
                 width: SizeConfig.screenWidth! / 1.2,
-                color: Color(0xffF9F8EE),
+                color: const Color(0xffF9F8EE),
                 child: Column(
                   children: [
                     Expanded(
                       flex: 4,
                       child: Padding(
-                        padding: EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(15.0),
                         child: image != null
                         ? Stack(
                           children: [
-                            Container(color: Color(0xffffffff),),
+                            Container(color: const Color(0xffffffff),),
                             Align(
                               alignment: Alignment.center, 
                               child: Container(
@@ -100,20 +100,20 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                         )
                         : Stack(
                           children: [
-                            Container(color: Color(0xffffffff),),
+                            Container(color: const Color(0xffffffff),),
 
-                            Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),),
+                            const Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
                           ],
                         ),
                       ),
                     ),
                     Expanded(
-                      child: Center(
-                        child: Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
-                          style: TextStyle(
+                      child: const Center(
+                        child: const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w300,
-                            color: Color(0xff000000),
+                            color: const Color(0xff000000),
                           ),
                         ),
                       ),
@@ -123,22 +123,22 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
               ),
             ),
 
-            SizedBox(height: 80,),
+            const SizedBox(height: 80,),
 
             MiscBLMButtonTemplate(
               buttonText: image != null ? 'Sign Up' : 'Speak Now',
-              buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+              buttonTextStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
               width: SizeConfig.screenWidth! / 2,
               height: 45,
               buttonColor: image != null
-              ? Color(0xff04ECFF)
-              : Color(0xff000000),
+              ? const Color(0xff04ECFF)
+              : const Color(0xff000000),
               onPressed: () async{
                 if(image != null){
 
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
                   bool result = await apiBLMUploadPhoto(image: image);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   if(result){
                     Navigator.pushReplacementNamed(context, '/home/blm');
@@ -148,13 +148,13 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
+                        description: const Text('Something went wrong. Please try again.',
                           textAlign: TextAlign.center,
                         ),
                         onlyOkButton: true,
-                        buttonOkColor: Colors.red,
+                        buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
                         },
@@ -167,13 +167,13 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                     builder: (_) => 
                       AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Please upload a photo.',
+                      description: const Text('Please upload a photo.',
                         textAlign: TextAlign.center,
                       ),
                       onlyOkButton: true,
-                      buttonOkColor: Colors.red,
+                      buttonOkColor: const Color(0xffff0000),
                       onOkButtonPressed: () {
                         Navigator.pop(context, true);
                       },
@@ -183,7 +183,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
               },
             ),
 
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
 
           ],
         ),

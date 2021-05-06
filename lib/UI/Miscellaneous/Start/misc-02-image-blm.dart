@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 class MiscStartImageBlmTemplate extends StatelessWidget{
 
   final String image;
-  const MiscStartImageBlmTemplate({
-    this.image = 'assets/icons/blm-image2.png',
-  });
+  const MiscStartImageBlmTemplate({this.image = 'assets/icons/blm-image2.png',});
 
   @override
   Widget build(BuildContext context){
@@ -14,9 +12,9 @@ class MiscStartImageBlmTemplate extends StatelessWidget{
     return Container(
       height: 150,
       width: 150,
-      color: Color(0xffF4F3EB),
+      color: const Color(0xffF4F3EB),
       child: Padding(
-        padding: EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(5.0),
         child: Transform.rotate(
           angle: 25,
           child: Image.asset(image),

@@ -32,7 +32,7 @@ class BLMGoogleAuthentication {
   }
 
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
-    context.showLoaderOverlay();
+    context.loaderOverlay.show();
 
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
@@ -128,7 +128,7 @@ class BLMGoogleAuthentication {
       }
     }
 
-    context.hideLoaderOverlay();
+    context.loaderOverlay.hide();
 
     return user;
   }

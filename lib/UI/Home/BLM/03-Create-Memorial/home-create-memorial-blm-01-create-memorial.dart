@@ -9,20 +9,20 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 class BLMCreateMemorialValues{
-  String blmName;
-  String description;
-  String location;
-  String dob;
-  String rip;
-  String state;
-  String country;
-  String precinct;
-  String relationship;
-  List<File> imagesOrVideos;
-  double longitude;
-  double latitude;
+  final String blmName;
+  final String description;
+  final String location;
+  final String dob;
+  final String rip;
+  final String state;
+  final String country;
+  final String precinct;
+  final String relationship;
+  final List<File> imagesOrVideos;
+  final double longitude;
+  final double latitude;
 
-  BLMCreateMemorialValues({
+  const BLMCreateMemorialValues({
     required this.blmName, 
     required this.description, 
     required this.location, 
@@ -37,7 +37,6 @@ class BLMCreateMemorialValues{
     required this.longitude,
   });
 }
-
 
 class HomeBLMCreateMemorial1 extends StatefulWidget{
 
@@ -74,11 +73,11 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+            title: const Text('Cry out for the Victims', maxLines: 2, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff))),
             centerTitle: true,
-            backgroundColor: Color(0xff04ECFF),
+            backgroundColor: const Color(0xff04ECFF),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -88,40 +87,40 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
             children: [
 
               SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
-                child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                physics: const NeverScrollableScrollPhysics(),
+                child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
               ),
 
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: ListView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   children: [
                     MiscBLMInputFieldDropDown(key: _key1,),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     MiscBLMInputFieldTemplate(key: _key2, labelText: 'Location of the incident'),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     MiscBLMInputFieldTemplate(key: _key3, labelText: 'Precinct / Station House (Optional)'),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     DateTimePicker(
                       type: DateTimePickerType.date,
                       controller: controller1,
-                      cursorColor: Color(0xff000000),
+                      cursorColor: const Color(0xff000000),
                       firstDate: DateTime(1000),
                       lastDate: DateTime.now(),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'DOB',
-                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff000000),
+                        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: const Color(0xff000000),
                           ),
                         ),
                       ),
@@ -139,21 +138,21 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                       },
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     DateTimePicker(
                       type: DateTimePickerType.date,
                       controller: controller2,
-                      cursorColor: Color(0xff000000),
+                      cursorColor: const Color(0xff000000),
                       firstDate: DateTime(1000),
                       lastDate: DateTime.now(),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'RIP',
-                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff000000),
+                        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: const Color(0xff000000),
                           ),
                         ),
                       ),
@@ -171,15 +170,15 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                       },
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     MiscBLMInputFieldTemplate(key: _key6, labelText: 'Country'),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     MiscBLMInputFieldTemplate(key: _key7, labelText: 'State'),
 
-                    SizedBox(height: 40,),
+                    const SizedBox(height: 40,),
 
                     MiscBLMButtonTemplate(
                       onPressed: () async{
@@ -190,14 +189,13 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                             builder: (_) => 
                               AssetGiffyDialog(
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Please complete the form before submitting.',
+                              description: const Text('Please complete the form before submitting.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(),
                               ),
                               onlyOkButton: true,
-                              buttonOkColor: Colors.red,
+                              buttonOkColor: const Color(0xffff0000),
                               onOkButtonPressed: () {
                                 Navigator.pop(context, true);
                               },
@@ -226,7 +224,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                   ],
                 ),
               ),
-
             ],
           ),
         ),

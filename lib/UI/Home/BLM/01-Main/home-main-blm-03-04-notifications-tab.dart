@@ -7,17 +7,17 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class BLMMainPagesNotifications{
-  int id;
-  String createdAt;
-  String updatedAt;
-  int actorId;
-  String actorImage;
-  bool read;
-  String action;
-  int postId;
-  String notificationType;
+  final int id;
+  final String createdAt;
+  final String updatedAt;
+  final int actorId;
+  final String actorImage;
+  final bool read;
+  final String action;
+  final int postId;
+  final String notificationType;
 
-  BLMMainPagesNotifications({required this.id, required this.createdAt, required this.updatedAt, required this.actorId, required this.actorImage, required this.read, required this.action, required this.postId, required this.notificationType});
+  const BLMMainPagesNotifications({required this.id, required this.createdAt, required this.updatedAt, required this.actorId, required this.actorImage, required this.read, required this.action, required this.postId, required this.notificationType});
 }
 
 class HomeBLMNotificationsTab extends StatefulWidget{
@@ -54,10 +54,10 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more notifications to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more notifications to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -74,9 +74,9 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiBLMHomeNotificationsTab(page: page);
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;
       count = count + newValue.blmNotification.length;
@@ -114,9 +114,9 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
         onRefresh: onRefresh,
         child: ListView.separated(
           controller: scrollController,
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           itemCount: count,
-          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i) {
             return MiscBLMNotificationDisplayTemplate(
               imageIcon: notifications[i].actorImage,
@@ -130,7 +130,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
         )
       )
       : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -141,9 +141,9 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-              Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+              const Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],

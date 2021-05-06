@@ -75,9 +75,9 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
 
   void onLoading() async{
     if(itemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularHomeNotificationsTab(page: page).onError((error, stackTrace) async{
-        context.hideLoaderOverlay();
+        context.loaderOverlay.hide();
         await showDialog(
           context: context,
           builder: (_) => 
@@ -98,7 +98,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         );
         return Future.error('Error occurred: $error');
       });
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
 
       itemRemaining = newValue.almItemsRemaining;
       count = count + newValue.almNotification.length;

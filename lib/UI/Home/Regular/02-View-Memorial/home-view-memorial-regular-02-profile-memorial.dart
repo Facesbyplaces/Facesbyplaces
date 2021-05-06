@@ -391,9 +391,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             join = !join;
                                                           });
 
-                                                          context.showLoaderOverlay();
+                                                          context.loaderOverlay.show();
                                                           bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: join);
-                                                          context.hideLoaderOverlay();
+                                                          context.loaderOverlay.hide();
 
                                                           print('The value of result is $result');
 

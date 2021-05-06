@@ -64,9 +64,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   }
 
   void getManagedPages() async{
-    context.showLoaderOverlay();
+    context.loaderOverlay.show();
     var newValue = await apiRegularShowListOfManagedPages().onError((error, stackTrace) async{
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       await showDialog(
         context: context,
         builder: (_) => 
@@ -87,7 +87,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
       );
       return Future.error('Error occurred: $error');
     });
-    context.hideLoaderOverlay();
+    context.loaderOverlay.hide();
 
     for(int i = 0; i < newValue.almPagesList.length; i++){
       managedPages.add(
@@ -162,7 +162,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     }
                   }
 
-                  context.showLoaderOverlay();
+                  context.loaderOverlay.show();
 
                   Location.LocationData locationData = await location.getLocation();
                   List<RegularTaggedPeople> userIds = [];
@@ -193,7 +193,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   );
                   
                   bool result = await apiRegularHomeCreatePost(post: post);
-                  context.hideLoaderOverlay();
+                  context.loaderOverlay.hide();
 
                   if(result){
                     Navigator.popAndPushNamed(context, '/home/regular');

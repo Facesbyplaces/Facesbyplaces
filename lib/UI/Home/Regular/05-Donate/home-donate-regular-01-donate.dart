@@ -28,17 +28,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   int donateToggle = 0;
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/donation-google-pay.svg', semanticsLabel: 'Donate with Google',);
 
-  // @override
-  // initState() {
-  //   super.initState();
-  //     StripePayment.setOptions(StripeOptions(
-  //       publishableKey: 'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik', 
-  //       merchantId: 'merchant.com.app.facesbyplaces', 
-  //       androidPayMode: 'test',
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -209,9 +198,9 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                           print('The pageId in regular donate is $pageId');
                           print('The amount in regular donate is $amount');
 
-                          context.showLoaderOverlay();
-                          bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
-                          context.hideLoaderOverlay();
+                          context.loaderOverlay.show();
+                          bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId!);
+                          context.loaderOverlay.hide();
 
                           if(result == true){
                             await showDialog(

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class HomeBLMUserChangePassword extends StatefulWidget{
   final int userId;
-  HomeBLMUserChangePassword({required this.userId});
+  const HomeBLMUserChangePassword({required this.userId});
 
   HomeBLMUserChangePasswordState createState() => HomeBLMUserChangePasswordState(userId: userId);
 }
@@ -37,45 +37,45 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Change Password', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Change Password', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
             ),
           ),
           body: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            padding: EdgeInsets.all(20.0),
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
 
                 MiscBLMInputFieldTemplate(key: _key1, labelText: 'Current Password', obscureText: true,),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
                 MiscBLMInputFieldTemplate(key: _key2, labelText: 'New Password', obscureText: true,),
 
-                SizedBox(height: 80,),
+                const SizedBox(height: 80,),
 
                 MiscBLMButtonTemplate(
                   buttonText: 'Update',
-                  buttonTextStyle: TextStyle(
+                  buttonTextStyle: const TextStyle(
                     fontSize: 16, 
                     fontWeight: FontWeight.bold, 
-                    color: Color(0xffffffff),
+                    color: const Color(0xffffffff),
                   ),
                   width: SizeConfig.screenWidth! / 2,
                   height: 45,
-                  buttonColor: Color(0xff04ECFF),
+                  buttonColor: const Color(0xff04ECFF),
                   onPressed: () async{
 
-                    context.showLoaderOverlay();
+                    context.loaderOverlay.show();
                     bool result = await apiBLMChangePassword(currentPassword: _key1.currentState!.controller.text, newPassword: _key2.currentState!.controller.text);
-                    context.hideLoaderOverlay();
+                    context.loaderOverlay.hide();
 
                     if(result){
                       await showDialog(
@@ -83,11 +83,10 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Successfully updated the password.',
+                          description: const Text('Successfully updated the password.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: true,
                           onOkButtonPressed: () {
@@ -102,14 +101,13 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
+                          description: const Text('Something went wrong. Please try again.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: true,
-                          buttonOkColor: Colors.red,
+                          buttonOkColor: const Color(0xffff0000),
                           onOkButtonPressed: () {
                             Navigator.pop(context, true);
                           },
@@ -119,8 +117,7 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                   },
                 ),
 
-                SizedBox(height: 20,),
-
+                const SizedBox(height: 20,),
               ],
             ),
           ),

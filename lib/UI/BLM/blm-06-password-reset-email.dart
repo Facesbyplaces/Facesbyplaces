@@ -30,15 +30,15 @@ class BLMPasswordResetEmail extends StatelessWidget{
             children: [
 
               SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Column(
                     children: [
 
                       Column(
                         children: [
-                          SizedBox(height: 40),
+                          const SizedBox(height: 40),
                           
                           Align(
                             alignment: Alignment.topLeft, 
@@ -46,7 +46,7 @@ class BLMPasswordResetEmail extends StatelessWidget{
                               onPressed: (){
                                 Navigator.pop(context);
                               }, 
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.arrow_back,
                                 size: 30,
                               ),
@@ -56,42 +56,42 @@ class BLMPasswordResetEmail extends StatelessWidget{
                         ],
                       ),
 
-                      SizedBox(height: 80,),
+                      const SizedBox(height: 80,),
 
-                      Center(child: Text('Verify Email', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                      const Center(child: const Text('Verify Email', style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),
 
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
 
-                      Center(child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                      const Center(child: const Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),),
 
-                      SizedBox(height: 80,),
+                      const SizedBox(height: 80,),
 
                       Padding(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                         child: MiscBLMInputFieldTemplate(
                           key: _key1, 
                           labelText: 'Email Address', 
                           type: TextInputType.emailAddress, 
-                          labelTextStyle: TextStyle(
+                          labelTextStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400, 
-                            color: Color(0xff000000),
+                            color: const Color(0xff000000),
                           ),
                         ),
                       ),
 
-                      SizedBox(height: 80,),
+                     const  SizedBox(height: 80,),
 
                       MiscBLMButtonTemplate(
                         buttonText: 'Next',
-                        buttonTextStyle: TextStyle(
+                        buttonTextStyle: const TextStyle(
                           fontSize: 16, 
                           fontWeight: FontWeight.bold, 
-                          color: Color(0xffffffff),
+                          color: const Color(0xffffffff),
                         ),
                         width: SizeConfig.screenWidth! / 2, 
                         height: 45, 
-                        buttonColor: Color(0xff04ECFF),
+                        buttonColor: const Color(0xff04ECFF),
                         onPressed: () async{
 
                           bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
@@ -102,14 +102,13 @@ class BLMPasswordResetEmail extends StatelessWidget{
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Please complete the form before submitting.',
+                                description: const Text('Please complete the form before submitting.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
+                                buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
                                 },
@@ -121,21 +120,20 @@ class BLMPasswordResetEmail extends StatelessWidget{
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Invalid email address. Please try again.',
+                                description: const Text('Invalid email address. Please try again.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
+                                buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
                                 },
                               )
                             );
                           }else{
-                            context.showLoaderOverlay();
+                            context.loaderOverlay.show();
 
                             BranchUniversalObject buo = BranchUniversalObject(
                               canonicalIdentifier: 'FacesbyPlaces',
@@ -161,12 +159,12 @@ class BLMPasswordResetEmail extends StatelessWidget{
                             FlutterBranchSdk.setIdentity('blm-user-forgot-password');
                             BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
 
-                            context.hideLoaderOverlay();
+                            context.loaderOverlay.hide();
                             
                             if(response.success){
-                              context.showLoaderOverlay();
+                              context.loaderOverlay.show();
                               bool result = await apiBLMPasswordReset(email: _key1.currentState!.controller.text, redirectLink: response.result);
-                              context.hideLoaderOverlay();
+                              context.loaderOverlay.hide();
                               
                               if(result == true){
                                 await showDialog(
@@ -174,7 +172,7 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                   builder: (_) => 
                                     AssetGiffyDialog(
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
                                       textAlign: TextAlign.center,
@@ -191,13 +189,13 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                   builder: (_) => 
                                     AssetGiffyDialog(
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                     entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Something went wrong. Please try again.',
+                                    description: const Text('Something went wrong. Please try again.',
                                       textAlign: TextAlign.center,
                                     ),
                                     onlyOkButton: true,
-                                    buttonOkColor: Colors.red,
+                                    buttonOkColor: const Color(0xffff0000),
                                     onOkButtonPressed: () {
                                       Navigator.pop(context, true);
                                     },
@@ -210,13 +208,13 @@ class BLMPasswordResetEmail extends StatelessWidget{
                                 builder: (_) => 
                                   AssetGiffyDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Something went wrong. Please try again.',
+                                  description: const Text('Something went wrong. Please try again.',
                                     textAlign: TextAlign.center,
                                   ),
                                   onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
+                                  buttonOkColor: const Color(0xffff0000),
                                   onOkButtonPressed: () {
                                     Navigator.pop(context, true);
                                   },
@@ -224,17 +222,15 @@ class BLMPasswordResetEmail extends StatelessWidget{
                               );
                             }
                           }
-
                         },
                       ),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                     ],
                   ),
                 ),
               ),
-
             ],
           ),
         ),

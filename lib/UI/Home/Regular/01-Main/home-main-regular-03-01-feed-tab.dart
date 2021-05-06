@@ -94,9 +94,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      context.showLoaderOverlay();
+      context.loaderOverlay.show();
       var newValue = await apiRegularHomeFeedTab(page: page).onError((error, stackTrace) async{
-        context.hideLoaderOverlay();
+        context.loaderOverlay.hide();
         await showDialog(
           context: context,
           builder: (_) => 
@@ -117,7 +117,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         );
         return Future.error('Error occurred: $error');
       });
-      context.hideLoaderOverlay();
+      context.loaderOverlay.hide();
       
 
       itemRemaining = newValue.almItemsRemaining;
