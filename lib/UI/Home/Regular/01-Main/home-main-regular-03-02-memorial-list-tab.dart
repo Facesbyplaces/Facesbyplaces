@@ -6,14 +6,14 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class RegularMainPagesMemorials{
-  int memorialId;
-  String memorialName;
-  String memorialDescription;
-  bool managed;
-  bool joined;
-  String pageType;
+  final int memorialId;
+  final String memorialName;
+  final String memorialDescription;
+  final bool managed;
+  final bool joined;
+  final String pageType;
 
-  RegularMainPagesMemorials({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.managed, required this.joined, required this.pageType});
+  const RegularMainPagesMemorials({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.managed, required this.joined, required this.pageType});
 }
 
 class HomeRegularManageTab extends StatefulWidget{
@@ -56,10 +56,10 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more posts to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more posts to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -83,18 +83,19 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     finalMemorials.add(
       Container(
         height: 80,
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        color: Color(0xffeeeeee),
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        color: const Color(0xffeeeeee),
         child: Row(
           children: [
-            Expanded(child: Align(alignment: Alignment.centerLeft, child: Text('My Family', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
+            Expanded(child: const Align(alignment: Alignment.centerLeft, child: const Text('My Family', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),),
             
             Expanded(
               child: GestureDetector(
                 onTap: (){
                   Navigator.pushNamed(context, '/home/regular/create-memorial');
                 },
-              child: Align(alignment: Alignment.centerRight, child: Text('Create', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
+                child: const Align(alignment: Alignment.centerRight, child: const Text('Create', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),
+              ),
             ),
           ],
         ),
@@ -106,15 +107,15 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     finalMemorials.add(
       Container(
         height: 80,
-        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        color: Color(0xffeeeeee),
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        color: const Color(0xffeeeeee),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Text('My Friends',
-            style: TextStyle(
+          child: const Text('My Friends',
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Color(0xff000000),
+              color: const Color(0xff000000),
             ),
           ),
         ),
@@ -262,15 +263,15 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         onRefresh: onRefresh,
         child: ListView.separated(
           controller: scrollController,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-          physics: ClampingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+          physics: const ClampingScrollPhysics(),
           itemCount: finalMemorials.length,
-          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i) => finalMemorials[i],
         )
       )
       : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -281,9 +282,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-              Text('Memorial is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+              const Text('Memorial is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],

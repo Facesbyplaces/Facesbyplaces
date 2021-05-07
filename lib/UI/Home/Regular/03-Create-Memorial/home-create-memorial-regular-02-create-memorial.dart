@@ -17,7 +17,7 @@ class HomeRegularCreateMemorial2 extends StatefulWidget{
   final String cemetery;
   final String country;
 
-  HomeRegularCreateMemorial2({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country});
+  const HomeRegularCreateMemorial2({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country});
 
   HomeRegularCreateMemorial2State createState() => HomeRegularCreateMemorial2State(relationship: relationship, birthplace: birthplace, dob: dob, rip: rip, cemetery: cemetery, country: country);
 }
@@ -75,11 +75,11 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+            title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff))),
             centerTitle: true,
-            backgroundColor: Color(0xff04ECFF),
+            backgroundColor: const Color(0xff04ECFF),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -89,33 +89,33 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
             children: [
 
               SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
-                child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                physics: const NeverScrollableScrollPhysics(),
+                child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
               ),
 
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: ListView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   children: [
 
                     MiscRegularInputFieldTemplate(key: _key1, labelText: 'Name of your Memorial Page'),
 
-                    SizedBox(height: 40,),
+                    const SizedBox(height: 40,),
 
                     Row(
                       children: [
-                        Text('Share your Story', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                        const Text('Share your Story', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
 
-                        SizedBox(height: 40,),
+                        const SizedBox(height: 40,),
 
                         Expanded(
                           child: DefaultTabController(
                             length: 3,
                             child: TabBar(
                               isScrollable: false,
-                              labelColor: Color(0xff04ECFF),
-                              unselectedLabelColor: Color(0xff000000),
+                              labelColor: const Color(0xff04ECFF),
+                              unselectedLabelColor: const Color(0xff000000),
                               indicatorColor: Colors.transparent,
                               onTap: (int number){
                                 setState(() {
@@ -124,33 +124,32 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                               },
                               tabs: [
 
-                                Center(
-                                  child: Text('Text',
-                                    style: TextStyle(
+                                const Center(
+                                  child: const Text('Text',
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ),
 
-                                Center(child: 
-                                  Text('Video',
-                                    style: TextStyle(
+                                const Center(
+                                  child: const Text('Video',
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ),
 
-                                Center(
-                                  child: Text('Slide',
-                                    style: TextStyle(
+                                const Center(
+                                  child: const Text('Slide',
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ),
-
                               ],
                             ),
                           ),
@@ -158,7 +157,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                       ],
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     Container(
                       child: ((){
@@ -170,11 +169,11 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                       }()),
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
-                    Text('Describe the events that happened to your love one.', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                    const Text('Describe the events that happened to your love one.', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
 
-                    SizedBox(height: 80,),
+                    const SizedBox(height: 80,),
 
                     MiscRegularButtonTemplate(
                       width: 150,
@@ -186,21 +185,20 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                             builder: (_) => 
                               AssetGiffyDialog(
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Please complete the form before submitting.',
+                              description: const Text('Please complete the form before submitting.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(),
                               ),
                               onlyOkButton: true,
-                              buttonOkColor: Colors.red,
+                              buttonOkColor: const Color(0xffff0000),
                               onOkButtonPressed: () {
                                 Navigator.pop(context, true);
                               },
                             )
                           );
                         }else{
-                          List<File> newFiles = [];
+                          const List<File> newFiles = [];
 
                           if(videoFile.path != ''){
                             newFiles.add(videoFile);
@@ -227,7 +225,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                         }
                       },
                     ),
-
                   ],
                 ),
               ),
@@ -241,27 +238,27 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   shareStory1(){
     return TextFormField(
       controller: controllerStory,
-      cursorColor: Color(0xff000000),
+      cursorColor: const Color(0xff000000),
       maxLines: 10,
       keyboardType: TextInputType.text,
       readOnly: false,
-      decoration: InputDecoration(
-        fillColor: Color(0xffffffff),
+      decoration: const InputDecoration(
+        fillColor: const Color(0xffffffff),
         filled: true,
         alignLabelWithHint: true,
         labelText: '',
-        labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        border: const OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: const Color(0xff000000),
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
       ),
     );
@@ -279,8 +276,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
           children: [
             BetterPlayer.file(
               videoFile.path,
-              betterPlayerConfiguration: BetterPlayerConfiguration(
-                controlsConfiguration: BetterPlayerControlsConfiguration(
+              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                controlsConfiguration: const BetterPlayerControlsConfiguration(
                   enableOverflowMenu: false,
                   enableMute: false,
                 ),
@@ -297,9 +294,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     videoFile = File('');  
                   });
                 },
-                icon: CircleAvatar(
-                  backgroundColor: Color(0xff000000),
-                  child: Icon(Icons.close, color: Color(0xffffffff),),
+                icon: const CircleAvatar(
+                  backgroundColor: const Color(0xff000000),
+                  child: const Icon(Icons.close, color: const Color(0xffffffff),),
                 ),
               ),
             ),
@@ -309,9 +306,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
           height: 260,
           width: SizeConfig.screenWidth,
           decoration: BoxDecoration(
-            color: Color(0xffcccccc),
-            border: Border.all(color: Color(0xff000000),),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: const Color(0xffcccccc),
+            border: Border.all(color: const Color(0xff000000),),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
         ),
       ),
@@ -327,7 +324,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
           child: Container(
             height: 100,
             child: GridView.count(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               crossAxisCount: 4,
               crossAxisSpacing: 4,
               mainAxisSpacing: 4,
@@ -340,11 +337,11 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                       },
                       child: Container(
                         width: 80,
-                        child: Icon(Icons.add_rounded, color: Color(0xff000000), size: 60),
+                        child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Color(0xffcccccc),
-                          border: Border.all(color: Color(0xff000000),),
+                          color: const Color(0xffcccccc),
+                          border: Border.all(color: const Color(0xff000000),),
                         ),
                       ),
                     );
@@ -360,7 +357,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                           context: context,
                           barrierDismissible: true,
                           barrierLabel: 'Dialog',
-                          transitionDuration: Duration(milliseconds: 0),
+                          transitionDuration: const Duration(milliseconds: 0),
                           pageBuilder: (_, __, ___) {
                             return Scaffold(
                               backgroundColor: Colors.black12.withOpacity(0.7),
@@ -370,26 +367,26 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                     children: [
                                       Container(
                                         alignment: Alignment.centerRight,
-                                        padding: EdgeInsets.only(right: 20.0),
+                                        padding: const EdgeInsets.only(right: 20.0),
                                         child: GestureDetector(
                                           onTap: (){
                                             Navigator.pop(context);
                                           },
                                           child: CircleAvatar(
                                             radius: 20,
-                                            backgroundColor: Color(0xff000000).withOpacity(0.8),
-                                            child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                            backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                            child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                           ),
                                         ),
                                       ),
 
-                                      SizedBox(height: 20,),
+                                      const SizedBox(height: 20,),
 
                                       Expanded(
                                         child: Image.asset(slideImages[index].path, fit: BoxFit.cover, scale: 1.0,),
                                       ),
 
-                                      SizedBox(height: 80,),
+                                      const SizedBox(height: 80,),
                                     ],
                                   ),
                                 ),
@@ -402,8 +399,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                         width: 80,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Color(0xffcccccc),
-                          border: Border.all(color: Color(0xff000000),),
+                          color: const Color(0xffcccccc),
+                          border: Border.all(color: const Color(0xff000000),),
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(slideImages[index].path),
@@ -414,13 +411,13 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                             Center(
                               child: CircleAvatar(
                                 radius: 25,
-                                backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                 child: Text(
                                   '${index + 1}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 40,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xffffffff),
+                                    color: const Color(0xffffffff),
                                   ),
                                 ),
                               ),
@@ -436,14 +433,13 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
           ),
         ),
 
-        SizedBox(height: 5,),
+        const SizedBox(height: 5,),
 
         Align(
           alignment: Alignment.centerLeft,
-          child: Text('Double tap to remove images.',style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+          child: const Text('Double tap to remove images.', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
         ),
       ],
     );
   }
 }
-

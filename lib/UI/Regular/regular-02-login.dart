@@ -145,7 +145,6 @@ class RegularLoginState extends State<RegularLogin>{
                                 )
                               );
                             }
-
                           }else{
                             final result = await fb.logIn(permissions: [
                               FacebookPermission.publicProfile,
@@ -153,14 +152,13 @@ class RegularLoginState extends State<RegularLogin>{
                               FacebookPermission.userFriends,
                             ]);
 
-                            context.loaderOverlay.show();
-
                             final email = (await fb.getUserEmail())!;
                             final profile = (await fb.getUserProfile())!;
                             final image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
                             FacebookAccessToken token = (await fb.accessToken)!;
 
                             if(result.status != FacebookLoginStatus.cancel){  
+                              context.loaderOverlay.show();
                               bool apiResult = await apiRegularSignInWithFacebook(
                                 firstName: '${profile.name}',
                                 lastName: '',
@@ -180,7 +178,6 @@ class RegularLoginState extends State<RegularLogin>{
                               }
                             }
                           }
-
                         },
                       ),
 
@@ -190,6 +187,7 @@ class RegularLoginState extends State<RegularLogin>{
                         style: AuthButtonStyle(
                           splashColor: const Color(0xffffffff),
                           height: 44,
+                          width: SizeConfig.screenWidth,
                         ),
                         onPressed: () async{
                           User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
@@ -218,7 +216,6 @@ class RegularLoginState extends State<RegularLogin>{
                           final newCredentials = oAuthProvider.credential(idToken: credential.identityToken, accessToken: credential.authorizationCode);
 
                           print('The newCredentials is $newCredentials');
-                          // final credential = oAuthProvider.getCredential(idToken: credential.identityToken, accessToken: credential.authorizationCode,);
 
                           context.loaderOverlay.show();
                           bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);

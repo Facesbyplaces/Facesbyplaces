@@ -21,7 +21,7 @@ import 'dart:io';
 
 class HomeRegularUserProfileDetails extends StatefulWidget{
   final int userId;
-  HomeRegularUserProfileDetails({required this.userId});
+  const HomeRegularUserProfileDetails({required this.userId});
   
   HomeRegularUserProfileDetailsState createState() => HomeRegularUserProfileDetailsState(userId: userId);
 }
@@ -69,14 +69,14 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
               controller: controller,
               panelMaxSize: SizeConfig.screenHeight! / 1.5,
               // panelBackground: Color(0xffECF0F1),
-              backgroundColor: Color(0xffECF0F1),
+              backgroundColor: const Color(0xffECF0F1),
               panel: Container(
                 height: SizeConfig.screenHeight! / 1.5,
-                padding: EdgeInsets.only(left: 50.0, right: 50.0),
-                decoration: BoxDecoration(
-                  color: Color(0xffffffff),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50.0),
+                padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                decoration: const BoxDecoration(
+                  color: const Color(0xffffffff),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: const Radius.circular(50.0),
                   ),
                 ),
                 child: Column(
@@ -89,21 +89,21 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         print('The user id is $userId');
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: userId,)));
                       },
-                      title: Text('Update Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                      subtitle: Text('Update your account details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                      title: const Text('Update Details', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                      subtitle: const Text('Update your account details', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                     ),
 
-                    Divider(height: 20, color: Color(0xff888888),),
+                    const Divider(height: 20, color: const Color(0xff888888),),
 
                     ListTile(
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: userId,)));
                       },
-                      title: Text('Password', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                      subtitle: Text('Change your login password', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                      title: const Text('Password', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                      subtitle: const Text('Change your login password', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                     ),
 
-                    Divider(height: 20, color: Color(0xff888888),),
+                    const Divider(height: 20, color: const Color(0xff888888),),
 
                     ListTile(
                       onTap: () async{
@@ -120,36 +120,33 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           toggleEmail: result.showOtherDetailsStatusHideEmail, 
                           toggleNumber: result.showOtherDetailsStatusHidePhoneNumber)));
                       },
-                      title: Text('Other info', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                      subtitle: Text('Optional informations you can share', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                      title: const Text('Other info', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                      subtitle: const Text('Optional informations you can share', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                     ),
 
-                    Divider(height: 20, color: Color(0xff888888),),
+                    const Divider(height: 20, color: const Color(0xff888888),),
 
                     ListTile(
-                      onTap: (){
-                        
-                      },
-                      title: Text('Privacy Settings', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                      subtitle: Text('Control what others see', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xffBDC3C7),),),
+                      onTap: () => {},
+                      title: const Text('Privacy Settings', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                      subtitle: const Text('Control what others see', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                     ),
 
-                    Divider(height: 20, color: Color(0xff888888),),
+                    const Divider(height: 20, color: const Color(0xff888888),),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     MiscRegularButtonTemplate(
                       buttonText: 'Logout',
-                      buttonTextStyle: TextStyle(
+                      buttonTextStyle: const TextStyle(
                         fontSize: 16, 
                         fontWeight: FontWeight.bold, 
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
                       onPressed: () async{
-
-                        bool logoutResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
+                        bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
 
                         print('The logoutResult is $logoutResult');
 
@@ -159,7 +156,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           context.loaderOverlay.hide();
 
                           if(result){
-                            Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                            Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
                             Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                           }else{
                             await showDialog(
@@ -167,14 +164,13 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Something went wrong. Please try again.',
+                                description: const Text('Something went wrong. Please try again.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(),
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
+                                buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
                                 },
@@ -183,28 +179,25 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           }
                         }
                       },
-                      buttonColor: Color(0xff04ECFF),
+                      buttonColor: const Color(0xff04ECFF),
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     
-                    Text('V.1.1.0', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
+                    const Text('V.1.1.0', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff888888),),),
 
                     Expanded(child: Container(),),
-
                   ],
                 ),
               ),
               body: Stack(
                 children: [
-
-                  Container(height: SizeConfig.screenHeight, color: Color(0xffECF0F1),),
+                  Container(height: SizeConfig.screenHeight, color: const Color(0xffECF0F1),),
 
                   Container(
                     height: SizeConfig.screenHeight! / 2.5,
                     child: Stack(
                       children: [
-
                         CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
 
                         Positioned(
@@ -225,11 +218,10 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Successfully updated the profile picture.',
+                                      description: const Text('Successfully updated the profile picture.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
                                       onOkButtonPressed: () {
@@ -243,14 +235,13 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -265,21 +256,21 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                 profileImage.path != ''
                                 ? CircleAvatar(
                                   radius: 120,
-                                  backgroundColor: Color(0xff888888),
+                                  backgroundColor: const Color(0xff888888),
                                   backgroundImage: AssetImage(profileImage.path),
                                 )
                                 : CircleAvatar(
                                   radius: 120,
-                                  backgroundColor: Color(0xff888888),
+                                  backgroundColor: const Color(0xff888888),
                                   backgroundImage: NetworkImage(profile.data!.showProfileInformationImage),
                                 ),
-                                Positioned(
+                                const Positioned(
                                   top: 0,
                                   right: 20,
-                                  child: CircleAvatar(
+                                  child: const CircleAvatar(
                                     radius: 30,
-                                    backgroundColor: Color(0xff888888),
-                                    child: Icon(Icons.camera, size: 50, color: Color(0xffffffff),),
+                                    backgroundColor: const Color(0xff888888),
+                                    child: const Icon(Icons.camera, size: 50, color: const Color(0xffffffff),),
                                   ),
                                 )
                               ],
@@ -292,12 +283,12 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                   SafeArea(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
                         onPressed: (){
                           Navigator.of(context).popAndPushNamed('/home/regular');
                         },
-                        icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 35,),
+                        icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
                       ),
                     ),
                   ),
@@ -310,28 +301,27 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         children: [
                           Center(
                             child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xff000000),
+                                color: const Color(0xff000000),
                               ),
                             ),
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           Center(
                             child: Text(profile.data!.showProfileInformationEmail,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
-                                color: Color(0xff000000),
+                                color: const Color(0xff000000),
                               ),
                             ),
                           ),
 
-                          SizedBox(height: 40,),
-
+                          const SizedBox(height: 40,),
                         ],
                       ),
                     ),
@@ -340,9 +330,9 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
               ),
             );
           }else if(profile.hasError){
-            return MiscRegularErrorMessageTemplate();
+            return const MiscRegularErrorMessageTemplate();
           }else{
-            return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
+            return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
           }
         },
       ),

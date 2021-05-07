@@ -4,14 +4,14 @@ import 'home-create-post-regular-01-create-post.dart';
 import 'package:flutter/material.dart';
 
 class RegularSearchUsers{
-  int userId;
-  String firstName;
-  String lastName;
-  String email;
-  int accountType;
-  String image;
+  final int userId;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final int accountType;
+  final String image;
 
-  RegularSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.email, required this.accountType, required this.image});
+  const RegularSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.email, required this.accountType, required this.image});
 }
 
 class HomeRegularCreatePostSearchUser extends StatefulWidget{
@@ -39,10 +39,10 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more users to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more users to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -116,12 +116,12 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                 onLoading();
               },
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
+                contentPadding: const EdgeInsets.all(15.0),
                 filled: true,
-                fillColor: Color(0xffffffff),
-                focusColor: Color(0xffffffff),
+                fillColor: const Color(0xffffffff),
+                focusColor: const Color(0xffffffff),
                 hintText: 'Search User',
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   fontSize: 16,
                 ),
                 suffixIcon: IconButton(
@@ -133,34 +133,34 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
                     onLoading();
                   },
-                  icon: Icon(Icons.search, color: Colors.grey),
+                  icon: const Icon(Icons.search, color: const Color(0xff888888)),
                 ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                border: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: const Color(0xffffffff)),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),
                 ),
-                enabledBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: const Color(0xffffffff)),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),
                 ),
-                focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: const Color(0xffffffff)),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),
                 ),
               ),
             ),
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
-            backgroundColor: Color(0xff04ECFF),
+            leading: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+            backgroundColor: const Color(0xff04ECFF),
           ),
           body: empty == false
           ? RefreshIndicator(
             onRefresh: onRefresh,
             child: ListView.separated(
               controller: scrollController,
-              padding: EdgeInsets.all(10.0),
-              physics: ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
+              physics: const ClampingScrollPhysics(),
               itemCount: users.length,
-              separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
               itemBuilder: (c, i) {
                 return ListTile(
                   onTap: (){
@@ -169,16 +169,16 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                   leading: users[i].image != '' 
                   ? CircleAvatar(
                     maxRadius: 40,
-                    backgroundColor: Color(0xff888888),
+                    backgroundColor: const Color(0xff888888),
                     backgroundImage: NetworkImage(users[i].image),
                   )
-                  : CircleAvatar(
+                  : const CircleAvatar(
                     maxRadius: 40,
-                    backgroundColor: Color(0xff888888),
-                    backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                    backgroundColor: const Color(0xff888888),
+                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                   ),
                   title: Text(users[i].firstName + ' ' + users[i].lastName,),
-                  subtitle: Text(users[i].email, style: TextStyle(fontSize: 12, color: Color(0xff888888),),),
+                  subtitle: Text(users[i].email, style: const TextStyle(fontSize: 12, color: const Color(0xff888888),),),
                 );
               }
             ),
@@ -186,16 +186,16 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
           : Container(
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
                   SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                   Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
 
-                  Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+                  const Text('Search a location to add on your post', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
 
                   SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],

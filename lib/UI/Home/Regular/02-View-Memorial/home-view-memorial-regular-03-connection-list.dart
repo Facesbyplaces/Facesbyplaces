@@ -15,7 +15,7 @@ class RegularConnectionListItem{
   final String image;
   final String relationship;
 
-  RegularConnectionListItem({required this.id, required this.accountType, required this.firstName, required this.lastName, required this.image, required this.relationship});
+  const RegularConnectionListItem({required this.id, required this.accountType, required this.firstName, required this.lastName, required this.image, required this.relationship});
 }
 
 class HomeRegularConnectionList extends StatefulWidget{
@@ -61,10 +61,10 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more connection list family to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more connection list family to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -78,10 +78,10 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more connection list friends to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more connection list friends to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -95,10 +95,10 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more connection list followers to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+           const SnackBar(
+              content: const Text('No more connection list followers to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -226,7 +226,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
 
                 Expanded(
@@ -264,10 +269,10 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       }
                     },
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(15.0),
+                      contentPadding: const EdgeInsets.all(15.0),
                       filled: true,
-                      fillColor: Color(0xffffffff),
-                      focusColor: Color(0xffffffff),
+                      fillColor: const Color(0xffffffff),
+                      focusColor: const Color(0xffffffff),
                       hintText: ((){
                         switch(toggle){
                           case 0: return 'Search Family';
@@ -275,29 +280,29 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                           case 2: return 'Search Followers';
                         }
                       }()),
-                      hintStyle: TextStyle(fontSize: 16,),
-                      prefixIcon: Icon(Icons.search, color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      hintStyle: const TextStyle(fontSize: 16,),
+                      prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
+                      border: const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
-                      enabledBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
-                      focusedBorder:  OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffffffff)),
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
                       ),
                     ),
                   ),
                 ),
 
-                SizedBox(width: 20,),
+                const SizedBox(width: 20,),
               ],
             ),
             leading: Container(),
-            backgroundColor: Color(0xff04ECFF),
+            backgroundColor: const Color(0xff04ECFF),
           ),
           body: Column(
             children: [
@@ -306,14 +311,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 alignment: Alignment.center,
                 width: SizeConfig.screenWidth,
                 height: 70,
-                color: Color(0xffffffff),
+                color: const Color(0xffffffff),
                 child: DefaultTabController(
                   initialIndex: toggle,
                   length: 3,
                   child: TabBar(
-                    labelColor: Color(0xff04ECFF),
-                    unselectedLabelColor: Color(0xff000000),
-                    indicatorColor: Color(0xff04ECFF),
+                    labelColor: const Color(0xff04ECFF),
+                    unselectedLabelColor: const Color(0xff000000),
+                    indicatorColor: const Color(0xff04ECFF),
                     onTap: (int number){
                       setState(() {
                         toggle = number;
@@ -321,32 +326,32 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                     },
                     tabs: [
 
-                      Center(
-                        child: Text('Family',
-                          style: TextStyle(
+                      const Center(
+                        child: const Text('Family',
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
 
-                      Center(child: Text('Friends',
-                          style: TextStyle(
+                      const Center(
+                        child: const Text('Friends',
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
 
-                      Center(
-                        child: Text('Followers',
-                          style: TextStyle(
+                      const Center(
+                        child: const Text('Followers',
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -361,7 +366,6 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                   }
                 }()),
               ),
-
             ],
           ),
         ),
@@ -374,8 +378,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       onRefresh: onRefresh1,
       child: GridView.count(
         controller: scrollController1,
-        padding: EdgeInsets.all(10.0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.all(10.0),
+        physics: const ClampingScrollPhysics(),
         crossAxisSpacing: 2,
         mainAxisSpacing: 20,
         crossAxisCount: 4,
@@ -405,28 +409,28 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       if(searches[index].image != ''){
                         return CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
+                          backgroundColor: const Color(0xff888888),
                           backgroundImage: NetworkImage(searches[index].image),
                         );
                       }else{
-                        return CircleAvatar(
+                        return const CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          backgroundColor: const Color(0xff888888),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }else{
                       if(listsFamily[index].image != ''){
                         return CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
+                          backgroundColor: const Color(0xff888888),
                           backgroundImage: NetworkImage(listsFamily[index].image),
                         );
                       }else{
-                        return CircleAvatar(
+                        return const CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          backgroundColor: const Color(0xff888888),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }
@@ -435,10 +439,10 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
               ),
 
               onSearch
-              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
-              : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14))
+              : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14)),
 
-              Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 12, color: Color(0xff888888))),
+              Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 12, color: const Color(0xff888888))),
             ],
           ),
         ),
@@ -451,8 +455,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       onRefresh: onRefresh2,
       child: GridView.count(
         controller: scrollController2,
-        padding: EdgeInsets.all(10.0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.all(10.0),
+        physics: const ClampingScrollPhysics(),
         crossAxisSpacing: 2,
         mainAxisSpacing: 20,
         crossAxisCount: 4,
@@ -481,28 +485,28 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       if(searches[index].image != ''){
                         return CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
+                          backgroundColor: const Color(0xff888888),
                           backgroundImage: NetworkImage(searches[index].image),
                         );
                       }else{
-                        return CircleAvatar(
+                        return const CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          backgroundColor: const Color(0xff888888),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }else{
                       if(listsFriends[index].image != ''){
                         return CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
+                          backgroundColor: const Color(0xff888888),
                           backgroundImage: NetworkImage(listsFriends[index].image),
                         );
                       }else{
-                        return CircleAvatar(
+                        return const CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          backgroundColor: const Color(0xff888888),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }
@@ -511,8 +515,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
               ),
 
               onSearch
-              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
-              : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14))
+              : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14)),
             ],
           ),
         ),
@@ -525,8 +529,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       onRefresh: onRefresh3,
       child: GridView.count(
         controller: scrollController3,
-        padding: EdgeInsets.all(10.0),
-        physics: ClampingScrollPhysics(),
+        padding: const EdgeInsets.all(10.0),
+        physics: const ClampingScrollPhysics(),
         crossAxisSpacing: 2,
         mainAxisSpacing: 20,
         crossAxisCount: 4,
@@ -555,28 +559,28 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       if(searches[index].image != ''){
                         return CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
+                          backgroundColor: const Color(0xff888888),
                           backgroundImage: NetworkImage(searches[index].image),
                         );
                       }else{
-                        return CircleAvatar(
+                        return const CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          backgroundColor: const Color(0xff888888),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }else{
                       if(listsFollowers[index].image != ''){
                         return CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
+                          backgroundColor: const Color(0xff888888),
                           backgroundImage: NetworkImage(listsFollowers[index].image),
                         );
                       }else{
-                        return CircleAvatar(
+                        return const CircleAvatar(
                           radius: 40,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          backgroundColor: const Color(0xff888888),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }
@@ -585,8 +589,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
               ),
 
               onSearch
-              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
-              : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
+              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14))
+              : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14)),
             ],
           ),
         ),

@@ -72,7 +72,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            title: const Text('Notification Settings', style: const TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            title: const Text('Notification Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
           ),
@@ -81,8 +81,8 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
               const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
 
               SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
-                padding: EdgeInsets.all(20.0),
+                physics: const ClampingScrollPhysics(),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
                     Column(
@@ -90,7 +90,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                         Row(
                           children: [
-                            Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('New Memorial Page', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle1,
@@ -107,14 +107,13 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -122,15 +121,15 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('New Activities', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('New Activities', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle2,
@@ -147,14 +146,13 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -162,15 +160,15 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Post Likes', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),)),
                             
                             Switch(
                               value: toggle3,
@@ -187,14 +185,13 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -202,15 +199,15 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Post Comments', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle4,
@@ -227,14 +224,13 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -242,30 +238,29 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                             ),
                           ],
                         ),
-
                       ],
                     ),
 
-                    Container(height: .5, color: Color(0xffffffff),),
+                    Container(height: .5, color: const Color(0xffffffff),),
 
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
 
-                        SizedBox(height: 40,),
+                        const SizedBox(height: 40,),
 
-                        Text('Page Invites', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                        const Text('Page Invites', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
 
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Add as Family', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle5,
@@ -282,14 +277,13 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -297,15 +291,15 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Add as Friend', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle6,
@@ -322,14 +316,13 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -337,15 +330,15 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Add as Page Admin', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle7,
@@ -362,14 +355,13 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -377,12 +369,11 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                             ),
                           ],
                         ),
-
                       ],
                     ),
                   ],

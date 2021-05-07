@@ -14,25 +14,25 @@ import 'package:mime/mime.dart';
 import 'dart:io';
 
 class RegularTaggedUsers{
-  String name;
-  int userId;
-  int accountType;
+  final String name;
+  final int userId;
+  final int accountType;
 
-  RegularTaggedUsers({required this.name, required this.userId, required this.accountType});
+  const RegularTaggedUsers({required this.name, required this.userId, required this.accountType});
 }
 
 class RegularManagedPages{
-  String name;
-  int pageId;
-  String image;
+  final String name;
+  final int pageId;
+  final String image;
 
-  RegularManagedPages({required this.name, required this.pageId, required this.image});
+  const RegularManagedPages({required this.name, required this.pageId, required this.image});
 }
 
 class HomeRegularCreatePost extends StatefulWidget{
   final String name;
   final int memorialId;
-  HomeRegularCreatePost({required this.name, required this.memorialId});
+  const HomeRegularCreatePost({required this.name, required this.memorialId});
 
   @override
   HomeRegularCreatePostState createState() => HomeRegularCreatePostState(name: name, memorialId: memorialId);
@@ -72,14 +72,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
         builder: (_) => 
           AssetGiffyDialog(
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
           entryAnimation: EntryAnimation.DEFAULT,
-          description: Text('Something went wrong. Please try again.',
+          description: const Text('Something went wrong. Please try again.',
             textAlign: TextAlign.center,
-            style: TextStyle(),
           ),
           onlyOkButton: true,
-          buttonOkColor: Colors.red,
+          buttonOkColor: const Color(0xffff0000),
           onOkButtonPressed: () {
             Navigator.pop(context, true);
           },
@@ -136,14 +135,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Create Post', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            title: const Text('Create Post', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
-            backgroundColor: Color(0xff04ECFF),
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+            backgroundColor: const Color(0xff04ECFF),
+            leading: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
             actions: [
               GestureDetector(
                 onTap: () async{
-
                   Location.Location location = new Location.Location();
 
                   bool serviceEnabled = await location.serviceEnabled();
@@ -165,7 +163,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   context.loaderOverlay.show();
 
                   Location.LocationData locationData = await location.getLocation();
-                  List<RegularTaggedPeople> userIds = [];
+                  const List<RegularTaggedPeople> userIds = [];
                   
                   if(users.length != 0){
                     for(int i = 0; i < users.length; i++){
@@ -178,7 +176,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     }
                   }
 
-                  List<File> newFiles = [];
+                  const List<File> newFiles = [];
                   newFiles.addAll(slideImages);
 
                   APIRegularCreatePost post = APIRegularCreatePost(
@@ -203,29 +201,28 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
+                        description: const Text('Something went wrong. Please try again.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
-                        buttonOkColor: Colors.red,
+                        buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
                         },
                       )
                     );
                   }
-
                 }, 
                 child: Padding(
-                  padding: EdgeInsets.only(right: 20.0), 
-                  child: Center(
-                    child: Text('Post', 
-                    style: TextStyle(
-                      color: Color(0xffffffff), 
-                      fontSize: 20,),
+                  padding: const EdgeInsets.only(right: 20.0), 
+                  child: const Center(
+                    child: const Text('Post', 
+                      style: const TextStyle(
+                        color: const Color(0xffffffff), 
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),
@@ -233,20 +230,20 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
             ],
           ),
           body: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             child: SafeArea(
               child: Column(
                 children: [
 
                   Container(
                     child: InputDecorator(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         alignLabelWithHint: true,
-                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                        focusedBorder: UnderlineInputBorder(
+                        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                        focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none,
                         ),
-                        border: UnderlineInputBorder(
+                        border: const UnderlineInputBorder(
                           borderSide: BorderSide.none,
                         ),
                       ),
@@ -267,15 +264,15 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 children: [
                                   value.image != ''
                                   ? CircleAvatar(
-                                    backgroundColor: Color(0xff888888),
+                                    backgroundColor: const Color(0xff888888),
                                     backgroundImage: NetworkImage(value.image),
                                   )
-                                  : CircleAvatar(
-                                    backgroundColor: Color(0xff888888),
-                                    backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                                  : const CircleAvatar(
+                                    backgroundColor: const Color(0xff888888),
+                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                   ),
 
-                                  SizedBox(width: 20,),
+                                  const SizedBox(width: 20,),
 
                                   Text(value.name, ),
                                 ],
@@ -286,13 +283,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                       ),
                     ),
                     decoration: BoxDecoration(
-                      color: Color(0xffffffff),
+                      color: const Color(0xffffffff),
                       boxShadow: <BoxShadow>[
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: const Color(0xff888888).withOpacity(0.5),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 0)
+                          offset: const Offset(0, 0)
                         ),
                       ],
                     ),
@@ -312,30 +309,30 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         }
                       },
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: TextFormField(
                           controller: controller,
-                          cursorColor: Color(0xff000000),
+                          cursorColor: const Color(0xff000000),
                           maxLines: maxLines,
                           keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            fillColor: Color(0xffffffff),
+                          decoration: const InputDecoration(
+                            fillColor: const Color(0xffffffff),
                             alignLabelWithHint: true,
                             labelText: 'Speak out...',
-                            labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xff000000),
+                            labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+                            border: const OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: const Color(0xff000000),
                               ),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius: const BorderRadius.all(Radius.circular(10)),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                               ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                               ),
                             ),
@@ -345,26 +342,26 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     ),
                   ),
 
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
 
                   newLocation != ''
                   ? Container(
                     child: Chip(
                       labelPadding: const EdgeInsets.only(left: 8.0),
                       label: Text(newLocation),
-                      deleteIcon: Icon(Icons.close, size: 18,),
+                      deleteIcon: const Icon(Icons.close, size: 18,),
                       onDeleted: () {
                         setState(() {
                           newLocation = '';
                         });
                       },
                     ),
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0,), 
                     alignment: Alignment.centerLeft,
                   )
                   : Container(height: 0,),
 
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
 
                   Container(
                     child: Wrap(
@@ -374,7 +371,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         (index) => Chip(
                           labelPadding: const EdgeInsets.only(left: 8.0),
                           label: Text(users[index].name),
-                          deleteIcon: Icon(Icons.close, size: 18,),
+                          deleteIcon: const Icon(Icons.close, size: 18,),
                           onDeleted: () {
                             setState(() {
                               users.removeAt(index);
@@ -383,11 +380,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         ),
                       ),
                     ),
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0,), 
                     alignment: Alignment.centerLeft,
                   ),
 
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
 
                   Container(
                     child: ((){
@@ -395,11 +392,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         return Container(
                           height: 200,
                           width: SizeConfig.screenWidth,
-                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                           child: Container(
                             height: 100,
                             child: GridView.count(
-                              physics: ClampingScrollPhysics(),
+                              physics: const ClampingScrollPhysics(),
                               crossAxisCount: 4,
                               crossAxisSpacing: 4,
                               mainAxisSpacing: 4,
@@ -415,7 +412,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                       context: context,
                                       barrierDismissible: true,
                                       barrierLabel: 'Dialog',
-                                      transitionDuration: Duration(milliseconds: 0),
+                                      transitionDuration: const Duration(milliseconds: 0),
                                       pageBuilder: (_, __, ___) {
                                         return Scaffold(
                                           backgroundColor: Colors.black12.withOpacity(0.7),
@@ -425,26 +422,26 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                 children: [
                                                   Container(
                                                     alignment: Alignment.centerRight,
-                                                    padding: EdgeInsets.only(right: 20.0),
+                                                    padding: const EdgeInsets.only(right: 20.0),
                                                     child: GestureDetector(
                                                       onTap: (){
                                                         Navigator.pop(context);
                                                       },
                                                       child: CircleAvatar(
                                                         radius: 20,
-                                                        backgroundColor: Color(0xff000000).withOpacity(0.8),
-                                                        child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                        child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                       ),
                                                     ),
                                                   ),
 
-                                                  SizedBox(height: 20,),
+                                                  const SizedBox(height: 20,),
 
                                                   Expanded(
                                                     child: ((){
                                                       if(lookupMimeType(slideImages[index].path)?.contains('video') == true){
                                                         return BetterPlayer.file('${slideImages[index].path}',
-                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                             autoDispose: false,
                                                             aspectRatio: 1,
                                                           ),
@@ -455,7 +452,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                     }()),
                                                   ),
 
-                                                  SizedBox(height: 80,),
+                                                  const SizedBox(height: 80,),
                                                 ],
                                               ),
                                             ),
@@ -468,8 +465,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   ? Stack(
                                     children: [
                                       BetterPlayer.file('${slideImages[index].path}',
-                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
                                             showControls: false,
                                           ),
                                           aspectRatio: 1,
@@ -479,12 +476,12 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                       Center(
                                         child: CircleAvatar(
                                           radius: 25,
-                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                          backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                           child: Text('${index + 1}',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 40,
                                               fontWeight: FontWeight.bold,
-                                              color: Color(0xffffffff),
+                                              color: const Color(0xffffffff),
                                             ),
                                           ),
                                         ),
@@ -500,9 +497,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                               slideImages.removeAt(index);
                                             });
                                           },
-                                          child: CircleAvatar(
-                                            backgroundColor: Color(0xff000000),
-                                            child: Icon(Icons.close, color: Color(0xffffffff),),
+                                          child: const CircleAvatar(
+                                            backgroundColor: const Color(0xff000000),
+                                            child: const Icon(Icons.close, color: const Color(0xffffffff),),
                                           ),
                                         ),
                                       )
@@ -513,8 +510,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                     width: 80,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Color(0xffcccccc),
-                                      border: Border.all(color: Color(0xff000000),),
+                                      color: const Color(0xffcccccc),
+                                      border: Border.all(color: const Color(0xff000000),),
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: AssetImage(slideImages[index].path),
@@ -527,10 +524,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                             radius: 25,
                                             backgroundColor: Color(0xffffffff).withOpacity(.5),
                                             child: Text('${index + 1}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
+                                                color: const Color(0xffffffff),
                                               ),
                                             ),
                                           ),
@@ -546,9 +543,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                 slideImages.removeAt(index);
                                               });
                                             },
-                                            child: CircleAvatar(
-                                              backgroundColor: Color(0xff000000),
-                                              child: Icon(Icons.close, color: Color(0xffffffff),),
+                                            child: const CircleAvatar(
+                                              backgroundColor: const Color(0xff000000),
+                                              child: const Icon(Icons.close, color: const Color(0xffffffff),),
                                             ),
                                           ),
                                         )
@@ -568,7 +565,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   ),
 
                   Container(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                     height: 160,
                     child: Column(
                       children: [
@@ -585,15 +582,15 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               color: Colors.transparent,
                               child: Row(
                                 children: [
-                                  Expanded(child: Text('Add a location'),),
-                                  Icon(Icons.place, color: Color(0xff4EC9D4),)
+                                  Expanded(child: const Text('Add a location'),),
+                                  const Icon(Icons.place, color: const Color(0xff4EC9D4),)
                                 ],
                               ),
                             ),
                           ),
                         ),
 
-                        Container(height: 1, color: Color(0xffeeeeee),),
+                        Container(height: 1, color: const Color(0xffeeeeee),),
 
                         Expanded(
                           child: GestureDetector(
@@ -605,28 +602,25 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   users.add(result);
                                 });
                               }
-
-                              
                             },
                             child: Container(
                               color: Colors.transparent,
                               child: Row(
                                 children: [
-                                  Expanded(child: Text('Tag a person you are with'),),
-                                  Icon(Icons.person, color: Color(0xff4EC9D4),)
+                                  Expanded(child: const Text('Tag a person you are with'),),
+                                  const Icon(Icons.person, color: const Color(0xff4EC9D4),)
                                 ],
                               ),
                             ),
                           ),
                         ),
 
-                        Container(height: 1, color: Color(0xffeeeeee),),
+                        Container(height: 1, color: const Color(0xffeeeeee),),
 
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-
-                              var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog(choice_1: 'Image', choice_2: 'Video',));
+                              var choice = await showDialog(context: (context), builder: (build) => const MiscRegularUploadFromDialog(choice_1: 'Image', choice_2: 'Video',));
 
                               if(choice == null){
                                 choice = 0;
@@ -637,24 +631,21 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   await getVideo();
                                 }
                               }
-                              
                             },
                             child: Container(
                               color: Colors.transparent,
                               child: Row(
                                 children: [
-                                  Expanded(child: Text('Upload a Video / Image'),),
-                                  Icon(Icons.image, color: Color(0xff4EC9D4),)
+                                  Expanded(child: const Text('Upload a Video / Image'),),
+                                  const Icon(Icons.image, color: const Color(0xff4EC9D4),)
                                 ],
                               ),
                             ),
                           ),
                         ),
-
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),

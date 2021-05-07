@@ -29,7 +29,7 @@ import 'dart:async';
 
 class HomeRegularScreenExtended extends StatefulWidget{
   final int newToggleBottom;
-  HomeRegularScreenExtended({required this.newToggleBottom});
+  const HomeRegularScreenExtended({required this.newToggleBottom});
 
   HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState(newToggleBottom: newToggleBottom);
 }
@@ -105,14 +105,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
         builder: (_) => 
           AssetGiffyDialog(
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
           entryAnimation: EntryAnimation.DEFAULT,
-          description: Text('Something went wrong. Please try again.',
+          description: const Text('Something went wrong. Please try again.',
             textAlign: TextAlign.center,
-            style: TextStyle(),
           ),
           onlyOkButton: true,
-          buttonOkColor: Colors.red,
+          buttonOkColor: const Color(0xffff0000),
           onOkButtonPressed: () {
             Navigator.pop(context, true);
           },
@@ -153,7 +152,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     builder: (context){
                       return IconButton(
                         icon: CircleAvatar(
-                          backgroundColor: Color(0xff888888),
+                          backgroundColor: const Color(0xff888888),
                           backgroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
                         ),
                         onPressed: () async{
@@ -164,24 +163,24 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   );
                 }else if(profileImage.hasError || isGuestLoggedIn){
                   return IconButton(
-                    icon: CircleAvatar(
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                    icon: const CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                     ),
                     onPressed: () async{
                       Scaffold.of(context).openDrawer();
                     },
                   );
                 }else{
-                  return Container(child: CircularProgressIndicator(), padding: EdgeInsets.all(20.0),);
+                  return Container(child: const CircularProgressIndicator(), padding: const EdgeInsets.all(20.0),);
                 }
               },
             ),
-            title: Text('FacesByPlaces.com', style: TextStyle(fontSize: 16, color: Color(0xffffffff),),),
+            title: const Text('FacesByPlaces.com', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
             centerTitle: true,
             actions: [
               IconButton(
-                icon: Icon(Icons.search, color: Color(0xffffffff), size: 35),
+                icon: const Icon(Icons.search, color: const Color(0xffffffff), size: 35),
                 onPressed: () async{
                   Navigator.pushNamed(context, '/home/regular/search');
                 },
@@ -191,7 +190,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
           body: Stack(
             children: [
 
-              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+              SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
 
               Container(
                 child: ((){
@@ -203,15 +202,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   }
                 }()),
               ),
-
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Color(0xffffffff),
+            backgroundColor: const Color(0xffffffff),
             onPressed: () async{
               scanQR();
             },
-            child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
+            child: const Icon(Icons.qr_code, color: const Color(0xff4EC9D4),),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: SingleChildScrollView(
@@ -222,18 +220,18 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
               child: ToggleButtons(
                 borderWidth: 0,
                 renderBorder: false,
-                selectedColor: Color(0xff04ECFF),
+                selectedColor: const Color(0xff04ECFF),
                 fillColor: Colors.transparent,
-                color: Color(0xffB1B1B1),
+                color: const Color(0xffB1B1B1),
                 children: [
 
                   Container(
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        Icon(MdiIcons.fire,),
-                        SizedBox(height: 5),
-                        Text('Feed', style: TextStyle(fontSize: 12,),),
+                        const Icon(MdiIcons.fire,),
+                        const SizedBox(height: 5),
+                        const Text('Feed', style: const TextStyle(fontSize: 12,),),
                       ],
                     ),
                   ),
@@ -242,9 +240,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        Icon(MdiIcons.graveStone),
-                        SizedBox(height: 5),
-                        Text('Memorials', style: TextStyle(fontSize: 12,),),
+                        const Icon(MdiIcons.graveStone),
+                        const SizedBox(height: 5),
+                        const Text('Memorials', style: const TextStyle(fontSize: 12,),),
                       ],
                     ),
                   ),
@@ -253,9 +251,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        Icon(MdiIcons.post),
-                        SizedBox(height: 5),
-                        Text('Post', style: TextStyle(fontSize: 12,),),
+                        const Icon(MdiIcons.post),
+                        const SizedBox(height: 5),
+                        const Text('Post', style: const TextStyle(fontSize: 12,),),
                       ],
                     ),
                   ),
@@ -266,10 +264,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                       alignment: Alignment.center,
                       children: [
                         Column(
-                          children: <Widget>[
-                            Icon(MdiIcons.heart),
-                            SizedBox(height: 5),
-                            Text('Notification', style: TextStyle(fontSize: 12,),),
+                          children: const <Widget>[
+                            const Icon(MdiIcons.heart),
+                            const SizedBox(height: 5),
+                            const Text('Notification', style: const TextStyle(fontSize: 12,),),
                           ],
                         ),
                         Positioned(
@@ -277,13 +275,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           right: 20,
                           child: CircleAvatar(
                             radius: 12,
-                            backgroundColor: Colors.red,
+                            backgroundColor: const Color(0xffff0000),
                             child: isGuestLoggedIn == true
-                            ? Text('0', 
-                              style: TextStyle(color: Color(0xffffffff), fontSize: 12),
+                            ? const Text('0', 
+                              style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),
                             )
                             : Text(unreadNotifications > 99 ? '99+' : '$unreadNotifications', 
-                              style: TextStyle(color: Color(0xffffffff), fontSize: 12),
+                              style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),
                             ),
                           ),
                         )
@@ -303,7 +301,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         bottomTab[i] = false;
                       }
                     }
-
                   });
 
                   if(toggleBottom == 3){
@@ -317,13 +314,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 isSelected: bottomTab
               ),
               decoration: BoxDecoration(
-                color: Color(0xffffffff),
+                color: const Color(0xffffffff),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
+                    color: const Color(0xff888888).withOpacity(0.5),
                     blurRadius: 5,
                     spreadRadius: 1,
-                    offset: Offset(0, 0)
+                    offset: const Offset(0, 0)
                   ),
                 ],
               ),
@@ -337,12 +334,12 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 return Drawer(
                   child: Container(
                     alignment: Alignment.topCenter,
-                    color: Color(0xff4EC9D4),
+                    color: const Color(0xff4EC9D4),
                     child: SingleChildScrollView(
                       physics: ClampingScrollPhysics(),
                       child: Column(
                         children: [
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           GestureDetector(
                             onTap: (){
@@ -350,7 +347,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 context: context,
                                 barrierDismissible: true,
                                 barrierLabel: 'Dialog',
-                                transitionDuration: Duration(milliseconds: 0),
+                                transitionDuration: const Duration(milliseconds: 0),
                                 pageBuilder: (_, __, ___) {
                                   return Scaffold(
                                     backgroundColor: Colors.black12.withOpacity(0.7),
@@ -360,31 +357,31 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                           children: [
                                             Container(
                                               alignment: Alignment.centerRight,
-                                              padding: EdgeInsets.only(right: 20.0),
+                                              padding: const EdgeInsets.only(right: 20.0),
                                               child: GestureDetector(
                                                 onTap: (){
                                                   Navigator.pop(context);
                                                 },
                                                 child: CircleAvatar(
                                                   radius: 20,
-                                                  backgroundColor: Color(0xff000000).withOpacity(0.8),
-                                                  child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                 ),
                                               ),
                                             ),
 
-                                            SizedBox(height: 20,),
+                                            const SizedBox(height: 20,),
 
                                             Expanded(
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl: manageDrawer.data!.showProfileInformationImage,
-                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               )
                                             ),
 
-                                            SizedBox(height: 80,),
+                                            const SizedBox(height: 80,),
                                           ],
                                         ),
                                       ),
@@ -396,40 +393,40 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             child: manageDrawer.data!.showProfileInformationImage != ''
                             ? CircleAvatar(
                               radius: 100,
-                              backgroundColor: Color(0xff888888),
+                              backgroundColor: const Color(0xff888888),
                               backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
                             )
-                            : CircleAvatar(
+                            : const CircleAvatar(
                               radius: 100,
-                              backgroundColor: Color(0xff888888),
-                              backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                              backgroundColor: const Color(0xff888888),
+                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                             ),
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
-                          Text(manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                          Text(manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: const Color(0xffffffff),),),
 
-                          SizedBox(height: 45),
+                          const SizedBox(height: 45),
 
                           GestureDetector(
                             onTap: (){
                               Navigator.pop(context);
                             },
-                            child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            child: const Text('Home', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
                           ),
 
-                          SizedBox(height: 25),
+                          const SizedBox(height: 25),
 
                           GestureDetector(
                             onTap: (){
                               Navigator.pop(context);
                               Navigator.pushNamed(context, '/home/regular/create-memorial');
                             },
-                            child: Text('Create Memorial Page', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            child: const Text('Create Memorial Page', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           GestureDetector(
                             onTap: () async{
@@ -448,19 +445,19 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 addAdmin: result.showNotificationStatusAddAdmin,
                               )));
                             },
-                            child: Text('Notification Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            child: const Text('Notification Settings', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           GestureDetector(
                             onTap: () async{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                             },
-                            child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            child: const Text('Profile Settings', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           GestureDetector(
                             onTap: () async{
@@ -470,7 +467,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               context.loaderOverlay.hide();
 
                               if(result){
-                                Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
                                 Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                               }else{
                                 await showDialog(
@@ -478,25 +475,22 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   builder: (_) => 
                                     AssetGiffyDialog(
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                     entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Something went wrong. Please try again.',
+                                    description: const Text('Something went wrong. Please try again.',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(),
                                     ),
                                     onlyOkButton: true,
-                                    buttonOkColor: Colors.red,
+                                    buttonOkColor: const Color(0xffff0000),
                                     onOkButtonPressed: () {
                                       Navigator.pop(context, true);
                                     },
                                   )
                                 );
                               }
-                              
                             },
-                            child: Text('Log Out', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            child: const Text('Log Out', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
                           ),
-                          
                         ],
                       ),
                     ),
@@ -506,15 +500,15 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 return Drawer(
                   child: Container(
                     alignment: Alignment.topCenter,
-                    color: Color(0xff4EC9D4),
+                    color: const Color(0xff4EC9D4),
                     child: Column(
                       children: [
-                        SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
                         
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 100,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                          backgroundColor: const Color(0xff888888),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         ),
 
                         Expanded(child: Container(),),
@@ -523,69 +517,68 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           onTap: (){
                             Navigator.pop(context);
                           },
-                          child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),), textAlign: TextAlign.center,),
+                          child: const Text('Something went wrong. Please try again.', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),), textAlign: TextAlign.center,),
                         ),
 
                         Expanded(child: Container(),),
 
                         GestureDetector(
                           onTap: (){
-                            Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                            Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
                             Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: 16,),
+                              const Icon(Icons.directions_walk_rounded, color: const Color(0xffffffff), size: 16,),
 
-                              SizedBox(width: 20),
+                              const SizedBox(width: 20),
 
-                              Text('Go back', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                              const Text('Go back', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
                             ],
                           ),
                         ),
 
                         Expanded(child: Container(),),
-                        
                       ],
                     ),
                   ),
                 );
               }else{
-                return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
+                return Container(child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
               }
             }
           )
           : Drawer(
             child: Container(
               alignment: Alignment.topCenter,
-              color: Color(0xff4EC9D4),
+              color: const Color(0xff4EC9D4),
               child: SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: Column(
                   children: [
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 100,
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                      backgroundColor: const Color(0xff888888),
+                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
-                    Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                    const Text('Guest User', textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: const Color(0xffffffff),),),
 
-                    SizedBox(height: 45,),
+                    const SizedBox(height: 45,),
 
                     GestureDetector(
                       onTap: (){
                         Navigator.pop(context);
                       },
-                      child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                      child: const Text('Home', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
                     ),
 
-                    SizedBox(height: 25,),
+                    const SizedBox(height: 25,),
 
                     GestureDetector(
                       onTap: () async{
@@ -605,12 +598,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                         sharedPrefs.remove('user-guest-session');
 
-                        Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                        Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
                         Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                       },
-                      child: Text('Sign up or Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                      child: const Text('Sign up or Sign in', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
                     ),
-                    
                   ],
                 ),
               ),

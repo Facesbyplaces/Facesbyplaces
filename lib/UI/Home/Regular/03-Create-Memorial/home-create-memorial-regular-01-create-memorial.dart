@@ -9,19 +9,19 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 class RegularCreateMemorialValues{
-  String memorialName;
-  String description;
-  String birthplace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
-  String relationship;
-  List<File> imagesOrVideos;
-  double longitude;
-  double latitude;
+  final String memorialName;
+  final String description;
+  final String birthplace;
+  final String dob;
+  final String rip;
+  final String cemetery;
+  final String country;
+  final String relationship;
+  final List<File> imagesOrVideos;
+  final double longitude;
+  final double latitude;
 
-  RegularCreateMemorialValues({
+  const RegularCreateMemorialValues({
     required this.memorialName, 
     required this.description, 
     required this.birthplace, 
@@ -70,11 +70,11 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+            title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff))),
             centerTitle: true,
-            backgroundColor: Color(0xff04ECFF),
+            backgroundColor: const Color(0xff04ECFF),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -84,41 +84,40 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
             children: [
 
               SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
-                child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                physics: const NeverScrollableScrollPhysics(),
+                child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
               ),
 
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: ListView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   children: [
                     MiscRegularInputFieldDropDown(key: _key1,),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     MiscRegularInputFieldTemplate(key: _key2, labelText: 'Birthplace'),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     DateTimePicker(
                       type: DateTimePickerType.date,
                       controller: controller1,
-                      cursorColor: Color(0xff000000),
+                      cursorColor: const Color(0xff000000),
                       firstDate: DateTime(1000),
                       lastDate: DateTime.now(),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'DOB',
-                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff000000),
+                        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: const Color(0xff000000),
                           ),
                         ),
                       ),
                       selectableDayPredicate: (date) {
-
                         if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
                           return true;
                         }else{
@@ -132,21 +131,21 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       },
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     DateTimePicker(
                       type: DateTimePickerType.date,
                       controller: controller2,
-                      cursorColor: Color(0xff000000),
+                      cursorColor: const Color(0xff000000),
                       firstDate: DateTime(1000),
                       lastDate: DateTime.now(),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'RIP',
-                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff000000),
+                        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: const Color(0xff000000),
                           ),
                         ),
                       ),
@@ -164,33 +163,31 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       },
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     MiscRegularInputFieldTemplate(key: _key5, labelText: 'Cemetery'),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
                     MiscRegularInputFieldTemplate(key: _key6, labelText: 'Country'),
 
-                    SizedBox(height: 40,),
+                    const SizedBox(height: 40,),
 
                     MiscRegularButtonTemplate(
                       onPressed: () async{
-
                         if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' ||  _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                           await showDialog(
                             context: context,
                             builder: (_) => 
                               AssetGiffyDialog(
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Please complete the form before submitting.',
+                              description: const Text('Please complete the form before submitting.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(),
                               ),
                               onlyOkButton: true,
-                              buttonOkColor: Colors.red,
+                              buttonOkColor: const Color(0xffff0000),
                               onOkButtonPressed: () {
                                 Navigator.pop(context, true);
                               },
@@ -209,12 +206,10 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             )
                           );
                         }
-
                       }, 
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
                     ),
-
                   ],
                 ),
               ),

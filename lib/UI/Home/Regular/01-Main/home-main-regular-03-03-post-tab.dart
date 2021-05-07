@@ -12,29 +12,29 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 
 class RegularMainPagesPosts{
-  int userId;
-  int postId;
-  int memorialId;
-  String memorialName;
-  String timeCreated;
-  String postBody;
-  dynamic profileImage;
-  List<dynamic> imagesOrVideos;
-  bool managed;
-  bool joined;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
-  int numberOfTagged;
-  List<String> taggedFirstName;
-  List<String> taggedLastName;
-  List<String> taggedImage;
-  List<int> taggedId;
-  String pageType;
-  bool famOrFriends;
-  String relationship;
+  final int userId;
+  final int postId;
+  final int memorialId;
+  final String memorialName;
+  final String timeCreated;
+  final String postBody;
+  final dynamic profileImage;
+  final List<dynamic> imagesOrVideos;
+  final bool managed;
+  final bool joined;
+  final int numberOfLikes;
+  final int numberOfComments;
+  final bool likeStatus;
+  final int numberOfTagged;
+  final List<String> taggedFirstName;
+  final List<String> taggedLastName;
+  final List<String> taggedImage;
+  final List<int> taggedId;
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
 
-  RegularMainPagesPosts({
+  const RegularMainPagesPosts({
     required this.userId, 
     required this.postId, 
     required this.memorialId, 
@@ -93,10 +93,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more posts to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more posts to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -121,14 +121,13 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
           builder: (_) => 
             AssetGiffyDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Something went wrong. Please try again.',
+            description: const Text('Something went wrong. Please try again.',
               textAlign: TextAlign.center,
-              style: TextStyle(),
             ),
             onlyOkButton: true,
-            buttonOkColor: Colors.red,
+            buttonOkColor: const Color(0xffff0000),
             onOkButtonPressed: () {
               Navigator.pop(context, true);
             },
@@ -142,10 +141,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       count = count + newValue.familyMemorialList.length;
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
-        List<String> newList1 = [];
-        List<String> newList2 = [];
-        List<String> newList3 = [];
-        List<int> newList4 = [];
+        const List<String> newList1 = [];
+        const List<String> newList2 = [];
+        const List<String> newList3 = [];
+        const List<int> newList4 = [];
 
         for(int j = 0; j < newValue.familyMemorialList[i].homeTabPostPostTagged.length; j++){
           newList1.add(newValue.familyMemorialList[i].homeTabPostPostTagged[j].homeTabPostTabTaggedFirstName);
@@ -198,10 +197,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
         onRefresh: onRefresh,
         child: ListView.separated(
           controller: scrollController,
-          padding: EdgeInsets.all(10.0),
-          physics: ClampingScrollPhysics(),
+          padding: const EdgeInsets.all(10.0),
+          physics: const ClampingScrollPhysics(),
           itemCount: count,
-          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i) {
             return MiscRegularPost(
               userId: posts[i].userId,
@@ -228,15 +227,15 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                 posts[i].imagesOrVideos.isNotEmpty
                 ? Column(
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     Container(
                       child: ((){
                         if(posts[i].imagesOrVideos.length == 1){
                           if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                             return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                controlsConfiguration: const BetterPlayerControlsConfiguration(
                                   showControls: false,
                                 ),
                                 aspectRatio: 16 / 9,
@@ -246,7 +245,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                             return CachedNetworkImage(
                               fit: BoxFit.cover,
                               imageUrl: posts[i].imagesOrVideos[0],
-                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             );
                           }
@@ -254,14 +253,14 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                           return StaggeredGridView.countBuilder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             crossAxisCount: 4,
                             itemCount: 2,
                             itemBuilder: (BuildContext context, int index) =>  
                               lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
@@ -270,10 +269,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                               : CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: posts[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               ),
-                            staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                            staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,
                           );
@@ -281,7 +280,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                           return StaggeredGridView.countBuilder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             crossAxisCount: 4,
                             itemCount: 3,
                             staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
@@ -291,8 +290,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                               if(index != 1){
                                 return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
                                       showControls: false,
                                     ),
                                     aspectRatio: 16 / 9,
@@ -301,7 +300,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                 : CachedNetworkImage(
                                   fit: BoxFit.cover,
                                   imageUrl: posts[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 );
                               }else{
@@ -312,26 +311,26 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                         fit: StackFit.expand,
                                         children: [
                                           BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                            betterPlayerConfiguration: BetterPlayerConfiguration(
-                                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                              controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                 showControls: false,
                                               ),
                                               aspectRatio: 16 / 9,
                                             ),
                                           ),
 
-                                          Container(color: Colors.black.withOpacity(0.5),),
+                                          Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                           Center(
                                             child: CircleAvatar(
                                               radius: 25,
-                                              backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                              backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                               child: Text(
                                                 '${posts[i].imagesOrVideos.length - 3}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 40,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Color(0xffffffff),
+                                                  color: const Color(0xffffffff),
                                                 ),
                                               ),
                                             ),
@@ -345,22 +344,22 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                           CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl: posts[i].imagesOrVideos[index],
-                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           ),
 
-                                          Container(color: Colors.black.withOpacity(0.5),),
+                                          Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                           Center(
                                             child: CircleAvatar(
                                               radius: 25,
-                                              backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                              backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                               child: Text(
                                                 '${posts[i].imagesOrVideos.length - 3}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 40,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Color(0xffffffff),
+                                                  color: const Color(0xffffffff),
                                                 ),
                                               ),
                                             ),
@@ -371,8 +370,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                   }else{
                                     if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                       return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
                                             showControls: false,
                                           ),
                                           aspectRatio: 16 / 9,
@@ -382,7 +381,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                       return CachedNetworkImage(
                                         fit: BoxFit.cover,
                                         imageUrl: posts[i].imagesOrVideos[index],
-                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       );
                                     }
@@ -397,14 +396,13 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                   ],
                 )
                 : Container(height: 0),
-
               ],
             );
           }
         ),
       )
       : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -415,9 +413,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-              Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+              const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],

@@ -24,7 +24,7 @@ class HomeRegularCreateMemorial3 extends StatefulWidget{
   final String memorialName;
   final List<dynamic> imagesOrVideos;
 
-  HomeRegularCreateMemorial3({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.description, required this.memorialName, required this.imagesOrVideos});
+  const HomeRegularCreateMemorial3({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.description, required this.memorialName, required this.imagesOrVideos});
 
   HomeRegularCreateMemorial3State createState() => HomeRegularCreateMemorial3State(relationship: relationship, birthplace: birthplace, dob: dob, rip: rip, cemetery: cemetery, country: country, description: description, memorialName: memorialName, imagesOrVideos: imagesOrVideos);
 }
@@ -71,11 +71,11 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+        title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff))),
         centerTitle: true,
-        backgroundColor: Color(0xff04ECFF),
+        backgroundColor: const Color(0xff04ECFF),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+          icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
           onPressed: (){
             Navigator.pop(context);
           },
@@ -84,19 +84,19 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
       body: Stack(
         children: [
 
-          MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+          const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
 
           Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             child: ListView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               children: [
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
-                Text('Upload or Select an Image', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
+                const Text('Upload or Select an Image', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: const Color(0xff000000),),),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
                 Container(
                   height: 200,
@@ -106,7 +106,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       fit: BoxFit.cover,
                       image: backgroundImage != File('')
                       ? AssetImage(backgroundImage.path)
-                      : AssetImage('assets/icons/alm-background1.png'),
+                      : const AssetImage('assets/icons/alm-background1.png'),
                     ),
                   ),
                   child: Stack(
@@ -119,17 +119,17 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         child: Center(
                           child: CircleAvatar(
                             radius: 60,
-                            backgroundColor: Color(0xffffffff),
+                            backgroundColor: const Color(0xffffffff),
                             child: Padding(
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               child: profileImage.path != ''
                               ? CircleAvatar(
                                 radius: 60,
                                 backgroundImage: FileImage(profileImage),
                               )
-                              : CircleAvatar(
+                              : const CircleAvatar(
                                 radius: 60,
-                                backgroundImage: AssetImage('assets/icons/cover-icon.png'),
+                                backgroundImage: const AssetImage('assets/icons/cover-icon.png'),
                               ),
                             ),
                           ),
@@ -139,45 +139,44 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       Positioned(
                         bottom: 40,
                         left: SizeConfig.screenWidth! / 2,
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           radius: 25,
-                          backgroundColor: Color(0xffffffff),
-                          child: CircleAvatar(
+                          backgroundColor: const Color(0xffffffff),
+                          child: const CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.transparent,
-                            child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),
+                            child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
                           ),
                         ),
                       ),
 
-                      Positioned(
+                      const Positioned(
                         top: 10,
                         right: 10,
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           radius: 25,
-                          backgroundColor: Color(0xffffffff),
-                          child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),
+                          backgroundColor: const Color(0xffffffff),
+                          child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
                         ),
                       ),
-
                     ],
                   ),
                 ),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
-                Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                const Text('Upload the best photo of the person in the memorial page.', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
 
-                SizedBox(height: 40,),
+                const SizedBox(height: 40,),
 
-                Text('Choose Background', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
+                const Text('Choose Background', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: const Color(0xff000000),),),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
                 Container(
                   height: 100,
                   child: ListView.separated(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index){
                       return ((){
@@ -193,18 +192,17 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             child: Container(
                               width: 100,
                               height: 100,  
-                              child: Icon(Icons.add_rounded, color: Color(0xff000000), size: 60,),
+                              child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Color(0xffcccccc),
-                                border: Border.all(color: Color(0xff000000),),
+                                color: const Color(0xffcccccc),
+                                border: Border.all(color: const Color(0xff000000),),
                               ),
                             ),
                           );
                         }else{
                           return GestureDetector(
                             onTap: () async{
-
                               final ByteData bytes = await rootBundle.load(backgroundImages[index]);
                               final Uint8List list = bytes.buffer.asUint8List();
 
@@ -219,11 +217,11 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             },
                             child: backgroundImageToggle == index
                             ? Container(
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               width: 100,
                               height: 100,
                               decoration: BoxDecoration(
-                                color: Color(0xff04ECFF),
+                                color: const Color(0xff04ECFF),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Container(
@@ -239,7 +237,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               ),
                             )
                             : Container(
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               width: 100,
                               height: 100,
                               decoration: BoxDecoration(
@@ -262,23 +260,22 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       }());
                     }, 
                     separatorBuilder: (context, index){
-                      return SizedBox(width: 25,);
+                      return const SizedBox(width: 25,);
                     },
                     itemCount: 5,
                   ),
                 ),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
-                Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                const Text('Upload your own or select from the pre-mades.', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
 
-                SizedBox(height: 80,),
+                const SizedBox(height: 80,),
 
                 MiscRegularButtonTemplate(
                   width: 150,
                   height: 45,
                   onPressed: () async{
-
                     Location.Location location = new Location.Location();
 
                     bool serviceEnabled = await location.serviceEnabled();
@@ -298,11 +295,10 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                          description: const Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
                             textAlign: TextAlign.center,
-                            style: TextStyle(),
                           ),
                           onlyOkButton: false,
                           onOkButtonPressed: () {
@@ -358,7 +354,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     }
                   },
                 ),
-
               ],
             ),
           ),
@@ -367,7 +362,3 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
     );
   }
 }
-
-
-
-

@@ -8,17 +8,17 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RegularMainPagesNotifications{
-  int id;
-  String createdAt;
-  String updatedAt;
-  int actorId;
-  String actorImage;
-  bool read;
-  String action;
-  int postId;
-  String notificationType;
+  final int id;
+  final String createdAt;
+  final String updatedAt;
+  final int actorId;
+  final String actorImage;
+  final bool read;
+  final String action;
+  final int postId;
+  final String notificationType;
 
-  RegularMainPagesNotifications({required this.id, required this.createdAt, required this.updatedAt, required this.actorId, required this.actorImage, required this.read, required this.action, required this.postId, required this.notificationType});
+  const RegularMainPagesNotifications({required this.id, required this.createdAt, required this.updatedAt, required this.actorId, required this.actorImage, required this.read, required this.action, required this.postId, required this.notificationType});
 }
 
 class HomeRegularNotificationsTab extends StatefulWidget{
@@ -55,10 +55,10 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more notifications to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more notifications to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -83,14 +83,13 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           builder: (_) => 
             AssetGiffyDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Something went wrong. Please try again.',
               textAlign: TextAlign.center,
-              style: TextStyle(),
             ),
             onlyOkButton: true,
-            buttonOkColor: Colors.red,
+            buttonOkColor: const Color(0xffff0000),
             onOkButtonPressed: () {
               Navigator.pop(context, true);
             },
@@ -125,7 +124,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -136,9 +134,9 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         onRefresh: onRefresh,
         child: ListView.separated(
           controller: scrollController,
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           itemCount: count,
-          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i) {
             return MiscRegularNotificationDisplayTemplate(
               imageIcon: notifications[i].actorImage,
@@ -152,7 +150,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         )
       )
       : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -163,9 +161,9 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              SizedBox(height: 45,),
+              const SizedBox(height: 45,),
 
-              Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+              const Text('Notification is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],
@@ -175,4 +173,3 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
     );
   }
 }
-

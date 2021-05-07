@@ -342,7 +342,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
-        SizedBox(height: 30,),
+        const SizedBox(height: 30,),
       ],
     );
   }

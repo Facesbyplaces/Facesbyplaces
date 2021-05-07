@@ -18,7 +18,7 @@ class HomeRegularNotificationSettings extends StatefulWidget{
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
-  HomeRegularNotificationSettings({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
+  const HomeRegularNotificationSettings({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
 
   @override
   HomeRegularNotificationSettingsState createState() => HomeRegularNotificationSettingsState(newMemorial: newMemorial, newActivities: newActivities, postLikes: postLikes, postComments: postComments, addFamily: addFamily, addFriends: addFriends, addAdmin: addAdmin);
@@ -69,14 +69,11 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Notification Settings', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Notification Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back, 
-                color: Color(0xffffffff),
-              ), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -84,22 +81,23 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
           ),
           body: Stack(
             children: [
-              MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+              const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
 
               SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
-                padding: EdgeInsets.all(20.0),
+                physics: const ClampingScrollPhysics(),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
                     Column(
                       children: [
-
                         Row(
                           children: [
-                            Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 16, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('New Memorial Page', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle1,
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
                                 bool result = await apiRegularUpdateNotificationMemorial(hide: value);
 
@@ -113,14 +111,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -128,19 +125,18 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
                             ),
-
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('New Activities', style: TextStyle(fontSize: 16, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('New Activities', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle2,
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
                                 bool result = await apiRegularUpdateNotificationActivities(hide: value);
 
@@ -154,14 +150,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -169,18 +164,18 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 16, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Post Likes', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle3,
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
                                 bool result = await apiRegularUpdateNotificationPostLikes(hide: value);
 
@@ -194,14 +189,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -209,18 +203,18 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 16, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Post Comments', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle4,
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
                                 bool result = await apiRegularUpdateNotificationPostComments(hide: value);
 
@@ -234,14 +228,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -249,33 +242,31 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
                             ),
                           ],
                         ),
-
                       ],
                     ),
 
-                    Container(height: .5, color: Color(0xffffffff),),
+                    Container(height: .5, color: const Color(0xffffffff),),
 
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(height: 40,),
 
-                        SizedBox(height: 40,),
+                        const Text('Page Invites', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
 
-                        Text('Page Invites', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 16, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Add as Family', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle5,
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
                                 bool result = await apiRegularUpdateNotificationAddFamily(hide: value);
 
@@ -289,14 +280,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -304,18 +294,18 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 16, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Add as Friend', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle6,
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
                                 bool result = await apiRegularUpdateNotificationAddFriends(hide: value);
 
@@ -329,14 +319,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -344,18 +333,18 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
                             ),
                           ],
                         ),
 
                         Row(
                           children: [
-                            Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 16, color: Color(0xff000000),),)),
+                            Expanded(child: const Text('Add as Page Admin', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),)),
 
                             Switch(
                               value: toggle7,
+                              activeColor: const Color(0xff2F353D),
+                              activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
                                 bool result = await apiRegularUpdateNotificationAddAdmin(hide: value);
 
@@ -369,14 +358,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     builder: (_) => 
                                       AssetGiffyDialog(
                                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                       entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
+                                      description: const Text('Something went wrong. Please try again.',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
                                       ),
                                       onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
+                                      buttonOkColor: const Color(0xffff0000),
                                       onOkButtonPressed: () {
                                         Navigator.pop(context, true);
                                       },
@@ -384,15 +372,11 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                   );
                                 }
                               },
-                              activeColor: Color(0xff2F353D),
-                              activeTrackColor: Color(0xff3498DB),
                             ),
                           ],
                         ),
-
                       ],
                     ),
-
                   ],
                 ),
               ),

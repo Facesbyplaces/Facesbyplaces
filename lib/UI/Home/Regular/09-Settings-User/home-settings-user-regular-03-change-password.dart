@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class HomeRegularUserChangePassword extends StatefulWidget{
   final int userId;
-  HomeRegularUserChangePassword({required this.userId});
+  const HomeRegularUserChangePassword({required this.userId});
 
   HomeRegularUserChangePasswordState createState() => HomeRegularUserChangePasswordState(userId: userId);
 }
@@ -37,11 +37,11 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Change Password', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Change Password', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -49,28 +49,29 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
           ),
           body: Container(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(20.0),
-              physics: ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(20.0),
+              physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
-
                   MiscRegularInputFieldTemplate(key: _key1, labelText: 'Current Password', obscureText: true,),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
 
                   MiscRegularInputFieldTemplate(key: _key2, labelText: 'New Password', obscureText: true,),
 
-                  SizedBox(height: 80,),
+                  const SizedBox(height: 80,),
 
                   MiscRegularButtonTemplate(
                     buttonText: 'Update',
-                    buttonTextStyle: TextStyle(
+                    buttonTextStyle: const TextStyle(
                       fontSize: 16, 
                       fontWeight: FontWeight.bold, 
-                      color: Color(0xffffffff),
+                      color: const Color(0xffffffff),
                     ),
+                    width: SizeConfig.screenWidth! / 2,
+                    height: 45,
+                    buttonColor: const Color(0xff04ECFF),
                     onPressed: () async{
-
                       context.loaderOverlay.show();
                       bool result = await apiRegularChangePassword(currentPassword: _key1.currentState!.controller.text, newPassword: _key2.currentState!.controller.text);
                       context.loaderOverlay.hide();
@@ -81,11 +82,10 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                           builder: (_) => 
                             AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Successfully updated the password.',
+                            description: const Text('Successfully updated the password.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(),
                             ),
                             onlyOkButton: true,
                             onOkButtonPressed: () {
@@ -100,28 +100,23 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                           builder: (_) => 
                             AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Something went wrong. Please try again.',
+                            description: const Text('Something went wrong. Please try again.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(),
                             ),
                             onlyOkButton: true,
-                            buttonOkColor: Colors.red,
+                            buttonOkColor: const Color(0xffff0000),
                             onOkButtonPressed: () {
                               Navigator.pop(context, true);
                             },
                           )
                         );
                       }
-                    }, 
-                    width: SizeConfig.screenWidth! / 2,
-                    height: 45,
-                    buttonColor: Color(0xff04ECFF),
+                    },
                   ),
 
-                  SizedBox(height: 160,),
-
+                  const SizedBox(height: 160,),
                 ],
               ),
             ),

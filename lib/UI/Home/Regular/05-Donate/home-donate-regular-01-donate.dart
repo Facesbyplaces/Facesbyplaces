@@ -13,7 +13,7 @@ class HomeRegularUserDonate extends StatefulWidget{
   final int pageId;
   final String pageName;
 
-  HomeRegularUserDonate({required this.pageType, required this.pageId, required this.pageName});
+  const HomeRegularUserDonate({required this.pageType, required this.pageId, required this.pageName});
 
   HomeRegularUserDonateState createState() => HomeRegularUserDonateState(pageType: pageType, pageId: pageId, pageName: pageName);
 }
@@ -43,34 +43,34 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
           }
         },
         child: Scaffold(
-          backgroundColor: Color(0xff888888),
+          backgroundColor: const Color(0xff888888),
           body: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xffffffff),
+                color: const Color(0xffffffff),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   Row(
                     children: [
-                      Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xff000000),), onPressed: (){Navigator.pop(context);},)),),
+                      Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xff000000),), onPressed: (){Navigator.pop(context);},)),),
 
-                      Text('Send a Gift', style: TextStyle(fontSize: 24,),),
+                      const Text('Send a Gift', style: const TextStyle(fontSize: 24,),),
 
                       Expanded(child: Container(),)
                     ],
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   Expanded(
                     child: GridView.count(
-                      physics: ClampingScrollPhysics(),
-                      padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+                      physics: const ClampingScrollPhysics(),
+                      padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       crossAxisCount: 2,
@@ -85,28 +85,28 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                             child: Container(
                               child: Column(
                                 children: [
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
 
                                   Expanded(child: Image.asset('assets/icons/gift.png'),),
 
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
 
                                   Container(
                                     child: ((){
                                       switch(index){
-                                        case 0: return Text('\$1.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                        case 1: return Text('\$5.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                        case 2: return Text('\$15.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                        case 3: return Text('\$25.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                        case 4: return Text('\$50.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
-                                        case 5: return Text('\$100.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+                                        case 0: return const Text('\$1.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+                                        case 1: return const Text('\$5.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+                                        case 2: return const Text('\$15.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+                                        case 3: return const Text('\$25.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+                                        case 4: return const Text('\$50.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+                                        case 5: return const Text('\$100.00', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
                                       }
                                     }()),
                                   ),
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                border: Border.all(width: index == donateToggle ? 2 : .5, color: index == donateToggle ? Color(0xff70D8FF) : Color(0xff888888),),
+                                border: Border.all(width: index == donateToggle ? 2 : .5, color: index == donateToggle ? const Color(0xff70D8FF) : const Color(0xff888888),),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                             ),
@@ -116,7 +116,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ),
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -208,9 +208,9 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                               builder: (_) => 
                                 AssetGiffyDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
+                                  description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
                                     textAlign: TextAlign.center,
                                   ),
                                   onlyOkButton: true,
@@ -225,13 +225,13 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                               builder: (_) => 
                                 AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Something went wrong. Please try again.',
+                                description: const Text('Something went wrong. Please try again.',
                                   textAlign: TextAlign.center,
                                 ),
                                 onlyOkButton: true,
-                                buttonOkColor: Colors.red,
+                                buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
                                 },
@@ -244,15 +244,15 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                         ),
                         height: 44,
                         minWidth: 280,
-                        color: Color(0xff000000),
+                        color: const Color(0xff000000),
                         child: Platform.isIOS
                         ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('Donate with', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
-                            SizedBox(width: 8.0,),
-                            Icon(FontAwesome5.apple_pay, color: Color(0xffffffff), size: 40),
+                            const Text('Donate with', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
+                            const SizedBox(width: 8.0,),
+                            const Icon(FontAwesome5.apple_pay, color: const Color(0xffffffff), size: 40),
                           ],
                         )
                         : donateWithGoogle
@@ -260,8 +260,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ],
                   ),
 
-                  SizedBox(height: 20),
-
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

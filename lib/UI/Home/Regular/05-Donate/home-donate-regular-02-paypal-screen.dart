@@ -27,12 +27,12 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
           }
         },
         child: Scaffold(
-          backgroundColor: Color(0xffECF0F1),
+          backgroundColor: const Color(0xffECF0F1),
           appBar: AppBar(
-             backgroundColor: Color(0xff04ECFF),
-            title: Text('Paypal', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+             backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Paypal', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+            leading: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
           ),
           body: InAppWebView(
             initialUrlRequest: URLRequest(
@@ -44,5 +44,3 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
     );
   }
 }
-
-

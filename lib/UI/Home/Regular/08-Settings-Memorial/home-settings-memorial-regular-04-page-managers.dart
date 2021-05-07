@@ -14,12 +14,12 @@ class RegularShowAdminSettings{
   final String relationship;
   final String email;
 
-  RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
+  const RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
 }
 
 class HomeRegularPageManagers extends StatefulWidget{
   final int memorialId;
-  HomeRegularPageManagers({required this.memorialId});
+  const HomeRegularPageManagers({required this.memorialId});
 
   HomeRegularPageManagersState createState() => HomeRegularPageManagersState(memorialId: memorialId);
 }
@@ -48,10 +48,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more users to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more users to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -80,13 +80,13 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
 
   void addManagers1(){
     managers.add(
-      Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: 14, color: Color(0xff888888)),),),
+      const Padding(padding: const EdgeInsets.only(left: 20.0,), child: const Text('Admin', style: const TextStyle(fontSize: 14, color: const Color(0xff888888)),),),
     );
   }
 
   void addManagers2(){
     managers.add(
-      Padding(padding: EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: 14, color: Color(0xff888888)),),),
+      const Padding(padding: const EdgeInsets.only(left: 20.0,), child: const Text('Family', style: const TextStyle(fontSize: 14, color: const Color(0xff888888)),),),
     );
   }
 
@@ -107,20 +107,18 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,
-              textColor: Color(0xffffffff),
-              splashColor: Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
+              splashColor: const Color(0xff04ECFF),
               onPressed: () async{
-
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Are you sure you want to remove this user?',
+                    description: const Text('Are you sure you want to remove this user?',
                       textAlign: TextAlign.center,
-                      style: TextStyle(),
                     ),
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
@@ -143,14 +141,13 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
-                        buttonOkColor: Colors.red,
+                        buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
                         },
@@ -162,11 +159,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully removed the user from the list.',
+                        description: const Text('Successfully removed the user from the list.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
                         onOkButtonPressed: () {
@@ -186,12 +182,12 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                   }
                 }
               },
-              child: Text('Remove', style: TextStyle(fontSize: 14,),),
+              child: const Text('Remove', style: const TextStyle(fontSize: 14,),),
               height: 40,
-              shape: StadiumBorder(
-                side: BorderSide(color: Color(0xffE74C3C)),
+              shape: const StadiumBorder(
+                side: const BorderSide(color: const Color(0xffE74C3C)),
               ),
-              color: Color(0xffE74C3C),
+              color: const Color(0xffE74C3C),
             ),
           ),
         );
@@ -221,26 +217,24 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       for(int i = 0; i < newValue.almFamilyList.length; i++){
         managers.add(
           ListTile(
-            leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
+            leading: CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
             title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
             subtitle: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,
-              textColor: Color(0xffffffff),
-              splashColor: Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
+              splashColor: const Color(0xff04ECFF),
               onPressed: () async{
-
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Are you sure you want to make this user a manager?',
+                    description: const Text('Are you sure you want to make this user a manager?',
                       textAlign: TextAlign.center,
-                      style: TextStyle(),
                     ),
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
@@ -263,14 +257,13 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
-                        buttonOkColor: Colors.red,
+                        buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
                         },
@@ -282,11 +275,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully removed the user from the list.',
+                        description: const Text('Successfully removed the user from the list.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
                         onOkButtonPressed: () {
@@ -306,12 +298,12 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                   }
                 }
               },
-              child: Text('Make Manager', style: TextStyle(fontSize: 14,),),
+              child: const Text('Make Manager', style: const TextStyle(fontSize: 14,),),
               height: 40,
-              shape: StadiumBorder(
-                side: BorderSide(color: Color(0xff04ECFF)),
+              shape: const StadiumBorder(
+                side: const BorderSide(color: const Color(0xff04ECFF)),
               ),
-              color: Color(0xff04ECFF),
+              color: const Color(0xff04ECFF),
             ),
           ),
         );
@@ -328,11 +320,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff04ECFF),
-        title:  Text('Memorial Settings', style: TextStyle(fontSize: 16, color: Color(0xffffffff),),),
+        backgroundColor: const Color(0xff04ECFF),
+        title: const Text('Memorial Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
         centerTitle: true,
           leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: (){
             Navigator.pop(context);
           },
@@ -344,10 +336,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            physics: ClampingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
             itemCount: managers.length,
-            separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => managers[i],
           )
         ),

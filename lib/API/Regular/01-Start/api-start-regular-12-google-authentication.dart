@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 class RegularGoogleAuthentication {
   static Future<FirebaseApp> initializeFirebase({required BuildContext context}) async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
-
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
@@ -35,48 +34,14 @@ class RegularGoogleAuthentication {
     context.loaderOverlay.show();
 
     FirebaseAuth auth = FirebaseAuth.instance;
-    User? user = FirebaseAuth.instance.currentUser;
+    User? user;
 
-    final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile', 'openid']);
+    final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-      // print('The authorization code is ${googleSignInAuthentication.accessToken}');
-      // print('The authorization code is ${googleSignInAuthentication.serverAuthCode}');
-
-      // FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('Token copied!'));
-
-
-
-      // ==============================================================================================================
-
-
-      // String newToken = await auth.currentUser!.getIdToken();
-      // FlutterClipboard.copy('$newToken').then(( value ) => print('Token copied!'));
-
-      // print('The new token is $newToken');
-      // print('Another token is ${googleSignInAuthentication.idToken}');
-
-      // GoogleSignInAuthentication newToken = await googleSignInAccount.authentication;
-      // FlutterClipboard.copy('$newToken').then(( value ) => print('GoogleSignInAuthentication newToken copied'));
-
-
-
-
-
-
-      String newToken = await auth.currentUser!.getIdToken();
-      FlutterClipboard.copy('$newToken').then(( value ) => print('Auth token copied!')); // verified on node
-
-      // GoogleSignInAuthentication newToken = await googleSignIn.currentUser!.authentication;
-      // FlutterClipboard.copy('${newToken.idToken}').then(( value ) => print('GoogleSignInAuthentication newToken copied!')); // verified on gem
-
-      // GoogleSignInAuthentication newToken = await googleSignInAccount.authentication;
-      // FlutterClipboard.copy('${newToken.idToken}').then(( value ) => print('GoogleSignInAuthentication newToken copied!')); // verified on gem
-
-      // String newToken = await user!.getIdToken();
-      // FlutterClipboard.copy('$newToken').then(( value ) => print('User token copied!')); // verified on node
+      FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('Auth token copied!')); // verified on node
 
       bool result = await apiRegularSignInWithGoogle(
         firstName: googleSignInAccount.displayName!, 
@@ -97,17 +62,6 @@ class RegularGoogleAuthentication {
       try {
         final UserCredential userCredential = await auth.signInWithCredential(credential);
         user = userCredential.user;
-
-        print('The user is $user');
-        print('The user is ${user!.displayName}');
-        print('The user is ${user.email}');
-        print('The user is ${user.refreshToken}');
-
-        IdTokenResult anotherToken = await user.getIdTokenResult();
-
-        print('The anotherToken is ${anotherToken.claims}');
-        print('The anotherToken is ${anotherToken.token}');
-
       } on FirebaseAuthException catch (e) {
         print('The firebase error is $e');
         if (e.code == 'account-exists-with-different-credential') {
@@ -116,14 +70,13 @@ class RegularGoogleAuthentication {
             builder: (_) => 
               AssetGiffyDialog(
               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
               entryAnimation: EntryAnimation.DEFAULT,
-              description: Text('The account already exists with a different credential.',
+              description: const Text('The account already exists with a different credential.',
                 textAlign: TextAlign.center,
-                style: TextStyle(),
               ),
               onlyOkButton: true,
-              buttonOkColor: Colors.red,
+              buttonOkColor: const Color(0xffff0000),
               onOkButtonPressed: () {
                 Navigator.pop(context, true);
               },
@@ -136,14 +89,13 @@ class RegularGoogleAuthentication {
             builder: (_) => 
               AssetGiffyDialog(
               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
               entryAnimation: EntryAnimation.DEFAULT,
-              description: Text('Error occurred while accessing credentials. Try again.',
+              description: const Text('Error occurred while accessing credentials. Try again.',
                 textAlign: TextAlign.center,
-                style: TextStyle(),
               ),
               onlyOkButton: true,
-              buttonOkColor: Colors.red,
+              buttonOkColor: const Color(0xffff0000),
               onOkButtonPressed: () {
                 Navigator.pop(context, true);
               },
@@ -156,14 +108,13 @@ class RegularGoogleAuthentication {
           builder: (_) => 
             AssetGiffyDialog(
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Error occurred while accessing credentials. Try again.',
+            description: const Text('Error occurred while accessing credentials. Try again.',
               textAlign: TextAlign.center,
-              style: TextStyle(),
             ),
             onlyOkButton: true,
-            buttonOkColor: Colors.red,
+            buttonOkColor: const Color(0xffff0000),
             onOkButtonPressed: () {
               Navigator.pop(context, true);
             },
@@ -186,29 +137,18 @@ class RegularGoogleAuthentication {
         builder: (_) => 
           AssetGiffyDialog(
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
           entryAnimation: EntryAnimation.DEFAULT,
-          description: Text('Error signing out. Try again.',
+          description: const Text('Error signing out. Try again.',
             textAlign: TextAlign.center,
-            style: TextStyle(),
           ),
           onlyOkButton: true,
-          buttonOkColor: Colors.red,
+          buttonOkColor: const Color(0xffff0000),
           onOkButtonPressed: () {
             Navigator.pop(context, true);
           },
         )
       );
     }
-  }
-
-  static SnackBar customSnackBar({required String content}) {
-    return SnackBar(
-      backgroundColor: Colors.black,
-      content: Text(
-        content,
-        style: TextStyle(color: Colors.redAccent, letterSpacing: 0.5),
-      ),
-    );
   }
 }

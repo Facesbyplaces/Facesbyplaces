@@ -23,7 +23,7 @@ class HomeRegularUserOtherDetails extends StatefulWidget{
   final bool toggleEmail;
   final bool toggleNumber;
 
-  HomeRegularUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
+  const HomeRegularUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
   HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthplace, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
 }
@@ -80,11 +80,11 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Other Details', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Other Details', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -93,19 +93,17 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
           body: FutureBuilder<APIRegularShowOtherDetails>(
             future: otherDetails,
             builder: (context, details){
-              print('The error is ${details.error}');
               if(details.hasData){
                 return SingleChildScrollView(
-                  padding: EdgeInsets.all(20.0),
-                  physics: ClampingScrollPhysics(),
+                  padding: const EdgeInsets.all(20.0),
+                  physics: const ClampingScrollPhysics(),
                   child: Column(
                     children: [
-
                       Row(
                         children: [
                           Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.showOtherDetailsBirthdate,),),
 
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
 
                           IconButton(
                             onPressed: () async{
@@ -115,19 +113,19 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                               await apiRegularHideBirthdate(hide: toggle1);
                             },
-                            icon: Icon(Icons.remove_red_eye_rounded),
-                            color: toggle1 ? Color(0xff85DBF1) : Color(0xff888888),
+                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            color: toggle1 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
 
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
 
                       Row(
                         children: [
                           Expanded(child: MiscRegularInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data!.showOtherDetailsBirthplace,),),
 
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
 
                           IconButton(
                             onPressed: () async{
@@ -137,19 +135,19 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                               await apiRegularHideBirthplace(hide: toggle2);
                             },
-                            icon: Icon(Icons.remove_red_eye_rounded),
-                            color: toggle2 ? Color(0xff85DBF1) : Color(0xff888888),
+                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            color: toggle2 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
 
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
 
                       Row(
                         children: [
                           Expanded(child: MiscRegularInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data!.showOtherDetailsAddress,),),
 
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
 
                           IconButton(
                             onPressed: () async{
@@ -159,19 +157,19 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                               await apiRegularHideAddress(hide: toggle3);
                             },
-                            icon: Icon(Icons.remove_red_eye_rounded),
-                            color: toggle3 ? Color(0xff85DBF1) : Color(0xff888888),
+                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            color: toggle3 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
 
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
 
                       Row(
                         children: [
                           Expanded(child: MiscRegularInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data!.showOtherDetailsEmail, type: TextInputType.emailAddress,),),
 
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
 
                           IconButton(
                             onPressed: () async{
@@ -181,19 +179,19 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                               await apiRegularHideEmail(hide: toggle4);
                             },
-                            icon: Icon(Icons.remove_red_eye_rounded),
-                            color: toggle4 ? Color(0xff85DBF1) : Color(0xff888888),
+                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            color: toggle4 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
 
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
 
                       Row(
                         children: [
                           Expanded(child: MiscRegularPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.showOtherDetailsPhoneNumber, type: TextInputType.phone),),
 
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
 
                           IconButton(
                             onPressed: () async{
@@ -203,23 +201,25 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                               await apiRegularHidePhoneNumber(hide: toggle5);
                             },
-                            icon: Icon(Icons.remove_red_eye_rounded),
-                            color: toggle5 ? Color(0xff85DBF1) : Color(0xff888888),
+                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            color: toggle5 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
 
-                      SizedBox(height: 80,),
+                      const SizedBox(height: 80,),
 
                       MiscRegularButtonTemplate(
                         buttonText: 'Update', 
-                        buttonTextStyle: TextStyle(
+                        buttonTextStyle: const TextStyle(
                           fontSize: 16, 
                           fontWeight: FontWeight.bold, 
-                          color: Color(0xffffffff),
+                          color: const Color(0xffffffff),
                         ),
+                        width: SizeConfig.screenWidth! / 2,
+                        height: 45,
+                        buttonColor: const Color(0xff04ECFF),
                         onPressed: () async{
-
                           if(
                             details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text ||
                             details.data!.showOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
@@ -227,7 +227,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text ||
                             details.data!.showOtherDetailsPhoneNumber != _key5.currentState!.controller.text
                           ){
-                            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+                            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),));
 
                             if(confirmResult){
                               context.loaderOverlay.show();
@@ -248,11 +248,10 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   builder: (_) => 
                                     AssetGiffyDialog(
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                     entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Successfully updated the other details.',
+                                    description: const Text('Successfully updated the other details.',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(),
                                     ),
                                     onlyOkButton: true,
                                     onOkButtonPressed: () {
@@ -267,14 +266,13 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   builder: (_) => 
                                     AssetGiffyDialog(
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                     entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Something went wrong. Please try again.',
+                                    description: const Text('Something went wrong. Please try again.',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(),
                                     ),
                                     onlyOkButton: true,
-                                    buttonOkColor: Colors.red,
+                                    buttonOkColor: const Color(0xffff0000),
                                     onOkButtonPressed: () {
                                       Navigator.pop(context, true);
                                     },
@@ -284,20 +282,17 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             }
                           }
                         }, 
-                        width: SizeConfig.screenWidth! / 2,
-                        height: 45,
-                        buttonColor: Color(0xff04ECFF),
                       ),
 
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
 
                     ],
                   ),
                 );
               }else if(details.hasError){
-                return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
+                return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),));
               }else{
-                return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
+                return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
               }
             },
           ),

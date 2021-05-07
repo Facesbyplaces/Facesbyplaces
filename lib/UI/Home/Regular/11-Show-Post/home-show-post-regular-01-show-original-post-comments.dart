@@ -37,41 +37,41 @@ import 'package:mime/mime.dart';
 import 'dart:ui';
 
 class RegularOriginalComment{
-  int commentId;
-  int postId;
-  int userId;
-  String commentBody;
-  String createdAt;
-  String firstName;
-  String lastName;
-  dynamic image;
-  bool commentLikes;
-  int commentNumberOfLikes;
-  int userAccountType;
-  List<RegularOriginalReply> listOfReplies;
+  final int commentId;
+  final int postId;
+  final int userId;
+  final String commentBody;
+  final String createdAt;
+  final String firstName;
+  final String lastName;
+  final dynamic image;
+  final bool commentLikes;
+  final int commentNumberOfLikes;
+  final int userAccountType;
+  final List<RegularOriginalReply> listOfReplies;
 
-  RegularOriginalComment({required this.commentId, required this.postId, required this.userId, required this.commentBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.commentLikes, required this.commentNumberOfLikes, required this.userAccountType, required this.listOfReplies});
+  const RegularOriginalComment({required this.commentId, required this.postId, required this.userId, required this.commentBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.commentLikes, required this.commentNumberOfLikes, required this.userAccountType, required this.listOfReplies});
 }
 
 class RegularOriginalReply{
-  int replyId;
-  int commentId;
-  int userId;
-  String replyBody;
-  String createdAt;
-  String firstName;
-  String lastName;
-  dynamic image;
-  bool replyLikes;
-  int replyNumberOfLikes;
-  int userAccountType;
+  final int replyId;
+  final int commentId;
+  final int userId;
+  final String replyBody;
+  final String createdAt;
+  final String firstName;
+  final String lastName;
+  final dynamic image;
+  final bool replyLikes;
+  final int replyNumberOfLikes;
+  final int userAccountType;
 
-  RegularOriginalReply({required this.replyId, required this.commentId, required this.userId, required this.replyBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.replyLikes, required this.replyNumberOfLikes, required this.userAccountType});
+  const RegularOriginalReply({required this.replyId, required this.commentId, required this.userId, required this.replyBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.replyLikes, required this.replyNumberOfLikes, required this.userAccountType});
 }
 
 class HomeRegularShowOriginalPostComments extends StatefulWidget{
   final int postId;
-  HomeRegularShowOriginalPostComments({required this.postId});
+  const HomeRegularShowOriginalPostComments({required this.postId});
 
   @override
   HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState(postId: postId);
@@ -141,10 +141,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
             });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No more comments to show'),
-                duration: Duration(seconds: 1),
-                backgroundColor: Color(0xff4EC9D4),
+              const SnackBar(
+                content: const Text('No more comments to show'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: const Color(0xff4EC9D4),
               ),
             );
           }
@@ -189,9 +189,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
           var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.almCommentsList[i].showListOfCommentsCommentId, page: page2);
           context.loaderOverlay.hide();
 
-          List<bool> newRepliesLikes = [];
-          List<int> newRepliesNumberOfLikes = [];
-          List<int> newReplyId = [];
+          const List<bool> newRepliesLikes = [];
+          const List<int> newRepliesNumberOfLikes = [];
+          const List<int> newReplyId = [];
 
           for(int j = 0; j < newValue2.almRepliesList.length; j++){
 
@@ -272,11 +272,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Post', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+            backgroundColor: const Color(0xff04ECFF),
+            title: const Text('Post', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -285,7 +285,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
               MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Alm'),
             ],
           ),
-          backgroundColor: Color(0xffffffff),
+          backgroundColor: const Color(0xffffffff),
           body: Stack(
             children: [
               isGuestLoggedIn
@@ -301,7 +301,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         child: RefreshIndicator(
                           onRefresh: onRefresh,
                           child: CustomScrollView(
-                            physics: ClampingScrollPhysics(),
+                            physics: const ClampingScrollPhysics(),
                             controller: scrollController,
                             slivers: <Widget>[
                               SliverToBoxAdapter(
@@ -309,7 +309,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                   key: profileKey,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                       height: 80,
                                       child: Row(
                                         children: [
@@ -331,17 +331,17 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                             },
                                             child: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != ''
                                             ? CircleAvatar(
-                                              backgroundColor: Color(0xff888888),
+                                              backgroundColor: const Color(0xff888888),
                                               backgroundImage: NetworkImage(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage),
                                             )
-                                            : CircleAvatar(
-                                              backgroundColor: Color(0xff888888),
-                                              backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                                            : const CircleAvatar(
+                                              backgroundColor: const Color(0xff888888),
+                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                             )
                                           ),
                                           Expanded(
                                             child: Container(
-                                              padding: EdgeInsets.only(left: 10.0),
+                                              padding: const EdgeInsets.only(left: 10.0),
                                               child: GestureDetector(
                                                 onTap: () async{
                                                   if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
@@ -364,10 +364,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       child: Align(alignment: Alignment.bottomLeft,
                                                         child: Text(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageName,
                                                           overflow: TextOverflow.ellipsis,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                             fontSize: 16,
                                                             fontWeight: FontWeight.bold,
-                                                            color: Color(0xff000000),
+                                                            color: const Color(0xff000000),
                                                           ),
                                                         ),
                                                       ),
@@ -377,10 +377,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         alignment: Alignment.topLeft,
                                                         child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreatedAt)),
                                                           maxLines: 1,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                             fontSize: 14,
                                                             fontWeight: FontWeight.w400,
-                                                            color: Color(0xffaaaaaa)
+                                                            color: const Color(0xffaaaaaa)
                                                           ),
                                                         ),
                                                       ),
@@ -403,7 +403,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                     originalPost.data!.almPost.showOriginalPostImagesOrVideos.isNotEmpty
                                     ? Column(
                                       children: [
-                                        SizedBox(height: 20),
+                                        const SizedBox(height: 20),
 
                                         Container(
                                           child: ((){
@@ -414,7 +414,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     context: context,
                                                     barrierDismissible: true,
                                                     barrierLabel: 'Dialog',
-                                                    transitionDuration: Duration(milliseconds: 0),
+                                                    transitionDuration: const Duration(milliseconds: 0),
                                                     pageBuilder: (_, __, ___) {
                                                       return Scaffold(
                                                         backgroundColor: Colors.black12.withOpacity(0.7),
@@ -424,26 +424,26 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               children: [
                                                                 Container(
                                                                   alignment: Alignment.centerRight,
-                                                                  padding: EdgeInsets.only(right: 20.0),
+                                                                  padding: const EdgeInsets.only(right: 20.0),
                                                                   child: GestureDetector(
                                                                     onTap: (){
                                                                       Navigator.pop(context);
                                                                     },
                                                                     child: CircleAvatar(
                                                                       radius: 20,
-                                                                      backgroundColor: Color(0xff000000).withOpacity(0.8),
-                                                                      child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                                      backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                      child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                     ),
                                                                   ),
                                                                 ),
 
-                                                                SizedBox(height: 10,),
+                                                                const SizedBox(height: 10,),
 
                                                                 Expanded(
                                                                   child: ((){
                                                                     if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                       return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
-                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                           aspectRatio: 1,
                                                                         ),
                                                                       );
@@ -451,15 +451,14 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                       return CachedNetworkImage(
                                                                         fit: BoxFit.cover,
                                                                         imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
-                                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                       );
                                                                     }
                                                                   }()),
                                                                 ),
 
-                                                                SizedBox(height: 85,),
-
+                                                                const SizedBox(height: 85,),
                                                               ],
                                                             ),
                                                           ),
@@ -471,9 +470,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                 child: ((){
                                                   if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
-                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                         aspectRatio: 16 / 9,
-                                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                           showControls: false,
                                                         ),
                                                       ),
@@ -482,7 +481,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     return CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
-                                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                     );
                                                   }
@@ -492,7 +491,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               return StaggeredGridView.countBuilder(
                                                 padding: EdgeInsets.zero,
                                                 shrinkWrap: true,
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics: const NeverScrollableScrollPhysics(),
                                                 crossAxisCount: 4,
                                                 itemCount: 2,
                                                 itemBuilder: (BuildContext context, int index) =>
@@ -502,7 +501,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       context: context,
                                                       barrierDismissible: true,
                                                       barrierLabel: 'Dialog',
-                                                      transitionDuration: Duration(milliseconds: 0),
+                                                      transitionDuration: const Duration(milliseconds: 0),
                                                       pageBuilder: (_, __, ___) {
                                                         return Scaffold(
                                                           backgroundColor: Colors.black12.withOpacity(0.7),
@@ -512,20 +511,20 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 children: [
                                                                   Container(
                                                                     alignment: Alignment.centerRight,
-                                                                    padding: EdgeInsets.only(right: 20.0),
+                                                                    padding: const EdgeInsets.only(right: 20.0),
                                                                     child: GestureDetector(
                                                                       onTap: (){
                                                                         Navigator.pop(context);
                                                                       },
                                                                       child: CircleAvatar(
                                                                         radius: 20,
-                                                                        backgroundColor: Color(0xff000000).withOpacity(0.8),
-                                                                        child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                        child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                       ),
                                                                     ),
                                                                   ),
 
-                                                                  SizedBox(height: 10,),
+                                                                  const SizedBox(height: 10,),
 
                                                                   Expanded(
                                                                     child: CarouselSlider(
@@ -534,7 +533,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         ((){
                                                                           if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                             return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                                 autoDispose: false,
                                                                                 aspectRatio: 1,
                                                                               ),
@@ -543,7 +542,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             return CachedNetworkImage(
                                                                               fit: BoxFit.cover,
                                                                               imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                             );
                                                                           }
@@ -563,19 +562,18 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
                                                                       IconButton(
-                                                                        onPressed: () => buttonCarouselController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
-                                                                        icon: Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                        onPressed: () => buttonCarouselController.previousPage(duration:const  Duration(milliseconds: 300), curve: Curves.linear),
+                                                                        icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
                                                                       ),
 
                                                                       IconButton(
-                                                                        onPressed: () => buttonCarouselController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
-                                                                        icon: Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                        onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                        icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
                                                                       ),
                                                                     ],
                                                                   ),
 
-                                                                  SizedBox(height: 85,),
-
+                                                                  const SizedBox(height: 85,),
                                                                 ],
                                                               ),
                                                             ),
@@ -587,9 +585,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   child: ((){
                                                     if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                       return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                           aspectRatio: 16 / 9,
-                                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
                                                         ),
@@ -598,13 +596,13 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       return CachedNetworkImage(
                                                         fit: BoxFit.cover,
                                                         imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       );
                                                     }
                                                   }()),
                                                 ),
-                                                staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                                                 mainAxisSpacing: 4.0,
                                                 crossAxisSpacing: 4.0,
                                               );
@@ -612,7 +610,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               return StaggeredGridView.countBuilder(
                                                 padding: EdgeInsets.zero,
                                                 shrinkWrap: true,
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics: const NeverScrollableScrollPhysics(),
                                                 crossAxisCount: 4,
                                                 itemCount: 3,
                                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
@@ -625,7 +623,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       context: context,
                                                       barrierDismissible: true,
                                                       barrierLabel: 'Dialog',
-                                                      transitionDuration: Duration(milliseconds: 0),
+                                                      transitionDuration: const Duration(milliseconds: 0),
                                                       pageBuilder: (_, __, ___) {
                                                         return Scaffold(
                                                           backgroundColor: Colors.black12.withOpacity(0.7),
@@ -635,20 +633,20 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 children: [
                                                                   Container(
                                                                     alignment: Alignment.centerRight,
-                                                                    padding: EdgeInsets.only(right: 20.0),
+                                                                    padding: const EdgeInsets.only(right: 20.0),
                                                                     child: GestureDetector(
                                                                       onTap: (){
                                                                         Navigator.pop(context);
                                                                       },
                                                                       child: CircleAvatar(
                                                                         radius: 20,
-                                                                        backgroundColor: Color(0xff000000).withOpacity(0.8),
-                                                                        child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
+                                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                        child: const Icon(Icons.close_rounded, color:const  Color(0xffffffff),),
                                                                       ),
                                                                     ),
                                                                   ),
 
-                                                                  SizedBox(height: 10,),
+                                                                  const SizedBox(height: 10,),
 
                                                                   Expanded(
                                                                     child: CarouselSlider(
@@ -657,7 +655,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         ((){
                                                                           if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                             return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
-                                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                                 autoDispose: false,
                                                                                 aspectRatio: 1,
                                                                               ),
@@ -666,7 +664,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             return CachedNetworkImage(
                                                                               fit: BoxFit.cover,
                                                                               imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                             );
                                                                           }
@@ -686,19 +684,18 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
                                                                       IconButton(
-                                                                        onPressed: () => buttonCarouselController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
-                                                                        icon: Icon(Icons.arrow_back_rounded, color: Color(0xffffffff),),
+                                                                        onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                        icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
                                                                       ),
 
                                                                       IconButton(
-                                                                        onPressed: () => buttonCarouselController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.linear),
-                                                                        icon: Icon(Icons.arrow_forward_rounded, color: Color(0xffffffff),),
+                                                                        onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                        icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
                                                                       ),
                                                                     ],
                                                                   ),
 
-                                                                  SizedBox(height: 85,),
-
+                                                                  const SizedBox(height: 85,),
                                                                 ],
                                                               ),
                                                             ),
@@ -711,9 +708,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     if(index != 1){
                                                       return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                       ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                           aspectRatio: 16 / 9,
-                                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
                                                         ),
@@ -721,7 +718,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       : CachedNetworkImage(
                                                         fit: BoxFit.cover,
                                                         imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       );
                                                     }else{
@@ -732,26 +729,26 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               fit: StackFit.expand,
                                                               children: [
                                                                 BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                     aspectRatio: 16 / 9,
-                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                                       showControls: false,
                                                                     ),
                                                                   ),
                                                                 ),
 
-                                                                Container(color: Colors.black.withOpacity(0.5),),
+                                                                Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                                                 Center(
                                                                   child: CircleAvatar(
                                                                     radius: 25,
-                                                                    backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                     child: Text(
                                                                       '${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}',
-                                                                      style: TextStyle(
+                                                                      style: const TextStyle(
                                                                         fontSize: 40,
                                                                         fontWeight: FontWeight.bold,
-                                                                        color: Color(0xffffffff),
+                                                                        color: const Color(0xffffffff),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -765,22 +762,22 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 CachedNetworkImage(
                                                                   fit: BoxFit.cover,
                                                                   imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 ),
 
-                                                                Container(color: Colors.black.withOpacity(0.5),),
+                                                                Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                                                 Center(
                                                                   child: CircleAvatar(
                                                                     radius: 25,
-                                                                    backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                     child: Text(
                                                                       '${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}',
-                                                                      style: TextStyle(
+                                                                      style: const TextStyle(
                                                                         fontSize: 40,
                                                                         fontWeight: FontWeight.bold,
-                                                                        color: Color(0xffffffff),
+                                                                        color: const Color(0xffffffff),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -791,9 +788,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         }else{
                                                           if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                             return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                 aspectRatio: 16 / 9,
-                                                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                                   showControls: false,
                                                                 ),
                                                               ),
@@ -802,7 +799,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             return CachedNetworkImage(
                                                               fit: BoxFit.cover,
                                                               imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             );
                                                           }
@@ -816,25 +813,24 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                           }()),
                                         ),
 
-                                        SizedBox(height: 20),
-
+                                        const SizedBox(height: 20),
                                       ],
                                     )
-                                    : Container(color: Colors.red, height: 0,),
+                                    : Container(color: const Color(0xffff0000), height: 0,),
 
                                     originalPost.data!.almPost.showOriginalPostPostTagged.length != 0
                                     ? Column(
                                       children: [
-                                        SizedBox(height: 10),
+                                        const SizedBox(height: 10),
 
                                         Container(
                                           alignment: Alignment.centerLeft,
-                                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                           child: RichText(
                                             text: TextSpan(
                                               children: [
-                                                TextSpan(
-                                                  style: TextStyle(color: Color(0xff888888)),
+                                                const TextSpan(
+                                                  style: const TextStyle(color: const Color(0xff888888)),
                                                   text: 'with '
                                                 ),
 
@@ -842,7 +838,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   children: List.generate(originalPost.data!.almPost.showOriginalPostPostTagged.length,
                                                     (index) => 
                                                     TextSpan(
-                                                      style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
+                                                      style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
                                                       children: <TextSpan>[
                                                         TextSpan(
                                                           text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
@@ -853,8 +849,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         ),
 
                                                         index < originalPost.data!.almPost.showOriginalPostPostTagged.length - 1
-                                                        ? TextSpan(text: ', ')
-                                                        : TextSpan(text: ''),
+                                                        ? const TextSpan(text: ', ')
+                                                        : const TextSpan(text: ''),
                                                       ],
                                                     ),
                                                   ),
@@ -870,37 +866,34 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                     Container(
                                       height: 40,
-                                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-
                                           Row(
                                             children: [
-                                              FaIcon(FontAwesomeIcons.heart, color: Color(0xff000000),),
+                                              const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff000000),),
 
-                                              SizedBox(width: 10,),
+                                              const SizedBox(width: 10,),
 
-                                              Text('$numberOfLikes', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
-
+                                              Text('$numberOfLikes', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
                                             ],
                                           ),
 
-                                          SizedBox(width: 40,),
+                                          const SizedBox(width: 40,),
 
                                           Row(
                                             children: [
-                                              FaIcon(FontAwesomeIcons.comment, color: Color(0xff000000),),
+                                              const FaIcon(FontAwesomeIcons.comment, color: const Color(0xff000000),),
 
-                                              SizedBox(width: 10,),
+                                              const SizedBox(width: 10,),
 
-                                              Text('$numberOfComments', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+                                              Text('$numberOfComments', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
                                             ],
                                           ),
                                         ],
                                       ),
                                     ),
-
                                   ],
                                 )
                               ),
@@ -926,8 +919,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: <Widget>[
                                                       ListTile(
-                                                        title: Text('Edit'),
-                                                        leading: Icon(Icons.edit),
+                                                        title: const Text('Edit'),
+                                                        leading: const Icon(Icons.edit),
                                                         onTap: () async{
                                                           controller.text = controller.text + comments[i].commentBody;
                                                           await showModalBottomSheet(
@@ -937,8 +930,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         },
                                                       ),
                                                       ListTile(
-                                                        title: Text('Delete'),
-                                                        leading: Icon(Icons.delete),
+                                                        title: const Text('Delete'),
+                                                        leading: const Icon(Icons.delete),
                                                         onTap: () async{  
                                                           context.loaderOverlay.show();
                                                           await apiRegularDeleteComment(commentId: comments[i].commentId);
@@ -978,8 +971,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: <Widget>[
                                                       ListTile(
-                                                        title: Text('Report'),
-                                                        leading: Icon(Icons.edit),
+                                                        title: const Text('Report'),
+                                                        leading: const Icon(Icons.edit),
                                                         onTap: (){
                                                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: 'Post')));
                                                         },
@@ -990,22 +983,22 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               );
                                             }
                                           },
-                                          visualDensity: VisualDensity(vertical: 4.0),
+                                          visualDensity: const VisualDensity(vertical: 4.0),
                                           leading: CircleAvatar(
                                             backgroundImage: NetworkImage(comments[i].image),
-                                            backgroundColor: Color(0xff888888),
+                                            backgroundColor: const Color(0xff888888),
                                           ),
                                           title: Row(
                                             children: [
                                               Expanded(
                                                 child: currentUserId == comments[i].userId && currentAccountType == comments[i].userAccountType
-                                                ? Text('You',
-                                                  style: TextStyle(
+                                                ? const Text('You',
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 )
                                                 : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -1031,8 +1024,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
                                                       }
                                                     }, 
-                                                    icon: commentsLikes[i] == true ? FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),) : FaIcon(FontAwesomeIcons.heart, color: Colors.grey,),
-                                                    label: Text('${commentsNumberOfLikes[i]}', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+                                                    icon: commentsLikes[i] == true ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),) : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
+                                                    label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
                                                   ),
                                                 ),
                                               ),
@@ -1042,33 +1035,31 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                             children: [
                                               Row(
                                                 children: [
-
                                                   Expanded(
                                                     child: Container(
-                                                      padding: EdgeInsets.all(10.0),
+                                                      padding: const EdgeInsets.all(10.0),
                                                       child: Text(
                                                         comments[i].commentBody,
-                                                        style: TextStyle(
-                                                          color: Color(0xffffffff),
+                                                        style: const TextStyle(
+                                                          color: const Color(0xffffffff),
                                                         ),
                                                       ),
-                                                      decoration: BoxDecoration(
-                                                        color: Color(0xff4EC9D4),
-                                                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                      decoration: const BoxDecoration(
+                                                        color: const Color(0xff4EC9D4),
+                                                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                                                       ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
 
-                                              SizedBox(height: 5,),
+                                              const SizedBox(height: 5,),
 
                                               Row(
                                                 children: [
-
                                                   Text(timeago.format(DateTime.parse(comments[i].createdAt))),
 
-                                                  SizedBox(width: 20,),
+                                                  const SizedBox(width: 20,),
 
                                                   GestureDetector(
                                                     onTap: () async{
@@ -1086,19 +1077,19 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         builder: (context) => showKeyboard()
                                                       );
                                                     },
-                                                    child: Text('Reply',),
+                                                    child: const Text('Reply',),
                                                   ),
                                                 ],
                                               ),
 
-                                              SizedBox(height: 20,),
+                                              const SizedBox(height: 20,),
 
                                               comments[i].listOfReplies.length != 0
                                               ? Column(
                                                   children: List.generate(comments[i].listOfReplies.length, (index) => 
                                                   ListTile(
                                                     contentPadding: EdgeInsets.zero,
-                                                    visualDensity: VisualDensity(vertical: 4.0),
+                                                    visualDensity: const VisualDensity(vertical: 4.0),
                                                     onTap: (){
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId, accountType: currentAccountType,)));
                                                     },
@@ -1113,8 +1104,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               mainAxisSize: MainAxisSize.min,
                                                               children: <Widget>[
                                                                 ListTile(
-                                                                  title: Text('Edit'),
-                                                                  leading: Icon(Icons.edit),
+                                                                  title: const Text('Edit'),
+                                                                  leading: const Icon(Icons.edit),
                                                                   onTap: () async{
                                                                     controller.text = controller.text + comments[i].listOfReplies[index].replyBody;
                                                                     await showModalBottomSheet(
@@ -1124,8 +1115,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   },
                                                                 ),
                                                                 ListTile(
-                                                                  title: Text('Delete'),
-                                                                  leading: Icon(Icons.delete),
+                                                                  title: const Text('Delete'),
+                                                                  leading: const Icon(Icons.delete),
                                                                   onTap: () async{  
                                                                     context.loaderOverlay.show();
                                                                     await apiRegularDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
@@ -1165,8 +1156,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               mainAxisSize: MainAxisSize.min,
                                                               children: <Widget>[
                                                                 ListTile(
-                                                                  title: Text('Report'),
-                                                                  leading: Icon(Icons.edit),
+                                                                  title: const Text('Report'),
+                                                                  leading: const Icon(Icons.edit),
                                                                   onTap: (){
                                                                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: 'Post')));
                                                                   },
@@ -1179,19 +1170,19 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     },
                                                     leading: CircleAvatar(
                                                       backgroundImage: NetworkImage(comments[i].listOfReplies[index].image),
-                                                      backgroundColor: Color(0xff888888),
+                                                      backgroundColor: const Color(0xff888888),
                                                     ),
                                                     title: Row(
                                                       children: [
                                                         Expanded(
                                                           child: currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType
-                                                          ? Text('You',
-                                                            style: TextStyle(
+                                                          ? const Text('You',
+                                                            style: const TextStyle(
                                                               fontWeight: FontWeight.bold,
                                                             ),
                                                           )
                                                           : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                               fontWeight: FontWeight.bold,
                                                             ),
                                                           ),
@@ -1217,8 +1208,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
                                                                 }
                                                               }, 
-                                                              icon: repliesLikes[i][index] == true ? FaIcon(FontAwesomeIcons.solidHeart, color: Color(0xffE74C3C),) : FaIcon(FontAwesomeIcons.heart, color: Colors.grey,),
-                                                              label: Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+                                                              icon: repliesLikes[i][index] == true ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),) : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
+                                                              label: Text('${repliesNumberOfLikes[i][index]}', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
                                                             ),
                                                           ),
                                                         ),
@@ -1230,29 +1221,29 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           children: [
                                                             Expanded(
                                                               child: Container(
-                                                                padding: EdgeInsets.all(10.0),
+                                                                padding: const EdgeInsets.all(10.0),
                                                                 child: Text(
                                                                   comments[i].listOfReplies[index].replyBody,
-                                                                  style: TextStyle(
-                                                                    color: Color(0xffffffff),
+                                                                  style: const TextStyle(
+                                                                    color: const Color(0xffffffff),
                                                                   ),
                                                                 ),
-                                                                decoration: BoxDecoration(
-                                                                  color: Color(0xff4EC9D4),
-                                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                                decoration: const BoxDecoration(
+                                                                  color: const Color(0xff4EC9D4),
+                                                                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                                                                 ),
                                                               ),
                                                             ),
                                                           ],
                                                         ),
 
-                                                        SizedBox(height: 5,),
+                                                        const SizedBox(height: 5,),
 
                                                         Row(
                                                           children: [
                                                             Text(timeago.format(DateTime.parse(comments[i].listOfReplies[index].createdAt))),
 
-                                                            SizedBox(width: 40,),
+                                                            const SizedBox(width: 40,),
 
                                                             GestureDetector(
                                                               onTap: () async{
@@ -1272,19 +1263,16 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   builder: (context) => showKeyboard()
                                                                 );
                                                               },
-                                                              child: Text('Reply',),
+                                                              child: const Text('Reply',),
                                                             ),
-
                                                           ],
                                                         ),
-
                                                       ],
                                                     )
                                                   ),
                                                 ),
                                               )
                                               : Container(height: 0,),
-
                                             ],
                                           ),
                                         ),
@@ -1296,28 +1284,26 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-
                                     SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                                     Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                                    SizedBox(height: 45,),
+                                    const SizedBox(height: 45,),
 
-                                    Text('Comment is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+                                    const Text('Comment is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
                                     SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
                                   ],
                                 ),
                               ),
-
                             ],
                           ),
                         ),
                       );
                     }else if(originalPost.hasError){
-                      return MiscRegularErrorMessageTemplate();
+                      return const MiscRegularErrorMessageTemplate();
                     }else{
-                      return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
+                      return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                     }
                   }
                 ),
@@ -1326,10 +1312,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
               isGuestLoggedIn
               ? BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                child: MiscRegularLoginToContinue(),
+                child: const MiscRegularLoginToContinue(),
               )
               : Container(height: 0),
-
             ],
           ),
         ),

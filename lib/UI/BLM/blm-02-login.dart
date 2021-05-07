@@ -77,8 +77,8 @@ class BLMLogin extends StatelessWidget{
 
                       FacebookAuthButton(
                         style: AuthButtonStyle(
-                          splashColor: const Color(0xffffffff),
-                          height: SizeConfig.screenWidth,
+                          height: 44,
+                          width: SizeConfig.screenWidth,
                         ),
                         onPressed: () async{
 
@@ -126,7 +126,6 @@ class BLMLogin extends StatelessWidget{
                                 )
                               );
                             }
-
                           }else{
                             final result = await fb.logIn(permissions: [
                               FacebookPermission.publicProfile,
@@ -141,7 +140,6 @@ class BLMLogin extends StatelessWidget{
 
                             if(result.status != FacebookLoginStatus.cancel){
                               context.loaderOverlay.show();
-                              
                               bool apiResult = await apiBLMSignInWithFacebook(
                                 firstName: '${profile.name}',
                                 lastName: '',

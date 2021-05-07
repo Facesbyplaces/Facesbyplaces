@@ -14,7 +14,7 @@ class RegularShowFriendsSettings{
   final String relationship;
   final int accountType;
 
-  RegularShowFriendsSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.accountType});
+  const RegularShowFriendsSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.accountType});
 }
 
 class HomeRegularPageFriends extends StatefulWidget{
@@ -24,7 +24,7 @@ class HomeRegularPageFriends extends StatefulWidget{
   final bool switchFriends;
   final bool switchFollowers;
 
-  HomeRegularPageFriends({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
+  const HomeRegularPageFriends({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
@@ -54,10 +54,10 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
           });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('No more users to show'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Color(0xff4EC9D4),
+            const SnackBar(
+              content: const Text('No more users to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
             ),
           );
         }
@@ -82,25 +82,24 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
       for(int i = 0; i < newValue.almFriendsList.length; i++){
         friends.add(
           ListTile(
-            leading: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != '' ? CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}')) : CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png'),),
+            leading: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != '' ? CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}')) : const CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: const AssetImage('assets/icons/app-icon.png'),),
             title: Text('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}'),
             subtitle: Text('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsEmail}'),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,
-              textColor: Color(0xffffffff),
-              splashColor: Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
+              splashColor: const Color(0xff04ECFF),
               onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Are you sure you want to remove this user?',
+                    description: const Text('Are you sure you want to remove this user?',
                       textAlign: TextAlign.center,
-                      style: TextStyle(),
                     ),
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
@@ -123,14 +122,13 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
-                        buttonOkColor: Colors.red,
+                        buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
                         },
@@ -142,11 +140,10 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                       builder: (_) => 
                         AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully removed the user from the list.',
+                        description: const Text('Successfully removed the user from the list.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(),
                         ),
                         onlyOkButton: true,
                         onOkButtonPressed: () {
@@ -163,12 +160,12 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                 }
 
               },
-              child: Text('Remove', style: TextStyle(fontSize: 14,),),
+              child: const Text('Remove', style: const TextStyle(fontSize: 14,),),
               height: 40,
-              shape: StadiumBorder(
-                side: BorderSide(color: Color(0xffE74C3C)),
+              shape: const StadiumBorder(
+                side: const BorderSide(color: const Color(0xffE74C3C)),
               ),
-                color: Color(0xffE74C3C),
+              color: const Color(0xffE74C3C),
             ),
           ),
         );
@@ -185,12 +182,12 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff04ECFF),
-        title: Text('Page Friends', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+        backgroundColor: const Color(0xff04ECFF),
+        title: const Text('Page Friends', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, 
-          color: Color(0xffffffff),
+          icon: const Icon(Icons.arrow_back, 
+          color: const Color(0xffffffff),
         ), 
           onPressed: (){
             Navigator.pop(context);
@@ -201,7 +198,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
             onTap: (){
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: false, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
             },
-            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),),
+            child: const Center(child: const Text('Add Friends', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),),
           ),
         ],
       ),
@@ -211,10 +208,10 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            physics: ClampingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
             itemCount: friends.length,
-            separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => friends[i],
           )
         ),
@@ -222,5 +219,3 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
     );
   }
 }
-
-

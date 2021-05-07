@@ -72,7 +72,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
@@ -191,7 +190,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         : ListTile(
           tileColor: const Color(0xffffffff),
           onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
+            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
             if(confirmResult){
 
               context.loaderOverlay.show();
@@ -305,14 +304,12 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                 ),
               ),
 
-
               Switch(
                 value: false,
                 onChanged: (value) => {},
                 activeColor: const Color(0xff2F353D),
                 activeTrackColor: const Color(0xff3498DB),
               ),
-
             ],
           ),
         ),
