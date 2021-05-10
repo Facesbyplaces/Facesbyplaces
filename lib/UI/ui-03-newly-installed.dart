@@ -1,6 +1,8 @@
+import 'package:facesbyplaces/Bloc/bloc-02-bloc-regular-misc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
@@ -9,11 +11,9 @@ class UINewlyInstalled extends StatefulWidget{
   UINewlyInstalledState createState() => UINewlyInstalledState();
 }
 
-class UINewlyInstalledState extends State<UINewlyInstalled>{
+class UINewlyInstalledState extends State<UINewlyInstalled> with TickerProviderStateMixin{
 
-  List<bool> bottomTab = [true, false, false];
   List<Widget> screens = [UINewlyInstalled01(), UINewlyInstalled02(), UINewlyInstalled03()];
-  int currentIndex = 0;
 
   newlyInstalled() async{
     final sharedPrefs = await SharedPreferences.getInstance();
@@ -28,68 +28,36 @@ class UINewlyInstalledState extends State<UINewlyInstalled>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return RepaintBoundary(
-      child: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          backgroundColor: const Color(0xffeeeeee),
-          body: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              children: [
-                Container(
-                  height: SizeConfig.screenHeight,
-                  child: TabBarView(
-                    children: screens,
-                  ),
+    return BlocProvider(
+      create: (BuildContext context) => BlocMiscStartNewlyInstalled(),
+      child: BlocBuilder<BlocMiscStartNewlyInstalled, int>(
+        builder: (context, content){
+          return RepaintBoundary(
+            child: DefaultTabController(
+              length: 3,
+              child: Scaffold(
+                backgroundColor: const Color(0xffeeeeee),
+                body: IndexedStack(
+                  index: content,
+                  children: screens,
                 ),
-
-                Container(
-                  alignment: Alignment.center,
-                  height: 50,
-                  width: 100,
-                  child: TabBar(
-                    isScrollable: false,
-                    labelColor: const Color(0xff04ECFF),
-                    unselectedLabelColor: const Color(0xffCDEAEC),
-                    indicatorColor: const Color(0xff04ECFF),
-                    indicator: BoxDecoration(
-                      color: Colors.transparent
-                    ),
-                    indicatorSize: TabBarIndicatorSize.label,
-                    tabs: [
-                      const Icon(Icons.circle, size: 15,),
-
-                      const Icon(Icons.circle, size: 15,),
-
-                      const Icon(Icons.circle, size: 15,),
-                    ],
-                  ),
-                ),
-
-                MaterialButton(
-                  padding: EdgeInsets.zero,
-                  child: const Text('Next', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
-                  minWidth: 200,
-                  height: 45,
-                  shape: const StadiumBorder(),
-                  color: const Color(0xff04ECFF),
-                  onPressed: (){
-                    Navigator.pushReplacementNamed(context, '/start');
-                  },
-                ),
-
-                const SizedBox(height: 20,),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
 }
 
-class UINewlyInstalled01 extends StatelessWidget{
+class UINewlyInstalled01 extends StatefulWidget{
+
+  UINewlyInstalled01State createState() => UINewlyInstalled01State();
+}
+
+class UINewlyInstalled01State extends State<UINewlyInstalled01>{
+
+  final TabController controller = TabController(initialIndex: 0, length: 3, vsync: UINewlyInstalledState());
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +160,44 @@ class UINewlyInstalled01 extends StatelessWidget{
                   const SizedBox(height: 10,),
 
                   const Text('"If human life were long enough to find the ultimate theory, everything would have been solved by previous generations. Nothing would be left to be discovered."', textAlign: TextAlign.center, style: const TextStyle(color: const Color(0xffffffff),),),
+
+                  Container(
+                    alignment: Alignment.center,
+                    height: 50,
+                    width: 100,
+                    child: TabBar(
+                      controller: controller,
+                      isScrollable: false,
+                      labelColor: const Color(0xff04ECFF),
+                      unselectedLabelColor: const Color(0xffCDEAEC),
+                      indicatorColor: const Color(0xff04ECFF),
+                      indicator: BoxDecoration(
+                        color: Colors.transparent
+                      ),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      tabs: [
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+                      ],
+                    ),
+                  ),
+
+                  MaterialButton(
+                    padding: EdgeInsets.zero,
+                    child: const Text('Next', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                    minWidth: 200,
+                    height: 45,
+                    shape: const StadiumBorder(),
+                    color: const Color(0xff04ECFF),
+                    onPressed: (){
+                      context.read<BlocMiscStartNewlyInstalled>().modify(1);
+                    },
+                  ),
+
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),
@@ -202,7 +208,14 @@ class UINewlyInstalled01 extends StatelessWidget{
   }
 }
 
-class UINewlyInstalled02 extends StatelessWidget{
+class UINewlyInstalled02 extends StatefulWidget{
+
+  UINewlyInstalled02State createState() => UINewlyInstalled02State();
+}
+
+class UINewlyInstalled02State extends State<UINewlyInstalled02>{
+
+  final TabController controller = TabController(initialIndex: 1, length: 3, vsync: UINewlyInstalledState());
 
   @override
   Widget build(BuildContext context) {
@@ -305,6 +318,44 @@ class UINewlyInstalled02 extends StatelessWidget{
                   const SizedBox(height: 10,),
 
                   const Text('"I\'ll do whatever it takes to win games, whether it\'s sitting on a bench waving a towel, handing a cup of water to a teammate, or hitting the game-winning shot."', textAlign: TextAlign.center, style: const TextStyle(color: const Color(0xffffffff),),),
+
+                  Container(
+                    alignment: Alignment.center,
+                    height: 50,
+                    width: 100,
+                    child: TabBar(
+                      controller: controller,
+                      isScrollable: false,
+                      labelColor: const Color(0xff04ECFF),
+                      unselectedLabelColor: const Color(0xffCDEAEC),
+                      indicatorColor: const Color(0xff04ECFF),
+                      indicator: BoxDecoration(
+                        color: Colors.transparent
+                      ),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      tabs: [
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+                      ],
+                    ),
+                  ),
+
+                  MaterialButton(
+                    padding: EdgeInsets.zero,
+                    child: const Text('Next', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                    minWidth: 200,
+                    height: 45,
+                    shape: const StadiumBorder(),
+                    color: const Color(0xff04ECFF),
+                    onPressed: (){
+                      context.read<BlocMiscStartNewlyInstalled>().modify(2);
+                    },
+                  ),
+
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),
@@ -315,7 +366,14 @@ class UINewlyInstalled02 extends StatelessWidget{
   }
 }
 
-class UINewlyInstalled03 extends StatelessWidget{
+class UINewlyInstalled03 extends StatefulWidget{
+
+  UINewlyInstalled03State createState() => UINewlyInstalled03State();
+}
+
+class UINewlyInstalled03State extends State<UINewlyInstalled03>{
+
+  final TabController controller = TabController(initialIndex: 2, length: 3, vsync: UINewlyInstalledState());
 
   @override
   Widget build(BuildContext context) {
@@ -418,6 +476,44 @@ class UINewlyInstalled03 extends StatelessWidget{
                   const SizedBox(height: 10,),
 
                   const Text('"I\'ve been the luckiest man in the world because I\'ve had friends, and to have the right friends is everything: people you can depend on, people who tell you the truth if you ask something."', textAlign: TextAlign.center, style: const TextStyle(color: const Color(0xffffffff),),),
+
+                  Container(
+                    alignment: Alignment.center,
+                    height: 50,
+                    width: 100,
+                    child: TabBar(
+                      controller: controller,
+                      isScrollable: false,
+                      labelColor: const Color(0xff04ECFF),
+                      unselectedLabelColor: const Color(0xffCDEAEC),
+                      indicatorColor: const Color(0xff04ECFF),
+                      indicator: BoxDecoration(
+                        color: Colors.transparent
+                      ),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      tabs: [
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+                      ],
+                    ),
+                  ),
+
+                  MaterialButton(
+                    padding: EdgeInsets.zero,
+                    child: const Text('Next', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                    minWidth: 200,
+                    height: 45,
+                    shape: const StadiumBorder(),
+                    color: const Color(0xff04ECFF),
+                    onPressed: (){
+                      Navigator.pushReplacementNamed(context, '/start');
+                    },
+                  ),
+
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),
@@ -427,3 +523,60 @@ class UINewlyInstalled03 extends StatelessWidget{
     );
   }
 }
+
+
+
+          // body: TabBarView(
+          //   children: screens,
+          // ),
+          // body: BlocProvider(
+          //   create: (BuildContext context) => BlocMiscStartNewlyInstalled(),
+          //   child: BlocBuilder<BlocMiscStartNewlyInstalled, int>(
+          //     builder: (context, content){
+          //       return TabBarView(
+          //         children: screens,
+          //       );
+          //     },
+          //   ),
+          // ),
+
+
+    // return BlocProvider(
+    //   create: (BuildContext context) => BlocMiscStartNewlyInstalled(),
+    //   child: BlocBuilder<BlocMiscStartNewlyInstalled, int>(
+    //     builder: (context, content){
+    //       return RepaintBoundary(
+    //         // child: IndexedStack(
+    //         //       index: content,
+    //         //       children: screens,
+    //         //     ),
+    //         child: DefaultTabController(
+    //           length: 3,
+    //           child: Scaffold(
+    //             backgroundColor: const Color(0xffeeeeee),
+    //             body: Container(
+    //               height: SizeConfig.screenHeight,
+    //               child: TabBarView(
+    //                 children: screens,
+    //               ),
+    //             ),
+    //             // body: Stack(
+    //             //   children: [
+    //             //     Container(
+    //             //       height: SizeConfig.screenHeight,
+    //             //       // child: TabBarView(
+    //             //       //   children: screens,
+    //             //       // ),
+    //             //       child: IndexedStack(
+    //             //         index: content,
+    //             //         children: screens,
+    //             //       ),
+    //             //     ),
+    //             //   ],
+    //             // ),
+    //           ),
+    //         ),
+    //       );
+    //     },
+    //   ),
+    // );

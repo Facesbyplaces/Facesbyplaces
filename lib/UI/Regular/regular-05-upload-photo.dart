@@ -15,16 +15,14 @@ class RegularUploadPhoto extends StatefulWidget{
 
 class RegularUploadPhotoState extends State<RegularUploadPhoto>{
 
-  File? image;
+  ValueNotifier<File> image = ValueNotifier<File>(File(''));
   final picker = ImagePicker();
 
   Future getImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
-      setState(() {
-        image = File(pickedFile.path);
-      });
+      image.value = File(pickedFile.path);
     }
   }
 
@@ -32,15 +30,14 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
     final profilePicture = await picker.getImage(source: ImageSource.camera);
 
     if(profilePicture != null){
-      setState(() {
-        image = File(profilePicture.path);
-      });
+      image.value = File(profilePicture.path);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    print('Upload photo screen build!');
     return RepaintBoundary(
       child: Scaffold(
         backgroundColor: Color(0xffffffff),
@@ -90,30 +87,33 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         flex: 4,
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: image != null
-                          ? Stack(
-                            children: [
-                              Container(color: const Color(0xffffffff),),
+                          child: ValueListenableBuilder(
+                            valueListenable: image,
+                            builder: (_, File imageListener, __) => imageListener.path != ''
+                            ? Stack(
+                              children: [
+                                Container(color: const Color(0xffffffff),),
 
-                              Align(
-                                alignment: Alignment.center, 
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: FileImage(image!),
+                                Align(
+                                  alignment: Alignment.center, 
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: FileImage(image.value),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )
-                          : Stack(
-                            children: [
-                              Container(color: const Color(0xffffffff),),
+                              ],
+                            )
+                            : Stack(
+                              children: [
+                                Container(color: const Color(0xffffffff),),
 
-                              Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
-                            ],
+                                Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -136,7 +136,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
               const SizedBox(height: 80),
 
               MiscRegularButtonTemplate(
-                buttonText: image != null
+                buttonText: image.value.path != ''
                 ? 'Sign Up'
                 : 'Next',
                 buttonTextStyle: const TextStyle(
@@ -148,7 +148,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 height: 45,
                 buttonColor: const Color(0xff04ECFF),
                 onPressed: () async{
-                  if(image != null){
+                  if(image.value.path != ''){
 
                     context.loaderOverlay.show();
                     bool result = await apiRegularUploadPhoto(image: image);

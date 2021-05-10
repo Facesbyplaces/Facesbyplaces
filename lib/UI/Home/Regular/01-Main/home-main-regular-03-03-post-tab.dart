@@ -141,10 +141,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       count = count + newValue.familyMemorialList.length;
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
-        const List<String> newList1 = [];
-        const List<String> newList2 = [];
-        const List<String> newList3 = [];
-        const List<int> newList4 = [];
+        List<String> newList1 = [];
+        List<String> newList2 = [];
+        List<String> newList3 = [];
+        List<int> newList4 = [];
 
         for(int j = 0; j < newValue.familyMemorialList[i].homeTabPostPostTagged.length; j++){
           newList1.add(newValue.familyMemorialList[i].homeTabPostPostTagged[j].homeTabPostTabTaggedFirstName);

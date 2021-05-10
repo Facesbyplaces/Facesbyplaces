@@ -38,9 +38,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async{
 
-  // debugProfileBuildsEnabled = true;
-  // debugRepaintRainbowEnabled = true;
-  // debugRepaintTextRainbowEnabled = true;
+  debugProfileBuildsEnabled = true;
+  debugRepaintRainbowEnabled = true;
+  debugRepaintTextRainbowEnabled = true;
 
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -59,8 +59,8 @@ void main() async{
         overlayOpacity: 0.5,
         overlayColor: Colors.grey,
         child: MaterialApp(
-          // checkerboardRasterCacheImages: true,
-          // showPerformanceOverlay: true,
+          checkerboardRasterCacheImages: true,
+          showPerformanceOverlay: true,
           title: 'Faces by Places',
           home: ((){
             if(newlyInstalled){
@@ -75,6 +75,8 @@ void main() async{
               }
             }
           }()),
+          // home: RegularUploadPhoto(),
+          // home: BLMUploadPhoto(),
           builder: (context, widget) => ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),
             maxWidth: 1200,

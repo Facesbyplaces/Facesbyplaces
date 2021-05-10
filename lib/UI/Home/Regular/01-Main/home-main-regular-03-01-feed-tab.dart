@@ -5,6 +5,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-image-dis
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -95,38 +96,17 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularHomeFeedTab(page: page).onError((error, stackTrace) async{
-        context.loaderOverlay.hide();
-        await showDialog(
-          context: context,
-          builder: (_) => 
-            AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-            entryAnimation: EntryAnimation.DEFAULT,
-            description: const Text('Something went wrong. Please try again.',
-              textAlign: TextAlign.center,
-            ),
-            onlyOkButton: true,
-            buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
-              Navigator.pop(context, true);
-            },
-          )
-        );
-        return Future.error('Error occurred: $error');
-      });
+      var newValue = await apiRegularHomeFeedTab(page: page);
       context.loaderOverlay.hide();
-      
 
       itemRemaining = newValue.almItemsRemaining;
       count = count + newValue.almFamilyMemorialList.length;
 
       for(int i = 0; i < newValue.almFamilyMemorialList.length; i++){
-        const List<String> newList1 = [];
-        const List<String> newList2 = [];
-        const List<String> newList3 = [];
-        const List<int> newList4 = [];
+        List<String> newList1 = [];
+        List<String> newList2 = [];
+        List<String> newList3 = [];
+        List<int> newList4 = [];
         for(int j = 0; j < newValue.almFamilyMemorialList[i].homeTabFeedPostTagged.length; j++){
           newList1.add(newValue.almFamilyMemorialList[i].homeTabFeedPostTagged[j].homeTabFeedTaggedFirstName);
           newList2.add(newValue.almFamilyMemorialList[i].homeTabFeedPostTagged[j].homeTabFeedTaggedLastName);
@@ -170,6 +150,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    print('Feed tab rebuild!');
     return count != 0
     ? RefreshIndicator(
       onRefresh: onRefresh,

@@ -15,16 +15,14 @@ class BLMUploadPhoto extends StatefulWidget{
 
 class BLMUploadPhotoState extends State<BLMUploadPhoto>{
 
-  File? image;
+  ValueNotifier<File> image = ValueNotifier<File>(File(''));
   final picker = ImagePicker();
 
   Future getImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
-      setState(() {
-        image = File(pickedFile.path);
-      });
+      image.value = File(pickedFile.path);
     }
   }
 
@@ -33,7 +31,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
 
     if(profilePicture != null){
       setState(() {
-        image = File(profilePicture.path);
+        image.value = File(profilePicture.path);
       });
     }
   }
@@ -41,6 +39,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    print('Upload photo blm screen build!');
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: SingleChildScrollView(
@@ -81,38 +80,42 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                       flex: 4,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: image != null
-                        ? Stack(
-                          children: [
-                            Container(color: const Color(0xffffffff),),
-                            Align(
-                              alignment: Alignment.center, 
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: FileImage(image!),
+                        child: ValueListenableBuilder(
+                          valueListenable: image,
+                          builder: (_, File imageListener, __) => imageListener.path != ''
+                          ? Stack(
+                            children: [
+                              Container(color: const Color(0xffffffff),),
+
+                              Align(
+                                alignment: Alignment.center, 
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: FileImage(image.value),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )
-                        : Stack(
-                          children: [
-                            Container(color: const Color(0xffffffff),),
+                            ],
+                          )
+                          : Stack(
+                            children: [
+                              Container(color: const Color(0xffffffff),),
 
-                            const Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
-                          ],
+                              Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                     Expanded(
                       child: const Center(
                         child: const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                        textAlign: TextAlign.center,
                           style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300,
+                            fontSize: 18,
                             color: const Color(0xff000000),
                           ),
                         ),
@@ -126,15 +129,15 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
             const SizedBox(height: 80,),
 
             MiscBLMButtonTemplate(
-              buttonText: image != null ? 'Sign Up' : 'Speak Now',
+              buttonText: image.value.path != '' ? 'Sign Up' : 'Speak Now',
               buttonTextStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
               width: SizeConfig.screenWidth! / 2,
               height: 45,
-              buttonColor: image != null
+              buttonColor: image.value.path != ''
               ? const Color(0xff04ECFF)
               : const Color(0xff000000),
               onPressed: () async{
-                if(image != null){
+                if(image.value.path != ''){
 
                   context.loaderOverlay.show();
                   bool result = await apiBLMUploadPhoto(image: image);
