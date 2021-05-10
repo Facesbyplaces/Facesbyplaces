@@ -183,7 +183,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                     MiscBLMButtonTemplate(
                       onPressed: () async{
 
-                        if(_key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
+                        if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
                           await showDialog(
                             context: context,
                             builder: (_) => 
@@ -202,6 +202,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                             )
                           );
                         }else{
+                          print('The precinct is ${_key3.currentState!.controller.text}');
                           Navigator.push(
                             context, MaterialPageRoute(builder: (context) => 
                               HomeBLMCreateMemorial2(

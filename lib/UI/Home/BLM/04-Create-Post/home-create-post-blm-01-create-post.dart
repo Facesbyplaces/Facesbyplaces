@@ -168,7 +168,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   context.loaderOverlay.show();
 
                   Location.LocationData locationData = await location.getLocation();
-                  const List<BLMTaggedPeople> userIds = [];
+                  List<BLMTaggedPeople> userIds = [];
 
                   if(users.length != 0){
                     for(int i = 0; i < users.length; i++){
@@ -181,7 +181,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     }
                   }
 
-                  const List<File> newFiles = [];
+                  List<File> newFiles = [];
                   newFiles.addAll(slideImages);
 
                   APIBLMCreatePost post = APIBLMCreatePost(

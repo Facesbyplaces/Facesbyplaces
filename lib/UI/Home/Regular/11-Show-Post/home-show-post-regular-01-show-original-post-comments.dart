@@ -189,9 +189,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
           var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.almCommentsList[i].showListOfCommentsCommentId, page: page2);
           context.loaderOverlay.hide();
 
-          const List<bool> newRepliesLikes = [];
-          const List<int> newRepliesNumberOfLikes = [];
-          const List<int> newReplyId = [];
+          List<bool> newRepliesLikes = [];
+          List<int> newRepliesNumberOfLikes = [];
+          List<int> newReplyId = [];
 
           for(int j = 0; j < newValue2.almRepliesList.length; j++){
 

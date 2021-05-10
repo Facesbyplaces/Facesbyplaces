@@ -99,10 +99,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
       itemRemaining = newValue.blmItemsRemaining;
       postCount = newValue.blmFamilyMemorialList.length;
 
-      const List<String> newList1 = [];
-      const List<String> newList2 = [];
-      const List<String> newList3 = [];
-      const List<int> newList4 = [];
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
 
       for(int i = 0; i < newValue.blmFamilyMemorialList.length; i++){
         for(int j = 0; j < newValue.blmFamilyMemorialList[i].profilePostPostTagged.length; j++){

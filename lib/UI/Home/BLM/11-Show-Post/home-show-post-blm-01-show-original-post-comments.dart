@@ -193,9 +193,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
           var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.blmCommentsList[i].showListCommentsCommentId, page: page2);
           context.loaderOverlay.hide();
 
-          const List<bool> newRepliesLikes = [];
-          const List<int> newRepliesNumberOfLikes = [];
-          const List<int> newReplyId = [];
+          List<bool> newRepliesLikes = [];
+          List<int> newRepliesNumberOfLikes = [];
+          List<int> newReplyId = [];
 
           for(int j = 0; j < newValue2.blmRepliesList.length; j++){
 

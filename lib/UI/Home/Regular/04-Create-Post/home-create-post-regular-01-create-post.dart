@@ -163,7 +163,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   context.loaderOverlay.show();
 
                   Location.LocationData locationData = await location.getLocation();
-                  const List<RegularTaggedPeople> userIds = [];
+                  List<RegularTaggedPeople> userIds = [];
                   
                   if(users.length != 0){
                     for(int i = 0; i < users.length; i++){
@@ -176,7 +176,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     }
                   }
 
-                  const List<File> newFiles = [];
+                  List<File> newFiles = [];
                   newFiles.addAll(slideImages);
 
                   APIRegularCreatePost post = APIRegularCreatePost(

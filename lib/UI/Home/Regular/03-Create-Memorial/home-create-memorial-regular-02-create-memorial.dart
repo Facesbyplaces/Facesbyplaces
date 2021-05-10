@@ -198,7 +198,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                             )
                           );
                         }else{
-                          const List<File> newFiles = [];
+                          List<File> newFiles = [];
 
                           if(videoFile.path != ''){
                             newFiles.add(videoFile);
