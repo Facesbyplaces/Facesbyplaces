@@ -135,5 +135,11 @@ flutter:
         - asset: assets/fonts/Roboto/Roboto-Thin.ttf
         - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
           style: italic
+    - family: NexaRegular
+      fonts:
+           - asset: assets/fonts/nexa/nexaregular.otf
+    - family: NexaBold
+      fonts:
+           - asset: assets/fonts/nexa/NexaDemo-Bold.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -54,7 +54,8 @@ class PushNotificationService {
       }
     });
 
-    Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    Future<void> _firebaseMessagingBackgroundHandler(
+        RemoteMessage message) async {
       await Firebase.initializeApp();
       print("Handling a background message: ${message.messageId}");
     }
@@ -69,76 +70,128 @@ class PushNotificationService {
   }
 }
 
-class UIGetStarted extends StatefulWidget{
+class UIGetStarted extends StatefulWidget {
   const UIGetStarted();
-  
+
   UIGetStartedState createState() => UIGetStartedState();
 }
 
-class UIGetStartedState extends State<UIGetStarted>{
-
+class UIGetStartedState extends State<UIGetStarted> {
   StreamSubscription<Map>? streamSubscription;
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-  void listenDeepLinkData(){
+  void listenDeepLinkData() {
     print('The start of deep linking');
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
-      if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
-        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
-      }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
-        initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
-      }else if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
+      if ((data.containsKey("+clicked_branch_link") &&
+              data["+clicked_branch_link"] == true) &&
+          (data.containsKey("link-category") &&
+              data["link-category"] == 'Post')) {
+        initUnitSharePost(
+            postId: data['link-post-id'],
+            likeStatus: data['link-like-status'],
+            numberOfLikes: data['link-number-of-likes'],
+            pageType: data['link-type-of-account']);
+      } else if ((data.containsKey("+clicked_branch_link") &&
+              data["+clicked_branch_link"] == true) &&
+          (data.containsKey("link-category") &&
+              data["link-category"] == 'Memorial')) {
+        initUnitShareMemorial(
+            memorialId: data['link-memorial-id'],
+            pageType: data['link-type-of-account'],
+            follower: false);
+      } else if (data.containsKey("+clicked_branch_link") &&
+          data["+clicked_branch_link"] == true) {
         initUnit(resetType: data["reset-type"]);
       }
     }, onError: (error) {
       PlatformException platformException = error as PlatformException;
-      print('InitSession error: ${platformException.code} - ${platformException.message}');
+      print(
+          'InitSession error: ${platformException.code} - ${platformException.message}');
     });
   }
 
-  initUnit({required String resetType}) async{
+  initUnit({required String resetType}) async {
     bool login = await FlutterBranchSdk.isUserIdentified();
 
-    if(login){
+    if (login) {
       var value1 = await FlutterBranchSdk.getLatestReferringParams();
 
-      if(resetType == 'Regular'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
-      }else{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset(resetToken: value1['reset_password_token'],)));
+      if (resetType == 'Regular') {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegularPasswordReset(
+                      resetToken: value1['reset_password_token'],
+                    )));
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BLMPasswordReset(
+                      resetToken: value1['reset_password_token'],
+                    )));
       }
     }
   }
 
-
-  initUnitSharePost({required int postId, required bool likeStatus, required int numberOfLikes, required String pageType}) async{
+  initUnitSharePost(
+      {required int postId,
+      required bool likeStatus,
+      required int numberOfLikes,
+      required String pageType}) async {
     bool login = await FlutterBranchSdk.isUserIdentified();
 
-    if(login){
+    if (login) {
       FlutterBranchSdk.logout();
 
-      if(pageType == 'Blm'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
-      }else{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
+      if (pageType == 'Blm') {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomeBLMShowOriginalPostComments(postId: postId)));
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomeRegularShowOriginalPostComments(postId: postId)));
       }
     }
   }
 
-  initUnitShareMemorial({required int memorialId, required String pageType, required bool follower}) async{
+  initUnitShareMemorial(
+      {required int memorialId,
+      required String pageType,
+      required bool follower}) async {
     bool login = await FlutterBranchSdk.isUserIdentified();
 
-    if(login){
+    if (login) {
       FlutterBranchSdk.logout();
-      if(pageType == 'Blm'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
-      }else{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      if (pageType == 'Blm') {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeBLMMemorialProfile(
+                      memorialId: memorialId,
+                      pageType: pageType,
+                      newJoin: follower,
+                    )));
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeRegularMemorialProfile(
+                      memorialId: memorialId,
+                      pageType: pageType,
+                      newJoin: follower,
+                    )));
       }
     }
   }
 
-  void initState(){
+  void initState() {
     super.initState();
     var newMessage = PushNotificationService(_firebaseMessaging);
     newMessage.initialise();
@@ -154,315 +207,331 @@ class UIGetStartedState extends State<UIGetStarted>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return RepaintBoundary(
-      child: Scaffold(
-        body: Container(
-          height: SizeConfig.screenHeight,
-          child: Stack(
-            children: [
-
-              Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: const AssetImage('assets/icons/background.png'),
-                        colorFilter: const ColorFilter.srgbToLinearGamma(),
-                      ),
-                    ),
-                  ),
-
-                  Stack(
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.black, // this one for android
+      statusBarBrightness: Brightness.dark, // this one for iOS
+    ));
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+          bottom: false,
+          child: Container(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Stack(
                     children: [
-                      Container(
-                        height: SizeConfig.screenHeight! / 2,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: 0,
-                              child: Transform.rotate(
-                                angle: -pi / 30,
-                                child: const MiscStartImageRegularTemplate(),
-                              ),
-                            ),
-                            Positioned(
-                              top: (SizeConfig.screenHeight! / 2) / 4,
-                              child: Transform.rotate(
-                                angle: -pi / 30,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: (SizeConfig.screenHeight! / 2) / 4,
-                              child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
-                            ),
-
-
-                            Positioned(
-                              left: SizeConfig.screenWidth! / 7.5,
-                              child: Transform.rotate(
-                                angle: pi / 30,
-                                child: const MiscStartImageRegularTemplate(),
-                              ),
-                            ),
-                            Positioned(
-                              top: (SizeConfig.screenHeight! / 2) / 4,
-                              left: SizeConfig.screenWidth! / 7.5,
-                              child: Transform.rotate(
-                                angle: 0,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: (SizeConfig.screenHeight! / 2) / 4,
-                              left: SizeConfig.screenWidth! / 7.5,
-                              child: Transform.rotate(
-                                angle: pi / 30,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              left: SizeConfig.screenWidth! / 7.5,
-                              child: Transform.rotate(
-                                angle: -pi / 80,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
-                              ),
-                            ),
-
-
-                            Positioned(
-                              left: SizeConfig.screenWidth! / 3.5,
-                              child: Transform.rotate(
-                                angle: -pi / 30,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
-                              ),
-                            ),
-                            Positioned(
-                              top: (SizeConfig.screenHeight! / 2) / 4,
-                              left: SizeConfig.screenWidth! / 3.5,
-                              child: Transform.rotate(
-                                angle: 0,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: (SizeConfig.screenHeight! / 2) / 4,
-                              left: SizeConfig.screenWidth! / 3.5,
-                              child: Transform.rotate(
-                                angle: pi / 30,
-                                child: const MiscStartImageRegularTemplate(),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              left: SizeConfig.screenWidth! / 3.5,
-                              child: Transform.rotate(
-                                angle: pi / 45,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
-                              ),
-                            ),
-
-
-                            Positioned(
-                              right: SizeConfig.screenWidth! / 3,
-                              child: Transform.rotate(
-                                angle: -pi / 30,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
-                              ),
-                            ),
-                            Positioned(
-                              top: (SizeConfig.screenHeight! / 2) / 4,
-                              right: SizeConfig.screenWidth! / 3,
-                              child: Transform.rotate(
-                                angle: 0,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: (SizeConfig.screenHeight! / 2) / 4,
-                              right: SizeConfig.screenWidth! / 3,
-                              child: Transform.rotate(
-                                angle: pi / 30,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: SizeConfig.screenWidth! / 3,
-                              child: Transform.rotate(
-                                angle: pi / 50,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
-                              ),
-                            ),
-
-
-                            Positioned(
-                              right: SizeConfig.screenWidth! / 4.5,
-                              child: Transform.rotate(
-                                angle: -pi / 30,
-                                child: const MiscStartImageRegularTemplate(),
-                              ),
-                            ),
-                            Positioned(
-                              top: (SizeConfig.screenHeight! / 2) / 4,
-                              right: SizeConfig.screenWidth! / 4.5,
-                              child: Transform.rotate(
-                                angle: 0,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: (SizeConfig.screenHeight! / 2) / 4,
-                              right: SizeConfig.screenWidth! / 4.5,
-                              child: Transform.rotate(
-                                angle: 0,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: SizeConfig.screenWidth! / 4.5,
-                              child: Transform.rotate(
-                                angle: -pi / 50,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
-                              ),
-                            ),
-
-
-                            Positioned(
-                              right: SizeConfig.screenWidth! / 10,
-                              child: Transform.rotate(
-                                angle: -pi / 30,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
-                              ),
-                            ),
-                            Positioned(
-                              top: (SizeConfig.screenHeight! / 2) / 4,
-                              right: SizeConfig.screenWidth! / 10,
-                              child: Transform.rotate(
-                                angle: 0,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: (SizeConfig.screenHeight! / 2) / 4,
-                              right: SizeConfig.screenWidth! / 10,
-                              child: Transform.rotate(
-                                angle: -pi / 12,
-                                child: const MiscStartImageRegularTemplate(),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: SizeConfig.screenWidth! / 10,
-                              child: Transform.rotate(
-                                angle: pi / 30,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
-                              ),
-                            ),
-
-
-                            Positioned(
-                              right: -20,
-                              child: Transform.rotate(
-                                angle: 0,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
-                              ),
-                            ),
-                            Positioned(
-                              top: (SizeConfig.screenHeight! / 2) / 4,
-                              right: -20,
-                              child: Transform.rotate(
-                                angle: -pi / 30,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image7.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: (SizeConfig.screenHeight! / 2) / 4,
-                              right: -20,
-                              child: Transform.rotate(
-                                angle: -pi / 12,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image4.png'),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: -20,
-                              child: Transform.rotate(
-                                angle: 0,
-                                child: const MiscStartImageRegularTemplate(image: 'assets/icons/frontpage-image5.png'),
-                              ),
-                            ),
-
-                          ],
+                      Positioned(
+                        top: 0,
+                        left: SizeConfig.blockSizeHorizontal! * 2,
+                        child: Transform.rotate(
+                          angle: -pi / 30,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image1.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        left: SizeConfig.blockSizeHorizontal! * 20,
+                        child: Transform.rotate(
+                          angle: -50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image5.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: 10,
+                        left: SizeConfig.blockSizeHorizontal! * 35,
+                        child: Transform.rotate(
+                          angle: -50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image2.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        left: SizeConfig.blockSizeHorizontal! * 45,
+                        child: Transform.rotate(
+                          angle: 0,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image3.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        left: SizeConfig.blockSizeHorizontal! * 60,
+                        child: Transform.rotate(
+                          angle: -pi / 30,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image4.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        left: SizeConfig.blockSizeHorizontal! * 80,
+                        child: Transform.rotate(
+                          angle: -pi / 10,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image5.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        left: SizeConfig.blockSizeHorizontal! * 70,
+                        child: Transform.rotate(
+                          angle: 0,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image6.png'),
                         ),
                       ),
 
-                      Column(
-                        children: [
-
-                          Container(
-                            height: SizeConfig.screenHeight! / 2,
-                            child: Image.asset('assets/icons/logo.png', height: 200, width: 200,),
-                          ),
-
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-
-                                const Center(child: const Text('FacesByPlaces.com', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff04ECFF),),),),
-
-                                const SizedBox(height: 20),
-
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: const Center(
-                                    child: const Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations', 
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: 'Roboto',
-                                        color: const Color(0xffffffff),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                                const SizedBox(height: 50),
-
-                                MaterialButton(
-                                  padding: EdgeInsets.zero,
-                                  child: const Text('Get Started', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
-                                  minWidth: 200,
-                                  height: 45,
-                                  shape: const StadiumBorder(),
-                                  color: const Color(0xff04ECFF),
-                                  onPressed: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
-                                  },
-                                ),
-
-                              ],
-                            ),
-                          ),
-                        ],
+                      ///
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 10,
+                        left: SizeConfig.blockSizeHorizontal! * 2,
+                        child: Transform.rotate(
+                          angle: 0,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image7.png'),
+                        ),
                       ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 9,
+                        left: SizeConfig.blockSizeHorizontal! * 20,
+                        child: Transform.rotate(
+                          angle: 0,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image8.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 10,
+                        left: SizeConfig.blockSizeHorizontal! * 35,
+                        child: Transform.rotate(
+                          angle: -pi / 50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image9.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 10,
+                        left: SizeConfig.blockSizeHorizontal! * 50,
+                        child: Transform.rotate(
+                          angle: -pi / 30,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image5.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 10,
+                        left: SizeConfig.blockSizeHorizontal! * 80,
+                        child: Transform.rotate(
+                          angle: -pi / 10,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image1.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 10,
+                        left: SizeConfig.blockSizeHorizontal! * 70,
+                        child: Transform.rotate(
+                          angle: 0,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image2.png'),
+                        ),
+                      ),
+
+                      ///
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 20,
+                        left: SizeConfig.blockSizeHorizontal! * 2,
+                        child: Transform.rotate(
+                          angle: 0,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image9.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 20,
+                        left: SizeConfig.blockSizeHorizontal! * 20,
+                        child: Transform.rotate(
+                          angle: -50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image8.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 20,
+                        left: SizeConfig.blockSizeHorizontal! * 35,
+                        child: Transform.rotate(
+                          angle: -pi / 50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image7.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 20,
+                        left: SizeConfig.blockSizeHorizontal! * 50,
+                        child: Transform.rotate(
+                          angle: -pi / 30,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image6.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 20,
+                        left: SizeConfig.blockSizeHorizontal! * 80,
+                        child: Transform.rotate(
+                          angle: -pi / 40,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image5.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 20,
+                        left: SizeConfig.blockSizeHorizontal! * 70,
+                        child: Transform.rotate(
+                          angle: -pi / 50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image4.png'),
+                        ),
+                      ),
+
+                      ///
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 30,
+                        left: SizeConfig.blockSizeHorizontal! * 2,
+                        child: Transform.rotate(
+                          angle: 0,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image7.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 30,
+                        left: SizeConfig.blockSizeHorizontal! * 20,
+                        child: Transform.rotate(
+                          angle: -50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image6.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 30,
+                        left: SizeConfig.blockSizeHorizontal! * 35,
+                        child: Transform.rotate(
+                          angle: -pi / 50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image4.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 30,
+                        left: SizeConfig.blockSizeHorizontal! * 50,
+                        child: Transform.rotate(
+                          angle: -pi / 30,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image5.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 30,
+                        left: SizeConfig.blockSizeHorizontal! * 80,
+                        child: Transform.rotate(
+                          angle: -pi / 40,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image3.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: SizeConfig.blockSizeVertical! * 30,
+                        left: SizeConfig.blockSizeHorizontal! * 70,
+                        child: Transform.rotate(
+                          angle: -pi / 50,
+                          child: const MiscStartImageRegularTemplate(
+                              image: 'assets/icons/frontpage-image2.png'),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: SizeConfig.blockSizeVertical! * 5,
+                        left: SizeConfig.blockSizeHorizontal! * 30,
+                        child: Image.asset(
+                          'assets/icons/logo.png',
+                          height: 200,
+                          width: 200,
+                        ),
+                      )
                     ],
                   ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+                ),
+                Container(
+                  height: SizeConfig.blockSizeVertical! * 54,
+                  decoration: const BoxDecoration(
+                    image: const DecorationImage(
+                      fit: BoxFit.fill,
+                      image: const AssetImage('assets/icons/background.png'),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: SizeConfig.blockSizeVertical! * 3),
+                      Center(
+                        child: const Text(
+                          'FacesByPlaces.com',
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff04ECFF),
+                              fontFamily: 'NexaBold'),
+                        ),
+                      ),
+                      SizedBox(height: SizeConfig.blockSizeVertical! * 3),
+                      Container(
+                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! *13, right: SizeConfig.blockSizeHorizontal! * 13),
+                        child: const Center(
+                          child: const Text(
+                            'Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'NexaRegular',
+                              color: const Color(0xffffffff),
+                              height: 1.5,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(),
+                      ),
+                      MaterialButton(
+                        padding: EdgeInsets.zero,
+                        child: const Text(
+                          'Get Started',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: const Color(0xffffffff),
+                            fontFamily: 'NexaBold'
+                          ),
+                        ),
+                        minWidth: SizeConfig.blockSizeHorizontal! * 90,
+                        height: 45,
+                        shape: const StadiumBorder(),
+                        color: const Color(0xff04ECFF),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const UILogin01()));
+                        },
+                      ),
+                      SizedBox(height: SizeConfig.blockSizeVertical! * 4),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }
