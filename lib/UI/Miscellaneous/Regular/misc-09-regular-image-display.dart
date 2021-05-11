@@ -22,7 +22,8 @@ class MiscRegularImageDisplayFeedTemplate extends StatelessWidget{
       child: CircleAvatar(
         radius: frontSize,
         backgroundColor: Colors.transparent,
-        backgroundImage: AssetImage(image),
+        foregroundImage: AssetImage(image),
+        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
       ),
     );
   }

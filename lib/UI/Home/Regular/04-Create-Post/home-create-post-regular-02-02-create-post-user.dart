@@ -170,12 +170,13 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                   ? CircleAvatar(
                     maxRadius: 40,
                     backgroundColor: const Color(0xff888888),
-                    backgroundImage: NetworkImage(users[i].image),
+                    foregroundImage: NetworkImage(users[i].image),
+                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                   )
                   : const CircleAvatar(
                     maxRadius: 40,
                     backgroundColor: const Color(0xff888888),
-                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                    foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                   ),
                   title: Text(users[i].firstName + ' ' + users[i].lastName,),
                   subtitle: Text(users[i].email, style: const TextStyle(fontSize: 12, color: const Color(0xff888888),),),

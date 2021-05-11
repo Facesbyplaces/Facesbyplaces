@@ -96,12 +96,14 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
   void initState(){
     super.initState();
+    // print("BLM rebuild for ${widget.key.toString()}");
     likePost = likeStatus;
     likesCount = numberOfLikes;
   }
 
   @override
   Widget build(BuildContext context){
+    // print('BLM post screen rebuild!');
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
@@ -148,11 +150,12 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     child: profileImage != null
                     ? CircleAvatar(
                       backgroundColor: const Color(0xff888888), 
-                      backgroundImage: NetworkImage(profileImage),
+                      foregroundImage: NetworkImage(profileImage),
+                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                     )
                     : const CircleAvatar(
                       backgroundColor: const Color(0xff888888), 
-                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
                   Expanded(

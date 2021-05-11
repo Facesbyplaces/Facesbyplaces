@@ -93,7 +93,18 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
         height: 80,
         color: const Color(0xffffffff),
         child: ListTile(
-          leading: image != '' ? CircleAvatar(radius: 30, backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage(image)) : const CircleAvatar(radius: 30, backgroundColor: const Color(0xff888888), backgroundImage: const AssetImage('assets/icons/app-icon.png')),
+          leading: image != '' 
+          ? CircleAvatar(
+            radius: 30, 
+            backgroundColor: const Color(0xff888888), 
+            foregroundImage: NetworkImage(image),
+            backgroundImage: const AssetImage('assets/icons/app-icon.png',),
+          ) 
+          : const CircleAvatar(
+            radius: 30, 
+            backgroundColor: const Color(0xff888888), 
+            foregroundImage: const AssetImage('assets/icons/app-icon.png',),
+          ),
           title: Text(memorialName,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,

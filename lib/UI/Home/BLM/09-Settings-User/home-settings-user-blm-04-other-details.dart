@@ -114,7 +114,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHideBirthdate(hide: toggle1);
                             },
-                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            icon: toggle1 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
                             color: toggle1 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
@@ -136,7 +136,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHideBirthplace(hide: toggle2);
                             },
-                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            icon: toggle2 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
                             color: toggle2 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
@@ -158,7 +158,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHideAddress(hide: toggle3);
                             },
-                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            icon: toggle3 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
                             color: toggle3 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
@@ -180,7 +180,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHideEmail(hide: toggle4);
                             },
-                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            icon: toggle4 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
                             color: toggle4 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
@@ -202,7 +202,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHidePhoneNumber(hide: toggle5);
                             },
-                            icon: const Icon(Icons.remove_red_eye_rounded),
+                            icon: toggle5 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
                             color: toggle5 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],

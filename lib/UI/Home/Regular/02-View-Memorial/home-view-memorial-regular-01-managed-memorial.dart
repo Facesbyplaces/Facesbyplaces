@@ -99,10 +99,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
       itemRemaining = newValue.almItemsRemaining;
       postCount = newValue.almFamilyMemorialList.length;
 
-      const List<String> newList1 = [];
-      const List<String> newList2 = [];
-      const List<String> newList3 = [];
-      const List<int> newList4 = [];
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
 
       for(int i = 0; i < newValue.almFamilyMemorialList.length; i++){
         for(int j = 0; j < newValue.almFamilyMemorialList[i].homeProfilePostTagged.length; j++){
@@ -896,12 +896,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           ? CircleAvatar(
                                             radius: 100,
                                             backgroundColor: const Color(0xff888888),
-                                            backgroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                            foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                           )
                                           : const CircleAvatar(
                                             radius: 100,
                                             backgroundColor: const Color(0xff888888),
-                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                            foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                           )
                                         ),
                                       ),

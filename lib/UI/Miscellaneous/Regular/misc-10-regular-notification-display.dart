@@ -49,11 +49,12 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
       leading: imageIcon != ''
       ? CircleAvatar(
         backgroundColor: const Color(0xff888888), 
-        backgroundImage: NetworkImage(imageIcon),
+        foregroundImage: NetworkImage(imageIcon),
+        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
       )
       : const CircleAvatar(
         backgroundColor: const Color(0xff888888), 
-        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+        foregroundImage: const AssetImage('assets/icons/app-icon.png'),
       ),
       title: Text(notification, style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 16),),
       subtitle: Text(dateCreated),

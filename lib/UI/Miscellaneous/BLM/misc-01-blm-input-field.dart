@@ -160,7 +160,7 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
     return InputDecorator(
       decoration: const InputDecoration(
         alignLabelWithHint: true,
-        labelText: 'Security Question',
+        labelText: 'Relationship',
         labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
@@ -222,7 +222,7 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
     return InputDecorator(
       decoration: const InputDecoration(
         alignLabelWithHint: true,
-        labelText: 'Relationship',
+        labelText: 'Security Question',
         labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(

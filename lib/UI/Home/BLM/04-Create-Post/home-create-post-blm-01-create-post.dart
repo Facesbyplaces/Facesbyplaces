@@ -168,7 +168,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   context.loaderOverlay.show();
 
                   Location.LocationData locationData = await location.getLocation();
-                  const List<BLMTaggedPeople> userIds = [];
+                  List<BLMTaggedPeople> userIds = [];
 
                   if(users.length != 0){
                     for(int i = 0; i < users.length; i++){
@@ -181,7 +181,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     }
                   }
 
-                  const List<File> newFiles = [];
+                  List<File> newFiles = [];
                   newFiles.addAll(slideImages);
 
                   APIBLMCreatePost post = APIBLMCreatePost(
@@ -271,11 +271,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   value.image != ''
                                   ? CircleAvatar(
                                     backgroundColor: const Color(0xff888888),
-                                    backgroundImage: NetworkImage(value.image),
+                                    foregroundImage: NetworkImage(value.image),
+                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                   )
                                   : const CircleAvatar(
                                     backgroundColor: const Color(0xff888888),
-                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                    foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                   ),
 
                                   const SizedBox(width: 20,),

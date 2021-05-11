@@ -18,6 +18,7 @@ import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-r
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-11-regular-dropdown.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -189,9 +190,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
           var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.almCommentsList[i].showListOfCommentsCommentId, page: page2);
           context.loaderOverlay.hide();
 
-          const List<bool> newRepliesLikes = [];
-          const List<int> newRepliesNumberOfLikes = [];
-          const List<int> newReplyId = [];
+          List<bool> newRepliesLikes = [];
+          List<int> newRepliesNumberOfLikes = [];
+          List<int> newReplyId = [];
 
           for(int j = 0; j < newValue2.almRepliesList.length; j++){
 
@@ -332,11 +333,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                             child: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != ''
                                             ? CircleAvatar(
                                               backgroundColor: const Color(0xff888888),
-                                              backgroundImage: NetworkImage(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage),
+                                              foregroundImage: NetworkImage(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage),
+                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                             )
                                             : const CircleAvatar(
                                               backgroundColor: const Color(0xff888888),
-                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                             )
                                           ),
                                           Expanded(
@@ -444,7 +446,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                       return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                                         betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                          aspectRatio: 1,
+                                                                          deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                          aspectRatio: 16 / 9,
                                                                         ),
                                                                       );
                                                                     }else{
@@ -534,8 +537,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                           if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                             return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                 autoDispose: false,
-                                                                                aspectRatio: 1,
+                                                                                aspectRatio: 16 / 9,
                                                                               ),
                                                                             );
                                                                           }else{
@@ -656,8 +660,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                           if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                             return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                 autoDispose: false,
-                                                                                aspectRatio: 1,
+                                                                                aspectRatio: 16 / 9,
                                                                               ),
                                                                             );
                                                                           }else{
@@ -985,8 +990,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                           },
                                           visualDensity: const VisualDensity(vertical: 4.0),
                                           leading: CircleAvatar(
-                                            backgroundImage: NetworkImage(comments[i].image),
                                             backgroundColor: const Color(0xff888888),
+                                            foregroundImage: NetworkImage(comments[i].image),
+                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                           ),
                                           title: Row(
                                             children: [
@@ -1169,8 +1175,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       }
                                                     },
                                                     leading: CircleAvatar(
-                                                      backgroundImage: NetworkImage(comments[i].listOfReplies[index].image),
                                                       backgroundColor: const Color(0xff888888),
+                                                      foregroundImage: NetworkImage(comments[i].listOfReplies[index].image),
+                                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                                     ),
                                                     title: Row(
                                                       children: [
@@ -1333,11 +1340,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
             currentUserImage != ''
             ? CircleAvatar(
               backgroundColor: Color(0xff888888),
-              backgroundImage: NetworkImage(currentUserImage),
+              foregroundImage: NetworkImage(currentUserImage),
+              backgroundImage: AssetImage('assets/icons/app-icon.png'),
             )
             : CircleAvatar(
               backgroundColor: Color(0xff888888),
-              backgroundImage: AssetImage('assets/icons/app-icon.png'),
+              foregroundImage: AssetImage('assets/icons/app-icon.png'),
             ),
 
             Expanded(
@@ -1467,7 +1475,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
             
             CircleAvatar(
               backgroundColor: Color(0xff888888), 
-              backgroundImage: NetworkImage(currentUserImage),
+              foregroundImage: NetworkImage(currentUserImage),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
             ),
 
             Expanded(

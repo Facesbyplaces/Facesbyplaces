@@ -67,8 +67,8 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
     required this.imagesOrVideos,
   });
 
-  File? backgroundImage;
-  File? profileImage;
+  File backgroundImage = File('');
+  File profileImage = File('');
   final picker = ImagePicker();
   List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
   int backgroundImageToggle = 0;
@@ -129,9 +129,9 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: backgroundImage != null
-                      ? AssetImage(backgroundImage!.path)
-                      : const AssetImage('assets/icons/profile_post1.png'),
+                      image: backgroundImage != File('')
+                      ? AssetImage(backgroundImage.path)
+                      : const AssetImage('assets/icons/alm-background1.png'),
                     ),
                   ),
                   child: Stack(
@@ -147,11 +147,15 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                             backgroundColor: const Color(0xffffffff),
                             child: Padding(
                               padding: const EdgeInsets.all(5),
-                              child: CircleAvatar(
+                              child: profileImage.path != ''
+                              ? CircleAvatar(
                                 radius: 60,
-                                backgroundImage: profileImage != null
-                                ? AssetImage(profileImage!.path)
-                                : const AssetImage('assets/icons/cover-icon.png'),
+                                foregroundImage: FileImage(profileImage),
+                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                              )
+                              : const CircleAvatar(
+                                radius: 60,
+                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                               ),
                             ),
                           ),
@@ -339,7 +343,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                       }
                     }else{
 
-                      if(profileImage == null){
+                      if(profileImage.path == ''){
                         final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
                         final Uint8List list = bytes.buffer.asUint8List();
 

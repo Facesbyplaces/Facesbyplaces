@@ -98,10 +98,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
       itemRemaining = newValue.blmItemsRemaining;
       postCount = newValue.blmFamilyMemorialList.length;
 
-      const List<String> newList1 = [];
-      const List<String> newList2 = [];
-      const List<String> newList3 = [];
-      const List<int> newList4 = [];
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
 
       for(int i = 0; i < newValue.blmFamilyMemorialList.length; i++){
         for(int j = 0; j < newValue.blmFamilyMemorialList[i].profilePostPostTagged.length; j++){
@@ -306,7 +306,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                 child: const CircleAvatar(
                                                   radius: 10,
                                                   backgroundColor: Colors.transparent,
-                                                  backgroundImage: const AssetImage('assets/icons/fist.png'),
+                                                  foregroundImage: const AssetImage('assets/icons/fist.png'),
                                                 ),
                                               ),
                                               label: Text('${profile.data!.blmMemorial.memorialFollowersCount}',
@@ -994,12 +994,13 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                 ? CircleAvatar(
                                                   radius: 100,
                                                   backgroundColor: const Color(0xff888888),
-                                                  backgroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
+                                                  foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
+                                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                                 )
                                                 : const CircleAvatar(
                                                   radius: 100,
                                                   backgroundColor: const Color(0xff888888),
-                                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                  foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                                 )
                                               ),
                                             ),

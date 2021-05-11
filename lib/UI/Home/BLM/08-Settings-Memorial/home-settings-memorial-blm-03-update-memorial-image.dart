@@ -110,7 +110,12 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                         height: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
+                          image: backgroundImage.path != ''
+                          ? DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('${backgroundImage.path}'),
+                          )
+                          : DecorationImage(
                             fit: BoxFit.cover,
                             image: CachedNetworkImageProvider('${memorialImageSettings.data!.blmMemorial.showPageImagesBackgroundImage}')
                           ),
@@ -132,12 +137,14 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     ? CircleAvatar(
                                       radius: 120,
                                       backgroundColor: const Color(0xff888888),
-                                      backgroundImage: AssetImage(profileImage.path),
+                                      foregroundImage: AssetImage(profileImage.path),
+                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                     )
                                     : CircleAvatar(
                                       radius: 120,
                                       backgroundColor: const Color(0xff888888),
-                                      backgroundImage: NetworkImage(memorialImageSettings.data!.blmMemorial.showPageImagesProfileImage),
+                                      foregroundImage: NetworkImage(memorialImageSettings.data!.blmMemorial.showPageImagesProfileImage),
+                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                     ),
                                   ),
                                 ),
@@ -292,7 +299,6 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
-
                           if(profileImage.path != '' || backgroundImage.path != ''){
                             context.loaderOverlay.show();
                             bool result = await apiBLMUpdatePageImages(memorialId: memorialId, backgroundImage: backgroundImage, profileImage: profileImage);

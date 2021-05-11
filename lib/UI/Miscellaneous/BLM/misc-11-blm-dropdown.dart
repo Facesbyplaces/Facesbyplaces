@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc-blm-misc.dart';
+import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';

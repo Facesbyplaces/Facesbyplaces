@@ -25,8 +25,6 @@ Future<String> apiBLMLeavePage({required int memorialId}) async{
 
   Dio dioRequest = Dio();
 
-  print('The memorial id is $memorialId');
-
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/relationship/leave',
     options: Options(
       followRedirects: false,
@@ -42,7 +40,7 @@ Future<String> apiBLMLeavePage({required int memorialId}) async{
     ),  
   );
 
-  print('The status code of blm leave page is ${response.statusCode}');
+  // print('The status code of blm leave page is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return result;

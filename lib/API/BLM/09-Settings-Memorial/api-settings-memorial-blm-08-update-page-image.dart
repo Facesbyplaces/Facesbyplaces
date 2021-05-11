@@ -11,12 +11,12 @@ Future<bool> apiBLMUpdatePageImages({required int memorialId, required dynamic b
   Dio dioRequest = Dio();
   FormData formData = FormData.fromMap({});
 
-  if(backgroundImage != null){
+  if(backgroundImage.path != ''){
     var file = await MultipartFile.fromFile(backgroundImage.path, filename: backgroundImage.path);
     formData.files.add(MapEntry('backgroundImage', file));
   }
   
-  if(profileImage != null){
+  if(profileImage.path != ''){
     var file = await MultipartFile.fromFile(profileImage.path, filename: profileImage.path);
     formData.files.add(MapEntry('profileImage', file));
   }

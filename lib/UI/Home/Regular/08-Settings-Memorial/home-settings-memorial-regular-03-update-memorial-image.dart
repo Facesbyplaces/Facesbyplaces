@@ -51,6 +51,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
       setState(() {
         backgroundImage = File(pickedFile.path);
       });
+      print('Success');
     }
   }
 
@@ -136,12 +137,14 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     ? CircleAvatar(
                                       radius: 120,
                                       backgroundColor: const Color(0xff888888),
-                                      backgroundImage: AssetImage(profileImage.path),
+                                      foregroundImage: AssetImage(profileImage.path),
+                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                     )
                                     : CircleAvatar(
                                       radius: 120,
                                       backgroundColor: const Color(0xff888888),
-                                      backgroundImage: NetworkImage(memorialImageSettings.data!.almMemorial.showPageImagesProfileImage),
+                                      foregroundImage: NetworkImage(memorialImageSettings.data!.almMemorial.showPageImagesProfileImage),
+                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                     ),
                                   ),
                                 ),
@@ -226,6 +229,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                       backgroundImageToggle = index;
                                       backgroundImage = file;
                                     });
+
                                   },
                                   child: backgroundImageToggle == index
                                   ? Container(
@@ -317,7 +321,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                   },
                                 )
                               );
-                              Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage));
+                              Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.almMemorial.showPageImagesRelationship));
                               Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
                             }else{
                               await showDialog(

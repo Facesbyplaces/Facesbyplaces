@@ -202,7 +202,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                             )
                           );
                         }else{
-                          const List<File> newFiles = [];
+                          List<File> newFiles = [];
 
                           if(videoFile.path != ''){
                             newFiles.add(videoFile);

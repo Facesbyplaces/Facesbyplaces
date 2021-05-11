@@ -18,6 +18,7 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-bl
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-dropdown.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -193,9 +194,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
           var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.blmCommentsList[i].showListCommentsCommentId, page: page2);
           context.loaderOverlay.hide();
 
-          const List<bool> newRepliesLikes = [];
-          const List<int> newRepliesNumberOfLikes = [];
-          const List<int> newReplyId = [];
+          List<bool> newRepliesLikes = [];
+          List<int> newRepliesNumberOfLikes = [];
+          List<int> newReplyId = [];
 
           for(int j = 0; j < newValue2.blmRepliesList.length; j++){
 
@@ -337,11 +338,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                             child: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage != ''
                                             ? CircleAvatar(
                                               backgroundColor: const Color(0xff888888),
-                                              backgroundImage: NetworkImage(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage),
+                                              foregroundImage: NetworkImage(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage),
+                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                             )
                                             : const CircleAvatar(
                                               backgroundColor: const Color(0xff888888),
-                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                             )
                                           ),
                                           Expanded(
@@ -449,7 +451,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                     if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                       return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
                                                                         betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                          aspectRatio: 1,
+                                                                          deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                          aspectRatio: 16 / 9,
                                                                         ),
                                                                       );
                                                                     }else{
@@ -540,8 +543,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                             return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                 autoDispose: false,
-                                                                                aspectRatio: 1,
+                                                                                aspectRatio: 16 / 9,
                                                                               ),
                                                                             );
                                                                           }else{
@@ -662,8 +666,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                             return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                 autoDispose: false,
-                                                                                aspectRatio: 1,
+                                                                                aspectRatio: 16 / 9,
                                                                               ),
                                                                             );
                                                                           }else{
@@ -995,8 +1000,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                           },
                                           visualDensity: const VisualDensity(vertical: 4.0),
                                           leading: CircleAvatar(
-                                            backgroundImage: NetworkImage(comments[i].image),
                                             backgroundColor: const Color(0xff888888),
+                                            foregroundImage: NetworkImage(comments[i].image),
+                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                           ),
                                           title: Row(
                                             children: [
@@ -1180,8 +1186,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       }
                                                     },
                                                     leading: CircleAvatar(
-                                                      backgroundImage: NetworkImage(comments[i].listOfReplies[index].image),
                                                       backgroundColor: const Color(0xff888888),
+                                                      foregroundImage: NetworkImage(comments[i].listOfReplies[index].image),
+                                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                                     ),
                                                     title: Row(
                                                       children: [
@@ -1346,7 +1353,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
             
             CircleAvatar(
               backgroundColor: const Color(0xff888888),
-              backgroundImage: NetworkImage(currentUserImage),
+              foregroundImage: NetworkImage(currentUserImage),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
             ),
 
             Expanded(
@@ -1475,7 +1483,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
             
             CircleAvatar(
               backgroundColor: const Color(0xff888888), 
-              backgroundImage: NetworkImage(currentUserImage),
+              foregroundImage: NetworkImage(currentUserImage),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
             ),
 
             Expanded(

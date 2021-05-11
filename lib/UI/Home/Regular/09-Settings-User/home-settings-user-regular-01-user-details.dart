@@ -257,12 +257,14 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                 ? CircleAvatar(
                                   radius: 120,
                                   backgroundColor: const Color(0xff888888),
-                                  backgroundImage: AssetImage(profileImage.path),
+                                  foregroundImage: AssetImage(profileImage.path),
+                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                 )
                                 : CircleAvatar(
                                   radius: 120,
                                   backgroundColor: const Color(0xff888888),
-                                  backgroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                  foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                 ),
                                 const Positioned(
                                   top: 0,

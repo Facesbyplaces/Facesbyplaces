@@ -61,48 +61,20 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
   MiscRegularPostState({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, required this.memorialName, this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 
-  BranchUniversalObject? buo;
-  BranchLinkProperties? lp;
-
   bool likePost = false;
-  bool pressedLike = false;
+  // bool pressedLike = false;
   int likesCount = 0;
-
-  void initBranchShare(){
-
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Share', 'Link'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Post')
-        ..addCustomMetadata('link-post-id', postId)
-        ..addCustomMetadata('link-like-status', likePost)
-        ..addCustomMetadata('link-number-of-likes', likesCount)
-        ..addCustomMetadata('link-type-of-account', 'Memorial')
-    );
-
-    lp = BranchLinkProperties(
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
-
 
   void initState(){
     super.initState();
+    // print("Regular rebuild for ${widget.key.toString()}");
     likePost = likeStatus;
     likesCount = numberOfLikes;
   }
 
   @override
   Widget build(BuildContext context){
+    // print('Regular post screen rebuild!');
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
@@ -143,7 +115,16 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                 }
               },
               contentPadding: EdgeInsets.zero,
-              leading: profileImage != '' ? CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage(profileImage)) : const CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: const AssetImage('assets/icons/app-icon.png')),
+              leading: profileImage != '' 
+              ? CircleAvatar(
+                backgroundColor: const Color(0xff888888), 
+                foregroundImage: NetworkImage(profileImage),
+                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+              ) 
+              : const CircleAvatar(
+                backgroundColor: const Color(0xff888888), 
+                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+              ),
               title: Text(memorialName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
               subtitle: Text(timeCreated, maxLines: 1, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xffaaaaaa),),),
               trailing: MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: pageType,),
@@ -206,10 +187,10 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       likePost = !likePost;
 
                       if(likePost == true){
-                        pressedLike = true;
+                        // pressedLike = true;
                         likesCount++;
                       }else{
-                        pressedLike = false;
+                        // pressedLike = false;
                         likesCount--;
                       }
                     });
@@ -237,19 +218,41 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                   splashColor: Colors.transparent,
                   icon: const CircleAvatar(backgroundColor: const Color(0xff4EC9D4), child: const Icon(Icons.share_rounded, color: const Color(0xffffffff)),),
                   onPressed: () async{
-                    initBranchShare();
+                    
+                    BranchUniversalObject buo = BranchUniversalObject(
+                      canonicalIdentifier: 'FacesbyPlaces',
+                      title: 'FacesbyPlaces Link',
+                      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+                      contentDescription: 'FacesbyPlaces link to the app',
+                      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+                      publiclyIndex: true,
+                      locallyIndex: true,
+                      contentMetadata: BranchContentMetaData()
+                        ..addCustomMetadata('link-category', 'Post')
+                        ..addCustomMetadata('link-post-id', postId)
+                        ..addCustomMetadata('link-like-status', likePost)
+                        ..addCustomMetadata('link-number-of-likes', likesCount)
+                        ..addCustomMetadata('link-type-of-account', 'Memorial')
+                    );
+
+                    BranchLinkProperties lp = BranchLinkProperties(
+                        feature: 'sharing',
+                        stage: 'new share',
+                      tags: ['one', 'two', 'three']
+                    );
+                    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
 
                     FlutterBranchSdk.setIdentity('alm-share-link');
 
                     BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                      buo: buo!,
-                      linkProperties: lp!,
+                      buo: buo,
+                      linkProperties: lp,
                       messageText: 'FacesbyPlaces App',
                       androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
                       androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
                     );
 
-                    if (response.success) {
+                    if(response.success){
                       await showDialog(
                         context: context,
                         builder: (_) => 
@@ -266,18 +269,16 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                           },
                         )
                       );
-                    } else {
+                    }else{
                       FlutterBranchSdk.logout();
                     }
                   },
                 ),
               ],
             ),
-
           ],
         ),
       ),
     );
   }
 }
-
