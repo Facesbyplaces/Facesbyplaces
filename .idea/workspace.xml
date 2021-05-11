@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21a8e94f-f08b-4f73-a167-e3ca3beff417" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/fonts/nexa/NexaDemo-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/nexa/NexaDemo-Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/nexa/NexaTextDemo-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/nexa/NexaTextDemo-Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/nexa/nexaregular.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/frontpage-image1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/frontpage-image2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/frontpage-image6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/frontpage-image8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/frontpage-image9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/GoogleService-Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/icons/background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/heart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/join1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/join2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/join3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/join4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/join5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/join6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/join7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/fist.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/icons/fist.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/BLM/blm-01-join.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/BLM/blm-01-join.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/UI/ui-01-get-started.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/ui-01-get-started.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/ui-02-login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/ui-02-login.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +43,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/fonts/nexa" />
       <recent name="$PROJECT_DIR$/assets/icons" />
+      <recent name="$PROJECT_DIR$/assets/fonts/nexa" />
       <recent name="$PROJECT_DIR$/assets/fonts" />
     </key>
   </component>
@@ -82,22 +81,22 @@
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
     <state x="997" y="106" width="1269" height="777" key="AVDManager/0.23.1920.1000@0.23.1920.1000" timestamp="1620614548564" />
-    <state width="1427" height="278" key="GridCell.Tab.0.bottom" timestamp="1620701881490">
+    <state width="1427" height="217" key="GridCell.Tab.0.bottom" timestamp="1620712184973">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="278" key="GridCell.Tab.0.bottom/0.23.1920.1000@0.23.1920.1000" timestamp="1620701881490" />
-    <state width="1427" height="278" key="GridCell.Tab.0.center" timestamp="1620701881489">
+    <state width="1427" height="217" key="GridCell.Tab.0.bottom/0.23.1920.1000@0.23.1920.1000" timestamp="1620712184973" />
+    <state width="1427" height="217" key="GridCell.Tab.0.center" timestamp="1620712184973">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="278" key="GridCell.Tab.0.center/0.23.1920.1000@0.23.1920.1000" timestamp="1620701881489" />
-    <state width="1427" height="278" key="GridCell.Tab.0.left" timestamp="1620701881488">
+    <state width="1427" height="217" key="GridCell.Tab.0.center/0.23.1920.1000@0.23.1920.1000" timestamp="1620712184973" />
+    <state width="1427" height="217" key="GridCell.Tab.0.left" timestamp="1620712184972">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="278" key="GridCell.Tab.0.left/0.23.1920.1000@0.23.1920.1000" timestamp="1620701881488" />
-    <state width="1427" height="278" key="GridCell.Tab.0.right" timestamp="1620701881490">
+    <state width="1427" height="217" key="GridCell.Tab.0.left/0.23.1920.1000@0.23.1920.1000" timestamp="1620712184972" />
+    <state width="1427" height="217" key="GridCell.Tab.0.right" timestamp="1620712184973">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="278" key="GridCell.Tab.0.right/0.23.1920.1000@0.23.1920.1000" timestamp="1620701881490" />
+    <state width="1427" height="217" key="GridCell.Tab.0.right/0.23.1920.1000@0.23.1920.1000" timestamp="1620712184973" />
     <state x="827" y="307" key="git4idea.merge.GitPullDialog" timestamp="1620638352750">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>

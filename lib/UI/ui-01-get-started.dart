@@ -480,7 +480,6 @@ class UIGetStartedState extends State<UIGetStarted> {
                           'FacesByPlaces.com',
                           style: TextStyle(
                               fontSize: 24,
-                              fontWeight: FontWeight.bold,
                               color: Color(0xff04ECFF),
                               fontFamily: 'NexaBold'),
                         ),
@@ -514,7 +513,7 @@ class UIGetStartedState extends State<UIGetStarted> {
                             fontFamily: 'NexaBold'
                           ),
                         ),
-                        minWidth: SizeConfig.blockSizeHorizontal! * 90,
+                        minWidth: SizeConfig.blockSizeHorizontal! * 80,
                         height: 45,
                         shape: const StadiumBorder(),
                         color: const Color(0xff04ECFF),
