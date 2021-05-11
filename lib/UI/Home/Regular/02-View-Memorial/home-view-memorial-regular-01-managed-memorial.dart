@@ -896,12 +896,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           ? CircleAvatar(
                                             radius: 100,
                                             backgroundColor: const Color(0xff888888),
-                                            backgroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                            foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                           )
                                           : const CircleAvatar(
                                             radius: 100,
                                             backgroundColor: const Color(0xff888888),
-                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                            foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                           )
                                         ),
                                       ),

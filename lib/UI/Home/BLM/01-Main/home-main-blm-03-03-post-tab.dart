@@ -146,6 +146,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    print('BLM Post tab screen rebuild!');
     return Container(
       width: SizeConfig.screenWidth,
       child: count != 0

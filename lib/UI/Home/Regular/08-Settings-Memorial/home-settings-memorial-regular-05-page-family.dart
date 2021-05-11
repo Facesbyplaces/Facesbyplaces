@@ -82,7 +82,16 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       for(int i = 0; i < newValue.almFamilyList.length; i++){
         family.add(
           ListTile(
-            leading: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != '' ? CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}')) : const CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: const AssetImage('assets/icons/app-icon.png'),),
+            leading: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != '' 
+            ? CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: NetworkImage('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}',),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png',),
+            ) 
+            : const CircleAvatar(
+              backgroundColor: const Color(0xff888888), 
+              foregroundImage: const AssetImage('assets/icons/app-icon.png',),
+            ),
             title: Text('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}'),
             subtitle: Text('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsEmail}'),
             trailing: MaterialButton(

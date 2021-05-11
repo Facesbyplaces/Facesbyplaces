@@ -302,11 +302,12 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                       leading: users[index].image != ''
                       ? CircleAvatar(
                         backgroundColor: const Color(0xff888888), 
-                        backgroundImage: NetworkImage('${users[index].image}'),
+                        foregroundImage: NetworkImage('${users[index].image}'),
+                        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                       )
                       : const CircleAvatar(
                         backgroundColor: const Color(0xff888888), 
-                        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                        foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                       ),
                       title: Text('${users[index].firstName} ${users[index].lastName}'),
                       subtitle: Text('${users[index].email}',

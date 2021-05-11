@@ -69,7 +69,16 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
       for(int i = 0; i < newValue.blmFamilyList.length; i++){
         family.add(
           ListTile(
-            leading: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != '' ? CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage('${newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}')) : const CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: const AssetImage('assets/icons/app-icon.png'),),
+            leading: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != '' 
+            ? CircleAvatar(
+              backgroundColor: const Color(0xff888888), 
+              foregroundImage: NetworkImage('${newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}',),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png',),
+            ) 
+            : const CircleAvatar(
+              backgroundColor: const Color(0xff888888), 
+              foregroundImage: const AssetImage('assets/icons/app-icon.png',),
+            ),
             title: Text('${newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}'),
             subtitle: Text('${newValue.blmFamilyList[i].showFamilySettingsRelationship}'),
             trailing: MaterialButton(

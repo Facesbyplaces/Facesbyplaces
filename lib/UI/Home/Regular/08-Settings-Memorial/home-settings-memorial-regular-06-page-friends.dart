@@ -82,7 +82,16 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
       for(int i = 0; i < newValue.almFriendsList.length; i++){
         friends.add(
           ListTile(
-            leading: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != '' ? CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}')) : const CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: const AssetImage('assets/icons/app-icon.png'),),
+            leading: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != '' 
+            ? CircleAvatar(
+              backgroundColor: Color(0xff888888), 
+              foregroundImage: NetworkImage('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}',),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png',),
+            ) 
+            : const CircleAvatar(
+              backgroundColor: const Color(0xff888888), 
+              foregroundImage: const AssetImage('assets/icons/app-icon.png',),
+            ),
             title: Text('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}'),
             subtitle: Text('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsEmail}'),
             trailing: MaterialButton(
@@ -158,7 +167,6 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                     );
                   }
                 }
-
               },
               child: const Text('Remove', style: const TextStyle(fontSize: 14,),),
               height: 40,

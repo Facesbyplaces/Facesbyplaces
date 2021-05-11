@@ -125,11 +125,12 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               child: profileImage.path != ''
                               ? CircleAvatar(
                                 radius: 60,
-                                backgroundImage: FileImage(profileImage),
+                                foregroundImage: FileImage(profileImage),
+                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               )
                               : const CircleAvatar(
                                 radius: 60,
-                                backgroundImage: const AssetImage('assets/icons/cover-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                               ),
                             ),
                           ),

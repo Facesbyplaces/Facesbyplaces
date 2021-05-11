@@ -49,13 +49,15 @@ class APIRegularShowPageImagesMain{
 class APIRegularShowPageImagesExtended{
   String showPageImagesBackgroundImage;
   String showPageImagesProfileImage;
+  String showPageImagesRelationship;
 
-  APIRegularShowPageImagesExtended({required this.showPageImagesBackgroundImage, required this.showPageImagesProfileImage});
+  APIRegularShowPageImagesExtended({required this.showPageImagesBackgroundImage, required this.showPageImagesProfileImage, required this.showPageImagesRelationship});
 
   factory APIRegularShowPageImagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageImagesExtended(
       showPageImagesBackgroundImage: parsedJson['backgroundImage'] != null ? parsedJson['backgroundImage'] : '',
       showPageImagesProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      showPageImagesRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
     );
   }
 }

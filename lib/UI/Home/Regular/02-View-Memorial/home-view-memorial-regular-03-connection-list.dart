@@ -410,13 +410,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: NetworkImage(searches[index].image),
+                          foregroundImage: NetworkImage(searches[index].image),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }else{
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }else{
@@ -424,13 +425,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: NetworkImage(listsFamily[index].image),
+                          foregroundImage: NetworkImage(listsFamily[index].image),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }else{
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }
@@ -486,13 +488,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: NetworkImage(searches[index].image),
+                          foregroundImage: NetworkImage(searches[index].image),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }else{
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }else{
@@ -500,13 +503,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: NetworkImage(listsFriends[index].image),
+                          foregroundImage: NetworkImage(listsFriends[index].image),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }else{
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }
@@ -560,13 +564,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: NetworkImage(searches[index].image),
+                          foregroundImage: NetworkImage(searches[index].image),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }else{
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }else{
@@ -574,13 +579,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: NetworkImage(listsFollowers[index].image),
+                          foregroundImage: NetworkImage(listsFollowers[index].image),
+                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }else{
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }

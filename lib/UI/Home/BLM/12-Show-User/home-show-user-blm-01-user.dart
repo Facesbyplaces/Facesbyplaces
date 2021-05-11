@@ -190,12 +190,13 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                             ? CircleAvatar(
                               radius: 100, 
                               backgroundColor: const Color(0xff888888), 
-                              backgroundImage: NetworkImage(profile.data!.showUserInformationImage),
+                              foregroundImage: NetworkImage(profile.data!.showUserInformationImage),
+                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                             )
                             : const CircleAvatar(
                               radius: 100, 
                               backgroundColor: const Color(0xff888888), 
-                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                             ),
                           ),
                         ),

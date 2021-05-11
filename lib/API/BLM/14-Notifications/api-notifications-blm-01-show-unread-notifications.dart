@@ -25,7 +25,7 @@ Future<int> apiBLMShowUnreadNotifications() async{
     ),  
   );
 
-  print('The status code of blm show unread notifications is ${response.statusCode}');
+  // print('The status code of blm show unread notifications is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

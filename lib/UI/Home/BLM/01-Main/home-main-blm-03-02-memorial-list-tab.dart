@@ -269,6 +269,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    print('BLM Memorial list tab rebuild!');
     return Container(
       width: SizeConfig.screenWidth,
       child: count != 0

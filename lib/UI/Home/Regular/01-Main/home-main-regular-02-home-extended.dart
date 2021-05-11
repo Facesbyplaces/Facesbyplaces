@@ -43,12 +43,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
 
-  // int toggleBottom = 0;
-  // List<bool> bottomTab = [true, false, false, false];
   Future<APIRegularShowProfileInformation>? drawerSettings;
-  // int unreadNotifications = 0;
   String _scanBarcode = 'Error';
-  // bool isGuestLoggedIn = true;
 
   Future<APIRegularShowProfileInformation> getDrawerInformation() async{
     return await apiRegularShowProfileInformation();
@@ -56,20 +52,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
   void getUnreadNotifications() async{
     var value = await apiRegularShowUnreadNotifications();
-
     unreadNotifications.value = value;
-
-    // setState(() {
-    //   unreadNotifications = value;
-    // });
   }
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
-    // setState(() {
-    //   isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    // });
     isGuestLoggedIn.value = sharedPrefs.getBool('user-guest-session') ?? false;
+
     if(isGuestLoggedIn.value != true){
       getUnreadNotifications();
       drawerSettings = getDrawerInformation();
@@ -171,7 +160,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               return IconButton(
                                 icon: CircleAvatar(
                                   backgroundColor: const Color(0xff888888),
-                                  backgroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                  foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                 ),
                                 onPressed: () async{
                                   Scaffold.of(context).openDrawer();
@@ -183,7 +173,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           return IconButton(
                             icon: const CircleAvatar(
                               backgroundColor: const Color(0xff888888),
-                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                             ),
                             onPressed: () async{
                               Scaffold.of(context).openDrawer();
@@ -290,7 +280,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 Positioned(
                                   top: 0,
                                   right: 20,
-                                  // unreadNotificationListener
                                   child: CircleAvatar(
                                     radius: 12,
                                     backgroundColor: const Color(0xffff0000),
@@ -306,11 +295,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               ],
                             ),
                           ),
-
                         ],
                         onPressed: (int index) async{
                           toggleBottom.value = index;
-
 
                           for(int i = 0; i < bottomTabListener.length; i++){
                             if(i == toggleBottom.value){
@@ -411,7 +398,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     ? CircleAvatar(
                                       radius: 100,
                                       backgroundColor: const Color(0xff888888),
-                                      backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                                      foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                     )
                                     : const CircleAvatar(
                                       radius: 100,
@@ -525,7 +513,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 const CircleAvatar(
                                   radius: 100,
                                   backgroundColor: const Color(0xff888888),
-                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                  foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                 ),
 
                                 Expanded(child: Container(),),
@@ -578,7 +566,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               const CircleAvatar(
                                 radius: 100,
                                 backgroundColor: const Color(0xff888888),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                               ),
 
                               const SizedBox(height: 20,),

@@ -101,7 +101,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       for(int i = 0; i < newValue.almAdminList.length; i++){
         managers.add(
           ListTile(
-            leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
+            leading: CircleAvatar(
+              backgroundColor: Color(0xff888888), 
+              foregroundImage: NetworkImage('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}',),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+            ),
             title: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
             subtitle: Text('${newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
             trailing: MaterialButton(
@@ -217,7 +221,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       for(int i = 0; i < newValue.almFamilyList.length; i++){
         managers.add(
           ListTile(
-            leading: CircleAvatar(backgroundColor: const Color(0xff888888), backgroundImage: NetworkImage('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),),
+            leading: CircleAvatar(
+              backgroundColor: const Color(0xff888888), 
+              foregroundImage: NetworkImage('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}'),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+            ),
             title: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
             subtitle: Text('${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
             trailing: MaterialButton(
