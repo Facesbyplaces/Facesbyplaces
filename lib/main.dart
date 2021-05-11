@@ -38,12 +38,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async{
 
-<<<<<<< HEAD
-=======
   // debugProfileBuildsEnabled = true;
   // debugRepaintRainbowEnabled = true;
   // debugRepaintTextRainbowEnabled = true;
->>>>>>> devel-updated
 
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -62,11 +59,8 @@ void main() async{
         overlayOpacity: 0.5,
         overlayColor: Colors.grey,
         child: MaterialApp(
-<<<<<<< HEAD
-=======
           // checkerboardRasterCacheImages: true,
           // showPerformanceOverlay: true,
->>>>>>> devel-updated
           title: 'Faces by Places',
           home: ((){
             if(newlyInstalled){
