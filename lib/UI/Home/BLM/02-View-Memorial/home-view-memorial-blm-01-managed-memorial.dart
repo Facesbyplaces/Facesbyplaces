@@ -956,6 +956,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                         (i) => Padding(
                           padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: MiscBLMPost(
+                            key: ValueKey('$i'),
                             userId: posts[i].userId,
                             postId: posts[i].postId,
                             memorialId: posts[i].memorialId,

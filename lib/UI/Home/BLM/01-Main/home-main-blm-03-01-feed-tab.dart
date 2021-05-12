@@ -47,31 +47,18 @@ class HomeBLMFeedTab extends StatefulWidget{
 class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   
   ScrollController scrollController = ScrollController();
-  ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(false);
   ValueNotifier<List<BLMMainPagesFeeds>> feeds = ValueNotifier<List<BLMMainPagesFeeds>>([]);
+  ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(false);
   ValueNotifier<int> count = ValueNotifier<int>(0);
-  // GlobalKey<ScaffoldState> key1 = GlobalKey<ScaffoldState>();
-
-  // List<BLMMainPagesFeeds> feeds = [];
-  // bool isGuestLoggedIn = false;
   int itemRemaining = 1;
   int page = 1;
-  // int count = 0;
-
-  
 
   void initState(){
     super.initState();
     isGuest();
     scrollController.addListener(() {
-      // print('2nd level');
-      // print('scrolled!');
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-        print('3nd level');
         if(itemRemaining != 0){
-          // setState(() {
-          //   onLoading();
-          // });
           onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
@@ -87,32 +74,26 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   }
 
   Future<void> onRefresh() async{
-    print('on refresh!');
-    // setState(() {
-      onLoading();
-    // });
+    onLoading();
   }
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
-    // setState(() {
-    //   isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    // });
     isGuestLoggedIn.value = sharedPrefs.getBool('user-guest-session') ?? false;
+
     if(isGuestLoggedIn.value != true){
       onLoading();
-      print('1st level');
     }
   }
 
   void onLoading() async{
-    print('On loading!');
     if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMHomeFeedTab(page: page);
       context.loaderOverlay.hide();
+
       itemRemaining = newValue.blmItemsRemaining;
-      count.value = newValue.blmFamilyMemorialList.length;
+      count.value = count.value + newValue.blmFamilyMemorialList.length;
 
       for(int i = 0; i < newValue.blmFamilyMemorialList.length; i++){
         List<String> newList1 = [];
@@ -155,7 +136,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
       }
 
       if(mounted)
-      setState(() {});
+      // setState(() {});
       page++;
     }
   }
@@ -180,9 +161,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               itemCount: countListener,
               separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
               itemBuilder: (c, i) {
-                print('Item builder rebuild! $i');
                 return feedsListener[i].pageType == 'Blm'
                 ? MiscBLMPost(
+                  key: ValueKey('$i'),
                   userId: feedsListener[i].userId,
                   postId: feedsListener[i].postId,
                   memorialId: feedsListener[i].memorialId,
@@ -376,10 +357,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                       ],
                     )
                     : Container(height: 0),
-
                   ],
                 )
                 : MiscRegularPost(
+                  key: ValueKey('$i'),
                   userId: feedsListener[i].userId,
                   postId: feedsListener[i].postId,
                   memorialId: feedsListener[i].memorialId,
@@ -670,27 +651,5 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
         ),
       ),
     );
-  }
-}
-
-class TestProxy extends StatefulWidget {
-  final Widget child;
-
-  const TestProxy({required Key key, required this.child}) : super(key: key);
-
-  @override
-  _TestProxyState createState() => _TestProxyState();
-}
-
-class _TestProxyState extends State<TestProxy> {
-  @override
-  void initState() {
-    super.initState();
-    print("Rebuild for ${widget.key.toString()}");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return widget.child;
   }
 }

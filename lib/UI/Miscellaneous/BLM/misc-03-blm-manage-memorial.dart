@@ -33,59 +33,34 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
     required this.relationship,
   });
 
-  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState(index: index, memorialName: memorialName, description: description, image: image, memorialId: memorialId, managed: managed, follower: follower, famOrFriends: famOrFriends, pageType: pageType, relationship: relationship);
+  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState();
 }
 
 class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
-
-  final int index;
-  final String memorialName;
-  final String description;
-  final String image;
-  final int memorialId;
-  final bool managed;
-  final bool follower;
-  final bool famOrFriends;
-  final String pageType;
-  final String relationship;
-
-  MiscBLMManageMemorialTabState({
-    required this.index, 
-    required this.memorialName,
-    required this.description,
-    required this.image,
-    required this.memorialId,
-    required this.managed,
-    required this.follower,
-    required this.famOrFriends,
-    required this.pageType,
-    required this.relationship,
-  });
-
   bool manageButton = false;
   bool followButton = false;
 
   void initState(){
     super.initState();
-    followButton = follower;
-    manageButton = managed;
+    followButton = widget.follower;
+    manageButton = widget.managed;
   }
 
   @override
   Widget build(BuildContext context){
     return GestureDetector(
       onTap: () async{
-        if(pageType == 'Blm'){
-          if(managed == true || famOrFriends == true){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
+        if(widget.pageType == 'Blm'){
+          if(widget.managed == true || widget.famOrFriends == true){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
           }else{
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: followButton,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButton,)));
           }
         }else{
-          if(managed == true || famOrFriends == true){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
+          if(widget.managed == true || widget.famOrFriends == true){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
           }else{
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: followButton,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButton,)));
           }
         }
       },
@@ -93,11 +68,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
         height: 80,
         color: const Color(0xffffffff),
         child: ListTile(
-          leading: image != '' 
+          leading: widget.image != '' 
           ? CircleAvatar(
             radius: 30, 
             backgroundColor: const Color(0xff888888), 
-            foregroundImage: NetworkImage(image),
+            foregroundImage: NetworkImage(widget.image),
             backgroundImage: const AssetImage('assets/icons/app-icon.png',),
           ) 
           : const CircleAvatar(
@@ -105,7 +80,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
             backgroundColor: const Color(0xff888888), 
             foregroundImage: const AssetImage('assets/icons/app-icon.png',),
           ),
-          title: Text(memorialName,
+          title: Text(widget.memorialName,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             style: const TextStyle(
@@ -114,7 +89,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
               color: const Color(0xff000000),
             ),
           ),
-          subtitle: Text(description,
+          subtitle: Text(widget.description,
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
             style: const TextStyle(
@@ -124,7 +99,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
             ),
           ),
           trailing: ((){
-            if(managed == true || famOrFriends == true){
+            if(widget.managed == true || widget.famOrFriends == true){
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
@@ -155,7 +130,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   if(confirmResult == true){
 
                     context.loaderOverlay.show();
-                    String result = await apiBLMLeavePage(memorialId: memorialId);
+                    String result = await apiBLMLeavePage(memorialId: widget.memorialId);
                     context.loaderOverlay.hide();
 
                     if(result != 'Failed'){
@@ -240,7 +215,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   if(confirmResult == true){
 
                     context.loaderOverlay.show();
-                    bool result = await apiBLMModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
+                    bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: false);
                     context.loaderOverlay.hide();
 
                     if(result){
@@ -302,7 +277,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                 splashColor: const Color(0xff4EC9D4),
                 onPressed: () async{
                   context.loaderOverlay.show();
-                  bool result = await apiBLMModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
+                  bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: true);
                   context.loaderOverlay.hide();
 
                   if(result){

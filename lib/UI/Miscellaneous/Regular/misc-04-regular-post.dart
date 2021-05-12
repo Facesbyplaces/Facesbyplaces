@@ -33,51 +33,49 @@ class MiscRegularPost extends StatefulWidget{
   final bool famOrFriends;
   final String relationship;
 
-  const MiscRegularPost({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, required this.memorialName, this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  const MiscRegularPost({
+    required Key key, 
+    required this.contents, 
+    required this.userId, 
+    required this.postId, 
+    required this.memorialId, 
+    required this.profileImage, 
+    this.memorialName = '', 
+    this.timeCreated = '', 
+    required this.managed, 
+    required this.joined, 
+    required this.numberOfComments, 
+    required this.numberOfLikes, 
+    required this.likeStatus, 
+    required this.numberOfTagged, 
+    required this.taggedFirstName, 
+    required this.taggedLastName, 
+    required this.taggedId, 
+    required this.pageType, 
+    required this.famOrFriends, 
+    required this.relationship
+  }) : super(key: key);
 
-  MiscRegularPostState createState() => MiscRegularPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId, pageType: pageType, famOrFriends: famOrFriends, relationship: relationship);
+  MiscRegularPostState createState() => MiscRegularPostState();
 }
 
-class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObserver{
-  final List<Widget> contents;
-  final int userId;
-  final int postId;
-  final int memorialId;
-  final String profileImage;
-  final String memorialName;
-  final String timeCreated;
-  final bool managed;
-  final bool joined;
-  final int numberOfComments;
-  final int numberOfLikes;
-  final bool likeStatus;
-  final int numberOfTagged;
-  final List<String> taggedFirstName;
-  final List<String> taggedLastName;
-  final List<int> taggedId;
-  final String pageType;
-  final bool famOrFriends;
-  final String relationship;
-
-  MiscRegularPostState({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, required this.memorialName, this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+class MiscRegularPostState extends State<MiscRegularPost>{
 
   bool likePost = false;
-  // bool pressedLike = false;
   int likesCount = 0;
 
   void initState(){
     super.initState();
     // print("Regular rebuild for ${widget.key.toString()}");
-    likePost = likeStatus;
-    likesCount = numberOfLikes;
+    likePost = widget.likeStatus;
+    likesCount = widget.numberOfLikes;
   }
 
   @override
   Widget build(BuildContext context){
-    // print('Regular post screen rebuild!');
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
       },
       child: Container(
         padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
@@ -100,39 +98,39 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
           children: [
             ListTile(
               onTap: (){
-                if(pageType == 'Memorial'){
-                  if(managed == true || famOrFriends == true){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
+                if(widget.pageType == 'Memorial'){
+                  if(widget.managed == true || widget.famOrFriends == true){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed:widget.managed, newlyCreated: false,)));
                   }else{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
                   }
                 }else{
-                  if(managed == true || famOrFriends == true){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
+                  if(widget.managed == true || widget.famOrFriends == true){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
                   }else{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
                   }
                 }
               },
               contentPadding: EdgeInsets.zero,
-              leading: profileImage != '' 
+              leading: widget.profileImage != '' 
               ? CircleAvatar(
                 backgroundColor: const Color(0xff888888), 
-                foregroundImage: NetworkImage(profileImage),
+                foregroundImage: NetworkImage(widget.profileImage),
                 backgroundImage: const AssetImage('assets/icons/app-icon.png'),
               ) 
               : const CircleAvatar(
                 backgroundColor: const Color(0xff888888), 
                 foregroundImage: const AssetImage('assets/icons/app-icon.png'),
               ),
-              title: Text(memorialName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-              subtitle: Text(timeCreated, maxLines: 1, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xffaaaaaa),),),
-              trailing: MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: pageType,),
+              title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+              subtitle: Text(widget.timeCreated, maxLines: 1, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xffaaaaaa),),),
+              trailing: MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType,),
             ),
 
-            Column(children: contents,),
+            Column(children: widget.contents,),
 
-            numberOfTagged != 0
+            widget.numberOfTagged != 0
             ? Column(
               children: [
                 const SizedBox(height: 10),
@@ -149,23 +147,23 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                         ),
 
                         TextSpan(
-                          children: List.generate(numberOfTagged, 
+                          children: List.generate(widget.numberOfTagged, 
                             (index) => TextSpan(
                               style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
                               children: <TextSpan>[
-                                TextSpan(text: taggedFirstName[index],),
+                                TextSpan(text: widget.taggedFirstName[index],),
 
                                 TextSpan(text: ' '),
 
-                                TextSpan(text: taggedLastName[index],),
+                                TextSpan(text: widget.taggedLastName[index],),
 
-                                index < numberOfTagged - 1
+                                index < widget.numberOfTagged - 1
                                 ? const TextSpan(text: ', ')
                                 : const TextSpan(text: ''),
                               ],
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index], accountType: pageType == 'BLM' ? 1 : 2)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: widget.taggedId[index], accountType: widget.pageType == 'BLM' ? 1 : 2)));
                               }
                             ),
                           ),
@@ -187,15 +185,13 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       likePost = !likePost;
 
                       if(likePost == true){
-                        // pressedLike = true;
                         likesCount++;
                       }else{
-                        // pressedLike = false;
                         likesCount--;
                       }
                     });
 
-                    await apiRegularLikeOrUnlikePost(postId: postId, like: likePost);
+                    await apiRegularLikeOrUnlikePost(postId: widget.postId, like: likePost);
                   },
                   icon: likePost == true ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),) : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
                   label: Text('$likesCount', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
@@ -205,10 +201,10 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                 TextButton.icon(
                   onPressed: () async{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
                   },
                   icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                  label: Text('$numberOfComments', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                  label: Text('${widget.numberOfComments}', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
                 ),
 
                 Expanded(child: Container(),),
@@ -229,7 +225,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       locallyIndex: true,
                       contentMetadata: BranchContentMetaData()
                         ..addCustomMetadata('link-category', 'Post')
-                        ..addCustomMetadata('link-post-id', postId)
+                        ..addCustomMetadata('link-post-id', widget.postId)
                         ..addCustomMetadata('link-like-status', likePost)
                         ..addCustomMetadata('link-number-of-likes', likesCount)
                         ..addCustomMetadata('link-type-of-account', 'Memorial')

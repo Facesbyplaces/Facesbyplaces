@@ -70,7 +70,8 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
   File backgroundImage = File('');
   File profileImage = File('');
   final picker = ImagePicker();
-  List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  // List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  List<String> backgroundImages = ['assets/icons/blm-memorial-cover-1.jpeg', 'assets/icons/blm-memorial-cover-2.jpeg'];
   int backgroundImageToggle = 0;
 
   Future getProfileImage() async{
@@ -129,9 +130,9 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: backgroundImage != File('')
+                      image: backgroundImage.path != ''
                       ? AssetImage(backgroundImage.path)
-                      : const AssetImage('assets/icons/alm-background1.png'),
+                      : const AssetImage('assets/icons/blm-memorial-cover-1.jpeg'),
                     ),
                   ),
                   child: Stack(
@@ -150,11 +151,13 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                               child: profileImage.path != ''
                               ? CircleAvatar(
                                 radius: 60,
+                                backgroundColor: Color(0xff888888),
                                 foregroundImage: FileImage(profileImage),
                                 backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               )
                               : const CircleAvatar(
                                 radius: 60,
+                                backgroundColor: Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                               ),
                             ),
@@ -206,7 +209,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index){
                       return ((){
-                        if(index == 4){
+                        if(index == 2){
                           return GestureDetector(
                             onTap: () async{
                               setState(() {
@@ -289,7 +292,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     separatorBuilder: (context, index){
                       return const SizedBox(width: 25);
                     },
-                    itemCount: 5,
+                    itemCount: 3,
                   ),
                 ),
 

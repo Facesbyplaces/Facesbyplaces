@@ -1036,6 +1036,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                               (i) => Padding(
                                 padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                                 child: MiscBLMPost(
+                                  key: ValueKey('$i'),
                                   userId: posts[i].userId,
                                   postId: posts[i].postId,
                                   memorialId: posts[i].memorialId,
