@@ -10,6 +10,7 @@ import { SuccessModal } from "../UserProfile/SuccessModal";
 
 export default function UsersTable() {
   const [showModal, setShowModal] = useState(true);
+  const [pageType, setPageType] = useState(2);
   const { tab } = useSelector(({ tab }) => ({
     tab: tab,
   }));
@@ -46,7 +47,7 @@ export default function UsersTable() {
               <div className="container">
                 <div className="card card-custom">
                   <Header />
-                  <Body />
+                  <Body pageType={pageType} setPageType={setPageType} />
                 </div>
               </div>
             );

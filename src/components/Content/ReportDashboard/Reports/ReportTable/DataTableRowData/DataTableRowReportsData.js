@@ -232,10 +232,7 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
       </tr>
     </tbody>
   ) : (
-    <tbody>
-      {/* <h1>Hi</h1> */}
-      {renderedPosts}
-    </tbody>
+    <tbody>{renderedPosts}</tbody>
   );
   // <div>
   //   {props.users.length == 0 ? (

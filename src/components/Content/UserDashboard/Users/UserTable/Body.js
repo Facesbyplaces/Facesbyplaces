@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DataTable from "./DataTable";
 
-export default function Body() {
+export default function Body({ pageType, setPageType }) {
   const [search, setSearch] = useState(false);
   const [keywords, setKeywords] = useState([]);
 
@@ -38,7 +38,7 @@ export default function Body() {
               </div>
             </div>
           </div>
-          <div className="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+          <div className="col-sm-1 mt-5 mt-lg-0">
             <a
               className="btn btn-light-primary px-6 font-weight-bold"
               onClick={() => handleClick()}
@@ -46,13 +46,54 @@ export default function Body() {
               Search
             </a>
           </div>
+          <div className="col-sm-3 mt-5 mt-lg-0">
+            <div className="dropdown pl-22">
+              <div
+                className="btn-group btn-group-toggle"
+                style={{
+                  display: "inline-block",
+                  textAlign: "center",
+                }}
+                data-toggle="buttons"
+              >
+                <label
+                  className={`btn btn-outline-warning ${
+                    pageType === 2 ? "active" : ""
+                  }`}
+                  style={{ width: "84px" }}
+                  onClick={() => setPageType(2)}
+                >
+                  <input type="radio" name="options" />
+                  ALM
+                </label>
+                <label
+                  className={`btn btn-outline-warning ${
+                    pageType === 1 ? "active" : ""
+                  }`}
+                  style={{ width: "84px" }}
+                >
+                  <input
+                    type="radio"
+                    name="options"
+                    onClick={() => setPageType(1)}
+                  />
+                  BLM
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       {/*end::Search Form*/}
 
       {/*begin: Datatable*/}
       <div className="">
-        <DataTable search={search} setSearch={setSearch} keywords={keywords} />
+        <DataTable
+          search={search}
+          setSearch={setSearch}
+          keywords={keywords}
+          pageType={pageType}
+        />
       </div>
       {/*end: Datatable*/}
     </div>

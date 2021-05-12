@@ -84,7 +84,7 @@ export default function PostDataTable({
         setPosts(posts);
         setReports(response.data.reports);
 
-        console.log("Response: ", response.data.reports);
+        console.log("Response: ", response.data);
       })
       .catch((error) => {
         console.log(error.response);
