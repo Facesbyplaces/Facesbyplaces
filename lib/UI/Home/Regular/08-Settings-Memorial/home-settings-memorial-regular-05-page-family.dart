@@ -212,7 +212,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       ),
       body: Container(
         width: SizeConfig.screenWidth,
-        child: RefreshIndicator(
+        child: family.length != 0
+        ? RefreshIndicator(
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
@@ -222,6 +223,25 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => family[i],
           )
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              const SizedBox(height: 45,),
+
+              const Text('Family list is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            ],
+          ),
         ),
       ),
     );
