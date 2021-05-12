@@ -212,7 +212,19 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
       ),
       body: Container(
         width: SizeConfig.screenWidth,
-        child: RefreshIndicator(
+        // child: RefreshIndicator(
+        //   onRefresh: onRefresh,
+        //   child: ListView.separated(
+        //     controller: scrollController,
+        //     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        //     physics: const ClampingScrollPhysics(),
+        //     itemCount: friends.length,
+        //     separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+        //     itemBuilder: (c, i) => friends[i],
+        //   )
+        // ),
+        child: friends.length != 0
+        ? RefreshIndicator(
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
@@ -222,6 +234,25 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => friends[i],
           )
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              const SizedBox(height: 45,),
+
+              const Text('Friends list is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            ],
+          ),
         ),
       ),
     );
