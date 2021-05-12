@@ -13,13 +13,13 @@ export default class Footer extends Component {
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
             {/*begin::Copyright*/}
             <div className="text-dark order-2 order-md-1">
-              <span className="text-muted font-weight-bold mr-2">2020©</span>
+              <span className="text-muted font-weight-bold mr-2">2021©</span>
               <a
                 href="http://keenthemes.com/metronic"
                 target="_blank"
                 className="text-dark-75 text-hover-primary"
               >
-                Keenthemes
+                Faces By Places
               </a>
             </div>
             {/*end::Copyright*/}
@@ -29,23 +29,17 @@ export default class Footer extends Component {
                 href="http://keenthemes.com/metronic"
                 target="_blank"
                 className="nav-link pl-0 pr-5"
-              >
-                About
-              </a>
+              ></a>
               <a
                 href="http://keenthemes.com/metronic"
                 target="_blank"
                 className="nav-link pl-0 pr-5"
-              >
-                Team
-              </a>
+              ></a>
               <a
                 href="http://keenthemes.com/metronic"
                 target="_blank"
                 className="nav-link pl-0 pr-0"
-              >
-                Contact
-              </a>
+              ></a>
             </div>
             {/*end::Nav*/}
           </div>

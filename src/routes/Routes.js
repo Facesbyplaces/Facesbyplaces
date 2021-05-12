@@ -16,6 +16,7 @@ import UserDashboard from "../components/Content/UserDashboard/UserDashboard";
 import MemorialDashboard from "../components/Content/MemorialDashboard/MemorialDashboard";
 import PostDashboard from "../components/Content/PostDashboard/PostDashboard";
 import ReportDashboard from "../components/Content/ReportDashboard/ReportDashboard";
+import Oops from "../components/Oops";
 
 export const Routes = withRouter(({ history }) => {
   const dispatch = useDispatch();
@@ -63,10 +64,11 @@ export const Routes = withRouter(({ history }) => {
         {/* <Route path="/logout" component={LogOut} /> */}
         {isAuthorized && isTokenValid ? (
           <>
-            <Route exact path="/users" component={UserDashboard} />
-            <Route exact path="/memorials" component={MemorialDashboard} />
-            <Route exact path="/posts" component={PostDashboard} />
-            <Route exact path="/reports" component={ReportDashboard} />
+            <Route path="/users" component={UserDashboard} />
+            <Route path="/memorials" component={MemorialDashboard} />
+            <Route path="/posts" component={PostDashboard} />
+            <Route path="/reports" component={ReportDashboard} />
+            <Route render={() => <Redirect to="/404" />} component={Oops} />
           </>
         ) : (
           <Redirect to="/admin" />
