@@ -40,10 +40,14 @@ class Api::V1::Admin::AdminController < ApplicationController
         allUsers = users.order("users.id DESC") + alm_users.order("alm_users.id DESC")
 
         render json: {  itemsremaining:  itemsremaining,
-                        users: ActiveModel::SerializableResource.new(
-                                    allUsers, 
-                                    each_serializer: UserSerializer
-                                ),
+                        users: {
+                            blm: users,
+                            alm: alm_users
+                        },
+                        # users: ActiveModel::SerializableResource.new(
+                        #             allUsers, 
+                        #             each_serializer: UserSerializer
+                        #         ),
                         user: user,
                     }
     end
