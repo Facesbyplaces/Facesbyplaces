@@ -6,20 +6,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
-class BLMMainPagesNotifications{
-  final int id;
-  final String createdAt;
-  final String updatedAt;
-  final int actorId;
-  final String actorImage;
-  final bool read;
-  final String action;
-  final int postId;
-  final String notificationType;
-
-  const BLMMainPagesNotifications({required this.id, required this.createdAt, required this.updatedAt, required this.actorId, required this.actorImage, required this.read, required this.action, required this.postId, required this.notificationType});
-}
-
 class HomeBLMNotificationsTab extends StatefulWidget{
 
   HomeBLMNotificationsTabState createState() => HomeBLMNotificationsTabState();
@@ -27,49 +13,44 @@ class HomeBLMNotificationsTab extends StatefulWidget{
 
 class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
+  List<MiscBLMNotificationDisplayTemplate> notifications = [];
   ScrollController scrollController = ScrollController();
-  List<BLMMainPagesNotifications> notifications = [];
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   bool isGuestLoggedIn = true;
   int itemRemaining = 1;
   int page = 1;
-  int count = 0;
 
   void initState(){
     super.initState();
     isGuest();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(itemRemaining != 0){
+          onLoading();
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: const Text('No more notifications to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
-    setState(() {
-      isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    });
+    isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
+
     if(isGuestLoggedIn != true){
       onLoading();
-      scrollController.addListener(() {
-        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-          if(itemRemaining != 0){
-            setState(() {
-              onLoading();
-            });
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: const Text('No more notifications to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
-              ),
-            );
-          }
-        }
-      });
     }
   }
 
   Future<void> onRefresh() async{
-    setState(() {
-      onLoading();
-    });
+    onLoading();
   }
 
   void onLoading() async{
@@ -79,26 +60,22 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;
-      count = count + newValue.blmNotification.length;
+      count.value = count.value + newValue.blmNotification.length;
 
       for(int i = 0; i < newValue.blmNotification.length; i++){
         notifications.add(
-          BLMMainPagesNotifications(
-            id: newValue.blmNotification[i].homeTabNotificationId,
-            createdAt: newValue.blmNotification[i].homeTabNotificationCreatedAt,
-            updatedAt: newValue.blmNotification[i].homeTabNotificationUpdatedAt,
-            actorId: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorId,
-            read: newValue.blmNotification[i].homeTabNotificationRead,
-            action: newValue.blmNotification[i].homeTabNotificationAction,
+          MiscBLMNotificationDisplayTemplate(
+            imageIcon: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
             postId: newValue.blmNotification[i].homeTabNotificationPostId,
-            actorImage: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
+            notification: newValue.blmNotification[i].homeTabNotificationAction,
+            dateCreated: timeago.format(DateTime.parse(newValue.blmNotification[i].homeTabNotificationCreatedAt,)),
             notificationType: newValue.blmNotification[i].homeTabNotificationNotificationType,
+            readStatus: newValue.blmNotification[i].homeTabNotificationRead,
           ),
         );
       }
 
       if(mounted)
-      setState(() {});
       page++;
     }
   }
@@ -107,46 +84,41 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Container(
-      width: SizeConfig.screenWidth,
-      child: count != 0
-      ? RefreshIndicator(
-        onRefresh: onRefresh,
-        child: ListView.separated(
-          controller: scrollController,
-          physics: const ClampingScrollPhysics(),
-          itemCount: count,
-          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-          itemBuilder: (c, i) {
-            return MiscBLMNotificationDisplayTemplate(
-              imageIcon: notifications[i].actorImage,
-              postId: notifications[i].postId,
-              notification: notifications[i].action,
-              dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
-              notificationType: notifications[i].notificationType,
-              readStatus: notifications[i].read,
-            );
-          },
+    print('BLM Notification tab screen rebuild!');
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Container(
+        width: SizeConfig.screenWidth,
+        child: countListener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh,
+          child: ListView.separated(
+            controller: scrollController,
+            physics: const ClampingScrollPhysics(),
+            itemCount: countListener,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => notifications[i],
+          )
         )
-      )
-      : SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-              const Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-            ],
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              ],
+            ),
           ),
         ),
       ),

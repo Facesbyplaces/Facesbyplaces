@@ -23,6 +23,7 @@ class HomeBLMManageTab extends StatefulWidget{
 
 class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   ScrollController scrollController = ScrollController();
   List<Widget> finalMemorials = [];
   int blmFamilyItemsRemaining = 1;
@@ -33,46 +34,40 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   bool flag1 = false;
   int page1 = 1;
   int page2 = 1;
-  int count = 0;
 
   void initState(){
     super.initState();
     isGuest();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0){
+          onLoading();
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: const Text('No more posts to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
-    setState(() {
-      isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    });
+    isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
+
     if(isGuestLoggedIn != true){
       addMemorials1();
       onLoading();
-      scrollController.addListener(() {
-        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-          if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0){
-            setState(() {
-              onLoading();
-            });
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: const Text('No more posts to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
-              ),
-            );
-          }
-        }
-      });
     }
   }
 
   Future<void> onRefresh() async{
     if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0 && flag1 == false){
-      setState(() {
-        flag1 = true;
-      });
+      flag1 = true;
       onLoading();
     }else{
       onLoading();
@@ -134,7 +129,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   }
 
   void onLoading() async{
-
     if(flag1 == false){
       onLoading1();
     }else{
@@ -150,7 +144,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       context.loaderOverlay.hide();
 
       blmFamilyItemsRemaining = newValue.blmFamilyMemorialList.blmHomeTabMemorialFamilyItemsRemaining;
-      count = count + newValue.blmFamilyMemorialList.blmHomeTabMemorialPage.length;
+      count.value = count.value + newValue.blmFamilyMemorialList.blmHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.blmFamilyMemorialList.blmHomeTabMemorialPage.length; i++){
         finalMemorials.add(
@@ -176,7 +170,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       context.loaderOverlay.hide();
 
       memorialFamilyItemsRemaining = newValue.blmFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining;
-      count = count + newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage.length;
+      count.value = count.value + newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage.length; i++){
         finalMemorials.add(
@@ -196,7 +190,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       }
 
       if(mounted)
-      setState(() {});
       page1++;
 
       if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
@@ -215,7 +208,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       context.loaderOverlay.hide();
 
       blmFriendsItemsRemaining = newValue.blmFriendsMemorialList.blmHomeTabMemorialFriendsItemsRemaining;
-      count = count + newValue.blmFriendsMemorialList.blmHomeTabMemorialPage.length;
+      count.value = count.value + newValue.blmFriendsMemorialList.blmHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.blmFriendsMemorialList.blmHomeTabMemorialPage.length; i++){
         finalMemorials.add(
@@ -241,7 +234,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       context.loaderOverlay.hide();
 
       memorialFriendsItemsRemaining = newValue.blmFriendsMemorialList.memorialHomeTabMemorialFriendsItemsRemaining;
-      count = count + newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage.length;
+      count.value = count.value + newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage.length; i++){
         finalMemorials.add(
@@ -261,7 +254,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       }
 
       if(mounted)
-      setState(() {});
       page2++;
     }
   }
@@ -270,38 +262,41 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     print('BLM Memorial list tab rebuild!');
-    return Container(
-      width: SizeConfig.screenWidth,
-      child: count != 0
-      ? RefreshIndicator(
-        onRefresh: onRefresh,
-        child: ListView.separated(
-          controller: scrollController,
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-          physics: const ClampingScrollPhysics(),
-          itemCount: finalMemorials.length,
-          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-          itemBuilder: (c, i) => finalMemorials[i],
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Container(
+        width: SizeConfig.screenWidth,
+        child: countListener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh,
+          child: ListView.separated(
+            controller: scrollController,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: finalMemorials.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => finalMemorials[i],
+          )
         )
-      )
-      : SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-              const Text('Memorial is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Memorial is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-            ],
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              ],
+            ),
           ),
         ),
       ),

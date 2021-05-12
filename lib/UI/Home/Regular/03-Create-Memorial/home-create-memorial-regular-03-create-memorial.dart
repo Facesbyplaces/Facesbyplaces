@@ -45,7 +45,8 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
   File backgroundImage = File('');
   File profileImage = File('');
   final picker = ImagePicker();
-  List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
+  // List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
+  List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
   int backgroundImageToggle = 0;
 
   Future getProfileImage() async{
@@ -104,9 +105,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: backgroundImage != File('')
+                      image: backgroundImage.path != ''
                       ? AssetImage(backgroundImage.path)
-                      : const AssetImage('assets/icons/alm-background1.png'),
+                      : const AssetImage('assets/icons/alm-memorial-cover-1.jpeg'),
                     ),
                   ),
                   child: Stack(
@@ -125,11 +126,13 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               child: profileImage.path != ''
                               ? CircleAvatar(
                                 radius: 60,
+                                backgroundColor: Color(0xff888888),
                                 foregroundImage: FileImage(profileImage),
                                 backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               )
                               : const CircleAvatar(
                                 radius: 60,
+                                backgroundColor: Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                               ),
                             ),
@@ -181,7 +184,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index){
                       return ((){
-                        if(index == 4){
+                        if(index == 2){
                           return GestureDetector(
                             onTap: () async{
                               setState(() {
@@ -263,7 +266,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     separatorBuilder: (context, index){
                       return const SizedBox(width: 25,);
                     },
-                    itemCount: 5,
+                    itemCount: 3,
                   ),
                 ),
 

@@ -33,80 +33,49 @@ class MiscBLMPost extends StatefulWidget{
   final bool famOrFriends;
   final String relationship;
 
-  const MiscBLMPost({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  const MiscBLMPost({
+    required Key key, 
+    required this.contents, 
+    required this.userId, 
+    required this.postId, 
+    required this.memorialId, 
+    required this.profileImage, 
+    this.memorialName = '', 
+    this.timeCreated = '', 
+    required this.managed, 
+    required this.joined, 
+    required this.numberOfComments, 
+    required this.numberOfLikes, 
+    required this.likeStatus, 
+    required this.numberOfTagged, 
+    required this.taggedFirstName, 
+    required this.taggedLastName, 
+    required this.taggedId, 
+    required this.pageType, 
+    required this.famOrFriends, 
+    required this.relationship
+  }) : super(key: key);
 
-  MiscBLMPostState createState() => MiscBLMPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId, pageType: pageType, famOrFriends: famOrFriends, relationship: relationship);
+  MiscBLMPostState createState() => MiscBLMPostState();
 }
 
 class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
-  final List<Widget> contents;
-  final int userId;
-  final int postId;
-  final int memorialId;
-  final dynamic profileImage;
-  final String memorialName;
-  final String timeCreated;
-  final bool managed;
-  final bool joined;
-  final int numberOfComments;
-  final int numberOfLikes;
-  final bool likeStatus;
-  final int numberOfTagged;
-  final List<String> taggedFirstName;
-  final List<String> taggedLastName;
-  final List<int> taggedId;
-  final String pageType;
-  final bool famOrFriends;
-  final String relationship;
-
-  MiscBLMPostState({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
-
   bool likePost = false;
-  bool pressedLike = false;
   int likesCount = 0;
-
-  BranchUniversalObject? buo;
-  BranchLinkProperties? lp;
-
-  void initBranchShare(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Share', 'Link'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Post')
-        ..addCustomMetadata('link-post-id', postId)
-        ..addCustomMetadata('link-like-status', likePost)
-        ..addCustomMetadata('link-number-of-likes', likesCount)
-        ..addCustomMetadata('link-type-of-account', 'Blm')
-    );
-
-    lp = BranchLinkProperties(
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
 
   void initState(){
     super.initState();
     // print("BLM rebuild for ${widget.key.toString()}");
-    likePost = likeStatus;
-    likesCount = numberOfLikes;
+    likePost = widget.likeStatus;
+    likesCount = widget.numberOfLikes;
   }
 
   @override
   Widget build(BuildContext context){
-    // print('BLM post screen rebuild!');
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: widget.postId)));
       },
       child: Container(
         padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
@@ -127,96 +96,41 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 65,
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () async{
-                      if(pageType == 'Memorial'){
-                        if(managed == true || famOrFriends == true){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
-                        }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
-                        }
-                      }else{
-                        if(managed == true || famOrFriends == true){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
-                        }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
-                        }
-                      }
-                    },
-                    child: profileImage != null
-                    ? CircleAvatar(
-                      backgroundColor: const Color(0xff888888), 
-                      foregroundImage: NetworkImage(profileImage),
-                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                    )
-                    : const CircleAvatar(
-                      backgroundColor: const Color(0xff888888), 
-                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: GestureDetector(
-                        onTap: (){
-                          if(pageType == 'Memorial'){
-                            if(managed == true || famOrFriends == true){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
-                            }else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
-                            }
-                          }else{
-                            if(managed == true || famOrFriends == true){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
-                            }else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
-                            }
-                          }
-                        },
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Align(alignment: Alignment.bottomLeft,
-                                child: Text(memorialName,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xff000000),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(timeCreated,
-                                  maxLines: 1,
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xffaaaaaa)
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: pageType,),
-                ],
+            ListTile(
+              onTap: (){
+                if(widget.pageType == 'Memorial'){
+                  if(widget.managed == true || widget.famOrFriends == true){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
+                  }else{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
+                  }
+                }else{
+                  if(widget.managed == true || widget.famOrFriends == true){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
+                  }else{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
+                  }
+                }
+              },
+              contentPadding: EdgeInsets.zero,
+              leading: widget.profileImage != '' 
+              ? CircleAvatar(
+                backgroundColor: const Color(0xff888888), 
+                foregroundImage: NetworkImage(widget.profileImage),
+                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+              ) 
+              : const CircleAvatar(
+                backgroundColor: const Color(0xff888888), 
+                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
               ),
+              title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+              subtitle: Text(widget.timeCreated, maxLines: 1, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xffaaaaaa),),),
+              trailing: MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType,),
             ),
 
-            Column(children: contents,),
+            Column(children: widget.contents,),
 
-            numberOfTagged != 0
+            widget.numberOfTagged != 0
             ? Column(
               children: [
                 const SizedBox(height: 10),
@@ -233,23 +147,23 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                         ),
 
                         TextSpan(
-                          children: List.generate(numberOfTagged, 
+                          children: List.generate(widget.numberOfTagged, 
                             (index) => TextSpan(
                               style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
                               children: <TextSpan>[
-                                TextSpan(text: taggedFirstName[index],),
+                                TextSpan(text: widget.taggedFirstName[index],),
 
                                 const TextSpan(text: ' '),
 
-                                TextSpan(text: taggedLastName[index],),
+                                TextSpan(text: widget.taggedLastName[index],),
 
-                                index < numberOfTagged - 1
+                                index < widget.numberOfTagged - 1
                                 ? const TextSpan(text: ', ')
                                 : const TextSpan(text: ''),
                               ],
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: taggedId[index], accountType: pageType == 'BLM' ? 1 : 2)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: widget.taggedId[index], accountType: widget.pageType == 'BLM' ? 1 : 2)));
                               }
                             ),
                           ),
@@ -271,15 +185,13 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                       likePost = !likePost;
 
                       if(likePost == true){
-                        pressedLike = true;
                         likesCount++;
                       }else{
-                        pressedLike = false;
                         likesCount--;
                       }
                     });
 
-                    await apiBLMLikeOrUnlikePost(postId: postId, like: likePost);
+                    await apiBLMLikeOrUnlikePost(postId: widget.postId, like: likePost);
                   },
                   icon: likePost == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
                   label: Text('$likesCount', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
@@ -289,10 +201,10 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                 TextButton.icon(
                   onPressed: () async{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: widget.postId)));
                   },
                   icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                  label: Text('$numberOfComments', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                  label: Text('${widget.numberOfComments}', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
                 ),
 
                 Expanded(child: Container(),),
@@ -302,13 +214,35 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                   splashColor: Colors.transparent,
                   icon: CircleAvatar(backgroundColor: const Color(0xff4EC9D4), child: const Icon(Icons.share_rounded, color: const Color(0xffffffff)),),
                   onPressed: () async{
-                    initBranchShare();
+                    BranchUniversalObject buo = BranchUniversalObject(
+                      canonicalIdentifier: 'FacesbyPlaces',
+                      title: 'FacesbyPlaces Link',
+                      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+                      contentDescription: 'FacesbyPlaces link to the app',
+                      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+                      publiclyIndex: true,
+                      locallyIndex: true,
+                      contentMetadata: BranchContentMetaData()
+                        ..addCustomMetadata('link-category', 'Post')
+                        ..addCustomMetadata('link-post-id', widget.postId)
+                        ..addCustomMetadata('link-like-status', likePost)
+                        ..addCustomMetadata('link-number-of-likes', likesCount)
+                        ..addCustomMetadata('link-type-of-account', 'Blm')
+                    );
+
+                    BranchLinkProperties lp = BranchLinkProperties(
+                        feature: 'sharing',
+                        stage: 'new share',
+                      tags: ['one', 'two', 'three']
+                    );
+
+                    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
 
                     FlutterBranchSdk.setIdentity('blm-share-link');
 
                     BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                      buo: buo!,
-                      linkProperties: lp!,
+                      buo: buo,
+                      linkProperties: lp,
                       messageText: 'FacesbyPlaces App',
                       androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
                       androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
@@ -339,7 +273,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                 ),
               ],
             ),
-
           ],
         ),
       ),

@@ -159,7 +159,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               return IconButton(
                                 icon: CircleAvatar(
                                   backgroundColor: const Color(0xff888888),
-                                  backgroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                  foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                 ),
                                 onPressed: () async{
                                   Scaffold.of(context).openDrawer();
@@ -171,7 +172,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           return IconButton(
                             icon: const CircleAvatar(
                               backgroundColor: const Color(0xff888888),
-                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                             ),
                             onPressed: () async{
                               Scaffold.of(context).openDrawer();
@@ -208,7 +209,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                       Container(
                         child: ((){
-                          print('test here!');
                           switch(toggleBottomListener){
                             case 0: return HomeBLMFeedTab();
                             case 1: return HomeBLMManageTab();

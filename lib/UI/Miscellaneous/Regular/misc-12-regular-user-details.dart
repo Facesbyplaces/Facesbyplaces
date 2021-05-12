@@ -154,6 +154,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
           separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i){
             return MiscRegularPost(
+              key: ValueKey('$i'),
               userId: posts[i].userId,
               postId: posts[i].postId,
               memorialId: posts[i].memorialId,

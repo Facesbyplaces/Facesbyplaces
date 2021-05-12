@@ -28,49 +28,44 @@ class HomeRegularNotificationsTab extends StatefulWidget{
 
 class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab>{
 
+  List<MiscRegularNotificationDisplayTemplate> notifications = [];
   ScrollController scrollController = ScrollController();
-  List<RegularMainPagesNotifications> notifications = [];
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   bool isGuestLoggedIn = true;
   int itemRemaining = 1;
   int page = 1;
-  int count = 0;
 
   void initState(){
     super.initState();
     isGuest();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(itemRemaining != 0){
+          onLoading();
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: const Text('No more notifications to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
-    setState(() {
-      isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    });
+    isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
+
     if(isGuestLoggedIn != true){
       onLoading();
-      scrollController.addListener(() {
-        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-          if(itemRemaining != 0){
-            setState(() {
-              onLoading();
-            });
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: const Text('No more notifications to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
-              ),
-            );
-          }
-        }
-      });
     }
   }
 
   Future<void> onRefresh() async{
-    setState(() {
-      onLoading();
-    });
+    onLoading();
   }
 
   void onLoading() async{
@@ -100,26 +95,22 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.almItemsRemaining;
-      count = count + newValue.almNotification.length;
+      count.value = count.value + newValue.almNotification.length;
 
       for(int i = 0; i < newValue.almNotification.length; i++){
         notifications.add(
-          RegularMainPagesNotifications(
-            id: newValue.almNotification[i].homeTabNotificationId,
-            createdAt: newValue.almNotification[i].homeTabNotificationCreatedAt,
-            updatedAt: newValue.almNotification[i].homeTabNotificationUpdatedAt,
-            actorId: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorId,
-            read: newValue.almNotification[i].homeTabNotificationRead,
-            action: newValue.almNotification[i].homeTabNotificationAction,
+          MiscRegularNotificationDisplayTemplate(
+            imageIcon: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
             postId: newValue.almNotification[i].homeTabNotificationPostId,
-            actorImage: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
+            notification: newValue.almNotification[i].homeTabNotificationAction,
+            dateCreated: timeago.format(DateTime.parse(newValue.almNotification[i].homeTabNotificationCreatedAt,)),
             notificationType: newValue.almNotification[i].homeTabNotificationNotificationType,
+            readStatus: newValue.almNotification[i].homeTabNotificationRead,
           ),
         );
       }
 
       if(mounted)
-      setState(() {});
       page++;
     }
   }
@@ -127,46 +118,41 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Container(
-      width: SizeConfig.screenWidth,
-      child: count != 0
-      ? RefreshIndicator(
-        onRefresh: onRefresh,
-        child: ListView.separated(
-          controller: scrollController,
-          physics: const ClampingScrollPhysics(),
-          itemCount: count,
-          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-          itemBuilder: (c, i) {
-            return MiscRegularNotificationDisplayTemplate(
-              imageIcon: notifications[i].actorImage,
-              postId: notifications[i].postId,
-              notification: notifications[i].action,
-              dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
-              notificationType: notifications[i].notificationType,
-              readStatus: notifications[i].read,
-            );
-          },
+    print('Notification tab rebuild!');
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Container(
+        width: SizeConfig.screenWidth,
+        child: countListener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh,
+          child: ListView.separated(
+            controller: scrollController,
+            physics: const ClampingScrollPhysics(),
+            itemCount: countListener,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => notifications[i],
+          )
         )
-      )
-      : SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-              const Text('Notification is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Notification is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-            ],
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              ],
+            ),
           ),
         ),
       ),

@@ -23,6 +23,7 @@ class HomeRegularManageTab extends StatefulWidget{
 
 class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   ScrollController scrollController = ScrollController();
   List<Widget> finalMemorials = [];
   int memorialFamilyItemsRemaining = 1;
@@ -33,46 +34,40 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   bool flag1 = false;
   int page1 = 1;
   int page2 = 1;
-  int count = 0;
 
   void initState(){
     super.initState();
     isGuest();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0){
+          onLoading();
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: const Text('No more posts to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
-    setState(() {
-      isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    });
+    isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
+
     if(isGuestLoggedIn != true){
       addMemorials1();
       onLoading();
-      scrollController.addListener(() {
-        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-          if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0){
-            setState(() {
-              onLoading();
-            });
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: const Text('No more posts to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
-              ),
-            );
-          }
-        }
-      });
     }
   }
   
   Future<void> onRefresh() async{
     if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0 && flag1 == false){
-      setState(() {
-        flag1 = true;
-      });
+      flag1 = true;
       onLoading();
     }else{
       onLoading();
@@ -138,7 +133,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       context.loaderOverlay.hide();
 
       memorialFamilyItemsRemaining = newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining;
-      count = count + newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length;
+      count.value = count.value + newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length; i++){
         finalMemorials.add(
@@ -164,7 +159,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       context.loaderOverlay.hide();
 
       blmFamilyItemsRemaining = newValue.almFamilyMemorialList.blmHomeTabMemorialFamilyItemsRemaining;
-      count = count + newValue.almFamilyMemorialList.blmHomeTabMemorialPage.length;
+      count.value = count.value + newValue.almFamilyMemorialList.blmHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.almFamilyMemorialList.blmHomeTabMemorialPage.length; i++){
         finalMemorials.add(
@@ -185,7 +180,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     }
 
     if(mounted)
-    setState(() {});
     page1++;
 
     if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
@@ -202,7 +196,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       context.loaderOverlay.hide();
 
       memorialFriendsItemsRemaining = newValue.almFriendsMemorialList.memorialHomeTabMemorialFriendsItemsRemaining;
-      count = count + newValue.almFriendsMemorialList.memorialHomeTabMemorialPage.length;
+      count.value = count.value + newValue.almFriendsMemorialList.memorialHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.almFriendsMemorialList.memorialHomeTabMemorialPage.length; i++){
         finalMemorials.add(
@@ -228,7 +222,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       context.loaderOverlay.hide();
 
       blmFriendsItemsRemaining = newValue.almFriendsMemorialList.blmHomeTabMemorialFriendsItemsRemaining;
-      count = count + newValue.almFriendsMemorialList.blmHomeTabMemorialPage.length;
+      count.value = count.value + newValue.almFriendsMemorialList.blmHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.almFriendsMemorialList.blmHomeTabMemorialPage.length; i++){
         finalMemorials.add(
@@ -248,7 +242,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       }
 
       if(mounted)
-      setState(() {});
       page2++;
     }
   }
@@ -256,38 +249,42 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Container(
-      width: SizeConfig.screenWidth,
-      child: count != 0
-      ? RefreshIndicator(
-        onRefresh: onRefresh,
-        child: ListView.separated(
-          controller: scrollController,
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-          physics: const ClampingScrollPhysics(),
-          itemCount: finalMemorials.length,
-          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-          itemBuilder: (c, i) => finalMemorials[i],
+    print('Memorial list tab rebuild!');
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Container(
+        width: SizeConfig.screenWidth,
+        child: countListener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh,
+          child: ListView.separated(
+            controller: scrollController,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: finalMemorials.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => finalMemorials[i],
+          )
         )
-      )
-      : SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-              const Text('Memorial is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Memorial is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-            ],
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              ],
+            ),
           ),
         ),
       ),

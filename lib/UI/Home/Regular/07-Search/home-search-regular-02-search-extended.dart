@@ -751,6 +751,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         itemBuilder: (c, i) {
           return feeds[i].pageType == 'Blm'
           ? MiscBLMPost(
+            key: ValueKey('$i'),
             userId: feeds[i].userId,
             postId: feeds[i].postId,
             memorialId: feeds[i].memorialId,
@@ -958,6 +959,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             ],
           )
           : MiscRegularPost(
+            key: ValueKey('$i'),
             userId: feeds[i].userId,
             postId: feeds[i].postId,
             memorialId: feeds[i].memorialId,
@@ -1174,6 +1176,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         itemBuilder: (c, i) {
           return searchFeeds[i].pageType == 'Blm'
           ? MiscBLMPost(
+            key: ValueKey('$i'),
             userId: searchFeeds[i].userId,
             postId: searchFeeds[i].postId,
             memorialId: searchFeeds[i].memorialId,
@@ -1380,6 +1383,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             ],
           )
           : MiscRegularPost(
+            key: ValueKey('$i'),
             userId: searchFeeds[i].userId,
             postId: searchFeeds[i].postId,
             memorialId: searchFeeds[i].memorialId,

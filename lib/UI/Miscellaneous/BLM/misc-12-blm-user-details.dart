@@ -152,6 +152,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i){
             return MiscBLMPost(
+              key: ValueKey('$i'),
               userId: posts[i].userId,
               postId: posts[i].postId,
               memorialId: posts[i].memorialId,
