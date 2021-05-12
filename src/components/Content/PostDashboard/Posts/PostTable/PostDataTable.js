@@ -62,8 +62,6 @@ export default function PostDataTable({
       blmPosts.length != 0 ||
       posts.length != 0
     ) {
-      return "";
-    } else {
       return (
         <a
           href="#"
@@ -112,6 +110,8 @@ export default function PostDataTable({
           </span>
         </a>
       );
+    } else {
+      return "";
     }
   };
 

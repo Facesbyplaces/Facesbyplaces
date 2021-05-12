@@ -44,8 +44,6 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
 
   const renderNextButton = () => {
     if (alm_users.length != 0 || blm_users.length != 0) {
-      return "";
-    } else {
       return (
         <a
           href="#"
@@ -94,6 +92,8 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
           </span>
         </a>
       );
+    } else {
+      return "";
     }
   };
 
