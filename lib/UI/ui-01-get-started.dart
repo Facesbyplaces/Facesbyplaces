@@ -84,7 +84,7 @@ class UIGetStartedState extends State<UIGetStarted> {
     print('The start of deep linking');
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
       if ((data.containsKey("+clicked_branch_link") &&
-              data["+clicked_branch_link"] == true) &&
+          data["+clicked_branch_link"] == true) &&
           (data.containsKey("link-category") &&
               data["link-category"] == 'Post')) {
         initUnitSharePost(
@@ -93,7 +93,7 @@ class UIGetStartedState extends State<UIGetStarted> {
             numberOfLikes: data['link-number-of-likes'],
             pageType: data['link-type-of-account']);
       } else if ((data.containsKey("+clicked_branch_link") &&
-              data["+clicked_branch_link"] == true) &&
+          data["+clicked_branch_link"] == true) &&
           (data.containsKey("link-category") &&
               data["link-category"] == 'Memorial')) {
         initUnitShareMemorial(
@@ -122,24 +122,24 @@ class UIGetStartedState extends State<UIGetStarted> {
             context,
             MaterialPageRoute(
                 builder: (context) => RegularPasswordReset(
-                      resetToken: value1['reset_password_token'],
-                    )));
+                  resetToken: value1['reset_password_token'],
+                )));
       } else {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => BLMPasswordReset(
-                      resetToken: value1['reset_password_token'],
-                    )));
+                  resetToken: value1['reset_password_token'],
+                )));
       }
     }
   }
 
   initUnitSharePost(
       {required int postId,
-      required bool likeStatus,
-      required int numberOfLikes,
-      required String pageType}) async {
+        required bool likeStatus,
+        required int numberOfLikes,
+        required String pageType}) async {
     bool login = await FlutterBranchSdk.isUserIdentified();
 
     if (login) {
@@ -163,8 +163,8 @@ class UIGetStartedState extends State<UIGetStarted> {
 
   initUnitShareMemorial(
       {required int memorialId,
-      required String pageType,
-      required bool follower}) async {
+        required String pageType,
+        required bool follower}) async {
     bool login = await FlutterBranchSdk.isUserIdentified();
 
     if (login) {
@@ -174,19 +174,19 @@ class UIGetStartedState extends State<UIGetStarted> {
             context,
             MaterialPageRoute(
                 builder: (context) => HomeBLMMemorialProfile(
-                      memorialId: memorialId,
-                      pageType: pageType,
-                      newJoin: follower,
-                    )));
+                  memorialId: memorialId,
+                  pageType: pageType,
+                  newJoin: follower,
+                )));
       } else {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => HomeRegularMemorialProfile(
-                      memorialId: memorialId,
-                      pageType: pageType,
-                      newJoin: follower,
-                    )));
+                  memorialId: memorialId,
+                  pageType: pageType,
+                  newJoin: follower,
+                )));
       }
     }
   }
@@ -453,12 +453,12 @@ class UIGetStartedState extends State<UIGetStarted> {
                         ),
                       ),
                       Positioned(
-                        bottom: SizeConfig.blockSizeVertical! * 5,
-                        left: SizeConfig.blockSizeHorizontal! * 30,
+                        top: SizeConfig.blockSizeVertical! * 10.0,
+                        left: SizeConfig.blockSizeVertical! * 5,
                         child: Image.asset(
                           'assets/icons/logo.png',
-                          height: 200,
-                          width: 200,
+                          height: SizeConfig.blockSizeVertical! * 29.98,
+                          width: SizeConfig.blockSizeVertical! * 47.81,
                         ),
                       )
                     ],
@@ -476,41 +476,38 @@ class UIGetStartedState extends State<UIGetStarted> {
                     children: [
                       SizedBox(height: SizeConfig.blockSizeVertical! * 3),
                       Center(
-                        child: const Text(
+                        child:  Text(
                           'FacesByPlaces.com',
                           style: TextStyle(
-                              fontSize: 24,
+                              fontSize: SizeConfig.blockSizeVertical! * 3.65,
                               color: Color(0xff04ECFF),
                               fontFamily: 'NexaBold'),
                         ),
                       ),
                       SizedBox(height: SizeConfig.blockSizeVertical! * 3),
                       Container(
-                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! *13, right: SizeConfig.blockSizeHorizontal! * 13),
-                        child: const Center(
-                          child: const Text(
+                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! *4.06, right: SizeConfig.blockSizeHorizontal! * 4.06),
+                        child:  Center(
+                          child:  Text(
                             'Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 18,
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 2.92,
                               fontFamily: 'NexaRegular',
                               color: const Color(0xffffffff),
-                              height: 1.5,
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(),
-                      ),
+                      Spacer(),
                       MaterialButton(
                         padding: EdgeInsets.zero,
-                        child: const Text(
+                        child:  Text(
                           'Get Started',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: const Color(0xffffffff),
-                            fontFamily: 'NexaBold'
+                          style:  TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                              color: const Color(0xffffffff),
+                              fontFamily: 'NexaBold'
                           ),
                         ),
                         minWidth: SizeConfig.blockSizeHorizontal! * 80,

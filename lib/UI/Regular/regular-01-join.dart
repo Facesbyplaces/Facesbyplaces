@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:flutter/material.dart';
@@ -7,68 +8,73 @@ class RegularJoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: Scaffold(
-        body: Stack(
-          children: [
-
-            const MiscRegularBackgroundTemplate(),
-
-            Positioned(
-              top: 50,
-              left: 30,
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  onPressed: (){
-                    Navigator.pop(context);
-                  }, 
-                  icon: const Icon(
-                    Icons.arrow_back, 
-                    color: const Color(0xff000000), 
-                    size: 30,
-                  ),
+    SizeConfig.init(context);
+    return Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+            bottom: false,
+            child: Container(
+              height: SizeConfig.screenHeight,
+              width: SizeConfig.screenWidth,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/icons/background.png'),
+                  colorFilter: ColorFilter.srgbToLinearGamma(),
                 ),
               ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-
-                  const SizedBox(height: 30),
-
-                  Container(child: Image.asset('assets/icons/logo.png', height: 150, width: 150,),),
-
-                  const SizedBox(height: 150),
-                  
-                  const Center(child: const Text('All Lives Matter', style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),),
-
-                  const SizedBox(height: 20),
-
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Color(0xffFFFFFF),
+                        size: SizeConfig.blockSizeVertical! * 3.65,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: SizeConfig.blockSizeVertical! * 7.12),
+                  Container(
+                    child: Image.asset(
+                      'assets/icons/logo.png',
+                      height: SizeConfig.blockSizeVertical! * 22.48,
+                      width: SizeConfig.blockSizeHorizontal! * 35.9,
+                    ),
+                  ),
+                  SizedBox(height: SizeConfig.blockSizeVertical! * 35.20),
+                  Center(
+                    child: Text(
+                      'All Lives Matter',
+                      style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 4.57,
+                          color: const Color(0xffffffff),
+                          fontFamily: 'NexaBold'
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: SizeConfig.blockSizeVertical! * 6.03),
                   MiscRegularButtonTemplate(
-                    buttonText: 'Next', 
-                    buttonTextStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold, 
+                    buttonText: 'Next',
+                    buttonTextStyle: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 3.29,
+                      fontFamily: 'NexaBold',
                       color: const Color(0xffffffff),
-                    ), 
-                    onPressed: (){
+                    ),
+                    onPressed: () {
                       Navigator.pushNamed(context, '/regular/login');
-                    }, 
-                    width: 150,
-                    height: 45,
+                    },
+                    width: SizeConfig.blockSizeHorizontal! * 52.17,
+                    height: SizeConfig.blockSizeVertical! * 7.00,
                     buttonColor: const Color(0xff04ECFF),
                   ),
-
+                  Spacer()
                 ],
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            )));
   }
 }

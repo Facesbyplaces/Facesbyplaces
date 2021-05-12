@@ -26,8 +26,8 @@ class BLMJoin extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back,
-                      color: const Color(0xff000000), size: 30),
+                  icon:  Icon(Icons.arrow_back,
+                    color:  Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                 ),
               ),
               Container(
@@ -36,10 +36,10 @@ class BLMJoin extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Spacer(),
-                    const Text(
+                    Text(
                       'BLACK',
-                      style: const TextStyle(
-                          fontSize: 24,
+                      style:  TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 3.65,
                           color: const Color(0xff000000),
                           fontFamily: 'NexaBold'),
                     ),
@@ -47,10 +47,10 @@ class BLMJoin extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       alignment: Alignment.center,
-                      child: const Text(
+                      child:  Text(
                         'LIVES',
-                        style: const TextStyle(
-                          fontSize: 24,
+                        style:  TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 3.65,
                           fontWeight: FontWeight.bold,
                           color: const Color(0xffffffff),
                         ),
@@ -58,14 +58,14 @@ class BLMJoin extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: const Color(0xff000000),
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                        const BorderRadius.all(Radius.circular(10)),
                       ),
                     ),
                     SizedBox(width: SizeConfig.blockSizeHorizontal! * 2),
-                    const Text(
+                    Text(
                       'MATTER',
-                      style: const TextStyle(
-                        fontSize: 24,
+                      style:  TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 3.65,
                         fontWeight: FontWeight.bold,
                         color: const Color(0xff000000),
                       ),
@@ -81,7 +81,7 @@ class BLMJoin extends StatelessWidget {
                     Positioned.fill(
                       top: SizeConfig.blockSizeVertical! * 30,
                       child: Container(
-                        height: SizeConfig.blockSizeVertical!*30,
+                        height: SizeConfig.blockSizeVertical! * 30,
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           image: const DecorationImage(
@@ -92,58 +92,65 @@ class BLMJoin extends StatelessWidget {
                           ),
                         ),
                         child: Container(
-                          color: Colors.white.withOpacity(0.3),
+                          color: Colors.white.withOpacity(0.4),
                         ),
                       ),
                     ),
                     Positioned(
-                      top: SizeConfig.blockSizeVertical!*5,
-                      left: SizeConfig.blockSizeHorizontal!*5,
+                      top: SizeConfig.blockSizeVertical! * 5,
+                      left: SizeConfig.blockSizeHorizontal! * 8,
                       child: Transform.rotate(
                         angle: 75,
-                        child: const MiscStartImageBlmTemplate(),
+                        child: const MiscStartImageBlmTemplate(
+                          image: 'assets/icons/join1.png',
+                        ),
                       ),
                     ),
-
                     Positioned(
-                      left: 200,
+                      left: SizeConfig.blockSizeHorizontal! * 40,
                       child: Transform.rotate(
-                        angle: 101,
+                        angle: 0,
                         child: const MiscStartImageBlmTemplate(),
                       ),
                     ),
-
                     Positioned(
-                      top: 100,
+                      top: SizeConfig.blockSizeVertical! * 5,
                       right: 0,
                       child: Transform.rotate(
                         angle: 101,
-                        child: const MiscStartImageBlmTemplate(),
+                        child: const MiscStartImageBlmTemplate(
+                          image: 'assets/icons/join2.png',
+                        ),
                       ),
                     ),
-
                     Positioned(
-                      top: 200,
+                      top: SizeConfig.blockSizeVertical! * 20,
                       child: Transform.rotate(
                         angle: 101,
                         child: const MiscStartImageBlmTemplate(),
                       ),
                     ),
-
                     Positioned(
-                      top: 200,
+                      bottom: SizeConfig.blockSizeVertical! * 30,
+                      left: SizeConfig.blockSizeHorizontal! * 65,
+                      child: Transform.rotate(
+                        angle: 101,
+                        child: const MiscStartImageBlmTemplate(
+                            image: 'assets/icons/join7.png'),
+                      ),
+                    ),
+                    Positioned(
+                      top: SizeConfig.blockSizeVertical! * 20,
                       right: 0,
-                      child: const MiscStartImageBlmTemplate(),
+                      child: Transform.rotate(
+                        angle: 0,
+                        child: const MiscStartImageBlmTemplate(
+                            image: 'assets/icons/join4.png'),
+                      ),
                     ),
-
                     Positioned(
-                      bottom: 0,
-                      child: const MiscStartImageBlmTemplate(),
-                    ),
-
-                    Positioned(
-                      bottom: 0,
-                      left: 150,
+                      bottom: SizeConfig.blockSizeVertical! * 30,
+                      left: SizeConfig.blockSizeHorizontal! * 30,
                       child: Transform.rotate(
                         angle: 101,
                         child: Container(
@@ -154,74 +161,60 @@ class BLMJoin extends StatelessWidget {
                             padding: const EdgeInsets.all(5.0),
                             child: Transform.rotate(
                               angle: 25,
-                              child: Image.asset('assets/icons/blm-image2.png'),
+                              child: Image.asset('assets/icons/join1.png'),
                             ),
                           ),
                         ),
                       ),
                     ),
-
                     Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Transform.rotate(
-                        angle: 101,
-                        child: const MiscStartImageBlmTemplate(),
+                      bottom: SizeConfig.blockSizeVertical! * 30,
+                      left: SizeConfig.blockSizeHorizontal! * 5,
+                      child: const MiscStartImageBlmTemplate(
+                          image: 'assets/icons/join4.png'),
+                    ),
+                    Positioned.fill(
+                        right: SizeConfig.blockSizeHorizontal! * 30,
+                        left: SizeConfig.blockSizeHorizontal! * 30,
+                        bottom: SizeConfig.blockSizeVertical! * 30,
+                        child: Image.asset(
+                          'assets/icons/logo.png',
+                        )),
+                    Positioned.fill(
+                      top: SizeConfig.blockSizeVertical! * 40,
+                      child: Center(
+                        child: Text(
+                          'Remembering the Victims',
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 3.29,
+                            fontFamily: 'NexaBold',
+                            color: const Color(0xff000000),
+                          ),
+                        ),
                       ),
                     ),
-
                     Positioned.fill(
-                        right: SizeConfig.blockSizeHorizontal!* 30,
-                        left: SizeConfig.blockSizeHorizontal!* 30,
-                        bottom: SizeConfig.blockSizeVertical!* 30,
-                      child: Image.asset('assets/icons/logo.png',)
+                      top: SizeConfig.blockSizeVertical! * 60,
+                      child: Center(
+                        child:  MiscBLMButtonTemplate(
+                          buttonText: 'Join',
+                          buttonTextStyle: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 3.29,
+                            fontFamily: 'NexaBold',
+                            color: const Color(0xffffffff),
+                          ),
+                          width: SizeConfig.blockSizeHorizontal! * 55,
+                          height: SizeConfig.blockSizeVertical! * 7.31,
+                          buttonColor: const Color(0xff4EC9D4),
+                          onPressed: (){
+                            Navigator.pushNamed(context, '/blm/login');
+                          },
+                        ),
+                      ),
                     ),
-
-                    // const SizedBox(height: 50,),
-
-                    // const Center(child: const Text('Remembering the Victims', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),
-
-                    // const SizedBox(height: 50,),
-                
-                    // MiscBLMButtonTemplate(
-                    //   buttonText: 'Join', 
-                    //   buttonTextStyle: const TextStyle(
-                    //     fontSize: 16,
-                    //     fontWeight: FontWeight.bold, 
-                    //     color: const Color(0xffffffff),
-                    //   ),
-                    //   width: SizeConfig.screenWidth! / 2, 
-                    //   height: 45,
-                    //   buttonColor: const Color(0xff4EC9D4),
-                    //   onPressed: (){
-                    //     Navigator.pushNamed(context, '/blm/login');
-                    //   },
-                    // ),
-
-                    // const SizedBox(height: 80,),
                   ],
                 ),
               ),
-
-              const SizedBox(height: 20,),
-
-              MiscBLMButtonTemplate(
-                buttonText: 'Join', 
-                buttonTextStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold, 
-                  color: const Color(0xffffffff),
-                ),
-                width: SizeConfig.screenWidth! / 2, 
-                height: 45,
-                buttonColor: const Color(0xff4EC9D4),
-                onPressed: (){
-                  Navigator.pushNamed(context, '/blm/login');
-                },
-              ),
-
-              const SizedBox(height: 20,),
-
             ],
           ),
         ),

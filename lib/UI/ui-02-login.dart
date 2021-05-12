@@ -20,36 +20,36 @@ class UILogin01 extends StatelessWidget {
               SizedBox(height: SizeConfig.blockSizeVertical! * 5),
               Image.asset(
                 'assets/icons/logo.png',
-                height: 200,
-                width: 200,
+                height: SizeConfig.blockSizeVertical! * 29.98,
+                width: SizeConfig.blockSizeVertical! * 47.81,
               ),
               SizedBox(height: SizeConfig.blockSizeVertical! * 2),
-              const Text(
+              Text(
                 'FacesByPlaces.com',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: SizeConfig.blockSizeVertical! * 2.74,
                     color: Color(0xff2F353D),
                     fontFamily: 'NexaBold'),
               ),
-              Spacer(),
-              const Text(
+              SizedBox(height: SizeConfig.blockSizeVertical! * 4.79),
+              Text(
                 'Honor, Respect, Never Forget',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'NexaBold',
-                  fontSize: 18,
+                  fontSize: SizeConfig.blockSizeVertical! * 2.74,
                   color: const Color(0xff000000),
                 ),
               ),
-              Spacer(),
+              SizedBox(height: SizeConfig.blockSizeVertical! * 4.20),
               Text(
                 'Black Lives Matter',
-                style: const TextStyle(
-                    fontSize: 18,
+                style:  TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 2.74,
                     color: const Color(0xff000000),
                     fontFamily: 'NexaRegular'),
               ),
-              SizedBox(height: SizeConfig.blockSizeVertical! * 2),
+              SizedBox(height: SizeConfig.blockSizeVertical! * 0.54),
               Padding(
                 padding: EdgeInsets.only(
                     left: SizeConfig.blockSizeHorizontal! * 3,
@@ -57,7 +57,7 @@ class UILogin01 extends StatelessWidget {
                 child: MaterialButton(
                   padding: EdgeInsets.zero,
                   minWidth: SizeConfig.screenWidth! / 1.5,
-                  height: 35,
+                  height: SizeConfig.blockSizeVertical! * 10.00,
                   child: Row(
                     children: [
                       CircleAvatar(
@@ -73,14 +73,14 @@ class UILogin01 extends StatelessWidget {
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.only(
-                            left: SizeConfig.blockSizeHorizontal! * 8,
-                            right: SizeConfig.blockSizeHorizontal! * 17,
+                            left: SizeConfig.blockSizeHorizontal! * 3.75,
+                            right: SizeConfig.blockSizeHorizontal! * 0,
                           ),
                           alignment: Alignment.center,
                           child: Text(
                             'Speak for a loved one killed by law enforcement',
-                            style: const TextStyle(
-                                fontSize: 18,
+                            style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.5,
                                 color: const Color(0xff2F353D),
                                 fontFamily: 'NexaRegular'),
                           ),
@@ -95,15 +95,15 @@ class UILogin01 extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: SizeConfig.blockSizeVertical! * 2),
-              const Text(
+              SizedBox(height: SizeConfig.blockSizeVertical! * 3.83),
+              Text(
                 'All Lives Matter',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: SizeConfig.blockSizeVertical! * 2.74,
                     color: const Color(0xff000000),
                     fontFamily: 'NexaRegular'),
               ),
-              SizedBox(height: SizeConfig.blockSizeVertical! * 2),
+              SizedBox(height: SizeConfig.blockSizeVertical! * 0.54),
               Padding(
                 padding: EdgeInsets.only(
                     left: SizeConfig.blockSizeHorizontal! * 3,
@@ -111,7 +111,7 @@ class UILogin01 extends StatelessWidget {
                 child: MaterialButton(
                   padding: EdgeInsets.zero,
                   minWidth: SizeConfig.screenWidth! / 1.5,
-                  height: 35,
+                  height: SizeConfig.blockSizeVertical! * 10.0,
                   child: Row(
                     children: [
                       CircleAvatar(
@@ -119,21 +119,21 @@ class UILogin01 extends StatelessWidget {
                         backgroundColor: const Color(0xff04ECFF),
                         child: Icon(
                           Icons.favorite,
-                          size: 50,
+                          size: SizeConfig.blockSizeVertical! * 5.0,
                           color: const Color(0xffffffff),
                         ),
                       ),
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.only(
-                            left: SizeConfig.blockSizeHorizontal! * 8,
-                            right: SizeConfig.blockSizeHorizontal! * 17,
+                            left: SizeConfig.blockSizeHorizontal! * 3.75,
+                            right: SizeConfig.blockSizeHorizontal! * 5,
                           ),
                           alignment: Alignment.center,
                           child: Text(
                             'Remembering friends and family',
-                            style: const TextStyle(
-                                fontSize: 18,
+                            style:  TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.5,
                                 color: const Color(0xff2F353D),
                                 fontFamily: 'NexaRegular'),
                           ),
@@ -152,19 +152,19 @@ class UILogin01 extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   children: <TextSpan>[
-                    const TextSpan(
-                      text: 'Already have an account? ',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: const Color(0xff000000),
-                        fontFamily: 'NexaRegular'
+                    TextSpan(
+                      text: 'Already have an Account? ',
+                      style:  TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                          color: const Color(0xff000000),
+                          fontFamily: 'NexaRegular'
                       ),
                     ),
                     TextSpan(
                         text: 'Login',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: const Color(0xff04ECFF),
+                        style:  TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                            color: const Color(0xff04ECFF),
                             fontFamily: 'NexaRegular'
                         ),
                         recognizer: TapGestureRecognizer()
