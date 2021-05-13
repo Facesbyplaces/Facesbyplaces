@@ -38,124 +38,139 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     print('Upload photo screen build!');
-    return RepaintBoundary(
-      child: Scaffold(
-        backgroundColor: Color(0xffffffff),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          physics: const ClampingScrollPhysics(),
-          child: Column(
-            children: [
+    return ValueListenableBuilder(
+      valueListenable: image,
+      builder: (_, File imageListener, __) => RepaintBoundary(
+        child: Scaffold(
+          backgroundColor: Color(0xffffffff),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            physics: const ClampingScrollPhysics(),
+            child: Column(
+              children: [
 
-              const SizedBox(height: 40),
+                const SizedBox(height: 40),
 
-              const Center(
-                child: const Text('Upload Photo',
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold, 
-                    color: const Color(0xff000000),
+                const Center(
+                  child: const Text('Upload Photo',
+                    style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold, 
+                      color: const Color(0xff000000),
+                    ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 40),
+                const SizedBox(height: 40),
 
-              GestureDetector(
-                onTap: () async{
+                GestureDetector(
+                  onTap: () async{
 
-                  var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
+                    var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
 
-                  if(choice == null){
-                    choice = 0;
-                  }else{
-                    if(choice == 1){
-                      await openCamera();
+                    if(choice == null){
+                      choice = 0;
                     }else{
-                      await getImage();
+                      if(choice == 1){
+                        await openCamera();
+                      }else{
+                        await getImage();
+                      }
                     }
-                  }
-                  
-                },
-                child: Container(
-                  height: SizeConfig.screenWidth! / 1.2,
-                  width: SizeConfig.screenWidth! / 1.2,
-                  color: const Color(0xffF9F8EE),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: ValueListenableBuilder(
-                            valueListenable: image,
-                            builder: (_, File imageListener, __) => imageListener.path != ''
-                            ? Stack(
+                    
+                  },
+                  child: Container(
+                    height: SizeConfig.screenWidth! / 1.2,
+                    width: SizeConfig.screenWidth! / 1.2,
+                    color: const Color(0xffF9F8EE),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Stack(
                               children: [
                                 Container(color: const Color(0xffffffff),),
 
-                                Align(
+                                imageListener.path != ''
+                                ? Align(
                                   alignment: Alignment.center, 
                                   child: Container(
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: FileImage(image.value),
+                                        image: FileImage(imageListener),
                                       ),
                                     ),
                                   ),
+                                )
+                                : Align(
+                                  alignment: Alignment.center, 
+                                  child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),
                                 ),
                               ],
-                            )
-                            : Stack(
-                              children: [
-                                Container(color: const Color(0xffffffff),),
-
-                                Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
-                              ],
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: const Center(
-                          child: const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: const Color(0xff000000),
+                        Expanded(
+                          child: const Center(
+                            child: const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: const Color(0xff000000),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 80),
+                const SizedBox(height: 80),
 
-              MiscRegularButtonTemplate(
-                buttonText: image.value.path != ''
-                ? 'Sign Up'
-                : 'Next',
-                buttonTextStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold, 
-                  color: const Color(0xffffffff),
-                ),
-                width: SizeConfig.screenWidth! / 2,
-                height: 45,
-                buttonColor: const Color(0xff04ECFF),
-                onPressed: () async{
-                  if(image.value.path != ''){
+                MiscRegularButtonTemplate(
+                  buttonText: imageListener.path != ''
+                  ? 'Sign Up'
+                  : 'Next',
+                  buttonTextStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold, 
+                    color: const Color(0xffffffff),
+                  ),
+                  width: SizeConfig.screenWidth! / 2,
+                  height: 45,
+                  buttonColor: const Color(0xff04ECFF),
+                  onPressed: () async{
+                    if(imageListener.path != ''){
 
-                    context.loaderOverlay.show();
-                    bool result = await apiRegularUploadPhoto(image: image);
-                    context.loaderOverlay.hide();
+                      context.loaderOverlay.show();
+                      bool result = await apiRegularUploadPhoto(image: imageListener);
+                      context.loaderOverlay.hide();
 
-                    if(result){
-                      Navigator.pushReplacementNamed(context, '/home/regular');
+                      if(result){
+                        Navigator.pushReplacementNamed(context, '/home/regular');
+                      }else{
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: const Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.red,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
+                      }
                     }else{
                       await showDialog(
                         context: context,
@@ -164,7 +179,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('Something went wrong. Please try again.',
+                          description: const Text('Please upload a photo.',
                             textAlign: TextAlign.center,
                           ),
                           onlyOkButton: true,
@@ -175,66 +190,48 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         )
                       );
                     }
-                  }else{
-                    await showDialog(
-                      context: context,
-                      builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: const Text('Please upload a photo.',
-                          textAlign: TextAlign.center,
-                        ),
-                        onlyOkButton: true,
-                        buttonOkColor: Colors.red,
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      )
-                    );
-                  }
-                },
-              ),
-
-              const SizedBox(height: 20),
-
-              RichText(
-                text: const TextSpan(
-                  children: <TextSpan>[
-                    const TextSpan(
-                      text: 'Connect / ', 
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w300,
-                        color: const Color(0xff888888),
-                      ),
-                    ),
-
-                    const TextSpan(
-                      text: 'Remember / ',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w300,
-                        color: const Color(0xff888888),
-                      ),
-                    ),
-
-                    const TextSpan(
-                      text: 'Honor',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w300,
-                        color: const Color(0xff888888),
-                      ),
-                    ),
-                  ],
+                  },
                 ),
-              ),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-            ],
+                RichText(
+                  text: const TextSpan(
+                    children: <TextSpan>[
+                      const TextSpan(
+                        text: 'Connect / ', 
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: const Color(0xff888888),
+                        ),
+                      ),
+
+                      const TextSpan(
+                        text: 'Remember / ',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: const Color(0xff888888),
+                        ),
+                      ),
+
+                      const TextSpan(
+                        text: 'Honor',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: const Color(0xff888888),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+              ],
+            ),
           ),
         ),
       ),

@@ -212,17 +212,6 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
       ),
       body: Container(
         width: SizeConfig.screenWidth,
-        // child: RefreshIndicator(
-        //   onRefresh: onRefresh,
-        //   child: ListView.separated(
-        //     controller: scrollController,
-        //     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        //     physics: const ClampingScrollPhysics(),
-        //     itemCount: friends.length,
-        //     separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        //     itemBuilder: (c, i) => friends[i],
-        //   )
-        // ),
         child: friends.length != 0
         ? RefreshIndicator(
           onRefresh: onRefresh,

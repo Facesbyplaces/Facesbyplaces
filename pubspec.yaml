@@ -50,7 +50,6 @@ dev_dependencies:
   flutter_barcode_scanner: ^2.0.0-nullsafety.0
   geocoding: ^2.0.0
   we_slide: ^2.0.0
-  date_time_picker: ^2.0.0
   keyboard_attachable: ^2.0.0
   modal_bottom_sheet: ^2.0.0
   pinput: ^1.2.0
@@ -74,6 +73,7 @@ dev_dependencies:
   firebase_auth: ^1.0.3
   google_sign_in: ^5.0.2
   flutter_login_facebook: ^1.0.1
+  flutter_datetime_picker: ^1.5.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

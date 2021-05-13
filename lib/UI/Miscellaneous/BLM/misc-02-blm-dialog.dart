@@ -18,11 +18,11 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Upload From',
+            const Text('Choose file to Upload:',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w300,
-                color: const Color(0xff000000),
+                color: const Color(0xff888888),
               ),
             ),
 
@@ -34,9 +34,9 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
               },
               child: Text(choice_1,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff000000).withOpacity(0.5),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff888888),
                 ),
               ),
             ),
@@ -49,9 +49,9 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
               },
               child: Text(choice_2,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff000000).withOpacity(0.5),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff888888),
                 ),
               ),
             ),

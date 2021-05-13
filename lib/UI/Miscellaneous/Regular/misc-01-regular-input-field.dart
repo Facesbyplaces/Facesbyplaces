@@ -1,5 +1,5 @@
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
@@ -271,20 +271,18 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
 class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
 
   final String labelText;
-  final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  const MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
+  const MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.displayText = ''}) : super(key: key);
 
-  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
+  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, displayText: displayText);
 }
 
 class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
   final String labelText;
-  final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  MiscRegularInputFieldDateTimeTemplateState({required this.labelText, required this.dateTimePickerType, required this.displayText});
+  MiscRegularInputFieldDateTimeTemplateState({required this.labelText, required this.displayText});
 
   TextEditingController controller = TextEditingController(text: '');
 
@@ -295,16 +293,29 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
 
   @override
   Widget build(BuildContext context) {
-    return DateTimePicker(
-      type: dateTimePickerType,
+    return TextFormField(
       controller: controller,
+      keyboardType: TextInputType.text,
       cursorColor: const Color(0xff000000),
-      firstDate: DateTime(1000),
-      lastDate: DateTime.now(),
+      readOnly: true,
+      onTap: (){
+        DatePicker.showDatePicker(
+          context, 
+          showTitleActions: true,
+          minTime: DateTime(1000),
+          maxTime: DateTime.now(),
+          currentTime: DateTime.now(),
+          onConfirm: (date) {
+            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+            controller.text = format;
+          },
+          locale: LocaleType.en,
+        );
+      },
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),

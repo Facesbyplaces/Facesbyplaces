@@ -23,6 +23,8 @@ Future<String> apiBLMVerifyEmail({required String verificationCode}) async{
   print('The status code of blm verify email is ${response.statusCode}');
 
   if(response.statusCode == 200){
+    sharedPrefs.setBool('blm-user-session', true);
+    sharedPrefs.setBool('user-guest-session', false);
     return 'Success';
   }else{
     var newData = Map<String, dynamic>.from(response.data);
