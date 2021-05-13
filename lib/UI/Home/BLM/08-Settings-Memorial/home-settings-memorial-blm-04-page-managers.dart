@@ -342,17 +342,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       ),
       body: Container(
         width: SizeConfig.screenWidth,
-      //   child: RefreshIndicator(
-      //     onRefresh: onRefresh,
-      //     child: ListView.separated(
-      //       controller: scrollController,
-      //       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-      //       physics: const ClampingScrollPhysics(),
-      //       itemCount: managers.length,
-      //       separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-      //       itemBuilder: (c, i) => managers[i],
-      //     )
-      //   ),
         child: managers.length != 0
         ? RefreshIndicator(
           onRefresh: onRefresh,

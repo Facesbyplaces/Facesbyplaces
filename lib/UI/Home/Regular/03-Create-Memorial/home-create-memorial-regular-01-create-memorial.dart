@@ -1,9 +1,9 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-regular-02-create-memorial.dart';
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -51,7 +51,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
 
-  DateTime dob = DateTime.now();
+  DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
 
   @override
@@ -101,13 +101,27 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                     const SizedBox(height: 20,),
 
-                    DateTimePicker(
-                      type: DateTimePickerType.date,
+                    TextFormField(
                       controller: controller1,
+                      keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
-                      firstDate: DateTime(1000),
-                      lastDate: DateTime.now(),
-                      decoration: const InputDecoration(
+                      readOnly: true,
+                      onTap: (){
+                        DatePicker.showDatePicker(
+                          context, 
+                          showTitleActions: true,
+                          minTime: dob,
+                          maxTime: rip,
+                          currentTime: DateTime.now(),
+                          onConfirm: (date) {
+                            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                            dob = date;
+                            controller1.text = format;
+                          },
+                          locale: LocaleType.en,
+                        );
+                      },
+                      decoration: InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'DOB',
                         labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
@@ -117,29 +131,31 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           ),
                         ),
                       ),
-                      selectableDayPredicate: (date) {
-                        if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
-                          return true;
-                        }else{
-                          return false;
-                        }
-                      },
-                      onChanged: (changed){
-                        setState(() {
-                          dob = DateTime.parse(changed);
-                        });
-                      },
                     ),
 
                     const SizedBox(height: 20,),
 
-                    DateTimePicker(
-                      type: DateTimePickerType.date,
+                    TextFormField(
                       controller: controller2,
+                      keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
-                      firstDate: DateTime(1000),
-                      lastDate: DateTime.now(),
-                      decoration: const InputDecoration(
+                      readOnly: true,
+                      onTap: (){
+                        DatePicker.showDatePicker(
+                          context, 
+                          showTitleActions: true,
+                          minTime: dob,
+                          maxTime: DateTime.now(),
+                          currentTime: DateTime.now(),
+                          onConfirm: (date) {
+                            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                            rip = date;
+                            controller2.text = format;
+                          },
+                          locale: LocaleType.en,
+                        );
+                      },
+                      decoration: InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'RIP',
                         labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
@@ -149,18 +165,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           ),
                         ),
                       ),
-                      selectableDayPredicate: (date) {
-                        if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
-                          return true;
-                        }else{
-                          return false;
-                        }
-                      },
-                      onChanged: (changed){
-                        setState(() {
-                          rip = DateTime.parse(changed);
-                        });
-                      },
                     ),
 
                     const SizedBox(height: 20,),
@@ -174,6 +178,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                     const SizedBox(height: 40,),
 
                     MiscRegularButtonTemplate(
+                      width: SizeConfig.screenWidth! / 2,
+                      height: 45,
                       onPressed: () async{
                         if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' ||  _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                           await showDialog(
@@ -206,9 +212,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             )
                           );
                         }
-                      }, 
-                      width: SizeConfig.screenWidth! / 2,
-                      height: 45,
+                      },
                     ),
                   ],
                 ),

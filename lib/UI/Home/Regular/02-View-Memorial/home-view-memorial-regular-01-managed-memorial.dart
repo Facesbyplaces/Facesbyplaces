@@ -7,6 +7,7 @@ import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -303,13 +304,75 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                       Column(
                                         children: [
-                                          Container(
+                                          GestureDetector(
+                                            onTap: (){
+                                              showGeneralDialog(
+                                                context: context,
+                                                barrierDismissible: true,
+                                                barrierLabel: 'Dialog',
+                                                transitionDuration: const Duration(milliseconds: 0),
+                                                pageBuilder: (_, __, ___) {
+                                                  return Scaffold(
+                                                    backgroundColor: Colors.black12.withOpacity(0.7),
+                                                    body: SizedBox.expand(
+                                                      child: SafeArea(
+                                                        child: Column(
+                                                          children: [
+                                                            Container(
+                                                              alignment: Alignment.centerRight,
+                                                              padding: const EdgeInsets.only(right: 20.0),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Navigator.pop(context);
+                                                                },
+                                                                child: CircleAvatar(
+                                                                  radius: 20,
+                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                                ),
+                                                              ),
+                                                            ),
+
+                                                            const SizedBox(height: 10,),
+
+                                                            Expanded(
+                                                              child: ((){
+                                                                if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
+                                                                  return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
+                                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                      aspectRatio: 16 / 9,
+                                                                    ),
+                                                                  );
+                                                                }else{
+                                                                  return CachedNetworkImage(
+                                                                    fit: BoxFit.cover,
+                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[0],
+                                                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                  );
+                                                                }
+                                                              }()),
+                                                            ),
+
+                                                            const SizedBox(height: 85,),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
                                             child: ((){
                                               if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty){
                                                 if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                   return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
                                                     betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                       aspectRatio: 16 / 9,
+                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                        showControls: false,
+                                                      ),
                                                     ),
                                                   );
                                                 }else{
@@ -672,8 +735,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                               if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
                                                                                 return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                   betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                     autoDispose: false,
-                                                                                    aspectRatio: 1,
+                                                                                    aspectRatio: 16 / 9,
                                                                                   ),
                                                                                 );
                                                                               }else{
@@ -701,18 +765,17 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                         children: [
                                                                           IconButton(
                                                                             onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                            icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
+                                                                            icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff), size: 25,),
                                                                           ),
 
                                                                           IconButton(
                                                                             onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                            icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                                            icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff), size: 25,),
                                                                           ),
                                                                         ],
                                                                       ),
 
                                                                       const SizedBox(height: 85,),
-
                                                                     ],
                                                                   ),
                                                                 ),

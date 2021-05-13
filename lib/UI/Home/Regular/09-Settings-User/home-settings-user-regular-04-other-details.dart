@@ -101,7 +101,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                     children: [
                       Row(
                         children: [
-                          Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.showOtherDetailsBirthdate,),),
+                          Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.showOtherDetailsBirthdate.substring(0, details.data!.showOtherDetailsBirthdate.indexOf('T'),),),),
 
                           const SizedBox(height: 20,),
 
