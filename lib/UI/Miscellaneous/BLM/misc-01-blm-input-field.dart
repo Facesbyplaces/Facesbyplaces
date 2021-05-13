@@ -1,5 +1,5 @@
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
 class MiscBLMInputFieldTemplate extends StatefulWidget{
@@ -257,18 +257,20 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
 class MiscBLMInputFieldDateTimeTemplate extends StatefulWidget{
 
   final String labelText;
+  final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  const MiscBLMInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.displayText = ''}) : super(key: key);
+  const MiscBLMInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
 
-  MiscBLMInputFieldDateTimeTemplateState createState() => MiscBLMInputFieldDateTimeTemplateState(labelText: labelText, displayText: displayText);
+  MiscBLMInputFieldDateTimeTemplateState createState() => MiscBLMInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
 }
 
 class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDateTimeTemplate>{
   final String labelText;
+  final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  MiscBLMInputFieldDateTimeTemplateState({required this.labelText, required this.displayText});
+  MiscBLMInputFieldDateTimeTemplateState({required this.labelText, required this.dateTimePickerType, required this.displayText});
 
   TextEditingController controller = TextEditingController(text: '');
 
@@ -279,26 +281,12 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return DateTimePicker(
+      type: dateTimePickerType,
       controller: controller,
-      keyboardType: TextInputType.text,
       cursorColor: const Color(0xff000000),
-      readOnly: true,
-      onTap: (){
-        DatePicker.showDatePicker(
-          context, 
-          showTitleActions: true,
-          minTime: DateTime(1000),
-          maxTime: DateTime.now(),
-          currentTime: DateTime.now(),
-          onConfirm: (date) {
-            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-            print('The new format is $format');
-            controller.text = format;
-          },
-          locale: LocaleType.en,
-        );
-      },
+      firstDate: DateTime(1000),
+      lastDate: DateTime.now(),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,

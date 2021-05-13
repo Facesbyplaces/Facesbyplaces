@@ -25,8 +25,6 @@ Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
   print('The status code of regular verify email is ${response.statusCode}');
 
   if(response.statusCode == 200){
-    sharedPrefs.setBool('regular-user-session', true);
-    sharedPrefs.setBool('user-guest-session', false);
     return 'Success';
   }else{
     var newData = Map<String, dynamic>.from(response.data);

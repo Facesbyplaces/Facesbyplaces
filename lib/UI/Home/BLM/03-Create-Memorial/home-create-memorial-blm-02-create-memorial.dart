@@ -2,7 +2,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/services.dart';
 import 'home-create-memorial-blm-03-create-memorial.dart';
 import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
@@ -280,65 +279,14 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
         child: videoFile.path != ''
         ? Stack(
           children: [
-            GestureDetector(
-              onTap: (){
-                showGeneralDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  barrierLabel: 'Dialog',
-                  transitionDuration: const Duration(milliseconds: 0),
-                  pageBuilder: (_, __, ___) {
-                    return Scaffold(
-                      backgroundColor: Colors.black12.withOpacity(0.7),
-                      body: SizedBox.expand(
-                        child: SafeArea(
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.centerRight,
-                                padding: const EdgeInsets.only(right: 20.0),
-                                child: GestureDetector(
-                                  onTap: (){
-                                    Navigator.pop(context);
-                                  },
-                                  child: CircleAvatar(
-                                    radius: 20,
-                                    backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                    child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 10,),
-
-                              Expanded(
-                                child: BetterPlayer.file(
-                                  videoFile.path,
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(     
-                                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                    aspectRatio: 16 / 9,
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 85,),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: BetterPlayer.file(
-                videoFile.path,
-                betterPlayerConfiguration: BetterPlayerConfiguration(
-                  deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                    showControls: false,
-                  ),
-                  aspectRatio: 16 / 9,
+            BetterPlayer.file(
+              videoFile.path,
+              betterPlayerConfiguration: BetterPlayerConfiguration(
+                controlsConfiguration: BetterPlayerControlsConfiguration(
+                  enableOverflowMenu: false,
+                  enableMute: false,
                 ),
+                aspectRatio: 16 / 9,
               ),
             ),
 

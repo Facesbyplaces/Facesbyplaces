@@ -1,8 +1,10 @@
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
-class MiscRegularInputFieldTemplate extends StatefulWidget{
+import '../../../Configurations/size_configuration.dart';
+
+class MiscRegularInputFieldTemplate extends StatefulWidget {
   final String labelText;
   final TextStyle labelTextStyle;
   final bool obscureText;
@@ -16,20 +18,35 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
   const MiscRegularInputFieldTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-    this.obscureText = false, 
-    this.type = TextInputType.text, 
-    this.maxLines = 1, 
+    this.labelTextStyle = const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: Colors.grey,
+    ),
+    this.obscureText = false,
+    this.type = TextInputType.text,
+    this.maxLines = 1,
     this.readOnly = false,
     this.includeSuffixIcon = false,
     this.displayText = '',
     this.edited = false,
   }) : super(key: key);
-  
-  MiscRegularInputFieldTemplateState createState() => MiscRegularInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText, edited: edited);
+
+  MiscRegularInputFieldTemplateState createState() =>
+      MiscRegularInputFieldTemplateState(
+          labelText: labelText,
+          labelTextStyle: labelTextStyle,
+          obscureText: obscureText,
+          type: type,
+          maxLines: maxLines,
+          readOnly: readOnly,
+          includeSuffixIcon: includeSuffixIcon,
+          displayText: displayText,
+          edited: edited);
 }
 
-class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemplate>{
+class MiscRegularInputFieldTemplateState
+    extends State<MiscRegularInputFieldTemplate> {
   final String labelText;
   final TextStyle labelTextStyle;
   final bool obscureText;
@@ -40,11 +57,20 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   final String displayText;
   final bool edited;
 
-  MiscRegularInputFieldTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText, required this.edited});
+  MiscRegularInputFieldTemplateState(
+      {required this.labelText,
+      required this.labelTextStyle,
+      required this.obscureText,
+      required this.type,
+      required this.maxLines,
+      required this.readOnly,
+      required this.includeSuffixIcon,
+      required this.displayText,
+      required this.edited});
 
   TextEditingController controller = TextEditingController(text: '');
 
-  void initState(){
+  void initState() {
     super.initState();
     controller = TextEditingController(text: displayText);
   }
@@ -72,7 +98,7 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   }
 }
 
-class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget{
+class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget {
   final String labelText;
   final TextStyle labelTextStyle;
   final TextInputType type;
@@ -83,18 +109,29 @@ class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget{
   const MiscRegularInputFieldMultiTextTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-    this.type = TextInputType.text, 
+    this.labelTextStyle = const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: Colors.grey,
+    ),
+    this.type = TextInputType.text,
     this.maxLines = 10,
     this.readOnly = false,
     this.backgroundColor = const Color(0xffffffff),
   }) : super(key: key);
-  
 
-  MiscRegularInputFieldMultiTextTemplateState createState() => MiscRegularInputFieldMultiTextTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
+  MiscRegularInputFieldMultiTextTemplateState createState() =>
+      MiscRegularInputFieldMultiTextTemplateState(
+          labelText: labelText,
+          labelTextStyle: labelTextStyle,
+          type: type,
+          maxLines: maxLines,
+          readOnly: readOnly,
+          backgroundColor: backgroundColor);
 }
 
-class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInputFieldMultiTextTemplate>{
+class MiscRegularInputFieldMultiTextTemplateState
+    extends State<MiscRegularInputFieldMultiTextTemplate> {
   final String labelText;
   final TextStyle labelTextStyle;
   final TextInputType type;
@@ -102,7 +139,13 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
   final bool readOnly;
   final Color backgroundColor;
 
-  MiscRegularInputFieldMultiTextTemplateState({required this.labelText, required this.labelTextStyle, required this.type, required this.maxLines, required this.readOnly, required this.backgroundColor});
+  MiscRegularInputFieldMultiTextTemplateState(
+      {required this.labelText,
+      required this.labelTextStyle,
+      required this.type,
+      required this.maxLines,
+      required this.readOnly,
+      required this.backgroundColor});
 
   TextEditingController controller = TextEditingController(text: '');
 
@@ -137,8 +180,7 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
   }
 }
 
-class MiscRegularInputFieldDropDown extends StatefulWidget{
-
+class MiscRegularInputFieldDropDown extends StatefulWidget {
   final String displayText;
 
   const MiscRegularInputFieldDropDown({
@@ -147,30 +189,45 @@ class MiscRegularInputFieldDropDown extends StatefulWidget{
   }) : super(key: key);
 
   @override
-  MiscRegularInputFieldDropDownState createState() => MiscRegularInputFieldDropDownState(displayText: displayText);
+  MiscRegularInputFieldDropDownState createState() =>
+      MiscRegularInputFieldDropDownState(displayText: displayText);
 }
 
-class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDropDown>{
-
+class MiscRegularInputFieldDropDownState
+    extends State<MiscRegularInputFieldDropDown> {
   final String displayText;
 
   MiscRegularInputFieldDropDownState({required this.displayText});
 
-  List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
+  List<String> relationship = [
+    'Father',
+    'Mother',
+    'Sister',
+    'Brother',
+    'Aunt',
+    'Uncle',
+    'Nephew',
+    'Grandmother',
+    'Grandfather'
+  ];
   String currentSelection = 'Father';
 
-  void initState(){
+  void initState() {
     super.initState();
     currentSelection = displayText;
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return InputDecorator(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        labelStyle: TextStyle(
+            fontSize: SizeConfig.blockSizeVertical! * 2.11,
+            fontFamily: 'NexaRegular',
+            color: const Color(0xff000000)),
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),
@@ -189,7 +246,12 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
           items: relationship.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value),
+              child: Text(value,
+                style: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                    fontFamily: 'NexaRegular',
+                    color: const Color(0xff000000)),
+              ),
             );
           }).toList(),
         ),
@@ -198,8 +260,7 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
   }
 }
 
-class MiscRegularInputFieldSecurityQuestions extends StatefulWidget{
-
+class MiscRegularInputFieldSecurityQuestions extends StatefulWidget {
   final String displayText;
 
   const MiscRegularInputFieldSecurityQuestions({
@@ -208,36 +269,40 @@ class MiscRegularInputFieldSecurityQuestions extends StatefulWidget{
   }) : super(key: key);
 
   @override
-  MiscRegularInputFieldSecurityQuestionsState createState() => MiscRegularInputFieldSecurityQuestionsState(displayText: displayText);
+  MiscRegularInputFieldSecurityQuestionsState createState() =>
+      MiscRegularInputFieldSecurityQuestionsState(displayText: displayText);
 }
 
-class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInputFieldSecurityQuestions>{
-
+class MiscRegularInputFieldSecurityQuestionsState
+    extends State<MiscRegularInputFieldSecurityQuestions> {
   final String displayText;
 
   MiscRegularInputFieldSecurityQuestionsState({required this.displayText});
 
   List<String> securityQuestions = [
-    'What\'s the name of your first dog?', 
-    'What primary school did you attend?', 
-    'In what city or town was your first job?', 
-    'What was your childhood nickname?', 
+    'What\'s the name of your first dog?',
+    'What primary school did you attend?',
+    'In what city or town was your first job?',
+    'What was your childhood nickname?',
     'What street did you live on in third grade?',
   ];
   String currentSelection = 'What\'s the name of your first dog?';
 
-  void initState(){
+  void initState() {
     super.initState();
     currentSelection = displayText;
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return InputDecorator(
       decoration: const InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Security Question',
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        labelStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: const Color(0xff888888)),
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),
@@ -247,8 +312,9 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           style: const TextStyle(
-            fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff000000)
-          ),
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: const Color(0xff000000)),
           value: currentSelection,
           isDense: true,
           onChanged: (String? newValue) {
@@ -268,54 +334,58 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
   }
 }
 
-class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
-
+class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget {
   final String labelText;
+  final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  const MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.displayText = ''}) : super(key: key);
+  const MiscRegularInputFieldDateTimeTemplate(
+      {required Key key,
+      this.labelText = '',
+      this.dateTimePickerType = DateTimePickerType.date,
+      this.displayText = ''})
+      : super(key: key);
 
-  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, displayText: displayText);
+  MiscRegularInputFieldDateTimeTemplateState createState() =>
+      MiscRegularInputFieldDateTimeTemplateState(
+          labelText: labelText,
+          dateTimePickerType: dateTimePickerType,
+          displayText: displayText);
 }
 
-class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
+class MiscRegularInputFieldDateTimeTemplateState
+    extends State<MiscRegularInputFieldDateTimeTemplate> {
   final String labelText;
+  final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  MiscRegularInputFieldDateTimeTemplateState({required this.labelText, required this.displayText});
+  MiscRegularInputFieldDateTimeTemplateState(
+      {required this.labelText,
+      required this.dateTimePickerType,
+      required this.displayText});
 
   TextEditingController controller = TextEditingController(text: '');
 
-  void initState(){
+  void initState() {
     super.initState();
     controller = TextEditingController(text: displayText);
   }
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return DateTimePicker(
+      type: dateTimePickerType,
       controller: controller,
-      keyboardType: TextInputType.text,
       cursorColor: const Color(0xff000000),
-      readOnly: true,
-      onTap: (){
-        DatePicker.showDatePicker(
-          context, 
-          showTitleActions: true,
-          minTime: DateTime(1000),
-          maxTime: DateTime.now(),
-          currentTime: DateTime.now(),
-          onConfirm: (date) {
-            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-            controller.text = format;
-          },
-          locale: LocaleType.en,
-        );
-      },
+      firstDate: DateTime(1000),
+      lastDate: DateTime.now(),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+        labelStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: const Color(0xff888888)),
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),
@@ -326,7 +396,7 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
   }
 }
 
-class MiscRegularPhoneNumberTemplate extends StatefulWidget{
+class MiscRegularPhoneNumberTemplate extends StatefulWidget {
   final String labelText;
   final TextStyle labelTextStyle;
   final bool obscureText;
@@ -339,19 +409,33 @@ class MiscRegularPhoneNumberTemplate extends StatefulWidget{
   const MiscRegularPhoneNumberTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-    this.obscureText = false, 
-    this.type = TextInputType.text, 
-    this.maxLines = 1, 
+    this.labelTextStyle = const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: Colors.grey,
+    ),
+    this.obscureText = false,
+    this.type = TextInputType.text,
+    this.maxLines = 1,
     this.readOnly = false,
     this.includeSuffixIcon = false,
     this.displayText = '',
   }) : super(key: key);
-  
-  MiscRegularPhoneNumberTemplateState createState() => MiscRegularPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
+
+  MiscRegularPhoneNumberTemplateState createState() =>
+      MiscRegularPhoneNumberTemplateState(
+          labelText: labelText,
+          labelTextStyle: labelTextStyle,
+          obscureText: obscureText,
+          type: type,
+          maxLines: maxLines,
+          readOnly: readOnly,
+          includeSuffixIcon: includeSuffixIcon,
+          displayText: displayText);
 }
 
-class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTemplate>{
+class MiscRegularPhoneNumberTemplateState
+    extends State<MiscRegularPhoneNumberTemplate> {
   final String labelText;
   final TextStyle labelTextStyle;
   final bool obscureText;
@@ -361,12 +445,20 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
   final bool includeSuffixIcon;
   final String displayText;
 
-  MiscRegularPhoneNumberTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
+  MiscRegularPhoneNumberTemplateState(
+      {required this.labelText,
+      required this.labelTextStyle,
+      required this.obscureText,
+      required this.type,
+      required this.maxLines,
+      required this.readOnly,
+      required this.includeSuffixIcon,
+      required this.displayText});
 
   TextEditingController controller = TextEditingController(text: '');
   bool valid = false;
 
-  void initState(){
+  void initState() {
     super.initState();
     controller = TextEditingController(text: displayText);
   }
@@ -374,9 +466,12 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
   @override
   Widget build(BuildContext context) {
     return InternationalPhoneNumberInput(
-      selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
+      selectorConfig: const SelectorConfig(
+        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+        showFlags: false,
+      ),
       textFieldController: controller,
-      onInputChanged: (PhoneNumber number){
+      onInputChanged: (PhoneNumber number) {
         print(number.phoneNumber);
       },
       onInputValidated: (bool value) {

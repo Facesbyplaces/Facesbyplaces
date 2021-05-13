@@ -5,7 +5,6 @@ import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-01-d
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-11-regular-dropdown.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -321,75 +320,13 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                             Column(
                                               children: [
-                                                GestureDetector(
-                                                  onTap: (){
-                                                    showGeneralDialog(
-                                                      context: context,
-                                                      barrierDismissible: true,
-                                                      barrierLabel: 'Dialog',
-                                                      transitionDuration: const Duration(milliseconds: 0),
-                                                      pageBuilder: (_, __, ___) {
-                                                        return Scaffold(
-                                                          backgroundColor: Colors.black12.withOpacity(0.7),
-                                                          body: SizedBox.expand(
-                                                            child: SafeArea(
-                                                              child: Column(
-                                                                children: [
-                                                                  Container(
-                                                                    alignment: Alignment.centerRight,
-                                                                    padding: const EdgeInsets.only(right: 20.0),
-                                                                    child: GestureDetector(
-                                                                      onTap: (){
-                                                                        Navigator.pop(context);
-                                                                      },
-                                                                      child: CircleAvatar(
-                                                                        radius: 20,
-                                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                        child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-
-                                                                  const SizedBox(height: 10,),
-
-                                                                  Expanded(
-                                                                    child: ((){
-                                                                      if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
-                                                                        return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                            deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                            aspectRatio: 16 / 9,
-                                                                          ),
-                                                                        );
-                                                                      }else{
-                                                                        return CachedNetworkImage(
-                                                                          fit: BoxFit.cover,
-                                                                          imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[0],
-                                                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                        );
-                                                                      }
-                                                                    }()),
-                                                                  ),
-
-                                                                  const SizedBox(height: 85,),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    );
-                                                  },
+                                                Container(
                                                   child: ((){
                                                     if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty){
                                                       if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                         return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
                                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                             aspectRatio: 16 / 9,
-                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                              showControls: false,
-                                                            ),
                                                           ),
                                                         );
                                                       }else{
@@ -455,17 +392,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             join = !join;
                                                           });
 
-                                                          print('The value of join is $join');
-
-                                                          if(join == true){
-                                                            profile.data!.almMemorial.showMemorialFollowersCount++;
-                                                          }else{
-                                                            profile.data!.almMemorial.showMemorialFollowersCount--;
-                                                          }
-
                                                           context.loaderOverlay.show();
                                                           bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: join);
                                                           context.loaderOverlay.hide();
+
+                                                          print('The value of result is $result');
 
                                                           if(result){
                                                             await showDialog(
@@ -846,9 +777,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                                     if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
                                                                                       return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                         betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                          deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                           autoDispose: false,
-                                                                                          aspectRatio: 16 / 9,
+                                                                                          aspectRatio: 1,
                                                                                         ),
                                                                                       );
                                                                                     }else{

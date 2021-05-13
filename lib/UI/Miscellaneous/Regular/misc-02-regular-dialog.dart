@@ -19,11 +19,11 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Choose file to Upload:',
+            const Text('Upload From',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w300,
-                color: const Color(0xff888888),
+                color: const Color(0xff000000),
               ),
             ),
 
@@ -35,9 +35,9 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
               },
               child: Text(choice_1,
                 style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff888888),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
@@ -50,9 +50,9 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
               },
               child: Text(choice_2,
                 style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff888888),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),

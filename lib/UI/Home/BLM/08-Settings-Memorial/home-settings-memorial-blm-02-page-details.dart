@@ -4,8 +4,8 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -33,13 +33,9 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key9 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
   Future<APIBLMShowPageDetailsMain>? futureMemorialSettings;
-
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
-  // DateTime dob = DateTime.now();
-  // DateTime rip = DateTime.now();
-
-  DateTime dob = DateTime(1000);
+  DateTime dob = DateTime.now();
   DateTime rip = DateTime.now();
 
   void initState(){
@@ -109,27 +105,14 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             const SizedBox(height: 20,),
 
-                            TextFormField(
+                            DateTimePicker(
+                              type: DateTimePickerType.date,
                               controller: controller1,
-                              keyboardType: TextInputType.text,
                               cursorColor: const Color(0xff000000),
-                              readOnly: true,
-                              onTap: (){
-                                DatePicker.showDatePicker(
-                                  context, 
-                                  showTitleActions: true,
-                                  minTime: dob,
-                                  maxTime: rip,
-                                  currentTime: DateTime.now(),
-                                  onConfirm: (date) {
-                                    String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                                    dob = date;
-                                    controller1.text = format;
-                                  },
-                                  locale: LocaleType.en,
-                                );
-                              },
-                              decoration: InputDecoration(
+                              firstDate: DateTime(1000),
+                              lastDate: DateTime.now(),
+                              dateLabelText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob,
+                              decoration: const InputDecoration(
                                 alignLabelWithHint: true,
                                 labelText: 'DOB',
                                 labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
@@ -139,31 +122,30 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                   ),
                                 ),
                               ),
+                              selectableDayPredicate: (date) {
+                                if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
+                                  return true;
+                                }else{
+                                  return false;
+                                }
+                              },
+                              onChanged: (changed){
+                                setState(() {
+                                  dob = DateTime.parse(changed);
+                                  controller1.text = dob.toString();
+                                });
+                              },
                             ),
 
                             const SizedBox(height: 20,),
 
-                            TextFormField(
+                            DateTimePicker(
+                              type: DateTimePickerType.date,
                               controller: controller2,
-                              keyboardType: TextInputType.text,
                               cursorColor: const Color(0xff000000),
-                              readOnly: true,
-                              onTap: (){
-                                DatePicker.showDatePicker(
-                                  context, 
-                                  showTitleActions: true,
-                                  minTime: dob,
-                                  maxTime: DateTime.now(),
-                                  currentTime: DateTime.now(),
-                                  onConfirm: (date) {
-                                    String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                                    rip = date;
-                                    controller2.text = format;
-                                  },
-                                  locale: LocaleType.en,
-                                );
-                              },
-                              decoration: InputDecoration(
+                              firstDate: DateTime(1000),
+                              lastDate: DateTime.now(),
+                              decoration: const InputDecoration(
                                 alignLabelWithHint: true,
                                 labelText: 'RIP',
                                 labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
@@ -173,6 +155,24 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                   ),
                                 ),
                               ),
+                              selectableDayPredicate: (date) {
+                                try{
+                                  if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                                    return true;
+                                  }else{
+                                    return false;
+                                  }
+                                }catch(e){
+                                  print('The error is $e');
+                                }
+                                return true;
+                              },
+                              onChanged: (changed){
+                                setState(() {
+                                  rip = DateTime.parse(changed);
+                                  controller2.text = dob.toString();
+                                });
+                              },
                             ),
 
                             const SizedBox(height: 20,),

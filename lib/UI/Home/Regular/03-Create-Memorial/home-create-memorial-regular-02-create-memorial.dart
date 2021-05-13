@@ -2,7 +2,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/services.dart';
 import 'home-create-memorial-regular-03-create-memorial.dart';
 import 'package:better_player/better_player.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -275,68 +274,16 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
         child: videoFile.path != ''
         ? Stack(
           children: [
-            GestureDetector(
-              onTap: (){
-                showGeneralDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  barrierLabel: 'Dialog',
-                  transitionDuration: const Duration(milliseconds: 0),
-                  pageBuilder: (_, __, ___) {
-                    return Scaffold(
-                      backgroundColor: Colors.black12.withOpacity(0.7),
-                      body: SizedBox.expand(
-                        child: SafeArea(
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.centerRight,
-                                padding: const EdgeInsets.only(right: 20.0),
-                                child: GestureDetector(
-                                  onTap: (){
-                                    Navigator.pop(context);
-                                  },
-                                  child: CircleAvatar(
-                                    radius: 20,
-                                    backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                    child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 10,),
-
-                              Expanded(
-                                child: BetterPlayer.file(
-                                  videoFile.path,
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(     
-                                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                    aspectRatio: 16 / 9,
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 85,),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: BetterPlayer.file(
-                videoFile.path,
-                betterPlayerConfiguration: BetterPlayerConfiguration(
-                  deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                    showControls: false,
-                  ),
-                  aspectRatio: 16 / 9,
+            BetterPlayer.file(
+              videoFile.path,
+              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                  enableOverflowMenu: false,
+                  enableMute: false,
                 ),
+                aspectRatio: 16 / 9,
               ),
             ),
-
 
             Positioned(
               right: 0,

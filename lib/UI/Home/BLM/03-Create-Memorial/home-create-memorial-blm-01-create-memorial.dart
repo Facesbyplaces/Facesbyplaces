@@ -1,9 +1,9 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-blm-02-create-memorial.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -54,7 +54,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
 
-  DateTime dob = DateTime(1000);
+  DateTime dob = DateTime.now();
   DateTime rip = DateTime.now();
 
   @override
@@ -108,27 +108,13 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                     const SizedBox(height: 20,),
 
-                    TextFormField(
+                    DateTimePicker(
+                      type: DateTimePickerType.date,
                       controller: controller1,
-                      keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
-                      readOnly: true,
-                      onTap: (){
-                        DatePicker.showDatePicker(
-                          context, 
-                          showTitleActions: true,
-                          minTime: dob,
-                          maxTime: rip,
-                          currentTime: DateTime.now(),
-                          onConfirm: (date) {
-                            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                            dob = date;
-                            controller1.text = format;
-                          },
-                          locale: LocaleType.en,
-                        );
-                      },
-                      decoration: InputDecoration(
+                      firstDate: DateTime(1000),
+                      lastDate: DateTime.now(),
+                      decoration: const InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'DOB',
                         labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
@@ -138,31 +124,29 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                           ),
                         ),
                       ),
+                      selectableDayPredicate: (date) {
+                        if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      },
+                      onChanged: (changed){
+                        setState(() {
+                          dob = DateTime.parse(changed);
+                        });
+                      },
                     ),
 
                     const SizedBox(height: 20,),
 
-                    TextFormField(
+                    DateTimePicker(
+                      type: DateTimePickerType.date,
                       controller: controller2,
-                      keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
-                      readOnly: true,
-                      onTap: (){
-                        DatePicker.showDatePicker(
-                          context, 
-                          showTitleActions: true,
-                          minTime: dob,
-                          maxTime: DateTime.now(),
-                          currentTime: DateTime.now(),
-                          onConfirm: (date) {
-                            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                            rip = date;
-                            controller2.text = format;
-                          },
-                          locale: LocaleType.en,
-                        );
-                      },
-                      decoration: InputDecoration(
+                      firstDate: DateTime(1000),
+                      lastDate: DateTime.now(),
+                      decoration: const InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'RIP',
                         labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
@@ -172,6 +156,18 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                           ),
                         ),
                       ),
+                      selectableDayPredicate: (date) {
+                        if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      },
+                      onChanged: (changed){
+                        setState(() {
+                          rip = DateTime.parse(changed);
+                        });
+                      },
                     ),
 
                     const SizedBox(height: 20,),
@@ -185,9 +181,8 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                     const SizedBox(height: 40,),
 
                     MiscBLMButtonTemplate(
-                      width: SizeConfig.screenWidth! / 2,
-                      height: 45,
                       onPressed: () async{
+
                         if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
                           await showDialog(
                             context: context,
@@ -207,6 +202,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                             )
                           );
                         }else{
+                          print('The precinct is ${_key3.currentState!.controller.text}');
                           Navigator.push(
                             context, MaterialPageRoute(builder: (context) => 
                               HomeBLMCreateMemorial2(
@@ -221,7 +217,10 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                             )
                           );
                         }
-                      },
+
+                      }, 
+                      width: SizeConfig.screenWidth! / 2,
+                      height: 45,
                     ),
                   ],
                 ),

@@ -135,10 +135,14 @@ class RegularLoginState extends State<RegularLogin>{
                                           builder: (_) =>
                                               AssetGiffyDialog(
                                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                title:  Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                                 entryAnimation: EntryAnimation.DEFAULT,
-                                                description: const Text('Invalid email or password. Please try again.',
+                                                description:  Text('Invalid email or password. Please try again.',
                                                   textAlign: TextAlign.center,
+                                                  style:  TextStyle(
+                                                      fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                                      fontFamily: 'NexaRegular'
+                                                  ),
                                                 ),
                                                 onlyOkButton: true,
                                                 buttonOkColor: const Color(0xffff0000),
@@ -259,10 +263,14 @@ class RegularLoginState extends State<RegularLogin>{
                                         builder: (_) =>
                                             AssetGiffyDialog(
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                              title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                               entryAnimation: EntryAnimation.DEFAULT,
-                                              description: const Text('Invalid email or password. Please try again.',
+                                              description: Text('Invalid email or password. Please try again.',
                                                 textAlign: TextAlign.center,
+                                                style:  TextStyle(
+                                                    fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                                    fontFamily: 'NexaRegular'
+                                                ),
                                               ),
                                               onlyOkButton: true,
                                               buttonOkColor: const Color(0xffff0000),
@@ -372,10 +380,14 @@ class RegularLoginState extends State<RegularLogin>{
                                   builder: (_) =>
                                       AssetGiffyDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        title: Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                         entryAnimation: EntryAnimation.DEFAULT,
-                                        description: const Text('Please complete the form before submitting.',
+                                        description: Text('Please complete the form before submitting.',
                                           textAlign: TextAlign.center,
+                                          style:  TextStyle(
+                                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                              fontFamily: 'NexaRegular'
+                                          ),
                                         ),
                                         onlyOkButton: true,
                                         buttonOkColor: const Color(0xffff0000),
@@ -390,10 +402,14 @@ class RegularLoginState extends State<RegularLogin>{
                                   builder: (_) =>
                                       AssetGiffyDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        title: Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                         entryAnimation: EntryAnimation.DEFAULT,
-                                        description: const Text('Invalid email address. Please try again.',
+                                        description: Text('Invalid email address. Please try again.',
                                           textAlign: TextAlign.center,
+                                          style:  TextStyle(
+                                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                              fontFamily: 'NexaRegular'
+                                          ),
                                         ),
                                         onlyOkButton: true,
                                         buttonOkColor: const Color(0xffff0000),
@@ -424,10 +440,14 @@ class RegularLoginState extends State<RegularLogin>{
                                     builder: (_) =>
                                         AssetGiffyDialog(
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          title:  Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                           entryAnimation: EntryAnimation.DEFAULT,
                                           description: Text('Error: $result',
                                             textAlign: TextAlign.center,
+                                            style:  TextStyle(
+                                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                                fontFamily: 'NexaRegular'
+                                            ),
                                           ),
                                           onlyOkButton: true,
                                           buttonOkColor: const Color(0xffff0000),

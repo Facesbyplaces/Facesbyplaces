@@ -27,39 +27,41 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class HomeRegularScreenExtended extends StatefulWidget{
+class HomeRegularScreenExtended extends StatefulWidget {
   final int newToggleBottom;
   const HomeRegularScreenExtended({required this.newToggleBottom});
 
-  HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState(newToggleBottom: newToggleBottom);
+  HomeRegularScreenExtendedState createState() =>
+      HomeRegularScreenExtendedState(newToggleBottom: newToggleBottom);
 }
 
-class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
+class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
   final int newToggleBottom;
   HomeRegularScreenExtendedState({required this.newToggleBottom});
 
   ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
   ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
-  ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
+  ValueNotifier<List<bool>> bottomTab =
+      ValueNotifier<List<bool>>([true, false, false, false]);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
 
   Future<APIRegularShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
 
-  Future<APIRegularShowProfileInformation> getDrawerInformation() async{
+  Future<APIRegularShowProfileInformation> getDrawerInformation() async {
     return await apiRegularShowProfileInformation();
   }
 
-  void getUnreadNotifications() async{
+  void getUnreadNotifications() async {
     var value = await apiRegularShowUnreadNotifications();
     unreadNotifications.value = value;
   }
 
-  void isGuest() async{
+  void isGuest() async {
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn.value = sharedPrefs.getBool('user-guest-session') ?? false;
 
-    if(isGuestLoggedIn.value != true){
+    if (isGuestLoggedIn.value != true) {
       getUnreadNotifications();
       drawerSettings = getDrawerInformation();
     }
@@ -68,7 +70,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   Future<void> scanQR() async {
     String barcodeScanRes;
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666", "Cancel", true, ScanMode.QR);
       print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -83,46 +86,77 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
     List<dynamic> newValue = _scanBarcode.split('-');
 
-    if(_scanBarcode != 'Error'){
-      if(newValue[0] == 'Memorial'){
-        if(newValue[2] == 'Blm'){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
-        }else{
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
+    if (_scanBarcode != 'Error') {
+      if (newValue[0] == 'Memorial') {
+        if (newValue[2] == 'Blm') {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeBLMMemorialProfile(
+                        memorialId: int.parse(newValue[1]),
+                        pageType: newValue[2],
+                        newJoin: false,
+                      )));
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeRegularMemorialProfile(
+                        memorialId: int.parse(newValue[1]),
+                        pageType: newValue[2],
+                        newJoin: false,
+                      )));
         }
-      }else{
-        if(newValue[4] == 'Blm'){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]))));
-        }else{
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
+      } else {
+        if (newValue[4] == 'Blm') {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeBLMShowOriginalPostComments(
+                      postId: int.parse(newValue[1]))));
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeRegularShowOriginalPostComments(
+                      postId: int.parse(newValue[1]))));
         }
       }
-    }else{
+    } else {
       await showDialog(
-        context: context,
-        builder: (_) => 
-          AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-          entryAnimation: EntryAnimation.DEFAULT,
-          description: const Text('Something went wrong. Please try again.',
-            textAlign: TextAlign.center,
-          ),
-          onlyOkButton: true,
-          buttonOkColor: const Color(0xffff0000),
-          onOkButtonPressed: () {
-            Navigator.pop(context, true);
-          },
-        )
-      );
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+                image: Image.asset(
+                  'assets/icons/cover-icon.png',
+                  fit: BoxFit.cover,
+                ),
+                title: const Text(
+                  'Error',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 22.0, fontWeight: FontWeight.w600),
+                ),
+                entryAnimation: EntryAnimation.DEFAULT,
+                description: const Text(
+                  'Something went wrong. Please try again.',
+                  textAlign: TextAlign.center,
+                ),
+                onlyOkButton: true,
+                buttonOkColor: const Color(0xffff0000),
+                onOkButtonPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ));
     }
   }
 
-  void initState(){
+  void initState() {
     super.initState();
     isGuest();
     toggleBottom.value = newToggleBottom;
-    bottomTab.value = toggleBottom.value ==  0 ? [true, false, false, false] : [false, true, false, false];
+    bottomTab.value = toggleBottom.value == 0
+        ? [true, false, false, false]
+        : [false, true, false, false];
   }
 
   @override
@@ -130,13 +164,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
     SizeConfig.init(context);
     print('Home extended screen build!');
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusNode currentFocus = FocusScope.of(context);
-          if(!currentFocus.hasPrimaryFocus){
+          if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
           }
         },
@@ -144,68 +178,102 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
           valueListenable: toggleBottom,
           builder: (_, int toggleBottomListener, __) => ValueListenableBuilder(
             valueListenable: bottomTab,
-            builder: (_, List<bool> bottomTabListener, __) => ValueListenableBuilder(
+            builder: (_, List<bool> bottomTabListener, __) =>
+                ValueListenableBuilder(
               valueListenable: unreadNotifications,
-              builder: (_, int unreadNotificationListener, __) => ValueListenableBuilder(
+              builder: (_, int unreadNotificationListener, __) =>
+                  ValueListenableBuilder(
                 valueListenable: isGuestLoggedIn,
                 builder: (_, bool isGuestLoggedInListener, __) => Scaffold(
                   appBar: AppBar(
                     backgroundColor: Color(0xff4EC9D4),
                     leading: FutureBuilder<APIRegularShowProfileInformation>(
                       future: drawerSettings,
-                      builder: (context, profileImage){
-                        if(profileImage.hasData){
+                      builder: (context, profileImage) {
+                        if (profileImage.hasData) {
                           return Builder(
-                            builder: (context){
+                            builder: (context) {
                               return IconButton(
                                 icon: CircleAvatar(
                                   backgroundColor: const Color(0xff888888),
-                                  foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
-                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                  foregroundImage: NetworkImage(profileImage
+                                      .data!.showProfileInformationImage),
+                                  backgroundImage: const AssetImage(
+                                      'assets/icons/app-icon.png'),
                                 ),
-                                onPressed: () async{
+                                onPressed: () async {
                                   Scaffold.of(context).openDrawer();
                                 },
                               );
                             },
                           );
-                        }else if(profileImage.hasError || isGuestLoggedInListener){
+                        } else if (profileImage.hasError ||
+                            isGuestLoggedInListener) {
                           return IconButton(
                             icon: const CircleAvatar(
                               backgroundColor: const Color(0xff888888),
-                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                              foregroundImage:
+                                  const AssetImage('assets/icons/app-icon.png'),
                             ),
-                            onPressed: () async{
+                            onPressed: () async {
                               Scaffold.of(context).openDrawer();
                             },
                           );
-                        }else{
-                          return Container(child: const CircularProgressIndicator(), padding: const EdgeInsets.all(20.0),);
+                        } else {
+                          return Container(
+                            child: const CircularProgressIndicator(),
+                            padding: const EdgeInsets.all(20.0),
+                          );
                         }
                       },
                     ),
-                    title: const Text('FacesByPlaces.com', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
+                    title: Text(
+                      'FacesByPlaces.com',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                        fontFamily: 'NexaBold',
+                        color: const Color(0xffffffff),
+                      ),
+                    ),
                     centerTitle: true,
                     actions: [
-                      IconButton(
-                        icon: const Icon(Icons.search, color: const Color(0xffffffff), size: 35),
-                        onPressed: () async{
+                      GestureDetector(
+                        onTap: (){
                           Navigator.pushNamed(context, '/home/regular/search');
                         },
+                        child: SizedBox(
+                          height: SizeConfig.blockSizeVertical! * 4.04,
+                          width: SizeConfig.blockSizeHorizontal! * 7.18,
+                          child: Image.asset(
+                            'assets/icons/zoom.png',
+                          ),
+                        ),
                       ),
                     ],
                   ),
                   body: Stack(
                     children: [
-                      SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
-
+                      SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        child: Container(
+                          height: SizeConfig.screenHeight,
+                          child: const MiscRegularBackgroundTemplate(
+                            image: const AssetImage(
+                                'assets/icons/background2.png'),
+                          ),
+                        ),
+                      ),
                       Container(
-                        child: ((){
-                          switch(toggleBottomListener){
-                            case 0: return HomeRegularFeedTab();
-                            case 1: return HomeRegularManageTab();
-                            case 2: return HomeRegularPostTab();
-                            case 3: return HomeRegularNotificationsTab();
+                        child: (() {
+                          switch (toggleBottomListener) {
+                            case 0:
+                              return HomeRegularFeedTab();
+                            case 1:
+                              return HomeRegularManageTab();
+                            case 2:
+                              return HomeRegularPostTab();
+                            case 3:
+                              return HomeRegularNotificationsTab();
                           }
                         }()),
                       ),
@@ -213,12 +281,16 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   ),
                   floatingActionButton: FloatingActionButton(
                     backgroundColor: const Color(0xffffffff),
-                    onPressed: () async{
+                    onPressed: () async {
                       scanQR();
                     },
-                    child: const Icon(Icons.qr_code, color: const Color(0xff4EC9D4),),
+                    child: const Icon(
+                      Icons.qr_code,
+                      color: const Color(0xff4EC9D4),
+                    ),
                   ),
-                  floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.centerDocked,
                   bottomNavigationBar: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Container(
@@ -231,40 +303,53 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         fillColor: Colors.transparent,
                         color: const Color(0xffB1B1B1),
                         children: [
-
                           Container(
                             width: SizeConfig.screenWidth! / 4,
                             child: Column(
                               children: [
-                                const Icon(MdiIcons.fire,),
+                                const Icon(
+                                  MdiIcons.fire,
+                                ),
                                 const SizedBox(height: 5),
-                                const Text('Feed', style: const TextStyle(fontSize: 12,),),
+                                const Text(
+                                  'Feed',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-
                           Container(
                             width: SizeConfig.screenWidth! / 4,
                             child: Column(
                               children: [
                                 const Icon(MdiIcons.graveStone),
                                 const SizedBox(height: 5),
-                                const Text('Memorials', style: const TextStyle(fontSize: 12,),),
+                                const Text(
+                                  'Memorials',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-
                           Container(
                             width: SizeConfig.screenWidth! / 4,
                             child: Column(
                               children: [
                                 const Icon(MdiIcons.post),
                                 const SizedBox(height: 5),
-                                const Text('Post', style: const TextStyle(fontSize: 12,),),
+                                const Text(
+                                  'Post',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-
                           Container(
                             width: SizeConfig.screenWidth! / 4,
                             child: Stack(
@@ -274,7 +359,12 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   children: const <Widget>[
                                     const Icon(MdiIcons.heart),
                                     const SizedBox(height: 5),
-                                    const Text('Notification', style: const TextStyle(fontSize: 12,),),
+                                    const Text(
+                                      'Notification',
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Positioned(
@@ -284,31 +374,39 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     radius: 12,
                                     backgroundColor: const Color(0xffff0000),
                                     child: isGuestLoggedInListener == true
-                                    ? const Text('0', 
-                                      style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),
-                                    )
-                                    : Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', 
-                                      style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),
-                                    ),
+                                        ? const Text(
+                                            '0',
+                                            style: const TextStyle(
+                                                color: const Color(0xffffffff),
+                                                fontSize: 12),
+                                          )
+                                        : Text(
+                                            unreadNotificationListener > 99
+                                                ? '99+'
+                                                : '$unreadNotificationListener',
+                                            style: const TextStyle(
+                                                color: const Color(0xffffffff),
+                                                fontSize: 12),
+                                          ),
                                   ),
                                 )
                               ],
                             ),
                           ),
                         ],
-                        onPressed: (int index) async{
+                        onPressed: (int index) async {
                           toggleBottom.value = index;
 
-                          for(int i = 0; i < bottomTabListener.length; i++){
-                            if(i == toggleBottom.value){
+                          for (int i = 0; i < bottomTabListener.length; i++) {
+                            if (i == toggleBottom.value) {
                               bottomTabListener[i] = true;
-                            }else{
+                            } else {
                               bottomTabListener[i] = false;
                             }
                           }
 
-                          if(toggleBottom.value == 3){
-                            if(isGuestLoggedInListener != true){
+                          if (toggleBottom.value == 3) {
+                            if (isGuestLoggedInListener != true) {
                               await apiRegularReadUnreadNotifications();
                               unreadNotifications.value = 0;
                               getUnreadNotifications();
@@ -321,301 +419,491 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         color: const Color(0xffffffff),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                            color: const Color(0xff888888).withOpacity(0.5),
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                            offset: const Offset(0, 0)
-                          ),
+                              color: const Color(0xff888888).withOpacity(0.5),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 0)),
                         ],
                       ),
                     ),
                   ),
                   drawer: isGuestLoggedInListener != true
-                  ? FutureBuilder<APIRegularShowProfileInformation>(
-                    future: drawerSettings,
-                    builder: (context, manageDrawer){
-                      if(manageDrawer.hasData){
-                        return Drawer(
+                      ? FutureBuilder<APIRegularShowProfileInformation>(
+                          future: drawerSettings,
+                          builder: (context, manageDrawer) {
+                            if (manageDrawer.hasData) {
+                              return Drawer(
+                                child: Container(
+                                  alignment: Alignment.topCenter,
+                                  color: const Color(0xff4EC9D4),
+                                  child: SingleChildScrollView(
+                                    physics: ClampingScrollPhysics(),
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(height: 20),
+                                        GestureDetector(
+                                          onTap: () {
+                                            showGeneralDialog(
+                                              context: context,
+                                              barrierDismissible: true,
+                                              barrierLabel: 'Dialog',
+                                              transitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 0),
+                                              pageBuilder: (_, __, ___) {
+                                                return Scaffold(
+                                                  backgroundColor: Colors
+                                                      .black12
+                                                      .withOpacity(0.7),
+                                                  body: SizedBox.expand(
+                                                    child: SafeArea(
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            alignment: Alignment
+                                                                .centerRight,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right:
+                                                                        20.0),
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child:
+                                                                  CircleAvatar(
+                                                                radius: 20,
+                                                                backgroundColor:
+                                                                    const Color(
+                                                                            0xff000000)
+                                                                        .withOpacity(
+                                                                            0.8),
+                                                                child:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .close_rounded,
+                                                                  color: const Color(
+                                                                      0xffffffff),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Expanded(
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                            fit: BoxFit.cover,
+                                                            imageUrl: manageDrawer
+                                                                .data!
+                                                                .showProfileInformationImage,
+                                                            placeholder:
+                                                                (context,
+                                                                        url) =>
+                                                                    const Center(
+                                                              child:
+                                                                  const CircularProgressIndicator(),
+                                                            ),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Image.asset(
+                                                              'assets/icons/cover-icon.png',
+                                                              fit: BoxFit.cover,
+                                                              scale: 1.0,
+                                                            ),
+                                                          )),
+                                                          const SizedBox(
+                                                            height: 80,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: manageDrawer.data!
+                                                      .showProfileInformationImage !=
+                                                  ''
+                                              ? CircleAvatar(
+                                                  radius: 100,
+                                                  backgroundColor:
+                                                      const Color(0xff888888),
+                                                  foregroundImage: NetworkImage(
+                                                      manageDrawer.data!
+                                                          .showProfileInformationImage),
+                                                  backgroundImage: const AssetImage(
+                                                      'assets/icons/app-icon.png'),
+                                                )
+                                              : const CircleAvatar(
+                                                  radius: 100,
+                                                  backgroundColor:
+                                                      const Color(0xff888888),
+                                                  backgroundImage: const AssetImage(
+                                                      'assets/icons/app-icon.png'),
+                                                ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Text(
+                                          manageDrawer.data!
+                                                  .showProfileInformationFirstName +
+                                              ' ' +
+                                              manageDrawer.data!
+                                                  .showProfileInformationLastName,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                           fontFamily: 'NexaBold',
+                                            color: const Color(0xffffffff),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 45),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            'Home',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                              fontFamily: 'NexaLight',
+                                              color: const Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 25),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                            Navigator.pushNamed(context,
+                                                '/home/regular/create-memorial');
+                                          },
+                                          child: Text(
+                                            'Create Memorial Page',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                              fontFamily: 'NexaLight',
+                                              color: const Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        GestureDetector(
+                                          onTap: () async {
+                                            context.loaderOverlay.show();
+                                            APIRegularShowNotificationStatus
+                                                result =
+                                                await apiRegularShowNotificationStatus(
+                                                    userId: manageDrawer.data!
+                                                        .showProfileInformationUserId);
+                                            context.loaderOverlay.hide();
+
+                                            Navigator.pop(context);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomeRegularNotificationSettings(
+                                                          newMemorial: result
+                                                              .showNotificationStatusNewMemorial,
+                                                          newActivities: result
+                                                              .showNotificationStatusNewActivities,
+                                                          postLikes: result
+                                                              .showNotificationStatusPostLikes,
+                                                          postComments: result
+                                                              .showNotificationStatusPostComments,
+                                                          addFamily: result
+                                                              .showNotificationStatusAddFamily,
+                                                          addFriends: result
+                                                              .showNotificationStatusAddFriends,
+                                                          addAdmin: result
+                                                              .showNotificationStatusAddAdmin,
+                                                        )));
+                                          },
+                                          child: Text(
+                                            'Notification Settings',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                              fontFamily: 'NexaLight',
+                                              color: const Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        GestureDetector(
+                                          onTap: () async {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomeRegularUserProfileDetails(
+                                                            userId: manageDrawer
+                                                                .data!
+                                                                .showProfileInformationUserId)));
+                                          },
+                                          child: Text(
+                                            'Profile Settings',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                              fontFamily: 'NexaLight',
+                                              color: const Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        GestureDetector(
+                                          onTap: () async {
+                                            context.loaderOverlay.show();
+                                            bool result =
+                                                await apiRegularLogout();
+                                            context.loaderOverlay.hide();
+
+                                            if (result) {
+                                              Route newRoute =
+                                                  MaterialPageRoute(
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          const UIGetStarted());
+                                              Navigator.pushAndRemoveUntil(
+                                                  context,
+                                                  newRoute,
+                                                  (route) => false);
+                                            } else {
+                                              await showDialog(
+                                                  context: context,
+                                                  builder: (_) =>
+                                                      AssetGiffyDialog(
+                                                        image: Image.asset(
+                                                          'assets/icons/cover-icon.png',
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                        title: const Text(
+                                                          'Error',
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: const TextStyle(
+                                                              fontSize: 22.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                        ),
+                                                        entryAnimation:
+                                                            EntryAnimation
+                                                                .DEFAULT,
+                                                        description: const Text(
+                                                          'Something went wrong. Please try again.',
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                        onlyOkButton: true,
+                                                        buttonOkColor:
+                                                            const Color(
+                                                                0xffff0000),
+                                                        onOkButtonPressed: () {
+                                                          Navigator.pop(
+                                                              context, true);
+                                                        },
+                                                      ));
+                                            }
+                                          },
+                                          child: Text(
+                                            'Log Out',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                              fontFamily: 'NexaLight',
+                                              color: const Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else if (manageDrawer.hasError) {
+                              return Drawer(
+                                child: Container(
+                                  alignment: Alignment.topCenter,
+                                  color: const Color(0xff4EC9D4),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      const CircleAvatar(
+                                        radius: 100,
+                                        backgroundColor:
+                                            const Color(0xff888888),
+                                        foregroundImage: const AssetImage(
+                                            'assets/icons/app-icon.png'),
+                                      ),
+                                      Expanded(
+                                        child: Container(),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text(
+                                          'Something went wrong. Please try again.',
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w200,
+                                            color: const Color(0xffffffff),
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Route newRoute = MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  const UIGetStarted());
+                                          Navigator.pushAndRemoveUntil(context,
+                                              newRoute, (route) => false);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.directions_walk_rounded,
+                                              color: const Color(0xffffffff),
+                                              size: 16,
+                                            ),
+                                            const SizedBox(width: 20),
+                                            const Text(
+                                              'Go back',
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w200,
+                                                color: const Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return Container(
+                                child: Center(
+                                  child: Container(
+                                    child: const SpinKitThreeBounce(
+                                      color: const Color(0xff000000),
+                                      size: 50.0,
+                                    ),
+                                    color: const Color(0xffffffff),
+                                  ),
+                                ),
+                              );
+                            }
+                          })
+                      : Drawer(
                           child: Container(
                             alignment: Alignment.topCenter,
                             color: const Color(0xff4EC9D4),
                             child: SingleChildScrollView(
-                              physics: ClampingScrollPhysics(),
+                              physics: const ClampingScrollPhysics(),
                               child: Column(
                                 children: [
-                                  const SizedBox(height: 20),
-
-                                  GestureDetector(
-                                    onTap: (){
-                                      showGeneralDialog(
-                                        context: context,
-                                        barrierDismissible: true,
-                                        barrierLabel: 'Dialog',
-                                        transitionDuration: const Duration(milliseconds: 0),
-                                        pageBuilder: (_, __, ___) {
-                                          return Scaffold(
-                                            backgroundColor: Colors.black12.withOpacity(0.7),
-                                            body: SizedBox.expand(
-                                              child: SafeArea(
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      alignment: Alignment.centerRight,
-                                                      padding: const EdgeInsets.only(right: 20.0),
-                                                      child: GestureDetector(
-                                                        onTap: (){
-                                                          Navigator.pop(context);
-                                                        },
-                                                        child: CircleAvatar(
-                                                          radius: 20,
-                                                          backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                          child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                        ),
-                                                      ),
-                                                    ),
-
-                                                    const SizedBox(height: 20,),
-
-                                                    Expanded(
-                                                      child: CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: manageDrawer.data!.showProfileInformationImage,
-                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                      )
-                                                    ),
-
-                                                    const SizedBox(height: 80,),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: manageDrawer.data!.showProfileInformationImage != ''
-                                    ? CircleAvatar(
-                                      radius: 100,
-                                      backgroundColor: const Color(0xff888888),
-                                      foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
-                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                    )
-                                    : const CircleAvatar(
-                                      radius: 100,
-                                      backgroundColor: const Color(0xff888888),
-                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const CircleAvatar(
+                                    radius: 100,
+                                    backgroundColor: const Color(0xff888888),
+                                    foregroundImage: const AssetImage(
+                                        'assets/icons/app-icon.png'),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const Text(
+                                    'Guest User',
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
-
-                                  const SizedBox(height: 20),
-
-                                  Text(manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: const Color(0xffffffff),),),
-
-                                  const SizedBox(height: 45),
-
+                                  const SizedBox(
+                                    height: 45,
+                                  ),
                                   GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       Navigator.pop(context);
                                     },
-                                    child: const Text('Home', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
+                                    child: const Text(
+                                      'Home',
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w200,
+                                        color: const Color(0xffffffff),
+                                      ),
+                                    ),
                                   ),
-
-                                  const SizedBox(height: 25),
-
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                      Navigator.pushNamed(context, '/home/regular/create-memorial');
-                                    },
-                                    child: const Text('Create Memorial Page', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
+                                  const SizedBox(
+                                    height: 25,
                                   ),
-
-                                  const SizedBox(height: 20),
-
                                   GestureDetector(
-                                    onTap: () async{
-                                      context.loaderOverlay.show();
-                                      APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
-                                      context.loaderOverlay.hide();
+                                    onTap: () async {
+                                      final sharedPrefs =
+                                          await SharedPreferences.getInstance();
 
-                                      Navigator.pop(context);
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularNotificationSettings(
-                                        newMemorial: result.showNotificationStatusNewMemorial,
-                                        newActivities: result.showNotificationStatusNewActivities,
-                                        postLikes: result.showNotificationStatusPostLikes,
-                                        postComments: result.showNotificationStatusPostComments,
-                                        addFamily: result.showNotificationStatusAddFamily,
-                                        addFriends: result.showNotificationStatusAddFriends,
-                                        addAdmin: result.showNotificationStatusAddAdmin,
-                                      )));
+                                      sharedPrefs.remove('blm-user-id');
+                                      sharedPrefs.remove('blm-access-token');
+                                      sharedPrefs.remove('blm-uid');
+                                      sharedPrefs.remove('blm-client');
+                                      sharedPrefs.remove('blm-user-session');
+
+                                      sharedPrefs.remove('regular-user-id');
+                                      sharedPrefs
+                                          .remove('regular-access-token');
+                                      sharedPrefs.remove('regular-uid');
+                                      sharedPrefs.remove('regular-client');
+                                      sharedPrefs
+                                          .remove('regular-user-session');
+
+                                      sharedPrefs.remove('user-guest-session');
+
+                                      Route newRoute = MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              const UIGetStarted());
+                                      Navigator.pushAndRemoveUntil(
+                                          context, newRoute, (route) => false);
                                     },
-                                    child: const Text('Notification Settings', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
-                                  ),
-
-                                  const SizedBox(height: 20),
-
-                                  GestureDetector(
-                                    onTap: () async{
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
-                                    },
-                                    child: const Text('Profile Settings', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
-                                  ),
-
-                                  const SizedBox(height: 20),
-
-                                  GestureDetector(
-                                    onTap: () async{
-
-                                      context.loaderOverlay.show();
-                                      bool result = await apiRegularLogout();
-                                      context.loaderOverlay.hide();
-
-                                      if(result){
-                                        Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
-                                        Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                      }else{
-                                        await showDialog(
-                                          context: context,
-                                          builder: (_) => 
-                                            AssetGiffyDialog(
-                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                            entryAnimation: EntryAnimation.DEFAULT,
-                                            description: const Text('Something went wrong. Please try again.',
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            onlyOkButton: true,
-                                            buttonOkColor: const Color(0xffff0000),
-                                            onOkButtonPressed: () {
-                                              Navigator.pop(context, true);
-                                            },
-                                          )
-                                        );
-                                      }
-                                    },
-                                    child: const Text('Log Out', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
+                                    child: const Text(
+                                      'Sign up or Sign in',
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w200,
+                                        color: const Color(0xffffffff),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                        );
-                      }else if(manageDrawer.hasError){
-                        return Drawer(
-                          child: Container(
-                            alignment: Alignment.topCenter,
-                            color: const Color(0xff4EC9D4),
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 20,),
-                                
-                                const CircleAvatar(
-                                  radius: 100,
-                                  backgroundColor: const Color(0xff888888),
-                                  foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                ),
-
-                                Expanded(child: Container(),),
-
-                                GestureDetector(
-                                  onTap: (){
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('Something went wrong. Please try again.', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),), textAlign: TextAlign.center,),
-                                ),
-
-                                Expanded(child: Container(),),
-
-                                GestureDetector(
-                                  onTap: (){
-                                    Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
-                                    Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(Icons.directions_walk_rounded, color: const Color(0xffffffff), size: 16,),
-
-                                      const SizedBox(width: 20),
-
-                                      const Text('Go back', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
-                                    ],
-                                  ),
-                                ),
-
-                                Expanded(child: Container(),),
-                              ],
-                            ),
-                          ),
-                        );
-                      }else{
-                        return Container(child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
-                      }
-                    }
-                  ) : Drawer(
-                      child: Container(
-                        alignment: Alignment.topCenter,
-                        color: const Color(0xff4EC9D4),
-                        child: SingleChildScrollView(
-                          physics: const ClampingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 20,),
-
-                              const CircleAvatar(
-                                radius: 100,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                              ),
-
-                              const SizedBox(height: 20,),
-
-                              const Text('Guest User', textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: const Color(0xffffffff),),),
-
-                              const SizedBox(height: 45,),
-
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Home', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
-                              ),
-
-                              const SizedBox(height: 25,),
-
-                              GestureDetector(
-                                onTap: () async{
-                                  final sharedPrefs = await SharedPreferences.getInstance();
-
-                                  sharedPrefs.remove('blm-user-id');
-                                  sharedPrefs.remove('blm-access-token');
-                                  sharedPrefs.remove('blm-uid');
-                                  sharedPrefs.remove('blm-client');
-                                  sharedPrefs.remove('blm-user-session');
-
-                                  sharedPrefs.remove('regular-user-id');
-                                  sharedPrefs.remove('regular-access-token');
-                                  sharedPrefs.remove('regular-uid');
-                                  sharedPrefs.remove('regular-client');
-                                  sharedPrefs.remove('regular-user-session');
-
-                                  sharedPrefs.remove('user-guest-session');
-
-                                  Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
-                                  Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                },
-                                child: const Text('Sign up or Sign in', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: const Color(0xffffffff),),),
-                              ),
-                            ],
-                          ),
                         ),
-                      ),
-                    ),
-                  ),
+                ),
               ),
-              
-              
             ),
           ),
         ),

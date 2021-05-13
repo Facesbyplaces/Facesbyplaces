@@ -2,7 +2,6 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-14-update-switch-status-family.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-15-update-switch-status-friends.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-16-update-switch-status-followers.dart';
-import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-02-page-details.dart';
@@ -57,9 +56,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: (){
-            // Navigator.pop(context);
             Navigator.pop(context);
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: '', managed: true, newlyCreated: false,)));
           },
         ),
       ),

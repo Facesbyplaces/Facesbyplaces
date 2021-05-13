@@ -111,7 +111,7 @@ class UILogin01 extends StatelessWidget {
                 child: MaterialButton(
                   padding: EdgeInsets.zero,
                   minWidth: SizeConfig.screenWidth! / 1.5,
-                  height: SizeConfig.blockSizeVertical! * 10.0,
+                  height: SizeConfig.blockSizeVertical! *9.0,
                   child: Row(
                     children: [
                       CircleAvatar(

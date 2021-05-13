@@ -2,7 +2,6 @@ import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-crea
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/services.dart';
 import 'home-create-post-blm-02-01-create-post-location.dart';
 import 'home-create-post-blm-02-02-create-post-user.dart';
 import 'package:location/location.dart' as Location;
@@ -450,9 +449,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                       if(lookupMimeType(slideImages[index].path)?.contains('video') == true){
                                                         return BetterPlayer.file('${slideImages[index].path}',
                                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                            deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                             autoDispose: false,
-                                                            aspectRatio: 16 / 9,
+                                                            aspectRatio: 1,
                                                           ),
                                                         );
                                                       }else{

@@ -9,222 +9,308 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class RegularVerifyEmail extends StatelessWidget{
-
+class RegularVerifyEmail extends StatelessWidget {
   final TextEditingController controller = TextEditingController(text: '');
-  
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return RepaintBoundary(
       child: WillPopScope(
-        onWillPop: () async{
+        onWillPop: () async {
           return Navigator.canPop(context);
         },
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusNode currentFocus = FocusScope.of(context);
-            if(!currentFocus.hasPrimaryFocus){
+            if (!currentFocus.hasPrimaryFocus) {
               currentFocus.unfocus();
             }
           },
           child: Scaffold(
-            body: Stack(
-              children: [
-
-                SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
-
-                SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: Column(
-                      children: [
-
-                        const SizedBox(height: 20),
-
-                        Align(
-                          alignment: Alignment.centerLeft, 
-                          child: IconButton(
-                            onPressed: (){
-                              Navigator.pop(context);
-                            }, 
-                            icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 30),
-                          ),
+            backgroundColor: Colors.black,
+            body: SafeArea(
+              bottom: false,
+              child: Container(
+                height: SizeConfig.screenHeight,
+                width: SizeConfig.screenWidth,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/icons/background2.png'),
+                    colorFilter: ColorFilter.srgbToLinearGamma(),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Color(0xff000000),
+                          size: SizeConfig.blockSizeVertical! * 3.65,
                         ),
-
-                        const SizedBox(height: 40),
-
-                        const Center(child: const Text('Verify Email', style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),
-
-                        const SizedBox(height: 40),
-
-                        const Center(child: const Text('We have sent a verification code to your email address. Please enter the verification code to continue.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),),
-
-                        const SizedBox(height: 40),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                          child: PinPut(
-                            fieldsAlignment: MainAxisAlignment.spaceEvenly,
-                            controller: controller,
-                            fieldsCount: 3,
-                            textStyle: const TextStyle(
-                              fontSize: 56,
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff000000)
-                            ),
-                            followingFieldDecoration: const BoxDecoration(
-                              border: const Border(bottom: const BorderSide(color: const Color(0xff000000),),)
-                            ),
-                            selectedFieldDecoration: const BoxDecoration(
-                              border: const Border(bottom: const BorderSide(color: const Color(0xff000000),),)
-                            ),
-                            submittedFieldDecoration: const BoxDecoration(
-                              border: const Border(bottom: const BorderSide(color: const Color(0xff000000),),)
+                      ),
+                    ),
+                    SizedBox(height: SizeConfig.blockSizeVertical! * 7.04),
+                    Center(
+                      child: Text(
+                        'Verify Email',
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 5.28,
+                         fontFamily: 'NexaBold',
+                          color: const Color(0xff2F353D),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: SizeConfig.blockSizeVertical! * 7.21),
+                    Container(
+                      padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 12.75, right: SizeConfig.blockSizeHorizontal! * 12.75),
+                      child: Text(
+                        'We have sent a verification code to your email address. Please enter the verification code to continue.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                         fontFamily: 'NexaRegular',
+                          color: const Color(0xff2F353D),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: SizeConfig.blockSizeVertical! * 10.38),
+                    Center(
+                      child: Text(
+                        'Enter your verification code here',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                          fontFamily: 'NexaLight',
+                          color: const Color(0xffBDC3C7),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: PinPut(
+                        fieldsAlignment: MainAxisAlignment.spaceEvenly,
+                        controller: controller,
+                        fieldsCount: 3,
+                        textStyle: const TextStyle(
+                            fontSize: 56,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff000000)),
+                        followingFieldDecoration: const BoxDecoration(
+                            border: const Border(
+                          bottom: const BorderSide(
+                            color: const Color(0xff000000),
+                          ),
+                        )),
+                        selectedFieldDecoration: const BoxDecoration(
+                            border: const Border(
+                          bottom: const BorderSide(
+                            color: const Color(0xff000000),
+                          ),
+                        )),
+                        submittedFieldDecoration: const BoxDecoration(
+                            border: const Border(
+                          bottom: const BorderSide(
+                            color: const Color(0xff000000),
+                          ),
+                        )),
+                      ),
+                    ),
+                    SizedBox(height: SizeConfig.blockSizeVertical! * 7.04),
+                    RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                           TextSpan(
+                            text: 'Didn\'t receive a code? ',
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                              fontFamily: 'NexaRegular',
+                              color: const Color(0xff2F353D),
                             ),
                           ),
-                        ),
-
-                        const SizedBox(height: 80),
-
-                        RichText(
-                          text: TextSpan(
-                            children: <TextSpan>[
-                              const TextSpan(
-                                text: 'Didn\'t receive a code? ', 
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300,
-                                  color: const Color(0xff000000),
-                                ),
+                          TextSpan(
+                              text: 'Resend',
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                color: const Color(0xff2F353D),
+                                fontFamily: 'NexaBold',
+                                decoration: TextDecoration.underline,
                               ),
-
-                              TextSpan(
-                                text: 'Resend',
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xff000000),
-                                  decoration: TextDecoration.underline,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                ..onTap = () async{
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
                                   context.loaderOverlay.show();
-                                  bool result = await apiRegularVerificationCodeResend();
+                                  bool result =
+                                      await apiRegularVerificationCodeResend();
                                   context.loaderOverlay.hide();
 
-                                  if(result == true){
+                                  if (result == true) {
                                     await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: const Text('Another code has been sent to your email address. Please check your inbox.',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        onlyOkButton: true,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                  }else{
+                                        context: context,
+                                        builder: (_) => AssetGiffyDialog(
+                                              image: Image.asset(
+                                                'assets/icons/cover-icon.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                              title: Text(
+                                                'Success',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                                  fontFamily: 'NexaRegular',),
+                                              ),
+                                              entryAnimation:
+                                                  EntryAnimation.DEFAULT,
+                                              description: Text(
+                                                'Another code has been sent to your email address. Please check your inbox.',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                  fontFamily: 'NexaRegular',
+                                                  color: const Color(0xff2F353D),
+                                                ),
+                                              ),
+                                              onlyOkButton: true,
+                                              onOkButtonPressed: () {
+                                                Navigator.pop(context, true);
+                                              },
+                                            ));
+                                  } else {
                                     await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: const Text('Something went wrong. Please try again.',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: const Color(0xffff0000),
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
+                                        context: context,
+                                        builder: (_) => AssetGiffyDialog(
+                                              image: Image.asset(
+                                                'assets/icons/cover-icon.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                              title: Text(
+                                                'Error',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                                  fontFamily: 'NexaRegular',),
+                                              ),
+                                              entryAnimation:
+                                                  EntryAnimation.DEFAULT,
+                                              description: Text(
+                                                'Something went wrong. Please try again.',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                  fontFamily: 'NexaRegular',
+                                                  color: const Color(0xff2F353D),
+                                                ),
+                                              ),
+                                              onlyOkButton: true,
+                                              buttonOkColor:
+                                                  const Color(0xffff0000),
+                                              onOkButtonPressed: () {
+                                                Navigator.pop(context, true);
+                                              },
+                                            ));
                                   }
-                                }
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        const SizedBox(height: 120),
-
-                        MiscRegularButtonTemplate(
-                          buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
-                          buttonTextStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold, 
-                            color: const Color(0xffffffff),
-                          ),
-                          width: SizeConfig.screenWidth! / 2, 
-                          height: 45,
-                          buttonColor: const Color(0xff04ECFF),
-                          onPressed: () async{
-
-                            if(controller.text.length != 3){
-                              await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: const Text('Please enter the verification code.',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: const Color(0xffff0000),
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
-                              );
-                            }else{
-
-                              context.loaderOverlay.show();
-                              String result = await apiRegularVerifyEmail(verificationCode: controller.text);
-                              context.loaderOverlay.hide();
-
-                              if(result == 'Success'){
-                                Navigator.pushNamed(context, '/regular/upload-photo');
-                              }else{
-                                await showDialog(
-                                  context: context,
-                                  builder: (_) => 
-                                    AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Error: $result',
+                                }),
+                        ],
+                      ),
+                    ),
+                    Spacer(),
+                    MiscRegularButtonTemplate(
+                      buttonText:
+                          controller.text.length != 3 ? 'Next' : 'Sign Up',
+                      buttonTextStyle: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaBold',
+                        color: const Color(0xffffffff),
+                      ),
+                      width: SizeConfig.screenWidth! / 2,
+                      height: 45,
+                      buttonColor: const Color(0xff04ECFF),
+                      onPressed: () async {
+                        if (controller.text.length != 3) {
+                          await showDialog(
+                              context: context,
+                              builder: (_) => AssetGiffyDialog(
+                                    image: Image.asset(
+                                      'assets/icons/cover-icon.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    title: Text(
+                                      'Error',
                                       textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                        fontFamily: 'NexaRegular',),
+                                    ),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text(
+                                      'Please enter the verification code.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                        fontFamily: 'NexaRegular',
+                                        color: const Color(0xff2F353D),
+                                      ),
                                     ),
                                     onlyOkButton: true,
                                     buttonOkColor: const Color(0xffff0000),
                                     onOkButtonPressed: () {
                                       Navigator.pop(context, true);
                                     },
-                                  )
-                                );
-                              }
-                            }
-                          },
-                        ),
+                                  ));
+                        } else {
+                          context.loaderOverlay.show();
+                          String result = await apiRegularVerifyEmail(
+                              verificationCode: controller.text);
+                          context.loaderOverlay.hide();
 
-                        const SizedBox(height: 40),
-                      ],
+                          if (result == 'Success') {
+                            Navigator.pushNamed(
+                                context, '/regular/upload-photo');
+                          } else {
+                            await showDialog(
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                      image: Image.asset(
+                                        'assets/icons/cover-icon.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                      title: Text(
+                                        'Error',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                          fontFamily: 'NexaRegular',),
+                                      ),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text(
+                                        'Error: $result',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                          fontFamily: 'NexaRegular',
+                                          color: const Color(0xff2F353D),
+                                        ),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: const Color(0xffff0000),
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    ));
+                          }
+                        }
+                      },
                     ),
-                  ),
+                    Spacer(),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
