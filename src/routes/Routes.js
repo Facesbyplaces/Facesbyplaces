@@ -68,7 +68,9 @@ export const Routes = withRouter(({ history }) => {
             <Route path="/memorials" component={MemorialDashboard} />
             <Route path="/posts" component={PostDashboard} />
             <Route path="/reports" component={ReportDashboard} />
-            <Route render={() => <Redirect to="/404" />} component={Oops} />
+            {/* <Redirect to="/404" /> */}
+            {/* <Route path="/404" component={Oops} /> */}
+            <Route render={() => <Redirect to={{ pathname: "/users" }} />} />
           </>
         ) : (
           <Redirect to="/admin" />

@@ -64,7 +64,6 @@ export default function PostDataTable({
     ) {
       return (
         <a
-          href="#"
           className={"btn btn-icon btn-sm border-0 btn-light mr-2 my-1"}
           onClick={() => handleNextClick()}
         >
@@ -270,7 +269,6 @@ export default function PostDataTable({
         <div className="d-flex align-items-center">
           {renderBackButton()}
           <a
-            href="#"
             className={
               "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
             }

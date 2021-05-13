@@ -46,7 +46,6 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
     if (alm_users.length != 0 || blm_users.length != 0) {
       return (
         <a
-          href="#"
           className={"btn btn-icon btn-sm border-0 btn-light mr-2 my-1"}
           onClick={() => handleNextClick()}
         >
@@ -229,7 +228,6 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
         <div className="d-flex align-items-center">
           {renderBackButton()}
           <a
-            href="#"
             className={
               "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
             }

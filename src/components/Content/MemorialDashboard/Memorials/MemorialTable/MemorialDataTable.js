@@ -51,7 +51,6 @@ export default function MemorialDataTable({
     if (memorials.length != 0 || blms.length != 0) {
       return (
         <a
-          href="#"
           className={"btn btn-icon btn-sm border-0 btn-light mr-2 my-1"}
           onClick={() => handleNextClick()}
         >
@@ -247,7 +246,6 @@ export default function MemorialDataTable({
         <div className="d-flex align-items-center">
           {renderBackButton()}
           <a
-            href="#"
             className={
               "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
             }
