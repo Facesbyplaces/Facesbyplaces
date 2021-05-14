@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter/services.dart';
 import 'home-create-post-regular-02-01-create-post-location.dart';
 import 'home-create-post-regular-02-02-create-post-user.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -443,8 +444,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                       if(lookupMimeType(slideImages[index].path)?.contains('video') == true){
                                                         return BetterPlayer.file('${slideImages[index].path}',
                                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                            deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                             autoDispose: false,
-                                                            aspectRatio: 1,
+                                                            aspectRatio: 16 / 9,
                                                           ),
                                                         );
                                                       }else{

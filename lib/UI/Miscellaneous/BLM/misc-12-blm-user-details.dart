@@ -41,12 +41,13 @@ class MiscBLMDraggablePost extends StatefulWidget{
   final int userId;
   const MiscBLMDraggablePost({required this.userId});
 
-  MiscBLMDraggablePostState createState() => MiscBLMDraggablePostState(userId: userId);
+  // MiscBLMDraggablePostState createState() => MiscBLMDraggablePostState(userId: userId);
+  MiscBLMDraggablePostState createState() => MiscBLMDraggablePostState();
 }
 
 class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
-  final int userId;
-  MiscBLMDraggablePostState({required this.userId});
+  // final int userId;
+  // MiscBLMDraggablePostState({required this.userId});
   
   ScrollController scrollController = ScrollController();
   List<BLMMiscDraggablePost> posts = [];
@@ -85,7 +86,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowUserPosts(userId: userId, page: page);
+      var newValue = await apiBLMShowUserPosts(userId: widget.userId, page: page);
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;

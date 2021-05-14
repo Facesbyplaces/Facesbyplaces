@@ -142,7 +142,9 @@ class UIGetStartedState extends State<UIGetStarted> {
         required String pageType}) async {
     bool login = await FlutterBranchSdk.isUserIdentified();
 
-    if (login) {
+    print('Shared post || User identified: $login || Post Type: $pageType');
+
+    if(login){
       FlutterBranchSdk.logout();
 
       if (pageType == 'Blm') {
@@ -167,7 +169,9 @@ class UIGetStartedState extends State<UIGetStarted> {
         required bool follower}) async {
     bool login = await FlutterBranchSdk.isUserIdentified();
 
-    if (login) {
+    print('Shared memorial || User identified: $login || Memorial Type: $pageType');
+
+    if(login){
       FlutterBranchSdk.logout();
       if (pageType == 'Blm') {
         Navigator.push(

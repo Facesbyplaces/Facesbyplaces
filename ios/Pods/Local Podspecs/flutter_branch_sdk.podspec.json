@@ -1,0 +1,34 @@
+{
+  "name": "flutter_branch_sdk",
+  "version": "1.3.2",
+  "summary": "Flutter Plugin for Brach Metrics SDK - https:&#x2F;&#x2F;branch.io",
+  "description": "Flutter Plugin for Brach Metrics SDK - https:&#x2F;&#x2F;branch.io",
+  "homepage": "https://github.com/RodrigoSMarques/flutter_branch_sdk",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": {
+    "Rodrigo S. Marques": "rodrigosmarques@gmail.com"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "dependencies": {
+    "Flutter": [
+
+    ],
+    "Branch": [
+      "~> 1.39.2"
+    ]
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+  },
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
+}

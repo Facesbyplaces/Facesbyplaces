@@ -11,7 +11,7 @@ Future<bool> apiRegularVerificationCodeResend() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth/password?/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=2',
+  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=2',
     options: Options(
       followRedirects: false,
       validateStatus: (status) {
@@ -27,6 +27,7 @@ Future<bool> apiRegularVerificationCodeResend() async{
   );
 
   print('The status code of regular verification code resend is ${response.statusCode}');
+  print('The status data of regular verification code resend is ${response.data}');
 
   if(response.statusCode == 200){
     return true;

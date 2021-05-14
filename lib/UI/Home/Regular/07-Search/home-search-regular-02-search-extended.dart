@@ -426,6 +426,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    print('Search screen rebuild!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

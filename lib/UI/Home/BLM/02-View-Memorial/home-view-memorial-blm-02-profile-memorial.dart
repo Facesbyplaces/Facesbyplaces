@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-dropdown.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
@@ -151,7 +152,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
       contentDescription: 'FacesbyPlaces link to the app',
       keywords: ['FacesbyPlaces', 'Share', 'Link'],
       publiclyIndex: true,
@@ -322,13 +322,75 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                             Column(
                                               children: [
-                                                Container(
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    showGeneralDialog(
+                                                      context: context,
+                                                      barrierDismissible: true,
+                                                      barrierLabel: 'Dialog',
+                                                      transitionDuration: const Duration(milliseconds: 0),
+                                                      pageBuilder: (_, __, ___) {
+                                                        return Scaffold(
+                                                          backgroundColor: Colors.black12.withOpacity(0.7),
+                                                          body: SizedBox.expand(
+                                                            child: SafeArea(
+                                                              child: Column(
+                                                                children: [
+                                                                  Container(
+                                                                    alignment: Alignment.centerRight,
+                                                                    padding: const EdgeInsets.only(right: 20.0),
+                                                                    child: GestureDetector(
+                                                                      onTap: (){
+                                                                        Navigator.pop(context);
+                                                                      },
+                                                                      child: CircleAvatar(
+                                                                        radius: 20,
+                                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                        child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+
+                                                                  const SizedBox(height: 10,),
+
+                                                                  Expanded(
+                                                                    child: ((){
+                                                                      if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                                        return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                            deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                            aspectRatio: 16 / 9,
+                                                                          ),
+                                                                        );
+                                                                      }else{
+                                                                        return CachedNetworkImage(
+                                                                          fit: BoxFit.cover,
+                                                                          imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
+                                                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                        );
+                                                                      }
+                                                                    }()),
+                                                                  ),
+
+                                                                  const SizedBox(height: 85,),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
                                                   child: ((){
                                                     if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
                                                       if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
                                                         return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
                                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                             aspectRatio: 16 / 9,
+                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                              showControls: false,
+                                                            ),
                                                           ),
                                                         );
                                                       }else{
@@ -393,6 +455,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           setState(() {
                                                             join = !join;
                                                           });
+
+                                                          print('The value of join is $join');
+
+                                                          if(join == true){
+                                                            profile.data!.blmMemorial.memorialFollowersCount++;
+                                                          }else{
+                                                            profile.data!.blmMemorial.memorialFollowersCount--;
+                                                          }
 
                                                           context.loaderOverlay.show();
                                                           bool result = await apiBLMModifyFollowPage(pageType: pageType, pageId: memorialId, follow: join);
@@ -789,8 +859,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                     if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[next])?.contains('video') == true){
                                                                                       return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
                                                                                         betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                          deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                           autoDispose: false,
-                                                                                          aspectRatio: 1,
+                                                                                          aspectRatio: 16 / 9,
                                                                                         ),
                                                                                       );
                                                                                     }else{
