@@ -130,16 +130,22 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                   'assets/icons/cover-icon.png',
                   fit: BoxFit.cover,
                 ),
-                title: const Text(
+                title: Text(
                   'Error',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 22.0, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                      fontFamily: 'NexaRegular'),
                 ),
                 entryAnimation: EntryAnimation.DEFAULT,
-                description: const Text(
+                description: Text(
                   'Something went wrong. Please try again.',
                   textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: SizeConfig
+                          .blockSizeVertical! *
+                          2.87,
+                      fontFamily: 'NexaRegular'),
                 ),
                 onlyOkButton: true,
                 buttonOkColor: const Color(0xffff0000),
@@ -311,10 +317,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                   MdiIcons.fire,
                                 ),
                                 const SizedBox(height: 5),
-                                const Text(
+                                Text(
                                   'Feed',
-                                  style: const TextStyle(
-                                    fontSize: 12,
+                                  style: TextStyle(
+                                      fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                    fontFamily: 'NexaLight'
                                   ),
                                 ),
                               ],
@@ -326,10 +333,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                               children: [
                                 const Icon(MdiIcons.graveStone),
                                 const SizedBox(height: 5),
-                                const Text(
+                                Text(
                                   'Memorials',
-                                  style: const TextStyle(
-                                    fontSize: 12,
+                                  style: TextStyle(
+                                      fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                      fontFamily: 'NexaLight'
                                   ),
                                 ),
                               ],
@@ -341,10 +349,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                               children: [
                                 const Icon(MdiIcons.post),
                                 const SizedBox(height: 5),
-                                const Text(
+                                Text(
                                   'Post',
-                                  style: const TextStyle(
-                                    fontSize: 12,
+                                  style: TextStyle(
+                                      fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                      fontFamily: 'NexaLight'
                                   ),
                                 ),
                               ],
@@ -356,13 +365,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                               alignment: Alignment.center,
                               children: [
                                 Column(
-                                  children: const <Widget>[
+                                  children: <Widget>[
                                     const Icon(MdiIcons.heart),
                                     const SizedBox(height: 5),
-                                    const Text(
+                                    Text(
                                       'Notification',
-                                      style: const TextStyle(
-                                        fontSize: 12,
+                                      style: TextStyle(
+                                          fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                          fontFamily: 'NexaLight'
                                       ),
                                     ),
                                   ],
@@ -696,10 +706,15 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                                         entryAnimation:
                                                             EntryAnimation
                                                                 .DEFAULT,
-                                                        description: const Text(
+                                                        description: Text(
                                                           'Something went wrong. Please try again.',
                                                           textAlign:
                                                               TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontSize: SizeConfig
+                                                                  .blockSizeVertical! *
+                                                                  2.87,
+                                                              fontFamily: 'NexaRegular'),
                                                         ),
                                                         onlyOkButton: true,
                                                         buttonOkColor:

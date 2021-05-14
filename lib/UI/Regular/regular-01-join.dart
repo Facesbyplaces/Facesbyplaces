@@ -19,8 +19,8 @@ class RegularJoin extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/icons/background.png'),
-                  colorFilter: ColorFilter.srgbToLinearGamma(),
+                  image: AssetImage('assets/icons/All Lives Matter.png'),
+                  //colorFilter: ColorFilter.srgbToLinearGamma(),
                 ),
               ),
               child: Column(

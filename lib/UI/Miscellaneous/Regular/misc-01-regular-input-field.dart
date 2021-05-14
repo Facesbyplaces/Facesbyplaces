@@ -84,6 +84,11 @@ class MiscRegularInputFieldTemplateState
       maxLines: maxLines,
       readOnly: readOnly,
       cursorColor: const Color(0xff000000),
+      style: TextStyle(
+        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+        fontFamily: 'NexaRegular',
+        color: const Color(0xff2F353D),
+      ),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
@@ -250,7 +255,7 @@ class MiscRegularInputFieldDropDownState
                 style: TextStyle(
                     fontSize: SizeConfig.blockSizeVertical! * 2.64,
                     fontFamily: 'NexaRegular',
-                    color: const Color(0xff000000)),
+                    color: const Color(0xff2F353D)),
               ),
             );
           }).toList(),
@@ -296,13 +301,13 @@ class MiscRegularInputFieldSecurityQuestionsState
   @override
   Widget build(BuildContext context) {
     return InputDecorator(
-      decoration: const InputDecoration(
+      decoration:  InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Security Question',
-        labelStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: const Color(0xff888888)),
+        labelStyle:  TextStyle(
+            fontSize: SizeConfig.blockSizeVertical! * 2.11,
+            fontFamily: 'NexaRegular',
+            color: const Color(0xffBDC3C7)),
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),
@@ -311,10 +316,10 @@ class MiscRegularInputFieldSecurityQuestionsState
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: const Color(0xff000000)),
+          style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.2,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xff2F353D)),
           value: currentSelection,
           isDense: true,
           onChanged: (String? newValue) {
@@ -325,7 +330,11 @@ class MiscRegularInputFieldSecurityQuestionsState
           items: securityQuestions.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value),
+              child: Text(value,
+              style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.2,
+                  fontFamily: 'NexaRegular',
+                  color: const Color(0xff2F353D)),),
             );
           }).toList(),
         ),
@@ -382,10 +391,10 @@ class MiscRegularInputFieldDateTimeTemplateState
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
-        labelStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: const Color(0xff888888)),
+        labelStyle: TextStyle(
+      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+          fontFamily: 'NexaRegular',
+          color: const Color(0xffBDC3C7)),
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),
@@ -479,6 +488,11 @@ class MiscRegularPhoneNumberTemplateState
           valid = value;
         });
       },
+      textStyle: TextStyle(
+        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+        fontFamily: 'NexaRegular',
+        color: const Color(0xff2F353D),
+      ),
       inputDecoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,

@@ -96,92 +96,16 @@ class BLMJoin extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: SizeConfig.blockSizeVertical! * 5,
-                      left: SizeConfig.blockSizeHorizontal! * 8,
-                      child: Transform.rotate(
-                        angle: 75,
-                        child: const MiscStartImageBlmTemplate(
-                          image: 'assets/icons/join1.png',
-                        ),
+                    Container(
+                      width: SizeConfig.screenWidth,
+                      height: SizeConfig.blockSizeVertical! * 60,
+                      child: Image.asset(
+                        'assets/icons/BLM Matter.png',
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                    Positioned(
-                      left: SizeConfig.blockSizeHorizontal! * 40,
-                      child: Transform.rotate(
-                        angle: 0,
-                        child: const MiscStartImageBlmTemplate(),
-                      ),
-                    ),
-                    Positioned(
-                      top: SizeConfig.blockSizeVertical! * 5,
-                      right: 0,
-                      child: Transform.rotate(
-                        angle: 101,
-                        child: const MiscStartImageBlmTemplate(
-                          image: 'assets/icons/join2.png',
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: SizeConfig.blockSizeVertical! * 20,
-                      child: Transform.rotate(
-                        angle: 101,
-                        child: const MiscStartImageBlmTemplate(),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: SizeConfig.blockSizeVertical! * 30,
-                      left: SizeConfig.blockSizeHorizontal! * 65,
-                      child: Transform.rotate(
-                        angle: 101,
-                        child: const MiscStartImageBlmTemplate(
-                            image: 'assets/icons/join7.png'),
-                      ),
-                    ),
-                    Positioned(
-                      top: SizeConfig.blockSizeVertical! * 20,
-                      right: 0,
-                      child: Transform.rotate(
-                        angle: 0,
-                        child: const MiscStartImageBlmTemplate(
-                            image: 'assets/icons/join4.png'),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: SizeConfig.blockSizeVertical! * 30,
-                      left: SizeConfig.blockSizeHorizontal! * 30,
-                      child: Transform.rotate(
-                        angle: 101,
-                        child: Container(
-                          height: 150,
-                          width: 150,
-                          color: Color(0xffF4F3EB),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Transform.rotate(
-                              angle: 25,
-                              child: Image.asset('assets/icons/join1.png'),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: SizeConfig.blockSizeVertical! * 30,
-                      left: SizeConfig.blockSizeHorizontal! * 5,
-                      child: const MiscStartImageBlmTemplate(
-                          image: 'assets/icons/join4.png'),
                     ),
                     Positioned.fill(
-                        right: SizeConfig.blockSizeHorizontal! * 30,
-                        left: SizeConfig.blockSizeHorizontal! * 30,
-                        bottom: SizeConfig.blockSizeVertical! * 30,
-                        child: Image.asset(
-                          'assets/icons/logo.png',
-                        )),
-                    Positioned.fill(
-                      top: SizeConfig.blockSizeVertical! * 40,
+                      top: SizeConfig.blockSizeVertical! * 45,
                       child: Center(
                         child: Text(
                           'Remembering the Victims',

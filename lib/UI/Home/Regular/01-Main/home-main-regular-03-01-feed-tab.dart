@@ -1029,51 +1029,11 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab> {
                       ),
                       const SizedBox(height: 20),
                       Container(
-                        width: SizeConfig.screenHeight,
-                        child: Stack(
-                          children: [
-                             Positioned(
-                               left: SizeConfig.blockSizeHorizontal! * 1.0,
-                               top: SizeConfig.blockSizeVertical! * 2.0,
-                              child: const MiscRegularImageDisplayFeedTemplate(
-                                frontSize: 65,
-                                backSize: 70,
-                              ),
-                            ),
-                             Positioned(
-                              right: SizeConfig.blockSizeHorizontal! * 1.0,
-                               top: SizeConfig.blockSizeVertical! * 2.0,
-                              child: const MiscRegularImageDisplayFeedTemplate(
-                                frontSize: 65,
-                                backSize: 70,
-                                backgroundColor: const Color(0xff04ECFF),
-                              ),
-                            ),
-                            Positioned(
-                              left: SizeConfig.blockSizeHorizontal! * 12.0,
-                              top: SizeConfig.blockSizeVertical! * 1.0,
-                              child: const MiscRegularImageDisplayFeedTemplate(
-                                frontSize: 75,
-                                backSize: 80,
-                              ),
-                            ),
-                            Positioned(
-                              right: SizeConfig.blockSizeHorizontal! * 12.0,
-                              top: SizeConfig.blockSizeVertical! * 1.0,
-                              child: const MiscRegularImageDisplayFeedTemplate(
-                                frontSize: 75,
-                                backSize: 80,
-                                backgroundColor: const Color(0xff04ECFF),
-                              ),
-                            ),
-                            Center(
-                              child: Image.asset(
-                                'assets/icons/logo.png',
-                                height: SizeConfig.blockSizeVertical! * 24.11,
-                                width: SizeConfig.blockSizeHorizontal! * 40.31,
-                              ),
-                            ),
-                          ],
+                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 2, right: SizeConfig.blockSizeHorizontal! * 2),
+                        child: Image.asset(
+                          'assets/icons/Welcome.png',
+                          width: SizeConfig.screenWidth,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       SizedBox(height: SizeConfig.blockSizeVertical! * 4.04),
@@ -1088,7 +1048,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab> {
                         ),
                       ),
                        Padding(
-                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 5, right: SizeConfig.blockSizeHorizontal! * 5),
+                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 6, right: SizeConfig.blockSizeHorizontal! * 6),
                         child:  Center(
                           child: Text(
                             'Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
