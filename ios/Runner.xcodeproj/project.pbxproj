@@ -390,11 +390,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 1.45;
-=======
 				CURRENT_PROJECT_VERSION = 1.44;
->>>>>>> local-devel-updated
 				DEVELOPMENT_TEAM = BFW7223SLN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -544,11 +540,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 1.45;
-=======
 				CURRENT_PROJECT_VERSION = 1.44;
->>>>>>> local-devel-updated
 				DEVELOPMENT_TEAM = BFW7223SLN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -586,11 +578,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 1.45;
-=======
 				CURRENT_PROJECT_VERSION = 1.44;
->>>>>>> local-devel-updated
 				DEVELOPMENT_TEAM = BFW7223SLN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
