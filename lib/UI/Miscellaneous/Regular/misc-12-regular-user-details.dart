@@ -41,12 +41,13 @@ class MiscRegularDraggablePost extends StatefulWidget{
   final int userId;
   const MiscRegularDraggablePost({required this.userId});
 
-  MiscRegularDraggablePostState createState() => MiscRegularDraggablePostState(userId: userId);
+  // MiscRegularDraggablePostState createState() => MiscRegularDraggablePostState(userId: userId);
+  MiscRegularDraggablePostState createState() => MiscRegularDraggablePostState();
 }
 
 class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
-  final int userId;
-  MiscRegularDraggablePostState({required this.userId});
+  // final int userId;
+  // MiscRegularDraggablePostState({required this.userId});
   
   ScrollController scrollController = ScrollController();
   List<RegularMiscDraggablePost> posts = [];
@@ -85,7 +86,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowUserPosts(userId: userId, page: page);
+      var newValue = await apiRegularShowUserPosts(userId: widget.userId, page: page);
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.almItemsRemaining;

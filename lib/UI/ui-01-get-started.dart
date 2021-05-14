@@ -114,6 +114,8 @@ class UIGetStartedState extends State<UIGetStarted>{
   initUnitSharePost({required int postId, required bool likeStatus, required int numberOfLikes, required String pageType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
+    print('Shared post || User identified: $login || Post Type: $pageType');
+
     if(login){
       FlutterBranchSdk.logout();
 
@@ -127,6 +129,8 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   initUnitShareMemorial({required int memorialId, required String pageType, required bool follower}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
+
+    print('Shared memorial || User identified: $login || Memorial Type: $pageType');
 
     if(login){
       FlutterBranchSdk.logout();

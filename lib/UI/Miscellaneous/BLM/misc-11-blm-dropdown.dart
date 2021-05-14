@@ -25,19 +25,10 @@ class MiscBLMDropDownTemplate extends StatefulWidget{
 
   const MiscBLMDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
 
-  MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState(postId: postId, likePost: likePost, likesCount: likesCount, reportType: reportType, pageType: pageType);
+  MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState();
 }
 
 class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
-
-  final int postId;
-  final bool likePost;
-  final int likesCount;
-  final String reportType;
-  final String pageType;
-
-  MiscBLMDropDownTemplateState({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
-
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
   GlobalKey qrKey = new GlobalKey();
@@ -46,16 +37,15 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
       contentDescription: 'FacesbyPlaces link to the app',
       keywords: ['FacesbyPlaces', 'Share', 'Link'],
       publiclyIndex: true,
       locallyIndex: true,
       contentMetadata: BranchContentMetaData()
         ..addCustomMetadata('link-category', 'Post')
-        ..addCustomMetadata('link-post-id', postId)
-        ..addCustomMetadata('link-like-status', likePost)
-        ..addCustomMetadata('link-number-of-likes', likesCount)
+        ..addCustomMetadata('link-post-id', widget.postId)
+        ..addCustomMetadata('link-like-status', widget.likePost)
+        ..addCustomMetadata('link-number-of-likes', widget.likesCount)
         ..addCustomMetadata('link-type-of-account', 'Blm')
     );
 
@@ -176,9 +166,9 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
               }else if(dropDownList == 'Report'){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: reportType,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.postId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
-                String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-$pageType'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+                String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
 
                 showGeneralDialog(
                   context: context,
@@ -274,10 +264,8 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                 }
 
                 FlutterClipboard.copy(response.result).then((value) => const ScaffoldMessenger(child: const Text('Link copied!'),));
-
               }
             },
-            
           );
         },
       ),  
@@ -293,17 +281,10 @@ class MiscBLMDropDownMemorialTemplate extends StatefulWidget{
 
   const MiscBLMDropDownMemorialTemplate({required this.memorialName, required this.memorialId, required this.pageType, required this.reportType});
 
-  MiscBLMDropDownMemorialTemplateState createState() => MiscBLMDropDownMemorialTemplateState(memorialName: memorialName, memorialId: memorialId, pageType: pageType, reportType: reportType);
+  MiscBLMDropDownMemorialTemplateState createState() => MiscBLMDropDownMemorialTemplateState();
 }
 
 class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorialTemplate>{
-  final String memorialName;
-  final int memorialId;
-  final String pageType;
-  final String reportType;
-
-  MiscBLMDropDownMemorialTemplateState({required this.memorialName, required this.memorialId, required this.pageType, required this.reportType});
-
   final snackBar = const SnackBar(content: const Text('Link copied!'), backgroundColor: const Color(0xff4EC9D4), duration: const Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
   BranchUniversalObject? buo;
@@ -314,15 +295,14 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
       contentDescription: 'FacesbyPlaces link to the app',
       keywords: ['FacesbyPlaces', 'Share', 'Link'],
       publiclyIndex: true,
       locallyIndex: true,
       contentMetadata: BranchContentMetaData()
         ..addCustomMetadata('link-category', 'Memorial')
-        ..addCustomMetadata('link-memorial-id', memorialId)
-        ..addCustomMetadata('link-type-of-account', pageType)
+        ..addCustomMetadata('link-memorial-id', widget.memorialId)
+        ..addCustomMetadata('link-type-of-account', widget.pageType)
     );
 
     lp = BranchLinkProperties(
@@ -443,9 +423,9 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
               }else if(dropDownList == 'Report'){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: memorialId, reportType: reportType,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.memorialId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
-                String qrData = 'Memorial-$memorialId-$pageType'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
+                String qrData = 'Memorial-${widget.memorialId}-${widget.pageType}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
 
                 showGeneralDialog(
                   context: context,

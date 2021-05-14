@@ -66,7 +66,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
   void initState(){
     super.initState();
-    // print("BLM rebuild for ${widget.key.toString()}");
     likePost = widget.likeStatus;
     likesCount = widget.numberOfLikes;
   }
@@ -217,7 +216,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     BranchUniversalObject buo = BranchUniversalObject(
                       canonicalIdentifier: 'FacesbyPlaces',
                       title: 'FacesbyPlaces Link',
-                      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
                       contentDescription: 'FacesbyPlaces link to the app',
                       keywords: ['FacesbyPlaces', 'Share', 'Link'],
                       publiclyIndex: true,
