@@ -136,9 +136,18 @@ flutter:
           style: italic
     - family: NexaRegular
       fonts:
-           - asset: assets/fonts/nexa/nexaregular.otf
+        - asset: assets/fonts/nexa/nexaregular.otf
     - family: NexaBold
       fonts:
-           - asset: assets/fonts/nexa/NexaDemo-Bold.ttf
+        - asset: assets/fonts/nexa/NexaDemo-Bold.ttf
+    - family: NexaLight
+      fonts:
+        - asset: assets/fonts/nexa/NexaDemo-Light.ttf
+    - family: HelveticaRegular
+      fonts:
+        - asset: assets/fonts/Helvetica-Font/Helvetica.ttf
+    - family: HelveticaBold
+      fonts:
+        - asset: assets/fonts/Helvetica-Font/Helvetica-Bold.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

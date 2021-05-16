@@ -6,8 +6,11 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularSearch extends StatelessWidget{
+class HomeRegularSearch extends StatefulWidget {
+  HomeRegularSearchState createState() => HomeRegularSearchState();
+}
 
+class HomeRegularSearchState extends State<HomeRegularSearch> {
   final TextEditingController controller = TextEditingController();
 
   @override
