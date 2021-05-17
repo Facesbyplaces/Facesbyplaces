@@ -225,248 +225,25 @@ class UIGetStartedState extends State<UIGetStarted> {
                 Expanded(
                   child: Stack(
                     children: [
-                      Positioned(
-                        top: 0,
-                        left: SizeConfig.blockSizeHorizontal! * 2,
-                        child: Transform.rotate(
-                          angle: -pi / 30,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image1.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: SizeConfig.blockSizeHorizontal! * 20,
-                        child: Transform.rotate(
-                          angle: -50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image5.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: 10,
-                        left: SizeConfig.blockSizeHorizontal! * 35,
-                        child: Transform.rotate(
-                          angle: -50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image2.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: SizeConfig.blockSizeHorizontal! * 45,
-                        child: Transform.rotate(
-                          angle: 0,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image3.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: SizeConfig.blockSizeHorizontal! * 60,
-                        child: Transform.rotate(
-                          angle: -pi / 30,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image4.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: SizeConfig.blockSizeHorizontal! * 80,
-                        child: Transform.rotate(
-                          angle: -pi / 10,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image5.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: SizeConfig.blockSizeHorizontal! * 70,
-                        child: Transform.rotate(
-                          angle: 0,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image6.png'),
-                        ),
-                      ),
-
-                      ///
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 10,
-                        left: SizeConfig.blockSizeHorizontal! * 2,
-                        child: Transform.rotate(
-                          angle: 0,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image7.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 9,
-                        left: SizeConfig.blockSizeHorizontal! * 20,
-                        child: Transform.rotate(
-                          angle: 0,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image8.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 10,
-                        left: SizeConfig.blockSizeHorizontal! * 35,
-                        child: Transform.rotate(
-                          angle: -pi / 50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image9.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 10,
-                        left: SizeConfig.blockSizeHorizontal! * 50,
-                        child: Transform.rotate(
-                          angle: -pi / 30,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image5.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 10,
-                        left: SizeConfig.blockSizeHorizontal! * 80,
-                        child: Transform.rotate(
-                          angle: -pi / 10,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image1.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 10,
-                        left: SizeConfig.blockSizeHorizontal! * 70,
-                        child: Transform.rotate(
-                          angle: 0,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image2.png'),
-                        ),
-                      ),
-
-                      ///
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 20,
-                        left: SizeConfig.blockSizeHorizontal! * 2,
-                        child: Transform.rotate(
-                          angle: 0,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image9.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 20,
-                        left: SizeConfig.blockSizeHorizontal! * 20,
-                        child: Transform.rotate(
-                          angle: -50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image8.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 20,
-                        left: SizeConfig.blockSizeHorizontal! * 35,
-                        child: Transform.rotate(
-                          angle: -pi / 50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image7.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 20,
-                        left: SizeConfig.blockSizeHorizontal! * 50,
-                        child: Transform.rotate(
-                          angle: -pi / 30,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image6.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 20,
-                        left: SizeConfig.blockSizeHorizontal! * 80,
-                        child: Transform.rotate(
-                          angle: -pi / 40,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image5.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 20,
-                        left: SizeConfig.blockSizeHorizontal! * 70,
-                        child: Transform.rotate(
-                          angle: -pi / 50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image4.png'),
-                        ),
-                      ),
-
-                      ///
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 30,
-                        left: SizeConfig.blockSizeHorizontal! * 2,
-                        child: Transform.rotate(
-                          angle: 0,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image7.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 30,
-                        left: SizeConfig.blockSizeHorizontal! * 20,
-                        child: Transform.rotate(
-                          angle: -50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image6.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 30,
-                        left: SizeConfig.blockSizeHorizontal! * 35,
-                        child: Transform.rotate(
-                          angle: -pi / 50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image4.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 30,
-                        left: SizeConfig.blockSizeHorizontal! * 50,
-                        child: Transform.rotate(
-                          angle: -pi / 30,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image5.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 30,
-                        left: SizeConfig.blockSizeHorizontal! * 80,
-                        child: Transform.rotate(
-                          angle: -pi / 40,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image3.png'),
-                        ),
-                      ),
-                      Positioned(
-                        top: SizeConfig.blockSizeVertical! * 30,
-                        left: SizeConfig.blockSizeHorizontal! * 70,
-                        child: Transform.rotate(
-                          angle: -pi / 50,
-                          child: const MiscStartImageRegularTemplate(
-                              image: 'assets/icons/frontpage-image2.png'),
+                      Container(
+                        width: SizeConfig.screenWidth,
+                        child:  Image.asset(
+                          'assets/icons/Collage Image.png',
+                          fit: BoxFit.contain,
                         ),
                       ),
                       Positioned(
                         top: SizeConfig.blockSizeVertical! * 10.0,
-                        left: SizeConfig.blockSizeVertical! * 5,
+                        left: SizeConfig.blockSizeVertical! * 6,
                         child: Image.asset(
                           'assets/icons/logo.png',
-                          height: SizeConfig.blockSizeVertical! * 29.98,
-                          width: SizeConfig.blockSizeVertical! * 47.81,
+                          height: SizeConfig.blockSizeVertical! * 27.98,
+                          width: SizeConfig.blockSizeVertical! * 45.81,
                         ),
                       )
+
                     ],
-                  ),
+                  )
                 ),
                 Container(
                   height: SizeConfig.blockSizeVertical! * 54,

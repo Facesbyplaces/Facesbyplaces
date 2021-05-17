@@ -15,11 +15,11 @@ class BLMMainPagesMemorials {
 
   const BLMMainPagesMemorials(
       {required this.blmId,
-      required this.blmName,
-      required this.blmDescription,
-      required this.managed,
-      required this.joined,
-      required this.pageType});
+        required this.blmName,
+        required this.blmDescription,
+        required this.managed,
+        required this.joined,
+        required this.pageType});
 }
 
 class HomeBLMManageTab extends StatefulWidget {
@@ -170,8 +170,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab> {
           newValue.blmFamilyMemorialList.blmHomeTabMemorialPage.length;
 
       for (int i = 0;
-          i < newValue.blmFamilyMemorialList.blmHomeTabMemorialPage.length;
-          i++) {
+      i < newValue.blmFamilyMemorialList.blmHomeTabMemorialPage.length;
+      i++) {
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
@@ -212,8 +212,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab> {
           newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage.length;
 
       for (int i = 0;
-          i < newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage.length;
-          i++) {
+      i < newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage.length;
+      i++) {
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
@@ -268,8 +268,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab> {
           newValue.blmFriendsMemorialList.blmHomeTabMemorialPage.length;
 
       for (int i = 0;
-          i < newValue.blmFriendsMemorialList.blmHomeTabMemorialPage.length;
-          i++) {
+      i < newValue.blmFriendsMemorialList.blmHomeTabMemorialPage.length;
+      i++) {
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
@@ -310,10 +310,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab> {
           newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage.length;
 
       for (int i = 0;
-          i <
-              newValue
-                  .blmFriendsMemorialList.memorialHomeTabMemorialPage.length;
-          i++) {
+      i <
+          newValue
+              .blmFriendsMemorialList.memorialHomeTabMemorialPage.length;
+      i++) {
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
@@ -362,54 +362,54 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab> {
         width: SizeConfig.screenWidth,
         child: countListener != 0
             ? RefreshIndicator(
-                onRefresh: onRefresh,
-                child: ListView.separated(
-                  controller: scrollController,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: finalMemorials.length,
-                  separatorBuilder: (c, i) =>
-                      const Divider(height: 10, color: Colors.transparent),
-                  itemBuilder: (c, i) => finalMemorials[i],
-                ))
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              padding:
+              const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+              physics: const ClampingScrollPhysics(),
+              itemCount: finalMemorials.length,
+              separatorBuilder: (c, i) =>
+              const Divider(height: 10, color: Colors.transparent),
+              itemBuilder: (c, i) => finalMemorials[i],
+            ))
             : SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 85 - kToolbarHeight) /
-                                3.5,
-                      ),
-                      Image.asset(
-                        'assets/icons/app-icon.png',
-                        height: 250,
-                        width: 250,
-                      ),
-                      const SizedBox(
-                        height: 45,
-                      ),
-                      Text(
-                        'Memorial is empty',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xffB1B1B1),
-                        ),
-                      ),
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 85 - kToolbarHeight) /
-                                3.5,
-                      ),
-                    ],
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height:
+                  (SizeConfig.screenHeight! - 85 - kToolbarHeight) /
+                      3.5,
+                ),
+                Image.asset(
+                  'assets/icons/app-icon.png',
+                  height: 250,
+                  width: 250,
+                ),
+                const SizedBox(
+                  height: 45,
+                ),
+                Text(
+                  'Memorial is empty',
+                  style: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 3.52,
+                    fontFamily: 'NexaBold',
+                    color: const Color(0xffB1B1B1),
                   ),
                 ),
-              ),
+                SizedBox(
+                  height:
+                  (SizeConfig.screenHeight! - 85 - kToolbarHeight) /
+                      3.5,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

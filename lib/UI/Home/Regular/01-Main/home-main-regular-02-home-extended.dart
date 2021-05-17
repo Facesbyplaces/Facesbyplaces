@@ -848,12 +848,12 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  const Text(
+                                   Text(
                                     'Guest User',
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
+                                    style: TextStyle(
+                                      fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                      fontFamily: 'NexaBold',
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
@@ -864,11 +864,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                     onTap: () {
                                       Navigator.pop(context);
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Home',
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w200,
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                        fontFamily: 'NexaLight',
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -903,11 +903,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                       Navigator.pushAndRemoveUntil(
                                           context, newRoute, (route) => false);
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Sign up or Sign in',
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w200,
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.blockSizeVertical! * 2.74,
+                                        fontFamily: 'NexaLight',
                                         color: const Color(0xffffffff),
                                       ),
                                     ),

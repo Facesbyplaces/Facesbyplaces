@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
-class HomeRegularCreateMemorial3 extends StatefulWidget{
+class HomeRegularCreateMemorial3 extends StatefulWidget {
   final String relationship;
   final String birthplace;
   final String dob;
@@ -24,12 +24,32 @@ class HomeRegularCreateMemorial3 extends StatefulWidget{
   final String memorialName;
   final List<dynamic> imagesOrVideos;
 
-  const HomeRegularCreateMemorial3({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.description, required this.memorialName, required this.imagesOrVideos});
+  const HomeRegularCreateMemorial3(
+      {required this.relationship,
+      required this.birthplace,
+      required this.dob,
+      required this.rip,
+      required this.cemetery,
+      required this.country,
+      required this.description,
+      required this.memorialName,
+      required this.imagesOrVideos});
 
-  HomeRegularCreateMemorial3State createState() => HomeRegularCreateMemorial3State(relationship: relationship, birthplace: birthplace, dob: dob, rip: rip, cemetery: cemetery, country: country, description: description, memorialName: memorialName, imagesOrVideos: imagesOrVideos);
+  HomeRegularCreateMemorial3State createState() =>
+      HomeRegularCreateMemorial3State(
+          relationship: relationship,
+          birthplace: birthplace,
+          dob: dob,
+          rip: rip,
+          cemetery: cemetery,
+          country: country,
+          description: description,
+          memorialName: memorialName,
+          imagesOrVideos: imagesOrVideos);
 }
 
-class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
+class HomeRegularCreateMemorial3State
+    extends State<HomeRegularCreateMemorial3> {
   final String relationship;
   final String birthplace;
   final String dob;
@@ -40,27 +60,39 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
   final String memorialName;
   final List<dynamic> imagesOrVideos;
 
-  HomeRegularCreateMemorial3State({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.description, required this.memorialName, required this.imagesOrVideos});
+  HomeRegularCreateMemorial3State(
+      {required this.relationship,
+      required this.birthplace,
+      required this.dob,
+      required this.rip,
+      required this.cemetery,
+      required this.country,
+      required this.description,
+      required this.memorialName,
+      required this.imagesOrVideos});
 
   File backgroundImage = File('');
   File profileImage = File('');
   final picker = ImagePicker();
   // List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
-  List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
+  List<String> backgroundImages = [
+    'assets/icons/alm-memorial-cover-1.jpeg',
+    'assets/icons/alm-memorial-cover-2.jpeg'
+  ];
   int backgroundImageToggle = 0;
 
-  Future getProfileImage() async{
+  Future getProfileImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if(pickedFile != null){
+    if (pickedFile != null) {
       setState(() {
         profileImage = File(pickedFile.path);
       });
     }
   }
 
-  Future getBackgroundImage() async{
+  Future getBackgroundImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if(pickedFile != null){
+    if (pickedFile != null) {
       setState(() {
         backgroundImage = File(pickedFile.path);
       });
@@ -72,33 +104,48 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff))),
+        title: Text('Create a Memorial Page for Friends and family.',
+            maxLines: 2,
+            style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                fontFamily: 'NexaRegular',
+                color: const Color(0xffffffff))),
         centerTitle: true,
         backgroundColor: const Color(0xff04ECFF),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
-          onPressed: (){
+          icon: const Icon(
+            Icons.arrow_back,
+            color: const Color(0xffffffff),
+          ),
+          onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
       body: Stack(
         children: [
-
-          const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
-
+          const MiscRegularBackgroundTemplate(
+            image: const AssetImage('assets/icons/background2.png'),
+          ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             child: ListView(
               physics: const ClampingScrollPhysics(),
               children: [
-
-                const SizedBox(height: 20,),
-
-                const Text('Upload or Select an Image', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: const Color(0xff000000),),),
-
-                const SizedBox(height: 20,),
-
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Upload or Select an Image',
+                    style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff000000))
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Container(
                   height: 200,
                   decoration: BoxDecoration(
@@ -106,15 +153,15 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: backgroundImage.path != ''
-                      ? AssetImage(backgroundImage.path)
-                      : const AssetImage('assets/icons/alm-memorial-cover-1.jpeg'),
+                          ? AssetImage(backgroundImage.path)
+                          : const AssetImage(
+                              'assets/icons/alm-memorial-cover-1.jpeg'),
                     ),
                   ),
                   child: Stack(
                     children: [
-
                       GestureDetector(
-                        onTap: () async{
+                        onTap: () async {
                           await getProfileImage();
                         },
                         child: Center(
@@ -124,22 +171,23 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             child: Padding(
                               padding: const EdgeInsets.all(5),
                               child: profileImage.path != ''
-                              ? CircleAvatar(
-                                radius: 60,
-                                backgroundColor: Color(0xff888888),
-                                foregroundImage: FileImage(profileImage),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                              )
-                              : const CircleAvatar(
-                                radius: 60,
-                                backgroundColor: Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                              ),
+                                  ? CircleAvatar(
+                                      radius: 60,
+                                      backgroundColor: Color(0xff888888),
+                                      foregroundImage: FileImage(profileImage),
+                                      backgroundImage: const AssetImage(
+                                          'assets/icons/app-icon.png'),
+                                    )
+                                  : const CircleAvatar(
+                                      radius: 60,
+                                      backgroundColor: Color(0xff888888),
+                                      foregroundImage: const AssetImage(
+                                          'assets/icons/app-icon.png'),
+                                    ),
                             ),
                           ),
                         ),
                       ),
-
                       Positioned(
                         bottom: 40,
                         left: SizeConfig.screenWidth! / 2,
@@ -149,44 +197,63 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                           child: const CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.transparent,
-                            child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
+                            child: const Icon(
+                              Icons.camera,
+                              color: const Color(0xffaaaaaa),
+                              size: 45,
+                            ),
                           ),
                         ),
                       ),
-
                       const Positioned(
                         top: 10,
                         right: 10,
                         child: const CircleAvatar(
                           radius: 25,
                           backgroundColor: const Color(0xffffffff),
-                          child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
+                          child: const Icon(
+                            Icons.camera,
+                            color: const Color(0xffaaaaaa),
+                            size: 45,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-
-                const SizedBox(height: 20,),
-
-                const Text('Upload the best photo of the person in the memorial page.', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
-
-                const SizedBox(height: 40,),
-
-                const Text('Choose Background', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: const Color(0xff000000),),),
-
-                const SizedBox(height: 20,),
-
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Upload the best photo of the person in the memorial page.',
+                    style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff2F353D))
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Text(
+                  'Choose Background',
+                    style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff000000))
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Container(
                   height: 100,
                   child: ListView.separated(
                     physics: const ClampingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index){
-                      return ((){
-                        if(index == 2){
+                    itemBuilder: (context, index) {
+                      return (() {
+                        if (index == 2) {
                           return GestureDetector(
-                            onTap: () async{
+                            onTap: () async {
                               setState(() {
                                 backgroundImageToggle = index;
                               });
@@ -195,24 +262,33 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             },
                             child: Container(
                               width: 100,
-                              height: 100,  
-                              child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
+                              height: 100,
+                              child: const Icon(
+                                Icons.add_rounded,
+                                color: const Color(0xff000000),
+                                size: 60,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: const Color(0xffcccccc),
-                                border: Border.all(color: const Color(0xff000000),),
+                                border: Border.all(
+                                  color: const Color(0xff000000),
+                                ),
                               ),
                             ),
                           );
-                        }else{
+                        } else {
                           return GestureDetector(
-                            onTap: () async{
-                              final ByteData bytes = await rootBundle.load(backgroundImages[index]);
+                            onTap: () async {
+                              final ByteData bytes = await rootBundle
+                                  .load(backgroundImages[index]);
                               final Uint8List list = bytes.buffer.asUint8List();
 
                               final tempDir = await getTemporaryDirectory();
-                              final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
-                              file.writeAsBytesSync(list);                              
+                              final file = await new File(
+                                      '${tempDir.path}/regular-background-image-$index.png')
+                                  .create();
+                              file.writeAsBytesSync(list);
 
                               setState(() {
                                 backgroundImageToggle = index;
@@ -220,66 +296,82 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               });
                             },
                             child: backgroundImageToggle == index
-                            ? Container(
-                              padding: const EdgeInsets.all(5),
-                              width: 100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                color: const Color(0xff04ECFF),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(backgroundImages[index]),
+                                ? Container(
+                                    padding: const EdgeInsets.all(5),
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xff04ECFF),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              backgroundImages[index]),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    padding: const EdgeInsets.all(5),
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              backgroundImages[index]),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            )
-                            : Container(
-                              padding: const EdgeInsets.all(5),
-                              width: 100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(backgroundImages[index]),
-                                  ),
-                                ),
-                              ),
-                            ),
                           );
                         }
                       }());
-                    }, 
-                    separatorBuilder: (context, index){
-                      return const SizedBox(width: 25,);
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        width: 25,
+                      );
                     },
                     itemCount: 3,
                   ),
                 ),
-
-                const SizedBox(height: 20,),
-
-                const Text('Upload your own or select from the pre-mades.', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
-
-                const SizedBox(height: 80,),
-
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Upload your own or select from the pre-mades.',
+                    style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff2F353D))
+                ),
+                const SizedBox(
+                  height: 80,
+                ),
                 MiscRegularButtonTemplate(
                   width: 150,
                   height: 45,
-                  onPressed: () async{
+                  buttonTextStyle: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                    fontFamily: 'NexaRegular',
+                    color: const Color(0xffFFFFFF),
+                  ),
+                  buttonText: 'Create my Memorial Page',
+                  onPressed: () async {
                     Location.Location location = new Location.Location();
 
                     bool serviceEnabled = await location.serviceEnabled();
@@ -291,39 +383,57 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       }
                     }
 
-                    Location.PermissionStatus permissionGranted = await location.hasPermission();
+                    Location.PermissionStatus permissionGranted =
+                        await location.hasPermission();
 
-                    if (permissionGranted != Location.PermissionStatus.granted) {
+                    if (permissionGranted !=
+                        Location.PermissionStatus.granted) {
                       bool confirmation = await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                            textAlign: TextAlign.center,
-                          ),
-                          onlyOkButton: false,
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                          onCancelButtonPressed: () {
-                            Navigator.pop(context, false);
-                          },
-                        )
-                      );
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                                image: Image.asset(
+                                  'assets/icons/cover-icon.png',
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  'Confirm',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                                      fontFamily: 'NexaRegular'),
+                                ),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text(
+                                  'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: SizeConfig
+                                          .blockSizeVertical! *
+                                          2.87,
+                                      fontFamily: 'NexaRegular'),
+                                ),
+                                onlyOkButton: false,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                                onCancelButtonPressed: () {
+                                  Navigator.pop(context, false);
+                                },
+                              ));
 
-                      if(confirmation == true){
+                      if (confirmation == true) {
                         permissionGranted = await location.requestPermission();
                       }
-                    }else{
-                      if(profileImage.path == ''){
-                        final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
+                    } else {
+                      if (profileImage.path == '') {
+                        final ByteData bytes = await rootBundle
+                            .load('assets/icons/cover-icon.png');
                         final Uint8List list = bytes.buffer.asUint8List();
 
                         final tempDir = await getTemporaryDirectory();
-                        final file = await new File('${tempDir.path}/regular-profile-image.png').create();
+                        final file = await new File(
+                                '${tempDir.path}/regular-profile-image.png')
+                            .create();
                         file.writeAsBytesSync(list);
 
                         setState(() {
@@ -331,9 +441,11 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         });
                       }
 
-                      Location.LocationData locationData = await location.getLocation();
+                      Location.LocationData locationData =
+                          await location.getLocation();
 
-                      APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
+                      APIRegularCreateMemorial memorial =
+                          APIRegularCreateMemorial(
                         almRelationship: relationship,
                         almBirthPlace: birthplace,
                         almDob: dob,
@@ -350,10 +462,17 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       );
 
                       context.loaderOverlay.show();
-                      int result = await apiRegularCreateMemorial(memorial: memorial);
+                      int result =
+                          await apiRegularCreateMemorial(memorial: memorial);
                       context.loaderOverlay.hide();
 
-                      Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: relationship,));
+                      Route newRoute = MaterialPageRoute(
+                          builder: (context) => HomeRegularProfile(
+                                memorialId: result,
+                                managed: true,
+                                newlyCreated: true,
+                                relationship: relationship,
+                              ));
                       Navigator.pushReplacement(context, newRoute);
                     }
                   },
