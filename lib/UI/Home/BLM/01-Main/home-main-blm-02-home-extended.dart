@@ -41,8 +41,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
 
   ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
   ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
-  ValueNotifier<List<bool>> bottomTab =
-      ValueNotifier<List<bool>>([true, false, false, false]);
+  ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
 
   Future<APIBLMShowProfileInformation>? drawerSettings;
@@ -70,8 +69,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
   Future<void> scanQR() async {
     String barcodeScanRes;
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          "#ff6666", "Cancel", true, ScanMode.QR);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
       print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -85,68 +83,35 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
 
     List<dynamic> newValue = _scanBarcode.split('-');
 
-    if (_scanBarcode != 'Error') {
-      if (newValue[0] == 'Memorial') {
-        if (newValue[2] == 'Blm') {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeBLMMemorialProfile(
-                        memorialId: int.parse(newValue[1]),
-                        pageType: newValue[2],
-                        newJoin: false,
-                      )));
-        } else {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeRegularMemorialProfile(
-                        memorialId: int.parse(newValue[1]),
-                        pageType: newValue[2],
-                        newJoin: false,
-                      )));
+    if(_scanBarcode != 'Error'){
+      if(newValue[0] == 'Memorial'){
+        if(newValue[2] == 'Blm'){
+          Navigator.push(context,MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
+        }else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
         }
-      } else {
-        if (newValue[4] == 'Blm') {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeBLMShowOriginalPostComments(
-                        postId: int.parse(newValue[1]),
-                      )));
-        } else {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeRegularShowOriginalPostComments(
-                      postId: int.parse(newValue[1]))));
+      }else{
+        if(newValue[4] == 'Blm'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]),)));
+        }else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
         }
       }
-    } else {
+    }else{
       await showDialog(
-          context: context,
-          builder: (_) => AssetGiffyDialog(
-                image: Image.asset(
-                  'assets/icons/cover-icon.png',
-                  fit: BoxFit.cover,
-                ),
-                title: const Text(
-                  'Error',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 22.0, fontWeight: FontWeight.w600),
-                ),
-                entryAnimation: EntryAnimation.DEFAULT,
-                description: const Text(
-                  'Something went wrong. Please try again.',
-                  textAlign: TextAlign.center,
-                ),
-                onlyOkButton: true,
-                buttonOkColor: const Color(0xffff0000),
-                onOkButtonPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ));
+        context: context, 
+        builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          entryAnimation: EntryAnimation.DEFAULT,
+          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+          onlyOkButton: true,
+          buttonOkColor: const Color(0xffff0000),
+          onOkButtonPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+      );
     }
   }
 
@@ -154,9 +119,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
     super.initState();
     isGuest();
     toggleBottom.value = newToggleBottom;
-    bottomTab.value = toggleBottom.value == 0
-        ? [true, false, false, false]
-        : [false, true, false, false];
+    bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false];
   }
 
   @override
@@ -178,11 +141,9 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
           valueListenable: toggleBottom,
           builder: (_, int toggleBottomListener, __) => ValueListenableBuilder(
             valueListenable: bottomTab,
-            builder: (_, List<bool> bottomTabListener, __) =>
-                ValueListenableBuilder(
+            builder: (_, List<bool> bottomTabListener, __) => ValueListenableBuilder(
               valueListenable: unreadNotifications,
-              builder: (_, int unreadNotificationListener, __) =>
-                  ValueListenableBuilder(
+              builder: (_, int unreadNotificationListener, __) => ValueListenableBuilder(
                 valueListenable: isGuestLoggedIn,
                 builder: (_, bool isGuestLoggedInListener, __) => Scaffold(
                   appBar: AppBar(
@@ -190,16 +151,14 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                     leading: FutureBuilder<APIBLMShowProfileInformation>(
                       future: drawerSettings,
                       builder: (context, profileImage) {
-                        if (profileImage.hasData) {
+                        if(profileImage.hasData){
                           return Builder(
-                            builder: (context) {
+                            builder: (context){
                               return IconButton(
                                 icon: CircleAvatar(
                                   backgroundColor: const Color(0xff888888),
-                                  foregroundImage: NetworkImage(profileImage
-                                      .data!.showProfileInformationImage),
-                                  backgroundImage: const AssetImage(
-                                      'assets/icons/app-icon.png'),
+                                  foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                 ),
                                 onPressed: () async {
                                   Scaffold.of(context).openDrawer();
@@ -207,18 +166,17 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                               );
                             },
                           );
-                        } else if (profileImage.hasError ||
-                            isGuestLoggedInListener) {
+                        } else if(profileImage.hasError || isGuestLoggedInListener){
                           return IconButton(
-                              icon: const CircleAvatar(
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage(
-                                    'assets/icons/app-icon.png'),
-                              ),
-                              onPressed: () async {
-                                Scaffold.of(context).openDrawer();
-                              });
-                        } else {
+                            icon: const CircleAvatar(
+                              backgroundColor: const Color(0xff888888),
+                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                            ),
+                            onPressed: () async {
+                              Scaffold.of(context).openDrawer();
+                            },
+                          );
+                        }else{
                           return Container(
                             child: const CircularProgressIndicator(),
                             padding: const EdgeInsets.all(20.0),
@@ -226,8 +184,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                         }
                       },
                     ),
-                    title: Text(
-                      'FacesByPlaces.com',
+                    title: Text('FacesByPlaces.com',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 2.74,
                         fontFamily: 'NexaBold',
@@ -243,9 +200,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                         child: SizedBox(
                           height: SizeConfig.blockSizeVertical! * 4.04,
                           width: SizeConfig.blockSizeHorizontal! * 7.18,
-                          child: Image.asset(
-                            'assets/icons/zoom.png',
-                          ),
+                          child: Image.asset('assets/icons/zoom.png',),
                         ),
                       ),
                     ],
@@ -257,22 +212,17 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                         child: Container(
                           height: SizeConfig.screenHeight,
                           child: const MiscBLMBackgroundTemplate(
-                            image: const AssetImage(
-                                'assets/icons/background2.png'),
+                            image: const AssetImage('assets/icons/background2.png'),
                           ),
                         ),
                       ),
                       Container(
                         child: (() {
                           switch (toggleBottomListener) {
-                            case 0:
-                              return HomeBLMFeedTab();
-                            case 1:
-                              return HomeBLMManageTab();
-                            case 2:
-                              return HomeBLMPostTab();
-                            case 3:
-                              return HomeBLMNotificationsTab();
+                            case 0: return HomeBLMFeedTab();
+                            case 1: return HomeBLMManageTab();
+                            case 2: return HomeBLMPostTab();
+                            case 3: return HomeBLMNotificationsTab();
                           }
                         }()),
                       ),

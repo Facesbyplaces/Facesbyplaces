@@ -447,10 +447,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                             deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                             autoDispose: false,
                                                             aspectRatio: 16 / 9,
+                                                            fit: BoxFit.contain,
                                                           ),
                                                         );
                                                       }else{
-                                                        return Image.asset(slideImages[index].path, fit: BoxFit.cover, scale: 1.0,);
+                                                        return Image.asset(slideImages[index].path, fit: BoxFit.contain, scale: 1.0,);
                                                       }
                                                     }()),
                                                   ),
@@ -472,7 +473,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                           controlsConfiguration: const BetterPlayerControlsConfiguration(
                                             showControls: false,
                                           ),
-                                          aspectRatio: 1,
+                                          aspectRatio: 16 / 9,
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
 

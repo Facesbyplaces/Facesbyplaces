@@ -312,6 +312,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                   betterPlayerConfiguration: BetterPlayerConfiguration(     
                                     deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                     aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ),
@@ -333,6 +334,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     showControls: false,
                   ),
                   aspectRatio: 16 / 9,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -436,7 +438,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                       const SizedBox(height: 20,),
 
                                       Expanded(
-                                        child: Image.asset(slideImages[index].path, fit: BoxFit.cover, scale: 1.0,),
+                                        child: Image.asset(slideImages[index].path, fit: BoxFit.contain, scale: 1.0,),
                                       ),
 
                                       const SizedBox(height: 80,),

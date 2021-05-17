@@ -25,36 +25,25 @@ class MiscBLMInputFieldTemplate extends StatefulWidget{
     this.displayText = '',
   }) : super(key: key);
   
-  MiscBLMInputFieldTemplateState createState() => MiscBLMInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
+  MiscBLMInputFieldTemplateState createState() => MiscBLMInputFieldTemplateState();
 }
 
 class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final bool obscureText;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final bool includeSuffixIcon;
-  final String displayText;
-
-  MiscBLMInputFieldTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
-
   TextEditingController controller = TextEditingController(text: '');
 
   void initState(){
     super.initState();
-    controller = TextEditingController(text: displayText);
+    controller = TextEditingController(text: widget.displayText);
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      obscureText: obscureText,
-      keyboardType: type,
-      maxLines: maxLines,
-      readOnly: readOnly,
+      obscureText: widget.obscureText,
+      keyboardType: widget.type,
+      maxLines: widget.maxLines,
+      readOnly: widget.readOnly,
       cursorColor: const Color(0xff000000),
       style: TextStyle(
         fontSize: SizeConfig.blockSizeVertical! * 2.64,
@@ -63,8 +52,8 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
       ),
       decoration: InputDecoration(
         alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: labelTextStyle,
+        labelText: widget.labelText,
+        labelStyle: widget.labelTextStyle,
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),
@@ -93,19 +82,10 @@ class MiscBLMInputFieldMultiTextTemplate extends StatefulWidget{
     this.backgroundColor = const Color(0xffffffff),
   }) : super(key: key);
   
-  MiscBLMInputFieldMultiTextTemplateState createState() => MiscBLMInputFieldMultiTextTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
+  MiscBLMInputFieldMultiTextTemplateState createState() => MiscBLMInputFieldMultiTextTemplateState();
 }
 
 class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMultiTextTemplate>{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final Color backgroundColor;
-
-  MiscBLMInputFieldMultiTextTemplateState({required this.labelText, required this.labelTextStyle, required this.type, required this.maxLines, required this.readOnly, required this.backgroundColor});
-
   TextEditingController controller = TextEditingController(text: '');
 
   @override
@@ -113,15 +93,15 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
     return TextFormField(
       controller: controller,
       cursorColor: const Color(0xff000000),
-      maxLines: maxLines,
-      keyboardType: type,
-      readOnly: readOnly,
+      maxLines: widget.maxLines,
+      keyboardType: widget.type,
+      readOnly: widget.readOnly,
       decoration: InputDecoration(
-        fillColor: backgroundColor,
+        fillColor: widget.backgroundColor,
         filled: true,
         alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: labelTextStyle,
+        labelText: widget.labelText,
+        labelStyle: widget.labelTextStyle,
         border: const OutlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),
@@ -145,20 +125,17 @@ class MiscBLMInputFieldDropDown extends StatefulWidget{
   const MiscBLMInputFieldDropDown({required Key key, this.displayText = 'Father',}) : super(key: key);
 
   @override
-  MiscBLMInputFieldDropDownState createState() => MiscBLMInputFieldDropDownState(displayText: displayText);
+  MiscBLMInputFieldDropDownState createState() => MiscBLMInputFieldDropDownState();
 }
 
 class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
-
-  final String displayText;
-  MiscBLMInputFieldDropDownState({required this.displayText});
 
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
   String currentSelection = 'Father';
 
   void initState(){
     super.initState();
-    currentSelection = displayText;
+    currentSelection = widget.displayText;
   }
 
   @override
@@ -201,14 +178,10 @@ class MiscBLMInputFieldSecurityQuestions extends StatefulWidget{
   const MiscBLMInputFieldSecurityQuestions({required Key key, this.displayText = 'What\'s the name of your first dog?',}) : super(key: key);
 
   @override
-  MiscBLMInputFieldSecurityQuestionsState createState() => MiscBLMInputFieldSecurityQuestionsState(displayText: displayText);
+  MiscBLMInputFieldSecurityQuestionsState createState() => MiscBLMInputFieldSecurityQuestionsState();
 }
 
 class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSecurityQuestions>{
-
-  final String displayText;
-  MiscBLMInputFieldSecurityQuestionsState({required this.displayText});
-
   List<String> securityQuestions = [
     'What\'s the name of your first dog?', 
     'What primary school did you attend?', 
@@ -220,7 +193,7 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
 
   void initState(){
     super.initState();
-    currentSelection = displayText;
+    currentSelection = widget.displayText;
   }
 
   @override
@@ -242,9 +215,10 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.2,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xff2F353D)),
+            fontSize: SizeConfig.blockSizeVertical! * 2.2,
+            fontFamily: 'NexaRegular',
+            color: const Color(0xff2F353D),
+          ),
           value: currentSelection,
           isDense: true,
           onChanged: (String? newValue) {
@@ -340,27 +314,16 @@ class MiscBLMPhoneNumberTemplate extends StatefulWidget{
     this.displayText = '', 
   }) : super(key: key);
   
-  MiscBLMPhoneNumberTemplateState createState() => MiscBLMPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
+  MiscBLMPhoneNumberTemplateState createState() => MiscBLMPhoneNumberTemplateState();
 }
 
 class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final bool obscureText;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final bool includeSuffixIcon;
-  final String displayText;
-
-  MiscBLMPhoneNumberTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
-
   TextEditingController controller = TextEditingController(text: '');
   bool valid = false;  
 
   void initState(){
     super.initState();
-    controller = TextEditingController(text: displayText);
+    controller = TextEditingController(text: widget.displayText);
   }
 
   @override
@@ -383,8 +346,8 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
       ),
       inputDecoration: InputDecoration(
         alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: labelTextStyle,
+        labelText: widget.labelText,
+        labelStyle: widget.labelTextStyle,
         focusedBorder: const UnderlineInputBorder(
           borderSide: const BorderSide(
             color: const Color(0xff000000),

@@ -18,7 +18,6 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-bl
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-dropdown.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -28,10 +27,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
@@ -453,21 +454,54 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                         betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                           deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                           aspectRatio: 16 / 9,
+                                                                          fit: BoxFit.contain,
                                                                         ),
                                                                       );
                                                                     }else{
-                                                                      return CachedNetworkImage(
-                                                                        fit: BoxFit.cover,
-                                                                        imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                      // return CachedNetworkImage(
+                                                                      //   fit: BoxFit.contain,
+                                                                      //   imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
+                                                                      //   placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                      //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                      // );
+                                                                      return ExtendedImage.network(
+                                                                        originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
+                                                                        fit: BoxFit.contain,
+                                                                        //enableLoadState: false,
+                                                                        // loadStateChanged: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                        // loadStateChanged: (),
+                                                                        // loadStateChanged: (ExtendedImageState state){
+                                                                        //   // return const Center(child: const CircularProgressIndicator(),);
+
+                                                                        // },
+                                                                        loadStateChanged: (state){
+                                                                          // if(state.){
+                                                                          //   return const Center(child: const CircularProgressIndicator(),);
+                                                                          // }
+                                                                          if(LoadState.loading == state.extendedImageLoadState){
+                                                                            return const Center(child: const CircularProgressIndicator(),);
+                                                                          }
+                                                                        },
+                                                                        mode: ExtendedImageMode.gesture,
+                                                                        initGestureConfigHandler: (state) {
+                                                                          return GestureConfig(
+                                                                            minScale: 0.9,
+                                                                            animationMinScale: 0.7,
+                                                                            maxScale: 3.0,
+                                                                            animationMaxScale: 3.5,
+                                                                            speed: 1.0,
+                                                                            inertialSpeed: 100.0,
+                                                                            initialScale: 1.0,
+                                                                            inPageView: false,
+                                                                            initialAlignment: InitialAlignment.center,
+                                                                          );
+                                                                        },
                                                                       );
                                                                     }
                                                                   }()),
                                                                 ),
 
                                                                 const SizedBox(height: 85,),
-
                                                               ],
                                                             ),
                                                           ),
@@ -481,6 +515,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
                                                       betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                         aspectRatio: 16 / 9,
+                                                        fit: BoxFit.contain,
                                                         controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                           showControls: false,
                                                         ),
@@ -546,14 +581,15 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                 deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                 autoDispose: false,
                                                                                 aspectRatio: 16 / 9,
+                                                                                fit: BoxFit.contain,
                                                                               ),
                                                                             );
                                                                           }else{
                                                                             return CachedNetworkImage(
-                                                                              fit: BoxFit.cover,
+                                                                              fit: BoxFit.contain,
                                                                               imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
                                                                               placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                             );
                                                                           }
                                                                         }()),
@@ -597,6 +633,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                         betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                           aspectRatio: 16 / 9,
+                                                          fit: BoxFit.contain,
                                                           controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
@@ -669,14 +706,15 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                 deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                 autoDispose: false,
                                                                                 aspectRatio: 16 / 9,
+                                                                                fit: BoxFit.contain,
                                                                               ),
                                                                             );
                                                                           }else{
                                                                             return CachedNetworkImage(
-                                                                              fit: BoxFit.cover,
+                                                                              fit: BoxFit.contain,
                                                                               imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
                                                                               placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                             );
                                                                           }
                                                                         }()),
@@ -722,6 +760,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                         betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                           aspectRatio: 16 / 9,
+                                                          fit: BoxFit.contain,
                                                           controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                             showControls: false,
                                                           ),
@@ -743,6 +782,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                   betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                     aspectRatio: 16 / 9,
+                                                                    fit: BoxFit.contain,
                                                                     controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                                       showControls: false,
                                                                     ),
@@ -802,6 +842,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                 aspectRatio: 16 / 9,
+                                                                fit: BoxFit.contain,
                                                                 controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                                   showControls: false,
                                                                 ),

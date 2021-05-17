@@ -251,10 +251,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                         Expanded(
                                                           child: CachedNetworkImage(
-                                                            fit: BoxFit.cover,
+                                                            fit: BoxFit.contain,
                                                             imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
                                                             placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                           )
                                                         ),
 
@@ -360,14 +360,15 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                             deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                             aspectRatio: 16 / 9,
+                                                                            fit: BoxFit.contain,
                                                                           ),
                                                                         );
                                                                       }else{
                                                                         return CachedNetworkImage(
-                                                                          fit: BoxFit.cover,
+                                                                          fit: BoxFit.contain,
                                                                           imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
                                                                           placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                         );
                                                                       }
                                                                     }()),
@@ -388,6 +389,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
                                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                             aspectRatio: 16 / 9,
+                                                            fit: BoxFit.contain,
                                                             controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                               showControls: false,
                                                             ),
@@ -862,14 +864,15 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                           deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                           autoDispose: false,
                                                                                           aspectRatio: 16 / 9,
+                                                                                          fit: BoxFit.contain,
                                                                                         ),
                                                                                       );
                                                                                     }else{
                                                                                       return CachedNetworkImage(
-                                                                                        fit: BoxFit.cover,
+                                                                                        fit: BoxFit.contain,
                                                                                         imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
                                                                                         placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                       );
                                                                                     }
                                                                                   }()),
@@ -917,6 +920,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                   child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
                                                                     betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                       aspectRatio: 1,
+                                                                      fit: BoxFit.contain,
                                                                       controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                                         showControls: false,
                                                                       ),
@@ -1040,10 +1044,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                             Expanded(
                                                               child: CachedNetworkImage(
-                                                                fit: BoxFit.cover,
+                                                                fit: BoxFit.contain,
                                                                 imageUrl: profile.data!.blmMemorial.memorialProfileImage,
                                                                 placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                               )
                                                             ),
 
@@ -1144,6 +1148,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       showControls: false,
                                                     ),
                                                     aspectRatio: 16 / 9,
+                                                    fit: BoxFit.contain,
                                                   ),
                                                 );
                                               }else{
@@ -1169,6 +1174,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         showControls: false,
                                                       ),
                                                       aspectRatio: 16 / 9,
+                                                      fit: BoxFit.contain,
                                                     ),
                                                   )
                                                   : CachedNetworkImage(
@@ -1200,6 +1206,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           showControls: false,
                                                         ),
                                                         aspectRatio: 16 / 9,
+                                                        fit: BoxFit.contain,
                                                       ),
                                                     )
                                                     : CachedNetworkImage(
@@ -1221,6 +1228,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                     showControls: false,
                                                                   ),
                                                                   aspectRatio: 16 / 9,
+                                                                  fit: BoxFit.contain,
                                                                 ),
                                                               ),
 
@@ -1280,6 +1288,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                 showControls: false,
                                                               ),
                                                               aspectRatio: 16 / 9,
+                                                              fit: BoxFit.contain,
                                                             ),
                                                           );
                                                         }else{

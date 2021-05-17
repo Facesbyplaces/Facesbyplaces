@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 
@@ -67,12 +66,11 @@ class HomeRegularPostTab extends StatefulWidget{
 class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<RegularMainPagesPosts> posts = [];
   bool isGuestLoggedIn = true;
   int itemRemaining = 1;
-  // int count = 0;
   int page = 1;
-  ValueNotifier<int> count = ValueNotifier<int>(0);
 
   void initState(){
     super.initState();
@@ -80,16 +78,24 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(itemRemaining != 0){
-          // setState(() {
-          //   onLoading();
-          // });
           onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: const Text('No more posts to show'),
               duration: const Duration(seconds: 1),
               backgroundColor: const Color(0xff4EC9D4),
+              action: SnackBarAction(
+                label: 'Refresh',
+                onPressed: () {
+                  page = 1;
+                  count.value = 0;
+                  itemRemaining = 1;
+                  posts = [];
+                  onRefresh();
+                },
+                textColor: const Color(0xff000000),
+              ),
             ),
           );
         }
@@ -227,6 +233,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
                                 ),
                               );
                             }else{
@@ -252,6 +259,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                       showControls: false,
                                     ),
                                     aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
                                   ),
                                 )
                                 : CachedNetworkImage(
@@ -283,6 +291,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                         showControls: false,
                                       ),
                                       aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
                                     ),
                                   )
                                   : CachedNetworkImage(
@@ -304,6 +313,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                                   showControls: false,
                                                 ),
                                                 aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
                                               ),
                                             ),
 
@@ -363,6 +373,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
                                           ),
                                         );
                                       }else{

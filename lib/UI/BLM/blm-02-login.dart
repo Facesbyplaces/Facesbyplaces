@@ -4,7 +4,6 @@ import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-07-sign-in-with-app
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-11-google-authentication.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +11,6 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:auth_buttons/auth_buttons.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'blm-06-password-reset-email.dart';
 import 'package:flutter/material.dart';

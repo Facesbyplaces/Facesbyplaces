@@ -240,10 +240,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                   Expanded(
                                                     child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                       imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
                                                       placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                     )
                                                   ),
 
@@ -341,14 +341,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                     betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                       aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
                                                                     ),
                                                                   );
                                                                 }else{
                                                                   return CachedNetworkImage(
-                                                                    fit: BoxFit.cover,
+                                                                    fit: BoxFit.contain,
                                                                     imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[0],
                                                                     placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                   );
                                                                 }
                                                               }()),
@@ -369,6 +370,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                   return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
                                                     betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                       aspectRatio: 16 / 9,
+                                                      fit: BoxFit.contain,
                                                       controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                         showControls: false,
                                                       ),
@@ -737,14 +739,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                                     deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                     autoDispose: false,
                                                                                     aspectRatio: 16 / 9,
+                                                                                    fit: BoxFit.contain,
                                                                                   ),
                                                                                 );
                                                                               }else{
                                                                                 return CachedNetworkImage(
-                                                                                  fit: BoxFit.cover,
+                                                                                  fit: BoxFit.contain,
                                                                                   imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
                                                                                   placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                 );
                                                                               }
                                                                             }()),
@@ -790,7 +793,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                             height: 100,
                                                             child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                aspectRatio: 1,
+                                                                aspectRatio: 16 / 9,
+                                                                fit: BoxFit.contain,
                                                                 controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                                   showControls: false,
                                                                 ),
@@ -933,10 +937,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                       Expanded(
                                                         child: CachedNetworkImage(
-                                                          fit: BoxFit.cover,
+                                                          fit: BoxFit.contain,
                                                           imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
                                                           placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                         )
                                                       ),
 
@@ -1037,6 +1041,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                 showControls: false,
                                               ),
                                               aspectRatio: 16 / 9,
+                                              fit: BoxFit.contain,
                                             ),
                                           );
                                         }else{
@@ -1062,6 +1067,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                   showControls: false,
                                                 ),
                                                 aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
                                               ),
                                             )
                                             : CachedNetworkImage(
@@ -1093,6 +1099,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     showControls: false,
                                                   ),
                                                   aspectRatio: 16 / 9,
+                                                  fit: BoxFit.contain,
                                                 ),
                                               )
                                               : CachedNetworkImage(
@@ -1114,6 +1121,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                               showControls: false,
                                                             ),
                                                             aspectRatio: 16 / 9,
+                                                            fit: BoxFit.contain,
                                                           ),
                                                         ),
 
@@ -1173,6 +1181,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                           showControls: false,
                                                         ),
                                                         aspectRatio: 16 / 9,
+                                                        fit: BoxFit.contain,
                                                       ),
                                                     );
                                                   }else{

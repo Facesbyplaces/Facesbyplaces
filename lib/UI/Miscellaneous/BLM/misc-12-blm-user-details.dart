@@ -41,19 +41,16 @@ class MiscBLMDraggablePost extends StatefulWidget{
   final int userId;
   const MiscBLMDraggablePost({required this.userId});
 
-  // MiscBLMDraggablePostState createState() => MiscBLMDraggablePostState(userId: userId);
   MiscBLMDraggablePostState createState() => MiscBLMDraggablePostState();
 }
 
 class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
-  // final int userId;
-  // MiscBLMDraggablePostState({required this.userId});
-  
   ScrollController scrollController = ScrollController();
   List<BLMMiscDraggablePost> posts = [];
   int itemRemaining = 1;
   int page = 1;
-  int count = 0;
+  // int count = 0;
+  ValueNotifier<int> count = ValueNotifier<int>(0);
 
   void initState(){
     super.initState();
@@ -61,9 +58,9 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(itemRemaining != 0){
-          setState(() {
-            onLoading();
-          });
+          // setState(() {
+          onLoading();
+          // });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -78,9 +75,9 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   }
 
   Future<void> onRefresh() async{
-    setState(() {
-      onLoading();
-    });
+    // setState(() {
+    onLoading();
+    // });
   }
 
   void onLoading() async{
@@ -90,7 +87,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;
-      count = count + newValue.blmFamilyMemorialList.length;
+      count.value = count.value + newValue.blmFamilyMemorialList.length;
 
       for(int i = 0; i < newValue.blmFamilyMemorialList.length; i++){
         List<String> newList1 = [];
@@ -132,7 +129,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
       }
 
       if(mounted)
-      setState(() {});
+      // setState(() {});
       page++;
     }
   }
@@ -140,112 +137,85 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Container(
-      width: SizeConfig.screenWidth,
-      child: count != 0
-      ? RefreshIndicator(
-        onRefresh: onRefresh,
-        child: ListView.separated(
-          controller: scrollController,
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          physics: const ClampingScrollPhysics(),
-          itemCount: posts.length,
-          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-          itemBuilder: (c, i){
-            return MiscBLMPost(
-              key: ValueKey('$i'),
-              userId: posts[i].userId,
-              postId: posts[i].postId,
-              memorialId: posts[i].memorialId,
-              memorialName: posts[i].memorialName,
-              timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
-              managed: posts[i].managed,
-              joined: posts[i].joined,
-              profileImage: posts[i].profileImage,
-              numberOfComments: posts[i].numberOfComments,
-              numberOfLikes: posts[i].numberOfLikes,
-              likeStatus: posts[i].likeStatus,
-              numberOfTagged: posts[i].numberOfTagged,
-              taggedFirstName: posts[i].taggedFirstName,
-              taggedLastName: posts[i].taggedLastName,
-              taggedId: posts[i].taggedId,
-              pageType: posts[i].pageType,
-              famOrFriends: posts[i].famOrFriends,
-              relationship: posts[i].relationship,
-              contents: [
-                Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Container(
+        width: SizeConfig.screenWidth,
+        child: countListener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh,
+          child: ListView.separated(
+            controller: scrollController,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            physics: const ClampingScrollPhysics(),
+            itemCount: posts.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i){
+              return MiscBLMPost(
+                key: ValueKey('$i'),
+                userId: posts[i].userId,
+                postId: posts[i].postId,
+                memorialId: posts[i].memorialId,
+                memorialName: posts[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
+                managed: posts[i].managed,
+                joined: posts[i].joined,
+                profileImage: posts[i].profileImage,
+                numberOfComments: posts[i].numberOfComments,
+                numberOfLikes: posts[i].numberOfLikes,
+                likeStatus: posts[i].likeStatus,
+                numberOfTagged: posts[i].numberOfTagged,
+                taggedFirstName: posts[i].taggedFirstName,
+                taggedLastName: posts[i].taggedLastName,
+                taggedId: posts[i].taggedId,
+                pageType: posts[i].pageType,
+                famOrFriends: posts[i].famOrFriends,
+                relationship: posts[i].relationship,
+                contents: [
+                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                posts[i].imagesOrVideos.isNotEmpty
-                ? Column(
-                  children: [
-                    const SizedBox(height: 20),
+                  posts[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                    children: [
+                      const SizedBox(height: 20),
 
-                    Container(
-                      child: ((){
-                        if(posts[i].imagesOrVideos.length == 1){
-                          if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
-                            return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                  showControls: false,
-                                ),
-                                aspectRatio: 16 / 9,
-                              ),
-                            );
-                          }else{
-                            return CachedNetworkImage(
-                              fit: BoxFit.contain,
-                              imageUrl: posts[i].imagesOrVideos[0],
-                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                            );
-                          }
-                        }else if(posts[i].imagesOrVideos.length == 2){
-                          return StaggeredGridView.countBuilder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 4,
-                            itemCount: 2,
-                            itemBuilder: (BuildContext context, int index) =>  
-                              lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
-                              ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                      Container(
+                        child: ((){
+                          if(posts[i].imagesOrVideos.length == 1){
+                            if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
+                              return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
                                 betterPlayerConfiguration: const BetterPlayerConfiguration(
                                   controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
                                 ),
-                              )
-                              : CachedNetworkImage(
+                              );
+                            }else{
+                              return CachedNetworkImage(
                                 fit: BoxFit.contain,
-                                imageUrl: posts[i].imagesOrVideos[index],
+                                imageUrl: posts[i].imagesOrVideos[0],
                                 placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                              ),
-                            staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                            mainAxisSpacing: 4.0,
-                            crossAxisSpacing: 4.0,
-                          );
-                        }else{
-                          return StaggeredGridView.countBuilder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 4,
-                            itemCount: 3,
-                            staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                            mainAxisSpacing: 4.0,
-                            crossAxisSpacing: 4.0,
-                            itemBuilder: (BuildContext context, int index) => ((){
-                              if(index != 1){
-                                return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                              );
+                            }
+                          }else if(posts[i].imagesOrVideos.length == 2){
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) =>  
+                                lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                   betterPlayerConfiguration: const BetterPlayerConfiguration(
                                     controlsConfiguration: const BetterPlayerControlsConfiguration(
                                       showControls: false,
                                     ),
                                     aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
                                   ),
                                 )
                                 : CachedNetworkImage(
@@ -253,122 +223,157 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                   imageUrl: posts[i].imagesOrVideos[index],
                                   placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                );
-                              }else{
-                                return ((){
-                                  if(posts[i].imagesOrVideos.length - 3 > 0){
-                                    if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
-                                      return Stack(
-                                        children: [
-                                          BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                showControls: false,
+                                ),
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) => ((){
+                                if(index != 1){
+                                  return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    fit: BoxFit.contain,
+                                    imageUrl: posts[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                  );
+                                }else{
+                                  return ((){
+                                    if(posts[i].imagesOrVideos.length - 3 > 0){
+                                      if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return Stack(
+                                          children: [
+                                            BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
                                               ),
-                                              aspectRatio: 16 / 9,
                                             ),
-                                          ),
 
-                                          Container(color: const Color(0xff000000).withOpacity(0.5),),
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
 
-                                          Center(
-                                            child: CircleAvatar(
-                                              radius: 25,
-                                              backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                              child: Text(
-                                                '${posts[i].imagesOrVideos.length - 3}',
-                                                style: const TextStyle(
-                                                  fontSize: 40,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: const Color(0xffffffff),
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${posts[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      );
-                                    }else{
-                                      return Stack(
-                                        children: [
-                                          CachedNetworkImage(
-                                            fit: BoxFit.fill,
-                                            imageUrl: posts[i].imagesOrVideos[index],
-                                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                          ),
+                                          ],
+                                        );
+                                      }else{
+                                        return Stack(
+                                          children: [
+                                            CachedNetworkImage(
+                                              fit: BoxFit.fill,
+                                              imageUrl: posts[i].imagesOrVideos[index],
+                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                            ),
 
-                                          Container(color: const Color(0xff000000).withOpacity(0.5),),
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
 
-                                          Center(
-                                            child: CircleAvatar(
-                                              radius: 25,
-                                              backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                              child: Text(
-                                                '${posts[i].imagesOrVideos.length - 3}',
-                                                style: const TextStyle(
-                                                  fontSize: 40,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: const Color(0xffffffff),
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${posts[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      );
-                                    }
-                                  }else{
-                                    if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
-                                      return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                            showControls: false,
-                                          ),
-                                          aspectRatio: 16 / 9,
-                                        ),
-                                      );
+                                          ],
+                                        );
+                                      }
                                     }else{
-                                      return CachedNetworkImage(
-                                        fit: BoxFit.fill,
-                                        imageUrl: posts[i].imagesOrVideos[index],
-                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                      );
+                                      if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        );
+                                      }else{
+                                        return CachedNetworkImage(
+                                          fit: BoxFit.fill,
+                                          imageUrl: posts[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                        );
+                                      }
                                     }
-                                  }
-                                }());
-                              }
-                            }()),
-                          );
-                        }
-                      }()),
-                    ),
-                  ],
-                )
-                : Container(height: 0),
+                                  }());
+                                }
+                              }()),
+                            );
+                          }
+                        }()),
+                      ),
+                    ],
+                  )
+                  : Container(height: 0),
 
-              ],
-            );
-          },
+                ],
+              );
+            },
+          )
         )
-      )
-      : SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
+                SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-              const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
-            ],
+                SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
+              ],
+            ),
           ),
         ),
       ),
@@ -387,6 +392,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   final int userId;
   MiscBLMDraggableMemorialsState({required this.userId});
 
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   ScrollController scrollController = ScrollController();
   List<Widget> finalMemorials = [];
   int ownedItemsRemaining = 1;
@@ -394,7 +400,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   int page1 = 1;
   int page2 = 1;
   bool flag1 = false;
-  int count = 0;
+  // int count = 0;
 
   void initState(){
     super.initState();
@@ -403,9 +409,9 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(ownedItemsRemaining != 0 && followedItemsRemaining != 0){
-          setState(() {
+          // setState(() {
             onLoading();
-          });
+          // });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -421,9 +427,9 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
 
   Future<void> onRefresh() async{
     if(ownedItemsRemaining == 0 && followedItemsRemaining == 0 && flag1 == false){
-      setState(() {
+      // setState(() {
         flag1 = true;
-      });
+      // });
       onLoading();
     }else{
       onLoading();
@@ -486,7 +492,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       context.loaderOverlay.hide();
 
       ownedItemsRemaining = newValue.blmOwnedItemsRemaining;
-      count = count + newValue.blmOwned.length;
+      count.value = count.value + newValue.blmOwned.length;
 
       for(int i = 0; i < newValue.blmOwned.length; i++){
         finalMemorials.add(
@@ -506,7 +512,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       }
 
       if(mounted)
-      setState(() {});
+      // setState(() {});
       page1++;
 
       if(ownedItemsRemaining == 0){
@@ -525,7 +531,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       context.loaderOverlay.hide();
 
       followedItemsRemaining = newValue.blmFollowedItemsRemaining;
-      count = count + newValue.blmFollowed.length;
+      count.value = count.value + newValue.blmFollowed.length;
 
       for(int i = 0; i < newValue.blmFollowed.length; i++){
         finalMemorials.add(
@@ -545,7 +551,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       }
 
       if(mounted)
-      setState(() {});
+      // setState(() {});
       page2++;
     }
   }
@@ -553,39 +559,42 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Container(
-      height: SizeConfig.screenHeight! / 1.5,
-      width: SizeConfig.screenWidth,
-      child: count != 0
-      ? RefreshIndicator(
-        onRefresh: onRefresh,
-        child: ListView.separated(
-          controller: scrollController,
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-          physics: const ClampingScrollPhysics(),
-          itemCount: finalMemorials.length,
-          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-          itemBuilder: (c, i) => finalMemorials[i],
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Container(
+        height: SizeConfig.screenHeight! / 1.5,
+        width: SizeConfig.screenWidth,
+        child: countListener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh,
+          child: ListView.separated(
+            controller: scrollController,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: finalMemorials.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => finalMemorials[i],
+          )
         )
-      )
-      : SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
+                SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-              const Text('Memorial is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Memorial is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
-            ],
+                SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
+              ],
+            ),
           ),
         ),
       ),

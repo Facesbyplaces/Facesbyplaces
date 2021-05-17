@@ -239,10 +239,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                   Expanded(
                                                     child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                       imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
                                                       placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                     )
                                                   ),
 
@@ -348,14 +348,15 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                     betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                       aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
                                                                     ),
                                                                   );
                                                                 }else{
                                                                   return CachedNetworkImage(
-                                                                    fit: BoxFit.cover,
+                                                                    fit: BoxFit.contain,
                                                                     imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
                                                                     placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                   );
                                                                 }
                                                               }()),
@@ -376,6 +377,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
                                                     betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                       aspectRatio: 16 / 9,
+                                                      fit: BoxFit.contain,
                                                       controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                         showControls: false,
                                                       ),
@@ -753,14 +755,15 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                                     deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                     autoDispose: false,
                                                                                     aspectRatio: 16 / 9,
+                                                                                    fit: BoxFit.contain,
                                                                                   ),
                                                                                 );
                                                                               }else{
                                                                                 return CachedNetworkImage(
-                                                                                  fit: BoxFit.cover,
+                                                                                  fit: BoxFit.contain,
                                                                                   imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
                                                                                   placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                 );
                                                                               }
                                                                             }()),
@@ -808,6 +811,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                             child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                 aspectRatio: 1,
+                                                                fit: BoxFit.contain,
                                                                 controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                                   showControls: false,
                                                                 ),
@@ -951,10 +955,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                       Expanded(
                                                         child: CachedNetworkImage(
-                                                          fit: BoxFit.cover,
+                                                          fit: BoxFit.contain,
                                                           imageUrl: profile.data!.blmMemorial.memorialProfileImage,
                                                           placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                         )
                                                       ),
 
@@ -1055,6 +1059,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 showControls: false,
                                               ),
                                               aspectRatio: 16 / 9,
+                                              fit: BoxFit.contain,
                                             ),
                                           );
                                         }else{
@@ -1080,6 +1085,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   showControls: false,
                                                 ),
                                                 aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
                                               ),
                                             )
                                             : CachedNetworkImage(
@@ -1111,6 +1117,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                     showControls: false,
                                                   ),
                                                   aspectRatio: 16 / 9,
+                                                  fit: BoxFit.contain,
                                                 ),
                                               )
                                               : CachedNetworkImage(
@@ -1132,6 +1139,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                               showControls: false,
                                                             ),
                                                             aspectRatio: 16 / 9,
+                                                            fit: BoxFit.contain,
                                                           ),
                                                         ),
 
@@ -1191,6 +1199,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                           showControls: false,
                                                         ),
                                                         aspectRatio: 16 / 9,
+                                                        fit: BoxFit.contain,
                                                       ),
                                                     );
                                                   }else{

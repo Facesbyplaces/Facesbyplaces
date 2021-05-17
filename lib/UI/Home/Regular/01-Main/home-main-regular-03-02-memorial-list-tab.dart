@@ -44,10 +44,26 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
           onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: const Text('No more posts to show'),
               duration: const Duration(seconds: 1),
               backgroundColor: const Color(0xff4EC9D4),
+              action: SnackBarAction(
+                label: 'Refresh',
+                onPressed: () {
+                  page1 = 1;
+                  page2 = 1;
+                  flag1 = false;
+                  count.value = 0;
+                  finalMemorials = [];
+                  memorialFamilyItemsRemaining = 1;
+                  memorialFriendsItemsRemaining = 1;
+                  blmFamilyItemsRemaining = 1;
+                  blmFriendsItemsRemaining = 1;
+                  onRefresh();
+                },
+                textColor: const Color(0xff000000),
+              ),
             ),
           );
         }

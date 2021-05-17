@@ -104,6 +104,14 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   final double longitude;
   final String currentLocation;
   HomeRegularPostState({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
+
+  ValueNotifier<int> toggle = ValueNotifier<int>(0);
+  ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
+  ValueNotifier<bool> onSearch = ValueNotifier<bool>(false);
+  ValueNotifier<int> tabCount1 = ValueNotifier<int>(0);
+  ValueNotifier<int> tabCount2 = ValueNotifier<int>(0);
+  ValueNotifier<int> tabCount3 = ValueNotifier<int>(0);
+  ValueNotifier<int> tabCount4 = ValueNotifier<int>(0);
   
   TextEditingController controller = TextEditingController();
   ScrollController scrollController1 = ScrollController();
@@ -118,7 +126,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   List<RegularSearchMainSuggested> searchSuggested = [];
   List<RegularSearchMainNearby> searchNearby = [];
   List<RegularSearchMainBLM> searchBlm = [];
-  bool onSearch = false;
   int postItemRemaining = 1;
   int suggestedItemRemaining = 1;
   int nearbyBlmItemsRemaining = 1;
@@ -128,35 +135,21 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   int page2 = 1;
   int page3 = 1;
   int page4 = 1;
-  int toggle = 0;
-  int tabCount1 = 0;
-  int tabCount2 = 0;
-  int tabCount3 = 0;
-  int tabCount4 = 0;
-  bool isGuestLoggedIn = true;
 
   Future<void> onRefresh1() async{
-    setState(() {
-      onLoading1();
-    });
+    onLoading1();
   }
 
   Future<void> onRefresh2() async{
-    setState(() {
-      onLoading2();
-    });
+    onLoading2();
   }
 
   Future<void> onRefresh3() async{
-    setState(() {
-      onLoading3();
-    });
+    onLoading3();
   }
 
   Future<void> onRefresh4() async{
-    setState(() {
-      onLoading4();
-    });
+    onLoading4();
   }
 
   void onLoading1() async{
@@ -167,7 +160,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       context.loaderOverlay.hide();
 
       postItemRemaining = newValue.almItemsRemaining;
-      tabCount1 = tabCount1 + newValue.almSearchPostList.length;
+      tabCount1.value = tabCount1.value + newValue.almSearchPostList.length;
 
       for(int i = 0; i < newValue.almSearchPostList.length; i++){
         List<String> newList1 = [];
@@ -210,7 +203,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       }
 
       if(mounted)
-      setState(() {});
       page1++;
     }
   }
@@ -221,7 +213,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       var newValue = await apiRegularSearchSuggested(page: page2);
       context.loaderOverlay.hide();
       suggestedItemRemaining = newValue.almItemsRemaining;
-      tabCount2 = tabCount2 + newValue.almSearchSuggestedPages.length;
+      tabCount2.value = tabCount2.value + newValue.almSearchSuggestedPages.length;
 
       for(int i = 0; i < newValue.almSearchSuggestedPages.length; i++){
         suggested.add(
@@ -240,7 +232,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       }
 
       if(mounted)
-      setState(() {});
       page2++;
     }
   }
@@ -252,7 +243,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       var newValue = await apiRegularSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       context.loaderOverlay.hide();
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
-      tabCount3 = tabCount3 + newValue.blmList.length;
+      tabCount3.value = tabCount3.value + newValue.blmList.length;
 
       for(int i = 0; i < newValue.blmList.length; i++){
         nearby.add(
@@ -271,7 +262,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       }
 
       if(mounted)
-      setState(() {});
       page3++;
     }
 
@@ -282,7 +272,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       var newValue = await apiRegularSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       context.loaderOverlay.hide();
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
-      tabCount3 = tabCount3 + newValue.memorialList.length;
+      tabCount3.value = tabCount3.value + newValue.memorialList.length;
       
       for(int i = 0; i < newValue.memorialList.length; i++){
         nearby.add(
@@ -301,7 +291,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       }
 
       if(mounted)
-      setState(() {});
       page3++;
     }
   } 
@@ -312,7 +301,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       var newValue = await apiRegularSearchBLM(page: page4, keywords: keyword);
       context.loaderOverlay.hide();
       blmItemRemaining = newValue.almItemsRemaining;
-      tabCount4 = tabCount4 + newValue.almMemorialList.length;
+      tabCount4.value = tabCount4.value + newValue.almMemorialList.length;
 
       for(int i = 0; i < newValue.almMemorialList.length; i++){
         blm.add(
@@ -331,96 +320,86 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       }
 
       if(mounted)
-      setState(() {});
       page4++;
     }
   }
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
-    setState(() {
-      isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    });
-    if(isGuestLoggedIn != true){
+    isGuestLoggedIn.value = sharedPrefs.getBool('user-guest-session') ?? false;
+
+    if(isGuestLoggedIn.value != true){
       onLoading1();
       onLoading2();
       onLoading3();
       onLoading4();
-      scrollController1.addListener(() {
-        if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
-          if(postItemRemaining != 0){
-            setState(() {
-              onLoading1();
-            });
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: const Text('No more posts to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
-              ),
-            );
-          }
-        }
-      });
-      scrollController2.addListener(() {
-        if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
-          if(suggestedItemRemaining != 0){
-            setState(() {
-              onLoading2();
-            });
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: const Text('No more suggested memorials to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
-              ),
-            );
-          }
-        }
-      });
-      scrollController3.addListener(() {
-        if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
-          if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
-            setState(() {
-              onLoading3();
-            });
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: const Text('No more nearby memorials to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
-              ),
-            );
-          }
-        }
-      });
-      scrollController4.addListener(() {
-        if (scrollController4.position.pixels == scrollController4.position.maxScrollExtent) {
-          if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
-            setState(() {
-              onLoading4();
-            });
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: const Text('No more BLM memorials to show'),
-                duration: const Duration(seconds: 1),
-                backgroundColor: const Color(0xff4EC9D4),
-              ),
-            );
-          }
-        }
-      });
     }
   }
 
   void initState(){
     super.initState();
     isGuest();
-    toggle = newToggle;
+    toggle.value = newToggle;
+    scrollController1.addListener(() {
+      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
+        if(postItemRemaining != 0){
+          onLoading1();
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: const Text('No more posts to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+    scrollController2.addListener(() {
+      if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
+        if(suggestedItemRemaining != 0){
+          onLoading2();
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: const Text('No more suggested memorials to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+    scrollController3.addListener(() {
+      if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
+        if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
+          onLoading3();
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: const Text('No more nearby memorials to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+    scrollController4.addListener(() {
+      if (scrollController4.position.pixels == scrollController4.position.maxScrollExtent) {
+        if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
+          onLoading4();
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: const Text('No more BLM memorials to show'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: const Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   @override
@@ -438,300 +417,299 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             currentFocus.unfocus();
           }
         },
-        child: Scaffold(
-          appBar: AppBar(
-            flexibleSpace: Row(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
-                ),
-
-                Expanded(
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: controller,
-                    onChanged: (search){
-                      if(search == ''){
-                        onSearch = false;
-                        searchFeeds = [];
-                        searchSuggested = [];
-                        searchNearby = [];
-                        searchBlm = [];
-                      }
-                    },
-                    onFieldSubmitted: (search){
-                      if(search == ''){
-                        setState(() {
-                          onSearch = false;
-                          searchFeeds = [];
-                          searchSuggested = [];
-                          searchNearby = [];
-                          searchBlm = [];
-                        });
-                      }else{
-                        if(toggle == 0){
-                          for(int i = 0; i < feeds.length; i++){
-                            if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
-                              print('The ${feeds[i].memorialName} contains $search');
-                              searchFeeds.add(feeds[i]);
-                            }
-                          }
-                        }else if(toggle == 1){
-                          for(int i = 0; i < suggested.length; i++){
-                            if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
-                              print('The ${suggested[i].memorialName} contains $search');
-                              searchSuggested.add(suggested[i]);
-                            }
-                          }
-                        }else if(toggle == 2){
-                          for(int i = 0; i < nearby.length; i++){
-                            if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
-                              print('The ${nearby[i].memorialName} contains $search');
-                              searchNearby.add(nearby[i]);
-                            }
-                          }
-                        }else if(toggle == 3){
-                          for(int i = 0; i < blm.length; i++){
-                            if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch == false){
-                              print('The ${blm[i].memorialName} contains $search');
-                              searchBlm.add(blm[i]);
-                            }
-                          }
-                        }
-
-                        setState(() {
-                          onSearch = true;
-                        });
-                      }
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(15.0),
-                      filled: true,
-                      fillColor: const Color(0xffffffff),
-                      focusColor: const Color(0xffffffff),
-                      hintText: 'Search Memorial',
-                      hintStyle: const TextStyle(
-                        fontSize: 14,
+        child: ValueListenableBuilder(
+          valueListenable: toggle,
+          builder: (_, int toggleListener, __) => ValueListenableBuilder(
+            valueListenable: isGuestLoggedIn,
+            builder: (_, bool isGuestLoggedInListener, __) => ValueListenableBuilder(
+              valueListenable: onSearch,
+              builder: (_, bool onSearchListener, __) => Scaffold(
+                appBar: AppBar(
+                  flexibleSpace: Row(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                       ),
-                      suffixIcon: IconButton(
-                        onPressed: () async{
-                          if(controller.text == ''){
-                            setState(() {
-                              onSearch = false;
+
+                      Expanded(
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          controller: controller,
+                          onChanged: (search){
+                            if(search == ''){
+                              onSearch.value = false;
                               searchFeeds = [];
                               searchSuggested = [];
                               searchNearby = [];
                               searchBlm = [];
-                            });
-                          }else{
-                            if(toggle == 0){
-                              for(int i = 0; i < feeds.length; i++){
-                                if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch == false){
-                                  print('The ${feeds[i].memorialName} contains ${controller.text}');
-                                  searchFeeds.add(feeds[i]);
-                                }
-                              }
-                            }else if(toggle == 1){
-                              for(int i = 0; i < suggested.length; i++){
-                                if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch == false){
-                                  print('The ${suggested[i].memorialName} contains ${controller.text}');
-                                  searchSuggested.add(suggested[i]);
-                                }
-                              }
-                            }else if(toggle == 2){
-                              for(int i = 0; i < nearby.length; i++){
-                                if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch == false){
-                                  print('The ${nearby[i].memorialName} contains ${controller.text}');
-                                  searchNearby.add(nearby[i]);
-                                }
-                              }
-                            }else if(toggle == 3){
-                              for(int i = 0; i < blm.length; i++){
-                                if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch == false){
-                                  print('The ${blm[i].memorialName} contains ${controller.text}');
-                                  searchBlm.add(blm[i]);
-                                }
-                              }
                             }
-
-                            setState(() {
-                              onSearch = true;
-                            });
-                          }
-                        },
-                        icon: const Icon(Icons.search, color: const Color(0xff888888),),
-                      ),
-                      border: const OutlineInputBorder(
-                        borderSide: const BorderSide(color: const Color(0xffffffff)),
-                        borderRadius: const BorderRadius.all(Radius.circular(25)),
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: const BorderSide(color: const Color(0xffffffff)),
-                        borderRadius: const BorderRadius.all(Radius.circular(25)),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: const BorderSide(color: const Color(0xffffffff)),
-                        borderRadius: const BorderRadius.all(Radius.circular(25)),
-                      ),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(width: 20,),
-              ],
-            ),
-            leading: Container(),
-            backgroundColor: const Color(0xff04ECFF),
-          ),
-          body: Stack(
-            children: [
-              SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
-
-              Column(
-                children: [
-
-                  IgnorePointer(
-                    ignoring: isGuestLoggedIn,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 55,
-                      color: const Color(0xffffffff),
-                      child: DefaultTabController(
-                        length: 4,
-                        child: TabBar(
-                          isScrollable: true,
-                          labelColor: const Color(0xff04ECFF),
-                          unselectedLabelColor: const Color(0xff000000),
-                          indicatorColor: const Color(0xff04ECFF),
-                          onTap: (int number){
-                            setState(() {
-                              toggle = number;
-                              searchFeeds = [];
-                              searchSuggested = [];
-                              searchNearby = [];
-                              searchBlm = [];
-                            });
                           },
-                          tabs: [
-                            const Center(
-                              child: const Text('Post',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
+                          onFieldSubmitted: (search){
+                            if(search == ''){
+                              onSearch.value = false;
+                              searchFeeds = [];
+                              searchSuggested = [];
+                              searchNearby = [];
+                              searchBlm = [];
+                            }else{
+                              if(toggleListener == 0){
+                                for(int i = 0; i < feeds.length; i++){
+                                  if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearchListener == false){
+                                    print('The ${feeds[i].memorialName} contains $search');
+                                    searchFeeds.add(feeds[i]);
+                                  }
+                                }
+                              }else if(toggleListener == 1){
+                                for(int i = 0; i < suggested.length; i++){
+                                  if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearchListener == false){
+                                    print('The ${suggested[i].memorialName} contains $search');
+                                    searchSuggested.add(suggested[i]);
+                                  }
+                                }
+                              }else if(toggleListener == 2){
+                                for(int i = 0; i < nearby.length; i++){
+                                  if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearchListener == false){
+                                    print('The ${nearby[i].memorialName} contains $search');
+                                    searchNearby.add(nearby[i]);
+                                  }
+                                }
+                              }else if(toggleListener == 3){
+                                for(int i = 0; i < blm.length; i++){
+                                  if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearchListener == false){
+                                    print('The ${blm[i].memorialName} contains $search');
+                                    searchBlm.add(blm[i]);
+                                  }
+                                }
+                              }
 
-                            const Center(
-                              child: const Text('Suggested',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
+                              onSearch.value = true;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15.0),
+                            filled: true,
+                            fillColor: const Color(0xffffffff),
+                            focusColor: const Color(0xffffffff),
+                            hintText: 'Search Memorial',
+                            hintStyle: const TextStyle(
+                              fontSize: 14,
                             ),
+                            suffixIcon: IconButton(
+                              onPressed: () async{
+                                if(controller.text == ''){
+                                  onSearch.value = false;
+                                  searchFeeds = [];
+                                  searchSuggested = [];
+                                  searchNearby = [];
+                                  searchBlm = [];
+                                }else{
+                                  if(toggleListener == 0){
+                                    for(int i = 0; i < feeds.length; i++){
+                                      if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearchListener == false){
+                                        print('The ${feeds[i].memorialName} contains ${controller.text}');
+                                        searchFeeds.add(feeds[i]);
+                                      }
+                                    }
+                                  }else if(toggleListener == 1){
+                                    for(int i = 0; i < suggested.length; i++){
+                                      if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearchListener == false){
+                                        print('The ${suggested[i].memorialName} contains ${controller.text}');
+                                        searchSuggested.add(suggested[i]);
+                                      }
+                                    }
+                                  }else if(toggleListener == 2){
+                                    for(int i = 0; i < nearby.length; i++){
+                                      if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearchListener == false){
+                                        print('The ${nearby[i].memorialName} contains ${controller.text}');
+                                        searchNearby.add(nearby[i]);
+                                      }
+                                    }
+                                  }else if(toggleListener == 3){
+                                    for(int i = 0; i < blm.length; i++){
+                                      if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearchListener == false){
+                                        print('The ${blm[i].memorialName} contains ${controller.text}');
+                                        searchBlm.add(blm[i]);
+                                      }
+                                    }
+                                  }
 
-                            const Center(
-                              child: const Text('Nearby',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
+                                  onSearch.value = true;
+                                }
+                              },
+                              icon: const Icon(Icons.search, color: const Color(0xff888888),),
                             ),
-
-                            const Center(
-                              child: const Text('BLM',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
+                            border: const OutlineInputBorder(
+                              borderSide: const BorderSide(color: const Color(0xffffffff)),
+                              borderRadius: const BorderRadius.all(Radius.circular(25)),
                             ),
-                          ],
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: const BorderSide(color: const Color(0xffffffff)),
+                              borderRadius: const BorderRadius.all(Radius.circular(25)),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: const BorderSide(color: const Color(0xffffffff)),
+                              borderRadius: const BorderRadius.all(Radius.circular(25)),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+
+                      const SizedBox(width: 20,),
+                    ],
                   ),
+                  leading: Container(),
+                  backgroundColor: const Color(0xff04ECFF),
+                ),
+                body: Stack(
+                  children: [
+                    SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
 
-                  Container(
-                    child: ((){
-                      switch(toggle){
-                        case 0: return Container(height: 20,);
-                        case 1: return Container(height: 20,);
-                        case 2: return 
-                        Container(
-                          height: 40,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 20,),
+                    Column(
+                      children: [
 
-                                const Icon(Icons.location_pin, color: const Color(0xff979797),),
+                        IgnorePointer(
+                          ignoring: isGuestLoggedInListener,
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 55,
+                            color: const Color(0xffffffff),
+                            child: DefaultTabController(
+                              length: 4,
+                              child: TabBar(
+                                isScrollable: true,
+                                labelColor: const Color(0xff04ECFF),
+                                unselectedLabelColor: const Color(0xff000000),
+                                indicatorColor: const Color(0xff04ECFF),
+                                onTap: (int number){
+                                  toggle.value = number;
+                                  searchFeeds = [];
+                                  searchSuggested = [];
+                                  searchNearby = [];
+                                  searchBlm = [];
+                                },
+                                tabs: [
+                                  const Center(
+                                    child: const Text('Post',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
 
-                                const SizedBox(width: 20,),
+                                  const Center(
+                                    child: const Text('Suggested',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
 
-                                ((){
-                                  if(currentLocation != ''){
-                                    return Text(currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                  }else{
-                                    return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                  }
-                                }()),
-                              ],
+                                  const Center(
+                                    child: const Text('Nearby',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+
+                                  const Center(
+                                    child: const Text('BLM',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        );
-                        case 3: return 
+                        ),
+
                         Container(
-                          height: 40,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 20,),
+                          child: ((){
+                            switch(toggleListener){
+                              case 0: return Container(height: 20,);
+                              case 1: return Container(height: 20,);
+                              case 2: return 
+                              Container(
+                                height: 40,
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(width: 20,),
 
-                                const Icon(Icons.location_pin, color: const Color(0xff979797),),
+                                      const Icon(Icons.location_pin, color: const Color(0xff979797),),
 
-                                const SizedBox(width: 20,),
+                                      const SizedBox(width: 20,),
 
-                                ((){
-                                  if(currentLocation != ''){
-                                    return Text(currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                  }else{
-                                    return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                  }
-                                }()),
-                              ],
-                            ),
+                                      ((){
+                                        if(currentLocation != ''){
+                                          return Text(currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                        }else{
+                                          return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                        }
+                                      }()),
+                                    ],
+                                  ),
+                                ),
+                              );
+                              case 3: return 
+                              Container(
+                                height: 40,
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(width: 20,),
+
+                                      const Icon(Icons.location_pin, color: const Color(0xff979797),),
+
+                                      const SizedBox(width: 20,),
+
+                                      ((){
+                                        if(currentLocation != ''){
+                                          return Text(currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                        }else{
+                                          return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                        }
+                                      }()),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                          }()),
+                        ),
+
+                        Expanded(
+                          child: Container(
+                            child: isGuestLoggedInListener
+                            ? BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                              child: const MiscRegularLoginToContinue(),
+                            )
+                            : ((){
+                              switch(toggleListener){
+                                case 0: return searchPostExtended();
+                                case 1: return searchSuggestedExtended();
+                                case 2: return searchNearbyExtended();
+                                case 3: return searchBLMExtended();
+                              }
+                            }()),
                           ),
-                        );
-                      }
-                    }()),
-                  ),
-
-                  Expanded(
-                    child: Container(
-                      child: isGuestLoggedIn
-                      ? BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: const MiscRegularLoginToContinue(),
-                      )
-                      : ((){
-                        switch(toggle){
-                          case 0: return searchPostExtended();
-                          case 1: return searchSuggestedExtended();
-                          case 2: return searchNearbyExtended();
-                          case 3: return searchBLMExtended();
-                        }
-                      }()),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -739,111 +717,55 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   }
 
   searchPostExtended(){
-    return tabCount1 != 0
-    ? RefreshIndicator(
-      onRefresh: onRefresh1,
-      child: onSearch != true
-      ? ListView.separated(
-        controller: scrollController1,
-        padding: const EdgeInsets.all(10.0),
-        physics: const ClampingScrollPhysics(),
-        itemCount: feeds.length,
-        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        itemBuilder: (c, i) {
-          return feeds[i].pageType == 'Blm'
-          ? MiscBLMPost(
-            key: ValueKey('$i'),
-            userId: feeds[i].userId,
-            postId: feeds[i].postId,
-            memorialId: feeds[i].memorialId,
-            memorialName: feeds[i].memorialName,
-            timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
-            managed: feeds[i].managed,
-            joined: feeds[i].follower,
-            profileImage: feeds[i].profileImage,
-            numberOfComments: feeds[i].numberOfComments,
-            numberOfLikes: feeds[i].numberOfLikes,
-            likeStatus: feeds[i].likeStatus,
-            numberOfTagged: feeds[i].numberOfTagged,
-            taggedFirstName: feeds[i].taggedFirstName,
-            taggedLastName: feeds[i].taggedLastName,
-            taggedId: feeds[i].taggedId,
-            pageType: feeds[i].pageType,
-            famOrFriends: feeds[i].famOrFriends,
-            relationship: feeds[i].relationship,
-            contents: [
-              Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+    return ValueListenableBuilder(
+      valueListenable: tabCount1,
+      builder: (_, int tabCount1Listener, __) => ValueListenableBuilder(
+        valueListenable: onSearch,
+        builder: (_, bool onSearchListener, __) => tabCount1Listener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh1,
+          child: onSearchListener != true
+          ? ListView.separated(
+            controller: scrollController1,
+            padding: const EdgeInsets.all(10.0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: feeds.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) {
+              return feeds[i].pageType == 'Blm'
+              ? MiscBLMPost(
+                key: ValueKey('$i'),
+                userId: feeds[i].userId,
+                postId: feeds[i].postId,
+                memorialId: feeds[i].memorialId,
+                memorialName: feeds[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
+                managed: feeds[i].managed,
+                joined: feeds[i].follower,
+                profileImage: feeds[i].profileImage,
+                numberOfComments: feeds[i].numberOfComments,
+                numberOfLikes: feeds[i].numberOfLikes,
+                likeStatus: feeds[i].likeStatus,
+                numberOfTagged: feeds[i].numberOfTagged,
+                taggedFirstName: feeds[i].taggedFirstName,
+                taggedLastName: feeds[i].taggedLastName,
+                taggedId: feeds[i].taggedId,
+                pageType: feeds[i].pageType,
+                famOrFriends: feeds[i].famOrFriends,
+                relationship: feeds[i].relationship,
+                contents: [
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-              feeds[i].imagesOrVideos.isNotEmpty
-              ? Column(
-                children: [
-                  const SizedBox(height: 20),
+                  feeds[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                    children: [
+                      const SizedBox(height: 20),
 
-                  Container(
-                    child: ((){
-                      if(feeds[i].imagesOrVideos.length == 1){
-                        if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
-                          return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-                            betterPlayerConfiguration: const BetterPlayerConfiguration(
-                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                loadingColor: const Color(0xff4EC9D4),
-                                loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                showControls: false,
-                              ),
-                              aspectRatio: 16 / 9,
-                            ),
-                          );
-                        }else{
-                          return CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: feeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                          );
-                        }
-                      }else if(feeds[i].imagesOrVideos.length == 2){
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 2,
-                          itemBuilder: (BuildContext context, int index) =>  
-                            lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
-                            ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                  loadingColor: const Color(0xff4EC9D4),
-                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                  showControls: false,
-                                ),
-                                aspectRatio: 16 / 9,
-                              ),
-                            )
-                            : CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: feeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            ),
-                          staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                        );
-                      }else{
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 3,
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                          itemBuilder: (BuildContext context, int index) => ((){
-                            if(index != 1){
-                              return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
-                              ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                      Container(
+                        child: ((){
+                          if(feeds[i].imagesOrVideos.length == 1){
+                            if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
+                              return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
                                 betterPlayerConfiguration: const BetterPlayerConfiguration(
                                   controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     loadingColor: const Color(0xff4EC9D4),
@@ -851,22 +773,147 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
                                 ),
-                              )
-                              : CachedNetworkImage(
+                              );
+                            }else{
+                              return CachedNetworkImage(
                                 fit: BoxFit.cover,
-                                imageUrl: feeds[i].imagesOrVideos[index],
+                                imageUrl: feeds[i].imagesOrVideos[0],
                                 placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
-                            }else{
-                              return ((){
-                                if(feeds[i].imagesOrVideos.length - 3 > 0){
-                                  if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
-                                    return Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                            }
+                          }else if(feeds[i].imagesOrVideos.length == 2){
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) =>  
+                                lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                                ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                      loadingColor: const Color(0xff4EC9D4),
+                                      loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                      showControls: false,
+                                    ),
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
+                                )
+                                : CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: feeds[i].imagesOrVideos[index],
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                ),
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) => ((){
+                                if(index != 1){
+                                  return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                        loadingColor: const Color(0xff4EC9D4),
+                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return ((){
+                                    if(feeds[i].imagesOrVideos.length - 3 > 0){
+                                      if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                  loadingColor: const Color(0xff4EC9D4),
+                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${feeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }else{
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: feeds[i].imagesOrVideos[index],
+                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            ),
+
+                                            Container(color: Colors.black.withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${feeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    }else{
+                                      if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
                                             controlsConfiguration: const BetterPlayerControlsConfiguration(
                                               loadingColor: const Color(0xff4EC9D4),
@@ -874,184 +921,64 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
                                           ),
-                                        ),
-
-                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: const TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }else{
-                                    return Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        CachedNetworkImage(
+                                        );
+                                      }else{
+                                        return CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                        ),
-
-                                        Container(color: Colors.black.withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: const TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                }else{
-                                  if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
-                                    return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                          loadingColor: const Color(0xff4EC9D4),
-                                          loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                          showControls: false,
-                                        ),
-                                        aspectRatio: 16 / 9,
-                                      ),
-                                    );
-                                  }else{
-                                    return CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: feeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    );
-                                  }
+                                        );
+                                      }
+                                    }
+                                  }());
                                 }
-                              }());
-                            }
-                          }()),
-                        );
-                      }
-                    }()),
-                  ),
+                              }()),
+                            );
+                          }
+                        }()),
+                      ),
+                    ],
+                  )
+                  : Container(height: 0),
+
                 ],
               )
-              : Container(height: 0),
+              : MiscRegularPost(
+                key: ValueKey('$i'),
+                userId: feeds[i].userId,
+                postId: feeds[i].postId,
+                memorialId: feeds[i].memorialId,
+                memorialName: feeds[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
+                managed: feeds[i].managed,
+                joined: feeds[i].follower,
+                profileImage: feeds[i].profileImage,
+                numberOfComments: feeds[i].numberOfComments,
+                numberOfLikes: feeds[i].numberOfLikes,
+                likeStatus: feeds[i].likeStatus,
+                numberOfTagged: feeds[i].numberOfTagged,
+                taggedFirstName: feeds[i].taggedFirstName,
+                taggedLastName: feeds[i].taggedLastName,
+                taggedId: feeds[i].taggedId,
+                pageType: feeds[i].pageType,
+                famOrFriends: feeds[i].famOrFriends,
+                relationship: feeds[i].relationship,
+                contents: [
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-            ],
-          )
-          : MiscRegularPost(
-            key: ValueKey('$i'),
-            userId: feeds[i].userId,
-            postId: feeds[i].postId,
-            memorialId: feeds[i].memorialId,
-            memorialName: feeds[i].memorialName,
-            timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
-            managed: feeds[i].managed,
-            joined: feeds[i].follower,
-            profileImage: feeds[i].profileImage,
-            numberOfComments: feeds[i].numberOfComments,
-            numberOfLikes: feeds[i].numberOfLikes,
-            likeStatus: feeds[i].likeStatus,
-            numberOfTagged: feeds[i].numberOfTagged,
-            taggedFirstName: feeds[i].taggedFirstName,
-            taggedLastName: feeds[i].taggedLastName,
-            taggedId: feeds[i].taggedId,
-            pageType: feeds[i].pageType,
-            famOrFriends: feeds[i].famOrFriends,
-            relationship: feeds[i].relationship,
-            contents: [
-              Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  feeds[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                    children: [
+                      const SizedBox(height: 20),
 
-              feeds[i].imagesOrVideos.isNotEmpty
-              ? Column(
-                children: [
-                  const SizedBox(height: 20),
-
-                  Container(
-                    child: ((){
-                      if(feeds[i].imagesOrVideos.length == 1){
-                        if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
-                          return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-                            betterPlayerConfiguration: const BetterPlayerConfiguration(
-                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                loadingColor: const Color(0xff4EC9D4),
-                                loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                showControls: false,
-                              ),
-                              aspectRatio: 16 / 9,
-                            ),
-                          );
-                        }else{
-                          return CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: feeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                          );
-                        }
-                      }else if(feeds[i].imagesOrVideos.length == 2){
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 2,
-                          itemBuilder: (BuildContext context, int index) =>  
-                            lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
-                            ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                  loadingColor: const Color(0xff4EC9D4),
-                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                  showControls: false,
-                                ),
-                                aspectRatio: 16 / 9,
-                              ),
-                            )
-                            : CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: feeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            ),
-                          staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                        );
-                      }else{
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 3,
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                          itemBuilder: (BuildContext context, int index) => ((){
-                            if(index != 1){
-                              return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
-                              ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                      Container(
+                        child: ((){
+                          if(feeds[i].imagesOrVideos.length == 1){
+                            if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
+                              return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
                                 betterPlayerConfiguration: const BetterPlayerConfiguration(
                                   controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     loadingColor: const Color(0xff4EC9D4),
@@ -1059,22 +986,147 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
                                 ),
-                              )
-                              : CachedNetworkImage(
+                              );
+                            }else{
+                              return CachedNetworkImage(
                                 fit: BoxFit.cover,
-                                imageUrl: feeds[i].imagesOrVideos[index],
+                                imageUrl: feeds[i].imagesOrVideos[0],
                                 placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
-                            }else{
-                              return ((){
-                                if(feeds[i].imagesOrVideos.length - 3 > 0){
-                                  if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
-                                    return Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                            }
+                          }else if(feeds[i].imagesOrVideos.length == 2){
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) =>  
+                                lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                                ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                      loadingColor: const Color(0xff4EC9D4),
+                                      loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                      showControls: false,
+                                    ),
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
+                                )
+                                : CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: feeds[i].imagesOrVideos[index],
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                ),
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) => ((){
+                                if(index != 1){
+                                  return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                        loadingColor: const Color(0xff4EC9D4),
+                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return ((){
+                                    if(feeds[i].imagesOrVideos.length - 3 > 0){
+                                      if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                  loadingColor: const Color(0xff4EC9D4),
+                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${feeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }else{
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: feeds[i].imagesOrVideos[index],
+                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${feeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    }else{
+                                      if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
                                             controlsConfiguration: const BetterPlayerControlsConfiguration(
                                               loadingColor: const Color(0xff4EC9D4),
@@ -1082,400 +1134,73 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
                                           ),
-                                        ),
-
-                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: const TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }else{
-                                    return Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        CachedNetworkImage(
+                                        );
+                                      }else{
+                                        return CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                        ),
-
-                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: const TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                }else{
-                                  if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
-                                    return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                          loadingColor: const Color(0xff4EC9D4),
-                                          loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                          showControls: false,
-                                        ),
-                                        aspectRatio: 16 / 9,
-                                      ),
-                                    );
-                                  }else{
-                                    return CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: feeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    );
-                                  }
+                                        );
+                                      }
+                                    }
+                                  }());
                                 }
-                              }());
-                            }
-                          }()),
-                        );
-                      }
-                    }()),
-                  ),
+                              }()),
+                            );
+                          }
+                        }()),
+                      ),
+                    ],
+                  )
+                  : Container(height: 0),
                 ],
-              )
-              : Container(height: 0),
-            ],
-          );
-        }
-      )
-      : ListView.separated(
-        controller: scrollController1,
-        padding: const EdgeInsets.all(10.0),
-        physics: const ClampingScrollPhysics(),
-        itemCount: searchFeeds.length,
-        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        itemBuilder: (c, i) {
-          return searchFeeds[i].pageType == 'Blm'
-          ? MiscBLMPost(
-            key: ValueKey('$i'),
-            userId: searchFeeds[i].userId,
-            postId: searchFeeds[i].postId,
-            memorialId: searchFeeds[i].memorialId,
-            memorialName: searchFeeds[i].memorialName,
-            timeCreated: timeago.format(DateTime.parse(searchFeeds[i].timeCreated)),
-            managed: searchFeeds[i].managed,
-            joined: searchFeeds[i].follower,
-            profileImage: searchFeeds[i].profileImage,
-            numberOfComments: searchFeeds[i].numberOfComments,
-            numberOfLikes: searchFeeds[i].numberOfLikes,
-            likeStatus: searchFeeds[i].likeStatus,
-            numberOfTagged: searchFeeds[i].numberOfTagged,
-            taggedFirstName: searchFeeds[i].taggedFirstName,
-            taggedLastName: searchFeeds[i].taggedLastName,
-            taggedId: searchFeeds[i].taggedId,
-            pageType: searchFeeds[i].pageType,
-            famOrFriends: searchFeeds[i].famOrFriends,
-            relationship: searchFeeds[i].relationship,
-            contents: [
-              Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
-
-              searchFeeds[i].imagesOrVideos.isNotEmpty
-              ? Column(
-                children: [
-                  const SizedBox(height: 20),
-
-                  Container(
-                    child: ((){
-                      if(searchFeeds[i].imagesOrVideos.length == 1){
-                        if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
-                          return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
-                            betterPlayerConfiguration: const BetterPlayerConfiguration(
-                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                loadingColor: const Color(0xff4EC9D4),
-                                loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                showControls: false,
-                              ),
-                              aspectRatio: 16 / 9,
-                            ),
-                          );
-                        }else{
-                          return CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: searchFeeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                          );
-                        }
-                      }else if(searchFeeds[i].imagesOrVideos.length == 2){
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 2,
-                          itemBuilder: (BuildContext context, int index) =>  
-                            lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
-                            ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                  loadingColor: const Color(0xff4EC9D4),
-                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                  showControls: false,
-                                ),
-                                aspectRatio: 16 / 9,
-                              ),
-                            )
-                            : CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: searchFeeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            ),
-                          staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                        );
-                      }else{
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 3,
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                          itemBuilder: (BuildContext context, int index) => ((){
-                            if(index != 1){
-                              return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
-                              ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    loadingColor: const Color(0xff4EC9D4),
-                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                    showControls: false,
-                                  ),
-                                  aspectRatio: 16 / 9,
-                                ),
-                              )
-                              : CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                              );
-                            }else{
-                              return ((){
-                                if(searchFeeds[i].imagesOrVideos.length - 3 > 0){
-                                  if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
-                                    return Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                              loadingColor: const Color(0xff4EC9D4),
-                                              loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                              showControls: false,
-                                            ),
-                                            aspectRatio: 16 / 9,
-                                          ),
-                                        ),
-
-                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                              style: const TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }else{
-                                    return Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                        ),
-
-                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                              style: const TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                }else{
-                                  if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
-                                    return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                          loadingColor: const Color(0xff4EC9D4),
-                                          loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                          showControls: false,
-                                        ),
-                                        aspectRatio: 16 / 9,
-                                      ),
-                                    );
-                                  }else{
-                                    return CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    );
-                                  }
-                                }
-                              }());
-                            }
-                          }()),
-                        );
-                      }
-                    }()),
-                  ),
-                ],
-              )
-              : Container(height: 0),
-            ],
+              );
+            }
           )
-          : MiscRegularPost(
-            key: ValueKey('$i'),
-            userId: searchFeeds[i].userId,
-            postId: searchFeeds[i].postId,
-            memorialId: searchFeeds[i].memorialId,
-            memorialName: searchFeeds[i].memorialName,
-            timeCreated: timeago.format(DateTime.parse(searchFeeds[i].timeCreated)),
-            managed: searchFeeds[i].managed,
-            joined: searchFeeds[i].follower,
-            profileImage: searchFeeds[i].profileImage,
-            numberOfComments: searchFeeds[i].numberOfComments,
-            numberOfLikes: searchFeeds[i].numberOfLikes,
-            likeStatus: searchFeeds[i].likeStatus,
-            numberOfTagged: searchFeeds[i].numberOfTagged,
-            taggedFirstName: searchFeeds[i].taggedFirstName,
-            taggedLastName: searchFeeds[i].taggedLastName,
-            taggedId: searchFeeds[i].taggedId,
-            pageType: searchFeeds[i].pageType,
-            famOrFriends: searchFeeds[i].famOrFriends,
-            relationship: searchFeeds[i].relationship,
-            contents: [
-              Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+          : ListView.separated(
+            controller: scrollController1,
+            padding: const EdgeInsets.all(10.0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchFeeds.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) {
+              return searchFeeds[i].pageType == 'Blm'
+              ? MiscBLMPost(
+                key: ValueKey('$i'),
+                userId: searchFeeds[i].userId,
+                postId: searchFeeds[i].postId,
+                memorialId: searchFeeds[i].memorialId,
+                memorialName: searchFeeds[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(searchFeeds[i].timeCreated)),
+                managed: searchFeeds[i].managed,
+                joined: searchFeeds[i].follower,
+                profileImage: searchFeeds[i].profileImage,
+                numberOfComments: searchFeeds[i].numberOfComments,
+                numberOfLikes: searchFeeds[i].numberOfLikes,
+                likeStatus: searchFeeds[i].likeStatus,
+                numberOfTagged: searchFeeds[i].numberOfTagged,
+                taggedFirstName: searchFeeds[i].taggedFirstName,
+                taggedLastName: searchFeeds[i].taggedLastName,
+                taggedId: searchFeeds[i].taggedId,
+                pageType: searchFeeds[i].pageType,
+                famOrFriends: searchFeeds[i].famOrFriends,
+                relationship: searchFeeds[i].relationship,
+                contents: [
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-              searchFeeds[i].imagesOrVideos.isNotEmpty
-              ? Column(
-                children: [
-                  const SizedBox(height: 20),
+                  searchFeeds[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                    children: [
+                      const SizedBox(height: 20),
 
-                  Container(
-                    child: ((){
-                      if(searchFeeds[i].imagesOrVideos.length == 1){
-                        if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
-                          return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
-                            betterPlayerConfiguration: const BetterPlayerConfiguration(
-                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                loadingColor: const Color(0xff4EC9D4),
-                                loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                showControls: false,
-                              ),
-                              aspectRatio: 16 / 9,
-                            ),
-                          );
-                        }else{
-                          return CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: searchFeeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                          );
-                        }
-                      }else if(searchFeeds[i].imagesOrVideos.length == 2){
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 2,
-                          itemBuilder: (BuildContext context, int index) =>  
-                            lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
-                            ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                  loadingColor: const Color(0xff4EC9D4),
-                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                  showControls: false,
-                                ),
-                                aspectRatio: 16 / 9,
-                              ),
-                            )
-                            : CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: searchFeeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            ),
-                          staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                        );
-                      }else{
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 3,
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                          itemBuilder: (BuildContext context, int index) => ((){
-                            if(index != 1){
-                              return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
-                              ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                      Container(
+                        child: ((){
+                          if(searchFeeds[i].imagesOrVideos.length == 1){
+                            if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
+                              return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
                                 betterPlayerConfiguration: const BetterPlayerConfiguration(
                                   controlsConfiguration: const BetterPlayerControlsConfiguration(
                                     loadingColor: const Color(0xff4EC9D4),
@@ -1483,22 +1208,147 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     showControls: false,
                                   ),
                                   aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
                                 ),
-                              )
-                              : CachedNetworkImage(
+                              );
+                            }else{
+                              return CachedNetworkImage(
                                 fit: BoxFit.cover,
-                                imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                imageUrl: searchFeeds[i].imagesOrVideos[0],
                                 placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
-                            }else{
-                              return ((){
-                                if(searchFeeds[i].imagesOrVideos.length - 3 > 0){
-                                  if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
-                                    return Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                            }
+                          }else if(searchFeeds[i].imagesOrVideos.length == 2){
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) =>  
+                                lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                                ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                      loadingColor: const Color(0xff4EC9D4),
+                                      loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                      showControls: false,
+                                    ),
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
+                                )
+                                : CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                ),
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) => ((){
+                                if(index != 1){
+                                  return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                        loadingColor: const Color(0xff4EC9D4),
+                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return ((){
+                                    if(searchFeeds[i].imagesOrVideos.length - 3 > 0){
+                                      if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                  loadingColor: const Color(0xff4EC9D4),
+                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${searchFeeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }else{
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${searchFeeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    }else{
+                                      if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: const BetterPlayerConfiguration(
                                             controlsConfiguration: const BetterPlayerControlsConfiguration(
                                               loadingColor: const Color(0xff4EC9D4),
@@ -1506,317 +1356,489 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                               showControls: false,
                                             ),
                                             aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
                                           ),
-                                        ),
-
-                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                              style: const TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }else{
-                                    return Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        CachedNetworkImage(
+                                        );
+                                      }else{
+                                        return CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: searchFeeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                        ),
-
-                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: 25,
-                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                              style: const TextStyle(
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                }else{
-                                  if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
-                                    return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                          loadingColor: const Color(0xff4EC9D4),
-                                          loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                          showControls: false,
-                                        ),
-                                        aspectRatio: 16 / 9,
-                                      ),
-                                    );
-                                  }else{
-                                    return CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    );
-                                  }
+                                        );
+                                      }
+                                    }
+                                  }());
                                 }
-                              }());
-                            }
-                          }()),
-                        );
-                      }
-                    }()),
-                  ),
+                              }()),
+                            );
+                          }
+                        }()),
+                      ),
+                    ],
+                  )
+                  : Container(height: 0),
                 ],
               )
-              : Container(height: 0),
-            ],
-          );
-        }
-      ),
-    )
-    : SingleChildScrollView(
-      physics: const ClampingScrollPhysics(),
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
+              : MiscRegularPost(
+                key: ValueKey('$i'),
+                userId: searchFeeds[i].userId,
+                postId: searchFeeds[i].postId,
+                memorialId: searchFeeds[i].memorialId,
+                memorialName: searchFeeds[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(searchFeeds[i].timeCreated)),
+                managed: searchFeeds[i].managed,
+                joined: searchFeeds[i].follower,
+                profileImage: searchFeeds[i].profileImage,
+                numberOfComments: searchFeeds[i].numberOfComments,
+                numberOfLikes: searchFeeds[i].numberOfLikes,
+                likeStatus: searchFeeds[i].likeStatus,
+                numberOfTagged: searchFeeds[i].numberOfTagged,
+                taggedFirstName: searchFeeds[i].taggedFirstName,
+                taggedLastName: searchFeeds[i].taggedLastName,
+                taggedId: searchFeeds[i].taggedId,
+                pageType: searchFeeds[i].pageType,
+                famOrFriends: searchFeeds[i].famOrFriends,
+                relationship: searchFeeds[i].relationship,
+                contents: [
+                  Container(alignment: Alignment.centerLeft, child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                  searchFeeds[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                    children: [
+                      const SizedBox(height: 20),
 
-            const SizedBox(height: 45,),
+                      Container(
+                        child: ((){
+                          if(searchFeeds[i].imagesOrVideos.length == 1){
+                            if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
+                              return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                    loadingColor: const Color(0xff4EC9D4),
+                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
+                                ),
+                              );
+                            }else{
+                              return CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: searchFeeds[i].imagesOrVideos[0],
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              );
+                            }
+                          }else if(searchFeeds[i].imagesOrVideos.length == 2){
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) =>  
+                                lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                                ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                      loadingColor: const Color(0xff4EC9D4),
+                                      loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                      showControls: false,
+                                    ),
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
+                                )
+                                : CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                ),
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) => ((){
+                                if(index != 1){
+                                  return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                        loadingColor: const Color(0xff4EC9D4),
+                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return ((){
+                                    if(searchFeeds[i].imagesOrVideos.length - 3 > 0){
+                                      if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                  loadingColor: const Color(0xff4EC9D4),
+                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
 
-            const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
 
-            SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
-          ],
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${searchFeeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }else{
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text(
+                                                  '${searchFeeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    }else{
+                                      if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                              loadingColor: const Color(0xff4EC9D4),
+                                              loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        );
+                                      }else{
+                                        return CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        );
+                                      }
+                                    }
+                                  }());
+                                }
+                              }()),
+                            );
+                          }
+                        }()),
+                      ),
+                    ],
+                  )
+                  : Container(height: 0),
+                ],
+              );
+            }
+          ),
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
+
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                const SizedBox(height: 45,),
+
+                const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+
+                SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
   searchSuggestedExtended(){
-    return tabCount2 != 0
-    ? RefreshIndicator(
-      onRefresh: onRefresh2,
-      child: onSearch != true
-      ? ListView.separated(
-        controller: scrollController2,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: const ClampingScrollPhysics(),
-        itemCount: suggested.length,
-        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        itemBuilder: (c, i) => 
-          MiscRegularManageMemorialTab(
-          index: i,
-          memorialName: suggested[i].memorialName,
-          description: suggested[i].memorialDescription,
-          image: suggested[i].image,
-          memorialId: suggested[i].memorialId,
-          managed: suggested[i].managed,
-          follower: suggested[i].follower,
-          pageType: suggested[i].pageType,
-          relationship: suggested[i].relationship,
-          famOrFriends: suggested[i].famOrFriends,
-        ),
-      )
-      : ListView.separated(
-        controller: scrollController2,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: const ClampingScrollPhysics(),
-        itemCount: searchSuggested.length,
-        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        itemBuilder: (c, i) => 
-          MiscRegularManageMemorialTab(
-          index: i,
-          memorialName: searchSuggested[i].memorialName,
-          description: searchSuggested[i].memorialDescription,
-          image: searchSuggested[i].image,
-          memorialId: searchSuggested[i].memorialId,
-          managed: searchSuggested[i].managed,
-          follower: searchSuggested[i].follower,
-          pageType: searchSuggested[i].pageType,
-          relationship: searchSuggested[i].relationship,
-          famOrFriends: searchSuggested[i].famOrFriends,
-        ),
-      )
-    )
-    : SingleChildScrollView(
-      physics: const ClampingScrollPhysics(),
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+    return ValueListenableBuilder(
+      valueListenable: tabCount2,
+      builder: (_, int tabCount2Listener, __) => ValueListenableBuilder(
+        valueListenable: onSearch,
+        builder: (_, bool onSearchListener, __) => tabCount2Listener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh2,
+          child: onSearchListener != true
+          ? ListView.separated(
+            controller: scrollController2,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: suggested.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => 
+              MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: suggested[i].memorialName,
+              description: suggested[i].memorialDescription,
+              image: suggested[i].image,
+              memorialId: suggested[i].memorialId,
+              managed: suggested[i].managed,
+              follower: suggested[i].follower,
+              pageType: suggested[i].pageType,
+              relationship: suggested[i].relationship,
+              famOrFriends: suggested[i].famOrFriends,
+            ),
+          )
+          : ListView.separated(
+            controller: scrollController2,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchSuggested.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => 
+              MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: searchSuggested[i].memorialName,
+              description: searchSuggested[i].memorialDescription,
+              image: searchSuggested[i].image,
+              memorialId: searchSuggested[i].memorialId,
+              managed: searchSuggested[i].managed,
+              follower: searchSuggested[i].follower,
+              pageType: searchSuggested[i].pageType,
+              relationship: searchSuggested[i].relationship,
+              famOrFriends: searchSuggested[i].famOrFriends,
+            ),
+          )
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-            const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-            const Text('Suggested is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Suggested is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
-          ],
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
   searchNearbyExtended(){
-    return tabCount3 != 0
-    ? RefreshIndicator(
-      onRefresh: onRefresh3,
-      child: onSearch != true
-      ? ListView.separated(
-        controller: scrollController3,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: const ClampingScrollPhysics(),
-        itemCount: nearby.length,
-        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        itemBuilder: (c, i) => 
-          MiscRegularManageMemorialTab(
-          index: i,
-          memorialName: nearby[i].memorialName,
-          description: nearby[i].memorialDescription,
-          image: nearby[i].image,
-          memorialId: nearby[i].memorialId,
-          managed: nearby[i].managed,
-          follower: nearby[i].follower,
-          pageType: nearby[i].pageType,
-          relationship: nearby[i].relationship,
-          famOrFriends: nearby[i].famOrFriends,
-        ),
-      )
-      : ListView.separated(
-        controller: scrollController3,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: const ClampingScrollPhysics(),
-        itemCount: searchNearby.length,
-        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        itemBuilder: (c, i) => 
-          MiscRegularManageMemorialTab(
-          index: i,
-          memorialName: searchNearby[i].memorialName,
-          description: searchNearby[i].memorialDescription,
-          image: searchNearby[i].image,
-          memorialId: searchNearby[i].memorialId,
-          managed: searchNearby[i].managed,
-          follower: searchNearby[i].follower,
-          pageType: searchNearby[i].pageType,
-          relationship: searchNearby[i].relationship,
-          famOrFriends: searchNearby[i].famOrFriends,
-        ),
-      )
-    )
-    : SingleChildScrollView(
-      physics: const ClampingScrollPhysics(),
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+    return ValueListenableBuilder(
+      valueListenable: tabCount3,
+      builder: (_, int tabCount3Listener, __) => ValueListenableBuilder(
+        valueListenable: onSearch,
+        builder: (_, bool onSearchListener, __) => tabCount3Listener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh3,
+          child: onSearchListener != true
+          ? ListView.separated(
+            controller: scrollController3,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: nearby.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => 
+              MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: nearby[i].memorialName,
+              description: nearby[i].memorialDescription,
+              image: nearby[i].image,
+              memorialId: nearby[i].memorialId,
+              managed: nearby[i].managed,
+              follower: nearby[i].follower,
+              pageType: nearby[i].pageType,
+              relationship: nearby[i].relationship,
+              famOrFriends: nearby[i].famOrFriends,
+            ),
+          )
+          : ListView.separated(
+            controller: scrollController3,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchNearby.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => 
+              MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: searchNearby[i].memorialName,
+              description: searchNearby[i].memorialDescription,
+              image: searchNearby[i].image,
+              memorialId: searchNearby[i].memorialId,
+              managed: searchNearby[i].managed,
+              follower: searchNearby[i].follower,
+              pageType: searchNearby[i].pageType,
+              relationship: searchNearby[i].relationship,
+              famOrFriends: searchNearby[i].famOrFriends,
+            ),
+          )
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-            const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-            const Text('Nearby is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Nearby is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
-          ],
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
   searchBLMExtended(){
-    return tabCount4 != 0
-    ? RefreshIndicator(
-      onRefresh: onRefresh3,
-      child: onSearch != true
-      ? ListView.separated(
-        controller: scrollController3,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: const ClampingScrollPhysics(),
-        itemCount: blm.length,
-        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        itemBuilder: (c, i) => 
-        MiscRegularManageMemorialTab(
-          index: i,
-          memorialName: blm[i].memorialName,
-          description: blm[i].memorialDescription,
-          image: blm[i].image,
-          memorialId: blm[i].memorialId,
-          managed: blm[i].managed,
-          follower: blm[i].follower,
-          pageType: blm[i].pageType,
-          relationship: blm[i].relationship,
-          famOrFriends: blm[i].famOrFriends,
-        ),
-      )
-      : ListView.separated(
-        controller: scrollController3,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        physics: const ClampingScrollPhysics(),
-        itemCount: searchBlm.length,
-        separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-        itemBuilder: (c, i) => 
-        MiscRegularManageMemorialTab(
-          index: i,
-          memorialName: searchBlm[i].memorialName,
-          description: searchBlm[i].memorialDescription,
-          image: searchBlm[i].image,
-          memorialId: searchBlm[i].memorialId,
-          managed: searchBlm[i].managed,
-          follower: searchBlm[i].follower,
-          pageType: searchBlm[i].pageType,
-          relationship: searchBlm[i].relationship,
-          famOrFriends: searchBlm[i].famOrFriends,
-        ),
-      ),
-    )
-    : SingleChildScrollView(
-      physics: const ClampingScrollPhysics(),
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+    return ValueListenableBuilder(
+      valueListenable: tabCount4,
+      builder: (_, int tabCount4Listener, __) => ValueListenableBuilder(
+        valueListenable: onSearch,
+        builder: (_, bool onSearchListener, __) => tabCount4Listener != 0
+        ? RefreshIndicator(
+          onRefresh: onRefresh4,
+          child: onSearchListener != true
+          ? ListView.separated(
+            controller: scrollController3,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: blm.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => 
+            MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: blm[i].memorialName,
+              description: blm[i].memorialDescription,
+              image: blm[i].image,
+              memorialId: blm[i].memorialId,
+              managed: blm[i].managed,
+              follower: blm[i].follower,
+              pageType: blm[i].pageType,
+              relationship: blm[i].relationship,
+              famOrFriends: blm[i].famOrFriends,
+            ),
+          )
+          : ListView.separated(
+            controller: scrollController3,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchBlm.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => 
+            MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: searchBlm[i].memorialName,
+              description: searchBlm[i].memorialDescription,
+              image: searchBlm[i].image,
+              memorialId: searchBlm[i].memorialId,
+              managed: searchBlm[i].managed,
+              follower: searchBlm[i].follower,
+              pageType: searchBlm[i].pageType,
+              relationship: searchBlm[i].relationship,
+              famOrFriends: searchBlm[i].famOrFriends,
+            ),
+          ),
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
-            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-            const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-            const Text('BLM is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('BLM is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
-          ],
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+              ],
+            ),
+          ),
         ),
       ),
     );

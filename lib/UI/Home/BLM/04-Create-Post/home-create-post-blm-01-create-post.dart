@@ -453,10 +453,11 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                             deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                             autoDispose: false,
                                                             aspectRatio: 16 / 9,
+                                                            fit: BoxFit.contain,
                                                           ),
                                                         );
                                                       }else{
-                                                        return Image.asset(slideImages[index].path, fit: BoxFit.cover, scale: 1.0,);
+                                                        return Image.asset(slideImages[index].path, fit: BoxFit.contain, scale: 1.0,);
                                                       }
                                                     }()),
                                                   ),
@@ -479,6 +480,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                             showControls: false,
                                           ),
                                           aspectRatio: 1,
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
 
