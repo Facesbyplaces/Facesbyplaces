@@ -141,10 +141,13 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
   @override
   Widget build(BuildContext context){
     return InputDecorator(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
+        labelStyle: TextStyle(
+            fontSize: SizeConfig.blockSizeVertical! * 2.11,
+            fontFamily: 'NexaRegular',
+            color: const Color(0xff000000)),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff000000),
@@ -163,7 +166,11 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
           items: relationship.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value),
+              child: Text(value,
+                style: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                    fontFamily: 'NexaRegular',
+                    color: const Color(0xff2F353D)),),
             );
           }).toList(),
         ),

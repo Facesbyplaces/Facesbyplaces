@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
@@ -48,6 +49,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
 
   @override
   Widget build(BuildContext context){
+    SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
         if(widget.pageType == 'Memorial'){
@@ -83,20 +85,18 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
           title: Text(widget.memorialName,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff000000),),
           ),
           subtitle: Text(widget.description,
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w200,
-              color: const Color(0xff888888),
-            ),
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff888888),),
           ),
           trailing: ((){
             if(widget.managed == true || widget.famOrFriends == true){
@@ -175,7 +175,10 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     }
                   }
                 },
-                child: const Text('Leave', style: const TextStyle(fontSize: 14,),),
+                child: Text('Leave', style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaBold',
+                  color: const Color(0xffFFFFFF),),),
                 height: 35,
                 shape: const RoundedRectangleBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(5)),

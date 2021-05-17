@@ -106,18 +106,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    // setState(() {
-    //   isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    // });
     if(isGuestLoggedIn != true){
       onLoading();
     }
   }
 
   Future<void> onRefresh() async{
-    // setState(() {
-    //   onLoading();
-    // });
     onLoading();
   }
 
@@ -172,7 +166,6 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       }
 
       if(mounted)
-      // setState(() {});
       page++;
     }
   }
