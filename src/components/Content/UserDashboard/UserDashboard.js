@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import HashLoader from "react-spinners/HashLoader";
 
 //Components
-import Navbar from "./Navbar/Navbar";
-import SideBar from "./SideBar/SideBar";
-import Topbar from "./Navbar/Topbar/Topbar";
-import Footer from "./Footer";
+import Navbar from "../../Navbar/Navbar";
+import Topbar from "../../Navbar/Topbar/Topbar";
+import SideBar from "../../SideBar/SideBar";
+import Footer from "../../Footer";
 import UsersTable from "./Users/UserTable/UsersTable";
 import Assets from "../../Assets";
 // import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";

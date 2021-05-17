@@ -95,7 +95,7 @@ export default function EditMemorial() {
     formData.append("memorial_id", memorial.id);
     console.log("Form Data: ", formData);
     axios
-      .put(`/api/v1/admin/blm/image/${memorial.id}`, formData)
+      .put(`/api/v1/admin/memorials/blm/image/${memorial.id}`, formData)
       .then((response) => {
         console.log(response.data);
       })
@@ -159,7 +159,7 @@ export default function EditMemorial() {
 
   useEffect(() => {
     axios
-      .get(`/api/v1/admin/users/selection`)
+      .get(`/api/v1/admin/memorials/users/selection`)
       .then((response) => {
         setUsers(response.data.users);
         console.log("Response: ", response.data.users);

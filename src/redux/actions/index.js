@@ -157,3 +157,32 @@ export const TableReportAction = () => {
     type: "TABLE_REPORT",
   };
 };
+
+// Navbar Tabs
+export const NavbarUserTabAction = (tab) => {
+  return {
+    type: "USER_TAB",
+    data: tab,
+  };
+};
+
+export const NavbarMemorialTabAction = (tab) => {
+  return {
+    type: "MEMORIAL_TAB",
+    data: tab,
+  };
+};
+
+export const NavbarPostTabAction = (tab) => {
+  return {
+    type: "POST_TAB",
+    data: tab,
+  };
+};
+
+export const NavbarReportTabAction = (tab) => {
+  return {
+    type: "REPORT_TAB",
+    data: tab,
+  };
+};

@@ -9,7 +9,7 @@ import Topbar from "../../Navbar/Topbar/Topbar";
 import SideBar from "../../SideBar/SideBar";
 import Footer from "../../Footer";
 import Assets from "../../Assets";
-import ReportTable from "./Reports/ReportTable/ReportTable";
+import TransactionTable from "./Transactions/TransactionTable/TransactionTable";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -49,7 +49,7 @@ const Dashboard = () => {
               {/*end::Header*/}
 
               {/*begin::Content*/}
-              <ReportTable />
+              <TransactionTable />
               {/*end::Content*/}
               <Footer />
             </div>

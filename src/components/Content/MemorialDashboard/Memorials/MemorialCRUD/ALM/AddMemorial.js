@@ -142,7 +142,7 @@ export default function AddMemorial() {
 
   useEffect(() => {
     axios
-      .get(`/api/v1/admin/users/selection`)
+      .get(`/api/v1/admin/memorials/users/selection`)
       .then((response) => {
         setUsers(response.data.users);
         console.log("Response: ", response.data.users);

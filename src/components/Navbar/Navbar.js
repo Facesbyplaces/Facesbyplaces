@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  NavbarUserTabAction,
+  NavbarMemorialTabAction,
+  NavbarPostTabAction,
+  NavbarReportTabAction,
+} from "../../redux/actions";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const { navbarTab } = useSelector(({ navbarTab }) => ({
+    navbarTab: navbarTab,
+  }));
+
+  const handleClick = (tab) => {
+    switch (tab) {
+      case "users":
+        console.log("TAB ", tab);
+        dispatch(NavbarUserTabAction({ tab }));
+      case "memorials":
+        dispatch(NavbarMemorialTabAction({ tab }));
+      case "posts":
+        dispatch(NavbarPostTabAction({ tab }));
+      case "reports":
+        dispatch(NavbarReportTabAction({ tab }));
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log("Navbar Tab: ", navbarTab);
+  // }, []);
+
   return (
     <div id="kt_header" className="header">
       {/*begin::Container*/}
@@ -17,9 +47,18 @@ export default function Navbar() {
           >
             {/*begin::Header Nav*/}
             <ul className="menu-nav">
-              <li className="menu-item menu-item-active" aria-haspopup="true">
-                <a href="/users" className="menu-link">
-                  <span className="menu-text">Users</span>
+              <li className="menu-item menu-item-submenu" aria-haspopup="true">
+                <a
+                  href="/users"
+                  className="menu-link"
+                  onClick={() => handleClick("users")}
+                >
+                  <span
+                    className="menu-text"
+                    onClick={() => handleClick("users")}
+                  >
+                    Users
+                  </span>
                 </a>
               </li>
               <li
@@ -44,15 +83,14 @@ export default function Navbar() {
                   <i className="menu-arrow" />
                 </a>
               </li>
-              <li
-                className="menu-item menu-item-submenu menu-item-rel"
-                data-menu-toggle="click"
-                aria-haspopup="true"
-              >
-                <a href="/reports" className="menu-link menu-toggle">
+              <li className="menu-item menu-item-submenu" aria-haspopup="true">
+                <a href="/reports" className="menu-link">
                   <span className="menu-text">Reports</span>
-                  <span className="menu-desc" />
-                  <i className="menu-arrow" />
+                </a>
+              </li>
+              <li className="menu-item menu-item-active" aria-haspopup="true">
+                <a href="/transactions" className="menu-link">
+                  <span className="menu-text">Transactions</span>
                 </a>
               </li>
             </ul>

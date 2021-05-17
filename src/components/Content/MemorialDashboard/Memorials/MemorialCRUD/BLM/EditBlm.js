@@ -98,7 +98,7 @@ export default function EditMemorial() {
     formData.append("memorial_id", memorial.id);
     console.log("Form Data: ", formData);
     axios
-      .put(`/api/v1/admin/blm/image/${memorial.id}`, formData)
+      .put(`/api/v1/admin/memorials/blm/image/${memorial.id}`, formData)
       .then((response) => {
         console.log(response.data);
       })
@@ -282,7 +282,7 @@ export default function EditMemorial() {
     console.log("Longitude: ", memorialLongitude);
     setLoading(true);
     axios
-      .put(`/api/v1/admin/blm/${memorial.id}`, {
+      .put(`/api/v1/admin/memorials/blm/${memorial.id}`, {
         user_id: pageCreator,
         location: memorialLocation,
         dob: memorialDateOfBirth,

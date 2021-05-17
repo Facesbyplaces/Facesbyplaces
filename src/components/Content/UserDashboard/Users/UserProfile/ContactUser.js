@@ -55,7 +55,7 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
     console.log("Message: ", message);
 
     axios
-      .post("/api/v1/admin/contact", {
+      .post("/api/v1/admin/users/contact", {
         message: message,
         id: user.id,
         subject: subject,

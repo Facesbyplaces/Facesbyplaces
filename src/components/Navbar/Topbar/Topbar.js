@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
-import { LogoutAction } from "../../../../../redux/actions";
+import { LogoutAction } from "../../../redux/actions/";
 
 export default function Topbar() {
   const { user } = useSelector(({ auth_data }) => ({
