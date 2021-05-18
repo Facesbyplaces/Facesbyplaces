@@ -187,13 +187,13 @@ export default function PostDataTable({
               </label>
             </th> */}
             <th className="pl-0" style={{ minWidth: "100px" }}>
-              transaction id
+              id
             </th>
-            <th style={{ minWidth: "120px" }}>memorial</th>
+            <th style={{ minWidth: "160px" }}>memorial</th>
             <th style={{ minWidth: "120px" }}>page type</th>
-            <th style={{ minWidth: "150px" }}>amount</th>
-            <th style={{ minWidth: "150px" }}>user</th>
-            <th style={{ minWidth: "130px" }}>account type</th>
+            <th style={{ minWidth: "100px" }}>amount</th>
+            <th style={{ minWidth: "160px" }}>user</th>
+            <th style={{ minWidth: "100px" }}>account type</th>
             <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
               action
             </th>
