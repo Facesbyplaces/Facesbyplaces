@@ -24,12 +24,12 @@ export default function DataTableRowTransactionData({
 
   const renderedTransactions = transactions.map((transaction) => (
     <tr>
-      <td className="pl-2 py-6">
+      {/* <td className="pl-2 py-6">
         <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
           <span />
         </label>
-      </td>
+      </td> */}
       <td>
         <a
           href="#"
@@ -40,12 +40,12 @@ export default function DataTableRowTransactionData({
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {transaction.page_id}
+          {transaction.page.name}
         </span>
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {transaction.page_type}
+          {transaction.page.page_type}
         </span>
       </td>
       <td className="pl-0 py-6">
@@ -55,12 +55,12 @@ export default function DataTableRowTransactionData({
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {transaction.account_id}
+          {transaction.user.first_name} {transaction.user.last_name}
         </span>
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {transaction.account_type}
+          {transaction.user.account_type}
         </span>
       </td>
       <td className="pr-2 text-left">
