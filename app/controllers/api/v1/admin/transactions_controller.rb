@@ -4,9 +4,10 @@ class Api::V1::Admin::TransactionsController < ApplicationController
 
     # Index Report
     def allTransactions
-        transactions = Transaction.all 
+        transactions = Transaction.all
                             
         transactions = transactions.page(params[:page]).per(numberOfPage)
+
         if transactions.total_count == 0 || (transactions.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif transactions.total_count < numberOfPage
@@ -16,7 +17,10 @@ class Api::V1::Admin::TransactionsController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        transactions: transactions
+                        transactions: ActiveModel::SerializableResource.new(
+                            transactions,
+                            each_serializer: TransactionSerializer
+                        )
                     }
     end
 

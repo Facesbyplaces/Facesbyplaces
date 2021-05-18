@@ -12,6 +12,6 @@ class TransactionSerializer < ActiveModel::Serializer
   end
 
   def user
-    UserSerializer.new( object.user ).attributes
+    UserSerializer.new( object.account ).attributes
   end
 end
