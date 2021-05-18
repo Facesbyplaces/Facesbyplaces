@@ -262,6 +262,10 @@ class RegularRegister extends StatelessWidget{
                                     description: Text(
                                       '$result',
                                       textAlign: TextAlign.center,
+                                      style:  TextStyle(
+                                          fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                          fontFamily: 'NexaRegular'
+                                      ),
                                     ),
                                     onlyOkButton: true,
                                     buttonOkColor: const Color(0xffff0000),
