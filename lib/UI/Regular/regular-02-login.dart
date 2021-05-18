@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

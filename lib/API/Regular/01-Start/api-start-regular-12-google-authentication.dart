@@ -3,6 +3,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'api-start-regular-06-sign-in-google.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';

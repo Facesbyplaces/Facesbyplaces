@@ -7,7 +7,6 @@ import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-mem
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,6 +18,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 import 'dart:async';
 

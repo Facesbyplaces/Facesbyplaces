@@ -6,6 +6,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -284,19 +285,23 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                         } else {
                           return GestureDetector(
                             onTap: () async {
-                              final ByteData bytes = await rootBundle
-                                  .load(backgroundImages[index]);
-                              final Uint8List list = bytes.buffer.asUint8List();
+                              // final ByteData bytes = await rootBundle
+                              //     .load(backgroundImages[index]);
+                              // final Uint8List list = bytes.buffer.asUint8List();
 
-                              final tempDir = await getTemporaryDirectory();
-                              final file = await new File(
-                                      '${tempDir.path}/blm-background-image-$index.png')
-                                  .create();
-                              file.writeAsBytesSync(list);
+                              // final tempDir = await getTemporaryDirectory();
+                              // final file = await new File(
+                              //         '${tempDir.path}/blm-background-image-$index.png')
+                              //     .create();
+                              // file.writeAsBytesSync(list);
+
+                              // setState(() {
+                              //   backgroundImageToggle = index;
+                              //   backgroundImage = file;
+                              // });
 
                               setState(() {
                                 backgroundImageToggle = index;
-                                backgroundImage = file;
                               });
                             },
                             child: backgroundImageToggle == index
@@ -374,6 +379,20 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                   ),
                   buttonText: 'Create my Memorial Page',
                   onPressed: () async {
+
+                    if(backgroundImageToggle == 0 || backgroundImageToggle == 1){
+                      final ByteData bytes = await rootBundle.load(backgroundImages[backgroundImageToggle]);
+                      final Uint8List list = bytes.buffer.asUint8List();
+
+                      final tempDir = await getTemporaryDirectory();
+                      final file = await new File('${tempDir.path}/blm-background-image-$backgroundImageToggle.png').create();
+                      file.writeAsBytesSync(list);
+
+                      setState(() {
+                        backgroundImage = file;
+                      });
+                    }
+
                     Location.Location location = new Location.Location();
 
                     bool serviceEnabled = await location.serviceEnabled();
@@ -423,14 +442,11 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                       }
                     } else {
                       if (profileImage.path == '') {
-                        final ByteData bytes = await rootBundle
-                            .load('assets/icons/cover-icon.png');
+                        final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
                         final Uint8List list = bytes.buffer.asUint8List();
 
                         final tempDir = await getTemporaryDirectory();
-                        final file = await new File(
-                                '${tempDir.path}/blm-profile-image.png')
-                            .create();
+                        final file = await new File('${tempDir.path}/blm-profile-image.png').create();
                         file.writeAsBytesSync(list);
 
                         setState(() {

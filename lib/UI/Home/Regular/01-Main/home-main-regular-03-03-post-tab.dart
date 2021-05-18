@@ -85,17 +85,6 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
               content: const Text('No more posts to show'),
               duration: const Duration(seconds: 1),
               backgroundColor: const Color(0xff4EC9D4),
-              action: SnackBarAction(
-                label: 'Refresh',
-                onPressed: () {
-                  page = 1;
-                  count.value = 0;
-                  itemRemaining = 1;
-                  posts = [];
-                  onRefresh();
-                },
-                textColor: const Color(0xff000000),
-              ),
             ),
           );
         }
@@ -112,6 +101,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   }
 
   Future<void> onRefresh() async{
+    page = 1;
+    count.value = 0;
+    itemRemaining = 1;
+    posts = [];
     onLoading();
   }
 

@@ -64,17 +64,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab> {
               content: const Text('No more feeds to show'),
               duration: const Duration(seconds: 1),
               backgroundColor: const Color(0xff4EC9D4),
-              action: SnackBarAction(
-                label: 'Refresh',
-                onPressed: () {
-                  page = 1;
-                  itemRemaining = 1;
-                  count.value = 0;
-                  feeds.value = [];
-                  onRefresh();
-                },
-                textColor: const Color(0xff000000),
-              ),
             ),
           );
         }
@@ -83,6 +72,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab> {
   }
 
   Future<void> onRefresh() async {
+    page = 1;
+    itemRemaining = 1;
+    count.value = 0;
+    feeds.value = [];
     onLoading();
   }
 

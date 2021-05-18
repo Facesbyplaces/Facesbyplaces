@@ -9,6 +9,7 @@ import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';

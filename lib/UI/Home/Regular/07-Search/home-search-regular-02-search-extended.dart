@@ -135,6 +135,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   int page2 = 1;
   int page3 = 1;
   int page4 = 1;
+  String searchKeyword = '';
 
   Future<void> onRefresh1() async{
     onLoading1();
@@ -153,7 +154,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   }
 
   void onLoading1() async{
-
     if(postItemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularSearchPosts(keywords: keyword, page: page1);
@@ -212,6 +212,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       context.loaderOverlay.show();
       var newValue = await apiRegularSearchSuggested(page: page2);
       context.loaderOverlay.hide();
+
       suggestedItemRemaining = newValue.almItemsRemaining;
       tabCount2.value = tabCount2.value + newValue.almSearchSuggestedPages.length;
 
@@ -238,10 +239,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
  
   void onLoading3() async{
     if(nearbyBlmItemsRemaining != 0){
-
       context.loaderOverlay.show();
       var newValue = await apiRegularSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       context.loaderOverlay.hide();
+
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
       tabCount3.value = tabCount3.value + newValue.blmList.length;
 
@@ -271,6 +272,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       context.loaderOverlay.show();
       var newValue = await apiRegularSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       context.loaderOverlay.hide();
+
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
       tabCount3.value = tabCount3.value + newValue.memorialList.length;
       
@@ -300,6 +302,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       context.loaderOverlay.show();
       var newValue = await apiRegularSearchBLM(page: page4, keywords: keyword);
       context.loaderOverlay.hide();
+      
       blmItemRemaining = newValue.almItemsRemaining;
       tabCount4.value = tabCount4.value + newValue.almMemorialList.length;
 
@@ -446,6 +449,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             }
                           },
                           onFieldSubmitted: (search){
+                            searchKeyword = search;
                             if(search == ''){
                               onSearch.value = false;
                               searchFeeds = [];
@@ -453,37 +457,37 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               searchNearby = [];
                               searchBlm = [];
                             }else{
+                              onSearch.value = true;
+
                               if(toggleListener == 0){
                                 for(int i = 0; i < feeds.length; i++){
-                                  if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearchListener == false){
+                                  if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
                                     print('The ${feeds[i].memorialName} contains $search');
                                     searchFeeds.add(feeds[i]);
                                   }
                                 }
                               }else if(toggleListener == 1){
                                 for(int i = 0; i < suggested.length; i++){
-                                  if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearchListener == false){
+                                  if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
                                     print('The ${suggested[i].memorialName} contains $search');
                                     searchSuggested.add(suggested[i]);
                                   }
                                 }
                               }else if(toggleListener == 2){
                                 for(int i = 0; i < nearby.length; i++){
-                                  if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearchListener == false){
+                                  if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
                                     print('The ${nearby[i].memorialName} contains $search');
                                     searchNearby.add(nearby[i]);
                                   }
                                 }
                               }else if(toggleListener == 3){
                                 for(int i = 0; i < blm.length; i++){
-                                  if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearchListener == false){
+                                  if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
                                     print('The ${blm[i].memorialName} contains $search');
                                     searchBlm.add(blm[i]);
                                   }
                                 }
-                              }
-
-                              onSearch.value = true;
+                              }                              
                             }
                           },
                           decoration: InputDecoration(
@@ -504,37 +508,37 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   searchNearby = [];
                                   searchBlm = [];
                                 }else{
+                                  onSearch.value = true;
+
                                   if(toggleListener == 0){
                                     for(int i = 0; i < feeds.length; i++){
-                                      if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearchListener == false){
+                                      if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
                                         print('The ${feeds[i].memorialName} contains ${controller.text}');
                                         searchFeeds.add(feeds[i]);
                                       }
                                     }
                                   }else if(toggleListener == 1){
                                     for(int i = 0; i < suggested.length; i++){
-                                      if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearchListener == false){
+                                      if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
                                         print('The ${suggested[i].memorialName} contains ${controller.text}');
                                         searchSuggested.add(suggested[i]);
                                       }
                                     }
                                   }else if(toggleListener == 2){
                                     for(int i = 0; i < nearby.length; i++){
-                                      if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearchListener == false){
+                                      if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
                                         print('The ${nearby[i].memorialName} contains ${controller.text}');
                                         searchNearby.add(nearby[i]);
                                       }
                                     }
                                   }else if(toggleListener == 3){
                                     for(int i = 0; i < blm.length; i++){
-                                      if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearchListener == false){
+                                      if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
                                         print('The ${blm[i].memorialName} contains ${controller.text}');
                                         searchBlm.add(blm[i]);
                                       }
                                     }
                                   }
-
-                                  onSearch.value = true;
                                 }
                               },
                               icon: const Icon(Icons.search, color: const Color(0xff888888),),
@@ -587,6 +591,40 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   searchSuggested = [];
                                   searchNearby = [];
                                   searchBlm = [];
+
+                                  if(onSearchListener == true){
+                                    if(toggle.value == 0){
+                                      for(int i = 0; i < feeds.length; i++){
+                                        if(feeds[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                          print('The ${feeds[i].memorialName} contains $searchKeyword');
+                                          searchFeeds.add(feeds[i]);
+                                        }
+                                      }
+                                    }else if(toggle.value == 1){
+                                      for(int i = 0; i < suggested.length; i++){
+                                        if(suggested[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                          print('The ${suggested[i].memorialName} contains $searchKeyword');
+                                          searchSuggested.add(suggested[i]);
+                                        }
+                                      }
+                                    }else if(toggle.value == 2){
+                                      for(int i = 0; i < nearby.length; i++){
+                                        if(nearby[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                          print('The ${nearby[i].memorialName} contains $searchKeyword');
+                                          searchNearby.add(nearby[i]);
+                                        }
+                                      }
+                                    }else if(toggle.value == 3){
+                                      for(int i = 0; i < blm.length; i++){
+                                        if(blm[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                          print('The ${blm[i].memorialName} contains $searchKeyword');
+                                          searchBlm.add(blm[i]);
+                                        }
+                                      }
+                                    }
+
+                                    onSearch.value = true;
+                                  }
                                 },
                                 tabs: [
                                   const Center(

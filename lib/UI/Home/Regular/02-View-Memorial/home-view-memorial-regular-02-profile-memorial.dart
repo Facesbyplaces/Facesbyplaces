@@ -5,7 +5,6 @@ import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-01-d
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-11-regular-dropdown.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,7 +16,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';

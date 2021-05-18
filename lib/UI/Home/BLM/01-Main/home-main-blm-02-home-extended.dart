@@ -21,6 +21,7 @@ import 'home-main-blm-03-01-feed-tab.dart';
 import 'home-main-blm-03-02-memorial-list-tab.dart';
 import 'home-main-blm-03-03-post-tab.dart';
 import 'home-main-blm-03-04-notifications-tab.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/services.dart';

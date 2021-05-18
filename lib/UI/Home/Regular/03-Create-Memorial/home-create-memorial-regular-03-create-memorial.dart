@@ -6,6 +6,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -280,19 +281,20 @@ class HomeRegularCreateMemorial3State
                         } else {
                           return GestureDetector(
                             onTap: () async {
-                              final ByteData bytes = await rootBundle
-                                  .load(backgroundImages[index]);
-                              final Uint8List list = bytes.buffer.asUint8List();
+                              // final ByteData bytes = await rootBundle.load(backgroundImages[index]);
+                              // final Uint8List list = bytes.buffer.asUint8List();
 
-                              final tempDir = await getTemporaryDirectory();
-                              final file = await new File(
-                                      '${tempDir.path}/regular-background-image-$index.png')
-                                  .create();
-                              file.writeAsBytesSync(list);
+                              // final tempDir = await getTemporaryDirectory();
+                              // final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
+                              // file.writeAsBytesSync(list);
+
+                              // setState(() {
+                              //   backgroundImageToggle = index;
+                              //   backgroundImage = file;
+                              // });
 
                               setState(() {
                                 backgroundImageToggle = index;
-                                backgroundImage = file;
                               });
                             },
                             child: backgroundImageToggle == index
@@ -372,6 +374,20 @@ class HomeRegularCreateMemorial3State
                   ),
                   buttonText: 'Create my Memorial Page',
                   onPressed: () async {
+
+                    if(backgroundImageToggle == 0 || backgroundImageToggle == 1){
+                      final ByteData bytes = await rootBundle.load(backgroundImages[backgroundImageToggle]);
+                      final Uint8List list = bytes.buffer.asUint8List();
+
+                      final tempDir = await getTemporaryDirectory();
+                      final file = await new File('${tempDir.path}/regular-background-image-$backgroundImageToggle.png').create();
+                      file.writeAsBytesSync(list);
+
+                      setState(() {
+                        backgroundImage = file;
+                      });
+                    }
+
                     Location.Location location = new Location.Location();
 
                     bool serviceEnabled = await location.serviceEnabled();

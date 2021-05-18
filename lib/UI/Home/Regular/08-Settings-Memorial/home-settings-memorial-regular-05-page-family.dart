@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-regular-07-search-user-settings.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 

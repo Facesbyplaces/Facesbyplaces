@@ -3,6 +3,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:path_provider/path_provider.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -58,6 +59,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
   }
 
   Future<void> shareQRCode(String qrData) async {
+    print('The qrData in Blm is $qrData');
     try {
       QrValidationResult qrValidationResult = QrValidator.validate(
         data: qrData,
@@ -78,7 +80,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
         final Uint8List list = bytes.buffer.asUint8List();
 
         final tempDir = await getTemporaryDirectory();
-        final file = await new File('${tempDir.path}/qr-code.png').create();
+        final file = await new File('${tempDir.path}/blm-qr-code.png').create();
         file.writeAsBytesSync(list);
 
         Share.shareFiles(['${file.path}'], text: 'QR Code');

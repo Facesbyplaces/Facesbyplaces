@@ -23,15 +23,17 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
     MapEntry('memorial[country]', MultipartFile.fromString(memorial.almCountry,),),
     MapEntry('memorial[description]', MultipartFile.fromString(memorial.almDescription,),),
     MapEntry('relationship', MultipartFile.fromString(memorial.almRelationship,),),
+    MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.almLatitude,),),
+    MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),)
   ]);
 
-  if(memorial.almLatitude != ''){
-    MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.almLatitude,),);
-  }
+  // if(memorial.almLatitude != ''){
+  //   MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.almLatitude,),);
+  // }
 
-  if(memorial.almLongitude != ''){
-    MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),);
-  }
+  // if(memorial.almLongitude != ''){
+  //   MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),);
+  // }
 
   if(memorial.almBackgroundImage != null || memorial.almBackgroundImage != ''){
     var file = await MultipartFile.fromFile(memorial.almBackgroundImage.path, filename: memorial.almBackgroundImage.path);

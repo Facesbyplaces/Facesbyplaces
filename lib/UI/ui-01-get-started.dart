@@ -6,7 +6,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'Miscellaneous/Start/misc-01-image-regular.dart';
 import 'Regular/regular-07-password-reset.dart';
 import 'BLM/blm-07-password-reset.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +76,7 @@ class UIGetStarted extends StatefulWidget {
 }
 
 class UIGetStartedState extends State<UIGetStarted> {
+  // ignore: cancel_subscriptions
   StreamSubscription<Map>? streamSubscription;
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 

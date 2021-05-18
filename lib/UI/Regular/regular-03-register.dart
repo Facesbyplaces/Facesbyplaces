@@ -1,9 +1,9 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-02-registration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

@@ -3,6 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';

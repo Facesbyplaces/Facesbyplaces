@@ -37,8 +37,8 @@ Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({required int postId})
     ),  
   );
 
-  print('The status code of blm show original post is ${response.statusCode}');
-  print('The status data of blm show original post is ${response.data}');
+  // print('The status code of blm show original post is ${response.statusCode}');
+  // print('The status data of blm show original post is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

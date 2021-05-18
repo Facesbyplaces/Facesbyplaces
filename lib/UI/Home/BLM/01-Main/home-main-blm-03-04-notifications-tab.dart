@@ -49,6 +49,10 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab> {
   }
 
   Future<void> onRefresh() async {
+    count.value = 0;
+    notifications = [];
+    itemRemaining = 1;
+    page = 1;
     onLoading();
   }
 

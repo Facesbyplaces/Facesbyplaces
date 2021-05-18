@@ -7,6 +7,7 @@ import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-not
 import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 

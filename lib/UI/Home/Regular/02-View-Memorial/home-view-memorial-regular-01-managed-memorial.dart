@@ -7,7 +7,6 @@ import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -18,6 +17,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:async';

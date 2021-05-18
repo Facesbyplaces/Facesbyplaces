@@ -20,6 +20,13 @@ Future<bool> apiBLMAddComment({required int postId, required dynamic commentBody
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
+
+  print('The post id is $postId');
+  print('The comment body is $commentBody');
+
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
@@ -44,6 +51,7 @@ Future<bool> apiBLMAddComment({required int postId, required dynamic commentBody
   );
 
   print('The status code of blm add comment is ${response.statusCode}');
+  print('The status data of blm add comment is ${response.data}');
 
   if(response.statusCode == 200){
     return true;

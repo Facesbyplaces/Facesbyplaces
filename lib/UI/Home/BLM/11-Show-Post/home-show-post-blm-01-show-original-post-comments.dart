@@ -27,10 +27,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
@@ -85,12 +85,16 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
   ScrollController scrollController = ScrollController();
   TextEditingController controller = TextEditingController(text: '');
-  List<BLMOriginalComment> comments = [];
-  List<BLMOriginalReply> replies = [];
+  ValueNotifier<List<BLMOriginalComment>> comments = ValueNotifier<List<BLMOriginalComment>>([]);
+  ValueNotifier<List<BLMOriginalReply>> replies = ValueNotifier<List<BLMOriginalReply>>([]);
+  ValueNotifier<int> count = ValueNotifier<int>(0);
+  ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
+  // List<BLMOriginalComment> comments = [];
+  // List<BLMOriginalReply> replies = [];
   int itemRemaining = 1;
   int repliesRemaining = 1;
   int page1 = 1;
-  int count = 0;
+  // int count = 0;
   int numberOfReplies = 0;
   int page2 = 1;
   List<bool> commentsLikes = [];
@@ -111,7 +115,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   bool likePost = false;
   bool pressedLike = false;
   int likesCount = 0;
-  bool isGuestLoggedIn = true;
+  // bool isGuestLoggedIn = true;
   CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
@@ -125,13 +129,17 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     bool regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
     bool blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
 
-    setState(() {
-      if(regularSession == true || blmSession == true){
-        isGuestLoggedIn = false;
-      }
-    });
+    if(regularSession == true || blmSession == true){
+      isGuestLoggedIn.value = false;
+    }
 
-    if(isGuestLoggedIn != true){
+    // setState(() {
+    //   if(regularSession == true || blmSession == true){
+    //     isGuestLoggedIn.value = false;
+    //   }
+    // });
+
+    if(isGuestLoggedIn.value != true){
       showOriginalPost = getOriginalPost(postId);
       getProfilePicture();
       getOriginalPostInformation();
@@ -139,9 +147,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       scrollController.addListener(() {
         if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
           if(itemRemaining != 0){
-            setState(() {
+            // setState(() {
               onLoading();
-            });
+            // });
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -157,9 +165,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   }
 
   Future<void> onRefresh() async{
-    setState(() {
+    // setState(() {
       onLoading();
-    });
+    // });
   }
 
   void getOriginalPostInformation() async{
@@ -181,7 +189,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       
       var newValue1 = await apiBLMShowListOfComments(postId: postId, page: page1);
       itemRemaining = newValue1.blmItemsRemaining;
-      count = count + newValue1.blmCommentsList.length;
+      count.value = count.value + newValue1.blmCommentsList.length;
 
       for(int i = 0; i < newValue1.blmCommentsList.length; i++){
         
@@ -206,7 +214,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
             newRepliesNumberOfLikes.add(replyLikeStatus.showCommentOrReplyNumberOfLikes);
             newReplyId.add(newValue2.blmRepliesList[j].showListRepliesReplyId);
 
-            replies.add(
+            replies.value.add(
               BLMOriginalReply(
                 replyId: newValue2.blmRepliesList[j].showListRepliesReplyId,
                 commentId: newValue2.blmRepliesList[j].showListRepliesCommentId,
@@ -232,7 +240,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
         repliesRemaining = 1;
         page2 = 1;
         
-        comments.add(
+        comments.value.add(
           BLMOriginalComment(
             commentId: newValue1.blmCommentsList[i].showListCommentsCommentId,
             postId: newValue1.blmCommentsList[i].showListCommentsPostId,
@@ -244,15 +252,15 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
             image: newValue1.blmCommentsList[i].showListCommentsUser.showListCommentsUserImage,
             commentLikes: commentLikeStatus.showCommentOrReplyLikeStatus,
             commentNumberOfLikes: commentLikeStatus.showCommentOrReplyNumberOfLikes,
-            listOfReplies: replies,
+            listOfReplies: replies.value,
             userAccountType: newValue1.blmCommentsList[i].showListCommentsUser.showListCommentsUserAccountType,
           ),    
         );
-        replies = [];
+        replies.value = [];
       }
 
       if(mounted)
-      setState(() {});
+      // setState(() {});
       page1++;
       
     }
@@ -265,6 +273,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
+    print('Show original BLM post comments screen rebuild!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -276,570 +285,251 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
             currentFocus.unfocus();
           }
         },
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: const Color(0xff04ECFF),
-            title: const Text('Post', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-            actions: [
-              MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Blm'),
-            ],
-          ),
-          backgroundColor: const Color(0xffffffff),
-          body: Stack(
-            children: [
-              isGuestLoggedIn
-              ? Container(height: 0,)
-              : IgnorePointer(
-                ignoring: isGuestLoggedIn,
-                child: FutureBuilder<APIBLMShowOriginalPostMain>(
-                  future: showOriginalPost,
-                  builder: (context, originalPost){
-                    if(originalPost.hasData){
-                      return FooterLayout(
-                        footer: showKeyboard(),
-                        child: RefreshIndicator(
-                          onRefresh: onRefresh,
-                          child: CustomScrollView(
-                            physics: ClampingScrollPhysics(),
-                            controller: scrollController,
-                            slivers: <Widget>[
-                              SliverToBoxAdapter(
-                                child: Column(
-                                  key: profileKey,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                      height: 80,
-                                      child: Row(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () async{
-                                              if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
-                                                }else{
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
-                                                }
-                                              }else{
-                                                if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
-                                                }else{
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
-                                                }
-                                              }
-                                            },
+        child: ValueListenableBuilder(
+          valueListenable: isGuestLoggedIn,
+          builder: (_, bool isGuestLoggedInListener, __) => ValueListenableBuilder(
+            valueListenable: count,
+            builder: (_, int countListener, __) => ValueListenableBuilder(
+              valueListenable: comments,
+              builder: (_, List<BLMOriginalComment> commentsListener, __) => ValueListenableBuilder(
+                valueListenable: replies,
+                builder: (_, List<BLMOriginalReply> repliesListener, __) => Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: const Color(0xff04ECFF),
+                    title: const Text('Post', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
+                    centerTitle: true,
+                    leading: IconButton(
+                      icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
+                      onPressed: (){
+                        Navigator.pop(context, numberOfComments);
+                      },
+                    ),
+                    actions: [
+                      MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Blm'),
+                    ],
+                  ),
+                  backgroundColor: const Color(0xffffffff),
+                  body: Stack(
+                    children: [
+                      isGuestLoggedInListener
+                      ? Container(height: 0,)
+                      : IgnorePointer(
+                        ignoring: isGuestLoggedInListener,
+                        child: FutureBuilder<APIBLMShowOriginalPostMain>(
+                          future: showOriginalPost,
+                          builder: (context, originalPost){
+                            if(originalPost.hasData){
+                              return FooterLayout(
+                                footer: showKeyboard(),
+                                child: RefreshIndicator(
+                                  onRefresh: onRefresh,
+                                  child: CustomScrollView(
+                                    physics: ClampingScrollPhysics(),
+                                    controller: scrollController,
+                                    slivers: <Widget>[
+                                      SliverToBoxAdapter(
+                                        child: Column(
+                                          key: profileKey,
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                              height: 80,
+                                              child: Row(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () async{
+                                                      if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                                        if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
+                                                        }else{
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                        }
+                                                      }else{
+                                                        if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
+                                                        }else{
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                        }
+                                                      }
+                                                    },
 
-                                            child: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage != ''
-                                            ? CircleAvatar(
-                                              backgroundColor: const Color(0xff888888),
-                                              foregroundImage: NetworkImage(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage),
-                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                            )
-                                            : const CircleAvatar(
-                                              backgroundColor: const Color(0xff888888),
-                                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                            )
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                              padding: const EdgeInsets.only(left: 10.0),
-                                              child: GestureDetector(
-                                                onTap: () async{
-                                                  if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                    if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
-                                                    }else{
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
-                                                    }
-                                                  }else{
-                                                    if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
-                                                    }else{
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
-                                                    }
-                                                  }
-                                                },
-                                                child: Column(
-                                                  children: [
-                                                    Expanded(
-                                                      child: Align(alignment: Alignment.bottomLeft,
-                                                        child: Text(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageName,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight: FontWeight.bold,
-                                                            color: const Color(0xff000000),
-                                                          ),
+                                                    child: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage != ''
+                                                    ? CircleAvatar(
+                                                      backgroundColor: const Color(0xff888888),
+                                                      foregroundImage: NetworkImage(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage),
+                                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                    )
+                                                    : const CircleAvatar(
+                                                      backgroundColor: const Color(0xff888888),
+                                                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                    )
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(
+                                                      padding: const EdgeInsets.only(left: 10.0),
+                                                      child: GestureDetector(
+                                                        onTap: () async{
+                                                          if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                                            if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
+                                                            }else{
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                            }
+                                                          }else{
+                                                            if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
+                                                            }else{
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                            }
+                                                          }
+                                                        },
+                                                        child: Column(
+                                                          children: [
+                                                            Expanded(
+                                                              child: Align(alignment: Alignment.bottomLeft,
+                                                                child: Text(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageName,
+                                                                  overflow: TextOverflow.ellipsis,
+                                                                  style: const TextStyle(
+                                                                    fontSize: 16,
+                                                                    fontWeight: FontWeight.bold,
+                                                                    color: const Color(0xff000000),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Align(
+                                                                alignment: Alignment.topLeft,
+                                                                child: Text(timeago.format(DateTime.parse(originalPost.data!.blmPost.showOriginalPostCreatedAt)),
+                                                                  maxLines: 1,
+                                                                  style: const TextStyle(
+                                                                    fontSize: 14,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    color: const Color(0xffaaaaaa)
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
-                                                    Expanded(
-                                                      child: Align(
-                                                        alignment: Alignment.topLeft,
-                                                        child: Text(timeago.format(DateTime.parse(originalPost.data!.blmPost.showOriginalPostCreatedAt)),
-                                                          maxLines: 1,
-                                                          style: const TextStyle(
-                                                            fontSize: 14,
-                                                            fontWeight: FontWeight.w400,
-                                                            color: const Color(0xffaaaaaa)
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
 
-                                    Container(
-                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                      alignment: Alignment.centerLeft, 
-                                      child: Text(originalPost.data!.blmPost.showOriginalPostBody),
-                                    ),
+                                            Container(
+                                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                              alignment: Alignment.centerLeft, 
+                                              child: Text(originalPost.data!.blmPost.showOriginalPostBody),
+                                            ),
 
-                                    originalPost.data!.blmPost.showOriginalPostImagesOrVideos.isNotEmpty
-                                    ? Column(
-                                      children: [
-                                        const SizedBox(height: 20),
+                                            originalPost.data!.blmPost.showOriginalPostImagesOrVideos.isNotEmpty
+                                            ? Column(
+                                              children: [
+                                                const SizedBox(height: 20),
 
-                                        Container(
-                                          child: ((){
-                                            if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 1){
-                                              return GestureDetector(
-                                                onTap: (){
-                                                  showGeneralDialog(
-                                                    context: context,
-                                                    barrierDismissible: true,
-                                                    barrierLabel: 'Dialog',
-                                                    transitionDuration: Duration(milliseconds: 0),
-                                                    pageBuilder: (_, __, ___) {
-                                                      return Scaffold(
-                                                        backgroundColor: Colors.black12.withOpacity(0.7),
-                                                        body: SizedBox.expand(
-                                                          child: SafeArea(
-                                                            child: Column(
-                                                              children: [
-                                                                Container(
-                                                                  alignment: Alignment.centerRight,
-                                                                  padding: const EdgeInsets.only(right: 20.0),
-                                                                  child: GestureDetector(
-                                                                    onTap: (){
-                                                                      Navigator.pop(context);
-                                                                    },
-                                                                    child: CircleAvatar(
-                                                                      radius: 20,
-                                                                      backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                      child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                    ),
-                                                                  ),
-                                                                ),
-
-                                                                const SizedBox(height: 10,),
-
-                                                                Expanded(
-                                                                  child: ((){
-                                                                    if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
-                                                                      return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                          deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                          aspectRatio: 16 / 9,
-                                                                          fit: BoxFit.contain,
+                                                Container(
+                                                  child: ((){
+                                                    if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 1){
+                                                      return GestureDetector(
+                                                        onTap: (){
+                                                          showGeneralDialog(
+                                                            context: context,
+                                                            barrierDismissible: true,
+                                                            barrierLabel: 'Dialog',
+                                                            transitionDuration: Duration(milliseconds: 0),
+                                                            pageBuilder: (_, __, ___) {
+                                                              return Scaffold(
+                                                                backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                body: SizedBox.expand(
+                                                                  child: SafeArea(
+                                                                    child: Column(
+                                                                      children: [
+                                                                        Container(
+                                                                          alignment: Alignment.centerRight,
+                                                                          padding: const EdgeInsets.only(right: 20.0),
+                                                                          child: GestureDetector(
+                                                                            onTap: (){
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                            child: CircleAvatar(
+                                                                              radius: 20,
+                                                                              backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                              child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                                            ),
+                                                                          ),
                                                                         ),
-                                                                      );
-                                                                    }else{
-                                                                      // return CachedNetworkImage(
-                                                                      //   fit: BoxFit.contain,
-                                                                      //   imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                                      //   placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                      //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                      // );
-                                                                      return ExtendedImage.network(
-                                                                        originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                                        fit: BoxFit.contain,
-                                                                        //enableLoadState: false,
-                                                                        // loadStateChanged: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                        // loadStateChanged: (),
-                                                                        // loadStateChanged: (ExtendedImageState state){
-                                                                        //   // return const Center(child: const CircularProgressIndicator(),);
 
-                                                                        // },
-                                                                        loadStateChanged: (state){
-                                                                          // if(state.){
-                                                                          //   return const Center(child: const CircularProgressIndicator(),);
-                                                                          // }
-                                                                          if(LoadState.loading == state.extendedImageLoadState){
-                                                                            return const Center(child: const CircularProgressIndicator(),);
-                                                                          }
-                                                                        },
-                                                                        mode: ExtendedImageMode.gesture,
-                                                                        initGestureConfigHandler: (state) {
-                                                                          return GestureConfig(
-                                                                            minScale: 0.9,
-                                                                            animationMinScale: 0.7,
-                                                                            maxScale: 3.0,
-                                                                            animationMaxScale: 3.5,
-                                                                            speed: 1.0,
-                                                                            inertialSpeed: 100.0,
-                                                                            initialScale: 1.0,
-                                                                            inPageView: false,
-                                                                            initialAlignment: InitialAlignment.center,
-                                                                          );
-                                                                        },
-                                                                      );
-                                                                    }
-                                                                  }()),
-                                                                ),
+                                                                        const SizedBox(height: 10,),
 
-                                                                const SizedBox(height: 85,),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                                child: ((){
-                                                  if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
-                                                    return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                        aspectRatio: 16 / 9,
-                                                        fit: BoxFit.contain,
-                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                          showControls: false,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }else{
-                                                    return CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                    );
-                                                  }
-                                                }()),
-                                              );
-                                            }else if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 2){
-                                              return StaggeredGridView.countBuilder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                crossAxisCount: 4,
-                                                itemCount: 2,
-                                                itemBuilder: (BuildContext context, int index) =>
-                                                GestureDetector(
-                                                  onTap: (){
-                                                    showGeneralDialog(
-                                                      context: context,
-                                                      barrierDismissible: true,
-                                                      barrierLabel: 'Dialog',
-                                                      transitionDuration: Duration(milliseconds: 0),
-                                                      pageBuilder: (_, __, ___) {
-                                                        return Scaffold(
-                                                          backgroundColor: Colors.black12.withOpacity(0.7),
-                                                          body: SizedBox.expand(
-                                                            child: SafeArea(
-                                                              child: Column(
-                                                                children: [
-                                                                  Container(
-                                                                    alignment: Alignment.centerRight,
-                                                                    padding: const EdgeInsets.only(right: 20.0),
-                                                                    child: GestureDetector(
-                                                                      onTap: (){
-                                                                        Navigator.pop(context);
-                                                                      },
-                                                                      child: CircleAvatar(
-                                                                        radius: 20,
-                                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                        child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-
-                                                                  const SizedBox(height: 10,),
-
-                                                                  Expanded(
-                                                                    child: CarouselSlider(
-                                                                      carouselController: buttonCarouselController,
-                                                                      items: List.generate(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                                        ((){
-                                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
-                                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                autoDispose: false,
-                                                                                aspectRatio: 16 / 9,
+                                                                        Expanded(
+                                                                          child: ((){
+                                                                            if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
+                                                                              return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
+                                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                  deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                  aspectRatio: 16 / 9,
+                                                                                  fit: BoxFit.contain,
+                                                                                ),
+                                                                              );
+                                                                            }else{
+                                                                              return CachedNetworkImage(
                                                                                 fit: BoxFit.contain,
-                                                                              ),
-                                                                            );
-                                                                          }else{
-                                                                            return CachedNetworkImage(
-                                                                              fit: BoxFit.contain,
-                                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                            );
-                                                                          }
-                                                                        }()),
-                                                                      ),
-                                                                      options: CarouselOptions(
-                                                                        autoPlay: false,
-                                                                        enlargeCenterPage: true,
-                                                                        aspectRatio: 1,
-                                                                        viewportFraction: 1,
-                                                                        initialPage: index,
-                                                                      ),
-                                                                    ),
-                                                                  ),
+                                                                                imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
+                                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                              );
+                                                                              // return ExtendedImage.network(
+                                                                              //   originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
+                                                                              //   fit: BoxFit.contain,
+                                                                              //   //enableLoadState: false,
+                                                                              //   // loadStateChanged: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                              //   // loadStateChanged: (),
+                                                                              //   // loadStateChanged: (ExtendedImageState state){
+                                                                              //   //   // return const Center(child: const CircularProgressIndicator(),);
 
-                                                                   Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                                    children: [
-                                                                      IconButton(
-                                                                        onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                        icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
-                                                                      ),
+                                                                              //   // },
+                                                                              //   loadStateChanged: (state){
+                                                                              //     // if(state.){
+                                                                              //     //   return const Center(child: const CircularProgressIndicator(),);
+                                                                              //     // }
+                                                                              //     if(LoadState.loading == state.extendedImageLoadState){
+                                                                              //       return const Center(child: const CircularProgressIndicator(),);
+                                                                              //     }
+                                                                              //   },
+                                                                              //   mode: ExtendedImageMode.gesture,
+                                                                              //   initGestureConfigHandler: (state) {
+                                                                              //     return GestureConfig(
+                                                                              //       minScale: 0.9,
+                                                                              //       animationMinScale: 0.7,
+                                                                              //       maxScale: 3.0,
+                                                                              //       animationMaxScale: 3.5,
+                                                                              //       speed: 1.0,
+                                                                              //       inertialSpeed: 100.0,
+                                                                              //       initialScale: 1.0,
+                                                                              //       inPageView: false,
+                                                                              //       initialAlignment: InitialAlignment.center,
+                                                                              //     );
+                                                                              //   },
+                                                                              // );
+                                                                            }
+                                                                          }()),
+                                                                        ),
 
-                                                                      IconButton(
-                                                                        onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                        icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-
-                                                                  const SizedBox(height: 85,),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  child: ((){
-                                                    if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                      return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                          aspectRatio: 16 / 9,
-                                                          fit: BoxFit.contain,
-                                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                            showControls: false,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }else{
-                                                      return CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                      );
-                                                    }
-                                                  }()),
-                                                ),
-                                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                                mainAxisSpacing: 4.0,
-                                                crossAxisSpacing: 4.0,
-                                              );
-                                            }else{
-                                              return StaggeredGridView.countBuilder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                crossAxisCount: 4,
-                                                itemCount: 3,
-                                                staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                                mainAxisSpacing: 4.0,
-                                                crossAxisSpacing: 4.0,
-                                                itemBuilder: (BuildContext context, int index) => 
-                                                GestureDetector(
-                                                  onTap: (){
-                                                    showGeneralDialog(
-                                                      context: context,
-                                                      barrierDismissible: true,
-                                                      barrierLabel: 'Dialog',
-                                                      transitionDuration: Duration(milliseconds: 0),
-                                                      pageBuilder: (_, __, ___) {
-                                                        return Scaffold(
-                                                          backgroundColor: Colors.black12.withOpacity(0.7),
-                                                          body: SizedBox.expand(
-                                                            child: SafeArea(
-                                                              child: Column(
-                                                                children: [
-                                                                  Container(
-                                                                    alignment: Alignment.centerRight,
-                                                                    padding: const EdgeInsets.only(right: 20.0),
-                                                                    child: GestureDetector(
-                                                                      onTap: (){
-                                                                        Navigator.pop(context);
-                                                                      },
-                                                                      child: CircleAvatar(
-                                                                        radius: 20,
-                                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                        child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-
-                                                                  SizedBox(height: 10,),
-
-                                                                  Expanded(
-                                                                    child: CarouselSlider(
-                                                                      carouselController: buttonCarouselController,
-                                                                      items: List.generate(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                                        ((){
-                                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
-                                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
-                                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                                deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                autoDispose: false,
-                                                                                aspectRatio: 16 / 9,
-                                                                                fit: BoxFit.contain,
-                                                                              ),
-                                                                            );
-                                                                          }else{
-                                                                            return CachedNetworkImage(
-                                                                              fit: BoxFit.contain,
-                                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                            );
-                                                                          }
-                                                                        }()),
-                                                                      ),
-                                                                      options: CarouselOptions(
-                                                                        autoPlay: false,
-                                                                        enlargeCenterPage: true,
-                                                                        aspectRatio: 1,
-                                                                        viewportFraction: 1,
-                                                                        initialPage: index,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-
-                                                                  Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                                    children: [
-                                                                      IconButton(
-                                                                        onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                        icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
-                                                                      ),
-
-                                                                      IconButton(
-                                                                        onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                        icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-
-                                                                  const SizedBox(height: 85,),
-
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  child: ((){
-                                                    if(index != 1){
-                                                      return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
-                                                      ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                          aspectRatio: 16 / 9,
-                                                          fit: BoxFit.contain,
-                                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                            showControls: false,
-                                                          ),
-                                                        ),
-                                                      )
-                                                      : CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                      );
-                                                    }else{
-                                                      return ((){
-                                                        if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3 > 0){
-                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                            return Stack(
-                                                              fit: StackFit.expand,
-                                                              children: [
-                                                                BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                    aspectRatio: 16 / 9,
-                                                                    fit: BoxFit.contain,
-                                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                      showControls: false,
+                                                                        const SizedBox(height: 85,),
+                                                                      ],
                                                                     ),
                                                                   ),
                                                                 ),
-
-                                                                Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                                                Center(
-                                                                  child: CircleAvatar(
-                                                                    radius: 25,
-                                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                    child: Text(
-                                                                      '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
-                                                                      style: const TextStyle(
-                                                                        fontSize: 40,
-                                                                        fontWeight: FontWeight.bold,
-                                                                        color: const Color(0xffffffff),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          }else{
-                                                            return Stack(
-                                                              fit: StackFit.expand,
-                                                              children: [
-                                                                CachedNetworkImage(
-                                                                  fit: BoxFit.cover,
-                                                                  imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                ),
-
-                                                                Container(color: const Color(0xff000000).withOpacity(0.5),),
-
-                                                                Center(
-                                                                  child: CircleAvatar(
-                                                                    radius: 25,
-                                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                    child: Text(
-                                                                      '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
-                                                                      style: const TextStyle(
-                                                                        fontSize: 40,
-                                                                        fontWeight: FontWeight.bold,
-                                                                        color: const Color(0xffffffff),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          }
-                                                        }else{
-                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                              );
+                                                            },
+                                                          );
+                                                        },
+                                                        child: ((){
+                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
+                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                 aspectRatio: 16 / 9,
                                                                 fit: BoxFit.contain,
@@ -851,533 +541,864 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           }else{
                                                             return CachedNetworkImage(
                                                               fit: BoxFit.cover,
-                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
                                                               placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             );
                                                           }
-                                                        }
-                                                      }());
+                                                        }()),
+                                                      );
+                                                    }else if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 2){
+                                                      return StaggeredGridView.countBuilder(
+                                                        padding: EdgeInsets.zero,
+                                                        shrinkWrap: true,
+                                                        physics: const NeverScrollableScrollPhysics(),
+                                                        crossAxisCount: 4,
+                                                        itemCount: 2,
+                                                        itemBuilder: (BuildContext context, int index) =>
+                                                        GestureDetector(
+                                                          onTap: (){
+                                                            showGeneralDialog(
+                                                              context: context,
+                                                              barrierDismissible: true,
+                                                              barrierLabel: 'Dialog',
+                                                              transitionDuration: Duration(milliseconds: 0),
+                                                              pageBuilder: (_, __, ___) {
+                                                                return Scaffold(
+                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                  body: SizedBox.expand(
+                                                                    child: SafeArea(
+                                                                      child: Column(
+                                                                        children: [
+                                                                          Container(
+                                                                            alignment: Alignment.centerRight,
+                                                                            padding: const EdgeInsets.only(right: 20.0),
+                                                                            child: GestureDetector(
+                                                                              onTap: (){
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: CircleAvatar(
+                                                                                radius: 20,
+                                                                                backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+
+                                                                          const SizedBox(height: 10,),
+
+                                                                          Expanded(
+                                                                            child: CarouselSlider(
+                                                                              carouselController: buttonCarouselController,
+                                                                              items: List.generate(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                                ((){
+                                                                                  if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
+                                                                                    return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        autoDispose: false,
+                                                                                        aspectRatio: 16 / 9,
+                                                                                        fit: BoxFit.contain,
+                                                                                      ),
+                                                                                    );
+                                                                                  }else{
+                                                                                    return CachedNetworkImage(
+                                                                                      fit: BoxFit.contain,
+                                                                                      imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                    );
+                                                                                  }
+                                                                                }()),
+                                                                              ),
+                                                                              options: CarouselOptions(
+                                                                                autoPlay: false,
+                                                                                enlargeCenterPage: true,
+                                                                                aspectRatio: 1,
+                                                                                viewportFraction: 1,
+                                                                                initialPage: index,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+
+                                                                          Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: [
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+
+                                                                          const SizedBox(height: 85,),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          child: ((){
+                                                            if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                              return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                  aspectRatio: 16 / 9,
+                                                                  fit: BoxFit.contain,
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                                    showControls: false,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }else{
+                                                              return CachedNetworkImage(
+                                                                fit: BoxFit.cover,
+                                                                imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                              );
+                                                            }
+                                                          }()),
+                                                        ),
+                                                        staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                                                        mainAxisSpacing: 4.0,
+                                                        crossAxisSpacing: 4.0,
+                                                      );
+                                                    }else{
+                                                      return StaggeredGridView.countBuilder(
+                                                        padding: EdgeInsets.zero,
+                                                        shrinkWrap: true,
+                                                        physics: const NeverScrollableScrollPhysics(),
+                                                        crossAxisCount: 4,
+                                                        itemCount: 3,
+                                                        staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                                        mainAxisSpacing: 4.0,
+                                                        crossAxisSpacing: 4.0,
+                                                        itemBuilder: (BuildContext context, int index) => 
+                                                        GestureDetector(
+                                                          onTap: (){
+                                                            showGeneralDialog(
+                                                              context: context,
+                                                              barrierDismissible: true,
+                                                              barrierLabel: 'Dialog',
+                                                              transitionDuration: Duration(milliseconds: 0),
+                                                              pageBuilder: (_, __, ___) {
+                                                                return Scaffold(
+                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                  body: SizedBox.expand(
+                                                                    child: SafeArea(
+                                                                      child: Column(
+                                                                        children: [
+                                                                          Container(
+                                                                            alignment: Alignment.centerRight,
+                                                                            padding: const EdgeInsets.only(right: 20.0),
+                                                                            child: GestureDetector(
+                                                                              onTap: (){
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: CircleAvatar(
+                                                                                radius: 20,
+                                                                                backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+
+                                                                          SizedBox(height: 10,),
+
+                                                                          Expanded(
+                                                                            child: CarouselSlider(
+                                                                              carouselController: buttonCarouselController,
+                                                                              items: List.generate(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                                ((){
+                                                                                  if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
+                                                                                    return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        autoDispose: false,
+                                                                                        aspectRatio: 16 / 9,
+                                                                                        fit: BoxFit.contain,
+                                                                                      ),
+                                                                                    );
+                                                                                  }else{
+                                                                                    return CachedNetworkImage(
+                                                                                      fit: BoxFit.contain,
+                                                                                      imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                    );
+                                                                                  }
+                                                                                }()),
+                                                                              ),
+                                                                              options: CarouselOptions(
+                                                                                autoPlay: false,
+                                                                                enlargeCenterPage: true,
+                                                                                aspectRatio: 1,
+                                                                                viewportFraction: 1,
+                                                                                initialPage: index,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+
+                                                                          Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: [
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+
+                                                                          const SizedBox(height: 85,),
+
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          child: ((){
+                                                            if(index != 1){
+                                                              return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
+                                                              ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                  aspectRatio: 16 / 9,
+                                                                  fit: BoxFit.contain,
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                                    showControls: false,
+                                                                  ),
+                                                                ),
+                                                              )
+                                                              : CachedNetworkImage(
+                                                                fit: BoxFit.cover,
+                                                                imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                              );
+                                                            }else{
+                                                              return ((){
+                                                                if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3 > 0){
+                                                                  if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                                    return Stack(
+                                                                      fit: StackFit.expand,
+                                                                      children: [
+                                                                        BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                            aspectRatio: 16 / 9,
+                                                                            fit: BoxFit.contain,
+                                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                                              showControls: false,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+
+                                                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                                                        Center(
+                                                                          child: CircleAvatar(
+                                                                            radius: 25,
+                                                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                            child: Text(
+                                                                              '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                              style: const TextStyle(
+                                                                                fontSize: 40,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                color: const Color(0xffffffff),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  }else{
+                                                                    return Stack(
+                                                                      fit: StackFit.expand,
+                                                                      children: [
+                                                                        CachedNetworkImage(
+                                                                          fit: BoxFit.cover,
+                                                                          imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                        ),
+
+                                                                        Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                                                        Center(
+                                                                          child: CircleAvatar(
+                                                                            radius: 25,
+                                                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                            child: Text(
+                                                                              '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                              style: const TextStyle(
+                                                                                fontSize: 40,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                color: const Color(0xffffffff),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  }
+                                                                }else{
+                                                                  if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                                    return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                        aspectRatio: 16 / 9,
+                                                                        fit: BoxFit.contain,
+                                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                                          showControls: false,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }else{
+                                                                    return CachedNetworkImage(
+                                                                      fit: BoxFit.cover,
+                                                                      imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    );
+                                                                  }
+                                                                }
+                                                              }());
+                                                            }
+                                                          }()),
+                                                        ),
+                                                      );
                                                     }
                                                   }()),
                                                 ),
-                                              );
-                                            }
-                                          }()),
-                                        ),
 
-                                        const SizedBox(height: 20),
+                                                const SizedBox(height: 20),
 
-                                      ],
-                                    )
-                                    : Container(color: const Color(0xffff0000), height: 0,),
-
-                                    originalPost.data!.blmPost.showOriginalPostPostTagged.length != 0
-                                    ? Column(
-                                      children: [
-                                        const SizedBox(height: 10),
-
-                                        Container(
-                                          alignment: Alignment.centerLeft,
-                                          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                          child: RichText(
-                                            text: TextSpan(
-                                              children: [
-                                                const TextSpan(
-                                                  style: const TextStyle(color: const Color(0xff888888)),
-                                                  text: 'with '
-                                                ),
-
-                                                TextSpan(
-                                                  children: List.generate(originalPost.data!.blmPost.showOriginalPostPostTagged.length,
-                                                    (index) => 
-                                                    TextSpan(
-                                                      style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
-                                                      children: <TextSpan>[
-                                                        TextSpan(
-                                                          text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
-                                                          recognizer: TapGestureRecognizer()
-                                                          ..onTap = (){
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
-                                                          }
-                                                        ),
-
-                                                        index < originalPost.data!.blmPost.showOriginalPostPostTagged.length - 1
-                                                        ? const TextSpan(text: ', ')
-                                                        : const TextSpan(text: ''),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
                                               ],
-                                            ),
-                                          )
-                                        )
+                                            )
+                                            : Container(color: const Color(0xffff0000), height: 0,),
 
-                                      ],
-                                    )
-                                    : Container(height: 0,),
+                                            originalPost.data!.blmPost.showOriginalPostPostTagged.length != 0
+                                            ? Column(
+                                              children: [
+                                                const SizedBox(height: 10),
 
-                                    Container(
-                                      height: 40,
-                                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-
-                                          Row(
-                                            children: [
-                                              const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff000000),),
-
-                                              const SizedBox(width: 10,),
-
-                                              Text('$numberOfLikes', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
-
-                                            ],
-                                          ),
-
-                                          const SizedBox(width: 40,),
-
-                                          Row(
-                                            children: [
-                                              const FaIcon(FontAwesomeIcons.comment, color: const Color(0xff000000),),
-
-                                              const SizedBox(width: 10,),
-
-                                              Text('$numberOfComments', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ),
-
-                              SliverToBoxAdapter(
-                                child: count != 0
-                                ? Column(
-                                  children: [
-                                    Column(
-                                      children: List.generate(
-                                        comments.length, (i) => ListTile(
-                                          onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].userId, accountType: comments[i].userAccountType,)));
-                                          },
-                                          onLongPress: () async{
-                                            if(currentUserId == comments[i].userId && currentAccountType == comments[i].userAccountType){
-                                              await showMaterialModalBottomSheet(
-                                                context: context, 
-                                                builder: (context) => 
-                                                  SafeArea(
-                                                  top: false,
-                                                  child: Column(
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      ListTile(
-                                                        title: const Text('Edit'),
-                                                        leading: const Icon(Icons.edit),
-                                                        onTap: () async{
-                                                          controller.text = controller.text + comments[i].commentBody;
-                                                          await showModalBottomSheet(
-                                                            context: context, 
-                                                            builder: (context) => showKeyboardEdit(isEdit: true, editId: comments[i].commentId),
-                                                          );
-                                                        },
-                                                      ),
-                                                      ListTile(
-                                                        title: const Text('Delete'),
-                                                        leading: const Icon(Icons.delete),
-                                                        onTap: () async{  
-                                                          context.loaderOverlay.show();
-                                                          await apiBLMDeleteComment(commentId: comments[i].commentId);
-                                                          context.loaderOverlay.hide();
-
-                                                          controller.clear();
-                                                          itemRemaining = 1;
-                                                          repliesRemaining = 1;
-                                                          comments = [];
-                                                          replies = [];
-                                                          numberOfReplies = 0;
-                                                          page1 = 1;
-                                                          page2 = 1;
-                                                          count = 0;
-                                                          commentsLikes = [];
-                                                          commentsNumberOfLikes = [];
-                                                          repliesLikes = [];
-                                                          repliesNumberOfLikes = [];
-                                                          isComment = true;
-                                                          numberOfLikes = 0;
-                                                          numberOfComments = 0;
-                                                          getOriginalPostInformation();
-                                                          onLoading();
-                                                        },
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              );
-                                            }else{
-                                              await showMaterialModalBottomSheet(
-                                                context: context, 
-                                                builder: (context) => 
-                                                  SafeArea(
-                                                  top: false,
-                                                  child: Column(
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      ListTile(
-                                                        title: const Text('Report'),
-                                                        leading: const Icon(Icons.edit),
-                                                        onTap: (){
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: 'Post')));
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              );
-                                            }
-                                          },
-                                          visualDensity: const VisualDensity(vertical: 4.0),
-                                          leading: CircleAvatar(
-                                            backgroundColor: const Color(0xff888888),
-                                            foregroundImage: NetworkImage(comments[i].image),
-                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                          ),
-                                          title: Row(
-                                            children: [
-                                              Expanded(
-                                                child: currentUserId == comments[i].userId && currentAccountType == comments[i].userAccountType
-                                                ? const Text('You',
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                )
-                                                : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Align(
-                                                  alignment: Alignment.centerRight,
-                                                  child: TextButton.icon(
-                                                    onPressed: () async{
-                                                      if(commentsLikes[i] == true){
-                                                        setState(() {
-                                                          commentsLikes[i] = false;
-                                                          commentsNumberOfLikes[i]--;
-                                                        });
-
-                                                        await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
-                                                      }else{
-                                                        setState(() {
-                                                          commentsLikes[i] = true;
-                                                          commentsNumberOfLikes[i]++;
-                                                        });
-
-                                                        await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
-                                                      }
-                                                    }, 
-                                                    icon: commentsLikes[i] == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
-                                                    label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          subtitle: Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Container(
-                                                      padding: const EdgeInsets.all(10.0),
-                                                      child: Text(
-                                                        comments[i].commentBody,
-                                                        style: const TextStyle(
-                                                          color: const Color(0xffffffff),
-                                                        ),
-                                                      ),
-                                                      decoration: const BoxDecoration(
-                                                        color: const Color(0xff4EC9D4),
-                                                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-
-                                              const SizedBox(height: 5,),
-
-                                              Row(
-                                                children: [
-
-                                                  Text(timeago.format(DateTime.parse(comments[i].createdAt))),
-
-                                                  const SizedBox(width: 20,),
-
-                                                  GestureDetector(
-                                                    onTap: () async{
-                                                      if(controller.text != ''){
-                                                        controller.clear();
-                                                      }
-
-                                                      setState(() {
-                                                        isComment = false;
-                                                        currentCommentId = comments[i].commentId;
-                                                      });
-
-                                                      await showModalBottomSheet(
-                                                        context: context, 
-                                                        builder: (context) => showKeyboard()
-                                                      );
-                                                    },
-                                                    child: const Text('Reply',),
-                                                  ),
-                                                ],
-                                              ),
-
-                                              const SizedBox(height: 20,),
-
-                                              comments[i].listOfReplies.length != 0
-                                              ? Column(
-                                                  children: List.generate(comments[i].listOfReplies.length, (index) => 
-                                                  ListTile(
-                                                    contentPadding: EdgeInsets.zero,
-                                                    visualDensity: const VisualDensity(vertical: 4.0),
-                                                    onTap: (){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId, accountType: currentAccountType,)));
-                                                    },
-                                                    onLongPress: () async{
-                                                      if(currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType){
-                                                        await showMaterialModalBottomSheet(
-                                                          context: context, 
-                                                          builder: (context) => 
-                                                            SafeArea(
-                                                            top: false,
-                                                            child: Column(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: <Widget>[
-                                                                ListTile(
-                                                                  title: const Text('Edit'),
-                                                                  leading: const Icon(Icons.edit),
-                                                                  onTap: () async{
-                                                                    controller.text = controller.text + comments[i].listOfReplies[index].replyBody;
-                                                                    await showModalBottomSheet(
-                                                                      context: context, 
-                                                                      builder: (context) => showKeyboardEdit(isEdit: false, editId: comments[i].listOfReplies[index].replyId),
-                                                                    );
-                                                                  },
-                                                                ),
-                                                                ListTile(
-                                                                  title: const Text('Delete'),
-                                                                  leading: const Icon(Icons.delete),
-                                                                  onTap: () async{  
-                                                                    context.loaderOverlay.show();
-                                                                    await apiBLMDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
-                                                                    context.loaderOverlay.hide();
-
-                                                                    controller.clear();
-                                                                    itemRemaining = 1;
-                                                                    repliesRemaining = 1;
-                                                                    comments = [];
-                                                                    replies = [];
-                                                                    numberOfReplies = 0;
-                                                                    page1 = 1;
-                                                                    page2 = 1;
-                                                                    count = 0;
-                                                                    commentsLikes = [];
-                                                                    commentsNumberOfLikes = [];
-                                                                    repliesLikes = [];
-                                                                    repliesNumberOfLikes = [];
-                                                                    isComment = true;
-                                                                    numberOfLikes = 0;
-                                                                    numberOfComments = 0;
-                                                                    getOriginalPostInformation();
-                                                                    onLoading();
-                                                                  },
-                                                                )
-                                                              ],
-                                                            ),
-                                                          )
-                                                        );
-                                                      }else{
-                                                        await showMaterialModalBottomSheet(
-                                                          context: context, 
-                                                          builder: (context) => 
-                                                            SafeArea(
-                                                            top: false,
-                                                            child: Column(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: <Widget>[
-                                                                ListTile(
-                                                                  title: const Text('Report'),
-                                                                  leading: const Icon(Icons.edit),
-                                                                  onTap: (){
-                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: 'Post')));
-                                                                  },
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        );
-                                                      }
-                                                    },
-                                                    leading: CircleAvatar(
-                                                      backgroundColor: const Color(0xff888888),
-                                                      foregroundImage: NetworkImage(comments[i].listOfReplies[index].image),
-                                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                                    ),
-                                                    title: Row(
+                                                Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                  child: RichText(
+                                                    text: TextSpan(
                                                       children: [
-                                                        Expanded(
-                                                          child: currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType
-                                                          ? const Text('You',
-                                                            style: const TextStyle(
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
-                                                          )
-                                                          : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                                            style: const TextStyle(
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
-                                                          ),
+                                                        const TextSpan(
+                                                          style: const TextStyle(color: const Color(0xff888888)),
+                                                          text: 'with '
                                                         ),
-                                                        Expanded(
-                                                          child: Align(
-                                                            alignment: Alignment.centerRight,
-                                                            child: TextButton.icon(
-                                                              onPressed: () async{
-                                                                if(repliesLikes[i][index] == true){
-                                                                  setState(() {
-                                                                    repliesLikes[i][index] = false;
-                                                                    repliesNumberOfLikes[i][index]--;                                                      
-                                                                  });
 
-                                                                  await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
-                                                                }else{
-                                                                  setState(() {
-                                                                    repliesLikes[i][index] = true;
-                                                                    repliesNumberOfLikes[i][index]++;
-                                                                  });
+                                                        TextSpan(
+                                                          children: List.generate(originalPost.data!.blmPost.showOriginalPostPostTagged.length,
+                                                            (index) => 
+                                                            TextSpan(
+                                                              style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
+                                                              children: <TextSpan>[
+                                                                TextSpan(
+                                                                  text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
+                                                                  recognizer: TapGestureRecognizer()
+                                                                  ..onTap = (){
+                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
+                                                                  }
+                                                                ),
 
-                                                                  await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
-                                                                }
-                                                              }, 
-                                                              icon: repliesLikes[i][index] == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
-                                                              label: Text('${repliesNumberOfLikes[i][index]}', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
+                                                                index < originalPost.data!.blmPost.showOriginalPostPostTagged.length - 1
+                                                                ? const TextSpan(text: ', ')
+                                                                : const TextSpan(text: ''),
+                                                              ],
                                                             ),
                                                           ),
                                                         ),
                                                       ],
                                                     ),
-                                                    subtitle: Column(
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Expanded(
-                                                              child: Container(
-                                                                padding: const EdgeInsets.all(10.0),
-                                                                child: Text(
-                                                                  comments[i].listOfReplies[index].replyBody,
-                                                                  style: const TextStyle(
-                                                                    color: const Color(0xffffffff),
-                                                                  ),
-                                                                ),
-                                                                decoration: const BoxDecoration(
-                                                                  color: const Color(0xff4EC9D4),
-                                                                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                                                                ),
+                                                  )
+                                                )
+
+                                              ],
+                                            )
+                                            : Container(height: 0,),
+
+                                            Container(
+                                              height: 40,
+                                              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children: [
+
+                                                  Row(
+                                                    children: [
+                                                      const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff000000),),
+
+                                                      const SizedBox(width: 10,),
+
+                                                      Text('$numberOfLikes', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
+
+                                                    ],
+                                                  ),
+
+                                                  const SizedBox(width: 40,),
+
+                                                  Row(
+                                                    children: [
+                                                      const FaIcon(FontAwesomeIcons.comment, color: const Color(0xff000000),),
+
+                                                      const SizedBox(width: 10,),
+
+                                                      Text('$numberOfComments', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ),
+
+                                      SliverToBoxAdapter(
+                                        child: countListener != 0
+                                        ? Column(
+                                          children: [
+                                            Column(
+                                              children: List.generate(
+                                                commentsListener.length, (i) => ListTile(
+                                                  onTap: (){
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: commentsListener[i].userId, accountType: commentsListener[i].userAccountType,)));
+                                                  },
+                                                  onLongPress: () async{
+                                                    if(currentUserId == commentsListener[i].userId && currentAccountType == commentsListener[i].userAccountType){
+                                                      await showMaterialModalBottomSheet(
+                                                        context: context, 
+                                                        builder: (context) => 
+                                                          SafeArea(
+                                                          top: false,
+                                                          child: Column(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: <Widget>[
+                                                              ListTile(
+                                                                title: const Text('Edit'),
+                                                                leading: const Icon(Icons.edit),
+                                                                onTap: () async{
+                                                                  controller.text = controller.text + commentsListener[i].commentBody;
+                                                                  await showModalBottomSheet(
+                                                                    context: context, 
+                                                                    builder: (context) => showKeyboardEdit(isEdit: true, editId: commentsListener[i].commentId),
+                                                                  );
+                                                                },
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                              ListTile(
+                                                                title: const Text('Delete'),
+                                                                leading: const Icon(Icons.delete),
+                                                                onTap: () async{  
+                                                                  context.loaderOverlay.show();
+                                                                  await apiBLMDeleteComment(commentId: commentsListener[i].commentId);
+                                                                  context.loaderOverlay.hide();
 
-                                                        const SizedBox(height: 5,),
-
-                                                        Row(
-                                                          children: [
-                                                            Text(timeago.format(DateTime.parse(comments[i].listOfReplies[index].createdAt))),
-
-                                                            const SizedBox(width: 40,),
-
-                                                            GestureDetector(
-                                                              onTap: () async{
-                                                                if(controller.text != ''){
                                                                   controller.clear();
-                                                                }
-
-                                                                controller.text = comments[i].firstName + ' ' + comments[i].lastName + ' ';
-
+                                                                  itemRemaining = 1;
+                                                                  repliesRemaining = 1;
+                                                                  comments.value = [];
+                                                                  replies.value = [];
+                                                                  numberOfReplies = 0;
+                                                                  page1 = 1;
+                                                                  page2 = 1;
+                                                                  count.value = 0;
+                                                                  commentsLikes = [];
+                                                                  commentsNumberOfLikes = [];
+                                                                  repliesLikes = [];
+                                                                  repliesNumberOfLikes = [];
+                                                                  isComment = true;
+                                                                  numberOfLikes = 0;
+                                                                  numberOfComments = 0;
+                                                                  getOriginalPostInformation();
+                                                                  onLoading();
+                                                                },
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      );
+                                                    }else{
+                                                      await showMaterialModalBottomSheet(
+                                                        context: context, 
+                                                        builder: (context) => 
+                                                          SafeArea(
+                                                          top: false,
+                                                          child: Column(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: <Widget>[
+                                                              ListTile(
+                                                                title: const Text('Report'),
+                                                                leading: const Icon(Icons.edit),
+                                                                onTap: (){
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: 'Post')));
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      );
+                                                    }
+                                                  },
+                                                  visualDensity: const VisualDensity(vertical: 4.0),
+                                                  leading: CircleAvatar(
+                                                    backgroundColor: const Color(0xff888888),
+                                                    foregroundImage: NetworkImage(commentsListener[i].image),
+                                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                  ),
+                                                  title: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: currentUserId == commentsListener[i].userId && currentAccountType == commentsListener[i].userAccountType
+                                                        ? const Text('You',
+                                                          style: const TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                          ),
+                                                        )
+                                                        : Text('${commentsListener[i].firstName}' + ' ' + '${commentsListener[i].lastName}',
+                                                          style: const TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment: Alignment.centerRight,
+                                                          child: TextButton.icon(
+                                                            onPressed: () async{
+                                                              if(commentsLikes[i] == true){
                                                                 setState(() {
-                                                                  isComment = false;
-                                                                  currentCommentId = comments[i].commentId;
+                                                                  commentsLikes[i] = false;
+                                                                  commentsNumberOfLikes[i]--;
                                                                 });
 
-                                                                await showModalBottomSheet(
-                                                                  context: context, 
-                                                                  builder: (context) => showKeyboard()
-                                                                );
-                                                              },
-                                                              child: const Text('Reply',),
-                                                            ),
+                                                                await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: commentsListener[i].commentId, likeStatus: false);
+                                                              }else{
+                                                                setState(() {
+                                                                  commentsLikes[i] = true;
+                                                                  commentsNumberOfLikes[i]++;
+                                                                });
 
-                                                          ],
+                                                                await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: commentsListener[i].commentId, likeStatus: true);
+                                                              }
+                                                            }, 
+                                                            icon: commentsLikes[i] == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
+                                                            label: Text('${commentsNumberOfLikes[i]}', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
+                                                          ),
                                                         ),
-                                                      ],
-                                                    )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  subtitle: Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            child: Container(
+                                                              padding: const EdgeInsets.all(10.0),
+                                                              child: Text(
+                                                                commentsListener[i].commentBody,
+                                                                style: const TextStyle(
+                                                                  color: const Color(0xffffffff),
+                                                                ),
+                                                              ),
+                                                              decoration: const BoxDecoration(
+                                                                color: const Color(0xff4EC9D4),
+                                                                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+
+                                                      const SizedBox(height: 5,),
+
+                                                      Row(
+                                                        children: [
+
+                                                          Text(timeago.format(DateTime.parse(commentsListener[i].createdAt))),
+
+                                                          const SizedBox(width: 20,),
+
+                                                          GestureDetector(
+                                                            onTap: () async{
+                                                              if(controller.text != ''){
+                                                                controller.clear();
+                                                              }
+
+                                                              setState(() {
+                                                                isComment = false;
+                                                                currentCommentId = commentsListener[i].commentId;
+                                                              });
+
+                                                              await showModalBottomSheet(
+                                                                context: context, 
+                                                                builder: (context) => showKeyboard()
+                                                              );
+                                                            },
+                                                            child: const Text('Reply',),
+                                                          ),
+                                                        ],
+                                                      ),
+
+                                                      const SizedBox(height: 20,),
+
+                                                      commentsListener[i].listOfReplies.length != 0
+                                                      ? Column(
+                                                          children: List.generate(commentsListener[i].listOfReplies.length, (index) => 
+                                                          ListTile(
+                                                            contentPadding: EdgeInsets.zero,
+                                                            visualDensity: const VisualDensity(vertical: 4.0),
+                                                            onTap: (){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: commentsListener[i].listOfReplies[index].userId, accountType: currentAccountType,)));
+                                                            },
+                                                            onLongPress: () async{
+                                                              if(currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType){
+                                                                await showMaterialModalBottomSheet(
+                                                                  context: context, 
+                                                                  builder: (context) => 
+                                                                    SafeArea(
+                                                                    top: false,
+                                                                    child: Column(
+                                                                      mainAxisSize: MainAxisSize.min,
+                                                                      children: <Widget>[
+                                                                        ListTile(
+                                                                          title: const Text('Edit'),
+                                                                          leading: const Icon(Icons.edit),
+                                                                          onTap: () async{
+                                                                            controller.text = controller.text + commentsListener[i].listOfReplies[index].replyBody;
+                                                                            await showModalBottomSheet(
+                                                                              context: context, 
+                                                                              builder: (context) => showKeyboardEdit(isEdit: false, editId: commentsListener[i].listOfReplies[index].replyId),
+                                                                            );
+                                                                          },
+                                                                        ),
+                                                                        ListTile(
+                                                                          title: const Text('Delete'),
+                                                                          leading: const Icon(Icons.delete),
+                                                                          onTap: () async{  
+                                                                            context.loaderOverlay.show();
+                                                                            await apiBLMDeleteReply(replyId: commentsListener[i].listOfReplies[index].replyId);
+                                                                            context.loaderOverlay.hide();
+
+                                                                            controller.clear();
+                                                                            itemRemaining = 1;
+                                                                            repliesRemaining = 1;
+                                                                            comments.value = [];
+                                                                            replies.value = [];
+                                                                            numberOfReplies = 0;
+                                                                            page1 = 1;
+                                                                            page2 = 1;
+                                                                            count.value = 0;
+                                                                            commentsLikes = [];
+                                                                            commentsNumberOfLikes = [];
+                                                                            repliesLikes = [];
+                                                                            repliesNumberOfLikes = [];
+                                                                            isComment = true;
+                                                                            numberOfLikes = 0;
+                                                                            numberOfComments = 0;
+                                                                            getOriginalPostInformation();
+                                                                            onLoading();
+                                                                          },
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                );
+                                                              }else{
+                                                                await showMaterialModalBottomSheet(
+                                                                  context: context, 
+                                                                  builder: (context) => 
+                                                                    SafeArea(
+                                                                    top: false,
+                                                                    child: Column(
+                                                                      mainAxisSize: MainAxisSize.min,
+                                                                      children: <Widget>[
+                                                                        ListTile(
+                                                                          title: const Text('Report'),
+                                                                          leading: const Icon(Icons.edit),
+                                                                          onTap: (){
+                                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: 'Post')));
+                                                                          },
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                );
+                                                              }
+                                                            },
+                                                            leading: CircleAvatar(
+                                                              backgroundColor: const Color(0xff888888),
+                                                              foregroundImage: NetworkImage(commentsListener[i].listOfReplies[index].image),
+                                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                            ),
+                                                            title: Row(
+                                                              children: [
+                                                                Expanded(
+                                                                  child: currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType
+                                                                  ? const Text('You',
+                                                                    style: const TextStyle(
+                                                                      fontWeight: FontWeight.bold,
+                                                                    ),
+                                                                  )
+                                                                  : Text(commentsListener[i].listOfReplies[index].firstName + ' ' + commentsListener[i].listOfReplies[index].lastName,
+                                                                    style: const TextStyle(
+                                                                      fontWeight: FontWeight.bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  child: Align(
+                                                                    alignment: Alignment.centerRight,
+                                                                    child: TextButton.icon(
+                                                                      onPressed: () async{
+                                                                        if(repliesLikes[i][index] == true){
+                                                                          setState(() {
+                                                                            repliesLikes[i][index] = false;
+                                                                            repliesNumberOfLikes[i][index]--;                                                      
+                                                                          });
+
+                                                                          await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: false);
+                                                                        }else{
+                                                                          setState(() {
+                                                                            repliesLikes[i][index] = true;
+                                                                            repliesNumberOfLikes[i][index]++;
+                                                                          });
+
+                                                                          await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: true);
+                                                                        }
+                                                                      }, 
+                                                                      icon: repliesLikes[i][index] == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
+                                                                      label: Text('${repliesNumberOfLikes[i][index]}', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            subtitle: Column(
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child: Container(
+                                                                        padding: const EdgeInsets.all(10.0),
+                                                                        child: Text(
+                                                                          commentsListener[i].listOfReplies[index].replyBody,
+                                                                          style: const TextStyle(
+                                                                            color: const Color(0xffffffff),
+                                                                          ),
+                                                                        ),
+                                                                        decoration: const BoxDecoration(
+                                                                          color: const Color(0xff4EC9D4),
+                                                                          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+
+                                                                const SizedBox(height: 5,),
+
+                                                                Row(
+                                                                  children: [
+                                                                    Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt))),
+
+                                                                    const SizedBox(width: 40,),
+
+                                                                    GestureDetector(
+                                                                      onTap: () async{
+                                                                        if(controller.text != ''){
+                                                                          controller.clear();
+                                                                        }
+
+                                                                        controller.text = commentsListener[i].firstName + ' ' + commentsListener[i].lastName + ' ';
+
+                                                                        setState(() {
+                                                                          isComment = false;
+                                                                          currentCommentId = commentsListener[i].commentId;
+                                                                        });
+
+                                                                        await showModalBottomSheet(
+                                                                          context: context, 
+                                                                          builder: (context) => showKeyboard()
+                                                                        );
+                                                                      },
+                                                                      child: const Text('Reply',),
+                                                                    ),
+
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            )
+                                                          ),
+                                                        ),
+                                                      )
+                                                      : Container(height: 0,),
+                                                    ],
                                                   ),
                                                 ),
-                                              )
-                                              : Container(height: 0,),
-                                            ],
-                                          ),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                        : Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+
+                                            SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+
+                                            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                                            const SizedBox(height: 45,),
+
+                                            const Text('Comment is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+
+                                            SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+                                          ],
                                         ),
                                       ),
-                                    )
-                                  ],
-                                )
-                                : Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
 
-                                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-
-                                    Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
-
-                                    const SizedBox(height: 45,),
-
-                                    const Text('Comment is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
-
-                                    SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-
-                            ],
-                          ),
+                              );
+                            }else if(originalPost.hasError){
+                              return MiscBLMErrorMessageTemplate();
+                            }else{
+                              return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                            }
+                          }
                         ),
-                      );
-                    }else if(originalPost.hasError){
-                      return MiscBLMErrorMessageTemplate();
-                    }else{
-                      return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
-                    }
-                  }
+                      ),
+
+                      isGuestLoggedInListener
+                      ? BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                        child: MiscBLMLoginToContinue(),
+                      )
+                      : Container(height: 0),
+                    ],
+                  ),
                 ),
               ),
-
-              isGuestLoggedIn
-              ? BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                child: MiscBLMLoginToContinue(),
-              )
-              : Container(height: 0),
-            ],
+            ),
           ),
         ),
       ),
@@ -1409,6 +1430,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   decoration: const InputDecoration(
                     fillColor: const Color(0xffBDC3C7),
                     filled: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelText: 'Say something...',
                     labelStyle: const TextStyle(
                       fontSize: 14,
@@ -1459,12 +1481,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   controller.clear();
                   itemRemaining = 1;
                   repliesRemaining = 1;
-                  comments = [];
-                  replies = [];
+                  comments.value = [];
+                  replies.value = [];
                   numberOfReplies = 0;
                   page1 = 1;
                   page2 = 1;
-                  count = 0;
+                  count.value = 0;
                   commentsLikes = [];
                   commentsNumberOfLikes = [];
                   repliesLikes = [];
@@ -1482,12 +1504,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   controller.clear();
                   itemRemaining = 1;
                   repliesRemaining = 1;
-                  comments = [];
-                  replies = [];
+                  comments.value = [];
+                  replies.value = [];
                   numberOfReplies = 0;
                   page1 = 1;
                   page2 = 1;
-                  count = 0;
+                  count.value = 0;
                   commentsLikes = [];
                   commentsNumberOfLikes = [];
                   repliesLikes = [];
@@ -1539,6 +1561,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   decoration: const InputDecoration(
                     fillColor: const Color(0xffBDC3C7),
                     filled: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelText: 'Say something...',
                     labelStyle: const TextStyle(
                       fontSize: 14,
@@ -1589,12 +1612,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   controller.clear();
                   itemRemaining = 1;
                   repliesRemaining = 1;
-                  comments = [];
-                  replies = [];
+                  comments.value = [];
+                  replies.value = [];
                   numberOfReplies = 0;
                   page1 = 1;
                   page2 = 1;
-                  count = 0;
+                  count.value = 0;
                   commentsLikes = [];
                   commentsNumberOfLikes = [];
                   repliesLikes = [];
@@ -1612,12 +1635,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   controller.clear();
                   itemRemaining = 1;
                   repliesRemaining = 1;
-                  comments = [];
-                  replies = [];
+                  comments.value = [];
+                  replies.value = [];
                   numberOfReplies = 0;
                   page1 = 1;
                   page2 = 1;
-                  count = 0;
+                  count.value = 0;
                   commentsLikes = [];
                   commentsNumberOfLikes = [];
                   repliesLikes = [];

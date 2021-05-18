@@ -36,7 +36,7 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
     ),
   );
 
-  print('The status code of regular show original post is ${response.statusCode}');
+  // print('The status code of regular show original post is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

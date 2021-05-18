@@ -6,6 +6,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
 import 'home-settings-memorial-blm-06-page-friends.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 

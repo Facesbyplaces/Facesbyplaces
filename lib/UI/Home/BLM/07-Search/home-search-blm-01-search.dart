@@ -2,6 +2,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-search-blm-02-search-extended.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';

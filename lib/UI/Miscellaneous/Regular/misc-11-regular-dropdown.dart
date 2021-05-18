@@ -3,6 +3,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-03-bloc-regular-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:path_provider/path_provider.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -27,7 +28,6 @@ class MiscRegularDropDownTemplate extends StatefulWidget{
 }
 
 class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate>{
-  final snackBar = const SnackBar(content: const Text('Link copied!'), backgroundColor: const Color(0xff4EC9D4), duration: const Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
   GlobalKey qrKey = new GlobalKey();
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
@@ -58,6 +58,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
   }
 
   Future<void> shareQRCode(String qrData) async {
+    print('The qrData in regular is $qrData');
     try {
       QrValidationResult qrValidationResult = QrValidator.validate(
         data: qrData,
@@ -72,15 +73,13 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
           qr: qrCode!,
           color: const Color(0xff000000),
           gapless: true,
-          embeddedImageStyle: null,
-          embeddedImage: null,
         );
 
         final ByteData bytes = (await painter.toImageData(320))!;
         final Uint8List list = bytes.buffer.asUint8List();
 
         final tempDir = await getTemporaryDirectory();
-        final file = await new File('${tempDir.path}/qr-code.png').create();
+        final file = await new File('${tempDir.path}/alm-qr-code.png').create();
         file.writeAsBytesSync(list);
 
         Share.shareFiles(['${file.path}'], text: 'QR Code');
@@ -134,7 +133,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
             onChanged: (String? listValue) async{
               dropDownList = listValue!;
               if(dropDownList == 'Share'){
-                print('Share!');
                 initBranchShare();
 
                 FlutterBranchSdk.setIdentity('alm-share-link');

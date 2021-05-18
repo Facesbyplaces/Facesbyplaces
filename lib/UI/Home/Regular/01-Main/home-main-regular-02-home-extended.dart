@@ -21,6 +21,7 @@ import 'home-main-regular-03-03-post-tab.dart';
 import 'home-main-regular-03-04-notifications-tab.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/services.dart';
@@ -72,7 +73,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           "#ff6666", "Cancel", true, ScanMode.QR);
-      print(barcodeScanRes);
+      print('Scanning: $barcodeScanRes');
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -85,6 +86,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
     // _scanBarcode = barcodeScanRes;
 
     List<dynamic> newValue = _scanBarcode.split('-');
+
+    print('The newValue in QR code is $newValue');
 
     if (_scanBarcode != 'Error') {
       if (newValue[0] == 'Memorial') {

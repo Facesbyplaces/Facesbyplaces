@@ -2,11 +2,12 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/services.dart';
 import 'home-create-memorial-regular-03-create-memorial.dart';
 import 'package:better_player/better_player.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 

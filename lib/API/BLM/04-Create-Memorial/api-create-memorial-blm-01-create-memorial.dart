@@ -24,15 +24,17 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
     MapEntry('blm[country]', MultipartFile.fromString(blmMemorial.blmCountry,),),
     MapEntry('blm[precinct]', MultipartFile.fromString(blmMemorial.blmPrecinct,),),
     MapEntry('relationship', MultipartFile.fromString(blmMemorial.blmRelationship,),),
+    MapEntry('blm[latitude]', MultipartFile.fromString(blmMemorial.blmLatitude,),),
+    MapEntry('blm[longitude]', MultipartFile.fromString(blmMemorial.blmLongitude,),),
   ]);
 
-  if(blmMemorial.blmLatitude != ''){
-    MapEntry('blm[latitude]', MultipartFile.fromString(blmMemorial.blmLatitude,),);
-  }
+  // if(blmMemorial.blmLatitude != ''){
+  //   MapEntry('blm[latitude]', MultipartFile.fromString(blmMemorial.blmLatitude,),);
+  // }
 
-  if(blmMemorial.blmLongitude != ''){
-    MapEntry('blm[longitude]', MultipartFile.fromString(blmMemorial.blmLongitude,),);
-  }
+  // if(blmMemorial.blmLongitude != ''){
+  //   MapEntry('blm[longitude]', MultipartFile.fromString(blmMemorial.blmLongitude,),);
+  // }
 
   if(blmMemorial.blmBackgroundImage != null || blmMemorial.blmBackgroundImage != ''){
     var file = await MultipartFile.fromFile(blmMemorial.blmBackgroundImage.path, filename: blmMemorial.blmBackgroundImage.path);

@@ -4,6 +4,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -75,6 +76,10 @@ class HomeRegularNotificationsTabState
   }
 
   Future<void> onRefresh() async {
+    count.value = 0;
+    notifications = [];
+    itemRemaining = 1;
+    page = 1;
     onLoading();
   }
 

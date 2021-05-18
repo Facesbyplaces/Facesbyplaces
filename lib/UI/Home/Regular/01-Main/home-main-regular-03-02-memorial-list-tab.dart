@@ -56,22 +56,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> {
               content: const Text('No more posts to show'),
               duration: const Duration(seconds: 1),
               backgroundColor: const Color(0xff4EC9D4),
-              action: SnackBarAction(
-                label: 'Refresh',
-                onPressed: () {
-                  page1 = 1;
-                  page2 = 1;
-                  flag1 = false;
-                  count.value = 0;
-                  finalMemorials = [];
-                  memorialFamilyItemsRemaining = 1;
-                  memorialFriendsItemsRemaining = 1;
-                  blmFamilyItemsRemaining = 1;
-                  blmFriendsItemsRemaining = 1;
-                  onRefresh();
-                },
-                textColor: const Color(0xff000000),
-              ),
             ),
           );
         }
@@ -90,12 +74,20 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab> {
   }
 
   Future<void> onRefresh() async {
-    if (blmFamilyItemsRemaining == 0 &&
-        memorialFamilyItemsRemaining == 0 &&
-        flag1 == false) {
+    if (blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0 && flag1 == false) {
       flag1 = true;
       onLoading();
     } else {
+      page1 = 1;
+      page2 = 1;
+      flag1 = false;
+      count.value = 0;
+      finalMemorials = [];
+      memorialFamilyItemsRemaining = 1;
+      memorialFriendsItemsRemaining = 1;
+      blmFamilyItemsRemaining = 1;
+      blmFriendsItemsRemaining = 1;
+      addMemorials1();
       onLoading();
     }
   }

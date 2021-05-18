@@ -7,6 +7,7 @@ import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regula
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-post-like-or-unlike.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -63,18 +64,25 @@ class MiscRegularPostState extends State<MiscRegularPost>{
 
   bool likePost = false;
   int likesCount = 0;
+  int commentsCount = 0;
 
   void initState(){
     super.initState();
     likePost = widget.likeStatus;
     likesCount = widget.numberOfLikes;
+    commentsCount = widget.numberOfComments;
   }
 
   @override
   Widget build(BuildContext context){
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
+      onTap: () async{
+        final returnValue = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
+        print('The return value is $returnValue');
+        commentsCount = int.parse(returnValue.toString());
+        setState(() {
+          print('Refreshed!');
+        });
       },
       child: Container(
         padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
@@ -203,7 +211,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
                   },
                   icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                  label: Text('${widget.numberOfComments}', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                  label: Text('$commentsCount', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
                 ),
 
                 Expanded(child: Container(),),

@@ -2,14 +2,15 @@ import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/services.dart';
 import 'home-create-post-regular-02-01-create-post-location.dart';
 import 'home-create-post-regular-02-02-create-post-user.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
 import 'package:better_player/better_player.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
