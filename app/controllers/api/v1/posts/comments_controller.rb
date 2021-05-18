@@ -97,7 +97,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
                     if relationship.account.notifsetting.postComments == true
                         if relationship.account != user()
                             user = relationship.account
-                            r_user
+                            r_user = relationship.account
                             # check if user owns the post
                             if user == comment.post.account 
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false, notif_type: 'Post')
