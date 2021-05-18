@@ -3,7 +3,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-post-regular-01-create-post.dart';
 import 'package:flutter/material.dart';
 
-class RegularSearchUsers{
+class RegularSearchUsers {
   final int userId;
   final String firstName;
   final String lastName;
@@ -11,17 +11,23 @@ class RegularSearchUsers{
   final int accountType;
   final String image;
 
-  const RegularSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.email, required this.accountType, required this.image});
+  const RegularSearchUsers(
+      {required this.userId,
+      required this.firstName,
+      required this.lastName,
+      required this.email,
+      required this.accountType,
+      required this.image});
 }
 
-class HomeRegularCreatePostSearchUser extends StatefulWidget{
-
+class HomeRegularCreatePostSearchUser extends StatefulWidget {
   @override
-  HomeRegularCreatePostSearchUserState createState() => HomeRegularCreatePostSearchUserState();
+  HomeRegularCreatePostSearchUserState createState() =>
+      HomeRegularCreatePostSearchUserState();
 }
 
-class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSearchUser>{
-
+class HomeRegularCreatePostSearchUserState
+    extends State<HomeRegularCreatePostSearchUser> {
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
   List<RegularSearchUsers> users = [];
@@ -29,15 +35,16 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
   bool empty = true;
   int page = 1;
 
-  void initState(){
+  void initState() {
     super.initState();
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-        if(itemRemaining != 0){
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        if (itemRemaining != 0) {
           setState(() {
             onLoading();
           });
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more users to show'),
@@ -50,22 +57,23 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
     });
   }
 
-  Future<void> onRefresh() async{
+  Future<void> onRefresh() async {
     setState(() {
       onLoading();
     });
   }
 
-  void onLoading() async{
-    if(itemRemaining != 0){
-      var newValue = await apiRegularSearchUsers(keywords: controller.text, page: page);
+  void onLoading() async {
+    if (itemRemaining != 0) {
+      var newValue =
+          await apiRegularSearchUsers(keywords: controller.text, page: page);
       itemRemaining = newValue.almItemsRemaining;
 
-      for(int i = 0; i < newValue.almSearchUsers.length; i++){
+      for (int i = 0; i < newValue.almSearchUsers.length; i++) {
         users.add(
           RegularSearchUsers(
-            userId: newValue.almSearchUsers[i].searchUsersId, 
-            firstName: newValue.almSearchUsers[i].searchUsersFirstName, 
+            userId: newValue.almSearchUsers[i].searchUsersId,
+            firstName: newValue.almSearchUsers[i].searchUsersFirstName,
             lastName: newValue.almSearchUsers[i].searchUsersLastName,
             email: newValue.almSearchUsers[i].searchUsersEmail,
             accountType: newValue.almSearchUsers[i].searchUsersAccountType,
@@ -74,8 +82,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
         );
       }
 
-      if(mounted)
-      setState(() {});
+      if (mounted) setState(() {});
       page++;
     }
   }
@@ -84,21 +91,21 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusNode currentFocus = FocusScope.of(context);
-          if(!currentFocus.hasPrimaryFocus){
+          if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
           }
         },
         child: Scaffold(
           appBar: AppBar(
             title: TextFormField(
-              onChanged: (newPlace){
-                if(newPlace == ''){
+              onChanged: (newPlace) {
+                if (newPlace == '') {
                   setState(() {
                     empty = true;
                     users = [];
@@ -107,7 +114,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                   });
                 }
               },
-              onFieldSubmitted: (newPlace){
+              onFieldSubmitted: (newPlace) {
                 setState(() {
                   controller.text = newPlace;
                   empty = false;
@@ -121,11 +128,13 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                 fillColor: const Color(0xffffffff),
                 focusColor: const Color(0xffffffff),
                 hintText: 'Search User',
-                hintStyle: const TextStyle(
-                  fontSize: 16,
+                hintStyle: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: const Color(0xffB1B1B1),
                 ),
                 suffixIcon: IconButton(
-                  onPressed: (){
+                  onPressed: () {
                     print('Search!');
                     setState(() {
                       empty = false;
@@ -133,7 +142,8 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
                     onLoading();
                   },
-                  icon: const Icon(Icons.search, color: const Color(0xff888888)),
+                  icon:
+                      const Icon(Icons.search, color: const Color(0xff888888)),
                 ),
                 border: const OutlineInputBorder(
                   borderSide: const BorderSide(color: const Color(0xffffffff)),
@@ -149,60 +159,99 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                 ),
               ),
             ),
-            leading: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: const Color(0xffffffff),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             backgroundColor: const Color(0xff04ECFF),
           ),
           body: empty == false
-          ? RefreshIndicator(
-            onRefresh: onRefresh,
-            child: ListView.separated(
-              controller: scrollController,
-              padding: const EdgeInsets.all(10.0),
-              physics: const ClampingScrollPhysics(),
-              itemCount: users.length,
-              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-              itemBuilder: (c, i) {
-                return ListTile(
-                  onTap: (){
-                    Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
-                  },
-                  leading: users[i].image != '' 
-                  ? CircleAvatar(
-                    maxRadius: 40,
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: NetworkImage(users[i].image),
-                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                  )
-                  : const CircleAvatar(
-                    maxRadius: 40,
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                  ),
-                  title: Text(users[i].firstName + ' ' + users[i].lastName,),
-                  subtitle: Text(users[i].email, style: const TextStyle(fontSize: 12, color: const Color(0xff888888),),),
-                );
-              }
-            ),
-          )
-          : Container(
-            width: SizeConfig.screenWidth,
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Column(
-                children: [
-                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-
-                  Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
-
-                  const SizedBox(height: 20,),
-
-                  const Text('Search a location to add on your post', style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),
-
-                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-                ],
-              ),
-            )
-          ),
+              ? RefreshIndicator(
+                  onRefresh: onRefresh,
+                  child: ListView.separated(
+                      controller: scrollController,
+                      padding: const EdgeInsets.all(10.0),
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: users.length,
+                      separatorBuilder: (c, i) =>
+                          const Divider(height: 10, color: Colors.transparent),
+                      itemBuilder: (c, i) {
+                        return ListTile(
+                          onTap: () {
+                            Navigator.pop(
+                                context,
+                                RegularTaggedUsers(
+                                    name: users[i].firstName +
+                                        ' ' +
+                                        users[i].lastName,
+                                    userId: users[i].userId,
+                                    accountType: users[i].accountType));
+                          },
+                          leading: users[i].image != ''
+                              ? CircleAvatar(
+                                  maxRadius: 40,
+                                  backgroundColor: const Color(0xff888888),
+                                  foregroundImage: NetworkImage(users[i].image),
+                                  backgroundImage: const AssetImage(
+                                      'assets/icons/app-icon.png'),
+                                )
+                              : const CircleAvatar(
+                                  maxRadius: 40,
+                                  backgroundColor: const Color(0xff888888),
+                                  foregroundImage: const AssetImage(
+                                      'assets/icons/app-icon.png'),
+                                ),
+                          title: Text(
+                            users[i].firstName + ' ' + users[i].lastName,
+                          ),
+                          subtitle: Text(
+                            users[i].email,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: const Color(0xff888888),
+                            ),
+                          ),
+                        );
+                      }),
+                )
+              : Container(
+                  width: SizeConfig.screenWidth,
+                  child: SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height:
+                              (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,
+                        ),
+                        Image.asset(
+                          'assets/icons/search-user.png',
+                          height: 240,
+                          width: 240,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Search a user to tag on your post.',
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                            fontFamily: 'NexaRegular',
+                            color: const Color(0xff000000),
+                          ),
+                        ),
+                        SizedBox(
+                          height:
+                              (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,
+                        ),
+                      ],
+                    ),
+                  )),
         ),
       ),
     );

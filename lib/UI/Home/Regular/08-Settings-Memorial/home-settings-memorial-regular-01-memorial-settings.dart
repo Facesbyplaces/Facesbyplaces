@@ -14,34 +14,51 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularMemorialSettings extends StatefulWidget{
+class HomeRegularMemorialSettings extends StatefulWidget {
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
 
-  const HomeRegularMemorialSettings({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
-  
-  HomeRegularMemorialSettingsState createState() => HomeRegularMemorialSettingsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
+  const HomeRegularMemorialSettings(
+      {required this.memorialId,
+      required this.memorialName,
+      required this.switchFamily,
+      required this.switchFriends,
+      required this.switchFollowers});
+
+  HomeRegularMemorialSettingsState createState() =>
+      HomeRegularMemorialSettingsState(
+          memorialId: memorialId,
+          memorialName: memorialName,
+          switchFamily: switchFamily,
+          switchFriends: switchFriends,
+          switchFollowers: switchFollowers);
 }
 
-class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings>{
+class HomeRegularMemorialSettingsState
+    extends State<HomeRegularMemorialSettings> {
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
 
-  HomeRegularMemorialSettingsState({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
-  
+  HomeRegularMemorialSettingsState(
+      {required this.memorialId,
+      required this.memorialName,
+      required this.switchFamily,
+      required this.switchFriends,
+      required this.switchFollowers});
+
   int toggle = 0;
   bool isSwitched1 = false;
   bool isSwitched2 = false;
   bool isSwitched3 = false;
   Future<bool>? switchStatus;
 
-  void initState(){
+  void initState() {
     super.initState();
     isSwitched1 = switchFamily;
     isSwitched2 = switchFriends;
@@ -49,18 +66,38 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff04ECFF),
-        title: const Text('Memorial Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
+        title: Row(
+          children: [
+            Text(
+              'Memorial Settings',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                fontFamily: 'NexaRegular',
+                color: const Color(0xffffffff),
+              ),
+            ),
+            Spacer()
+          ],
+        ),
         centerTitle: true,
-          leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: (){
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, size: SizeConfig.blockSizeVertical! * 3.52,),
+          onPressed: () {
             Navigator.pop(context);
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: '', managed: true, newlyCreated: false,)));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeRegularProfile(
+                          memorialId: memorialId,
+                          relationship: '',
+                          managed: true,
+                          newlyCreated: false,
+                        )));
           },
         ),
       ),
@@ -76,26 +113,30 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                 labelColor: const Color(0xff04ECFF),
                 unselectedLabelColor: const Color(0xff000000),
                 indicatorColor: const Color(0xff04ECFF),
-                onTap: (int index){
+                  indicatorSize: TabBarIndicatorSize.label,
+                onTap: (int index) {
                   setState(() {
                     toggle = index;
                   });
                 },
                 tabs: [
-                  const Center(
-                    child: const Text('Page',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                  Center(
+                    child: Text(
+                      'Page',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff2F353D),
                       ),
                     ),
                   ),
-
-                  const Center(
-                    child: const Text('Privacy',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                  Center(
+                    child: Text(
+                      'Privacy',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff2F353D),
                       ),
                     ),
                   ),
@@ -103,13 +144,14 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
               ),
             ),
           ),
-
           Expanded(
             child: Container(
-              child: ((){
-                switch(toggle){
-                  case 0: return settingsTab1(memorialId);
-                  case 1: return settingsTab2(memorialId);
+              child: (() {
+                switch (toggle) {
+                  case 0:
+                    return settingsTab1(memorialId);
+                  case 1:
+                    return settingsTab2(memorialId);
                 }
               }()),
             ),
@@ -119,156 +161,336 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
     );
   }
 
-  settingsTab1(int memorialId){
+  settingsTab1(int memorialId) {
     return ListView(
       physics: const ClampingScrollPhysics(),
       children: [
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageDetails(memorialId: memorialId,)));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeRegularPageDetails(
+                          memorialId: memorialId,
+                        )));
           },
-          title: const Text('Page Details', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Update page details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text(
+            'Page Details',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff2F353D),
+            ),
+          ),
+          subtitle: Text(
+            'Update page details',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7),
+            ),
+          ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialPageImage(memorialId: memorialId,)));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeRegularMemorialPageImage(
+                          memorialId: memorialId,
+                        )));
           },
-          title: const Text('Page Image', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Update Page image and background image', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text(
+            'Page Image',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff2F353D),
+            ),
+          ),
+          subtitle: Text(
+            'Update Page image and background image',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7),
+            ),
+          ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: memorialId,)));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeRegularPageManagers(
+                          memorialId: memorialId,
+                        )));
           },
-          title: const Text('Admins', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Add or remove admins of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text(
+            'Admins',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff2F353D),
+            ),
+          ),
+          subtitle: Text(
+            'Add or remove admins of this page',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7),
+            ),
+          ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeRegularPageFamily(
+                        memorialId: memorialId,
+                        memorialName: memorialName,
+                        switchFamily: switchFamily,
+                        switchFriends: switchFriends,
+                        switchFollowers: switchFollowers)));
           },
-          title: const Text('Family', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Add or remove family of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text(
+            'Family',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff2F353D),
+            ),
+          ),
+          subtitle: Text(
+            'Add or remove family of this page',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7),
+            ),
+          ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeRegularPageFriends(
+                        memorialId: memorialId,
+                        memorialName: memorialName,
+                        switchFamily: switchFamily,
+                        switchFriends: switchFriends,
+                        switchFollowers: switchFollowers)));
           },
-          title: const Text('Friends', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Add or remove friends of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text(
+            'Friends',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff2F353D),
+            ),
+          ),
+          subtitle: Text(
+            'Add or remove friends of this page',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7),
+            ),
+          ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: (){
+          onTap: () {
             Navigator.pushNamed(context, '/home/regular/donation-paypal');
           },
-          title: const Text('Paypal', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Manage cards that receives the memorial gifts', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text(
+            'Paypal',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff2F353D),
+            ),
+          ),
+          subtitle: Text(
+            'Manage cards that receives the memorial gifts',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7),
+            ),
+          ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(content: 'Are you sure you want to delete "$memorialName"?',),);
-            if(confirmResult){
-
+          onTap: () async {
+            bool confirmResult = await showDialog(
+              context: (context),
+              builder: (build) => MiscRegularConfirmDialog(
+                content: 'Are you sure you want to delete "$memorialName"?',
+              ),
+            );
+            if (confirmResult) {
               context.loaderOverlay.show();
-              bool result = await apiRegularDeleteMemorial(memorialId: memorialId);
+              bool result =
+                  await apiRegularDeleteMemorial(memorialId: memorialId);
               context.loaderOverlay.hide();
 
-              if(result){
+              if (result) {
                 Navigator.popAndPushNamed(context, '/home/regular');
-              }else{
+              } else {
                 await showDialog(
-                  context: context,
-                  builder: (_) => 
-                    AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    entryAnimation: EntryAnimation.DEFAULT,
-                    description: const Text('Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                    ),
-                    onlyOkButton: true,
-                    buttonOkColor: const Color(0xffff0000),
-                    onOkButtonPressed: () {
-                      Navigator.pop(context, true);
-                    },
-                  )
-                );
+                    context: context,
+                    builder: (_) => AssetGiffyDialog(
+                          image: Image.asset(
+                            'assets/icons/cover-icon.png',
+                            fit: BoxFit.cover,
+                          ),
+                          title: const Text(
+                            'Error',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 22.0, fontWeight: FontWeight.w600),
+                          ),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: const Text(
+                            'Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: const Color(0xffff0000),
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        ));
               }
             }
           },
-          title: const Text('Delete Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Completely remove the page. This is irreversible', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text(
+            'Delete Page',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff2F353D),
+            ),
+          ),
+          subtitle: Text(
+            'Completely remove the page. This is irreversible',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7),
+            ),
+          ),
         ),
-
-        const SizedBox(height: 10,),
-
-        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
-
-        const SizedBox(height: 30,),
+        const SizedBox(
+          height: 10,
+        ),
+        Image.asset(
+          'assets/icons/logo.png',
+          height: 100,
+          width: 100,
+        ),
+        const SizedBox(
+          height: 30,
+        ),
       ],
     );
   }
 
-  settingsTab2(int memorialId){
+  settingsTab2(int memorialId) {
     return ListView(
       physics: const ClampingScrollPhysics(),
       children: [
-
-        const ListTile(
+        ListTile(
           tileColor: const Color(0xffffffff),
-          title: const Text('Customize shown info', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Customize what others see on your page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text(
+            'Customize shown info',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaBold',
+              color: const Color(0xff2F353D),
+            ),
+          ),
+          subtitle: Text(
+            'Customize what others see on your page',
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7),
+            ),
+          ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         Container(
           height: 80,
           color: const Color(0xffffffff),
           child: Row(
             children: [
               Expanded(
-                child: const ListTile(
+                child: ListTile(
                   tileColor: const Color(0xffffffff),
-                  title: const Text('Hide Family', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-                  subtitle: const Text('Show or hide family details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+                  title: Text(
+                    'Hide Family',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                      fontFamily: 'NexaBold',
+                      color: const Color(0xff2F353D),
+                    ),
+                  ),
+                  subtitle: Text(
+                    'Show or hide family details',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaRegular',
+                      color: const Color(0xffBDC3C7),
+                    ),
+                  ),
                 ),
               ),
-
               Switch(
                 value: isSwitched1,
-                onChanged: (value) async{
+                onChanged: (value) async {
                   setState(() {
                     isSwitched1 = value;
                   });
-                  
-                  await apiRegularUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
+
+                  await apiRegularUpdateSwitchStatusFamily(
+                      memorialId: memorialId, status: value);
                 },
                 activeColor: const Color(0xff2F353D),
                 activeTrackColor: const Color(0xff3498DB),
@@ -276,30 +498,45 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             ],
           ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         Container(
           height: 80,
           color: const Color(0xffffffff),
           child: Row(
             children: [
               Expanded(
-                child: const ListTile(
+                child: ListTile(
                   tileColor: const Color(0xffffffff),
-                  title: const Text('Hide Friends', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-                  subtitle: const Text('Show or hide friends details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+                  title: Text(
+                    'Hide Friends',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                      fontFamily: 'NexaBold',
+                      color: const Color(0xff2F353D),
+                    ),
+                  ),
+                  subtitle: Text(
+                    'Show or hide friends details',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaRegular',
+                      color: const Color(0xffBDC3C7),
+                    ),
+                  ),
                 ),
               ),
-
               Switch(
                 value: isSwitched2,
-                onChanged: (value) async{
+                onChanged: (value) async {
                   setState(() {
                     isSwitched2 = value;
                   });
 
-                  await apiRegularUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
+                  await apiRegularUpdateSwitchStatusFriends(
+                      memorialId: memorialId, status: value);
                 },
                 activeColor: const Color(0xff2F353D),
                 activeTrackColor: const Color(0xff3498DB),
@@ -307,30 +544,45 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             ],
           ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         Container(
           height: 80,
           color: const Color(0xffffffff),
           child: Row(
             children: [
               Expanded(
-                child: const ListTile(
+                child: ListTile(
                   tileColor: const Color(0xffffffff),
-                  title: const Text('Hide Followers', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-                  subtitle: const Text('Show or hide your followers', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+                  title: Text(
+                    'Hide Followers',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                      fontFamily: 'NexaBold',
+                      color: const Color(0xff2F353D),
+                    ),
+                  ),
+                  subtitle: Text(
+                    'Show or hide your followers',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaRegular',
+                      color: const Color(0xffBDC3C7),
+                    ),
+                  ),
                 ),
               ),
-
               Switch(
                 value: isSwitched3,
-                onChanged: (value) async{
+                onChanged: (value) async {
                   setState(() {
                     isSwitched3 = value;
                   });
 
-                  await apiRegularUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
+                  await apiRegularUpdateSwitchStatusFollowers(
+                      memorialId: memorialId, status: value);
                 },
                 activeColor: const Color(0xff2F353D),
                 activeTrackColor: const Color(0xff3498DB),
@@ -338,13 +590,16 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             ],
           ),
         ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
+        Container(
+          height: 5,
+          color: const Color(0xffeeeeee),
+        ),
         const SizedBox(height: 80),
-
-        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
-
+        Image.asset(
+          'assets/icons/logo.png',
+          height: 100,
+          width: 100,
+        ),
         const SizedBox(height: 10),
       ],
     );

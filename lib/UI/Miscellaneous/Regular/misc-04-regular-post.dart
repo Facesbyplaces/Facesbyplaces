@@ -10,9 +10,10 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../../Configurations/size_configuration.dart';
 import 'misc-11-regular-dropdown.dart';
 
-class MiscRegularPost extends StatefulWidget{
+class MiscRegularPost extends StatefulWidget {
   final List<Widget> contents;
   final int userId;
   final int postId;
@@ -33,61 +34,69 @@ class MiscRegularPost extends StatefulWidget{
   final bool famOrFriends;
   final String relationship;
 
-  const MiscRegularPost({
-    required Key key, 
-    required this.contents, 
-    required this.userId, 
-    required this.postId, 
-    required this.memorialId, 
-    required this.profileImage, 
-    this.memorialName = '', 
-    this.timeCreated = '', 
-    required this.managed, 
-    required this.joined, 
-    required this.numberOfComments, 
-    required this.numberOfLikes, 
-    required this.likeStatus, 
-    required this.numberOfTagged, 
-    required this.taggedFirstName, 
-    required this.taggedLastName, 
-    required this.taggedId, 
-    required this.pageType, 
-    required this.famOrFriends, 
-    required this.relationship
-  }) : super(key: key);
+  const MiscRegularPost(
+      {required Key key,
+      required this.contents,
+      required this.userId,
+      required this.postId,
+      required this.memorialId,
+      required this.profileImage,
+      this.memorialName = '',
+      this.timeCreated = '',
+      required this.managed,
+      required this.joined,
+      required this.numberOfComments,
+      required this.numberOfLikes,
+      required this.likeStatus,
+      required this.numberOfTagged,
+      required this.taggedFirstName,
+      required this.taggedLastName,
+      required this.taggedId,
+      required this.pageType,
+      required this.famOrFriends,
+      required this.relationship})
+      : super(key: key);
 
   MiscRegularPostState createState() => MiscRegularPostState();
 }
 
-class MiscRegularPostState extends State<MiscRegularPost>{
-
+class MiscRegularPostState extends State<MiscRegularPost> {
   bool likePost = false;
   int likesCount = 0;
 
-  void initState(){
+  void initState() {
     super.initState();
     likePost = widget.likeStatus;
     likesCount = widget.numberOfLikes;
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeRegularShowOriginalPostComments(
+                    postId: widget.postId)));
       },
       child: Container(
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
+        padding: const EdgeInsets.only(
+          left: 10.0,
+          right: 10.0,
+        ),
         decoration: BoxDecoration(
           color: const Color(0xffffffff),
-          borderRadius: const BorderRadius.all(Radius.circular(15),),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15),
+          ),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: const Color(0xff888888).withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: const Offset(0, 0)
-            ),
+                color: const Color(0xff888888).withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: const Offset(0, 0)),
           ],
         ),
         child: Column(
@@ -96,174 +105,279 @@ class MiscRegularPostState extends State<MiscRegularPost>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ListTile(
-              onTap: (){
-                if(widget.pageType == 'Memorial'){
-                  if(widget.managed == true || widget.famOrFriends == true){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed:widget.managed, newlyCreated: false,)));
-                  }else{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
+              onTap: () {
+                if (widget.pageType == 'Memorial') {
+                  if (widget.managed == true || widget.famOrFriends == true) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomeRegularProfile(
+                                  memorialId: widget.memorialId,
+                                  relationship: widget.relationship,
+                                  managed: widget.managed,
+                                  newlyCreated: false,
+                                )));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomeRegularMemorialProfile(
+                                  memorialId: widget.memorialId,
+                                  pageType: widget.pageType,
+                                  newJoin: widget.joined,
+                                )));
                   }
-                }else{
-                  if(widget.managed == true || widget.famOrFriends == true){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
-                  }else{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
+                } else {
+                  if (widget.managed == true || widget.famOrFriends == true) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomeBLMProfile(
+                                  memorialId: widget.memorialId,
+                                  relationship: widget.relationship,
+                                  managed: widget.managed,
+                                  newlyCreated: false,
+                                )));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomeBLMMemorialProfile(
+                                  memorialId: widget.memorialId,
+                                  pageType: widget.pageType,
+                                  newJoin: widget.joined,
+                                )));
                   }
                 }
               },
               contentPadding: EdgeInsets.zero,
-              leading: widget.profileImage != '' 
-              ? CircleAvatar(
-                backgroundColor: const Color(0xff888888), 
-                foregroundImage: NetworkImage(widget.profileImage),
-                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-              ) 
-              : const CircleAvatar(
-                backgroundColor: const Color(0xff888888), 
-                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-              ),
-              title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-              subtitle: Text(widget.timeCreated, maxLines: 1, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xffaaaaaa),),),
-              trailing: MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType,),
-            ),
-
-            Column(children: widget.contents,),
-
-            widget.numberOfTagged != 0
-            ? Column(
-              children: [
-                const SizedBox(height: 10),
-
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: RichText(
-                    text: TextSpan(
-                      
-                      children: [
-                        const TextSpan(
-                          style: const TextStyle(color: const Color(0xff888888)),
-                          text: 'with '
-                        ),
-
-                        TextSpan(
-                          children: List.generate(widget.numberOfTagged, 
-                            (index) => TextSpan(
-                              style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
-                              children: <TextSpan>[
-                                TextSpan(text: widget.taggedFirstName[index],),
-
-                                TextSpan(text: ' '),
-
-                                TextSpan(text: widget.taggedLastName[index],),
-
-                                index < widget.numberOfTagged - 1
-                                ? const TextSpan(text: ', ')
-                                : const TextSpan(text: ''),
-                              ],
-                              recognizer: TapGestureRecognizer()
-                              ..onTap = (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: widget.taggedId[index], accountType: widget.pageType == 'BLM' ? 1 : 2)));
-                              }
-                            ),
-                          ),
-                        ),
-                      ],
+              leading: widget.profileImage != ''
+                  ? CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: NetworkImage(widget.profileImage),
+                      backgroundImage:
+                          const AssetImage('assets/icons/app-icon.png'),
+                    )
+                  : const CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage:
+                          const AssetImage('assets/icons/app-icon.png'),
                     ),
+              title: Text(
+                widget.memorialName,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaBold',
+                  color: const Color(0xff000000),
+                ),
+              ),
+              subtitle: Text(
+                widget.timeCreated,
+                maxLines: 1,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xffaaaaaa),
+                ),
+              ),
+              trailing: MiscRegularDropDownTemplate(
+                postId: widget.postId,
+                likePost: likePost,
+                likesCount: likesCount,
+                reportType: 'Post',
+                pageType: widget.pageType,
+              ),
+            ),
+            Column(
+              children: widget.contents,
+            ),
+            widget.numberOfTagged != 0
+                ? Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                    style: const TextStyle(
+                                        color: const Color(0xff888888)),
+                                    text: 'with '),
+                                TextSpan(
+                                  children: List.generate(
+                                    widget.numberOfTagged,
+                                    (index) => TextSpan(
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xff000000)),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: widget.taggedFirstName[index],
+                                          ),
+                                          TextSpan(text: ' '),
+                                          TextSpan(
+                                            text: widget.taggedLastName[index],
+                                          ),
+                                          index < widget.numberOfTagged - 1
+                                              ? const TextSpan(text: ', ')
+                                              : const TextSpan(text: ''),
+                                        ],
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomeRegularUserProfile(
+                                                            userId:
+                                                                widget.taggedId[
+                                                                    index],
+                                                            accountType:
+                                                                widget.pageType ==
+                                                                        'BLM'
+                                                                    ? 1
+                                                                    : 2)));
+                                          }),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ))
+                    ],
                   )
-                )
-
-              ],
-            )
-            : Container(height: 0,),
-
+                : Container(
+                    height: 0,
+                  ),
             Row(
               children: [
                 TextButton.icon(
-                  onPressed: () async{
+                  onPressed: () async {
                     setState(() {
                       likePost = !likePost;
 
-                      if(likePost == true){
+                      if (likePost == true) {
                         likesCount++;
-                      }else{
+                      } else {
                         likesCount--;
                       }
                     });
 
-                    await apiRegularLikeOrUnlikePost(postId: widget.postId, like: likePost);
+                    await apiRegularLikeOrUnlikePost(
+                        postId: widget.postId, like: likePost);
                   },
-                  icon: likePost == true ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),) : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
-                  label: Text('$likesCount', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                  icon: likePost == true
+                      ? const FaIcon(
+                          FontAwesomeIcons.solidHeart,
+                          color: const Color(0xffE74C3C),
+                        )
+                      : const FaIcon(
+                          FontAwesomeIcons.heart,
+                          color: const Color(0xff888888),
+                        ),
+                  label: Text(
+                    '$likesCount',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
                 ),
-
                 const SizedBox(width: 20),
-
                 TextButton.icon(
-                  onPressed: () async{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
+                  onPressed: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                HomeRegularShowOriginalPostComments(
+                                    postId: widget.postId)));
                   },
-                  icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                  label: Text('${widget.numberOfComments}', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                  icon: const FaIcon(
+                    FontAwesomeIcons.solidComment,
+                    color: const Color(0xff4EC9D4),
+                  ),
+                  label: Text(
+                    '${widget.numberOfComments}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
                 ),
-
-                Expanded(child: Container(),),
-
+                Expanded(
+                  child: Container(),
+                ),
                 IconButton(
                   alignment: Alignment.centerRight,
                   splashColor: Colors.transparent,
-                  icon: const CircleAvatar(backgroundColor: const Color(0xff4EC9D4), child: const Icon(Icons.share_rounded, color: const Color(0xffffffff)),),
-                  onPressed: () async{
-                    
+                  icon: const CircleAvatar(
+                    backgroundColor: const Color(0xff4EC9D4),
+                    child: const Icon(Icons.share_rounded,
+                        color: const Color(0xffffffff)),
+                  ),
+                  onPressed: () async {
                     BranchUniversalObject buo = BranchUniversalObject(
-                      canonicalIdentifier: 'FacesbyPlaces',
-                      title: 'FacesbyPlaces Link',
-                      contentDescription: 'FacesbyPlaces link to the app',
-                      keywords: ['FacesbyPlaces', 'Share', 'Link'],
-                      publiclyIndex: true,
-                      locallyIndex: true,
-                      contentMetadata: BranchContentMetaData()
-                        ..addCustomMetadata('link-category', 'Post')
-                        ..addCustomMetadata('link-post-id', widget.postId)
-                        ..addCustomMetadata('link-like-status', likePost)
-                        ..addCustomMetadata('link-number-of-likes', likesCount)
-                        ..addCustomMetadata('link-type-of-account', 'Memorial')
-                    );
+                        canonicalIdentifier: 'FacesbyPlaces',
+                        title: 'FacesbyPlaces Link',
+                        contentDescription: 'FacesbyPlaces link to the app',
+                        keywords: ['FacesbyPlaces', 'Share', 'Link'],
+                        publiclyIndex: true,
+                        locallyIndex: true,
+                        contentMetadata: BranchContentMetaData()
+                          ..addCustomMetadata('link-category', 'Post')
+                          ..addCustomMetadata('link-post-id', widget.postId)
+                          ..addCustomMetadata('link-like-status', likePost)
+                          ..addCustomMetadata(
+                              'link-number-of-likes', likesCount)
+                          ..addCustomMetadata(
+                              'link-type-of-account', 'Memorial'));
 
                     BranchLinkProperties lp = BranchLinkProperties(
                         feature: 'sharing',
                         stage: 'new share',
-                      tags: ['one', 'two', 'three']
-                    );
-                    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+                        tags: ['one', 'two', 'three']);
+                    lp.addControlParam('url',
+                        'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
 
                     FlutterBranchSdk.setIdentity('alm-share-link');
 
                     BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                      buo: buo,
-                      linkProperties: lp,
-                      messageText: 'FacesbyPlaces App',
-                      androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                      androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-                    );
+                        buo: buo,
+                        linkProperties: lp,
+                        messageText: 'FacesbyPlaces App',
+                        androidMessageTitle:
+                            'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                        androidSharingTitle:
+                            'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
 
-                    if(response.success){
+                    if (response.success) {
                       await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('Successfully shared the link.',
-                            textAlign: TextAlign.center,
-                          ),
-                          onlyOkButton: true,
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                        )
-                      );
-                    }else{
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                                image: Image.asset(
+                                  'assets/icons/cover-icon.png',
+                                  fit: BoxFit.cover,
+                                ),
+                                title: const Text(
+                                  'Success',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontSize: 22.0,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: const Text(
+                                  'Successfully shared the link.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                onlyOkButton: true,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              ));
+                    } else {
                       FlutterBranchSdk.logout();
                     }
                   },
