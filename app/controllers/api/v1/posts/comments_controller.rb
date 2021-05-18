@@ -1,6 +1,6 @@
 class Api::V1::Posts::CommentsController < ApplicationController
     before_action :check_user
-    before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
+    # before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
 
     def editComment
         comment = Comment.find(params[:comment_id])
@@ -126,7 +126,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
 
             render json: {status: :success, comment: comment}
         else
-            render json: {status: comment.errors}
+            render json: {status: comment.errors}, status: 404
         end
     end
     
