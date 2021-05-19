@@ -1,25 +1,31 @@
 import React, { useState } from "react";
-import { DeleteModal } from "./DeleteModal";
-//Loader
-import HashLoader from "react-spinners/HashLoader";
+import axios from "../../../../../../auxiliary/axios";
 
-import { useDispatch } from "react-redux";
-import {
-  ViewReportAction,
-  EditReportAction,
-  DeleteReportAction,
-} from "../../../../../../redux/actions";
+import { TransactionModal } from "./TransactionModal";
+import HashLoader from "react-spinners/HashLoader";
 
 export default function DataTableRowTransactionData({
   transactions,
   search,
   pageType,
 }) {
-  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [transaction, setTransaction] = useState();
+  const handleViewClick = (id) => {
+    setShowModal((prev) => !prev);
+    fetchTransaction(id);
+  };
 
-  const handleViewClick = (id, option, type) => {
-    console.log(id, option);
-    dispatch(ViewReportAction({ id, option, type }));
+  const fetchTransaction = (id) => {
+    axios
+      .get(`/api/v1/admin/transactions/show/?id=${id}`)
+      .then((response) => {
+        // console.log(response.data);
+        setTransaction(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.errors);
+      });
   };
 
   const renderedTransactions = transactions.map((transaction) => (
@@ -67,7 +73,7 @@ export default function DataTableRowTransactionData({
         {/* View User Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
-          onClick={() => handleViewClick(transaction.id, "v", 2)}
+          onClick={() => handleViewClick(transaction.id)}
         >
           <span className="svg-icon svg-icon-lg svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
@@ -108,6 +114,11 @@ export default function DataTableRowTransactionData({
             {/*end::Svg Icon*/}
           </span>
         </a>
+        <TransactionModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          transaction={transaction}
+        />
       </td>
     </tr>
   ));
