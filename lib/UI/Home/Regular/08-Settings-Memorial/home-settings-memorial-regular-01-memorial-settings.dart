@@ -105,8 +105,8 @@ class HomeRegularMemorialSettingsState
       body: Column(
         children: [
           Container(
-            alignment: Alignment.centerLeft,
-            width: SizeConfig.screenWidth,
+          //  alignment: Alignment.centerLeft,
+           // width: SizeConfig.screenWidth,
             height: 70,
             child: DefaultTabController(
               length: 2,
@@ -121,24 +121,20 @@ class HomeRegularMemorialSettingsState
                   });
                 },
                 tabs: [
-                  Center(
-                    child: Text(
-                      'Page',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xff2F353D),
-                      ),
+                  Text(
+                    'Page',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                      fontFamily: 'NexaRegular',
+                      color: const Color(0xff2F353D),
                     ),
                   ),
-                  Center(
-                    child: Text(
-                      'Privacy',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xff2F353D),
-                      ),
+                  Text(
+                    'Privacy',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                      fontFamily: 'NexaRegular',
+                      color: const Color(0xff2F353D),
                     ),
                   ),
                 ],

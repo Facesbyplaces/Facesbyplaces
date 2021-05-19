@@ -404,10 +404,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                           ),
                                           label: Text(
                                             '${profile.data!.almMemorial.showMemorialFollowersCount}',
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
-                                              color: const Color(0xff000000),
+                                            style: TextStyle(
+                                              fontSize: SizeConfig
+                                                  .blockSizeVertical! *
+                                                  2.11,
+                                              fontFamily: 'NexaBold',
+                                              color: const Color(0xff2F353D),
                                             ),
                                           ),
                                         ),

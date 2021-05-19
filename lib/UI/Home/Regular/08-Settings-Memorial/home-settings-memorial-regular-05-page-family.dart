@@ -127,9 +127,19 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
                     ),
                   ),
             title: Text(
-                '${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}'),
+                '${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontFamily: 'NexaBold',
+                color: const Color(0xff000000),
+              ),),
             subtitle: Text(
-                '${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsEmail}'),
+                '${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsEmail}',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                fontFamily: 'NexaRegular',
+                color: const Color(0xffBDC3C7),
+              ),),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,

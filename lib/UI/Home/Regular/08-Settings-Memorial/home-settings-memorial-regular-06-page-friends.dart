@@ -125,9 +125,19 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
                     ),
                   ),
             title: Text(
-                '${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}'),
+                '${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontFamily: 'NexaBold',
+                color: const Color(0xff000000),
+              ),),
             subtitle: Text(
-                '${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsEmail}'),
+                '${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsEmail}',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                fontFamily: 'NexaRegular',
+                color: const Color(0xffBDC3C7),
+              ),),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,

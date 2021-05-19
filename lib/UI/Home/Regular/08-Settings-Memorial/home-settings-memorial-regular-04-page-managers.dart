@@ -323,9 +323,19 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
               backgroundImage: const AssetImage('assets/icons/app-icon.png'),
             ),
             title: Text(
-                '${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}'),
+                '${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontFamily: 'NexaBold',
+                color: const Color(0xff000000),
+              ),),
             subtitle: Text(
-                '${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}'),
+                '${newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                fontFamily: 'NexaRegular',
+                color: const Color(0xffBDC3C7),
+              ),),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,

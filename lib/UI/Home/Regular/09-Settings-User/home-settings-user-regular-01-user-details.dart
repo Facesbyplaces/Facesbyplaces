@@ -447,10 +447,10 @@ class HomeRegularUserProfileDetailsState
                           Navigator.of(context)
                               .popAndPushNamed('/home/regular');
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.arrow_back,
                           color: const Color(0xffffffff),
-                          size: 35,
+                            size: SizeConfig.blockSizeVertical! * 3.52
                         ),
                       ),
                     ),

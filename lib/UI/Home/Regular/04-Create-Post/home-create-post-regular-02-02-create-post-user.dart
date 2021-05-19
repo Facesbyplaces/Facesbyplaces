@@ -122,6 +122,11 @@ class HomeRegularCreatePostSearchUserState
 
                 onLoading();
               },
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                fontFamily: 'NexaRegular',
+                color: const Color(0xff000000),
+              ),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(15.0),
                 filled: true,
@@ -208,12 +213,18 @@ class HomeRegularCreatePostSearchUserState
                                 ),
                           title: Text(
                             users[i].firstName + ' ' + users[i].lastName,
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                              fontFamily: 'NexaRegular',
+                              color: const Color(0xff000000),
+                            ),
                           ),
                           subtitle: Text(
                             users[i].email,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: const Color(0xff888888),
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                              fontFamily: 'NexaRegular',
+                              color: const Color(0xff000000),
                             ),
                           ),
                         );
