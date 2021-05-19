@@ -273,7 +273,7 @@ Rails.application.routes.draw do
         # all transactions
         get 'transactions',                       to: 'transactions#allTransactions'
         # show transaction
-        get 'transactions/show',                  to: 'transactions#show_transaction'
+        get 'transactions/show',                  to: 'transactions#showTransaction'
 
       end
 

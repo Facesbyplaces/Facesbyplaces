@@ -24,6 +24,12 @@ class Api::V1::Admin::TransactionsController < ApplicationController
                     }
     end
 
+    def showTransaction
+        transaction = Transaction.find(params[:id])
+
+        render json: TransactionSerializer.new( transaction ).attributes
+    end
+
     private
 
     # def report_params
