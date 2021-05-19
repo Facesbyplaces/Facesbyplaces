@@ -179,10 +179,10 @@ class MiscRegularPostState extends State<MiscRegularPost> {
               subtitle: Text(
                 widget.timeCreated,
                 maxLines: 1,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xffaaaaaa),
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 1.56,
+                  fontFamily: 'NexaRegular',
+                  color: const Color(0xffB1B1B1),
                 ),
               ),
               trailing: MiscRegularDropDownTemplate(
@@ -282,8 +282,9 @@ class MiscRegularPostState extends State<MiscRegularPost> {
                         ),
                   label: Text(
                     '$likesCount',
-                    style: const TextStyle(
-                      fontSize: 14,
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaRegular',
                       color: const Color(0xff000000),
                     ),
                   ),
@@ -299,7 +300,11 @@ class MiscRegularPostState extends State<MiscRegularPost> {
                                     postId: widget.postId)));
                   },
                   icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                  label: Text('$commentsCount', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                  label: Text('$commentsCount',  style: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                    fontFamily: 'NexaRegular',
+                    color: const Color(0xff000000),
+                  ),),
                 ),
                 IconButton(
                   alignment: Alignment.centerRight,
@@ -352,17 +357,21 @@ class MiscRegularPostState extends State<MiscRegularPost> {
                                   'assets/icons/cover-icon.png',
                                   fit: BoxFit.cover,
                                 ),
-                                title: const Text(
+                                title: Text(
                                   'Success',
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w600),
+                                  style:  TextStyle(
+                                      fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                      fontFamily: 'NexaRegular'),
                                 ),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: const Text(
+                                description: Text(
                                   'Successfully shared the link.',
                                   textAlign: TextAlign.center,
+                                  style:  TextStyle(
+                                      fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                      fontFamily: 'NexaRegular'
+                                  ),
                                 ),
                                 onlyOkButton: true,
                                 onOkButtonPressed: () {

@@ -13,7 +13,12 @@ class HomeBLMPageFriends extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  const HomeBLMPageFriends({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
+  const HomeBLMPageFriends(
+      {required this.memorialId,
+      required this.memorialName,
+      required this.switchFamily,
+      required this.switchFriends,
+      required this.switchFollowers});
 
   HomeBLMPageFriendsState createState() => HomeBLMPageFriendsState();
 }
@@ -24,16 +29,17 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   List<Widget> friends = [];
   int page = 1;
 
-  void initState(){
+  void initState() {
     super.initState();
     onLoading();
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-        if(friendsItemsRemaining != 0){
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        if (friendsItemsRemaining != 0) {
           setState(() {
             onLoading();
           });
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more users to show'),
@@ -46,111 +52,169 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
     });
   }
 
-  Future<void> onRefresh() async{
+  Future<void> onRefresh() async {
     setState(() {
       onLoading();
     });
   }
 
-  void onLoading() async{
-    if(friendsItemsRemaining != 0){
+  void onLoading() async {
+    if (friendsItemsRemaining != 0) {
       context.loaderOverlay.show();
       var newValue = await apiBLMShowFriendsSettings(memorialId: widget.memorialId, page: page);
       context.loaderOverlay.hide();
 
       friendsItemsRemaining = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.blmFriendsList.length; i++){
+      for (int i = 0; i < newValue.blmFriendsList.length; i++) {
         friends.add(
           ListTile(
-            leading: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != '' 
-            ? CircleAvatar(
-              backgroundColor: Color(0xff888888), 
-              foregroundImage: NetworkImage('${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}',),
-              backgroundImage: AssetImage('assets/icons/app-icon.png'),
-            ) 
-            : CircleAvatar(
-              backgroundColor: Color(0xff888888), 
-              foregroundImage: AssetImage('assets/icons/app-icon.png'),
-            ),
-            title: Text('${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}'),
-            subtitle: Text('${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsEmail}'),
+            leading: newValue.blmFriendsList[i].showFriendsSettingsUser
+                        .showFriendsSettingsDetailsImage !=
+                    ''
+                ? CircleAvatar(
+                    backgroundColor: Color(0xff888888),
+                    foregroundImage: NetworkImage(
+                      '${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}',
+                    ),
+                    backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                  )
+                : CircleAvatar(
+                    backgroundColor: Color(0xff888888),
+                    foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                  ),
+            title: Text(
+                '${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontFamily: 'NexaBold',
+                color: const Color(0xff000000),
+              ),),
+            subtitle: Text(
+                '${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsEmail}',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                fontFamily: 'NexaRegular',
+                color: const Color(0xffBDC3C7),
+              ),),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,
               textColor: const Color(0xffffffff),
               splashColor: const Color(0xff04ECFF),
-              onPressed: () async{
-
+              onPressed: () async {
                 bool confirmation = await showDialog(
-                  context: context,
-                  builder: (_) => 
-                    AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    entryAnimation: EntryAnimation.DEFAULT,
-                    description: const Text('Are you sure you want to remove this user?',
-                      textAlign: TextAlign.center,
-                    ),
-                    onlyOkButton: false,
-                    onOkButtonPressed: () async{
-                      Navigator.pop(context, true);
-                    },
-                    onCancelButtonPressed: () {
-                      Navigator.pop(context, false);
-                    },
-                  )
-                );
+                    context: context,
+                    builder: (_) => AssetGiffyDialog(
+                          image: Image.asset(
+                            'assets/icons/cover-icon.png',
+                            fit: BoxFit.cover,
+                          ),
+                      title: Text(
+                        'Confirm',
+                        textAlign: TextAlign.center,
+                        style:  TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                            fontFamily: 'NexaRegular'),
+                      ),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text(
+                        'Are you sure you want to remove this user?',
+                        textAlign: TextAlign.center,
+                        style:  TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                            fontFamily: 'NexaRegular'
+                        ),
+                      ),
+                          onlyOkButton: false,
+                          onOkButtonPressed: () async {
+                            Navigator.pop(context, true);
+                          },
+                          onCancelButtonPressed: () {
+                            Navigator.pop(context, false);
+                          },
+                        ));
 
-                if(confirmation){
+                if (confirmation) {
                   context.loaderOverlay.show();
                   String result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: widget.memorialId, userId: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId, accountType: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType);
                   context.loaderOverlay.hide();
 
-                  if(result != 'Success'){
+                  if (result != 'Success') {
                     await showDialog(
-                      context: context,
-                      builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Error: $result.',
-                          textAlign: TextAlign.center,
-                        ),
-                        onlyOkButton: true,
-                        buttonOkColor: const Color(0xffff0000),
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      )
-                    );
-                  }else{
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(
+                              image: Image.asset(
+                                'assets/icons/cover-icon.png',
+                                fit: BoxFit.cover,
+                              ),
+                          title: Text(
+                            'Error',
+                            textAlign: TextAlign.center,
+                            style:  TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                fontFamily: 'NexaRegular'),
+                          ),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text(
+                            'Error: $result.',
+                            textAlign: TextAlign.center,
+                            style:  TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular'
+                            ),
+                          ),
+                              onlyOkButton: true,
+                              buttonOkColor: const Color(0xffff0000),
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            ));
+                  } else {
                     await showDialog(
-                      context: context,
-                      builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: const Text('Successfully removed the user from the list.',
-                          textAlign: TextAlign.center,
-                        ),
-                        onlyOkButton: true,
-                        onOkButtonPressed: () {
-                          friends = [];
-                          friendsItemsRemaining = 1;
-                          page = 1; 
-                          onLoading();
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(
+                              image: Image.asset(
+                                'assets/icons/cover-icon.png',
+                                fit: BoxFit.cover,
+                              ),
+                          title: Text(
+                            'Success',
+                            textAlign: TextAlign.center,
+                            style:  TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                fontFamily: 'NexaRegular'),
+                          ),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text(
+                            'Successfully removed the user from the list.',
+                            textAlign: TextAlign.center,
+                            style:  TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular'
+                            ),
+                          ),
+                              onlyOkButton: true,
+                              onOkButtonPressed: () {
+                                friends = [];
+                                friendsItemsRemaining = 1;
+                                page = 1;
+                                onLoading();
 
-                          Navigator.pop(context, true);
-                        },
-                      )
-                    );
+                                Navigator.pop(context, true);
+                              },
+                            ));
                   }
                 }
               },
-              child: const Text('Remove', style: const TextStyle(fontSize: 14,),),
+              child: Text(
+                'Remove',
+                style:  TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'HelveticaRegular',
+                  color: const Color(0xffffffff),
+                ),
+              ),
               height: 40,
               shape: const StadiumBorder(
                 side: const BorderSide(color: const Color(0xffE74C3C)),
@@ -161,8 +225,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
         );
       }
 
-      if(mounted)
-      setState(() {});
+      if (mounted) setState(() {});
       page++;
     }
   }
@@ -173,51 +236,96 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff04ECFF),
-        title: const Text('Page Friends', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),
+        title: Row(
+          children: [
+            Text(
+              'Friends',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                fontFamily: 'NexaRegular',
+                color: const Color(0xffffffff),
+              ),
+            ),
+            Spacer()
+          ],
+        ),
         centerTitle: true,
-        leading: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: const Color(0xffffffff),
+            size: SizeConfig.blockSizeVertical! * 3.52,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           GestureDetector(
             onTap: (){
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
             },
-            child: const Center(child: const Text('Add Friends', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),),
+            child: Center(
+              child: Text(
+                'Add Friends',
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: const Color(0xffffffff),
+                ),
+              ),
+            ),
           ),
         ],
       ),
       body: Container(
         width: SizeConfig.screenWidth,
         child: friends.length != 0
-        ? RefreshIndicator(
-          onRefresh: onRefresh,
-          child: ListView.separated(
-            controller: scrollController,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            physics: const ClampingScrollPhysics(),
-            itemCount: friends.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            itemBuilder: (c, i) => friends[i],
-          )
-        )
-        : SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
-
-              const SizedBox(height: 45,),
-
-              const Text('Friends list is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
-
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-            ],
-          ),
-        ),
+            ? RefreshIndicator(
+                onRefresh: onRefresh,
+                child: ListView.separated(
+                  controller: scrollController,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: friends.length,
+                  separatorBuilder: (c, i) =>
+                      const Divider(height: 10, color: Colors.transparent),
+                  itemBuilder: (c, i) => friends[i],
+                ))
+            : SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) /
+                          3.5,
+                    ),
+                    Image.asset(
+                      'assets/icons/app-icon.png',
+                      height: 250,
+                      width: 250,
+                    ),
+                    const SizedBox(
+                      height: 45,
+                    ),
+                    Text(
+                      'Friends list is empty',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 3.52,
+                        fontFamily: 'NexaBold',
+                        color: const Color(0xffB1B1B1),
+                      ),
+                    ),
+                    SizedBox(
+                      height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) /
+                          3.5,
+                    ),
+                  ],
+                ),
+              ),
       ),
     );
   }

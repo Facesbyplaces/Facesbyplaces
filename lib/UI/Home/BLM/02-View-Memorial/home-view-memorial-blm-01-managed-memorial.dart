@@ -266,9 +266,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                           textAlign: TextAlign.center,
                                           maxLines: 5,
                                           overflow: TextOverflow.clip,
-                                          style: const TextStyle(
-                                            fontSize: 20, 
-                                            fontWeight: FontWeight.bold, 
+                                          style: TextStyle(
+                                            fontSize: SizeConfig
+                                                .blockSizeVertical! *
+                                                2.64,
+                                            fontFamily: 'NexaBold',
                                             color: const Color(0xff000000),
                                           ),
                                         ),
@@ -290,10 +292,12 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                           ),
                                         ),
                                         label: Text('${profile.data!.blmMemorial.memorialFollowersCount}',
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xff000000),
+                                          style: TextStyle(
+                                            fontSize: SizeConfig
+                                                .blockSizeVertical! *
+                                                2.11,
+                                            fontFamily: 'NexaBold',
+                                            color: const Color(0xff2F353D),
                                           ),
                                         ),
                                       ),
@@ -393,10 +397,13 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                 child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription,
                                                   textAlign: TextAlign.center,
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: const Color(0xff000000),
+                                                  style: TextStyle(
+                                                    fontSize: SizeConfig
+                                                        .blockSizeVertical! *
+                                                        2.11,
+                                                    fontFamily: 'NexaRegular',
+                                                    color: const Color(
+                                                        0xff2F353D),
                                                   ),
                                                 ),
                                               );
@@ -435,11 +442,14 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                     }
                                                     
                                                   },
-                                                  child: const Text('Manage',
-                                                    style: const TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xffffffff),
+                                                  child: Text('Manage',
+                                                    style: TextStyle(
+                                                      fontSize: SizeConfig
+                                                          .blockSizeVertical! *
+                                                          2.64,
+                                                      fontFamily: 'NexaBold',
+                                                      color: const Color(
+                                                          0xffFFFFFF),
                                                     ),
                                                   ),
                                                   minWidth: SizeConfig.screenWidth! / 2,
@@ -495,9 +505,13 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 const SizedBox(width: 20,),
                                                 Expanded(
                                                   child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsCountry,
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: const Color(0xff000000),
+                                                    style: TextStyle(
+                                                      fontSize: SizeConfig
+                                                          .blockSizeVertical! *
+                                                          1.76,
+                                                      fontFamily: 'NexaRegular',
+                                                      color: const Color(
+                                                          0xff000000),
                                                     ),
                                                   ),
                                                 ),
@@ -512,9 +526,13 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 const SizedBox(width: 20,),
                                                 Expanded(
                                                   child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDob,
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: const Color(0xff000000),
+                                                    style: TextStyle(
+                                                      fontSize: SizeConfig
+                                                          .blockSizeVertical! *
+                                                          1.76,
+                                                      fontFamily: 'NexaRegular',
+                                                      color: const Color(
+                                                          0xff000000),
                                                     ),
                                                   ),
                                                 ),
@@ -529,9 +547,13 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 const SizedBox(width: 20,),
                                                 Expanded(
                                                   child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsRip,
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: const Color(0xff000000),
+                                                    style: TextStyle(
+                                                      fontSize: SizeConfig
+                                                          .blockSizeVertical! *
+                                                          1.76,
+                                                      fontFamily: 'NexaRegular',
+                                                      color: const Color(
+                                                          0xff000000),
                                                     ),
                                                   ),
                                                 ),
@@ -557,18 +579,26 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   children: [
 
                                                     Text('${profile.data!.blmMemorial.memorialPostsCount}',
-                                                      style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: const Color(0xff000000),
+                                                      style: TextStyle(
+                                                        fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                            2.64,
+                                                        fontFamily:
+                                                        'NexaBold',
+                                                        color: const Color(
+                                                            0xff000000),
                                                       ),
                                                     ),
 
-                                                    const Text('Post',
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w300,
-                                                        color: const Color(0xffaaaaaa),
+                                                    Text('Post',
+                                                      style: TextStyle(
+                                                        fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                            1.76,
+                                                        fontFamily:
+                                                        'NexaRegular',
+                                                        color: const Color(
+                                                            0xff677375),
                                                       ),
                                                     ),
                                                   ],
@@ -587,18 +617,26 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   children: [
 
                                                     Text('${profile.data!.blmMemorial.memorialFamilyCount}',
-                                                      style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: const Color(0xff000000),
+                                                      style: TextStyle(
+                                                        fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                            2.64,
+                                                        fontFamily:
+                                                        'NexaBold',
+                                                        color: const Color(
+                                                            0xff000000),
                                                       ),
                                                     ),
 
                                                     Text('Family',
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w300,
-                                                        color: const Color(0xffaaaaaa),
+                                                      style: TextStyle(
+                                                        fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                            1.76,
+                                                        fontFamily:
+                                                        'NexaRegular',
+                                                        color: const Color(
+                                                            0xff677375),
                                                       ),
                                                     ),
                                                   ],
@@ -616,18 +654,26 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 child: Column(
                                                   children: [
                                                     Text('${profile.data!.blmMemorial.memorialFriendsCount}',
-                                                      style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: const Color(0xff000000),
+                                                      style: TextStyle(
+                                                        fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                            2.64,
+                                                        fontFamily:
+                                                        'NexaBold',
+                                                        color: const Color(
+                                                            0xff000000),
                                                       ),
                                                     ),
 
-                                                    const Text('Friends',
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w300,
-                                                        color: const Color(0xffaaaaaa),
+                                                    Text('Friends',
+                                                      style: TextStyle(
+                                                        fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                            1.76,
+                                                        fontFamily:
+                                                        'NexaRegular',
+                                                        color: const Color(
+                                                            0xff677375),
                                                       ),
                                                     ),
                                                   ],
@@ -646,18 +692,26 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   children: [
 
                                                     Text('${profile.data!.blmMemorial.memorialFollowersCount}',
-                                                      style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: const Color(0xff000000),
+                                                      style: TextStyle(
+                                                        fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                            2.64,
+                                                        fontFamily:
+                                                        'NexaBold',
+                                                        color: const Color(
+                                                            0xff000000),
                                                       ),
                                                     ),
 
-                                                    const Text('Joined',
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w300,
-                                                        color: const Color(0xffaaaaaa),
+                                                    Text('Joined',
+                                                      style: TextStyle(
+                                                        fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                            1.76,
+                                                        fontFamily:
+                                                        'NexaRegular',
+                                                        color: const Color(
+                                                            0xff677375),
                                                       ),
                                                     ),
                                                   ],
@@ -683,7 +737,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
-                                                color: const Color(0xff000000),
+                                                color:
+                                                const Color(0xff000000),
                                               ),
                                             ),
                                           ),
@@ -864,13 +919,16 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                           },
                                           child: Row(
                                             children: [
-                                              const Icon(Icons.arrow_back, color: const Color(0xffffffff),), 
-                                              const Text('Back',
-                                                style: const TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: const Color(0xffffffff),
-                                                ),
+                                              Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig
+                                                  .blockSizeVertical! *
+                                                  3.65,),
+                                              Text('Back',
+                                                style: TextStyle(
+                                                    fontSize: SizeConfig
+                                                        .blockSizeVertical! *
+                                                        3.16,
+                                                    color: Color(0xffFFFFFF),
+                                                    fontFamily: 'NexaRegular'),
                                               ),
                                             ],
                                           ),
@@ -879,26 +937,28 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                     ),
                                     Expanded(
                                       child: Container(
-                                        padding: const EdgeInsets.only(right: 20.0),
+                                        padding:
+                                        const EdgeInsets.only(right: 20.0),
                                         alignment: Alignment.centerRight,
                                         child: widget.managed == true
                                         ? MaterialButton(
                                           onPressed: () async{
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePost(name: profile.data!.blmMemorial.memorialName, memorialId: profile.data!.blmMemorial.memorialId)));
                                           },
-                                          shape: const StadiumBorder(),
-                                          color: const Color(0xff00ff00),
-                                          splashColor: const Color(0xffffff00),
-                                          height: 45,
-                                          child: const Text('Create Post',
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: const Color(0xffffffff),
-                                            ),
+                                          child: Text(
+                                            'Create Post',
+                                            style: TextStyle(
+                                                fontSize: SizeConfig
+                                                    .blockSizeVertical! *
+                                                    3.16,
+                                                color: Color(0xffFFFFFF),
+                                                fontFamily:
+                                                'NexaRegular'),
                                           ),
                                         )
-                                        : Container(height: 0,),
+                                            : Container(
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ],

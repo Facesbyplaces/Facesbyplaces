@@ -95,7 +95,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
             style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+              fontSize: SizeConfig.blockSizeVertical! * 2.11,
               fontFamily: 'NexaBold',
               color: const Color(0xff888888),),
           ),
@@ -263,7 +263,10 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     }
                   }
                 },
-                child: const Text('Leave', style: const TextStyle(fontSize: 14,),),
+                child: Text('Leave', style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaBold',
+                  color: const Color(0xffFFFFFF),)),
                 height: 35,
                 shape: const RoundedRectangleBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(5)),

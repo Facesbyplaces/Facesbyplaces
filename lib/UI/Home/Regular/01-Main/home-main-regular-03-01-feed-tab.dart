@@ -568,6 +568,11 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab> {
                                     feedsListener[i].postBody,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 5,
+                                    style: TextStyle(
+                                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                      fontFamily: 'NexaRegular',
+                                      color: const Color(0xff000000),
+                                    ),
                                   ),
                                 ),
                                 feedsListener[i].imagesOrVideos.isNotEmpty

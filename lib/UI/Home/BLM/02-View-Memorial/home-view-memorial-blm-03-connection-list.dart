@@ -7,7 +7,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-class BLMConnectionListItem{
+class BLMConnectionListItem {
   final int id;
   final int accountType;
   final String firstName;
@@ -15,13 +15,20 @@ class BLMConnectionListItem{
   final String image;
   final String relationship;
 
-  const BLMConnectionListItem({required this.id, required this.accountType, required this.firstName, required this.lastName, required this.image, required this.relationship});
+  const BLMConnectionListItem(
+      {required this.id,
+      required this.accountType,
+      required this.firstName,
+      required this.lastName,
+      required this.image,
+      required this.relationship});
 }
 
-class HomeBLMConnectionList extends StatefulWidget{
+class HomeBLMConnectionList extends StatefulWidget {
   final int memorialId;
   final int newToggle;
-  const HomeBLMConnectionList({required this.memorialId, required this.newToggle});
+  const HomeBLMConnectionList(
+      {required this.memorialId, required this.newToggle});
 
   HomeBLMConnectionListState createState() => HomeBLMConnectionListState();
 }
@@ -44,19 +51,20 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   int page3 = 1;
   int toggle = 0;
 
-  void initState(){
+  void initState() {
     super.initState();
     toggle = widget.newToggle;
     onLoading1();
     onLoading2();
     onLoading3();
     scrollController1.addListener(() {
-      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
-        if(itemRemaining1 != 0){
+      if (scrollController1.position.pixels ==
+          scrollController1.position.maxScrollExtent) {
+        if (itemRemaining1 != 0) {
           setState(() {
             onLoading1();
           });
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more connection list family to show'),
@@ -68,12 +76,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       }
     });
     scrollController2.addListener(() {
-      if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
-        if(itemRemaining2 != 0){
+      if (scrollController2.position.pixels ==
+          scrollController2.position.maxScrollExtent) {
+        if (itemRemaining2 != 0) {
           setState(() {
             onLoading1();
           });
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more connection list friends to show'),
@@ -85,12 +94,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       }
     });
     scrollController3.addListener(() {
-      if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
-        if(itemRemaining3 != 0){
+      if (scrollController3.position.pixels ==
+          scrollController3.position.maxScrollExtent) {
+        if (itemRemaining3 != 0) {
           setState(() {
             onLoading1();
           });
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more connection list followers to show'),
@@ -103,102 +113,112 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     });
   }
 
-  Future<void> onRefresh1() async{
+  Future<void> onRefresh1() async {
     setState(() {
       onLoading1();
     });
   }
 
-  Future<void> onRefresh2() async{
+  Future<void> onRefresh2() async {
     setState(() {
       onLoading2();
     });
   }
 
-  Future<void> onRefresh3() async{
+  Future<void> onRefresh3() async {
     setState(() {
       onLoading3();
     });
   }
 
-  void onLoading1() async{
-    if(itemRemaining1 != 0){
-
+  void onLoading1() async {
+    if (itemRemaining1 != 0) {
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFamily(memorialId: widget.memorialId, page: page1);
       context.loaderOverlay.hide();
 
       itemRemaining1 = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.blmFamilyList.length; i++){
+      for (int i = 0; i < newValue.blmFamilyList.length; i++) {
         listsFamily.add(
           BLMConnectionListItem(
-            id: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsId,
-            accountType: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyAccountType,
-            firstName: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsFirstName,
-            lastName: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsLastName,
-            image: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsImage,
-            relationship: newValue.blmFamilyList[i].connectionListFamilyRelationship,
-          ),    
+            id: newValue.blmFamilyList[i].connectionListFamilyUser
+                .connectionListFamilyDetailsId,
+            accountType: newValue.blmFamilyList[i].connectionListFamilyUser
+                .connectionListFamilyAccountType,
+            firstName: newValue.blmFamilyList[i].connectionListFamilyUser
+                .connectionListFamilyDetailsFirstName,
+            lastName: newValue.blmFamilyList[i].connectionListFamilyUser
+                .connectionListFamilyDetailsLastName,
+            image: newValue.blmFamilyList[i].connectionListFamilyUser
+                .connectionListFamilyDetailsImage,
+            relationship:
+                newValue.blmFamilyList[i].connectionListFamilyRelationship,
+          ),
         );
       }
 
-      if(mounted)
-      setState(() {});
+      if (mounted) setState(() {});
       page1++;
     }
   }
 
-  void onLoading2() async{
-    if(itemRemaining2 != 0){
+  void onLoading2() async {
+    if (itemRemaining2 != 0) {
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFriends(memorialId: widget.memorialId, page: page2);
       context.loaderOverlay.hide();
 
       itemRemaining2 = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.blmFriendsList.length; i++){
+      for (int i = 0; i < newValue.blmFriendsList.length; i++) {
         listsFriends.add(
           BLMConnectionListItem(
-            id: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsId,
-            accountType: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsAccountType,
-            firstName: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsFirstName,
-            lastName: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsLastName,
-            image: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsImage,
+            id: newValue.blmFriendsList[i].connectionListFriendsUser
+                .connectionListFriendsDetailsId,
+            accountType: newValue.blmFriendsList[i].connectionListFriendsUser
+                .connectionListFriendsAccountType,
+            firstName: newValue.blmFriendsList[i].connectionListFriendsUser
+                .connectionListFriendsDetailsFirstName,
+            lastName: newValue.blmFriendsList[i].connectionListFriendsUser
+                .connectionListFriendsDetailsLastName,
+            image: newValue.blmFriendsList[i].connectionListFriendsUser
+                .connectionListFriendsDetailsImage,
             relationship: 'Friend',
-          ),    
+          ),
         );
       }
 
-      if(mounted)
-      setState(() {});
+      if (mounted) setState(() {});
       page2++;
     }
   }
 
-  void onLoading3() async{
-    if(itemRemaining3 != 0){
+  void onLoading3() async {
+    if (itemRemaining3 != 0) {
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFollowers(memorialId: widget.memorialId, page: page3);
       context.loaderOverlay.hide();
 
       itemRemaining3 = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.blmFollowersList.length; i++){
+      for (int i = 0; i < newValue.blmFollowersList.length; i++) {
         listsFollowers.add(
           BLMConnectionListItem(
             id: newValue.blmFollowersList[i].connectionListFollowersId,
-            accountType: newValue.blmFollowersList[i].connectionListFollowersAccountType,
-            firstName: newValue.blmFollowersList[i].connectionListFollowersFirstName,
-            lastName: newValue.blmFollowersList[i].connectionListFollowersLastName,
+            accountType:
+                newValue.blmFollowersList[i].connectionListFollowersAccountType,
+            firstName:
+                newValue.blmFollowersList[i].connectionListFollowersFirstName,
+            lastName:
+                newValue.blmFollowersList[i].connectionListFollowersLastName,
             image: newValue.blmFollowersList[i].connectionListFollowersImage,
             relationship: 'Follower',
-          ),    
+          ),
         );
       }
 
-      if(mounted)
-      setState(() {});
+      if (mounted) setState(() {});
       page3++;
     }
   }
@@ -207,13 +227,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusNode currentFocus = FocusScope.of(context);
-          if(!currentFocus.hasPrimaryFocus){
+          if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
           }
         },
@@ -223,74 +243,105 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Color(0xffffffff),
+                        size: SizeConfig.blockSizeVertical! * 3.52,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
-
                 Expanded(
                   child: TextFormField(
-                    onChanged: (search){
-                      if(toggle == 0){
-                        for(int i = 0; i < listsFamily.length; i++){
-                          if(listsFamily[i].firstName == search || listsFamily[i].lastName == search){
+                    onChanged: (search) {
+                      if (toggle == 0) {
+                        for (int i = 0; i < listsFamily.length; i++) {
+                          if (listsFamily[i].firstName == search ||
+                              listsFamily[i].lastName == search) {
                             searches.add(listsFamily[i]);
                           }
                         }
-                      }else if(toggle == 1){
-                        for(int i = 0; i < listsFriends.length; i++){
-                          if(listsFriends[i].firstName == search || listsFriends[i].lastName == search){
+                      } else if (toggle == 1) {
+                        for (int i = 0; i < listsFriends.length; i++) {
+                          if (listsFriends[i].firstName == search ||
+                              listsFriends[i].lastName == search) {
                             searches.add(listsFriends[i]);
                           }
                         }
-                      }else if(toggle == 2){
-                        for(int i = 0; i < listsFollowers.length; i++){
-                          if(listsFollowers[i].firstName == search || listsFollowers[i].lastName == search){
+                      } else if (toggle == 2) {
+                        for (int i = 0; i < listsFollowers.length; i++) {
+                          if (listsFollowers[i].firstName == search ||
+                              listsFollowers[i].lastName == search) {
                             searches.add(listsFollowers[i]);
                           }
                         }
                       }
 
-                      if(search == ''){
+                      if (search == '') {
                         setState(() {
                           onSearch = false;
                           searches = [];
                         });
-                      }else{
+                      } else {
                         setState(() {
                           onSearch = true;
                         });
                       }
                     },
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaRegular',
+                      color: const Color(0xff2F353D),
+                    ),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(15.0),
                       filled: true,
                       fillColor: const Color(0xffffffff),
                       focusColor: const Color(0xffffffff),
-                      hintText: ((){
-                        switch(toggle){
-                          case 0: return 'Search Family';
-                          case 1: return 'Search Friends';
-                          case 2: return 'Search Followers';
+                      hintText: (() {
+                        switch (toggle) {
+                          case 0:
+                            return 'Search Family';
+                          case 1:
+                            return 'Search Friends';
+                          case 2:
+                            return 'Search Followers';
                         }
                       }()),
-                      hintStyle: const TextStyle(fontSize: 16,),
-                      prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
+                      hintStyle: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xffB1B1B1),
+                      ),
+                      prefixIcon: const Icon(Icons.search,
+                          color: const Color(0xff888888)),
                       border: const OutlineInputBorder(
-                        borderSide: const BorderSide(color: const Color(0xffffffff)),
-                        borderRadius: const BorderRadius.all(Radius.circular(25)),
+                        borderSide:
+                            const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(25)),
                       ),
-                      enabledBorder:  const OutlineInputBorder(
-                        borderSide: const BorderSide(color: const Color(0xffffffff)),
-                        borderRadius: const BorderRadius.all(Radius.circular(25)),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(25)),
                       ),
-                      focusedBorder:  const OutlineInputBorder(
-                        borderSide: const BorderSide(color: const Color(0xffffffff)),
-                        borderRadius: const BorderRadius.all(Radius.circular(25)),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: const Color(0xffffffff)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(25)),
                       ),
                     ),
                   ),
                 ),
-
-                const SizedBox(width: 20,),
+                const SizedBox(
+                  width: 20,
+                ),
               ],
             ),
             leading: Container(),
@@ -298,9 +349,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           ),
           body: Column(
             children: [
-
               Container(
-                alignment: Alignment.center,
+               // alignment: Alignment.center,
                 width: SizeConfig.screenWidth,
                 height: 70,
                 color: const Color(0xffffffff),
@@ -311,54 +361,51 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                     labelColor: const Color(0xff04ECFF),
                     unselectedLabelColor: const Color(0xff000000),
                     indicatorColor: const Color(0xff04ECFF),
-                    onTap: (int number){
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicatorWeight: 5,
+                    onTap: (int number) {
                       setState(() {
                         toggle = number;
                       });
                     },
                     tabs: [
-
-                      const Center(
-                        child: const Text('Family',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
+                      Text(
+                        'Family',
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                          fontFamily: 'NexaRegular',
                         ),
                       ),
-
-                      const Center(child: const Text('Friends',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
+                      Text(
+                        'Friends',
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                          fontFamily: 'NexaRegular',
                         ),
                       ),
-
-                      const Center(
-                        child: const Text('Followers',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
+                      Text(
+                        'Followers',
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                          fontFamily: 'NexaRegular',
                         ),
                       ),
-
                     ],
                   ),
                 ),
               ),
-
               Expanded(
-                child: ((){
-                  switch(toggle){
-                    case 0: return connectionListFamilyWidget();
-                    case 1: return connectionListFriendsWidget();
-                    case 2: return connectionListFollowersWidget();
+                child: (() {
+                  switch (toggle) {
+                    case 0:
+                      return connectionListFamilyWidget();
+                    case 1:
+                      return connectionListFriendsWidget();
+                    case 2:
+                      return connectionListFollowersWidget();
                   }
                 }()),
               ),
-
             ],
           ),
         ),
@@ -366,7 +413,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     );
   }
 
-  connectionListFamilyWidget(){
+  connectionListFamilyWidget() {
     return RefreshIndicator(
       onRefresh: onRefresh1,
       child: GridView.count(
@@ -376,67 +423,120 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         crossAxisSpacing: 2,
         mainAxisSpacing: 20,
         crossAxisCount: 4,
-        children: List.generate(onSearch ? searches.length : listsFamily.length, (index) =>           
-          Column(
+        children: List.generate(
+          onSearch ? searches.length : listsFamily.length,
+          (index) => Column(
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: (){
-                    if(onSearch){
-                      if(searches[index].accountType == 1){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType,)));
-                      }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+                  onTap: () {
+                    if (onSearch) {
+                      if (searches[index].accountType == 1) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeBLMUserProfile(
+                                      userId: searches[index].id,
+                                      accountType: searches[index].accountType,
+                                    )));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeRegularUserProfile(
+                                    userId: searches[index].id,
+                                    accountType: searches[index].accountType)));
                       }
-                    }else{
-                      if(listsFamily[index].accountType == 1){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
-                      }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
+                    } else {
+                      if (listsFamily[index].accountType == 1) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeBLMUserProfile(
+                                    userId: listsFamily[index].id,
+                                    accountType:
+                                        listsFamily[index].accountType)));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeRegularUserProfile(
+                                    userId: listsFamily[index].id,
+                                    accountType:
+                                        listsFamily[index].accountType)));
                       }
                     }
                   },
-                  child: ((){
-                    if(onSearch){
-                      if(searches[index].image != ''){
+                  child: (() {
+                    if (onSearch) {
+                      if (searches[index].image != '') {
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
                           foregroundImage: NetworkImage(searches[index].image),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          backgroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
-                      }else{
+                      } else {
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
-                    }else{
-                      if(listsFamily[index].image != ''){
+                    } else {
+                      if (listsFamily[index].image != '') {
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: NetworkImage(listsFamily[index].image),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              NetworkImage(listsFamily[index].image),
+                          backgroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
-                      }else{
+                      } else {
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }
                   }()),
                 ),
               ),
-
               onSearch
-              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14))
-              : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14)),
-
-              Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 12, color: const Color(0xff888888))),
+                  ? Text(
+                      '${searches[index].firstName} ${searches[index].lastName}',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      maxLines: 1,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff2F353D),
+                ),)
+                  : Text(
+                      '${listsFamily[index].firstName} ${listsFamily[index].lastName}',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      maxLines: 1,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff2F353D),
+                ),),
+              Text('${listsFamily[index].relationship}',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.clip,
+                  maxLines: 1,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xffB1B1B1),
+                ),),
             ],
           ),
         ),
@@ -444,7 +544,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     );
   }
 
-  connectionListFriendsWidget(){
+  connectionListFriendsWidget() {
     return RefreshIndicator(
       onRefresh: onRefresh2,
       child: GridView.count(
@@ -454,65 +554,110 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         crossAxisSpacing: 2,
         mainAxisSpacing: 20,
         crossAxisCount: 4,
-        children: List.generate(onSearch ? searches.length : listsFriends.length, (index) =>           
-          Column(
+        children: List.generate(
+          onSearch ? searches.length : listsFriends.length,
+          (index) => Column(
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: (){
-                    if(onSearch){
-                      if(searches[index].accountType == 1){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-                      }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+                  onTap: () {
+                    if (onSearch) {
+                      if (searches[index].accountType == 1) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeBLMUserProfile(
+                                    userId: searches[index].id,
+                                    accountType: searches[index].accountType)));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeRegularUserProfile(
+                                    userId: searches[index].id,
+                                    accountType: searches[index].accountType)));
                       }
-                    }else{
-                      if(listsFriends[index].accountType == 1){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
-                      }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
+                    } else {
+                      if (listsFriends[index].accountType == 1) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeBLMUserProfile(
+                                    userId: listsFriends[index].id,
+                                    accountType:
+                                        listsFriends[index].accountType)));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeRegularUserProfile(
+                                    userId: listsFriends[index].id,
+                                    accountType:
+                                        listsFriends[index].accountType)));
                       }
                     }
                   },
-                  child: ((){
-                    if(onSearch){
-                      if(searches[index].image != ''){
+                  child: (() {
+                    if (onSearch) {
+                      if (searches[index].image != '') {
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
                           foregroundImage: NetworkImage(searches[index].image),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          backgroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
-                      }else{
+                      } else {
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
-                    }else{
-                      if(listsFriends[index].image != ''){
+                    } else {
+                      if (listsFriends[index].image != '') {
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: NetworkImage(listsFriends[index].image),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              NetworkImage(listsFriends[index].image),
+                          backgroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
-                      }else{
+                      } else {
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }
                   }()),
                 ),
               ),
-
               onSearch
-              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14))
-              : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14)),
+                  ? Text(
+                      '${searches[index].firstName} ${searches[index].lastName}',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      maxLines: 1,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff2F353D),
+                ),)
+                  : Text(
+                      '${listsFriends[index].firstName} ${listsFriends[index].lastName}',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      maxLines: 1,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff2F353D),
+                ),),
             ],
           ),
         ),
@@ -520,7 +665,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     );
   }
 
-  connectionListFollowersWidget(){
+  connectionListFollowersWidget() {
     return RefreshIndicator(
       onRefresh: onRefresh3,
       child: GridView.count(
@@ -530,65 +675,110 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         crossAxisSpacing: 2,
         mainAxisSpacing: 20,
         crossAxisCount: 4,
-        children: List.generate(onSearch ? searches.length : listsFollowers.length, (index) =>           
-          Column(
+        children: List.generate(
+          onSearch ? searches.length : listsFollowers.length,
+          (index) => Column(
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: (){
-                    if(onSearch){
-                      if(searches[index].accountType == 1){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-                      }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
+                  onTap: () {
+                    if (onSearch) {
+                      if (searches[index].accountType == 1) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeBLMUserProfile(
+                                    userId: searches[index].id,
+                                    accountType: searches[index].accountType)));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeRegularUserProfile(
+                                    userId: searches[index].id,
+                                    accountType: searches[index].accountType)));
                       }
-                    }else{
-                      if(listsFollowers[index].accountType == 1){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
-                      }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
+                    } else {
+                      if (listsFollowers[index].accountType == 1) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeBLMUserProfile(
+                                    userId: listsFollowers[index].id,
+                                    accountType:
+                                        listsFollowers[index].accountType)));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeRegularUserProfile(
+                                    userId: listsFollowers[index].id,
+                                    accountType:
+                                        listsFollowers[index].accountType)));
                       }
                     }
                   },
-                  child: ((){
-                    if(onSearch){
-                      if(searches[index].image != ''){
+                  child: (() {
+                    if (onSearch) {
+                      if (searches[index].image != '') {
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
                           foregroundImage: NetworkImage(searches[index].image),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          backgroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
-                      }else{
+                      } else {
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
-                    }else{
-                      if(listsFollowers[index].image != ''){
+                    } else {
+                      if (listsFollowers[index].image != '') {
                         return CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: NetworkImage(listsFollowers[index].image),
-                          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              NetworkImage(listsFollowers[index].image),
+                          backgroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
-                      }else{
+                      } else {
                         return const CircleAvatar(
                           radius: 40,
                           backgroundColor: const Color(0xff888888),
-                          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                          foregroundImage:
+                              const AssetImage('assets/icons/app-icon.png'),
                         );
                       }
                     }
                   }()),
                 ),
               ),
-
               onSearch
-              ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14))
-              : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: const TextStyle(fontSize: 14)),
+                  ? Text(
+                      '${searches[index].firstName} ${searches[index].lastName}',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      maxLines: 1,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff2F353D),
+                ),)
+                  : Text(
+                      '${listsFollowers[index].firstName} ${listsFollowers[index].lastName}',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      maxLines: 1,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff2F353D),
+                ),),
             ],
           ),
         ),

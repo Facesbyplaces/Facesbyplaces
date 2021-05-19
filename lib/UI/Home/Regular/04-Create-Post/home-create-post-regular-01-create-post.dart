@@ -382,6 +382,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                           cursorColor: const Color(0xff000000),
                           maxLines: maxLines,
                           keyboardType: TextInputType.text,
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                            fontFamily: 'NexaRegular',
+                            color: const Color(0xfF000000)),
                           decoration: InputDecoration(
                             fillColor: const Color(0xffffffff),
                             alignLabelWithHint: true,
