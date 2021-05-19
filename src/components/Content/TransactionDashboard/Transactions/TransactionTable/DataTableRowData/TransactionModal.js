@@ -1,6 +1,4 @@
-import React, { useState, memo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { DeleteReportAction } from "../../../../../../redux/actions";
+import React, { useState, useEffect } from "react";
 import axios from "../../../../../../auxiliary/axios";
 
 //Loader

@@ -12,21 +12,9 @@ export default function DataTableRowTransactionData({
   const [showModal, setShowModal] = useState(false);
   const [gift, setGift] = useState();
 
-  const handleViewClick = (id) => {
+  const handleViewClick = (transaction) => {
+    setGift(transaction);
     setShowModal((prev) => !prev);
-    fetchTransaction(id);
-  };
-
-  const fetchTransaction = (id) => {
-    axios
-      .get(`/api/v1/admin/transactions/show/?id=${id}`)
-      .then((response) => {
-        // console.log(response.data);
-        setGift(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data.errors);
-      });
   };
 
   const renderedTransactions = transactions.map((transaction) => (
@@ -74,7 +62,7 @@ export default function DataTableRowTransactionData({
         {/* View User Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
-          onClick={() => handleViewClick(transaction.id)}
+          onClick={() => handleViewClick(transaction)}
         >
           <span className="svg-icon svg-icon-lg svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
@@ -115,11 +103,6 @@ export default function DataTableRowTransactionData({
             {/*end::Svg Icon*/}
           </span>
         </a>
-        <TransactionModal
-          showModal={showModal}
-          setShowModal={setShowModal}
-          transaction={gift}
-        />
       </td>
     </tr>
   ));
@@ -145,7 +128,15 @@ export default function DataTableRowTransactionData({
       </tr>
     </tbody>
   ) : (
-    <tbody>{renderedTransactions}</tbody>
+    <tbody>
+      {renderedTransactions}{" "}
+      <TransactionModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        transaction={gift}
+      />
+      ;
+    </tbody>
   );
   // <div>
   //   {props.users.length == 0 ? (
