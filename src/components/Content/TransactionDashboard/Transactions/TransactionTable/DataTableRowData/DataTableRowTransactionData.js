@@ -10,7 +10,8 @@ export default function DataTableRowTransactionData({
   pageType,
 }) {
   const [showModal, setShowModal] = useState(false);
-  const [transaction, setTransaction] = useState();
+  const [gift, setGift] = useState();
+
   const handleViewClick = (id) => {
     setShowModal((prev) => !prev);
     fetchTransaction(id);
@@ -21,7 +22,7 @@ export default function DataTableRowTransactionData({
       .get(`/api/v1/admin/transactions/show/?id=${id}`)
       .then((response) => {
         // console.log(response.data);
-        setTransaction(response.data);
+        setGift(response.data);
       })
       .catch((error) => {
         console.log(error.response.data.errors);
@@ -117,7 +118,7 @@ export default function DataTableRowTransactionData({
         <TransactionModal
           showModal={showModal}
           setShowModal={setShowModal}
-          transaction={transaction}
+          transaction={gift}
         />
       </td>
     </tr>
