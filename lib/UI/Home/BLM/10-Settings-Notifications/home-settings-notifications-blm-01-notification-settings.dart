@@ -19,47 +19,13 @@ class HomeBLMNotificationSettings extends StatefulWidget {
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
-
-  const HomeBLMNotificationSettings(
-      {required this.newMemorial,
-      required this.newActivities,
-      required this.postLikes,
-      required this.postComments,
-      required this.addFamily,
-      required this.addFriends,
-      required this.addAdmin});
+  const HomeBLMNotificationSettings({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
 
   @override
-  HomeBLMNotificationSettingsState createState() =>
-      HomeBLMNotificationSettingsState(
-          newMemorial: newMemorial,
-          newActivities: newActivities,
-          postLikes: postLikes,
-          postComments: postComments,
-          addFamily: addFamily,
-          addFriends: addFriends,
-          addAdmin: addAdmin);
+  HomeBLMNotificationSettingsState createState() => HomeBLMNotificationSettingsState();
 }
 
-class HomeBLMNotificationSettingsState
-    extends State<HomeBLMNotificationSettings> {
-  final bool newMemorial;
-  final bool newActivities;
-  final bool postLikes;
-  final bool postComments;
-  final bool addFamily;
-  final bool addFriends;
-  final bool addAdmin;
-
-  HomeBLMNotificationSettingsState(
-      {required this.newMemorial,
-      required this.newActivities,
-      required this.postLikes,
-      required this.postComments,
-      required this.addFamily,
-      required this.addFriends,
-      required this.addAdmin});
-
+class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings> {
   bool toggle1 = false;
   bool toggle2 = false;
   bool toggle3 = false;
@@ -70,13 +36,13 @@ class HomeBLMNotificationSettingsState
 
   void initState() {
     super.initState();
-    toggle1 = newMemorial;
-    toggle2 = newActivities;
-    toggle3 = postLikes;
-    toggle4 = postComments;
-    toggle5 = addFamily;
-    toggle6 = addFriends;
-    toggle7 = addAdmin;
+    toggle1 = widget.newMemorial;
+    toggle2 = widget.newActivities;
+    toggle3 = widget.postLikes;
+    toggle4 = widget.postComments;
+    toggle5 = widget.addFamily;
+    toggle6 = widget.addFriends;
+    toggle7 = widget.addAdmin;
   }
 
   @override

@@ -18,13 +18,7 @@ class RegularSearchUsers {
   final String email;
   final int accountType;
 
-  const RegularSearchUsers(
-      {required this.userId,
-      required this.firstName,
-      required this.lastName,
-      required this.image,
-      required this.email,
-      required this.accountType});
+  const RegularSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
 }
 
 class HomeRegularSearchUser extends StatefulWidget {
@@ -35,40 +29,13 @@ class HomeRegularSearchUser extends StatefulWidget {
   final bool switchFriends;
   final bool switchFollowers;
 
-  const HomeRegularSearchUser(
-      {required this.isFamily,
-      required this.memorialId,
-      required this.memorialName,
-      required this.switchFamily,
-      required this.switchFriends,
-      required this.switchFollowers});
+  const HomeRegularSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   @override
-  HomeRegularSearchUserState createState() => HomeRegularSearchUserState(
-      isFamily: isFamily,
-      memorialId: memorialId,
-      memorialName: memorialName,
-      switchFamily: switchFamily,
-      switchFriends: switchFriends,
-      switchFollowers: switchFollowers);
+  HomeRegularSearchUserState createState() => HomeRegularSearchUserState();
 }
 
 class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
-  final bool isFamily;
-  final int memorialId;
-  final String memorialName;
-  final bool switchFamily;
-  final bool switchFriends;
-  final bool switchFollowers;
-
-  HomeRegularSearchUserState(
-      {required this.isFamily,
-      required this.memorialId,
-      required this.memorialName,
-      required this.switchFamily,
-      required this.switchFriends,
-      required this.switchFollowers});
-
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
   List<RegularSearchUsers> users = [];
@@ -298,7 +265,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                               height: 10, color: Colors.transparent),
                           itemBuilder: (c, index) => ListTile(
                                 onTap: () async {
-                                  if (isFamily) {
+                                  if (widget.isFamily) {
                                     String choice = await showDialog(
                                             context: (context),
                                             builder: (build) =>
@@ -308,7 +275,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                                     if (choice != '') {
                                       context.loaderOverlay.show();
                                       String result = await apiRegularAddFamily(
-                                          memorialId: memorialId,
+                                          memorialId: widget.memorialId,
                                           userId: users[index].userId,
                                           relationship: choice,
                                           accountType:
@@ -351,22 +318,20 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   HomeRegularPageFamily(
-                                                      memorialId: memorialId,
-                                                      memorialName:
-                                                          memorialName,
-                                                      switchFamily:
-                                                          switchFamily,
+                                                      memorialId: widget.memorialId,
+                                                      memorialName: widget.memorialName,
+                                                      switchFamily: widget.switchFamily,
                                                       switchFriends:
-                                                          switchFriends,
+                                                          widget.switchFriends,
                                                       switchFollowers:
-                                                          switchFollowers)),
+                                                          widget.switchFollowers)),
                                         );
                                       }
                                     }
                                   } else {
                                     context.loaderOverlay.show();
                                     String result = await apiRegularAddFriends(
-                                        memorialId: memorialId,
+                                        memorialId: widget.memorialId,
                                         userId: users[index].userId,
                                         accountType: users[index].accountType);
                                     context.loaderOverlay.hide();
@@ -406,13 +371,11 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 HomeRegularPageFriends(
-                                                    memorialId: memorialId,
-                                                    memorialName: memorialName,
-                                                    switchFamily: switchFamily,
-                                                    switchFriends:
-                                                        switchFriends,
-                                                    switchFollowers:
-                                                        switchFollowers)),
+                                                    memorialId: widget.memorialId,
+                                                    memorialName: widget.memorialName,
+                                                    switchFamily: widget.switchFamily,
+                                                    switchFriends: widget.switchFriends,
+                                                    switchFollowers: widget.switchFollowers)),
                                       );
                                     }
                                   }

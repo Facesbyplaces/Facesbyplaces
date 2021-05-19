@@ -16,13 +16,12 @@ class HomeRegularPageDetails extends StatefulWidget {
   final int memorialId;
   const HomeRegularPageDetails({required this.memorialId});
 
-  HomeRegularPageDetailsState createState() =>
-      HomeRegularPageDetailsState(memorialId: memorialId);
+  HomeRegularPageDetailsState createState() => HomeRegularPageDetailsState();
 }
 
 class HomeRegularPageDetailsState extends State<HomeRegularPageDetails> {
-  final int memorialId;
-  HomeRegularPageDetailsState({required this.memorialId});
+  // final int memorialId;
+  // HomeRegularPageDetailsState({required this.memorialId});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 =
       GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -38,15 +37,12 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails> {
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
 
-  // DateTime dob = DateTime.now();
-  // DateTime rip = DateTime.now();
-
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
 
   void initState() {
     super.initState();
-    futureMemorialSettings = getMemorialSettings(memorialId);
+    futureMemorialSettings = getMemorialSettings(widget.memorialId);
   }
 
   Future<APIRegularShowPageDetailsMain> getMemorialSettings(
@@ -324,7 +320,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails> {
                                         _key5.currentState!.controller.text,
                                     cemetery:
                                         _key6.currentState!.controller.text,
-                                    memorialId: memorialId,
+                                    memorialId: widget.memorialId,
                                   );
                                   context.loaderOverlay.hide();
 
@@ -360,7 +356,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails> {
                                             ));
                                     Route route = MaterialPageRoute(
                                         builder: (context) => HomeRegularProfile(
-                                            memorialId: memorialId,
+                                            memorialId: widget.memorialId,
                                             managed: true,
                                             newlyCreated: false,
                                             relationship: memorialSettings

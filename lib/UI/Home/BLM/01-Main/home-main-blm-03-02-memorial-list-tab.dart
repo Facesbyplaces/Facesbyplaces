@@ -13,13 +13,7 @@ class BLMMainPagesMemorials {
   final bool joined;
   final String pageType;
 
-  const BLMMainPagesMemorials(
-      {required this.blmId,
-        required this.blmName,
-        required this.blmDescription,
-        required this.managed,
-        required this.joined,
-        required this.pageType});
+  const BLMMainPagesMemorials({required this.blmId, required this.blmName, required this.blmDescription, required this.managed, required this.joined, required this.pageType});
 }
 
 class HomeBLMManageTab extends StatefulWidget {

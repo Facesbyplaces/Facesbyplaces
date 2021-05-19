@@ -12,14 +12,10 @@ class HomeBLMMemorialSettingsWithHidden extends StatefulWidget{
   final String relationship;
   const HomeBLMMemorialSettingsWithHidden({required this.memorialId, required this.relationship});
   
-  HomeBLMMemorialSettingsWithHiddenState createState() => HomeBLMMemorialSettingsWithHiddenState(memorialId: memorialId, relationship: relationship);
+  HomeBLMMemorialSettingsWithHiddenState createState() => HomeBLMMemorialSettingsWithHiddenState();
 }
 
 class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettingsWithHidden>{
-  final int memorialId;
-  final String relationship;
-  HomeBLMMemorialSettingsWithHiddenState({required this.memorialId, required this.relationship});
-  
   int toggle = 0;
 
   @override
@@ -82,8 +78,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
             child: Container(
               child: ((){
                 switch(toggle){
-                  case 0: return settingsTab1(memorialId);
-                  case 1: return settingsTab2(memorialId);
+                  case 0: return settingsTab1(widget.memorialId);
+                  case 1: return settingsTab2(widget.memorialId);
                 }
               }()),
             ),
@@ -138,7 +134,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
-        relationship != 'Friend'
+        widget.relationship != 'Friend'
         ? ListTile(
           tileColor: Color(0xffffffff),
           onTap: () async{

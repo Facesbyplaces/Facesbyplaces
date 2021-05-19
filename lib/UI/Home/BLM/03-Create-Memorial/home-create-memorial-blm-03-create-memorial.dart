@@ -25,58 +25,12 @@ class HomeBLMCreateMemorial3 extends StatefulWidget {
   final String description;
   final String memorialName;
   final List<dynamic> imagesOrVideos;
+  const HomeBLMCreateMemorial3({required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.state, required this.description, required this.memorialName, required this.imagesOrVideos,});
 
-  const HomeBLMCreateMemorial3({
-    required this.relationship,
-    required this.locationOfIncident,
-    required this.precinct,
-    required this.dob,
-    required this.rip,
-    required this.country,
-    required this.state,
-    required this.description,
-    required this.memorialName,
-    required this.imagesOrVideos,
-  });
-
-  HomeBLMCreateMemorial3State createState() => HomeBLMCreateMemorial3State(
-      relationship: relationship,
-      locationOfIncident: locationOfIncident,
-      precinct: precinct,
-      dob: dob,
-      rip: rip,
-      country: country,
-      state: state,
-      description: description,
-      memorialName: memorialName,
-      imagesOrVideos: imagesOrVideos);
+  HomeBLMCreateMemorial3State createState() => HomeBLMCreateMemorial3State();
 }
 
 class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
-  final String relationship;
-  final String locationOfIncident;
-  final String precinct;
-  final String dob;
-  final String rip;
-  final String country;
-  final String state;
-  final String description;
-  final String memorialName;
-  final List<dynamic> imagesOrVideos;
-
-  HomeBLMCreateMemorial3State({
-    required this.relationship,
-    required this.locationOfIncident,
-    required this.precinct,
-    required this.dob,
-    required this.rip,
-    required this.country,
-    required this.state,
-    required this.description,
-    required this.memorialName,
-    required this.imagesOrVideos,
-  });
-
   File backgroundImage = File('');
   File profileImage = File('');
   final picker = ImagePicker();
@@ -458,18 +412,18 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                           await location.getLocation();
 
                       APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
-                        blmMemorialName: memorialName,
-                        blmDescription: description,
-                        blmLocationOfIncident: locationOfIncident,
-                        blmDob: dob,
-                        blmRip: rip,
-                        blmState: state,
-                        blmCountry: country,
-                        blmPrecinct: precinct,
-                        blmRelationship: relationship,
+                        blmMemorialName: widget.memorialName,
+                        blmDescription: widget.description,
+                        blmLocationOfIncident: widget.locationOfIncident,
+                        blmDob: widget.dob,
+                        blmRip: widget.rip,
+                        blmState: widget.state,
+                        blmCountry: widget.country,
+                        blmPrecinct: widget.precinct,
+                        blmRelationship: widget.relationship,
                         blmBackgroundImage: backgroundImage,
                         blmProfileImage: profileImage,
-                        blmImagesOrVideos: imagesOrVideos,
+                        blmImagesOrVideos: widget.imagesOrVideos,
                         blmLatitude: '${locationData.latitude}',
                         blmLongitude: '${locationData.longitude}',
                       );
@@ -485,7 +439,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                 memorialId: result,
                                 managed: true,
                                 newlyCreated: true,
-                                relationship: relationship,
+                                relationship: widget.relationship,
                               ));
                       Navigator.pushReplacement(context, newRoute);
                     }

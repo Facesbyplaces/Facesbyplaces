@@ -37,14 +37,10 @@ class HomeBLMCreatePost extends StatefulWidget{
   const HomeBLMCreatePost({required this.name, required this.memorialId});
 
   @override
-  HomeBLMCreatePostState createState() => HomeBLMCreatePostState(name: name, memorialId: memorialId);
+  HomeBLMCreatePostState createState() => HomeBLMCreatePostState();
 }
 
 class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
-  final String name;
-  final int memorialId;
-  HomeBLMCreatePostState({required this.name, required this.memorialId});
-
   List<BLMManagedPages> managedPages = [];
   String currentSelection = '';
   int currentIdSelected = 0;
@@ -60,8 +56,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
   void initState(){
     super.initState();
-    currentSelection = name;
-    currentIdSelected = memorialId;
+    currentSelection = widget.name;
+    currentIdSelected = widget.memorialId;
     getManagedPages();
   }
 

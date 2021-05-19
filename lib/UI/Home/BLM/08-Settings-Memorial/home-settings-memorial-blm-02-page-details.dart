@@ -17,14 +17,10 @@ class HomeBLMPageDetails extends StatefulWidget{
   final int memorialId;
   const HomeBLMPageDetails({required this.memorialId});
 
-  HomeBLMPageDetailsState createState() => HomeBLMPageDetailsState(memorialId: memorialId);
+  HomeBLMPageDetailsState createState() => HomeBLMPageDetailsState();
 }
 
 class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
-
-  final int memorialId;
-  HomeBLMPageDetailsState({required this.memorialId});
-
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldDropDownState> _key3 = GlobalKey<MiscBLMInputFieldDropDownState>();
@@ -37,15 +33,13 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
-  // DateTime dob = DateTime.now();
-  // DateTime rip = DateTime.now();
 
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
 
   void initState(){
     super.initState();
-    futureMemorialSettings = getMemorialSettings(memorialId);
+    futureMemorialSettings = getMemorialSettings(widget.memorialId);
   }
 
   Future<APIBLMShowPageDetailsMain> getMemorialSettings(int memorialId) async{
@@ -219,7 +213,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                     context.loaderOverlay.show();
 
                                     bool result = await apiBLMUpdatePageDetails(
-                                      memorialId: memorialId,
+                                      memorialId: widget.memorialId,
                                       name: _key1.currentState!.controller.text,
                                       description: _key2.currentState!.controller.text,
                                       relationship: _key3.currentState!.currentSelection,
@@ -250,7 +244,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                           },
                                         )
                                       );
-                                      Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,));
+                                      Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, managed: true, newlyCreated: false, relationship: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,));
                                       Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                                     }else{
                                       await showDialog(
@@ -277,7 +271,6 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                             ),
 
                             const SizedBox(height: 20,),
-
                           ],
                         ),
                       ),

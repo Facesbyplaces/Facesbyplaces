@@ -19,25 +19,14 @@ class RegularMainPagesNotifications {
   final int postId;
   final String notificationType;
 
-  const RegularMainPagesNotifications(
-      {required this.id,
-        required this.createdAt,
-        required this.updatedAt,
-        required this.actorId,
-        required this.actorImage,
-        required this.read,
-        required this.action,
-        required this.postId,
-        required this.notificationType});
+  const RegularMainPagesNotifications({required this.id, required this.createdAt, required this.updatedAt, required this.actorId, required this.actorImage, required this.read, required this.action, required this.postId, required this.notificationType});
 }
 
 class HomeRegularNotificationsTab extends StatefulWidget {
-  HomeRegularNotificationsTabState createState() =>
-      HomeRegularNotificationsTabState();
+  HomeRegularNotificationsTabState createState() => HomeRegularNotificationsTabState();
 }
 
-class HomeRegularNotificationsTabState
-    extends State<HomeRegularNotificationsTab> {
+class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab> {
   List<MiscRegularNotificationDisplayTemplate> notifications = [];
   ScrollController scrollController = ScrollController();
   ValueNotifier<int> count = ValueNotifier<int>(0);

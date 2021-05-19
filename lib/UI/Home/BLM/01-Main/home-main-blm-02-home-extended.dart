@@ -32,13 +32,10 @@ class HomeBLMScreenExtended extends StatefulWidget {
   final int newToggleBottom;
   HomeBLMScreenExtended({required this.newToggleBottom});
 
-  HomeBLMScreenExtendedState createState() =>
-      HomeBLMScreenExtendedState(newToggleBottom: newToggleBottom);
+  HomeBLMScreenExtendedState createState() => HomeBLMScreenExtendedState();
 }
 
 class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
-  final int newToggleBottom;
-  HomeBLMScreenExtendedState({required this.newToggleBottom});
 
   ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
   ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
@@ -119,7 +116,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
   void initState() {
     super.initState();
     isGuest();
-    toggleBottom.value = newToggleBottom;
+    toggleBottom.value = widget.newToggleBottom;
     bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false];
   }
 

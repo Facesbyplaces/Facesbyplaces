@@ -55,15 +55,10 @@ class HomeBLMMemorialProfile extends StatefulWidget{
   final bool newJoin;
   const HomeBLMMemorialProfile({required this.memorialId, required this.pageType, required this.newJoin});
 
-  HomeBLMMemorialProfileState createState() => HomeBLMMemorialProfileState(memorialId: memorialId, pageType: pageType, newJoin: newJoin);
+  HomeBLMMemorialProfileState createState() => HomeBLMMemorialProfileState();
 }
 
 class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
-  final int memorialId;
-  final String pageType;
-  final bool newJoin;
-  HomeBLMMemorialProfileState({required this.memorialId, required this.pageType, required this.newJoin});
-
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
   List<BLMProfilePosts> posts = [];
@@ -96,7 +91,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   void onLoading() async{
     if(itemRemaining != 0){
       
-      var newValue = await apiBLMProfilePost(memorialId: memorialId, page: page);
+      var newValue = await apiBLMProfilePost(memorialId: widget.memorialId, page: page);
       itemRemaining = newValue.blmItemsRemaining;
       postCount = newValue.blmFamilyMemorialList.length;
 
@@ -159,7 +154,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
       locallyIndex: true,
       contentMetadata: BranchContentMetaData()
         ..addCustomMetadata('link-category', 'Memorial')
-        ..addCustomMetadata('link-memorial-id', memorialId)
+        ..addCustomMetadata('link-memorial-id', widget.memorialId)
         ..addCustomMetadata('link-type-of-account', 'Blm')
     );
 
@@ -174,9 +169,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   void initState(){
     super.initState();
     isGuest();
-    join = newJoin;
+    join = widget.newJoin;
     onLoading();
-    showProfile = getProfileInformation(memorialId);
+    showProfile = getProfileInformation(widget.memorialId);
   }
 
   @override
@@ -299,7 +294,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                             TextButton.icon(
                                               onPressed: (){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 2)));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                               }, 
                                               icon: const CircleAvatar(
                                                 radius: 15,
@@ -437,7 +432,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                     child: profile.data!.blmMemorial.memorialDetails.memorialAcceptDonations == true
                                                     ? GestureDetector(
                                                       onTap: (){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: pageType, pageId: memorialId, pageName: profile.data!.blmMemorial.memorialName)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: widget.pageType, pageId: widget.memorialId, pageName: profile.data!.blmMemorial.memorialName)));
                                                       },
                                                       child: const CircleAvatar(
                                                         radius: 25,
@@ -468,7 +463,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           }
 
                                                           context.loaderOverlay.show();
-                                                          bool result = await apiBLMModifyFollowPage(pageType: pageType, pageId: memorialId, follow: join);
+                                                          bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: join);
                                                           context.loaderOverlay.hide();
 
                                                           if(result){
@@ -700,7 +695,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 0)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 0)));
                                                       },
                                                       child: Column(
                                                         children: [
@@ -730,7 +725,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 1)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 1)));
                                                       },
                                                       child: Column(
                                                         children: [
@@ -759,7 +754,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 2)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                                       },
                                                       child: Column(
                                                         children: [
@@ -995,7 +990,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                               height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
                                               child: Align(
                                                 alignment: Alignment.centerRight,
-                                                child: MiscBLMDropDownMemorialTemplate(memorialName: profile.data!.blmMemorial.memorialName, memorialId: memorialId, pageType: pageType, reportType: 'Blm',),
+                                                child: MiscBLMDropDownMemorialTemplate(memorialName: profile.data!.blmMemorial.memorialName, memorialId: widget.memorialId, pageType: widget.pageType, reportType: 'Blm',),
                                               ),
                                             ),
                                           ),

@@ -19,46 +19,13 @@ class HomeBLMCreateMemorial2 extends StatefulWidget {
   final String rip;
   final String country;
   final String state;
+  const HomeBLMCreateMemorial2({required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.state});
 
-  const HomeBLMCreateMemorial2(
-      {required this.relationship,
-      required this.locationOfIncident,
-      required this.precinct,
-      required this.dob,
-      required this.rip,
-      required this.country,
-      required this.state});
-
-  HomeBLMCreateMemorial2State createState() => HomeBLMCreateMemorial2State(
-      relationship: relationship,
-      locationOfIncident: locationOfIncident,
-      precinct: precinct,
-      dob: dob,
-      rip: rip,
-      country: country,
-      state: state);
+  HomeBLMCreateMemorial2State createState() => HomeBLMCreateMemorial2State();
 }
 
 class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
-  final String relationship;
-  final String locationOfIncident;
-  final String precinct;
-  final String dob;
-  final String rip;
-  final String country;
-  final String state;
-
-  HomeBLMCreateMemorial2State(
-      {required this.relationship,
-      required this.locationOfIncident,
-      required this.precinct,
-      required this.dob,
-      required this.rip,
-      required this.country,
-      required this.state});
-
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   TextEditingController controllerStory = TextEditingController();
   List<File> slideImages = [];
   int toggle = 0;
@@ -287,13 +254,13 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => HomeBLMCreateMemorial3(
-                                  relationship: relationship,
-                                  locationOfIncident: locationOfIncident,
-                                  precinct: precinct,
-                                  dob: dob,
-                                  rip: rip,
-                                  country: country,
-                                  state: state,
+                                  relationship: widget.relationship,
+                                  locationOfIncident: widget.locationOfIncident,
+                                  precinct: widget.precinct,
+                                  dob: widget.dob,
+                                  rip: widget.rip,
+                                  country: widget.country,
+                                  state: widget.state,
                                   description: controllerStory.text,
                                   memorialName:
                                       _key1.currentState!.controller.text,

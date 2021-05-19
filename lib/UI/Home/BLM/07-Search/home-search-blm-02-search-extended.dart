@@ -94,17 +94,10 @@ class HomeBLMPost extends StatefulWidget{
   final String currentLocation;
   const HomeBLMPost({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
 
-  HomeBLMPostState createState() => HomeBLMPostState(keyword: keyword, newToggle: newToggle, latitude: latitude, longitude: longitude, currentLocation: currentLocation);
+  HomeBLMPostState createState() => HomeBLMPostState();
 }
 
 class HomeBLMPostState extends State<HomeBLMPost>{
-  final String keyword;
-  final int newToggle;
-  final double latitude;
-  final double longitude;
-  final String currentLocation;
-  HomeBLMPostState({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
-
   ValueNotifier<int> toggle = ValueNotifier<int>(0);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
   ValueNotifier<bool> onSearch = ValueNotifier<bool>(false);
@@ -156,7 +149,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   void onLoading1() async{
     if(postItemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMSearchPosts(keywords: keyword, page: page1);
+      var newValue = await apiBLMSearchPosts(keywords: widget.keyword, page: page1);
       context.loaderOverlay.hide();
 
       postItemRemaining = newValue.blmItemsRemaining;
@@ -240,7 +233,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   void onLoading3() async{
     if(nearbyBlmItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
+      var newValue = await apiBLMSearchNearby(page: page3, latitude: widget.latitude, longitude: widget.longitude);
       context.loaderOverlay.hide();
 
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
@@ -270,7 +263,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     
     if(nearbyMemorialItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
+      var newValue = await apiBLMSearchNearby(page: page3, latitude: widget.latitude, longitude: widget.longitude);
       context.loaderOverlay.hide();
 
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
@@ -300,7 +293,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   void onLoading4() async{
     if(blmItemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMSearchBLM(page: page4, keywords: keyword);
+      var newValue = await apiBLMSearchBLM(page: page4, keywords: widget.keyword);
       context.loaderOverlay.hide();
 
       blmItemRemaining = newValue.blmItemsRemaining;
@@ -342,7 +335,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   void initState(){
     super.initState();
     isGuest();
-    toggle.value = newToggle;
+    toggle.value = widget.newToggle;
     scrollController1.addListener(() {
       if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
         if(postItemRemaining != 0){
@@ -688,8 +681,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                       const SizedBox(width: 20,),
 
                                       ((){
-                                        if(currentLocation != ''){
-                                          return Text(currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12),);
+                                        if(widget.currentLocation != ''){
+                                          return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12),);
                                         }else{
                                           return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
                                         }
@@ -712,8 +705,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                       const SizedBox(width: 20,),
 
                                       ((){
-                                        if(currentLocation != ''){
-                                          return Text(currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                        if(widget.currentLocation != ''){
+                                          return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
                                         }else{
                                           return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
                                         }

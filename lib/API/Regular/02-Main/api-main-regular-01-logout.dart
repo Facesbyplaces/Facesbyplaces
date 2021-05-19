@@ -56,6 +56,8 @@ Future<bool> apiRegularLogout() async{
     await googleSignIn.disconnect();
 
     FacebookLogin fb = FacebookLogin();
+    String email = (await fb.getUserEmail())!;
+    print('The email is $email');
     await fb.logOut();    
 
     return true;

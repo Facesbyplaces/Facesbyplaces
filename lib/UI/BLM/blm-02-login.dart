@@ -100,7 +100,8 @@ class BLMLogin extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () async {
-                                final fb = FacebookLogin(debug: true);
+                                // final fb = FacebookLogin(debug: true);
+                                final fb = FacebookLogin();
                                 bool isLoggedIn = await fb.isLoggedIn;
 
                                 if (isLoggedIn == true) {

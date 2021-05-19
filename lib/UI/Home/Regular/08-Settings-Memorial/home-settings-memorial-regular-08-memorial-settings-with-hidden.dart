@@ -12,19 +12,11 @@ class HomeRegularMemorialSettingsWithHidden extends StatefulWidget{
   final String relationship;
   const HomeRegularMemorialSettingsWithHidden({required this.memorialId, required this.relationship});
   
-  HomeRegularMemorialSettingsWithHiddenState createState() => HomeRegularMemorialSettingsWithHiddenState(memorialId: memorialId, relationship: relationship);
+  HomeRegularMemorialSettingsWithHiddenState createState() => HomeRegularMemorialSettingsWithHiddenState();
 }
 
 class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemorialSettingsWithHidden>{
-  final int memorialId;
-  final String relationship;
-  HomeRegularMemorialSettingsWithHiddenState({required this.memorialId, required this.relationship});
-  
   int toggle = 0;
-
-  void initState(){
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context){
@@ -85,8 +77,8 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
             child: Container(
               child: ((){
                 switch(toggle){
-                  case 0: return settingsTab1(memorialId);
-                  case 1: return settingsTab2(memorialId);
+                  case 0: return settingsTab1(widget.memorialId);
+                  case 1: return settingsTab2(widget.memorialId);
                 }
               }()),
             ),
@@ -141,7 +133,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
-        relationship != 'Friend'
+        widget.relationship != 'Friend'
         ? ListTile(
           onTap: () async{
             String choice = await showDialog(context: (context), builder: (build) => const MiscRegularRelationshipFromDialog());

@@ -26,7 +26,6 @@ import 'package:keyboard_attachable/keyboard_attachable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -76,25 +75,19 @@ class HomeBLMShowOriginalPostComments extends StatefulWidget{
   const HomeBLMShowOriginalPostComments({required this.postId});
 
   @override
-  HomeBLMShowOriginalPostCommentsState createState() => HomeBLMShowOriginalPostCommentsState(postId: postId);
+  HomeBLMShowOriginalPostCommentsState createState() => HomeBLMShowOriginalPostCommentsState();
 }
 
 class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPostComments>{
-  final int postId;
-  HomeBLMShowOriginalPostCommentsState({required this.postId});
-
   ScrollController scrollController = ScrollController();
   TextEditingController controller = TextEditingController(text: '');
   ValueNotifier<List<BLMOriginalComment>> comments = ValueNotifier<List<BLMOriginalComment>>([]);
   ValueNotifier<List<BLMOriginalReply>> replies = ValueNotifier<List<BLMOriginalReply>>([]);
   ValueNotifier<int> count = ValueNotifier<int>(0);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
-  // List<BLMOriginalComment> comments = [];
-  // List<BLMOriginalReply> replies = [];
   int itemRemaining = 1;
   int repliesRemaining = 1;
   int page1 = 1;
-  // int count = 0;
   int numberOfReplies = 0;
   int page2 = 1;
   List<bool> commentsLikes = [];
@@ -115,7 +108,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   bool likePost = false;
   bool pressedLike = false;
   int likesCount = 0;
-  // bool isGuestLoggedIn = true;
   CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
@@ -133,23 +125,15 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       isGuestLoggedIn.value = false;
     }
 
-    // setState(() {
-    //   if(regularSession == true || blmSession == true){
-    //     isGuestLoggedIn.value = false;
-    //   }
-    // });
-
     if(isGuestLoggedIn.value != true){
-      showOriginalPost = getOriginalPost(postId);
+      showOriginalPost = getOriginalPost(widget.postId);
       getProfilePicture();
       getOriginalPostInformation();
       onLoading();
       scrollController.addListener(() {
         if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
           if(itemRemaining != 0){
-            // setState(() {
-              onLoading();
-            // });
+            onLoading();
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -165,13 +149,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   }
 
   Future<void> onRefresh() async{
-    // setState(() {
-      onLoading();
-    // });
+    onLoading();
   }
 
   void getOriginalPostInformation() async{
-    var originalPostInformation = await apiBLMShowOriginalPost(postId: postId);
+    var originalPostInformation = await apiBLMShowOriginalPost(postId: widget.postId);
     numberOfLikes = originalPostInformation.blmPost.showOriginalPostNumberOfLikes;
     numberOfComments = originalPostInformation.blmPost.showOriginalPostNumberOfComments;
   }
@@ -186,8 +168,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   void onLoading() async{
     
     if(itemRemaining != 0){
+      context.loaderOverlay.show();
       
-      var newValue1 = await apiBLMShowListOfComments(postId: postId, page: page1);
+      var newValue1 = await apiBLMShowListOfComments(postId: widget.postId, page: page1);
       itemRemaining = newValue1.blmItemsRemaining;
       count.value = count.value + newValue1.blmCommentsList.length;
 
@@ -199,10 +182,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
         commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
         
         if(repliesRemaining != 0){
-          context.loaderOverlay.show();
+          
           var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.blmCommentsList[i].showListCommentsCommentId, page: page2);
-          context.loaderOverlay.hide();
-
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
           List<int> newReplyId = [];
@@ -260,9 +241,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       }
 
       if(mounted)
-      // setState(() {});
       page1++;
-      
+      context.loaderOverlay.hide();
     }
   }
 
@@ -305,21 +285,21 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                       },
                     ),
                     actions: [
-                      MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Blm'),
+                      MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Blm'),
                     ],
                   ),
                   backgroundColor: const Color(0xffffffff),
-                  body: Stack(
-                    children: [
-                      isGuestLoggedInListener
-                      ? Container(height: 0,)
-                      : IgnorePointer(
-                        ignoring: isGuestLoggedInListener,
-                        child: FutureBuilder<APIBLMShowOriginalPostMain>(
-                          future: showOriginalPost,
-                          builder: (context, originalPost){
-                            if(originalPost.hasData){
-                              return FooterLayout(
+                  body: FutureBuilder<APIBLMShowOriginalPostMain>(
+                    future: showOriginalPost,
+                    builder: (context, originalPost){
+                      if(originalPost.hasData){
+                        return Stack(
+                          children: [
+                            isGuestLoggedInListener
+                            ? Container(height: 0,)
+                            : IgnorePointer(
+                              ignoring: isGuestLoggedInListener,
+                              child: FooterLayout(
                                 footer: showKeyboard(),
                                 child: RefreshIndicator(
                                   onRefresh: onRefresh,
@@ -481,39 +461,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                 placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                               );
-                                                                              // return ExtendedImage.network(
-                                                                              //   originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                                              //   fit: BoxFit.contain,
-                                                                              //   //enableLoadState: false,
-                                                                              //   // loadStateChanged: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                              //   // loadStateChanged: (),
-                                                                              //   // loadStateChanged: (ExtendedImageState state){
-                                                                              //   //   // return const Center(child: const CircularProgressIndicator(),);
-
-                                                                              //   // },
-                                                                              //   loadStateChanged: (state){
-                                                                              //     // if(state.){
-                                                                              //     //   return const Center(child: const CircularProgressIndicator(),);
-                                                                              //     // }
-                                                                              //     if(LoadState.loading == state.extendedImageLoadState){
-                                                                              //       return const Center(child: const CircularProgressIndicator(),);
-                                                                              //     }
-                                                                              //   },
-                                                                              //   mode: ExtendedImageMode.gesture,
-                                                                              //   initGestureConfigHandler: (state) {
-                                                                              //     return GestureConfig(
-                                                                              //       minScale: 0.9,
-                                                                              //       animationMinScale: 0.7,
-                                                                              //       maxScale: 3.0,
-                                                                              //       animationMaxScale: 3.5,
-                                                                              //       speed: 1.0,
-                                                                              //       inertialSpeed: 100.0,
-                                                                              //       initialScale: 1.0,
-                                                                              //       inPageView: false,
-                                                                              //       initialAlignment: InitialAlignment.center,
-                                                                              //     );
-                                                                              //   },
-                                                                              // );
                                                                             }
                                                                           }()),
                                                                         ),
@@ -1047,7 +994,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 title: const Text('Report'),
                                                                 leading: const Icon(Icons.edit),
                                                                 onTap: (){
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: 'Post')));
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.postId, reportType: 'Post')));
                                                                 },
                                                               ),
                                                             ],
@@ -1234,7 +1181,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           title: const Text('Report'),
                                                                           leading: const Icon(Icons.edit),
                                                                           onTap: (){
-                                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: 'Post')));
+                                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.postId, reportType: 'Post')));
                                                                           },
                                                                         ),
                                                                       ],
@@ -1378,23 +1325,24 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                     ],
                                   ),
                                 ),
-                              );
-                            }else if(originalPost.hasError){
-                              return MiscBLMErrorMessageTemplate();
-                            }else{
-                              return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
-                            }
-                          }
-                        ),
-                      ),
+                              ),
+                            ),
 
-                      isGuestLoggedInListener
-                      ? BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: MiscBLMLoginToContinue(),
-                      )
-                      : Container(height: 0),
-                    ],
+                            isGuestLoggedInListener
+                            ? BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                              child: MiscBLMLoginToContinue(),
+                            )
+                            : Container(height: 0),
+                          ],
+                        );
+                      }else if(originalPost.hasError){
+                        return const MiscBLMErrorMessageTemplate();
+                      }else{
+                        return Container(height: 0);
+                        // return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                      }
+                    }
                   ),
                 ),
               ),
@@ -1475,7 +1423,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   );
                 }else if(isComment == true){
                   context.loaderOverlay.show();
-                  await apiBLMAddComment(postId: postId, commentBody: controller.text);
+                  await apiBLMAddComment(postId: widget.postId, commentBody: controller.text);
                   context.loaderOverlay.hide();
 
                   controller.clear();

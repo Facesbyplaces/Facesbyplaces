@@ -7,17 +7,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class BLMShowFriendsSettings{
-  final int userId;
-  final String firstName;
-  final String lastName;
-  final String image;
-  final String relationship;
-  final int accountType;
-
-  const BLMShowFriendsSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.accountType});
-}
-
 class HomeBLMPageFriends extends StatefulWidget{
   final int memorialId;
   final String memorialName;
@@ -26,17 +15,10 @@ class HomeBLMPageFriends extends StatefulWidget{
   final bool switchFollowers;
   const HomeBLMPageFriends({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
-  HomeBLMPageFriendsState createState() => HomeBLMPageFriendsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
+  HomeBLMPageFriendsState createState() => HomeBLMPageFriendsState();
 }
 
 class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
-  final int memorialId;
-  final String memorialName;
-  final bool switchFamily;
-  final bool switchFriends;
-  final bool switchFollowers;
-  HomeBLMPageFriendsState({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
-
   ScrollController scrollController = ScrollController();
   int friendsItemsRemaining = 1;
   List<Widget> friends = [];
@@ -73,7 +55,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   void onLoading() async{
     if(friendsItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowFriendsSettings(memorialId: memorialId, page: page);
+      var newValue = await apiBLMShowFriendsSettings(memorialId: widget.memorialId, page: page);
       context.loaderOverlay.hide();
 
       friendsItemsRemaining = newValue.blmItemsRemaining;
@@ -122,7 +104,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
 
                 if(confirmation){
                   context.loaderOverlay.show();
-                  String result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId, accountType: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType);
+                  String result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: widget.memorialId, userId: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId, accountType: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType);
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){
@@ -197,7 +179,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
             },
             child: const Center(child: const Text('Add Friends', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),),
           ),

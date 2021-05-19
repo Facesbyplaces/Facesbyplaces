@@ -10,6 +10,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'misc-06-regular-button.dart';
 import 'package:share/share.dart';
 import 'dart:typed_data';
@@ -22,18 +23,18 @@ class MiscRegularDropDownTemplate extends StatefulWidget{
   final int likesCount;
   final String reportType;
   final String pageType;
+
   const MiscRegularDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
 
   MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState();
 }
 
 class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate>{
-  GlobalKey qrKey = new GlobalKey();
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
+  GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare(){
-    print('Dropdown regular!');
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
@@ -66,6 +67,10 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
         errorCorrectionLevel: QrErrorCorrectLevel.L,
       );
 
+      print('The validation is ${qrValidationResult.status}');
+      print('The validation is ${qrValidationResult.error}');
+      print('The validation is ${qrValidationResult.qrCode}');
+
       if(qrValidationResult.status == QrValidationStatus.valid){
         QrCode? qrCode = qrValidationResult.qrCode;
 
@@ -75,12 +80,16 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
           gapless: true,
         );
 
+        print('The painter is $painter');
+
         final ByteData bytes = (await painter.toImageData(320))!;
         final Uint8List list = bytes.buffer.asUint8List();
 
         final tempDir = await getTemporaryDirectory();
         final file = await new File('${tempDir.path}/alm-qr-code.png').create();
         file.writeAsBytesSync(list);
+
+        print('The file  is ${file.path}');
 
         Share.shareFiles(['${file.path}'], text: 'QR Code');
       }else{
@@ -170,7 +179,9 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
-                String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+                String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+
+                print('The qrData on click is $qrData');
 
                 showGeneralDialog(
                   context: context,
@@ -185,20 +196,20 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                           children: [
                             Container(
                               height: 50,
-                              padding: EdgeInsets.only(right: 20.0),
+                              padding: const EdgeInsets.only(right: 20.0),
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
                                 onTap: (){
                                   Navigator.pop(context);
                                 },
-                                child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
+                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                               ),
                             ),
 
                             Expanded(
                               child: Container(
                                 height: SizeConfig.screenHeight! - 400,
-                                color: Color(0xffffffff),
+                                color: const Color(0xffffffff),
                                 child: Center(
                                   child: RepaintBoundary(
                                     key: qrKey,
@@ -213,24 +224,24 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                               ),
                             ),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             MiscRegularButtonTemplate(
                               buttonText: 'Share',
-                              buttonTextStyle: TextStyle(
+                              buttonTextStyle: const TextStyle(
                                 fontSize: 16, 
                                 fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
+                                color: const Color(0xffffffff),
                               ),
                               width: SizeConfig.screenWidth! / 2,
                               height: 45,
-                              buttonColor: Color(0xff04ECFF), 
+                              buttonColor: const Color(0xff04ECFF), 
                               onPressed: () async{
                                 await shareQRCode(qrData);
                               },
                             ),
 
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                           ],
                         ),
@@ -428,7 +439,8 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.memorialId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
-                String qrData = 'Memorial-${widget.memorialId}-${widget.pageType}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
+                String qrData = 'Memorial-${widget.memorialId}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
+                // String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
 
                 showGeneralDialog(
                   context: context,

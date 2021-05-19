@@ -15,26 +15,17 @@ class RegularShowAdminSettings {
   final String relationship;
   final String email;
 
-  const RegularShowAdminSettings(
-      {required this.userId,
-      required this.firstName,
-      required this.lastName,
-      required this.image,
-      required this.relationship,
-      required this.email});
+  const RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
 }
 
 class HomeRegularPageManagers extends StatefulWidget {
   final int memorialId;
   const HomeRegularPageManagers({required this.memorialId});
 
-  HomeRegularPageManagersState createState() =>
-      HomeRegularPageManagersState(memorialId: memorialId);
+  HomeRegularPageManagersState createState() => HomeRegularPageManagersState();
 }
 
 class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
-  final int memorialId;
-  HomeRegularPageManagersState({required this.memorialId});
 
   ScrollController scrollController = ScrollController();
   List<Widget> managers = [];
@@ -127,7 +118,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
     if (adminItemsRemaining != 0) {
       context.loaderOverlay.show();
       var newValue = await apiRegularShowAdminSettings(
-          memorialId: memorialId, page: page1);
+          memorialId: widget.memorialId, page: page1);
       context.loaderOverlay.hide();
 
       adminItemsRemaining = newValue.almAdminItemsRemaining;
@@ -199,7 +190,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
                   context.loaderOverlay.show();
                   String result = await apiRegularDeleteMemorialAdmin(
                       pageType: 'Memorial',
-                      pageId: memorialId,
+                      pageId: widget.memorialId,
                       userId: newValue.almAdminList[i].showAdminsSettingsUser
                           .showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
@@ -308,7 +299,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
     if (familyItemsRemaining != 0) {
       context.loaderOverlay.show();
       var newValue = await apiRegularShowAdminSettings(
-          memorialId: memorialId, page: page2);
+          memorialId: widget.memorialId, page: page2);
       context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.almFamilyItemsRemaining;
@@ -368,7 +359,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
                   context.loaderOverlay.show();
                   String result = await apiRegularAddMemorialAdmin(
                       pageType: 'Memorial',
-                      pageId: memorialId,
+                      pageId: widget.memorialId,
                       userId: newValue.almFamilyList[i].showAdminsSettingsUser
                           .showAdminsSettingsUserId);
                   context.loaderOverlay.hide();

@@ -23,14 +23,10 @@ class HomeBLMConnectionList extends StatefulWidget{
   final int newToggle;
   const HomeBLMConnectionList({required this.memorialId, required this.newToggle});
 
-  HomeBLMConnectionListState createState() => HomeBLMConnectionListState(memorialId: memorialId, newToggle: newToggle);
+  HomeBLMConnectionListState createState() => HomeBLMConnectionListState();
 }
 
 class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
-  final int memorialId;
-  final int newToggle;
-  HomeBLMConnectionListState({required this.memorialId, required this.newToggle});
-
   ScrollController scrollController1 = ScrollController();
   ScrollController scrollController2 = ScrollController();
   ScrollController scrollController3 = ScrollController();
@@ -50,7 +46,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
 
   void initState(){
     super.initState();
-    toggle = newToggle;
+    toggle = widget.newToggle;
     onLoading1();
     onLoading2();
     onLoading3();
@@ -129,7 +125,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     if(itemRemaining1 != 0){
 
       context.loaderOverlay.show();
-      var newValue = await apiBLMConnectionListFamily(memorialId: memorialId, page: page1);
+      var newValue = await apiBLMConnectionListFamily(memorialId: widget.memorialId, page: page1);
       context.loaderOverlay.hide();
 
       itemRemaining1 = newValue.blmItemsRemaining;
@@ -156,7 +152,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   void onLoading2() async{
     if(itemRemaining2 != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMConnectionListFriends(memorialId: memorialId, page: page2);
+      var newValue = await apiBLMConnectionListFriends(memorialId: widget.memorialId, page: page2);
       context.loaderOverlay.hide();
 
       itemRemaining2 = newValue.blmItemsRemaining;
@@ -183,7 +179,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   void onLoading3() async{
     if(itemRemaining3 != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMConnectionListFollowers(memorialId: memorialId, page: page3);
+      var newValue = await apiBLMConnectionListFollowers(memorialId: widget.memorialId, page: page3);
       context.loaderOverlay.hide();
 
       itemRemaining3 = newValue.blmItemsRemaining;

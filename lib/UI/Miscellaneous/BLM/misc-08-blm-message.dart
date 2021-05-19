@@ -2,6 +2,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscBLMErrorMessageTemplate extends StatelessWidget{
+  const MiscBLMErrorMessageTemplate();
 
   @override
   Widget build(BuildContext context){

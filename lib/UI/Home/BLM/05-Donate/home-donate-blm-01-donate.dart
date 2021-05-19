@@ -16,15 +16,10 @@ class HomeBLMUserDonate extends StatefulWidget{
 
   const HomeBLMUserDonate({required this.pageType, required this.pageId, required this.pageName});
 
-  HomeBLMUserDonateState createState() => HomeBLMUserDonateState(pageType: pageType, pageId: pageId, pageName: pageName);
+  HomeBLMUserDonateState createState() => HomeBLMUserDonateState();
 }
 
 class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
-  final String pageType;
-  final int pageId;
-  final String pageName;
-
-  HomeBLMUserDonateState({required this.pageType, required this.pageId, required this.pageName});
 
   int donateToggle = 0;
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/donation-google-pay.svg', semanticsLabel: 'Donate with Google',);
@@ -165,7 +160,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                               lineItems: [
                                 LineItem(
                                   currencyCode: 'USD',
-                                  description: 'Donation of $amount for $pageName'
+                                  description: 'Donation of $amount for ${widget.pageName}'
                                 ),
                               ],
                               totalPrice: ((){
@@ -185,7 +180,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                               currencyCode: 'USD',
                               items: [
                                 ApplePayItem(
-                                  label: '$pageName',
+                                  label: '${widget.pageName}',
                                   amount: ((){
                                     switch(donateToggle){
                                       case 0: return '1.00';
@@ -207,7 +202,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                           print('The amount in blm donate is $amount');
 
                           context.loaderOverlay.show();
-                          bool result = await apiBLMDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId!);
+                          bool result = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: amount, token: paymentToken.tokenId!);
                           context.loaderOverlay.hide();
 
                           if(result == true){

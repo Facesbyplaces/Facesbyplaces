@@ -23,20 +23,7 @@ class BLMCreateMemorialValues {
   final double longitude;
   final double latitude;
 
-  const BLMCreateMemorialValues({
-    required this.blmName,
-    required this.description,
-    required this.location,
-    required this.dob,
-    required this.rip,
-    required this.state,
-    required this.country,
-    required this.precinct,
-    required this.relationship,
-    required this.imagesOrVideos,
-    required this.latitude,
-    required this.longitude,
-  });
+  const BLMCreateMemorialValues({required this.blmName, required this.description, required this.location, required this.dob, required this.rip, required this.state, required this.country, required this.precinct, required this.relationship, required this.imagesOrVideos, required this.latitude, required this.longitude,});
 }
 
 class HomeBLMCreateMemorial1 extends StatefulWidget {
@@ -44,16 +31,11 @@ class HomeBLMCreateMemorial1 extends StatefulWidget {
 }
 
 class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
-  final GlobalKey<MiscBLMInputFieldDropDownState> _key1 =
-      GlobalKey<MiscBLMInputFieldDropDownState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key6 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key7 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldDropDownState> _key1 = GlobalKey<MiscBLMInputFieldDropDownState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key6 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key7 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();

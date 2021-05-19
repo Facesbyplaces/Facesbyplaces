@@ -21,14 +21,10 @@ class HomeRegularMemorialPageImage extends StatefulWidget {
   final int memorialId;
   const HomeRegularMemorialPageImage({required this.memorialId});
 
-  HomeRegularMemorialPageImageState createState() =>
-      HomeRegularMemorialPageImageState(memorialId: memorialId);
+  HomeRegularMemorialPageImageState createState() => HomeRegularMemorialPageImageState();
 }
 
-class HomeRegularMemorialPageImageState
-    extends State<HomeRegularMemorialPageImage> {
-  final int memorialId;
-  HomeRegularMemorialPageImageState({required this.memorialId});
+class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage> {
 
   List<String> backgroundImages = [
     'assets/icons/alm-background1.png',
@@ -68,7 +64,7 @@ class HomeRegularMemorialPageImageState
 
   void initState() {
     super.initState();
-    futureMemorialSettings = getMemorialSettings(memorialId);
+    futureMemorialSettings = getMemorialSettings(widget.memorialId);
   }
 
   @override
@@ -396,7 +392,7 @@ class HomeRegularMemorialPageImageState
                                 backgroundImage.path != '') {
                               context.loaderOverlay.show();
                               bool result = await apiRegularUpdatePageImages(
-                                  memorialId: memorialId,
+                                  memorialId: widget.memorialId,
                                   backgroundImage: backgroundImage,
                                   profileImage: profileImage);
                               context.loaderOverlay.hide();
@@ -433,7 +429,7 @@ class HomeRegularMemorialPageImageState
                                         ));
                                 Route route = MaterialPageRoute(
                                     builder: (context) => HomeRegularProfile(
-                                        memorialId: memorialId,
+                                        memorialId: widget.memorialId,
                                         managed: true,
                                         newlyCreated: false,
                                         relationship: memorialImageSettings

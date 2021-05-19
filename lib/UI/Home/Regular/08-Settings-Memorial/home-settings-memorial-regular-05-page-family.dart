@@ -7,61 +7,18 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class RegularShowFamilySettings {
-  final int userId;
-  final String firstName;
-  final String lastName;
-  final String image;
-  final String relationship;
-  final int accountType;
-
-  const RegularShowFamilySettings(
-      {required this.userId,
-      required this.firstName,
-      required this.lastName,
-      required this.image,
-      required this.relationship,
-      required this.accountType});
-}
-
 class HomeRegularPageFamily extends StatefulWidget {
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
+  const HomeRegularPageFamily({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers,});
 
-  const HomeRegularPageFamily({
-    required this.memorialId,
-    required this.memorialName,
-    required this.switchFamily,
-    required this.switchFriends,
-    required this.switchFollowers,
-  });
-
-  HomeRegularPageFamilyState createState() => HomeRegularPageFamilyState(
-      memorialId: memorialId,
-      memorialName: memorialName,
-      switchFamily: switchFamily,
-      switchFriends: switchFriends,
-      switchFollowers: switchFollowers);
+  HomeRegularPageFamilyState createState() => HomeRegularPageFamilyState();
 }
 
 class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
-  final int memorialId;
-  final String memorialName;
-  final bool switchFamily;
-  final bool switchFriends;
-  final bool switchFollowers;
-
-  HomeRegularPageFamilyState({
-    required this.memorialId,
-    required this.memorialName,
-    required this.switchFamily,
-    required this.switchFriends,
-    required this.switchFollowers,
-  });
-
   ScrollController scrollController = ScrollController();
   int familyItemsRemaining = 1;
   List<Widget> family = [];
@@ -99,8 +56,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
   void onLoading() async {
     if (familyItemsRemaining != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowFamilySettings(
-          memorialId: memorialId, page: page);
+      var newValue = await apiRegularShowFamilySettings(memorialId: widget.memorialId, page: page);
       context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.almItemsRemaining;
@@ -108,9 +64,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
       for (int i = 0; i < newValue.almFamilyList.length; i++) {
         family.add(
           ListTile(
-            leading: newValue.almFamilyList[i].showFamilySettingsUser
-                        .showFamilySettingsDetailsImage !=
-                    ''
+            leading: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != ''
                 ? CircleAvatar(
                     backgroundColor: const Color(0xff888888),
                     foregroundImage: NetworkImage(
@@ -171,7 +125,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
                 if (confirmation) {
                   context.loaderOverlay.show();
                   String result = await apiRegularDeleteMemorialFriendsOrFamily(
-                      memorialId: memorialId,
+                      memorialId: widget.memorialId,
                       userId: newValue.almFamilyList[i].showFamilySettingsUser
                           .showFamilySettingsDetailsId,
                       accountType: newValue
@@ -310,11 +264,11 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
                   MaterialPageRoute(
                       builder: (context) => HomeRegularSearchUser(
                           isFamily: true,
-                          memorialId: memorialId,
-                          memorialName: memorialName,
-                          switchFamily: switchFamily,
-                          switchFriends: switchFriends,
-                          switchFollowers: switchFollowers)));
+                          memorialId: widget.memorialId,
+                          memorialName: widget.memorialName,
+                          switchFamily: widget.switchFamily,
+                          switchFriends: widget.switchFriends,
+                          switchFollowers: widget.switchFollowers)));
             },
             child:  Center(
               child:  Text(

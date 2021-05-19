@@ -32,18 +32,13 @@ class HomeRegularScreenExtended extends StatefulWidget {
   final int newToggleBottom;
   const HomeRegularScreenExtended({required this.newToggleBottom});
 
-  HomeRegularScreenExtendedState createState() =>
-      HomeRegularScreenExtendedState(newToggleBottom: newToggleBottom);
+  HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState();
 }
 
 class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
-  final int newToggleBottom;
-  HomeRegularScreenExtendedState({required this.newToggleBottom});
-
   ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
   ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
-  ValueNotifier<List<bool>> bottomTab =
-      ValueNotifier<List<bool>>([true, false, false, false]);
+  ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
 
   Future<APIRegularShowProfileInformation>? drawerSettings;
@@ -71,8 +66,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
   Future<void> scanQR() async {
     String barcodeScanRes;
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          "#ff6666", "Cancel", true, ScanMode.QR);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
       print('Scanning: $barcodeScanRes');
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -92,80 +86,53 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
     if (_scanBarcode != 'Error') {
       if (newValue[0] == 'Memorial') {
         if (newValue[2] == 'Blm') {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeBLMMemorialProfile(
-                        memorialId: int.parse(newValue[1]),
-                        pageType: newValue[2],
-                        newJoin: false,
-                      )));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
         } else {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeRegularMemorialProfile(
-                        memorialId: int.parse(newValue[1]),
-                        pageType: newValue[2],
-                        newJoin: false,
-                      )));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
         }
       } else {
         if (newValue[4] == 'Blm') {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeBLMShowOriginalPostComments(
-                      postId: int.parse(newValue[1]))));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]))));
         } else {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeRegularShowOriginalPostComments(
-                      postId: int.parse(newValue[1]))));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
         }
       }
     } else {
       await showDialog(
-          context: context,
+        context: context,
           builder: (_) => AssetGiffyDialog(
-                image: Image.asset(
-                  'assets/icons/cover-icon.png',
-                  fit: BoxFit.cover,
-                ),
-                title: Text(
-                  'Error',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                      fontFamily: 'NexaRegular'),
-                ),
-                entryAnimation: EntryAnimation.DEFAULT,
-                description: Text(
-                  'Something went wrong. Please try again.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: SizeConfig
-                          .blockSizeVertical! *
-                          2.87,
-                      fontFamily: 'NexaRegular'),
-                ),
-                onlyOkButton: true,
-                buttonOkColor: const Color(0xffff0000),
-                onOkButtonPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ));
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error', 
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 3.16,
+              fontFamily: 'NexaRegular',
+            ),
+          ),
+          entryAnimation: EntryAnimation.DEFAULT,
+          description: Text(
+            'Something went wrong. Please try again.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: SizeConfig.blockSizeVertical! * 2.87,
+              fontFamily: 'NexaRegular',
+            ),
+          ),
+          onlyOkButton: true,
+          buttonOkColor: const Color(0xffff0000),
+          onOkButtonPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+      );
     }
   }
 
   void initState() {
     super.initState();
     isGuest();
-    toggleBottom.value = newToggleBottom;
-    bottomTab.value = toggleBottom.value == 0
-        ? [true, false, false, false]
-        : [false, true, false, false];
+    toggleBottom.value = widget.newToggleBottom;
+    bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false];
   }
 
   @override
@@ -205,10 +172,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                               return IconButton(
                                 icon: CircleAvatar(
                                   backgroundColor: const Color(0xff888888),
-                                  foregroundImage: NetworkImage(profileImage
-                                      .data!.showProfileInformationImage),
-                                  backgroundImage: const AssetImage(
-                                      'assets/icons/app-icon.png'),
+                                  foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                 ),
                                 onPressed: () async {
                                   Scaffold.of(context).openDrawer();
@@ -216,13 +181,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                               );
                             },
                           );
-                        } else if (profileImage.hasError ||
-                            isGuestLoggedInListener) {
+                        } else if (profileImage.hasError || isGuestLoggedInListener) {
                           return IconButton(
                             icon: const CircleAvatar(
                               backgroundColor: const Color(0xff888888),
-                              foregroundImage:
-                                  const AssetImage('assets/icons/app-icon.png'),
+                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                             ),
                             onPressed: () async {
                               Scaffold.of(context).openDrawer();
@@ -236,8 +199,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                         }
                       },
                     ),
-                    title: Text(
-                      'FacesByPlaces.com',
+                    title: Text('FacesByPlaces.com',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 2.74,
                         fontFamily: 'NexaBold',
@@ -253,9 +215,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                         child: SizedBox(
                           height: SizeConfig.blockSizeVertical! * 4.04,
                           width: SizeConfig.blockSizeHorizontal! * 7.18,
-                          child: Image.asset(
-                            'assets/icons/zoom.png',
-                          ),
+                          child: Image.asset('assets/icons/zoom.png',),
                         ),
                       ),
                     ],
@@ -267,22 +227,17 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                         child: Container(
                           height: SizeConfig.screenHeight,
                           child: const MiscRegularBackgroundTemplate(
-                            image: const AssetImage(
-                                'assets/icons/background2.png'),
+                            image: const AssetImage('assets/icons/background2.png'),
                           ),
                         ),
                       ),
                       Container(
                         child: (() {
                           switch (toggleBottomListener) {
-                            case 0:
-                              return HomeRegularFeedTab();
-                            case 1:
-                              return HomeRegularManageTab();
-                            case 2:
-                              return HomeRegularPostTab();
-                            case 3:
-                              return HomeRegularNotificationsTab();
+                            case 0: return HomeRegularFeedTab();
+                            case 1: return HomeRegularManageTab();
+                            case 2: return HomeRegularPostTab();
+                            case 3: return HomeRegularNotificationsTab();
                           }
                         }()),
                       ),

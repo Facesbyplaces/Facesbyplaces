@@ -24,48 +24,17 @@ class HomeBLMUserOtherDetails extends StatefulWidget {
   final bool toggleEmail;
   final bool toggleNumber;
 
-  const HomeBLMUserOtherDetails(
-      {required this.userId,
-      required this.toggleBirthdate,
-      required this.toggleBirthplace,
-      required this.toggleAddress,
-      required this.toggleEmail,
-      required this.toggleNumber});
+  const HomeBLMUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
-  HomeBLMUserOtherDetailsState createState() => HomeBLMUserOtherDetailsState(
-      userId: userId,
-      toggleBirthdate: toggleBirthdate,
-      toggleBirthplace: toggleBirthplace,
-      toggleAddress: toggleAddress,
-      toggleEmail: toggleEmail,
-      toggleNumber: toggleNumber);
+  HomeBLMUserOtherDetailsState createState() => HomeBLMUserOtherDetailsState();
 }
 
 class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails> {
-  final int userId;
-  final bool toggleBirthdate;
-  final bool toggleBirthplace;
-  final bool toggleAddress;
-  final bool toggleEmail;
-  final bool toggleNumber;
-  HomeBLMUserOtherDetailsState(
-      {required this.userId,
-      required this.toggleBirthdate,
-      required this.toggleBirthplace,
-      required this.toggleAddress,
-      required this.toggleEmail,
-      required this.toggleNumber});
-
-  final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key1 =
-      GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key4 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key5 =
-      GlobalKey<MiscBLMPhoneNumberTemplateState>();
+  final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key5 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
 
   Future<APIBLMShowOtherDetails>? otherDetails;
   bool toggle1 = false;
@@ -76,12 +45,12 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails> {
 
   void initState() {
     super.initState();
-    otherDetails = getOtherDetails(userId);
-    toggle1 = toggleBirthdate;
-    toggle2 = toggleBirthplace;
-    toggle3 = toggleAddress;
-    toggle4 = toggleEmail;
-    toggle5 = toggleNumber;
+    otherDetails = getOtherDetails(widget.userId);
+    toggle1 = widget.toggleBirthdate;
+    toggle2 = widget.toggleBirthplace;
+    toggle3 = widget.toggleAddress;
+    toggle4 = widget.toggleEmail;
+    toggle5 = widget.toggleNumber;
   }
 
   Future<APIBLMShowOtherDetails> getOtherDetails(int userId) async {
@@ -403,7 +372,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails> {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             HomeBLMUserProfileDetails(
-                                              userId: userId,
+                                              userId: widget.userId,
                                             )));
                               } else {
                                 await showDialog(

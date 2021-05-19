@@ -103,7 +103,8 @@ class RegularLoginState extends State<RegularLogin> {
                               ),
                             ),
                             onPressed: () async {
-                              final fb = FacebookLogin(debug: true);
+                              // final fb = FacebookLogin(debug: true);
+                              final fb = FacebookLogin();
                               bool isLoggedIn = await fb.isLoggedIn;
 
                               if (isLoggedIn == true) {

@@ -15,17 +15,10 @@ class HomeBLMPageFamily extends StatefulWidget{
   final bool switchFollowers;
   const HomeBLMPageFamily({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers,});
 
-  HomeBLMPageFamilyState createState() => HomeBLMPageFamilyState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
+  HomeBLMPageFamilyState createState() => HomeBLMPageFamilyState();
 }
 
 class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
-  final int memorialId;
-  final String memorialName;
-  final bool switchFamily;
-  final bool switchFriends;
-  final bool switchFollowers;
-  HomeBLMPageFamilyState({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers,});
-
   ScrollController scrollController = ScrollController();
   int familyItemsRemaining = 1;
   List<Widget> family = [];
@@ -62,7 +55,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   void onLoading() async{
     if(familyItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowFamilySettings(memorialId: memorialId, page: page);
+      var newValue = await apiBLMShowFamilySettings(memorialId: widget.memorialId, page: page);
       context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.blmItemsRemaining;
@@ -111,7 +104,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
 
                 if(confirmation){
                   context.loaderOverlay.show();
-                  String result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType);
+                  String result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: widget.memorialId, userId: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId, accountType: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType);
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){
@@ -191,7 +184,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
             },
             child: const Center(child: const Text('Add Family', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff)),),),
           ),

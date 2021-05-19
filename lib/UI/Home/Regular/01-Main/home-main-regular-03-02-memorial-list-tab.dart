@@ -12,14 +12,7 @@ class RegularMainPagesMemorials {
   final bool managed;
   final bool joined;
   final String pageType;
-
-  const RegularMainPagesMemorials(
-      {required this.memorialId,
-        required this.memorialName,
-        required this.memorialDescription,
-        required this.managed,
-        required this.joined,
-        required this.pageType});
+  const RegularMainPagesMemorials({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.managed, required this.joined, required this.pageType});
 }
 
 class HomeRegularManageTab extends StatefulWidget {

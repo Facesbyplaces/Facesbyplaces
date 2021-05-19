@@ -7,23 +7,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class RegularShowFriendsSettings {
-  final int userId;
-  final String firstName;
-  final String lastName;
-  final String image;
-  final String relationship;
-  final int accountType;
-
-  const RegularShowFriendsSettings(
-      {required this.userId,
-      required this.firstName,
-      required this.lastName,
-      required this.image,
-      required this.relationship,
-      required this.accountType});
-}
-
 class HomeRegularPageFriends extends StatefulWidget {
   final int memorialId;
   final String memorialName;
@@ -31,35 +14,12 @@ class HomeRegularPageFriends extends StatefulWidget {
   final bool switchFriends;
   final bool switchFollowers;
 
-  const HomeRegularPageFriends(
-      {required this.memorialId,
-      required this.memorialName,
-      required this.switchFamily,
-      required this.switchFriends,
-      required this.switchFollowers});
+  const HomeRegularPageFriends({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
-  HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState(
-      memorialId: memorialId,
-      memorialName: memorialName,
-      switchFamily: switchFamily,
-      switchFriends: switchFriends,
-      switchFollowers: switchFollowers);
+  HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState();
 }
 
 class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
-  final int memorialId;
-  final String memorialName;
-  final bool switchFamily;
-  final bool switchFriends;
-  final bool switchFollowers;
-
-  HomeRegularPageFriendsState(
-      {required this.memorialId,
-      required this.memorialName,
-      required this.switchFamily,
-      required this.switchFriends,
-      required this.switchFollowers});
-
   ScrollController scrollController = ScrollController();
   int friendsItemsRemaining = 1;
   List<Widget> friends = [];
@@ -97,8 +57,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
   void onLoading() async {
     if (friendsItemsRemaining != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowFriendsSettings(
-          memorialId: memorialId, page: page);
+      var newValue = await apiRegularShowFriendsSettings(memorialId: widget.memorialId, page: page);
       context.loaderOverlay.hide();
 
       friendsItemsRemaining = newValue.almItemsRemaining;
@@ -106,9 +65,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
       for (int i = 0; i < newValue.almFriendsList.length; i++) {
         friends.add(
           ListTile(
-            leading: newValue.almFriendsList[i].showFriendsSettingsUser
-                        .showFriendsSettingsDetailsImage !=
-                    ''
+            leading: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != ''
                 ? CircleAvatar(
                     backgroundColor: Color(0xff888888),
                     foregroundImage: NetworkImage(
@@ -169,7 +126,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
                 if (confirmation) {
                   context.loaderOverlay.show();
                   String result = await apiRegularDeleteMemorialFriendsOrFamily(
-                      memorialId: memorialId,
+                      memorialId: widget.memorialId,
                       userId: newValue.almFriendsList[i].showFriendsSettingsUser
                           .showFriendsSettingsDetailsId,
                       accountType: newValue
@@ -306,11 +263,11 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
                   MaterialPageRoute(
                       builder: (context) => HomeRegularSearchUser(
                           isFamily: false,
-                          memorialId: memorialId,
-                          memorialName: memorialName,
-                          switchFamily: switchFamily,
-                          switchFriends: switchFriends,
-                          switchFollowers: switchFollowers)));
+                          memorialId: widget.memorialId,
+                          memorialName: widget.memorialName,
+                          switchFamily: widget.switchFamily,
+                          switchFriends: widget.switchFriends,
+                          switchFollowers: widget.switchFollowers)));
             },
             child: Center(
               child: Text(

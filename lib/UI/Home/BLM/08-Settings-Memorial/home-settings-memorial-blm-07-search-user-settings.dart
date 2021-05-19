@@ -32,19 +32,10 @@ class HomeBLMSearchUser extends StatefulWidget{
   const HomeBLMSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   @override
-  HomeBLMSearchUserState createState() => HomeBLMSearchUserState(isFamily: isFamily, memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
+  HomeBLMSearchUserState createState() => HomeBLMSearchUserState();
 }
 
 class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
-  final bool isFamily;
-  final int memorialId;
-  final String memorialName;
-  final bool switchFamily;
-  final bool switchFriends;
-  final bool switchFollowers;
-
-  HomeBLMSearchUserState({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
-
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
   List<BLMSearchUsers> users = [];
@@ -242,12 +233,12 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                     separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                     itemBuilder: (c, index) => ListTile(
                       onTap: () async{
-                        if(isFamily){
+                        if(widget.isFamily){
                           String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
 
                           if(choice != ''){
                             context.loaderOverlay.show();
-                            String result = await apiBLMAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
+                            String result = await apiBLMAddFamily(memorialId: widget.memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
                             context.loaderOverlay.hide();
 
                             if(result != 'Success'){
@@ -269,12 +260,12 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                                 )
                               );
                             }else{
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)),);
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)),);
                             }
                           }
                         }else{
                           context.loaderOverlay.show();
-                          String result = await apiBLMAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
+                          String result = await apiBLMAddFriends(memorialId: widget.memorialId, userId: users[index].userId, accountType: users[index].accountType);
                           context.loaderOverlay.hide();
 
                           if(result != 'Success'){
@@ -296,7 +287,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                               )
                             );
                           }else{
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)),);
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)),);
                           }
                         }
                       },

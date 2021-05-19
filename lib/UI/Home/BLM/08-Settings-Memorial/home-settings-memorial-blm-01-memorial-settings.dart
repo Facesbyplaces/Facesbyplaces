@@ -23,100 +23,94 @@ class HomeBLMMemorialSettings extends StatefulWidget{
   final bool switchFollowers;
   HomeBLMMemorialSettings({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
   
-  HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
+  HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState();
 }
 
-class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
-  final int memorialId;
-  final String memorialName;
-  final bool switchFamily;
-  final bool switchFriends;
-  final bool switchFollowers;
-  HomeBLMMemorialSettingsState({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
-  
-  int toggle = 0;
-  bool isSwitched1 = false;
-  bool isSwitched2 = false;
-  bool isSwitched3 = false;
+class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{ 
+  ValueNotifier<int> toggle = ValueNotifier<int>(0);
+  ValueNotifier<bool> isSwitched1 = ValueNotifier<bool>(false);
+  ValueNotifier<bool> isSwitched2 = ValueNotifier<bool>(false);
+  ValueNotifier<bool> isSwitched3 = ValueNotifier<bool>(false);
   Future? switchStatus;
 
   void initState(){
     super.initState();
-    isSwitched1 = switchFamily;
-    isSwitched2 = switchFriends;
-    isSwitched3 = switchFollowers;
+    isSwitched1.value = widget.switchFamily;
+    isSwitched2.value = widget.switchFriends;
+    isSwitched3.value = widget.switchFollowers;
   }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff04ECFF),
-        title: const Text('Memorial Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
-        centerTitle: true,
-          leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-            // Navigator.pop(context);
-            Navigator.pop(context);
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: '', managed: true, newlyCreated: false,)));
-          },
+    print('Blm Memorial settings rebuild!');
+    return ValueListenableBuilder(
+      valueListenable: toggle,
+      builder: (_, int toggleListener, __) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xff04ECFF),
+          title: const Text('Memorial Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
+          centerTitle: true,
+            leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: (){
+              Navigator.pop(context);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: false,)));
+            },
+          ),
         ),
-      ),
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            width: SizeConfig.screenWidth,
-            height: 70,
-            child: DefaultTabController(
-              length: 2,
-              child: TabBar(
-                labelColor: const Color(0xff04ECFF),
-                unselectedLabelColor: const Color(0xff000000),
-                indicatorColor: const Color(0xff04ECFF),
-                onTap: (int index){
-                  setState(() {
-                    toggle = index;
-                  });
-                },
-                tabs: [
+        body: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              width: SizeConfig.screenWidth,
+              height: 70,
+              child: DefaultTabController(
+                length: 2,
+                child: TabBar(
+                  labelColor: const Color(0xff04ECFF),
+                  unselectedLabelColor: const Color(0xff000000),
+                  indicatorColor: const Color(0xff04ECFF),
+                  onTap: (int index){
+                    toggle.value = index;
+                  },
+                  tabs: [
 
-                  const Center(
-                    child: const Text('Page',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                    const Center(
+                      child: const Text('Page',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
-                  ),
 
-                  const Center(
-                    child: const Text('Privacy',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                    const Center(
+                      child: const Text('Privacy',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
-                  ),
 
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
 
-          Expanded(
-            child: Container(
-              child: ((){
-                switch(toggle){
-                  case 0: return settingsTab1(memorialId);
-                  case 1: return settingsTab2(memorialId);
-                }
-              }()),
+            Expanded(
+              child: Container(
+                child: ((){
+                  switch(toggleListener){
+                    case 0: return settingsTab1(widget.memorialId);
+                    case 1: return settingsTab2(widget.memorialId);
+                  }
+                }()),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -162,7 +156,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
         ListTile(
           tileColor: const Color(0xffffffff),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers), settings: RouteSettings(name: 'memorial-settings')));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers), settings: RouteSettings(name: 'memorial-settings')));
           },
           title: const Text('Family', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
           subtitle: const Text('Add or remove family of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
@@ -173,7 +167,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
         ListTile(
           tileColor: const Color(0xffffffff),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
           },
           title: const Text('Friends', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
           subtitle: const Text('Add or remove friends of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
@@ -195,7 +189,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
         ListTile(
           tileColor: Color(0xffffffff),
           onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(content: 'Are you sure you want to delete "$memorialName"?',),);
+            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
             if(confirmResult){
 
               context.loaderOverlay.show();
@@ -239,115 +233,115 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
   }
 
   settingsTab2(int memorialId){
-    return ListView(
-      physics: const ClampingScrollPhysics(),
-      children: [
-
-        ListTile(
-          tileColor: const Color(0xffffffff),
-          title: const Text('Customize shown info', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Customize what others see on your page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
-        ),
-
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
-        Container(
-          height: 80,
-          color: const Color(0xffffffff),
-          child: Row(
+    return ValueListenableBuilder(
+      valueListenable: isSwitched1,
+      builder: (_, bool isSwitched1Listener, __) => ValueListenableBuilder(
+        valueListenable: isSwitched2,
+        builder: (_, bool isSwitched2Listener, __) => ValueListenableBuilder(
+          valueListenable: isSwitched3,
+          builder: (_, bool isSwitched3Listener, __) => ListView(
+            physics: const ClampingScrollPhysics(),
             children: [
-              Expanded(
-                child: const ListTile(
-                  tileColor: const Color(0xffffffff),
-                  title: const Text('Hide Family', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-                  subtitle: const Text('Show or hide family details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+
+              ListTile(
+                tileColor: const Color(0xffffffff),
+                title: const Text('Customize shown info', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                subtitle: const Text('Customize what others see on your page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+              ),
+
+              Container(height: 5, color: const Color(0xffeeeeee),),
+
+              Container(
+                height: 80,
+                color: const Color(0xffffffff),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: const ListTile(
+                        tileColor: const Color(0xffffffff),
+                        title: const Text('Hide Family', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                        subtitle: const Text('Show or hide family details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+                      ),
+                    ),
+
+                    Switch(
+                      value: isSwitched1Listener,
+                      onChanged: (value) async{
+                        isSwitched1.value = value;
+                        await apiBLMUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
+                      },
+                      activeColor: const Color(0xff2F353D),
+                      activeTrackColor: const Color(0xff3498DB),
+                    ),
+                  ],
                 ),
               ),
 
-              Switch(
-                value: isSwitched1,
-                onChanged: (value) async{
-                  setState(() {
-                    isSwitched1 = value;
-                  });
+              Container(height: 5, color: const Color(0xffeeeeee),),
 
-                  await apiBLMUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
-                },
-                activeColor: const Color(0xff2F353D),
-                activeTrackColor: const Color(0xff3498DB),
-              ),
-            ],
-          ),
-        ),
+              Container(
+                height: 80,
+                color: const Color(0xffffffff),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: const ListTile(
+                        tileColor: const Color(0xffffffff),
+                        title: const Text('Hide Friends', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                        subtitle: const Text('Show or hide friends details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+                      ),
+                    ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
-        Container(
-          height: 80,
-          color: const Color(0xffffffff),
-          child: Row(
-            children: [
-              Expanded(
-                child: const ListTile(
-                  tileColor: const Color(0xffffffff),
-                  title: const Text('Hide Friends', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-                  subtitle: const Text('Show or hide friends details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+                    Switch(
+                      value: isSwitched2Listener,
+                      onChanged: (value) async{
+                        isSwitched2.value = value;
+                        await apiBLMUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
+                      },
+                      activeColor: const Color(0xff2F353D),
+                      activeTrackColor: const Color(0xff3498DB),
+                    ),
+                  ],
                 ),
               ),
 
-              Switch(
-                value: isSwitched2,
-                onChanged: (value) async{
-                  setState(() {
-                    isSwitched2 = value;
-                  });
+              Container(height: 5, color: const Color(0xffeeeeee),),
 
-                  await apiBLMUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
-                },
-                activeColor: const Color(0xff2F353D),
-                activeTrackColor: const Color(0xff3498DB),
-              ),
-            ],
-          ),
-        ),
+              Container(
+                height: 80,
+                color: const Color(0xffffffff),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: const ListTile(
+                        tileColor: const Color(0xffffffff),
+                        title: const Text('Hide Followers', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                        subtitle: const Text('Show or hide your followers', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+                      ),
+                    ),
 
-        Container(height: 5, color: const Color(0xffeeeeee),),
-
-        Container(
-          height: 80,
-          color: const Color(0xffffffff),
-          child: Row(
-            children: [
-              Expanded(
-                child: const ListTile(
-                  tileColor: const Color(0xffffffff),
-                  title: const Text('Hide Followers', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-                  subtitle: const Text('Show or hide your followers', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+                    Switch(
+                      value: isSwitched3Listener,
+                      onChanged: (value) async{
+                        isSwitched3.value = value;
+                        await apiBLMUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
+                      },
+                      activeColor: const Color(0xff2F353D),
+                      activeTrackColor: const Color(0xff3498DB),
+                    ),
+                  ],
                 ),
               ),
 
-              Switch(
-                value: isSwitched3,
-                onChanged: (value) async{
-                  setState(() {
-                    isSwitched3 = value;
-                  });
+              const SizedBox(height: 10,),
 
-                  await apiBLMUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
-                },
-                activeColor: const Color(0xff2F353D),
-                activeTrackColor: const Color(0xff3498DB),
-              ),
+              Image.asset('assets/icons/logo.png', height: 100, width: 100,),
+
+              const SizedBox(height: 30,),
             ],
           ),
         ),
-
-        const SizedBox(height: 10,),
-
-        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
-
-        const SizedBox(height: 30,),
-      ],
+      ),
     );
   }
 }

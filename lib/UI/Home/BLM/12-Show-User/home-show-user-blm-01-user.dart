@@ -15,28 +15,23 @@ class HomeBLMUserProfile extends StatefulWidget{
   final int accountType;
   const HomeBLMUserProfile({required this.userId, required this.accountType});
 
-  HomeBLMUserProfileState createState() => HomeBLMUserProfileState(userId: userId, accountType: accountType);
+  HomeBLMUserProfileState createState() => HomeBLMUserProfileState();
 }
 
 class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
-  final int userId;
-  final int accountType;
-  HomeBLMUserProfileState({required this.userId, required this.accountType});
-
   Future<APIBLMShowUserInformation>? showProfile;
-  
   WeSlideController controller = WeSlideController();
   int currentIndex = 0;
   List<Widget> children = [];
 
   Future<APIBLMShowUserInformation> getProfileInformation() async{
-    return await apiBLMShowUserInformation(userId: userId, accountType: accountType);
+    return await apiBLMShowUserInformation(userId: widget.userId, accountType: widget.accountType);
   }
 
   void initState(){
     super.initState();
     showProfile = getProfileInformation();
-    children = [MiscBLMDraggablePost(userId: userId,), MiscBLMDraggableMemorials(userId: userId,)]; // MISCELLANEOUS - MISC-13-BLM-USER-DETAILS.DART
+    children = [MiscBLMDraggablePost(userId: widget.userId,), MiscBLMDraggableMemorials(userId: widget.userId,)]; // MISCELLANEOUS - MISC-13-BLM-USER-DETAILS.DART
   }
 
   @override

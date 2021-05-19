@@ -24,14 +24,10 @@ class HomeBLMUserProfileDetails extends StatefulWidget {
   final int userId;
   HomeBLMUserProfileDetails({required this.userId});
 
-  HomeBLMUserProfileDetailsState createState() =>
-      HomeBLMUserProfileDetailsState(userId: userId);
+  HomeBLMUserProfileDetailsState createState() => HomeBLMUserProfileDetailsState();
 }
 
 class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
-  final int userId;
-  HomeBLMUserProfileDetailsState({required this.userId});
-
   Future<APIBLMShowProfileInformation>? showProfile;
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
@@ -88,12 +84,12 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
                     ),
                     ListTile(
                       onTap: () {
-                        print('The user id is $userId');
+                        print('The user id is ${widget.userId}');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => HomeBLMUserUpdateDetails(
-                                      userId: userId,
+                                      userId: widget.userId,
                                     )));
                       },
                       title: Text(
@@ -123,7 +119,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => HomeBLMUserChangePassword(
-                                      userId: userId,
+                                      userId: widget.userId,
                                     )));
                       },
                       title: Text(
@@ -151,14 +147,14 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
                       onTap: () async {
                         context.loaderOverlay.show();
                         APIBLMShowOtherDetailsStatus result =
-                            await apiBLMShowOtherDetailsStatus(userId: userId);
+                            await apiBLMShowOtherDetailsStatus(userId: widget.userId);
                         context.loaderOverlay.hide();
 
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => HomeBLMUserOtherDetails(
-                                    userId: userId,
+                                    userId: widget.userId,
                                     toggleBirthdate: result
                                         .showOtherDetailsStatusHideBirthdate,
                                     toggleBirthplace: result
@@ -326,9 +322,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
 
                               if (getImage) {
                                 context.loaderOverlay.show();
-                                bool result =
-                                    await apiBLMUpdateUserProfilePicture(
-                                        image: profileImage, userId: userId);
+                                bool result = await apiBLMUpdateUserProfilePicture(image: profileImage, userId: widget.userId);
                                 context.loaderOverlay.hide();
 
                                 if (result) {

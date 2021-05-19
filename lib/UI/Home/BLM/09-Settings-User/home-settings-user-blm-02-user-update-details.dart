@@ -15,30 +15,21 @@ class HomeBLMUserUpdateDetails extends StatefulWidget {
   final int userId;
   const HomeBLMUserUpdateDetails({required this.userId});
 
-  HomeBLMUserUpdateDetailsState createState() =>
-      HomeBLMUserUpdateDetailsState(userId: userId);
+  HomeBLMUserUpdateDetailsState createState() => HomeBLMUserUpdateDetailsState();
 }
 
 class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails> {
-  final int userId;
-  HomeBLMUserUpdateDetailsState({required this.userId});
-
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key4 =
-      GlobalKey<MiscBLMPhoneNumberTemplateState>();
-  final GlobalKey<MiscBLMInputFieldSecurityQuestionsState> _key5 =
-      GlobalKey<MiscBLMInputFieldSecurityQuestionsState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key4 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
+  final GlobalKey<MiscBLMInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscBLMInputFieldSecurityQuestionsState>();
 
   Future<APIBLMShowAccountDetails>? accountDetails;
 
   void initState() {
     super.initState();
-    accountDetails = getAccountDetails(userId);
+    accountDetails = getAccountDetails(widget.userId);
   }
 
   Future<APIBLMShowAccountDetails> getAccountDetails(int userId) async {
@@ -236,7 +227,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails> {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             HomeBLMUserProfileDetails(
-                                              userId: userId,
+                                              userId: widget.userId,
                                             )));
                               } else {
                                 await showDialog(

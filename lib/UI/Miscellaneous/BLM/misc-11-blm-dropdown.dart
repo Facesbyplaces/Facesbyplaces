@@ -67,6 +67,10 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
         errorCorrectionLevel: QrErrorCorrectLevel.L,
       );
 
+      print('The validation is ${qrValidationResult.status}');
+      print('The validation is ${qrValidationResult.error}');
+      print('The validation is ${qrValidationResult.qrCode}');
+
       if(qrValidationResult.status == QrValidationStatus.valid){
         QrCode? qrCode = qrValidationResult.qrCode;
 
@@ -76,12 +80,16 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
           gapless: true,
         );
 
+        print('The painter is $painter');
+
         final ByteData bytes = (await painter.toImageData(320))!;
         final Uint8List list = bytes.buffer.asUint8List();
 
         final tempDir = await getTemporaryDirectory();
         final file = await new File('${tempDir.path}/blm-qr-code.png').create();
         file.writeAsBytesSync(list);
+
+        print('The file  is ${file.path}');
 
         Share.shareFiles(['${file.path}'], text: 'QR Code');
       }else{
@@ -171,6 +179,8 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.postId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
                 String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+
+                print('The qrData on click is $qrData');
 
                 showGeneralDialog(
                   context: context,

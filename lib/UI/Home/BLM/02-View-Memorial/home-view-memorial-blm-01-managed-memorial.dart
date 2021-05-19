@@ -53,20 +53,12 @@ class HomeBLMProfile extends StatefulWidget{
   final String relationship;
   final bool managed;
   final bool newlyCreated;
-
   const HomeBLMProfile({required this.memorialId, required this.relationship, required this.managed, required this.newlyCreated});
 
-  HomeBLMProfileState createState() => HomeBLMProfileState(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: newlyCreated);
+  HomeBLMProfileState createState() => HomeBLMProfileState();
 }
 
 class HomeBLMProfileState extends State<HomeBLMProfile>{
-  final int memorialId;
-  final String relationship;
-  final bool managed;
-  final bool newlyCreated;
-
-  HomeBLMProfileState({required this.memorialId, required this.relationship, required this.managed, required this.newlyCreated});
-
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
   List<BLMProfilePosts> posts = [];
@@ -84,7 +76,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
   void initState(){
     super.initState();
     onLoading();
-    showProfile = getProfileInformation(memorialId);
+    showProfile = getProfileInformation(widget.memorialId);
   }
 
   Future<void> onRefresh() async{
@@ -95,7 +87,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiBLMProfilePost(memorialId: memorialId, page: page);
+      var newValue = await apiBLMProfilePost(memorialId: widget.memorialId, page: page);
 
       itemRemaining = newValue.blmItemsRemaining;
       postCount = newValue.blmFamilyMemorialList.length;
@@ -159,7 +151,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
       locallyIndex: true,
       contentMetadata: BranchContentMetaData()
         ..addCustomMetadata('link-category', 'Memorial')
-        ..addCustomMetadata('link-memorial-id', memorialId)
+        ..addCustomMetadata('link-memorial-id', widget.memorialId)
         ..addCustomMetadata('link-type-of-account', 'Blm')
     );
 
@@ -286,7 +278,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                       TextButton.icon(
                                         onPressed: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 2)));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                         }, 
                                         icon: const CircleAvatar(
                                           radius: 15,
@@ -430,16 +422,16 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 child: MaterialButton(
                                                   padding: EdgeInsets.zero,
                                                   onPressed: () async{
-                                                    if(managed == true){
+                                                    if(widget.managed == true){
                                                       context.loaderOverlay.show();
-                                                      APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId: memorialId);
+                                                      APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId: widget.memorialId);
                                                       context.loaderOverlay.hide();
 
                                                       if(result.switchStatusSuccess){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, memorialName: profile.data!.blmMemorial.memorialName, switchFamily: result.switchStatusFamily, switchFriends: result.switchStatusFriends, switchFollowers: result.switchStatusFollowers,)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.blmMemorial.memorialName, switchFamily: result.switchStatusFamily, switchFriends: result.switchStatusFriends, switchFollowers: result.switchStatusFollowers,)));
                                                       }
                                                     }else{
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettingsWithHidden(memorialId: memorialId, relationship: relationship,)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettingsWithHidden(memorialId: widget.memorialId, relationship: widget.relationship,)));
                                                     }
                                                     
                                                   },
@@ -589,7 +581,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: (){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 0)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 0)));
                                                 },
                                                 child: Column(
                                                   children: [
@@ -619,7 +611,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: (){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 1)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 1)));
                                                 },
                                                 child: Column(
                                                   children: [
@@ -648,7 +640,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: (){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 2)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                                 },
                                                 child: Column(
                                                   children: [
@@ -863,7 +855,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                         padding: const EdgeInsets.only(left: 20.0),
                                         child: GestureDetector(
                                           onTap: (){
-                                            if(newlyCreated == true){
+                                            if(widget.newlyCreated == true){
                                               Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMScreenExtended(newToggleBottom: 1,),);
                                               Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                                             }else{
@@ -889,7 +881,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                       child: Container(
                                         padding: const EdgeInsets.only(right: 20.0),
                                         alignment: Alignment.centerRight,
-                                        child: managed == true
+                                        child: widget.managed == true
                                         ? MaterialButton(
                                           onPressed: () async{
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePost(name: profile.data!.blmMemorial.memorialName, memorialId: profile.data!.blmMemorial.memorialId)));

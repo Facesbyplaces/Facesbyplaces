@@ -22,13 +22,10 @@ class HomeBLMPageManagers extends StatefulWidget{
   final int memorialId;
   const HomeBLMPageManagers({required this.memorialId});
 
-  HomeBLMPageManagersState createState() => HomeBLMPageManagersState(memorialId: memorialId);
+  HomeBLMPageManagersState createState() => HomeBLMPageManagersState();
 }
 
 class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
-  final int memorialId;
-  HomeBLMPageManagersState({required this.memorialId});
-
   ScrollController scrollController = ScrollController();
   List<Widget> managers = [];
   int adminItemsRemaining = 1;
@@ -94,7 +91,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
   void onLoading1() async{
     if(adminItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowAdminSettings(memorialId: memorialId, page: page1);
+      var newValue = await apiBLMShowAdminSettings(memorialId: widget.memorialId, page: page1);
       context.loaderOverlay.hide();
 
       adminItemsRemaining = newValue.blmAdminItemsRemaining;
@@ -138,7 +135,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
                 if(confirmation){
                   context.loaderOverlay.show();
-                  String result = await apiBLMDeleteMemorialAdmin(pageType: 'Blm', pageId: memorialId, userId: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
+                  String result = await apiBLMDeleteMemorialAdmin(pageType: 'Blm', pageId: widget.memorialId, userId: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){
@@ -215,7 +212,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     
     if(familyItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowAdminSettings(memorialId: memorialId, page: page2);
+      var newValue = await apiBLMShowAdminSettings(memorialId: widget.memorialId, page: page2);
       context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.blmFamilyItemsRemaining;
@@ -259,7 +256,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
                 if(confirmation){
                   context.loaderOverlay.show();
-                  String result = await apiBLMAddMemorialAdmin(pageType: 'Blm', pageId: memorialId, userId: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
+                  String result = await apiBLMAddMemorialAdmin(pageType: 'Blm', pageId: widget.memorialId, userId: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
 
                   if(result != 'Success'){

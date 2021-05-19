@@ -26,7 +26,6 @@ import 'package:keyboard_attachable/keyboard_attachable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -76,23 +75,17 @@ class HomeRegularShowOriginalPostComments extends StatefulWidget{
   const HomeRegularShowOriginalPostComments({required this.postId});
 
   @override
-  HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState(postId: postId);
+  HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState();
 }
 
 class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOriginalPostComments>{
-  final int postId;
-  HomeRegularShowOriginalPostCommentsState({required this.postId});
-
   ScrollController scrollController = ScrollController();
   TextEditingController controller = TextEditingController(text: '');
-  // List<RegularOriginalComment> comments = [];
-  // List<RegularOriginalReply> replies = [];
   ValueNotifier<List<RegularOriginalComment>> comments = ValueNotifier<List<RegularOriginalComment>>([]);
   ValueNotifier<List<RegularOriginalReply>> replies = ValueNotifier<List<RegularOriginalReply>>([]);
   int itemRemaining = 1;
   int repliesRemaining = 1;
   int page1 = 1;
-  // int count = 0;
   int numberOfReplies = 0;
   int page2 = 1;
   List<bool> commentsLikes = [];
@@ -115,7 +108,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   bool likePost = false;
   bool pressedLike = false;
   int likesCount = 0;
-  // bool isGuestLoggedIn = true;
   CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
@@ -133,23 +125,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       isGuestLoggedIn.value = false;
     }
 
-    // setState(() {
-    //   if(regularSession == true || blmSession == true){
-    //     isGuestLoggedIn.value = false;
-    //   }
-    // });
-    
     if(isGuestLoggedIn.value != true){
-      showOriginalPost = getOriginalPost(postId);
+      showOriginalPost = getOriginalPost(widget.postId);
       getProfilePicture();
       getOriginalPostInformation();
       onLoading();
       scrollController.addListener(() {
         if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
           if(itemRemaining != 0){
-            // setState(() {
-              onLoading();
-            // });
+            onLoading();
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -165,13 +149,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   }
 
   Future<void> onRefresh() async{
-    // setState(() {
-      onLoading();
-    // });
+    onLoading();
   }
 
   void getOriginalPostInformation() async{
-    var originalPostInformation = await apiRegularShowOriginalPost(postId: postId);
+    var originalPostInformation = await apiRegularShowOriginalPost(postId: widget.postId);
     numberOfLikes = originalPostInformation.almPost.showOriginalPostNumberOfLikes;
     numberOfComments = originalPostInformation.almPost.showOriginalPostNumberOfComments;
   }
@@ -186,7 +168,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   void onLoading() async{
     
     if(itemRemaining != 0){
-      var newValue1 = await apiRegularShowListOfComments(postId: postId, page: page1);
+      context.loaderOverlay.show();
+      var newValue1 = await apiRegularShowListOfComments(postId: widget.postId, page: page1);
       itemRemaining = newValue1.almItemsRemaining;
       count.value = count.value + newValue1.almCommentsList.length;
 
@@ -196,9 +179,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
         
         if(repliesRemaining != 0){
-          context.loaderOverlay.show();
+          
           var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.almCommentsList[i].showListOfCommentsCommentId, page: page2);
-          context.loaderOverlay.hide();
+          
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
@@ -257,9 +240,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       }
 
       if(mounted)
-      // setState(() {});
       page1++;
-      
+      context.loaderOverlay.hide();
     }
   }
 
@@ -302,21 +284,21 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                       },
                     ),
                     actions: [
-                      MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Alm'),
+                      MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Alm'),
                     ],
                   ),
                   backgroundColor: const Color(0xffffffff),
-                  body: Stack(
-                    children: [
-                      isGuestLoggedInListener
-                      ? Container(height: 0,)
-                      : IgnorePointer(
-                        ignoring: isGuestLoggedInListener,
-                        child: FutureBuilder<APIRegularShowOriginalPostMain>(
-                          future: showOriginalPost,
-                          builder: (context, originalPost){
-                            if(originalPost.hasData){
-                              return FooterLayout(
+                  body: FutureBuilder<APIRegularShowOriginalPostMain>(
+                    future: showOriginalPost,
+                    builder: (context, originalPost){
+                      if(originalPost.hasData){
+                        return Stack(
+                          children: [
+                            isGuestLoggedInListener
+                            ? Container(height: 0,)
+                            : IgnorePointer(
+                              ignoring: isGuestLoggedInListener,
+                              child: FooterLayout(
                                 footer: showKeyboard(),
                                 child: RefreshIndicator(
                                   onRefresh: onRefresh,
@@ -1006,7 +988,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 title: const Text('Report'),
                                                                 leading: const Icon(Icons.edit),
                                                                 onTap: (){
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: 'Post')));
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
                                                                 },
                                                               ),
                                                             ],
@@ -1192,7 +1174,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                           title: const Text('Report'),
                                                                           leading: const Icon(Icons.edit),
                                                                           onTap: (){
-                                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: 'Post')));
+                                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
                                                                           },
                                                                         ),
                                                                       ],
@@ -1333,24 +1315,42 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                     ],
                                   ),
                                 ),
-                              );
-                            }else if(originalPost.hasError){
-                              return const MiscRegularErrorMessageTemplate();
-                            }else{
-                              return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
-                            }
-                          }
-                        ),
-                      ),
+                              ),
+                            ),
 
-                      isGuestLoggedInListener
-                      ? BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: const MiscRegularLoginToContinue(),
-                      )
-                      : Container(height: 0),
-                    ],
+                            isGuestLoggedInListener
+                            ? BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                              child: const MiscRegularLoginToContinue(),
+                            )
+                            : Container(height: 0),
+                          ],
+                        );
+                      }else if(originalPost.hasError){
+                        return const MiscRegularErrorMessageTemplate();
+                      }else{
+                        return Container(height: 0);
+                        // return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                      }
+                    }
                   ),
+                  // body: Stack(
+                  //   children: [
+                  //     isGuestLoggedInListener
+                  //     ? Container(height: 0,)
+                  //     : IgnorePointer(
+                  //       ignoring: isGuestLoggedInListener,
+                  //       child: 
+                  //     ),
+
+                  //     isGuestLoggedInListener
+                  //     ? BackdropFilter(
+                  //       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                  //       child: const MiscRegularLoginToContinue(),
+                  //     )
+                  //     : Container(height: 0),
+                  //   ],
+                  // ),
                 ),
               ),
             ),
@@ -1436,7 +1436,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   );
                 }else if(isComment == true && controller.text != ''){
                   context.loaderOverlay.show();
-                  await apiRegularAddComment(postId: postId, commentBody: controller.text);
+                  await apiRegularAddComment(postId: widget.postId, commentBody: controller.text);
                   context.loaderOverlay.hide();
 
                   controller.clear();

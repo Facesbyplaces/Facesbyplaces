@@ -12,18 +12,13 @@ class HomeBLMUserChangePassword extends StatefulWidget {
   final int userId;
   const HomeBLMUserChangePassword({required this.userId});
 
-  HomeBLMUserChangePasswordState createState() =>
-      HomeBLMUserChangePasswordState(userId: userId);
+  HomeBLMUserChangePasswordState createState() => HomeBLMUserChangePasswordState();
 }
 
 class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword> {
-  final int userId;
-  HomeBLMUserChangePasswordState({required this.userId});
 
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +141,7 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => HomeBLMUserProfileDetails(
-                                    userId: userId,
+                                    userId: widget.userId,
                                   )));
                     } else {
                       await showDialog(

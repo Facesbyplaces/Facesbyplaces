@@ -22,14 +22,10 @@ class HomeBLMMemorialPageImage extends StatefulWidget{
   final int memorialId;
   HomeBLMMemorialPageImage({required this.memorialId});
 
-  HomeBLMMemorialPageImageState createState() => HomeBLMMemorialPageImageState(memorialId: memorialId);
+  HomeBLMMemorialPageImageState createState() => HomeBLMMemorialPageImageState();
 }
 
 class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
-
-  final int memorialId;
-  HomeBLMMemorialPageImageState({required this.memorialId});
-
   final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
   int backgroundImageToggle  = 0;
   final picker = ImagePicker();
@@ -61,7 +57,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
   void initState(){
     super.initState();
-    futureMemorialSettings = getMemorialSettings(memorialId);
+    futureMemorialSettings = getMemorialSettings(widget.memorialId);
   }
 
   @override
@@ -302,7 +298,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                         onPressed: () async{
                           if(profileImage.path != '' || backgroundImage.path != ''){
                             context.loaderOverlay.show();
-                            bool result = await apiBLMUpdatePageImages(memorialId: memorialId, backgroundImage: backgroundImage, profileImage: profileImage);
+                            bool result = await apiBLMUpdatePageImages(memorialId: widget.memorialId, backgroundImage: backgroundImage, profileImage: profileImage);
                             context.loaderOverlay.hide();
 
                             if(result){
@@ -322,7 +318,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                   },
                                 )
                               );
-                              Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.blmMemorial.showPageImagesRelationship,));
+                              Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.blmMemorial.showPageImagesRelationship,));
                               Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                             }else{
                               await showDialog(
