@@ -5,7 +5,7 @@ import axios from "../../../../../../auxiliary/axios";
 import HashLoader from "react-spinners/HashLoader";
 
 export const TransactionModal = ({ showModal, setShowModal, transaction }) => {
-  console.log(transaction);
+  var dateFormat = require("dateformat");
 
   return (
     <>
@@ -27,6 +27,7 @@ export const TransactionModal = ({ showModal, setShowModal, transaction }) => {
                         type="email"
                         className="form-control form-control-solid"
                         value={transaction.page.name}
+                        disabled
                       />
                     </div>
                     <div className="form-group" style={{ textAlign: "left" }}>
@@ -39,6 +40,7 @@ export const TransactionModal = ({ showModal, setShowModal, transaction }) => {
                           " " +
                           transaction.user.last_name
                         }
+                        disabled
                       />
                       {/* <span className="form-text text-muted">
                         We'll never share your email with anyone else
@@ -54,6 +56,21 @@ export const TransactionModal = ({ showModal, setShowModal, transaction }) => {
                           type="text"
                           className="form-control form-control-solid"
                           value={transaction.amount}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group" style={{ textAlign: "left" }}>
+                      <label>Date Donated:</label>
+                      <div className="input-group input-group-lg">
+                        <input
+                          type="text"
+                          className="form-control form-control-solid"
+                          value={dateFormat(
+                            transaction.created_at,
+                            "mmmm d, yyyy"
+                          )}
+                          disabled
                         />
                       </div>
                     </div>
