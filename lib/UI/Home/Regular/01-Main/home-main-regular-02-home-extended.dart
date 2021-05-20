@@ -170,10 +170,19 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                           return Builder(
                             builder: (context) {
                               return IconButton(
-                                icon: CircleAvatar(
-                                  backgroundColor: const Color(0xff888888),
-                                  foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
-                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                icon: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  child: CircleAvatar(
+                                    backgroundColor: const Color(0xff888888),
+                                    foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                  ),
                                 ),
                                 onPressed: () async {
                                   Scaffold.of(context).openDrawer();
@@ -499,16 +508,25 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                           child: manageDrawer.data!
                                                       .showProfileInformationImage !=
                                                   ''
-                                              ? CircleAvatar(
-                                                  radius: 100,
-                                                  backgroundColor:
-                                                      const Color(0xff888888),
-                                                  foregroundImage: NetworkImage(
-                                                      manageDrawer.data!
-                                                          .showProfileInformationImage),
-                                                  backgroundImage: const AssetImage(
-                                                      'assets/icons/app-icon.png'),
-                                                )
+                                              ? Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color: Colors.white,
+                                                width: 3,
+                                              ),
+                                            ),
+                                            child: CircleAvatar(
+                                              radius: 100,
+                                              backgroundColor:
+                                              const Color(0xff888888),
+                                              foregroundImage: NetworkImage(
+                                                  manageDrawer.data!
+                                                      .showProfileInformationImage),
+                                              backgroundImage: const AssetImage(
+                                                  'assets/icons/app-icon.png'),
+                                            ),
+                                          )
                                               : const CircleAvatar(
                                                   radius: 100,
                                                   backgroundColor:

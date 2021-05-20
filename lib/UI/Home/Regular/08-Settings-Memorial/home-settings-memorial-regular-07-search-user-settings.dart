@@ -116,100 +116,126 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
         },
         child: Scaffold(
           appBar: AppBar(
-            flexibleSpace: Row(
+            flexibleSpace: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: const Color(0xffffffff),
-                      size: SizeConfig.blockSizeVertical! * 3.52,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      controller: controller,
-                      onChanged: (newPlaces) {
-                        setState(() {
-                          keywords = newPlaces;
-                        });
-
-                        if (newPlaces != '') {
-                          setState(() {
-                            empty = false;
-                            itemRemaining = 1;
-                            page = 1;
-                            keywords = '';
-                          });
-                        } else {
-                          empty = true;
-                          setState(() {
-                            users = [];
-                          });
-                        }
-                      },
-                      onFieldSubmitted: (newPlaces) {
-                        setState(() {
-                          keywords = newPlaces;
-                        });
-
-                        if (newPlaces != '') {
-                          onLoading();
-                        }
-                      },
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(15.0),
-                        filled: true,
-                        fillColor: const Color(0xffffffff),
-                        focusColor: const Color(0xffffffff),
-                        hintText: 'Search User',
-                        hintStyle: const TextStyle(
-                          fontSize: 14,
+                Spacer(),
+                Row(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: const Color(0xffffffff),
+                          size: SizeConfig.blockSizeVertical! * 3.52,
                         ),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              keywords = controller.text;
-                            });
-
-                            if (controller.text != '') {
-                              onLoading();
-                            }
-                          },
-                          icon: const Icon(Icons.search,
-                              color: const Color(0xff888888)),
-                        ),
-                        border: const OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: const Color(0xffffffff)),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(25)),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: const Color(0xffffffff)),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(25)),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: const Color(0xffffffff)),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(25)),
-                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ),
-                  ),
+                    Spacer(),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      width: SizeConfig.blockSizeHorizontal! * 79.06,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                keywords = controller.text;
+                              });
+
+                              if (controller.text != '') {
+                                onLoading();
+                              }
+                            },
+                            icon: const Icon(Icons.search,
+                                color: const Color(0xff888888)),
+                          ),
+                          Expanded(
+                            child: TextFormField(
+                              keyboardType: TextInputType.text,
+                              controller: controller,
+                              onChanged: (newPlaces) {
+                                setState(() {
+                                  keywords = newPlaces;
+                                });
+
+                                if (newPlaces != '') {
+                                  setState(() {
+                                    empty = false;
+                                    itemRemaining = 1;
+                                    page = 1;
+                                    keywords = '';
+                                  });
+                                } else {
+                                  empty = true;
+                                  setState(() {
+                                    users = [];
+                                  });
+                                }
+                              },
+                              onFieldSubmitted: (newPlaces) {
+                                setState(() {
+                                  keywords = newPlaces;
+                                });
+
+                                if (newPlaces != '') {
+                                  onLoading();
+                                }
+                              },
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                fontFamily: 'NexaRegular',
+                                color: Color(0xffB1B1B1),
+                              ),
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.all(15.0),
+                                filled: true,
+                                fillColor: const Color(0xffffffff),
+                                focusColor: const Color(0xffffffff),
+                                hintText: 'Search User',
+                                hintStyle: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.11,
+                                  fontFamily: 'NexaRegular',
+                                  color: Color(0xffB1B1B1),
+                                ),
+                                border: const OutlineInputBorder(
+                                  borderSide:
+                                  const BorderSide(color: const Color(0xffffffff)),
+                                  borderRadius:
+                                  const BorderRadius.all(Radius.circular(25)),
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide:
+                                  const BorderSide(color: const Color(0xffffffff)),
+                                  borderRadius:
+                                  const BorderRadius.all(Radius.circular(25)),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide:
+                                  const BorderSide(color: const Color(0xffffffff)),
+                                  borderRadius:
+                                  const BorderRadius.all(Radius.circular(25)),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  width: 20,
+                SizedBox(
+                  height: 5,
                 ),
               ],
             ),
@@ -237,11 +263,14 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const Text(
+                        Text(
                           'Search a location to add on your post',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: const Color(0xff000000),
+                          style: TextStyle(
+                            fontSize:
+                            SizeConfig.blockSizeVertical! *
+                                2.64,
+                            fontFamily: 'NexaRegular',
+                            color: Color(0xff000000),
                           ),
                         ),
                         SizedBox(
@@ -290,19 +319,22 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                                                     'assets/icons/cover-icon.png',
                                                     fit: BoxFit.cover,
                                                   ),
-                                                  title: const Text(
+                                                  title: Text(
                                                     'Error',
                                                     textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                        fontSize: 22.0,
-                                                        fontWeight:
-                                                            FontWeight.w600),
+                                                    style:  TextStyle(
+                                                        fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                                        fontFamily: 'NexaRegular'),
                                                   ),
                                                   entryAnimation:
                                                       EntryAnimation.DEFAULT,
                                                   description: Text(
                                                     'Error: $result.',
                                                     textAlign: TextAlign.center,
+                                                    style:  TextStyle(
+                                                        fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                                        fontFamily: 'NexaRegular'
+                                                    ),
                                                   ),
                                                   onlyOkButton: true,
                                                   buttonOkColor:
@@ -344,19 +376,22 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                                                   'assets/icons/cover-icon.png',
                                                   fit: BoxFit.cover,
                                                 ),
-                                                title: const Text(
+                                                title: Text(
                                                   'Error',
                                                   textAlign: TextAlign.center,
-                                                  style: const TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontWeight:
-                                                          FontWeight.w600),
+                                                  style:  TextStyle(
+                                                      fontSize: SizeConfig.blockSizeVertical! * 3.87,
+                                                      fontFamily: 'NexaRegular'),
                                                 ),
                                                 entryAnimation:
                                                     EntryAnimation.DEFAULT,
                                                 description: Text(
                                                   'Error: $result.',
                                                   textAlign: TextAlign.center,
+                                                  style:  TextStyle(
+                                                      fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                                      fontFamily: 'NexaRegular'
+                                                  ),
                                                 ),
                                                 onlyOkButton: true,
                                                 buttonOkColor:
