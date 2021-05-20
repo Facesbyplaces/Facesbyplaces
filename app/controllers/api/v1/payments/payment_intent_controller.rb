@@ -33,12 +33,14 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         
         if payment_intent.status == 'succeeded'
           # save to transaction
-          Transaction.create(page: @memorial, account: user(), amount: @amount)
+          transaction = Transaction.create(page: @memorial, account: user(), amount: @amount)
+          transaction.save
 
           render json: {
             memorial_stripe_account: @memorial.stripe_connect_account_id,
             publishable_key: Rails.configuration.stripe[:publishable_key],
-            payment_intent: payment_intent
+            payment_intent: payment_intent,
+            transaction: transaction
           }, status: 200
         else 
           render json: {status: "Transaction Failed"}, status: 422
