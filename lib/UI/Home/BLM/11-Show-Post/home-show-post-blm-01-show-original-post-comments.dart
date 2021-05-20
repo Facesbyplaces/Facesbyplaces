@@ -89,12 +89,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   ValueNotifier<List<BLMOriginalReply>> replies = ValueNotifier<List<BLMOriginalReply>>([]);
   ValueNotifier<int> count = ValueNotifier<int>(0);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
-  // List<BLMOriginalComment> comments = [];
-  // List<BLMOriginalReply> replies = [];
   int itemRemaining = 1;
   int repliesRemaining = 1;
   int page1 = 1;
-  // int count = 0;
   int numberOfReplies = 0;
   int page2 = 1;
   List<bool> commentsLikes = [];
@@ -115,7 +112,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   bool likePost = false;
   bool pressedLike = false;
   int likesCount = 0;
-  // bool isGuestLoggedIn = true;
   CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
@@ -133,12 +129,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       isGuestLoggedIn.value = false;
     }
 
-    // setState(() {
-    //   if(regularSession == true || blmSession == true){
-    //     isGuestLoggedIn.value = false;
-    //   }
-    // });
-
     if(isGuestLoggedIn.value != true){
       showOriginalPost = getOriginalPost(postId);
       getProfilePicture();
@@ -147,9 +137,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       scrollController.addListener(() {
         if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
           if(itemRemaining != 0){
-            // setState(() {
-              onLoading();
-            // });
+            onLoading();
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -165,9 +153,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   }
 
   Future<void> onRefresh() async{
-    // setState(() {
-      onLoading();
-    // });
+    onLoading();
   }
 
   void getOriginalPostInformation() async{
@@ -260,9 +246,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       }
 
       if(mounted)
-      // setState(() {});
       page1++;
-      
     }
   }
 
@@ -481,39 +465,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                 placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                               );
-                                                                              // return ExtendedImage.network(
-                                                                              //   originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                                              //   fit: BoxFit.contain,
-                                                                              //   //enableLoadState: false,
-                                                                              //   // loadStateChanged: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                                                              //   // loadStateChanged: (),
-                                                                              //   // loadStateChanged: (ExtendedImageState state){
-                                                                              //   //   // return const Center(child: const CircularProgressIndicator(),);
-
-                                                                              //   // },
-                                                                              //   loadStateChanged: (state){
-                                                                              //     // if(state.){
-                                                                              //     //   return const Center(child: const CircularProgressIndicator(),);
-                                                                              //     // }
-                                                                              //     if(LoadState.loading == state.extendedImageLoadState){
-                                                                              //       return const Center(child: const CircularProgressIndicator(),);
-                                                                              //     }
-                                                                              //   },
-                                                                              //   mode: ExtendedImageMode.gesture,
-                                                                              //   initGestureConfigHandler: (state) {
-                                                                              //     return GestureConfig(
-                                                                              //       minScale: 0.9,
-                                                                              //       animationMinScale: 0.7,
-                                                                              //       maxScale: 3.0,
-                                                                              //       animationMaxScale: 3.5,
-                                                                              //       speed: 1.0,
-                                                                              //       inertialSpeed: 100.0,
-                                                                              //       initialScale: 1.0,
-                                                                              //       inPageView: false,
-                                                                              //       initialAlignment: InitialAlignment.center,
-                                                                              //     );
-                                                                              //   },
-                                                                              // );
                                                                             }
                                                                           }()),
                                                                         ),

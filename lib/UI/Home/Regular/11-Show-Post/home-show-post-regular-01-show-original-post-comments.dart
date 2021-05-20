@@ -85,14 +85,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
   ScrollController scrollController = ScrollController();
   TextEditingController controller = TextEditingController(text: '');
-  // List<RegularOriginalComment> comments = [];
-  // List<RegularOriginalReply> replies = [];
   ValueNotifier<List<RegularOriginalComment>> comments = ValueNotifier<List<RegularOriginalComment>>([]);
   ValueNotifier<List<RegularOriginalReply>> replies = ValueNotifier<List<RegularOriginalReply>>([]);
   int itemRemaining = 1;
   int repliesRemaining = 1;
   int page1 = 1;
-  // int count = 0;
   int numberOfReplies = 0;
   int page2 = 1;
   List<bool> commentsLikes = [];
@@ -115,7 +112,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   bool likePost = false;
   bool pressedLike = false;
   int likesCount = 0;
-  // bool isGuestLoggedIn = true;
   CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
@@ -132,12 +128,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     if(regularSession == true || blmSession == true){
       isGuestLoggedIn.value = false;
     }
-
-    // setState(() {
-    //   if(regularSession == true || blmSession == true){
-    //     isGuestLoggedIn.value = false;
-    //   }
-    // });
     
     if(isGuestLoggedIn.value != true){
       showOriginalPost = getOriginalPost(postId);
@@ -147,9 +137,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       scrollController.addListener(() {
         if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
           if(itemRemaining != 0){
-            // setState(() {
-              onLoading();
-            // });
+            onLoading();
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -165,9 +153,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   }
 
   Future<void> onRefresh() async{
-    // setState(() {
-      onLoading();
-    // });
+    onLoading();
   }
 
   void getOriginalPostInformation() async{
@@ -257,9 +243,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
       }
 
       if(mounted)
-      // setState(() {});
       page1++;
-      
     }
   }
 
@@ -1042,18 +1026,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           child: TextButton.icon(
                                                             onPressed: () async{
                                                               if(commentsLikes[i] == true){
-                                                                // setState(() {
-                                                                  commentsLikes[i] = false;
-                                                                  commentsNumberOfLikes[i]--;
-                                                                // });
-
+                                                                commentsLikes[i] = false;
+                                                                commentsNumberOfLikes[i]--;
                                                                 await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: commentsListener[i].commentId, likeStatus: false);
                                                               }else{
-                                                                // setState(() {
-                                                                  commentsLikes[i] = true;
-                                                                  commentsNumberOfLikes[i]++;
-                                                                // });
-
+                                                                commentsLikes[i] = true;
+                                                                commentsNumberOfLikes[i]++;
                                                                 await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: commentsListener[i].commentId, likeStatus: true);
                                                               }
                                                             }, 
@@ -1100,10 +1078,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 controller.clear();
                                                               }
 
-                                                              // setState(() {
-                                                                isComment = false;
-                                                                currentCommentId = commentsListener[i].commentId;
-                                                              // });
+                                                              isComment = false;
+                                                              currentCommentId = commentsListener[i].commentId;
 
                                                               await showModalBottomSheet(
                                                                 context: context, 

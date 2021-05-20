@@ -27,7 +27,7 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) asy
   );
 
   print('The status code of blm show memorial details is ${response.statusCode}');
-  print('The status data of blm show memorial details is ${response.data}');
+  // print('The status data of blm show memorial details is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -113,6 +113,8 @@ class APIBLMShowMemorialExtendedDetails{
     DateTime dob = DateTime.parse(newDOB);
     String newRIP = parsedJson['rip'];
     DateTime rip = DateTime.parse(newRIP);
+
+    print('Accepts donations: ${parsedJson['accept_donations'] != null ? parsedJson['accept_donations'] : false}');
 
     return APIBLMShowMemorialExtendedDetails(
       memorialDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
