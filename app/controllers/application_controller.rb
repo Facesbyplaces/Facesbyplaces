@@ -11,10 +11,6 @@ class ApplicationController < ActionController::Base
         rescue_from CanCan::AccessDenied do |exception|
             render json: {status: exception.message}
         end
-
-        def current_user
-            super 
-        end
       
         private
 
@@ -92,10 +88,14 @@ class ApplicationController < ActionController::Base
         end
 
         def check_user
-            if user() != nil 
-                return true 
+            if user() != nil   
+                if user().account_type == 1 || "1" 
+                    return :authenticate_user!  
+                else
+                    return :authenticate_alm_user! 
+                end
             else
-                return false 
+                return render json: {error: "Account is needed to proceed."}, status: 404
             end
         end
 
