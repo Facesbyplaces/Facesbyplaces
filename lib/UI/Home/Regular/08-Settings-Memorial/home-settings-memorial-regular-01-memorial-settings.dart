@@ -73,8 +73,6 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
         body: Column(
           children: [
             Container(
-              alignment: Alignment.centerLeft,
-              width: SizeConfig.screenWidth,
               height: 70,
               child: DefaultTabController(
                 length: 2,
@@ -87,22 +85,20 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     toggle.value = index;
                   },
                   tabs: [
-                    Center(
-                      child: Text('Page',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xff2F353D),
-                        ),
+                    Text(
+                      'Page',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff2F353D),
                       ),
                     ),
-                    Center(
-                      child: Text('Privacy',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xff2F353D),
-                        ),
+                    Text(
+                      'Privacy',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff2F353D),
                       ),
                     ),
                   ],

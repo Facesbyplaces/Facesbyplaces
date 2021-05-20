@@ -3,118 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="21a8e94f-f08b-4f73-a167-e3ca3beff417" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/BoringSSL-GRPC.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/BoringSSL-GRPC.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/FBSDKCoreKit-FacebookSDKStrings.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/FBSDKCoreKit-FacebookSDKStrings.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Pods-Runner.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Pods-Runner.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/PromisesObjC.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/PromisesObjC.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Stripe-Stripe.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Stripe-Stripe.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/abseil.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/abseil.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-C++-gRPCCertificates-Cpp.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-C++-gRPCCertificates-Cpp.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-C++.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-C++.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-Core.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-Core.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/leveldb-library.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/leveldb-library.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/libPhoneNumber-iOS.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/libPhoneNumber-iOS.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/AppAuth.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/BoringSSL-GRPC.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/Branch.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/CocoaAsyncSocket.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FBSDKCoreKit-FacebookSDKStrings.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FBSDKCoreKit.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FBSDKLoginKit.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FMDB.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/Firebase.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FirebaseAnalytics.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FirebaseAuth.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FirebaseCore.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FirebaseCoreDiagnostics.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FirebaseFirestore.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FirebaseInstallations.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FirebaseInstanceID.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/FirebaseMessaging.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/Flutter.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/GTMAppAuth.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/GTMSessionFetcher.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/GoogleAppMeasurement.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/GoogleDataTransport.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/GoogleSignIn.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/GoogleUtilities.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/KTVCocoaHTTPServer.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/KTVHTTPCache.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/OrderedSet.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/Pods-Runner.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/PromisesObjC.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/Stripe-Stripe.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/Stripe.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/ZLPhotoBrowser.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/abseil.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/better_player.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/firebase_auth.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/firebase_core.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/firebase_messaging.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/flutter_barcode_scanner.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/flutter_branch_sdk.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/flutter_inappwebview.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/flutter_keyboard_visibility.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/flutter_login_facebook.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/gRPC-C++-gRPCCertificates-Cpp.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/gRPC-C++.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/gRPC-Core.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/geocoding.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/geolocator.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/google_sign_in.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/image_picker.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/images_picker.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/leveldb-library.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/libPhoneNumber-iOS.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/libphonenumber.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/libphonenumber_plugin.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/location.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/nanopb.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/path_provider.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/share.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/shared_preferences.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/sign_in_with_apple.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/sqflite.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/stripe_payment.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/wakelock.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk38.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/01-Main/home-main-blm-03-01-feed-tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/01-Main/home-main-blm-03-01-feed-tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/01-Main/home-main-blm-03-02-memorial-list-tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/01-Main/home-main-blm-03-02-memorial-list-tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-03-connection-list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-03-connection-list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/01-Main/home-main-blm-02-home-extended.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/01-Main/home-main-blm-02-home-extended.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/07-Search/home-search-blm-01-search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/07-Search/home-search-blm-01-search.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-01-memorial-settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-01-memorial-settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-02-page-details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-02-page-details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-03-update-memorial-image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-03-update-memorial-image.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-04-page-managers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-04-page-managers.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-05-page-family.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-05-page-family.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-06-page-friends.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-06-page-friends.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-07-search-user-settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-07-search-user-settings.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/01-Main/home-main-regular-03-01-feed-tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/01-Main/home-main-regular-03-01-feed-tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-03-connection-list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-03-connection-list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/01-Main/home-main-regular-02-home-extended.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/01-Main/home-main-regular-02-home-extended.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-04-page-managers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-04-page-managers.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-05-page-family.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-05-page-family.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-06-page-friends.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-06-page-friends.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-07-search-user-settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-07-search-user-settings.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-04-blm-post.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-04-blm-post.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-04-regular-post.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-04-regular-post.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-10-blm-notification-display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-10-blm-notification-display.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-10-regular-notification-display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-10-regular-notification-display.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,22 +80,22 @@
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
     <state x="997" y="106" width="1269" height="777" key="AVDManager/0.23.1920.1000@0.23.1920.1000" timestamp="1620614548564" />
-    <state width="1427" height="74" key="GridCell.Tab.0.bottom" timestamp="1621408549362">
+    <state width="1427" height="304" key="GridCell.Tab.0.bottom" timestamp="1621499047075">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="74" key="GridCell.Tab.0.bottom/0.23.1920.1000@0.23.1920.1000" timestamp="1621408549362" />
-    <state width="1427" height="74" key="GridCell.Tab.0.center" timestamp="1621408549361">
+    <state width="1427" height="304" key="GridCell.Tab.0.bottom/0.23.1920.1000@0.23.1920.1000" timestamp="1621499047075" />
+    <state width="1427" height="304" key="GridCell.Tab.0.center" timestamp="1621499047074">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="74" key="GridCell.Tab.0.center/0.23.1920.1000@0.23.1920.1000" timestamp="1621408549361" />
-    <state width="1427" height="74" key="GridCell.Tab.0.left" timestamp="1621408549361">
+    <state width="1427" height="304" key="GridCell.Tab.0.center/0.23.1920.1000@0.23.1920.1000" timestamp="1621499047074" />
+    <state width="1427" height="304" key="GridCell.Tab.0.left" timestamp="1621499047074">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="74" key="GridCell.Tab.0.left/0.23.1920.1000@0.23.1920.1000" timestamp="1621408549361" />
-    <state width="1427" height="74" key="GridCell.Tab.0.right" timestamp="1621408549362">
+    <state width="1427" height="304" key="GridCell.Tab.0.left/0.23.1920.1000@0.23.1920.1000" timestamp="1621499047074" />
+    <state width="1427" height="304" key="GridCell.Tab.0.right" timestamp="1621499047074">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="74" key="GridCell.Tab.0.right/0.23.1920.1000@0.23.1920.1000" timestamp="1621408549362" />
+    <state width="1427" height="304" key="GridCell.Tab.0.right/0.23.1920.1000@0.23.1920.1000" timestamp="1621499047074" />
     <state x="836" y="247" key="Vcs.Push.Dialog.v2" timestamp="1621244045094">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
@@ -204,6 +104,10 @@
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
     <state x="844" y="184" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1920.1000@0.23.1920.1000" timestamp="1621234466595" />
+    <state x="1034" y="154" width="887" height="922" key="dock-window-1" timestamp="1621485788831">
+      <screen x="0" y="23" width="1920" height="1000" />
+    </state>
+    <state x="1034" y="154" width="887" height="922" key="dock-window-1/0.23.1920.1000@0.23.1920.1000" timestamp="1621485788831" />
     <state x="827" y="307" key="git4idea.merge.GitPullDialog" timestamp="1621314879195">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>

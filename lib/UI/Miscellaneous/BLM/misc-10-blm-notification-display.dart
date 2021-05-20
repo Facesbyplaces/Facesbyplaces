@@ -6,7 +6,9 @@ import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
+import '../../../Configurations/size_configuration.dart';
+
+class MiscBLMNotificationDisplayTemplate extends StatelessWidget {
   final String imageIcon;
   final String notification;
   final String dateCreated;
@@ -24,39 +26,75 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
   });
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-      tileColor: readStatus == true ? const Color(0xffffffff) : const Color(0xffdddddd),
-      onTap: () async{
-        if(notificationType == 'Memorial'){
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      tileColor: readStatus == true
+          ? const Color(0xffffffff)
+          : const Color(0xffdddddd),
+      onTap: () async {
+        if (notificationType == 'Memorial') {
           context.loaderOverlay.show();
-          var memorialProfile = await apiRegularShowMemorial(memorialId: postId);
+          var memorialProfile =
+              await apiRegularShowMemorial(memorialId: postId);
           context.loaderOverlay.hide();
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: memorialProfile.almMemorial.showMemorialFollower,)));
-        }else if(notificationType == 'Blm'){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeRegularMemorialProfile(
+                        memorialId: postId,
+                        pageType: notificationType,
+                        newJoin:
+                            memorialProfile.almMemorial.showMemorialFollower,
+                      )));
+        } else if (notificationType == 'Blm') {
           context.loaderOverlay.show();
           var blmProfile = await apiBLMShowMemorial(memorialId: postId);
           context.loaderOverlay.hide();
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: blmProfile.blmMemorial.memorialFollower,)));
-        }else if(notificationType == 'Post'){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeBLMMemorialProfile(
+                        memorialId: postId,
+                        pageType: notificationType,
+                        newJoin: blmProfile.blmMemorial.memorialFollower,
+                      )));
+        } else if (notificationType == 'Post') {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      HomeBLMShowOriginalPostComments(postId: postId)));
         }
       },
       leading: imageIcon != ''
-      ? CircleAvatar(
-        backgroundColor: const Color(0xff888888), 
-        foregroundImage: NetworkImage(imageIcon),
-        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-      )
-      : const CircleAvatar(
-        backgroundColor: const Color(0xff888888), 
-        foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+          ? CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: NetworkImage(imageIcon),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+            )
+          : const CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+            ),
+      title: Text(
+        notification,
+        style: TextStyle(
+          fontSize: SizeConfig.blockSizeVertical! * 2.11,
+          fontFamily: 'RobotoRegular',
+          color: const Color(0xff000000),
+        ),
       ),
-      title: Text(notification, style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 16),),
-      subtitle: Text(dateCreated),
+      subtitle: Text(dateCreated,
+        style: TextStyle(
+          fontSize: SizeConfig.blockSizeVertical! * 1.76,
+          fontFamily: 'RobotoLight',
+          color: const Color(0xff000000),
+        ),),
     );
   }
 }

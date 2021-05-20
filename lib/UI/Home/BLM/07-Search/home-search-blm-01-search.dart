@@ -57,7 +57,7 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: IconButton(icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                            child: IconButton(icon:  Icon(Icons.arrow_back, color: const Color(0xffffffff),size: SizeConfig.blockSizeVertical! * 3.52,), onPressed: (){Navigator.pop(context);},),
                           ),
                           Spacer(),
                           Container(
