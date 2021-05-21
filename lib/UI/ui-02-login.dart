@@ -8,7 +8,6 @@ class UILogin01 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: SafeArea(
         bottom: false,
         child: Container(

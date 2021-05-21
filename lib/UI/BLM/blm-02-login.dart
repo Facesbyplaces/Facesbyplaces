@@ -40,7 +40,7 @@ class BLMLogin extends StatelessWidget {
             }
           },
           child: Scaffold(
-              backgroundColor: Colors.black,
+             // backgroundColor: Colors.black,
               body: SafeArea(
                 bottom: false,
                 child: Container(

@@ -42,7 +42,6 @@ class RegularLoginState extends State<RegularLogin> {
             }
           },
           child: Scaffold(
-            backgroundColor: const Color(0xff000000),
             body: SafeArea(
               bottom: false,
               child: Container(
