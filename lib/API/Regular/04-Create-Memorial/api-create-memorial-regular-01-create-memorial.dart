@@ -27,14 +27,6 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
     MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),)
   ]);
 
-  // if(memorial.almLatitude != ''){
-  //   MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.almLatitude,),);
-  // }
-
-  // if(memorial.almLongitude != ''){
-  //   MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),);
-  // }
-
   if(memorial.almBackgroundImage != null || memorial.almBackgroundImage != ''){
     var file = await MultipartFile.fromFile(memorial.almBackgroundImage.path, filename: memorial.almBackgroundImage.path);
     formData.files.add(MapEntry('memorial[backgroundImage]', file));
@@ -46,7 +38,6 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
   }
   
   if(memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
-
     for(int i = 0; i < memorial.almImagesOrVideos.length; i++){
       if(memorial.almImagesOrVideos[i].path != null || memorial.almImagesOrVideos != ['']){
         var file = await MultipartFile.fromFile(memorial.almImagesOrVideos[i].path, filename: memorial.almImagesOrVideos[i].path);

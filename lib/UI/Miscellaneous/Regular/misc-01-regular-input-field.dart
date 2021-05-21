@@ -17,11 +17,7 @@ class MiscRegularInputFieldTemplate extends StatefulWidget {
   const MiscRegularInputFieldTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: const Color(0xff888888),
-    ),
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
     this.obscureText = false,
     this.type = TextInputType.text,
     this.maxLines = 1,
@@ -35,8 +31,7 @@ class MiscRegularInputFieldTemplate extends StatefulWidget {
       MiscRegularInputFieldTemplateState();
 }
 
-class MiscRegularInputFieldTemplateState
-    extends State<MiscRegularInputFieldTemplate> {
+class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemplate> {
   TextEditingController controller = TextEditingController(text: '');
 
   void initState() {
