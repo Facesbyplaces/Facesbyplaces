@@ -9,7 +9,7 @@ class BLMJoin extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       body: SafeArea(
         bottom: false,
         child: Container(

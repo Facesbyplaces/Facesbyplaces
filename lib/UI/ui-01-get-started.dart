@@ -211,12 +211,7 @@ class UIGetStartedState extends State<UIGetStarted> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Colors.black, // this one for android
-      statusBarBrightness: Brightness.dark, // this one for iOS
-    ));
     return Scaffold(
-      backgroundColor: Colors.black,
       body: SafeArea(
           bottom: false,
           child: Container(
@@ -226,7 +221,9 @@ class UIGetStartedState extends State<UIGetStarted> {
                   child: Stack(
                     children: [
                       Container(
+                        color: Colors.black,
                         width: SizeConfig.screenWidth,
+                        height: SizeConfig.blockSizeVertical!* 50,
                         child:  Image.asset(
                           'assets/icons/Collage Image.png',
                           fit: BoxFit.contain,

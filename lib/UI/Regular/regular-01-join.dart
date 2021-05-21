@@ -9,7 +9,6 @@ class RegularJoin extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      backgroundColor: const Color(0xff000000),
       body: SafeArea(
         bottom: false,
         child: Container(
