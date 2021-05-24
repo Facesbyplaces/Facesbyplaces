@@ -3,17 +3,24 @@ import axios from "../../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { TablePostAction, EditPostAction } from "../../../../../redux/actions";
+import CommentTable from "../CommentTable/CommentTable";
 
 export default function ViewPost() {
   var dateFormat = require("dateformat");
   const dispatch = useDispatch();
-  const [post, setPost] = useState([]);
-  const [postPage, setPostPage] = useState([]);
-  const [imagesOrVideos, setImagesOrVideos] = useState([]);
-  const [imagesOrVideosEmpty, setImagesOrVideosEmpty] = useState(false);
+
+  // Posts
   const { postTab } = useSelector(({ postTab }) => ({
     postTab: postTab,
   }));
+  const [post, setPost] = useState([]);
+  const [postPage, setPostPage] = useState([]);
+  // Images
+  const [imagesOrVideos, setImagesOrVideos] = useState([]);
+  const [imagesOrVideosEmpty, setImagesOrVideosEmpty] = useState(false);
+  // Comments
+  const [comments, setComments] = useState([]);
+  const [page, setPage] = useState(1);
 
   const handleTableClick = () => {
     dispatch(TablePostAction());
@@ -22,6 +29,22 @@ export default function ViewPost() {
   const handleEditClick = (id, option, type) => {
     console.log(id, option, type);
     dispatch(EditPostAction({ id, option, type }));
+  };
+
+  const fetchComments = (page) => {
+    axios
+      .get(`/api/v1/admin/comments`, { params: { page: page, id: post.id } })
+      .then((response) => {
+        console.log("Comments: ", response.data);
+        setComments(response.data.comments);
+        // setMemorialPosts(memorials);
+        // setPosts(response.data.posts);
+
+        // console.log("Response: ", response.data.posts);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
 
   const renderedImagesOrVideos = imagesOrVideos.map((iOV) => {
@@ -65,62 +88,16 @@ export default function ViewPost() {
       .catch((error) => {
         console.log(error.errors);
       });
+    fetchComments(page);
   }, post.id);
 
   return (
     <div className="d-flex flex-column flex-column-fluid mt-25">
-      {/*begin::Entry*/}
-      {/*begin::Hero*/}
-      {/* <div
-        className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
-        style={{
-          backgroundImage: memorial.backgroundImage
-            ? `url( ${memorial.backgroundImage})`
-            : `url("assets/media/bg/bg-1.jpg")`,
-          height: "350px",
-        }}
-      >
-        <div className="container">
-          <div className="d-flex justify-content-between align-items-center pt-25 pb-35" />
-        </div>
-      </div> */}
-      {/*end::Hero*/}
-      {/*begin::Section*/}
       <div className="container mt-n15 gutter-b">
         <div className="card card-custom">
           <div className="card-body">
             <form className="form">
               <div className="tab-content">
-                {/*begin::Group*/}
-                {/* <div className="form-group mt-n15 row">
-                  <div
-                    className="col-10 pl-15"
-                    style={{
-                      flex: "0",
-                      maxWidth: "100%",
-                      borderRadius: "6rem",
-                      marginRight: "auto",
-                    }}
-                  >
-                    <div
-                      className="image-input image-input-empty image-input-outline"
-                      style={{
-                        backgroundImage: memorial.profileImage
-                          ? `url( ${memorial.profileImage})`
-                          : `url( "assets/media/users/blank.png" )`,
-                        borderRadius: "6rem",
-                      }}
-                    >
-                      <div
-                        className="image-input-wrapper"
-                        style={{
-                          borderRadius: "6rem",
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div> */}
-                {/*end::Group*/}
                 {/*begin::Tab*/}
                 <div className="tab-pane show active px-7 mt-5">
                   <div className="card-header py-3 pl-5">
@@ -400,6 +377,7 @@ export default function ViewPost() {
       </div>
       {/*end::Section*/}
       {/*end::Entry*/}
+      <CommentTable comments={comments} />
     </div>
   );
 }

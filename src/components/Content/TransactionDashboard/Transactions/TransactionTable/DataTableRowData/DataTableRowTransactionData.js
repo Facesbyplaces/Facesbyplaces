@@ -4,11 +4,7 @@ import axios from "../../../../../../auxiliary/axios";
 import { TransactionModal } from "./TransactionModal";
 import HashLoader from "react-spinners/HashLoader";
 
-export default function DataTableRowTransactionData({
-  transactions,
-  search,
-  pageType,
-}) {
+export default function DataTableRowTransactionData({ transactions, search }) {
   const [showModal, setShowModal] = useState(false);
   const [gift, setGift] = useState();
 
