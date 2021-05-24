@@ -234,6 +234,15 @@ Rails.application.routes.draw do
         # search post
         get 'search/post',                        to: 'posts#searchPost'
         
+        # COMMENTS
+
+        # comments
+        get 'comments',                           to: 'comments#commentsIndex'
+        # edit comment
+        put 'comments/edit/:id',                  to: 'comments#editComment'
+
+        # MEMORIALS
+
         # all users without paginations
         get 'memorials/users/selection',          to: 'memorials#usersSelection'
         # all memorials
