@@ -470,7 +470,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                                     controlsConfiguration: const BetterPlayerControlsConfiguration(
                                                       showControls: false,
                                                     ),
-                                                    aspectRatio: 16 / 9,
+                                                    aspectRatio: 1,
                                                     fit: BoxFit.contain,
                                                   ),
                                                 ),

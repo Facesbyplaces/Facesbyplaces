@@ -15,13 +15,13 @@ class HomeRegularUserProfile extends StatefulWidget{
   final int accountType;
   const HomeRegularUserProfile({required this.userId, required this.accountType});
 
-  HomeRegularUserProfileState createState() => HomeRegularUserProfileState(userId: userId, accountType: accountType);
+  HomeRegularUserProfileState createState() => HomeRegularUserProfileState();
 }
 
 class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
-  final int userId;
-  final int accountType;
-  HomeRegularUserProfileState({required this.userId, required this.accountType});
+  // final int userId;
+  // final int accountType;
+  // HomeRegularUserProfileState({required this.userId, required this.accountType});
 
   Future<APIRegularShowUserInformation>? showProfile;
 
@@ -30,13 +30,15 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   List<Widget> children = [];
 
   Future<APIRegularShowUserInformation> getProfileInformation() async{
-    return await apiRegularShowUserInformation(userId: userId, accountType: accountType);
+    print('The user id is ${widget.userId}');
+    print('The account type is ${widget.accountType}');
+    return await apiRegularShowUserInformation(userId: widget.userId, accountType: widget.accountType);
   }
 
   void initState(){
     super.initState();
     showProfile = getProfileInformation();
-    children = [MiscRegularDraggablePost(userId: userId,), MiscRegularDraggableMemorials(userId: userId,)];
+    children = [MiscRegularDraggablePost(userId: widget.userId,), MiscRegularDraggableMemorials(userId: widget.userId,)];
   }
 
   @override
