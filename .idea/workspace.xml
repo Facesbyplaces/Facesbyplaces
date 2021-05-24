@@ -3,67 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="21a8e94f-f08b-4f73-a167-e3ca3beff417" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/better_player" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/better_player" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_auth" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_auth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_core" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_core" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_messaging" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_messaging" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_barcode_scanner" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_barcode_scanner" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_branch_sdk" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_branch_sdk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_inappwebview" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_inappwebview" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_keyboard_visibility" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_keyboard_visibility" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_login_facebook" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_login_facebook" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/geocoding" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/geocoding" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/geolocator" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/geolocator" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/google_sign_in" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/google_sign_in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/image_picker" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/images_picker" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/images_picker" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/libphonenumber" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/libphonenumber" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/libphonenumber_plugin" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/libphonenumber_plugin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/location" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/location" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/path_provider" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/path_provider" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/share" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/share" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/shared_preferences" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/sign_in_with_apple" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/sign_in_with_apple" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/sqflite" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/sqflite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/stripe_payment" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/stripe_payment" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/wakelock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/wakelock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Manifest.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/BoringSSL-GRPC.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/BoringSSL-GRPC.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/FBSDKCoreKit-FacebookSDKStrings.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/FBSDKCoreKit-FacebookSDKStrings.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Pods-Runner.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Pods-Runner.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/PromisesObjC.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/PromisesObjC.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Stripe-Stripe.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Stripe-Stripe.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/abseil.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/abseil.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-C++-gRPCCertificates-Cpp.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-C++-gRPCCertificates-Cpp.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-C++.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-C++.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-Core.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/gRPC-Core.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/leveldb-library.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/leveldb-library.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/libPhoneNumber-iOS.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/libPhoneNumber-iOS.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/BLM/blm-01-join.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/BLM/blm-01-join.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/BLM/blm-02-login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/BLM/blm-02-login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/BLM/blm-03-register.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/BLM/blm-03-register.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/BLM/blm-06-password-reset-email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/BLM/blm-06-password-reset-email.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-03-connection-list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-03-connection-list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-03-connection-list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-03-connection-list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Regular/regular-01-join.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Regular/regular-01-join.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Regular/regular-02-login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Regular/regular-02-login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Regular/regular-03-register.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Regular/regular-03-register.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Regular/regular-06-password-reset-email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Regular/regular-06-password-reset-email.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/ui-01-get-started.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/ui-01-get-started.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/ui-02-login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/ui-02-login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/ui-03-newly-installed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/ui-03-newly-installed.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +27,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -129,26 +71,26 @@
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
     <state x="651" y="106" width="1269" height="777" key="AVDManager/0.23.1920.1000@0.23.1920.1000" timestamp="1621564624335" />
-    <state width="1427" height="304" key="GridCell.Tab.0.bottom" timestamp="1621570192655">
+    <state width="1427" height="304" key="GridCell.Tab.0.bottom" timestamp="1621838833845">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="304" key="GridCell.Tab.0.bottom/0.23.1920.1000@0.23.1920.1000" timestamp="1621570192655" />
-    <state width="1427" height="304" key="GridCell.Tab.0.center" timestamp="1621570192655">
+    <state width="1427" height="304" key="GridCell.Tab.0.bottom/0.23.1920.1000@0.23.1920.1000" timestamp="1621838833845" />
+    <state width="1427" height="304" key="GridCell.Tab.0.center" timestamp="1621838833844">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="304" key="GridCell.Tab.0.center/0.23.1920.1000@0.23.1920.1000" timestamp="1621570192655" />
-    <state width="1427" height="304" key="GridCell.Tab.0.left" timestamp="1621570192654">
+    <state width="1427" height="304" key="GridCell.Tab.0.center/0.23.1920.1000@0.23.1920.1000" timestamp="1621838833844" />
+    <state width="1427" height="304" key="GridCell.Tab.0.left" timestamp="1621838833843">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="304" key="GridCell.Tab.0.left/0.23.1920.1000@0.23.1920.1000" timestamp="1621570192654" />
-    <state width="1427" height="304" key="GridCell.Tab.0.right" timestamp="1621570192655">
+    <state width="1427" height="304" key="GridCell.Tab.0.left/0.23.1920.1000@0.23.1920.1000" timestamp="1621838833843" />
+    <state width="1427" height="304" key="GridCell.Tab.0.right" timestamp="1621838833845">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state width="1427" height="304" key="GridCell.Tab.0.right/0.23.1920.1000@0.23.1920.1000" timestamp="1621570192655" />
-    <state x="836" y="247" key="Vcs.Push.Dialog.v2" timestamp="1621504779863">
+    <state width="1427" height="304" key="GridCell.Tab.0.right/0.23.1920.1000@0.23.1920.1000" timestamp="1621838833845" />
+    <state x="836" y="247" key="Vcs.Push.Dialog.v2" timestamp="1621593099137">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state x="836" y="247" key="Vcs.Push.Dialog.v2/0.23.1920.1000@0.23.1920.1000" timestamp="1621504779863" />
+    <state x="836" y="247" key="Vcs.Push.Dialog.v2/0.23.1920.1000@0.23.1920.1000" timestamp="1621593099137" />
     <state x="844" y="184" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1621234466595">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
@@ -157,9 +99,9 @@
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
     <state x="1034" y="154" width="887" height="922" key="dock-window-1/0.23.1920.1000@0.23.1920.1000" timestamp="1621485788831" />
-    <state x="827" y="307" key="git4idea.merge.GitPullDialog" timestamp="1621562654307">
+    <state x="827" y="307" key="git4idea.merge.GitPullDialog" timestamp="1621823787484">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
-    <state x="827" y="307" key="git4idea.merge.GitPullDialog/0.23.1920.1000@0.23.1920.1000" timestamp="1621562654307" />
+    <state x="827" y="307" key="git4idea.merge.GitPullDialog/0.23.1920.1000@0.23.1920.1000" timestamp="1621823787484" />
   </component>
 </project>
