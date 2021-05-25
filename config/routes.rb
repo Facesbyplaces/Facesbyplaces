@@ -240,6 +240,10 @@ Rails.application.routes.draw do
         get 'comments',                           to: 'comments#commentsIndex'
         # edit comment
         put 'comments/edit/:id',                  to: 'comments#editComment'
+        # add comment
+        put 'comments/add/:id',                   to: 'comments#addComment'
+        # delete comment
+        delete 'comments/delete/:id',                to: 'comments#deleteComment'
 
         # MEMORIALS
 
