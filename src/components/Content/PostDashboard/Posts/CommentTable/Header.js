@@ -1,15 +1,16 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { AddPostAction } from "../../../../../redux/actions";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AddCommentModal } from "./CommentCRUD/AddCommentModal";
 
-export default function Header({ pageType }) {
+export default function Header() {
+  const { postTab } = useSelector(({ postTab }) => ({
+    postTab: postTab,
+  }));
+  const [showAddModal, setShowAddModal] = useState(false);
   const dispatch = useDispatch();
-  console.log(pageType);
 
-  const handleAddClick = (option) => {
-    console.log(option);
-    const type = pageType;
-    dispatch(AddPostAction({ option, type }));
+  const handleAddClick = () => {
+    setShowAddModal((prev) => !prev);
   };
 
   return (
@@ -27,7 +28,7 @@ export default function Header({ pageType }) {
         <a
           className="btn btn-primary font-weight-bolder"
           style={{ width: "167px" }}
-          onClick={() => handleAddClick("a")}
+          onClick={() => handleAddClick()}
         >
           <span className="svg-icon svg-icon-md">
             {/*begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg*/}
@@ -53,6 +54,11 @@ export default function Header({ pageType }) {
           </span>
           Comment
         </a>
+        <AddCommentModal
+          id={postTab.id}
+          showAddModal={showAddModal}
+          setShowAddModal={setShowAddModal}
+        />
         {/*end::Button*/}
       </div>
     </div>

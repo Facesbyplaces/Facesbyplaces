@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "../../../../../auxiliary/axios";
 //Data Table
@@ -6,29 +6,21 @@ import DataTableRowPostCommentsData from "./DataTableRowData/DataTableRowPostCom
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
-export default function PostDataTable({
-  search,
-  setSearch,
-  keywords,
-  pageType,
-  comments,
-}) {
+export default function PostDataTable({ search, setSearch, keywords }) {
   const { postTab } = useSelector(({ postTab }) => ({
     postTab: postTab,
   }));
-  const [page, setPage] = useState(1);
-  const [clicked, setClicked] = useState(false);
+  const [fetched, setFetched] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [newComments, setNewComments] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [page, setPage] = useState(1);
 
   const fetchComments = (page) => {
     axios
       .get(`/api/v1/admin/comments`, { params: { page: page, id: postTab.id } })
       .then((response) => {
-        console.log(response.data);
-        setNewComments(response.data);
-
-        // console.log("Response: ", response.data.posts);
+        setComments(response.data.comments);
+        setFetched(true);
       })
       .catch((error) => {
         console.log(error.response);
@@ -54,9 +46,10 @@ export default function PostDataTable({
   //   search ? handleSearch() : console.log("Search", search);
   // }
 
-  useEffect(() => {
-    fetchComments(page);
-  }, [comments.id]);
+  // fetchComments(page);
+  {
+    fetched ? console.log(" ") : fetchComments(page);
+  }
 
   const handleNextClick = () => {
     const pages = page + 1;
@@ -223,11 +216,7 @@ export default function PostDataTable({
             </tr>
           </tbody>
         ) : (
-          <DataTableRowPostCommentsData
-            search={search}
-            pageType={pageType}
-            comments={comments}
-          />
+          <DataTableRowPostCommentsData search={search} comments={comments} />
         )}
       </table>
       <div className="d-flex justify-content-between align-items-center flex-wrap">

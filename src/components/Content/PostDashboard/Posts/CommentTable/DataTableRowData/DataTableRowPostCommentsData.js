@@ -1,22 +1,19 @@
 import React, { useState } from "react";
-import { DeleteModal } from "./DeleteModal";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
-import { useDispatch } from "react-redux";
-import { DeletePostAction } from "../../../../../../redux/actions";
 import { ViewCommentModal } from "../CommentCRUD/ViewCommentModal";
 import { EditCommentModal } from "../CommentCRUD/EditCommentModal";
+import { DeleteCommentModal } from "../CommentCRUD/DeleteCommentModal";
 
 export default function DataTableRowPostCommentsData({ search, comments }) {
   const [showViewModal, setShowViewModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [postComment, setPostComment] = useState(false);
 
-  console.log("Memorial: ", comments);
-
   const handleViewClick = (comment) => {
-    console.log(comment);
+    // console.log(comment);
     setPostComment(comment);
     setShowViewModal((prev) => !prev);
   };
@@ -28,8 +25,9 @@ export default function DataTableRowPostCommentsData({ search, comments }) {
   };
 
   const handleDeleteClick = (id) => {
-    // dispatch(DeletePostAction({ id, option }));
-    // setShowModal((prev) => !prev);
+    // console.log(id);
+    setPostComment(id);
+    setShowDeleteModal((prev) => !prev);
   };
 
   const renderedComments = comments.map((comment) => (
@@ -136,7 +134,7 @@ export default function DataTableRowPostCommentsData({ search, comments }) {
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
           data-toggle="modal"
           data-target="#exampleModalSizeSm"
-          onClick={() => handleDeleteClick(comment)}
+          onClick={() => handleDeleteClick(comment.id)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg*/}
@@ -203,6 +201,11 @@ export default function DataTableRowPostCommentsData({ search, comments }) {
         showEditModal={showEditModal}
         setShowEditModal={setShowEditModal}
         comment={postComment}
+      />
+      <DeleteCommentModal
+        showDeleteModal={showDeleteModal}
+        setShowDeleteModal={setShowDeleteModal}
+        id={postComment}
       />
     </tbody>
   );

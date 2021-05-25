@@ -18,9 +18,6 @@ export default function ViewPost() {
   // Images
   const [imagesOrVideos, setImagesOrVideos] = useState([]);
   const [imagesOrVideosEmpty, setImagesOrVideosEmpty] = useState(false);
-  // Comments
-  const [comments, setComments] = useState([]);
-  const [page, setPage] = useState(1);
 
   const handleTableClick = () => {
     dispatch(TablePostAction());
@@ -29,22 +26,6 @@ export default function ViewPost() {
   const handleEditClick = (id, option, type) => {
     console.log(id, option, type);
     dispatch(EditPostAction({ id, option, type }));
-  };
-
-  const fetchComments = (page) => {
-    axios
-      .get(`/api/v1/admin/comments`, { params: { page: page, id: post.id } })
-      .then((response) => {
-        console.log("Comments: ", response.data);
-        setComments(response.data.comments);
-        // setMemorialPosts(memorials);
-        // setPosts(response.data.posts);
-
-        // console.log("Response: ", response.data.posts);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
   };
 
   const renderedImagesOrVideos = imagesOrVideos.map((iOV) => {
@@ -88,7 +69,6 @@ export default function ViewPost() {
       .catch((error) => {
         console.log(error.errors);
       });
-    fetchComments(page);
   }, post.id);
 
   return (
@@ -377,7 +357,7 @@ export default function ViewPost() {
       </div>
       {/*end::Section*/}
       {/*end::Entry*/}
-      <CommentTable comments={comments} />
+      <CommentTable />
     </div>
   );
 }

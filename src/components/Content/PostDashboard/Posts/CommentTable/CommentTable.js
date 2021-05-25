@@ -11,12 +11,8 @@ import AddPost from "../PostCRUD/AddPost";
 
 import { SuccessModal } from "../PostCRUD/SuccessModal";
 
-export default function CommentTable({ comments }) {
-  const [showModal, setShowModal] = useState(true);
+export default function CommentTable() {
   const [pageType, setPageType] = useState(0);
-  const { postTab } = useSelector(({ postTab }) => ({
-    postTab: postTab,
-  }));
 
   return (
     <div
@@ -26,11 +22,7 @@ export default function CommentTable({ comments }) {
       <div className="container">
         <div className="card card-custom">
           <Header pageType={pageType} setPageType={setPageType} />
-          <Body
-            comments={comments}
-            pageType={pageType}
-            setPageType={setPageType}
-          />
+          <Body />
         </div>
       </div>
     </div>

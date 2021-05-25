@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CommentDataTable from "./CommentDataTable";
 import { AddMemorialAction } from "../../../../../redux/actions";
 
-export default function Body({ pageType, setPageType, comments }) {
+export default function Body() {
   const [search, setSearch] = useState(false);
   const [keywords, setKeywords] = useState([]);
 
@@ -57,8 +57,6 @@ export default function Body({ pageType, setPageType, comments }) {
           search={search}
           setSearch={setSearch}
           keywords={keywords}
-          pageType={pageType}
-          comments={comments}
         />
       </div>
       {/*end: Datatable*/}
