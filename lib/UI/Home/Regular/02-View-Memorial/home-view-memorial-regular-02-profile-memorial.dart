@@ -461,10 +461,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               child: MaterialButton(
                                                                 padding: EdgeInsets.zero,
                                                                 onPressed: () async{
-
-                                                                  // setState(() {
-                                                                  //   join = !join;
-                                                                  // });
                                                                   join.value = !join.value;
 
                                                                   print('The value of join is $join');

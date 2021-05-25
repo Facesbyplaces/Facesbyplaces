@@ -34,6 +34,12 @@
 @import flutter_barcode_scanner;
 #endif
 
+#if __has_include(<flutter_braintree/FlutterBraintreePlugin.h>)
+#import <flutter_braintree/FlutterBraintreePlugin.h>
+#else
+@import flutter_braintree;
+#endif
+
 #if __has_include(<flutter_branch_sdk/FlutterBranchSdkPlugin.h>)
 #import <flutter_branch_sdk/FlutterBranchSdkPlugin.h>
 #else
@@ -136,12 +142,6 @@
 @import sqflite;
 #endif
 
-#if __has_include(<stripe_payment/StripePaymentPlugin.h>)
-#import <stripe_payment/StripePaymentPlugin.h>
-#else
-@import stripe_payment;
-#endif
-
 #if __has_include(<wakelock/WakelockPlugin.h>)
 #import <wakelock/WakelockPlugin.h>
 #else
@@ -156,6 +156,7 @@
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTFirebaseMessagingPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseMessagingPlugin"]];
   [SwiftFlutterBarcodeScannerPlugin registerWithRegistrar:[registry registrarForPlugin:@"SwiftFlutterBarcodeScannerPlugin"]];
+  [FlutterBraintreePlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterBraintreePlugin"]];
   [FlutterBranchSdkPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterBranchSdkPlugin"]];
   [InAppWebViewFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"InAppWebViewFlutterPlugin"]];
   [FlutterKeyboardVisibilityPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterKeyboardVisibilityPlugin"]];
@@ -173,7 +174,6 @@
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
   [SignInWithApplePlugin registerWithRegistrar:[registry registrarForPlugin:@"SignInWithApplePlugin"]];
   [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
-  [StripePaymentPlugin registerWithRegistrar:[registry registrarForPlugin:@"StripePaymentPlugin"]];
   [WakelockPlugin registerWithRegistrar:[registry registrarForPlugin:@"WakelockPlugin"]];
 }
 
