@@ -93,7 +93,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
           ),
           subtitle: Text(widget.description,
             overflow: TextOverflow.ellipsis,
-            maxLines: 3,
+            maxLines: 1,
             style: TextStyle(
               fontSize: SizeConfig.blockSizeVertical! * 2.11,
               fontFamily: 'NexaBold',
