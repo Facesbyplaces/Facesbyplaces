@@ -10,7 +10,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class MiscRegularManageMemorialTab extends StatefulWidget{
+class MiscRegularManageMemorialTab extends StatefulWidget {
   final int index;
   final String memorialName;
   final String description;
@@ -23,7 +23,7 @@ class MiscRegularManageMemorialTab extends StatefulWidget{
   final String relationship;
 
   const MiscRegularManageMemorialTab({
-    required this.index, 
+    required this.index,
     this.memorialName = '',
     this.description = '',
     required this.image,
@@ -35,151 +35,232 @@ class MiscRegularManageMemorialTab extends StatefulWidget{
     required this.relationship,
   });
 
-  MiscRegularManageMemorialTabState createState() => MiscRegularManageMemorialTabState();
+  MiscRegularManageMemorialTabState createState() =>
+      MiscRegularManageMemorialTabState();
 }
 
-class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialTab>{
+class MiscRegularManageMemorialTabState
+    extends State<MiscRegularManageMemorialTab> {
   bool manageButton = false;
   bool followButton = false;
 
-  void initState(){
+  void initState() {
     super.initState();
     followButton = widget.follower;
     manageButton = widget.managed;
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     SizeConfig.init(context);
     return GestureDetector(
-      onTap: () async{
-        if(widget.pageType == 'Memorial'){
-          if(widget.managed == true || widget.famOrFriends == true){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
-          }else{
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButton,)));
+      onTap: () async {
+        if (widget.pageType == 'Memorial') {
+
+          if (widget.managed == true || widget.famOrFriends == true) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeRegularProfile(
+                          memorialId: widget.memorialId,
+                          relationship: widget.relationship,
+                          managed: widget.managed,
+                          newlyCreated: false,
+                        )));
+          } else {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeRegularMemorialProfile(
+                          memorialId: widget.memorialId,
+                          pageType: widget.pageType,
+                          newJoin: followButton,
+                        )));
           }
-        }else{
-          if(widget.managed == true || widget.famOrFriends == true){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
-          }else{
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButton,)));
+        } else {
+          if (widget.managed == true || widget.famOrFriends == true) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeBLMProfile(
+                          memorialId: widget.memorialId,
+                          relationship: widget.relationship,
+                          managed: widget.managed,
+                          newlyCreated: false,
+                        )));
+          } else {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeBLMMemorialProfile(
+                          memorialId: widget.memorialId,
+                          pageType: widget.pageType,
+                          newJoin: followButton,
+                        )));
           }
         }
       },
       child: Container(
-        height: 80,
+        //height: 80,
         color: const Color(0xffffffff),
         child: ListTile(
-          leading: widget.image != '' 
-          ? CircleAvatar(
-            radius: 30, 
-            backgroundColor: const Color(0xff888888), 
-            foregroundImage: NetworkImage(widget.image),
-            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-          ) 
-          : const CircleAvatar(
-            radius: 30, 
-            backgroundColor: const Color(0xff888888), 
-            foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-          ),
-          title: Text(widget.memorialName,
+          leading: widget.image != ''
+              ? CircleAvatar(
+                  radius: 30,
+                  backgroundColor: const Color(0xff888888),
+                  foregroundImage: NetworkImage(widget.image),
+                  backgroundImage:
+                      const AssetImage('assets/icons/app-icon.png'),
+                )
+              : const CircleAvatar(
+                  radius: 30,
+                  backgroundColor: const Color(0xff888888),
+                  foregroundImage:
+                      const AssetImage('assets/icons/app-icon.png'),
+                ),
+          title: Text(
+            widget.memorialName,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             style: TextStyle(
               fontSize: SizeConfig.blockSizeVertical! * 2.64,
               fontFamily: 'NexaBold',
-              color: const Color(0xff000000),),
+              color: const Color(0xff000000),
+            ),
           ),
-          subtitle: Text(widget.description,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
+          subtitle: Text(
+            widget.description,
+            // overflow: TextOverflow.ellipsis,
+            //maxLines: 1,
             style: TextStyle(
               fontSize: SizeConfig.blockSizeVertical! * 2.11,
               fontFamily: 'NexaBold',
-              color: const Color(0xff888888),),
+              color: const Color(0xff888888),
+            ),
           ),
-          trailing: ((){
-            if(widget.managed == true || widget.famOrFriends == true){
+          trailing: (() {
+            if (widget.managed == true || widget.famOrFriends == true) {
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
                 textColor: const Color(0xffffffff),
                 splashColor: const Color(0xff4EC9D4),
-                onPressed: () async{
-
+                onPressed: () async {
                   bool confirmResult = await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: const Text('Are you sure you want to leave this page?',
-                        textAlign: TextAlign.center,
-                      ),
-                      onlyOkButton: false,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                      onCancelButtonPressed: () {
-                        Navigator.pop(context, false);
-                      },
-                    )
-                  );
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(
+                            image: Image.asset(
+                              'assets/icons/cover-icon.png',
+                              fit: BoxFit.cover,
+                            ),
+                            title: Text(
+                              'Confirm',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description:  Text(
+                              'Are you sure you want to leave this page?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            onlyOkButton: false,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                            onCancelButtonPressed: () {
+                              Navigator.pop(context, false);
+                            },
+                          ));
 
-                  if(confirmResult == true){
-
+                  if (confirmResult == true) {
                     context.loaderOverlay.show();
-                    String result = await apiRegularLeavePage(memorialId: widget.memorialId);
+                    String result = await apiRegularLeavePage(
+                        memorialId: widget.memorialId);
                     context.loaderOverlay.hide();
 
-                    if(result != 'Failed'){
+                    if (result != 'Failed') {
                       setState(() {
                         followButton = false;
                       });
 
                       await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
-                            textAlign: TextAlign.center,
-                          ),
-                          onlyOkButton: true,
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                        )
-                      );
-                    }else{
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                                image: Image.asset(
+                                  'assets/icons/cover-icon.png',
+                                  fit: BoxFit.cover,
+                                ),
+                            title: Text(
+                              'Success',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Successfully followed the page. You will receive notifications from this page.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                                onlyOkButton: true,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              ));
+                    } else {
                       await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('Something went wrong. Please try again.',
-                            textAlign: TextAlign.center,
-                          ),
-                          onlyOkButton: true,
-                          buttonOkColor: const Color(0xffff0000),
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                        )
-                      );
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                                image: Image.asset(
+                                  'assets/icons/cover-icon.png',
+                                  fit: BoxFit.cover,
+                                ),
+                            title: Text(
+                              'Error',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                                onlyOkButton: true,
+                                buttonOkColor: const Color(0xffff0000),
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              ));
                     }
                   }
                 },
-                child: Text('Leave', style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xffFFFFFF),),),
+                child: Text(
+                  'Leave',
+                  style: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                    fontFamily: 'NexaBold',
+                    color: const Color(0xffFFFFFF),
+                  ),
+                ),
                 height: 35,
                 shape: const RoundedRectangleBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
@@ -187,86 +268,128 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 ),
                 color: const Color(0xff04ECFF),
               );
-            }else if(followButton == true){
+            } else if (followButton == true) {
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
                 textColor: const Color(0xffffffff),
                 splashColor: const Color(0xff4EC9D4),
-                onPressed: () async{
-
+                onPressed: () async {
                   bool confirmResult = await showDialog(
-                    context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: const Text('Are you sure you want to leave this page?',
-                        textAlign: TextAlign.center,
-                      ),
-                      onlyOkButton: false,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                      onCancelButtonPressed: () {
-                        Navigator.pop(context, false);
-                      },
-                    )
-                  );
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(
+                            image: Image.asset(
+                              'assets/icons/cover-icon.png',
+                              fit: BoxFit.cover,
+                            ),
+                            title: Text(
+                              'Confirm',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Are you sure you want to leave this page?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            onlyOkButton: false,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                            onCancelButtonPressed: () {
+                              Navigator.pop(context, false);
+                            },
+                          ));
 
-                  if(confirmResult == true){
-
+                  if (confirmResult == true) {
                     context.loaderOverlay.show();
-                    bool result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: false);
+                    bool result = await apiRegularModifyFollowPage(
+                        pageType: widget.pageType,
+                        pageId: widget.memorialId,
+                        follow: false);
                     context.loaderOverlay.hide();
 
-                    if(result){
+                    if (result) {
                       setState(() {
                         followButton = false;
                       });
 
                       await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
-                            textAlign: TextAlign.center,
-                          ),
-                          onlyOkButton: true,
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                        )
-                      );
-                    }else{
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                                image: Image.asset(
+                                  'assets/icons/cover-icon.png',
+                                  fit: BoxFit.cover,
+                                ),
+                            title: Text(
+                              'Success',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Successfully followed the page. You will receive notifications from this page.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                                onlyOkButton: true,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              ));
+                    } else {
                       await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('Something went wrong. Please try again.',
-                            textAlign: TextAlign.center,
-                          ),
-                          onlyOkButton: true,
-                          buttonOkColor: const Color(0xffff0000),
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                        )
-                      );
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                                image: Image.asset(
+                                  'assets/icons/cover-icon.png',
+                                  fit: BoxFit.cover,
+                                ),
+                            title: Text(
+                              'Error',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                                onlyOkButton: true,
+                                buttonOkColor: const Color(0xffff0000),
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              ));
                     }
                   }
                 },
-                child: Text('Leave', style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xffFFFFFF),)),
+                child: Text('Leave',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaBold',
+                      color: const Color(0xffFFFFFF),
+                    )),
                 height: 35,
                 shape: const RoundedRectangleBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
@@ -274,60 +397,93 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 ),
                 color: const Color(0xff04ECFF),
               );
-            }else{
+            } else {
               return MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
                 textColor: const Color(0xff4EC9D4),
                 splashColor: const Color(0xff4EC9D4),
-                onPressed: () async{
-
+                onPressed: () async {
                   context.loaderOverlay.show();
-                  bool result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: true);
+                  bool result = await apiRegularModifyFollowPage(
+                      pageType: widget.pageType,
+                      pageId: widget.memorialId,
+                      follow: true);
                   context.loaderOverlay.hide();
 
-                  if(result){
+                  if (result) {
                     setState(() {
                       followButton = true;
                     });
 
                     await showDialog(
-                      context: context,
-                      builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: const Text('Successfully followed the page. You will receive notifications from this page.',
-                          textAlign: TextAlign.center,
-                        ),
-                        onlyOkButton: true,
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      )
-                    );
-                  }else{
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(
+                              image: Image.asset(
+                                'assets/icons/cover-icon.png',
+                                fit: BoxFit.cover,
+                              ),
+                              title: Text(
+                                'Success',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! * 3.16,
+                                    fontFamily: 'NexaRegular'),
+                              ),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text(
+                                'Successfully followed the page. You will receive notifications from this page.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! * 2.87,
+                                    fontFamily: 'NexaRegular'),
+                              ),
+                              onlyOkButton: true,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            ));
+                  } else {
                     await showDialog(
-                      context: context,
-                      builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: const Text('Something went wrong. Please try again.',
-                          textAlign: TextAlign.center,
-                        ),
-                        onlyOkButton: true,
-                        buttonOkColor: const Color(0xffff0000),
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      )
-                    );
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(
+                              image: Image.asset(
+                                'assets/icons/cover-icon.png',
+                                fit: BoxFit.cover,
+                              ),
+                              title: Text(
+                                'Error',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! * 3.16,
+                                    fontFamily: 'NexaRegular'),
+                              ),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text(
+                                'Something went wrong. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! * 2.87,
+                                    fontFamily: 'NexaRegular'),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: const Color(0xffff0000),
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            ));
                   }
                 },
-                child: const Text('Join', style: const TextStyle(fontSize: 14,),),
+                child: Text(
+                  'Join',
+                  style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaBold'),
+                ),
                 height: 35,
                 shape: const RoundedRectangleBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(5)),

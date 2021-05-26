@@ -205,9 +205,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                         onTap: () {
                           Navigator.pushNamed(context, '/home/blm/search');
                         },
-                        child: SizedBox(
+                        child: Container(
                           height: SizeConfig.blockSizeVertical! * 4.04,
-                          width: SizeConfig.blockSizeHorizontal! * 7.18,
+                          width: SizeConfig.blockSizeHorizontal! * 12.18,
+                          padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal! * 5),
                           child: Image.asset('assets/icons/zoom.png',),
                         ),
                       ),

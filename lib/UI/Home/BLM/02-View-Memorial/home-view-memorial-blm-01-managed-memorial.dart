@@ -1107,7 +1107,15 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   famOrFriends: posts[i].famOrFriends,
                                   relationship: posts[i].relationship,
                                   contents: [
-                                    Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                                    Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(
+                                      fontSize: SizeConfig
+                                          .blockSizeVertical! *
+                                          2.11,
+                                      fontFamily:
+                                      'NexaRegular',
+                                      color: const Color(
+                                          0xff000000),
+                                    ),),),
 
                                     posts[i].imagesOrVideos.isNotEmpty
                                         ? Column(
