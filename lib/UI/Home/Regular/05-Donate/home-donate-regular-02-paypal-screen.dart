@@ -55,8 +55,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal> {
           ),
           body: InAppWebView(
             initialUrlRequest: URLRequest(
-              url: Uri.parse(
-                  'https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AWLin_bJ6V3b0F7WJVam90ow5ffcqWp9aEfQOHYuQtl5nqoSoH47WJKE24dCLiY-Xmg2UmKaj8v9WkWv&response_type=code&redirect_uri=https://www.google.com'),
+              url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.sandbox.paypal.com/myaccount/summary/'),
             ),
           ),
         ),

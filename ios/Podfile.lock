@@ -522,6 +522,7 @@ DEPENDENCIES:
   - Braintree
   - Braintree/Apple-Pay
   - Braintree/DataCollector
+  - Braintree/PayPalDataCollector
   - BraintreeDropIn
   - Firebase/Analytics
   - Firebase/Auth
@@ -704,6 +705,6 @@ SPEC CHECKSUMS:
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
   ZLPhotoBrowser: 809878607ea92e9411c580797ce1be23896b8d7f
 
-PODFILE CHECKSUM: c35c97e864625ee8583bb27dc2cc27f7076e33da
+PODFILE CHECKSUM: 3dad29f69ac707e4ec5e4fab550c460565b2771f
 
 COCOAPODS: 1.10.1

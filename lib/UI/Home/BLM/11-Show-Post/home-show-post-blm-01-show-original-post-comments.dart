@@ -990,8 +990,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                         ),
                                       ),
                                       SliverToBoxAdapter(
-                                        child: countListener != 0
-                                        ? Column(
+                                        child: Column(
                                           children: [
 
                                             Column(
@@ -1426,32 +1425,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 ),
                                               ),
                                             ),
-                                            
-                                          ],
-                                        )
-                                        : Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-                                            
-                                            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
-
-                                            const SizedBox(height: 45,),
-
-                                            const Text('Comment is empty',
-                                              style:
-                                              const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight:
-                                                FontWeight
-                                                    .bold,
-                                                color: const Color(
-                                                    0xffB1B1B1),
-                                              ),
-                                            ),
-                                            
-                                            SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
                                           ],
                                         ),
                                       ),

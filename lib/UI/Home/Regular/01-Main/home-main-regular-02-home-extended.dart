@@ -9,6 +9,7 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-02-read-unread-notifications.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -645,63 +646,96 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                         const SizedBox(height: 20),
                                         GestureDetector(
                                           onTap: () async {
-                                            context.loaderOverlay.show();
-                                            bool result =
-                                                await apiRegularLogout();
-                                            context.loaderOverlay.hide();
+                                            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
 
-                                            if (result) {
-                                              Route newRoute =
-                                                  MaterialPageRoute(
-                                                      builder: (BuildContext
-                                                              context) =>
-                                                          const UIGetStarted());
-                                              Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  newRoute,
-                                                  (route) => false);
-                                            } else {
-                                              await showDialog(
+                                            if(confirmResult){
+                                              context.loaderOverlay.show();
+                                              bool result = await apiRegularLogout();
+                                              context.loaderOverlay.hide();
+
+                                              if (result) {
+                                                Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+                                                Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                              } else {
+                                                await showDialog(
                                                   context: context,
-                                                  builder: (_) =>
-                                                      AssetGiffyDialog(
-                                                        image: Image.asset(
-                                                          'assets/icons/cover-icon.png',
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                        title: const Text(
-                                                          'Error',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: const TextStyle(
-                                                              fontSize: 22.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                        ),
-                                                        entryAnimation:
-                                                            EntryAnimation
-                                                                .DEFAULT,
-                                                        description: Text(
-                                                          'Something went wrong. Please try again.',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  2.87,
-                                                              fontFamily: 'NexaRegular'),
-                                                        ),
-                                                        onlyOkButton: true,
-                                                        buttonOkColor:
-                                                            const Color(
-                                                                0xffff0000),
-                                                        onOkButtonPressed: () {
-                                                          Navigator.pop(
-                                                              context, true);
-                                                        },
-                                                      ));
+                                                  builder: (_) => AssetGiffyDialog(
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    title: const Text('Error', 
+                                                      textAlign: TextAlign.center, 
+                                                      style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+                                                    ),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    description: const Text(
+                                                      'Something went wrong. Please try again.',
+                                                      textAlign: TextAlign.center,
+                                                    ),
+                                                    onlyOkButton: true,
+                                                    buttonOkColor: const Color(0xffff0000),
+                                                    onOkButtonPressed: () {
+                                                      Navigator.pop(context, true);
+                                                    },
+                                                  ),
+                                                );
+                                              }
                                             }
+
+                                            // context.loaderOverlay.show();
+                                            // bool result = await apiRegularLogout();
+                                            // context.loaderOverlay.hide();
+
+                                            // if (result) {
+                                            //   Route newRoute =
+                                            //       MaterialPageRoute(
+                                            //           builder: (BuildContext
+                                            //                   context) =>
+                                            //               const UIGetStarted());
+                                            //   Navigator.pushAndRemoveUntil(
+                                            //       context,
+                                            //       newRoute,
+                                            //       (route) => false);
+                                            // } else {
+                                            //   await showDialog(
+                                            //       context: context,
+                                            //       builder: (_) =>
+                                            //           AssetGiffyDialog(
+                                            //             image: Image.asset(
+                                            //               'assets/icons/cover-icon.png',
+                                            //               fit: BoxFit.cover,
+                                            //             ),
+                                            //             title: const Text(
+                                            //               'Error',
+                                            //               textAlign:
+                                            //                   TextAlign.center,
+                                            //               style: const TextStyle(
+                                            //                   fontSize: 22.0,
+                                            //                   fontWeight:
+                                            //                       FontWeight
+                                            //                           .w600),
+                                            //             ),
+                                            //             entryAnimation:
+                                            //                 EntryAnimation
+                                            //                     .DEFAULT,
+                                            //             description: Text(
+                                            //               'Something went wrong. Please try again.',
+                                            //               textAlign:
+                                            //                   TextAlign.center,
+                                            //               style: TextStyle(
+                                            //                   fontSize: SizeConfig
+                                            //                       .blockSizeVertical! *
+                                            //                       2.87,
+                                            //                   fontFamily: 'NexaRegular'),
+                                            //             ),
+                                            //             onlyOkButton: true,
+                                            //             buttonOkColor:
+                                            //                 const Color(
+                                            //                     0xffff0000),
+                                            //             onOkButtonPressed: () {
+                                            //               Navigator.pop(
+                                            //                   context, true);
+                                            //             },
+                                            //           ));
+                                            // }
                                           },
                                           child: Text(
                                             'Log Out',

@@ -14,7 +14,6 @@ class RegularShowAdminSettings {
   final String image;
   final String relationship;
   final String email;
-
   const RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
 }
 
@@ -117,8 +116,33 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
   void onLoading1() async {
     if (adminItemsRemaining != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowAdminSettings(
-          memorialId: widget.memorialId, page: page1);
+      var newValue = await apiRegularShowAdminSettings(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Error: $error.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                fontFamily: 'NexaRegular'
+              ),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+        throw Exception('$error');
+      });
       context.loaderOverlay.hide();
 
       adminItemsRemaining = newValue.almAdminItemsRemaining;

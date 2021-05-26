@@ -13,7 +13,6 @@ class HomeRegularPageFriends extends StatefulWidget {
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-
   const HomeRegularPageFriends({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState();
@@ -57,7 +56,33 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
   void onLoading() async {
     if (friendsItemsRemaining != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowFriendsSettings(memorialId: widget.memorialId, page: page);
+      var newValue = await apiRegularShowFriendsSettings(memorialId: widget.memorialId, page: page).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Error: $error.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                fontFamily: 'NexaRegular'
+              ),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+        throw Exception('$error');
+      });
       context.loaderOverlay.hide();
 
       friendsItemsRemaining = newValue.almItemsRemaining;

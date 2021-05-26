@@ -13,13 +13,7 @@ class HomeBLMPageFamily extends StatefulWidget {
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  const HomeBLMPageFamily({
-    required this.memorialId,
-    required this.memorialName,
-    required this.switchFamily,
-    required this.switchFriends,
-    required this.switchFollowers,
-  });
+  const HomeBLMPageFamily({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers,});
 
   HomeBLMPageFamilyState createState() => HomeBLMPageFamilyState();
 }
@@ -62,7 +56,33 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   void onLoading() async {
     if (familyItemsRemaining != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowFamilySettings(memorialId: widget.memorialId, page: page);
+      var newValue = await apiBLMShowFamilySettings(memorialId: widget.memorialId, page: page).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Error: $error.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                fontFamily: 'NexaRegular'
+              ),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+        throw Exception('$error');
+      });
       context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.blmItemsRemaining;

@@ -376,14 +376,12 @@ class BLMLogin extends StatelessWidget {
                             GestureDetector(
                               child: Align(
                                 alignment: Alignment.centerRight,
-                                child: Text(
-                                  'Forgot Password?',
+                                child: Text('Forgot Password?',
                                   style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xff2F353D),
-                                      fontSize:
-                                          SizeConfig.blockSizeVertical! * 2.19,
-                                      fontFamily: 'NexaRegular'),
+                                    color: Color(0xff2F353D),
+                                    fontSize: SizeConfig.blockSizeVertical! * 2.19,
+                                    fontFamily: 'NexaRegular',
+                                  ),
                                 ),
                               ),
                               onTap: () {

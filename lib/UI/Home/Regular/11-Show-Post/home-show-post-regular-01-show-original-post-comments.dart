@@ -980,8 +980,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                         ),
                                       ),
                                       SliverToBoxAdapter(
-                                        child: countListener != 0
-                                        ? Column(
+                                        child: Column(
                                           children: [
                                             Column(
                                               children: List.generate(commentsListener.length, (i) => ListTile(
@@ -1397,21 +1396,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               ),
                                             ),
                                           )
-                                        ],
-                                      )
-                                      : Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-                                          
-                                          Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
-
-                                          const SizedBox(height: 45,),
-
-                                          const Text('Comment is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
-
-                                          SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
                                         ],
                                       ),
                                     ),

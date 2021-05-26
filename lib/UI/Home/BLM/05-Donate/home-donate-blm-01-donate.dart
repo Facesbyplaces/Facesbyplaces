@@ -169,7 +169,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                               totalPrice: amount,
                               currencyCode: 'USD',
                               billingAddressRequired: false,
-                              googleMerchantID: 'BCR2DN6TV7D57PRP',
+                              // googleMerchantID: 'BCR2DN6TV7D57PRP',
                             ),
                             paypalRequest: BraintreePayPalRequest(
                               amount: ((){

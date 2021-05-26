@@ -334,7 +334,6 @@ class RegularLoginState extends State<RegularLogin> {
                               alignment: Alignment.centerRight,
                               child: Text('Forgot Password?',
                                 style: TextStyle(
-                                  decoration: TextDecoration.underline,
                                   color: const Color(0xff2F353D),
                                   fontSize: SizeConfig.blockSizeVertical! * 2.19,
                                   fontFamily: 'NexaRegular',

@@ -443,8 +443,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       child: Row(
                                                         children: [
                                                           Expanded(
-                                                            child: profile.data!.blmMemorial.memorialDetails.memorialAcceptDonations == true
-                                                            ? GestureDetector(
+                                                            child: GestureDetector(
                                                               onTap: (){
                                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: widget.pageType, pageId: widget.memorialId, pageName: profile.data!.blmMemorial.memorialName)));
                                                               },
@@ -453,8 +452,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                 backgroundColor: const Color(0xffE67E22),
                                                                 child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 25,),
                                                               ),
-                                                            )
-                                                            : Container(),
+                                                            ),
                                                           ),
                                                           Expanded(
                                                             flex: 2,
@@ -645,7 +643,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                               Expanded(
                                                                 child: GestureDetector(
                                                                   onTap: () async{
-                                                                    // final launcher = const GoogleMapsLauncher();
+                                                                    // final launcher = const GoogleMapsLauncher(); // MAPS
                                                                     // await launcher.launch(
                                                                     //   geoPoint: GeoPoint(0.0, 0.0),
                                                                     // );

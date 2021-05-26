@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
@@ -10,8 +9,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
 class RegularPasswordResetEmail extends StatelessWidget {
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 =
-      GlobalKey<MiscRegularInputFieldTemplateState>();
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,6 @@ class RegularPasswordResetEmail extends StatelessWidget {
           }
         },
         child: Scaffold(
-         // backgroundColor: Colors.black,
           body: SafeArea(
             bottom: false,
             child: Container(
@@ -47,9 +44,9 @@ class RegularPasswordResetEmail extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 80,
-                  ),
+                  
+                  const SizedBox(height: 80,),
+
                   Center(
                     child: Text(
                       'Verify Email',
@@ -80,14 +77,34 @@ class RegularPasswordResetEmail extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: MiscRegularInputFieldTemplate(
-                      key: _key1,
-                      labelText: 'Email Address',
-                      type: TextInputType.emailAddress,
-                      labelTextStyle: TextStyle(
+                    child: TextFormField(
+                      controller: controller,
+                      keyboardType: TextInputType.emailAddress,
+                      cursorColor: const Color(0xff000000),
+                      style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 2.64,
                         fontFamily: 'NexaRegular',
-                        color: Color(0xff000000),
+                        color: const Color(0xff2F353D),
+                      ),
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'Email Address',
+                        labelStyle: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                          fontFamily: 'NexaRegular',
+                          color: Color(0xff000000),
+                        ),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: const Color(0xffffffff),
+                            width: 0,
+                          ),
+                        ),
+                        border: const UnderlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: const Color(0xff000000),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -105,11 +122,9 @@ class RegularPasswordResetEmail extends StatelessWidget {
                     height: 45,
                     buttonColor: const Color(0xff04ECFF),
                     onPressed: () async {
-                      bool validEmail = RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(_key1.currentState!.controller.text);
+                      bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.text);
 
-                      if (_key1.currentState!.controller.text == '') {
+                      if(controller.text == '') {
                         await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
@@ -205,9 +220,7 @@ class RegularPasswordResetEmail extends StatelessWidget {
 
                         if (response.success) {
                           context.loaderOverlay.show();
-                          bool result = await apiRegularPasswordReset(
-                              email: _key1.currentState!.controller.text,
-                              redirectLink: response.result);
+                          bool result = await apiRegularPasswordReset(email: controller.text, redirectLink: response.result);
                           context.loaderOverlay.hide();
 
                           FlutterClipboard.copy('${response.result}')
@@ -230,7 +243,7 @@ class RegularPasswordResetEmail extends StatelessWidget {
                                       ),
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text(
-                                        'An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
+                                        'An email has been sent to ${controller.text} containing instructions for resetting your password.',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: SizeConfig
