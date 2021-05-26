@@ -32,6 +32,11 @@ target 'Runner' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Messaging'
+  pod 'Braintree', :inhibit_warnings => true
+  pod 'Braintree/Apple-Pay', :inhibit_warnings => true
+  pod 'BraintreeDropIn', :inhibit_warnings => true
+  pod 'Braintree/DataCollector', :inhibit_warnings => true
+  pod 'Braintree/PayPalDataCollector', :inhibit_warnings => true
   use_frameworks!
   use_modular_headers!
 

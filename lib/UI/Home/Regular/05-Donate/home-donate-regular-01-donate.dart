@@ -1,31 +1,28 @@
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
+// import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-03-tokenization.dart';
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-04-process-payment.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_braintree/flutter_braintree.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:loader_overlay/loader_overlay.dart';
-import 'package:stripe_payment/stripe_payment.dart';
+// import 'package:loader_overlay/loader_overlay.dart';
+// import 'package:stripe_payment/stripe_payment.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'dart:io';
 
 class HomeRegularUserDonate extends StatefulWidget{
   final String pageType;
   final int pageId;
   final String pageName;
-
   const HomeRegularUserDonate({required this.pageType, required this.pageId, required this.pageName});
 
-  HomeRegularUserDonateState createState() => HomeRegularUserDonateState(pageType: pageType, pageId: pageId, pageName: pageName);
+  HomeRegularUserDonateState createState() => HomeRegularUserDonateState();
 }
 
 class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
-  final String pageType;
-  final int pageId;
-  final String pageName;
-
-  HomeRegularUserDonateState({required this.pageType, required this.pageId, required this.pageName});
-
   int donateToggle = 0;
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/donation-google-pay.svg', semanticsLabel: 'Donate with Google',);
 
@@ -125,43 +122,46 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       MaterialButton(
                         onPressed: () async{
 
-                          StripePayment.setOptions(
-                            StripeOptions(
-                              publishableKey: 'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik', 
-                              merchantId: 'merchant.com.app.facesbyplaces', 
-                              androidPayMode: 'test',
-                            ),
-                          );                    
+                          String token = await apiRegularTokenization();
 
-                         double amount = 1.00;
+                          print('The new token is $token');
+
+                          String amount = '0.99';
 
                           if(donateToggle == 0){
-                            amount = 1.00;
+                            amount = '0.99';
                           }else if(donateToggle == 1){
-                            amount = 5.00;
+                            amount = '5.00';
                           }else if(donateToggle == 2){
-                            amount = 15.00;
+                            amount = '15.00';
                           }else if(donateToggle == 3){
-                            amount = 25.00;
+                            amount = '25.00';
                           }else if(donateToggle == 4){
-                            amount = 50.00;
+                            amount = '50.00';
                           }else if(donateToggle == 5){
-                            amount = 100.00;
+                            amount = '100.00';
                           }
 
-                          print('The donateToggle is $donateToggle');
-
-                          var paymentToken = await StripePayment.paymentRequestWithNativePay(
-                            androidPayOptions: AndroidPayPaymentRequest(
-                              lineItems: [
-                                LineItem(
-                                  currencyCode: 'USD',
-                                  description: 'Donation of $amount for $pageName'
-                                ),
-                              ],
-                              totalPrice: ((){
+                          var request = BraintreeDropInRequest(
+                            tokenizationKey: token,
+                            collectDeviceData: true,
+                            applePayRequest: BraintreeApplePayRequest(
+                              countryCode: 'US',
+                              currencyCode: 'USD',
+                              appleMerchantID: 'merchant.com.app.facesbyplaces',
+                              amount: double.parse(amount),
+                              displayName: 'FacesbyPlaces'
+                            ),
+                            googlePaymentRequest: BraintreeGooglePaymentRequest(
+                              totalPrice: amount,
+                              currencyCode: 'USD',
+                              billingAddressRequired: false,
+                              googleMerchantID: 'BCR2DN6TV7D57PRP',
+                            ),
+                            paypalRequest: BraintreePayPalRequest(
+                              amount: ((){
                                 switch(donateToggle){
-                                  case 0: return '1.00';
+                                  case 0: return '0.99';
                                   case 1: return '5.00';
                                   case 2: return '15.00';
                                   case 3: return '25.00';
@@ -169,41 +169,47 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                   case 5: return '100.00';
                                 }
                               }()),
-                              currencyCode: 'USD',
+                              displayName: 'Example company',
                             ),
-                            applePayOptions: ApplePayPaymentOptions(
-                              countryCode: 'US',
-                              currencyCode: 'USD',
-                              items: [
-                                ApplePayItem(
-                                  label: '$pageName',
-                                  amount: ((){
-                                    switch(donateToggle){
-                                      case 0: return '1.00';
-                                      case 1: return '5.00';
-                                      case 2: return '15.00';
-                                      case 3: return '25.00';
-                                      case 4: return '50.00';
-                                      case 5: return '100.00';
-                                    }
-                                  }()),
-                                )
-                              ],
-                            ),
+                            cardEnabled: true,
                           );
 
-                          StripePayment.completeNativePayRequest();
+                          BraintreeDropInResult result = (await BraintreeDropIn.start(request).catchError((onError){print('The error is $onError');}))!;
 
-                          print('The payment token in regular donate is is ${paymentToken.tokenId}');
-                          print('The pageType in regular donate is $pageType');
-                          print('The pageId in regular donate is $pageId');
-                          print('The amount in regular donate is $amount');
+                          print('The amount is ${request.paypalRequest!.amount}');
+                          print('The nonce is ${result.paymentMethodNonce.nonce}');
+                          print('The nonce is ${result.deviceData}');
 
-                          context.loaderOverlay.show();
-                          bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId!);
-                          context.loaderOverlay.hide();
+                          var newValue = json.decode(result.deviceData!);
+                          var deviceToken = newValue['correlation_id'];
 
-                          if(result == true){
+                          print('The newValue is $newValue');
+                          print('The deviceToken is $deviceToken');
+
+                          // var newValue = json.decode(result.deviceData!);
+                          // var deviceToken = newValue['correlation_id'] ?? '';
+
+                          // String deviceToken = '';
+
+                          // if(json.decode(result.deviceData!) != null){
+                          //   var newValue = json.decode(result.deviceData!);
+                          //   deviceToken = newValue['correlation_id'] ?? '';
+                          // }
+
+                          // String deviceToken = '';
+                          // if(newValue['correlation_id'] != null){
+                          //   deviceToken = newValue;
+                          // }
+                          // var deviceToken = newValue
+
+                          // print('The newValue is $newValue');
+                          // print('The deviceToken is $deviceToken');
+
+                          bool paymentResult = await apiRegularProcessToken(amount: request.paypalRequest!.amount!, nonce: result.paymentMethodNonce.nonce, deviceData: deviceToken);
+
+                          print('The paymentResult is $paymentResult');
+
+                          if(paymentResult == true){
                             await showDialog(
                               context: context,
                               builder: (_) => 

@@ -52,6 +52,16 @@
 				<string>com.googleusercontent.apps.1032401585355-7v7a5ju4dncrn8nsgkqu2pn76e4e9078</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.app.facesbyplaces.braintree</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.app.facesbyplaces.braintree</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
