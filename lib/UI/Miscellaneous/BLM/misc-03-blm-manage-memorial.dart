@@ -99,7 +99,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
         }
       },
       child: Container(
-        height: 80,
+       // height: 80,
         color: const Color(0xffffffff),
         child: ListTile(
           leading: widget.image != ''
@@ -129,8 +129,8 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
           ),
           subtitle: Text(
             widget.description,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
+           // overflow: TextOverflow.ellipsis,
+           // maxLines: 1,
             style: TextStyle(
               fontSize: SizeConfig.blockSizeVertical! * 2.11,
               fontFamily: 'NexaBold',
@@ -151,17 +151,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                               'assets/icons/cover-icon.png',
                               fit: BoxFit.cover,
                             ),
-                            title: const Text(
-                              'Confirm',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 22.0, fontWeight: FontWeight.w600),
-                            ),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: const Text(
-                              'Are you sure you want to leave this page?',
-                              textAlign: TextAlign.center,
-                            ),
+                        title: Text(
+                          'Confirm',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize:
+                              SizeConfig.blockSizeVertical! * 3.16,
+                              fontFamily: 'NexaRegular'),
+                        ),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description:  Text(
+                          'Are you sure you want to leave this page?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize:
+                              SizeConfig.blockSizeVertical! * 2.87,
+                              fontFamily: 'NexaRegular'),
+                        ),
                             onlyOkButton: false,
                             onOkButtonPressed: () {
                               Navigator.pop(context, true);
@@ -189,18 +195,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                                   'assets/icons/cover-icon.png',
                                   fit: BoxFit.cover,
                                 ),
-                                title: const Text(
-                                  'Success',
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: const Text(
-                                  'Successfully unfollowed the page. You will no longer receive notifications from this page.',
-                                  textAlign: TextAlign.center,
-                                ),
+                            title: Text(
+                              'Success',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Successfully followed the page. You will receive notifications from this page.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
                                 onlyOkButton: true,
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
@@ -214,18 +225,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                                   'assets/icons/cover-icon.png',
                                   fit: BoxFit.cover,
                                 ),
-                                title: const Text(
-                                  'Error',
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: const Text(
-                                  'Something went wrong. Please try again.',
-                                  textAlign: TextAlign.center,
-                                ),
+                            title: Text(
+                              'Error',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
                                 onlyOkButton: true,
                                 buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
@@ -263,17 +279,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                               'assets/icons/cover-icon.png',
                               fit: BoxFit.cover,
                             ),
-                            title: const Text(
-                              'Confirm',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 22.0, fontWeight: FontWeight.w600),
-                            ),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: const Text(
-                              'Are you sure you want to leave this page?',
-                              textAlign: TextAlign.center,
-                            ),
+                        title: Text(
+                          'Confirm',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize:
+                              SizeConfig.blockSizeVertical! * 3.16,
+                              fontFamily: 'NexaRegular'),
+                        ),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description:  Text(
+                          'Are you sure you want to leave this page?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize:
+                              SizeConfig.blockSizeVertical! * 2.87,
+                              fontFamily: 'NexaRegular'),
+                        ),
                             onlyOkButton: false,
                             onOkButtonPressed: () {
                               Navigator.pop(context, true);
@@ -303,18 +325,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                                   'assets/icons/cover-icon.png',
                                   fit: BoxFit.cover,
                                 ),
-                                title: const Text(
-                                  'Success',
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: const Text(
-                                  'Successfully unfollowed the page. You will no longer receive notifications from this page.',
-                                  textAlign: TextAlign.center,
-                                ),
+                            title: Text(
+                              'Success',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Successfully followed the page. You will receive notifications from this page.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
                                 onlyOkButton: true,
                                 onOkButtonPressed: () {
                                   Navigator.pop(context, true);
@@ -328,18 +355,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                                   'assets/icons/cover-icon.png',
                                   fit: BoxFit.cover,
                                 ),
-                                title: const Text(
-                                  'Error',
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: const Text(
-                                  'Something went wrong. Please try again.',
-                                  textAlign: TextAlign.center,
-                                ),
+                            title: Text(
+                              'Error',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text(
+                              'Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
+                            ),
                                 onlyOkButton: true,
                                 buttonOkColor: const Color(0xffff0000),
                                 onOkButtonPressed: () {
@@ -389,17 +421,22 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                                 'assets/icons/cover-icon.png',
                                 fit: BoxFit.cover,
                               ),
-                              title: const Text(
+                              title: Text(
                                 'Success',
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! * 3.16,
+                                    fontFamily: 'NexaRegular'),
                               ),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: const Text(
+                              description: Text(
                                 'Successfully followed the page. You will receive notifications from this page.',
                                 textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! * 2.87,
+                                    fontFamily: 'NexaRegular'),
                               ),
                               onlyOkButton: true,
                               onOkButtonPressed: () {
@@ -414,18 +451,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                                 'assets/icons/cover-icon.png',
                                 fit: BoxFit.cover,
                               ),
-                              title: const Text(
-                                'Error',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: const Text(
-                                'Something went wrong. Please try again.',
-                                textAlign: TextAlign.center,
-                              ),
+                          title: Text(
+                            'Error',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize:
+                                SizeConfig.blockSizeVertical! * 3.16,
+                                fontFamily: 'NexaRegular'),
+                          ),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text(
+                            'Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize:
+                                SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular'),
+                          ),
                               onlyOkButton: true,
                               buttonOkColor: const Color(0xffff0000),
                               onOkButtonPressed: () {
@@ -434,11 +476,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                             ));
                   }
                 },
-                child: const Text(
+                child: Text(
                   'Join',
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
+                  style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaBold'),
                 ),
                 height: 35,
                 shape: const RoundedRectangleBorder(

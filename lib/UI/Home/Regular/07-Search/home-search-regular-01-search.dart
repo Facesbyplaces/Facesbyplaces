@@ -109,13 +109,13 @@ class HomeRegularSearchState extends State<HomeRegularSearch> {
                                                   'assets/icons/cover-icon.png',
                                                   fit: BoxFit.cover,
                                                 ),
-                                                title: const Text(
+                                                title: Text(
                                                   'Confirm',
                                                   textAlign: TextAlign.center,
-                                                  style: const TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontWeight:
-                                                          FontWeight.w600),
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                      SizeConfig.blockSizeVertical! * 3.16,
+                                                      fontFamily: 'NexaRegular'),
                                                 ),
                                                 entryAnimation:
                                                     EntryAnimation.DEFAULT,

@@ -250,7 +250,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                             ),
                           ),
 
-                          const SizedBox(height: 20,),
+                          SizedBox(height: SizeConfig.blockSizeVertical! * 1,),
 
                           Text('About',
                             style: TextStyle(
@@ -260,7 +260,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                             ),
                           ),
 
-                          const SizedBox(height: 40,),
+                          SizedBox(height: SizeConfig.blockSizeVertical! * 2,),
 
                           Padding(
                             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -364,7 +364,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                   ],
                                 ),
 
-                                const SizedBox(height: 20,),
+                                SizedBox(height: 10,),
 
                                 Row(
                                   children: [
@@ -388,7 +388,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     Expanded(
                                       child: Text('${profile.data!.showUserInformationEmailAddress}',
                                         style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                          fontSize: SizeConfig.blockSizeVertical! * 2,
                                           fontFamily: 'NexaRegular',
                                           color: const Color(0xff2F353D),
                                         ),

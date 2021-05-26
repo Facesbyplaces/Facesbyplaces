@@ -566,12 +566,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                             .showMemorialDetails
                                                             .showMemorialDetailsDescription,
                                                         textAlign: TextAlign.center,
-                                                        style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                          FontWeight.w300,
-                                                          color: const Color(
-                                                              0xff000000),
+                                                        style: TextStyle(
+                                                          fontSize: SizeConfig
+                                                              .blockSizeVertical! *
+                                                              2.11,
+                                                          fontFamily: 'NexaRegular',
+                                                          color: const Color(0xff000000),
                                                         ),
                                                       ),
                                                     );
@@ -831,26 +831,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                         children: [
                                                           Text(
                                                             '${profile.data!.almMemorial.showMemorialPostsCount}',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  2.64,
-                                                              fontFamily:
-                                                              'NexaBold',
-                                                              color: const Color(
-                                                                  0xff000000),
+                                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                              fontFamily: 'NexaBold',
+                                                              color: const Color(0xff000000),
                                                             ),
                                                           ),
                                                           Text(
                                                             'Post',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  1.76,
-                                                              fontFamily:
-                                                              'NexaRegular',
-                                                              color: const Color(
-                                                                  0xff677375),
+                                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                                              fontFamily:'NexaRegular',
+                                                              color: const Color(0xff677375),
                                                             ),
                                                           ),
                                                         ],
@@ -1015,13 +1005,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                   padding: const EdgeInsets.only(
                                                       left: 20.0),
                                                   alignment: Alignment.centerLeft,
-                                                  child: const Text(
+                                                  child: Text(
                                                     'Post',
-                                                    style: const TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight: FontWeight.bold,
-                                                      color:
-                                                      const Color(0xff000000),
+                                                    style: TextStyle(
+                                                      fontSize: SizeConfig
+                                                          .blockSizeVertical! *
+                                                          2.64,
+                                                      fontFamily:
+                                                      'NexaBold',
+                                                      color: const Color(
+                                                          0xff000000),
                                                     ),
                                                   ),
                                                 ),
@@ -1553,6 +1546,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                         posts[i].postBody,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 5,
+                                        style: TextStyle(
+                                          fontSize: SizeConfig
+                                              .blockSizeVertical! *
+                                              2.11,
+                                          fontFamily:
+                                          'NexaRegular',
+                                          color: const Color(
+                                              0xff000000),
+                                        ),
                                       ),
                                     ),
                                     posts[i].imagesOrVideos.isNotEmpty

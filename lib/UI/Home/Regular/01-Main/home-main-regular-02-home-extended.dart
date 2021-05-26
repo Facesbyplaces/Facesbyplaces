@@ -221,36 +221,40 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                         onTap: (){
                           Navigator.pushNamed(context, '/home/regular/search');
                         },
-                        child: SizedBox(
+                        child: Container(
                           height: SizeConfig.blockSizeVertical! * 4.04,
-                          width: SizeConfig.blockSizeHorizontal! * 7.18,
+                          width: SizeConfig.blockSizeHorizontal! * 12.18,
+                          padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal! * 5),
                           child: Image.asset('assets/icons/zoom.png',),
                         ),
                       ),
                     ],
                   ),
-                  body: Stack(
-                    children: [
-                      SingleChildScrollView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        child: Container(
-                          height: SizeConfig.screenHeight,
-                          child: const MiscRegularBackgroundTemplate(
-                            image: const AssetImage('assets/icons/background2.png'),
+                  body: SafeArea(
+                    bottom: false,
+                    child: Stack(
+                      children: [
+                        SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          child: Container(
+                            height: SizeConfig.screenHeight,
+                            child: const MiscRegularBackgroundTemplate(
+                              image: const AssetImage('assets/icons/background2.png'),
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        child: (() {
-                          switch (toggleBottomListener) {
-                            case 0: return HomeRegularFeedTab();
-                            case 1: return HomeRegularManageTab();
-                            case 2: return HomeRegularPostTab();
-                            case 3: return HomeRegularNotificationsTab();
-                          }
-                        }()),
-                      ),
-                    ],
+                        Container(
+                          child: (() {
+                            switch (toggleBottomListener) {
+                              case 0: return HomeRegularFeedTab();
+                              case 1: return HomeRegularManageTab();
+                              case 2: return HomeRegularPostTab();
+                              case 3: return HomeRegularNotificationsTab();
+                            }
+                          }()),
+                        ),
+                      ],
+                    ),
                   ),
                   floatingActionButton: FloatingActionButton(
                     backgroundColor: const Color(0xffffffff),
