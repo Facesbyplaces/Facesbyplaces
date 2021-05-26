@@ -7,6 +7,7 @@ export default function Header() {
     postTab: postTab,
   }));
   const [showAddModal, setShowAddModal] = useState(false);
+  const [fetched, setFetched] = useState(false);
   const dispatch = useDispatch();
 
   const handleAddClick = () => {
@@ -58,6 +59,8 @@ export default function Header() {
           id={postTab.id}
           showAddModal={showAddModal}
           setShowAddModal={setShowAddModal}
+          fetched={fetched}
+          setFetched={setFetched}
         />
         {/*end::Button*/}
       </div>

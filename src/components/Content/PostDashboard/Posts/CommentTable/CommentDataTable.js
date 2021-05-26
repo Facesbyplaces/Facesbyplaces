@@ -27,26 +27,24 @@ export default function PostDataTable({ search, setSearch, keywords }) {
       });
   };
 
-  // const handleSearch = () => {
-  //   axios
-  //     .get(`/api/v1/admin/search/post`, {
-  //       params: { keywords: keywords, page: page },
-  //     })
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setComments(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //     });
-  //   setSearch(false);
-  // };
+  const handleSearch = () => {
+    axios
+      .get(`/api/v1/admin/search/comments`, {
+        params: { keywords: keywords, page: page },
+      })
+      .then((response) => {
+        setComments(response.data.comments);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+    setSearch(false);
+  };
 
-  // {
-  //   search ? handleSearch() : console.log("Search", search);
-  // }
+  {
+    search ? handleSearch() : console.log("Search", search);
+  }
 
-  // fetchComments(page);
   {
     fetched ? console.log(" ") : fetchComments(page);
   }
