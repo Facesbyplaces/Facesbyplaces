@@ -12,4 +12,7 @@ class Comment < ApplicationRecord
   has_many :reports, as: :reportable, dependent: :destroy
 
   validates :body, presence: true
+  # Search
+  include PgSearch::Model
+  multisearchable against: :body
 end

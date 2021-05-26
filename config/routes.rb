@@ -236,14 +236,18 @@ Rails.application.routes.draw do
         
         # COMMENTS
 
+        # all users without paginations
+        get 'comments/users/selection',           to: 'comments#usersSelection'
         # comments
         get 'comments',                           to: 'comments#commentsIndex'
         # edit comment
         put 'comments/edit/:id',                  to: 'comments#editComment'
         # add comment
-        put 'comments/add/:id',                   to: 'comments#addComment'
+        post 'comments/add',                      to: 'comments#addComment'
         # delete comment
-        delete 'comments/delete/:id',                to: 'comments#deleteComment'
+        delete 'comments/delete/:id',             to: 'comments#deleteComment'
+        # delete comment
+        get 'search/comments',                    to: 'comments#searchComment'
 
         # MEMORIALS
 
