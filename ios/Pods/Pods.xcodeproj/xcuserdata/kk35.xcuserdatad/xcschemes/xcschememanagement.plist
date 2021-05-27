@@ -14,6 +14,31 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Braintree-Braintree-Drop-In-Localization.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Braintree-Braintree-UI-Localization.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Braintree.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>BraintreeDropIn-Braintree-UIKit-Localization.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>BraintreeDropIn.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Branch.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -149,16 +174,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Stripe-Stripe.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Stripe.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>ZLPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -190,6 +205,11 @@
 			<false/>
 		</dict>
 		<key>flutter_barcode_scanner.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>flutter_braintree.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -305,11 +325,6 @@
 			<false/>
 		</dict>
 		<key>sqflite.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>stripe_payment.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

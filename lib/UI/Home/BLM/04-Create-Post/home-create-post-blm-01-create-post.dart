@@ -259,7 +259,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<int>(
                                     value: currentIdSelected,
-                                    isDense: true,
                                     onChanged: (int? newValue) {
                                       currentIdSelected = newValue!;
                                     },

@@ -665,14 +665,21 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                    title: const Text('Error', 
-                                                      textAlign: TextAlign.center, 
-                                                      style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+                                                    title: Text('Error',
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                          SizeConfig.blockSizeVertical! * 3.16,
+                                                          fontFamily: 'NexaRegular'),
                                                     ),
                                                     entryAnimation: EntryAnimation.DEFAULT,
-                                                    description: const Text(
+                                                    description: Text(
                                                       'Something went wrong. Please try again.',
                                                       textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                          SizeConfig.blockSizeVertical! * 2.87,
+                                                          fontFamily: 'NexaRegular'),
                                                     ),
                                                     onlyOkButton: true,
                                                     buttonOkColor: const Color(0xffff0000),
@@ -779,13 +786,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                         onTap: () {
                                           Navigator.pop(context);
                                         },
-                                        child: const Text(
+                                        child: Text(
                                           'Something went wrong. Please try again.',
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w200,
-                                            color: const Color(0xffffffff),
-                                          ),
+                                          style: TextStyle(
+                                              fontSize:
+                                              SizeConfig.blockSizeVertical! * 2.87,
+                                              fontFamily: 'NexaRegular',
+                                           color:  Color(0xffFFFFFF),),
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
@@ -810,13 +817,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                               size: 16,
                                             ),
                                             const SizedBox(width: 20),
-                                            const Text(
+                                            Text(
                                               'Go back',
-                                              style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w200,
-                                                color: const Color(0xffffffff),
-                                              ),
+                                              style: TextStyle(
+                                                fontSize:
+                                                SizeConfig.blockSizeVertical! * 2.87,
+                                                fontFamily: 'NexaRegular',
+                                                color:  Color(0xffFFFFFF),),
                                             ),
                                           ],
                                         ),

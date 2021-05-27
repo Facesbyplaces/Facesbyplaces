@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../Configurations/size_configuration.dart';
+
 class MiscBLMUploadFromDialog extends StatelessWidget{
 
   final String choice_1;
@@ -8,6 +10,7 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
   const MiscBLMUploadFromDialog({this.choice_1 = 'Camera', this.choice_2 = 'Gallery'});
 
   Widget build(BuildContext context){
+    SizeConfig.init(context);
     return Dialog(
       shape: const RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(5))
@@ -18,12 +21,11 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Choose file to Upload:',
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w300,
-                color: const Color(0xff888888),
-              ),
+            Text('Choose file to Upload:',
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontFamily: 'NexaLight',
+                color: Color(0xff000000),),
             ),
 
             const SizedBox(height: 40,),
@@ -34,10 +36,9 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
               },
               child: Text(choice_1,
                 style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff888888),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xffC1C1C1),),
               ),
             ),
 
@@ -49,10 +50,9 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
               },
               child: Text(choice_2,
                 style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff888888),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xffC1C1C1),),
               ),
             ),
           ],
@@ -78,13 +78,12 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Choose the relationship of this person:',
+            Text('Choose the relationship of this person:',
             textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w200,
-                color: const Color(0xff000000),
-              ),
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontFamily: 'NexaBold',
+                color: Color(0xff000000),),
             ),
 
             const SizedBox(height: 40,),
@@ -95,10 +94,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Father',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff000000).withOpacity(0.5),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000).withOpacity(0.5),),
               ),
             ),
 
@@ -110,10 +108,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Mother',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff000000).withOpacity(0.5),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000).withOpacity(0.5),),
               ),
             ),
 
@@ -125,10 +122,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Sister',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff000000).withOpacity(0.5),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000).withOpacity(0.5),),
               ),
             ),
 
@@ -140,10 +136,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Brother',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff000000).withOpacity(0.5),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000).withOpacity(0.5),),
               ),
             ),
 
@@ -155,10 +150,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Aunt',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff000000).withOpacity(0.5),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000).withOpacity(0.5),),
               ),
             ),
 
@@ -170,10 +164,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Uncle',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff000000).withOpacity(0.5),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000).withOpacity(0.5),),
               ),
             ),
 
@@ -185,10 +178,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Nephew',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff000000).withOpacity(0.5),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000).withOpacity(0.5),),
               ),
             ),
 
@@ -215,10 +207,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Grandmother',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff000000).withOpacity(0.5),
-                ),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000).withOpacity(0.5),),
               ),
             ),
 
@@ -260,22 +251,20 @@ class MiscBLMConfirmDialog extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(title,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xff000000),
-              ),
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontFamily: 'NexaBold',
+                color: Color(0xff000000),),
             ),
 
             const SizedBox(height: 20,),
 
             Text(content,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xff000000),
-              ),
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                fontFamily: 'NexaRegular',
+                color: Color(0xff000000),),
             ),
 
             const SizedBox(height: 20,),
@@ -290,8 +279,8 @@ class MiscBLMConfirmDialog extends StatelessWidget{
                     child: Text(confirm_1,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaBold',
                         color: confirmColor_1,
                       ),
                     ),
@@ -305,8 +294,8 @@ class MiscBLMConfirmDialog extends StatelessWidget{
                     child: Text(confirm_2,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                        fontFamily: 'NexaBold',
                         color: confirmColor_2,
                       ),
                     ),

@@ -113,7 +113,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                             ),
                           ),
 
-                          const SizedBox(width: 40,),
+                          //const SizedBox(width: 15,),
 
                           Expanded(
                             child: DefaultTabController(
@@ -130,7 +130,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                                   Center(
                                     child: Text('Text',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.0,
+                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                         fontFamily: 'NexaRegular',
                                       ),
                                     ),
@@ -138,7 +138,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                                   Center(
                                     child: Text('Video',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.0,
+                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                         fontFamily: 'NexaRegular',
                                       ),
                                     ),
@@ -146,7 +146,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                                   Center(
                                     child: Text('Slide',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.0,
+                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                         fontFamily: 'NexaRegular',
                                       ),
                                     ),
@@ -260,6 +260,11 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
       maxLines: 10,
       keyboardType: TextInputType.text,
       readOnly: false,
+      style: TextStyle(
+    fontSize: SizeConfig.blockSizeVertical! * 2.11,
+      fontFamily: 'NexaRegular',
+      color: const Color(0xff2F353D),
+    ),
       decoration: InputDecoration(
         fillColor: Color(0xffffffff),
         filled: true,
@@ -556,9 +561,9 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
               alignment: Alignment.centerLeft,
               child: Text('Double tap to remove images.',
                 style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                  color: Color(0xff000000),
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: const Color(0xff2F353D),
                 ),
               ),
             ),

@@ -239,8 +239,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                               color: const Color(0xff000000),
                             ),
                           ),
-                          SizedBox(
-                              height: SizeConfig.blockSizeVertical! * 2.03),
+                          SizedBox(height: SizeConfig.blockSizeVertical! * 2.03),
 
                           Text('${profile.data!.showUserInformationEmailAddress}',
                             style: TextStyle(

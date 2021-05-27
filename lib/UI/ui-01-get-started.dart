@@ -293,10 +293,7 @@ class UIGetStartedState extends State<UIGetStarted> {
                         shape: const StadiumBorder(),
                         color: const Color(0xff04ECFF),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const UILogin01()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
                         },
                       ),
                       SizedBox(height: SizeConfig.blockSizeVertical! * 4),

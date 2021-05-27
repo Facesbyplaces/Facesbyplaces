@@ -316,6 +316,11 @@ class HomeRegularCreateMemorial2State
       maxLines: 10,
       keyboardType: TextInputType.text,
       readOnly: false,
+      style: TextStyle(
+        fontSize: SizeConfig.blockSizeVertical! * 2.11,
+        fontFamily: 'NexaRegular',
+        color: const Color(0xff2F353D),
+      ),
       decoration: const InputDecoration(
         fillColor: const Color(0xffffffff),
         filled: true,
@@ -643,12 +648,12 @@ class HomeRegularCreateMemorial2State
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: const Text(
+              child: Text(
                 'Double tap to remove images.',
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                  color: const Color(0xff000000),
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: const Color(0xff2F353D),
                 ),
               ),
             ),

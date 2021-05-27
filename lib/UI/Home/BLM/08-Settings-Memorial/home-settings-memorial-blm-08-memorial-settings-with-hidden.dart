@@ -126,10 +126,18 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
-        const ListTile(
+        ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text('Friends', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Add or remove friends of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          title: Text('Friends', style: TextStyle(
+              fontSize:
+              SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xff000000)),),
+          subtitle: Text('Add or remove friends of this page', style: TextStyle(
+              fontSize:
+              SizeConfig.blockSizeVertical! * 2.64,
+              fontFamily: 'NexaRegular',
+              color: const Color(0xffBDC3C7)),),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
@@ -149,10 +157,17 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    title: Text('Success', textAlign: TextAlign.center,  style: TextStyle(
+                        fontSize:
+                        SizeConfig.blockSizeVertical! * 3.16,
+                        fontFamily: 'NexaRegular'),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: const Text('Successfully updated the relationship setting.',
+                    description: Text('Successfully updated the relationship setting.',
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize:
+                          SizeConfig.blockSizeVertical! * 2.87,
+                          fontFamily: 'NexaRegular'),
                     ),
                     onlyOkButton: true,
                     onOkButtonPressed: () {
@@ -166,10 +181,17 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(
+                        fontSize:
+                        SizeConfig.blockSizeVertical! * 3.16,
+                        fontFamily: 'NexaRegular'),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: const Text('Something went wrong. Please try again.',
+                    description: Text('Something went wrong. Please try again.',
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize:
+                          SizeConfig.blockSizeVertical! * 2.87,
+                          fontFamily: 'NexaRegular'),
                     ),
                     onlyOkButton: true,
                     buttonOkColor: const Color(0xffff0000),
@@ -206,10 +228,17 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(
+                        fontSize:
+                        SizeConfig.blockSizeVertical! * 3.16,
+                        fontFamily: 'NexaRegular'),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: const Text('Something went wrong. Please try again.',
+                    description: Text('Something went wrong. Please try again.',
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize:
+                          SizeConfig.blockSizeVertical! * 2.87,
+                          fontFamily: 'NexaRegular'),
                     ),
                     onlyOkButton: true,
                     buttonOkColor: const Color(0xffff0000),

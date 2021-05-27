@@ -19,14 +19,16 @@ class RegularTaggedUsers {
   final String name;
   final int userId;
   final int accountType;
-  const RegularTaggedUsers({required this.name, required this.userId, required this.accountType});
+  const RegularTaggedUsers(
+      {required this.name, required this.userId, required this.accountType});
 }
 
 class RegularManagedPages {
   final String name;
   final int pageId;
   final String image;
-  const RegularManagedPages({required this.name, required this.pageId, required this.image});
+  const RegularManagedPages(
+      {required this.name, required this.pageId, required this.image});
 }
 
 class HomeRegularCreatePost extends StatefulWidget {
@@ -110,19 +112,24 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
         },
         child: ValueListenableBuilder(
           valueListenable: removeAttachment,
-          builder: (_, int removeAttachmentListener, __) => ValueListenableBuilder(
+          builder: (_, int removeAttachmentListener, __) =>
+              ValueListenableBuilder(
             valueListenable: slideImages,
-            builder: (_, List<File> slideImagesListener, __) => ValueListenableBuilder(
+            builder: (_, List<File> slideImagesListener, __) =>
+                ValueListenableBuilder(
               valueListenable: slideCount,
-              builder: (_, int slideCountListener, __) => ValueListenableBuilder(
+              builder: (_, int slideCountListener, __) =>
+                  ValueListenableBuilder(
                 valueListenable: userCount,
-                builder: (_, int userCountListener, __) => ValueListenableBuilder(
+                builder: (_, int userCountListener, __) =>
+                    ValueListenableBuilder(
                   valueListenable: newLocation,
                   builder: (_, String newLocationListener, __) => Scaffold(
                     appBar: AppBar(
                       title: Row(
                         children: [
-                          Text('Create Post',
+                          Text(
+                            'Create Post',
                             style: TextStyle(
                               fontSize: SizeConfig.blockSizeVertical! * 3.16,
                               fontFamily: 'NexaRegular',
@@ -135,7 +142,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                       centerTitle: true,
                       backgroundColor: const Color(0xff04ECFF),
                       leading: IconButton(
-                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: const Color(0xffffffff),
+                          size: SizeConfig.blockSizeVertical! * 3.52,
+                        ),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -143,9 +154,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                       actions: [
                         GestureDetector(
                           onTap: () async {
-                            Location.Location location = new Location.Location();
+                            Location.Location location =
+                                new Location.Location();
 
-                            bool serviceEnabled = await location.serviceEnabled();
+                            bool serviceEnabled =
+                                await location.serviceEnabled();
                             if (!serviceEnabled) {
                               serviceEnabled = await location.requestService();
                               if (!serviceEnabled) {
@@ -153,17 +166,22 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                               }
                             }
 
-                            Location.PermissionStatus permissionGranted = await location.hasPermission();
-                            if (permissionGranted == Location.PermissionStatus.denied) {
-                              permissionGranted = await location.requestPermission();
-                              if (permissionGranted != Location.PermissionStatus.granted) {
+                            Location.PermissionStatus permissionGranted =
+                                await location.hasPermission();
+                            if (permissionGranted ==
+                                Location.PermissionStatus.denied) {
+                              permissionGranted =
+                                  await location.requestPermission();
+                              if (permissionGranted !=
+                                  Location.PermissionStatus.granted) {
                                 return;
                               }
                             }
 
                             context.loaderOverlay.show();
 
-                            Location.LocationData locationData = await location.getLocation();
+                            Location.LocationData locationData =
+                                await location.getLocation();
                             List<RegularTaggedPeople> userIds = [];
 
                             if (users.length != 0) {
@@ -191,22 +209,37 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                               almTagPeople: userIds,
                             );
 
-                            bool result = await apiRegularHomeCreatePost(post: post);
+                            bool result =
+                                await apiRegularHomeCreatePost(post: post);
                             context.loaderOverlay.hide();
 
-                            if(result){
-                              Navigator.popAndPushNamed(context, '/home/regular');
-                            }else{
+                            if (result) {
+                              Navigator.popAndPushNamed(
+                                  context, '/home/regular');
+                            } else {
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Something went wrong. Please try again.',
+                                  image: Image.asset(
+                                    'assets/icons/cover-icon.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                  title: Text(
+                                    'Error',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                        fontSize:
+                                            SizeConfig.blockSizeVertical! *
+                                                3.87,
+                                        fontFamily: 'NexaRegular'),
+                                  ),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text(
+                                    'Something went wrong. Please try again.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize:
+                                          SizeConfig.blockSizeVertical! * 2.87,
                                       fontFamily: 'NexaRegular',
                                     ),
                                   ),
@@ -222,9 +255,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 20.0),
                             child: Center(
-                              child: Text('Post',
+                              child: Text(
+                                'Post',
                                 style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                  fontSize:
+                                      SizeConfig.blockSizeVertical! * 2.64,
                                   fontFamily: 'NexaRegular',
                                   color: const Color(0xffffffff),
                                 ),
@@ -248,35 +283,50 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xff888888),
                                   ),
-                                  focusedBorder: const UnderlineInputBorder(borderSide: BorderSide.none,),
-                                  border: const UnderlineInputBorder(borderSide: BorderSide.none,),
+                                  focusedBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  border: const UnderlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
                                 ),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<int>(
                                     value: currentIdSelected,
-                                    isDense: true,
+                                    //  isDense: true,
                                     onChanged: (int? newValue) {
                                       currentIdSelected = newValue!;
                                     },
-                                    items: managedPages.map((RegularManagedPages value) {
+                                    items: managedPages
+                                        .map((RegularManagedPages value) {
                                       return DropdownMenuItem<int>(
                                         value: value.pageId,
                                         child: Row(
                                           children: [
                                             value.image != ''
-                                            ? CircleAvatar(
-                                              backgroundColor: const Color(0xff888888),
-                                              foregroundImage: NetworkImage(value.image),
-                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                            )
-                                            : const CircleAvatar(
-                                              backgroundColor: const Color(0xff888888),
-                                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                            ),
+                                                ? CircleAvatar(
+                                                    backgroundColor:
+                                                        const Color(0xff888888),
+                                                    foregroundImage:
+                                                        NetworkImage(
+                                                            value.image),
+                                                    backgroundImage:
+                                                        const AssetImage(
+                                                            'assets/icons/app-icon.png'),
+                                                  )
+                                                : const CircleAvatar(
+                                                    backgroundColor:
+                                                        const Color(0xff888888),
+                                                    foregroundImage:
+                                                        const AssetImage(
+                                                            'assets/icons/app-icon.png'),
+                                                  ),
                                             Text(
                                               value.name,
                                               style: TextStyle(
-                                                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                fontSize: SizeConfig
+                                                        .blockSizeVertical! *
+                                                    2.64,
                                                 fontFamily: 'NexaBold',
                                                 color: const Color(0xff000000),
                                               ),
@@ -292,7 +342,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                 color: const Color(0xffffffff),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: const Color(0xff888888).withOpacity(0.5),
+                                    color: const Color(0xff888888)
+                                        .withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 5,
                                     offset: const Offset(0, 0),
@@ -303,9 +354,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                             FocusScope(
                               child: Focus(
                                 onFocusChange: (focus) {
-                                  if(focus){
+                                  if (focus) {
                                     maxLines = 10;
-                                  }else{
+                                  } else {
                                     maxLines = 5;
                                   }
                                 },
@@ -318,7 +369,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                     maxLines: maxLines,
                                     keyboardType: TextInputType.text,
                                     style: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                      fontSize:
+                                          SizeConfig.blockSizeVertical! * 2.64,
                                       fontFamily: 'NexaRegular',
                                       color: const Color(0xfF000000),
                                     ),
@@ -327,16 +379,29 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                       alignLabelWithHint: true,
                                       labelText: 'Speak out...',
                                       labelStyle: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                        fontSize:
+                                            SizeConfig.blockSizeVertical! *
+                                                2.64,
                                         fontFamily: 'NexaRegular',
                                         color: const Color(0xffB1B1B1),
                                       ),
                                       border: const OutlineInputBorder(
-                                        borderSide: const BorderSide(color: const Color(0xff000000),),
-                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                        borderSide: const BorderSide(
+                                          color: const Color(0xff000000),
+                                        ),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10)),
                                       ),
-                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
-                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                        ),
+                                      ),
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -346,29 +411,39 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                               height: 10,
                             ),
                             newLocationListener != ''
-                            ? Container(
-                              child: Chip(
-                                labelPadding: const EdgeInsets.only(left: 8.0),
-                                label: Text(newLocationListener),
-                                deleteIcon: const Icon(Icons.close, size: 18,),
-                                onDeleted: () {
-                                  newLocation.value = '';
-                                },
-                              ),
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
-                              alignment: Alignment.centerLeft,
-                            )
-                            : Container(height: 0,),
-
-                            const SizedBox(height: 10,),
-
+                                ? Container(
+                                    child: Chip(
+                                      labelPadding:
+                                          const EdgeInsets.only(left: 8.0),
+                                      label: Text(newLocationListener),
+                                      deleteIcon: const Icon(
+                                        Icons.close,
+                                        size: 18,
+                                      ),
+                                      onDeleted: () {
+                                        newLocation.value = '';
+                                      },
+                                    ),
+                                    padding: const EdgeInsets.only(
+                                      left: 20.0,
+                                      right: 20.0,
+                                    ),
+                                    alignment: Alignment.centerLeft,
+                                  )
+                                : Container(
+                                    height: 0,
+                                  ),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             Container(
                               child: Wrap(
                                 spacing: 5.0,
                                 children: List.generate(
                                   users.length,
                                   (index) => Chip(
-                                    labelPadding: const EdgeInsets.only(left: 8.0),
+                                    labelPadding:
+                                        const EdgeInsets.only(left: 8.0),
                                     label: Text(users[index].name),
                                     deleteIcon: const Icon(
                                       Icons.close,
@@ -381,19 +456,23 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                   ),
                                 ),
                               ),
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              padding: const EdgeInsets.only(
+                                left: 20.0,
+                                right: 20.0,
+                              ),
                               alignment: Alignment.centerLeft,
                             ),
-
-                            const SizedBox(height: 10,),
-
+                            const SizedBox(
+                              height: 10,
+                            ),
                             Container(
                               child: (() {
                                 if (slideCountListener != 0) {
                                   return Container(
                                     height: 200,
                                     width: SizeConfig.screenWidth,
-                                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, right: 20.0),
                                     child: Container(
                                       height: 100,
                                       child: GridView.count(
@@ -401,7 +480,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                         crossAxisCount: 4,
                                         crossAxisSpacing: 4,
                                         mainAxisSpacing: 4,
-                                        children: List.generate(slideCountListener, (index) {
+                                        children: List.generate(
+                                            slideCountListener, (index) {
                                           return GestureDetector(
                                             onDoubleTap: () {
                                               removeAttachment.value = index;
@@ -411,49 +491,91 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                                 context: context,
                                                 barrierDismissible: true,
                                                 barrierLabel: 'Dialog',
-                                                transitionDuration: const Duration(milliseconds: 0),
+                                                transitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
                                                 pageBuilder: (_, __, ___) {
                                                   return Scaffold(
-                                                    backgroundColor: Colors.black12.withOpacity(0.7),
+                                                    backgroundColor: Colors
+                                                        .black12
+                                                        .withOpacity(0.7),
                                                     body: SizedBox.expand(
                                                       child: SafeArea(
                                                         child: Column(
                                                           children: [
                                                             Container(
-                                                              alignment: Alignment.centerRight,
-                                                              padding: const EdgeInsets.only(right: 20.0),
-                                                              child: GestureDetector(
+                                                              alignment: Alignment
+                                                                  .centerRight,
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          20.0),
+                                                              child:
+                                                                  GestureDetector(
                                                                 onTap: () {
-                                                                  Navigator.pop(context);
+                                                                  Navigator.pop(
+                                                                      context);
                                                                 },
-                                                                child: CircleAvatar(
+                                                                child:
+                                                                    CircleAvatar(
                                                                   radius: 20,
-                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                                  backgroundColor: const Color(
+                                                                          0xff000000)
+                                                                      .withOpacity(
+                                                                          0.8),
+                                                                  child:
+                                                                      const Icon(
+                                                                    Icons
+                                                                        .close_rounded,
+                                                                    color: const Color(
+                                                                        0xffffffff),
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
-
-                                                            const SizedBox(height: 20,),
-
+                                                            const SizedBox(
+                                                              height: 20,
+                                                            ),
                                                             Expanded(
                                                               child: (() {
-                                                                if (lookupMimeType(slideImagesListener[index].path)?.contains('video') ==true) {
-                                                                  return BetterPlayer.file('${slideImagesListener[index].path}',
-                                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                                      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                      autoDispose: false,
-                                                                      aspectRatio: 16 / 9,
-                                                                      fit: BoxFit.contain,
+                                                                if (lookupMimeType(slideImagesListener[index]
+                                                                            .path)
+                                                                        ?.contains(
+                                                                            'video') ==
+                                                                    true) {
+                                                                  return BetterPlayer
+                                                                      .file(
+                                                                    '${slideImagesListener[index].path}',
+                                                                    betterPlayerConfiguration:
+                                                                        const BetterPlayerConfiguration(
+                                                                      deviceOrientationsAfterFullScreen: [
+                                                                        DeviceOrientation
+                                                                            .portraitUp
+                                                                      ],
+                                                                      autoDispose:
+                                                                          false,
+                                                                      aspectRatio:
+                                                                          16 /
+                                                                              9,
+                                                                      fit: BoxFit
+                                                                          .contain,
                                                                     ),
                                                                   );
                                                                 } else {
-                                                                  return Image.file(slideImagesListener[index], fit: BoxFit.contain,);
+                                                                  return Image
+                                                                      .file(
+                                                                    slideImagesListener[
+                                                                        index],
+                                                                    fit: BoxFit
+                                                                        .contain,
+                                                                  );
                                                                 }
                                                               }()),
                                                             ),
-
-                                                            const SizedBox(height: 80,),
+                                                            const SizedBox(
+                                                              height: 80,
+                                                            ),
                                                           ],
                                                         ),
                                                       ),
@@ -462,106 +584,168 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                                 },
                                               );
                                             },
-                                            child: lookupMimeType(slideImagesListener[index].path)?.contains('video') == true
-                                            ? Stack(
-                                              children: [
-                                                BetterPlayer.file('${slideImagesListener[index].path}',
-                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                      showControls: false,
-                                                    ),
-                                                    aspectRatio: 1,
-                                                    fit: BoxFit.contain,
-                                                  ),
-                                                ),
-                                                Center(
-                                                  child: CircleAvatar(
-                                                    radius: 25,
-                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${index + 1}',
-                                                      style: const TextStyle(
-                                                        fontSize: 40,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: const Color(0xffffffff),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                removeAttachmentListener == index
-                                                ? Positioned(
-                                                    top: 0,
-                                                    right: 0,
-                                                    child: GestureDetector(
-                                                      onTap: () {
-                                                        slideImages.value.removeAt(index);
-                                                        slideCount.value--;
-                                                      },
-                                                      child: const CircleAvatar(
-                                                        backgroundColor: const Color(0xff000000),
-                                                        child: const Icon(Icons.close, color: const Color(0xffffffff),),
-                                                      ),
-                                                    ),
-                                                  )
-                                                : Container(height: 0),
-                                              ],
-                                            )
-                                            : Container(
-                                              width: 80,
-                                              child: Stack(
-                                                fit: StackFit.expand,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(10),
-                                                    child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
-                                                  ),
-
-                                                  Center(
-                                                    child: CircleAvatar(
-                                                      radius: 25,
-                                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text('${index + 1}',
-                                                        style: const TextStyle(
-                                                          fontSize: 40,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: const Color(0xffffffff),
+                                            child: lookupMimeType(
+                                                            slideImagesListener[
+                                                                    index]
+                                                                .path)
+                                                        ?.contains('video') ==
+                                                    true
+                                                ? Stack(
+                                                    children: [
+                                                      BetterPlayer.file(
+                                                        '${slideImagesListener[index].path}',
+                                                        betterPlayerConfiguration:
+                                                            const BetterPlayerConfiguration(
+                                                          controlsConfiguration:
+                                                              const BetterPlayerControlsConfiguration(
+                                                            showControls: false,
+                                                          ),
+                                                          aspectRatio: 1,
+                                                          fit: BoxFit.contain,
                                                         ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                  removeAttachmentListener == index
-                                                  ? Positioned(
-                                                      top: 0,
-                                                      right: 0,
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          slideImages.value.removeAt(index);
-                                                          slideCount.value--;
-                                                        },
-                                                        child: const CircleAvatar(
-                                                          backgroundColor: const Color(0xff000000),
-                                                          child: const Icon(Icons.close,
-                                                            color: const Color(0xffffffff),
+                                                      Center(
+                                                        child: CircleAvatar(
+                                                          radius: 25,
+                                                          backgroundColor:
+                                                              const Color(
+                                                                      0xffffffff)
+                                                                  .withOpacity(
+                                                                      .5),
+                                                          child: Text(
+                                                            '${index + 1}',
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 40,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color: const Color(
+                                                                  0xffffffff),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
-                                                    )
-                                                  : Container(height: 0),
-                                                ],
-                                              ),
-                                            ),
+                                                      removeAttachmentListener ==
+                                                              index
+                                                          ? Positioned(
+                                                              top: 0,
+                                                              right: 0,
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  slideImages
+                                                                      .value
+                                                                      .removeAt(
+                                                                          index);
+                                                                  slideCount
+                                                                      .value--;
+                                                                },
+                                                                child:
+                                                                    const CircleAvatar(
+                                                                  backgroundColor:
+                                                                      const Color(
+                                                                          0xff000000),
+                                                                  child:
+                                                                      const Icon(
+                                                                    Icons.close,
+                                                                    color: const Color(
+                                                                        0xffffffff),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            )
+                                                          : Container(
+                                                              height: 0),
+                                                    ],
+                                                  )
+                                                : Container(
+                                                    width: 80,
+                                                    child: Stack(
+                                                      fit: StackFit.expand,
+                                                      children: [
+                                                        ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          child: Image.file(
+                                                            slideImagesListener[
+                                                                index],
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                        Center(
+                                                          child: CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor:
+                                                                Color(0xffffffff)
+                                                                    .withOpacity(
+                                                                        .5),
+                                                            child: Text(
+                                                              '${index + 1}',
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 40,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: const Color(
+                                                                    0xffffffff),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        removeAttachmentListener ==
+                                                                index
+                                                            ? Positioned(
+                                                                top: 0,
+                                                                right: 0,
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    slideImages
+                                                                        .value
+                                                                        .removeAt(
+                                                                            index);
+                                                                    slideCount
+                                                                        .value--;
+                                                                  },
+                                                                  child:
+                                                                      const CircleAvatar(
+                                                                    backgroundColor:
+                                                                        const Color(
+                                                                            0xff000000),
+                                                                    child:
+                                                                        const Icon(
+                                                                      Icons
+                                                                          .close,
+                                                                      color: const Color(
+                                                                          0xffffffff),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Container(
+                                                                height: 0),
+                                                      ],
+                                                    ),
+                                                  ),
                                           );
                                         }),
                                       ),
                                     ),
                                   );
-                                }else{
-                                  return Container(height: 0,);
+                                } else {
+                                  return Container(
+                                    height: 0,
+                                  );
                                 }
                               }()),
                             ),
-
-                            Divider(color: const Color(0xff2F353D), thickness: 0.2,),
-
+                            Divider(
+                              color: const Color(0xff2F353D),
+                              thickness: 0.2,
+                            ),
                             Container(
                               height: 160,
                               child: Column(
@@ -569,7 +753,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async {
-                                        String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchLocation()));
+                                        String result = await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeRegularCreatePostSearchLocation()));
                                         newLocation.value = result;
                                       },
                                       child: Container(
@@ -580,18 +768,41 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(child: Text('Add a location', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
-                                            const Icon(Icons.place, color: const Color(0xff4EC9D4),),
+                                            Expanded(
+                                              child: Text(
+                                                'Add a location',
+                                                style: TextStyle(
+                                                  fontSize: SizeConfig
+                                                          .blockSizeVertical! *
+                                                      2.64,
+                                                  fontFamily: 'NexaRegular',
+                                                  color:
+                                                      const Color(0xff000000),
+                                                ),
+                                              ),
+                                            ),
+                                            const Icon(
+                                              Icons.place,
+                                              color: const Color(0xff4EC9D4),
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+                                  Divider(
+                                    color: const Color(0xff2F353D),
+                                    thickness: 0.2,
+                                  ),
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async {
-                                        RegularTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchUser()));
+                                        RegularTaggedUsers? result =
+                                            await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomeRegularCreatePostSearchUser()));
 
                                         if (result != null) {
                                           userCount.value++;
@@ -599,30 +810,50 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                         }
                                       },
                                       child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        padding: const EdgeInsets.only(
+                                          left: 20.0,
+                                          right: 20.0,
+                                        ),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
                                             Expanded(
-                                              child: Text('Tag a person you are with',
-                                                style:  TextStyle(
-                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                              child: Text(
+                                                'Tag a person you are with',
+                                                style: TextStyle(
+                                                  fontSize: SizeConfig
+                                                          .blockSizeVertical! *
+                                                      2.64,
                                                   fontFamily: 'NexaRegular',
-                                                  color: const Color(0xff000000),
+                                                  color:
+                                                      const Color(0xff000000),
                                                 ),
                                               ),
                                             ),
-                                            const Icon(Icons.person, color: const Color(0xff4EC9D4),),
+                                            const Icon(
+                                              Icons.person,
+                                              color: const Color(0xff4EC9D4),
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+                                  Divider(
+                                    color: const Color(0xff2F353D),
+                                    thickness: 0.2,
+                                  ),
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async {
-                                        var choice = await showDialog(context: (context), builder: (build) => const MiscRegularUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
+                                        var choice = await showDialog(
+                                          context: (context),
+                                          builder: (build) =>
+                                              const MiscRegularUploadFromDialog(
+                                            choice_1: 'Image',
+                                            choice_2: 'Video',
+                                          ),
+                                        );
 
                                         if (choice == null) {
                                           choice = 0;
@@ -635,16 +866,23 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                         }
                                       },
                                       child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        padding: const EdgeInsets.only(
+                                          left: 20.0,
+                                          right: 20.0,
+                                        ),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
                                             Expanded(
-                                              child: Text('Upload a Video / Image',
+                                              child: Text(
+                                                'Upload a Video / Image',
                                                 style: TextStyle(
-                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                  fontSize: SizeConfig
+                                                          .blockSizeVertical! *
+                                                      2.64,
                                                   fontFamily: 'NexaRegular',
-                                                  color: const Color(0xff000000),
+                                                  color:
+                                                      const Color(0xff000000),
                                                 ),
                                               ),
                                             ),
