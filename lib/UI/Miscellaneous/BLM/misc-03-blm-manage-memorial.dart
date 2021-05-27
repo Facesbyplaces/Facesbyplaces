@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -21,476 +21,367 @@ class MiscBLMManageMemorialTab extends StatefulWidget {
   final bool famOrFriends;
   final String pageType;
   final String relationship;
+  const MiscBLMManageMemorialTab({required this.index, this.memorialName = '', this.description = '', required this.image, required this.memorialId, required this.managed, required this.follower, required this.famOrFriends, required this.pageType, required this.relationship,});
 
-  const MiscBLMManageMemorialTab({
-    required this.index,
-    this.memorialName = '',
-    this.description = '',
-    required this.image,
-    required this.memorialId,
-    required this.managed,
-    required this.follower,
-    required this.famOrFriends,
-    required this.pageType,
-    required this.relationship,
-  });
-
-  MiscBLMManageMemorialTabState createState() =>
-      MiscBLMManageMemorialTabState();
+  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState();
 }
 
 class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
   bool manageButton = false;
-  bool followButton = false;
+  ValueNotifier<bool> followButton = ValueNotifier<bool>(false);
 
   void initState() {
     super.initState();
-    followButton = widget.follower;
+    followButton.value = widget.follower;
     manageButton = widget.managed;
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return GestureDetector(
-      onTap: () async {
-        if (widget.pageType == 'Blm') {
-          if (widget.managed == true || widget.famOrFriends == true) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomeBLMProfile(
-                          memorialId: widget.memorialId,
-                          relationship: widget.relationship,
-                          managed: widget.managed,
-                          newlyCreated: false,
-                        )));
-          } else {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomeBLMMemorialProfile(
-                          memorialId: widget.memorialId,
-                          pageType: widget.pageType,
-                          newJoin: followButton,
-                        )));
-          }
-        } else {
-          if (widget.managed == true || widget.famOrFriends == true) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomeRegularProfile(
-                          memorialId: widget.memorialId,
-                          relationship: widget.relationship,
-                          managed: widget.managed,
-                          newlyCreated: false,
-                        )));
-          } else {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomeRegularMemorialProfile(
-                          memorialId: widget.memorialId,
-                          pageType: widget.pageType,
-                          newJoin: followButton,
-                        )));
-          }
-        }
-      },
-      child: Container(
-       // height: 80,
-        color: const Color(0xffffffff),
-        child: ListTile(
-          leading: widget.image != ''
-              ? CircleAvatar(
-                  radius: 30,
-                  backgroundColor: const Color(0xff888888),
-                  foregroundImage: NetworkImage(widget.image),
-                  backgroundImage: const AssetImage(
-                    'assets/icons/app-icon.png',
-                  ),
-                )
-              : const CircleAvatar(
-                  radius: 30,
-                  backgroundColor: const Color(0xff888888),
-                  foregroundImage: const AssetImage(
-                    'assets/icons/app-icon.png',
-                  ),
-                ),
-          title: Text(
-            widget.memorialName,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff000000),),
-          ),
-          subtitle: Text(
-            widget.description,
-           // overflow: TextOverflow.ellipsis,
-           // maxLines: 1,
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff888888),),
-          ),
-          trailing: (() {
+    return ValueListenableBuilder(
+      valueListenable: followButton,
+      builder: (_, bool followButtonListener, __) => GestureDetector(
+        onTap: () async {
+          if (widget.pageType == 'Blm') {
             if (widget.managed == true || widget.famOrFriends == true) {
-              return MaterialButton(
-                elevation: 0,
-                padding: EdgeInsets.zero,
-                textColor: const Color(0xffffffff),
-                splashColor: const Color(0xff4EC9D4),
-                onPressed: () async {
-                  bool confirmResult = await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(
-                            image: Image.asset(
-                              'assets/icons/cover-icon.png',
-                              fit: BoxFit.cover,
-                            ),
-                        title: Text(
-                          'Confirm',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize:
-                              SizeConfig.blockSizeVertical! * 3.16,
-                              fontFamily: 'NexaRegular'),
-                        ),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description:  Text(
-                          'Are you sure you want to leave this page?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize:
-                              SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular'),
-                        ),
-                            onlyOkButton: false,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                            onCancelButtonPressed: () {
-                              Navigator.pop(context, false);
-                            },
-                          ));
-
-                  if (confirmResult == true) {
-                    context.loaderOverlay.show();
-                    String result =
-                        await apiBLMLeavePage(memorialId: widget.memorialId);
-                    context.loaderOverlay.hide();
-
-                    if (result != 'Failed') {
-                      setState(() {
-                        followButton = false;
-                      });
-
-                      await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                            title: Text(
-                              'Success',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 3.16,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text(
-                              'Successfully followed the page. You will receive notifications from this page.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                                onlyOkButton: true,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    } else {
-                      await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                            title: Text(
-                              'Error',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 3.16,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text(
-                              'Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                                onlyOkButton: true,
-                                buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    }
-                  }
-                },
-                child: Text(
-                  'Leave',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaBold',
-                      color: const Color(0xffFFFFFF),)
-                ),
-                height: 35,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  side: const BorderSide(color: const Color(0xff04ECFF)),
-                ),
-                color: const Color(0xff04ECFF),
-              );
-            } else if (followButton == true) {
-              return MaterialButton(
-                elevation: 0,
-                padding: EdgeInsets.zero,
-                textColor: const Color(0xffffffff),
-                splashColor: const Color(0xff4EC9D4),
-                onPressed: () async {
-                  bool confirmResult = await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(
-                            image: Image.asset(
-                              'assets/icons/cover-icon.png',
-                              fit: BoxFit.cover,
-                            ),
-                        title: Text(
-                          'Confirm',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize:
-                              SizeConfig.blockSizeVertical! * 3.16,
-                              fontFamily: 'NexaRegular'),
-                        ),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description:  Text(
-                          'Are you sure you want to leave this page?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize:
-                              SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular'),
-                        ),
-                            onlyOkButton: false,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                            onCancelButtonPressed: () {
-                              Navigator.pop(context, false);
-                            },
-                          ));
-
-                  if (confirmResult == true) {
-                    context.loaderOverlay.show();
-                    bool result = await apiBLMModifyFollowPage(
-                        pageType: widget.pageType,
-                        pageId: widget.memorialId,
-                        follow: false);
-                    context.loaderOverlay.hide();
-
-                    if (result) {
-                      setState(() {
-                        followButton = false;
-                      });
-
-                      await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                            title: Text(
-                              'Success',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 3.16,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text(
-                              'Successfully followed the page. You will receive notifications from this page.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                                onlyOkButton: true,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    } else {
-                      await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                            title: Text(
-                              'Error',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 3.16,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text(
-                              'Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                                onlyOkButton: true,
-                                buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    }
-                  }
-                },
-                child: Text(
-                  'Leave',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaBold',
-                      color: const Color(0xffFFFFFF),)
-                ),
-                height: 35,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  side: const BorderSide(color: const Color(0xff04ECFF)),
-                ),
-                color: const Color(0xff04ECFF),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
             } else {
-              return MaterialButton(
-                elevation: 0,
-                padding: EdgeInsets.zero,
-                textColor: const Color(0xff4EC9D4),
-                splashColor: const Color(0xff4EC9D4),
-                onPressed: () async {
-                  context.loaderOverlay.show();
-                  bool result = await apiBLMModifyFollowPage(
-                      pageType: widget.pageType,
-                      pageId: widget.memorialId,
-                      follow: true);
-                  context.loaderOverlay.hide();
+              followButton.value = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButtonListener,)));
+            }
+          } else {
+            if (widget.managed == true || widget.famOrFriends == true) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
+            } else {
+              followButton.value = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButtonListener,)));
+            }
+          }
+        },
+        child: Container(
+          color: const Color(0xffffffff),
+          child: ListTile(
+            leading: widget.image != ''
+            ? CircleAvatar(
+              radius: 30,
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: NetworkImage(widget.image),
+              backgroundImage: const AssetImage('assets/icons/app-icon.png',),
+            )
+            : const CircleAvatar(
+              radius: 30,
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/app-icon.png',),
+            ),
+            title: Text(
+              widget.memorialName,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                fontFamily: 'NexaBold',
+                color: const Color(0xff000000),
+              ),
+            ),
+            subtitle: Text(
+              widget.description,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                fontFamily: 'NexaBold',
+                color: const Color(0xff888888),
+              ),
+            ),
+            trailing: (() {
+              if(widget.managed == true || widget.famOrFriends == true){
+                return MaterialButton(
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                  textColor: const Color(0xffffffff),
+                  splashColor: const Color(0xff4EC9D4),
+                  onPressed: () async {
+                    bool confirmResult = await showDialog(
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Confirm',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
+                        ),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Are you sure you want to leave this page?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                            fontFamily: 'NexaRegular',
+                          ),
+                        ),
+                        onlyOkButton: false,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                        onCancelButtonPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                      ),
+                    );
 
-                  if (result) {
-                    setState(() {
-                      followButton = true;
-                    });
+                    if(confirmResult == true){
+                      context.loaderOverlay.show();
+                      String result = await apiBLMLeavePage(memorialId: widget.memorialId);
+                      context.loaderOverlay.hide();
 
-                    await showDialog(
+                      if(result != 'Failed'){
+                        followButton.value = false;
+
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Success', 
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Successfully followed the page. You will receive notifications from this page.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular',
+                              ),
+                            ),
+                            onlyOkButton: true,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }else{
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                                fontFamily: 'NexaRegular',
+                              ),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular',
+                              ),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: const Color(0xffff0000),
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: Text('Leave',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaBold',
+                      color: const Color(0xffFFFFFF),
+                    ),
+                  ),
+                  height: 35,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    side: const BorderSide(color: const Color(0xff04ECFF)),
+                  ),
+                  color: const Color(0xff04ECFF),
+                );
+              }else if(followButtonListener == true){
+                return MaterialButton(
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                  textColor: const Color(0xffffffff),
+                  splashColor: const Color(0xff4EC9D4),
+                  onPressed: () async {
+                    bool confirmResult = await showDialog(
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Confirm',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
+                        ),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Are you sure you want to leave this page?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                            fontFamily: 'NexaRegular',
+                          ),
+                        ),
+                        onlyOkButton: false,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                        onCancelButtonPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                      ),
+                    );
+
+                    if(confirmResult == true){
+                      context.loaderOverlay.show();
+                      bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: false);
+                      context.loaderOverlay.hide();
+
+                      if(result){
+                        followButton.value = false;
+
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Success',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                                fontFamily: 'NexaRegular',
+                              ),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Successfully followed the page. You will receive notifications from this page.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular',
+                              ),
+                            ),
+                            onlyOkButton: true,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }else{
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                                fontFamily: 'NexaRegular',
+                              ),
+                            ),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular',
+                              ),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: const Color(0xffff0000),
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: Text('Leave',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                      fontFamily: 'NexaBold',
+                      color: const Color(0xffFFFFFF),
+                    ),
+                  ),
+                  height: 35,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    side: const BorderSide(color: const Color(0xff04ECFF)),
+                  ),
+                  color: const Color(0xff04ECFF),
+                );
+              }else{
+                return MaterialButton(
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                  textColor: const Color(0xff4EC9D4),
+                  splashColor: const Color(0xff4EC9D4),
+                  onPressed: () async {
+                    context.loaderOverlay.show();
+                    bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: true);
+                    context.loaderOverlay.hide();
+
+                    if(result){
+                      followButton.value = true;
+
+                      await showDialog(
                         context: context,
-                        builder: (_) => AssetGiffyDialog(
-                              image: Image.asset(
-                                'assets/icons/cover-icon.png',
-                                fit: BoxFit.cover,
-                              ),
-                              title: Text(
-                                'Success',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize:
-                                    SizeConfig.blockSizeVertical! * 3.16,
-                                    fontFamily: 'NexaRegular'),
-                              ),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text(
-                                'Successfully followed the page. You will receive notifications from this page.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize:
-                                    SizeConfig.blockSizeVertical! * 2.87,
-                                    fontFamily: 'NexaRegular'),
-                              ),
-                              onlyOkButton: true,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            ));
-                  } else {
-                    await showDialog(
-                        context: context,
-                        builder: (_) => AssetGiffyDialog(
-                              image: Image.asset(
-                                'assets/icons/cover-icon.png',
-                                fit: BoxFit.cover,
-                              ),
-                          title: Text(
-                            'Error',
+                        builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Success',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize:
-                                SizeConfig.blockSizeVertical! * 3.16,
-                                fontFamily: 'NexaRegular'),
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',
+                            ),
                           ),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text(
-                            'Something went wrong. Please try again.',
+                          description: Text('Successfully followed the page. You will receive notifications from this page.',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize:
-                                SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular'),
+                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                              fontFamily: 'NexaRegular',
+                            ),
                           ),
-                              onlyOkButton: true,
-                              buttonOkColor: const Color(0xffff0000),
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            ));
-                  }
-                },
-                child: Text(
-                  'Join',
-                  style: TextStyle(
+                          onlyOkButton: true,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        ),
+                      );
+                    }else{
+                      await showDialog(
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                              fontFamily: 'NexaRegular',
+                            ),
+                          ),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                              fontFamily: 'NexaRegular',
+                            ),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: const Color(0xffff0000),
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        ),
+                      );
+                    }
+                  },
+                  child: Text('Join',
+                    style: TextStyle(
                       fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaBold'),
-                ),
-                height: 35,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  side: const BorderSide(color: const Color(0xff4EC9D4)),
-                ),
-                color: const Color(0xffffffff),
-              );
-            }
-          }()),
+                      fontFamily: 'NexaBold',
+                    ),
+                  ),
+                  height: 35,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    side: const BorderSide(color: const Color(0xff4EC9D4)),
+                  ),
+                  color: const Color(0xffffffff),
+                );
+              }
+            }()),
+          ),
         ),
       ),
     );

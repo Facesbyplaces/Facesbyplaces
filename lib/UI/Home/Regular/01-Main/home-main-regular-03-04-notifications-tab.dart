@@ -112,21 +112,18 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       for (int i = 0; i < newValue.almNotification.length; i++) {
         notifications.add(
           MiscRegularNotificationDisplayTemplate(
-            imageIcon: newValue.almNotification[i].homeTabNotificationActor
-                .homeTabNotificationActorImage,
+            imageIcon: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
             postId: newValue.almNotification[i].homeTabNotificationPostId,
             notification: newValue.almNotification[i].homeTabNotificationAction,
-            dateCreated: timeago.format(DateTime.parse(
-              newValue.almNotification[i].homeTabNotificationCreatedAt,
-            )),
-            notificationType:
-            newValue.almNotification[i].homeTabNotificationNotificationType,
+            dateCreated: timeago.format(DateTime.parse(newValue.almNotification[i].homeTabNotificationCreatedAt,)),
+            notificationType: newValue.almNotification[i].homeTabNotificationNotificationType,
             readStatus: newValue.almNotification[i].homeTabNotificationRead,
           ),
         );
       }
 
-      if (mounted) page++;
+      if(mounted)
+      page++;
     }
   }
 

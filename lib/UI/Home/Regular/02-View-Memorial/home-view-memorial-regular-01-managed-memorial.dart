@@ -12,7 +12,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
@@ -44,7 +43,6 @@ class RegularProfilePosts {
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
   const RegularProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
@@ -53,28 +51,26 @@ class HomeRegularProfile extends StatefulWidget {
   final String relationship;
   final bool managed;
   final bool newlyCreated;
-
   HomeRegularProfile({required this.memorialId, required this.relationship, required this.managed, required this.newlyCreated});
 
   HomeRegularProfileState createState() => HomeRegularProfileState();
 }
 
 class HomeRegularProfileState extends State<HomeRegularProfile> {
-  TextEditingController controller = TextEditingController();
-  ScrollController scrollController = ScrollController();
-  List<RegularProfilePosts> posts = [];
-  Future<APIRegularShowMemorialMain>? showProfile;
-  GlobalKey dataKey = GlobalKey<HomeRegularProfileState>();
+  ValueNotifier<bool> showFloatingButton = ValueNotifier<bool>(false);
+  CarouselController buttonCarouselController = CarouselController();
   GlobalKey profileKey = GlobalKey<HomeRegularProfileState>();
-  int itemRemaining = 1;
-  // int postCount = 0;
+  TextEditingController controller = TextEditingController();
+  GlobalKey dataKey = GlobalKey<HomeRegularProfileState>();
+  ScrollController scrollController = ScrollController();
   ValueNotifier<int> postCount = ValueNotifier<int>(0);
-  bool empty = true;
-  int page = 1;
+  Future<APIRegularShowMemorialMain>? showProfile;
+  List<RegularProfilePosts> posts = [];
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
-  CarouselController buttonCarouselController = CarouselController();
-  ValueNotifier<bool> showFloatingButton = ValueNotifier<bool>(false);
+  int itemRemaining = 1;
+  bool empty = true;
+  int page = 1;
 
   void initState() {
     super.initState();
@@ -92,13 +88,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
   }
 
   Future<void> onRefresh() async {
-    // setState(() {
-      onLoading();
-    // });
+    postCount.value = 0;
+    itemRemaining = 1;
+    posts = [];
+    page = 1;
+    onLoading();
   }
 
   void onLoading() async {
     if (itemRemaining != 0) {
+      context.loaderOverlay.show();
       var newValue = await apiRegularProfilePost(memorialId: widget.memorialId, page: page);
       itemRemaining = newValue.almItemsRemaining;
       postCount.value = newValue.almFamilyMemorialList.length;
@@ -110,61 +109,42 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
 
       for (int i = 0; i < newValue.almFamilyMemorialList.length; i++) {
         for (int j = 0; j < newValue.almFamilyMemorialList[i].homeProfilePostTagged.length; j++) {
-          newList1.add(newValue.almFamilyMemorialList[i]
-              .homeProfilePostTagged[j].homeProfilePostTaggedFirstName);
-          newList2.add(newValue.almFamilyMemorialList[i]
-              .homeProfilePostTagged[j].homeProfilePostTaggedLastName);
-          newList3.add(newValue.almFamilyMemorialList[i]
-              .homeProfilePostTagged[j].homeProfilePostTaggedImage);
-          newList4.add(newValue.almFamilyMemorialList[i]
-              .homeProfilePostTagged[j].homeProfilePostTaggedId);
+          newList1.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedFirstName);
+          newList2.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedLastName);
+          newList3.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedImage);
+          newList4.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedId);
         }
 
         posts.add(
           RegularProfilePosts(
-            userId: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPagePageCreator.homeProfilePostPageCreatorId,
+            userId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageCreator.homeProfilePostPageCreatorId,
             postId: newValue.almFamilyMemorialList[i].homeProfilePostId,
-            memorialId: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPageId,
-            timeCreated:
-                newValue.almFamilyMemorialList[i].homeProfilePostCreatedAt,
-            memorialName: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPageName,
+            memorialId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageId,
+            timeCreated: newValue.almFamilyMemorialList[i].homeProfilePostCreatedAt,
+            memorialName: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageName,
             postBody: newValue.almFamilyMemorialList[i].homeProfilePostBody,
-            profileImage: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPageProfileImage,
-            imagesOrVideos:
-                newValue.almFamilyMemorialList[i].homeProfilePostImagesOrVideos,
-            managed: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPageManage,
-            joined: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPageFollower,
-            numberOfComments: newValue
-                .almFamilyMemorialList[i].homeProfilePostNumberOfComments,
-            numberOfLikes:
-                newValue.almFamilyMemorialList[i].homeProfilePostNumberOfLikes,
-            likeStatus:
-                newValue.almFamilyMemorialList[i].homeProfilePostLikeStatus,
-            numberOfTagged:
-                newValue.almFamilyMemorialList[i].homeProfilePostTagged.length,
+            profileImage: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageProfileImage,
+            imagesOrVideos: newValue.almFamilyMemorialList[i].homeProfilePostImagesOrVideos,
+            managed: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageManage,
+            joined: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFollower,
+            numberOfComments: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfComments,
+            numberOfLikes: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfLikes,
+            likeStatus: newValue.almFamilyMemorialList[i].homeProfilePostLikeStatus,
+            numberOfTagged: newValue.almFamilyMemorialList[i].homeProfilePostTagged.length,
             taggedFirstName: newList1,
             taggedLastName: newList2,
             taggedImage: newList3,
             taggedId: newList4,
-            pageType: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPagePageType,
-            famOrFriends: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPageFamOrFriends,
-            relationship: newValue.almFamilyMemorialList[i].homeProfilePostPage
-                .homeProfilePostPageRelationship,
+            pageType: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageType,
+            famOrFriends: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFamOrFriends,
+            relationship: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageRelationship,
           ),
         );
       }
 
-      if (mounted) 
-      // setState(() {});
+      if (mounted)
       page++;
+      context.loaderOverlay.hide();
     }
   }
 
@@ -174,21 +154,20 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
 
   void initBranchShare() {
     buo = BranchUniversalObject(
-        canonicalIdentifier: 'FacesbyPlaces',
-        title: 'FacesbyPlaces Link',
-        contentDescription: 'FacesbyPlaces link to the app',
-        keywords: ['FacesbyPlaces', 'Share', 'Link'],
-        publiclyIndex: true,
-        locallyIndex: true,
-        contentMetadata: BranchContentMetaData()
-          ..addCustomMetadata('link-category', 'Memorial')
-          ..addCustomMetadata('link-memorial-id', widget.memorialId)
-          ..addCustomMetadata('link-type-of-account', 'Memorial'));
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Memorial')
+        ..addCustomMetadata('link-memorial-id', widget.memorialId)
+        ..addCustomMetadata('link-type-of-account', 'Memorial'),
+      );
 
-    lp = BranchLinkProperties(
-        feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
-    lp!.addControlParam(
-        'url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   @override
@@ -200,7 +179,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
       builder: (_, bool showFloatingButtonListener, __) => ValueListenableBuilder(
         valueListenable: postCount,
         builder: (_, int postCountListener, __) => Scaffold(
-         // backgroundColor: Color(0xffffffff),
           body: SafeArea(
             bottom: false,
             child: RefreshIndicator(
@@ -224,23 +202,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                     width: SizeConfig.screenWidth,
                                     child: CachedNetworkImage(
                                       fit: BoxFit.cover,
-                                      imageUrl: profile.data!.almMemorial
-                                          .showMemorialBackgroundImage,
-                                      placeholder: (context, url) => const Center(
-                                        child: const CircularProgressIndicator(),
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          Image.asset(
-                                            'assets/icons/cover-icon.png',
-                                            fit: BoxFit.cover,
-                                            scale: 1.0,
-                                          ),
+                                      imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
+                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     ),
                                   ),
                                   Column(
                                     children: [
-                                      GestureDetector(
-                                        // BACKGROUND IMAGE FOR ZOOMING IN
+                                      GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
                                         onTap: () {
                                           showGeneralDialog(
                                             context: context,
@@ -257,59 +226,32 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                     child: Column(
                                                       children: [
                                                         Container(
-                                                          alignment:
-                                                          Alignment.centerRight,
-                                                          padding:
-                                                          const EdgeInsets.only(
-                                                              right: 20.0),
+                                                          alignment: Alignment.centerRight,
+                                                          padding: const EdgeInsets.only(right: 20.0),
                                                           child: GestureDetector(
                                                             onTap: () {
-                                                              Navigator.pop(
-                                                                  context);
+                                                              Navigator.pop(context);
                                                             },
                                                             child: CircleAvatar(
                                                               radius: 20,
-                                                              backgroundColor:
-                                                              const Color(
-                                                                  0xff000000)
-                                                                  .withOpacity(
-                                                                  0.8),
-                                                              child: const Icon(
-                                                                Icons.close_rounded,
-                                                                color: const Color(
-                                                                    0xffffffff),
-                                                              ),
+                                                              backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                              child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                             ),
                                                           ),
                                                         ),
-                                                        const SizedBox(
-                                                          height: 20,
-                                                        ),
+
+                                                        const SizedBox(height: 20,),
+
                                                         Expanded(
-                                                            child:
-                                                            CachedNetworkImage(
-                                                              fit: BoxFit.contain,
-                                                              imageUrl: profile
-                                                                  .data!
-                                                                  .almMemorial
-                                                                  .showMemorialBackgroundImage,
-                                                              placeholder:
-                                                                  (context, url) =>
-                                                              const Center(
-                                                                child:
-                                                                const CircularProgressIndicator(),
-                                                              ),
-                                                              errorWidget: (context,
-                                                                  url, error) =>
-                                                                  Image.asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit.contain,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                            )),
-                                                        const SizedBox(
-                                                          height: 80,
+                                                          child: CachedNetworkImage(
+                                                            fit: BoxFit.contain, 
+                                                            imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
+                                                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                          ),
                                                         ),
+
+                                                        const SizedBox(height: 80,),
                                                       ],
                                                     ),
                                                   ),
@@ -327,24 +269,20 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                         width: SizeConfig.screenWidth,
                                         decoration: const BoxDecoration(
                                           borderRadius: const BorderRadius.only(
-                                              topLeft: const Radius.circular(20),
-                                              topRight: const Radius.circular(20)),
+                                            topLeft: const Radius.circular(20),
+                                            topRight: const Radius.circular(20),
+                                          ),
                                           color: const Color(0xffffffff),
                                         ),
                                         child: Column(
                                           children: [
-                                            const SizedBox(
-                                              height: 150,
-                                            ),
+                                            const SizedBox(height: 150,),
+
                                             Center(
-                                              child: Text(
-                                                profile.data!.almMemorial
-                                                    .showMemorialName,
+                                              child: Text(profile.data!.almMemorial.showMemorialName,
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontSize: SizeConfig
-                                                      .blockSizeVertical! *
-                                                      2.64,
+                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
                                                   fontFamily: 'NexaBold',
                                                   color: const Color(0xff000000),
                                                 ),
@@ -352,43 +290,29 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 overflow: TextOverflow.clip,
                                               ),
                                             ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
+
+                                            const SizedBox(height: 20,),
+
                                             TextButton.icon(
                                               onPressed: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            HomeRegularConnectionList(
-                                                                memorialId: widget.memorialId,
-                                                                newToggle: 2)));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                               },
                                               icon: const CircleAvatar(
                                                 radius: 15,
-                                                backgroundColor:
-                                                const Color(0xffE67E22),
-                                                child: const Icon(
-                                                  Icons.card_giftcard,
-                                                  color: const Color(0xffffffff),
-                                                  size: 18,
-                                                ),
+                                                backgroundColor: const Color(0xffE67E22),
+                                                child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 18,),
                                               ),
-                                              label: Text(
-                                                '${profile.data!.almMemorial.showMemorialFollowersCount}',
+                                              label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}',
                                                 style: TextStyle(
-                                                  fontSize: SizeConfig
-                                                      .blockSizeVertical! *
-                                                      2.11,
+                                                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                                   fontFamily: 'NexaBold',
                                                   color: const Color(0xff2F353D),
                                                 ),
                                               ),
                                             ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
+
+                                            const SizedBox(height: 20,),
+
                                             Column(
                                               children: [
                                                 GestureDetector(
@@ -398,51 +322,32 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                       barrierDismissible: true,
                                                       barrierLabel: 'Dialog',
                                                       transitionDuration:
-                                                      const Duration(
-                                                          milliseconds: 0),
+                                                      const Duration(milliseconds: 0),
                                                       pageBuilder: (_, __, ___) {
                                                         return Scaffold(
-                                                          backgroundColor: Colors
-                                                              .black12
-                                                              .withOpacity(0.7),
+                                                          backgroundColor: Colors.black12.withOpacity(0.7),
                                                           body: SizedBox.expand(
                                                             child: SafeArea(
                                                               child: Column(
                                                                 children: [
                                                                   Container(
-                                                                    alignment: Alignment
-                                                                        .centerRight,
-                                                                    padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        right:
-                                                                        20.0),
-                                                                    child:
-                                                                    GestureDetector(
+                                                                    alignment: Alignment.centerRight,
+                                                                    padding: const EdgeInsets.only(right:20.0),
+                                                                    child: GestureDetector(
                                                                       onTap: () {
-                                                                        Navigator.pop(
-                                                                            context);
+                                                                        Navigator.pop(context);
                                                                       },
                                                                       child:
                                                                       CircleAvatar(
                                                                         radius: 20,
-                                                                        backgroundColor: const Color(
-                                                                            0xff000000)
-                                                                            .withOpacity(
-                                                                            0.8),
-                                                                        child:
-                                                                        const Icon(
-                                                                          Icons
-                                                                              .close_rounded,
-                                                                          color: const Color(
-                                                                              0xffffffff),
-                                                                        ),
+                                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                        child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                  const SizedBox(
-                                                                    height: 10,
-                                                                  ),
+
+                                                                  const SizedBox(height: 10,),
+                                                                  
                                                                   Expanded(
                                                                     child: (() {
                                                                       if (lookupMimeType(profile
@@ -1489,18 +1394,19 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                         } else if (profile.hasError) {
                           return MiscRegularErrorMessageTemplate();
                         } else {
-                          return Container(
-                            height: SizeConfig.screenHeight,
-                            child: Center(
-                              child: Container(
-                                child: const SpinKitThreeBounce(
-                                  color: const Color(0xff000000),
-                                  size: 50.0,
-                                ),
-                                color: const Color(0xffffffff),
-                              ),
-                            ),
-                          );
+                          return Container(height: SizeConfig.screenHeight);
+                          // return Container(
+                          //   height: SizeConfig.screenHeight,
+                          //   child: Center(
+                          //     child: Container(
+                          //       child: const SpinKitThreeBounce(
+                          //         color: const Color(0xff000000),
+                          //         size: 50.0,
+                          //       ),
+                          //       color: const Color(0xffffffff),
+                          //     ),
+                          //   ),
+                          // );
                         }
                       },
                     ),

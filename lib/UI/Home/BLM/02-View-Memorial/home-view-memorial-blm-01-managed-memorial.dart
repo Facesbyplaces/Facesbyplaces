@@ -13,7 +13,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -91,6 +90,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
   void onLoading() async{
     if(itemRemaining != 0){
+      context.loaderOverlay.show();
       var newValue = await apiBLMProfilePost(memorialId: widget.memorialId, page: page);
       itemRemaining = newValue.blmItemsRemaining;
       postCount.value = newValue.blmFamilyMemorialList.length;
@@ -136,6 +136,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
       if(mounted)
       page++;
+      context.loaderOverlay.hide();
     }
   }
 
@@ -166,6 +167,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
   }
 
   Future<void> onRefresh() async{
+    postCount.value = 0;
+    itemRemaining = 1;
+    posts = [];
+    page = 1;
     onLoading();
   }
 
@@ -1068,7 +1073,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                         }else if(profile.hasError){
                           return MiscBLMErrorMessageTemplate();
                         }else{
-                          return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                          return Container(height: SizeConfig.screenHeight);
+                          // return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                         }
                       },
                     ),

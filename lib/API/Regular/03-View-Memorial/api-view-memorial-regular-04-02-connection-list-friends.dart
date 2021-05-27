@@ -3,13 +3,31 @@ import 'package:dio/dio.dart';
 
 Future<APIRegularConnectionListFriendsMain> apiRegularConnectionListFriends({required int memorialId, required int page}) async{
 
+  // final sharedPrefs = await SharedPreferences.getInstance();
+  // String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  // String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  // String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+
+  // Dio dioRequest = Dio();
+
   final sharedPrefs = await SharedPreferences.getInstance();
-  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
+  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
+  String? getAccessToken;
+  String? getUID;
+  String? getClient;
+
+  if(userSessionRegular == true){
+    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  }else if(userSessionBLM == true){
+    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  }
 
   Dio dioRequest = Dio();
-
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
     options: Options(
       followRedirects: false,

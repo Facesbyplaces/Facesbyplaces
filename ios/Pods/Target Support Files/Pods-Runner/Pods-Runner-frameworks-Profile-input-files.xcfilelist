@@ -51,3 +51,4 @@ ${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework
 ${BUILT_PRODUCTS_DIR}/sign_in_with_apple/sign_in_with_apple.framework
 ${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework
 ${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework
+${BUILT_PRODUCTS_DIR}/webview_flutter/webview_flutter.framework

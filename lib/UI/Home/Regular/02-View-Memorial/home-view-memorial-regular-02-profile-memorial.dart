@@ -11,7 +11,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
@@ -45,7 +44,6 @@ class RegularProfilePosts{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
   const RegularProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
@@ -99,11 +97,16 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   }
 
   Future<void> onRefresh() async{
+    postCount.value = 0;
+    itemRemaining = 1; 
+    posts = [];
+    page = 1;
     onLoading();
   }
 
   void onLoading() async{
     if(itemRemaining != 0){
+      context.loaderOverlay.show();
       var newValue = await apiRegularProfilePost(memorialId: widget.memorialId, page: page);
       itemRemaining = newValue.almItemsRemaining;
       postCount.value = newValue.almFamilyMemorialList.length;
@@ -150,6 +153,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
       if(mounted)
       page++;
+      context.loaderOverlay.hide();
     }
   }
 
@@ -955,8 +959,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                               child: Row(
                                                 children: [
                                                   TextButton.icon(
-                                                    onPressed: (){
-                                                      Navigator.pop(context);
+                                                    onPressed: (){ // BACK BUTTON
+                                                      // Navigator.pop(context);
+                                                      Navigator.pop(context, join.value);
                                                     }, 
                                                     icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
                                                     label: const Text('Back', 
@@ -1309,7 +1314,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                         }else if(profile.hasError){
                           return MiscRegularErrorMessageTemplate();
                         }else{
-                          return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                          return Container(height: SizeConfig.screenHeight);
                         }
                       }
                     ),

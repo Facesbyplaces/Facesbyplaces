@@ -12,7 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -78,6 +77,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
   void onLoading() async{
     if(itemRemaining != 0){
+      context.loaderOverlay.show();
       var newValue = await apiBLMProfilePost(memorialId: widget.memorialId, page: page);
       itemRemaining = newValue.blmItemsRemaining;
       postCount.value = newValue.blmFamilyMemorialList.length;
@@ -123,6 +123,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
       if(mounted)
       page++;
+      context.loaderOverlay.hide();
     }
   }
 
@@ -167,6 +168,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   }
 
   Future<void> onRefresh() async{
+    postCount.value = 0;
+    itemRemaining = 1; 
+    posts = [];
+    page = 1;
     onLoading();
   }
 
@@ -1020,8 +1025,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         child: Padding(
                                                           padding: const EdgeInsets.only(left: 20.0),
                                                           child: GestureDetector(
-                                                            onTap: (){
-                                                              Navigator.pop(context);
+                                                            onTap: (){ // BACK BUTTON
+                                                              Navigator.pop(context, join.value);
                                                             },
                                                             child: Row(
                                                               children: [
@@ -1150,7 +1155,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     }else if(profile.hasError){
                                       return MiscBLMErrorMessageTemplate();
                                     }else{
-                                      return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
+                                      return Container(height: SizeConfig.screenHeight);
+                                      // return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                                     }
                                   }
                               ),
