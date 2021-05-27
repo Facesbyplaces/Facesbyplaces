@@ -210,111 +210,114 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         child: ValueListenableBuilder(
           valueListenable: toggle,
           builder: (_, int toggleListener, __) => Scaffold(
-            appBar: AppBar(
-              flexibleSpace: Column(
-                children: [
-                  Spacer(),
-                  Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          onChanged: (search) {
-                            searchKeyword = search;
-
-                            if (search == '') {
-                              onSearch.value = false;
-                              searches = [];
-                              count4.value = searches.length;
-                            } else {
-                              onSearch.value = true;
-                            }
-
-                            if(onSearch.value == true){
-                              if(toggle.value == 0){
-                                searches = listsFamily;
-                                count4.value = searches.length;
-                                if(searches.length != 0){
-                                  for(int i = 0; i < listsFamily.length; i++){
-                                    searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
-                                    count4.value = searches.length;
-                                  }
-                                }
-                              }else if(toggle.value == 1){
-                                searches = listsFriends;
-                                count4.value = searches.length;
-                                if(searches.length != 0){
-                                  for(int i = 0; i < listsFriends.length; i++){
-                                    searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
-                                    count4.value = searches.length;
-                                  }
-                                }
-                              }else if(toggle.value == 2){
-                                searches = listsFollowers;
-                                count4.value = searches.length;
-                                if(searches.length != 0){
-                                  for(int i = 0; i < listsFollowers.length; i++){
-                                    searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
-                                    count4.value = searches.length;
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                            fontFamily: 'NexaRegular',
-                            color: const Color(0xff2F353D),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(70.0),
+              child: AppBar(
+                flexibleSpace: Column(
+                  children: [
+                    Spacer(),
+                    Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15.0),
-                            filled: true,
-                            fillColor: const Color(0xffffffff),
-                            focusColor: const Color(0xffffffff),
-                            hintText: (() {
-                              switch (toggleListener) {
-                                case 0: return 'Search Family';
-                                case 1: return 'Search Friends';
-                                case 2: return 'Search Followers';
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            onChanged: (search) {
+                              searchKeyword = search;
+
+                              if (search == '') {
+                                onSearch.value = false;
+                                searches = [];
+                                count4.value = searches.length;
+                              } else {
+                                onSearch.value = true;
                               }
-                            }()),
-                            hintStyle: TextStyle(
+
+                              if(onSearch.value == true){
+                                if(toggle.value == 0){
+                                  searches = listsFamily;
+                                  count4.value = searches.length;
+                                  if(searches.length != 0){
+                                    for(int i = 0; i < listsFamily.length; i++){
+                                      searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
+                                      count4.value = searches.length;
+                                    }
+                                  }
+                                }else if(toggle.value == 1){
+                                  searches = listsFriends;
+                                  count4.value = searches.length;
+                                  if(searches.length != 0){
+                                    for(int i = 0; i < listsFriends.length; i++){
+                                      searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
+                                      count4.value = searches.length;
+                                    }
+                                  }
+                                }else if(toggle.value == 2){
+                                  searches = listsFollowers;
+                                  count4.value = searches.length;
+                                  if(searches.length != 0){
+                                    for(int i = 0; i < listsFollowers.length; i++){
+                                      searches = searches.where((element) => element.firstName.toUpperCase().contains(searchKeyword.toUpperCase()) || element.lastName.toUpperCase().contains(searchKeyword.toUpperCase())).toList();
+                                      count4.value = searches.length;
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            style: TextStyle(
                               fontSize: SizeConfig.blockSizeVertical! * 2.11,
                               fontFamily: 'NexaRegular',
-                              color: const Color(0xffB1B1B1),
+                              color: const Color(0xff2F353D),
                             ),
-                            prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
-                            border: const OutlineInputBorder(
-                              borderSide: const BorderSide(color: const Color(0xffffffff)),
-                              borderRadius: const BorderRadius.all(Radius.circular(25)),
-                            ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(color: const Color(0xffffffff)),
-                              borderRadius: const BorderRadius.all(Radius.circular(25)),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(color: const Color(0xffffffff)),
-                              borderRadius: const BorderRadius.all(Radius.circular(25)),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(15.0),
+                              filled: true,
+                              fillColor: const Color(0xffffffff),
+                              focusColor: const Color(0xffffffff),
+                              hintText: (() {
+                                switch (toggleListener) {
+                                  case 0: return 'Search Family';
+                                  case 1: return 'Search Friends';
+                                  case 2: return 'Search Followers';
+                                }
+                              }()),
+                              hintStyle: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                fontFamily: 'NexaRegular',
+                                color: const Color(0xffB1B1B1),
+                              ),
+                              prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
+                              border: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: const Color(0xffffffff)),
+                                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                              ),
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: const Color(0xffffffff)),
+                                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: const Color(0xffffffff)),
+                                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 20,),
-                    ],
-                  ),
-                  SizedBox(height: 5,),
-                ],
+                        const SizedBox(width: 20,),
+                      ],
+                    ),
+                    SizedBox(height: 5,),
+                  ],
+                ),
+                leading: Container(),
+                backgroundColor: const Color(0xff04ECFF),
               ),
-              leading: Container(),
-              backgroundColor: const Color(0xff04ECFF),
             ),
             body: Column(
               children: [

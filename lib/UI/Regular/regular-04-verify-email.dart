@@ -121,10 +121,17 @@ class RegularVerifyEmail extends StatelessWidget{
                                       builder: (_) => 
                                         AssetGiffyDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        title: Text('Success', textAlign: TextAlign.center,  style: TextStyle(
+                                            fontSize:
+                                            SizeConfig.blockSizeVertical! * 3.16,
+                                            fontFamily: 'NexaRegular'),),
                                         entryAnimation: EntryAnimation.DEFAULT,
-                                        description: const Text('Another code has been sent to your email address. Please check your inbox.',
+                                        description: Text('Another code has been sent to your email address. Please check your inbox.',
                                           textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize:
+                                              SizeConfig.blockSizeVertical! * 2.87,
+                                              fontFamily: 'NexaRegular'),
                                         ),
                                         onlyOkButton: true,
                                         onOkButtonPressed: () {
@@ -138,10 +145,17 @@ class RegularVerifyEmail extends StatelessWidget{
                                       builder: (_) => 
                                         AssetGiffyDialog(
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(
+                                            fontSize:
+                                            SizeConfig.blockSizeVertical! * 3.16,
+                                            fontFamily: 'NexaRegular'),),
                                         entryAnimation: EntryAnimation.DEFAULT,
-                                        description: const Text('Something went wrong. Please try again.',
+                                        description: Text('Something went wrong. Please try again.',
                                           textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize:
+                                              SizeConfig.blockSizeVertical! * 2.87,
+                                              fontFamily: 'NexaRegular'),
                                         ),
                                         onlyOkButton: true,
                                         buttonOkColor: const Color(0xffff0000),
@@ -177,10 +191,17 @@ class RegularVerifyEmail extends StatelessWidget{
                                 builder: (_) => 
                                   AssetGiffyDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(
+                                      fontSize:
+                                      SizeConfig.blockSizeVertical! * 3.16,
+                                      fontFamily: 'NexaRegular'),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: const Text('Please enter the verification code.',
+                                  description: Text('Please enter the verification code.',
                                     textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize:
+                                        SizeConfig.blockSizeVertical! * 2.87,
+                                        fontFamily: 'NexaRegular'),
                                   ),
                                   onlyOkButton: true,
                                   buttonOkColor: const Color(0xffff0000),
@@ -203,10 +224,17 @@ class RegularVerifyEmail extends StatelessWidget{
                                   builder: (_) => 
                                     AssetGiffyDialog(
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    title:  Text('Error', textAlign: TextAlign.center,  style: TextStyle(
+                                        fontSize:
+                                        SizeConfig.blockSizeVertical! * 3.16,
+                                        fontFamily: 'NexaRegular'),),
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('Error: $result',
                                       textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize:
+                                          SizeConfig.blockSizeVertical! * 2.87,
+                                          fontFamily: 'NexaRegular'),
                                     ),
                                     onlyOkButton: true,
                                     buttonOkColor: const Color(0xffff0000),

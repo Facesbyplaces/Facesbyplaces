@@ -317,11 +317,18 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                               context: context,
                               builder: (_) => AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                title: Text('Confirm', textAlign: TextAlign.center,  style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! * 3.16,
+                                    fontFamily: 'NexaRegular'),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: const Text(
+                                description: Text(
                                   'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
                                   textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize:
+                                      SizeConfig.blockSizeVertical! * 2.87,
+                                      fontFamily: 'NexaRegular'),
                                 ),
                                 onlyOkButton: false,
                                 onOkButtonPressed: () {

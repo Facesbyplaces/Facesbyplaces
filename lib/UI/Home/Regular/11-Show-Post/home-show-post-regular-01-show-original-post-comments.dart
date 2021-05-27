@@ -1539,11 +1539,18 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: Text('Error',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 3.16,
+                                  fontFamily: 'NexaRegular'),
                             ),
                             entryAnimation: EntryAnimation.DEFAULT,
                             description: Text('Please input a comment.',
                               textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                  SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'),
                             ),
                             onlyOkButton: true,
                             buttonOkColor: Colors.red,
@@ -1673,11 +1680,18 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       title: Text('Error',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize:
+                            SizeConfig.blockSizeVertical! * 3.16,
+                            fontFamily: 'NexaRegular'),
                       ),
                       entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Please input a comment.',
                         textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize:
+                            SizeConfig.blockSizeVertical! * 2.87,
+                            fontFamily: 'NexaRegular'),
                       ),
                       onlyOkButton: true,
                       buttonOkColor: Colors.red,
@@ -1807,9 +1821,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                     context: context,
                     builder: (_) => AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(
+                          fontSize:
+                          SizeConfig.blockSizeVertical! * 3.16,
+                          fontFamily: 'NexaRegular'),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Please input a comment.', textAlign: TextAlign.center,),
+                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(
+                          fontSize:
+                          SizeConfig.blockSizeVertical! * 2.87,
+                          fontFamily: 'NexaRegular'),),
                       onlyOkButton: true,
                       buttonOkColor: Colors.red,
                       onOkButtonPressed: () {

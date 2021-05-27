@@ -102,78 +102,95 @@ class HomeRegularCreatePostSearchUserState
           }
         },
         child: Scaffold(
-          appBar: AppBar(
-            title: TextFormField(
-              onChanged: (newPlace) {
-                if (newPlace == '') {
-                  setState(() {
-                    empty = true;
-                    users = [];
-                    itemRemaining = 1;
-                    page = 1;
-                  });
-                }
-              },
-              onFieldSubmitted: (newPlace) {
-                setState(() {
-                  controller.text = newPlace;
-                  empty = false;
-                });
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(70.0),
+            child: AppBar(
+              flexibleSpace: Column(
+                children: [
+                  Spacer(),
+                  Row(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (newPlace) {
+                            if (newPlace == '') {
+                              setState(() {
+                                empty = true;
+                                users = [];
+                                itemRemaining = 1;
+                                page = 1;
+                              });
+                            }
+                          },
+                          onFieldSubmitted: (newPlace) {
+                            setState(() {
+                              controller.text = newPlace;
+                              empty = false;
+                            });
 
-                onLoading();
-              },
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                fontFamily: 'NexaRegular',
-                color: const Color(0xff000000),
-              ),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(15.0),
-                filled: true,
-                fillColor: const Color(0xffffffff),
-                focusColor: const Color(0xffffffff),
-                hintText: 'Search User',
-                hintStyle: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                  fontFamily: 'NexaRegular',
-                  color: const Color(0xffB1B1B1),
-                ),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    print('Search!');
-                    setState(() {
-                      empty = false;
-                    });
+                            onLoading();
+                          },
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                            fontFamily: 'NexaRegular',
+                            color: const Color(0xff000000),
+                          ),
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15.0),
+                            filled: true,
+                            fillColor: const Color(0xffffffff),
+                            focusColor: const Color(0xffffffff),
+                            hintText: 'Search User',
+                            hintStyle: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                              fontFamily: 'NexaRegular',
+                              color: const Color(0xffB1B1B1),
+                            ),
+                            prefixIcon: IconButton(
+                              onPressed: () {
+                                print('Search!');
+                                setState(() {
+                                  empty = false;
+                                });
 
-                    onLoading();
-                  },
-                  icon:
-                      const Icon(Icons.search, color: const Color(0xff888888)),
-                ),
-                border: const OutlineInputBorder(
-                  borderSide: const BorderSide(color: const Color(0xffffffff)),
-                  borderRadius: const BorderRadius.all(Radius.circular(25)),
-                ),
-                enabledBorder: const OutlineInputBorder(
-                  borderSide: const BorderSide(color: const Color(0xffffffff)),
-                  borderRadius: const BorderRadius.all(Radius.circular(25)),
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: const BorderSide(color: const Color(0xffffffff)),
-                  borderRadius: const BorderRadius.all(Radius.circular(25)),
-                ),
+                                onLoading();
+                              },
+                              icon:
+                              const Icon(Icons.search, color: const Color(0xff888888)),
+                            ),
+                            border: const OutlineInputBorder(
+                              borderSide: const BorderSide(color: const Color(0xffffffff)),
+                              borderRadius: const BorderRadius.all(Radius.circular(25)),
+                            ),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: const BorderSide(color: const Color(0xffffffff)),
+                              borderRadius: const BorderRadius.all(Radius.circular(25)),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: const BorderSide(color: const Color(0xffffffff)),
+                              borderRadius: const BorderRadius.all(Radius.circular(25)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20,),
+                    ],
+                  ),
+                  SizedBox(height: 5,),
+                ],
               ),
+              leading: Container(),
+              backgroundColor: const Color(0xff04ECFF),
             ),
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: const Color(0xffffffff),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            backgroundColor: const Color(0xff04ECFF),
           ),
           body: empty == false
               ? RefreshIndicator(

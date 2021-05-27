@@ -115,132 +115,135 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
           }
         },
         child: Scaffold(
-          appBar: AppBar(
-            flexibleSpace: Column(
-              children: [
-                Spacer(),
-                Row(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: const Color(0xffffffff),
-                          size: SizeConfig.blockSizeVertical! * 3.52,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Spacer(),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      width: SizeConfig.blockSizeHorizontal! * 79.06,
-                      child: Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                keywords = controller.text;
-                              });
-
-                              if (controller.text != '') {
-                                onLoading();
-                              }
-                            },
-                            icon: const Icon(Icons.search,
-                                color: const Color(0xff888888)),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(70.0),
+            child: AppBar(
+              flexibleSpace: Column(
+                children: [
+                  Spacer(),
+                  Row(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: const Color(0xffffffff),
+                            size: SizeConfig.blockSizeVertical! * 3.52,
                           ),
-                          Expanded(
-                            child: TextFormField(
-                              keyboardType: TextInputType.text,
-                              controller: controller,
-                              onChanged: (newPlaces) {
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        width: SizeConfig.blockSizeHorizontal! * 79.06,
+                        child: Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
                                 setState(() {
-                                  keywords = newPlaces;
+                                  keywords = controller.text;
                                 });
 
-                                if (newPlaces != '') {
-                                  setState(() {
-                                    empty = false;
-                                    itemRemaining = 1;
-                                    page = 1;
-                                    keywords = '';
-                                  });
-                                } else {
-                                  empty = true;
-                                  setState(() {
-                                    users = [];
-                                  });
-                                }
-                              },
-                              onFieldSubmitted: (newPlaces) {
-                                setState(() {
-                                  keywords = newPlaces;
-                                });
-
-                                if (newPlaces != '') {
+                                if (controller.text != '') {
                                   onLoading();
                                 }
                               },
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xffB1B1B1),
-                              ),
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.all(15.0),
-                                filled: true,
-                                fillColor: const Color(0xffffffff),
-                                focusColor: const Color(0xffffffff),
-                                hintText: 'Search User',
-                                hintStyle: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 2.11,
+                              icon: const Icon(Icons.search,
+                                  color: const Color(0xff888888)),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                controller: controller,
+                                onChanged: (newPlaces) {
+                                  setState(() {
+                                    keywords = newPlaces;
+                                  });
+
+                                  if (newPlaces != '') {
+                                    setState(() {
+                                      empty = false;
+                                      itemRemaining = 1;
+                                      page = 1;
+                                      keywords = '';
+                                    });
+                                  } else {
+                                    empty = true;
+                                    setState(() {
+                                      users = [];
+                                    });
+                                  }
+                                },
+                                onFieldSubmitted: (newPlaces) {
+                                  setState(() {
+                                    keywords = newPlaces;
+                                  });
+
+                                  if (newPlaces != '') {
+                                    onLoading();
+                                  }
+                                },
+                                style: TextStyle(
+                                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                   fontFamily: 'NexaRegular',
                                   color: Color(0xffB1B1B1),
                                 ),
-                                border: const OutlineInputBorder(
-                                  borderSide:
-                                  const BorderSide(color: const Color(0xffffffff)),
-                                  borderRadius:
-                                  const BorderRadius.all(Radius.circular(25)),
-                                ),
-                                enabledBorder: const OutlineInputBorder(
-                                  borderSide:
-                                  const BorderSide(color: const Color(0xffffffff)),
-                                  borderRadius:
-                                  const BorderRadius.all(Radius.circular(25)),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide:
-                                  const BorderSide(color: const Color(0xffffffff)),
-                                  borderRadius:
-                                  const BorderRadius.all(Radius.circular(25)),
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.all(15.0),
+                                  filled: true,
+                                  fillColor: const Color(0xffffffff),
+                                  focusColor: const Color(0xffffffff),
+                                  hintText: 'Search User',
+                                  hintStyle: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! * 2.11,
+                                    fontFamily: 'NexaRegular',
+                                    color: Color(0xffB1B1B1),
+                                  ),
+                                  border: const OutlineInputBorder(
+                                    borderSide:
+                                    const BorderSide(color: const Color(0xffffffff)),
+                                    borderRadius:
+                                    const BorderRadius.all(Radius.circular(25)),
+                                  ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderSide:
+                                    const BorderSide(color: const Color(0xffffffff)),
+                                    borderRadius:
+                                    const BorderRadius.all(Radius.circular(25)),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide:
+                                    const BorderSide(color: const Color(0xffffffff)),
+                                    borderRadius:
+                                    const BorderRadius.all(Radius.circular(25)),
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
+                      const SizedBox(
+                        width: 20,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                ],
+              ),
+              leading: Container(),
+              backgroundColor: const Color(0xff04ECFF),
             ),
-            leading: Container(),
-            backgroundColor: const Color(0xff04ECFF),
           ),
           body: Container(
             height: SizeConfig.screenHeight! - kToolbarHeight,

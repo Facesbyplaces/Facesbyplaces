@@ -96,6 +96,11 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
       maxLines: widget.maxLines,
       keyboardType: widget.type,
       readOnly: widget.readOnly,
+      style: TextStyle(
+        fontSize: SizeConfig.blockSizeVertical! * 2.64,
+        fontFamily: 'NexaRegular',
+        color: const Color(0xff2F353D),
+      ),
       decoration: InputDecoration(
         fillColor: widget.backgroundColor,
         filled: true,

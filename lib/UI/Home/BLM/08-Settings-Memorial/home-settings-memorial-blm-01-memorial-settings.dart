@@ -354,16 +354,22 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings> {
                             'assets/icons/cover-icon.png',
                             fit: BoxFit.cover,
                           ),
-                          title: const Text(
+                          title: Text(
                             'Error',
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontSize: 22.0, fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                fontSize:
+                                SizeConfig.blockSizeVertical! * 3.16,
+                                fontFamily: 'NexaRegular'),
                           ),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text(
+                          description: Text(
                             'Something went wrong. Please try again.',
                             textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize:
+                                SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular'),
                           ),
                           onlyOkButton: true,
                           buttonOkColor: const Color(0xffff0000),
