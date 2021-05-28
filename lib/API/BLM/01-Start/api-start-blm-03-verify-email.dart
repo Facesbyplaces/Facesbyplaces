@@ -5,6 +5,9 @@ Future<String> apiBLMVerifyEmail({required String verificationCode}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   int prefsUserID = sharedPrefs.getInt('blm-user-id')!;
+  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   Dio dioRequest = Dio();
 
@@ -16,6 +19,9 @@ Future<String> apiBLMVerifyEmail({required String verificationCode}) async{
       },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
       }
     ),  
   );

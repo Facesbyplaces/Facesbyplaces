@@ -34,29 +34,7 @@ class MiscBLMPost extends StatefulWidget {
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
-  const MiscBLMPost(
-      {required Key key,
-      required this.contents,
-      required this.userId,
-      required this.postId,
-      required this.memorialId,
-      required this.profileImage,
-      this.memorialName = '',
-      this.timeCreated = '',
-      required this.managed,
-      required this.joined,
-      required this.numberOfComments,
-      required this.numberOfLikes,
-      required this.likeStatus,
-      required this.numberOfTagged,
-      required this.taggedFirstName,
-      required this.taggedLastName,
-      required this.taggedId,
-      required this.pageType,
-      required this.famOrFriends,
-      required this.relationship})
-      : super(key: key);
+  const MiscBLMPost({required Key key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship}) : super(key: key);
 
   MiscBLMPostState createState() => MiscBLMPostState();
 }
@@ -78,11 +56,7 @@ class MiscBLMPostState extends State<MiscBLMPost> {
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async {
-        final returnValue = await Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    HomeBLMShowOriginalPostComments(postId: widget.postId)));
+        final returnValue = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: widget.postId)));
         print('The return value is $returnValue');
         commentsCount = int.parse(returnValue.toString());
         setState(() {
@@ -90,21 +64,17 @@ class MiscBLMPostState extends State<MiscBLMPost> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.only(
-          left: 10.0,
-          right: 10.0,
-        ),
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
         decoration: BoxDecoration(
           color: const Color(0xffffffff),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(15),
-          ),
+          borderRadius: const BorderRadius.all(Radius.circular(15),),
           boxShadow: <BoxShadow>[
             BoxShadow(
-                color: const Color(0xff888888).withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 5,
-                offset: const Offset(0, 0)),
+              color: const Color(0xff888888).withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 0),
+            ),
           ],
         ),
         child: Column(

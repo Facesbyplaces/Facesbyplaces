@@ -20,6 +20,11 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
+  print('The post id is $postId');
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
+
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/$postId',
@@ -66,8 +71,9 @@ class APIRegularShowOriginalPostMainExtended{
   String showOriginalPostCreatedAt;
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
+  bool showOriginalPostLikeStatus;
 
-  APIRegularShowOriginalPostMainExtended({required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments});
+  APIRegularShowOriginalPostMainExtended({required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
 
   factory APIRegularShowOriginalPostMainExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -89,6 +95,7 @@ class APIRegularShowOriginalPostMainExtended{
       showOriginalPostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
       showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
+      showOriginalPostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }

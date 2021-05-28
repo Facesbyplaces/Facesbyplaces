@@ -157,10 +157,12 @@ class HomeRegularCreateMemorial2State
                                 onTap: (int number) {
                                   toggle.value = number;
                                 },
+                                indicator: BoxDecoration(
+                                  border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),
+                                ),
                                 tabs: [
                                   Center(
-                                    child: Text(
-                                      'Text',
+                                    child: Text('Text',
                                       style: TextStyle(
                                         fontSize:
                                             SizeConfig.blockSizeVertical! * 2.0,
@@ -168,6 +170,7 @@ class HomeRegularCreateMemorial2State
                                       ),
                                     ),
                                   ),
+
                                   Center(
                                     child: Text(
                                       'Video',
@@ -453,16 +456,17 @@ class HomeRegularCreateMemorial2State
                   ],
                 )
               : Container(
-                  height: 260,
-                  width: SizeConfig.screenWidth,
-                  decoration: BoxDecoration(
-                    color: const Color(0xffcccccc),
-                    border: Border.all(
-                      color: const Color(0xff000000),
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                height: 260,
+                width: SizeConfig.screenWidth,
+                decoration: BoxDecoration(
+                  color: const Color(0xffcccccc),
+                  border: Border.all(
+                    color: const Color(0xff000000),
                   ),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
+                child: Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
+              ),
         ),
       ),
     );

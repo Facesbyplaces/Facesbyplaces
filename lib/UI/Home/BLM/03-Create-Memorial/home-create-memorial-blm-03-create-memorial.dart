@@ -222,6 +222,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                     final file = await new File('${tempDir.path}/blm-background-image-$index.png').create();
                                     file.writeAsBytesSync(list);
 
+                                    backgroundImageToggle.value = index;
                                     backgroundImage.value = file;
                                   },
                                   child: backgroundImageToggleListener == index
@@ -342,6 +343,44 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
 
                             if (confirmation == true) {
                               permissionGranted = await location.requestPermission();
+
+                              if (profileImage.value.path == '') {
+                                final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
+                                final Uint8List list = bytes.buffer.asUint8List();
+
+                                final tempDir = await getTemporaryDirectory();
+                                final file = await new File('${tempDir.path}/blm-profile-image.png').create();
+                                file.writeAsBytesSync(list);
+
+                                profileImage.value = file;
+                              }
+
+                              Location.LocationData locationData = await location.getLocation();
+
+                              APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
+                                blmMemorialName: widget.memorialName,
+                                blmDescription: widget.description,
+                                blmLocationOfIncident: widget.locationOfIncident,
+                                blmDob: widget.dob,
+                                blmRip: widget.rip,
+                                blmState: widget.state,
+                                blmCountry: widget.country,
+                                blmPrecinct: widget.precinct,
+                                blmRelationship: widget.relationship,
+                                blmBackgroundImage: backgroundImage.value,
+                                blmProfileImage: profileImage.value,
+                                blmImagesOrVideos: widget.imagesOrVideos,
+                                blmLatitude: '${locationData.latitude}',
+                                blmLongitude: '${locationData.longitude}',
+                              );
+
+                              context.loaderOverlay.show();
+                              int result = await apiBLMCreateMemorial(blmMemorial: memorial);
+                              print('The result is $result');
+                              context.loaderOverlay.hide();
+
+                              Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
+                              Navigator.pushReplacement(context, newRoute);
                             }
                           } else {
                             if (profileImage.value.path == '') {

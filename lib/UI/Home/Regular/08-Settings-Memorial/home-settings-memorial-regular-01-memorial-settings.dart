@@ -341,8 +341,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
         valueListenable: isSwitched2,
         builder: (_, bool isSwitched2Listener, __) => ValueListenableBuilder(
           valueListenable: isSwitched3,
-          builder: (_, bool isSwitched3Listener, __) => ListView(
-            physics: const ClampingScrollPhysics(),
+          builder: (_, bool isSwitched3Listener, __) => Column(
             children: [
               ListTile(
                 tileColor: const Color(0xffffffff),
@@ -483,6 +482,8 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
               Container(height: 5, color: const Color(0xffeeeeee),),
 
               const SizedBox(height: 80),
+
+              Expanded(child: Container()),
 
               Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 

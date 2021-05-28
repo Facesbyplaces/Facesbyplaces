@@ -4,6 +4,9 @@ import 'package:dio/dio.dart';
 Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
   final sharedPrefs = await SharedPreferences.getInstance();
   int prefsUserID = sharedPrefs.getInt('regular-user-id')!;
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   print('The user id is $prefsUserID');
   print('The verification code is $verificationCode');
@@ -18,11 +21,15 @@ Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
       },
       headers: <String, dynamic>{
         'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
       }
     ),  
   );
 
   print('The status code of regular verify email is ${response.statusCode}');
+  print('The status data of regular verify email is ${response.data}');
 
   if(response.statusCode == 200){
     sharedPrefs.setBool('regular-user-session', true);

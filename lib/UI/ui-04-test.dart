@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:http_auth/http_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 class LoginPaypalTest extends StatelessWidget {
 
@@ -27,12 +26,12 @@ class LoginPaypalTest extends StatelessWidget {
             
             Container(
               height: 240,
-              color: Colors.blue
-              // decoration: BoxDecoration(
-              //   image: DecorationImage(
-              //     image: AssetImage('assets/icons/paypal.png'),
-              //   ),
-              // ),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/icons/paypal.png'),
+                ),
+              ),
+              // child: FaIcon(FontAwesomeIcons.paypal,),
             ),
 
             Text('Log in with Paypal', style: TextStyle(fontSize: 16, color: Color(0xff000000)),),
@@ -131,20 +130,41 @@ class LoginPaypalTest extends StatelessWidget {
                 }
 
               },
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold, 
-                  color: Color(0xffffffff),
-                ), 
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      // color: Colors.blue,
+                      image: DecorationImage(
+                        image: AssetImage('assets/icons/paypal.png',),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    // child: FaIcon(FontAwesomeIcons.paypal,),
+                  ),
+
+                  SizedBox(width: 9,),
+
+                  Text(
+                    'Log in with Paypal',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold, 
+                      color: Color(0xff000000),
+                    ), 
+                  ),
+                ],
               ),
               minWidth: SizeConfig.screenWidth,
-              height: 70,
+              height: 48,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)
               ),
-              color: Color(0xff0070BA),
+              color: Color(0xffdddddd),
             ),
 
             SizedBox(height: 20),

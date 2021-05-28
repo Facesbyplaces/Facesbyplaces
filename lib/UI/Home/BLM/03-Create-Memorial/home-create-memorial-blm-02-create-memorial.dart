@@ -126,6 +126,9 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                                 onTap: (int number) {
                                   toggle.value = number;
                                 },
+                                indicator: BoxDecoration(
+                                  border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),
+                                ),
                                 tabs: [
                                   Center(
                                     child: Text('Text',
@@ -387,6 +390,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
               ),
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
+            child: Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
           ),
         ),
       ),

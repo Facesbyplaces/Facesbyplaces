@@ -123,8 +123,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
     if(isGuestLoggedIn.value != true){
       showOriginalPost = getOriginalPost(widget.postId);
-      getProfilePicture();
       getOriginalPostInformation();
+      getProfilePicture();
       onLoading();
       scrollController.addListener(() {
         if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
@@ -152,6 +152,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     var originalPostInformation = await apiBLMShowOriginalPost(postId: widget.postId);
     numberOfLikes = originalPostInformation.blmPost.showOriginalPostNumberOfLikes;
     numberOfComments = originalPostInformation.blmPost.showOriginalPostNumberOfComments;
+    likePost = originalPostInformation.blmPost.showOriginalPostLikeStatus;
   }
 
   void getProfilePicture() async {
@@ -964,7 +965,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff000000),),
+                                                      likePost == true
+                                                      ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),)
+                                                      : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff000000),),
 
                                                       const SizedBox(width: 10,),
                                                       

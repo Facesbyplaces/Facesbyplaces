@@ -123,8 +123,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     
     if(isGuestLoggedIn.value != true){
       showOriginalPost = getOriginalPost(widget.postId);
-      getProfilePicture();
       getOriginalPostInformation();
+      getProfilePicture();
       onLoading();
       scrollController.addListener(() {
         if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
@@ -152,6 +152,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     var originalPostInformation = await apiRegularShowOriginalPost(postId: widget.postId);
     numberOfLikes = originalPostInformation.almPost.showOriginalPostNumberOfLikes;
     numberOfComments = originalPostInformation.almPost.showOriginalPostNumberOfComments;
+    likePost = originalPostInformation.almPost.showOriginalPostLikeStatus;
   }
 
   void getProfilePicture() async {
@@ -949,7 +950,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff000000),),
+                                                      likePost == true
+                                                      ? const FaIcon(FontAwesomeIcons.heart, color: const Color(0xffE74C3C),)
+                                                      : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff000000),),
 
                                                       const SizedBox(width: 10,),
 

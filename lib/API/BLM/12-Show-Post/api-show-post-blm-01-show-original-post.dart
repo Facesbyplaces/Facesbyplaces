@@ -75,8 +75,9 @@ class APIBLMShowOriginalPostExtended{
   String showOriginalPostCreatedAt;
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
+  bool showOriginalPostLikeStatus;
 
-  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments,});
+  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
 
   factory APIBLMShowOriginalPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -99,6 +100,7 @@ class APIBLMShowOriginalPostExtended{
       showOriginalPostCreatedAt: parsedJson['created_at'],
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
       showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
+      showOriginalPostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }

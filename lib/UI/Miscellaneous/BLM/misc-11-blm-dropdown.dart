@@ -12,7 +12,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share/share.dart';
-import 'misc-06-blm-button.dart';
 import 'dart:typed_data';
 import 'dart:io';
 import 'dart:ui';
@@ -23,14 +22,7 @@ class MiscBLMDropDownTemplate extends StatefulWidget {
   final int likesCount;
   final String reportType;
   final String pageType;
-
-  const MiscBLMDropDownTemplate(
-      {required this.postId,
-      required this.likePost,
-      required this.likesCount,
-      required this.reportType,
-      required this.pageType});
-
+  const MiscBLMDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
   MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState();
 }
 
@@ -41,23 +33,22 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
 
   void initBranchShare() {
     buo = BranchUniversalObject(
-        canonicalIdentifier: 'FacesbyPlaces',
-        title: 'FacesbyPlaces Link',
-        contentDescription: 'FacesbyPlaces link to the app',
-        keywords: ['FacesbyPlaces', 'Share', 'Link'],
-        publiclyIndex: true,
-        locallyIndex: true,
-        contentMetadata: BranchContentMetaData()
-          ..addCustomMetadata('link-category', 'Post')
-          ..addCustomMetadata('link-post-id', widget.postId)
-          ..addCustomMetadata('link-like-status', widget.likePost)
-          ..addCustomMetadata('link-number-of-likes', widget.likesCount)
-          ..addCustomMetadata('link-type-of-account', 'Blm'));
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Post')
+        ..addCustomMetadata('link-post-id', widget.postId)
+        ..addCustomMetadata('link-like-status', widget.likePost)
+        ..addCustomMetadata('link-number-of-likes', widget.likesCount)
+        ..addCustomMetadata('link-type-of-account', 'Blm'),
+      );
 
-    lp = BranchLinkProperties(
-        feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
-    lp!.addControlParam(
-        'url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   Future<void> shareQRCode(String qrData) async {

@@ -1,7 +1,24 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+
+// class MyChromeSafariBrowser extends ChromeSafariBrowser {
+//   @override
+//   void onOpened() {
+//     print("ChromeSafari browser opened");
+//   }
+
+//   @override
+//   void onCompletedInitialLoad() {
+//     print("ChromeSafari browser initial load completed");
+//   }
+
+//   @override
+//   void onClosed() {
+//     print("ChromeSafari browser closed");
+//   }
+// }
 
 class InAppPayPal extends StatefulWidget {
   InAppPayPalState createState() => InAppPayPalState();
@@ -10,6 +27,9 @@ class InAppPayPal extends StatefulWidget {
 class InAppPayPalState extends State<InAppPayPal> {
   String url = "";
   double progress = 0;
+
+  // final ChromeSafariBrowser browser = MyChromeSafariBrowser();
+  String link = 'https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F';
 
   @override
   Widget build(BuildContext context) {
@@ -54,38 +74,81 @@ class InAppPayPalState extends State<InAppPayPal> {
               },
             ),
           ),
-          body: WebView(
-            // initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.sandbox.paypal.com/myaccount/summary/',
-            initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.sandbox.paypal.com/myaccount/summary/',
-            onPageFinished: (value){
-              print('onPageFinished: $value');
-            },
-            onPageStarted: (value){
-              print('onPageStarted: $value');
-            },
-            onProgress: (value){
-              print('onProgress: $value');
-            },
-            onWebResourceError: (value){
-              print('onWebResourceError: $value');
-              print('onWebResourceError: ${value.description}');
-              print('onWebResourceError: ${value.domain}');
-              print('onWebResourceError: ${value.errorCode}');
-              print('onWebResourceError: ${value.errorType}');
-              print('onWebResourceError: ${value.failingUrl}');
-            },
-            onWebViewCreated: (value) async{
-              print('onWebViewCreated: $value');
-              String currentUrl = (await value.currentUrl())!;
-              print('onWebViewCreated currentUrl: $currentUrl');
-              String title = (await value.getTitle())!;
-              print('onWebViewCreated title: $title');
-            },
+
+
+          body: Center(
+            child: MaterialButton(
+              minWidth: 50,
+              height: 30,
+              color: Colors.red,
+              onPressed: () async{
+                await canLaunch(link) 
+                ? await launch(link) 
+                : throw 'Could not launch $link';
+              },
+            ),
           ),
+
+
+
+          // body: WebView(
+          //   // initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.sandbox.paypal.com/myaccount/summary/',
+          //   // initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F',
+          //   // initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F',
+          //   initialUrl: 'https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F',
+          //   // initialUrl: 'https://www.sandbox.paypal.com/signin/?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F',
+          //   onPageFinished: (value){
+          //     print('onPageFinished: $value');
+          //   },
+          //   onPageStarted: (value){
+          //     print('onPageStarted: $value');
+          //   },
+          //   onProgress: (value){
+          //     print('onProgress: $value');
+          //   },
+          //   onWebResourceError: (value){
+          //     print('onWebResourceError: $value');
+          //     print('onWebResourceError: ${value.description}');
+          //     print('onWebResourceError: ${value.domain}');
+          //     print('onWebResourceError: ${value.errorCode}');
+          //     print('onWebResourceError: ${value.errorType}');
+          //     print('onWebResourceError: ${value.failingUrl}');
+          //   },
+          //   onWebViewCreated: (value) async{
+          //     print('onWebViewCreated: $value');
+          //     String currentUrl = (await value.currentUrl())!;
+          //     print('onWebViewCreated currentUrl: $currentUrl');
+          //     String title = (await value.getTitle())!;
+          //     print('onWebViewCreated title: $title');
+          //   },
+          // ),
+
+
+          // body: Center(
+          //   child: MaterialButton(
+          //     minWidth: 50,
+          //     height: 30,
+          //     color: Colors.red,
+          //     onPressed: () async{
+          //       await browser.open(
+          //       url: Uri.parse('https://www.sandbox.paypal.com/connect/?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F'),
+          //       options: ChromeSafariBrowserClassOptions(
+          //       android: AndroidChromeCustomTabsOptions(
+          //         addDefaultShareMenuItem: false,
+          //         keepAliveEnabled: true,
+          //       ),
+          //       ios: IOSSafariOptions(
+          //       dismissButtonStyle: IOSSafariDismissButtonStyle.CLOSE,
+          //       presentationStyle: IOSUIModalPresentationStyle.OVER_FULL_SCREEN)));
+
+          //     },
+          //   ),
+          // ),
+
           // body: InAppWebView(
           //   initialUrlRequest: URLRequest(
           //     // url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.sandbox.paypal.com/myaccount/summary/'),
-          //     url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com'),
+          //     url: Uri.parse('https://www.sandbox.paypal.com/signin/?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F'),
           //   ),
           //   onFindResultReceived: (InAppWebViewController app, int number1, int number2, bool val){
           //     print('The app is ${app.android}');
@@ -103,6 +166,9 @@ class InAppPayPalState extends State<InAppPayPal> {
           //     print('inAppWebViewController is ${inAppWebViewController.ios}');
           //     print('inAppWebViewController is ${inAppWebViewController.javaScriptHandlersMap}');
           //     print('inAppWebViewController is ${inAppWebViewController.webStorage}');
+
+          //     print('uRLAuthenticationChallenge is ${uRLAuthenticationChallenge.protectionSpace.host}');
+          //     print('uRLAuthenticationChallenge is ${uRLAuthenticationChallenge.protectionSpace.port}');
           //     return http;
           //     // {Future<HttpAuthResponse?> Function(InAppWebViewController, URLAuthenticationChallenge)? onReceivedHttpAuthRequest}
           //   },

@@ -229,6 +229,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
                                     final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
                                     file.writeAsBytesSync(list);
 
+                                    backgroundImageToggle.value = index;
                                     backgroundImage.value = file;
                                   },
                                   child: backgroundImageToggleListener == index
@@ -341,6 +342,45 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
 
                             if (confirmation == true) {
                               permissionGranted = await location.requestPermission();
+
+                              if (profileImage.value.path == '') {
+                                final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
+                                final Uint8List list = bytes.buffer.asUint8List();
+
+                                final tempDir = await getTemporaryDirectory();
+                                final file = await new File('${tempDir.path}/regular-profile-image.png').create();
+                                file.writeAsBytesSync(list);
+
+                                // setState(() {
+                                //   profileImage.value = file;
+                                // });
+                                profileImage.value = file;
+                              }
+
+                              Location.LocationData locationData = await location.getLocation();
+
+                              APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
+                                almRelationship: widget.relationship,
+                                almBirthPlace: widget.birthplace,
+                                almDob: widget.dob,
+                                almRip: widget.rip,
+                                almCemetery: widget.cemetery,
+                                almCountry: widget.country,
+                                almMemorialName: widget.memorialName,
+                                almDescription: widget.description,
+                                almBackgroundImage: backgroundImage.value,
+                                almProfileImage: profileImage.value,
+                                almImagesOrVideos: widget.imagesOrVideos,
+                                almLatitude: '${locationData.latitude}',
+                                almLongitude: '${locationData.longitude}',
+                              );
+
+                              context.loaderOverlay.show();
+                              int result = await apiRegularCreateMemorial(memorial: memorial);
+                              context.loaderOverlay.hide();
+
+                              Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
+                              Navigator.pushReplacement(context, newRoute);
                             }
                           } else {
                             if (profileImage.value.path == '') {
