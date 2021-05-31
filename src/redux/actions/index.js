@@ -186,3 +186,10 @@ export const NavbarReportTabAction = (tab) => {
     data: tab,
   };
 };
+
+export const NavbarTransactionTabAction = (tab) => {
+  return {
+    type: "TRANSACTION_TAB",
+    data: tab,
+  };
+};

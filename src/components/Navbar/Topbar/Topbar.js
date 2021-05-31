@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
-import { LogoutAction } from "../../../redux/actions/";
+import { LogoutAction, NavbarUserTabAction } from "../../../redux/actions/";
 
 export default function Topbar() {
   const { user } = useSelector(({ auth_data }) => ({
@@ -18,7 +18,9 @@ export default function Topbar() {
   };
 
   const onLogOutClicked = () => {
+    const tab = "users";
     dispatch(LogoutAction({}));
+    dispatch(NavbarUserTabAction({ tab }));
   };
 
   // console.log("Top Bar User", user);
@@ -132,7 +134,6 @@ export default function Topbar() {
                   </span>
                 </a>
                 <a
-                  href="#"
                   className="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5"
                   onClick={onLogOutClicked}
                 >

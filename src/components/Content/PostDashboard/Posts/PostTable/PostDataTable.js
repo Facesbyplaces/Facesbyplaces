@@ -13,7 +13,6 @@ export default function PostDataTable({
   pageType,
 }) {
   const [page, setPage] = useState(1);
-  const [clicked, setClicked] = useState(false);
   const [loader, setLoader] = useState(false);
   const [posts, setPosts] = useState([]);
   const [memorialPosts, setMemorialPosts] = useState([]);

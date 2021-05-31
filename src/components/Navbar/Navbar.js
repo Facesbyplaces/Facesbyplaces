@@ -5,6 +5,7 @@ import {
   NavbarMemorialTabAction,
   NavbarPostTabAction,
   NavbarReportTabAction,
+  NavbarTransactionTabAction,
 } from "../../redux/actions";
 
 export default function Navbar() {
@@ -12,24 +13,38 @@ export default function Navbar() {
   const { navbarTab } = useSelector(({ navbarTab }) => ({
     navbarTab: navbarTab,
   }));
+  const { auth_data } = useSelector(({ auth_data }) => ({
+    auth_data: auth_data,
+  }));
 
-  const handleClick = (tab) => {
-    switch (tab) {
-      case "users":
-        console.log("TAB ", tab);
-        dispatch(NavbarUserTabAction({ tab }));
-      case "memorials":
-        dispatch(NavbarMemorialTabAction({ tab }));
-      case "posts":
-        dispatch(NavbarPostTabAction({ tab }));
-      case "reports":
-        dispatch(NavbarReportTabAction({ tab }));
-    }
+  const handleUserTabClicked = (tab) => {
+    console.log("TAB ", tab);
+    dispatch(NavbarUserTabAction({ tab }));
   };
 
-  // useEffect(() => {
-  //   console.log("Navbar Tab: ", navbarTab);
-  // }, []);
+  const handleMemorialTabClicked = (tab) => {
+    console.log("TAB ", tab);
+    dispatch(NavbarMemorialTabAction({ tab }));
+  };
+
+  const handlePostTabClicked = (tab) => {
+    console.log("TAB ", tab);
+    dispatch(NavbarPostTabAction({ tab }));
+  };
+
+  const handleReportTabClicked = (tab) => {
+    console.log("TAB ", tab);
+    dispatch(NavbarReportTabAction({ tab }));
+  };
+
+  const handleTransactionTabClicked = (tab) => {
+    console.log("TAB ", tab);
+    dispatch(NavbarTransactionTabAction({ tab }));
+  };
+
+  useEffect(() => {
+    console.log("auth_data: ", auth_data);
+  }, []);
 
   return (
     <div id="kt_header" className="header">
@@ -47,50 +62,95 @@ export default function Navbar() {
           >
             {/*begin::Header Nav*/}
             <ul className="menu-nav">
-              <li className="menu-item menu-item-submenu" aria-haspopup="true">
-                <a
-                  href="/users"
-                  className="menu-link"
-                  onClick={() => handleClick("users")}
-                >
+              <li
+                className={
+                  navbarTab.tab == "users"
+                    ? "menu-item menu-item-active"
+                    : "menu-item menu-item-submenu"
+                }
+                aria-haspopup="true"
+              >
+                <a href="/users" className="menu-link">
                   <span
                     className="menu-text"
-                    onClick={() => handleClick("users")}
+                    onClick={() => handleUserTabClicked("users")}
                   >
                     Users
                   </span>
                 </a>
               </li>
               <li
-                className="menu-item menu-item-submenu menu-item-rel"
+                className={
+                  navbarTab.tab == "memorials"
+                    ? "menu-item menu-item-active"
+                    : "menu-item menu-item-submenu"
+                }
                 data-menu-toggle="click"
                 aria-haspopup="true"
               >
                 <a href="/memorials" className="menu-link menu-toggle">
-                  <span className="menu-text">Memorials</span>
+                  <span
+                    className="menu-text"
+                    onClick={() => handleMemorialTabClicked("memorials")}
+                  >
+                    Memorials
+                  </span>
                   <span className="menu-desc" />
                   <i className="menu-arrow" />
                 </a>
               </li>
               <li
-                className="menu-item menu-item-submenu menu-item-rel"
+                className={
+                  navbarTab.tab == "posts"
+                    ? "menu-item menu-item-active"
+                    : "menu-item menu-item-submenu"
+                }
                 data-menu-toggle="click"
                 aria-haspopup="true"
               >
                 <a href="/posts" className="menu-link menu-toggle">
-                  <span className="menu-text">Posts</span>
+                  <span
+                    className="menu-text"
+                    onClick={() => handlePostTabClicked("posts")}
+                  >
+                    Posts
+                  </span>
                   <span className="menu-desc" />
                   <i className="menu-arrow" />
                 </a>
               </li>
-              <li className="menu-item menu-item-submenu" aria-haspopup="true">
+              <li
+                className={
+                  navbarTab.tab == "reports"
+                    ? "menu-item menu-item-active"
+                    : "menu-item menu-item-submenu"
+                }
+                aria-haspopup="true"
+              >
                 <a href="/reports" className="menu-link">
-                  <span className="menu-text">Reports</span>
+                  <span
+                    className="menu-text"
+                    onClick={() => handleReportTabClicked("reports")}
+                  >
+                    Reports
+                  </span>
                 </a>
               </li>
-              <li className="menu-item menu-item-active" aria-haspopup="true">
+              <li
+                className={
+                  navbarTab.tab == "transactions"
+                    ? "menu-item menu-item-active"
+                    : "menu-item menu-item-submenu"
+                }
+                aria-haspopup="true"
+              >
                 <a href="/transactions" className="menu-link">
-                  <span className="menu-text">Transactions</span>
+                  <span
+                    className="menu-text"
+                    onClick={() => handleTransactionTabClicked("transactions")}
+                  >
+                    Transactions
+                  </span>
                 </a>
               </li>
             </ul>

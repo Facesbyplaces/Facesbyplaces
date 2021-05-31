@@ -37,6 +37,9 @@ export default function Body({ pageType, setPageType }) {
                   </span>
                 </div>
               </div>
+              <span className="d-block text-muted pt-2 pl-6 font-size-sm">
+                Pick a memorial type first before searching
+              </span>
             </div>
           </div>
           <div className="col-sm-1 mt-5 mt-lg-0">

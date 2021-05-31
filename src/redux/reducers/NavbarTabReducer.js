@@ -28,7 +28,12 @@ export const NavbarTabReducer = persistReducer(
       case "REPORT_TAB":
         localStorage.setItem("tab", action.data.tab);
 
-        return initialAuthState;
+        return action.data;
+
+      case "TRANSACTION_TAB":
+        localStorage.setItem("tab", action.data.tab);
+
+        return action.data;
 
       default:
         return state;
