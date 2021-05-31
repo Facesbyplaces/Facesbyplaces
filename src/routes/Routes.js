@@ -17,7 +17,7 @@ import MemorialDashboard from "../components/Content/MemorialDashboard/MemorialD
 import PostDashboard from "../components/Content/PostDashboard/PostDashboard";
 import ReportDashboard from "../components/Content/ReportDashboard/ReportDashboard";
 import TransactionDashboard from "../components/Content/TransactionDashboard/TransactionDashboard";
-// import Oops from "../components/Oops";
+import Oops from "../components/Oops";
 
 export const Routes = withRouter(({ history }) => {
   const dispatch = useDispatch();
@@ -70,13 +70,12 @@ export const Routes = withRouter(({ history }) => {
             <Route path="/posts" component={PostDashboard} />
             <Route path="/reports" component={ReportDashboard} />
             <Route path="/transactions" component={TransactionDashboard} />
-            {/* <Redirect to="/404" /> */}
-            {/* <Route path="/404" component={Oops} /> */}
-            {/* <Route render={() => <Redirect to={{ pathname: "/users" }} />} /> */}
+            <Route path="*" component={UserDashboard} />
           </>
         ) : (
           <Redirect to="/admin" />
         )}
+        {/* <Route render={() => <Redirect to={{ pathname: "/users" }} />} /> */}
       </Switch>
     </>
   );
