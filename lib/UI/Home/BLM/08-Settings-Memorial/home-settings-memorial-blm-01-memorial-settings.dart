@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-15-update-switch-status-friends.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-16-update-switch-status-followers.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-02-page-details.dart';
@@ -306,7 +307,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings> {
         ListTile(
           tileColor: const Color(0xffffffff),
           onTap: () {
-            Navigator.pushNamed(context, '/home/blm/donation-paypal');
+            // Navigator.pushNamed(context, '/home/blm/donation-paypal');
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPaypal(pageId: memorialId)));
           },
           title: Text(
             'Paypal',

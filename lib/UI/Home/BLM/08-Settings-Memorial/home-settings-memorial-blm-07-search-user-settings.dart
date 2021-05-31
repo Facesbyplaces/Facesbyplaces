@@ -438,20 +438,14 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                                   }
                                 },
                                 leading: users[index].image != ''
-                                    ? CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xff888888),
-                                        foregroundImage: NetworkImage(
-                                            '${users[index].image}'),
-                                        backgroundImage: const AssetImage(
-                                            'assets/icons/app-icon.png'),
-                                      )
-                                    : const CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xff888888),
-                                        foregroundImage: const AssetImage(
-                                            'assets/icons/app-icon.png'),
-                                      ),
+                                ? CircleAvatar(
+                                  backgroundColor: const Color(0xff888888),
+                                  foregroundImage: NetworkImage('${users[index].image}'),
+                                )
+                                : const CircleAvatar(
+                                  backgroundColor: const Color(0xff888888),
+                                  foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                ),
                                 title: Text(
                                     '${users[index].firstName} ${users[index].lastName}'),
                                 subtitle: Text(

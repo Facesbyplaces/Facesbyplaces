@@ -2,13 +2,11 @@ import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart';
-import 'UI/Home/Regular/05-Donate/home-donate-regular-02-paypal-screen.dart';
 import 'UI/Home/Regular/07-Search/home-search-regular-01-search.dart';
 import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart';
-import 'UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +14,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
@@ -27,8 +26,8 @@ import 'UI/BLM/blm-03-register.dart';
 import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
-import 'package:flutter/rendering.dart';
 import 'UI/ui-03-newly-installed.dart';
+import 'dart:async';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -111,14 +110,12 @@ void main() async{
             '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
             '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
             '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
-            '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
-            '/home/blm/donation-paypal': (BuildContext context) => HomeBLMPaypal(), // BLM HOME SCREEN
+            '/home/blm/search': (BuildContext context) => HomeBLMSearch(), // BLM HOME SCREEN
 
             '/home/regular': (BuildContext context) => HomeRegularScreen(),
             '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
             '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
             '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
-            '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
             '/home/regular/search': (BuildContext context) => HomeRegularSearch(), // ALM HOME SCREEN
 
           },
@@ -126,4 +123,25 @@ void main() async{
       ),
     ),
   );
+
+  // Future<void> initUniLinks() async {
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     final initialLink = await getInitialLink();
+  //     print('The initialLink is $initialLink');
+
+  //   // _sub = getUriLinksStream().listen((Uri uri) async {
+  //   //     //Do something with uri
+  //   // });
+  //     linkStream.listen((event) {
+  //       print('The newLink is $event');
+  //     });
+  //     // Parse the link and warn the user, if it is not correct,
+  //     // but keep in mind it could be `null`.
+  //   } on PlatformException {
+  //     print('Something went wrong. Please try again.');
+  //     // Handle exception by warning the user their action did not succeed
+  //     // return?
+  //   }
+  // }
 }

@@ -370,11 +370,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     ? CircleAvatar(
                                                       backgroundColor: const Color(0xff888888),
                                                       foregroundImage: NetworkImage(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage),
-                                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                                     )
                                                     : const CircleAvatar(
                                                       backgroundColor: const Color(0xff888888),
-                                                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                                     ),
                                                   ),
                                                   Expanded(
@@ -1083,10 +1082,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     }
                                                   },
                                                   visualDensity: const VisualDensity(vertical: 4.0),
-                                                  leading: CircleAvatar(
+                                                  leading: commentsListener[i].image != ''
+                                                  ? CircleAvatar(
                                                     backgroundColor: const Color(0xff888888),
                                                     foregroundImage: NetworkImage(commentsListener[i].image),
-                                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                  )
+                                                  : const CircleAvatar(
+                                                    backgroundColor: const Color(0xff888888),
+                                                    foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                                   ),
                                                   title: Row(
                                                     children: [
@@ -1291,10 +1294,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 );
                                                               }
                                                             },
-                                                            leading: CircleAvatar(
+                                                            leading: commentsListener[i].listOfReplies[index].image != ''
+                                                            ? CircleAvatar(
                                                               backgroundColor: const Color(0xff888888),
                                                               foregroundImage: NetworkImage(commentsListener[i].listOfReplies[index].image),
-                                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                            )
+                                                            : const CircleAvatar(
+                                                              backgroundColor: const Color(0xff888888),
+                                                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                                             ),
                                                             title: Row(
                                                               children: [
@@ -1515,10 +1522,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
               Row(
                 children: [
-                  CircleAvatar(
+                  currentUserImage != ''
+                  ? CircleAvatar(
                     backgroundColor: const Color(0xff888888),
                     foregroundImage: NetworkImage(currentUserImage),
-                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                  )
+                  : const CircleAvatar(
+                    backgroundColor: const Color(0xff888888),
+                    foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                   ),
                   Expanded(
                     child: Padding(
@@ -1651,10 +1662,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
         )
         : Row(
           children: [
-            CircleAvatar(
+            currentUserImage != ''
+            ? CircleAvatar(
               backgroundColor: const Color(0xff888888),
               foregroundImage: NetworkImage(currentUserImage),
-              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+            )
+            : const CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
             ),
             Expanded(
               child: Padding(
@@ -1797,10 +1812,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
         ),
         child: Row(
           children: [
-            CircleAvatar(
+            currentUserImage != ''
+            ? CircleAvatar(
               backgroundColor: const Color(0xff888888),
               foregroundImage: NetworkImage(currentUserImage),
-              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+            )
+            : const CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
             ),
             Expanded(
               child: Padding(

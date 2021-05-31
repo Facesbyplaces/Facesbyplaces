@@ -149,12 +149,16 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       for (int i = 0; i < newValue.blmAdminList.length; i++) {
         managers.add(
           ListTile(
-            leading: CircleAvatar(
+            leading: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage != ''
+            ? CircleAvatar(
+              maxRadius: 40,
               backgroundColor: const Color(0xff888888),
-              foregroundImage: NetworkImage(
-                '${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}',
-              ),
-              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+              foregroundImage: NetworkImage(newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage),
+            )
+            : const CircleAvatar(
+              maxRadius: 40,
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
             ),
             title: Text(
                 '${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
@@ -324,12 +328,16 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       for (int i = 0; i < newValue.blmFamilyList.length; i++) {
         managers.add(
           ListTile(
-            leading: CircleAvatar(
+            leading: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage != ''
+            ? CircleAvatar(
+              maxRadius: 40,
               backgroundColor: const Color(0xff888888),
-              foregroundImage: NetworkImage(
-                '${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage}',
-              ),
-              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+              foregroundImage: NetworkImage(newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage),
+            )
+            : const CircleAvatar(
+              maxRadius: 40,
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
             ),
             title: Text(
                 '${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',

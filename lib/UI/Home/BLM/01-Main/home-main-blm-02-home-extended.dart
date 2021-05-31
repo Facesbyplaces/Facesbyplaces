@@ -172,7 +172,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                                   child: CircleAvatar(
                                     backgroundColor: const Color(0xff888888),
                                     foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
-                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                    backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                   ),
                                 ),
                                 onPressed: () async {
@@ -185,7 +185,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                           return IconButton(
                             icon: const CircleAvatar(
                               backgroundColor: const Color(0xff888888),
-                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                             ),
                             onPressed: () async {
                               Scaffold.of(context).openDrawer();
@@ -517,7 +517,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                                                   manageDrawer.data!
                                                       .showProfileInformationImage),
                                               backgroundImage: const AssetImage(
-                                                  'assets/icons/app-icon.png'),
+                                                  'assets/icons/user-placeholder.png'),
                                             ),
                                           )
                                               : const CircleAvatar(
@@ -525,7 +525,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                                                   backgroundColor:
                                                       const Color(0xff888888),
                                                   foregroundImage: const AssetImage(
-                                                      'assets/icons/app-icon.png'),
+                                                      'assets/icons/user-placeholder.png'),
                                                 ),
                                         ),
                                         const SizedBox(height: 20),
@@ -763,7 +763,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                                         backgroundColor:
                                             const Color(0xff888888),
                                         foregroundImage: const AssetImage(
-                                            'assets/icons/app-icon.png'),
+                                            'assets/icons/user-placeholder.png'),
                                       ),
                                       Expanded(
                                         child: Container(),
@@ -848,7 +848,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
                                     radius: 100,
                                     backgroundColor: const Color(0xff888888),
                                     foregroundImage: const AssetImage(
-                                        'assets/icons/app-icon.png'),
+                                        'assets/icons/user-placeholder.png'),
                                   ),
                                   const SizedBox(height: 20),
                                   Text(

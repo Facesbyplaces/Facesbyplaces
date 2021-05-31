@@ -1041,23 +1041,23 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 },
                                               );
                                             },
-                                            child: CircleAvatar(
+                                            child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
                                               radius: 100,
                                               backgroundColor: const Color(0xff04ECFF),
                                               child: Padding(
-                                                  padding: EdgeInsets.all(5),
-                                                  child: profile.data!.blmMemorial.memorialProfileImage != ''
-                                                      ? CircleAvatar(
-                                                    radius: 100,
-                                                    backgroundColor: const Color(0xff888888),
-                                                    foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
-                                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                                  )
-                                                      : const CircleAvatar(
-                                                    radius: 100,
-                                                    backgroundColor: const Color(0xff888888),
-                                                    foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                                  )
+                                                padding: EdgeInsets.all(5),
+                                                child: profile.data!.blmMemorial.memorialProfileImage != ''
+                                                ? CircleAvatar(
+                                                  radius: 100,
+                                                  backgroundColor: const Color(0xff888888),
+                                                  foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
+                                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                )
+                                                : const CircleAvatar(
+                                                  radius: 100,
+                                                  backgroundColor: const Color(0xff888888),
+                                                  foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                ),
                                               ),
                                             ),
                                           ),

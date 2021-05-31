@@ -455,13 +455,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           } else {
@@ -470,13 +470,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFamily[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }
@@ -572,13 +572,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           } else {
@@ -587,13 +587,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFriends[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             } else {
                               return CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }
@@ -678,13 +678,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           } else {
@@ -693,13 +693,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFollowers[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }

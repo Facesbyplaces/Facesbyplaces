@@ -90,20 +90,17 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
       for (int i = 0; i < newValue.blmFriendsList.length; i++) {
         friends.add(
           ListTile(
-            leading: newValue.blmFriendsList[i].showFriendsSettingsUser
-                        .showFriendsSettingsDetailsImage !=
-                    ''
-                ? CircleAvatar(
-                    backgroundColor: Color(0xff888888),
-                    foregroundImage: NetworkImage(
-                      '${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}',
-                    ),
-                    backgroundImage: AssetImage('assets/icons/app-icon.png'),
-                  )
-                : CircleAvatar(
-                    backgroundColor: Color(0xff888888),
-                    foregroundImage: AssetImage('assets/icons/app-icon.png'),
-                  ),
+            leading: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != ''
+            ? CircleAvatar(
+              backgroundColor: Color(0xff888888),
+              foregroundImage: NetworkImage(
+                '${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}',
+              ),
+            )
+            : CircleAvatar(
+              backgroundColor: Color(0xff888888),
+              foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+            ),
             title: Text(
                 '${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}',
               style: TextStyle(

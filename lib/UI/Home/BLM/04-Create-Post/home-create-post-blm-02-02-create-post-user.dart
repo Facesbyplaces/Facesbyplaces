@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'home-create-post-blm-01-create-post.dart';
 import 'package:flutter/material.dart';
 
@@ -65,8 +66,8 @@ class HomeBLMCreatePostSearchUserState
 
   void onLoading() async {
     if (itemRemaining != 0) {
-      var newValue =
-          await apiBLMSearchUsers(keywords: controller.text, page: page);
+      context.loaderOverlay.show();
+      var newValue = await apiBLMSearchUsers(keywords: controller.text, page: page);
       itemRemaining = newValue.blmItemsRemaining;
 
       for (int i = 0; i < newValue.blmUsers.length; i++) {
@@ -82,6 +83,7 @@ class HomeBLMCreatePostSearchUserState
 
       if (mounted) setState(() {});
       page++;
+      context.loaderOverlay.hide();
     }
   }
 
@@ -217,14 +219,12 @@ class HomeBLMCreatePostSearchUserState
                                   maxRadius: 40,
                                   backgroundColor: const Color(0xff888888),
                                   foregroundImage: NetworkImage(users[i].image),
-                                  backgroundImage: const AssetImage(
-                                      'assets/icons/app-icon.png'),
                                 )
                               : const CircleAvatar(
                                   maxRadius: 40,
                                   backgroundColor: const Color(0xff888888),
                                   foregroundImage: const AssetImage(
-                                      'assets/icons/app-icon.png'),
+                                      'assets/icons/user-placeholder.png'),
                                 ),
                           title: Text(
                             users[i].firstName + ' ' + users[i].lastName,

@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-15-update-switch-status-friends.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-16-update-switch-status-followers.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-02-paypal-screen.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-regular-02-page-details.dart';
@@ -246,7 +247,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
         ListTile(
           tileColor: const Color(0xffffffff),
           onTap: () {
-            Navigator.pushNamed(context, '/home/regular/donation-paypal');
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPaypal(pageId: memorialId)));
           },
           title: Text('Paypal',
             style: TextStyle(
