@@ -14,5 +14,5 @@ class Comment < ApplicationRecord
   validates :body, presence: true
   # Search
   include PgSearch::Model
-  multisearchable against: :body
+  pg_search_scope :search_by_text, against: :body
 end
