@@ -70,7 +70,7 @@ export const Routes = withRouter(({ history }) => {
             <Route path="/posts" component={PostDashboard} />
             <Route path="/reports" component={ReportDashboard} />
             <Route path="/transactions" component={TransactionDashboard} />
-            <Route path="*" component={UserDashboard} />
+            {/* <Route path="*" component={UserDashboard} /> */}
           </>
         ) : (
           <Redirect to="/admin" />
