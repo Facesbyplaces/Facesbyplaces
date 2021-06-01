@@ -91,21 +91,14 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
         friends.add(
           ListTile(
             leading: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != ''
-                ? CircleAvatar(
-                    backgroundColor: Color(0xff888888),
-                    foregroundImage: NetworkImage(
-                      '${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}',
-                    ),
-                    backgroundImage: const AssetImage(
-                      'assets/icons/app-icon.png',
-                    ),
-                  )
-                : const CircleAvatar(
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: const AssetImage(
-                      'assets/icons/app-icon.png',
-                    ),
-                  ),
+            ? CircleAvatar(
+              backgroundColor: Color(0xff888888),
+              foregroundImage: NetworkImage('${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage}',),
+            )
+            : const CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/user-placeholder.png',),
+            ),
             title: Text(
                 '${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName} ${newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName}',
               style: TextStyle(

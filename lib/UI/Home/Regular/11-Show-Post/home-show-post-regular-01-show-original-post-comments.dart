@@ -112,6 +112,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     likesCount = numberOfLikes;
   }
 
+  void dispose(){
+    super.dispose();
+  }
+
   void isGuest() async {
     final sharedPrefs = await SharedPreferences.getInstance();
     bool regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
@@ -365,11 +369,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     ? CircleAvatar(
                                                       backgroundColor: const Color(0xff888888),
                                                       foregroundImage: NetworkImage(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage),
-                                                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                                                     )
                                                     : const CircleAvatar(
                                                       backgroundColor: const Color(0xff888888),
-                                                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                                     ),
                                                   ),
                                                   Expanded(
@@ -1036,6 +1039,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 numberOfComments = 0;
                                                                 getOriginalPostInformation();
                                                                 onLoading();
+                                                                Navigator.pop(context);
                                                               },
                                                             )
                                                           ],
@@ -1064,10 +1068,14 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   }
                                                 },
                                                 visualDensity: const VisualDensity(vertical: 4.0),
-                                                leading: CircleAvatar(
+                                                leading: commentsListener[i].image != ''
+                                                ? CircleAvatar(
                                                   backgroundColor: const Color(0xff888888),
                                                   foregroundImage: NetworkImage(commentsListener[i].image),
-                                                  backgroundImage: const AssetImage( 'assets/icons/app-icon.png'),
+                                                )
+                                                : const CircleAvatar(
+                                                  backgroundColor: const Color(0xff888888),
+                                                  foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                                 ),
                                                 title: Row(
                                                   children: [
@@ -1241,6 +1249,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                           numberOfComments = 0;
                                                                           getOriginalPostInformation();
                                                                           onLoading();
+                                                                          Navigator.pop(context);
                                                                         },
                                                                       )
                                                                     ],
@@ -1268,10 +1277,14 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               );
                                                             }
                                                           },
-                                                          leading: CircleAvatar(
+                                                          leading: commentsListener[i].listOfReplies[index].image != ''
+                                                          ? CircleAvatar(
                                                             backgroundColor: const Color(0xff888888),
                                                             foregroundImage: NetworkImage(commentsListener[i].listOfReplies[index].image),
-                                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                          )
+                                                          : const CircleAvatar(
+                                                            backgroundColor: const Color(0xff888888),
+                                                            foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                                           ),
                                                           title: Row(
                                                             children: [
@@ -1488,11 +1501,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   ? CircleAvatar(
                     backgroundColor: Color(0xff888888),
                     foregroundImage: NetworkImage(currentUserImage),
-                    backgroundImage: AssetImage('assets/icons/app-icon.png'),
                   )
                   : CircleAvatar(
                     backgroundColor: Color(0xff888888),
-                    foregroundImage: AssetImage('assets/icons/app-icon.png'),
+                    foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
                   ),
                   Expanded(
                     child: Padding(
@@ -1629,11 +1641,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
             ? CircleAvatar(
               backgroundColor: Color(0xff888888),
               foregroundImage: NetworkImage(currentUserImage),
-              backgroundImage: AssetImage('assets/icons/app-icon.png'),
             )
             : CircleAvatar(
               backgroundColor: Color(0xff888888),
-              foregroundImage: AssetImage('assets/icons/app-icon.png'),
+              foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
             ),
             Expanded(
               child: Padding(
@@ -1773,10 +1784,14 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         padding: EdgeInsets.only(left: 20.0, right: 20.0,),
         child: Row(
           children: [
-            CircleAvatar(
-              backgroundColor: Color(0xff888888),
+            currentUserImage != ''
+            ? CircleAvatar(
+              backgroundColor: const Color(0xff888888),
               foregroundImage: NetworkImage(currentUserImage),
-              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+            )
+            : const CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
             ),
             Expanded(
               child: Padding(

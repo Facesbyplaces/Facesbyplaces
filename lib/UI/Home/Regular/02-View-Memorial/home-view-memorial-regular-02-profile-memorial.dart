@@ -22,6 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';
 
+import 'home-view-memorial-regular-04-maps.dart';
+
 class RegularProfilePosts{
   final int userId;
   final int postId;
@@ -643,6 +645,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                   // await launcher.launch(
                                                                   //   geoPoint: GeoPoint(0.0, 0.0),
                                                                   // );
+                                                                  print('The latitude is ${profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude}');
+                                                                  print('The longitude is ${profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude}');
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude,)));
                                                                 },
                                                                 child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery,
                                                                   style: const TextStyle(

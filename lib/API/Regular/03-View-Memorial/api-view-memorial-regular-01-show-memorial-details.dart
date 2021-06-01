@@ -27,7 +27,6 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
   );
 
   print('The status code of regular show memorial details is ${response.statusCode}');
-  // print('The status data of regular show memorial details is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -40,7 +39,6 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
 class APIRegularShowMemorialMain{
 
   APIRegularShowMemorialExtended almMemorial;
-
   APIRegularShowMemorialMain({required this.almMemorial});
 
   factory APIRegularShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
@@ -98,8 +96,10 @@ class APIRegularShowMemorialExtendedDetails{
   String showMemorialDetailsCemetery;
   String showMemorialDetailsCountry;
   bool showMemorialAcceptDonations;
+  double showMemorialLatitude;
+  double showMemorialLongitude;
 
-  APIRegularShowMemorialExtendedDetails({required this.showMemorialDetailsDescription, required this.showMemorialDetailsBirthPlace, required this.showMemorialDetailsDob, required this.showMemorialDetailsRip, required this.showMemorialDetailsCemetery, required this.showMemorialDetailsCountry, required this.showMemorialAcceptDonations});
+  APIRegularShowMemorialExtendedDetails({required this.showMemorialDetailsDescription, required this.showMemorialDetailsBirthPlace, required this.showMemorialDetailsDob, required this.showMemorialDetailsRip, required this.showMemorialDetailsCemetery, required this.showMemorialDetailsCountry, required this.showMemorialAcceptDonations, required this.showMemorialLatitude, required this.showMemorialLongitude});
 
   factory APIRegularShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     String newDOB = parsedJson['dob'];
@@ -115,6 +115,8 @@ class APIRegularShowMemorialExtendedDetails{
       showMemorialDetailsCemetery: parsedJson['cemetery'] != null ? parsedJson['cemetery'] : '',
       showMemorialDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
       showMemorialAcceptDonations: parsedJson['accept_donations'] != null ? parsedJson['accept_donations'] : false,
+      showMemorialLatitude: parsedJson['latitude'] != null ? parsedJson['latitude'] : false,
+      showMemorialLongitude: parsedJson['longitude'] != null ? parsedJson['longitude'] : false,
     );
   }
 }

@@ -80,7 +80,6 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularShowUserPosts(userId: widget.userId, page: page);
-      context.loaderOverlay.hide();
 
       itemRemaining = newValue.almItemsRemaining;
       count.value = count.value + newValue.almFamilyMemorialList.length;
@@ -127,6 +126,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
 
       if(mounted)
       page++;
+      context.loaderOverlay.hide();
     }
   }
 
@@ -483,7 +483,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
     if(ownedItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularShowUserMemorials(userId: userId, page: page1);
-      context.loaderOverlay.hide();
 
       ownedItemsRemaining = newValue.almOwnedItemsRemaining;
       count.value = count.value + newValue.almOwned.length;
@@ -507,6 +506,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
 
       if(mounted)
       page1++;
+      context.loaderOverlay.hide();
 
       if(ownedItemsRemaining == 0){
         addMemorials2();
@@ -520,7 +520,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
     if(followedItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularShowUserMemorials(userId: userId, page: page2);
-      context.loaderOverlay.hide();
 
       followedItemsRemaining = newValue.almFollowedItemsRemaining;
       count.value = count.value + newValue.almFollowed.length;
@@ -544,6 +543,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
 
       if(mounted)
       page2++;
+      context.loaderOverlay.hide();
     }
   }
 

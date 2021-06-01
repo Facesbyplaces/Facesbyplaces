@@ -25,8 +25,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
   List<Widget> children = [];
 
   Future<APIBLMShowUserInformation> getProfileInformation() async{
-    print('The user id is ${widget.userId}');
-    print('The account type is ${widget.accountType}');
     return await apiBLMShowUserInformation(userId: widget.userId, accountType: widget.accountType);
   }
 

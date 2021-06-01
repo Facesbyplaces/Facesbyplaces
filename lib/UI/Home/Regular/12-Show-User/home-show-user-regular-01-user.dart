@@ -19,10 +19,6 @@ class HomeRegularUserProfile extends StatefulWidget{
 }
 
 class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
-  // final int userId;
-  // final int accountType;
-  // HomeRegularUserProfileState({required this.userId, required this.accountType});
-
   Future<APIRegularShowUserInformation>? showProfile;
 
   WeSlideController controller = WeSlideController();
@@ -30,8 +26,6 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   List<Widget> children = [];
 
   Future<APIRegularShowUserInformation> getProfileInformation() async{
-    print('The user id is ${widget.userId}');
-    print('The account type is ${widget.accountType}');
     return await apiRegularShowUserInformation(userId: widget.userId, accountType: widget.accountType);
   }
 
@@ -52,7 +46,6 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
             return WeSlide(
               controller: controller,
               panelMaxSize: SizeConfig.screenHeight! / 1.5,
-              // panelBackground: Color(0xffffffff),
               backgroundColor: Color(0xffffffff),
               panel: Container(
                 height: SizeConfig.screenHeight! / 1.5,
@@ -200,13 +193,12 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                 radius: 100,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(profile.data!.showUserInformationImage),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               ),
                             )
                             : const CircleAvatar(
                               radius: 100, 
                               backgroundColor: const Color(0xff888888), 
-                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                             ),
                           ),
                         ),

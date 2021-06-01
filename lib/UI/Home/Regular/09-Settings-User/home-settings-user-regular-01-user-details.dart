@@ -404,35 +404,52 @@ class HomeRegularUserProfileDetailsState
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
-                                profileImage.path != ''
-                                    ? CircleAvatar(
+
+                                Container(
+                                  child: ((){
+                                    if(profileImage.path != ''){
+                                      return CircleAvatar(
                                         radius: 120,
-                                        backgroundColor:
-                                            const Color(0xff888888),
-                                        foregroundImage:
-                                            AssetImage(profileImage.path),
-                                        backgroundImage: const AssetImage(
-                                            'assets/icons/app-icon.png'),
-                                      )
-                                    : Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Colors.white,
-                                            width: 3,
-                                          ),
-                                        ),
-                                        child: CircleAvatar(
-                                          radius: 120,
-                                          backgroundColor:
-                                              const Color(0xff888888),
-                                          foregroundImage: NetworkImage(profile
-                                              .data!
-                                              .showProfileInformationImage),
-                                          backgroundImage: const AssetImage(
-                                              'assets/icons/app-icon.png'),
-                                        ),
-                                      ),
+                                        backgroundColor: const Color(0xff888888),
+                                        foregroundImage: AssetImage(profileImage.path),
+                                      );
+                                    }else if(profile.data!.showProfileInformationImage != ''){
+                                      return CircleAvatar(
+                                        radius: 120,
+                                        backgroundColor: const Color(0xff888888),
+                                        foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                      );
+                                    }else{
+                                      return CircleAvatar(
+                                        radius: 120,
+                                        backgroundColor: const Color(0xff888888),
+                                        foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                      );
+                                    }
+                                  }()),
+                                ),
+                                // profileImage.path != ''
+                                //     ? CircleAvatar(
+                                //       radius: 120,
+                                //       backgroundColor: const Color(0xff888888),
+                                //       foregroundImage: AssetImage(profileImage.path),
+                                //       backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                //     )
+                                //     : Container(
+                                //       decoration: BoxDecoration(
+                                //         shape: BoxShape.circle,
+                                //         border: Border.all(
+                                //           color: Colors.white,
+                                //           width: 3,
+                                //         ),
+                                //       ),
+                                //       child: CircleAvatar(
+                                //         radius: 120,
+                                //         backgroundColor: const Color(0xff888888),
+                                //         foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                                //         backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                //       ),
+                                //     ),
                                 const Positioned(
                                   top: 0,
                                   right: 20,

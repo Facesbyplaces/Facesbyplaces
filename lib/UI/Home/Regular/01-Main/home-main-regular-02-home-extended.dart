@@ -179,10 +179,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                       width: 2,
                                     ),
                                   ),
-                                  child: CircleAvatar(
+                                  child: profileImage.data!.showProfileInformationImage != ''
+                                  ? CircleAvatar(
                                     backgroundColor: const Color(0xff888888),
                                     foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
-                                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                  )
+                                  : const CircleAvatar(
+                                    backgroundColor: const Color(0xff888888),
+                                    foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                   ),
                                 ),
                                 onPressed: () async {
@@ -195,7 +199,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                           return IconButton(
                             icon: const CircleAvatar(
                               backgroundColor: const Color(0xff888888),
-                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                             ),
                             onPressed: () async {
                               Scaffold.of(context).openDrawer();
@@ -523,22 +527,15 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                             ),
                                             child: CircleAvatar(
                                               radius: 100,
-                                              backgroundColor:
-                                              const Color(0xff888888),
-                                              foregroundImage: NetworkImage(
-                                                  manageDrawer.data!
-                                                      .showProfileInformationImage),
-                                              backgroundImage: const AssetImage(
-                                                  'assets/icons/app-icon.png'),
+                                              backgroundColor: const Color(0xff888888),
+                                              foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
                                             ),
                                           )
-                                              : const CircleAvatar(
-                                                  radius: 100,
-                                                  backgroundColor:
-                                                      const Color(0xff888888),
-                                                  backgroundImage: const AssetImage(
-                                                      'assets/icons/app-icon.png'),
-                                                ),
+                                          : const CircleAvatar(
+                                            radius: 100,
+                                            backgroundColor: const Color(0xff888888),
+                                            foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                          ),
                                         ),
                                         const SizedBox(height: 20),
                                         Text(
@@ -774,10 +771,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                       ),
                                       const CircleAvatar(
                                         radius: 100,
-                                        backgroundColor:
-                                            const Color(0xff888888),
-                                        foregroundImage: const AssetImage(
-                                            'assets/icons/app-icon.png'),
+                                        backgroundColor: const Color(0xff888888),
+                                        foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                       ),
                                       Expanded(
                                         child: Container(),
@@ -863,8 +858,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                   const CircleAvatar(
                                     radius: 100,
                                     backgroundColor: const Color(0xff888888),
-                                    foregroundImage: const AssetImage(
-                                        'assets/icons/app-icon.png'),
+                                    foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                   ),
                                   const SizedBox(
                                     height: 20,

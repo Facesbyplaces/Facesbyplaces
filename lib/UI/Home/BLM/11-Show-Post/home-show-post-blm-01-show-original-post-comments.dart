@@ -1053,6 +1053,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   numberOfComments = 0;
                                                                   getOriginalPostInformation();
                                                                   onLoading();
+                                                                  Navigator.pop(context);
                                                                 },
                                                               )
                                                             ],
@@ -1267,6 +1268,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                             numberOfComments = 0;
                                                                             getOriginalPostInformation();
                                                                             onLoading();
+                                                                            Navigator.pop(context);
                                                                           },
                                                                         )
                                                                       ],

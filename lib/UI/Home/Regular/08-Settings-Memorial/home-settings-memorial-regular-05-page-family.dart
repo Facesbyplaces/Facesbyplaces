@@ -91,21 +91,14 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
         family.add(
           ListTile(
             leading: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != ''
-                ? CircleAvatar(
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: NetworkImage(
-                      '${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}',
-                    ),
-                    backgroundImage: const AssetImage(
-                      'assets/icons/app-icon.png',
-                    ),
-                  )
-                : const CircleAvatar(
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: const AssetImage(
-                      'assets/icons/app-icon.png',
-                    ),
-                  ),
+            ? CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: NetworkImage('${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage}',),
+            )
+            : const CircleAvatar(
+              backgroundColor: const Color(0xff888888),
+              foregroundImage: const AssetImage('assets/icons/user-placeholder.png',),
+            ),
             title: Text(
                 '${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName} ${newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName}',
               style: TextStyle(

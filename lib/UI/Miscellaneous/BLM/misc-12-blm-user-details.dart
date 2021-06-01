@@ -49,7 +49,6 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   List<BLMMiscDraggablePost> posts = [];
   int itemRemaining = 1;
   int page = 1;
-  // int count = 0;
   ValueNotifier<int> count = ValueNotifier<int>(0);
 
   void initState(){
@@ -58,9 +57,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(itemRemaining != 0){
-          // setState(() {
           onLoading();
-          // });
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -75,16 +72,13 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   }
 
   Future<void> onRefresh() async{
-    // setState(() {
     onLoading();
-    // });
   }
 
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMShowUserPosts(userId: widget.userId, page: page);
-      context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;
       count.value = count.value + newValue.blmFamilyMemorialList.length;
@@ -129,8 +123,8 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
       }
 
       if(mounted)
-      // setState(() {});
       page++;
+      context.loaderOverlay.hide();
     }
   }
 
@@ -403,7 +397,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   int page1 = 1;
   int page2 = 1;
   bool flag1 = false;
-  // int count = 0;
 
   void initState(){
     super.initState();
@@ -412,9 +405,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if(ownedItemsRemaining != 0 && followedItemsRemaining != 0){
-          // setState(() {
-            onLoading();
-          // });
+          onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -430,9 +421,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
 
   Future<void> onRefresh() async{
     if(ownedItemsRemaining == 0 && followedItemsRemaining == 0 && flag1 == false){
-      // setState(() {
-        flag1 = true;
-      // });
+      flag1 = true;
       onLoading();
     }else{
       onLoading();
@@ -492,7 +481,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     if(ownedItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page1);
-      context.loaderOverlay.hide();
 
       ownedItemsRemaining = newValue.blmOwnedItemsRemaining;
       count.value = count.value + newValue.blmOwned.length;
@@ -515,8 +503,8 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       }
 
       if(mounted)
-      // setState(() {});
       page1++;
+      context.loaderOverlay.hide();
 
       if(ownedItemsRemaining == 0){
         addMemorials2();
@@ -531,7 +519,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     if(followedItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page2);
-      context.loaderOverlay.hide();
 
       followedItemsRemaining = newValue.blmFollowedItemsRemaining;
       count.value = count.value + newValue.blmFollowed.length;
@@ -554,8 +541,8 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       }
 
       if(mounted)
-      // setState(() {});
       page2++;
+      context.loaderOverlay.hide();
     }
   }
 

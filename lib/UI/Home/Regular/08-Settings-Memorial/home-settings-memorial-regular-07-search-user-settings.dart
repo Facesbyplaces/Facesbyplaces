@@ -76,8 +76,33 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
   void onLoading() async {
     if (itemRemaining != 0) {
       context.loaderOverlay.show();
-      var newValue =
-          await apiRegularSearchUsers(keywords: keywords, page: page);
+      var newValue = await apiRegularSearchUsers(keywords: keywords, page: page).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Error: $error.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                fontFamily: 'NexaRegular'
+              ),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+        throw Exception('$error');
+      });
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.almItemsRemaining;
@@ -419,25 +444,16 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                                   }
                                 },
                                 leading: users[index].image != ''
-                                    ? CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xff888888),
-                                        foregroundImage: NetworkImage(
-                                            '${users[index].image}'),
-                                        backgroundImage: const AssetImage(
-                                            'assets/icons/app-icon.png'),
-                                      )
-                                    : const CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xff888888),
-                                        foregroundImage: const AssetImage(
-                                            'assets/icons/app-icon.png'),
-                                      ),
-                                title: Text(
-                                    '${users[index].firstName} ${users[index].lastName}'),
-                                subtitle: Text(
-                                  '${users[index].email}',
+                                ? CircleAvatar(
+                                  backgroundColor: const Color(0xff888888),
+                                  foregroundImage: NetworkImage('${users[index].image}'),
+                                )
+                                : const CircleAvatar(
+                                  backgroundColor: const Color(0xff888888),
+                                  foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                                 ),
+                                title: Text('${users[index].firstName} ${users[index].lastName}'),
+                                subtitle: Text('${users[index].email}',),
                               )),
                     ),
                   ),

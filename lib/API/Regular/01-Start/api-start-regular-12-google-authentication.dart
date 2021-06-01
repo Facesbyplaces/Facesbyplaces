@@ -32,15 +32,15 @@ class RegularGoogleAuthentication {
   }
 
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
-    context.loaderOverlay.show();
-
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
     final GoogleSignIn googleSignIn = GoogleSignIn();
+    context.loaderOverlay.show();
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
+      
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
       FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('Auth token copied!')); // verified on node
 
@@ -125,7 +125,6 @@ class RegularGoogleAuthentication {
     }
 
     context.loaderOverlay.hide();
-
     return user;
   }
 

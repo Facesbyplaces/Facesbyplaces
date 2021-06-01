@@ -20,6 +20,7 @@ import 'package:flutter/services.dart';
 import '../ui-01-get-started.dart';
 
 class RegularLogin extends StatefulWidget {
+
   RegularLoginState createState() => RegularLoginState();
 }
 
@@ -102,7 +103,6 @@ class RegularLoginState extends State<RegularLogin> {
                               ),
                             ),
                             onPressed: () async {
-                              // final fb = FacebookLogin(debug: true);
                               final fb = FacebookLogin();
                               bool isLoggedIn = await fb.isLoggedIn;
 

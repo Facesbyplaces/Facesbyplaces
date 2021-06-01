@@ -27,7 +27,6 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) asy
   );
 
   print('The status code of blm show memorial details is ${response.statusCode}');
-  // print('The status data of blm show memorial details is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -40,7 +39,6 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) asy
 class APIBLMShowMemorialMain{
 
   APIBLMShowMemorialExtended blmMemorial;
-
   APIBLMShowMemorialMain({required this.blmMemorial});
 
   factory APIBLMShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
@@ -104,8 +102,10 @@ class APIBLMShowMemorialExtendedDetails{
   String memorialDetailsState;
   String memorialDetailsCountry;
   bool memorialAcceptDonations;
+  double memorialLatitude;
+  double memorialLongitude;
 
-  APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsDob, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry, required this.memorialAcceptDonations});
+  APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsDob, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry, required this.memorialAcceptDonations, required this.memorialLatitude, required this.memorialLongitude});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
 
@@ -113,8 +113,6 @@ class APIBLMShowMemorialExtendedDetails{
     DateTime dob = DateTime.parse(newDOB);
     String newRIP = parsedJson['rip'];
     DateTime rip = DateTime.parse(newRIP);
-
-    print('Accepts donations: ${parsedJson['accept_donations'] != null ? parsedJson['accept_donations'] : false}');
 
     return APIBLMShowMemorialExtendedDetails(
       memorialDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
@@ -125,6 +123,8 @@ class APIBLMShowMemorialExtendedDetails{
       memorialDetailsState: parsedJson['state'] != null ? parsedJson['state'] : '',
       memorialDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
       memorialAcceptDonations: parsedJson['accept_donations'] != null ? parsedJson['accept_donations'] : false,
+      memorialLatitude: parsedJson['latitude'] != null ? parsedJson['latitude'] : false,
+      memorialLongitude: parsedJson['longitude'] != null ? parsedJson['longitude'] : false,
     );
   }
 }

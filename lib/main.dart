@@ -123,25 +123,4 @@ void main() async{
       ),
     ),
   );
-
-  // Future<void> initUniLinks() async {
-  //   // Platform messages may fail, so we use a try/catch PlatformException.
-  //   try {
-  //     final initialLink = await getInitialLink();
-  //     print('The initialLink is $initialLink');
-
-  //   // _sub = getUriLinksStream().listen((Uri uri) async {
-  //   //     //Do something with uri
-  //   // });
-  //     linkStream.listen((event) {
-  //       print('The newLink is $event');
-  //     });
-  //     // Parse the link and warn the user, if it is not correct,
-  //     // but keep in mind it could be `null`.
-  //   } on PlatformException {
-  //     print('Something went wrong. Please try again.');
-  //     // Handle exception by warning the user their action did not succeed
-  //     // return?
-  //   }
-  // }
 }

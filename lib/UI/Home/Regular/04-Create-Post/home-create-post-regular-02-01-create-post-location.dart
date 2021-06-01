@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 class HomeRegularCreatePostSearchLocation extends StatefulWidget {
   @override
-  HomeRegularCreatePostSearchLocationState createState() =>
-      HomeRegularCreatePostSearchLocationState();
+
+  HomeRegularCreatePostSearchLocationState createState() => HomeRegularCreatePostSearchLocationState();
 }
 
-class HomeRegularCreatePostSearchLocationState
-    extends State<HomeRegularCreatePostSearchLocation> {
+class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePostSearchLocation> {
   TextEditingController controller = TextEditingController();
   List<String> places = [];
   bool empty = true;

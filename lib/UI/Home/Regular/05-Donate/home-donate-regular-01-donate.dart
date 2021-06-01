@@ -4,8 +4,6 @@ import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-04-proces
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_braintree/flutter_braintree.dart';
-// import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:stripe_payment/stripe_payment.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,7 +22,6 @@ class HomeRegularUserDonate extends StatefulWidget{
 
 class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   int donateToggle = 0;
-  // final Widget donateWithGoogle = SvgPicture.asset('assets/icons/donation-google-pay.svg', semanticsLabel: 'Donate with Google',);
 
   final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/google-pay.svg', semanticsLabel: 'Google Pay Mark', height: 52, width: 52);
@@ -194,9 +191,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                       BraintreeDropInResult result = (await BraintreeDropIn.start(request).catchError((onError){print('The error is $onError');}))!;
 
+                      
+                      print('The payment method description is ${result.paymentMethodNonce.description}');
+                      print('The payment method isDefault is ${result.paymentMethodNonce.isDefault}');
+                      print('The payment method nonce is ${result.paymentMethodNonce.nonce}');
+                      print('The payment method typeLabel is ${result.paymentMethodNonce.typeLabel}');
                       print('The amount is ${request.paypalRequest!.amount}');
-                      print('The nonce is ${result.paymentMethodNonce.nonce}');
-                      print('The nonce is ${result.deviceData}');
+                      print('The amount is ${request.clientToken}');
+                      print('The device data is ${result.deviceData}');
 
                       var newValue = json.decode(result.deviceData!);
                       var deviceToken = newValue['correlation_id'];

@@ -3,6 +3,7 @@ import Flutter
 import Firebase
 import BraintreeDropIn
 import Braintree
+import GoogleMaps
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -15,6 +16,7 @@ import Braintree
     }
     FirebaseApp.configure()
     BTAppSwitch.setReturnURLScheme("com.app.facesbyplaces.braintree")
+    GMSServices.provideAPIKey("AIzaSyDdGbn-l8EjoPZOqQoedcCzkTa-ubuL9Do")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

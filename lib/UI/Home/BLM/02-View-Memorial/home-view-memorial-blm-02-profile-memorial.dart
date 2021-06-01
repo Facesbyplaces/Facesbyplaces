@@ -22,6 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';
 
+import 'home-view-memorial-blm-04-maps.dart';
+
 class BLMProfilePosts{
   final int userId;
   final int postId;
@@ -699,6 +701,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                         // await launcher.launch(
                                                                         //   geoPoint: GeoPoint(0.0, 0.0),
                                                                         // );
+                                                                        print('The latitude is ${profile.data!.blmMemorial.memorialDetails.memorialLatitude}');
+                                                                        print('The longitude is ${profile.data!.blmMemorial.memorialDetails.memorialLongitude}');
+                                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude,)));
                                                                       },
                                                                       child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation,
                                                                         style: TextStyle(
@@ -1156,7 +1161,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       return MiscBLMErrorMessageTemplate();
                                     }else{
                                       return Container(height: SizeConfig.screenHeight);
-                                      // return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                                     }
                                   }
                               ),

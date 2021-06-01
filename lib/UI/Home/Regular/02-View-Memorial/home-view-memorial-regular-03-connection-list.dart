@@ -5,6 +5,8 @@ import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regula
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RegularConnectionListItem {
@@ -115,7 +117,33 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
   void onLoading1() async {
     if (itemRemaining1 != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiRegularConnectionListFamily(memorialId: widget.memorialId, page: page1);
+      var newValue = await apiRegularConnectionListFamily(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Error: $error.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                fontFamily: 'NexaRegular'
+              ),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+        throw Exception('$error');
+      });
       context.loaderOverlay.hide();
 
       itemRemaining1 = newValue.almItemsRemaining;
@@ -142,7 +170,33 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
   void onLoading2() async {
     if (itemRemaining2 != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiRegularConnectionListFriends(memorialId: widget.memorialId, page: page2);
+      var newValue = await apiRegularConnectionListFriends(memorialId: widget.memorialId, page: page2).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Error: $error.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                fontFamily: 'NexaRegular'
+              ),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+        throw Exception('$error');
+      });
       context.loaderOverlay.hide();
 
       itemRemaining2 = newValue.almItemsRemaining;
@@ -169,7 +223,33 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
   void onLoading3() async {
     if (itemRemaining3 != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiRegularConnectionListFollowers(memorialId: widget.memorialId, page: page3);
+      var newValue = await apiRegularConnectionListFollowers(memorialId: widget.memorialId, page: page3).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Error: $error.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                fontFamily: 'NexaRegular'
+              ),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+        throw Exception('$error');
+      });
       context.loaderOverlay.hide();
 
       itemRemaining3 = newValue.almItemsRemaining;
@@ -455,13 +535,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           } else {
@@ -470,13 +549,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFamily[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }
@@ -572,13 +650,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           } else {
@@ -587,13 +664,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFriends[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }
@@ -678,13 +754,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           } else {
@@ -693,13 +768,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList> {
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFollowers[index].image),
-                                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
                               );
                             } else {
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
-                                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
                           }
