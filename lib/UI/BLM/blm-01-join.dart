@@ -9,7 +9,6 @@ class BLMJoin extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      //backgroundColor: Colors.black,
       body: SafeArea(
         bottom: false,
         child: Container(
@@ -24,8 +23,7 @@ class BLMJoin extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon:  Icon(Icons.arrow_back,
-                    color:  Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+                  icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                 ),
               ),
               Container(
@@ -33,21 +31,24 @@ class BLMJoin extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+
                     Spacer(),
-                    Text(
-                      'BLACK',
-                      style:  TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.65,
-                          color: const Color(0xff000000),
-                          fontFamily: 'NexaBold'),
+
+                    Text('BLACK',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 3.65,
+                        color: const Color(0xff000000),
+                        fontFamily: 'NexaBold',
+                      ),
                     ),
+
                     SizedBox(width: SizeConfig.blockSizeHorizontal! * 2),
+
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       alignment: Alignment.center,
-                      child:  Text(
-                        'LIVES',
-                        style:  TextStyle(
+                      child: Text('LIVES',
+                        style: TextStyle(
                           fontSize: SizeConfig.blockSizeVertical! * 3.65,
                           fontWeight: FontWeight.bold,
                           color: const Color(0xffffffff),
@@ -59,20 +60,24 @@ class BLMJoin extends StatelessWidget {
                         const BorderRadius.all(Radius.circular(10)),
                       ),
                     ),
+
                     SizedBox(width: SizeConfig.blockSizeHorizontal! * 2),
-                    Text(
-                      'MATTER',
-                      style:  TextStyle(
+
+                    Text('MATTER',
+                      style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 3.65,
                         fontWeight: FontWeight.bold,
                         color: const Color(0xff000000),
                       ),
                     ),
+
                     Spacer(),
                   ],
                 ),
               ),
+
               SizedBox(height: SizeConfig.blockSizeVertical! * 5),
+
               Expanded(
                 child: Stack(
                   children: [
@@ -84,29 +89,22 @@ class BLMJoin extends StatelessWidget {
                           color: Colors.white,
                           image: const DecorationImage(
                             fit: BoxFit.fill,
-                            image: const AssetImage(
-                              'assets/icons/join6.png',
+                            image: const AssetImage('assets/icons/join6.png',
                             ),
                           ),
                         ),
-                        child: Container(
-                          color: Colors.white.withOpacity(0.4),
-                        ),
+                        child: Container(color: Colors.white.withOpacity(0.4),),
                       ),
                     ),
                     Container(
                       width: SizeConfig.screenWidth,
                       height: SizeConfig.blockSizeVertical! * 60,
-                      child: Image.asset(
-                        'assets/icons/BLM Matter.png',
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.asset('assets/icons/BLM Matter.png', fit: BoxFit.cover,),
                     ),
                     Positioned.fill(
                       top: SizeConfig.blockSizeVertical! * 45,
                       child: Center(
-                        child: Text(
-                          'Remembering the Victims',
+                        child: Text('Remembering the Victims',
                           style: TextStyle(
                             fontSize: SizeConfig.blockSizeVertical! * 3.29,
                             fontFamily: 'NexaBold',

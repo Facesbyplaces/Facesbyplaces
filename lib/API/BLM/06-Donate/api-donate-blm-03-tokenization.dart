@@ -26,14 +26,13 @@ Future<String> apiBLMTokenization() async{
       ),
     );
 
-  print('The status code of regular paypal is ${response.statusCode}');
-  print('The status data of regular paypal is ${response.data}');
+  print('The status code of regular tokenization is ${response.statusCode}');
+  print('The status data of regular tokenization is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
 
     String token = newData['client_token'];
-    // print('The token is $token');
     return token;
   }else{
     return Future.error('Something went wrong. Please try again.');

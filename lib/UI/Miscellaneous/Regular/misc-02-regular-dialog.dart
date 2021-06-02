@@ -1,7 +1,5 @@
-
-import 'package:flutter/material.dart';
-
 import '../../../Configurations/size_configuration.dart';
+import 'package:flutter/material.dart';
 
 class MiscRegularUploadFromDialog extends StatelessWidget{
 
@@ -22,12 +20,7 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Choose file to Upload:',
-              style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                  fontFamily: 'NexaLight',
-                color: Color(0xff000000),),
-            ),
+            Text('Choose file to Upload:', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaLight', color: Color(0xff000000),),),
 
             const SizedBox(height: 40,),
 
@@ -39,7 +32,8 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xffC1C1C1),),
+                  color: Color(0xffC1C1C1),
+                ),
               ),
             ),
 
@@ -53,7 +47,8 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xffC1C1C1),),
+                  color: Color(0xffC1C1C1),
+                ),
               ),
             ),
           ],
@@ -64,7 +59,6 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
 }
 
 class MiscRegularConfirmDialog extends StatelessWidget{
-
   final String title;
   final String content;
   final String confirm_1;
@@ -96,21 +90,23 @@ class MiscRegularConfirmDialog extends StatelessWidget{
               style: TextStyle(
                 fontSize: SizeConfig.blockSizeVertical! * 2.64,
                 fontFamily: 'NexaBold',
-                color: Color(0xff000000),),
+                color: Color(0xff000000),
+              ),
             ),
 
             const SizedBox(height: 20,),
 
-           Padding(
-             padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 11.0, right: SizeConfig.blockSizeHorizontal! * 11.0),
-             child:  Text(content,
-               textAlign: TextAlign.center,
-               style: TextStyle(
-                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                 fontFamily: 'NexaRegular',
-                 color: Color(0xff000000),),
-             ),
-           ),
+            Padding(
+              padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 11.0, right: SizeConfig.blockSizeHorizontal! * 11.0),
+              child: Text(content,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                  fontFamily: 'NexaRegular',
+                  color: Color(0xff000000),
+                ),
+              ),
+            ),
 
             const SizedBox(height: 20,),
 
@@ -123,11 +119,7 @@ class MiscRegularConfirmDialog extends StatelessWidget{
                     },
                     child: Text(confirm_1,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaBold',
-                        color: confirmColor_1,
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: confirmColor_1,),
                     ),
                   ),
                 ),
@@ -138,11 +130,7 @@ class MiscRegularConfirmDialog extends StatelessWidget{
                     },
                     child: Text(confirm_2,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaBold',
-                        color: confirmColor_2,
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: confirmColor_2,),
                     ),
                   ),
                 ),
@@ -156,7 +144,6 @@ class MiscRegularConfirmDialog extends StatelessWidget{
 }
 
 class MiscRegularRelationshipFromDialog extends StatelessWidget{
-
   const MiscRegularRelationshipFromDialog();
 
   Widget build(BuildContext context){
@@ -172,11 +159,12 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('Choose the relationship of this person:',
-            textAlign: TextAlign.center,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: SizeConfig.blockSizeVertical! * 2.64,
                 fontFamily: 'NexaBold',
-                color: Color(0xff000000),),
+                color: Color(0xff000000),
+              ),
             ),
 
             const SizedBox(height: 40,),
@@ -189,7 +177,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xff000000).withOpacity(0.5),),
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
               ),
             ),
 
@@ -203,7 +192,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xff000000).withOpacity(0.5),),
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
               ),
             ),
 
@@ -217,7 +207,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xff000000).withOpacity(0.5),),
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
               ),
             ),
 
@@ -245,7 +236,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xff000000).withOpacity(0.5),),
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
               ),
             ),
 
@@ -259,7 +251,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xff000000).withOpacity(0.5),),
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
               ),
             ),
 
@@ -273,7 +266,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xff000000).withOpacity(0.5),),
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
               ),
             ),
 
@@ -287,7 +281,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xff000000).withOpacity(0.5),),
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
               ),
             ),
 
@@ -301,7 +296,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeVertical! * 2.64,
                   fontFamily: 'NexaRegular',
-                  color: Color(0xff000000).withOpacity(0.5),),
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
               ),
             ),
 

@@ -137,6 +137,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     width: SizeConfig.screenWidth! / 2, 
                     height: 45,
                     onPressed: () async{
+                      print('REGULAR');
                       String token = await apiRegularTokenization();
 
                       print('The new token is $token');
@@ -189,7 +190,30 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                         cardEnabled: true,
                       );
 
-                      BraintreeDropInResult result = (await BraintreeDropIn.start(request).catchError((onError){print('The error is $onError');}))!;
+                      BraintreeDropInResult result = (await BraintreeDropIn.start(request).catchError((onError){
+                        showDialog(
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Error: Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                fontFamily: 'NexaRegular'
+                              ),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: const Color(0xffff0000),
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }))!;
 
                       
                       print('The payment method description is ${result.paymentMethodNonce.description}');

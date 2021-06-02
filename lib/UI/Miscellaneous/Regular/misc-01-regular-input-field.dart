@@ -27,8 +27,7 @@ class MiscRegularInputFieldTemplate extends StatefulWidget {
     this.edited = false,
   }) : super(key: key);
 
-  MiscRegularInputFieldTemplateState createState() =>
-      MiscRegularInputFieldTemplateState();
+  MiscRegularInputFieldTemplateState createState() => MiscRegularInputFieldTemplateState();
 }
 
 class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemplate> {
@@ -48,20 +47,12 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
       maxLines: widget.maxLines,
       readOnly: widget.readOnly,
       cursorColor: const Color(0xff000000),
-      style: TextStyle(
-        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-        fontFamily: 'NexaRegular',
-        color: const Color(0xff2F353D),
-      ),
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: widget.labelText,
         labelStyle: widget.labelTextStyle,
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
     );
   }
@@ -78,23 +69,17 @@ class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget {
   const MiscRegularInputFieldMultiTextTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: const Color(0xff888888),
-    ),
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
     this.type = TextInputType.text,
     this.maxLines = 10,
     this.readOnly = false,
     this.backgroundColor = const Color(0xffffffff),
   }) : super(key: key);
 
-  MiscRegularInputFieldMultiTextTemplateState createState() =>
-      MiscRegularInputFieldMultiTextTemplateState();
+  MiscRegularInputFieldMultiTextTemplateState createState() => MiscRegularInputFieldMultiTextTemplateState();
 }
 
-class MiscRegularInputFieldMultiTextTemplateState
-    extends State<MiscRegularInputFieldMultiTextTemplate> {
+class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInputFieldMultiTextTemplate> {
   TextEditingController controller = TextEditingController(text: '');
 
   @override
@@ -105,29 +90,15 @@ class MiscRegularInputFieldMultiTextTemplateState
       maxLines: widget.maxLines,
       keyboardType: widget.type,
       readOnly: widget.readOnly,
-      style: TextStyle(
-        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-        fontFamily: 'NexaRegular',
-        color: const Color(0xff2F353D),
-      ),
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         fillColor: widget.backgroundColor,
         filled: true,
         alignLabelWithHint: true,
         labelText: widget.labelText,
         labelStyle: widget.labelTextStyle,
-        border: const OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
+        border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+        focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
       ),
     );
   }
@@ -135,29 +106,14 @@ class MiscRegularInputFieldMultiTextTemplateState
 
 class MiscRegularInputFieldDropDown extends StatefulWidget {
   final String displayText;
-  const MiscRegularInputFieldDropDown({
-    required Key key,
-    this.displayText = 'Father',
-  }) : super(key: key);
+  const MiscRegularInputFieldDropDown({required Key key, this.displayText = 'Father',}) : super(key: key);
 
   @override
-  MiscRegularInputFieldDropDownState createState() =>
-      MiscRegularInputFieldDropDownState();
+  MiscRegularInputFieldDropDownState createState() => MiscRegularInputFieldDropDownState();
 }
 
-class MiscRegularInputFieldDropDownState
-    extends State<MiscRegularInputFieldDropDown> {
-  List<String> relationship = [
-    'Father',
-    'Mother',
-    'Sister',
-    'Brother',
-    'Aunt',
-    'Uncle',
-    'Nephew',
-    'Grandmother',
-    'Grandfather'
-  ];
+class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDropDown> {
+  List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
   String currentSelection = 'Father';
 
   void initState() {
@@ -172,15 +128,8 @@ class MiscRegularInputFieldDropDownState
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xff000000)),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
@@ -212,18 +161,13 @@ class MiscRegularInputFieldDropDownState
 
 class MiscRegularInputFieldSecurityQuestions extends StatefulWidget {
   final String displayText;
-  const MiscRegularInputFieldSecurityQuestions({
-    required Key key,
-    this.displayText = 'What\'s the name of your first dog?',
-  }) : super(key: key);
+  const MiscRegularInputFieldSecurityQuestions({required Key key, this.displayText = 'What\'s the name of your first dog?',}) : super(key: key);
 
   @override
-  MiscRegularInputFieldSecurityQuestionsState createState() =>
-      MiscRegularInputFieldSecurityQuestionsState();
+  MiscRegularInputFieldSecurityQuestionsState createState() => MiscRegularInputFieldSecurityQuestionsState();
 }
 
-class MiscRegularInputFieldSecurityQuestionsState
-    extends State<MiscRegularInputFieldSecurityQuestions> {
+class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInputFieldSecurityQuestions> {
   List<String> securityQuestions = [
     'What\'s the name of your first dog?',
     'What primary school did you attend?',
@@ -249,19 +193,11 @@ class MiscRegularInputFieldSecurityQuestionsState
           fontFamily: 'NexaRegular',
           color: const Color(0xffBDC3C7),
         ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          style: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 2.2,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xff2F353D),
-          ),
+          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
           value: currentSelection,
           isDense: true,
           onChanged: (String? newValue) {
@@ -291,16 +227,12 @@ class MiscRegularInputFieldSecurityQuestionsState
 class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget {
   final String labelText;
   final String displayText;
-  const MiscRegularInputFieldDateTimeTemplate(
-      {required Key key, this.labelText = '', this.displayText = ''})
-      : super(key: key);
+  const MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.displayText = ''}) : super(key: key);
 
-  MiscRegularInputFieldDateTimeTemplateState createState() =>
-      MiscRegularInputFieldDateTimeTemplateState();
+  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState();
 }
 
-class MiscRegularInputFieldDateTimeTemplateState
-    extends State<MiscRegularInputFieldDateTimeTemplate> {
+class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate> {
   TextEditingController controller = TextEditingController(text: '');
 
   void initState() {
@@ -323,8 +255,7 @@ class MiscRegularInputFieldDateTimeTemplateState
           maxTime: DateTime.now(),
           currentTime: DateTime.now(),
           onConfirm: (date) {
-            String format =
-                "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
             controller.text = format;
           },
           locale: LocaleType.en,
@@ -333,16 +264,8 @@ class MiscRegularInputFieldDateTimeTemplateState
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: widget.labelText,
-        labelStyle: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: const Color(0xff888888),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
     );
   }
@@ -361,11 +284,7 @@ class MiscRegularPhoneNumberTemplate extends StatefulWidget {
   const MiscRegularPhoneNumberTemplate({
     required Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: const Color(0xff888888),
-    ),
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
     this.obscureText = false,
     this.type = TextInputType.text,
     this.maxLines = 1,
@@ -374,12 +293,10 @@ class MiscRegularPhoneNumberTemplate extends StatefulWidget {
     this.displayText = '',
   }) : super(key: key);
 
-  MiscRegularPhoneNumberTemplateState createState() =>
-      MiscRegularPhoneNumberTemplateState();
+  MiscRegularPhoneNumberTemplateState createState() => MiscRegularPhoneNumberTemplateState();
 }
 
-class MiscRegularPhoneNumberTemplateState
-    extends State<MiscRegularPhoneNumberTemplate> {
+class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTemplate> {
   TextEditingController controller = TextEditingController(text: '');
   bool valid = false;
 
@@ -391,10 +308,7 @@ class MiscRegularPhoneNumberTemplateState
   @override
   Widget build(BuildContext context) {
     return InternationalPhoneNumberInput(
-      selectorConfig: const SelectorConfig(
-        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-        showFlags: false,
-      ),
+      selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,
       onInputChanged: (PhoneNumber number) {
         print(number.phoneNumber);
@@ -404,20 +318,12 @@ class MiscRegularPhoneNumberTemplateState
           valid = value;
         });
       },
-      textStyle: TextStyle(
-        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-        fontFamily: 'NexaRegular',
-        color: const Color(0xff2F353D),
-      ),
+      textStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       inputDecoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: widget.labelText,
         labelStyle: widget.labelTextStyle,
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
     );
   }

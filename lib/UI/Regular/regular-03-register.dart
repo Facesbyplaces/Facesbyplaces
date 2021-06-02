@@ -34,7 +34,6 @@ class RegularRegister extends StatelessWidget{
             }
           },
           child: Scaffold(
-             // backgroundColor: Colors.black,
               body: SafeArea(
                 bottom: false,
                 child: Container(

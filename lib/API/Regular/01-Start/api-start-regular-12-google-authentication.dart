@@ -51,7 +51,27 @@ class RegularGoogleAuthentication {
         username: googleSignInAccount.email,
         googleId: await FlutterClipboard.paste().then((value) {return value;}),
         image: googleSignInAccount.photoUrl!,
-      );
+      ).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => 
+            AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: const Text('Something went wrong. Please try again.',
+              textAlign: TextAlign.center,
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+            },
+          )
+        );
+        throw Exception('$error');
+      });
 
       print('The sign in with google result is $result');
 

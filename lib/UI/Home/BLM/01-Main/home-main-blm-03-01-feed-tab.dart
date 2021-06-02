@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 
@@ -91,7 +93,32 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab> {
   void onLoading() async {
     if (itemRemaining != 0) {
       context.loaderOverlay.show();
-      var newValue = await apiBLMHomeFeedTab(page: page);
+      var newValue = await apiBLMHomeFeedTab(page: page).onError((error, stackTrace){
+        context.loaderOverlay.hide();
+        showDialog(
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Error: $error.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                fontFamily: 'NexaRegular'
+              ),
+            ),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: () {
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+        throw Exception('$error');
+      });
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;

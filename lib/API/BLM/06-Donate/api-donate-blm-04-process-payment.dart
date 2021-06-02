@@ -26,8 +26,8 @@ Future<bool> apiBLMProcessToken({required String amount, required String nonce, 
       ),
     );
 
-    print('The status code of regular paypal is ${response.statusCode}');
-    print('The status data of regular paypal is ${response.data}');
+    print('The status code of regular process payment is ${response.statusCode}');
+    print('The status data of regular process payment is ${response.data}');
 
     if(response.statusCode == 200){
       return true;

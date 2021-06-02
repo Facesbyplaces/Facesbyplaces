@@ -76,19 +76,11 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
               widget.memorialName,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                fontFamily: 'NexaBold',
-                color: const Color(0xff000000),
-              ),
+              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
             ),
             subtitle: Text(
               widget.description,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                fontFamily: 'NexaBold',
-                color: const Color(0xff888888),
-              ),
+              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xff888888),),
             ),
             trailing: (() {
               if(widget.managed == true || widget.famOrFriends == true){
@@ -102,18 +94,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       context: context,
                       builder: (_) => AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Confirm', 
-                          textAlign: TextAlign.center, 
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
-                        ),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Are you sure you want to leave this page?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                         onlyOkButton: false,
                         onOkButtonPressed: () {
                           Navigator.pop(context, true);
@@ -138,10 +121,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           title: Text('Success', textAlign: TextAlign.center, 
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Successfully followed the page. You will receive notifications from this page.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),
-                            ),
+                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                             onlyOkButton: true,
                             onOkButtonPressed: () {
                               Navigator.pop(context, true);
@@ -152,14 +132,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
-                            ),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),
-                            ),
+                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                             onlyOkButton: true,
                             buttonOkColor: const Color(0xffff0000),
                             onOkButtonPressed: () {
@@ -170,70 +145,96 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       }
                     }
                   },
-                  child: Text('Leave',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaBold',
-                      color: const Color(0xffFFFFFF),
-                    ),
-                  ),
+                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                   height: 35,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    side: const BorderSide(color: const Color(0xff04ECFF)),
-                  ),
-                color: const Color(0xff04ECFF),
-              );
-            }else if (followButtonListener == true){
-              return MaterialButton(
-                elevation: 0,
-                padding: EdgeInsets.zero,
-                textColor: const Color(0xffffffff),
-                splashColor: const Color(0xff4EC9D4),
-                onPressed: () async {
-                  bool confirmResult = await showDialog(
-                    context: context,
-                    builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Confirm', 
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
+                  color: const Color(0xff04ECFF),
+                );
+              }else if (followButtonListener == true){
+                return MaterialButton(
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                  textColor: const Color(0xffffffff),
+                  splashColor: const Color(0xff4EC9D4),
+                  onPressed: () async {
+                    bool confirmResult = await showDialog(
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                        onlyOkButton: false,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                        onCancelButtonPressed: () {
+                          Navigator.pop(context, false);
+                        },
                       ),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Are you sure you want to leave this page?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),
-                      ),
-                      onlyOkButton: false,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                      onCancelButtonPressed: () {
-                        Navigator.pop(context, false);
-                      },
-                    ),
-                  );
+                    );
 
-                  if(confirmResult == true){
+                    if(confirmResult == true){
+                      context.loaderOverlay.show();
+                      bool result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId,follow: false);
+                      context.loaderOverlay.hide();
+
+                      if(result){
+                        followButton.value = false;
+
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            onlyOkButton: true,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }else{
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            onlyOkButton: true,
+                            buttonOkColor: const Color(0xffff0000),
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                  height: 35,
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
+                  color: const Color(0xff04ECFF),
+                );
+              }else{
+                return MaterialButton(
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                  textColor: const Color(0xff4EC9D4),
+                  splashColor: const Color(0xff4EC9D4),
+                  onPressed: () async {
                     context.loaderOverlay.show();
-                    bool result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId,follow: false);
+                    bool result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId,follow: true);
                     context.loaderOverlay.hide();
 
                     if(result){
-                      followButton.value = false;
+                      followButton.value = true;
 
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),
-                          ),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text(
-                            'Successfully followed the page. You will receive notifications from this page.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),
-                          ),
+                          description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular', ),),
                           onlyOkButton: true,
                           onOkButtonPressed: () {
                             Navigator.pop(context, true);
@@ -244,21 +245,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                              fontFamily: 'NexaRegular',
-                            ),
-                          ),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular',
-                            ),
-                          ),
+                          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                           onlyOkButton: true,
                           buttonOkColor: const Color(0xffff0000),
                           onOkButtonPressed: () {
@@ -267,97 +256,17 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         ),
                       );
                     }
-                  }
-                },
-                child: Text('Leave',
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                    fontFamily: 'NexaBold',
-                    color: const Color(0xffFFFFFF),
-                  ),
-                ),
-                height: 35,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  side: const BorderSide(color: const Color(0xff04ECFF)),
-                ),
-                color: const Color(0xff04ECFF),
-              );
-            }else{
-              return MaterialButton(
-                elevation: 0,
-                padding: EdgeInsets.zero,
-                textColor: const Color(0xff4EC9D4),
-                splashColor: const Color(0xff4EC9D4),
-                onPressed: () async {
-                  context.loaderOverlay.show();
-                  bool result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId,follow: true);
-                  context.loaderOverlay.hide();
-
-                  if(result){
-                    followButton.value = true;
-
-                    await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', 
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),
-                        ),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully followed the page. You will receive notifications from this page.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
-                        onlyOkButton: true,
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      ),
-                    );
-                  }else{
-                    await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', 
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),
-                        ),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
-                        onlyOkButton: true,
-                        buttonOkColor: const Color(0xffff0000),
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      ),
-                    );
-                  }
-                },
-                child: Text('Join',
-                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold'),
-                ),
-                height: 35,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  side: const BorderSide(color: const Color(0xff4EC9D4)),
-                ),
-                color: const Color(0xffffffff),
-              );
-            }
-          }()),
+                  },
+                  child: Text('Join', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold'),),
+                  height: 35,
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff4EC9D4)),),
+                  color: const Color(0xffffffff),
+                );
+              }
+            }()),
+          ),
         ),
       ),
-    ),
     );
   }
 }

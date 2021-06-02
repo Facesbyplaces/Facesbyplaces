@@ -6,17 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-class UINewlyInstalled extends StatefulWidget {
+class UINewlyInstalled extends StatefulWidget{
+
   UINewlyInstalledState createState() => UINewlyInstalledState();
 }
 
-class UINewlyInstalledState extends State<UINewlyInstalled>
-    with TickerProviderStateMixin {
-  List<Widget> screens = [
-    UINewlyInstalled01(),
-    UINewlyInstalled02(),
-    UINewlyInstalled03()
-  ];
+class UINewlyInstalledState extends State<UINewlyInstalled> with TickerProviderStateMixin{
+  List<Widget> screens = [UINewlyInstalled01(), UINewlyInstalled02(), UINewlyInstalled03()];
 
   newlyInstalled() async {
     final sharedPrefs = await SharedPreferences.getInstance();
@@ -29,7 +25,7 @@ class UINewlyInstalledState extends State<UINewlyInstalled>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return BlocProvider(
       create: (BuildContext context) => BlocMiscStartNewlyInstalled(),
@@ -53,13 +49,13 @@ class UINewlyInstalledState extends State<UINewlyInstalled>
   }
 }
 
-class UINewlyInstalled01 extends StatefulWidget {
+class UINewlyInstalled01 extends StatefulWidget{
+
   UINewlyInstalled01State createState() => UINewlyInstalled01State();
 }
 
-class UINewlyInstalled01State extends State<UINewlyInstalled01> {
-  final TabController controller =
-      TabController(initialIndex: 0, length: 3, vsync: UINewlyInstalledState());
+class UINewlyInstalled01State extends State<UINewlyInstalled01>{
+  final TabController controller = TabController(initialIndex: 0, length: 3, vsync: UINewlyInstalledState());
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +72,7 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01> {
             ),
             child: new BackdropFilter(
               filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: new Container(
-                decoration: new BoxDecoration(
-                    color: const Color(0xffffffff).withOpacity(0.0)),
-              ),
+              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0)),),
             ),
           ),
           SingleChildScrollView(
@@ -89,49 +82,31 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01> {
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Image.asset(
-                    'assets/icons/logo.png',
-                    height: 100,
-                    width: 100,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Image.asset(
-                    'assets/icons/stephen-hawking.jpeg',
-                    height: SizeConfig.screenWidth! / 1.2,
-                    width: SizeConfig.screenWidth! / 1.2,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text('Stephen Hawking',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xff04ECFF),
-                    ),),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 50,),
+
+                  Image.asset('assets/icons/logo.png', height: 100, width: 100,),
+
+                  const SizedBox(height: 20,),
+
+                  Image.asset('assets/icons/stephen-hawking.jpeg', height: SizeConfig.screenWidth! / 1.2, width: SizeConfig.screenWidth! / 1.2, fit: BoxFit.cover,),
+
+                  const SizedBox(height: 20,),
+
+                  Text('Stephen Hawking', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),),
+
+                  const SizedBox(height: 20,),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        MdiIcons.starOutline,
-                        color: const Color(0xffffffff),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
+                      const Icon(MdiIcons.starOutline, color: const Color(0xffffffff),),
+
+                      const SizedBox(width: 5,),
+
                       RichText(
-                        text:  TextSpan(
+                        text: TextSpan(
                           children: <TextSpan>[
-                             TextSpan(
+                            TextSpan(
                               text: 'Born ',
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
@@ -140,30 +115,28 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01> {
                               ),
                             ),
                             TextSpan(
-                                text: 'January 8, 1942',
+                              text: 'January 8, 1942',
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                 fontFamily: 'NexaBold',
                                 color: const Color(0xfFFFFFFF),
-                              ),),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
+                  const SizedBox(height: 10,),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        MdiIcons.graveStone,
-                        color: const Color(0xffffffff),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
+                      const Icon(MdiIcons.graveStone, color: const Color(0xffffffff),),
+
+                      const SizedBox(width: 5,),
+
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
@@ -176,22 +149,22 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01> {
                               ),
                             ),
                             TextSpan(
-                                text: 'March 14, 2018',
+                              text: 'March 14, 2018',
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                 fontFamily: 'NexaBold',
                                 color: const Color(0xfFFFFFFF),
-                              ),),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    '"If human life were long enough to find the ultimate theory, everything would have been solved by previous generations. Nothing would be left to be discovered."',
+
+                  const SizedBox(height: 10,),
+
+                  Text('"If human life were long enough to find the ultimate theory, everything would have been solved by previous generations. Nothing would be left to be discovered."',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: SizeConfig.blockSizeVertical! * 2.11,
@@ -199,6 +172,7 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01> {
                       color: const Color(0xfFFFFFFF),
                     ),
                   ),
+
                   Container(
                     alignment: Alignment.center,
                     height: 50,
@@ -212,25 +186,18 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01> {
                       indicator: BoxDecoration(color: Colors.transparent),
                       indicatorSize: TabBarIndicatorSize.label,
                       tabs: [
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
                       ],
                     ),
                   ),
+
                   MaterialButton(
                     padding: EdgeInsets.zero,
-                    child: Text(
-                      'Next',
+                    child: Text('Next',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 2.64,
                         fontFamily: 'NexaRegular',
@@ -241,13 +208,12 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01> {
                     height: 45,
                     shape: const StadiumBorder(),
                     color: const Color(0xff04ECFF),
-                    onPressed: () {
+                    onPressed: (){
                       context.read<BlocMiscStartNewlyInstalled>().modify(1);
                     },
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),
@@ -259,12 +225,12 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01> {
 }
 
 class UINewlyInstalled02 extends StatefulWidget {
+
   UINewlyInstalled02State createState() => UINewlyInstalled02State();
 }
 
 class UINewlyInstalled02State extends State<UINewlyInstalled02> {
-  final TabController controller =
-      TabController(initialIndex: 1, length: 3, vsync: UINewlyInstalledState());
+  final TabController controller = TabController(initialIndex: 1, length: 3, vsync: UINewlyInstalledState());
 
   @override
   Widget build(BuildContext context) {
@@ -274,17 +240,11 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
           Container(
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.5),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: const AssetImage('assets/icons/kobe-bryant.jpeg'),
-              ),
+              image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/kobe-bryant.jpeg'),),
             ),
             child: new BackdropFilter(
               filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: new Container(
-                decoration: new BoxDecoration(
-                    color: const Color(0xffffffff).withOpacity(0.0)),
-              ),
+              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0)),),
             ),
           ),
           SingleChildScrollView(
@@ -294,45 +254,27 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Image.asset(
-                    'assets/icons/logo.png',
-                    height: 100,
-                    width: 100,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Image.asset(
-                    'assets/icons/kobe-bryant.jpeg',
-                    height: SizeConfig.screenWidth! / 1.2,
-                    width: SizeConfig.screenWidth! / 1.2,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text('Kobe Bryant',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xff04ECFF),
-                    ),),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 50,),
+
+                  Image.asset('assets/icons/logo.png', height: 100, width: 100,),
+
+                  const SizedBox(height: 20,),
+
+                  Image.asset('assets/icons/kobe-bryant.jpeg', height: SizeConfig.screenWidth! / 1.2, width: SizeConfig.screenWidth! / 1.2, fit: BoxFit.cover,),
+
+                  const SizedBox(height: 20,),
+
+                  Text('Kobe Bryant', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),),
+
+                  const SizedBox(height: 20,),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        MdiIcons.starOutline,
-                        color: const Color(0xffffffff),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
+                      const Icon(MdiIcons.starOutline, color: const Color(0xffffffff),),
+
+                      const SizedBox(width: 5,),
+
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
@@ -345,33 +287,31 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                               ),
                             ),
                             TextSpan(
-                                text: 'August 23, 1978',
+                              text: 'August 23, 1978',
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                 fontFamily: 'NexaBold',
                                 color: const Color(0xfFFFFFFF),
-                              ),),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
+                  const SizedBox(height: 10,),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        MdiIcons.graveStone,
-                        color: const Color(0xffffffff),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
+                      const Icon(MdiIcons.graveStone, color: const Color(0xffffffff),),
+
+                      const SizedBox(width: 5,),
+
                       RichText(
                         text: TextSpan(
-                          children:  <TextSpan>[
+                          children: <TextSpan>[
                             TextSpan(
                               text: 'Died ',
                               style: TextStyle(
@@ -380,23 +320,23 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                                 color: Color(0xfFFFFFFF),
                               ),
                             ),
-                             TextSpan(
-                                text: 'January 26, 2020',
+                            TextSpan(
+                              text: 'January 26, 2020',
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                 fontFamily: 'NexaBold',
                                 color: const Color(0xfFFFFFFF),
-                              ),),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    '"I\'ll do whatever it takes to win games, whether it\'s sitting on a bench waving a towel, handing a cup of water to a teammate, or hitting the game-winning shot."',
+
+                  const SizedBox(height: 10,),
+
+                  Text('"I\'ll do whatever it takes to win games, whether it\'s sitting on a bench waving a towel, handing a cup of water to a teammate, or hitting the game-winning shot."',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: SizeConfig.blockSizeVertical! * 2.11,
@@ -404,6 +344,7 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                       color: const Color(0xfFFFFFFF),
                     ),
                   ),
+
                   Container(
                     alignment: Alignment.center,
                     height: 50,
@@ -417,25 +358,17 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                       indicator: BoxDecoration(color: Colors.transparent),
                       indicatorSize: TabBarIndicatorSize.label,
                       tabs: [
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
                       ],
                     ),
                   ),
                   MaterialButton(
                     padding: EdgeInsets.zero,
-                    child: Text(
-                      'Next',
+                    child: Text('Next',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 2.64,
                         fontFamily: 'NexaRegular',
@@ -450,9 +383,8 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                       context.read<BlocMiscStartNewlyInstalled>().modify(2);
                     },
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),
@@ -464,12 +396,12 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
 }
 
 class UINewlyInstalled03 extends StatefulWidget {
+
   UINewlyInstalled03State createState() => UINewlyInstalled03State();
 }
 
 class UINewlyInstalled03State extends State<UINewlyInstalled03> {
-  final TabController controller =
-      TabController(initialIndex: 2, length: 3, vsync: UINewlyInstalledState());
+  final TabController controller = TabController(initialIndex: 2, length: 3, vsync: UINewlyInstalledState());
 
   @override
   Widget build(BuildContext context) {
@@ -479,17 +411,11 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
           Container(
             decoration: BoxDecoration(
               color: const Color(0xffffffff).withOpacity(0.5),
-              image: const DecorationImage(
-                fit: BoxFit.cover,
-                image: const AssetImage('assets/icons/stan-lee.jpeg'),
-              ),
+              image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/stan-lee.jpeg'),),
             ),
             child: new BackdropFilter(
               filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: new Container(
-                decoration: new BoxDecoration(
-                    color: const Color(0xffffffff).withOpacity(0.0)),
-              ),
+              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0)),),
             ),
           ),
           SingleChildScrollView(
@@ -499,45 +425,27 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Image.asset(
-                    'assets/icons/logo.png',
-                    height: 100,
-                    width: 100,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Image.asset(
-                    'assets/icons/stan-lee.jpeg',
-                    height: SizeConfig.screenWidth! / 1.2,
-                    width: SizeConfig.screenWidth! / 1.2,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text('Stan Lee',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xff04ECFF),
-                    ),),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 50,),
+
+                  Image.asset('assets/icons/logo.png', height: 100, width: 100,),
+
+                  const SizedBox(height: 20,),
+
+                  Image.asset('assets/icons/stan-lee.jpeg', height: SizeConfig.screenWidth! / 1.2, width: SizeConfig.screenWidth! / 1.2, fit: BoxFit.cover,),
+
+                  const SizedBox(height: 20,),
+
+                  Text('Stan Lee', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),),
+
+                  const SizedBox(height: 20,),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        MdiIcons.starOutline,
-                        color: const Color(0xffffffff),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
+                      const Icon(MdiIcons.starOutline, color: const Color(0xffffffff),),
+
+                      const SizedBox(width: 5,),
+
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
@@ -555,25 +463,23 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                 fontFamily: 'NexaBold',
                                 color: const Color(0xfFFFFFFF),
-                              ),),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
+                  const SizedBox(height: 10,),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        MdiIcons.graveStone,
-                        color: const Color(0xffffffff),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
+                      const Icon(MdiIcons.graveStone, color: const Color(0xffffffff),),
+
+                      const SizedBox(width: 5,),
+
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
@@ -586,22 +492,22 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                               ),
                             ),
                             TextSpan(
-                                text: 'November 12, 2018',
+                              text: 'November 12, 2018',
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                 fontFamily: 'NexaBold',
                                 color: const Color(0xfFFFFFFF),
-                              ),),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    '"I\'ve been the luckiest man in the world because I\'ve had friends, and to have the right friends is everything: people you can depend on, people who tell you the truth if you ask something."',
+
+                  const SizedBox(height: 10,),
+
+                  Text('"I\'ve been the luckiest man in the world because I\'ve had friends, and to have the right friends is everything: people you can depend on, people who tell you the truth if you ask something."',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: SizeConfig.blockSizeVertical! * 2.11,
@@ -609,6 +515,7 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                       color: const Color(0xfFFFFFFF),
                     ),
                   ),
+                  
                   Container(
                     alignment: Alignment.center,
                     height: 50,
@@ -622,25 +529,17 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                       indicator: BoxDecoration(color: Colors.transparent),
                       indicatorSize: TabBarIndicatorSize.label,
                       tabs: [
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
-                        const Icon(
-                          Icons.circle,
-                          size: 15,
-                        ),
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
+
+                        const Icon(Icons.circle, size: 15,),
                       ],
                     ),
                   ),
                   MaterialButton(
                     padding: EdgeInsets.zero,
-                    child: Text(
-                      'Next',
+                    child: Text('Next',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 2.64,
                         fontFamily: 'NexaRegular',
@@ -655,9 +554,8 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                       Navigator.pushReplacementNamed(context, '/start');
                     },
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+
+                  const SizedBox(height: 20,),
                 ],
               ),
             ),
@@ -667,57 +565,3 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
     );
   }
 }
-
-// body: TabBarView(
-//   children: screens,
-// ),
-// body: BlocProvider(
-//   create: (BuildContext context) => BlocMiscStartNewlyInstalled(),
-//   child: BlocBuilder<BlocMiscStartNewlyInstalled, int>(
-//     builder: (context, content){
-//       return TabBarView(
-//         children: screens,
-//       );
-//     },
-//   ),
-// ),
-
-// return BlocProvider(
-//   create: (BuildContext context) => BlocMiscStartNewlyInstalled(),
-//   child: BlocBuilder<BlocMiscStartNewlyInstalled, int>(
-//     builder: (context, content){
-//       return RepaintBoundary(
-//         // child: IndexedStack(
-//         //       index: content,
-//         //       children: screens,
-//         //     ),
-//         child: DefaultTabController(
-//           length: 3,
-//           child: Scaffold(
-//             backgroundColor: const Color(0xffeeeeee),
-//             body: Container(
-//               height: SizeConfig.screenHeight,
-//               child: TabBarView(
-//                 children: screens,
-//               ),
-//             ),
-//             // body: Stack(
-//             //   children: [
-//             //     Container(
-//             //       height: SizeConfig.screenHeight,
-//             //       // child: TabBarView(
-//             //       //   children: screens,
-//             //       // ),
-//             //       child: IndexedStack(
-//             //         index: content,
-//             //         children: screens,
-//             //       ),
-//             //     ),
-//             //   ],
-//             // ),
-//           ),
-//         ),
-//       );
-//     },
-//   ),
-// );

@@ -3,11 +3,23 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) async{
-
+  
   final sharedPrefs = await SharedPreferences.getInstance();
-  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
+  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
+  String? getAccessToken;
+  String? getUID;
+  String? getClient;
+
+  if(userSessionRegular == true){
+    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  }else if(userSessionBLM == true){
+    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  }
 
   Dio dioRequest = Dio();
 
@@ -123,8 +135,8 @@ class APIBLMShowMemorialExtendedDetails{
       memorialDetailsState: parsedJson['state'] != null ? parsedJson['state'] : '',
       memorialDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
       memorialAcceptDonations: parsedJson['accept_donations'] != null ? parsedJson['accept_donations'] : false,
-      memorialLatitude: parsedJson['latitude'] != null ? parsedJson['latitude'] : false,
-      memorialLongitude: parsedJson['longitude'] != null ? parsedJson['longitude'] : false,
+      memorialLatitude: parsedJson['latitude'] != null ? parsedJson['latitude'] : 0.0,
+      memorialLongitude: parsedJson['longitude'] != null ? parsedJson['longitude'] : 0.0,
     );
   }
 }

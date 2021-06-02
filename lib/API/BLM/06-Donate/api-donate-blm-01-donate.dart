@@ -4,11 +4,6 @@ import 'package:dio/dio.dart';
 
 Future<bool> apiBLMDonate({required String pageType, required int pageId, required double amount, required String token}) async{
 
-  // final sharedPrefs = await SharedPreferences.getInstance();
-  // String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  // String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  // String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +20,6 @@ Future<bool> apiBLMDonate({required String pageType, required int pageId, requir
     getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
-
 
   Dio dioRequest = Dio();
   FormData formData = FormData();

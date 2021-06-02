@@ -12,18 +12,12 @@ class RegularPasswordReset extends StatefulWidget {
   final String resetToken;
   RegularPasswordReset({required this.resetToken});
 
-  RegularPasswordResetState createState() =>
-      RegularPasswordResetState(resetToken: resetToken);
+  RegularPasswordResetState createState() => RegularPasswordResetState();
 }
 
 class RegularPasswordResetState extends State<RegularPasswordReset> {
-  final String resetToken;
-  RegularPasswordResetState({required this.resetToken});
-
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 =
-      GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 =
-      GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
   @override
   void initState() {
@@ -32,17 +26,17 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return RepaintBoundary(
       child: WillPopScope(
-        onWillPop: () async {
+        onWillPop: () async{
           return Navigator.canPop(context);
         },
         child: GestureDetector(
-          onTap: () {
+          onTap: (){
             FocusNode currentFocus = FocusScope.of(context);
-            if (!currentFocus.hasPrimaryFocus) {
+            if (!currentFocus.hasPrimaryFocus){
               currentFocus.unfocus();
             }
           },
@@ -64,19 +58,16 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                icon: Icon(
-                                  Icons.arrow_back,
-                                  color: Color(0xff000000),
-                                  size: SizeConfig.blockSizeVertical! * 3.65,
-                                ),
+                                icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                               ),
                             ),
                           ],
                         ),
+                        
                         const SizedBox(height: 80),
+
                         Center(
-                          child: Text(
-                            'Change Password',
+                          child: Text('Change Password',
                             style: TextStyle(
                               fontSize: SizeConfig.blockSizeVertical! * 5.28,
                               fontFamily: 'NexaBold',
@@ -84,13 +75,11 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 40,
-                        ),
+
+                        const SizedBox(height: 40,),
+
                         Center(
-                         // padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8, right: SizeConfig.blockSizeHorizontal! * 11.25),
-                          child: Text(
-                            'Please enter your new password',
+                          child: Text('Please enter your new password',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: SizeConfig.blockSizeVertical! * 2.64,
@@ -99,9 +88,9 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 80,
-                        ),
+
+                        const SizedBox(height: 80,),
+
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                           child: MiscRegularInputFieldTemplate(
@@ -116,9 +105,9 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                             obscureText: true,
                           ),
                         ),
-                        const SizedBox(
-                          height: 40,
-                        ),
+
+                        const SizedBox(height: 40,),
+
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                           child: MiscRegularInputFieldTemplate(
@@ -133,9 +122,9 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                             obscureText: true,
                           ),
                         ),
-                        const SizedBox(
-                          height: 80,
-                        ),
+
+                        const SizedBox(height: 80,),
+
                         MiscRegularButtonTemplate(
                           buttonText: 'Change',
                           buttonTextStyle: TextStyle(
@@ -146,155 +135,77 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                           width: SizeConfig.screenWidth! / 2,
                           height: 45,
                           buttonColor: const Color(0xff04ECFF),
-                          onPressed: () async {
-                            if (_key1.currentState!.controller.text == '' ||
-                                _key2.currentState!.controller.text == '') {
+                          onPressed: () async{
+                            if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                               await showDialog(
-                                  context: context,
-                                  builder: (_) => AssetGiffyDialog(
-                                    image: Image.asset(
-                                      'assets/icons/cover-icon.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                    title: Text(
-                                      'Error',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                          fontFamily: 'NexaRegular'),
-                                    ),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text(
-                                      'Please complete the form before submitting.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: SizeConfig
-                                              .blockSizeVertical! *
-                                              2.87,
-                                          fontFamily:
-                                          'NexaRegular'),
-                                    ),
-                                    onlyOkButton: true,
-                                    buttonOkColor: const Color(0xffff0000),
-                                    onOkButtonPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  ));
-                            } else if (_key1.currentState!.controller.text !=
-                                _key2.currentState!.controller.text) {
-                              await showDialog(
-                                  context: context,
-                                  builder: (_) => AssetGiffyDialog(
-                                    image: Image.asset(
-                                      'assets/icons/cover-icon.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                    title: Text(
-                                      'Error',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                          fontFamily: 'NexaRegular'),
-                                    ),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text(
-                                      'Passwords don\'t match. Please try again.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: SizeConfig
-                                              .blockSizeVertical! *
-                                              2.87,
-                                          fontFamily:
-                                          'NexaRegular'),
-                                    ),
-                                    onlyOkButton: true,
-                                    buttonOkColor: const Color(0xffff0000),
-                                    onOkButtonPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  ));
-                            } else {
-                              context.loaderOverlay.show();
-                              bool result = await apiRegularPasswordChange(
-                                password: _key1.currentState!.controller.text,
-                                passwordConfirmation:
-                                _key2.currentState!.controller.text,
-                                resetToken: resetToken,
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                  onlyOkButton: true,
+                                  buttonOkColor: const Color(0xffff0000),
+                                  onOkButtonPressed: (){
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
                               );
+                            }else if(_key1.currentState!.controller.text != _key2.currentState!.controller.text){
+                              await showDialog(
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                  onlyOkButton: true,
+                                  buttonOkColor: const Color(0xffff0000),
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
+                              );
+                            }else{
+                              context.loaderOverlay.show();
+                              bool result = await apiRegularPasswordChange(password: _key1.currentState!.controller.text, passwordConfirmation: _key2.currentState!.controller.text,resetToken: widget.resetToken,);
                               context.loaderOverlay.hide();
 
-                              if (result) {
+                              if(result){
                                 await showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset(
-                                        'assets/icons/cover-icon.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                      title: Text(
-                                        'Success',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                            fontFamily: 'NexaRegular'),
-                                      ),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text(
-                                        'Successfully updated the password.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: SizeConfig
-                                                .blockSizeVertical! *
-                                                2.87,
-                                            fontFamily:
-                                            'NexaRegular'),
-                                      ),
-                                      onlyOkButton: true,
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                        Navigator.of(context)
-                                            .pushNamedAndRemoveUntil(
-                                            '/start',
-                                                (Route<dynamic> route) =>
-                                            false);
-                                      },
-                                    ));
-                              } else {
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                    onlyOkButton: true,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                      Navigator.of(context).pushNamedAndRemoveUntil('/start', (Route<dynamic> route) =>false);
+                                    },
+                                  ),
+                                );
+                              }else{
                                 await showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset(
-                                        'assets/icons/cover-icon.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                      title: Text(
-                                        'Error',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                            fontFamily: 'NexaRegular'),
-                                      ),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text(
-                                        'Something went wrong. Please try again.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: SizeConfig
-                                                .blockSizeVertical! *
-                                                2.87,
-                                            fontFamily:
-                                            'NexaRegular'),
-                                      ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: const Color(0xffff0000),
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    ));
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                    onlyOkButton: true,
+                                    buttonOkColor: const Color(0xffff0000),
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  ),
+                                );
                               }
                             }
                           },
                         ),
+
                         const SizedBox(height: 20),
                       ],
                     ),

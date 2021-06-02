@@ -106,6 +106,8 @@ class RegularLoginState extends State<RegularLogin> {
                               final fb = FacebookLogin();
                               bool isLoggedIn = await fb.isLoggedIn;
 
+                              print('isLoggedIn is $isLoggedIn');
+
                               if (isLoggedIn == true) {
                                 context.loaderOverlay.show();
 

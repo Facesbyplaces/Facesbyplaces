@@ -35,6 +35,6 @@ Future<bool> apiBLMSignInWithGoogle({required String firstName, required String 
     
     return true;
   }else{
-    return false;
+    throw Exception('Something went wrong. Please try again');
   }
 }

@@ -38,7 +38,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    print('Upload photo screen build!');
     return ValueListenableBuilder(
       valueListenable: image,
       builder: (_, File imageListener, __) => RepaintBoundary(
@@ -78,7 +77,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         await getImage();
                       }
                     }
-                    
                   },
                   child: Container(
                     height: SizeConfig.screenWidth! / 1.2,
@@ -133,14 +131,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 const SizedBox(height: 80),
 
                 MiscRegularButtonTemplate(
-                  buttonText: imageListener.path != ''
-                  ? 'Sign Up'
-                  : 'Next',
-                  buttonTextStyle: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold, 
-                    color: const Color(0xffffffff),
-                  ),
+                  buttonText: imageListener.path != '' ? 'Sign Up' : 'Next',
+                  buttonTextStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
                   width: SizeConfig.screenWidth! / 2,
                   height: 45,
                   buttonColor: const Color(0xff04ECFF),
@@ -159,18 +151,9 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                           builder: (_) => 
                             AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(
-                                fontSize:
-                                SizeConfig.blockSizeVertical! * 3.16,
-                                fontFamily: 'NexaRegular'),),
+                            title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'),
-                            ),
+                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                             onlyOkButton: true,
                             buttonOkColor: Colors.red,
                             onOkButtonPressed: () {
@@ -182,21 +165,11 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                     }else{
                       await showDialog(
                         context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
+                        builder: (_) => AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(
-                              fontSize:
-                              SizeConfig.blockSizeVertical! * 3.16,
-                              fontFamily: 'NexaRegular'),),
+                          title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Please upload a photo.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize:
-                                SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular'),
-                          ),
+                          description: Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                           onlyOkButton: true,
                           buttonOkColor: Colors.red,
                           onOkButtonPressed: () {
@@ -244,7 +217,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 ),
 
                 const SizedBox(height: 20),
-
               ],
             ),
           ),
@@ -253,4 +225,3 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
     );
   }
 }
-

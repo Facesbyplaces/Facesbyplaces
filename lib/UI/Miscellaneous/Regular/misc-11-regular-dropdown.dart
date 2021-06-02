@@ -16,6 +16,8 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:io';
 
+import 'misc-06-regular-button.dart';
+
 class MiscRegularDropDownTemplate extends StatefulWidget {
   final int postId;
   final bool likePost;
@@ -216,97 +218,60 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   barrierLabel: 'Dialog',
                   transitionDuration: Duration(milliseconds: 0),
                   pageBuilder: (_, __, ___) {
-                    return Material(
-                      type: MaterialType.transparency,
-                      child: SizedBox.expand(
-                        child: SafeArea(
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 50,
-                                padding: const EdgeInsets.only(right: 20.0),
-                                alignment: Alignment.centerRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Icon(
-                                    Icons.close_rounded,
-                                    color: const Color(0xffffffff),
-                                    size: 30,
-                                  ),
-                                ),
+                    return SizedBox.expand(
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 50,
+                              padding: EdgeInsets.only(right: 20.0),
+                              alignment: Alignment.centerRight,
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
                               ),
-                              Expanded(
-                                child: Container(
-                                  height: SizeConfig.screenHeight! - 400,
-                                  color: Colors.black26,
-                                  padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 10, right: SizeConfig.blockSizeHorizontal! * 10, top: SizeConfig.blockSizeHorizontal! * 20, bottom: SizeConfig.blockSizeHorizontal! * 25),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xffffffff),
-                                      border: Border.all(color: Color(0xffffffff),),
-                                      borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Spacer(),
-                                        Center(
-                                          child: RepaintBoundary(
-                                            key: qrKey,
-                                            child: QrImage(
-                                              data: qrData,
-                                              version: QrVersions.auto,
-                                              size: 320,
-                                              gapless: false,
-                                            ),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          'Karen Cruz Memorial',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                            fontFamily: 'NexaBold',
-                                            color: Color(0xff2F353D),
-                                          ),
-                                        ),
-                                        Text(
-                                          'QR Code',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                            fontFamily: 'NexaBold',
-                                            color: const Color(0xff2F353D),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              /* const SizedBox(
-                              height: 20,
                             ),
+
+                            Expanded(
+                              child: Container(
+                                height: SizeConfig.screenHeight! - 400,
+                                color: Color(0xffffffff),
+                                child: Center(
+                                  child: RepaintBoundary(
+                                    key: qrKey,
+                                    child: QrImage(
+                                      data: qrData,
+                                      version: QrVersions.auto,
+                                      size: 320,
+                                      gapless: false,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            SizedBox(height: 20,),
+
                             MiscRegularButtonTemplate(
                               buttonText: 'Share',
-                              buttonTextStyle: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xffffffff),
+                              buttonTextStyle: TextStyle(
+                                fontSize: 16, 
+                                fontWeight: FontWeight.bold, 
+                                color: Color(0xffffffff),
                               ),
                               width: SizeConfig.screenWidth! / 2,
                               height: 45,
-                              buttonColor: const Color(0xff04ECFF),
-                              onPressed: () async {
+                              buttonColor: Color(0xff04ECFF), 
+                              onPressed: () async{
                                 await shareQRCode(qrData);
                               },
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),*/
-                            ],
-                          ),
+
+                            SizedBox(height: 20,),
+
+                          ],
                         ),
                       ),
                     );
@@ -572,97 +537,60 @@ class MiscRegularDropDownMemorialTemplateState
                   barrierLabel: 'Dialog',
                   transitionDuration: Duration(milliseconds: 0),
                   pageBuilder: (_, __, ___) {
-                    return Material(
-                      type: MaterialType.transparency,
-                      child: SizedBox.expand(
-                        child: SafeArea(
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 50,
-                                padding: const EdgeInsets.only(right: 20.0),
-                                alignment: Alignment.centerRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Icon(
-                                    Icons.close_rounded,
-                                    color: const Color(0xffffffff),
-                                    size: 30,
-                                  ),
-                                ),
+                    return SizedBox.expand(
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 50,
+                              padding: const EdgeInsets.only(right: 20.0),
+                              alignment: Alignment.centerRight,
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+                                },
+                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                               ),
-                              Expanded(
-                                child: Container(
-                                  height: SizeConfig.screenHeight! - 400,
-                                  color: Colors.black26,
-                                  padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 10, right: SizeConfig.blockSizeHorizontal! * 10, top: SizeConfig.blockSizeHorizontal! * 20, bottom: SizeConfig.blockSizeHorizontal! * 25),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xffffffff),
-                                      border: Border.all(color: Color(0xffffffff),),
-                                      borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Spacer(),
-                                        Center(
-                                          child: RepaintBoundary(
-                                            key: qrKey,
-                                            child: QrImage(
-                                              data: qrData,
-                                              version: QrVersions.auto,
-                                              size: 320,
-                                              gapless: false,
-                                            ),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          'Karen Cruz Memorial',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                            fontFamily: 'NexaBold',
-                                            color: Color(0xff2F353D),
-                                          ),
-                                        ),
-                                        Text(
-                                          'QR Code',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                            fontFamily: 'NexaBold',
-                                            color: const Color(0xff2F353D),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              /* const SizedBox(
-                              height: 20,
                             ),
+
+                            Expanded(
+                              child: Container(
+                                height: SizeConfig.screenHeight! - 400,
+                                color: const Color(0xffffffff),
+                                child: Center(
+                                  child: RepaintBoundary(
+                                    key: qrKey,
+                                    child: QrImage(
+                                      data: qrData,
+                                      version: QrVersions.auto,
+                                      size: 320,
+                                      gapless: false,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 20,),
+
                             MiscRegularButtonTemplate(
                               buttonText: 'Share',
                               buttonTextStyle: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 16, 
+                                fontWeight: FontWeight.bold, 
                                 color: const Color(0xffffffff),
                               ),
                               width: SizeConfig.screenWidth! / 2,
                               height: 45,
-                              buttonColor: const Color(0xff04ECFF),
-                              onPressed: () async {
+                              buttonColor: const Color(0xff04ECFF), 
+                              onPressed: () async{
                                 await shareQRCode(qrData);
                               },
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),*/
-                            ],
-                          ),
+
+                            const SizedBox(height: 20,),
+
+                          ],
                         ),
                       ),
                     );

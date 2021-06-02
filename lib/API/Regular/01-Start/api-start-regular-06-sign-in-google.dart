@@ -36,6 +36,6 @@ Future<bool> apiRegularSignInWithGoogle({required String firstName, required Str
 
     return true;
   }else{
-    return false;
+    throw Exception('Something went wrong. Please try again');
   }
 }
