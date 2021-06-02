@@ -11,13 +11,22 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end
 
         if @user
-          params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-          @user.password = @user.password_confirmation = params[:password]
-          @user.update({ device_token: params[:device_token] })
-          @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
-          super
-        else
+          if params[:password].present? 
+            @user.update({ device_token: params[:device_token] })
+            @user.save
+            render json: { success: true, user:  @user, status: 200 }, status: 200
+            super
+          else
+            params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+            puts "Password: "
+            puts params[:password]
+            @user.password = @user.password_confirmation = params[:password]
+            @user.update({ device_token: params[:device_token] })
+            @user.save
+            render json: { success: true, user:  @user, status: 200 }, status: 200
+            super
+          end
+        else # If user's first login
           if account_type == 1
             @user = User.new(sign_up_params)
           elsif account_type == 2
@@ -43,12 +52,14 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           end
 
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+          puts "Password: "
+          puts params[:password]
           @user.password = @user.password_confirmation = params[:password]
           @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
+          # render json: { success: true, user:  @user, status: 200 }, status: 200
 
           Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
-          super
+          super || render_create_success2 && super
         end
 
       #Google Login
@@ -76,12 +87,19 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
         if @user
           params[:email] = @user.email
-          params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-          @user.password = @user.password_confirmation = params[:password]
-          @user.update({ device_token: params[:device_token] })
-          @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
-          super
+          if params[:password].present? 
+            @user.update({ device_token: params[:device_token] })
+            @user.save
+            render json: { success: true, user:  @user, status: 200 }, status: 200
+            super
+          else
+            params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+            @user.password = @user.password_confirmation = params[:password]
+            @user.update({ device_token: params[:device_token] })
+            @user.save
+            render json: { success: true, user:  @user, status: 200 }, status: 200
+            super
+          end
         else
 
           if account_type == 1
@@ -212,11 +230,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       
     end
     
+    protected
+
     def sign_up_params
       params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
     end
-
-    protected
 
     def valid_params?(key, val)
       params[:facebook_id].present? || params[:google_id].present? ? "" : resource_params[:password] && key && val

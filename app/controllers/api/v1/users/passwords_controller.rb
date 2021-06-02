@@ -1,5 +1,11 @@
 class Api::V1::Users::PasswordsController < DeviseTokenAuth::PasswordsController
+    before_action :check_user
 
+    def update
+      user().update(password_update: true)
+      super
+    end
+    
     protected
 
     def render_update_success

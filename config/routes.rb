@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
+    passwords: 'api/v1/users/passwords',
   }, :skip => [:omniauth_callbacks]
   
   # Route for ALM User
@@ -36,6 +37,8 @@ Rails.application.routes.draw do
         resources :resend_verification_code, only: [:create]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
+
+        post 'check_password', to: 'users#check_password'
 
         post 'signin-blm-guest', to: 'users#blm_guest'
         post 'signin-alm-guest', to: 'users#alm_guest'

@@ -1,5 +1,5 @@
 class Api::V1::Users::UsersController < ApplicationController
-    before_action :check_user, except: [:guest, :create_guest_user]
+    before_action :check_user, except: [:guest, :create_guest_user, :check_password]
 
     ## SIGN_IN AS GUEST
     # def blm_guest
@@ -24,6 +24,21 @@ class Api::V1::Users::UsersController < ApplicationController
     #     u
     # end
     ##
+
+    def check_password
+        account_type = params[:account_type].to_i
+        if account_type == 1
+          @user = User.where(email: params[:email], account_type: params[:account_type]).first
+        elsif account_type == 2
+          @user = AlmUser.where(email: params[:email], account_type: params[:account_type]).first
+        end
+  
+        if @user.password_update == true
+          render json: { success: true, password_updated: @user.password_update, params:  sign_up_params, status: 200 }, status: 200
+        else
+            render json: { success: true, password_updated: @user.password_update, params:  sign_up_params, status: 200 }, status: 200  
+        end
+    end
     
     def edit
         if params[:account_type] == "1"
@@ -251,6 +266,10 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     private
+    def sign_up_params
+        params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
+    end
+
     def updateDetails_params
         params.permit(:first_name, :last_name, :email, :phone_number, :question)
     end
