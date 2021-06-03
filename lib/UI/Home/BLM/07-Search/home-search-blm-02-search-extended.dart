@@ -40,7 +40,6 @@ class BLMSearchMainPosts{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
   const BLMSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
@@ -54,7 +53,6 @@ class BLMSearchMainSuggested{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
   const BLMSearchMainSuggested({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
@@ -68,7 +66,6 @@ class BLMSearchMainNearby{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
   const BLMSearchMainNearby({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
@@ -82,7 +79,6 @@ class BLMSearchMainBLM{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
   const BLMSearchMainBLM({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
@@ -105,7 +101,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   ValueNotifier<int> tabCount2 = ValueNotifier<int>(0);
   ValueNotifier<int> tabCount3 = ValueNotifier<int>(0);
   ValueNotifier<int> tabCount4 = ValueNotifier<int>(0);
-
   TextEditingController controller = TextEditingController();
   ScrollController scrollController1 = ScrollController();
   ScrollController scrollController2 = ScrollController();
@@ -119,16 +114,16 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   List<BLMSearchMainSuggested> searchSuggested = [];
   List<BLMSearchMainNearby> searchNearby = [];
   List<BLMSearchMainBLM> searchBlm = [];
-  int postItemRemaining = 1;
-  int suggestedItemRemaining = 1;
-  int nearbyBlmItemsRemaining = 1;
   int nearbyMemorialItemsRemaining = 1;
+  int nearbyBlmItemsRemaining = 1;
+  int suggestedItemRemaining = 1;
+  int postItemRemaining = 1;
   int blmItemRemaining = 1;
+  String searchKeyword = '';
   int page1 = 1;
   int page2 = 1;
   int page3 = 1;
   int page4 = 1;
-  String searchKeyword = '';
 
   Future<void> onRefresh1() async{
     onLoading1();
@@ -399,7 +394,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     print('BLM Search screen rebuild!');
     return WillPopScope(
@@ -449,28 +444,22 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_back,
-                                        color: const Color(0xffffffff),
-                                        size: SizeConfig.blockSizeVertical! *
-                                            3.65,
-                                      ),
-                                      onPressed: () {
+                                      icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
+                                      onPressed: (){
                                         Navigator.pop(context);
                                       },
                                     ),
                                   ),
+
                                   Spacer(),
+
                                   Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    width:
-                                    SizeConfig.blockSizeHorizontal! * 79.06,
+                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
+                                    width: SizeConfig.blockSizeHorizontal! * 79.06,
                                     child: Row(
                                       children: [
                                         IconButton(
+                                          icon: const Icon(Icons.search, color: const Color(0xff888888),),
                                           onPressed: () async{
                                             if(controller.text == ''){
                                               onSearch.value = false;
@@ -512,7 +501,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               }
                                             }
                                           },
-                                          icon: const Icon(Icons.search, color: const Color(0xff888888),),
                                         ),
                                         Expanded(
                                           child: TextFormField(
@@ -569,61 +557,24 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                                 }
                                               }
                                             },
-                                            style: TextStyle(
-                                              fontSize: SizeConfig
-                                                  .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular',
-                                              color: Color(0xffB1B1B1),
-                                            ),
+                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                             decoration: InputDecoration(
-                                              contentPadding:
-                                              const EdgeInsets.all(15.0),
+                                              contentPadding: const EdgeInsets.all(15.0),
                                               filled: true,
-                                              fillColor:
-                                              const Color(0xffffffff),
-                                              focusColor:
-                                              const Color(0xffffffff),
+                                              fillColor: const Color(0xffffffff),
+                                              focusColor: const Color(0xffffffff),
                                               hintText: 'Search Memorial',
-                                              hintStyle: TextStyle(
-                                                fontSize: SizeConfig
-                                                    .blockSizeVertical! *
-                                                    2.11,
-                                                fontFamily: 'NexaRegular',
-                                                color: Color(0xffB1B1B1),
-                                              ),
-                                              border: const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: const Color(
-                                                        0xffffffff)),
-                                                borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(25)),
-                                              ),
-                                              enabledBorder:
-                                              const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: const Color(
-                                                        0xffffffff)),
-                                                borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(25)),
-                                              ),
-                                              focusedBorder:
-                                              const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: const Color(
-                                                        0xffffffff)),
-                                                borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(25)),
-                                              ),
+                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
                                   ),
+
                                   Spacer(),
                                 ],
                               ),
@@ -683,47 +634,13 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                       }
                                     },
                                     tabs: [
+                                      Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
 
-                                      Center(
-                                        child: Text(
-                                          'Post',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig
-                                                  .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'Suggested',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig
-                                                  .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'Nearby',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig
-                                                  .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'BLM',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig
-                                                  .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                      ),
+                                      Center(child: Text('Suggested', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('Nearby', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('BLM', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
                                     ],
                                   ),
                                 ),
@@ -735,66 +652,63 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 switch(toggleListener){
                                   case 0: return Container(height: 20,);
                                   case 1: return Container(height: 20,);
-                                  case 2: return
-                                    Container(
-                                      height: 40,
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          children: [
-                                            const SizedBox(width: 20,),
+                                  case 2: return 
+                                  Container(
+                                    height: 40,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(width: 20,),
 
-                                            const Icon(Icons.location_pin, color: const Color(0xff979797),),
+                                          const Icon(Icons.location_pin, color: const Color(0xff979797),),
 
-                                            const SizedBox(width: 20,),
+                                          const SizedBox(width: 20,),
 
-                                            ((){
-                                              if(widget.currentLocation != ''){
-                                                return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12),);
-                                              }else{
-                                                return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                              }
-                                            }()),
-                                          ],
-                                        ),
+                                          ((){
+                                            if(widget.currentLocation != ''){
+                                              return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12),);
+                                            }else{
+                                              return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                            }
+                                          }()),
+                                        ],
                                       ),
-                                    );
+                                    ),
+                                  );
                                   case 3: return
-                                    Container(
-                                      height: 40,
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          children: [
-                                            const SizedBox(width: 20,),
+                                  Container(
+                                    height: 40,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(width: 20,),
 
-                                            const Icon(Icons.location_pin, color: const Color(0xff979797),),
+                                          const Icon(Icons.location_pin, color: const Color(0xff979797),),
 
-                                            const SizedBox(width: 20,),
+                                          const SizedBox(width: 20,),
 
-                                            ((){
-                                              if(widget.currentLocation != ''){
-                                                return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                              }else{
-                                                return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
-                                              }
-                                            }()),
-                                          ],
-                                        ),
+                                          ((){
+                                            if(widget.currentLocation != ''){
+                                              return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                            }else{
+                                              return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                            }
+                                          }()),
+                                        ],
                                       ),
-                                    );
+                                    ),
+                                  );
                                 }
                               }()),
                             ),
 
                             Expanded(
                               child: Container(
-                                child: isGuestLoggedInListener
-                                    ? BackdropFilter(
-                                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                                  child: MiscBLMLoginToContinue(),
-                                )
-                                    : ((){
+                                child: isGuestLoggedInListener 
+                                ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: MiscBLMLoginToContinue(),)
+                                : ((){
                                   switch(toggleListener){
                                     case 0: return searchPostExtended();
                                     case 1: return searchSuggestedExtended();

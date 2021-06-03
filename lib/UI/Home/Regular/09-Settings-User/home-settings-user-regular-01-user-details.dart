@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dar
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-03-show-other-details-status.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-12-update-user-profile-picture.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-14-check-account.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
@@ -11,6 +12,7 @@ import 'package:facesbyplaces/UI/ui-01-get-started.dart';
 import 'home-settings-user-regular-02-user-update-details.dart';
 import 'home-settings-user-regular-03-change-password.dart';
 import 'home-settings-user-regular-04-other-details.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -24,15 +26,10 @@ class HomeRegularUserProfileDetails extends StatefulWidget {
   final int userId;
   const HomeRegularUserProfileDetails({required this.userId});
 
-  HomeRegularUserProfileDetailsState createState() =>
-      HomeRegularUserProfileDetailsState(userId: userId);
+  HomeRegularUserProfileDetailsState createState() => HomeRegularUserProfileDetailsState();
 }
 
-class HomeRegularUserProfileDetailsState
-    extends State<HomeRegularUserProfileDetails> {
-  final int userId;
-  HomeRegularUserProfileDetailsState({required this.userId});
-
+class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDetails> {
   Future<APIRegularShowProfileInformation>? showProfile;
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
@@ -66,338 +63,219 @@ class HomeRegularUserProfileDetailsState
     return Scaffold(
       body: FutureBuilder<APIRegularShowProfileInformation>(
         future: showProfile,
-        builder: (context, profile) {
-          if (profile.hasData) {
+        builder: (context, profile){
+          if(profile.hasData){
             return WeSlide(
               controller: controller,
               panelMaxSize: SizeConfig.screenHeight! / 1.5,
-              // panelBackground: Color(0xffECF0F1),
               backgroundColor: const Color(0xffECF0F1),
               panel: Container(
                 height: SizeConfig.screenHeight! / 1.5,
                 padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-                decoration: const BoxDecoration(
-                  color: const Color(0xffffffff),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: const Radius.circular(50.0),
-                  ),
-                ),
+                decoration: const BoxDecoration(color: const Color(0xffffffff), borderRadius: const BorderRadius.only(topLeft: const Radius.circular(50.0),),),
                 child: Column(
                   children: [
-                    Expanded(
-                      child: Container(),
-                    ),
+                    Expanded(child: Container(),),
+
                     ListTile(
-                      onTap: () {
-                        print('The user id is $userId');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    HomeRegularUserUpdateDetails(
-                                      userId: userId,
-                                    )));
+                      onTap: (){
+                        print('The user id is ${widget.userId}');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: widget.userId,)));
                       },
-                      title: Text(
-                        'Update Details',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xff000000),
-                        ),
-                      ),
-                      subtitle: Text(
-                        'Update your account details',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xffBDC3C7),
-                        ),
-                      ),
+                      title: Text('Update Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      subtitle: Text('Update your account details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
-                    const Divider(
-                      height: 20,
-                      color: const Color(0xff888888),
-                    ),
+
+                    const Divider(height: 20, color: const Color(0xff888888),),
+
                     ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    HomeRegularUserChangePassword(
-                                      userId: userId,
-                                    )));
-                      },
-                      title: Text(
-                        'Password',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xff000000),
-                        ),
-                      ),
-                      subtitle: Text(
-                        'Change your login password',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xffBDC3C7),
-                        ),
-                      ),
-                    ),
-                    const Divider(
-                      height: 20,
-                      color: const Color(0xff888888),
-                    ),
-                    ListTile(
-                      onTap: () async {
+                      onTap: () async{
+                        final sharedPrefs = await SharedPreferences.getInstance();
+                        bool socialAppSession = sharedPrefs.getBool('regular-social-app-session') ?? false;
                         context.loaderOverlay.show();
-                        APIRegularShowOtherDetailsStatus result =
-                            await apiRegularShowOtherDetailsStatus(
-                                userId: userId);
+                        bool checkAccount = await apiRegularCheckAccount(email: profile.data!.showProfileInformationEmail).onError((error, stackTrace){
+                          context.loaderOverlay.hide();
+                          showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Error: $error.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: SizeConfig.blockSizeVertical! * 2.87,
+                                  fontFamily: 'NexaRegular'
+                                ),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: const Color(0xffff0000),
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          throw Exception('$error');
+                        });
                         context.loaderOverlay.hide();
 
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeRegularUserOtherDetails(
-                                    userId: userId,
-                                    toggleBirthdate: result
-                                        .showOtherDetailsStatusHideBirthdate,
-                                    toggleBirthplace: result
-                                        .showOtherDetailsStatusHideBirthplace,
-                                    toggleAddress: result
-                                        .showOtherDetailsStatusHideAddress,
-                                    toggleEmail:
-                                        result.showOtherDetailsStatusHideEmail,
-                                    toggleNumber: result
-                                        .showOtherDetailsStatusHidePhoneNumber)));
+                        print('The value of socialAppSession is $socialAppSession');
+                        print('The value of checkAccount is $checkAccount');
+
+                        if(socialAppSession == true && checkAccount == false){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: widget.userId, isAddPassword: true,)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: widget.userId, isAddPassword: false,)));
+                        }
                       },
-                      title: Text(
-                        'Other info',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xff000000),
-                        ),
-                      ),
-                      subtitle: Text(
-                        'Optional informations you can share',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xffBDC3C7),
-                        ),
-                      ),
+                      title: Text('Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      subtitle: Text('Change your login password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
-                    const Divider(
-                      height: 20,
-                      color: const Color(0xff888888),
+
+                    const Divider(height: 20, color: const Color(0xff888888),),
+
+                    ListTile(
+                      onTap: () async{
+                        context.loaderOverlay.show();
+                        APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
+                        context.loaderOverlay.hide();
+
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                          HomeRegularUserOtherDetails(
+                              userId: widget.userId,
+                              toggleBirthdate: result.showOtherDetailsStatusHideBirthdate,
+                              toggleBirthplace: result.showOtherDetailsStatusHideBirthplace,
+                              toggleAddress: result.showOtherDetailsStatusHideAddress,
+                              toggleEmail: result.showOtherDetailsStatusHideEmail,
+                              toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,
+                            ),
+                          ),
+                        );
+                      },
+                      title: Text('Other info', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      subtitle: Text('Optional informations you can share',style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
+
+                    const Divider(height: 20, color: const Color(0xff888888),),
+
                     ListTile(
                       onTap: () => {},
-                      title: Text(
-                        'Privacy Settings',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xff000000),
-                        ),
-                      ),
-                      subtitle: Text(
-                        'Control what others see',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xffBDC3C7),
-                        ),
-                      ),
+                      title: Text('Privacy Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      subtitle: Text('Control what others see', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
-                    const Divider(
-                      height: 20,
-                      color: const Color(0xff888888),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+
+                    const Divider(height: 20, color: const Color(0xff888888),),
+
+                    const SizedBox(height: 20,),
+
                     MiscRegularButtonTemplate(
                       buttonText: 'Logout',
-                      buttonTextStyle: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                        fontFamily: 'NexaBold',
-                        color: const Color(0xffffffff),
-                      ),
+                      buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
-                      onPressed: () async {
+                      buttonColor: const Color(0xff04ECFF),
+                      onPressed: () async{
                         bool logoutResult = await showDialog(
-                            context: (context),
-                            builder: (build) => const MiscRegularConfirmDialog(
-                                  title: 'Log out',
-                                  content:
-                                      'Are you sure you want to log out from this account?',
-                                  confirmColor_1: const Color(0xff000000),
-                                  confirmColor_2: const Color(0xff888888),
-                                ));
+                          context: (context),
+                          builder: (build) => const MiscRegularConfirmDialog(
+                            title: 'Log out',
+                            content: 'Are you sure you want to log out from this account?',
+                            confirmColor_1: const Color(0xff000000),
+                            confirmColor_2: const Color(0xff888888),
+                          ),
+                        );
 
                         print('The logoutResult is $logoutResult');
 
-                        if (logoutResult) {
+                        if(logoutResult){
                           context.loaderOverlay.show();
                           bool result = await apiRegularLogout();
                           context.loaderOverlay.hide();
 
-                          if (result) {
-                            Route newRoute = MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const UIGetStarted());
-                            Navigator.pushAndRemoveUntil(
-                                context, newRoute, (route) => false);
-                          } else {
+                          if(result){
+                            Route newRoute = MaterialPageRoute(builder: (BuildContext context) => const UIGetStarted());
+                            Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                          }else{
                             await showDialog(
-                                context: context,
-                                builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset(
-                                        'assets/icons/cover-icon.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                  title: Text(
-                                    'Error',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize:
-                                        SizeConfig.blockSizeVertical! * 3.16,
-                                        fontFamily: 'NexaRegular'),
-                                  ),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text(
-                                    'Something went wrong. Please try again.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize:
-                                        SizeConfig.blockSizeVertical! * 2.87,
-                                        fontFamily: 'NexaRegular'),
-                                  ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: const Color(0xffff0000),
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    ));
+                              context: context,
+                              builder: (_) => AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                onlyOkButton: true,
+                                buttonOkColor: const Color(0xffff0000),
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              ),
+                            );
                           }
                         }
                       },
-                      buttonColor: const Color(0xff04ECFF),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'V.1.1.0',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                        fontFamily: 'NexaBold',
-                        color: const Color(0xff888888),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
+
+                    const SizedBox(height: 20,),
+
+                    Text('V.1.1.0', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
+
+                    Expanded(child: Container(),),
                   ],
                 ),
               ),
               body: Stack(
                 children: [
-                  Container(
-                    height: SizeConfig.screenHeight,
-                    color: const Color(0xffECF0F1),
-                  ),
+                  Container(height: SizeConfig.screenHeight, color: const Color(0xffECF0F1),),
+
                   Container(
                     height: SizeConfig.screenHeight! / 2.5,
                     child: Stack(
                       children: [
-                        CustomPaint(
-                          size: Size.infinite,
-                          painter: MiscRegularCurvePainter(),
-                        ),
+                        CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
+
                         Positioned(
                           bottom: 50,
                           left: (SizeConfig.screenWidth! / 2) - 120,
                           child: GestureDetector(
-                            onTap: () async {
+                            onTap: () async{
                               bool getImage = await getProfileImage();
 
-                              if (getImage) {
+                              if(getImage){
                                 context.loaderOverlay.show();
-                                bool result =
-                                    await apiRegularUpdateUserProfilePicture(
-                                        image: profileImage, userId: userId);
+                                bool result = await apiRegularUpdateUserProfilePicture(image: profileImage, userId: widget.userId);
                                 context.loaderOverlay.hide();
 
-                                if (result) {
+                                if(result){
                                   await showDialog(
-                                      context: context,
-                                      builder: (_) => AssetGiffyDialog(
-                                            image: Image.asset(
-                                              'assets/icons/cover-icon.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                            title: Text(
-                                              'Success',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize:
-                                                  SizeConfig.blockSizeVertical! * 3.16,
-                                                  fontFamily: 'NexaRegular'),
-                                            ),
-                                            entryAnimation:
-                                                EntryAnimation.DEFAULT,
-                                            description: Text(
-                                              'Successfully updated the profile picture.',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize:
-                                                  SizeConfig.blockSizeVertical! * 2.87,
-                                                  fontFamily: 'NexaRegular'),
-                                            ),
-                                            onlyOkButton: true,
-                                            onOkButtonPressed: () {
-                                              Navigator.pop(context, true);
-                                            },
-                                          ));
-                                } else {
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Successfully updated the profile picture.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
+                                }else{
                                   await showDialog(
-                                      context: context,
-                                      builder: (_) => AssetGiffyDialog(
-                                            image: Image.asset(
-                                              'assets/icons/cover-icon.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                        title: Text(
-                                          'Error',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize:
-                                              SizeConfig.blockSizeVertical! * 3.16,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text(
-                                          'Something went wrong. Please try again.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize:
-                                              SizeConfig.blockSizeVertical! * 2.87,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                            onlyOkButton: true,
-                                            buttonOkColor:
-                                                const Color(0xffff0000),
-                                            onOkButtonPressed: () {
-                                              Navigator.pop(context, true);
-                                            },
-                                          ));
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                      onlyOkButton: true,
+                                      buttonOkColor: const Color(0xffff0000),
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
                                 }
                               }
                             },
@@ -428,39 +306,14 @@ class HomeRegularUserProfileDetailsState
                                     }
                                   }()),
                                 ),
-                                // profileImage.path != ''
-                                //     ? CircleAvatar(
-                                //       radius: 120,
-                                //       backgroundColor: const Color(0xff888888),
-                                //       foregroundImage: AssetImage(profileImage.path),
-                                //       backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                //     )
-                                //     : Container(
-                                //       decoration: BoxDecoration(
-                                //         shape: BoxShape.circle,
-                                //         border: Border.all(
-                                //           color: Colors.white,
-                                //           width: 3,
-                                //         ),
-                                //       ),
-                                //       child: CircleAvatar(
-                                //         radius: 120,
-                                //         backgroundColor: const Color(0xff888888),
-                                //         foregroundImage: NetworkImage(profile.data!.showProfileInformationImage),
-                                //         backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                //       ),
-                                //     ),
+
                                 const Positioned(
                                   top: 0,
                                   right: 20,
                                   child: const CircleAvatar(
                                     radius: 30,
                                     backgroundColor: const Color(0xff888888),
-                                    child: const Icon(
-                                      Icons.camera,
-                                      size: 50,
-                                      color: const Color(0xffffffff),
-                                    ),
+                                    child: const Icon(Icons.camera, size: 50, color: const Color(0xffffffff),),
                                   ),
                                 )
                               ],
@@ -474,15 +327,10 @@ class HomeRegularUserProfileDetailsState
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .popAndPushNamed('/home/regular');
+                        onPressed: (){
+                          Navigator.of(context).popAndPushNamed('/home/regular');
                         },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: const Color(0xffffffff),
-                            size: SizeConfig.blockSizeVertical! * 3.52
-                        ),
+                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
                       ),
                     ),
                   ),
@@ -494,9 +342,7 @@ class HomeRegularUserProfileDetailsState
                         children: [
                           Center(
                             child: Text(
-                              profile.data!.showProfileInformationFirstName +
-                                  ' ' +
-                                  profile.data!.showProfileInformationLastName,
+                              profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName,
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeVertical! * 3.52,
                                 fontFamily: 'NexaBold',
@@ -504,8 +350,9 @@ class HomeRegularUserProfileDetailsState
                               ),
                             ),
                           ),
-                          SizedBox(
-                              height: SizeConfig.blockSizeVertical! * 2.03),
+
+                          SizedBox(height: SizeConfig.blockSizeVertical! * 2.03),
+
                           Center(
                             child: Text(
                               profile.data!.showProfileInformationEmail,
@@ -516,9 +363,8 @@ class HomeRegularUserProfileDetailsState
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 40,
-                          ),
+
+                          const SizedBox(height: 40,),
                         ],
                       ),
                     ),
@@ -526,9 +372,9 @@ class HomeRegularUserProfileDetailsState
                 ],
               ),
             );
-          } else if (profile.hasError) {
+          }else if(profile.hasError){
             return const MiscRegularErrorMessageTemplate();
-          } else {
+          }else{
             return Container(
               height: SizeConfig.screenHeight,
               child: Center(

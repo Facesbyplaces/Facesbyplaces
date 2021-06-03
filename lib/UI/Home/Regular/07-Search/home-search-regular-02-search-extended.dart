@@ -39,29 +39,7 @@ class RegularSearchMainPosts {
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
-  const RegularSearchMainPosts(
-      {required this.userId,
-      required this.postId,
-      required this.memorialId,
-      required this.memorialName,
-      required this.timeCreated,
-      required this.postBody,
-      required this.profileImage,
-      required this.imagesOrVideos,
-      required this.managed,
-      required this.follower,
-      required this.numberOfLikes,
-      required this.numberOfComments,
-      required this.likeStatus,
-      required this.numberOfTagged,
-      required this.taggedFirstName,
-      required this.taggedLastName,
-      required this.taggedImage,
-      required this.taggedId,
-      required this.pageType,
-      required this.famOrFriends,
-      required this.relationship});
+  const RegularSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class RegularSearchMainSuggested {
@@ -74,17 +52,7 @@ class RegularSearchMainSuggested {
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
-  const RegularSearchMainSuggested(
-      {required this.memorialId,
-      required this.memorialName,
-      required this.memorialDescription,
-      required this.image,
-      required this.managed,
-      required this.follower,
-      required this.pageType,
-      required this.famOrFriends,
-      required this.relationship});
+  const RegularSearchMainSuggested({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class RegularSearchMainNearby {
@@ -97,17 +65,7 @@ class RegularSearchMainNearby {
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
-  const RegularSearchMainNearby(
-      {required this.memorialId,
-      required this.memorialName,
-      required this.memorialDescription,
-      required this.image,
-      required this.managed,
-      required this.follower,
-      required this.pageType,
-      required this.famOrFriends,
-      required this.relationship});
+  const RegularSearchMainNearby({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class RegularSearchMainBLM {
@@ -120,17 +78,7 @@ class RegularSearchMainBLM {
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
-  const RegularSearchMainBLM(
-      {required this.memorialId,
-      required this.memorialName,
-      required this.memorialDescription,
-      required this.image,
-      required this.managed,
-      required this.follower,
-      required this.pageType,
-      required this.famOrFriends,
-      required this.relationship});
+  const RegularSearchMainBLM({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class HomeRegularPost extends StatefulWidget {
@@ -139,43 +87,20 @@ class HomeRegularPost extends StatefulWidget {
   final double latitude;
   final double longitude;
   final String currentLocation;
-  const HomeRegularPost(
-      {required this.keyword,
-      required this.newToggle,
-      required this.latitude,
-      required this.longitude,
-      required this.currentLocation});
+  const HomeRegularPost({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
 
-  HomeRegularPostState createState() => HomeRegularPostState(
-      keyword: keyword,
-      newToggle: newToggle,
-      latitude: latitude,
-      longitude: longitude,
-      currentLocation: currentLocation);
+  HomeRegularPostState createState() => HomeRegularPostState();
 }
 
 class HomeRegularPostState extends State<HomeRegularPost> {
-  final String keyword;
-  final int newToggle;
-  final double latitude;
-  final double longitude;
-  final String currentLocation;
-  HomeRegularPostState(
-      {required this.keyword,
-      required this.newToggle,
-      required this.latitude,
-      required this.longitude,
-      required this.currentLocation});
-
-  ValueNotifier<int> toggle = ValueNotifier<int>(0);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
   ValueNotifier<bool> onSearch = ValueNotifier<bool>(false);
+  TextEditingController controller = TextEditingController();
+  ValueNotifier<int> toggle = ValueNotifier<int>(0);
   ValueNotifier<int> tabCount1 = ValueNotifier<int>(0);
   ValueNotifier<int> tabCount2 = ValueNotifier<int>(0);
   ValueNotifier<int> tabCount3 = ValueNotifier<int>(0);
   ValueNotifier<int> tabCount4 = ValueNotifier<int>(0);
-
-  TextEditingController controller = TextEditingController();
   ScrollController scrollController1 = ScrollController();
   ScrollController scrollController2 = ScrollController();
   ScrollController scrollController3 = ScrollController();
@@ -188,165 +113,132 @@ class HomeRegularPostState extends State<HomeRegularPost> {
   List<RegularSearchMainSuggested> searchSuggested = [];
   List<RegularSearchMainNearby> searchNearby = [];
   List<RegularSearchMainBLM> searchBlm = [];
-  int postItemRemaining = 1;
-  int suggestedItemRemaining = 1;
-  int nearbyBlmItemsRemaining = 1;
   int nearbyMemorialItemsRemaining = 1;
+  int nearbyBlmItemsRemaining = 1;
+  int suggestedItemRemaining = 1;
+  int postItemRemaining = 1;
   int blmItemRemaining = 1;
+  String searchKeyword = '';
   int page1 = 1;
   int page2 = 1;
   int page3 = 1;
   int page4 = 1;
-  String searchKeyword = '';
 
-  Future<void> onRefresh1() async {
+  Future<void> onRefresh1() async{
     onLoading1();
   }
 
-  Future<void> onRefresh2() async {
+  Future<void> onRefresh2() async{
     onLoading2();
   }
 
-  Future<void> onRefresh3() async {
+  Future<void> onRefresh3() async{
     onLoading3();
   }
 
-  Future<void> onRefresh4() async {
+  Future<void> onRefresh4() async{
     onLoading4();
   }
 
-  void onLoading1() async {
-    if (postItemRemaining != 0) {
+  void onLoading1() async{
+    if(postItemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue =
-          await apiRegularSearchPosts(keywords: keyword, page: page1);
+      var newValue = await apiRegularSearchPosts(keywords: widget.keyword, page: page1);
       context.loaderOverlay.hide();
 
       postItemRemaining = newValue.almItemsRemaining;
       tabCount1.value = tabCount1.value + newValue.almSearchPostList.length;
 
-      for (int i = 0; i < newValue.almSearchPostList.length; i++) {
+      for(int i = 0; i < newValue.almSearchPostList.length; i++){
         List<String> newList1 = [];
         List<String> newList2 = [];
         List<String> newList3 = [];
         List<int> newList4 = [];
 
-        for (int j = 0;
-            j < newValue.almSearchPostList[i].searchPostPostTagged.length;
-            j++) {
-          newList1.add(newValue.almSearchPostList[i].searchPostPostTagged[j]
-              .searchPostTaggedFirstName);
-          newList2.add(newValue.almSearchPostList[i].searchPostPostTagged[j]
-              .searchPostTaggedLastName);
-          newList3.add(newValue.almSearchPostList[i].searchPostPostTagged[j]
-              .searchPostTaggedImage);
-          newList4.add(newValue
-              .almSearchPostList[i].searchPostPostTagged[j].searchPostTaggedId);
+        for(int j = 0; j < newValue.almSearchPostList[i].searchPostPostTagged.length; j++){
+          newList1.add(newValue.almSearchPostList[i].searchPostPostTagged[j].searchPostTaggedFirstName);
+          newList2.add(newValue.almSearchPostList[i].searchPostPostTagged[j].searchPostTaggedLastName);
+          newList3.add(newValue.almSearchPostList[i].searchPostPostTagged[j].searchPostTaggedImage);
+          newList4.add(newValue.almSearchPostList[i].searchPostPostTagged[j].searchPostTaggedId);
         }
 
         feeds.add(
           RegularSearchMainPosts(
-            userId: newValue.almSearchPostList[i].searchPostPage
-                .searchPostPagePageCreator.searchPostPageCreatorId,
+            userId: newValue.almSearchPostList[i].searchPostPage.searchPostPagePageCreator.searchPostPageCreatorId,
             postId: newValue.almSearchPostList[i].searchPostId,
-            memorialId:
-                newValue.almSearchPostList[i].searchPostPage.searchPostPageId,
+            memorialId: newValue.almSearchPostList[i].searchPostPage.searchPostPageId,
             timeCreated: newValue.almSearchPostList[i].searchPostCreatedAt,
-            memorialName:
-                newValue.almSearchPostList[i].searchPostPage.searchPostPageName,
+            memorialName: newValue.almSearchPostList[i].searchPostPage.searchPostPageName,
             postBody: newValue.almSearchPostList[i].searchPostBody,
-            profileImage: newValue
-                .almSearchPostList[i].searchPostPage.searchPostPageProfileImage,
-            imagesOrVideos:
-                newValue.almSearchPostList[i].searchPostImagesOrVideos,
-            managed: newValue
-                .almSearchPostList[i].searchPostPage.searchPostPageManage,
-            follower: newValue
-                .almSearchPostList[i].searchPostPage.searchPostPageFollower,
-            numberOfComments:
-                newValue.almSearchPostList[i].searchPostNumberOfComments,
-            numberOfLikes:
-                newValue.almSearchPostList[i].searchPostNumberOfLikes,
+            profileImage: newValue.almSearchPostList[i].searchPostPage.searchPostPageProfileImage,
+            imagesOrVideos: newValue.almSearchPostList[i].searchPostImagesOrVideos,
+            managed: newValue.almSearchPostList[i].searchPostPage.searchPostPageManage,
+            follower: newValue.almSearchPostList[i].searchPostPage.searchPostPageFollower,
+            numberOfComments: newValue.almSearchPostList[i].searchPostNumberOfComments,
+            numberOfLikes: newValue.almSearchPostList[i].searchPostNumberOfLikes,
             likeStatus: newValue.almSearchPostList[i].searchPostLikeStatus,
-            numberOfTagged:
-                newValue.almSearchPostList[i].searchPostPostTagged.length,
+            numberOfTagged: newValue.almSearchPostList[i].searchPostPostTagged.length,
             taggedFirstName: newList1,
             taggedLastName: newList2,
             taggedImage: newList3,
             taggedId: newList4,
-            pageType: newValue
-                .almSearchPostList[i].searchPostPage.searchPostPagePageType,
-            famOrFriends: newValue
-                .almSearchPostList[i].searchPostPage.searchPostPageFamOrFriends,
-            relationship: newValue
-                .almSearchPostList[i].searchPostPage.searchPostPageRelationship,
+            pageType: newValue.almSearchPostList[i].searchPostPage.searchPostPagePageType,
+            famOrFriends: newValue.almSearchPostList[i].searchPostPage.searchPostPageFamOrFriends,
+            relationship: newValue.almSearchPostList[i].searchPostPage.searchPostPageRelationship,
           ),
         );
       }
 
-      if (mounted) page1++;
+      if (mounted) 
+      page1++;
     }
   }
 
-  void onLoading2() async {
-    if (suggestedItemRemaining != 0) {
+  void onLoading2() async{
+    if(suggestedItemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularSearchSuggested(page: page2);
       context.loaderOverlay.hide();
 
       suggestedItemRemaining = newValue.almItemsRemaining;
-      tabCount2.value =
-          tabCount2.value + newValue.almSearchSuggestedPages.length;
+      tabCount2.value = tabCount2.value + newValue.almSearchSuggestedPages.length;
 
-      for (int i = 0; i < newValue.almSearchSuggestedPages.length; i++) {
+      for(int i = 0; i < newValue.almSearchSuggestedPages.length; i++){
         suggested.add(
           RegularSearchMainSuggested(
-            memorialId: newValue.almSearchSuggestedPages[i].searchSuggestedPage
-                .searchSuggestedPageId,
-            memorialName: newValue.almSearchSuggestedPages[i]
-                .searchSuggestedPage.searchSuggestedPageName,
-            memorialDescription: newValue
-                .almSearchSuggestedPages[i]
-                .searchSuggestedPage
-                .searchSuggestedPageDetails
-                .searchSuggestedPageDetailsDescription,
-            image: newValue.almSearchSuggestedPages[i].searchSuggestedPage
-                .searchSuggestedPageProfileImage,
-            managed: newValue.almSearchSuggestedPages[i].searchSuggestedPage
-                .searchSuggestedPageManage,
-            follower: newValue.almSearchSuggestedPages[i].searchSuggestedPage
-                .searchSuggestedPageFollower,
-            pageType: newValue.almSearchSuggestedPages[i].searchSuggestedPage
-                .searchSuggestedPagePageType,
-            famOrFriends: newValue.almSearchSuggestedPages[i]
-                .searchSuggestedPage.searchSuggestedPageFamOrFriends,
-            relationship: newValue.almSearchSuggestedPages[i]
-                .searchSuggestedPage.searchSuggestedPageRelationship,
+            memorialId: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageId,
+            memorialName: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageName,
+            memorialDescription: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageDetails.searchSuggestedPageDetailsDescription,
+            image: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageProfileImage,
+            managed: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageManage,
+            follower: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageFollower,
+            pageType: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPagePageType,
+            famOrFriends: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageFamOrFriends,
+            relationship: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageRelationship,
           ),
         );
       }
 
-      if (mounted) page2++;
+      if (mounted) 
+      page2++;
     }
   }
 
-  void onLoading3() async {
-    if (nearbyBlmItemsRemaining != 0) {
+  void onLoading3() async{
+    if(nearbyBlmItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularSearchNearby(
-          page: page3, latitude: latitude, longitude: longitude);
+      var newValue = await apiRegularSearchNearby(page: page3, latitude: widget.latitude, longitude: widget.longitude);
       context.loaderOverlay.hide();
 
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
       tabCount3.value = tabCount3.value + newValue.blmList.length;
 
-      for (int i = 0; i < newValue.blmList.length; i++) {
+      for(int i = 0; i < newValue.blmList.length; i++){
         nearby.add(
           RegularSearchMainNearby(
             memorialId: newValue.blmList[i].searchNearbyId,
             memorialName: newValue.blmList[i].searchNearbyName,
-            memorialDescription: newValue.blmList[i].searchNearbyDetails
-                .searchNearbyPageDetailsDescription,
+            memorialDescription: newValue.blmList[i].searchNearbyDetails.searchNearbyPageDetailsDescription,
             image: newValue.blmList[i].searchNearbyProfileImage,
             managed: newValue.blmList[i].searchNearbyManage,
             follower: newValue.blmList[i].searchNearbyFollower,
@@ -357,27 +249,26 @@ class HomeRegularPostState extends State<HomeRegularPost> {
         );
       }
 
-      if (mounted) page3++;
+      if(mounted) 
+      page3++;
     }
 
     page3 = 1;
 
-    if (nearbyMemorialItemsRemaining != 0) {
+    if(nearbyMemorialItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularSearchNearby(
-          page: page3, latitude: latitude, longitude: longitude);
+      var newValue = await apiRegularSearchNearby(page: page3, latitude: widget.latitude, longitude: widget.longitude);
       context.loaderOverlay.hide();
 
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
       tabCount3.value = tabCount3.value + newValue.memorialList.length;
 
-      for (int i = 0; i < newValue.memorialList.length; i++) {
+      for(int i = 0; i < newValue.memorialList.length; i++){
         nearby.add(
           RegularSearchMainNearby(
             memorialId: newValue.memorialList[i].searchNearbyId,
             memorialName: newValue.memorialList[i].searchNearbyName,
-            memorialDescription: newValue.memorialList[i].searchNearbyDetails
-                .searchNearbyPageDetailsDescription,
+            memorialDescription: newValue.memorialList[i].searchNearbyDetails.searchNearbyPageDetailsDescription,
             image: newValue.memorialList[i].searchNearbyProfileImage,
             managed: newValue.memorialList[i].searchNearbyManage,
             follower: newValue.memorialList[i].searchNearbyFollower,
@@ -388,56 +279,46 @@ class HomeRegularPostState extends State<HomeRegularPost> {
         );
       }
 
-      if (mounted) page3++;
+      if(mounted)
+      page3++;
     }
   }
 
-  void onLoading4() async {
-    if (blmItemRemaining != 0) {
+  void onLoading4() async{
+    if(blmItemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularSearchBLM(page: page4, keywords: keyword);
+      var newValue = await apiRegularSearchBLM(page: page4, keywords: widget.keyword);
       context.loaderOverlay.hide();
 
       blmItemRemaining = newValue.almItemsRemaining;
       tabCount4.value = tabCount4.value + newValue.almMemorialList.length;
 
-      for (int i = 0; i < newValue.almMemorialList.length; i++) {
+      for(int i = 0; i < newValue.almMemorialList.length; i++){
         blm.add(
           RegularSearchMainBLM(
-            memorialId: newValue.almMemorialList[i].searchBLMMemorialPage
-                .searchBLMMemorialPageId,
-            memorialName: newValue.almMemorialList[i].searchBLMMemorialPage
-                .searchBLMMemorialPageName,
-            memorialDescription: newValue
-                .almMemorialList[i]
-                .searchBLMMemorialPage
-                .searchBLMMemorialPageDetails
-                .searchBLMMemorialPageDetailsDescription,
-            image: newValue.almMemorialList[i].searchBLMMemorialPage
-                .searchBLMMemorialPageProfileImage,
-            managed: newValue.almMemorialList[i].searchBLMMemorialPage
-                .searchBLMMemorialPageManage,
-            follower: newValue.almMemorialList[i].searchBLMMemorialPage
-                .searchBLMMemorialPageFollower,
-            pageType: newValue.almMemorialList[i].searchBLMMemorialPage
-                .searchBLMMemorialPagePageType,
-            famOrFriends: newValue.almMemorialList[i].searchBLMMemorialPage
-                .searchBLMMemorialPageFamOrFriends,
-            relationship: newValue.almMemorialList[i].searchBLMMemorialPage
-                .searchBLMMemorialPageRelationship,
+            memorialId: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageId,
+            memorialName: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageName,
+            memorialDescription: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageDetails.searchBLMMemorialPageDetailsDescription,
+            image: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageProfileImage,
+            managed: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageManage,
+            follower: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageFollower,
+            pageType: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPagePageType,
+            famOrFriends: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageFamOrFriends,
+            relationship: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageRelationship,
           ),
         );
       }
 
-      if (mounted) page4++;
+      if(mounted)
+      page4++;
     }
   }
 
-  void isGuest() async {
+  void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn.value = sharedPrefs.getBool('user-guest-session') ?? false;
 
-    if (isGuestLoggedIn.value != true) {
+    if(isGuestLoggedIn.value != true){
       onLoading1();
       onLoading2();
       onLoading3();
@@ -445,16 +326,15 @@ class HomeRegularPostState extends State<HomeRegularPost> {
     }
   }
 
-  void initState() {
+  void initState(){
     super.initState();
     isGuest();
-    toggle.value = newToggle;
-    scrollController1.addListener(() {
-      if (scrollController1.position.pixels ==
-          scrollController1.position.maxScrollExtent) {
-        if (postItemRemaining != 0) {
+    toggle.value = widget.newToggle;
+    scrollController1.addListener((){
+      if(scrollController1.position.pixels == scrollController1.position.maxScrollExtent){
+        if(postItemRemaining != 0){
           onLoading1();
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more posts to show'),
@@ -465,12 +345,11 @@ class HomeRegularPostState extends State<HomeRegularPost> {
         }
       }
     });
-    scrollController2.addListener(() {
-      if (scrollController2.position.pixels ==
-          scrollController2.position.maxScrollExtent) {
-        if (suggestedItemRemaining != 0) {
+    scrollController2.addListener((){
+      if(scrollController2.position.pixels == scrollController2.position.maxScrollExtent){
+        if(suggestedItemRemaining != 0){
           onLoading2();
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more suggested memorials to show'),
@@ -481,12 +360,11 @@ class HomeRegularPostState extends State<HomeRegularPost> {
         }
       }
     });
-    scrollController3.addListener(() {
-      if (scrollController3.position.pixels ==
-          scrollController3.position.maxScrollExtent) {
-        if (nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0) {
+    scrollController3.addListener((){
+      if(scrollController3.position.pixels == scrollController3.position.maxScrollExtent){
+        if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
           onLoading3();
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more nearby memorials to show'),
@@ -497,12 +375,11 @@ class HomeRegularPostState extends State<HomeRegularPost> {
         }
       }
     });
-    scrollController4.addListener(() {
-      if (scrollController4.position.pixels ==
-          scrollController4.position.maxScrollExtent) {
-        if (nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0) {
+    scrollController4.addListener((){
+      if(scrollController4.position.pixels == scrollController4.position.maxScrollExtent){
+        if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
           onLoading4();
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more BLM memorials to show'),
@@ -516,17 +393,17 @@ class HomeRegularPostState extends State<HomeRegularPost> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     print('Search screen rebuild!');
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -534,8 +411,7 @@ class HomeRegularPostState extends State<HomeRegularPost> {
           valueListenable: toggle,
           builder: (_, int toggleListener, __) => ValueListenableBuilder(
             valueListenable: isGuestLoggedIn,
-            builder: (_, bool isGuestLoggedInListener, __) =>
-                ValueListenableBuilder(
+            builder: (_, bool isGuestLoggedInListener, __) => ValueListenableBuilder(
               valueListenable: onSearch,
               builder: (_, bool onSearchListener, __) => Scaffold(
                 backgroundColor: Color(0xff04ECFF),
@@ -544,18 +420,9 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                   child: Container(
                     height: SizeConfig.screenHeight,
                     width: SizeConfig.screenWidth,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/icons/background2.png'),
-                        colorFilter: ColorFilter.srgbToLinearGamma(),
-                      ),
-                    ),
+                    decoration: BoxDecoration(color: Colors.white, image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
                     child: Stack(
                       children: [
-                        // SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
-
                         Column(
                           children: [
                             Container(
@@ -567,117 +434,70 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_back,
-                                        color: const Color(0xffffffff),
-                                        size: SizeConfig.blockSizeVertical! *
-                                            3.65,
-                                      ),
-                                      onPressed: () {
+                                      icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
+                                      onPressed: (){
                                         Navigator.pop(context);
                                       },
                                     ),
                                   ),
+
                                   Spacer(),
+
                                   Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    width:
-                                        SizeConfig.blockSizeHorizontal! * 79.06,
+                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
+                                    width: SizeConfig.blockSizeHorizontal! * 79.06,
                                     child: Row(
                                       children: [
                                         IconButton(
-                                          onPressed: () async {
-                                            if (controller.text == '') {
+                                          icon: const Icon(Icons.search, color: const Color(0xff888888),),
+                                          onPressed: () async{
+                                            if(controller.text == ''){
                                               onSearch.value = false;
                                               searchFeeds = [];
                                               searchSuggested = [];
                                               searchNearby = [];
                                               searchBlm = [];
-                                            } else {
+                                            }else{
                                               onSearch.value = true;
 
-                                              if (toggleListener == 0) {
-                                                for (int i = 0;
-                                                    i < feeds.length;
-                                                    i++) {
-                                                  if (feeds[i]
-                                                          .memorialName
-                                                          .toUpperCase()
-                                                          .contains(controller
-                                                              .text
-                                                              .toUpperCase()) &&
-                                                      onSearch.value == true) {
-                                                    print(
-                                                        'The ${feeds[i].memorialName} contains ${controller.text}');
+                                              if(toggleListener == 0){
+                                                for(int i = 0; i < feeds.length; i++){
+                                                  if(feeds[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
+                                                    print('The ${feeds[i].memorialName} contains ${controller.text}');
                                                     searchFeeds.add(feeds[i]);
                                                   }
                                                 }
-                                              } else if (toggleListener == 1) {
-                                                for (int i = 0;
-                                                    i < suggested.length;
-                                                    i++) {
-                                                  if (suggested[i]
-                                                          .memorialName
-                                                          .toUpperCase()
-                                                          .contains(controller
-                                                              .text
-                                                              .toUpperCase()) &&
-                                                      onSearch.value == true) {
-                                                    print(
-                                                        'The ${suggested[i].memorialName} contains ${controller.text}');
-                                                    searchSuggested
-                                                        .add(suggested[i]);
+                                              }else if(toggleListener == 1){
+                                                for(int i = 0; i < suggested.length; i++) {
+                                                  if(suggested[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
+                                                    print('The ${suggested[i].memorialName} contains ${controller.text}');
+                                                    searchSuggested.add(suggested[i]);
                                                   }
                                                 }
-                                              } else if (toggleListener == 2) {
-                                                for (int i = 0;
-                                                    i < nearby.length;
-                                                    i++) {
-                                                  if (nearby[i]
-                                                          .memorialName
-                                                          .toUpperCase()
-                                                          .contains(controller
-                                                              .text
-                                                              .toUpperCase()) &&
-                                                      onSearch.value == true) {
-                                                    print(
-                                                        'The ${nearby[i].memorialName} contains ${controller.text}');
+                                              }else if(toggleListener == 2){
+                                                for(int i = 0; i < nearby.length; i++){
+                                                  if(nearby[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true){
+                                                    print('The ${nearby[i].memorialName} contains ${controller.text}');
                                                     searchNearby.add(nearby[i]);
                                                   }
                                                 }
-                                              } else if (toggleListener == 3) {
-                                                for (int i = 0;
-                                                    i < blm.length;
-                                                    i++) {
-                                                  if (blm[i]
-                                                          .memorialName
-                                                          .toUpperCase()
-                                                          .contains(controller
-                                                              .text
-                                                              .toUpperCase()) &&
-                                                      onSearch.value == true) {
-                                                    print(
-                                                        'The ${blm[i].memorialName} contains ${controller.text}');
+                                              }else if(toggleListener == 3){
+                                                for(int i = 0; i < blm.length; i++){
+                                                  if(blm[i].memorialName.toUpperCase().contains(controller.text.toUpperCase()) && onSearch.value == true) {
+                                                    print('The ${blm[i].memorialName} contains ${controller.text}');
                                                     searchBlm.add(blm[i]);
                                                   }
                                                 }
                                               }
                                             }
                                           },
-                                          icon: const Icon(
-                                            Icons.search,
-                                            color: const Color(0xff888888),
-                                          ),
                                         ),
                                         Expanded(
                                           child: TextFormField(
                                             keyboardType: TextInputType.text,
                                             controller: controller,
-                                            onChanged: (search) {
-                                              if (search == '') {
+                                            onChanged: (search){
+                                              if(search == ''){
                                                 onSearch.value = false;
                                                 searchFeeds = [];
                                                 searchSuggested = [];
@@ -685,144 +505,66 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                                                 searchBlm = [];
                                               }
                                             },
-                                            onFieldSubmitted: (search) {
+                                            onFieldSubmitted: (search){
                                               searchKeyword = search;
-                                              if (search == '') {
+                                              if(search == ''){
                                                 onSearch.value = false;
                                                 searchFeeds = [];
                                                 searchSuggested = [];
                                                 searchNearby = [];
                                                 searchBlm = [];
-                                              } else {
+                                              }else{
                                                 onSearch.value = true;
 
-                                                if (toggleListener == 0) {
-                                                  for (int i = 0;
-                                                      i < feeds.length;
-                                                      i++) {
-                                                    if (feeds[i]
-                                                            .memorialName
-                                                            .toUpperCase()
-                                                            .contains(search
-                                                                .toUpperCase()) &&
-                                                        onSearch.value ==
-                                                            true) {
-                                                      print(
-                                                          'The ${feeds[i].memorialName} contains $search');
+                                                if(toggleListener == 0){
+                                                  for(int i = 0; i < feeds.length; i++){
+                                                    if(feeds[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
+                                                      print('The ${feeds[i].memorialName} contains $search');
                                                       searchFeeds.add(feeds[i]);
                                                     }
                                                   }
-                                                } else if (toggleListener ==
-                                                    1) {
-                                                  for (int i = 0;
-                                                      i < suggested.length;
-                                                      i++) {
-                                                    if (suggested[i]
-                                                            .memorialName
-                                                            .toUpperCase()
-                                                            .contains(search
-                                                                .toUpperCase()) &&
-                                                        onSearch.value ==
-                                                            true) {
-                                                      print(
-                                                          'The ${suggested[i].memorialName} contains $search');
-                                                      searchSuggested
-                                                          .add(suggested[i]);
+                                                }else if(toggleListener == 1){
+                                                  for(int i = 0; i < suggested.length; i++){
+                                                    if(suggested[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
+                                                      print('The ${suggested[i].memorialName} contains $search');
+                                                      searchSuggested.add(suggested[i]);
                                                     }
                                                   }
-                                                } else if (toggleListener ==
-                                                    2) {
-                                                  for (int i = 0;
-                                                      i < nearby.length;
-                                                      i++) {
-                                                    if (nearby[i]
-                                                            .memorialName
-                                                            .toUpperCase()
-                                                            .contains(search
-                                                                .toUpperCase()) &&
-                                                        onSearch.value ==
-                                                            true) {
-                                                      print(
-                                                          'The ${nearby[i].memorialName} contains $search');
-                                                      searchNearby
-                                                          .add(nearby[i]);
+                                                }else if(toggleListener == 2){
+                                                  for(int i = 0; i < nearby.length; i++){
+                                                    if(nearby[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
+                                                      print('The ${nearby[i].memorialName} contains $search');
+                                                      searchNearby.add(nearby[i]);
                                                     }
                                                   }
-                                                } else if (toggleListener ==
-                                                    3) {
-                                                  for (int i = 0;
-                                                      i < blm.length;
-                                                      i++) {
-                                                    if (blm[i]
-                                                            .memorialName
-                                                            .toUpperCase()
-                                                            .contains(search
-                                                                .toUpperCase()) &&
-                                                        onSearch.value ==
-                                                            true) {
-                                                      print(
-                                                          'The ${blm[i].memorialName} contains $search');
+                                                }else if(toggleListener == 3){
+                                                  for(int i = 0; i < blm.length; i++){
+                                                    if(blm[i].memorialName.toUpperCase().contains(search.toUpperCase()) && onSearch.value == true){
+                                                      print('The ${blm[i].memorialName} contains $search');
                                                       searchBlm.add(blm[i]);
                                                     }
                                                   }
                                                 }
                                               }
                                             },
-                                            style: TextStyle(
-                                              fontSize: SizeConfig
-                                                      .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular',
-                                              color: Color(0xffB1B1B1),
-                                            ),
+                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                             decoration: InputDecoration(
-                                              contentPadding:
-                                                  const EdgeInsets.all(15.0),
+                                              contentPadding: const EdgeInsets.all(15.0),
                                               filled: true,
-                                              fillColor:
-                                                  const Color(0xffffffff),
-                                              focusColor:
-                                                  const Color(0xffffffff),
+                                              fillColor: const Color(0xffffffff),
+                                              focusColor: const Color(0xffffffff),
                                               hintText: 'Search Memorial',
-                                              hintStyle: TextStyle(
-                                                fontSize: SizeConfig
-                                                        .blockSizeVertical! *
-                                                    2.11,
-                                                fontFamily: 'NexaRegular',
-                                                color: Color(0xffB1B1B1),
-                                              ),
-                                              border: const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: const Color(
-                                                        0xffffffff)),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(25)),
-                                              ),
-                                              enabledBorder:
-                                                  const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: const Color(
-                                                        0xffffffff)),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(25)),
-                                              ),
-                                              focusedBorder:
-                                                  const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: const Color(
-                                                        0xffffffff)),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(25)),
-                                              ),
+                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
                                   ),
+
                                   Spacer(),
                                 ],
                               ),
@@ -838,8 +580,7 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                                   child: TabBar(
                                     isScrollable: true,
                                     labelColor: const Color(0xff04ECFF),
-                                    unselectedLabelColor:
-                                        const Color(0xff000000),
+                                    unselectedLabelColor: const Color(0xff000000),
                                     indicatorColor: const Color(0xff04ECFF),
                                     onTap: (int number) {
                                       toggle.value = number;
@@ -848,62 +589,32 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                                       searchNearby = [];
                                       searchBlm = [];
 
-                                      if (onSearchListener == true) {
-                                        if (toggle.value == 0) {
-                                          for (int i = 0;
-                                              i < feeds.length;
-                                              i++) {
-                                            if (feeds[i]
-                                                    .memorialName
-                                                    .toUpperCase()
-                                                    .contains(searchKeyword
-                                                        .toUpperCase()) &&
-                                                onSearch.value == true) {
-                                              print(
-                                                  'The ${feeds[i].memorialName} contains $searchKeyword');
+                                      if(onSearchListener == true){
+                                        if(toggle.value == 0){
+                                          for(int i = 0; i < feeds.length; i++){
+                                            if(feeds[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                              print('The ${feeds[i].memorialName} contains $searchKeyword');
                                               searchFeeds.add(feeds[i]);
                                             }
                                           }
-                                        } else if (toggle.value == 1) {
-                                          for (int i = 0;
-                                              i < suggested.length;
-                                              i++) {
-                                            if (suggested[i]
-                                                    .memorialName
-                                                    .toUpperCase()
-                                                    .contains(searchKeyword
-                                                        .toUpperCase()) &&
-                                                onSearch.value == true) {
-                                              print(
-                                                  'The ${suggested[i].memorialName} contains $searchKeyword');
+                                        }else if(toggle.value == 1){
+                                          for(int i = 0; i < suggested.length; i++){
+                                            if(suggested[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                              print('The ${suggested[i].memorialName} contains $searchKeyword');
                                               searchSuggested.add(suggested[i]);
                                             }
                                           }
-                                        } else if (toggle.value == 2) {
-                                          for (int i = 0;
-                                              i < nearby.length;
-                                              i++) {
-                                            if (nearby[i]
-                                                    .memorialName
-                                                    .toUpperCase()
-                                                    .contains(searchKeyword
-                                                        .toUpperCase()) &&
-                                                onSearch.value == true) {
-                                              print(
-                                                  'The ${nearby[i].memorialName} contains $searchKeyword');
+                                        }else if(toggle.value == 2){
+                                          for(int i = 0; i < nearby.length; i++){
+                                            if(nearby[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                              print('The ${nearby[i].memorialName} contains $searchKeyword');
                                               searchNearby.add(nearby[i]);
                                             }
                                           }
-                                        } else if (toggle.value == 3) {
-                                          for (int i = 0; i < blm.length; i++) {
-                                            if (blm[i]
-                                                    .memorialName
-                                                    .toUpperCase()
-                                                    .contains(searchKeyword
-                                                        .toUpperCase()) &&
-                                                onSearch.value == true) {
-                                              print(
-                                                  'The ${blm[i].memorialName} contains $searchKeyword');
+                                        }else if(toggle.value == 3){
+                                          for(int i = 0; i < blm.length; i++){
+                                            if(blm[i].memorialName.toUpperCase().contains(searchKeyword.toUpperCase()) && onSearch.value == true){
+                                              print('The ${blm[i].memorialName} contains $searchKeyword');
                                               searchBlm.add(blm[i]);
                                             }
                                           }
@@ -913,46 +624,13 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                                       }
                                     },
                                     tabs: [
-                                      Center(
-                                        child: Text(
-                                          'Post',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig
-                                                      .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'Suggested',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig
-                                                      .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'Nearby',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig
-                                                      .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'BLM',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig
-                                                      .blockSizeVertical! *
-                                                  2.11,
-                                              fontFamily: 'NexaRegular'),
-                                        ),
-                                      ),
+                                      Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('Suggested', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('Nearby', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('BLM', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
                                     ],
                                   ),
                                 ),
@@ -961,122 +639,71 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                             Container(
                               child: (() {
                                 switch (toggleListener) {
-                                  case 0:
-                                    return Container(
-                                      height: 20,
-                                    );
-                                  case 1:
-                                    return Container(
-                                      height: 20,
-                                    );
-                                  case 2:
-                                    return Container(
-                                      height: 40,
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          children: [
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            const Icon(
-                                              Icons.location_pin,
-                                              color: const Color(0xff979797),
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            (() {
-                                              if (currentLocation != '') {
-                                                return Text(
-                                                  currentLocation,
-                                                  style: const TextStyle(
-                                                    color:
-                                                        const Color(0xff000000),
-                                                    fontSize: 12,
-                                                  ),
-                                                );
-                                              } else {
-                                                return const Text(
-                                                  '',
-                                                  style: const TextStyle(
-                                                    color:
-                                                        const Color(0xff000000),
-                                                    fontSize: 12,
-                                                  ),
-                                                );
-                                              }
-                                            }()),
-                                          ],
-                                        ),
+                                  case 0: return Container(height: 20,);
+                                  case 1: return Container(height: 20,);
+                                  case 2: return 
+                                  Container(
+                                    height: 40,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(width: 20,),
+
+                                          const Icon(Icons.location_pin, color: const Color(0xff979797),),
+
+                                          const SizedBox(width: 20,),
+
+                                          ((){
+                                            if(widget.currentLocation != ''){
+                                              return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                            }else{
+                                              return const Text('', style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                            }
+                                          }()),
+                                        ],
                                       ),
-                                    );
-                                  case 3:
-                                    return Container(
-                                      height: 40,
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          children: [
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            const Icon(
-                                              Icons.location_pin,
-                                              color: const Color(0xff979797),
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            (() {
-                                              if (currentLocation != '') {
-                                                return Text(
-                                                  currentLocation,
-                                                  style: const TextStyle(
-                                                    color:
-                                                        const Color(0xff000000),
-                                                    fontSize: 12,
-                                                  ),
-                                                );
-                                              } else {
-                                                return const Text(
-                                                  '',
-                                                  style: const TextStyle(
-                                                    color:
-                                                        const Color(0xff000000),
-                                                    fontSize: 12,
-                                                  ),
-                                                );
-                                              }
-                                            }()),
-                                          ],
-                                        ),
+                                    ),
+                                  );
+                                  case 3: return
+                                  Container(
+                                    height: 40,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(width: 20,),
+
+                                          const Icon(Icons.location_pin, color: const Color(0xff979797),),
+
+                                          const SizedBox(width: 20,),
+
+                                          ((){
+                                            if(widget.currentLocation != ''){
+                                              return Text(widget.currentLocation, style: const TextStyle(color: const Color(0xff000000), fontSize: 12,),);
+                                            }else{
+                                              return const Text('', style: const TextStyle(color: const Color(0xff000000),fontSize: 12,),);
+                                            }
+                                          }()),
+                                        ],
                                       ),
-                                    );
+                                    ),
+                                  );
                                 }
                               }()),
                             ),
                             Expanded(
                               child: Container(
                                 child: isGuestLoggedInListener
-                                    ? BackdropFilter(
-                                        filter: ImageFilter.blur(
-                                            sigmaX: 10.0, sigmaY: 10.0),
-                                        child:
-                                            const MiscRegularLoginToContinue(),
-                                      )
-                                    : (() {
-                                        switch (toggleListener) {
-                                          case 0:
-                                            return searchPostExtended();
-                                          case 1:
-                                            return searchSuggestedExtended();
-                                          case 2:
-                                            return searchNearbyExtended();
-                                          case 3:
-                                            return searchBLMExtended();
-                                        }
-                                      }()),
+                                ? BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: const MiscRegularLoginToContinue(),)
+                                : ((){
+                                  switch (toggleListener){
+                                    case 0: return searchPostExtended();
+                                    case 1: return searchSuggestedExtended();
+                                    case 2: return searchNearbyExtended();
+                                    case 3: return searchBLMExtended();
+                                  }
+                                }()),
                               ),
                             ),
                           ],
@@ -1099,1573 +726,772 @@ class HomeRegularPostState extends State<HomeRegularPost> {
       builder: (_, int tabCount1Listener, __) => ValueListenableBuilder(
         valueListenable: onSearch,
         builder: (_, bool onSearchListener, __) => tabCount1Listener != 0
-            ? RefreshIndicator(
-                onRefresh: onRefresh1,
-                child: onSearchListener != true
-                    ? ListView.separated(
-                        controller: scrollController1,
-                        padding: const EdgeInsets.all(10.0),
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: feeds.length,
-                        separatorBuilder: (c, i) => const Divider(
-                            height: 10, color: Colors.transparent),
-                        itemBuilder: (c, i) {
-                          return feeds[i].pageType == 'Blm'
-                              ? MiscBLMPost(
-                                  key: ValueKey('$i'),
-                                  userId: feeds[i].userId,
-                                  postId: feeds[i].postId,
-                                  memorialId: feeds[i].memorialId,
-                                  memorialName: feeds[i].memorialName,
-                                  timeCreated: timeago.format(
-                                      DateTime.parse(feeds[i].timeCreated)),
-                                  managed: feeds[i].managed,
-                                  joined: feeds[i].follower,
-                                  profileImage: feeds[i].profileImage,
-                                  numberOfComments: feeds[i].numberOfComments,
-                                  numberOfLikes: feeds[i].numberOfLikes,
-                                  likeStatus: feeds[i].likeStatus,
-                                  numberOfTagged: feeds[i].numberOfTagged,
-                                  taggedFirstName: feeds[i].taggedFirstName,
-                                  taggedLastName: feeds[i].taggedLastName,
-                                  taggedId: feeds[i].taggedId,
-                                  pageType: feeds[i].pageType,
-                                  famOrFriends: feeds[i].famOrFriends,
-                                  relationship: feeds[i].relationship,
-                                  contents: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        feeds[i].postBody,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 5,
-                                      ),
+        ? RefreshIndicator(
+          onRefresh: onRefresh1,
+          child: onSearchListener != true
+          ? ListView.separated(
+            controller: scrollController1,
+            padding: const EdgeInsets.all(10.0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: feeds.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) {
+              return feeds[i].pageType == 'Blm'
+              ? MiscBLMPost(
+                key: ValueKey('$i'),
+                userId: feeds[i].userId,
+                postId: feeds[i].postId,
+                memorialId: feeds[i].memorialId,
+                memorialName: feeds[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
+                managed: feeds[i].managed,
+                joined: feeds[i].follower,
+                profileImage: feeds[i].profileImage,
+                numberOfComments: feeds[i].numberOfComments,
+                numberOfLikes: feeds[i].numberOfLikes,
+                likeStatus: feeds[i].likeStatus,
+                numberOfTagged: feeds[i].numberOfTagged,
+                taggedFirstName: feeds[i].taggedFirstName,
+                taggedLastName: feeds[i].taggedLastName,
+                taggedId: feeds[i].taggedId,
+                pageType: feeds[i].pageType,
+                famOrFriends: feeds[i].famOrFriends,
+                relationship: feeds[i].relationship,
+                contents: [
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  
+                  feeds[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                    children: [
+                      const SizedBox(height: 20),
+
+                      Container(
+                        child: ((){
+                          if(feeds[i].imagesOrVideos.length == 1){
+                            if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
+                              return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                    loadingColor: const Color(0xff4EC9D4),
+                                    loadingWidget: const Center(
+                                      child: const CircularProgressIndicator(),
                                     ),
-                                    feeds[i].imagesOrVideos.isNotEmpty
-                                        ? Column(
-                                            children: [
-                                              const SizedBox(height: 20),
-                                              Container(
-                                                child: (() {
-                                                  if (feeds[i]
-                                                          .imagesOrVideos
-                                                          .length ==
-                                                      1) {
-                                                    if (lookupMimeType(feeds[i]
-                                                                    .imagesOrVideos[
-                                                                0])
-                                                            ?.contains(
-                                                                'video') ==
-                                                        true) {
-                                                      return BetterPlayer
-                                                          .network(
-                                                        '${feeds[i].imagesOrVideos[0]}',
-                                                        betterPlayerConfiguration:
-                                                            const BetterPlayerConfiguration(
-                                                          controlsConfiguration:
-                                                              const BetterPlayerControlsConfiguration(
-                                                            loadingColor:
-                                                                const Color(
-                                                                    0xff4EC9D4),
-                                                            loadingWidget:
-                                                                const Center(
-                                                              child:
-                                                                  const CircularProgressIndicator(),
-                                                            ),
-                                                            showControls: false,
-                                                          ),
-                                                          aspectRatio: 16 / 9,
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      return CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: feeds[i]
-                                                            .imagesOrVideos[0],
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                const Center(
-                                                          child:
-                                                              const CircularProgressIndicator(),
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Image.asset(
-                                                          'assets/icons/cover-icon.png',
-                                                          fit: BoxFit.cover,
-                                                          scale: 1.0,
-                                                        ),
-                                                      );
-                                                    }
-                                                  } else if (feeds[i]
-                                                          .imagesOrVideos
-                                                          .length ==
-                                                      2) {
-                                                    return StaggeredGridView
-                                                        .countBuilder(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      crossAxisCount: 4,
-                                                      itemCount: 2,
-                                                      itemBuilder: (BuildContext
-                                                                  context,
-                                                              int index) =>
-                                                          lookupMimeType(feeds[i]
-                                                                              .imagesOrVideos[
-                                                                          index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true
-                                                              ? BetterPlayer
-                                                                  .network(
-                                                                  '${feeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                )
-                                                              : CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: feeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                ),
-                                                      staggeredTileBuilder: (int
-                                                              index) =>
-                                                          const StaggeredTile
-                                                              .count(2, 2),
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisSpacing: 4.0,
-                                                    );
-                                                  } else {
-                                                    return StaggeredGridView
-                                                        .countBuilder(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      crossAxisCount: 4,
-                                                      itemCount: 3,
-                                                      staggeredTileBuilder: (int
-                                                              index) =>
-                                                          StaggeredTile.count(
-                                                              2,
-                                                              index.isEven
-                                                                  ? 1
-                                                                  : 2),
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisSpacing: 4.0,
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                                  int index) =>
-                                                              (() {
-                                                        if (index != 1) {
-                                                          return lookupMimeType(
-                                                                          feeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true
-                                                              ? BetterPlayer
-                                                                  .network(
-                                                                  '${feeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                )
-                                                              : CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: feeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                );
-                                                        } else {
-                                                          return (() {
-                                                            if (feeds[i]
-                                                                        .imagesOrVideos
-                                                                        .length -
-                                                                    3 >
-                                                                0) {
-                                                              if (lookupMimeType(
-                                                                          feeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true) {
-                                                                return Stack(
-                                                                  fit: StackFit
-                                                                      .expand,
-                                                                  children: [
-                                                                    BetterPlayer
-                                                                        .network(
-                                                                      '${feeds[i].imagesOrVideos[index]}',
-                                                                      betterPlayerConfiguration:
-                                                                          const BetterPlayerConfiguration(
-                                                                        controlsConfiguration:
-                                                                            const BetterPlayerControlsConfiguration(
-                                                                          loadingColor:
-                                                                              const Color(0xff4EC9D4),
-                                                                          loadingWidget:
-                                                                              const Center(
-                                                                            child:
-                                                                                const CircularProgressIndicator(),
-                                                                          ),
-                                                                          showControls:
-                                                                              false,
-                                                                        ),
-                                                                        aspectRatio:
-                                                                            16 /
-                                                                                9,
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      color: const Color(
-                                                                              0xff000000)
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                    ),
-                                                                    Center(
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        radius:
-                                                                            25,
-                                                                        backgroundColor:
-                                                                            const Color(0xffffffff).withOpacity(.5),
-                                                                        child:
-                                                                            Text(
-                                                                          '${feeds[i].imagesOrVideos.length - 3}',
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                40,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color:
-                                                                                const Color(0xffffffff),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              } else {
-                                                                return Stack(
-                                                                  fit: StackFit
-                                                                      .expand,
-                                                                  children: [
-                                                                    CachedNetworkImage(
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                      imageUrl:
-                                                                          feeds[i]
-                                                                              .imagesOrVideos[index],
-                                                                      placeholder:
-                                                                          (context, url) =>
-                                                                              const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      errorWidget: (context,
-                                                                              url,
-                                                                              error) =>
-                                                                          Image
-                                                                              .asset(
-                                                                        'assets/icons/cover-icon.png',
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                        scale:
-                                                                            1.0,
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      color: Colors
-                                                                          .black
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                    ),
-                                                                    Center(
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        radius:
-                                                                            25,
-                                                                        backgroundColor:
-                                                                            const Color(0xffffffff).withOpacity(.5),
-                                                                        child:
-                                                                            Text(
-                                                                          '${feeds[i].imagesOrVideos.length - 3}',
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                40,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color:
-                                                                                const Color(0xffffffff),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              }
-                                                            } else {
-                                                              if (lookupMimeType(
-                                                                          feeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true) {
-                                                                return BetterPlayer
-                                                                    .network(
-                                                                  '${feeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                return CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: feeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                );
-                                                              }
-                                                            }
-                                                          }());
-                                                        }
-                                                      }()),
-                                                    );
-                                                  }
-                                                }()),
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
+                                ),
+                              );
+                            }else{
+                              return CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: feeds[i].imagesOrVideos[0],
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              );
+                            }
+                          }else if(feeds[i].imagesOrVideos.length == 2){
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                    loadingColor: const Color(0xff4EC9D4),
+                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => const Center(
+                                  child: const CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),),
+                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                                mainAxisSpacing: 4.0,
+                                crossAxisSpacing: 4.0,
+                              );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) =>
+                              ((){
+                                if(index != 1){
+                                  return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                                      ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                            loadingColor: const Color(0xff4EC9D4),
+                                            loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                            showControls: false,
+                                          ),
+                                          aspectRatio: 16 / 9,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      )
+                                      : CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl: feeds[i].imagesOrVideos[index],
+                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      );
+                                }else{
+                                  return ((){
+                                    if(feeds[i].imagesOrVideos.length - 3 > 0){
+                                      if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                  loadingColor: const Color(0xff4EC9D4),
+                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
                                               ),
-                                            ],
-                                          )
-                                        : Container(height: 0),
-                                  ],
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }else{
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: feeds[i].imagesOrVideos[index],
+                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            ),
+
+                                            Container(color: Colors.black.withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    }else{
+                                      if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                              loadingColor: const Color(0xff4EC9D4),
+                                              loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        );
+                                      }else{
+                                        return CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: feeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        );
+                                      }
+                                    }
+                                  }());
+                                }
+                              }()),
+                            );
+                          }
+                        }()),
+                      ),
+                    ],
+                  )
+                  : Container(height: 0),
+                ],
+              )
+              : MiscRegularPost(
+                key: ValueKey('$i'),
+                userId: feeds[i].userId,
+                postId: feeds[i].postId,
+                memorialId: feeds[i].memorialId,
+                memorialName: feeds[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
+                managed: feeds[i].managed,
+                joined: feeds[i].follower,
+                profileImage: feeds[i].profileImage,
+                numberOfComments: feeds[i].numberOfComments,
+                numberOfLikes: feeds[i].numberOfLikes,
+                likeStatus: feeds[i].likeStatus,
+                numberOfTagged: feeds[i].numberOfTagged,
+                taggedFirstName: feeds[i].taggedFirstName,
+                taggedLastName: feeds[i].taggedLastName,
+                taggedId: feeds[i].taggedId,
+                pageType: feeds[i].pageType,
+                famOrFriends: feeds[i].famOrFriends,
+                relationship: feeds[i].relationship,
+                contents: [
+                  Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  
+                  feeds[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                    children: [
+                      const SizedBox(height: 20),
+
+                      Container(
+                        child: ((){
+                          if(feeds[i].imagesOrVideos.length == 1){
+                            if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
+                              return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                    loadingColor: const Color(0xff4EC9D4),
+                                    loadingWidget: const Center(
+                                      child: const CircularProgressIndicator(),
+                                    ),
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
+                                ),
+                              );
+                            }else{
+                              return CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: feeds[i].imagesOrVideos[0],
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              );
+                            }
+                          }else if(feeds[i].imagesOrVideos.length == 2){
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                      loadingColor: const Color(0xff4EC9D4),
+                                      loadingWidget: const Center(
+                                        child: const CircularProgressIndicator(),
+                                      ),
+                                      showControls: false,
+                                    ),
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
                                 )
-                              : MiscRegularPost(
-                                  key: ValueKey('$i'),
-                                  userId: feeds[i].userId,
-                                  postId: feeds[i].postId,
-                                  memorialId: feeds[i].memorialId,
-                                  memorialName: feeds[i].memorialName,
-                                  timeCreated: timeago.format(
-                                      DateTime.parse(feeds[i].timeCreated)),
-                                  managed: feeds[i].managed,
-                                  joined: feeds[i].follower,
-                                  profileImage: feeds[i].profileImage,
-                                  numberOfComments: feeds[i].numberOfComments,
-                                  numberOfLikes: feeds[i].numberOfLikes,
-                                  likeStatus: feeds[i].likeStatus,
-                                  numberOfTagged: feeds[i].numberOfTagged,
-                                  taggedFirstName: feeds[i].taggedFirstName,
-                                  taggedLastName: feeds[i].taggedLastName,
-                                  taggedId: feeds[i].taggedId,
-                                  pageType: feeds[i].pageType,
-                                  famOrFriends: feeds[i].famOrFriends,
-                                  relationship: feeds[i].relationship,
-                                  contents: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        feeds[i].postBody,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 5,
+                                : CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: feeds[i].imagesOrVideos[index],
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png',fit: BoxFit.cover, scale: 1.0,),
+                                ),
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) =>
+                              ((){
+                                if(index != 1){
+                                  return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}', 
+                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                        loadingColor: const Color(0xff4EC9D4),
+                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                        showControls: false,
                                       ),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
                                     ),
-                                    feeds[i].imagesOrVideos.isNotEmpty
-                                        ? Column(
-                                            children: [
-                                              const SizedBox(height: 20),
-                                              Container(
-                                                child: (() {
-                                                  if (feeds[i]
-                                                          .imagesOrVideos
-                                                          .length ==
-                                                      1) {
-                                                    if (lookupMimeType(feeds[i]
-                                                                    .imagesOrVideos[
-                                                                0])
-                                                            ?.contains(
-                                                                'video') ==
-                                                        true) {
-                                                      return BetterPlayer
-                                                          .network(
-                                                        '${feeds[i].imagesOrVideos[0]}',
-                                                        betterPlayerConfiguration:
-                                                            const BetterPlayerConfiguration(
-                                                          controlsConfiguration:
-                                                              const BetterPlayerControlsConfiguration(
-                                                            loadingColor:
-                                                                const Color(
-                                                                    0xff4EC9D4),
-                                                            loadingWidget:
-                                                                const Center(
-                                                              child:
-                                                                  const CircularProgressIndicator(),
-                                                            ),
-                                                            showControls: false,
-                                                          ),
-                                                          aspectRatio: 16 / 9,
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      return CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: feeds[i]
-                                                            .imagesOrVideos[0],
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                const Center(
-                                                          child:
-                                                              const CircularProgressIndicator(),
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Image.asset(
-                                                          'assets/icons/cover-icon.png',
-                                                          fit: BoxFit.cover,
-                                                          scale: 1.0,
-                                                        ),
-                                                      );
-                                                    }
-                                                  } else if (feeds[i]
-                                                          .imagesOrVideos
-                                                          .length ==
-                                                      2) {
-                                                    return StaggeredGridView
-                                                        .countBuilder(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      crossAxisCount: 4,
-                                                      itemCount: 2,
-                                                      itemBuilder: (BuildContext
-                                                                  context,
-                                                              int index) =>
-                                                          lookupMimeType(feeds[i]
-                                                                              .imagesOrVideos[
-                                                                          index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true
-                                                              ? BetterPlayer
-                                                                  .network(
-                                                                  '${feeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                )
-                                                              : CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: feeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                ),
-                                                      staggeredTileBuilder: (int
-                                                              index) =>
-                                                          const StaggeredTile
-                                                              .count(2, 2),
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisSpacing: 4.0,
-                                                    );
-                                                  } else {
-                                                    return StaggeredGridView
-                                                        .countBuilder(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      crossAxisCount: 4,
-                                                      itemCount: 3,
-                                                      staggeredTileBuilder: (int
-                                                              index) =>
-                                                          StaggeredTile.count(
-                                                              2,
-                                                              index.isEven
-                                                                  ? 1
-                                                                  : 2),
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisSpacing: 4.0,
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                                  int index) =>
-                                                              (() {
-                                                        if (index != 1) {
-                                                          return lookupMimeType(
-                                                                          feeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true
-                                                              ? BetterPlayer
-                                                                  .network(
-                                                                  '${feeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                )
-                                                              : CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: feeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                );
-                                                        } else {
-                                                          return (() {
-                                                            if (feeds[i]
-                                                                        .imagesOrVideos
-                                                                        .length -
-                                                                    3 >
-                                                                0) {
-                                                              if (lookupMimeType(
-                                                                          feeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true) {
-                                                                return Stack(
-                                                                  fit: StackFit
-                                                                      .expand,
-                                                                  children: [
-                                                                    BetterPlayer
-                                                                        .network(
-                                                                      '${feeds[i].imagesOrVideos[index]}',
-                                                                      betterPlayerConfiguration:
-                                                                          const BetterPlayerConfiguration(
-                                                                        controlsConfiguration:
-                                                                            const BetterPlayerControlsConfiguration(
-                                                                          loadingColor:
-                                                                              const Color(0xff4EC9D4),
-                                                                          loadingWidget:
-                                                                              const Center(
-                                                                            child:
-                                                                                const CircularProgressIndicator(),
-                                                                          ),
-                                                                          showControls:
-                                                                              false,
-                                                                        ),
-                                                                        aspectRatio:
-                                                                            16 /
-                                                                                9,
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      color: const Color(
-                                                                              0xff000000)
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                    ),
-                                                                    Center(
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        radius:
-                                                                            25,
-                                                                        backgroundColor:
-                                                                            const Color(0xffffffff).withOpacity(.5),
-                                                                        child:
-                                                                            Text(
-                                                                          '${feeds[i].imagesOrVideos.length - 3}',
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                40,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color:
-                                                                                const Color(0xffffffff),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              } else {
-                                                                return Stack(
-                                                                  fit: StackFit
-                                                                      .expand,
-                                                                  children: [
-                                                                    CachedNetworkImage(
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                      imageUrl:
-                                                                          feeds[i]
-                                                                              .imagesOrVideos[index],
-                                                                      placeholder:
-                                                                          (context, url) =>
-                                                                              const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      errorWidget: (context,
-                                                                              url,
-                                                                              error) =>
-                                                                          Image
-                                                                              .asset(
-                                                                        'assets/icons/cover-icon.png',
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                        scale:
-                                                                            1.0,
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      color: const Color(
-                                                                              0xff000000)
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                    ),
-                                                                    Center(
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        radius:
-                                                                            25,
-                                                                        backgroundColor:
-                                                                            const Color(0xffffffff).withOpacity(.5),
-                                                                        child:
-                                                                            Text(
-                                                                          '${feeds[i].imagesOrVideos.length - 3}',
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                40,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color:
-                                                                                const Color(0xffffffff),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              }
-                                                            } else {
-                                                              if (lookupMimeType(
-                                                                          feeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true) {
-                                                                return BetterPlayer
-                                                                    .network(
-                                                                  '${feeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                return CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: feeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                );
-                                                              }
-                                                            }
-                                                          }());
-                                                        }
-                                                      }()),
-                                                    );
-                                                  }
-                                                }()),
+                                  )
+                                  : CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return ((){
+                                    if(feeds[i].imagesOrVideos.length - 3 > 0){
+                                      if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                  loadingColor: const Color(0xff4EC9D4),
+                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
                                               ),
-                                            ],
-                                          )
-                                        : Container(height: 0),
-                                  ],
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+                                            
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25, 
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5), 
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }else{
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: feeds[i].imagesOrVideos[index],
+                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+                                            
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    }else{
+                                      if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                              loadingColor: const Color(0xff4EC9D4),
+                                              loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        );
+                                      }else{
+                                        return CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: feeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        );
+                                      }
+                                    }
+                                  }());
+                                }
+                              }()),
+                            );
+                          }
+                        }()),
+                      ),
+                    ],
+                  )
+                  : Container(height: 0),
+                ],
+              );
+            }
+          )
+          : ListView.separated(
+            controller: scrollController1,
+            padding: const EdgeInsets.all(10.0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchFeeds.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) {
+              return searchFeeds[i].pageType == 'Blm'
+              ? MiscBLMPost(
+                key: ValueKey('$i'),
+                userId: searchFeeds[i].userId,
+                postId: searchFeeds[i].postId,
+                memorialId: searchFeeds[i].memorialId,
+                memorialName: searchFeeds[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(searchFeeds[i].timeCreated)),
+                managed: searchFeeds[i].managed,
+                joined: searchFeeds[i].follower,
+                profileImage: searchFeeds[i].profileImage,
+                numberOfComments: searchFeeds[i].numberOfComments,
+                numberOfLikes: searchFeeds[i].numberOfLikes,
+                likeStatus: searchFeeds[i].likeStatus,
+                numberOfTagged: searchFeeds[i].numberOfTagged,
+                taggedFirstName: searchFeeds[i].taggedFirstName,
+                taggedLastName: searchFeeds[i].taggedLastName,
+                taggedId: searchFeeds[i].taggedId,
+                pageType: searchFeeds[i].pageType,
+                famOrFriends: searchFeeds[i].famOrFriends,
+                relationship: searchFeeds[i].relationship,
+                contents: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      searchFeeds[i].postBody,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 5,
+                    ),
+                  ),
+                  
+                  searchFeeds[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                      children: [
+                        const SizedBox(height: 20),
+
+                        Container(
+                          child: ((){
+                            if(searchFeeds[i].imagesOrVideos.length == 1){
+                              if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
+                                return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                      loadingColor: const Color(0xff4EC9D4),
+                                      loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                      showControls: false,
+                                    ),
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
                                 );
-                        })
-                    : ListView.separated(
-                        controller: scrollController1,
-                        padding: const EdgeInsets.all(10.0),
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: searchFeeds.length,
-                        separatorBuilder: (c, i) => const Divider(
-                            height: 10, color: Colors.transparent),
-                        itemBuilder: (c, i) {
-                          return searchFeeds[i].pageType == 'Blm'
-                              ? MiscBLMPost(
-                                  key: ValueKey('$i'),
-                                  userId: searchFeeds[i].userId,
-                                  postId: searchFeeds[i].postId,
-                                  memorialId: searchFeeds[i].memorialId,
-                                  memorialName: searchFeeds[i].memorialName,
-                                  timeCreated: timeago.format(DateTime.parse(
-                                      searchFeeds[i].timeCreated)),
-                                  managed: searchFeeds[i].managed,
-                                  joined: searchFeeds[i].follower,
-                                  profileImage: searchFeeds[i].profileImage,
-                                  numberOfComments:
-                                      searchFeeds[i].numberOfComments,
-                                  numberOfLikes: searchFeeds[i].numberOfLikes,
-                                  likeStatus: searchFeeds[i].likeStatus,
-                                  numberOfTagged: searchFeeds[i].numberOfTagged,
-                                  taggedFirstName:
-                                      searchFeeds[i].taggedFirstName,
-                                  taggedLastName: searchFeeds[i].taggedLastName,
-                                  taggedId: searchFeeds[i].taggedId,
-                                  pageType: searchFeeds[i].pageType,
-                                  famOrFriends: searchFeeds[i].famOrFriends,
-                                  relationship: searchFeeds[i].relationship,
-                                  contents: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        searchFeeds[i].postBody,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 5,
-                                      ),
+                              }else{
+                                return CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: searchFeeds[i].imagesOrVideos[0],
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                );
+                              }
+                            }else if(searchFeeds[i].imagesOrVideos.length == 2){
+                              return StaggeredGridView.countBuilder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                crossAxisCount: 4,
+                                itemCount: 2,
+                                itemBuilder: (BuildContext context, int index) => lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                                ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                      loadingColor: const Color(0xff4EC9D4),
+                                      loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                      showControls: false,
                                     ),
-                                    searchFeeds[i].imagesOrVideos.isNotEmpty
-                                        ? Column(
+                                    aspectRatio: 16 / 9,
+                                    fit: BoxFit.contain,
+                                  ),
+                                )
+                                : CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                ),
+                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                                mainAxisSpacing: 4.0,
+                                crossAxisSpacing: 4.0,
+                              );
+                            }else{
+                              return StaggeredGridView.countBuilder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                crossAxisCount: 4,
+                                itemCount: 3,
+                                staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                mainAxisSpacing: 4.0,
+                                crossAxisSpacing: 4.0,
+                                itemBuilder: (BuildContext context, int index) =>
+                                ((){
+                                  if(index != 1){
+                                    return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                                    ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                          loadingColor: const Color(0xff4EC9D4),
+                                          loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                          showControls: false,
+                                        ),
+                                        aspectRatio: 16 / 9,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    )
+                                    : CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    );
+                                  }else{
+                                    return ((){
+                                      if(searchFeeds[i].imagesOrVideos.length - 3 > 0){
+                                        if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                          return Stack(
+                                            fit: StackFit.expand,
                                             children: [
-                                              const SizedBox(height: 20),
-                                              Container(
-                                                child: (() {
-                                                  if (searchFeeds[i]
-                                                          .imagesOrVideos
-                                                          .length ==
-                                                      1) {
-                                                    if (lookupMimeType(searchFeeds[
-                                                                        i]
-                                                                    .imagesOrVideos[
-                                                                0])
-                                                            ?.contains(
-                                                                'video') ==
-                                                        true) {
-                                                      return BetterPlayer
-                                                          .network(
-                                                        '${searchFeeds[i].imagesOrVideos[0]}',
-                                                        betterPlayerConfiguration:
-                                                            const BetterPlayerConfiguration(
-                                                          controlsConfiguration:
-                                                              const BetterPlayerControlsConfiguration(
-                                                            loadingColor:
-                                                                const Color(
-                                                                    0xff4EC9D4),
-                                                            loadingWidget:
-                                                                const Center(
-                                                              child:
-                                                                  const CircularProgressIndicator(),
-                                                            ),
-                                                            showControls: false,
-                                                          ),
-                                                          aspectRatio: 16 / 9,
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      return CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: searchFeeds[i]
-                                                            .imagesOrVideos[0],
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                const Center(
-                                                          child:
-                                                              const CircularProgressIndicator(),
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Image.asset(
-                                                          'assets/icons/cover-icon.png',
-                                                          fit: BoxFit.cover,
-                                                          scale: 1.0,
-                                                        ),
-                                                      );
-                                                    }
-                                                  } else if (searchFeeds[i]
-                                                          .imagesOrVideos
-                                                          .length ==
-                                                      2) {
-                                                    return StaggeredGridView
-                                                        .countBuilder(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      crossAxisCount: 4,
-                                                      itemCount: 2,
-                                                      itemBuilder: (BuildContext
-                                                                  context,
-                                                              int index) =>
-                                                          lookupMimeType(searchFeeds[i]
-                                                                              .imagesOrVideos[
-                                                                          index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true
-                                                              ? BetterPlayer
-                                                                  .network(
-                                                                  '${searchFeeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                )
-                                                              : CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: searchFeeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                ),
-                                                      staggeredTileBuilder: (int
-                                                              index) =>
-                                                          const StaggeredTile
-                                                              .count(2, 2),
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisSpacing: 4.0,
-                                                    );
-                                                  } else {
-                                                    return StaggeredGridView
-                                                        .countBuilder(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      crossAxisCount: 4,
-                                                      itemCount: 3,
-                                                      staggeredTileBuilder: (int
-                                                              index) =>
-                                                          StaggeredTile.count(
-                                                              2,
-                                                              index.isEven
-                                                                  ? 1
-                                                                  : 2),
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisSpacing: 4.0,
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                                  int index) =>
-                                                              (() {
-                                                        if (index != 1) {
-                                                          return lookupMimeType(
-                                                                          searchFeeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true
-                                                              ? BetterPlayer
-                                                                  .network(
-                                                                  '${searchFeeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                )
-                                                              : CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: searchFeeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                );
-                                                        } else {
-                                                          return (() {
-                                                            if (searchFeeds[i]
-                                                                        .imagesOrVideos
-                                                                        .length -
-                                                                    3 >
-                                                                0) {
-                                                              if (lookupMimeType(
-                                                                          searchFeeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true) {
-                                                                return Stack(
-                                                                  fit: StackFit
-                                                                      .expand,
-                                                                  children: [
-                                                                    BetterPlayer
-                                                                        .network(
-                                                                      '${searchFeeds[i].imagesOrVideos[index]}',
-                                                                      betterPlayerConfiguration:
-                                                                          const BetterPlayerConfiguration(
-                                                                        controlsConfiguration:
-                                                                            const BetterPlayerControlsConfiguration(
-                                                                          loadingColor:
-                                                                              const Color(0xff4EC9D4),
-                                                                          loadingWidget:
-                                                                              const Center(
-                                                                            child:
-                                                                                const CircularProgressIndicator(),
-                                                                          ),
-                                                                          showControls:
-                                                                              false,
-                                                                        ),
-                                                                        aspectRatio:
-                                                                            16 /
-                                                                                9,
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      color: const Color(
-                                                                              0xff000000)
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                    ),
-                                                                    Center(
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        radius:
-                                                                            25,
-                                                                        backgroundColor:
-                                                                            const Color(0xffffffff).withOpacity(.5),
-                                                                        child:
-                                                                            Text(
-                                                                          '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                40,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color:
-                                                                                const Color(0xffffffff),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              } else {
-                                                                return Stack(
-                                                                  fit: StackFit
-                                                                      .expand,
-                                                                  children: [
-                                                                    CachedNetworkImage(
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                      imageUrl:
-                                                                          searchFeeds[i]
-                                                                              .imagesOrVideos[index],
-                                                                      placeholder:
-                                                                          (context, url) =>
-                                                                              const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      errorWidget: (context,
-                                                                              url,
-                                                                              error) =>
-                                                                          Image
-                                                                              .asset(
-                                                                        'assets/icons/cover-icon.png',
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                        scale:
-                                                                            1.0,
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      color: const Color(
-                                                                              0xff000000)
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                    ),
-                                                                    Center(
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        radius:
-                                                                            25,
-                                                                        backgroundColor:
-                                                                            const Color(0xffffffff).withOpacity(.5),
-                                                                        child:
-                                                                            Text(
-                                                                          '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                40,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color:
-                                                                                const Color(0xffffffff),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              }
-                                                            } else {
-                                                              if (lookupMimeType(
-                                                                          searchFeeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true) {
-                                                                return BetterPlayer
-                                                                    .network(
-                                                                  '${searchFeeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                return CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: searchFeeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                );
-                                                              }
-                                                            }
-                                                          }());
-                                                        }
-                                                      }()),
-                                                    );
-                                                  }
-                                                }()),
+                                              BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                    loadingColor: const Color(0xff4EC9D4),
+                                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                                    showControls: false,
+                                                  ),
+                                                  aspectRatio: 16 / 9,
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                              
+                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                              Center(
+                                                child: CircleAvatar(
+                                                  radius: 25,
+                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
+                                                      style: const TextStyle(
+                                                      fontSize: 40,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: const Color(0xffffffff),
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
                                             ],
-                                          )
-                                        : Container(height: 0),
-                                  ],
-                                )
-                              : MiscRegularPost(
-                                  key: ValueKey('$i'),
-                                  userId: searchFeeds[i].userId,
-                                  postId: searchFeeds[i].postId,
-                                  memorialId: searchFeeds[i].memorialId,
-                                  memorialName: searchFeeds[i].memorialName,
-                                  timeCreated: timeago.format(DateTime.parse(
-                                      searchFeeds[i].timeCreated)),
-                                  managed: searchFeeds[i].managed,
-                                  joined: searchFeeds[i].follower,
-                                  profileImage: searchFeeds[i].profileImage,
-                                  numberOfComments:
-                                      searchFeeds[i].numberOfComments,
-                                  numberOfLikes: searchFeeds[i].numberOfLikes,
-                                  likeStatus: searchFeeds[i].likeStatus,
-                                  numberOfTagged: searchFeeds[i].numberOfTagged,
-                                  taggedFirstName:
-                                      searchFeeds[i].taggedFirstName,
-                                  taggedLastName: searchFeeds[i].taggedLastName,
-                                  taggedId: searchFeeds[i].taggedId,
-                                  pageType: searchFeeds[i].pageType,
-                                  famOrFriends: searchFeeds[i].famOrFriends,
-                                  relationship: searchFeeds[i].relationship,
-                                  contents: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        searchFeeds[i].postBody,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 5,
-                                      ),
-                                    ),
-                                    searchFeeds[i].imagesOrVideos.isNotEmpty
-                                        ? Column(
+                                          );
+                                        }else{
+                                          return Stack(
+                                            fit: StackFit.expand,
                                             children: [
-                                              const SizedBox(height: 20),
-                                              Container(
-                                                child: (() {
-                                                  if (searchFeeds[i]
-                                                          .imagesOrVideos
-                                                          .length ==
-                                                      1) {
-                                                    if (lookupMimeType(searchFeeds[
-                                                                        i]
-                                                                    .imagesOrVideos[
-                                                                0])
-                                                            ?.contains(
-                                                                'video') ==
-                                                        true) {
-                                                      return BetterPlayer
-                                                          .network(
-                                                        '${searchFeeds[i].imagesOrVideos[0]}',
-                                                        betterPlayerConfiguration:
-                                                            const BetterPlayerConfiguration(
-                                                          controlsConfiguration:
-                                                              const BetterPlayerControlsConfiguration(
-                                                            loadingColor:
-                                                                const Color(
-                                                                    0xff4EC9D4),
-                                                            loadingWidget:
-                                                                const Center(
-                                                              child:
-                                                                  const CircularProgressIndicator(),
-                                                            ),
-                                                            showControls: false,
-                                                          ),
-                                                          aspectRatio: 16 / 9,
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      return CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: searchFeeds[i]
-                                                            .imagesOrVideos[0],
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                const Center(
-                                                          child:
-                                                              const CircularProgressIndicator(),
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Image.asset(
-                                                          'assets/icons/cover-icon.png',
-                                                          fit: BoxFit.cover,
-                                                          scale: 1.0,
-                                                        ),
-                                                      );
-                                                    }
-                                                  } else if (searchFeeds[i]
-                                                          .imagesOrVideos
-                                                          .length ==
-                                                      2) {
-                                                    return StaggeredGridView
-                                                        .countBuilder(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      crossAxisCount: 4,
-                                                      itemCount: 2,
-                                                      itemBuilder: (BuildContext
-                                                                  context,
-                                                              int index) =>
-                                                          lookupMimeType(searchFeeds[i]
-                                                                              .imagesOrVideos[
-                                                                          index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true
-                                                              ? BetterPlayer
-                                                                  .network(
-                                                                  '${searchFeeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                )
-                                                              : CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: searchFeeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                ),
-                                                      staggeredTileBuilder: (int
-                                                              index) =>
-                                                          const StaggeredTile
-                                                              .count(2, 2),
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisSpacing: 4.0,
-                                                    );
-                                                  } else {
-                                                    return StaggeredGridView
-                                                        .countBuilder(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      crossAxisCount: 4,
-                                                      itemCount: 3,
-                                                      staggeredTileBuilder: (int
-                                                              index) =>
-                                                          StaggeredTile.count(
-                                                              2,
-                                                              index.isEven
-                                                                  ? 1
-                                                                  : 2),
-                                                      mainAxisSpacing: 4.0,
-                                                      crossAxisSpacing: 4.0,
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                                  int index) =>
-                                                              (() {
-                                                        if (index != 1) {
-                                                          return lookupMimeType(
-                                                                          searchFeeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true
-                                                              ? BetterPlayer
-                                                                  .network(
-                                                                  '${searchFeeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                )
+                                              CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              ),
+                                              
+                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                              Center(
+                                                child: CircleAvatar(
+                                                  radius: 25,
+                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
+                                                    style: const TextStyle(
+                                                      fontSize: 40,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: const Color(0xffffffff),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        }
+                                      }else{
+                                        if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                          return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                              controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                loadingColor: const Color(0xff4EC9D4),
+                                                loadingWidget: const Center(
+                                                  child: const CircularProgressIndicator(),
+                                                ),
+                                                showControls: false,
+                                              ),
+                                              aspectRatio: 16 / 9,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          );
+                                        }else{
+                                        return CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        );
+                                      }
+                                    }
+                                  }());
+                                }
+                              }()),
+                            );
+                          }
+                        }()),
+                      ),
+                    ],
+                  )
+                  : Container(height: 0),
+                ],
+              )
+              : MiscRegularPost(
+                key: ValueKey('$i'),
+                userId: searchFeeds[i].userId,
+                postId: searchFeeds[i].postId,
+                memorialId: searchFeeds[i].memorialId,
+                memorialName: searchFeeds[i].memorialName,
+                timeCreated: timeago.format(DateTime.parse(searchFeeds[i].timeCreated)),
+                managed: searchFeeds[i].managed,
+                joined: searchFeeds[i].follower,
+                profileImage: searchFeeds[i].profileImage,
+                numberOfComments: searchFeeds[i].numberOfComments,
+                numberOfLikes: searchFeeds[i].numberOfLikes,
+                likeStatus: searchFeeds[i].likeStatus,
+                numberOfTagged: searchFeeds[i].numberOfTagged,
+                taggedFirstName: searchFeeds[i].taggedFirstName,
+                taggedLastName: searchFeeds[i].taggedLastName,
+                taggedId: searchFeeds[i].taggedId,
+                pageType: searchFeeds[i].pageType,
+                famOrFriends: searchFeeds[i].famOrFriends,
+                relationship: searchFeeds[i].relationship,
+                contents: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      searchFeeds[i].postBody,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 5,
+                    ),
+                  ),
+                  
+                  searchFeeds[i].imagesOrVideos.isNotEmpty
+                  ? Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      
+                      Container(
+                        child: (() {
+                          if(searchFeeds[i].imagesOrVideos.length == 1){
+                            if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
+                              return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                    loadingColor: const Color(0xff4EC9D4),
+                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
+                                ),
+                              );
+                            }else{
+                              return CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: searchFeeds[i].imagesOrVideos[0],
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              );
+                            }
+                          }else if(searchFeeds[i].imagesOrVideos.length == 2) {
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) => lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                    loadingColor: const Color(0xff4EC9D4),
+                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              ),
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) =>
+                              ((){
+                              if(index != 1){
+                                return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                                    ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                            loadingColor: const Color(0xff4EC9D4),
+                                            loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                            showControls: false,
+                                          ),
+                                          aspectRatio: 16 / 9,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      )
                                                               : CachedNetworkImage(
                                                                   fit: BoxFit
                                                                       .cover,

@@ -120,6 +120,8 @@ class BLMLogin extends StatelessWidget{
                               if(apiResult == true){
                                 final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
                                 await FirebaseAuth.instance.signInWithCredential(credential);
+                                final sharedPrefs = await SharedPreferences.getInstance();
+                                sharedPrefs.setBool('blm-social-app-session', true);
                                 Navigator.pushReplacementNamed(context, '/home/blm');
                               }else{
                                 await showDialog(
@@ -172,6 +174,8 @@ class BLMLogin extends StatelessWidget{
                                 }else{
                                   final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
                                   await FirebaseAuth.instance.signInWithCredential(credential);
+                                  final sharedPrefs = await SharedPreferences.getInstance();
+                                  sharedPrefs.setBool('blm-social-app-session', true);
                                   Navigator.pushReplacementNamed(context, '/home/blm');
                                 }
                               }
@@ -199,6 +203,8 @@ class BLMLogin extends StatelessWidget{
                             User? user = await BLMGoogleAuthentication.signInWithGoogle(context: context);
 
                             if (user != null) {
+                              final sharedPrefs = await SharedPreferences.getInstance();
+                              sharedPrefs.setBool('blm-social-app-session', true);
                               Navigator.pushReplacementNamed(context, '/home/blm');
                             }
                           },
@@ -233,6 +239,8 @@ class BLMLogin extends StatelessWidget{
                             context.loaderOverlay.hide();
 
                             if(result == true){
+                              final sharedPrefs = await SharedPreferences.getInstance();
+                              sharedPrefs.setBool('blm-social-app-session', true);
                               Navigator.pushReplacementNamed(context, '/home/blm');
                             }else{
                               await showDialog(

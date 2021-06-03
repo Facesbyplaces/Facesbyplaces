@@ -129,6 +129,8 @@ class RegularLoginState extends State<RegularLogin> {
                                 if(apiResult == true){
                                   final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
                                   await FirebaseAuth.instance.signInWithCredential(credential);
+                                  final sharedPrefs = await SharedPreferences.getInstance();
+                                  sharedPrefs.setBool('regular-social-app-session', true);
                                   Navigator.pushReplacementNamed(context, '/home/regular');
                                 }else{
                                   await showDialog(
@@ -178,6 +180,8 @@ class RegularLoginState extends State<RegularLogin> {
                                   }else{
                                     final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
                                     await FirebaseAuth.instance.signInWithCredential(credential);
+                                    final sharedPrefs = await SharedPreferences.getInstance();
+                                    sharedPrefs.setBool('regular-social-app-session', true);
                                     Navigator.pushReplacementNamed(context, '/home/regular');
                                   }
                                 }
@@ -203,6 +207,8 @@ class RegularLoginState extends State<RegularLogin> {
                               User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
 
                               if (user != null) {
+                                final sharedPrefs = await SharedPreferences.getInstance();
+                                sharedPrefs.setBool('regular-social-app-session', true);
                                 Navigator.pushReplacementNamed(context, '/home/regular');
                               }
                             },
@@ -244,8 +250,8 @@ class RegularLoginState extends State<RegularLogin> {
                               context.loaderOverlay.hide();
 
                               if(result == true){
-                                // final OAuthCredential cred = FacebookAuthProvider.credential('${credential.identityToken}');
-                                // await FirebaseAuth.instance.signInWithCredential(cred);
+                                final sharedPrefs = await SharedPreferences.getInstance();
+                                sharedPrefs.setBool('regular-social-app-session', true);
                                 Navigator.pushReplacementNamed(context, '/home/regular');
                               }else{
                                 await showDialog(
