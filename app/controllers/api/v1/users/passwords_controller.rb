@@ -2,8 +2,11 @@ class Api::V1::Users::PasswordsController < DeviseTokenAuth::PasswordsController
     before_action :check_user
 
     def update
-      user().update(password_update: true)
-      super
+      super do |resource|
+        resource.update(password_update: true)    
+      end
+      # super
+      # resource.update(password_update: true)    
     end
     
     protected

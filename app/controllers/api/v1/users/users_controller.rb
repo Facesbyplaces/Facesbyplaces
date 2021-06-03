@@ -1,5 +1,5 @@
 class Api::V1::Users::UsersController < ApplicationController
-    before_action :check_user, except: [:guest, :create_guest_user, :check_password]
+    before_action :check_user, except: [:guest, :create_guest_user]
 
     ## SIGN_IN AS GUEST
     # def blm_guest
@@ -25,18 +25,11 @@ class Api::V1::Users::UsersController < ApplicationController
     # end
     ##
 
-    def check_password
-        account_type = params[:account_type].to_i
-        if account_type == 1
-          @user = User.where(email: params[:email], account_type: params[:account_type]).first
-        elsif account_type == 2
-          @user = AlmUser.where(email: params[:email], account_type: params[:account_type]).first
-        end
-  
-        if @user.password_update == true
-          render json: { success: true, password_updated: @user.password_update, params:  sign_up_params, status: 200 }, status: 200
+    def check_password        
+        if user().password_update == true
+            render json: { success: true, password_updated: user().password_update, status: 200 }, status: 200
         else
-            render json: { success: true, password_updated: @user.password_update, params:  sign_up_params, status: 200 }, status: 200  
+            render json: { success: true, password_updated: user().password_update, status: 200 }, status: 200  
         end
     end
     

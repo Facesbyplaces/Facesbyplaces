@@ -38,7 +38,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
                     if user.notifsetting.postComments == true
                         # check if user owns the post
                         if user == comment.post.account 
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false, notif_type: 'Post')
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: {comment.post.id, comment.post.name}, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = user.device_token
                             title = "FacesbyPlaces Notification"

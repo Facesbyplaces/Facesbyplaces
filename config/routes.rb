@@ -38,7 +38,7 @@ Rails.application.routes.draw do
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
 
-        post 'check_password', to: 'users#check_password'
+        get 'check_password', to: 'users#check_password'
 
         post 'signin-blm-guest', to: 'users#blm_guest'
         post 'signin-alm-guest', to: 'users#alm_guest'
