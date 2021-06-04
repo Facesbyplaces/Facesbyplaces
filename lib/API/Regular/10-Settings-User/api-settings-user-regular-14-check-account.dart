@@ -1,17 +1,25 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularCheckAccount({required String email}) async{
 
+  final sharedPrefs = await SharedPreferences.getInstance();
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/check_password?account_type=2&email=$email',
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/check_password?account_type=2&email=$email',
     options: Options(
       followRedirects: false,
       validateStatus: (status) {
         return status! < 600;
       },
-      headers: <String, dynamic>{
-        'Content-Type': 'application/json',
+      headers: <String, String>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
       }
     ),  
   );

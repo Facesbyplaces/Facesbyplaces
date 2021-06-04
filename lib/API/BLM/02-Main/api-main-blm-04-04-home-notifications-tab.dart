@@ -25,7 +25,7 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({required int p
     ),  
   );
 
-  // print('The status code of blm home notifications tab is ${response.statusCode}');
+  print('The status code of blm home notifications tab is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -57,14 +57,14 @@ class APIBLMHomeTabNotificationExtended{
   int homeTabNotificationId;
   String homeTabNotificationCreatedAt;
   String homeTabNotificationUpdatedAt;
-  int homeTabNotificationRecipientId;
   APIBLMHomeTabNotificationExtendedActor homeTabNotificationActor;
+  APIBLMHomeTabNotificationExtendedRecipient homeTabNotificationRecipient;
   bool homeTabNotificationRead;
   String homeTabNotificationAction;
   int homeTabNotificationPostId;
   String homeTabNotificationNotificationType;
 
-  APIBLMHomeTabNotificationExtended({required this.homeTabNotificationId, required this.homeTabNotificationCreatedAt, required this.homeTabNotificationUpdatedAt, required this.homeTabNotificationRecipientId, required this.homeTabNotificationActor, required this.homeTabNotificationRead, required this.homeTabNotificationAction, required this.homeTabNotificationPostId, required this.homeTabNotificationNotificationType});
+  APIBLMHomeTabNotificationExtended({required this.homeTabNotificationId, required this.homeTabNotificationCreatedAt, required this.homeTabNotificationUpdatedAt, required this.homeTabNotificationActor, required this.homeTabNotificationRecipient, required this.homeTabNotificationRead, required this.homeTabNotificationAction, required this.homeTabNotificationPostId, required this.homeTabNotificationNotificationType});
 
   factory APIBLMHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -72,8 +72,8 @@ class APIBLMHomeTabNotificationExtended{
       homeTabNotificationId: parsedJson['id'],
       homeTabNotificationCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
       homeTabNotificationUpdatedAt: parsedJson['updated_at'] != null ? parsedJson['updated_at'] : '',
-      homeTabNotificationRecipientId: parsedJson['recipient_id'],
       homeTabNotificationActor: APIBLMHomeTabNotificationExtendedActor.fromJson(parsedJson['actor']),
+      homeTabNotificationRecipient: APIBLMHomeTabNotificationExtendedRecipient.fromJson(parsedJson['recipient']),
       homeTabNotificationRead: parsedJson['read'],
       homeTabNotificationAction: parsedJson['action'] != null ? parsedJson['action'] : '',
       homeTabNotificationPostId: parsedJson['postId'],
@@ -85,14 +85,39 @@ class APIBLMHomeTabNotificationExtended{
 class APIBLMHomeTabNotificationExtendedActor{
   int homeTabNotificationActorId;
   String homeTabNotificationActorImage;
+  String homeTabNotificationActorFirstName;
+  int homeTabNotificationActorAccountType;
 
-  APIBLMHomeTabNotificationExtendedActor({required this.homeTabNotificationActorId, required this.homeTabNotificationActorImage});
+  APIBLMHomeTabNotificationExtendedActor({required this.homeTabNotificationActorId, required this.homeTabNotificationActorImage, required this.homeTabNotificationActorFirstName, required this.homeTabNotificationActorAccountType});
 
   factory APIBLMHomeTabNotificationExtendedActor.fromJson(Map<String, dynamic> parsedJson){
 
     return APIBLMHomeTabNotificationExtendedActor(
       homeTabNotificationActorId: parsedJson['id'],
       homeTabNotificationActorImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      homeTabNotificationActorFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      homeTabNotificationActorAccountType: parsedJson['account_type'] != null ? parsedJson['account_type'] : '',
+    );
+  }
+}
+
+class APIBLMHomeTabNotificationExtendedRecipient{
+  int homeTabNotificationRecipientId;
+  String homeTabNotificationRecipientImage;
+  String homeTabNotificationRecipientFirstName;
+  String homeTabNotificationRecipientLastName;
+  int homeTabNotificationRecipientAccountType;
+
+  APIBLMHomeTabNotificationExtendedRecipient({required this.homeTabNotificationRecipientId, required this.homeTabNotificationRecipientImage, required this.homeTabNotificationRecipientFirstName, required this.homeTabNotificationRecipientLastName, required this.homeTabNotificationRecipientAccountType});
+
+  factory APIBLMHomeTabNotificationExtendedRecipient.fromJson(Map<String, dynamic> parsedJson){
+
+    return APIBLMHomeTabNotificationExtendedRecipient(
+      homeTabNotificationRecipientId: parsedJson['id'],
+      homeTabNotificationRecipientImage: parsedJson['image'] != null ? parsedJson['image'] : '',
+      homeTabNotificationRecipientFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      homeTabNotificationRecipientLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      homeTabNotificationRecipientAccountType: parsedJson['account_type'] != null ? parsedJson['account_type'] : '',
     );
   }
 }

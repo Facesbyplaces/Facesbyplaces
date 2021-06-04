@@ -38,19 +38,40 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
   List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
 
   Future getProfileImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      profileImage.value = File(pickedFile.path);
+    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    // if (pickedFile != null) {
+    //   profileImage.value = File(pickedFile.path);
+    // }
+
+    try {
+      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
+        return picture;
+      });
+
+      if (pickedFile != null) {
+        profileImage.value = File(pickedFile.path);
+      }
+    } catch (error) {
+      print('Error: ${error.toString()}');
     }
   }
 
   Future getBackgroundImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      // setState(() {
-      //   backgroundImage = File(pickedFile.path);
-      // });
-      backgroundImage.value = File(pickedFile.path);
+    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    // if (pickedFile != null) {
+    //   backgroundImage.value = File(pickedFile.path);
+    // }
+
+    try {
+      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
+        return picture;
+      });
+
+      if (pickedFile != null) {
+        backgroundImage.value = File(pickedFile.path);
+      }
+    } catch (error) {
+      print('Error: ${error.toString()}');
     }
   }
 

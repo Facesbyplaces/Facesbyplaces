@@ -34,17 +34,41 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
   final picker = ImagePicker();
 
   Future getVideo() async {
-    final pickedFile = await picker.getVideo(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      videoFile.value = File(pickedFile.path);
+    // final pickedFile = await picker.getVideo(source: ImageSource.gallery);
+    // if (pickedFile != null) {
+    //   videoFile.value = File(pickedFile.path);
+    // }
+    try {
+      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture) {
+        return picture;
+      });
+
+      if (pickedFile != null) {
+        videoFile.value = File(pickedFile.path);
+      }
+    } catch (error) {
+      print('Error: ${error.toString()}');
     }
   }
 
   Future getSlideImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      slideImages.value.add(File(pickedFile.path));
-      slideCount.value++;
+    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    // if (pickedFile != null) {
+    //   slideImages.value.add(File(pickedFile.path));
+    //   slideCount.value++;
+    // }
+
+    try {
+      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
+        return picture;
+      });
+
+      if (pickedFile != null) {
+        slideImages.value.add(File(pickedFile.path));
+        slideCount.value++;
+      }
+    } catch (error) {
+      print('Error: ${error.toString()}');
     }
   }
 

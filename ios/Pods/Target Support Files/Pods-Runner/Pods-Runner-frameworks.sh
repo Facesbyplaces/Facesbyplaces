@@ -227,6 +227,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sign_in_with_apple/sign_in_with_apple.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/url_launcher/url_launcher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi
 if [[ "$CONFIGURATION" == "Profile" ]]; then
@@ -282,6 +283,7 @@ if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sign_in_with_apple/sign_in_with_apple.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/url_launcher/url_launcher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -337,6 +339,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sign_in_with_apple/sign_in_with_apple.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/url_launcher/url_launcher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
