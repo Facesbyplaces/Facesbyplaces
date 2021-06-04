@@ -44,20 +44,20 @@ class Api::V1::Posts::CommentsController < ApplicationController
                             title = "FacesbyPlaces Notification"
                             message = "#{user().first_name} commented on your post"
                             PushNotification(device_token, title, message)
-                        elsif comment.post.tagpeople.where(account: user).first
+                        else comment.post.tagpeople.where(account: user).first
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = user.device_token
                             title = "FacesbyPlaces Notification"
                             message = "#{user().first_name} commented on a post that you're tagged in"
                             PushNotification(device_token, title, message)
-                        else
-                            Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
-                            #Push Notification
-                            device_token = user.device_token
-                            title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
-                            PushNotification(device_token, title, message)
+                        # else
+                        #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
+                        #     #Push Notification
+                        #     device_token = user.device_token
+                        #     title = "FacesbyPlaces Notification"
+                        #     message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
+                        #     PushNotification(device_token, title, message)
                         end
 
                     end
@@ -74,20 +74,20 @@ class Api::V1::Posts::CommentsController < ApplicationController
                             title = "FacesbyPlaces Notification"
                             message = "#{user().first_name} commented on your post"
                             PushNotification(device_token, title, message)
-                        elsif comment.post.tagpeople.where(account: user).first
+                        else comment.post.tagpeople.where(account: user).first
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = user.device_token
                             title = "FacesbyPlaces Notification"
                             message = "#{user().first_name} commented on a post that you're tagged in"
                             PushNotification(device_token, title, message)
-                        else
-                            Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
-                            #Push Notification
-                            device_token = user.device_token
-                            title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
-                            PushNotification(device_token, title, message)
+                        # else
+                        #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
+                        #     #Push Notification
+                        #     device_token = user.device_token
+                        #     title = "FacesbyPlaces Notification"
+                        #     message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
+                        #     PushNotification(device_token, title, message)
                         end
                     end
                 end
@@ -106,20 +106,20 @@ class Api::V1::Posts::CommentsController < ApplicationController
                                 title = "FacesbyPlaces Notification"
                                 message = "#{user().first_name} commented on your post"
                                 PushNotification(device_token, title, message)
-                            elsif comment.post.tagpeople.where(account: user).first
+                            else comment.post.tagpeople.where(account: user).first
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false, notif_type: 'Post')
                                 #Push Notification
                                 device_token = user.device_token
                                 title = "FacesbyPlaces Notification"
                                 message = "#{user().first_name} commented on a post that you're tagged in"
                                 PushNotification(device_token, title, message)
-                            else
-                                Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
-                                #Push Notification
-                                device_token = user.device_token
-                                title = "FacesbyPlaces Notification"
-                                message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
-                                PushNotification(device_token, title, message)
+                            # else
+                            #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
+                            #     #Push Notification
+                            #     device_token = user.device_token
+                            #     title = "FacesbyPlaces Notification"
+                            #     message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
+                            #     PushNotification(device_token, title, message)
                             end
                         end
                     end
