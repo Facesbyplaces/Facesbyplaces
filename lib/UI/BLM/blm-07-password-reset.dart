@@ -12,18 +12,12 @@ class BLMPasswordReset extends StatefulWidget {
   final String resetToken;
   const BLMPasswordReset({required this.resetToken});
 
-  BLMPasswordResetState createState() =>
-      BLMPasswordResetState(resetToken: resetToken);
+  BLMPasswordResetState createState() =>BLMPasswordResetState();
 }
 
 class BLMPasswordResetState extends State<BLMPasswordReset> {
-  final String resetToken;
-  BLMPasswordResetState({required this.resetToken});
-
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 =
-      GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
   @override
   void initState() {
@@ -32,16 +26,16 @@ class BLMPasswordResetState extends State<BLMPasswordReset> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -60,240 +54,128 @@ class BLMPasswordResetState extends State<BLMPasswordReset> {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: IconButton(
-                              onPressed: () {
+                              onPressed: (){
                                 Navigator.pop(context);
                               },
-                              icon: Icon(
-                                Icons.arrow_back,
-                                color: Color(0xff000000),
-                                size: SizeConfig.blockSizeVertical! * 3.65,
-                              ),
+                              icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                             ),
                           ),
                         ],
                       ),
+
                       const SizedBox(height: 80),
-                      Center(
-                        child: Text(
-                          'Change Password',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 5.28,
-                            fontFamily: 'NexaBold',
-                            color: Color(0xff2F353D),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Center(
-                        // padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8, right: SizeConfig.blockSizeHorizontal! * 11.25),
-                        child: Text(
-                          'Please enter your new password',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaRegular',
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 80,
-                      ),
+
+                      Center(child: Text('Change Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
+
+                      const SizedBox(height: 40,),
+
+                      Center(child: Text('Please enter your new password', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+
+                      const SizedBox(height: 80,),
+
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                         child: MiscBLMInputFieldTemplate(
                           key: _key1,
                           labelText: 'New Password',
                           type: TextInputType.emailAddress,
-                          labelTextStyle: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaRegular',
-                            color: Color(0xff000000),
-                          ),
+                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',color: Color(0xff000000),),
                           obscureText: true,
                         ),
                       ),
-                      const SizedBox(
-                        height: 40,
-                      ),
+
+                      const SizedBox(height: 40,),
+
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                         child: MiscBLMInputFieldTemplate(
                           key: _key2,
                           labelText: 'Confirm Password',
                           type: TextInputType.emailAddress,
-                          labelTextStyle: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaRegular',
-                            color: Color(0xff000000),
-                          ),
+                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                           obscureText: true,
                         ),
                       ),
-                      const SizedBox(
-                        height: 80,
-                      ),
+
+                      const SizedBox(height: 80,),
+
                       MiscBLMButtonTemplate(
                         buttonText: 'Change',
-                        buttonTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                          fontFamily: 'NexaBold',
-                          color: Color(0xffFFFFFF),
-                        ),
+                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
                         width: SizeConfig.screenWidth! / 2,
                         height: 45,
                         buttonColor: const Color(0xff04ECFF),
-                        onPressed: () async {
-                          if (_key1.currentState!.controller.text == '' ||
-                              _key2.currentState!.controller.text == '') {
+                        onPressed: () async{
+                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                             await showDialog(
-                                context: context,
-                                builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset(
-                                        'assets/icons/cover-icon.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                  title: Text(
-                                    'Error',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                        fontFamily: 'NexaRegular'),
-                                  ),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text(
-                                    'Please complete the form before submitting.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: SizeConfig
-                                            .blockSizeVertical! *
-                                            2.87,
-                                        fontFamily:
-                                        'NexaRegular'),
-                                  ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: const Color(0xffff0000),
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    ));
-                          } else if (_key1.currentState!.controller.text !=
-                              _key2.currentState!.controller.text) {
-                            await showDialog(
-                                context: context,
-                                builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset(
-                                        'assets/icons/cover-icon.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                  title: Text(
-                                    'Error',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                        fontFamily: 'NexaRegular'),
-                                  ),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text(
-                                    'Passwords don\'t match. Please try again.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: SizeConfig
-                                            .blockSizeVertical! *
-                                            2.87,
-                                        fontFamily:
-                                        'NexaRegular'),
-                                  ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: const Color(0xffff0000),
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    ));
-                          } else {
-                            context.loaderOverlay.show();
-                            bool result = await apiBLMPasswordChange(
-                              password: _key1.currentState!.controller.text,
-                              passwordConfirmation:
-                                  _key2.currentState!.controller.text,
-                              resetToken: resetToken,
+                              context: context,
+                              builder: (_) => AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                onlyOkButton: true,
+                                buttonOkColor: const Color(0xffff0000),
+                                onOkButtonPressed: (){
+                                  Navigator.pop(context, true);
+                                },
+                              ),
                             );
+                          }else if (_key1.currentState!.controller.text != _key2.currentState!.controller.text){
+                            await showDialog(
+                              context: context,
+                              builder: (_) => AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                onlyOkButton: true,
+                                buttonOkColor: const Color(0xffff0000),
+                                onOkButtonPressed: (){
+                                  Navigator.pop(context, true);
+                                },
+                              ),
+                            );
+                          }else{
+                            context.loaderOverlay.show();
+                            bool result = await apiBLMPasswordChange(password: _key1.currentState!.controller.text, passwordConfirmation: _key2.currentState!.controller.text, resetToken: widget.resetToken,);
                             context.loaderOverlay.hide();
 
-                            if (result) {
+                            if(result){
                               await showDialog(
-                                  context: context,
-                                  builder: (_) => AssetGiffyDialog(
-                                        image: Image.asset(
-                                          'assets/icons/cover-icon.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                    title: Text(
-                                      'Success',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                          fontFamily: 'NexaRegular'),
-                                    ),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text(
-                                      'Successfully updated the password.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: SizeConfig
-                                              .blockSizeVertical! *
-                                              2.87,
-                                          fontFamily:
-                                          'NexaRegular'),
-                                    ),
-                                        onlyOkButton: true,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                          Navigator.of(context)
-                                              .pushNamedAndRemoveUntil(
-                                                  '/start',
-                                                  (Route<dynamic> route) =>
-                                                      false);
-                                        },
-                                      ));
-                            } else {
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                  onlyOkButton: true,
+                                  onOkButtonPressed: (){
+                                    Navigator.pop(context, true);
+                                    Navigator.of(context).pushNamedAndRemoveUntil('/start', (Route<dynamic> route) => false);
+                                  },
+                                ),
+                              );
+                            }else{
                               await showDialog(
-                                  context: context,
-                                  builder: (_) => AssetGiffyDialog(
-                                        image: Image.asset(
-                                          'assets/icons/cover-icon.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                    title: Text(
-                                      'Error',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                          fontFamily: 'NexaRegular'),
-                                    ),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text(
-                                      'Something went wrong. Please try again.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: SizeConfig
-                                              .blockSizeVertical! *
-                                              2.87,
-                                          fontFamily:
-                                          'NexaRegular'),
-                                    ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: const Color(0xffff0000),
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      ));
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                  onlyOkButton: true,
+                                  buttonOkColor: const Color(0xffff0000),
+                                  onOkButtonPressed: (){
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
+                              );
                             }
                           }
                         },
                       ),
+
                       const SizedBox(height: 20),
                     ],
                   ),

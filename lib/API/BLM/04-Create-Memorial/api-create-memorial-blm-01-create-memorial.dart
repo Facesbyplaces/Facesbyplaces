@@ -11,9 +11,6 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
-  print('The latitude in create memorial in blm is ${blmMemorial.blmLatitude}');
-  print('The longitude in create memorial in blm is ${blmMemorial.blmLongitude}');
-
   formData.files.addAll([
     MapEntry('blm[name]', MultipartFile.fromString(blmMemorial.blmMemorialName,),),
     MapEntry('blm[description]', MultipartFile.fromString(blmMemorial.blmDescription,),),
@@ -89,21 +86,5 @@ class APIBLMCreateMemorial{
   List<dynamic> blmImagesOrVideos;
   String blmLatitude;
   String blmLongitude;
-
-  APIBLMCreateMemorial({
-    required this.blmMemorialName, 
-    required this.blmDescription, 
-    required this.blmLocationOfIncident, 
-    required this.blmDob, 
-    required this.blmRip, 
-    required this.blmState, 
-    required this.blmCountry, 
-    required this.blmPrecinct, 
-    required this.blmRelationship, 
-    required this.blmBackgroundImage, 
-    required this.blmProfileImage, 
-    required this.blmImagesOrVideos,
-    required this.blmLatitude,
-    required this.blmLongitude,
-  });
+  APIBLMCreateMemorial({required this.blmMemorialName, required this.blmDescription, required this.blmLocationOfIncident, required this.blmDob, required this.blmRip, required this.blmState, required this.blmCountry, required this.blmPrecinct, required this.blmRelationship, required this.blmBackgroundImage, required this.blmProfileImage, required this.blmImagesOrVideos, required this.blmLatitude, required this.blmLongitude,});
 }

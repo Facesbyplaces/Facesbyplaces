@@ -6,7 +6,6 @@ import 'dart:async';
 class HomeBLMMaps extends StatefulWidget {
   final double latitude;
   final double longitude;
-
   const HomeBLMMaps({required this.latitude, required this.longitude});
 
   HomeBLMMapsState createState() => HomeBLMMapsState();
@@ -26,19 +25,13 @@ class HomeBLMMapsState extends State<HomeBLMMaps> {
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Maps',
-          style: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 2.74,
-            fontFamily: 'NexaBold',
-            color: const Color(0xffffffff),
-          ),
-        ),
+        title: Text('Maps', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
       ),
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex!,
-        onMapCreated: (GoogleMapController controller) {
+        onMapCreated: (GoogleMapController controller){
           _controller.complete(controller);
         },
       ),

@@ -27,7 +27,6 @@ Future<bool> apiRegularProcessToken({required String amount, required String non
     );
 
     print('The status code of regular paypal is ${response.statusCode}');
-    print('The status data of regular paypal is ${response.data}');
 
     if(response.statusCode == 200){
       return true;
@@ -35,7 +34,6 @@ Future<bool> apiRegularProcessToken({required String amount, required String non
       return false;
     }
   }catch(e){
-    // return Future.error('The error is $e');
     throw Exception('The error is $e');
   }
 }

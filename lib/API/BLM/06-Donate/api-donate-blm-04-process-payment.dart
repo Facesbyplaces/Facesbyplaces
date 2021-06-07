@@ -27,7 +27,6 @@ Future<bool> apiBLMProcessToken({required String amount, required String nonce, 
     );
 
     print('The status code of regular process payment is ${response.statusCode}');
-    print('The status data of regular process payment is ${response.data}');
 
     if(response.statusCode == 200){
       return true;
@@ -35,7 +34,6 @@ Future<bool> apiBLMProcessToken({required String amount, required String nonce, 
       return false;
     }
   }catch(e){
-    // return Future.error('The error is $e');
     throw Exception('The error is $e');
   }
 }

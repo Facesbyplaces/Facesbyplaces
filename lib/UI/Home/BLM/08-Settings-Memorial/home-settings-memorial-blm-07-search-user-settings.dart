@@ -17,14 +17,7 @@ class BLMSearchUsers {
   final String image;
   final String email;
   final int accountType;
-
-  const BLMSearchUsers(
-      {required this.userId,
-      required this.firstName,
-      required this.lastName,
-      required this.image,
-      required this.email,
-      required this.accountType});
+  const BLMSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
 }
 
 class HomeBLMSearchUser extends StatefulWidget {
@@ -34,14 +27,7 @@ class HomeBLMSearchUser extends StatefulWidget {
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-
-  const HomeBLMSearchUser(
-      {required this.isFamily,
-      required this.memorialId,
-      required this.memorialName,
-      required this.switchFamily,
-      required this.switchFriends,
-      required this.switchFollowers});
+  const HomeBLMSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   @override
   HomeBLMSearchUserState createState() => HomeBLMSearchUserState();
@@ -59,14 +45,13 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
   void initState() {
     super.initState();
     onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
+    scrollController.addListener((){
+      if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if (itemRemaining != 0) {
-          setState(() {
+          setState((){
             onLoading();
           });
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more users to show'),
@@ -79,14 +64,14 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
     });
   }
 
-  Future<void> onRefresh() async {
-    setState(() {
+  Future<void> onRefresh() async{
+    setState((){
       onLoading();
     });
   }
 
-  void onLoading() async {
-    if (itemRemaining != 0) {
+  void onLoading() async{
+    if (itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMSearchUsers(keywords: keywords, page: page).onError((error, stackTrace){
         context.loaderOverlay.hide();
@@ -98,16 +83,10 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Error: $error.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                fontFamily: 'NexaRegular'
-              ),
-            ),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
             onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
             },
@@ -132,22 +111,23 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
         );
       }
 
-      if (mounted) setState(() {});
+      if(mounted)
+      setState(() {});
       page++;
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if (!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -163,119 +143,84 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: const Color(0xffffffff),
-                            size: SizeConfig.blockSizeVertical! * 3.52,
-                          ),
-                          onPressed: () {
+                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                          onPressed: (){
                             Navigator.pop(context);
                           },
                         ),
                       ),
                       Spacer(),
                       Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
+                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
                         width: SizeConfig.blockSizeHorizontal! * 79.06,
                         child: Row(
                           children: [
                             IconButton(
-                              onPressed: () {
-                                setState(() {
+                              onPressed: (){
+                                setState((){
                                   keywords = controller.text;
                                 });
 
-                                if (controller.text != '') {
+                                if(controller.text != ''){
                                   onLoading();
                                 }
                               },
-                              icon: const Icon(Icons.search,
-                                  color: const Color(0xff888888)),
+                              icon: const Icon(Icons.search, color: const Color(0xff888888)),
                             ),
                             Expanded(
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 controller: controller,
-                                onChanged: (newPlaces) {
-                                  setState(() {
+                                onChanged: (newPlaces){
+                                  setState((){
                                     keywords = newPlaces;
                                   });
 
-                                  if (newPlaces != '') {
-                                    setState(() {
+                                  if(newPlaces != ''){
+                                    setState((){
                                       empty = false;
                                       itemRemaining = 1;
                                       page = 1;
                                       keywords = '';
                                     });
-                                  } else {
+                                  }else{
                                     empty = true;
-                                    setState(() {
+                                    setState((){
                                       users = [];
                                     });
                                   }
                                 },
-                                onFieldSubmitted: (newPlaces) {
-                                  setState(() {
+                                onFieldSubmitted: (newPlaces){
+                                  setState((){
                                     keywords = newPlaces;
                                   });
 
-                                  if (newPlaces != '') {
+                                  if(newPlaces != ''){
                                     onLoading();
                                   }
                                 },
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                  fontFamily: 'NexaRegular',
-                                  color: Color(0xffB1B1B1),
-                                ),
+                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.all(15.0),
                                   filled: true,
                                   fillColor: const Color(0xffffffff),
                                   focusColor: const Color(0xffffffff),
                                   hintText: 'Search User',
-                                  hintStyle: TextStyle(
-                                    fontSize:
-                                    SizeConfig.blockSizeVertical! * 2.11,
-                                    fontFamily: 'NexaRegular',
-                                    color: Color(0xffB1B1B1),
-                                  ),
-                                  border: const OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: const Color(0xffffffff)),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(25)),
-                                  ),
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: const Color(0xffffffff)),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(25)),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: const Color(0xffffffff)),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(25)),
-                                  ),
+                                  hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                  border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                 ),
                               ),
                             )
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        width: 20,
-                      ),
+
+                      const SizedBox(width: 20,),
                     ],
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
+                  SizedBox(height: 5,),
                 ],
               ),
               leading: Container(),
@@ -286,200 +231,126 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
             height: SizeConfig.screenHeight! - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: empty
-                ? SingleChildScrollView(
-                    physics: const ClampingScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height:
-                              (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,
-                        ),
-                        Image.asset(
-                          'assets/icons/search-user.png',
-                          height: 240,
-                          width: 240,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Search to add users',
-                          style: TextStyle(
-                            fontSize:
-                            SizeConfig.blockSizeVertical! *
-                                2.64,
-                            fontFamily: 'NexaRegular',
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          height:
-                              (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,
-                        ),
-                      ],
-                    ),
-                  )
-                : Container(
-                    width: SizeConfig.screenWidth,
-                    child: RefreshIndicator(
-                      onRefresh: onRefresh,
-                      child: ListView.separated(
-                          controller: scrollController,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 0),
-                          physics: const ClampingScrollPhysics(),
-                          itemCount: users.length,
-                          separatorBuilder: (c, i) => const Divider(
-                              height: 10, color: Colors.transparent),
-                          itemBuilder: (c, index) => ListTile(
-                                onTap: () async {
-                                  if (widget.isFamily) {
-                                    String choice = await showDialog(
-                                            context: (context),
-                                            builder: (build) =>
-                                                MiscBLMRelationshipFromDialog()) ??
-                                        '';
+            ? SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              padding: EdgeInsets.zero,
+              child: Column(
+                children: [
 
-                                    if (choice != '') {
-                                      context.loaderOverlay.show();
-                                      String result = await apiBLMAddFamily(
-                                          memorialId: widget.memorialId,
-                                          userId: users[index].userId,
-                                          relationship: choice,
-                                          accountType:
-                                              users[index].accountType);
-                                      context.loaderOverlay.hide();
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
-                                      if (result != 'Success') {
-                                        await showDialog(
-                                            context: context,
-                                            builder: (_) => AssetGiffyDialog(
-                                                  image: Image.asset(
-                                                    'assets/icons/cover-icon.png',
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  title: Text(
-                                                    'Error',
-                                                    textAlign: TextAlign.center,
-                                                    style:  TextStyle(
-                                                        fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                                        fontFamily: 'NexaRegular'),
-                                                  ),
-                                                  entryAnimation:
-                                                      EntryAnimation.DEFAULT,
-                                                  description: Text(
-                                                    'Error: $result.',
-                                                    textAlign: TextAlign.center,
-                                                    style:  TextStyle(
-                                                        fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                                        fontFamily: 'NexaRegular'
-                                                    ),
-                                                  ),
-                                                  onlyOkButton: true,
-                                                  buttonOkColor:
-                                                      const Color(0xffff0000),
-                                                  onOkButtonPressed: () {
-                                                    Navigator.pop(
-                                                        context, true);
-                                                  },
-                                                ));
-                                      } else {
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomeBLMPageFamily(
-                                                      memorialId:
-                                                          widget.memorialId,
-                                                      memorialName:
-                                                          widget.memorialName,
-                                                      switchFamily:
-                                                          widget.switchFamily,
-                                                      switchFriends:
-                                                          widget.switchFriends,
-                                                      switchFollowers: widget
-                                                          .switchFollowers)),
-                                        );
-                                      }
-                                    }
-                                  } else {
-                                    context.loaderOverlay.show();
-                                    String result = await apiBLMAddFriends(
-                                        memorialId: widget.memorialId,
-                                        userId: users[index].userId,
-                                        accountType: users[index].accountType);
-                                    context.loaderOverlay.hide();
+                  Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
-                                    if (result != 'Success') {
-                                      await showDialog(
-                                          context: context,
-                                          builder: (_) => AssetGiffyDialog(
-                                                image: Image.asset(
-                                                  'assets/icons/cover-icon.png',
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                title: Text(
-                                                  'Error',
-                                                  textAlign: TextAlign.center,
-                                                  style:  TextStyle(
-                                                      fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                                      fontFamily: 'NexaRegular'),
-                                                ),
-                                                entryAnimation:
-                                                    EntryAnimation.DEFAULT,
-                                                description: Text(
-                                                  'Error: $result.',
-                                                  textAlign: TextAlign.center,
-                                                  style:  TextStyle(
-                                                      fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                                      fontFamily: 'NexaRegular'
-                                                  ),
-                                                ),
-                                                onlyOkButton: true,
-                                                buttonOkColor:
-                                                    const Color(0xffff0000),
-                                                onOkButtonPressed: () {
-                                                  Navigator.pop(context, true);
-                                                },
-                                              ));
-                                    } else {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomeBLMPageFriends(
-                                                    memorialId:
-                                                        widget.memorialId,
-                                                    memorialName:
-                                                        widget.memorialName,
-                                                    switchFamily:
-                                                        widget.switchFamily,
-                                                    switchFriends:
-                                                        widget.switchFriends,
-                                                    switchFollowers: widget
-                                                        .switchFollowers)),
-                                      );
-                                    }
-                                  }
+                  const SizedBox(height: 20,),
+
+                  Text('Search to add users', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+                ],
+              ),
+            )
+            : Container(
+              width: SizeConfig.screenWidth,
+              child: RefreshIndicator(
+                onRefresh: onRefresh,
+                child: ListView.separated(
+                  controller: scrollController,
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: users.length,
+                  separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+                  itemBuilder: (c, index) => ListTile(
+                    onTap: () async{
+                      if(widget.isFamily){
+                        String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
+
+                        if (choice != '') {
+                          context.loaderOverlay.show();
+                          String result = await apiBLMAddFamily(
+                            memorialId: widget.memorialId,
+                            userId: users[index].userId,
+                            relationship: choice,
+                            accountType: users[index].accountType,
+                          );
+                          context.loaderOverlay.hide();
+
+                          if(result != 'Success'){
+                            await showDialog(
+                              context: context,
+                              builder: (_) => AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                onlyOkButton: true,
+                                buttonOkColor: const Color(0xffff0000),
+                                onOkButtonPressed: (){
+                                  Navigator.pop(context, true);
                                 },
-                                leading: users[index].image != ''
-                                ? CircleAvatar(
-                                  backgroundColor: const Color(0xff888888),
-                                  foregroundImage: NetworkImage('${users[index].image}'),
-                                )
-                                : const CircleAvatar(
-                                  backgroundColor: const Color(0xff888888),
-                                  foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                ),
-                                title: Text(
-                                    '${users[index].firstName} ${users[index].lastName}'),
-                                subtitle: Text(
-                                  '${users[index].email}',
-                                ),
-                              )),
+                              ),
+                            );
+                          }else{
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(
+                              memorialId: widget.memorialId,
+                              memorialName: widget.memorialName,
+                              switchFamily: widget.switchFamily,
+                              switchFriends: widget.switchFriends, 
+                              switchFollowers: widget.switchFollowers)),
+                            );
+                          }
+                        }
+                      }else{
+                        context.loaderOverlay.show();
+                        String result = await apiBLMAddFriends(memorialId: widget.memorialId, userId: users[index].userId, accountType: users[index].accountType);
+                        context.loaderOverlay.hide();
+
+                        if(result != 'Success'){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                              onlyOkButton: true,
+                              buttonOkColor:
+                                  const Color(0xffff0000),
+                              onOkButtonPressed: (){
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                        }else{
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(
+                                memorialId: widget.memorialId,
+                                memorialName: widget.memorialName,
+                                switchFamily: widget.switchFamily,
+                                switchFriends: widget.switchFriends,
+                                switchFollowers: widget.switchFollowers,
+                              ),
+                            ),
+                          );
+                        }
+                      }
+                    },
+                    leading: users[index].image != ''
+                    ? CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: NetworkImage('${users[index].image}'),
+                    )
+                    : const CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                    ),
+                    title: Text('${users[index].firstName} ${users[index].lastName}'),
+                    subtitle: Text('${users[index].email}',
                     ),
                   ),
+                ),
+              ),
+            ),
           ),
         ),
       ),

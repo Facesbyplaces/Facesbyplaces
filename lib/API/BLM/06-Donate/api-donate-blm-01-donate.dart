@@ -31,10 +31,6 @@ Future<bool> apiBLMDonate({required String pageType, required int pageId, requir
     'token': '$token',
   });
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
     options: Options(
       followRedirects: false,
@@ -52,7 +48,6 @@ Future<bool> apiBLMDonate({required String pageType, required int pageId, requir
   );
 
   print('The status code of blm donate is ${response.statusCode}');
-  print('The status data of blm donate is ${response.data}');
 
   FlutterClipboard.copy('${response.data}').then(( value ) => print('copied!'));
 

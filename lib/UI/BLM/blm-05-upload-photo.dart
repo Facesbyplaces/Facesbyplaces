@@ -40,7 +40,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    print('Upload photo blm screen build!');
     return ValueListenableBuilder(
       valueListenable: image,
       builder: (_, File imageListener, __) => Scaffold(
@@ -71,7 +70,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                       await getImage();
                     }
                   }
-                  
                 },
                 child: Container(
                   height: SizeConfig.screenWidth! / 1.2,
@@ -99,10 +97,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                   ),
                                 ),
                               )
-                              : Align(
-                                alignment: Alignment.center, 
-                                child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),
-                              ),
+                              : Align(alignment: Alignment.center,  child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
                             ],
                           ),
                         ),
@@ -150,12 +145,10 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('Something went wrong. Please try again.',
-                            textAlign: TextAlign.center,
-                          ),
+                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
                           onlyOkButton: true,
                           buttonOkColor: const Color(0xffff0000),
-                          onOkButtonPressed: () {
+                          onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
                         )
@@ -169,12 +162,10 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: const Text('Please upload a photo.',
-                          textAlign: TextAlign.center,
-                        ),
+                        description: const Text('Please upload a photo.', textAlign: TextAlign.center,),
                         onlyOkButton: true,
                         buttonOkColor: const Color(0xffff0000),
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
                       )
@@ -184,7 +175,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
               ),
 
               const SizedBox(height: 10,),
-
             ],
           ),
         ),

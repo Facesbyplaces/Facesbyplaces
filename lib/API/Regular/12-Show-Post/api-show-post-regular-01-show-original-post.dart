@@ -20,11 +20,6 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  print('The post id is $postId');
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/$postId',
@@ -41,7 +36,7 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
     ),
   );
 
-  // print('The status code of regular show original post is ${response.statusCode}');
+  print('The status code of regular show original post is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

@@ -36,7 +36,7 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int 
     ),
   );
 
-  // print('The status code of regular show post comments is ${response.statusCode}');
+  print('The status code of regular show post comments is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

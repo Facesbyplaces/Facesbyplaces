@@ -331,8 +331,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     super.initState();
     isGuest();
     toggle.value = widget.newToggle;
-    scrollController1.addListener(() {
-      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
+    scrollController1.addListener((){
+      if(scrollController1.position.pixels == scrollController1.position.maxScrollExtent){
         if(postItemRemaining != 0){
           onLoading1();
         }else{
@@ -346,8 +346,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         }
       }
     });
-    scrollController2.addListener(() {
-      if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
+    scrollController2.addListener((){
+      if(scrollController2.position.pixels == scrollController2.position.maxScrollExtent){
         if(suggestedItemRemaining != 0){
           onLoading2();
         }else{
@@ -361,8 +361,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         }
       }
     });
-    scrollController3.addListener(() {
-      if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
+    scrollController3.addListener((){
+      if(scrollController3.position.pixels == scrollController3.position.maxScrollExtent){
         if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
           onLoading3();
         }else{
@@ -376,8 +376,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         }
       }
     });
-    scrollController4.addListener(() {
-      if (scrollController4.position.pixels == scrollController4.position.maxScrollExtent) {
+    scrollController4.addListener((){
+      if(scrollController4.position.pixels == scrollController4.position.maxScrollExtent){
         if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
           onLoading4();
         }else{

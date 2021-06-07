@@ -38,11 +38,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
   List<String> backgroundImages = ['assets/icons/blm-memorial-cover-1.jpeg', 'assets/icons/blm-memorial-cover-2.jpeg'];
 
   Future getProfileImage() async {
-    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    // if (pickedFile != null) {
-    //   profileImage.value = File(pickedFile.path);
-    // }
-
     try {
       final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
         return picture;
@@ -57,11 +52,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
   }
 
   Future getBackgroundImage() async {
-    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    // if (pickedFile != null) {
-    //   backgroundImage.value = File(pickedFile.path);
-    // }
-
     try {
       final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
         return picture;
@@ -78,7 +68,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    print('BLM create memorial screen 3 rebuild!');
     return ValueListenableBuilder(
       valueListenable: backgroundImage,
       builder: (_, File backgroundImageListener, __) => ValueListenableBuilder(
@@ -92,7 +81,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
               backgroundColor: Color(0xff04ECFF),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
-                onPressed: () {
+                onPressed: (){
                   Navigator.pop(context);
                 },
               ),
@@ -134,7 +123,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                             ),
 
                             GestureDetector(
-                              onTap: () async {
+                              onTap: () async{
                                 await getProfileImage();
                               },
                               child: Center(
@@ -169,11 +158,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                 child: const CircleAvatar(
                                   radius: 25,
                                   backgroundColor: Colors.transparent,
-                                  child: const Icon(
-                                    Icons.camera,
-                                    color: const Color(0xffaaaaaa),
-                                    size: 45,
-                                  ),
+                                  child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
                                 ),
                               ),
                             ),
@@ -184,14 +169,9 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                               child: const CircleAvatar(
                                 radius: 25,
                                 backgroundColor: const Color(0xffffffff),
-                                child: const Icon(
-                                  Icons.camera,
-                                  color: const Color(0xffaaaaaa),
-                                  size: 45,
-                                ),
+                                child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -211,34 +191,32 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                         child: ListView.separated(
                           physics: const ClampingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return (() {
-                              if (index == 2) {
+                          separatorBuilder: (context, index){
+                            return const SizedBox(width: 25);
+                          },
+                          itemCount: 3,
+                          itemBuilder: (context, index){
+                            return ((){
+                              if(index == 2){
                                 return GestureDetector(
-                                  onTap: () async {
-                                    backgroundImageToggle.value = index;
-                                    await getBackgroundImage();
-                                  },
                                   child: Container(
                                     width: 100,
                                     height: 100,
-                                    child: const Icon(
-                                      Icons.add_rounded,
-                                      color: const Color(0xff000000),
-                                      size: 60,
-                                    ),
+                                    child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: const Color(0xffcccccc),
-                                      border: Border.all(
-                                        color: const Color(0xff000000),
-                                      ),
+                                      border: Border.all(color: const Color(0xff000000),),
                                     ),
                                   ),
+                                  onTap: () async{
+                                    backgroundImageToggle.value = index;
+                                    await getBackgroundImage();
+                                  },
                                 );
-                              } else {
+                              }else{
                                 return GestureDetector(
-                                  onTap: () async {
+                                  onTap: () async{
                                     final ByteData bytes = await rootBundle.load(backgroundImages[index]);
                                     final Uint8List list = bytes.buffer.asUint8List();
 
@@ -260,10 +238,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                       height: 100,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(backgroundImages[index]),
-                                        ),
+                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
                                       ),
                                     ),
                                   )
@@ -277,11 +252,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                       height: 100,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              backgroundImages[index]),
-                                        ),
+                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
                                       ),
                                     ),
                                   ),
@@ -289,10 +260,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                               }
                             }());
                           },
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(width: 25);
-                          },
-                          itemCount: 3,
                         ),
                       ),
 
@@ -305,13 +272,9 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                       MiscBLMButtonTemplate(
                         width: 150,
                         height: 45,
-                        buttonTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xffFFFFFF),
-                        ),
+                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                         buttonText: 'Create my Memorial Page',
-                        onPressed: () async {
+                        onPressed: () async{
 
                           if(backgroundImageToggle.value == 0 || backgroundImageToggle.value == 1){
                             final ByteData bytes = await rootBundle.load(backgroundImages[backgroundImageToggle.value]);
@@ -325,50 +288,39 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                           }
 
                           Location.Location location = new Location.Location();
-
                           bool serviceEnabled = await location.serviceEnabled();
 
-                          if (!serviceEnabled) {
+                          if(!serviceEnabled){
                             serviceEnabled = await location.requestService();
-                            if (!serviceEnabled) {
+                            if(!serviceEnabled){
                               return;
                             }
                           }
 
                           Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                          if (permissionGranted != Location.PermissionStatus.granted) {
+                          if (permissionGranted != Location.PermissionStatus.granted){
                             bool confirmation = await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Confirm', textAlign: TextAlign.center,  style: TextStyle(
-                                    fontSize:
-                                    SizeConfig.blockSizeVertical! * 3.16,
-                                    fontFamily: 'NexaRegular'),),
+                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text(
-                                  'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize:
-                                      SizeConfig.blockSizeVertical! * 2.87,
-                                      fontFamily: 'NexaRegular'),
-                                ),
+                                description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                 onlyOkButton: false,
-                                onOkButtonPressed: () {
+                                onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },
-                                onCancelButtonPressed: () {
+                                onCancelButtonPressed: (){
                                   Navigator.pop(context, false);
                                 },
                               ),
                             );
 
-                            if (confirmation == true) {
+                            if(confirmation == true){
                               permissionGranted = await location.requestPermission();
 
-                              if (profileImage.value.path == '') {
+                              if(profileImage.value.path == ''){
                                 final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
                                 final Uint8List list = bytes.buffer.asUint8List();
 
@@ -406,8 +358,8 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                               Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
                               Navigator.pushReplacement(context, newRoute);
                             }
-                          } else {
-                            if (profileImage.value.path == '') {
+                          }else{
+                            if(profileImage.value.path == ''){
                               final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
                               final Uint8List list = bytes.buffer.asUint8List();
 

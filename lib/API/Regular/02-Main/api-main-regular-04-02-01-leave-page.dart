@@ -25,8 +25,6 @@ Future<String> apiRegularLeavePage({required int memorialId}) async{
 
   Dio dioRequest = Dio();
 
-  print('The memorial id in regular is $memorialId');
-
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/relationship/leave',
     options: Options(
       followRedirects: false,

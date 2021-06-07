@@ -46,7 +46,6 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
   if(response.statusCode == 200){
     return true;
   }else{
-    print('Error occurred of follow page ${response.statusMessage}');
     return false;
   }
 }

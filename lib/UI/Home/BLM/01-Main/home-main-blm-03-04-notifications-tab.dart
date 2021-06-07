@@ -92,7 +92,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('BLM Notification tab screen rebuild!');
     return ValueListenableBuilder(
       valueListenable: count,
       builder: (_, int countListener, __) => Container(

@@ -18,7 +18,6 @@ Future<String> apiRegularLogin({required String email, required String password,
   );
 
   print('The status code of regular login is ${response.statusCode}');
-  // print('The status data of regular login is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

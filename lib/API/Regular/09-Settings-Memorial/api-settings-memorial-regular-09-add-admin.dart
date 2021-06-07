@@ -20,10 +20,6 @@ Future<String> apiRegularAddMemorialAdmin({required String pageType, required in
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
@@ -55,5 +51,4 @@ Future<String> apiRegularAddMemorialAdmin({required String pageType, required in
     var newData = Map<String, dynamic>.from(response.data);
     return newData['error'];
   }
-
 }

@@ -36,7 +36,7 @@ Future<APIRegularShowCommentOrReplyLikeStatus> apiRegularShowCommentOrReplyLikeS
     ),
   );
 
-  // print('The status code of regular show comment or reply like status is ${response.statusCode}');
+  print('The status code of regular show comment or reply like status is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

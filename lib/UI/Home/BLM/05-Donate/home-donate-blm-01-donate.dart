@@ -22,12 +22,11 @@ class HomeBLMUserDonate extends StatefulWidget{
 class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
   int donateToggle = 0;
-  // final Widget donateWithGoogle = SvgPicture.asset('assets/icons/donation-google-pay.svg', semanticsLabel: 'Donate with Google',);
   final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/google-pay.svg', semanticsLabel: 'Google Pay Mark', height: 52, width: 52);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
       onWillPop: () async{
@@ -45,10 +44,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              decoration: BoxDecoration(
-                color: const Color(0xffffffff),
-                borderRadius: BorderRadius.circular(20.0),
-              ),
+              decoration: BoxDecoration(color: const Color(0xffffffff), borderRadius: BorderRadius.circular(20.0),),
               child: Column(
                 children: [
                   const SizedBox(height: 20,),
@@ -140,18 +136,11 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                   MiscBLMButtonTemplate(
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
-                    buttonTextStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold, 
-                      color: Color(0xffffffff),
-                    ),
+                    buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,  color: Color(0xffffffff),),
                     width: SizeConfig.screenWidth! / 2, 
                     height: 45,
                     onPressed: () async{
                       String token = await apiBLMTokenization();
-
-                      print('The new token is $token');
-
                       String amount = '0.99';
 
                       if(donateToggle == 0){
@@ -209,16 +198,10 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Error: Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular'
-                              ),
-                            ),
+                            description: Text('Error: Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                             onlyOkButton: true,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -242,19 +225,16 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       if(paymentResult == true){
                         await showDialog(
                           context: context,
-                          builder: (_) => 
-                            AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
-                                textAlign: TextAlign.center,
-                              ),
-                              onlyOkButton: true,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
+                          builder: (_) => AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
+                            onlyOkButton: true,
+                            onOkButtonPressed: (){
+                              Navigator.pop(context);
+                            },
+                          ),
                         );
                       }else{
                         await showDialog(
@@ -264,12 +244,10 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: const Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                            ),
+                            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
                             onlyOkButton: true,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           )

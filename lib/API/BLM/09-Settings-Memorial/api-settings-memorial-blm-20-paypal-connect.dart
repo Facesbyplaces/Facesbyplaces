@@ -15,7 +15,6 @@ Future<bool> apiBLMMemorialPaypalConnect({required String userId, required Strin
   );
 
   print('The status code of blm paypal connect is ${response.statusCode}');
-  print('The status code of blm paypal connect is ${response.data}');
 
   if(response.statusCode == 200){
     return true;

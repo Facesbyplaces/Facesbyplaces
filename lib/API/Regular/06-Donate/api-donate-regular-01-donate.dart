@@ -32,7 +32,6 @@ Future<bool> apiRegularDonate({required String pageType, required int pageId, re
   );
 
   print('The status code of regular donate is ${response.statusCode}');
-  print('The status data of regular donate is ${response.data}');
 
   if(response.statusCode == 200){
     return true;

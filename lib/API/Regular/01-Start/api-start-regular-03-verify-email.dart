@@ -8,9 +8,6 @@ Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The user id is $prefsUserID');
-  print('The verification code is $verificationCode');
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode&account_type=2',
@@ -29,7 +26,6 @@ Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
   );
 
   print('The status code of regular verify email is ${response.statusCode}');
-  print('The status data of regular verify email is ${response.data}');
 
   if(response.statusCode == 200){
     sharedPrefs.setBool('regular-user-session', true);

@@ -43,7 +43,6 @@ class BLMProfilePosts{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
   const BLMProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
@@ -77,9 +76,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
     super.initState();
     onLoading();
     showProfile = getProfileInformation(widget.memorialId);
-    scrollController.addListener(() {
+    scrollController.addListener((){
       if(postCount.value != 0){
-        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if (scrollController.position.pixels == scrollController.position.maxScrollExtent){
           showFloatingButton.value = true;
         }else{
           showFloatingButton.value = false;
@@ -149,9 +148,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
       publiclyIndex: true,
       locallyIndex: true,
       contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Memorial')
-        ..addCustomMetadata('link-memorial-id', widget.memorialId)
-        ..addCustomMetadata('link-type-of-account', 'Blm')
+      ..addCustomMetadata('link-category', 'Memorial')
+      ..addCustomMetadata('link-memorial-id', widget.memorialId)
+      ..addCustomMetadata('link-type-of-account', 'Blm')
     );
 
     lp = BranchLinkProperties(
@@ -183,7 +182,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
       builder: (_, bool showFloatingButtonListener, __) => ValueListenableBuilder(
         valueListenable: postCount,
         builder: (_, int postCountListener, __) => Scaffold(
-         // backgroundColor: const Color(0xffffffff),
           body: SafeArea(
             bottom: false,
             child: RefreshIndicator(

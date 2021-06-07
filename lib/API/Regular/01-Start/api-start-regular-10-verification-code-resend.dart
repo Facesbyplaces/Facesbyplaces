@@ -27,7 +27,6 @@ Future<bool> apiRegularVerificationCodeResend() async{
   );
 
   print('The status code of regular verification code resend is ${response.statusCode}');
-  print('The status data of regular verification code resend is ${response.data}');
 
   if(response.statusCode == 200){
     return true;

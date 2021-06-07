@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class HomeBLMCreateMemorial2 extends StatefulWidget {
+class HomeBLMCreateMemorial2 extends StatefulWidget{
   final String relationship;
   final String locationOfIncident;
   final String precinct;
@@ -24,7 +24,7 @@ class HomeBLMCreateMemorial2 extends StatefulWidget {
   HomeBLMCreateMemorial2State createState() => HomeBLMCreateMemorial2State();
 }
 
-class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
+class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   TextEditingController controllerStory = TextEditingController();
   ValueNotifier<List<File> > slideImages = ValueNotifier<List<File>>([]);
@@ -34,10 +34,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
   final picker = ImagePicker();
 
   Future getVideo() async {
-    // final pickedFile = await picker.getVideo(source: ImageSource.gallery);
-    // if (pickedFile != null) {
-    //   videoFile.value = File(pickedFile.path);
-    // }
     try {
       final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture) {
         return picture;
@@ -51,13 +47,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
     }
   }
 
-  Future getSlideImage() async {
-    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    // if (pickedFile != null) {
-    //   slideImages.value.add(File(pickedFile.path));
-    //   slideCount.value++;
-    // }
-
+  Future getSlideImage() async{
     try {
       final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
         return picture;
@@ -73,17 +63,16 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('BLM create memorial screen 2 rebuild!');
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -96,7 +85,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
               backgroundColor: const Color(0xff04ECFF),
               leading: IconButton(
                 icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
-                onPressed: () {
+                onPressed: (){
                   Navigator.pop(context);
                 },
               ),
@@ -137,8 +126,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                             ),
                           ),
 
-                          //const SizedBox(width: 15,),
-
                           Expanded(
                             child: DefaultTabController(
                               length: 3,
@@ -150,34 +137,13 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                                 onTap: (int number) {
                                   toggle.value = number;
                                 },
-                                indicator: BoxDecoration(
-                                  border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),
-                                ),
+                                indicator: BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
                                 tabs: [
-                                  Center(
-                                    child: Text('Text',
-                                      style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                        fontFamily: 'NexaRegular',
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text('Video',
-                                      style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                        fontFamily: 'NexaRegular',
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text('Slide',
-                                      style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                        fontFamily: 'NexaRegular',
-                                      ),
-                                    ),
-                                  ),
+                                  Center(child: Text('Text', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',),),),
+
+                                  Center(child: Text('Video', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',),),),
+
+                                  Center(child: Text('Slide', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',),),),
                                 ],
                               ),
                             ),
@@ -188,8 +154,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                       const SizedBox(height: 20,),
 
                       Container(
-                        child: (() {
-                          switch (toggleListener) {
+                        child: ((){
+                          switch (toggleListener){
                             case 0: return shareStory1();
                             case 1: return shareStory2();
                             case 2: return shareStory3();
@@ -199,47 +165,31 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                       
                       const SizedBox(height: 20),
                       
-                      Text('Describe the events that happened to your love one.',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xff2F353D),
-                        ),
-                      ),
+                      Text('Describe the events that happened to your love one.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
                       
                       SizedBox(height: SizeConfig.blockSizeVertical! * 16.02),
                       
                       MiscBLMButtonTemplate(
                         width: 150,
                         height: 45,
-                        buttonTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xffFFFFFF),
-                        ),
+                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
                         onPressed: () async {
-                          if (_key1.currentState!.controller.text == '') {
+                          if(_key1.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
-                                ),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                                 entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Please complete the form before submitting.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),
-                                ),
+                                description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                 onlyOkButton: true,
                                 buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
+                                onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },
                               ),
                             );
-                          } else {
+                          }else{
                             List<File> newFiles = [];
 
                             if(videoFile.value.path != ''){
@@ -280,47 +230,33 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
     );
   }
 
-  shareStory1() {
+  shareStory1(){
     return TextFormField(
       controller: controllerStory,
       cursorColor: Color(0xff000000),
       maxLines: 10,
       keyboardType: TextInputType.text,
       readOnly: false,
-      style: TextStyle(
-    fontSize: SizeConfig.blockSizeVertical! * 2.11,
-      fontFamily: 'NexaRegular',
-      color: const Color(0xff2F353D),
-    ),
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         fillColor: Color(0xffffffff),
         filled: true,
         alignLabelWithHint: true,
         labelText: '',
         labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
+        border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),), borderRadius: BorderRadius.all(Radius.circular(10)),),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),), borderRadius: BorderRadius.all(Radius.circular(10)),),
       ),
     );
   }
 
-  shareStory2() {
+  shareStory2(){
     return ValueListenableBuilder(
       valueListenable: videoFile,
       builder: (_, File videoFileListener, __) => Container(
         width: SizeConfig.screenWidth,
         child: GestureDetector(
-          onTap: () async {
+          onTap: () async{
             await getVideo();
           },
           child: videoFileListener.path != ''
@@ -379,9 +315,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                 child: BetterPlayer.file(videoFileListener.path,
                   betterPlayerConfiguration: BetterPlayerConfiguration(
                     deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                      showControls: false,
-                    ),
+                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                     aspectRatio: 16 / 9,
                   ),
                 ),
@@ -544,37 +478,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2> {
                               ],
                             ),
                           ),
-                          // child: Container(
-                          //   width: 80,
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(10),
-                          //     color: Color(0xffcccccc),
-                          //     border: Border.all(
-                          //       color: Color(0xff000000),
-                          //     ),
-                          //     image: DecorationImage(
-                          //       fit: BoxFit.cover,
-                          //       image: AssetImage(slideImagesListener[index].path),
-                          //     ),
-                          //   ),
-                          //   child: Stack(
-                          //     children: [
-                          //       Center(
-                          //         child: CircleAvatar(
-                          //           radius: 25,
-                          //           backgroundColor: Color(0xffffffff).withOpacity(.5),
-                          //           child: Text('${index + 1}',
-                          //             style: TextStyle(
-                          //               fontSize: 40,
-                          //               fontWeight: FontWeight.bold,
-                          //               color: Color(0xffffffff),
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                         );
                       }
                     }());

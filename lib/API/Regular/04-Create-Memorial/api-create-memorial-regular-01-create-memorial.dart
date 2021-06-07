@@ -11,9 +11,6 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
-  print('The latitude in create memorial in regular is ${memorial.almLatitude}');
-  print('The longitude in create memorial in regular is ${memorial.almLongitude}');
-
   formData.files.addAll([
     MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
     MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),
@@ -87,20 +84,5 @@ class APIRegularCreateMemorial{
   List<dynamic> almImagesOrVideos;
   String almLatitude;
   String almLongitude;
-
-  APIRegularCreateMemorial({
-    required this.almMemorialName, 
-    required this.almDescription, 
-    required this.almBirthPlace, 
-    required this.almDob, 
-    required this.almRip, 
-    required this.almCemetery,
-    required this.almCountry, 
-    required this.almRelationship, 
-    required this.almBackgroundImage, 
-    required this.almProfileImage, 
-    required this.almLatitude,
-    required this.almImagesOrVideos,
-    required this.almLongitude,
-  });
+  APIRegularCreateMemorial({required this.almMemorialName, required this.almDescription, required this.almBirthPlace, required this.almDob, required this.almRip, required this.almCemetery,required this.almCountry, required this.almRelationship, required this.almBackgroundImage, required this.almProfileImage, required this.almLatitude,required this.almImagesOrVideos, required this.almLongitude,});
 }

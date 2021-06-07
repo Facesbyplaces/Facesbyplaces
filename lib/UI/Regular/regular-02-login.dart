@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
-import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-12-google-authentication.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-google-authentication.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';

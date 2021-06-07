@@ -24,7 +24,6 @@ Future<String> apiBLMMemorialPaypalAccessToken({required String code}) async{
   );
 
   print('The status code of blm paypal access token is ${response.statusCode}');
-  print('The status code of blm paypal access token is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

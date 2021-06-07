@@ -25,13 +25,10 @@ Future<bool> apiRegularCheckAccount({required String email}) async{
   );
 
   print('The status code of regular check account is ${response.statusCode}');
-  print('The status data of regular check account is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     bool passwordUpdated = newData['password_updated'];
-
-    print('The value of passwordUpdated is $passwordUpdated');
     return passwordUpdated;
   }else{
     throw Exception('Something went wrong. Please try again.');

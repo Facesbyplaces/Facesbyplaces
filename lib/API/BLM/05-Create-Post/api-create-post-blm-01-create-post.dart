@@ -68,25 +68,11 @@ class APIBLMCreatePost{
   double blmPostLatitude;
   double blmPostLongitude;
   List<BLMTaggedPeople> blmPostTagPeople;
-  
-  APIBLMCreatePost({
-    required this.blmPostPageType,
-    required this.blmPostPageId,
-    required this.blmPostPostBody,
-    required this.blmPostLocation,
-    required this.blmPostImagesOrVideos,
-    required this.blmPostLatitude,
-    required this.blmPostLongitude,
-    required this.blmPostTagPeople,
-  });
+  APIBLMCreatePost({required this.blmPostPageType, required this.blmPostPageId, required this.blmPostPostBody, required this.blmPostLocation, required this.blmPostImagesOrVideos, required this.blmPostLatitude, required this.blmPostLongitude, required this.blmPostTagPeople,});
 }
 
 class BLMTaggedPeople{
   int userId;
   int accountType;
-
-  BLMTaggedPeople({
-    required this.userId,
-    required this.accountType,
-  });
+  BLMTaggedPeople({required this.userId, required this.accountType,});
 }

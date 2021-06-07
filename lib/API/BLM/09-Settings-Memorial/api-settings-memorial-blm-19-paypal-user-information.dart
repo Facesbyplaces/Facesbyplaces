@@ -52,7 +52,6 @@ class APIBLMShowPaypalUserInformationExtended{
   APIBLMShowPaypalUserInformationExtended({required this.email});
 
   factory APIBLMShowPaypalUserInformationExtended.fromJson(Map<String, dynamic> parsedJson){
-    print('The value of email is ${parsedJson['value']}');
     return APIBLMShowPaypalUserInformationExtended(
       email: parsedJson['value'],
     );

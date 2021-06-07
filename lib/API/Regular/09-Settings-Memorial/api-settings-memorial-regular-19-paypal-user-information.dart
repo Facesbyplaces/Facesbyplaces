@@ -27,7 +27,6 @@ Future<APIRegularShowPaypalUserInformation> apiRegularMemorialPaypalUserInformat
 }
 
 class APIRegularShowPaypalUserInformation{
-
   String userId;
   String name;
   List<APIRegularShowPaypalUserInformationExtended> emails;
@@ -47,12 +46,10 @@ class APIRegularShowPaypalUserInformation{
 }
 
 class APIRegularShowPaypalUserInformationExtended{
-
   String email;
   APIRegularShowPaypalUserInformationExtended({required this.email});
 
   factory APIRegularShowPaypalUserInformationExtended.fromJson(Map<String, dynamic> parsedJson){
-    print('The value of email is ${parsedJson['value']}');
     return APIRegularShowPaypalUserInformationExtended(
       email: parsedJson['value'],
     );

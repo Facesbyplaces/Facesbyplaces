@@ -10,9 +10,7 @@ Future<String> apiRegularTokenization() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/payments/paypal/new',
-    'http://fbp.dev1.koda.ws/api/v1/payments/braintree/new',
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/payments/braintree/new',
     options: Options(
       followRedirects: false,
       validateStatus: (status) {
@@ -28,7 +26,6 @@ Future<String> apiRegularTokenization() async{
   );
 
   print('The status code of regular paypal is ${response.statusCode}');
-  print('The status data of regular paypal is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

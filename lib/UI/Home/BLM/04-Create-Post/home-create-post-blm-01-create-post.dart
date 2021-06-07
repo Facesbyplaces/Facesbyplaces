@@ -59,12 +59,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     getManagedPages();
   }
 
-  void getManagedPages() async {
+  void getManagedPages() async{
     context.loaderOverlay.show();
     var newValue = await apiBLMShowListOfManagedPages();
     context.loaderOverlay.hide();
 
-    for (int i = 0; i < newValue.blmPagesList.length; i++) {
+    for(int i = 0; i < newValue.blmPagesList.length; i++){
       managedPages.add(BLMManagedPages(
         name: newValue.blmPagesList[i].blmManagedPagesName,
         pageId: newValue.blmPagesList[i].blmManagedPagesId,
@@ -74,15 +74,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     setState(() {});
   }
 
-  Future getVideo() async {
-    // final pickedFile = await picker.getVideo(source: ImageSource.gallery);
-    // if (pickedFile != null) {
-    //   slideImages.value.add(File(pickedFile.path));
-    //   slideCount.value++;
-    // }
-
-    try {
-      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture) {
+  Future getVideo() async{
+    try{
+      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -90,44 +84,38 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
         slideImages.value.add(File(pickedFile.path));
         slideCount.value++;
       }
-    } catch (error) {
+    }catch (error){
       print('Error: ${error.toString()}');
     }
   }
 
-  Future getSlideFiles() async {
-    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    // if (pickedFile != null) {
-    //   slideImages.value.add(File(pickedFile.path));
-    //   slideCount.value++;
-    // }
-
-    try {
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
+  Future getSlideFiles() async{
+    try{
+      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
-      if (pickedFile != null) {
+      if(pickedFile != null){
         slideImages.value.add(File(pickedFile.path));
         slideCount.value++;
       }
-    } catch (error) {
+    }catch (error){
       print('Error: ${error.toString()}');
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     print('Create post screen rebuild!');
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -145,44 +133,35 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     appBar: AppBar(
                       title: Row(
                         children: [
-                          Text('Create Post',
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xffffffff),
-                            ),
-                          ),
-                          const Spacer()
+                          Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                          const Spacer(),
                         ],
                       ),
                       centerTitle: true,
                       backgroundColor: const Color(0xff04ECFF),
                       leading: IconButton(
-                        icon: Icon(Icons.arrow_back,
-                          color: const Color(0xffffffff),
-                          size: SizeConfig.blockSizeVertical! * 3.52,
-                        ),
-                        onPressed: () {
+                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                        onPressed: (){
                           Navigator.pop(context);
                         },
                       ),
                       actions: [
                         GestureDetector(
-                          onTap: () async {
+                          onTap: () async{
                             Location.Location location = new Location.Location();
 
                             bool serviceEnabled = await location.serviceEnabled();
-                            if (!serviceEnabled) {
+                            if(!serviceEnabled){
                               serviceEnabled = await location.requestService();
-                              if (!serviceEnabled) {
+                              if(!serviceEnabled){
                                 return;
                               }
                             }
 
                             Location.PermissionStatus permissionGranted = await location.hasPermission();
-                            if (permissionGranted == Location.PermissionStatus.denied) {
+                            if(permissionGranted == Location.PermissionStatus.denied){
                               permissionGranted = await location.requestPermission();
-                              if (permissionGranted != Location.PermissionStatus.granted) {
+                              if(permissionGranted != Location.PermissionStatus.granted){
                                 return;
                               }
                             }
@@ -192,14 +171,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                             Location.LocationData locationData = await location.getLocation();
                             List<BLMTaggedPeople> userIds = [];
 
-                            if (userCount.value != 0) {
-                              for (int i = 0; i < userCount.value; i++) {
-                                userIds.add(
-                                  BLMTaggedPeople(
-                                    userId: users[i].userId,
-                                    accountType: users[i].accountType,
-                                  ),
-                                );
+                            if(userCount.value != 0){
+                              for(int i = 0; i < userCount.value; i++){
+                                userIds.add(BLMTaggedPeople(userId: users[i].userId, accountType: users[i].accountType,),);
                               }
                             }
 
@@ -226,24 +200,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  title: Text('Error',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),
-                                  ),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Something went wrong. Please try again.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                      fontFamily: 'NexaRegular',
-                                    ),
-                                  ),
+                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                                   onlyOkButton: true,
                                   buttonOkColor: const Color(0xffff0000),
-                                  onOkButtonPressed: () {
+                                  onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
                                 ),
@@ -285,10 +248,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<int>(
                                     value: currentIdSelected,
-                                    onChanged: (int? newValue) {
+                                    onChanged: (int? newValue){
                                       currentIdSelected = newValue!;
                                     },
-                                    items: managedPages.map((BLMManagedPages value) {
+                                    items: managedPages.map((BLMManagedPages value){
                                       return DropdownMenuItem<int>(
                                         value: value.pageId,
                                         child: Row(
@@ -334,10 +297,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                             ),
                             FocusScope(
                               child: Focus(
-                                onFocusChange: (focus) {
-                                  if (focus) {
+                                onFocusChange: (focus){
+                                  if(focus){
                                     maxLines = 10;
-                                  } else {
+                                  }else{
                                     maxLines = 5;
                                   }
                                 },
@@ -349,30 +312,15 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     cursorColor: const Color(0xff000000),
                                     maxLines: maxLines,
                                     keyboardType: TextInputType.text,
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                      fontFamily: 'NexaRegular',
-                                      color: const Color(0xfF000000),
-                                    ),
+                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),
                                     decoration: InputDecoration(
                                       fillColor: const Color(0xffffffff),
                                       alignLabelWithHint: true,
                                       labelText: 'Speak out...',
-                                      labelStyle: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                        fontFamily: 'NexaRegular',
-                                        color: const Color(0xffB1B1B1),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderSide: const BorderSide(color: const Color(0xff000000),),
-                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(color: Colors.transparent,),
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(color: Colors.transparent,),
-                                      ),
+                                      labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                                      border: OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
+                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
                                     ),
                                   ),
                                 ),
@@ -386,10 +334,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               child: Chip(
                                 labelPadding: const EdgeInsets.only(left: 8.0),
                                 label: Text(newLocationListener),
-                                deleteIcon: const Icon(
-                                  Icons.close,
-                                  size: 18,
-                                ),
+                                deleteIcon: const Icon(Icons.close, size: 18,),
                                 onDeleted: () {
                                   newLocation.value = '';
                                 },
@@ -412,11 +357,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   (index) => Chip(
                                     labelPadding: const EdgeInsets.only(left: 8.0),
                                     label: Text(users[index].name),
-                                    deleteIcon: const Icon(
-                                      Icons.close,
-                                      size: 18,
-                                    ),
-                                    onDeleted: () {
+                                    deleteIcon: const Icon(Icons.close, size: 18,),
+                                    onDeleted: (){
                                       userCount.value--;
                                       users.removeAt(index);
                                     },
@@ -430,8 +372,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                             const SizedBox(height: 10,),
 
                             Container(
-                              child: (() {
-                                if (slideCountListener != 0) {
+                              child: ((){
+                                if(slideCountListener != 0){
                                   return Container(
                                     height: 200,
                                     width: SizeConfig.screenWidth,
@@ -443,18 +385,18 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         crossAxisCount: 4,
                                         crossAxisSpacing: 4,
                                         mainAxisSpacing: 4,
-                                        children: List.generate(slideCountListener, (index) {
+                                        children: List.generate(slideCountListener, (index){
                                           return GestureDetector(
-                                            onDoubleTap: () {
+                                            onDoubleTap: (){
                                               removeAttachment.value = index;
                                             },
-                                            onTap: () {
+                                            onTap: (){
                                               showGeneralDialog(
                                                 context: context,
                                                 barrierDismissible: true,
                                                 barrierLabel: 'Dialog',
                                                 transitionDuration: Duration(milliseconds: 0),
-                                                pageBuilder: (_, __, ___) {
+                                                pageBuilder: (_, __, ___){
                                                   return Scaffold(
                                                     backgroundColor: Colors.black12.withOpacity(0.7),
                                                     body: SizedBox.expand(
@@ -465,7 +407,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                               alignment: Alignment.centerRight,
                                                               padding: const EdgeInsets.only(right: 20.0),
                                                               child: GestureDetector(
-                                                                onTap: () {
+                                                                onTap: (){
                                                                   Navigator.pop(context);
                                                                 },
                                                                 child: CircleAvatar(
@@ -480,8 +422,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                             const SizedBox(height: 20,),
 
                                                             Expanded(
-                                                              child: (() {
-                                                                if (lookupMimeType(slideImagesListener[index].path)?.contains('video') == true) {
+                                                              child: ((){
+                                                                if(lookupMimeType(slideImagesListener[index].path)?.contains('video') == true){
                                                                   return BetterPlayer.file('${slideImagesListener[index].path}',
                                                                     betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
@@ -490,7 +432,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                                       fit: BoxFit.contain,
                                                                     ),
                                                                   );
-                                                                } else {
+                                                                }else{
                                                                   return Image.file(slideImagesListener[index], fit: BoxFit.contain,);
                                                                 }
                                                               }()),
@@ -509,9 +451,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                               children: [
                                                 BetterPlayer.file('${slideImagesListener[index].path}',
                                                   betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                      showControls: false,
-                                                    ),
+                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                     aspectRatio: 1,
                                                     fit: BoxFit.contain,
                                                   ),
@@ -534,16 +474,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                   top: 0,
                                                   right: 0,
                                                   child: GestureDetector(
-                                                    onTap: () {
+                                                    onTap: (){
                                                       slideImages.value.removeAt(index);
                                                       slideCount.value--;
                                                     },
                                                     child: const CircleAvatar(
                                                       backgroundColor: const Color(0xff000000),
-                                                      child: const Icon(
-                                                        Icons.close,
-                                                        color: const Color(0xffffffff),
-                                                      ),
+                                                      child: const Icon(Icons.close, color: const Color(0xffffffff),),
                                                     ),
                                                   ),
                                                 )
@@ -555,10 +492,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                               child: Stack(
                                                 fit: StackFit.expand,
                                                 children: [
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(10),
-                                                    child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
-                                                  ),
+                                                  ClipRRect(borderRadius: BorderRadius.circular(10), child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),),
 
                                                   Center(
                                                     child: CircleAvatar(
@@ -578,7 +512,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                     top: 0,
                                                     right: 0,
                                                     child: GestureDetector(
-                                                      onTap: () {
+                                                      onTap: (){
                                                         slideImages.value.removeAt(index);
                                                       },
                                                       child: const CircleAvatar(
@@ -596,7 +530,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                       ),
                                     ),
                                   );
-                                } else {
+                                }else{
                                   return Container(height: 0,);
                                 }
                               }()),
@@ -609,7 +543,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 children: [
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () async {
+                                      onTap: () async{
                                         String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
 
                                         newLocation.value = result;
@@ -639,7 +573,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () async {
+                                      onTap: () async{
                                         BLMTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchUser()));
 
                                         if(result != null){
@@ -672,7 +606,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () async {
+                                      onTap: () async{
                                         var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
 
                                         if(choice == null){

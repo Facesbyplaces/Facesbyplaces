@@ -4,8 +4,6 @@ Future<bool> apiRegularPasswordReset({required String email, required String red
 
   Dio dioRequest = Dio();
 
-  print('The redirect link is $redirectLink');
-
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth/password?email=$email&redirect_url=$redirectLink',
     options: Options(
       followRedirects: false,
@@ -19,7 +17,6 @@ Future<bool> apiRegularPasswordReset({required String email, required String red
   );
 
   print('The status code of regular password reset is ${response.statusCode}');
-  print('The status message of regular password reset is ${response.data}');
 
   if(response.statusCode == 200){
     return true;

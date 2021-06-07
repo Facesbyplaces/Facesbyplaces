@@ -20,13 +20,13 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if (!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -36,33 +36,20 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal> {
             backgroundColor: const Color(0xff04ECFF),
             title: Row(
               children: [
-                Text(
-                  'Paypal',
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xffffffff),
-                  ),
-                ),
-                Spacer()
+                Text('Paypal', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                Spacer(),
               ],
             ),
             centerTitle: true,
             leading: IconButton(
-              icon:  Icon(
-                Icons.arrow_back,
-                color: const Color(0xffffffff),
-                size: SizeConfig.blockSizeVertical! * 3.52,
-              ),
-              onPressed: () {
+              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+              onPressed: (){
                 Navigator.pop(context);
               },
             ),
           ),
           body: InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F'),
-            ),
+            initialUrlRequest: URLRequest(url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F'),),
             onLoadStart: (InAppWebViewController app, uri) async{
               if(uri!.queryParameters['code'] != null){
                 String accessToken = await apiBLMMemorialPaypalAccessToken(code: '${uri.queryParameters['code']}');
@@ -77,12 +64,10 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal> {
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: const Text('Something went wrong. Please try again.',
-                        textAlign: TextAlign.center,
-                      ),
+                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
                       onlyOkButton: true,
                       buttonOkColor: const Color(0xffff0000),
-                      onOkButtonPressed: () {
+                      onOkButtonPressed: (){
                         Navigator.pop(context, true);
                         Navigator.pop(context, true);
                       },

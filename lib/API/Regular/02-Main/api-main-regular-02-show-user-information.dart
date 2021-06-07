@@ -3,15 +3,6 @@ import 'package:dio/dio.dart';
 
 Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() async{
 
-  // final sharedPrefs = await SharedPreferences.getInstance();
-  // String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  // String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  // String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-
-  // print('The acces token is $getAccessToken');
-  // print('The uid is $getUID');
-  // print('The client is $getClient');
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -28,10 +19,6 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
     getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
-
-  print('The acces token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
 
   Dio dioRequest = Dio();
 

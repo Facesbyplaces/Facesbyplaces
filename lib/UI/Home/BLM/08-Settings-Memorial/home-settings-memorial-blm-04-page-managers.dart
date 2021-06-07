@@ -33,18 +33,17 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
   int page2 = 1;
   bool flag1 = false;
 
-  void initState() {
+  void initState(){
     super.initState();
     addManagers1();
     onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-        if (adminItemsRemaining != 0 && familyItemsRemaining != 0) {
-          setState(() {
+    scrollController.addListener((){
+      if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
+        if(adminItemsRemaining != 0 && familyItemsRemaining != 0){
+          setState((){
             onLoading();
           });
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more users to show'),
@@ -57,17 +56,17 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     });
   }
 
-  void onLoading() async {
-    if (flag1 == false) {
+  void onLoading() async{
+    if(flag1 == false){
       onLoading1();
-    } else {
+    }else{
       onLoading2();
     }
   }
 
-  Future<void> onRefresh() async {
+  Future<void> onRefresh() async{
     if (adminItemsRemaining == 0 && flag1 == false) {
-      setState(() {
+      setState((){
         flag1 = true;
       });
       onLoading1();
@@ -76,32 +75,20 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     }
   }
 
-  void addManagers1() {
+  void addManagers1(){
     managers.add(
        Padding(
-        padding: const EdgeInsets.only(
-          left: 20.0,
-        ),
-        child: Text(
-          'Admin',
-          style: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 1.76,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xff9F9F9F),
-          ),
-        ),
+        padding: const EdgeInsets.only(left: 20.0,),
+        child: Text('Admin', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),
       ),
     );
   }
 
-  void addManagers2() {
+  void addManagers2(){
     managers.add(
       Padding(
-        padding: const EdgeInsets.only(
-          left: 20.0,
-        ),
-        child: Text(
-          'Family',
+        padding: const EdgeInsets.only(left: 20.0,),
+        child: Text('Family',
           style: TextStyle(
             fontSize: SizeConfig.blockSizeVertical! * 1.76,
             fontFamily: 'NexaRegular',
@@ -112,8 +99,8 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     );
   }
 
-  void onLoading1() async {
-    if (adminItemsRemaining != 0) {
+  void onLoading1() async{
+    if(adminItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMShowAdminSettings(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
         context.loaderOverlay.hide();
@@ -125,13 +112,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Error: $error.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                fontFamily: 'NexaRegular'
-              ),
-            ),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
             onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
             onOkButtonPressed: () {
@@ -160,146 +141,98 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
               backgroundColor: const Color(0xff888888),
               foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
             ),
-            title: Text(
-                '${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
+            title: Text('${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
               style: TextStyle(
                 fontSize: SizeConfig.blockSizeVertical! * 2.64,
                 fontFamily: 'NexaBold',
                 color: const Color(0xff000000),
-              ),),
-            subtitle: Text(
-                '${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}',
+              ),
+            ),
+            subtitle: Text('${newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}',
               style: TextStyle(
                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                 fontFamily: 'NexaRegular',
                 color: const Color(0xffBDC3C7),
-              ),),
+              ),
+            ),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,
               textColor: const Color(0xffffffff),
               splashColor: const Color(0xff04ECFF),
-              onPressed: () async {
+              onPressed: () async{
                 bool confirmation = await showDialog(
-                    context: context,
-                    builder: (_) => AssetGiffyDialog(
-                          image: Image.asset(
-                            'assets/icons/cover-icon.png',
-                            fit: BoxFit.cover,
-                          ),
-                      title: Text(
-                        'Confirm',
-                        textAlign: TextAlign.center,
-                        style:  TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                            fontFamily: 'NexaRegular'),
-                      ),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text(
-                        'Are you sure you want to remove this user?',
-                        textAlign: TextAlign.center,
-                        style:  TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular'
-                        ),
-                      ),
-                          onlyOkButton: false,
-                          onOkButtonPressed: () async {
-                            Navigator.pop(context, true);
-                          },
-                          onCancelButtonPressed: () {
-                            Navigator.pop(context, false);
-                          },
-                        ));
+                  context: context,
+                  builder: (_) => AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Are you sure you want to remove this user?',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                    onlyOkButton: false,
+                    onOkButtonPressed: () async{
+                      Navigator.pop(context, true);
+                    },
+                    onCancelButtonPressed: (){
+                      Navigator.pop(context, false);
+                    },
+                  ),
+                );
 
-                if (confirmation) {
+                if(confirmation){
                   context.loaderOverlay.show();
                   String result = await apiBLMDeleteMemorialAdmin(pageType: 'Blm', pageId: widget.memorialId, userId: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
 
-                  if (result != 'Success') {
+                  if(result != 'Success'){
                     await showDialog(
-                        context: context,
-                        builder: (_) => AssetGiffyDialog(
-                              image: Image.asset(
-                                'assets/icons/cover-icon.png',
-                                fit: BoxFit.cover,
-                              ),
-                          title: Text(
-                            'Error',
-                            textAlign: TextAlign.center,
-                            style:  TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                fontFamily: 'NexaRegular'),
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error',textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Error: $result.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'
                           ),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text(
-                            'Error: $result.',
-                            textAlign: TextAlign.center,
-                            style:  TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular'
-                            ),
-                          ),
-                              onlyOkButton: true,
-                              buttonOkColor: const Color(0xffff0000),
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            ));
-                  } else {
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: const Color(0xffff0000),
+                        onOkButtonPressed: (){
+                          Navigator.pop(context, true);
+                        },
+                      ),
+                    );
+                  }else{
                     await showDialog(
-                        context: context,
-                        builder: (_) => AssetGiffyDialog(
-                              image: Image.asset(
-                                'assets/icons/cover-icon.png',
-                                fit: BoxFit.cover,
-                              ),
-                          title: Text(
-                            'Success',
-                            textAlign: TextAlign.center,
-                            style:  TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                fontFamily: 'NexaRegular'),
-                          ),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text(
-                            'Successfully removed the user from the list.',
-                            textAlign: TextAlign.center,
-                            style:  TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular'
-                            ),
-                          ),
-                              onlyOkButton: true,
-                              onOkButtonPressed: () {
-                                managers = [];
-                                adminItemsRemaining = 1;
-                                familyItemsRemaining = 1;
-                                page1 = 1;
-                                page2 = 1;
-                                flag1 = false;
-                                addManagers1();
-                                onLoading();
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                        onlyOkButton: true,
+                        onOkButtonPressed: (){
+                          managers = [];
+                          adminItemsRemaining = 1;
+                          familyItemsRemaining = 1;
+                          page1 = 1;
+                          page2 = 1;
+                          flag1 = false;
+                          addManagers1();
+                          onLoading();
 
-                                Navigator.pop(context, true);
-                              },
-                            ));
+                          Navigator.pop(context, true);
+                        },
+                      ),
+                    );
                   }
                 }
               },
-              child: Text(
-                'Remove',
-                style:  TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                  fontFamily: 'HelveticaRegular',
-                  color: const Color(0xffffffff),
-                ),
-              ),
+              child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
               height: 40,
-              shape: const StadiumBorder(
-                side: const BorderSide(color: const Color(0xffE74C3C)),
-              ),
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
               color: const Color(0xffE74C3C),
             ),
           ),
@@ -307,17 +240,18 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       }
     }
 
-    if (mounted) setState(() {});
+    if(mounted)
+    setState(() {});
     page1++;
 
-    if (adminItemsRemaining == 0) {
+    if(adminItemsRemaining == 0){
       addManagers2();
       flag1 = true;
       onLoading();
     }
   }
 
-  void onLoading2() async {
+  void onLoading2() async{
     if (familyItemsRemaining != 0) {
       context.loaderOverlay.show();
       var newValue = await apiBLMShowAdminSettings(memorialId: widget.memorialId, page: page2);
@@ -325,7 +259,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
       familyItemsRemaining = newValue.blmFamilyItemsRemaining;
 
-      for (int i = 0; i < newValue.blmFamilyList.length; i++) {
+      for(int i = 0; i < newValue.blmFamilyList.length; i++){
         managers.add(
           ListTile(
             leading: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage != ''
@@ -339,179 +273,120 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
               backgroundColor: const Color(0xff888888),
               foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
             ),
-            title: Text(
-                '${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
+            title: Text('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName} ${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName}',
               style: TextStyle(
                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                 fontFamily: 'NexaRegular',
                 color: const Color(0xffBDC3C7),
-              ),),
-            subtitle: Text(
-                '${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}',
+              ),
+            ),
+            subtitle: Text('${newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail}',
               style: TextStyle(
                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                 fontFamily: 'NexaRegular',
                 color: const Color(0xffBDC3C7),
-              ),),
+              ),
+            ),
             trailing: MaterialButton(
               minWidth: SizeConfig.screenWidth! / 3.5,
               padding: EdgeInsets.zero,
               textColor: const Color(0xffffffff),
               splashColor: const Color(0xff04ECFF),
-              onPressed: () async {
+              onPressed: () async{
                 bool confirmation = await showDialog(
-                    context: context,
-                    builder: (_) => AssetGiffyDialog(
-                          image: Image.asset(
-                            'assets/icons/cover-icon.png',
-                            fit: BoxFit.cover,
-                          ),
-                      title: Text(
-                        'Confirm',
-                        textAlign: TextAlign.center,
-                        style:  TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                            fontFamily: 'NexaRegular'),
-                      ),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text(
-                        'Are you sure you want to make this user a manager?',
-                        textAlign: TextAlign.center,
-                        style:  TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular'
-                        ),
-                      ),
-                          onlyOkButton: false,
-                          onOkButtonPressed: () async {
-                            Navigator.pop(context, true);
-                          },
-                          onCancelButtonPressed: () {
-                            Navigator.pop(context, false);
-                          },
-                        ));
+                  context: context,
+                  builder: (_) => AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                    onlyOkButton: false,
+                    onOkButtonPressed: () async{
+                      Navigator.pop(context, true);
+                    },
+                    onCancelButtonPressed: (){
+                      Navigator.pop(context, false);
+                    },
+                  ),
+                );
 
-                if (confirmation) {
+                if(confirmation){
                   context.loaderOverlay.show();
                   String result = await apiBLMAddMemorialAdmin(pageType: 'Blm', pageId: widget.memorialId, userId: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
 
-                  if (result != 'Success') {
+                  if(result != 'Success'){
                     await showDialog(
-                        context: context,
-                        builder: (_) => AssetGiffyDialog(
-                              image: Image.asset(
-                                'assets/icons/cover-icon.png',
-                                fit: BoxFit.cover,
-                              ),
-                          title: Text(
-                            'Error',
-                            textAlign: TextAlign.center,
-                            style:  TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                fontFamily: 'NexaRegular'),
-                          ),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text(
-                            'Error: $result.',
-                            textAlign: TextAlign.center,
-                            style:  TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular'
-                            ),
-                          ),
-                              onlyOkButton: true,
-                              buttonOkColor: const Color(0xffff0000),
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            ));
-                  } else {
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                        onlyOkButton: true,
+                        buttonOkColor: const Color(0xffff0000),
+                        onOkButtonPressed: (){
+                          Navigator.pop(context, true);
+                        },
+                      ),
+                    );
+                  }else{
                     await showDialog(
-                        context: context,
-                        builder: (_) => AssetGiffyDialog(
-                              image: Image.asset(
-                                'assets/icons/cover-icon.png',
-                                fit: BoxFit.cover,
-                              ),
-                          title: Text(
-                            'Success',
-                            textAlign: TextAlign.center,
-                            style:  TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                fontFamily: 'NexaRegular'),
-                          ),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text(
-                            'Successfully removed the user from the list.',
-                            textAlign: TextAlign.center,
-                            style:  TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular'
-                            ),
-                          ),
-                              onlyOkButton: true,
-                              onOkButtonPressed: () {
-                                managers = [];
-                                adminItemsRemaining = 1;
-                                familyItemsRemaining = 1;
-                                page1 = 1;
-                                page2 = 1;
-                                flag1 = false;
-                                addManagers1();
-                                onLoading();
+                      context: context,
+                      builder: (_) => AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                        onlyOkButton: true,
+                        onOkButtonPressed: (){
+                          managers = [];
+                          adminItemsRemaining = 1;
+                          familyItemsRemaining = 1;
+                          page1 = 1;
+                          page2 = 1;
+                          flag1 = false;
+                          addManagers1();
+                          onLoading();
 
-                                Navigator.pop(context, true);
-                              },
-                            ));
+                          Navigator.pop(context, true);
+                        },
+                      ),
+                    );
                   }
                 }
               },
-              child: Text(
-                'Make Manager',
-                style:  TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.2,
-                    fontFamily: 'NexaRegular'
-                ),
-              ),
+              child: Text('Make Manager', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular'),),
               height: 40,
-              shape: const StadiumBorder(
-                side: const BorderSide(color: const Color(0xff04ECFF)),
-              ),
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF)),),
               color: const Color(0xff04ECFF),
             ),
           ),
         );
       }
 
-      if (mounted) setState(() {});
+      if(mounted)
+      setState(() {});
       page2++;
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff04ECFF),
         title: Row(
           children: [
-            Text(
-              'Page Managers',
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                fontFamily: 'NexaRegular',
-                color: const Color(0xffffffff),
-              ),
-            ),
-            Spacer()
+            Text('Page Managers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            Spacer(),
           ],
         ),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.52,),
-          onPressed: () {
+          onPressed: (){
             Navigator.pop(context);
           },
         ),
@@ -519,51 +394,35 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       body: Container(
         width: SizeConfig.screenWidth,
         child: managers.length != 0
-            ? RefreshIndicator(
-                onRefresh: onRefresh,
-                child: ListView.separated(
-                  controller: scrollController,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: managers.length,
-                  separatorBuilder: (c, i) =>
-                      const Divider(height: 10, color: Colors.transparent),
-                  itemBuilder: (c, i) => managers[i],
-                ))
-            : SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) /
-                          3.5,
-                    ),
-                    Image.asset(
-                      'assets/icons/app-icon.png',
-                      height: 250,
-                      width: 250,
-                    ),
-                    const SizedBox(
-                      height: 45,
-                    ),
-                    Text(
-                      'Managers list is empty',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                        fontFamily: 'NexaBold',
-                        color: const Color(0xffB1B1B1),
-                      ),
-                    ),
-                    SizedBox(
-                      height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) /
-                          3.5,
-                    ),
-                  ],
-                ),
-              ),
+        ? RefreshIndicator(
+          onRefresh: onRefresh,
+          child: ListView.separated(
+            controller: scrollController,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: managers.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => managers[i],
+          ),
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              const SizedBox(height: 45,),
+
+              Text('Managers list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -22,12 +22,6 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({required int postId, 
 
   Dio dioRequest = Dio();
 
-  print('The post id is $postId');
-  print('The page is $page');
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
     options: Options(
       followRedirects: false,
@@ -43,7 +37,7 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({required int postId, 
     ),  
   );
 
-  // print('The status code of blm show post comments is ${response.statusCode}');
+  print('The status code of blm show post comments is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

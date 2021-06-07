@@ -56,10 +56,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     onLoading2();
     onLoading3();
     scrollController1.addListener(() {
-      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
-        if (itemRemaining1 != 0) {
+      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent){
+        if(itemRemaining1 != 0){
           onLoading1();
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more connection list family to show'),
@@ -70,11 +70,11 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         }
       }
     });
-    scrollController2.addListener(() {
-      if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
-        if (itemRemaining2 != 0) {
+    scrollController2.addListener((){
+      if(scrollController2.position.pixels == scrollController2.position.maxScrollExtent){
+        if(itemRemaining2 != 0){
           onLoading1();
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more connection list friends to show'),
@@ -102,20 +102,20 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     });
   }
 
-  Future<void> onRefresh1() async {
+  Future<void> onRefresh1() async{
     onLoading1();
   }
 
-  Future<void> onRefresh2() async {
+  Future<void> onRefresh2() async{
     onLoading2();
   }
 
-  Future<void> onRefresh3() async {
+  Future<void> onRefresh3() async{
     onLoading3();
   }
 
-  void onLoading1() async {
-    if (itemRemaining1 != 0) {
+  void onLoading1() async{
+    if(itemRemaining1 != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFamily(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
         context.loaderOverlay.hide();
@@ -127,16 +127,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Error: $error.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                fontFamily: 'NexaRegular'
-              ),
-            ),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
             onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
             },
@@ -149,7 +143,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       itemRemaining1 = newValue.blmItemsRemaining;
       count1.value = count1.value + newValue.blmFamilyList.length;
 
-      for (int i = 0; i < newValue.blmFamilyList.length; i++) {
+      for(int i = 0; i < newValue.blmFamilyList.length; i++){
         listsFamily.add(
           BLMConnectionListItem(
             id: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsId,
@@ -162,13 +156,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         );
       }
 
-      if (mounted)
+      if(mounted)
       page1++;
     }
   }
 
-  void onLoading2() async {
-    if (itemRemaining2 != 0) {
+  void onLoading2() async{
+    if(itemRemaining2 != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFriends(memorialId: widget.memorialId, page: page2).onError((error, stackTrace){
         context.loaderOverlay.hide();
@@ -180,13 +174,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Error: $error.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                fontFamily: 'NexaRegular'
-              ),
-            ),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
             onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
             onOkButtonPressed: () {
@@ -202,7 +190,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       itemRemaining2 = newValue.blmItemsRemaining;
       count2.value = count2.value + newValue.blmFriendsList.length;
 
-      for (int i = 0; i < newValue.blmFriendsList.length; i++) {
+      for(int i = 0; i < newValue.blmFriendsList.length; i++){
         listsFriends.add(
           BLMConnectionListItem(
             id: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsId,
@@ -215,13 +203,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         );
       }
 
-      if (mounted)
+      if(mounted)
       page2++;
     }
   }
 
-  void onLoading3() async {
-    if (itemRemaining3 != 0) {
+  void onLoading3() async{
+    if(itemRemaining3 != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMConnectionListFollowers(memorialId: widget.memorialId, page: page3).onError((error, stackTrace){
         context.loaderOverlay.hide();
@@ -233,16 +221,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Error: $error.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                fontFamily: 'NexaRegular'
-              ),
-            ),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
             onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
             },
@@ -255,7 +237,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       itemRemaining3 = newValue.blmItemsRemaining;
       count3.value = count3.value + newValue.blmFollowersList.length;
 
-      for (int i = 0; i < newValue.blmFollowersList.length; i++) {
+      for(int i = 0; i < newValue.blmFollowersList.length; i++){
         listsFollowers.add(
           BLMConnectionListItem(
             id: newValue.blmFollowersList[i].connectionListFollowersId,
@@ -268,22 +250,22 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         );
       }
 
-      if (mounted)
+      if(mounted)
       page3++;
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -309,14 +291,14 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                         ),
                         Expanded(
                           child: TextFormField(
-                            onChanged: (search) {
+                            onChanged: (search){
                               searchKeyword = search;
 
-                              if (search == '') {
+                              if(search == ''){
                                 onSearch.value = false;
                                 searches = [];
                                 count4.value = searches.length;
-                              } else {
+                              }else{
                                 onSearch.value = true;
                               }
 
@@ -351,41 +333,24 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                 }
                               }
                             },
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff2F353D),
-                            ),
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(15.0),
                               filled: true,
                               fillColor: const Color(0xffffffff),
                               focusColor: const Color(0xffffffff),
-                              hintText: (() {
-                                switch (toggleListener) {
+                              hintText: ((){
+                                switch(toggleListener){
                                   case 0: return 'Search Family';
                                   case 1: return 'Search Friends';
                                   case 2: return 'Search Followers';
                                 }
                               }()),
-                              hintStyle: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: const Color(0xffB1B1B1),
-                              ),
+                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                               prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
-                              border: const OutlineInputBorder(
-                                borderSide: const BorderSide(color: const Color(0xffffffff)),
-                                borderRadius: const BorderRadius.all(Radius.circular(25)),
-                              ),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: const BorderSide(color: const Color(0xffffffff)),
-                                borderRadius: const BorderRadius.all(Radius.circular(25)),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: const BorderSide(color: const Color(0xffffffff)),
-                                borderRadius: const BorderRadius.all(Radius.circular(25)),
-                              ),
+                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                             ),
                           ),
                         ),
@@ -451,24 +416,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                         }
                       },
                       tabs: [
-                        Text('Family',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
-                        Text('Friends',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
-                        Text('Followers',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
+                        Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
+                        Text('Followers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
                       ],
                     ),
                   ),
@@ -491,7 +441,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     );
   }
 
-  connectionListFamilyWidget() {
+  connectionListFamilyWidget(){
     return ValueListenableBuilder(
       valueListenable: onSearch,
       builder: (_, bool onSearchListener, __) => ValueListenableBuilder(
@@ -513,44 +463,44 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          if (onSearchListener) {
-                            if (searches[index].accountType == 1) {
+                        onTap: (){
+                          if(onSearchListener){
+                            if(searches[index].accountType == 1){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType,)));
-                            } else {
+                            }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
                             }
-                          } else {
-                            if (listsFamily[index].accountType == 1) {
+                          }else{
+                            if (listsFamily[index].accountType == 1){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
-                            } else {
+                            }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
                             }
                           }
                         },
-                        child: (() {
-                          if (onSearchListener) {
-                            if (searches[index].image != '') {
+                        child: ((){
+                          if(onSearchListener){
+                            if(searches[index].image != ''){
                               return CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
                               );
-                            } else {
+                            }else{
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
-                          } else {
-                            if (listsFamily[index].image != '') {
+                          }else{
+                            if(listsFamily[index].image != ''){
                               return CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFamily[index].image),
                               );
-                            } else {
+                            }else{
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
@@ -569,32 +519,20 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                        fontFamily: 'NexaRegular',
-                        color: Color(0xff2F353D),
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     )
-                    : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.clip,
-                        maxLines: 1,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                        fontFamily: 'NexaRegular',
-                        color: Color(0xff2F353D),
-                      ),
+                    : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', 
+                      textAlign: TextAlign.center, 
+                      overflow: TextOverflow.clip, 
+                      maxLines: 1,
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
 
                     Text('${listsFamily[index].relationship}',
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                        fontFamily: 'NexaRegular',
-                        color: Color(0xffB1B1B1),
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                     ),
                   ],
                 ),
@@ -606,7 +544,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     );
   }
 
-  connectionListFriendsWidget() {
+  connectionListFriendsWidget(){
     return ValueListenableBuilder(
       valueListenable: onSearch,
       builder: (_, bool onSearchListener, __) => ValueListenableBuilder(
@@ -628,44 +566,44 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          if (onSearchListener) {
-                            if (searches[index].accountType == 1) {
+                        onTap: (){
+                          if(onSearchListener){
+                            if(searches[index].accountType == 1){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-                            } else {
+                            }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
                             }
-                          } else {
-                            if (listsFriends[index].accountType == 1) {
+                          }else{
+                            if(listsFriends[index].accountType == 1){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
-                            } else {
+                            }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
                             }
                           }
                         },
-                        child: (() {
-                          if (onSearchListener) {
-                            if (searches[index].image != '') {
+                        child: ((){
+                          if(onSearchListener){
+                            if(searches[index].image != ''){
                               return CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
                               );
-                            } else {
+                            }else{
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
-                          } else {
-                            if (listsFriends[index].image != '') {
+                          }else{
+                            if(listsFriends[index].image != ''){
                               return CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFriends[index].image),
                               );
-                            } else {
+                            }else{
                               return CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
@@ -684,21 +622,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                        fontFamily: 'NexaRegular',
-                        color: Color(0xff2F353D),
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     )
                     : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}',
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                        fontFamily: 'NexaRegular',
-                        color: Color(0xff2F353D),
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
                   ],
                 ),
@@ -710,7 +640,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     );
   }
 
-  connectionListFollowersWidget() {
+  connectionListFollowersWidget(){
     return ValueListenableBuilder(
       valueListenable: onSearch,
       builder: (_, bool onSearchListener, __) => ValueListenableBuilder(
@@ -732,44 +662,44 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          if (onSearchListener) {
-                            if (searches[index].accountType == 1) {
+                        onTap: (){
+                          if(onSearchListener){
+                            if(searches[index].accountType == 1){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
-                            } else {
+                            }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
                             }
-                          } else {
-                            if (listsFollowers[index].accountType == 1) {
+                          }else{
+                            if(listsFollowers[index].accountType == 1){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
-                            } else {
+                            }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
                             }
                           }
                         },
-                        child: (() {
-                          if (onSearchListener) {
-                            if (searches[index].image != '') {
+                        child: ((){
+                          if(onSearchListener){
+                            if(searches[index].image != ''){
                               return CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
                               );
-                            } else {
+                            }else{
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                               );
                             }
-                          } else {
-                            if (listsFollowers[index].image != '') {
+                          }else{
+                            if(listsFollowers[index].image != ''){
                               return CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFollowers[index].image),
                               );
-                            } else {
+                            }else{
                               return const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: const Color(0xff888888),
@@ -788,21 +718,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                        fontFamily: 'NexaRegular',
-                        color: Color(0xff2F353D),
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     )
                     : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}',
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                        fontFamily: 'NexaRegular',
-                        color: Color(0xff2F353D),
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
                   ],
                 ),

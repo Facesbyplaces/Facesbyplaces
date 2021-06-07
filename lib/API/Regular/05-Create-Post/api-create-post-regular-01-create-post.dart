@@ -67,25 +67,11 @@ class APIRegularCreatePost{
   double almLatitude;
   double almLongitude;
   List<RegularTaggedPeople> almTagPeople;
-  
-  APIRegularCreatePost({
-    required this.almPageType,
-    required this.almPageId, 
-    required this.almPostBody,
-    required this.almLocation,
-    required this.almImagesOrVideos, 
-    required this.almLatitude,
-    required this.almLongitude, 
-    required this.almTagPeople,
-  });
+  APIRegularCreatePost({required this.almPageType, required this.almPageId, required this.almPostBody, required this.almLocation, required this.almImagesOrVideos, required this.almLatitude, required this.almLongitude, required this.almTagPeople,});
 }
 
 class RegularTaggedPeople{
   int userId;
   int accountType;
-
-  RegularTaggedPeople({
-    required this.userId,
-    required this.accountType,
-  });
+  RegularTaggedPeople({required this.userId, required this.accountType,});
 }

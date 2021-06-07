@@ -18,7 +18,6 @@ Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) 
   );
 
   print('The status code of blm registration is ${response.statusCode}');
-  print('The status body of blm registration is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
@@ -36,16 +35,12 @@ Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) 
   }else if(response.statusCode == 422){
     var newData = Map<String, dynamic>.from(response.data);
     var errors = newData['errors'];
-    var message = errors['full_messages'][0];
-
-    print('The message is $message');
 
     return '${errors['full_messages'][0]}.';
   }else{
     return 'Something went wrong. Please try again.';
   }
 }
-
 
 class APIBLMAccountRegistration{
   String firstName;

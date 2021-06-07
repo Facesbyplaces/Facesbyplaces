@@ -3,10 +3,6 @@ import 'package:dio/dio.dart';
 
 Future<bool> apiRegularPasswordChange({required String password, required String passwordConfirmation, required String resetToken}) async{
 
-  print('The password is $password');
-  print('The passwordConfirmation is $passwordConfirmation');
-  print('The resetToken is $resetToken');
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/alm_auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
@@ -22,7 +18,6 @@ Future<bool> apiRegularPasswordChange({required String password, required String
   );
 
   print('The status code of regular password change is ${response.statusCode}');
-  print('The status data of regular password change is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
