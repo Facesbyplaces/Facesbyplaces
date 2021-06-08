@@ -68,7 +68,7 @@ class BLMOriginalReply {
   const BLMOriginalReply({required this.replyId, required this.commentId, required this.userId, required this.replyBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.replyLikes, required this.replyNumberOfLikes, required this.userAccountType});
 }
 
-class HomeBLMShowOriginalPostComments extends StatefulWidget {
+class HomeBLMShowOriginalPostComments extends StatefulWidget{
   final int postId;
   const HomeBLMShowOriginalPostComments({required this.postId});
 
@@ -76,7 +76,7 @@ class HomeBLMShowOriginalPostComments extends StatefulWidget {
   HomeBLMShowOriginalPostCommentsState createState() => HomeBLMShowOriginalPostCommentsState();
 }
 
-class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPostComments> {
+class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPostComments>{
   ValueNotifier<List<BLMOriginalComment>> comments = ValueNotifier<List<BLMOriginalComment>>([]);
   ValueNotifier<List<BLMOriginalReply>> replies = ValueNotifier<List<BLMOriginalReply>>([]);
   GlobalKey profileKey = GlobalKey<HomeBLMShowOriginalPostCommentsState>();
@@ -106,18 +106,18 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   int page1 = 1;
   int page2 = 1;
 
-  void initState() {
+  void initState(){
     super.initState();
     isGuest();
     likesCount = numberOfLikes;
   }
 
-  void isGuest() async {
+  void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
     bool regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
     bool blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
 
-    if (regularSession == true || blmSession == true) {
+    if(regularSession == true || blmSession == true){
       isGuestLoggedIn.value = false;
     }
 
@@ -126,8 +126,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
       getOriginalPostInformation();
       getProfilePicture();
       onLoading();
-      scrollController.addListener(() {
-        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      scrollController.addListener((){
+        if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
           if(itemRemaining != 0){
             onLoading();
           }else{
@@ -148,33 +148,33 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     onLoading();
   }
 
-  void getOriginalPostInformation() async {
+  void getOriginalPostInformation() async{
     var originalPostInformation = await apiBLMShowOriginalPost(postId: widget.postId);
     numberOfLikes = originalPostInformation.blmPost.showOriginalPostNumberOfLikes;
     numberOfComments = originalPostInformation.blmPost.showOriginalPostNumberOfComments;
     likePost = originalPostInformation.blmPost.showOriginalPostLikeStatus;
   }
 
-  void getProfilePicture() async {
+  void getProfilePicture() async{
     var getProfilePicture = await apiBLMShowProfileInformation();
     currentUserImage = getProfilePicture.showProfileInformationImage;
     currentUserId = getProfilePicture.showProfileInformationUserId;
     currentAccountType = getProfilePicture.showProfileInformationAccountType;
   }
 
-  void onLoading() async {
-    if (itemRemaining != 0) {
+  void onLoading() async{
+    if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue1 = await apiBLMShowListOfComments(postId: widget.postId, page: page1);
       itemRemaining = newValue1.blmItemsRemaining;
       count.value = count.value + newValue1.blmCommentsList.length;
 
-      for (int i = 0; i < newValue1.blmCommentsList.length; i++) {
+      for(int i = 0; i < newValue1.blmCommentsList.length; i++){
         var commentLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.blmCommentsList[i].showListCommentsCommentId);
         commentsLikes.add(commentLikeStatus.showCommentOrReplyLikeStatus);
         commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
 
-        if (repliesRemaining != 0) {
+        if(repliesRemaining != 0){
           var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.blmCommentsList[i].showListCommentsCommentId, page: page2);
 
           List<bool> newRepliesLikes = [];
@@ -238,20 +238,20 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     }
   }
 
-  Future<APIBLMShowOriginalPostMain> getOriginalPost(postId) async {
+  Future<APIBLMShowOriginalPostMain> getOriginalPost(postId) async{
     return await apiBLMShowOriginalPost(postId: postId);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     print('Show original BLM post comments screen rebuild!');
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
@@ -268,17 +268,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                 builder: (_, List<BLMOriginalReply> repliesListener, __) => Scaffold(
                   appBar: AppBar(
                     backgroundColor: const Color(0xff04ECFF),
-                    title: Text('Post',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xffffffff),
-                      ),
-                    ),
+                    title: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
                     centerTitle: true,
                     leading: IconButton(
                       icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
-                      onPressed: () {
+                      onPressed: (){
                         Navigator.pop(context, numberOfComments);
                       },
                     ),
@@ -301,7 +295,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                           ignoring: isGuestLoggedInListener,
                           child: FutureBuilder<APIBLMShowOriginalPostMain>(
                             future: showOriginalPost,
-                            builder: (context, originalPost) {
+                            builder: (context, originalPost){
                             if(originalPost.hasData){
                               return FooterLayout(
                                 footer: showKeyboard(),
@@ -321,7 +315,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                               child: Row(
                                                 children: [
                                                   GestureDetector(
-                                                    onTap: () async {
+                                                    onTap: () async{
                                                       if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
                                                         if (originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true) {
                                                           Navigator.push(context, MaterialPageRoute(
@@ -1869,22 +1863,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                     context: context,
                     builder: (_) => AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize:
-                            SizeConfig.blockSizeVertical! * 3.16,
-                            fontFamily: 'NexaRegular'),
-                      ),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Please input a comment.', textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize:
-                            SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular'),),
+                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                       onlyOkButton: true,
                       buttonOkColor: const Color(0xffff0000),
-                      onOkButtonPressed: () {
+                      onOkButtonPressed: (){
                         Navigator.pop(context, true);
                       },
                     ),

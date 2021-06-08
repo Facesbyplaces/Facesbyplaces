@@ -19,16 +19,14 @@ class RegularTaggedUsers {
   final String name;
   final int userId;
   final int accountType;
-  const RegularTaggedUsers(
-      {required this.name, required this.userId, required this.accountType});
+  const RegularTaggedUsers({required this.name, required this.userId, required this.accountType});
 }
 
 class RegularManagedPages {
   final String name;
   final int pageId;
   final String image;
-  const RegularManagedPages(
-      {required this.name, required this.pageId, required this.image});
+  const RegularManagedPages({required this.name, required this.pageId, required this.image});
 }
 
 class HomeRegularCreatePost extends StatefulWidget {
@@ -54,19 +52,19 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
   int currentIdSelected = 1;
   int maxLines = 5;
 
-  void initState() {
+  void initState(){
     super.initState();
     currentSelection = widget.name;
     currentIdSelected = widget.memorialId;
     getManagedPages();
   }
 
-  void getManagedPages() async {
+  void getManagedPages() async{
     context.loaderOverlay.show();
     var newValue = await apiRegularShowListOfManagedPages();
     context.loaderOverlay.hide();
 
-    for (int i = 0; i < newValue.almPagesList.length; i++) {
+    for(int i = 0; i < newValue.almPagesList.length; i++){
       managedPages.add(
         RegularManagedPages(
           name: newValue.almPagesList[i].showListOfManagedPagesName,
@@ -78,146 +76,106 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
     setState(() {});
   }
 
-  Future getVideo() async {
-    // final pickedFile = await picker.getVideo(source: ImageSource.gallery);
-
-    // if (pickedFile != null) {
-    //   slideImages.value.add(File(pickedFile.path));
-    //   slideCount.value++;
-    // }
-
-    try {
-      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture) {
+  Future getVideo() async{
+    try{
+      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
-      if (pickedFile != null) {
+      if(pickedFile != null){
         slideImages.value.add(File(pickedFile.path));
         slideCount.value++;
       }
-    } catch (error) {
+    }catch (error){
       print('Error: ${error.toString()}');
     }
   }
 
   Future getSlideFiles() async {
-    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    // if (pickedFile != null) {
-    //   slideImages.value.add(File(pickedFile.path));
-    //   slideCount.value++;
-    // }
-
-    try {
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
+    try{
+      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
-      if (pickedFile != null) {
+      if(pickedFile != null){
         slideImages.value.add(File(pickedFile.path));
         slideCount.value++;
       }
-    } catch (error) {
+    }catch (error){
       print('Error: ${error.toString()}');
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     print('Regular create post screen rebuild!');
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
         child: ValueListenableBuilder(
           valueListenable: removeAttachment,
-          builder: (_, int removeAttachmentListener, __) =>
-              ValueListenableBuilder(
+          builder: (_, int removeAttachmentListener, __) => ValueListenableBuilder(
             valueListenable: slideImages,
-            builder: (_, List<File> slideImagesListener, __) =>
-                ValueListenableBuilder(
+            builder: (_, List<File> slideImagesListener, __) => ValueListenableBuilder(
               valueListenable: slideCount,
-              builder: (_, int slideCountListener, __) =>
-                  ValueListenableBuilder(
+              builder: (_, int slideCountListener, __) => ValueListenableBuilder(
                 valueListenable: userCount,
-                builder: (_, int userCountListener, __) =>
-                    ValueListenableBuilder(
+                builder: (_, int userCountListener, __) => ValueListenableBuilder(
                   valueListenable: newLocation,
                   builder: (_, String newLocationListener, __) => Scaffold(
                     appBar: AppBar(
                       title: Row(
                         children: [
-                          Text(
-                            'Create Post',
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xffffffff),
-                            ),
-                          ),
-                          Spacer()
+                          Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                          Spacer(),
                         ],
                       ),
                       centerTitle: true,
                       backgroundColor: const Color(0xff04ECFF),
                       leading: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: const Color(0xffffffff),
-                          size: SizeConfig.blockSizeVertical! * 3.52,
-                        ),
-                        onPressed: () {
+                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                        onPressed: (){
                           Navigator.pop(context);
                         },
                       ),
                       actions: [
                         GestureDetector(
-                          onTap: () async {
-                            Location.Location location =
-                                new Location.Location();
+                          onTap: () async{
+                            Location.Location location = new Location.Location();
 
-                            bool serviceEnabled =
-                                await location.serviceEnabled();
-                            if (!serviceEnabled) {
+                            bool serviceEnabled = await location.serviceEnabled();
+                            if(!serviceEnabled){
                               serviceEnabled = await location.requestService();
-                              if (!serviceEnabled) {
+                              if(!serviceEnabled){
                                 return;
                               }
                             }
 
-                            Location.PermissionStatus permissionGranted =
-                                await location.hasPermission();
-                            if (permissionGranted ==
-                                Location.PermissionStatus.denied) {
-                              permissionGranted =
-                                  await location.requestPermission();
-                              if (permissionGranted !=
-                                  Location.PermissionStatus.granted) {
+                            Location.PermissionStatus permissionGranted = await location.hasPermission();
+                            if(permissionGranted == Location.PermissionStatus.denied){
+                              permissionGranted = await location.requestPermission();
+                              if(permissionGranted != Location.PermissionStatus.granted){
                                 return;
                               }
                             }
 
                             context.loaderOverlay.show();
 
-                            Location.LocationData locationData =
-                                await location.getLocation();
+                            Location.LocationData locationData = await location.getLocation();
                             List<RegularTaggedPeople> userIds = [];
 
-                            if (users.length != 0) {
-                              for (int i = 0; i < users.length; i++) {
-                                userIds.add(
-                                  RegularTaggedPeople(
-                                    userId: users[i].userId,
-                                    accountType: users[i].accountType,
-                                  ),
-                                );
+                            if(users.length != 0){
+                              for(int i = 0; i < users.length; i++){
+                                userIds.add(RegularTaggedPeople(userId: users[i].userId, accountType: users[i].accountType,),);
                               }
                             }
 
@@ -235,43 +193,22 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                               almTagPeople: userIds,
                             );
 
-                            bool result =
-                                await apiRegularHomeCreatePost(post: post);
+                            bool result = await apiRegularHomeCreatePost(post: post);
                             context.loaderOverlay.hide();
 
-                            if (result) {
-                              Navigator.popAndPushNamed(
-                                  context, '/home/regular');
-                            } else {
+                            if(result){
+                              Navigator.popAndPushNamed(context, '/home/regular');
+                            }else{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset(
-                                    'assets/icons/cover-icon.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  title: Text(
-                                    'Error',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize:
-                                            SizeConfig.blockSizeVertical! *
-                                                3.87,
-                                        fontFamily: 'NexaRegular'),
-                                  ),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text(
-                                    'Something went wrong. Please try again.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize:
-                                          SizeConfig.blockSizeVertical! * 2.87,
-                                      fontFamily: 'NexaRegular',
-                                    ),
-                                  ),
+                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                                   onlyOkButton: true,
                                   buttonOkColor: const Color(0xffff0000),
-                                  onOkButtonPressed: () {
+                                  onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
                                 ),
@@ -281,11 +218,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 20.0),
                             child: Center(
-                              child: Text(
-                                'Post',
+                              child: Text('Post',
                                 style: TextStyle(
-                                  fontSize:
-                                      SizeConfig.blockSizeVertical! * 2.64,
+                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
                                   fontFamily: 'NexaRegular',
                                   color: const Color(0xffffffff),
                                 ),
@@ -304,59 +239,33 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                               child: InputDecorator(
                                 decoration: const InputDecoration(
                                   alignLabelWithHint: true,
-                                  labelStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xff888888),
-                                  ),
-                                  focusedBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  border: const UnderlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
+                                  labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+                                  focusedBorder: const UnderlineInputBorder(borderSide: BorderSide.none,),
+                                  border: const UnderlineInputBorder(borderSide: BorderSide.none,),
                                 ),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<int>(
                                     value: currentIdSelected,
-                                    //  isDense: true,
-                                    onChanged: (int? newValue) {
+                                    onChanged: (int? newValue){
                                       currentIdSelected = newValue!;
                                     },
-                                    items: managedPages
-                                        .map((RegularManagedPages value) {
+                                    items: managedPages.map((RegularManagedPages value){
                                       return DropdownMenuItem<int>(
                                         value: value.pageId,
                                         child: Row(
                                           children: [
                                             value.image != ''
-                                                ? CircleAvatar(
-                                                    backgroundColor:
-                                                        const Color(0xff888888),
-                                                    foregroundImage:
-                                                        NetworkImage(
-                                                            value.image),
-                                                    backgroundImage:
-                                                        const AssetImage(
-                                                            'assets/icons/app-icon.png'),
-                                                  )
-                                                : const CircleAvatar(
-                                                    backgroundColor:
-                                                        const Color(0xff888888),
-                                                    foregroundImage:
-                                                        const AssetImage(
-                                                            'assets/icons/app-icon.png'),
-                                                  ),
-                                            Text(
-                                              value.name,
-                                              style: TextStyle(
-                                                fontSize: SizeConfig
-                                                        .blockSizeVertical! *
-                                                    2.64,
-                                                fontFamily: 'NexaBold',
-                                                color: const Color(0xff000000),
-                                              ),
+                                            ? CircleAvatar(
+                                              backgroundColor: const Color(0xff888888),
+                                              foregroundImage: NetworkImage(value.image),
+                                              backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                            )
+                                            : const CircleAvatar(
+                                              backgroundColor: const Color(0xff888888),
+                                              foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                                             ),
+
+                                            Text(value.name, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                           ],
                                         ),
                                       );
@@ -368,8 +277,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                 color: const Color(0xffffffff),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: const Color(0xff888888)
-                                        .withOpacity(0.5),
+                                    color: const Color(0xff888888).withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 5,
                                     offset: const Offset(0, 0),
@@ -379,10 +287,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                             ),
                             FocusScope(
                               child: Focus(
-                                onFocusChange: (focus) {
-                                  if (focus) {
+                                onFocusChange: (focus){
+                                  if(focus){
                                     maxLines = 10;
-                                  } else {
+                                  }else{
                                     maxLines = 5;
                                   }
                                 },
@@ -394,29 +302,19 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                     cursorColor: const Color(0xff000000),
                                     maxLines: maxLines,
                                     keyboardType: TextInputType.text,
-                                    style: TextStyle(
-                                      fontSize:
-                                          SizeConfig.blockSizeVertical! * 2.64,
-                                      fontFamily: 'NexaRegular',
-                                      color: const Color(0xfF000000),
-                                    ),
+                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),
                                     decoration: InputDecoration(
                                       fillColor: const Color(0xffffffff),
                                       alignLabelWithHint: true,
                                       labelText: 'Speak out...',
                                       labelStyle: TextStyle(
-                                        fontSize:
-                                            SizeConfig.blockSizeVertical! *
-                                                2.64,
+                                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
                                         fontFamily: 'NexaRegular',
                                         color: const Color(0xffB1B1B1),
                                       ),
                                       border: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: const Color(0xff000000),
-                                        ),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
+                                        borderSide: const BorderSide(color: const Color(0xff000000),),
+                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                                       ),
                                       focusedBorder: const OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -433,72 +331,55 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
+
+                            const SizedBox(height: 10,),
+
                             newLocationListener != ''
-                                ? Container(
-                                    child: Chip(
-                                      labelPadding:
-                                          const EdgeInsets.only(left: 8.0),
-                                      label: Text(newLocationListener),
-                                      deleteIcon: const Icon(
-                                        Icons.close,
-                                        size: 18,
-                                      ),
-                                      onDeleted: () {
-                                        newLocation.value = '';
-                                      },
-                                    ),
-                                    padding: const EdgeInsets.only(
-                                      left: 20.0,
-                                      right: 20.0,
-                                    ),
-                                    alignment: Alignment.centerLeft,
-                                  )
-                                : Container(
-                                    height: 0,
-                                  ),
-                            const SizedBox(
-                              height: 10,
-                            ),
+                            ? Container(
+                              child: Chip(
+                                labelPadding: const EdgeInsets.only(left: 8.0),
+                                label: Text(newLocationListener),
+                                deleteIcon: const Icon(Icons.close, size: 18,),
+                                onDeleted: () {
+                                  newLocation.value = '';
+                                },
+                              ),
+                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              alignment: Alignment.centerLeft,
+                            )
+                            : Container(height: 0,),
+
+                            const SizedBox(height: 10,),
+
                             Container(
                               child: Wrap(
                                 spacing: 5.0,
                                 children: List.generate(
                                   users.length,
                                   (index) => Chip(
-                                    labelPadding:
-                                        const EdgeInsets.only(left: 8.0),
+                                    labelPadding: const EdgeInsets.only(left: 8.0),
                                     label: Text(users[index].name),
-                                    deleteIcon: const Icon(
-                                      Icons.close,
-                                      size: 18,
-                                    ),
-                                    onDeleted: () {
+                                    deleteIcon: const Icon(Icons.close, size: 18,),
+                                    onDeleted: (){
                                       userCount.value--;
                                       users.removeAt(index);
                                     },
                                   ),
                                 ),
                               ),
-                              padding: const EdgeInsets.only(
-                                left: 20.0,
-                                right: 20.0,
-                              ),
+                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                               alignment: Alignment.centerLeft,
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
+
+                            const SizedBox(height: 10,),
+
                             Container(
-                              child: (() {
-                                if (slideCountListener != 0) {
+                              child: ((){
+                                if(slideCountListener != 0){
                                   return Container(
                                     height: 200,
                                     width: SizeConfig.screenWidth,
-                                    padding: const EdgeInsets.only(
-                                        left: 20.0, right: 20.0),
+                                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                     child: Container(
                                       height: 100,
                                       child: GridView.count(

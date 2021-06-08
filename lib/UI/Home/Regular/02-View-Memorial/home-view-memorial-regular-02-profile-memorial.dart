@@ -15,14 +15,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'home-view-memorial-regular-04-maps.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';
-
-import 'home-view-memorial-regular-04-maps.dart';
 
 class RegularProfilePosts{
   final int userId;

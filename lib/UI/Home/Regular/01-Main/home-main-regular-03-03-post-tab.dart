@@ -32,30 +32,7 @@ class RegularMainPagesPosts{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
-  const RegularMainPagesPosts({
-    required this.userId, 
-    required this.postId, 
-    required this.memorialId, 
-    required this.memorialName, 
-    required this.timeCreated, 
-    required this.postBody, 
-    required this.profileImage, 
-    required this.imagesOrVideos, 
-    required this.managed,
-    required this.joined,
-    required this.numberOfLikes,
-    required this.numberOfComments,
-    required this.likeStatus,
-    required this.numberOfTagged, 
-    required this.taggedFirstName, 
-    required this.taggedLastName, 
-    required this.taggedImage, 
-    required this.taggedId,
-    required this.pageType, 
-    required this.famOrFriends, 
-    required this.relationship,
-  });
+  const RegularMainPagesPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship,});
 }
 
 class HomeRegularPostTab extends StatefulWidget{
@@ -75,8 +52,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   void initState(){
     super.initState();
     isGuest();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    scrollController.addListener((){
+      if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(itemRemaining != 0){
           onLoading();
         }else{

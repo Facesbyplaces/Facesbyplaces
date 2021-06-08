@@ -128,16 +128,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
 
         ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: Text('Friends', style: TextStyle(
-              fontSize:
-              SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xff000000)),),
-          subtitle: Text('Add or remove friends of this page', style: TextStyle(
-              fontSize:
-              SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xffBDC3C7)),),
+          title: Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000)),),
+          subtitle: Text('Add or remove friends of this page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7)),),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
@@ -145,6 +137,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         widget.relationship != 'Friend'
         ? ListTile(
           tileColor: Color(0xffffffff),
+          title: const Text('Relationship', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Set your relationship for this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
           onTap: () async{
             String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
 
@@ -157,20 +151,11 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Success', textAlign: TextAlign.center,  style: TextStyle(
-                        fontSize:
-                        SizeConfig.blockSizeVertical! * 3.16,
-                        fontFamily: 'NexaRegular'),),
+                    title: Text('Success', textAlign: TextAlign.center,  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Successfully updated the relationship setting.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize:
-                          SizeConfig.blockSizeVertical! * 2.87,
-                          fontFamily: 'NexaRegular'),
-                    ),
+                    description: Text('Successfully updated the relationship setting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                     onlyOkButton: true,
-                    onOkButtonPressed: () {
+                    onOkButtonPressed: (){
                       Navigator.pop(context, true);
                     },
                   )
@@ -181,21 +166,12 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(
-                        fontSize:
-                        SizeConfig.blockSizeVertical! * 3.16,
-                        fontFamily: 'NexaRegular'),),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize:
-                          SizeConfig.blockSizeVertical! * 2.87,
-                          fontFamily: 'NexaRegular'),
-                    ),
+                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                     onlyOkButton: true,
                     buttonOkColor: const Color(0xffff0000),
-                    onOkButtonPressed: () {
+                    onOkButtonPressed: (){
                       Navigator.pop(context, true);
                     },
                   )
@@ -203,11 +179,11 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
               }
             }
           },
-          title: const Text('Relationship', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Set your relationship for this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         )
         : ListTile(
           tileColor: const Color(0xffffffff),
+          title: const Text('Leave Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Leave this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
           onTap: () async{
             bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
             if(confirmResult){
@@ -228,21 +204,12 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                   builder: (_) => 
                     AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(
-                        fontSize:
-                        SizeConfig.blockSizeVertical! * 3.16,
-                        fontFamily: 'NexaRegular'),),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize:
-                          SizeConfig.blockSizeVertical! * 2.87,
-                          fontFamily: 'NexaRegular'),
-                    ),
+                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                     onlyOkButton: true,
                     buttonOkColor: const Color(0xffff0000),
-                    onOkButtonPressed: () {
+                    onOkButtonPressed: (){
                       Navigator.pop(context, true);
                     },
                   )
@@ -250,8 +217,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
               }
             }
           },
-          title: const Text('Leave Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
-          subtitle: const Text('Leave this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),

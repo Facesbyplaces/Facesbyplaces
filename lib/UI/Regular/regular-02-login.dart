@@ -434,17 +434,12 @@ class RegularLoginState extends State<RegularLogin> {
                           context.loaderOverlay.show();
 
                           String deviceToken = '';
-                          final FirebaseMessaging _firebaseMessaging =
-                              FirebaseMessaging.instance;
-                          final pushNotificationService =
-                              PushNotificationService(_firebaseMessaging);
+                          final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+                          final pushNotificationService = PushNotificationService(_firebaseMessaging);
                           pushNotificationService.initialise();
-                          deviceToken = (await pushNotificationService.fcm
-                              .getToken())!;
-                          String result = await apiRegularLogin(
-                              email: _key1.currentState!.controller.text,
-                              password: _key2.currentState!.controller.text,
-                              deviceToken: deviceToken);
+                          deviceToken = (await pushNotificationService.fcm.getToken())!;
+                          print('The deviceToken is $deviceToken');
+                          String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
 
                           context.loaderOverlay.hide();
 

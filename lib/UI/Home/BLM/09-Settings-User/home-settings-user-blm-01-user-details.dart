@@ -22,14 +22,14 @@ import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class HomeBLMUserProfileDetails extends StatefulWidget {
+class HomeBLMUserProfileDetails extends StatefulWidget{
   final int userId;
   HomeBLMUserProfileDetails({required this.userId});
 
   HomeBLMUserProfileDetailsState createState() => HomeBLMUserProfileDetailsState();
 }
 
-class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
+class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
   Future<APIBLMShowProfileInformation>? showProfile;
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
@@ -52,7 +52,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
     }
   }
 
-  void initState() {
+  void initState(){
     super.initState();
     showProfile = getProfileInformation();
   }
@@ -88,6 +88,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
                     const Divider(height: 20, color: const Color(0xff888888),),
 
                     ListTile(
+                      title: Text('Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      subtitle: Text('Change your login password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       onTap: () async{
                         final sharedPrefs = await SharedPreferences.getInstance();
                         bool socialAppSession = sharedPrefs.getBool('blm-social-app-session') ?? false;
@@ -102,16 +104,10 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Error: $error.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'
-                                ),
-                              ),
+                              description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                               onlyOkButton: true,
                               buttonOkColor: const Color(0xffff0000),
-                              onOkButtonPressed: () {
+                              onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
                             ),
@@ -129,13 +125,13 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserChangePassword(userId: widget.userId, isAddPassword: false,)));
                         }
                       },
-                      title: Text('Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                      subtitle: Text('Change your login password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
 
                     const Divider(height: 20, color: const Color(0xff888888),),
 
                     ListTile(
+                      title: Text('Other info', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      subtitle: Text('Optional informations you can share', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       onTap: () async{
                         context.loaderOverlay.show();
                         APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: widget.userId);
@@ -153,8 +149,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails> {
                           ),
                         );
                       },
-                      title: Text('Other info', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                      subtitle: Text('Optional informations you can share', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
 
                     const Divider(height: 20, color: const Color(0xff888888),),

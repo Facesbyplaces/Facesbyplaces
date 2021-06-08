@@ -21,7 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:async';
 
-class RegularProfilePosts {
+class RegularProfilePosts{
   final int userId;
   final int postId;
   final int memorialId;
@@ -46,7 +46,7 @@ class RegularProfilePosts {
   const RegularProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
-class HomeRegularProfile extends StatefulWidget {
+class HomeRegularProfile extends StatefulWidget{
   final int memorialId;
   final String relationship;
   final bool managed;
@@ -76,9 +76,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
     super.initState();
     onLoading();
     showProfile = getProfileInformation(widget.memorialId);
-    scrollController.addListener(() {
+    scrollController.addListener((){
       if(postCount.value != 0){
-        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
           showFloatingButton.value = true;
         }else{
           showFloatingButton.value = false;
@@ -87,7 +87,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
     });
   }
 
-  Future<void> onRefresh() async {
+  Future<void> onRefresh() async{
     postCount.value = 0;
     itemRemaining = 1;
     posts = [];
@@ -95,8 +95,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
     onLoading();
   }
 
-  void onLoading() async {
-    if (itemRemaining != 0) {
+  void onLoading() async{
+    if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularProfilePost(memorialId: widget.memorialId, page: page);
       itemRemaining = newValue.almItemsRemaining;
@@ -148,11 +148,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
     }
   }
 
-  Future<APIRegularShowMemorialMain> getProfileInformation(int memorialId) async {
+  Future<APIRegularShowMemorialMain> getProfileInformation(int memorialId) async{
     return await apiRegularShowMemorial(memorialId: memorialId);
   }
 
-  void initBranchShare() {
+  void initBranchShare(){
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
@@ -171,7 +171,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     print('Regular profile screen rebuild!');
     return ValueListenableBuilder(
@@ -210,6 +210,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                   Column(
                                     children: [
                                       GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                                        child: Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
                                         onTap: () {
                                           showGeneralDialog(
                                             context: context,
@@ -260,18 +261,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                             },
                                           );
                                         },
-                                        child: Container(
-                                          height: SizeConfig.screenHeight! / 3.5,
-                                          color: Colors.transparent,
-                                        ),
                                       ),
                                       Container(
                                         width: SizeConfig.screenWidth,
                                         decoration: const BoxDecoration(
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: const Radius.circular(20),
-                                            topRight: const Radius.circular(20),
-                                          ),
+                                          borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20),),
                                           color: const Color(0xffffffff),
                                         ),
                                         child: Column(
@@ -281,11 +275,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                             Center(
                                               child: Text(profile.data!.almMemorial.showMemorialName,
                                                 textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                  fontFamily: 'NexaBold',
-                                                  color: const Color(0xff000000),
-                                                ),
+                                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
                                                 maxLines: 5,
                                                 overflow: TextOverflow.clip,
                                               ),
@@ -294,9 +284,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                             const SizedBox(height: 20,),
 
                                             TextButton.icon(
-                                              onPressed: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
-                                              },
                                               icon: const CircleAvatar(
                                                 radius: 15,
                                                 backgroundColor: const Color(0xffE67E22),
@@ -309,6 +296,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                   color: const Color(0xff2F353D),
                                                 ),
                                               ),
+                                              onPressed: () {
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
+                                              },
                                             ),
 
                                             const SizedBox(height: 20,),
@@ -334,76 +324,43 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                     alignment: Alignment.centerRight,
                                                                     padding: const EdgeInsets.only(right:20.0),
                                                                     child: GestureDetector(
-                                                                      onTap: () {
-                                                                        Navigator.pop(context);
-                                                                      },
-                                                                      child:
-                                                                      CircleAvatar(
+                                                                      child: CircleAvatar(
                                                                         radius: 20,
                                                                         backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                                         child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                       ),
+                                                                      onTap: (){
+                                                                        Navigator.pop(context);
+                                                                      },
                                                                     ),
                                                                   ),
 
                                                                   const SizedBox(height: 10,),
                                                                   
                                                                   Expanded(
-                                                                    child: (() {
-                                                                      if (lookupMimeType(profile
-                                                                          .data!
-                                                                          .almMemorial
-                                                                          .showMemorialImagesOrVideos[0])
-                                                                          ?.contains('video') ==
-                                                                          true) {
-                                                                        return BetterPlayer
-                                                                            .network(
-                                                                          '${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                                          betterPlayerConfiguration:
-                                                                          const BetterPlayerConfiguration(
+                                                                    child: ((){
+                                                                      if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
+                                                                        return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
+                                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                             deviceOrientationsAfterFullScreen: [
-                                                                              DeviceOrientation
-                                                                                  .portraitUp
+                                                                              DeviceOrientation.portraitUp
                                                                             ],
-                                                                            aspectRatio:
-                                                                            16 /
-                                                                                9,
-                                                                            fit: BoxFit
-                                                                                .contain,
+                                                                            aspectRatio: 16 / 9,
+                                                                            fit: BoxFit.contain,
                                                                           ),
                                                                         );
-                                                                      } else {
+                                                                      }else{
                                                                         return CachedNetworkImage(
-                                                                          fit: BoxFit
-                                                                              .contain,
-                                                                          imageUrl: profile
-                                                                              .data!
-                                                                              .almMemorial
-                                                                              .showMemorialImagesOrVideos[0],
-                                                                          placeholder:
-                                                                              (context, url) =>
-                                                                          const Center(
-                                                                            child:
-                                                                            const CircularProgressIndicator(),
-                                                                          ),
-                                                                          errorWidget: (context,
-                                                                              url,
-                                                                              error) =>
-                                                                              Image
-                                                                                  .asset(
-                                                                                'assets/icons/cover-icon.png',
-                                                                                fit: BoxFit
-                                                                                    .contain,
-                                                                                scale:
-                                                                                1.0,
-                                                                              ),
+                                                                          fit: BoxFit.contain,
+                                                                          imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[0],
+                                                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                         );
                                                                       }
                                                                     }()),
                                                                   ),
-                                                                  const SizedBox(
-                                                                    height: 85,
-                                                                  ),
+
+                                                                  const SizedBox(height: 85,),
                                                                 ],
                                                               ),
                                                             ),
@@ -412,307 +369,182 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                       },
                                                     );
                                                   },
-                                                  child: (() {
-                                                    if (profile
-                                                        .data!
-                                                        .almMemorial
-                                                        .showMemorialImagesOrVideos
-                                                        .isNotEmpty) {
-                                                      if (lookupMimeType(profile
-                                                          .data!
-                                                          .almMemorial
-                                                          .showMemorialImagesOrVideos[0])
-                                                          ?.contains('video') ==
-                                                          true) {
-                                                        return BetterPlayer.network(
-                                                          '${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                          betterPlayerConfiguration:
-                                                          const BetterPlayerConfiguration(
+                                                  child: ((){
+                                                    if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty) {
+                                                      if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
+                                                        return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
+                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                             aspectRatio: 16 / 9,
                                                             fit: BoxFit.contain,
-                                                            controlsConfiguration:
-                                                            const BetterPlayerControlsConfiguration(
-                                                              showControls: false,
-                                                            ),
+                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                           ),
                                                         );
-                                                      } else {
-                                                        return Container(
-                                                          height: 0,
-                                                        );
+                                                      }else{
+                                                        return Container(height: 0,);
                                                       }
-                                                    } else {
-                                                      return Container(
-                                                        height: 0,
-                                                      );
+                                                    }else{
+                                                      return Container(height: 0,);
                                                     }
                                                   }()),
                                                 ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                (() {
-                                                  if (profile
-                                                      .data!
-                                                      .almMemorial
-                                                      .showMemorialDetails
-                                                      .showMemorialDetailsDescription !=
-                                                      '') {
+
+                                                const SizedBox(height: 20,),
+
+                                                ((){
+                                                  if(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription != ''){
                                                     return Container(
                                                       alignment: Alignment.center,
-                                                      padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20.0,
-                                                          right: 20.0),
-                                                      child: Text(
-                                                        profile
-                                                            .data!
-                                                            .almMemorial
-                                                            .showMemorialDetails
-                                                            .showMemorialDetailsDescription,
+                                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                      child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription,
                                                         textAlign: TextAlign.center,
-                                                        style: TextStyle(
-                                                          fontSize: SizeConfig
-                                                              .blockSizeVertical! *
-                                                              2.11,
-                                                          fontFamily: 'NexaRegular',
-                                                          color: const Color(0xff000000),
-                                                        ),
+                                                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                                       ),
                                                     );
-                                                  } else {
-                                                    return Container(
-                                                      height: 0,
-                                                    );
+                                                  }else{
+                                                    return Container(height: 0,);
                                                   }
                                                 }()),
                                               ],
                                             ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
+
+                                            const SizedBox(height: 20,),
+
                                             Container(
                                               child: Row(
                                                 children: [
-                                                  Expanded(
-                                                    child: Container(),
-                                                  ),
+                                                  Expanded(child: Container(),),
+
                                                   Expanded(
                                                     flex: 2,
                                                     child: Padding(
                                                       padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10.0,
-                                                          right: 10.0),
+                                                      const EdgeInsets.only(left: 10.0, right: 10.0),
+
                                                       child: MaterialButton(
                                                         padding: EdgeInsets.zero,
+                                                        child: Text('Manage', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                        minWidth: SizeConfig.screenWidth! / 2,
+                                                        height: 45,
+                                                        shape: const StadiumBorder(),
+                                                        color: const Color(0xff2F353D),
                                                         onPressed: () async {
-                                                          if (widget.managed == true) {
-                                                            context.loaderOverlay
-                                                                .show();
+                                                          if(widget.managed == true){
+                                                            context.loaderOverlay.show();
                                                             APIRegularShowSwitchStatus
-                                                            result =
-                                                            await apiRegularShowSwitchStatus(
-                                                                memorialId:
-                                                                widget.memorialId);
-                                                            context.loaderOverlay
-                                                                .hide();
+                                                            result = await apiRegularShowSwitchStatus(memorialId: widget.memorialId);
+                                                            context.loaderOverlay.hide();
 
-                                                            if (result
-                                                                .showSwitchStatusSuccess) {
-                                                              Navigator.push(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) => HomeRegularMemorialSettings(
-                                                                          memorialId:
-                                                                          widget.memorialId,
-                                                                          memorialName: profile
-                                                                              .data!
-                                                                              .almMemorial
-                                                                              .showMemorialName,
-                                                                          switchFamily:
-                                                                          result
-                                                                              .showSwitchStatusFamily,
-                                                                          switchFriends:
-                                                                          result
-                                                                              .showSwitchStatusFriends,
-                                                                          switchFollowers:
-                                                                          result
-                                                                              .showSwitchStatusFollowers)));
+                                                            if(result.showSwitchStatusSuccess){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(
+                                                                    memorialId: widget.memorialId,
+                                                                    memorialName: profile.data!.almMemorial.showMemorialName,
+                                                                    switchFamily: result.showSwitchStatusFamily,
+                                                                    switchFriends: result.showSwitchStatusFriends,
+                                                                    switchFollowers: result.showSwitchStatusFollowers,
+                                                                  ),
+                                                                ),
+                                                              );
                                                             }
-                                                          } else {
-                                                            Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                        HomeRegularMemorialSettingsWithHidden(
-                                                                          memorialId:
-                                                                          widget.memorialId,
-                                                                          relationship:
-                                                                          widget.relationship,
-                                                                        )));
+                                                          }else{
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(
+                                                                memorialId: widget.memorialId,
+                                                                relationship: widget.relationship,
+                                                                ),
+                                                              ),
+                                                            );
                                                           }
                                                         },
-                                                        child: Text(
-                                                          'Manage',
-                                                          style: TextStyle(
-                                                            fontSize: SizeConfig
-                                                                .blockSizeVertical! *
-                                                                2.64,
-                                                            fontFamily: 'NexaBold',
-                                                            color: const Color(
-                                                                0xffFFFFFF),
-                                                          ),
-                                                        ),
-                                                        minWidth: SizeConfig
-                                                            .screenWidth! /
-                                                            2,
-                                                        height: 45,
-                                                        shape:
-                                                        const StadiumBorder(),
-                                                        color:
-                                                        const Color(0xff2F353D),
                                                       ),
                                                     ),
                                                   ),
                                                   Expanded(
                                                     child: GestureDetector(
-                                                      onTap: () async {
+                                                      onTap: () async{
                                                         initBranchShare();
 
-                                                        FlutterBranchSdk
-                                                            .setIdentity(
-                                                            'alm-share-link');
+                                                        FlutterBranchSdk.setIdentity('alm-share-link');
 
-                                                        BranchResponse response =
-                                                        await FlutterBranchSdk.showShareSheet(
-                                                            buo: buo!,
-                                                            linkProperties: lp!,
-                                                            messageText:
-                                                            'FacesbyPlaces App',
-                                                            androidMessageTitle:
-                                                            'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                                                            androidSharingTitle:
-                                                            'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
+                                                        BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                                                          buo: buo!,
+                                                          linkProperties: lp!,
+                                                          messageText: 'FacesbyPlaces App',
+                                                          androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                                          androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                                        );
 
-                                                        if (response.success) {
-                                                          print(
-                                                              'Link generated: ${response.result}');
-                                                        } else {
+                                                        if(response.success){
+                                                          print('Link generated: ${response.result}');
+                                                        }else{
                                                           FlutterBranchSdk.logout();
-                                                          print(
-                                                              'Error : ${response.errorCode} - ${response.errorMessage}');
+                                                          print('Error : ${response.errorCode} - ${response.errorMessage}');
                                                         }
                                                       },
                                                       child: const CircleAvatar(
                                                         radius: 25,
-                                                        backgroundColor:
-                                                        const Color(0xff3498DB),
-                                                        child: const Icon(
-                                                          Icons.share,
-                                                          color: const Color(
-                                                              0xffffffff),
-                                                          size: 25,
-                                                        ),
+                                                        backgroundColor: const Color(0xff3498DB),
+                                                        child: const Icon(Icons.share, color: const Color(0xffffffff), size: 25,),
                                                       ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
+
+                                            const SizedBox(height: 20,),
+
                                             Padding(
-                                              padding:
-                                              const EdgeInsets.only(left: 20),
+                                              padding: const EdgeInsets.only(left: 20),
                                               child: Column(
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      const Icon(
-                                                        Icons.place,
-                                                        color:
-                                                        const Color(0xff000000),
-                                                        size: 25,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 20,
-                                                      ),
+                                                      const Icon(Icons.place, color: const Color(0xff000000), size: 25,),
+
+                                                      const SizedBox(width: 20,),
+
                                                       Text(
-                                                        profile
-                                                            .data!
-                                                            .almMemorial
-                                                            .showMemorialDetails
-                                                            .showMemorialDetailsCountry,
+                                                        profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCountry,
                                                         style: TextStyle(
-                                                          fontSize: SizeConfig
-                                                              .blockSizeVertical! *
-                                                              1.76,
+                                                          fontSize: SizeConfig.blockSizeVertical! * 1.76,
                                                           fontFamily: 'NexaRegular',
-                                                          color: const Color(
-                                                              0xff000000),
+                                                          color: const Color(0xff000000),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                  const SizedBox(
-                                                    height: 20,
-                                                  ),
+
+                                                  const SizedBox(height: 20,),
+
                                                   Row(
                                                     children: [
-                                                      const Icon(
-                                                        Icons.star,
-                                                        color:
-                                                        const Color(0xff000000),
-                                                        size: 25,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 20,
-                                                      ),
-                                                      Text(
-                                                        profile
-                                                            .data!
-                                                            .almMemorial
-                                                            .showMemorialDetails
-                                                            .showMemorialDetailsDob,
+                                                      const Icon(Icons.star, color: const Color(0xff000000), size: 25,),
+
+                                                      const SizedBox(width: 20,),
+
+                                                      Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDob,
                                                         style: TextStyle(
-                                                          fontSize: SizeConfig
-                                                              .blockSizeVertical! *
-                                                              1.76,
+                                                          fontSize: SizeConfig.blockSizeVertical! * 1.76,
                                                           fontFamily: 'NexaRegular',
-                                                          color: const Color(
-                                                              0xff000000),
+                                                          color: const Color(0xff000000),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                  const SizedBox(
-                                                    height: 20,
-                                                  ),
+
+                                                  const SizedBox(height: 20,),
+
                                                   Row(
                                                     children: [
-                                                      Image.asset(
-                                                        'assets/icons/grave_logo.png',
-                                                        height: 25,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 20,
-                                                      ),
+                                                      Image.asset('assets/icons/grave_logo.png', height: 25,),
+
+                                                      const SizedBox(width: 20,),
+
                                                       Text(
-                                                        profile
-                                                            .data!
-                                                            .almMemorial
-                                                            .showMemorialDetails
-                                                            .showMemorialDetailsRip,
+                                                        profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsRip,
                                                         style: TextStyle(
-                                                          fontSize: SizeConfig
-                                                              .blockSizeVertical! *
-                                                              1.76,
+                                                          fontSize: SizeConfig.blockSizeVertical! * 1.76,
                                                           fontFamily: 'NexaRegular',
-                                                          color: const Color(
-                                                              0xff000000),
+                                                          color: const Color(0xff000000),
                                                         ),
                                                       ),
                                                     ],
@@ -720,29 +552,27 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 ],
                                               ),
                                             ),
+
                                             const SizedBox(height: 20),
+
                                             Container(
                                               height: 50.0,
                                               child: Row(
                                                 children: [
                                                   Expanded(
                                                     child: GestureDetector(
-                                                      onTap: () {
-                                                        Scrollable.ensureVisible(
-                                                            dataKey
-                                                                .currentContext!);
+                                                      onTap: (){
+                                                        Scrollable.ensureVisible(dataKey.currentContext!);
                                                       },
                                                       child: Column(
                                                         children: [
-                                                          Text(
-                                                            '${profile.data!.almMemorial.showMemorialPostsCount}',
+                                                          Text('${profile.data!.almMemorial.showMemorialPostsCount}',
                                                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64,
                                                               fontFamily: 'NexaBold',
                                                               color: const Color(0xff000000),
                                                             ),
                                                           ),
-                                                          Text(
-                                                            'Post',
+                                                          Text('Post',
                                                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76,
                                                               fontFamily:'NexaRegular',
                                                               color: const Color(0xff677375),
@@ -752,140 +582,90 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Container(
-                                                    width: 5,
-                                                    color: const Color(0xffeeeeee),
-                                                  ),
+
+                                                  Container(width: 5, color: const Color(0xffeeeeee),),
+
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    HomeRegularConnectionList(
-                                                                        memorialId:
-                                                                        widget.memorialId,
-                                                                        newToggle:
-                                                                        0)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(
+                                                              memorialId: widget.memorialId,
+                                                              newToggle: 0,
+                                                            ),
+                                                          ),
+                                                        );
                                                       },
                                                       child: Column(
                                                         children: [
-                                                          Text(
-                                                            '${profile.data!.almMemorial.showMemorialFamilyCount}',
+                                                          Text('${profile.data!.almMemorial.showMemorialFamilyCount}',
                                                             style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  2.64,
-                                                              fontFamily:
-                                                              'NexaBold',
-                                                              color: const Color(
-                                                                  0xff000000),
+                                                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                              fontFamily: 'NexaBold',
+                                                              color: const Color(0xff000000),
                                                             ),
                                                           ),
-                                                          Text(
-                                                            'Family',
+
+                                                          Text('Family',
                                                             style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  1.76,
-                                                              fontFamily:
-                                                              'NexaRegular',
-                                                              color: const Color(
-                                                                  0xff677375),
+                                                              fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                                              fontFamily: 'NexaRegular',
+                                                              color: const Color(0xff677375),
                                                             ),
                                                           ),
                                                         ],
                                                       ),
                                                     ),
                                                   ),
-                                                  Container(
-                                                    width: 5,
-                                                    color: const Color(0xffeeeeee),
-                                                  ),
+
+                                                  Container(width: 5, color: const Color(0xffeeeeee),),
+
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    HomeRegularConnectionList(
-                                                                        memorialId:
-                                                                        widget.memorialId,
-                                                                        newToggle:
-                                                                        1)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 1,),),);
                                                       },
                                                       child: Column(
                                                         children: [
-                                                          Text(
-                                                            '${profile.data!.almMemorial.showMemorialFriendsCount}',
+                                                          Text('${profile.data!.almMemorial.showMemorialFriendsCount}',
                                                             style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  2.64,
-                                                              fontFamily:
-                                                              'NexaBold',
-                                                              color: const Color(
-                                                                  0xff000000),
+                                                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                              fontFamily: 'NexaBold',
+                                                              color: const Color(0xff000000),
                                                             ),
                                                           ),
-                                                          Text(
-                                                            'Friends',
+
+                                                          Text('Friends',
                                                             style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  1.76,
-                                                              fontFamily:
-                                                              'NexaRegular',
-                                                              color: const Color(
-                                                                  0xff677375),
+                                                              fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                                              fontFamily: 'NexaRegular',
+                                                              color: const Color(0xff677375),
                                                             ),
                                                           ),
                                                         ],
                                                       ),
                                                     ),
                                                   ),
-                                                  Container(
-                                                    width: 5,
-                                                    color: const Color(0xffeeeeee),
-                                                  ),
+
+                                                  Container(width: 5, color: const Color(0xffeeeeee),),
+
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    HomeRegularConnectionList(
-                                                                        memorialId: widget.memorialId,
-                                                                        newToggle:
-                                                                        2)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                                       },
                                                       child: Column(
                                                         children: [
-                                                          Text(
-                                                            '${profile.data!.almMemorial.showMemorialFollowersCount}',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  2.64,
-                                                              fontFamily:
-                                                              'NexaBold',
-                                                              color: const Color(
-                                                                  0xff000000),
+                                                          Text('${profile.data!.almMemorial.showMemorialFollowersCount}',
+                                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                              fontFamily: 'NexaBold',
+                                                              color: const Color(0xff000000),
                                                             ),
                                                           ),
-                                                          Text(
-                                                            'Joined',
+                                                          Text('Joined',
                                                             style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                  .blockSizeVertical! *
-                                                                  1.76,
-                                                              fontFamily:
-                                                              'NexaRegular',
-                                                              color: const Color(
-                                                                  0xff677375),
+                                                              fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                                              fontFamily:'NexaRegular',
+                                                              color: const Color(0xff677375),
                                                             ),
                                                           ),
                                                         ],
@@ -895,102 +675,62 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 ],
                                               ),
                                             ),
-                                            Container(
-                                              height: 5,
-                                              color: const Color(0xffffffff),
-                                            ),
-                                            Container(
-                                              height: 5,
-                                              color: const Color(0xffeeeeee),
-                                            ),
+
+                                            Container(height: 5, color: const Color(0xffffffff),),
+
+                                            Container(height: 5, color: const Color(0xffeeeeee),),
+
                                             Column(
                                               children: [
                                                 const SizedBox(height: 20),
                                                 Container(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 20.0),
+                                                  padding: const EdgeInsets.only(left: 20.0),
                                                   alignment: Alignment.centerLeft,
-                                                  child: Text(
-                                                    'Post',
+                                                  child: Text('Post',
                                                     style: TextStyle(
-                                                      fontSize: SizeConfig
-                                                          .blockSizeVertical! *
-                                                          2.64,
-                                                      fontFamily:
-                                                      'NexaBold',
-                                                      color: const Color(
-                                                          0xff000000),
+                                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                                                      fontFamily: 'NexaBold',
+                                                      color: const Color(0xff000000),
                                                     ),
                                                   ),
                                                 ),
+
                                                 const SizedBox(height: 20),
-                                                profile
-                                                    .data!
-                                                    .almMemorial
-                                                    .showMemorialImagesOrVideos
-                                                    .isNotEmpty
-                                                    ? Column(
+
+                                                profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty
+                                                ? Column(
                                                   children: [
                                                     Container(
-                                                      width: SizeConfig
-                                                          .screenWidth,
+                                                      width: SizeConfig.screenWidth,
                                                       height: 100,
-                                                      padding:
-                                                      const EdgeInsets
-                                                          .only(
-                                                          left: 20.0,
-                                                          right: 20.0),
-                                                      child:
-                                                      ListView.separated(
-                                                        physics:
-                                                        const ClampingScrollPhysics(),
-                                                        scrollDirection:
-                                                        Axis.horizontal,
-                                                        separatorBuilder:
-                                                            (context, index) {
-                                                          return const SizedBox(
-                                                              width: 20);
+                                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                      child: ListView.separated(
+                                                        physics: const ClampingScrollPhysics(),
+                                                        scrollDirection: Axis.horizontal,
+                                                        separatorBuilder: (context, index){
+                                                          return const SizedBox(width: 20);
                                                         },
-                                                        itemCount: profile
-                                                            .data!
-                                                            .almMemorial
-                                                            .showMemorialImagesOrVideos
-                                                            .length,
-                                                        itemBuilder:
-                                                            (context, index) {
+                                                        itemCount: profile.data!.almMemorial.showMemorialImagesOrVideos.length,
+                                                        itemBuilder: (context, index){
                                                           return GestureDetector(
-                                                            onTap: () {
+                                                            onTap: (){
                                                               showGeneralDialog(
-                                                                context:
-                                                                context,
-                                                                barrierDismissible:
-                                                                true,
-                                                                barrierLabel:
-                                                                'Dialog',
-                                                                transitionDuration:
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                    0),
-                                                                pageBuilder:
-                                                                    (_, __,
-                                                                    ___) {
+                                                                context: context,
+                                                                barrierDismissible: true,
+                                                                barrierLabel: 'Dialog',
+                                                                transitionDuration: const Duration(milliseconds:0),
+                                                                pageBuilder: (_, __, ___) {
                                                                   return Scaffold(
-                                                                    backgroundColor: Colors
-                                                                        .black12
-                                                                        .withOpacity(
-                                                                        0.7),
-                                                                    body: SizedBox
-                                                                        .expand(
-                                                                      child:
-                                                                      SafeArea(
-                                                                        child:
-                                                                        Column(
+                                                                    backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                    body: SizedBox.expand(
+                                                                      child: SafeArea(
+                                                                        child: Column(
                                                                           children: [
                                                                             Container(
                                                                               alignment: Alignment.centerRight,
                                                                               padding: const EdgeInsets.only(right: 20.0),
                                                                               child: GestureDetector(
-                                                                                onTap: () {
+                                                                                onTap: (){
                                                                                   Navigator.pop(context);
                                                                                 },
                                                                                 child: CircleAvatar(
@@ -1003,16 +743,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                                 ),
                                                                               ),
                                                                             ),
-                                                                            const SizedBox(
-                                                                              height: 10,
-                                                                            ),
+
+                                                                            const SizedBox(height: 10,),
+
                                                                             Expanded(
                                                                               child: CarouselSlider(
                                                                                 carouselController: buttonCarouselController,
                                                                                 items: List.generate(
-                                                                                  profile.data!.almMemorial.showMemorialImagesOrVideos.length,
-                                                                                      (next) => (() {
-                                                                                    if (lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true) {
+                                                                                  profile.data!.almMemorial.showMemorialImagesOrVideos.length, (next) => 
+                                                                                  ((){
+                                                                                    if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
                                                                                       return BetterPlayer.network(
                                                                                         '${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                         betterPlayerConfiguration: const BetterPlayerConfiguration(
@@ -1028,14 +768,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                                       return CachedNetworkImage(
                                                                                         fit: BoxFit.contain,
                                                                                         imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
-                                                                                        placeholder: (context, url) => const Center(
-                                                                                          child: const CircularProgressIndicator(),
-                                                                                        ),
-                                                                                        errorWidget: (context, url, error) => Image.asset(
-                                                                                          'assets/icons/cover-icon.png',
-                                                                                          fit: BoxFit.contain,
-                                                                                          scale: 1.0,
-                                                                                        ),
+                                                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                       );
                                                                                     }
                                                                                   }()),
@@ -1070,9 +804,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                                 ),
                                                                               ],
                                                                             ),
-                                                                            const SizedBox(
-                                                                              height: 85,
-                                                                            ),
+
+                                                                            const SizedBox(height: 85,),
                                                                           ],
                                                                         ),
                                                                       ),
@@ -1081,63 +814,28 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                 },
                                                               );
                                                             },
-                                                            child: (() {
-                                                              if (lookupMimeType(profile
-                                                                  .data!
-                                                                  .almMemorial
-                                                                  .showMemorialImagesOrVideos[index])
-                                                                  ?.contains('video') ==
-                                                                  true) {
+                                                            child: ((){
+                                                              if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[index])?.contains('video') == true){
                                                                 return Container(
                                                                   width: 100,
                                                                   height: 100,
-                                                                  child: BetterPlayer
-                                                                      .network(
-                                                                    '${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
-                                                                    betterPlayerConfiguration:
-                                                                    const BetterPlayerConfiguration(
-                                                                      aspectRatio:
-                                                                      16 /
-                                                                          9,
-                                                                      fit: BoxFit
-                                                                          .contain,
-                                                                      controlsConfiguration:
-                                                                      const BetterPlayerControlsConfiguration(
-                                                                        showControls:
-                                                                        false,
-                                                                      ),
+                                                                  child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
+                                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                      aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
+                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                     ),
                                                                   ),
                                                                 );
-                                                              } else {
+                                                              }else{
                                                                 return Container(
                                                                   width: 100,
                                                                   height: 100,
-                                                                  child:
-                                                                  CachedNetworkImage(
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    imageUrl: profile
-                                                                        .data!
-                                                                        .almMemorial
-                                                                        .showMemorialImagesOrVideos[index],
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                    const Center(
-                                                                      child:
-                                                                      const CircularProgressIndicator(),
-                                                                    ),
-                                                                    errorWidget: (context,
-                                                                        url,
-                                                                        error) =>
-                                                                        Image
-                                                                            .asset(
-                                                                          'assets/icons/cover-icon.png',
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                          scale:
-                                                                          1.0,
-                                                                        ),
+                                                                  child: CachedNetworkImage(
+                                                                    fit: BoxFit.cover,
+                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
+                                                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                   ),
                                                                 );
                                                               }
@@ -1146,19 +844,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                         },
                                                       ),
                                                     ),
-                                                    const SizedBox(
-                                                        height: 20),
+
+                                                    const SizedBox(height: 20),
                                                   ],
                                                 )
-                                                    : Container(
-                                                  height: 0,
-                                                ),
+                                                : Container(height: 0,),
                                               ],
                                             ),
-                                            Container(
-                                              height: 5,
-                                              color: const Color(0xffeeeeee),
-                                            ),
+
+                                            Container(height: 5, color: const Color(0xffeeeeee),),
                                           ],
                                         ),
                                       ),
@@ -1166,98 +860,47 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                   ),
                                   SafeArea(
                                     child: Container(
-                                      height: Size.fromHeight(
-                                          AppBar().preferredSize.height)
-                                          .height +
-                                          (Size.fromHeight(
-                                              AppBar().preferredSize.height)
-                                              .height /
-                                              2),
-                                      child: Row(children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets.only(left: 20.0),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                if (widget.newlyCreated == true) {
-                                                  Route newRoute =
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomeRegularScreenExtended(
-                                                          newToggleBottom: 1,
-                                                        ),
-                                                  );
-                                                  Navigator.pushAndRemoveUntil(
-                                                      context,
-                                                      newRoute,
-                                                          (route) => false);
-                                                } else {
-                                                  Navigator.pop(context);
-                                                }
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.arrow_back,
-                                                    color: const Color(0xffffffff),
-                                                    size: SizeConfig
-                                                        .blockSizeVertical! *
-                                                        3.65,
-                                                  ),
-                                                  Text(
-                                                    'Back',
-                                                    style: TextStyle(
-                                                        fontSize: SizeConfig
-                                                            .blockSizeVertical! *
-                                                            3.16,
-                                                        color: Color(0xffFFFFFF),
-                                                        fontFamily: 'NexaRegular'),
-                                                  ),
-                                                ],
+                                      height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets.only(left: 20.0),
+                                              child: GestureDetector(
+                                                onTap: (){
+                                                  if(widget.newlyCreated == true){
+                                                    Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularScreenExtended(newToggleBottom: 1,),);
+                                                    Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                                  }else{
+                                                    Navigator.pop(context);
+                                                  }
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
+                                                    Text('Back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            padding:
-                                            const EdgeInsets.only(right: 20.0),
-                                            alignment: Alignment.centerRight,
-                                            child: widget.managed == true
-                                                ? GestureDetector(
-                                              onTap: () async {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            HomeRegularCreatePost(
-                                                                name: profile
-                                                                    .data!
-                                                                    .almMemorial
-                                                                    .showMemorialName,
-                                                                memorialId: profile
-                                                                    .data!
-                                                                    .almMemorial
-                                                                    .showMemorialId)));
-                                              },
-                                              child: Text(
-                                                'Create Post',
-                                                style: TextStyle(
-                                                    fontSize: SizeConfig
-                                                        .blockSizeVertical! *
-                                                        3.16,
-                                                    color: Color(0xffFFFFFF),
-                                                    fontFamily:
-                                                    'NexaRegular'),
-                                              ),
-                                            )
-                                                : Container(
-                                              height: 0,
+                                          Expanded(
+                                            child: Container(
+                                              padding: const EdgeInsets.only(right: 20.0),
+                                              alignment: Alignment.centerRight,
+                                              child: widget.managed == true
+                                              ? GestureDetector(
+                                                onTap: () async{
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
+                                                },
+                                                child: Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                              )
+                                              : Container(height: 0,),
                                             ),
                                           ),
-                                        ),
-                                      ]),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Positioned(
@@ -1278,69 +921,38 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 const Duration(milliseconds: 0),
                                                 pageBuilder: (_, __, ___) {
                                                   return Scaffold(
-                                                    backgroundColor: Colors.black12
-                                                        .withOpacity(0.7),
+                                                    backgroundColor: Colors.black12.withOpacity(0.7),
                                                     body: SizedBox.expand(
                                                       child: SafeArea(
                                                         child: Column(
                                                           children: [
                                                             Container(
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  right: 20.0),
-                                                              child:
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
+                                                              alignment: Alignment.centerRight,
+                                                              padding: const EdgeInsets.only(right: 20.0),
+                                                              child: GestureDetector(
                                                                 child: CircleAvatar(
                                                                   radius: 20,
-                                                                  backgroundColor:
-                                                                  const Color(
-                                                                      0xff000000)
-                                                                      .withOpacity(
-                                                                      0.8),
-                                                                  child: const Icon(
-                                                                    Icons
-                                                                        .close_rounded,
-                                                                    color: const Color(
-                                                                        0xffffffff),
-                                                                  ),
+                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                 ),
+                                                                onTap: (){
+                                                                  Navigator.pop(context);
+                                                                },
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                              height: 20,
-                                                            ),
+
+                                                            const SizedBox(height: 20,),
+
                                                             Expanded(
-                                                                child:
-                                                                CachedNetworkImage(
-                                                                  fit: BoxFit.contain,
-                                                                  imageUrl: profile
-                                                                      .data!
-                                                                      .almMemorial
-                                                                      .showMemorialProfileImage,
-                                                                  placeholder:
-                                                                      (context, url) =>
-                                                                  const Center(
-                                                                    child:
-                                                                    const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                      url, error) =>
-                                                                      Image.asset(
-                                                                        'assets/icons/cover-icon.png',
-                                                                        fit: BoxFit.contain,
-                                                                        scale: 1.0,
-                                                                      ),
-                                                                )),
-                                                            const SizedBox(
-                                                              height: 80,
+                                                              child: CachedNetworkImage(
+                                                                fit: BoxFit.contain,
+                                                                imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
+                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                              ),
                                                             ),
+
+                                                            const SizedBox(height: 80,),
                                                           ],
                                                         ),
                                                       ),
@@ -1351,36 +963,21 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                             },
                                             child: CircleAvatar(
                                               radius: 100,
-                                              backgroundColor:
-                                              const Color(0xff000000),
+                                              backgroundColor: const Color(0xff000000),
                                               child: Padding(
-                                                  padding: const EdgeInsets.all(5),
-                                                  child: profile.data!.almMemorial
-                                                      .showMemorialProfileImage !=
-                                                      ''
-                                                      ? CircleAvatar(
-                                                    radius: 100,
-                                                    backgroundColor:
-                                                    const Color(
-                                                        0xff888888),
-                                                    foregroundImage:
-                                                    NetworkImage(profile
-                                                        .data!
-                                                        .almMemorial
-                                                        .showMemorialProfileImage),
-                                                    backgroundImage:
-                                                    const AssetImage(
-                                                        'assets/icons/app-icon.png'),
-                                                  )
-                                                      : const CircleAvatar(
-                                                    radius: 100,
-                                                    backgroundColor:
-                                                    const Color(
-                                                        0xff888888),
-                                                    foregroundImage:
-                                                    const AssetImage(
-                                                        'assets/icons/app-icon.png'),
-                                                  )),
+                                                padding: const EdgeInsets.all(5),
+                                                child: profile.data!.almMemorial.showMemorialProfileImage != ''
+                                                ? CircleAvatar(
+                                                  radius: 100,
+                                                  backgroundColor: const Color(0xff888888),
+                                                  foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),)
+                                                : const CircleAvatar(
+                                                  radius: 100,
+                                                  backgroundColor: const Color(0xff888888),
+                                                  foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -1391,22 +988,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                               ),
                             ],
                           );
-                        } else if (profile.hasError) {
+                        }else if(profile.hasError){
                           return MiscRegularErrorMessageTemplate();
-                        } else {
+                        }else{
                           return Container(height: SizeConfig.screenHeight);
-                          // return Container(
-                          //   height: SizeConfig.screenHeight,
-                          //   child: Center(
-                          //     child: Container(
-                          //       child: const SpinKitThreeBounce(
-                          //         color: const Color(0xff000000),
-                          //         size: 50.0,
-                          //       ),
-                          //       color: const Color(0xffffffff),
-                          //     ),
-                          //   ),
-                          // );
                         }
                       },
                     ),
@@ -1414,24 +999,21 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                   SliverToBoxAdapter(
                     key: dataKey,
                     child: postCountListener != 0
-                        ? Padding(
+                    ? Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         children: [
                           Column(
                             children: List.generate(
-                              posts.length,
-                                  (i) => Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10.0, bottom: 10.0),
+                              posts.length, (i) => Padding(
+                                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                                 child: MiscRegularPost(
                                   key: ValueKey('$i'),
                                   userId: posts[i].userId,
                                   postId: posts[i].postId,
                                   memorialId: posts[i].memorialId,
                                   memorialName: posts[i].memorialName,
-                                  timeCreated: timeago.format(
-                                      DateTime.parse(posts[i].timeCreated)),
+                                  timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
                                   managed: posts[i].managed,
                                   joined: posts[i].joined,
                                   profileImage: posts[i].profileImage,
@@ -1453,257 +1035,111 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 5,
                                         style: TextStyle(
-                                          fontSize: SizeConfig
-                                              .blockSizeVertical! *
-                                              2.11,
-                                          fontFamily:
-                                          'NexaRegular',
-                                          color: const Color(
-                                              0xff000000),
+                                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                          fontFamily: 'NexaRegular',
+                                          color: const Color(0xff000000),
                                         ),
                                       ),
                                     ),
+
                                     posts[i].imagesOrVideos.isNotEmpty
-                                        ? Column(
+                                    ? Column(
                                       children: [
                                         const SizedBox(height: 20),
+
                                         Container(
-                                          child: (() {
-                                            if (posts[i]
-                                                .imagesOrVideos
-                                                .length ==
-                                                1) {
-                                              if (lookupMimeType(posts[
-                                              i]
-                                                  .imagesOrVideos[
-                                              0])
-                                                  ?.contains(
-                                                  'video') ==
-                                                  true) {
-                                                return BetterPlayer
-                                                    .network(
-                                                  '${posts[i].imagesOrVideos[0]}',
-                                                  betterPlayerConfiguration:
-                                                  const BetterPlayerConfiguration(
-                                                    controlsConfiguration:
-                                                    const BetterPlayerControlsConfiguration(
-                                                      showControls:
-                                                      false,
-                                                    ),
+                                          child: ((){
+                                            if(posts[i].imagesOrVideos.length == 1){
+                                              if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
+                                                return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
+                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                     aspectRatio: 16 / 9,
                                                     fit: BoxFit.contain,
                                                   ),
                                                 );
-                                              } else {
+                                              }else{
                                                 return CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: posts[i]
-                                                      .imagesOrVideos[0],
-                                                  placeholder:
-                                                      (context, url) =>
-                                                  const Center(
-                                                    child:
-                                                    const CircularProgressIndicator(),
-                                                  ),
-                                                  errorWidget: (context,
-                                                      url, error) =>
-                                                      Image.asset(
-                                                        'assets/icons/cover-icon.png',
-                                                        fit: BoxFit.cover,
-                                                        scale: 1.0,
-                                                      ),
+                                                  imageUrl: posts[i].imagesOrVideos[0],
+                                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 );
                                               }
-                                            } else if (posts[i]
-                                                .imagesOrVideos
-                                                .length ==
-                                                2) {
-                                              return StaggeredGridView
-                                                  .countBuilder(
-                                                padding:
-                                                EdgeInsets.zero,
+                                            }else if(posts[i].imagesOrVideos.length == 2){
+                                              return StaggeredGridView.countBuilder(
+                                                padding: EdgeInsets.zero,
                                                 shrinkWrap: true,
-                                                physics:
-                                                const NeverScrollableScrollPhysics(),
+                                                physics: const NeverScrollableScrollPhysics(),
                                                 crossAxisCount: 4,
                                                 itemCount: 2,
-                                                itemBuilder: (BuildContext
-                                                context,
-                                                    int index) =>
-                                                lookupMimeType(posts[i].imagesOrVideos[
-                                                index])
-                                                    ?.contains(
-                                                    'video') ==
-                                                    true
-                                                    ? BetterPlayer
-                                                    .network(
-                                                  '${posts[i].imagesOrVideos[index]}',
-                                                  betterPlayerConfiguration:
-                                                  const BetterPlayerConfiguration(
-                                                    controlsConfiguration:
-                                                    const BetterPlayerControlsConfiguration(
-                                                      showControls:
-                                                      false,
-                                                    ),
-                                                    aspectRatio:
-                                                    16 /
-                                                        9,
-                                                    fit: BoxFit
-                                                        .contain,
+                                                staggeredTileBuilder: (int index) =>const StaggeredTile.count(2, 2),
+                                                mainAxisSpacing: 4.0,
+                                                crossAxisSpacing: 4.0,
+                                                itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                                                ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                    aspectRatio: 16 / 9,
+                                                    fit: BoxFit.contain,
                                                   ),
                                                 )
-                                                    : CachedNetworkImage(
-                                                  fit: BoxFit
-                                                      .cover,
-                                                  imageUrl: posts[i]
-                                                      .imagesOrVideos[
-                                                  index],
-                                                  placeholder:
-                                                      (context,
-                                                      url) =>
-                                                  const Center(
-                                                    child:
-                                                    const CircularProgressIndicator(),
-                                                  ),
-                                                  errorWidget: (context,
-                                                      url,
-                                                      error) =>
-                                                      Image
-                                                          .asset(
-                                                        'assets/icons/cover-icon.png',
-                                                        fit: BoxFit
-                                                            .cover,
-                                                        scale:
-                                                        1.0,
-                                                      ),
+                                                : CachedNetworkImage(
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: posts[i].imagesOrVideos[index],placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 ),
-                                                staggeredTileBuilder: (int
-                                                index) =>
-                                                const StaggeredTile
-                                                    .count(2, 2),
-                                                mainAxisSpacing: 4.0,
-                                                crossAxisSpacing: 4.0,
                                               );
-                                            } else {
-                                              return StaggeredGridView
-                                                  .countBuilder(
-                                                padding:
-                                                EdgeInsets.zero,
+                                            }else{
+                                              return StaggeredGridView.countBuilder(
+                                                padding: EdgeInsets.zero,
                                                 shrinkWrap: true,
-                                                physics:
-                                                const NeverScrollableScrollPhysics(),
+                                                physics: const NeverScrollableScrollPhysics(),
                                                 crossAxisCount: 4,
                                                 itemCount: 3,
-                                                staggeredTileBuilder: (int
-                                                index) =>
-                                                    StaggeredTile.count(
-                                                        2,
-                                                        index.isEven
-                                                            ? 1
-                                                            : 2),
+                                                staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                                                 mainAxisSpacing: 4.0,
                                                 crossAxisSpacing: 4.0,
-                                                itemBuilder:
-                                                    (BuildContext
-                                                context,
-                                                    int index) =>
-                                                (() {
-                                                  if (index != 1) {
-                                                    return lookupMimeType(posts[i].imagesOrVideos[
-                                                    index])
-                                                        ?.contains(
-                                                        'video') ==
-                                                        true
-                                                        ? BetterPlayer
-                                                        .network(
-                                                      '${posts[i].imagesOrVideos[index]}',
-                                                      betterPlayerConfiguration:
-                                                      const BetterPlayerConfiguration(
-                                                        controlsConfiguration:
-                                                        const BetterPlayerControlsConfiguration(
-                                                          showControls:
-                                                          false,
-                                                        ),
-                                                        aspectRatio:
-                                                        16 /
-                                                            9,
-                                                        fit: BoxFit
-                                                            .contain,
+                                                itemBuilder: (BuildContext context, int index) =>
+                                                ((){
+                                                  if(index != 1){
+                                                    return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                                                    ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                        aspectRatio: 16 / 9,
+                                                        fit: BoxFit.contain,
                                                       ),
                                                     )
-                                                        : CachedNetworkImage(
-                                                      fit: BoxFit
-                                                          .cover,
-                                                      imageUrl: posts[i]
-                                                          .imagesOrVideos[
-                                                      index],
-                                                      placeholder:
-                                                          (context,
-                                                          url) =>
-                                                      const Center(
-                                                        child:
-                                                        const CircularProgressIndicator(),
-                                                      ),
-                                                      errorWidget: (context,
-                                                          url,
-                                                          error) =>
-                                                          Image
-                                                              .asset(
-                                                            'assets/icons/cover-icon.png',
-                                                            fit: BoxFit
-                                                                .cover,
-                                                            scale:
-                                                            1.0,
-                                                          ),
+                                                    : CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: posts[i].imagesOrVideos[index],
+                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                     );
-                                                  } else {
-                                                    return (() {
-                                                      if (posts[i]
-                                                          .imagesOrVideos
-                                                          .length -
-                                                          3 >
-                                                          0) {
-                                                        if (lookupMimeType(posts[i].imagesOrVideos[
-                                                        index])
-                                                            ?.contains(
-                                                            'video') ==
-                                                            true) {
+                                                  }else{
+                                                    return ((){
+                                                      if(posts[i].imagesOrVideos.length - 3 > 0){
+                                                        if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                                           return Stack(
-                                                            fit: StackFit
-                                                                .expand,
+                                                            fit: StackFit.expand,
                                                             children: [
-                                                              BetterPlayer
-                                                                  .network(
-                                                                '${posts[i].imagesOrVideos[index]}',
-                                                                betterPlayerConfiguration:
-                                                                const BetterPlayerConfiguration(
-                                                                  controlsConfiguration:
-                                                                  const BetterPlayerControlsConfiguration(
-                                                                    showControls:
-                                                                    false,
-                                                                  ),
-                                                                  aspectRatio:
-                                                                  16 / 9,
-                                                                  fit: BoxFit
-                                                                      .contain,
+                                                              BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                  aspectRatio: 16 / 9,
+                                                                  fit: BoxFit.contain,
                                                                 ),
                                                               ),
-                                                              Container(
-                                                                color: const Color(0xff000000)
-                                                                    .withOpacity(0.5),
-                                                              ),
+
+                                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
+
                                                               Center(
-                                                                child:
-                                                                CircleAvatar(
-                                                                  radius:
-                                                                  25,
-                                                                  backgroundColor:
-                                                                  const Color(0xffffffff).withOpacity(.5),
-                                                                  child:
-                                                                  Text(
-                                                                    '${posts[i].imagesOrVideos.length - 3}',
-                                                                    style:
-                                                                    const TextStyle(
+                                                                child: CircleAvatar(
+                                                                  radius: 25,
+                                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                  child: Text('${posts[i].imagesOrVideos.length - 3}',
+                                                                    style: const TextStyle(
                                                                       fontSize: 40,
                                                                       fontWeight: FontWeight.bold,
                                                                       color: const Color(0xffffffff),
@@ -1713,49 +1149,25 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                               ),
                                                             ],
                                                           );
-                                                        } else {
+                                                        }else{
                                                           return Stack(
-                                                            fit: StackFit
-                                                                .expand,
+                                                            fit: StackFit.expand,
                                                             children: [
                                                               CachedNetworkImage(
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                                imageUrl:
-                                                                posts[i].imagesOrVideos[index],
-                                                                placeholder:
-                                                                    (context, url) =>
-                                                                const Center(
-                                                                  child:
-                                                                  const CircularProgressIndicator(),
-                                                                ),
-                                                                errorWidget: (context,
-                                                                    url,
-                                                                    error) =>
-                                                                    Image.asset(
-                                                                      'assets/icons/cover-icon.png',
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                      scale:
-                                                                      1.0,
-                                                                    ),
+                                                                fit: BoxFit.cover,
+                                                                imageUrl: posts[i].imagesOrVideos[index],
+                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               ),
-                                                              Container(
-                                                                color: const Color(0xff000000)
-                                                                    .withOpacity(0.5),
-                                                              ),
+
+                                                              Container(color: const Color(0xff000000).withOpacity(0.5),),
+
                                                               Center(
-                                                                child:
-                                                                CircleAvatar(
-                                                                  radius:
-                                                                  25,
-                                                                  backgroundColor:
-                                                                  const Color(0xffffffff).withOpacity(.5),
-                                                                  child:
-                                                                  Text(
-                                                                    '${posts[i].imagesOrVideos.length - 3}',
-                                                                    style:
-                                                                    const TextStyle(
+                                                                child: CircleAvatar(
+                                                                  radius: 25,
+                                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                  child: Text('${posts[i].imagesOrVideos.length - 3}',
+                                                                    style: const TextStyle(
                                                                       fontSize: 40,
                                                                       fontWeight: FontWeight.bold,
                                                                       color: const Color(0xffffffff),
@@ -1766,54 +1178,21 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                             ],
                                                           );
                                                         }
-                                                      } else {
-                                                        if (lookupMimeType(posts[i].imagesOrVideos[
-                                                        index])
-                                                            ?.contains(
-                                                            'video') ==
-                                                            true) {
-                                                          return BetterPlayer
-                                                              .network(
-                                                            '${posts[i].imagesOrVideos[index]}',
-                                                            betterPlayerConfiguration:
-                                                            const BetterPlayerConfiguration(
-                                                              controlsConfiguration:
-                                                              const BetterPlayerControlsConfiguration(
-                                                                showControls:
-                                                                false,
-                                                              ),
-                                                              aspectRatio:
-                                                              16 /
-                                                                  9,
-                                                              fit: BoxFit
-                                                                  .contain,
+                                                      }else{
+                                                        if (lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
+                                                          return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                              aspectRatio: 16 / 9,
+                                                              fit: BoxFit.contain,
                                                             ),
                                                           );
-                                                        } else {
+                                                        }else{
                                                           return CachedNetworkImage(
-                                                            fit: BoxFit
-                                                                .cover,
-                                                            imageUrl: posts[i]
-                                                                .imagesOrVideos[
-                                                            index],
-                                                            placeholder:
-                                                                (context,
-                                                                url) =>
-                                                            const Center(
-                                                              child:
-                                                              const CircularProgressIndicator(),
-                                                            ),
-                                                            errorWidget: (context,
-                                                                url,
-                                                                error) =>
-                                                                Image
-                                                                    .asset(
-                                                                  'assets/icons/cover-icon.png',
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  scale:
-                                                                  1.0,
-                                                                ),
+                                                            fit: BoxFit.cover,
+                                                            imageUrl: posts[i].imagesOrVideos[index],
+                                                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                           );
                                                         }
                                                       }
@@ -1826,7 +1205,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                         ),
                                       ],
                                     )
-                                        : Container(height: 0),
+                                    : Container(height: 0),
                                   ],
                                 ),
                               ),
@@ -1837,34 +1216,17 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                         ],
                       ),
                     )
-                        : Column(
+                    : Column(
                       children: [
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Center(
-                          child: Image.asset(
-                            'assets/icons/app-icon.png',
-                            height: 250,
-                            width: 250,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 45,
-                        ),
-                        Center(
-                          child: Text(
-                            'Post is empty',
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                              fontFamily: 'NexaBold',
-                              color: const Color(0xffB1B1B1),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
+                        const SizedBox(height: 40,),
+
+                        Center(child: Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),),
+
+                        const SizedBox(height: 45,),
+
+                        Center(child: Text('Post is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
+
+                        const SizedBox(height: 40,),
                       ],
                     ),
                   ),
@@ -1877,10 +1239,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
             visible: showFloatingButtonListener,
             child: FloatingActionButton(
               backgroundColor: const Color(0xff4EC9D4,),
-              child: const Icon(
-                Icons.arrow_upward_rounded,
-                color: const Color(0xffffffff),
-              ),
+              child: const Icon(Icons.arrow_upward_rounded, color: const Color(0xffffffff),),
               onPressed: (){
                 Scrollable.ensureVisible(profileKey.currentContext!);
               },

@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1032401585355-7v7a5ju4dncrn8nsgkqu2pn76e4e9078.apps.googleusercontent.com</string>
+	<string>928205848551-4o7gv1ub92qe3qt4fvba09ta8us2g1uj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1032401585355-7v7a5ju4dncrn8nsgkqu2pn76e4e9078</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>1032401585355-c6c5srm6h38511gucs068o578n4ldd85.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.928205848551-4o7gv1ub92qe3qt4fvba09ta8us2g1uj</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD2Cl5SFYu2BGFUl_o25NwLTnPv9JxOPkM</string>
+	<string>AIzaSyD4_UsN56B1NlA6b3sBCc07qkDxiz5fnTM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1032401585355</string>
+	<string>928205848551</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.app.facesbyplaces</string>
 	<key>PROJECT_ID</key>
-	<string>fbp-sign-in</string>
+	<string>facesbyplaces-83c1f</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fbp-sign-in.appspot.com</string>
+	<string>facesbyplaces-83c1f.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1032401585355:ios:a1107ba0b5fd8ef552474e</string>
+	<string>1:928205848551:ios:db2139320d63683d98c742</string>
 </dict>
 </plist>
