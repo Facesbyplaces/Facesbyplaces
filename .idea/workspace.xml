@@ -5,80 +5,21 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.8.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.8.3/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/better_player" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/better_player" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_auth" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_auth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_core" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_core" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_messaging" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/firebase_messaging" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_barcode_scanner" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_barcode_scanner" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_branch_sdk" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_branch_sdk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_inappwebview" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_inappwebview" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_keyboard_visibility" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_keyboard_visibility" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_login_facebook" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/flutter_login_facebook" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/geocoding" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/geocoding" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/geolocator" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/geolocator" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/google_sign_in" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/google_sign_in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/image_picker" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/images_picker" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/images_picker" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/libphonenumber" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/libphonenumber" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/libphonenumber_plugin" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/libphonenumber_plugin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/location" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/location" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/path_provider" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/path_provider" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/share" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/share" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/shared_preferences" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/sign_in_with_apple" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/sign_in_with_apple" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/sqflite" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/sqflite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.symlinks/plugins/wakelock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.symlinks/plugins/wakelock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Stripe-Stripe.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/Stripe.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/stripe_payment.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/kk35.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/UI/BLM/blm-04-verify-email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/BLM/blm-04-verify-email.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/BLM/blm-07-password-reset.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/BLM/blm-07-password-reset.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/01-Main/home-main-blm-02-home-extended.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/01-Main/home-main-blm-02-home-extended.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-03-connection-list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-03-connection-list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-03-create-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-03-create-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/06-Report/home-report-blm-01-report.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/06-Report/home-report-blm-01-report.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-01-memorial-settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-01-memorial-settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-02-page-details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-02-page-details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-07-search-user-settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-07-search-user-settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-08-memorial-settings-with-hidden.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-08-memorial-settings-with-hidden.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/01-Main/home-main-regular-02-home-extended.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/01-Main/home-main-regular-02-home-extended.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/01-Main/home-main-regular-03-04-notifications-tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/01-Main/home-main-regular-03-04-notifications-tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-03-connection-list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-03-connection-list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/06-Report/home-report-regular-01-report.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/06-Report/home-report-regular-01-report.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-07-search-user-settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-07-search-user-settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-11-blm-dropdown.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-11-blm-dropdown.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-12-blm-user-details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/BLM/misc-12-blm-user-details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-08-regular-message.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-08-regular-message.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-11-regular-dropdown.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-11-regular-dropdown.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-12-regular-user-details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Miscellaneous/Regular/misc-12-regular-user-details.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/UI/Regular/regular-04-verify-email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Regular/regular-04-verify-email.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Regular/regular-05-upload-photo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Regular/regular-05-upload-photo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Regular/regular-07-password-reset.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Regular/regular-07-password-reset.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/ui-01-get-started.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/ui-01-get-started.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,26 +87,26 @@
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
     <state x="600" y="100" width="1269" height="777" key="AVDManager/0.23.1920.1000@0.23.1920.1000" timestamp="1621933918167" />
-    <state width="1595" height="162" key="GridCell.Tab.0.bottom" timestamp="1622096694987">
+    <state width="1595" height="361" key="GridCell.Tab.0.bottom" timestamp="1623129302084">
       <screen x="0" y="23" width="1920" height="999" />
     </state>
     <state width="1427" height="304" key="GridCell.Tab.0.bottom/0.23.1920.1000@0.23.1920.1000" timestamp="1621938297421" />
-    <state width="1595" height="162" key="GridCell.Tab.0.bottom/0.23.1920.999@0.23.1920.999" timestamp="1622096694987" />
-    <state width="1595" height="162" key="GridCell.Tab.0.center" timestamp="1622096694986">
+    <state width="1595" height="361" key="GridCell.Tab.0.bottom/0.23.1920.999@0.23.1920.999" timestamp="1623129302084" />
+    <state width="1595" height="361" key="GridCell.Tab.0.center" timestamp="1623129302083">
       <screen x="0" y="23" width="1920" height="999" />
     </state>
     <state width="1427" height="304" key="GridCell.Tab.0.center/0.23.1920.1000@0.23.1920.1000" timestamp="1621938297420" />
-    <state width="1595" height="162" key="GridCell.Tab.0.center/0.23.1920.999@0.23.1920.999" timestamp="1622096694986" />
-    <state width="1595" height="162" key="GridCell.Tab.0.left" timestamp="1622096694986">
+    <state width="1595" height="361" key="GridCell.Tab.0.center/0.23.1920.999@0.23.1920.999" timestamp="1623129302083" />
+    <state width="1595" height="361" key="GridCell.Tab.0.left" timestamp="1623129302083">
       <screen x="0" y="23" width="1920" height="999" />
     </state>
     <state width="1427" height="304" key="GridCell.Tab.0.left/0.23.1920.1000@0.23.1920.1000" timestamp="1621938297419" />
-    <state width="1595" height="162" key="GridCell.Tab.0.left/0.23.1920.999@0.23.1920.999" timestamp="1622096694986" />
-    <state width="1595" height="162" key="GridCell.Tab.0.right" timestamp="1622096694987">
+    <state width="1595" height="361" key="GridCell.Tab.0.left/0.23.1920.999@0.23.1920.999" timestamp="1623129302083" />
+    <state width="1595" height="361" key="GridCell.Tab.0.right" timestamp="1623129302083">
       <screen x="0" y="23" width="1920" height="999" />
     </state>
     <state width="1427" height="304" key="GridCell.Tab.0.right/0.23.1920.1000@0.23.1920.1000" timestamp="1621938297420" />
-    <state width="1595" height="162" key="GridCell.Tab.0.right/0.23.1920.999@0.23.1920.999" timestamp="1622096694987" />
+    <state width="1595" height="361" key="GridCell.Tab.0.right/0.23.1920.999@0.23.1920.999" timestamp="1623129302083" />
     <state x="836" y="247" key="Vcs.Push.Dialog.v2" timestamp="1621938238565">
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
@@ -178,10 +119,10 @@
       <screen x="0" y="23" width="1920" height="1000" />
     </state>
     <state x="1034" y="154" width="887" height="922" key="dock-window-1/0.23.1920.1000@0.23.1920.1000" timestamp="1621485788831" />
-    <state x="827" y="307" key="git4idea.merge.GitPullDialog" timestamp="1622080142132">
+    <state x="827" y="307" key="git4idea.merge.GitPullDialog" timestamp="1623126030531">
       <screen x="0" y="23" width="1920" height="999" />
     </state>
     <state x="827" y="307" key="git4idea.merge.GitPullDialog/0.23.1920.1000@0.23.1920.1000" timestamp="1621931657855" />
-    <state x="827" y="307" key="git4idea.merge.GitPullDialog/0.23.1920.999@0.23.1920.999" timestamp="1622080142132" />
+    <state x="827" y="307" key="git4idea.merge.GitPullDialog/0.23.1920.999@0.23.1920.999" timestamp="1623126030531" />
   </component>
 </project>

@@ -327,3 +327,4 @@ class RegularVerifyEmail extends StatelessWidget {
     );
   }
 }
+
