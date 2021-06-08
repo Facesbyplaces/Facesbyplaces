@@ -41,9 +41,9 @@ class Api::V1::Admin::PostsController < ApplicationController
     def createPost
         post = Post.new(post_params)
         if params[:account_type].to_i === 1
-            user = User.find(params[:user_id])
+            @user = User.find(params[:user_id])
         elsif params[:account_type].to_i === 2
-            user = AlmUser.find(params[:user_id])
+            @user = AlmUser.find(params[:user_id])
         end
 
         post.account = user
@@ -84,18 +84,18 @@ class Api::V1::Admin::PostsController < ApplicationController
                     if user.notifsetting.newActivities == true
                         # check if the user is in the tag people
                         if people.include?([user.id, user.account_type])
-                            Notification.create(recipient: user, actor: user, action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
+                            Notification.create(recipient: user, actor: @user, action: "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = user.device_token
                             title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                            message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
                             PushNotification(device_token, title, message)
                         else
-                            Notification.create(recipient: user, actor: user, action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
+                            Notification.create(recipient: user, actor: @user, action: "#{@user.first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = user.device_token
                             title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                            message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
                             PushNotification(device_token, title, message)
                         end
                     end
@@ -107,18 +107,18 @@ class Api::V1::Admin::PostsController < ApplicationController
                     if user.notifsetting.newActivities == true
                         # check if the user is in the tag people
                         if people.include?([user.id, user.account_type])
-                            Notification.create(recipient: user, actor: user, action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
+                            Notification.create(recipient: user, actor: @user, action: "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = user.device_token
                             title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                            message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
                             PushNotification(device_token, title, message)
                         else
-                            Notification.create(recipient: user, actor: user, action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
+                            Notification.create(recipient: user, actor: @user, action: "#{@user.first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = user.device_token
                             title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                            message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
                             PushNotification(device_token, title, message)
                         end
                     end
@@ -126,20 +126,20 @@ class Api::V1::Admin::PostsController < ApplicationController
 
                 # For families and friends
                 (post.page.relationships).each do |relationship|
-                    if relationship.account != user() && relationship.account.notifsetting.newActivities == true
+                    if relationship.account != @user && relationship.account.notifsetting.newActivities == true
                         if people.include?([relationship.account.id, relationship.account.account_type])
-                            Notification.create(recipient: relationship.account, actor: user, action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
+                            Notification.create(recipient: relationship.account, actor: @user, action: "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = relationship.account.device_token
                             title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                            message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
                             PushNotification(device_token, title, message)
                         else
-                            Notification.create(recipient: relationship.account, actor: user, action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
+                            Notification.create(recipient: relationship.account, actor: user, action: "#{@user.first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
                             #Push Notification
                             device_token = relationship.account.device_token
                             title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                            message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
                             PushNotification(device_token, title, message)
                         end
                     end
@@ -252,4 +252,27 @@ class Api::V1::Admin::PostsController < ApplicationController
             return render json: {status: "Must be an admin to continue"}, status: 401
         end
     end
+
+    def PushNotification(device_tokens, title, message)
+        require 'fcm'
+        puts        "\n-- Device Token : --\n#{device_tokens}"
+        logger.info "\n-- Device Token : --\n#{device_tokens}"
+
+        fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
+        options = { notification: { 
+                        body: 'message',
+                        title: 'title',
+                    }
+                }
+
+        begin
+            response = fcm_client.send(device_tokens, options)
+        rescue StandardError => err
+            puts        "\n-- PushNotification : Error --\n#{err}"
+            logger.info "\n-- PushNotification : Error --\n#{err}"
+        end
+
+        puts response
+    end
+
 end
