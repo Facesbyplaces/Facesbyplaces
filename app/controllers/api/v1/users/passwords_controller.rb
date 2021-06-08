@@ -1,5 +1,5 @@
 class Api::V1::Users::PasswordsController < DeviseTokenAuth::PasswordsController
-    before_action :check_user
+    before_action :check_user, except: [:create]
 
     def update
       super do |resource|
