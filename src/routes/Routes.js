@@ -62,7 +62,6 @@ export const Routes = withRouter(({ history }) => {
             <Route exact path="/admin" component={Home} />
           </>
         )}
-        {/* <Route path="/logout" component={LogOut} /> */}
         {isAuthorized && isTokenValid ? (
           <>
             <Route path="/users" component={UserDashboard} />

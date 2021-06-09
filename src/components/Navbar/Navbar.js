@@ -6,6 +6,10 @@ import {
   NavbarPostTabAction,
   NavbarReportTabAction,
   NavbarTransactionTabAction,
+  TableUserAction,
+  TableMemorialAction,
+  TablePostAction,
+  TableReportAction,
 } from "../../redux/actions";
 
 export default function Navbar() {
@@ -20,26 +24,42 @@ export default function Navbar() {
   const handleUserTabClicked = (tab) => {
     console.log("TAB ", tab);
     dispatch(NavbarUserTabAction({ tab }));
+    dispatch(TableMemorialAction());
+    dispatch(TablePostAction());
+    dispatch(TableReportAction());
   };
 
   const handleMemorialTabClicked = (tab) => {
     console.log("TAB ", tab);
     dispatch(NavbarMemorialTabAction({ tab }));
+    dispatch(TableUserAction());
+    dispatch(TablePostAction());
+    dispatch(TableReportAction());
   };
 
   const handlePostTabClicked = (tab) => {
     console.log("TAB ", tab);
     dispatch(NavbarPostTabAction({ tab }));
+    dispatch(TableMemorialAction());
+    dispatch(TableUserAction());
+    dispatch(TableReportAction());
   };
 
   const handleReportTabClicked = (tab) => {
     console.log("TAB ", tab);
     dispatch(NavbarReportTabAction({ tab }));
+    dispatch(TableMemorialAction());
+    dispatch(TablePostAction());
+    dispatch(TableUserAction());
   };
 
   const handleTransactionTabClicked = (tab) => {
     console.log("TAB ", tab);
     dispatch(NavbarTransactionTabAction({ tab }));
+    dispatch(TableUserAction());
+    dispatch(TableMemorialAction());
+    dispatch(TablePostAction());
+    dispatch(TableReportAction());
   };
 
   useEffect(() => {
