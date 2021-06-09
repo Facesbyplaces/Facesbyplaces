@@ -307,25 +307,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                       fillColor: const Color(0xffffffff),
                                       alignLabelWithHint: true,
                                       labelText: 'Speak out...',
-                                      labelStyle: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                        fontFamily: 'NexaRegular',
-                                        color: const Color(0xffB1B1B1),
-                                      ),
-                                      border: const OutlineInputBorder(
-                                        borderSide: const BorderSide(color: const Color(0xff000000),),
-                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                        ),
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                        ),
-                                      ),
+                                      labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                                      border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
+                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent,),),
                                     ),
                                   ),
                                 ),
@@ -340,7 +325,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                 labelPadding: const EdgeInsets.only(left: 8.0),
                                 label: Text(newLocationListener),
                                 deleteIcon: const Icon(Icons.close, size: 18,),
-                                onDeleted: () {
+                                onDeleted: (){
                                   newLocation.value = '';
                                 },
                               ),
@@ -387,102 +372,61 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                         crossAxisCount: 4,
                                         crossAxisSpacing: 4,
                                         mainAxisSpacing: 4,
-                                        children: List.generate(
-                                            slideCountListener, (index) {
+                                        children: List.generate(slideCountListener, (index){
                                           return GestureDetector(
-                                            onDoubleTap: () {
+                                            onDoubleTap: (){
                                               removeAttachment.value = index;
                                             },
-                                            onTap: () {
+                                            onTap: (){
                                               showGeneralDialog(
                                                 context: context,
                                                 barrierDismissible: true,
                                                 barrierLabel: 'Dialog',
-                                                transitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 0),
-                                                pageBuilder: (_, __, ___) {
+                                                transitionDuration: const Duration(milliseconds: 0),
+                                                pageBuilder: (_, __, ___){
                                                   return Scaffold(
-                                                    backgroundColor: Colors
-                                                        .black12
-                                                        .withOpacity(0.7),
+                                                    backgroundColor: Colors.black12.withOpacity(0.7),
                                                     body: SizedBox.expand(
                                                       child: SafeArea(
                                                         child: Column(
                                                           children: [
                                                             Container(
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          20.0),
-                                                              child:
-                                                                  GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
-                                                                child:
-                                                                    CircleAvatar(
+                                                              alignment: Alignment.centerRight,
+                                                              padding: const EdgeInsets.only(right: 20.0),
+                                                              child: GestureDetector(
+                                                                child: CircleAvatar(
                                                                   radius: 20,
-                                                                  backgroundColor: const Color(
-                                                                          0xff000000)
-                                                                      .withOpacity(
-                                                                          0.8),
-                                                                  child:
-                                                                      const Icon(
-                                                                    Icons
-                                                                        .close_rounded,
-                                                                    color: const Color(
-                                                                        0xffffffff),
-                                                                  ),
+                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                 ),
+                                                                onTap: (){
+                                                                  Navigator.pop(context);
+                                                                },
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                              height: 20,
-                                                            ),
+
+                                                            const SizedBox(height: 20,),
+
                                                             Expanded(
-                                                              child: (() {
-                                                                if (lookupMimeType(slideImagesListener[index]
-                                                                            .path)
-                                                                        ?.contains(
-                                                                            'video') ==
-                                                                    true) {
-                                                                  return BetterPlayer
-                                                                      .file(
-                                                                    '${slideImagesListener[index].path}',
-                                                                    betterPlayerConfiguration:
-                                                                        const BetterPlayerConfiguration(
+                                                              child: ((){
+                                                                if(lookupMimeType(slideImagesListener[index].path)?.contains('video') == true){
+                                                                  return BetterPlayer.file('${slideImagesListener[index].path}',
+                                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                       deviceOrientationsAfterFullScreen: [
-                                                                        DeviceOrientation
-                                                                            .portraitUp
+                                                                        DeviceOrientation.portraitUp
                                                                       ],
-                                                                      autoDispose:
-                                                                          false,
-                                                                      aspectRatio:
-                                                                          16 /
-                                                                              9,
-                                                                      fit: BoxFit
-                                                                          .contain,
+                                                                      autoDispose: false,
+                                                                      aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
                                                                     ),
                                                                   );
-                                                                } else {
-                                                                  return Image
-                                                                      .file(
-                                                                    slideImagesListener[
-                                                                        index],
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  );
+                                                                }else{
+                                                                  return Image.file(slideImagesListener[index], fit: BoxFit.contain,);
                                                                 }
                                                               }()),
                                                             ),
-                                                            const SizedBox(
-                                                              height: 80,
-                                                            ),
+
+                                                            const SizedBox(height: 80,),
                                                           ],
                                                         ),
                                                       ),
@@ -491,168 +435,99 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                                 },
                                               );
                                             },
-                                            child: lookupMimeType(
-                                                            slideImagesListener[
-                                                                    index]
-                                                                .path)
-                                                        ?.contains('video') ==
-                                                    true
-                                                ? Stack(
-                                                    children: [
-                                                      BetterPlayer.file(
-                                                        '${slideImagesListener[index].path}',
-                                                        betterPlayerConfiguration:
-                                                            const BetterPlayerConfiguration(
-                                                          controlsConfiguration:
-                                                              const BetterPlayerControlsConfiguration(
-                                                            showControls: false,
-                                                          ),
-                                                          aspectRatio: 1,
-                                                          fit: BoxFit.contain,
+                                            child: lookupMimeType(slideImagesListener[index].path)?.contains('video') == true
+                                            ? Stack(
+                                              children: [
+                                                BetterPlayer.file('${slideImagesListener[index].path}',
+                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                    aspectRatio: 1,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+
+                                                Center(
+                                                  child: CircleAvatar(
+                                                    radius: 25,
+                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                    child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                  ),
+                                                ),
+
+                                                removeAttachmentListener == index
+                                                ? Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    child: const CircleAvatar(
+                                                      backgroundColor: const Color(0xff000000),
+                                                      child: const Icon(Icons.close, color: const Color(0xffffffff),),
+                                                    ),
+                                                    onTap: (){
+                                                      slideImages.value.removeAt(index);
+                                                      slideCount.value--;
+                                                    },
+                                                  ),
+                                                )
+                                                : Container(height: 0),
+                                              ],
+                                            )
+                                            : Container(
+                                              width: 80,
+                                              child: Stack(
+                                                fit: StackFit.expand,
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
+                                                  ),
+
+                                                  Center(
+                                                    child: CircleAvatar(
+                                                      radius: 25,
+                                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                                      child: Text('${index + 1}',
+                                                        style: const TextStyle(
+                                                          fontSize: 40,
+                                                          fontWeight: FontWeight.bold,
+                                                          color: const Color(0xffffffff),
                                                         ),
                                                       ),
-                                                      Center(
-                                                        child: CircleAvatar(
-                                                          radius: 25,
-                                                          backgroundColor:
-                                                              const Color(
-                                                                      0xffffffff)
-                                                                  .withOpacity(
-                                                                      .5),
-                                                          child: Text(
-                                                            '${index + 1}',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 40,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: const Color(
-                                                                  0xffffffff),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      removeAttachmentListener ==
-                                                              index
-                                                          ? Positioned(
-                                                              top: 0,
-                                                              right: 0,
-                                                              child:
-                                                                  GestureDetector(
-                                                                onTap: () {
-                                                                  slideImages
-                                                                      .value
-                                                                      .removeAt(
-                                                                          index);
-                                                                  slideCount
-                                                                      .value--;
-                                                                },
-                                                                child:
-                                                                    const CircleAvatar(
-                                                                  backgroundColor:
-                                                                      const Color(
-                                                                          0xff000000),
-                                                                  child:
-                                                                      const Icon(
-                                                                    Icons.close,
-                                                                    color: const Color(
-                                                                        0xffffffff),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            )
-                                                          : Container(
-                                                              height: 0),
-                                                    ],
-                                                  )
-                                                : Container(
-                                                    width: 80,
-                                                    child: Stack(
-                                                      fit: StackFit.expand,
-                                                      children: [
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          child: Image.file(
-                                                            slideImagesListener[
-                                                                index],
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                        Center(
-                                                          child: CircleAvatar(
-                                                            radius: 25,
-                                                            backgroundColor:
-                                                                Color(0xffffffff)
-                                                                    .withOpacity(
-                                                                        .5),
-                                                            child: Text(
-                                                              '${index + 1}',
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 40,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: const Color(
-                                                                    0xffffffff),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        removeAttachmentListener ==
-                                                                index
-                                                            ? Positioned(
-                                                                top: 0,
-                                                                right: 0,
-                                                                child:
-                                                                    GestureDetector(
-                                                                  onTap: () {
-                                                                    slideImages
-                                                                        .value
-                                                                        .removeAt(
-                                                                            index);
-                                                                    slideCount
-                                                                        .value--;
-                                                                  },
-                                                                  child:
-                                                                      const CircleAvatar(
-                                                                    backgroundColor:
-                                                                        const Color(
-                                                                            0xff000000),
-                                                                    child:
-                                                                        const Icon(
-                                                                      Icons
-                                                                          .close,
-                                                                      color: const Color(
-                                                                          0xffffffff),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            : Container(
-                                                                height: 0),
-                                                      ],
                                                     ),
                                                   ),
+                                                  
+                                                  removeAttachmentListener == index
+                                                  ? Positioned(
+                                                    top: 0,
+                                                    right: 0,
+                                                    child: GestureDetector(
+                                                      onTap: (){
+                                                        slideImages.value.removeAt(index);
+                                                        slideCount.value--;
+                                                      },
+                                                      child: const CircleAvatar(
+                                                        backgroundColor: const Color(0xff000000),
+                                                        child: const Icon(Icons.close, color: const Color(0xffffffff),),
+                                                      ),
+                                                    ),
+                                                  )
+                                                  : Container(height: 0),
+                                                ],
+                                              ),
+                                            ),
                                           );
                                         }),
                                       ),
                                     ),
                                   );
-                                } else {
-                                  return Container(
-                                    height: 0,
-                                  );
+                                }else{
+                                  return Container(height: 0,);
                                 }
                               }()),
                             ),
-                            Divider(
-                              color: const Color(0xff2F353D),
-                              thickness: 0.2,
-                            ),
+
+                            Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+
                             Container(
                               height: 160,
                               child: Column(
@@ -660,143 +535,74 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async {
-                                        String result = await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomeRegularCreatePostSearchLocation()));
+                                        String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchLocation()));
                                         newLocation.value = result;
                                       },
                                       child: Container(
-                                        padding: const EdgeInsets.only(
-                                          left: 20.0,
-                                          right: 20.0,
-                                        ),
+                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(
-                                              child: Text(
-                                                'Add a location',
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig
-                                                          .blockSizeVertical! *
-                                                      2.64,
-                                                  fontFamily: 'NexaRegular',
-                                                  color:
-                                                      const Color(0xff000000),
-                                                ),
-                                              ),
-                                            ),
-                                            const Icon(
-                                              Icons.place,
-                                              color: const Color(0xff4EC9D4),
-                                            ),
+                                            Expanded(child: Text('Add a location', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+
+                                            const Icon(Icons.place, color: const Color(0xff4EC9D4),),
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Divider(
-                                    color: const Color(0xff2F353D),
-                                    thickness: 0.2,
-                                  ),
+
+                                  Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () async {
-                                        RegularTaggedUsers? result =
-                                            await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomeRegularCreatePostSearchUser()));
+                                      onTap: () async{
+                                        RegularTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchUser()));
 
-                                        if (result != null) {
+                                        if(result != null){
                                           userCount.value++;
                                           users.add(result);
                                         }
                                       },
                                       child: Container(
-                                        padding: const EdgeInsets.only(
-                                          left: 20.0,
-                                          right: 20.0,
-                                        ),
+                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(
-                                              child: Text(
-                                                'Tag a person you are with',
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig
-                                                          .blockSizeVertical! *
-                                                      2.64,
-                                                  fontFamily: 'NexaRegular',
-                                                  color:
-                                                      const Color(0xff000000),
-                                                ),
-                                              ),
-                                            ),
-                                            const Icon(
-                                              Icons.person,
-                                              color: const Color(0xff4EC9D4),
-                                            ),
+                                            Expanded(child: Text('Tag a person you are with', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color:const Color(0xff000000),),),),
+
+                                            const Icon(Icons.person, color: const Color(0xff4EC9D4),),
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Divider(
-                                    color: const Color(0xff2F353D),
-                                    thickness: 0.2,
-                                  ),
+
+                                  Divider(color: const Color(0xff2F353D), thickness: 0.2,),
+
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () async {
-                                        var choice = await showDialog(
-                                          context: (context),
-                                          builder: (build) =>
-                                              const MiscRegularUploadFromDialog(
-                                            choice_1: 'Image',
-                                            choice_2: 'Video',
-                                          ),
-                                        );
+                                      onTap: () async{
+                                        var choice = await showDialog(context: (context), builder: (build) => const MiscRegularUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
 
-                                        if (choice == null) {
+                                        if(choice == null){
                                           choice = 0;
-                                        } else {
-                                          if (choice == 1) {
+                                        }else{
+                                          if(choice == 1){
                                             await getSlideFiles();
-                                          } else {
+                                          }else{
                                             await getVideo();
                                           }
                                         }
                                       },
                                       child: Container(
-                                        padding: const EdgeInsets.only(
-                                          left: 20.0,
-                                          right: 20.0,
-                                        ),
+                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(
-                                              child: Text(
-                                                'Upload a Video / Image',
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig
-                                                          .blockSizeVertical! *
-                                                      2.64,
-                                                  fontFamily: 'NexaRegular',
-                                                  color:
-                                                      const Color(0xff000000),
-                                                ),
-                                              ),
-                                            ),
-                                            const Icon(
-                                              Icons.image,
-                                              color: const Color(0xff4EC9D4),
-                                            )
+                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+
+                                            const Icon(Icons.image, color: const Color(0xff4EC9D4),),
                                           ],
                                         ),
                                       ),

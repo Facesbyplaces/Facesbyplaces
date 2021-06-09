@@ -38,14 +38,13 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
     super.initState();
     addManagers1();
     onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-        if (adminItemsRemaining != 0 && familyItemsRemaining != 0) {
-          setState(() {
+    scrollController.addListener((){
+      if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
+        if(adminItemsRemaining != 0 && familyItemsRemaining != 0){
+          setState((){
             onLoading();
           });
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more users to show'),
@@ -58,63 +57,45 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
     });
   }
 
-  void onLoading() async {
-    if (flag1 == false) {
+  void onLoading() async{
+    if(flag1 == false){
       onLoading1();
-    } else {
+    }else{
       onLoading2();
     }
   }
 
-  Future<void> onRefresh() async {
-    if (adminItemsRemaining == 0 && flag1 == false) {
-      setState(() {
+  Future<void> onRefresh() async{
+    if (adminItemsRemaining == 0 && flag1 == false){
+      setState((){
         flag1 = true;
       });
       onLoading1();
-    } else {
+    }else{
       onLoading2();
     }
   }
 
-  void addManagers1() {
+  void addManagers1(){
     managers.add(
       Padding(
-        padding: const EdgeInsets.only(
-          left: 20.0,
-        ),
-        child: Text(
-          'Admin',
-          style: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 1.76,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xff9F9F9F),
-          ),
-        ),
+        padding: const EdgeInsets.only(left: 20.0,),
+        child: Text('Admin', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),
       ),
     );
   }
 
-  void addManagers2() {
+  void addManagers2(){
     managers.add(
       Padding(
-        padding: const EdgeInsets.only(
-          left: 20.0,
-        ),
-        child: Text(
-          'Family',
-          style: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 1.76,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xff9F9F9F),
-          ),
-        ),
+        padding: const EdgeInsets.only(left: 20.0,),
+        child: Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),
       ),
     );
   }
 
-  void onLoading1() async {
-    if (adminItemsRemaining != 0) {
+  void onLoading1() async{
+    if(adminItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularShowAdminSettings(memorialId: widget.memorialId, page: page1).onError((error, stackTrace){
         context.loaderOverlay.hide();

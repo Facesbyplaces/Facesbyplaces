@@ -1,4 +1,3 @@
-
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-03-tokenization.dart';
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-04-process-payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
@@ -129,11 +128,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                   MiscRegularButtonTemplate(
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
-                    buttonTextStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold, 
-                      color: Color(0xffffffff),
-                    ),
+                    buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
                     width: SizeConfig.screenWidth! / 2, 
                     height: 45,
                     onPressed: () async{
@@ -199,22 +194,15 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Error: Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular'
-                              ),
-                            ),
+                            description: Text('Error: Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                             onlyOkButton: true,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
                         );
                       }))!;
-
                       
                       print('The payment method description is ${result.paymentMethodNonce.description}');
                       print('The payment method isDefault is ${result.paymentMethodNonce.isDefault}');
@@ -237,34 +225,28 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       if(paymentResult == true){
                         await showDialog(
                           context: context,
-                          builder: (_) => 
-                            AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
-                                textAlign: TextAlign.center,
-                              ),
-                              onlyOkButton: true,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
+                          builder: (_) =>  AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
+                            onlyOkButton: true,
+                            onOkButtonPressed: (){
+                              Navigator.pop(context);
+                            },
+                          ),
                         );
                       }else{
                         await showDialog(
                           context: context,
-                          builder: (_) => 
-                            AssetGiffyDialog(
+                          builder: (_) => AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: const Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                            ),
+                            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
                             onlyOkButton: true,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           )

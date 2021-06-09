@@ -7,24 +7,25 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularSearch extends StatefulWidget {
+class HomeRegularSearch extends StatefulWidget{
+
   HomeRegularSearchState createState() => HomeRegularSearchState();
 }
 
-class HomeRegularSearchState extends State<HomeRegularSearch> {
+class HomeRegularSearchState extends State<HomeRegularSearch>{
   final TextEditingController controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -37,11 +38,7 @@ class HomeRegularSearchState extends State<HomeRegularSearch> {
               width: SizeConfig.screenWidth,
               decoration: BoxDecoration(
                 color: Colors.white,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/icons/background2.png'),
-                  colorFilter: ColorFilter.srgbToLinearGamma(),
-                ),
+                image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
               ),
               child: SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
@@ -56,372 +53,191 @@ class HomeRegularSearchState extends State<HomeRegularSearch> {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_back,
-                                color: const Color(0xffffffff),
-                                size: SizeConfig.blockSizeVertical! * 3.65,
-                              ),
-                              onPressed: () {
+                              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
+                              onPressed: (){
                                 Navigator.pop(context);
                               },
                             ),
                           ),
+
                           Spacer(),
+
                           Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
                             width: SizeConfig.blockSizeHorizontal! * 79.06,
                             child: Row(
                               children: [
                                 IconButton(
-                                  onPressed: () async {
-                                    Location.Location location =
-                                        new Location.Location();
-                                    bool serviceEnabled =
-                                        await location.serviceEnabled();
+                                  onPressed: () async{
+                                    Location.Location location = new Location.Location();
+                                    bool serviceEnabled = await location.serviceEnabled();
 
-                                    print(
-                                        'The serviceEnabled is $serviceEnabled');
+                                    print('The serviceEnabled is $serviceEnabled');
 
-                                    if (!serviceEnabled) {
-                                      serviceEnabled =
-                                          await location.requestService();
-                                      if (!serviceEnabled) {
+                                    if(!serviceEnabled){
+                                      serviceEnabled = await location.requestService();
+                                      if(!serviceEnabled){
                                         return;
                                       }
                                     }
 
-                                    Location.PermissionStatus
-                                        permissionGranted =
-                                        await location.hasPermission();
+                                    Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                                    print(
-                                        'The permissionGranted is $permissionGranted');
+                                    print('The permissionGranted is $permissionGranted');
 
-                                    if (permissionGranted !=
-                                        Location.PermissionStatus.granted) {
+                                    if(permissionGranted != Location.PermissionStatus.granted){
                                       bool confirmation = await showDialog(
-                                          context: context,
-                                          builder: (_) => AssetGiffyDialog(
-                                                image: Image.asset(
-                                                  'assets/icons/cover-icon.png',
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                title: Text(
-                                                  'Confirm',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontSize:
-                                                      SizeConfig.blockSizeVertical! * 3.16,
-                                                      fontFamily: 'NexaRegular'),
-                                                ),
-                                                entryAnimation:
-                                                    EntryAnimation.DEFAULT,
-                                                description: Text(
-                                                  'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontSize: SizeConfig
-                                                          .blockSizeVertical! *
-                                                          2.87,
-                                                      fontFamily:
-                                                      'NexaRegular'),
-                                                ),
-                                                onlyOkButton: false,
-                                                onOkButtonPressed: () {
-                                                  Navigator.pop(context, true);
-                                                },
-                                                onCancelButtonPressed: () {
-                                                  Navigator.pop(context, false);
-                                                },
-                                              ));
+                                        context: context,
+                                        builder: (_) => AssetGiffyDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                          entryAnimation: EntryAnimation.DEFAULT,
+                                          description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                          onlyOkButton: false,
+                                          onOkButtonPressed: (){
+                                            Navigator.pop(context, true);
+                                          },
+                                          onCancelButtonPressed: (){
+                                            Navigator.pop(context, false);
+                                          },
+                                        ),
+                                      );
 
-                                      if (confirmation == true) {
-                                        permissionGranted =
-                                            await location.requestPermission();
+                                      if(confirmation == true){
+                                        permissionGranted = await location.requestPermission();
 
                                         context.loaderOverlay.show();
-                                        Location.LocationData locationData =
-                                            await location.getLocation();
-                                        List<Placemark> placemarks =
-                                            await placemarkFromCoordinates(
-                                                locationData.latitude!,
-                                                locationData.longitude!);
+                                        Location.LocationData locationData = await location.getLocation();
+                                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                                         context.loaderOverlay.hide();
 
-                                        print(
-                                            'The latitude is ${locationData.latitude}');
-                                        print(
-                                            'The latitude is ${locationData.longitude}');
+                                        print('The latitude is ${locationData.latitude}');
+                                        print('The latitude is ${locationData.longitude}');
 
                                         Navigator.pop(context);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomeRegularPost(
-                                                      keyword: controller.text,
-                                                      newToggle: 0,
-                                                      latitude: locationData
-                                                          .latitude!,
-                                                      longitude: locationData
-                                                          .longitude!,
-                                                      currentLocation:
-                                                          placemarks[0].name!,
-                                                    )));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,),),);
                                       }
-                                    } else {
+                                    }else{
                                       context.loaderOverlay.show();
-                                      Location.LocationData locationData =
-                                          await location.getLocation();
-                                      List<Placemark> placemarks =
-                                          await placemarkFromCoordinates(
-                                              locationData.latitude!,
-                                              locationData.longitude!);
+                                      Location.LocationData locationData = await location.getLocation();
+                                      List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                                       context.loaderOverlay.hide();
 
-                                      print(
-                                          'The latitude is ${locationData.latitude}');
-                                      print(
-                                          'The latitude is ${locationData.longitude}');
+                                      print('The latitude is ${locationData.latitude}');
+                                      print('The latitude is ${locationData.longitude}');
 
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomeRegularPost(
-                                                    keyword: controller.text,
-                                                    newToggle: 0,
-                                                    latitude:
-                                                        locationData.latitude!,
-                                                    longitude:
-                                                        locationData.longitude!,
-                                                    currentLocation:
-                                                        placemarks[0].name!,
-                                                  )));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                                     }
                                   },
-                                  icon: Icon(
-                                    Icons.search,
-                                    color: Color(0xff888888),
-                                    size: SizeConfig.blockSizeVertical! * 3.65,
-                                  ),
+                                  icon: Icon(Icons.search, color: Color(0xff888888), size: SizeConfig.blockSizeVertical! * 3.65,),
                                 ),
                                 Expanded(
                                   child: TextFormField(
                                     keyboardType: TextInputType.text,
                                     controller: controller,
-                                    onFieldSubmitted: (String keyword) async {
-                                      Location.Location location =
-                                          new Location.Location();
-                                      bool serviceEnabled =
-                                          await location.serviceEnabled();
+                                    onFieldSubmitted: (String keyword) async{
+                                      Location.Location location = new Location.Location();
+                                      bool serviceEnabled = await location.serviceEnabled();
 
-                                      print(
-                                          'The value of serviceEnabled $serviceEnabled');
+                                      print('The value of serviceEnabled $serviceEnabled');
 
-                                      if (!serviceEnabled) {
-                                        serviceEnabled =
-                                            await location.requestService();
-                                        if (!serviceEnabled) {
+                                      if(!serviceEnabled){
+                                        serviceEnabled = await location.requestService();
+                                        if(!serviceEnabled){
                                           return;
                                         }
                                       }
 
-                                      Location.PermissionStatus
-                                          permissionGranted =
-                                          await location.hasPermission();
+                                      Location.PermissionStatus permissionGranted = await location.hasPermission();
 
-                                      print(
-                                          'The permissionGranted is $permissionGranted');
+                                      print('The permissionGranted is $permissionGranted');
 
-                                      if (permissionGranted !=
-                                          Location.PermissionStatus.granted) {
+                                      if(permissionGranted != Location.PermissionStatus.granted){
                                         bool confirmation = await showDialog(
-                                            context: context,
-                                            builder: (_) => AssetGiffyDialog(
-                                                  image: Image.asset(
-                                                    'assets/icons/cover-icon.png',
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  title: Text(
-                                                    'Confirm',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: SizeConfig
-                                                                .blockSizeVertical! *
-                                                            3.16,
-                                                        fontFamily:
-                                                            'NexaRegular'),
-                                                  ),
-                                                  entryAnimation:
-                                                      EntryAnimation.DEFAULT,
-                                                  description: Text(
-                                                    'FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: SizeConfig
-                                                                .blockSizeVertical! *
-                                                            2.87,
-                                                        fontFamily:
-                                                            'NexaRegular'),
-                                                  ),
-                                                  onlyOkButton: false,
-                                                  onOkButtonPressed: () {
-                                                    Navigator.pop(
-                                                        context, true);
-                                                  },
-                                                  onCancelButtonPressed: () {
-                                                    Navigator.pop(
-                                                        context, false);
-                                                  },
-                                                ));
+                                          context: context,
+                                          builder: (_) => AssetGiffyDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                            entryAnimation: EntryAnimation.DEFAULT,
+                                            description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                            onlyOkButton: false,
+                                            onOkButtonPressed: (){
+                                              Navigator.pop(context, true);
+                                            },
+                                            onCancelButtonPressed: (){
+                                              Navigator.pop(context, false);
+                                            },
+                                          ),
+                                        );
 
-                                        if (confirmation == true) {
-                                          permissionGranted = await location
-                                              .requestPermission();
+                                        if(confirmation == true){
+                                          permissionGranted = await location.requestPermission();
 
                                           context.loaderOverlay.show();
-                                          Location.LocationData locationData =
-                                              await location.getLocation();
-                                          List<Placemark> placemarks =
-                                              await placemarkFromCoordinates(
-                                                  locationData.latitude!,
-                                                  locationData.longitude!);
+                                          Location.LocationData locationData = await location.getLocation();
+                                          List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                                           context.loaderOverlay.hide();
 
-                                          print(
-                                              'The latitude is ${locationData.latitude}');
-                                          print(
-                                              'The latitude is ${locationData.longitude}');
+                                          print('The latitude is ${locationData.latitude}');
+                                          print('The latitude is ${locationData.longitude}');
 
                                           Navigator.pop(context);
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomeRegularPost(
-                                                        keyword: keyword,
-                                                        newToggle: 0,
-                                                        latitude: locationData
-                                                            .latitude!,
-                                                        longitude: locationData
-                                                            .longitude!,
-                                                        currentLocation:
-                                                            placemarks[0].name!,
-                                                      )));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,),),);
                                         }
-                                      } else {
+                                      }else{
                                         context.loaderOverlay.show();
-                                        Location.LocationData locationData =
-                                            await location.getLocation();
-                                        List<Placemark> placemarks =
-                                            await placemarkFromCoordinates(
-                                                locationData.latitude!,
-                                                locationData.longitude!);
+                                        Location.LocationData locationData = await location.getLocation();
+                                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                                         context.loaderOverlay.hide();
 
-                                        print(
-                                            'The latitude is ${locationData.latitude}');
-                                        print(
-                                            'The latitude is ${locationData.longitude}');
+                                        print('The latitude is ${locationData.latitude}');
+                                        print('The latitude is ${locationData.longitude}');
 
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomeRegularPost(
-                                                      keyword: keyword,
-                                                      newToggle: 0,
-                                                      latitude: locationData
-                                                          .latitude!,
-                                                      longitude: locationData
-                                                          .longitude!,
-                                                      currentLocation:
-                                                          placemarks[0].name!,
-                                                    )));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,),),);
                                       }
                                     },
-                                    style: TextStyle(
-                                      fontSize:
-                                          SizeConfig.blockSizeVertical! * 2.11,
-                                      fontFamily: 'NexaRegular',
-                                      color: Color(0xffB1B1B1),
-                                    ),
+                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.all(15.0),
+                                      contentPadding: const EdgeInsets.all(15.0),
                                       filled: true,
                                       fillColor: const Color(0xffffffff),
                                       focusColor: const Color(0xffffffff),
                                       hintText: 'Search a Post',
-                                      hintStyle: TextStyle(
-                                        fontSize:
-                                            SizeConfig.blockSizeVertical! *
-                                                2.11,
-                                        fontFamily: 'NexaRegular',
-                                        color: Color(0xffB1B1B1),
-                                      ),
-                                      border: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: const Color(0xffffffff)),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(25)),
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: const Color(0xffffffff)),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(25)),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: const Color(0xffffffff)),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(25)),
-                                      ),
+                                      hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                      border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
                                     ),
                                   ),
                                 )
                               ],
                             ),
                           ),
+
                           Spacer(),
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,
-                    ),
+
+                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+
                     Container(
                       height: SizeConfig.blockSizeVertical! * 23.23,
                       width: SizeConfig.blockSizeVertical! * 41.25,
-                      decoration: new BoxDecoration(
-                        color: Color(0xffEFFEFF),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(Icons.search,
-                          color: const Color(0xff4EC9D4), size: SizeConfig.blockSizeVertical! * 15.26),
+                      decoration: new BoxDecoration(color: Color(0xffEFFEFF), shape: BoxShape.circle,),
+                      child: Icon(Icons.search, color: const Color(0xff4EC9D4), size: SizeConfig.blockSizeVertical! * 15.26),
                     ),
+
                     SizedBox(height: SizeConfig.blockSizeVertical! * 3.16),
+
                     Padding(
-                      padding: EdgeInsets.only(
-                          left: SizeConfig.blockSizeHorizontal! * 22.75,
-                          right: SizeConfig.blockSizeHorizontal! * 22.75),
-                      child: Text(
-                        'Enter a memorial page name to start searching',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                            fontFamily: 'NexaRegular',
-                            color: Color(0xff6B6B6B)),
-                      ),
+                      padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 22.75, right: SizeConfig.blockSizeHorizontal! * 22.75),
+                      child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff6B6B6B)),),
                     ),
-                    SizedBox(
-                      height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,
-                    ),
+
+                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                   ],
                 ),
               ),

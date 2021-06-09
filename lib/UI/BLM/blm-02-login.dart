@@ -419,7 +419,7 @@ class BLMLogin extends StatelessWidget{
 
                         String deviceToken = '';
                         final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-                        final pushNotificationService = PushNotificationService(_firebaseMessaging);
+                        final pushNotificationService = PushNotificationService(_firebaseMessaging, context);
                         pushNotificationService.initialise();
                         deviceToken = (await pushNotificationService.fcm.getToken())!;
                         String result = await apiBLMLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);

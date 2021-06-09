@@ -435,7 +435,7 @@ class RegularLoginState extends State<RegularLogin> {
 
                           String deviceToken = '';
                           final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-                          final pushNotificationService = PushNotificationService(_firebaseMessaging);
+                          final pushNotificationService = PushNotificationService(_firebaseMessaging, context);
                           pushNotificationService.initialise();
                           deviceToken = (await pushNotificationService.fcm.getToken())!;
                           print('The deviceToken is $deviceToken');

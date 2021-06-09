@@ -5,7 +5,6 @@ import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'Regular/regular-07-password-reset.dart';
 import 'BLM/blm-07-password-reset.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,8 @@ const double pi = 3.1415926535897932;
 
 class PushNotificationService{
   final FirebaseMessaging fcm;
-  PushNotificationService(this.fcm);
+  final BuildContext context;
+  PushNotificationService(this.fcm, this.context);
 
   Future initialise() async{
     if (Platform.isIOS){
@@ -40,29 +40,47 @@ class PushNotificationService{
 
     print('User granted permission: ${settings.authorizationStatus}');
 
-    fcm.getInitialMessage();
+    // RemoteMessage messageWhileClosed = (await fcm.getInitialMessage())!;
+
+    // if(messageWhileClosed.notification != null){
+    //   print('Message data title while closed: ${messageWhileClosed.notification!.title}');
+    //   print('Message data body while closed: ${messageWhileClosed.notification!.body}');
+    // }
 
     FirebaseMessaging.onMessage.listen((message) {
       print('Got a message whilst in the foreground!');
       print('Message data: $message');
       print('Message data: ${message.data}');
-      if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
-      }
+      print('Message data title: ${message.notification!.title}');
+      print('Message data body: ${message.notification!.body}');
+      // if (message.notification != null) {
+      //   print('Message also contained a notification: ${message.notification}');
+      // }
     });
-
-    Future<void> _firebaseMessagingBackgroundHandler(
-        RemoteMessage message) async {
-      await Firebase.initializeApp();
-      print("Handling a background message: ${message.messageId}");
-    }
-
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       print('Pressed!');
-      print('The message on pressed is ${event.data}');
       print('The message on pressed is $event');
+      print('The message on pressed is ${event.data}');
+      print('The message on pressed is ${event.data['dataID']}');
+      print('The message on pressed is ${event.data['dataType']}');
+      print('The message on pressed is ${event.notification!.title}');
+      print('The message on pressed is ${event.notification!.body}');
+
+
+      if(event.data['dataType'] == 'Post'){
+        if(event.data['postType'] == 'Blm'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(event.data['dataID']))));
+        }else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(event.data['dataID']))));
+        }
+      }else{
+        if(event.data['dataType'] == 'Blm'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(event.data['dataID']), pageType: event.data['dataType'], newJoin: false,)));
+        }else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(event.data['dataID']), pageType: event.data['dataType'], newJoin: false,)));
+        }
+      }
     });
   }
 }
@@ -90,8 +108,7 @@ class UIGetStartedState extends State<UIGetStarted>{
       }
     }, onError: (error) {
       PlatformException platformException = error as PlatformException;
-      print(
-          'InitSession error: ${platformException.code} - ${platformException.message}');
+      print('InitSession error: ${platformException.code} - ${platformException.message}');
     });
   }
 
@@ -140,7 +157,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   void initState(){
     super.initState();
-    var newMessage = PushNotificationService(_firebaseMessaging);
+    var newMessage = PushNotificationService(_firebaseMessaging, context);
     newMessage.initialise();
     listenDeepLinkData();
   }

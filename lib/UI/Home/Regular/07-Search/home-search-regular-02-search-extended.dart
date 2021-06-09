@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';
 
-class RegularSearchMainPosts {
+class RegularSearchMainPosts{
   final int userId;
   final int postId;
   final int memorialId;
@@ -42,7 +42,7 @@ class RegularSearchMainPosts {
   const RegularSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
-class RegularSearchMainSuggested {
+class RegularSearchMainSuggested{
   final int memorialId;
   final String memorialName;
   final String memorialDescription;
@@ -55,7 +55,7 @@ class RegularSearchMainSuggested {
   const RegularSearchMainSuggested({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
-class RegularSearchMainNearby {
+class RegularSearchMainNearby{
   final int memorialId;
   final String memorialName;
   final String memorialDescription;
@@ -68,7 +68,7 @@ class RegularSearchMainNearby {
   const RegularSearchMainNearby({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
-class RegularSearchMainBLM {
+class RegularSearchMainBLM{
   final int memorialId;
   final String memorialName;
   final String memorialDescription;
@@ -81,7 +81,7 @@ class RegularSearchMainBLM {
   const RegularSearchMainBLM({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
-class HomeRegularPost extends StatefulWidget {
+class HomeRegularPost extends StatefulWidget{
   final String keyword;
   final int newToggle;
   final double latitude;
@@ -92,7 +92,7 @@ class HomeRegularPost extends StatefulWidget {
   HomeRegularPostState createState() => HomeRegularPostState();
 }
 
-class HomeRegularPostState extends State<HomeRegularPost> {
+class HomeRegularPostState extends State<HomeRegularPost>{
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
   ValueNotifier<bool> onSearch = ValueNotifier<bool>(false);
   TextEditingController controller = TextEditingController();
@@ -833,23 +833,23 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                               ((){
                                 if(index != 1){
                                   return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
-                                      ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                            loadingColor: const Color(0xff4EC9D4),
-                                            loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                            showControls: false,
-                                          ),
-                                          aspectRatio: 16 / 9,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      )
-                                      : CachedNetworkImage(
-                                        fit: BoxFit.cover,
-                                        imageUrl: feeds[i].imagesOrVideos[index],
-                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                      );
+                                  ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                        loadingColor: const Color(0xff4EC9D4),
+                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
                                 }else{
                                   return ((){
                                     if(feeds[i].imagesOrVideos.length - 3 > 0){
@@ -1005,24 +1005,24 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                      loadingColor: const Color(0xff4EC9D4),
-                                      loadingWidget: const Center(
-                                        child: const CircularProgressIndicator(),
-                                      ),
-                                      showControls: false,
+                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                    loadingColor: const Color(0xff4EC9D4),
+                                    loadingWidget: const Center(
+                                      child: const CircularProgressIndicator(),
                                     ),
-                                    aspectRatio: 16 / 9,
-                                    fit: BoxFit.contain,
+                                    showControls: false,
                                   ),
-                                )
-                                : CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: feeds[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png',fit: BoxFit.cover, scale: 1.0,),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
                                 ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png',fit: BoxFit.cover, scale: 1.0,),
+                              ),
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                               mainAxisSpacing: 4.0,
                               crossAxisSpacing: 4.0,
@@ -1479,283 +1479,141 @@ class HomeRegularPostState extends State<HomeRegularPost> {
                               crossAxisSpacing: 4.0,
                               itemBuilder: (BuildContext context, int index) =>
                               ((){
-                              if(index != 1){
-                                return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
-                                    ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                          controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                            loadingColor: const Color(0xff4EC9D4),
-                                            loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                            showControls: false,
-                                          ),
-                                          aspectRatio: 16 / 9,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      )
-                                                              : CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: searchFeeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                );
-                                                        } else {
-                                                          return (() {
-                                                            if (searchFeeds[i]
-                                                                        .imagesOrVideos
-                                                                        .length -
-                                                                    3 >
-                                                                0) {
-                                                              if (lookupMimeType(
-                                                                          searchFeeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true) {
-                                                                return Stack(
-                                                                  fit: StackFit
-                                                                      .expand,
-                                                                  children: [
-                                                                    BetterPlayer
-                                                                        .network(
-                                                                      '${searchFeeds[i].imagesOrVideos[index]}',
-                                                                      betterPlayerConfiguration:
-                                                                          const BetterPlayerConfiguration(
-                                                                        controlsConfiguration:
-                                                                            const BetterPlayerControlsConfiguration(
-                                                                          loadingColor:
-                                                                              const Color(0xff4EC9D4),
-                                                                          loadingWidget:
-                                                                              const Center(
-                                                                            child:
-                                                                                const CircularProgressIndicator(),
-                                                                          ),
-                                                                          showControls:
-                                                                              false,
-                                                                        ),
-                                                                        aspectRatio:
-                                                                            16 /
-                                                                                9,
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      color: const Color(
-                                                                              0xff000000)
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                    ),
-                                                                    Center(
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        radius:
-                                                                            25,
-                                                                        backgroundColor:
-                                                                            const Color(0xffffffff).withOpacity(.5),
-                                                                        child:
-                                                                            Text(
-                                                                          '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                40,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color:
-                                                                                const Color(0xffffffff),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              } else {
-                                                                return Stack(
-                                                                  fit: StackFit
-                                                                      .expand,
-                                                                  children: [
-                                                                    CachedNetworkImage(
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                      imageUrl:
-                                                                          searchFeeds[i]
-                                                                              .imagesOrVideos[index],
-                                                                      placeholder:
-                                                                          (context, url) =>
-                                                                              const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      errorWidget: (context,
-                                                                              url,
-                                                                              error) =>
-                                                                          Image
-                                                                              .asset(
-                                                                        'assets/icons/cover-icon.png',
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                        scale:
-                                                                            1.0,
-                                                                      ),
-                                                                    ),
-                                                                    Container(
-                                                                      color: const Color(
-                                                                              0xff000000)
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                    ),
-                                                                    Center(
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        radius:
-                                                                            25,
-                                                                        backgroundColor:
-                                                                            const Color(0xffffffff).withOpacity(.5),
-                                                                        child:
-                                                                            Text(
-                                                                          '${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                40,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color:
-                                                                                const Color(0xffffffff),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              }
-                                                            } else {
-                                                              if (lookupMimeType(
-                                                                          searchFeeds[i].imagesOrVideos[
-                                                                              index])
-                                                                      ?.contains(
-                                                                          'video') ==
-                                                                  true) {
-                                                                return BetterPlayer
-                                                                    .network(
-                                                                  '${searchFeeds[i].imagesOrVideos[index]}',
-                                                                  betterPlayerConfiguration:
-                                                                      const BetterPlayerConfiguration(
-                                                                    controlsConfiguration:
-                                                                        const BetterPlayerControlsConfiguration(
-                                                                      loadingColor:
-                                                                          const Color(
-                                                                              0xff4EC9D4),
-                                                                      loadingWidget:
-                                                                          const Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator(),
-                                                                      ),
-                                                                      showControls:
-                                                                          false,
-                                                                    ),
-                                                                    aspectRatio:
-                                                                        16 / 9,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                return CachedNetworkImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  imageUrl: searchFeeds[
-                                                                              i]
-                                                                          .imagesOrVideos[
-                                                                      index],
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const Center(
-                                                                    child:
-                                                                        const CircularProgressIndicator(),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/icons/cover-icon.png',
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    scale: 1.0,
-                                                                  ),
-                                                                );
-                                                              }
-                                                            }
-                                                          }());
-                                                        }
-                                                      }()),
-                                                    );
-                                                  }
-                                                }()),
+                                if(index != 1){
+                                  return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
+                                  ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                      aspectRatio: 16 / 9,
+                                      fit: BoxFit.contain,
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                        loadingColor: const Color(0xff4EC9D4),
+                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                        showControls: false,
+                                      ),
+                                    ),
+                                  )
+                                  : CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return ((){
+                                    if(searchFeeds[i].imagesOrVideos.length - 3 > 0){
+                                      if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                                  loadingColor: const Color(0xff4EC9D4),
+                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
+                                                fit: BoxFit.contain,
                                               ),
-                                            ],
-                                          )
-                                        : Container(height: 0),
-                                  ],
-                                );
-                        }),
-              )
-            : SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 55 - kToolbarHeight) /
-                                4,
-                      ),
-                      Image.asset(
-                        'assets/icons/app-icon.png',
-                        height: 250,
-                        width: 250,
-                      ),
-                      const SizedBox(
-                        height: 45,
-                      ),
-                      Text(
-                        'Post is empty',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xffB1B1B1),
-                        ),
-                      ),
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 55 - kToolbarHeight) /
-                                4,
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }else{
+                                        return Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            ),
+
+                                            Container(color: const Color(0xff000000).withOpacity(0.5),),
+
+                                            Center(
+                                              child: CircleAvatar(
+                                                radius: 25,
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
+                                                  style: const TextStyle(
+                                                    fontSize: 40,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: const Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    }else{
+                                      if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                        return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                            aspectRatio: 16 / 9,
+                                            fit: BoxFit.contain,
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
+                                              loadingColor: const Color(0xff4EC9D4),
+                                              loadingWidget: const Center(child: const CircularProgressIndicator(),),
+                                              showControls: false,
+                                            ),
+                                          ),
+                                        );
+                                      }else{
+                                        return CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        );
+                                      }
+                                    }
+                                  }());
+                                }
+                              }()),
+                            );
+                          }
+                        }()),
                       ),
                     ],
-                  ),
-                ),
-              ),
+                  )
+                  : Container(height: 0),
+                ],
+              );
+            }
+          ),
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
+                
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                const SizedBox(height: 45,),
+
+                Text('Post is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+
+                SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -1766,88 +1624,68 @@ class HomeRegularPostState extends State<HomeRegularPost> {
       builder: (_, int tabCount2Listener, __) => ValueListenableBuilder(
         valueListenable: onSearch,
         builder: (_, bool onSearchListener, __) => tabCount2Listener != 0
-            ? RefreshIndicator(
-                onRefresh: onRefresh2,
-                child: onSearchListener != true
-                    ? ListView.separated(
-                        controller: scrollController2,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 0),
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: suggested.length,
-                        separatorBuilder: (c, i) => const Divider(
-                            height: 10, color: Colors.transparent),
-                        itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                          index: i,
-                          memorialName: suggested[i].memorialName,
-                          description: suggested[i].memorialDescription,
-                          image: suggested[i].image,
-                          memorialId: suggested[i].memorialId,
-                          managed: suggested[i].managed,
-                          follower: suggested[i].follower,
-                          pageType: suggested[i].pageType,
-                          relationship: suggested[i].relationship,
-                          famOrFriends: suggested[i].famOrFriends,
-                        ),
-                      )
-                    : ListView.separated(
-                        controller: scrollController2,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 0),
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: searchSuggested.length,
-                        separatorBuilder: (c, i) => const Divider(
-                            height: 10, color: Colors.transparent),
-                        itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                          index: i,
-                          memorialName: searchSuggested[i].memorialName,
-                          description: searchSuggested[i].memorialDescription,
-                          image: searchSuggested[i].image,
-                          memorialId: searchSuggested[i].memorialId,
-                          managed: searchSuggested[i].managed,
-                          follower: searchSuggested[i].follower,
-                          pageType: searchSuggested[i].pageType,
-                          relationship: searchSuggested[i].relationship,
-                          famOrFriends: searchSuggested[i].famOrFriends,
-                        ),
-                      ))
-            : SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 75 - kToolbarHeight) /
-                                4,
-                      ),
-                      Image.asset(
-                        'assets/icons/app-icon.png',
-                        height: 250,
-                        width: 250,
-                      ),
-                      const SizedBox(
-                        height: 45,
-                      ),
-                      Text(
-                        'Suggested is empty',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xffB1B1B1),
-                        ),
-                      ),
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 75 - kToolbarHeight) /
-                                4,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+        ? RefreshIndicator(
+          onRefresh: onRefresh2,
+          child: onSearchListener != true
+          ? ListView.separated(
+            controller: scrollController2,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: suggested.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: suggested[i].memorialName,
+              description: suggested[i].memorialDescription,
+              image: suggested[i].image,
+              memorialId: suggested[i].memorialId,
+              managed: suggested[i].managed,
+              follower: suggested[i].follower,
+              pageType: suggested[i].pageType,
+              relationship: suggested[i].relationship,
+              famOrFriends: suggested[i].famOrFriends,
+            ),
+          )
+          : ListView.separated(
+            controller: scrollController2,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchSuggested.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: searchSuggested[i].memorialName,
+              description: searchSuggested[i].memorialDescription,
+              image: searchSuggested[i].image,
+              memorialId: searchSuggested[i].memorialId,
+              managed: searchSuggested[i].managed,
+              follower: searchSuggested[i].follower,
+              pageType: searchSuggested[i].pageType,
+              relationship: searchSuggested[i].relationship,
+              famOrFriends: searchSuggested[i].famOrFriends,
+            ),
+          ),
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                const SizedBox(height: 45,),
+
+                Text('Suggested is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -1858,88 +1696,68 @@ class HomeRegularPostState extends State<HomeRegularPost> {
       builder: (_, int tabCount3Listener, __) => ValueListenableBuilder(
         valueListenable: onSearch,
         builder: (_, bool onSearchListener, __) => tabCount3Listener != 0
-            ? RefreshIndicator(
-                onRefresh: onRefresh3,
-                child: onSearchListener != true
-                    ? ListView.separated(
-                        controller: scrollController3,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 0),
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: nearby.length,
-                        separatorBuilder: (c, i) => const Divider(
-                            height: 10, color: Colors.transparent),
-                        itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                          index: i,
-                          memorialName: nearby[i].memorialName,
-                          description: nearby[i].memorialDescription,
-                          image: nearby[i].image,
-                          memorialId: nearby[i].memorialId,
-                          managed: nearby[i].managed,
-                          follower: nearby[i].follower,
-                          pageType: nearby[i].pageType,
-                          relationship: nearby[i].relationship,
-                          famOrFriends: nearby[i].famOrFriends,
-                        ),
-                      )
-                    : ListView.separated(
-                        controller: scrollController3,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 0),
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: searchNearby.length,
-                        separatorBuilder: (c, i) => const Divider(
-                            height: 10, color: Colors.transparent),
-                        itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                          index: i,
-                          memorialName: searchNearby[i].memorialName,
-                          description: searchNearby[i].memorialDescription,
-                          image: searchNearby[i].image,
-                          memorialId: searchNearby[i].memorialId,
-                          managed: searchNearby[i].managed,
-                          follower: searchNearby[i].follower,
-                          pageType: searchNearby[i].pageType,
-                          relationship: searchNearby[i].relationship,
-                          famOrFriends: searchNearby[i].famOrFriends,
-                        ),
-                      ))
-            : SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 75 - kToolbarHeight) /
-                                4,
-                      ),
-                      Image.asset(
-                        'assets/icons/app-icon.png',
-                        height: 250,
-                        width: 250,
-                      ),
-                      const SizedBox(
-                        height: 45,
-                      ),
-                      Text(
-                        'Nearby is empty',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xffB1B1B1),
-                        ),
-                      ),
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 75 - kToolbarHeight) /
-                                4,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+        ? RefreshIndicator(
+          onRefresh: onRefresh3,
+          child: onSearchListener != true
+          ? ListView.separated(
+            controller: scrollController3,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: nearby.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: nearby[i].memorialName,
+              description: nearby[i].memorialDescription,
+              image: nearby[i].image,
+              memorialId: nearby[i].memorialId,
+              managed: nearby[i].managed,
+              follower: nearby[i].follower,
+              pageType: nearby[i].pageType,
+              relationship: nearby[i].relationship,
+              famOrFriends: nearby[i].famOrFriends,
+            ),
+          )
+          : ListView.separated(
+            controller: scrollController3,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchNearby.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: searchNearby[i].memorialName,
+              description: searchNearby[i].memorialDescription,
+              image: searchNearby[i].image,
+              memorialId: searchNearby[i].memorialId,
+              managed: searchNearby[i].managed,
+              follower: searchNearby[i].follower,
+              pageType: searchNearby[i].pageType,
+              relationship: searchNearby[i].relationship,
+              famOrFriends: searchNearby[i].famOrFriends,
+            ),
+          ),
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                const SizedBox(height: 45,),
+
+                Text('Nearby is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -1950,89 +1768,68 @@ class HomeRegularPostState extends State<HomeRegularPost> {
       builder: (_, int tabCount4Listener, __) => ValueListenableBuilder(
         valueListenable: onSearch,
         builder: (_, bool onSearchListener, __) => tabCount4Listener != 0
-            ? RefreshIndicator(
-                onRefresh: onRefresh4,
-                child: onSearchListener != true
-                    ? ListView.separated(
-                        controller: scrollController3,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 0),
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: blm.length,
-                        separatorBuilder: (c, i) => const Divider(
-                            height: 10, color: Colors.transparent),
-                        itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                          index: i,
-                          memorialName: blm[i].memorialName,
-                          description: blm[i].memorialDescription,
-                          image: blm[i].image,
-                          memorialId: blm[i].memorialId,
-                          managed: blm[i].managed,
-                          follower: blm[i].follower,
-                          pageType: blm[i].pageType,
-                          relationship: blm[i].relationship,
-                          famOrFriends: blm[i].famOrFriends,
-                        ),
-                      )
-                    : ListView.separated(
-                        controller: scrollController3,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 0),
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: searchBlm.length,
-                        separatorBuilder: (c, i) => const Divider(
-                            height: 10, color: Colors.transparent),
-                        itemBuilder: (c, i) => MiscRegularManageMemorialTab(
-                          index: i,
-                          memorialName: searchBlm[i].memorialName,
-                          description: searchBlm[i].memorialDescription,
-                          image: searchBlm[i].image,
-                          memorialId: searchBlm[i].memorialId,
-                          managed: searchBlm[i].managed,
-                          follower: searchBlm[i].follower,
-                          pageType: searchBlm[i].pageType,
-                          relationship: searchBlm[i].relationship,
-                          famOrFriends: searchBlm[i].famOrFriends,
-                        ),
-                      ),
-              )
-            : SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 75 - kToolbarHeight) /
-                                4,
-                      ),
-                      Image.asset(
-                        'assets/icons/app-icon.png',
-                        height: 250,
-                        width: 250,
-                      ),
-                      const SizedBox(
-                        height: 45,
-                      ),
-                      Text(
-                        'BLM is empty',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xffB1B1B1),
-                        ),
-                      ),
-                      SizedBox(
-                        height:
-                            (SizeConfig.screenHeight! - 75 - kToolbarHeight) /
-                                4,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+        ? RefreshIndicator(
+          onRefresh: onRefresh4,
+          child: onSearchListener != true
+          ? ListView.separated(
+            controller: scrollController3,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: blm.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: blm[i].memorialName,
+              description: blm[i].memorialDescription,
+              image: blm[i].image,
+              memorialId: blm[i].memorialId,
+              managed: blm[i].managed,
+              follower: blm[i].follower,
+              pageType: blm[i].pageType,
+              relationship: blm[i].relationship,
+              famOrFriends: blm[i].famOrFriends,
+            ),
+          )
+          : ListView.separated(
+            controller: scrollController3,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchBlm.length,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            itemBuilder: (c, i) => MiscRegularManageMemorialTab(
+              index: i,
+              memorialName: searchBlm[i].memorialName,
+              description: searchBlm[i].memorialDescription,
+              image: searchBlm[i].image,
+              memorialId: searchBlm[i].memorialId,
+              managed: searchBlm[i].managed,
+              follower: searchBlm[i].follower,
+              pageType: searchBlm[i].pageType,
+              relationship: searchBlm[i].relationship,
+              famOrFriends: searchBlm[i].famOrFriends,
+            ),
+          ),
+        )
+        : SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                const SizedBox(height: 45,),
+
+                Text('BLM is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),), ),
+
+                SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

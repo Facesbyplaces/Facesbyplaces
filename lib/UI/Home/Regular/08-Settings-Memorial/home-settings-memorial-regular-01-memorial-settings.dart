@@ -42,7 +42,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     print('Memorial settings rebuild!');
     return ValueListenableBuilder(
@@ -52,20 +52,14 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           backgroundColor: const Color(0xff04ECFF),
           title: Row(
             children: [
-              Text('Memorial Settings',
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                  fontFamily: 'NexaRegular',
-                  color: const Color(0xffffffff),
-                ),
-              ),
-              const Spacer()
+              Text('Memorial Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              const Spacer(),
             ],
           ),
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, size: SizeConfig.blockSizeVertical! * 3.52,),
-            onPressed: () {
+            onPressed: (){
               Navigator.pop(context);
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: '', managed: true, newlyCreated: false,)));
             },
@@ -82,34 +76,20 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                   unselectedLabelColor: const Color(0xff000000),
                   indicatorColor: const Color(0xff04ECFF),
                   indicatorSize: TabBarIndicatorSize.label,
-                  onTap: (int index) {
+                  onTap: (int index){
                     toggle.value = index;
                   },
                   tabs: [
-                    Text(
-                      'Page',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xff2F353D),
-                      ),
-                    ),
-                    Text(
-                      'Privacy',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xff2F353D),
-                      ),
-                    ),
+                    Text('Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                    Text('Privacy', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D)),),
                   ],
                 ),
               ),
             ),
             Expanded(
               child: Container(
-                child: (() {
-                  switch (toggleListener) {
+                child: ((){
+                  switch (toggleListener){
                     case 0: return settingsTab1(widget.memorialId);
                     case 1: return settingsTab2(widget.memorialId);
                   }
@@ -122,187 +102,101 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
     );
   }
 
-  settingsTab1(int memorialId) {
+  settingsTab1(int memorialId){
     return ListView(
       physics: const ClampingScrollPhysics(),
       children: [
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: () {
+          title: Text('Page Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+          subtitle: Text('Update page details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageDetails(memorialId: memorialId,)));
           },
-          title: Text('Page Details',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-          subtitle: Text('Update page details',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: () {
+          title: Text('Page Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+          subtitle: Text('Update Page image and background image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialPageImage(memorialId: memorialId,)));
           },
-          title: Text('Page Image',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-          subtitle: Text('Update Page image and background image',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: () {
+          title: Text('Admins', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+          subtitle: Text('Add or remove admins of this page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: memorialId,)));
           },
-          title: Text('Admins',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-          subtitle: Text('Add or remove admins of this page',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: () {
+          title: Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+          subtitle: Text('Add or remove family of this page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
           },
-          title: Text(
-            'Family',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-          subtitle: Text(
-            'Add or remove family of this page',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: () {
+          title: Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+          subtitle: Text('Add or remove friends of this page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
           },
-          title: Text('Friends',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-          subtitle: Text(
-            'Add or remove friends of this page',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: () {
+          title: Text('Paypal', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+          subtitle: Text('Manage cards that receives the memorial gifts', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7), ),),
+          onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPaypal(pageId: memorialId)));
           },
-          title: Text('Paypal',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-          subtitle: Text('Manage cards that receives the memorial gifts',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
         ),
 
         Container(height: 5, color: const Color(0xffeeeeee),),
 
         ListTile(
           tileColor: const Color(0xffffffff),
-          onTap: () async {
+          title: Text('Delete Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+          subtitle: Text('Completely remove the page. This is irreversible', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+          onTap: () async{
             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(content: 'Are you sure you want to delete "${widget.memorialName}"?',),);
 
-            if (confirmResult) {
+            if(confirmResult){
               context.loaderOverlay.show();
               bool result = await apiRegularDeleteMemorial(memorialId: memorialId);
               context.loaderOverlay.hide();
 
-              if (result) {
+              if(result){
                 Navigator.popAndPushNamed(context, '/home/regular');
-              } else {
+              }else{
                 await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Error',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize:
-                          SizeConfig.blockSizeVertical! * 3.16,
-                          fontFamily: 'NexaRegular'),
-                    ),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description:  Text(
-                      'Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize:
-                          SizeConfig.blockSizeVertical! * 2.87,
-                          fontFamily: 'NexaRegular'),
-                    ),
+                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                     onlyOkButton: true,
                     buttonOkColor: const Color(0xffff0000),
-                    onOkButtonPressed: () {
+                    onOkButtonPressed: (){
                       Navigator.pop(context, true);
                     },
                   ),
@@ -310,20 +204,6 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
               }
             }
           },
-          title: Text('Delete Page',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-          subtitle: Text('Completely remove the page. This is irreversible',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-              fontFamily: 'NexaRegular',
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
         ),
 
         const SizedBox(height: 10,),
@@ -335,7 +215,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
     );
   }
 
-  settingsTab2(int memorialId) {
+  settingsTab2(int memorialId){
     return ValueListenableBuilder(
       valueListenable: isSwitched1,
       builder: (_, bool isSwitched1Listener, __) => ValueListenableBuilder(
@@ -346,20 +226,8 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             children: [
               ListTile(
                 tileColor: const Color(0xffffffff),
-                title: Text('Customize shown info',
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                    fontFamily: 'NexaBold',
-                    color: const Color(0xff2F353D),
-                  ),
-                ),
-                subtitle: Text('Customize what others see on your page',
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xffBDC3C7),
-                  ),
-                ),
+                title: Text('Customize shown info', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                subtitle: Text('Customize what others see on your page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
               ),
 
               Container(height: 5, color: const Color(0xffeeeeee),),
@@ -372,30 +240,18 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     Expanded(
                       child: ListTile(
                         tileColor: const Color(0xffffffff),
-                        title: Text('Hide Family',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaBold',
-                            color: const Color(0xff2F353D),
-                          ),
-                        ),
-                        subtitle: Text('Show or hide family details',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                            fontFamily: 'NexaRegular',
-                            color: const Color(0xffBDC3C7),
-                          ),
-                        ),
+                        title: Text('Hide Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                        subtitle: Text('Show or hide family details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       ),
                     ),
                     Switch(
                       value: isSwitched1Listener,
-                      onChanged: (value) async {
+                      activeColor: const Color(0xff2F353D),
+                      activeTrackColor: const Color(0xff3498DB),
+                      onChanged: (value) async{
                         isSwitched1.value = value;
                         await apiRegularUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
                       },
-                      activeColor: const Color(0xff2F353D),
-                      activeTrackColor: const Color(0xff3498DB),
                     ),
                   ],
                 ),
@@ -411,31 +267,19 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     Expanded(
                       child: ListTile(
                         tileColor: const Color(0xffffffff),
-                        title: Text('Hide Friends',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaBold',
-                            color: const Color(0xff2F353D),
-                          ),
-                        ),
-                        subtitle: Text('Show or hide friends details',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                            fontFamily: 'NexaRegular',
-                            color: const Color(0xffBDC3C7),
-                          ),
-                        ),
+                        title: Text('Hide Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                        subtitle: Text('Show or hide friends details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       ),
                     ),
 
                     Switch(
                       value: isSwitched2Listener,
-                      onChanged: (value) async {
+                      activeColor: const Color(0xff2F353D),
+                      activeTrackColor: const Color(0xff3498DB),
+                      onChanged: (value) async{
                         isSwitched2.value = value;
                         await apiRegularUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
                       },
-                      activeColor: const Color(0xff2F353D),
-                      activeTrackColor: const Color(0xff3498DB),
                     ),
                   ],
                 ),
@@ -451,30 +295,18 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     Expanded(
                       child: ListTile(
                         tileColor: const Color(0xffffffff),
-                        title: Text('Hide Followers',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaBold',
-                            color: const Color(0xff2F353D),
-                          ),
-                        ),
-                        subtitle: Text('Show or hide your followers',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                            fontFamily: 'NexaRegular',
-                            color: const Color(0xffBDC3C7),
-                          ),
-                        ),
+                        title: Text('Hide Followers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                        subtitle: Text('Show or hide your followers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       ),
                     ),
                     Switch(
                       value: isSwitched3Listener,
-                      onChanged: (value) async {
-                        isSwitched3.value = value;
-                        await apiRegularUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
-                      },
                       activeColor: const Color(0xff2F353D),
                       activeTrackColor: const Color(0xff3498DB),
+                      onChanged: (value) async{
+                        isSwitched3.value = value;
+                        await apiRegularUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
+                      },                      
                     ),
                   ],
                 ),

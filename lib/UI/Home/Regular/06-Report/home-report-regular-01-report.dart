@@ -10,25 +10,22 @@ import 'package:flutter/material.dart';
 class HomeRegularReport extends StatelessWidget {
   final int postId;
   final String reportType;
-
   HomeRegularReport({required this.postId, required this.reportType});
 
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 =
-      GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldMultiTextTemplateState> _key2 =
-      GlobalKey<MiscRegularInputFieldMultiTextTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscRegularInputFieldMultiTextTemplateState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -37,25 +34,14 @@ class HomeRegularReport extends StatelessWidget {
             backgroundColor: const Color(0xff04ECFF),
             title: Row(
               children: [
-                Text(
-                  'Report',
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xffffffff),
-                  ),
-                ),
-                Spacer()
+                Text('Report', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                Spacer(),
               ],
             ),
             centerTitle: true,
             leading: IconButton(
-              icon:  Icon(
-                Icons.arrow_back,
-                color: const Color(0xffffffff),
-                size: SizeConfig.blockSizeVertical! * 3.52,
-              ),
-              onPressed: () {
+              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+              onPressed: (){
                 Navigator.pop(context);
               },
             ),
@@ -67,161 +53,91 @@ class HomeRegularReport extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Inform us about what happened.',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xfF000000),
-                    ),
-                  ),
+                  child: Text('Inform us about what happened.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),),
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
+
+                const SizedBox(height: 25,),
+
                 MiscRegularInputFieldTemplate(
                   key: _key1,
                   labelText: 'Subject',
                   type: TextInputType.text,
-                  labelTextStyle: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xfFB1B1B1),
-                  ),
+                  labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
+
+                const SizedBox(height: 25,),
+
                 MiscRegularInputFieldMultiTextTemplate(
                   key: _key2,
                   labelText: 'Body',
-                  labelTextStyle: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xfFB1B1B1),
-                  ),
+                  labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
+
+                const SizedBox(height: 50,),
+
                 MiscRegularButtonTemplate(
                   buttonText: 'Report',
-                  buttonTextStyle: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                      color: const Color(0xffffffff),
-                      fontFamily: 'NexaBold'
-                  ),
+                  buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
                   width: SizeConfig.screenWidth! / 2,
                   height: 45,
                   buttonColor: const Color(0xff04ECFF),
-                  onPressed: () async {
-                    if (_key1.currentState!.controller.text == '' ||
-                        _key2.currentState!.controller.text == '') {
+                  onPressed: () async{
+                    if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                       await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  'Error',
-                                  textAlign: TextAlign.center,
-                                  style:  TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                      fontFamily: 'NexaRegular'),
-                                ),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text(
-                                  'Please complete the form before submitting.',
-                                  textAlign: TextAlign.center,
-                                  style:  TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                      fontFamily: 'NexaRegular'
-                                  ),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    } else {
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                          onlyOkButton: true,
+                          buttonOkColor: const Color(0xffff0000),
+                          onOkButtonPressed: (){
+                            Navigator.pop(context, true);
+                          },
+                        ),
+                      );
+                    }else{
                       context.loaderOverlay.show();
-                      bool result = await apiRegularReport(
-                          postId: postId,
-                          reportType: reportType,
-                          subject: _key1.currentState!.controller.text,
-                          body: _key2.currentState!.controller.text);
+                      bool result = await apiRegularReport(postId: postId, reportType: reportType, subject: _key1.currentState!.controller.text, body: _key2.currentState!.controller.text);
                       context.loaderOverlay.hide();
 
-                      if (result) {
+                      if(result){
                         await showDialog(
-                            context: context,
-                            builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset(
-                                    'assets/icons/cover-icon.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  title: Text(
-                                    'Success',
-                                    textAlign: TextAlign.center,
-                                    style:  TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                        fontFamily: 'NexaRegular'),
-                                  ),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text(
-                                    'Successfully submitted a report. Your report will be reviewed by the administrator.',
-                                    textAlign: TextAlign.center,
-                                    style:  TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                        fontFamily: 'NexaRegular'
-                                    ),
-                                  ),
-                                  onlyOkButton: true,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                    Navigator.pop(context, true);
-                                  },
-                                ));
-                      } else {
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            onlyOkButton: true,
+                            onOkButtonPressed: (){
+                              Navigator.pop(context, true);
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }else{
                         await showDialog(
-                            context: context,
-                            builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset(
-                                    'assets/icons/cover-icon.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                              title: Text(
-                                'Error',
-                                textAlign: TextAlign.center,
-                                style:  TextStyle(
-                                    fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                    fontFamily: 'NexaRegular'),
-                              ),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text(
-                                'Please complete the form before submitting.',
-                                textAlign: TextAlign.center,
-                                style:  TextStyle(
-                                    fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                    fontFamily: 'NexaRegular'
-                                ),
-                              ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: const Color(0xffff0000),
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                ));
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular')),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            onlyOkButton: true,
+                            buttonOkColor: const Color(0xffff0000),
+                            onOkButtonPressed: (){
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
                       }
                     }
                   },
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
+
+                const SizedBox(height: 25,),
               ],
             ),
           ),

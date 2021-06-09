@@ -7,26 +7,26 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularPaypal extends StatefulWidget {
+class HomeRegularPaypal extends StatefulWidget{
   final int pageId;
   const HomeRegularPaypal({required this.pageId});
 
   HomeRegularPaypalState createState() => HomeRegularPaypalState();
 }
 
-class HomeRegularPaypalState extends State<HomeRegularPaypal> {
+class HomeRegularPaypalState extends State<HomeRegularPaypal>{
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -36,25 +36,14 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal> {
             backgroundColor: const Color(0xff04ECFF),
             title: Row(
               children: [
-                Text(
-                  'Paypal',
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xffffffff),
-                  ),
-                ),
-                Spacer()
+                Text('Paypal', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                Spacer(),
               ],
             ),
             centerTitle: true,
             leading: IconButton(
-              icon:  Icon(
-                Icons.arrow_back,
-                color: const Color(0xffffffff),
-                size: SizeConfig.blockSizeVertical! * 3.52,
-              ),
-              onPressed: () {
+              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+              onPressed: (){
                 Navigator.pop(context);
               },
             ),
@@ -72,17 +61,14 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal> {
                 if(result == false){
                   await showDialog(
                     context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
+                    builder: (_) =>  AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: const Text('Something went wrong. Please try again.',
-                        textAlign: TextAlign.center,
-                      ),
+                      description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
                       onlyOkButton: true,
                       buttonOkColor: const Color(0xffff0000),
-                      onOkButtonPressed: () {
+                      onOkButtonPressed: (){
                         Navigator.pop(context, true);
                         Navigator.pop(context, true);
                       },
