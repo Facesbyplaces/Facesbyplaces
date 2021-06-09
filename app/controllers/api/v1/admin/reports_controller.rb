@@ -142,28 +142,6 @@ class Api::V1::Admin::ReportsController < ApplicationController
         render json: transaction
     end
 
-    def PushNotification(device_tokens, title, message)
-        require 'fcm'
-        puts        "\n-- Device Token : --\n#{device_tokens}"
-        logger.info "\n-- Device Token : --\n#{device_tokens}"
-
-        fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
-        options = { notification: { 
-                        body: 'message',
-                        title: 'title',
-                    }
-                }
-        begin
-            response = fcm_client.send(device_tokens, options)
-        rescue StandardError => err
-            puts        "\n-- PushNotification : Error --\n#{err}"
-            logger.info "\n-- PushNotification : Error --\n#{err}"
-        end
-  
-        puts response
-    end
-
-
     private
 
     def report_params

@@ -81,7 +81,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             device_tokens = almUsersDeviceToken + blmUsersDeviceToken
             title = "New Memorial Page"
             message = "#{user().first_name} created a new page"
-            PushNotification(device_tokens, title, message)
+            PushNotification(device_tokens, title, message, user, user(), memorial.id, "Memorial", " ")
         else
             render json: {status: "#{check} is empty"}
         end
@@ -289,27 +289,6 @@ class Api::V1::Pages::MemorialsController < ApplicationController
                         each_serializer: RelationshipSerializer
                     )
         }
-    end
-
-    def PushNotification(device_tokens, title, message)
-        require 'fcm'
-        puts        "\n-- Device Token : --\n#{device_tokens}"
-        logger.info "\n-- Device Token : --\n#{device_tokens}"
-
-        fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
-        options = { notification: { 
-                        body: 'message',
-                        title: 'title',
-                    }
-                }
-        begin
-            response = fcm_client.send(device_tokens, options)
-        rescue StandardError => err
-            puts        "\n-- PushNotification : Error --\n#{err}"
-            logger.info "\n-- PushNotification : Error --\n#{err}"
-        end
-  
-        puts response
     end
 
     private

@@ -120,7 +120,7 @@ class Api::V1::Admin::MemorialsController < ApplicationController
                 device_tokens = almUsersDeviceToken + blmUsersDeviceToken
                 title = "New Memorial Page"
                 message = "#{user().first_name} created a new page"
-                PushNotification(device_tokens, title, message)
+                PushNotification(device_tokens, title, message, user, user(), memorial.id, "Memorial", " ")
             else
                 render json: {status: "#{check} is empty"}
             end
@@ -180,7 +180,7 @@ class Api::V1::Admin::MemorialsController < ApplicationController
                         device_tokens = almUsersDeviceToken + blmUsersDeviceToken
                         title = "New Memorial Page"
                         message = "#{user().first_name} created a new page"
-                        PushNotification(device_tokens, title, message)
+                        PushNotification(device_tokens, title, message, user, user(), blm.id, "Blm", " ")
                     else
                         render json: {errors: relationship.errors}, status: 500
                     end
