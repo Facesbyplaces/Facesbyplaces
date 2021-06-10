@@ -30,7 +30,7 @@ class Memorial < ApplicationRecord
 
     resourcify
 
-    # geocdoe
+    # geocode
     geocoded_by :cemetery
     after_validation :geocode, if: :cemetery_changed?
 
