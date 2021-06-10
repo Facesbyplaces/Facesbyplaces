@@ -15,6 +15,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home-main-regular-03-01-feed-tab.dart';
 import 'home-main-regular-03-02-memorial-list-tab.dart';
@@ -41,9 +42,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
   ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
   ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
-
   Future<APIRegularShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<APIRegularShowProfileInformation> getDrawerInformation() async {
     return await apiRegularShowProfileInformation();
@@ -120,6 +121,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
     isGuest();
     toggleBottom.value = widget.newToggleBottom;
     bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false];
+    var newMessage = PushNotificationService(_firebaseMessaging, context);
+    newMessage.initialise();
   }
 
   @override

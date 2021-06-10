@@ -49,6 +49,18 @@ void main() async{
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
 
+  NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  print('User granted permission for push notification: ${settings.authorizationStatus}');
+
   final sharedPrefs = await SharedPreferences.getInstance();
   final newlyInstalled = sharedPrefs.getBool('newly-installed') ?? true;
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;

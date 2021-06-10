@@ -15,6 +15,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -44,6 +45,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
   Future<APIBLMShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<APIBLMShowProfileInformation> getDrawerInformation() async {
     return await apiBLMShowProfileInformation();
@@ -118,6 +120,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended> {
     isGuest();
     toggleBottom.value = widget.newToggleBottom;
     bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false];
+    var newMessage = PushNotificationService(_firebaseMessaging, context);
+    newMessage.initialise();
   }
 
   @override

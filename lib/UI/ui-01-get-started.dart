@@ -11,41 +11,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'ui-02-login.dart';
 import 'dart:async';
-import 'dart:io';
 
 const double pi = 3.1415926535897932;
 
 class PushNotificationService{
   final FirebaseMessaging fcm;
   final BuildContext context;
+
   PushNotificationService(this.fcm, this.context);
 
   Future initialise() async{
-    if (Platform.isIOS){
-      fcm.requestPermission();
-    }
 
     String token = (await fcm.getToken())!;
     print("FirebaseMessaging token: $token");
-
-    NotificationSettings settings = await fcm.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-
-    print('User granted permission: ${settings.authorizationStatus}');
-
-    // RemoteMessage messageWhileClosed = (await fcm.getInitialMessage())!;
-
-    // if(messageWhileClosed.notification != null){
-    //   print('Message data title while closed: ${messageWhileClosed.notification!.title}');
-    //   print('Message data body while closed: ${messageWhileClosed.notification!.body}');
-    // }
 
     FirebaseMessaging.onMessage.listen((message) {
       print('Got a message whilst in the foreground!');
@@ -53,12 +31,9 @@ class PushNotificationService{
       print('Message data: ${message.data}');
       print('Message data title: ${message.notification!.title}');
       print('Message data body: ${message.notification!.body}');
-      // if (message.notification != null) {
-      //   print('Message also contained a notification: ${message.notification}');
-      // }
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    FirebaseMessaging.onMessageOpenedApp.listen((event) async{
       print('Pressed!');
       print('The message on pressed is $event');
       print('The message on pressed is ${event.data}');
@@ -94,7 +69,7 @@ class UIGetStarted extends StatefulWidget{
 class UIGetStartedState extends State<UIGetStarted>{
   // ignore: cancel_subscriptions
   StreamSubscription<Map>? streamSubscription;
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  String token = '';
 
   void listenDeepLinkData(){
     print('The start of deep linking');
@@ -157,8 +132,6 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   void initState(){
     super.initState();
-    var newMessage = PushNotificationService(_firebaseMessaging, context);
-    newMessage.initialise();
     listenDeepLinkData();
   }
 
