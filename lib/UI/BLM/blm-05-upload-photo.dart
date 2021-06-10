@@ -9,28 +9,26 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class BLMUploadPhoto extends StatefulWidget{
-
+class BLMUploadPhoto extends StatefulWidget {
   BLMUploadPhotoState createState() => BLMUploadPhotoState();
 }
 
-class BLMUploadPhotoState extends State<BLMUploadPhoto>{
-
+class BLMUploadPhotoState extends State<BLMUploadPhoto> {
   ValueNotifier<File> image = ValueNotifier<File>(File(''));
   final picker = ImagePicker();
 
-  Future getImage() async{
+  Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
-    if(pickedFile != null){
+    if (pickedFile != null) {
       image.value = File(pickedFile.path);
     }
   }
 
-  Future openCamera() async{
+  Future openCamera() async {
     final profilePicture = await picker.getImage(source: ImageSource.camera);
 
-    if(profilePicture != null){
+    if (profilePicture != null) {
       setState(() {
         image.value = File(profilePicture.path);
       });
@@ -49,24 +47,34 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
           physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
-
-              const SizedBox(height: 40,),
-
-              const Center(child: const Text('Upload Photo', style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),),
-
-              const SizedBox(height: 40,),
-
+              const SizedBox(
+                height: 40,
+              ),
+              Center(
+                child: Text(
+                  'Upload Photo',
+                  style: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 5.28,
+                    fontFamily: 'NexaBold',
+                    color: const Color(0xff2F353D),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
               GestureDetector(
-                onTap: () async{
+                onTap: () async {
+                  var choice = await showDialog(
+                      context: (context),
+                      builder: (build) => const MiscBLMUploadFromDialog());
 
-                  var choice = await showDialog(context: (context), builder: (build) => const MiscBLMUploadFromDialog());
-
-                  if(choice == null){
+                  if (choice == null) {
                     choice = 0;
-                  }else{
-                    if(choice == 1){
+                  } else {
+                    if (choice == 1) {
                       await openCamera();
-                    }else{
+                    } else {
                       await getImage();
                     }
                   }
@@ -83,31 +91,41 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                           padding: const EdgeInsets.all(15.0),
                           child: Stack(
                             children: [
-                              Container(color: const Color(0xffffffff),),
-
+                              Container(
+                                color: const Color(0xffffffff),
+                              ),
                               imageListener.path != ''
-                              ? Align(
-                                alignment: Alignment.center, 
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: FileImage(imageListener),
+                                  ? Align(
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: FileImage(imageListener),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Align(
+                                      alignment: Alignment.center,
+                                      child: const Icon(
+                                        Icons.add,
+                                        color: const Color(0xffE3E3E3),
+                                        size: 250,
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              )
-                              : Align(alignment: Alignment.center,  child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
                             ],
                           ),
                         ),
                       ),
                       Expanded(
-                        child: const Center(
-                          child: const Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
-                          textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 18,
+                        child: Center(
+                          child: Text(
+                            'A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
+                              fontFamily: 'NexaRegular',
                               color: const Color(0xff000000),
                             ),
                           ),
@@ -117,64 +135,102 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                   ),
                 ),
               ),
-
-              const SizedBox(height: 80,),
-
+              const SizedBox(
+                height: 80,
+              ),
               MiscBLMButtonTemplate(
                 buttonText: imageListener.path != '' ? 'Sign Up' : 'Speak Now',
-                buttonTextStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
+                buttonTextStyle: TextStyle(
+                  fontSize: SizeConfig.blockSizeVertical! * 3.16,
+                  fontFamily: 'NexaBold',
+                  color: const Color(0xffffffff),
+                ),
                 width: SizeConfig.screenWidth! / 2,
                 height: 45,
                 buttonColor: imageListener.path != ''
-                ? const Color(0xff04ECFF)
-                : const Color(0xff000000),
-                onPressed: () async{
-                  if(imageListener.path != ''){
-
+                    ? const Color(0xff04ECFF)
+                    : const Color(0xff000000),
+                onPressed: () async {
+                  if (imageListener.path != '') {
                     context.loaderOverlay.show();
                     bool result = await apiBLMUploadPhoto(image: imageListener);
                     context.loaderOverlay.hide();
 
-                    if(result){
+                    if (result) {
                       Navigator.pushReplacementNamed(context, '/home/blm');
-                    }else{
+                    } else {
                       await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
-                          onlyOkButton: true,
-                          buttonOkColor: const Color(0xffff0000),
-                          onOkButtonPressed: (){
-                            Navigator.pop(context, true);
-                          },
-                        )
-                      );
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                                image: Image.asset(
+                                  'assets/icons/cover-icon.png',
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  'Error',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize:
+                                      SizeConfig.blockSizeVertical! *
+                                          3.16,
+                                      fontFamily: 'NexaRegular'),
+                                ),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text(
+                                  'Something went wrong. Please try again.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize:
+                                      SizeConfig.blockSizeVertical! *
+                                          2.87,
+                                      fontFamily: 'NexaRegular'),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: const Color(0xffff0000),
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              ));
                     }
-                  }else{
+                  } else {
                     await showDialog(
-                      context: context,
-                      builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: const Text('Please upload a photo.', textAlign: TextAlign.center,),
-                        onlyOkButton: true,
-                        buttonOkColor: const Color(0xffff0000),
-                        onOkButtonPressed: (){
-                          Navigator.pop(context, true);
-                        },
-                      )
-                    );
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(
+                              image: Image.asset(
+                                'assets/icons/cover-icon.png',
+                                fit: BoxFit.cover,
+                              ),
+                              title: Text(
+                                'Error',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! *
+                                        3.16,
+                                    fontFamily: 'NexaRegular'),
+                              ),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text(
+                                'Please upload a photo.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                    SizeConfig.blockSizeVertical! *
+                                        2.87,
+                                    fontFamily: 'NexaRegular'),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: const Color(0xffff0000),
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            ));
                   }
                 },
               ),
-
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
