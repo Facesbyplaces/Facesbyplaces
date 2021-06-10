@@ -42,128 +42,79 @@ class BLMPasswordResetState extends State<BLMPasswordReset> {
         child: Scaffold(
           body: SafeArea(
             bottom: false,
-            child: Stack(
-              children: [
-                SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Column(
-                    children: [
-                      Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: IconButton(
-                              onPressed: (){
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+            child: SingleChildScrollView(
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: Column(
+                      children: [
+                        Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: IconButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+                              ),
                             ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 80),
+
+                        Center(child: Text('Change Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
+
+                        const SizedBox(height: 40,),
+
+                        Center(child: Text('Please enter your new password', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+
+                        const SizedBox(height: 80,),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: MiscBLMInputFieldTemplate(
+                            key: _key1,
+                            labelText: 'New Password',
+                            type: TextInputType.emailAddress,
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',color: Color(0xff000000),),
+                            obscureText: true,
                           ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 80),
-
-                      Center(child: Text('Change Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
-
-                      const SizedBox(height: 40,),
-
-                      Center(child: Text('Please enter your new password', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
-
-                      const SizedBox(height: 80,),
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                        child: MiscBLMInputFieldTemplate(
-                          key: _key1,
-                          labelText: 'New Password',
-                          type: TextInputType.emailAddress,
-                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',color: Color(0xff000000),),
-                          obscureText: true,
                         ),
-                      ),
 
-                      const SizedBox(height: 40,),
+                        const SizedBox(height: 40,),
 
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                        child: MiscBLMInputFieldTemplate(
-                          key: _key2,
-                          labelText: 'Confirm Password',
-                          type: TextInputType.emailAddress,
-                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                          obscureText: true,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: MiscBLMInputFieldTemplate(
+                            key: _key2,
+                            labelText: 'Confirm Password',
+                            type: TextInputType.emailAddress,
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            obscureText: true,
+                          ),
                         ),
-                      ),
 
-                      const SizedBox(height: 80,),
+                        const SizedBox(height: 80,),
 
-                      MiscBLMButtonTemplate(
-                        buttonText: 'Change',
-                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
-                        width: SizeConfig.screenWidth! / 2,
-                        height: 45,
-                        buttonColor: const Color(0xff04ECFF),
-                        onPressed: () async{
-                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                onlyOkButton: true,
-                                buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: (){
-                                  Navigator.pop(context, true);
-                                },
-                              ),
-                            );
-                          }else if (_key1.currentState!.controller.text != _key2.currentState!.controller.text){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                onlyOkButton: true,
-                                buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: (){
-                                  Navigator.pop(context, true);
-                                },
-                              ),
-                            );
-                          }else{
-                            context.loaderOverlay.show();
-                            bool result = await apiBLMPasswordChange(password: _key1.currentState!.controller.text, passwordConfirmation: _key2.currentState!.controller.text, resetToken: widget.resetToken,);
-                            context.loaderOverlay.hide();
-
-                            if(result){
-                              await showDialog(
-                                context: context,
-                                builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                  onlyOkButton: true,
-                                  onOkButtonPressed: (){
-                                    Navigator.pop(context, true);
-                                    Navigator.of(context).pushNamedAndRemoveUntil('/start', (Route<dynamic> route) => false);
-                                  },
-                                ),
-                              );
-                            }else{
+                        MiscBLMButtonTemplate(
+                          buttonText: 'Change',
+                          buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
+                          width: SizeConfig.screenWidth! / 2,
+                          height: 45,
+                          buttonColor: const Color(0xff04ECFF),
+                          onPressed: () async{
+                            if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                  description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                   onlyOkButton: true,
                                   buttonOkColor: const Color(0xffff0000),
                                   onOkButtonPressed: (){
@@ -171,16 +122,67 @@ class BLMPasswordResetState extends State<BLMPasswordReset> {
                                   },
                                 ),
                               );
-                            }
-                          }
-                        },
-                      ),
+                            }else if (_key1.currentState!.controller.text != _key2.currentState!.controller.text){
+                              await showDialog(
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                  onlyOkButton: true,
+                                  buttonOkColor: const Color(0xffff0000),
+                                  onOkButtonPressed: (){
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
+                              );
+                            }else{
+                              context.loaderOverlay.show();
+                              bool result = await apiBLMPasswordChange(password: _key1.currentState!.controller.text, passwordConfirmation: _key2.currentState!.controller.text, resetToken: widget.resetToken,);
+                              context.loaderOverlay.hide();
 
-                      const SizedBox(height: 20),
-                    ],
+                              if(result){
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                    onlyOkButton: true,
+                                    onOkButtonPressed: (){
+                                      Navigator.pop(context, true);
+                                      Navigator.of(context).pushNamedAndRemoveUntil('/start', (Route<dynamic> route) => false);
+                                    },
+                                  ),
+                                );
+                              }else{
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                    onlyOkButton: true,
+                                    buttonOkColor: const Color(0xffff0000),
+                                    onOkButtonPressed: (){
+                                      Navigator.pop(context, true);
+                                    },
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                        ),
+
+                        const SizedBox(height: 20),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
