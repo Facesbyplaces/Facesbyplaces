@@ -30,7 +30,7 @@ export default function PostTable() {
           case "e":
             return <EditPost />;
           case "a":
-            return <AddPost />;
+            return <AddPost pageType={pageType} setPageType={setPageType} />;
           case "d":
             return (
               <div className="container">

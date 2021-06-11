@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  NavbarUserTabAction,
-  NavbarMemorialTabAction,
-  NavbarPostTabAction,
-  NavbarReportTabAction,
-  NavbarTransactionTabAction,
   TableUserAction,
   TableMemorialAction,
   TablePostAction,
   TableReportAction,
 } from "../../redux/actions";
 
-export default function Navbar() {
+export default function Navbar({ item }) {
   const dispatch = useDispatch();
   const { navbarTab } = useSelector(({ navbarTab }) => ({
     navbarTab: navbarTab,
@@ -21,41 +16,31 @@ export default function Navbar() {
     auth_data: auth_data,
   }));
 
-  const handleUserTabClicked = (tab) => {
-    console.log("TAB ", tab);
-    dispatch(NavbarUserTabAction({ tab }));
+  const handleUserTabClicked = () => {
     dispatch(TableMemorialAction());
     dispatch(TablePostAction());
     dispatch(TableReportAction());
   };
 
-  const handleMemorialTabClicked = (tab) => {
-    console.log("TAB ", tab);
-    dispatch(NavbarMemorialTabAction({ tab }));
+  const handleMemorialTabClicked = () => {
     dispatch(TableUserAction());
     dispatch(TablePostAction());
     dispatch(TableReportAction());
   };
 
-  const handlePostTabClicked = (tab) => {
-    console.log("TAB ", tab);
-    dispatch(NavbarPostTabAction({ tab }));
+  const handlePostTabClicked = () => {
     dispatch(TableMemorialAction());
     dispatch(TableUserAction());
     dispatch(TableReportAction());
   };
 
-  const handleReportTabClicked = (tab) => {
-    console.log("TAB ", tab);
-    dispatch(NavbarReportTabAction({ tab }));
+  const handleReportTabClicked = () => {
     dispatch(TableMemorialAction());
     dispatch(TablePostAction());
     dispatch(TableUserAction());
   };
 
-  const handleTransactionTabClicked = (tab) => {
-    console.log("TAB ", tab);
-    dispatch(NavbarTransactionTabAction({ tab }));
+  const handleTransactionTabClicked = () => {
     dispatch(TableUserAction());
     dispatch(TableMemorialAction());
     dispatch(TablePostAction());
@@ -84,64 +69,57 @@ export default function Navbar() {
             <ul className="menu-nav">
               <li
                 className={
-                  navbarTab.tab == "users"
+                  item == "users"
                     ? "menu-item menu-item-active"
                     : "menu-item menu-item-submenu"
                 }
                 aria-haspopup="true"
               >
-                <a href="/users" className="menu-link">
-                  <span
-                    className="menu-text"
-                    onClick={() => handleUserTabClicked("users")}
-                  >
-                    Users
-                  </span>
+                <a
+                  href="/users"
+                  className="menu-link"
+                  onClick={() => handleUserTabClicked()}
+                >
+                  <span className="menu-text">Users</span>
                 </a>
               </li>
               <li
                 className={
-                  navbarTab.tab == "memorials"
-                    ? "menu-item menu-item-active"
-                    : "menu-item menu-item-submenu"
-                }
-                data-menu-toggle="click"
-                aria-haspopup="true"
-              >
-                <a href="/memorials" className="menu-link menu-toggle">
-                  <span
-                    className="menu-text"
-                    onClick={() => handleMemorialTabClicked("memorials")}
-                  >
-                    Memorials
-                  </span>
-                  <span className="menu-desc" />
-                  <i className="menu-arrow" />
-                </a>
-              </li>
-              <li
-                className={
-                  navbarTab.tab == "posts"
+                  item == "memorials"
                     ? "menu-item menu-item-active"
                     : "menu-item menu-item-submenu"
                 }
                 data-menu-toggle="click"
                 aria-haspopup="true"
               >
-                <a href="/posts" className="menu-link menu-toggle">
-                  <span
-                    className="menu-text"
-                    onClick={() => handlePostTabClicked("posts")}
-                  >
-                    Posts
-                  </span>
-                  <span className="menu-desc" />
-                  <i className="menu-arrow" />
+                <a
+                  href="/memorials"
+                  className="menu-link menu-toggle"
+                  onClick={() => handleMemorialTabClicked()}
+                >
+                  <span className="menu-text">Memorials</span>
                 </a>
               </li>
               <li
                 className={
-                  navbarTab.tab == "reports"
+                  item == "posts"
+                    ? "menu-item menu-item-active"
+                    : "menu-item menu-item-submenu"
+                }
+                data-menu-toggle="click"
+                aria-haspopup="true"
+              >
+                <a
+                  href="/posts"
+                  className="menu-link menu-toggle"
+                  onClick={() => handlePostTabClicked()}
+                >
+                  <span className="menu-text">Posts</span>
+                </a>
+              </li>
+              <li
+                className={
+                  item == "reports"
                     ? "menu-item menu-item-active"
                     : "menu-item menu-item-submenu"
                 }
@@ -150,7 +128,7 @@ export default function Navbar() {
                 <a href="/reports" className="menu-link">
                   <span
                     className="menu-text"
-                    onClick={() => handleReportTabClicked("reports")}
+                    onClick={() => handleReportTabClicked()}
                   >
                     Reports
                   </span>
@@ -158,7 +136,7 @@ export default function Navbar() {
               </li>
               <li
                 className={
-                  navbarTab.tab == "transactions"
+                  item == "transactions"
                     ? "menu-item menu-item-active"
                     : "menu-item menu-item-submenu"
                 }
@@ -167,7 +145,7 @@ export default function Navbar() {
                 <a href="/transactions" className="menu-link">
                   <span
                     className="menu-text"
-                    onClick={() => handleTransactionTabClicked("transactions")}
+                    onClick={() => handleTransactionTabClicked()}
                   >
                     Transactions
                   </span>

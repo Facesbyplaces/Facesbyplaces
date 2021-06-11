@@ -14,6 +14,7 @@ import Assets from "../../Assets";
 
 const UserDashboard = () => {
   const [loading, setLoading] = useState(false);
+  const [item, setItem] = useState("users");
 
   useEffect(() => {
     setLoading(true);
@@ -42,7 +43,7 @@ const UserDashboard = () => {
               <div id="kt_header" className="header">
                 {/*begin::Container*/}
                 <div className="container-fluid d-flex align-items-stretch justify-content-between">
-                  <Navbar />
+                  <Navbar item={item} />
                   <Topbar />
                 </div>
                 {/*end::Container*/}

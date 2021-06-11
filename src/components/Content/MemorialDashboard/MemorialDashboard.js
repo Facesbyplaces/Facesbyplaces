@@ -14,6 +14,7 @@ import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
 
 const MemorialDashboard = () => {
   const [loading, setLoading] = useState(false);
+  const [item, setItem] = useState("memorials");
 
   useEffect(() => {
     setLoading(true);
@@ -42,7 +43,7 @@ const MemorialDashboard = () => {
               <div id="kt_header" className="header">
                 {/*begin::Container*/}
                 <div className="container-fluid d-flex align-items-stretch justify-content-between">
-                  <Navbar />
+                  <Navbar item={item} />
                   <Topbar />
                 </div>
                 {/*end::Container*/}

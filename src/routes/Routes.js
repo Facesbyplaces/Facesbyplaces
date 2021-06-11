@@ -48,34 +48,30 @@ export const Routes = withRouter(({ history }) => {
     }
   }, [location]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log("isAuthorized: ", isAuthorized);
-  console.log("isTokenValid: ", isTokenValid);
+  // console.log("isAuthorized: ", isAuthorized);
+  // console.log("isTokenValid: ", isTokenValid);
 
-  return (
-    <>
+  if (isAuthorized && isTokenValid) {
+    return (
       <Switch>
-        {isAuthorized && isTokenValid ? (
-          <Redirect from="/admin" to="/users" />
-        ) : (
-          <>
-            <Redirect to="/admin" />
-            <Route exact path="/admin" component={Home} />
-          </>
-        )}
-        {isAuthorized && isTokenValid ? (
-          <>
-            <Route path="/users" component={UserDashboard} />
-            <Route path="/memorials" component={MemorialDashboard} />
-            <Route path="/posts" component={PostDashboard} />
-            <Route path="/reports" component={ReportDashboard} />
-            <Route path="/transactions" component={TransactionDashboard} />
-            {/* <Route path="*" component={UserDashboard} /> */}
-          </>
-        ) : (
-          <Redirect to="/admin" />
-        )}
-        {/* <Route render={() => <Redirect to={{ pathname: "/users" }} />} /> */}
+        <Redirect from="/admin" to="/users" />
+        <Route path="/users" component={UserDashboard} />
+        <Route path="/memorials" component={MemorialDashboard} />
+        <Route path="/posts" component={PostDashboard} />
+        <Route path="/reports" component={ReportDashboard} />
+        <Route path="/transactions" component={TransactionDashboard} />
+
+        {/* Invalid Urls */}
+        <Route path="/404" component={Oops} />
+        <Redirect to={{ pathname: "/404" }} />
       </Switch>
-    </>
-  );
+    );
+  } else {
+    return (
+      <Switch>
+        <Route exact path="/admin" component={Home} />
+        <Redirect to="/admin" />
+      </Switch>
+    );
+  }
 });

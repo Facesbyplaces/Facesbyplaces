@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
-import { LogoutAction, NavbarUserTabAction } from "../../../redux/actions/";
+import { LogoutAction } from "../../../redux/actions/";
 
 export default function Topbar() {
   const { user } = useSelector(({ auth_data }) => ({
@@ -20,7 +20,6 @@ export default function Topbar() {
   const onLogOutClicked = () => {
     const tab = "users";
     dispatch(LogoutAction({}));
-    dispatch(NavbarUserTabAction({ tab }));
   };
 
   // console.log("Top Bar User", user);

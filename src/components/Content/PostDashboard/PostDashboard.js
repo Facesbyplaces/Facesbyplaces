@@ -13,6 +13,7 @@ import PostTable from "./Posts/PostTable/PostTable";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
+  const [item, setItem] = useState("posts");
 
   useEffect(() => {
     setLoading(true);
@@ -41,7 +42,7 @@ const Dashboard = () => {
               <div id="kt_header" className="header">
                 {/*begin::Container*/}
                 <div className="container-fluid d-flex align-items-stretch justify-content-between">
-                  <Navbar />
+                  <Navbar item={item} />
                   <Topbar />
                 </div>
                 {/*end::Container*/}

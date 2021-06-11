@@ -14,6 +14,7 @@ export default function AddPost() {
   const [errors, setErrors] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [pageType, setPageType] = useState(0);
   const type = postTab.type == 2 ? "Memorial" : "Blm";
 
   // ImageOrVideos Variables
@@ -82,6 +83,28 @@ export default function AddPost() {
       });
   };
 
+  const fetchPageAdmin = (e) => {
+    axios
+      .get(`/api/v1/admin/posts/pageAdmins`)
+      .then((response) => {
+        response.data.pageadmins.map((pageadmin) =>
+          pageadmin.account_type == e
+            ? setUsers(response.data.pageadmins)
+            : setUsers(response.data.pageadmins)
+        );
+        console.log("Response: ", response.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
+  //
+  const setPage = (e) => {
+    setPageType(e);
+    fetchPageAdmin(e);
+  };
+
   // Form Data Handlers
   const handleUserChange = (e) => {
     setPageAdmin(e.target.value);
@@ -118,28 +141,17 @@ export default function AddPost() {
   };
 
   useEffect(() => {
-    axios
-      .get(`/api/v1/admin/posts/pageAdmins`)
-      .then((response) => {
-        response.data.pageadmins.map((pageadmin) =>
-          pageadmin.account_type == postTab.type
-            ? setUsers(response.data.pageadmins)
-            : setUsers(response.data.pageadmins)
-        );
-        console.log("Response: ", response.data);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+    fetchPageAdmin(postTab.type);
+    setPageType(postTab.type);
   }, [users.id]);
 
   const renderedUsers = users.map((user) =>
-    user.account_type == postTab.type ? (
+    user.account_type == pageType ? (
       <option value={user.id}>
         {user.first_name} {user.last_name}
       </option>
     ) : (
-      console.log("Not an Alm User")
+      console.log("Not a User")
     )
   );
 
@@ -349,6 +361,51 @@ export default function AddPost() {
                               )}
                             </div>
                           </div> */}
+                            {/*begin::Group*/}
+                            <div className="form-group row">
+                              <label className="col-form-label col-3 text-lg-right text-left">
+                                Post Type
+                              </label>
+                              <div className="col-9">
+                                <div
+                                  className="btn-group btn-group-toggle"
+                                  style={{
+                                    display: "inline-block",
+                                    textAlign: "center",
+                                  }}
+                                  data-toggle="buttons"
+                                >
+                                  <label
+                                    className={`btn btn-outline-warning ${
+                                      pageType === 2 ? "active" : ""
+                                    }`}
+                                    style={{ width: "56px" }}
+                                    onClick={() => setPage(2)}
+                                  >
+                                    <input type="radio" name="options" />
+                                    ALM
+                                  </label>
+                                  <label
+                                    className={`btn btn-outline-warning ${
+                                      pageType === 1 ? "active" : ""
+                                    }`}
+                                    style={{ width: "56px" }}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="options"
+                                      onClick={() => setPage(1)}
+                                    />
+                                    BLM
+                                  </label>
+                                </div>
+                                <span className="form-text text-muted">
+                                  Pick a post type first before choosing a page
+                                  admin.
+                                </span>
+                              </div>
+                            </div>
+                            {/*end::Group*/}
                             {/*begin::Group*/}
                             <div className="form-group row">
                               <label className="col-form-label col-3 text-lg-right text-left">
