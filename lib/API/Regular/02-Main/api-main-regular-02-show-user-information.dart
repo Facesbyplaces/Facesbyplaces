@@ -20,6 +20,10 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
+
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',

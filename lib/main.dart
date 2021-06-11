@@ -29,6 +29,9 @@ import 'UI/ui-02-login.dart';
 import 'UI/ui-03-newly-installed.dart';
 import 'dart:async';
 
+import 'UI/ui-04-test-stream.dart';
+import 'UI/ui-05-test-images.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("Handling a background message: $message");

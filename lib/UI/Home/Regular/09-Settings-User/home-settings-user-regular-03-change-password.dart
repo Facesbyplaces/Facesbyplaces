@@ -202,42 +202,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                           }
                         }
                       }
-
-                      // context.loaderOverlay.show();
-                      // bool result = await apiRegularChangePassword(currentPassword: _key1.currentState!.controller.text, newPassword: _key2.currentState!.controller.text);
-                      // context.loaderOverlay.hide();
-
-                      // if(result){
-                      //   await showDialog(
-                      //     context: context,
-                      //     builder: (_) => AssetGiffyDialog(
-                      //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      //       title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                      //       entryAnimation: EntryAnimation.DEFAULT,
-                      //       description: Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                      //       onlyOkButton: true,
-                      //       onOkButtonPressed: (){
-                      //         Navigator.pop(context, true);
-                      //       },
-                      //     ),
-                      //   );
-                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
-                      // }else{
-                      //   await showDialog(
-                      //     context: context,
-                      //     builder: (_) => AssetGiffyDialog(
-                      //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                      //       entryAnimation: EntryAnimation.DEFAULT,
-                      //       description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                      //       onlyOkButton: true,
-                      //       buttonOkColor: const Color(0xffff0000),
-                      //       onOkButtonPressed: (){
-                      //         Navigator.pop(context, true);
-                      //       },
-                      //     ),
-                      //   );
-                      // }
                     },
                   ),
 

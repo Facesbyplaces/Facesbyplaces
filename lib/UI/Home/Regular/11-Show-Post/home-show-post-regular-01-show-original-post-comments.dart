@@ -25,6 +25,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keyboard_attachable/keyboard_attachable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
@@ -112,6 +113,29 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     super.initState();
     isGuest();
     likesCount = numberOfLikes;
+    Timer.periodic(Duration(seconds: 5), (Timer t){
+      // itemRemaining = 1;
+      // page1 = 1;
+
+      // controller.clear();
+      itemRemaining = 1;
+      repliesRemaining = 1;
+      // replies.value = [];
+      numberOfReplies = 0;
+      page1 = 1;
+      page2 = 1;
+      count.value = 0;
+      // commentsLikes = [];
+      // commentsNumberOfLikes = [];
+      // repliesLikes = [];
+      // repliesNumberOfLikes = [];
+      isComment = true;
+      numberOfLikes = 0;
+      numberOfComments = 0;
+      print('Called onLoading()');
+      getOriginalPostInformation();
+      onLoading();
+    });
   }
 
   void dispose(){
@@ -171,7 +195,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
   void onLoading() async {
     if (itemRemaining != 0) {
-      context.loaderOverlay.show();
+      // context.loaderOverlay.show();
       var newValue1 = await apiRegularShowListOfComments(postId: widget.postId, page: page1);
       itemRemaining = newValue1.almItemsRemaining;
       count.value = count.value + newValue1.almCommentsList.length;
@@ -240,11 +264,16 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         replies.value = [];
       }
 
-      Timer.periodic(Duration(seconds: 1), (Timer t) => commentsStream.add(comments));
+      // commentsStream.add(comments);
+      if(!commentsStream.isClosed){
+        commentsStream.add(comments);
+      }
+
+      // Timer.periodic(Duration(seconds: 1), (Timer t) => commentsStream.add(comments));
 
       if(mounted)
       page1++;
-      context.loaderOverlay.hide();
+      // context.loaderOverlay.hide();
     }
   }
 
@@ -296,6 +325,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         leading: IconButton(
                           icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
                           onPressed: () {
+                            commentsStream.close();
                             Navigator.pop(context, numberOfComments);
                           },
                         ),
@@ -1449,7 +1479,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
             }else if(commentsStreamData.hasError){
               return const MiscRegularErrorMessageTemplate();
             }else{
-              return Container(height: 0,);
+              // return Container(height: 0,);
+              return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
             }
           },
         ),

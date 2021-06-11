@@ -23,51 +23,25 @@ class HomeRegularUserOtherDetails extends StatefulWidget {
   final bool toggleAddress;
   final bool toggleEmail;
   final bool toggleNumber;
+  const HomeRegularUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
-  const HomeRegularUserOtherDetails(
-      {required this.userId,
-      required this.toggleBirthdate,
-      required this.toggleBirthplace,
-      required this.toggleAddress,
-      required this.toggleEmail,
-      required this.toggleNumber});
-
-  HomeRegularUserOtherDetailsState createState() =>
-      HomeRegularUserOtherDetailsState(
-          userId: userId,
-          toggleBirthdate: toggleBirthdate,
-          toggleBirthplace: toggleBirthplace,
-          toggleAddress: toggleAddress,
-          toggleEmail: toggleEmail,
-          toggleNumber: toggleNumber);
+  HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthplace, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
 }
 
-class HomeRegularUserOtherDetailsState
-    extends State<HomeRegularUserOtherDetails> {
+class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails> {
   final int userId;
   final bool toggleBirthdate;
   final bool toggleBirthplace;
   final bool toggleAddress;
   final bool toggleEmail;
   final bool toggleNumber;
-  HomeRegularUserOtherDetailsState(
-      {required this.userId,
-      required this.toggleBirthdate,
-      required this.toggleBirthplace,
-      required this.toggleAddress,
-      required this.toggleEmail,
-      required this.toggleNumber});
+  HomeRegularUserOtherDetailsState({required this.userId,required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
-  final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 =
-      GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 =
-      GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key3 =
-      GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key4 =
-      GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key5 =
-      GlobalKey<MiscRegularPhoneNumberTemplateState>();
+  final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key5 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
 
   Future<APIRegularShowOtherDetails>? otherDetails;
   bool toggle1 = false;
@@ -109,27 +83,22 @@ class HomeRegularUserOtherDetailsState
             backgroundColor: const Color(0xff04ECFF),
             title: Row(
               children: [
-                Text(
-                  'Other Details',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                      fontFamily: 'NexaRegular', color: const Color(0xffffffff)),
-                ),
-                Spacer()
+                Text('Other Details', textAlign: TextAlign.left, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
+                Spacer(),
               ],
             ),
             centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.65,),
-              onPressed: () {
+              onPressed: (){
                 Navigator.pop(context);
               },
             ),
           ),
           body: FutureBuilder<APIRegularShowOtherDetails>(
             future: otherDetails,
-            builder: (context, details) {
-              if (details.hasData) {
+            builder: (context, details){
+              if(details.hasData){
                 return SingleChildScrollView(
                   padding: const EdgeInsets.all(20.0),
                   physics: const ClampingScrollPhysics(),
@@ -141,33 +110,28 @@ class HomeRegularUserOtherDetailsState
                             child: MiscRegularInputFieldDateTimeTemplate(
                               key: _key1,
                               labelText: 'Birthdate',
-                              displayText:
-                                  details.data!.showOtherDetailsBirthdate,
+                              displayText: details.data!.showOtherDetailsBirthdate,
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+
+                          const SizedBox(height: 20,),
+
                           IconButton(
-                            onPressed: () async {
-                              setState(() {
+                            onPressed: () async{
+                              setState((){
                                 toggle1 = !toggle1;
                               });
 
                               await apiRegularHideBirthdate(hide: toggle1);
                             },
-                            icon: toggle1
-                                ? const Icon(Icons.visibility_rounded)
-                                : const Icon(Icons.visibility_off_rounded),
-                            color: toggle1
-                                ? const Color(0xff85DBF1)
-                                : const Color(0xff888888),
+                            icon: toggle1 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle1 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+
+                      const SizedBox(height: 20,),
+
                       Row(
                         children: [
                           Expanded(
@@ -183,29 +147,25 @@ class HomeRegularUserOtherDetailsState
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+
+                          const SizedBox(height: 20,),
+
                           IconButton(
-                            onPressed: () async {
-                              setState(() {
+                            onPressed: () async{
+                              setState((){
                                 toggle2 = !toggle2;
                               });
 
                               await apiRegularHideBirthplace(hide: toggle2);
                             },
-                            icon: toggle2
-                                ? const Icon(Icons.visibility_rounded)
-                                : const Icon(Icons.visibility_off_rounded),
-                            color: toggle2
-                                ? const Color(0xff85DBF1)
-                                : const Color(0xff888888),
+                            icon: toggle2 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle2 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      
+                      const SizedBox(height: 20,),
+                      
                       Row(
                         children: [
                           Expanded(
