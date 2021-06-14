@@ -74,11 +74,10 @@ dev_dependencies:
   flutter_login_facebook: ^1.0.1
   flutter_datetime_picker: ^1.5.1
   extended_image: ^4.1.0
-  flutter_braintree: ^2.0.0-nullsafety.0
   google_maps_flutter: ^2.0.6
   flutter_google_places: ^0.3.0
   easy_rich_text: ^0.5.5
-  web_socket_channel: ^2.1.0
+  flutter_stripe: ^1.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

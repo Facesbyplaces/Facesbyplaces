@@ -16,8 +16,6 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:io';
 
-import 'misc-06-regular-button.dart';
-
 class MiscRegularDropDownTemplate extends StatefulWidget {
   final int postId;
   final bool likePost;
@@ -56,7 +54,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
   Future<void> shareQRCode(String qrData) async {
     print('The qrData in regular is $qrData');
-    try {
+    try{
       QrValidationResult qrValidationResult = QrValidator.validate(
         data: qrData,
         version: QrVersions.auto,
@@ -67,7 +65,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
       print('The validation is ${qrValidationResult.error}');
       print('The validation is ${qrValidationResult.qrCode}');
 
-      if (qrValidationResult.status == QrValidationStatus.valid) {
+      if(qrValidationResult.status == QrValidationStatus.valid){
         QrCode? qrCode = qrValidationResult.qrCode;
 
         final painter = QrPainter.withQr(
@@ -88,38 +86,23 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
         print('The file  is ${file.path}');
 
         Share.shareFiles(['${file.path}'], text: 'QR Code');
-      } else {
+      }else{
         await showDialog(
-            context: context,
-            builder: (_) => AssetGiffyDialog(
-                  image: Image.asset(
-                    'assets/icons/cover-icon.png',
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(
-                    'Error',
-                    textAlign: TextAlign.center,
-                    style:  TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                        fontFamily: 'NexaRegular'),
-                  ),
-                  entryAnimation: EntryAnimation.DEFAULT,
-                  description: Text(
-                    'Invalid QR Code.',
-                    textAlign: TextAlign.center,
-                    style:  TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                        fontFamily: 'NexaRegular'
-                    ),
-                  ),
-                  onlyOkButton: true,
-                  buttonOkColor: const Color(0xffff0000),
-                  onOkButtonPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                ));
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: (){
+              Navigator.pop(context, true);
+            },
+          ),
+        );
       }
-    } catch (e) {
+    }catch (e){
       print(e.toString());
     }
   }
@@ -133,13 +116,9 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
         builder: (context, dropDownList) {
           return DropdownButton<String>(
             underline: Container(height: 0),
-            icon: Center(
-              child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
-            ),
-            style: TextStyle(
-                fontFamily: 'Roboto', fontSize: 14, color: Color(0xff888888)),
-            items: const <String>['Copy Link', 'Share', 'QR Code', 'Report']
-                .map((String value) {
+            icon: Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
+            style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Color(0xff888888)),
+            items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 value: value,
                 child: Container(
@@ -147,67 +126,41 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                 ),
               );
             }).toList(),
-            onChanged: (String? listValue) async {
+            onChanged: (String? listValue) async{
               dropDownList = listValue!;
-              if (dropDownList == 'Share') {
+              if(dropDownList == 'Share'){
                 initBranchShare();
-
                 FlutterBranchSdk.setIdentity('alm-share-link');
 
                 BranchResponse response = await FlutterBranchSdk.showShareSheet(
                     buo: buo!,
                     linkProperties: lp!,
                     messageText: 'FacesbyPlaces App',
-                    androidMessageTitle:
-                        'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                    androidSharingTitle:
-                        'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
+                    androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                    androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
 
-                if (response.success) {
+                if(response.success){
                   await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(
-                            image: Image.asset(
-                              'assets/icons/cover-icon.png',
-                              fit: BoxFit.cover,
-                            ),
-                            title: Text(
-                              'Success',
-                              textAlign: TextAlign.center,
-                              style:  TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text(
-                              'Successfully shared the link.',
-                              textAlign: TextAlign.center,
-                              style:  TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'
-                              ),
-                            ),
-                            onlyOkButton: true,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          ));
-                } else {
+                    context: context,
+                    builder: (_) => AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      onlyOkButton: true,
+                      onOkButtonPressed: (){
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                  );
+                }else{
                   FlutterBranchSdk.logout();
-                  print(
-                      'Error : ${response.errorCode} - ${response.errorMessage}');
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-              } else if (dropDownList == 'Report') {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomeRegularReport(
-                              postId: widget.postId,
-                              reportType: widget.reportType,
-                            )));
-              } else if (dropDownList == 'QR Code') {
-                String qrData =
-                    'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+              }else if(dropDownList == 'Report'){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: widget.reportType,)));
+              }else if(dropDownList == 'QR Code'){
+                String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
 
                 print('The qrData on click is $qrData');
 
@@ -308,22 +261,17 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                     );
                   },
                 );
-              } else {
+              }else{
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('alm-share-copied-link');
 
-                BranchResponse response = await FlutterBranchSdk.getShortUrl(
-                    buo: buo!, linkProperties: lp!);
-                if (response.success) {
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
+                if(response.success){
                   await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                            image: Image.asset(
-                              'assets/icons/cover-icon.png',
-                              fit: BoxFit.cover,
-                            ),
-                            title: Text(
-                              'Success',
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success',
                               textAlign: TextAlign.center,
                               style:  TextStyle(
                                   fontSize: SizeConfig.blockSizeVertical! * 3.87,

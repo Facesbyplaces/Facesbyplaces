@@ -12,6 +12,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/rendering.dart';
@@ -28,9 +29,6 @@ import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
 import 'UI/ui-03-newly-installed.dart';
 import 'dart:async';
-
-import 'UI/ui-04-test-stream.dart';
-import 'UI/ui-05-test-images.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -49,6 +47,8 @@ void main() async{
   // debugRepaintTextRainbowEnabled = true;
 
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey =  'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik';
+  Stripe.merchantIdentifier = 'merchant.com.app.facesbyplaces';
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
 
@@ -137,7 +137,6 @@ void main() async{
             '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
             '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
             '/home/regular/search': (BuildContext context) => HomeRegularSearch(), // ALM HOME SCREEN
-
           },
         ),
       ),
