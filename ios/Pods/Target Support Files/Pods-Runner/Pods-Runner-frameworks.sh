@@ -200,6 +200,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/KTVHTTPCache/KTVHTTPCache.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OrderedSet/OrderedSet.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ZLPhotoBrowser/ZLPhotoBrowser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/better_player/better_player.framework"
@@ -227,6 +228,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sign_in_with_apple/sign_in_with_apple.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/stripe_ios/stripe_ios.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/url_launcher/url_launcher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi
@@ -256,6 +258,7 @@ if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/KTVHTTPCache/KTVHTTPCache.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OrderedSet/OrderedSet.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ZLPhotoBrowser/ZLPhotoBrowser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/better_player/better_player.framework"
@@ -283,6 +286,7 @@ if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sign_in_with_apple/sign_in_with_apple.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/stripe_ios/stripe_ios.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/url_launcher/url_launcher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi
@@ -312,6 +316,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/KTVHTTPCache/KTVHTTPCache.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OrderedSet/OrderedSet.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ZLPhotoBrowser/ZLPhotoBrowser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/better_player/better_player.framework"
@@ -339,6 +344,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sign_in_with_apple/sign_in_with_apple.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/stripe_ios/stripe_ios.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/url_launcher/url_launcher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi

@@ -1,8 +1,6 @@
 import UIKit
 import Flutter
 import Firebase
-import BraintreeDropIn
-import Braintree
 import GoogleMaps
 
 @UIApplicationMain
@@ -19,11 +17,5 @@ import GoogleMaps
     GMSServices.provideAPIKey("AIzaSyDdGbn-l8EjoPZOqQoedcCzkTa-ubuL9Do")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-  }
-  override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-      if url.scheme?.localizedCaseInsensitiveCompare("com.app.facesbyplaces.braintree") == .orderedSame {
-          return BTAppSwitch.handleOpen(url, options: options)
-      }
-      return false
   }
 }
