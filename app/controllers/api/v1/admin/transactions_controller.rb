@@ -30,6 +30,17 @@ class Api::V1::Admin::TransactionsController < ApplicationController
         render json: TransactionSerializer.new( transaction ).attributes
     end
 
+    def payoutTransaction
+        transaction = Transaction.find(params[:id])
+        if transaction.status === "pending"
+            transaction.update(status: "transferred")
+        elsif transaction.status === "transferred"
+            transaction.update(status: "pending")
+        end
+
+        render json: TransactionSerializer.new( transaction ).attributes
+    end
+
     private
 
     # def report_params

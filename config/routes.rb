@@ -294,6 +294,8 @@ Rails.application.routes.draw do
         get 'transactions',                       to: 'transactions#allTransactions'
         # show transaction
         get 'transactions/show',                  to: 'transactions#showTransaction'
+        # payout transaction
+        put 'transactions/payout/:id',            to: 'transactions#payoutTransaction'
 
       end
 

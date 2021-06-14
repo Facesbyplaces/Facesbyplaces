@@ -1,5 +1,5 @@
 class TransactionSerializer < ActiveModel::Serializer
-  attributes :id, :page, :user, :amount, :created_at
+  attributes :id, :page, :user, :amount, :status, :created_at
 
   def page
     if object.page_type == 'Blm'
