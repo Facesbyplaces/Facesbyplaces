@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import axios from "../../../../../../auxiliary/axios";
+// import axios from "../../../../../../auxiliary/axios";
 
 import { TransactionModal } from "./TransactionModal";
+import { PayoutModal } from "./PayoutModal";
+import { SuccessModal } from "./SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
 
 export default function DataTableRowTransactionData({ transactions, search }) {
   const [showModal, setShowModal] = useState(false);
+  const [showPayoutModal, setShowPayoutModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [gift, setGift] = useState();
 
   const handleViewClick = (transaction) => {
     setGift(transaction);
     setShowModal((prev) => !prev);
+  };
+
+  const handlePayoutClick = (transaction) => {
+    setGift(transaction);
+    setShowPayoutModal((prev) => !prev);
   };
 
   const renderedTransactions = transactions.map((transaction) => (
@@ -50,12 +59,29 @@ export default function DataTableRowTransactionData({ transactions, search }) {
         </span>
       </td>
       <td>
-        <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {transaction.user.account_type == 2 ? "ALM" : "BLM"}
-        </span>
+        {transaction.user.account_type == 2 ? (
+          <span className={"label label-lg label-light-warning label-inline"}>
+            ALM
+          </span>
+        ) : (
+          <span className={"label label-lg label-light-primary label-inline"}>
+            BLM
+          </span>
+        )}
+      </td>
+      <td>
+        {transaction.status === "pending" ? (
+          <span className="label label-lg label-light-danger label-inline">
+            {transaction.status}
+          </span>
+        ) : (
+          <span className="label label-lg label-light-success label-inline">
+            {transaction.status}
+          </span>
+        )}
       </td>
       <td className="pr-2 text-left">
-        {/* View User Icon */}
+        {/* View Transaction Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
           onClick={() => handleViewClick(transaction)}
@@ -99,6 +125,70 @@ export default function DataTableRowTransactionData({ transactions, search }) {
             {/*end::Svg Icon*/}
           </span>
         </a>
+        {/* Payout Transaction Icon */}
+        <a
+          className={
+            transaction.status === "pending"
+              ? "btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+              : "btn btn-icon btn-light btn-hover-primary btn-sm mx-3 disabled"
+          }
+          onClick={() => handlePayoutClick(transaction)}
+        >
+          <span className="svg-icon svg-icon-md svg-icon-primary">
+            {/*begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg*/}
+            <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
+              {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+              <title>Stockholm-icons / Shopping / Credit-card</title>
+              <desc>Created with Sketch.</desc>
+              <defs />
+              <g
+                id="Stockholm-icons-/-Shopping-/-Credit-card"
+                stroke="none"
+                strokeWidth={1}
+                fill="none"
+                fillRule="evenodd"
+              >
+                <rect id="bound" x={0} y={0} width={24} height={24} />
+                <rect
+                  id="Combined-Shape"
+                  fill="#000000"
+                  opacity="0.3"
+                  x={2}
+                  y={5}
+                  width={20}
+                  height={14}
+                  rx={2}
+                />
+                <rect
+                  id="Rectangle-59"
+                  fill="#000000"
+                  x={2}
+                  y={8}
+                  width={20}
+                  height={3}
+                />
+                <rect
+                  id="Rectangle-59-Copy"
+                  fill="#000000"
+                  opacity="0.3"
+                  x={16}
+                  y={14}
+                  width={4}
+                  height={2}
+                  rx={1}
+                />
+              </g>
+            </svg>
+            {/*end::Svg Icon*/}
+          </span>
+        </a>
       </td>
     </tr>
   ));
@@ -130,6 +220,16 @@ export default function DataTableRowTransactionData({ transactions, search }) {
         showModal={showModal}
         setShowModal={setShowModal}
         transaction={gift}
+      />
+      <PayoutModal
+        showModal={showPayoutModal}
+        setShowModal={setShowPayoutModal}
+        setShowSuccessModal={setShowSuccessModal}
+        transaction={gift}
+      />
+      <SuccessModal
+        showModal={showSuccessModal}
+        setShowModal={setShowSuccessModal}
       />
       ;
     </tbody>
