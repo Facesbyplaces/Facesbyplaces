@@ -2,6 +2,8 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   before_action :check_user
   
   def set_payment_intent
+      @stripe_account_id = User.find_by(email: "admin@email.com").device_token
+
       case params[:page_type]
       when 'Blm'
         @memorial = Blm.find(params[:page_id])
@@ -28,7 +30,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         amount: @amount.to_i,
         description: "Donation for #{@memorial.name}",
         source: token,
-      }, stripe_account: @memorial.stripe_connect_account_id)
+      }, stripe_account: @stripe_connect_account_id)
       
       if payment_intent.status == 'succeeded'
         # save to transaction
