@@ -13,7 +13,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     if intent.status == 'requires_confirmation'
       if transaction.save
         render json: {
-          memorial_stripe_account: memorial.stripe_connect_account_id,
+          # memorial_stripe_account: memorial.stripe_connect_account_id,
           publishable_key: Rails.configuration.stripe[:publishable_key],
           payment_intent: intent,
           transaction: transaction
@@ -34,7 +34,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   end
 
   def payment_method
-    params[:payment_method]
+    return params[:payment_method]
   end
   
   def stripe_account_id
