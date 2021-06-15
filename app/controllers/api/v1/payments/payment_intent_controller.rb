@@ -1,15 +1,16 @@
 class Api::V1::Payments::PaymentIntentController < ApplicationController
-  # before_action :check_user
+  before_action :check_user
 
   def set_payment_intent
     intent = Stripe::PaymentIntent.create({
       amount: amount,
       currency: 'usd',
       description: "Donation for #{memorial.name}",
-      customer: stripe_account_id
+      customer: stripe_account_id,
+      payment_method: payment_method
     })
 
-    if intent.status == 'succeeded'
+    if intent.status == 'requires_confirmation'
       if transaction.save
         render json: {
           memorial_stripe_account: memorial.stripe_connect_account_id,
@@ -30,6 +31,10 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   private
   def report_params
     params.require(:card).permit(:number, :exp_month, :exp_year, :cvc)
+  end
+
+  def payment_method
+    params[:payment_method]
   end
   
   def stripe_account_id
