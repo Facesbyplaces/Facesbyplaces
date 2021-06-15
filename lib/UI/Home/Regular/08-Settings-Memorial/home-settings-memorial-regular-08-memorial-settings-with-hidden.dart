@@ -24,17 +24,11 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff04ECFF),
-        title: const Text(
-          'Memorial Settings',
-          style: const TextStyle(
-            fontSize: 16,
-            color: const Color(0xffffffff),
-          ),
-        ),
+        title: const Text('Memorial Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
+          onPressed: (){
             Navigator.pop(context);
           },
         ),
@@ -51,30 +45,14 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
                 labelColor: const Color(0xff04ECFF),
                 unselectedLabelColor: const Color(0xff000000),
                 indicatorColor: const Color(0xff04ECFF),
-                onTap: (int index) {
-                  setState(() {
+                onTap: (int index){
+                  setState((){
                     toggle = index;
                   });
                 },
                 tabs: [
-                  const Center(
-                    child: const Text(
-                      'Page',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  const Center(
-                    child: const Text(
-                      'Privacy',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
+                  const Center(child: const Text('Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
+                  const Center(child: const Text('Privacy', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
                 ],
               ),
             ),
@@ -94,340 +72,153 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
     );
   }
 
-  settingsTab1(int memorialId) {
+  settingsTab1(int memorialId){
     return ListView(
       physics: const ClampingScrollPhysics(),
       children: [
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text(
-            'Page Details',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
-          ),
-          subtitle: const Text(
-            'Update page details',
-            style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
+          title: const Text('Page Details', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Update page details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text(
-            'Page Image',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
-          ),
-          subtitle: const Text(
-            'Update Page image and background image',
-            style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
+          title: const Text('Page Image', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Update Page image and background image', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+        
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text(
-            'Admins',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
-          ),
-          subtitle: const Text(
-            'Add or remove admins of this page',
-            style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
+          title: const Text('Admins', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Add or remove admins of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text(
-            'Family',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
-          ),
-          subtitle: const Text(
-            'Add or remove family of this page',
-            style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
+          title: const Text('Family', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Add or remove family of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text(
-            'Friends',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
-          ),
-          subtitle: const Text(
-            'Add or remove friends of this page',
-            style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
+          title: const Text('Friends', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Add or remove friends of this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         widget.relationship != 'Friend'
-            ? ListTile(
-                onTap: () async {
-                  String choice = await showDialog(
-                      context: (context),
-                      builder: (build) =>
-                          const MiscRegularRelationshipFromDialog());
+        ? ListTile(
+          tileColor: const Color(0xffffffff),
+          title: const Text('Relationship', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Set your relationship for this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          onTap: () async{
+            String choice = await showDialog(context: (context), builder: (build) => const MiscRegularRelationshipFromDialog());
 
-                  if (choice != '') {
-                    bool result = await apiRegularMemorialSetRelationship(
-                        memorialId: memorialId, relationship: choice);
+            if(choice != ''){
+              bool result = await apiRegularMemorialSetRelationship(memorialId: memorialId, relationship: choice);
 
-                    if (result == true) {
-                      await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  'Success',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize:
-                                      SizeConfig.blockSizeVertical! * 3.16,
-                                      fontFamily: 'NexaRegular'),
-                                ),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text(
-                                  'Successfully updated the relationship setting.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize:
-                                      SizeConfig.blockSizeVertical! * 2.87,
-                                      fontFamily: 'NexaRegular'),
-                                ),
-                                onlyOkButton: true,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    } else {
-                      await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  'Error',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize:
-                                      SizeConfig.blockSizeVertical! * 3.16,
-                                      fontFamily: 'NexaRegular'),
-                                ),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description:  Text(
-                                  'Something went wrong. Please try again.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize:
-                                      SizeConfig.blockSizeVertical! * 2.87,
-                                      fontFamily: 'NexaRegular'),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    }
-                  }
-                },
-                tileColor: const Color(0xffffffff),
-                title: const Text(
-                  'Relationship',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xff000000),
+              if(result == true){
+                await showDialog(
+                  context: context,
+                  builder: (_) => AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Successfully updated the relationship setting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                    onlyOkButton: true,
+                    onOkButtonPressed: (){
+                      Navigator.pop(context, true);
+                    },
                   ),
-                ),
-                subtitle: const Text(
-                  'Set your relationship for this page',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w300,
-                    color: const Color(0xffBDC3C7),
+                );
+              }else{
+                await showDialog(
+                  context: context,
+                  builder: (_) => AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                    onlyOkButton: true,
+                    buttonOkColor: const Color(0xffff0000),
+                    onOkButtonPressed: (){
+                      Navigator.pop(context, true);
+                    },
                   ),
-                ),
-              )
-            : ListTile(
-                onTap: () async {
-                  bool confirmResult = await showDialog(
-                    context: (context),
-                    builder: (build) => const MiscRegularConfirmDialog(
-                      title: 'Leave page',
-                      content: 'Are you sure you want to leave this page?',
-                    ),
-                  );
-                  if (confirmResult) {
-                    context.loaderOverlay.show();
-                    String result =
-                        await apiRegularLeavePage(memorialId: memorialId);
-                    context.loaderOverlay.hide();
+                );
+              }
+            }
+          },
+        )
+        : ListTile(
+          tileColor: const Color(0xffffffff),
+          title: const Text('Leave Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Leave this page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
+          onTap: () async{
+            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
 
-                    if (result != 'Failed') {
-                      if (result == 'Blm') {
-                        Navigator.popAndPushNamed(context, '/home/blm');
-                      } else {
-                        Navigator.popAndPushNamed(context, '/home/regular');
-                      }
-                    } else {
-                      await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  'Error',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize:
-                                      SizeConfig.blockSizeVertical! * 3.16,
-                                      fontFamily: 'NexaRegular'),
-                                ),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text(
-                                  'Something went wrong. Please try again.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize:
-                                      SizeConfig.blockSizeVertical! * 2.87,
-                                      fontFamily: 'NexaRegular'),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    }
-                  }
-                },
-                tileColor: const Color(0xffffffff),
-                title: const Text(
-                  'Leave Page',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xff000000),
+            if(confirmResult){
+              context.loaderOverlay.show();
+              String result = await apiRegularLeavePage(memorialId: memorialId);
+              context.loaderOverlay.hide();
+
+              if(result != 'Failed'){
+                if(result == 'Blm'){
+                  Navigator.popAndPushNamed(context, '/home/blm');
+                }else{
+                  Navigator.popAndPushNamed(context, '/home/regular');
+                }
+              }else{
+                await showDialog(
+                  context: context,
+                  builder: (_) => AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                    onlyOkButton: true,
+                    buttonOkColor: const Color(0xffff0000),
+                    onOkButtonPressed: (){
+                      Navigator.pop(context, true);
+                    },
                   ),
-                ),
-                subtitle: const Text(
-                  'Leave this page',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w300,
-                    color: const Color(0xffBDC3C7),
-                  ),
-                ),
-              ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
+                );
+              }
+            }
+          },
         ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text(
-            'Paypal',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
-          ),
-          subtitle: const Text(
-            'Manage cards that receives the memorial gifts.',
-            style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
+          title: const Text('Paypal', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Manage cards that receives the memorial gifts.', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text(
-            'Delete Page',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
-          ),
-          subtitle: const Text(
-            'Completely remove the page. This is irreversible',
-            style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
+          title: const Text('Delete Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Completely remove the page. This is irreversible', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
-        const SizedBox(
-          height: 10,
-        ),
-        Image.asset(
-          'assets/icons/logo.png',
-          height: 100,
-          width: 100,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
+
+        const SizedBox(height: 10,),
+
+        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
+
+        const SizedBox(height: 30,),
       ],
     );
   }
@@ -438,26 +229,12 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
       children: [
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
-          title: const Text(
-            'Customize shown info',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xff000000),
-            ),
-          ),
-          subtitle: const Text(
-            'Customize what others see on your page',
-            style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              color: const Color(0xffBDC3C7),
-            ),
-          ),
+          title: const Text('Customize shown info', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+          subtitle: const Text('Customize what others see on your page', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         Container(
           height: 80,
           color: const Color(0xffaaaaaa),
@@ -466,21 +243,8 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               Expanded(
                 child: const ListTile(
                   tileColor: const Color(0xffaaaaaa),
-                  title: const Text(
-                    'Hide Family',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xff000000),
-                    ),
-                  ),
-                  subtitle: const Text(
-                    'Show or hide family details',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w300,
-                      color: const Color(0xffBDC3C7),
-                    ),
-                  ),
+                  title: const Text('Hide Family', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                  subtitle: const Text('Show or hide family details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                 ),
               ),
               Switch(
@@ -492,10 +256,9 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
             ],
           ),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         Container(
           height: 80,
           color: const Color(0xffaaaaaa),
@@ -504,21 +267,8 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               Expanded(
                 child: const ListTile(
                   tileColor: const Color(0xffaaaaaa),
-                  title: const Text(
-                    'Hide Friends',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xff000000),
-                    ),
-                  ),
-                  subtitle: const Text(
-                    'Show or hide friends details',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w300,
-                      color: const Color(0xffBDC3C7),
-                    ),
-                  ),
+                  title: const Text('Hide Friends', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                  subtitle: const Text('Show or hide friends details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                 ),
               ),
               Switch(
@@ -530,10 +280,9 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
             ],
           ),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
         Container(
           height: 80,
           color: const Color(0xffaaaaaa),
@@ -542,21 +291,8 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               Expanded(
                 child: const ListTile(
                   tileColor: const Color(0xffaaaaaa),
-                  title: const Text(
-                    'Hide Followers',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xff000000),
-                    ),
-                  ),
-                  subtitle: const Text(
-                    'Show or hide your followers',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w300,
-                      color: const Color(0xffBDC3C7),
-                    ),
-                  ),
+                  title: const Text('Hide Followers', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                  subtitle: const Text('Show or hide your followers', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                 ),
               ),
               Switch(
@@ -568,21 +304,14 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
             ],
           ),
         ),
-        Container(
-          height: 5,
-          color: const Color(0xffeeeeee),
-        ),
-        const SizedBox(
-          height: 80,
-        ),
-        Image.asset(
-          'assets/icons/logo.png',
-          height: 100,
-          width: 100,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
+
+        Container(height: 5, color: const Color(0xffeeeeee),),
+
+        const SizedBox(height: 80,),
+
+        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
+
+        const SizedBox(height: 10,),
       ],
     );
   }

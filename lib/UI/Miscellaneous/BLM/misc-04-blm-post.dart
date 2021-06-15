@@ -83,81 +83,40 @@ class MiscBLMPostState extends State<MiscBLMPost> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ListTile(
-              onTap: () {
-                if (widget.pageType == 'Memorial') {
-                  if (widget.managed == true || widget.famOrFriends == true) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeRegularProfile(
-                                  memorialId: widget.memorialId,
-                                  relationship: widget.relationship,
-                                  managed: widget.managed,
-                                  newlyCreated: false,
-                                )));
-                  } else {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeRegularMemorialProfile(
-                                  memorialId: widget.memorialId,
-                                  pageType: widget.pageType,
-                                  newJoin: widget.joined,
-                                )));
+              onTap: (){
+                if(widget.pageType == 'Memorial'){
+                  if(widget.managed == true || widget.famOrFriends == true){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
+                  }else{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
                   }
-                } else {
-                  if (widget.managed == true || widget.famOrFriends == true) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeBLMProfile(
-                                  memorialId: widget.memorialId,
-                                  relationship: widget.relationship,
-                                  managed: widget.managed,
-                                  newlyCreated: false,
-                                )));
-                  } else {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeBLMMemorialProfile(
-                                  memorialId: widget.memorialId,
-                                  pageType: widget.pageType,
-                                  newJoin: widget.joined,
-                                )));
+                }else{
+                  if(widget.managed == true || widget.famOrFriends == true){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
+                  }else{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
                   }
                 }
               },
               contentPadding: EdgeInsets.zero,
               leading: widget.profileImage != ''
-                  ? CircleAvatar(
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: NetworkImage(widget.profileImage),
-                      backgroundImage:
-                          const AssetImage('assets/icons/app-icon.png'),
-                    )
-                  : const CircleAvatar(
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage:
-                          const AssetImage('assets/icons/app-icon.png'),
-                    ),
-              title: Text(
-                widget.memorialName,
+              ? CircleAvatar(
+                backgroundColor: const Color(0xff888888),
+                foregroundImage: NetworkImage(widget.profileImage),
+                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+              )
+              : const CircleAvatar(
+                backgroundColor: const Color(0xff888888),
+                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+              ),
+              title: Text(widget.memorialName,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xff000000),
-                ),
+                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
               ),
               subtitle: Text(
                 widget.timeCreated,
                 maxLines: 1,
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 1.56,
-                  fontFamily: 'NexaRegular',
-                  color: const Color(0xffB1B1B1),
-                ),
+                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.56, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
               ),
               trailing: MiscBLMDropDownTemplate(
                 postId: widget.postId,
@@ -167,62 +126,58 @@ class MiscBLMPostState extends State<MiscBLMPost> {
                 pageType: widget.pageType,
               ),
             ),
-            Column(
-              children: widget.contents,
-            ),
+
+            Column(children: widget.contents,),
+
             widget.numberOfTagged != 0
-                ? Column(
-                    children: [
-                      const SizedBox(height: 10),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                const TextSpan(
-                                    style: const TextStyle(
-                                        color: const Color(0xff888888)),
-                                    text: 'with '),
-                                TextSpan(
-                                  children: List.generate(
-                                    widget.numberOfTagged,
-                                    (index) => TextSpan(
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xff000000)),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: widget.taggedFirstName[index],
-                                          ),
-                                          const TextSpan(text: ' '),
-                                          TextSpan(
-                                            text: widget.taggedLastName[index],
-                                          ),
-                                          index < widget.numberOfTagged - 1
-                                              ? const TextSpan(text: ', ')
-                                              : const TextSpan(text: ''),
-                                        ],
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomeBLMUserProfile(
-                                                            userId:
-                                                                widget.taggedId[
-                                                                    index],
-                                                            accountType:
-                                                                widget.pageType ==
-                                                                        'BLM'
-                                                                    ? 1
-                                                                    : 2)));
-                                          }),
-                                  ),
+            ? Column(
+                children: [
+                  const SizedBox(height: 10),
+                  
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(text: TextSpan(children: [const TextSpan(style: const TextStyle(color: const Color(0xff888888)), text: 'with '),
+                              TextSpan(
+                                children: List.generate(
+                                  widget.numberOfTagged,
+                                  (index) => TextSpan(
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color(0xff000000)),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: widget.taggedFirstName[index],
+                                        ),
+                                        const TextSpan(text: ' '),
+                                        TextSpan(
+                                          text: widget.taggedLastName[index],
+                                        ),
+                                        index < widget.numberOfTagged - 1
+                                            ? const TextSpan(text: ', ')
+                                            : const TextSpan(text: ''),
+                                      ],
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HomeBLMUserProfile(
+                                                          userId:
+                                                              widget.taggedId[
+                                                                  index],
+                                                          accountType:
+                                                              widget.pageType ==
+                                                                      'BLM'
+                                                                  ? 1
+                                                                  : 2)));
+                                        }),
                                 ),
-                              ],
-                            ),
-                          ))
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 : Container(

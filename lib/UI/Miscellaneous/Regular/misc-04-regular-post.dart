@@ -197,27 +197,15 @@ class MiscRegularPostState extends State<MiscRegularPost> {
                     await apiRegularLikeOrUnlikePost(postId: widget.postId, like: likePost);
                   },
                   icon: likePost == true
-                  ? const FaIcon(
-                    FontAwesomeIcons.solidHeart,
-                    color: const Color(0xffE74C3C),
-                  )
-                  : const FaIcon(
-                    FontAwesomeIcons.heart,
-                    color: const Color(0xff888888),
-                  ),
-                  label: Text('$likesCount',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xff000000),
-                    ),
-                  ),
+                  ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
+                  : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
+                  label: Text('$likesCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                 ),
 
                 const SizedBox(width: 20),
 
                 TextButton.icon(
-                  onPressed: () async {
+                  onPressed: () async{
                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
                   },
                   icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
@@ -274,23 +262,11 @@ class MiscRegularPostState extends State<MiscRegularPost> {
                         context: context,
                         builder: (_) => AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                fontFamily: 'NexaRegular',
-                              ),
-                          ),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Successfully shared the link.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular'
-                            ),
-                          ),
+                          description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                           onlyOkButton: true,
-                          onOkButtonPressed: () {
+                          onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
                         ),

@@ -140,17 +140,15 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                               labelText: 'Birthplace',
                               displayText:
                               details.data!.showOtherDetailsBirthplace,
-                              labelTextStyle: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: const Color(0xffBDC3C7),
-                              ),
+                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                             ),
                           ),
 
                           const SizedBox(height: 20,),
 
                           IconButton(
+                            icon: toggle2 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle2 ? const Color(0xff85DBF1) : const Color(0xff888888),
                             onPressed: () async{
                               setState((){
                                 toggle2 = !toggle2;
@@ -158,8 +156,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                               await apiRegularHideBirthplace(hide: toggle2);
                             },
-                            icon: toggle2 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
-                            color: toggle2 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
@@ -172,38 +168,29 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             child: MiscRegularInputFieldTemplate(
                               key: _key3,
                               labelText: 'Home Address',
-                              displayText:
-                                  details.data!.showOtherDetailsAddress,
-                              labelTextStyle: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: const Color(0xffBDC3C7),
-                              ),
+                              displayText: details.data!.showOtherDetailsAddress,
+                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+
+                          const SizedBox(height: 20,),
+
                           IconButton(
-                            onPressed: () async {
-                              setState(() {
+                            icon: toggle3 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle3 ? const Color(0xff85DBF1) : const Color(0xff888888),
+                            onPressed: () async{
+                              setState((){
                                 toggle3 = !toggle3;
                               });
 
                               await apiRegularHideAddress(hide: toggle3);
                             },
-                            icon: toggle3
-                                ? const Icon(Icons.visibility_rounded)
-                                : const Icon(Icons.visibility_off_rounded),
-                            color: toggle3
-                                ? const Color(0xff85DBF1)
-                                : const Color(0xff888888),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+
+                      const SizedBox(height: 20,),
+
                       Row(
                         children: [
                           Expanded(
@@ -212,107 +199,74 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                               labelText: 'Email',
                               displayText: details.data!.showOtherDetailsEmail,
                               type: TextInputType.emailAddress,
-                              labelTextStyle: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: const Color(0xffBDC3C7),
-                              ),
+                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+
+                          const SizedBox(height: 20,),
+
                           IconButton(
-                            onPressed: () async {
-                              setState(() {
+                            icon: toggle4 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle4 ? const Color(0xff85DBF1) : const Color(0xff888888),
+                            onPressed: () async{
+                              setState((){
                                 toggle4 = !toggle4;
                               });
 
                               await apiRegularHideEmail(hide: toggle4);
                             },
-                            icon: toggle4
-                                ? const Icon(Icons.visibility_rounded)
-                                : const Icon(Icons.visibility_off_rounded),
-                            color: toggle4
-                                ? const Color(0xff85DBF1)
-                                : const Color(0xff888888),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+
+                      const SizedBox(height: 20,),
+
                       Row(
                         children: [
                           Expanded(
                             child: MiscRegularPhoneNumberTemplate(
-                                key: _key5,
-                                labelText: 'Contact Number',
-                                labelTextStyle: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                  fontFamily: 'NexaRegular',
-                                  color: const Color(0xffBDC3C7),
-                                ),
-                                displayText:
-                                    details.data!.showOtherDetailsPhoneNumber,
-                                type: TextInputType.phone),
+                              key: _key5,
+                              labelText: 'Contact Number',
+                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',color: const Color(0xffBDC3C7),),
+                              displayText: details.data!.showOtherDetailsPhoneNumber,
+                              type: TextInputType.phone,
+                            ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+
+                          const SizedBox(height: 20,),
+
                           IconButton(
-                            onPressed: () async {
-                              setState(() {
+                            icon: toggle5 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle5 ? const Color(0xff85DBF1) : const Color(0xff888888),
+                            onPressed: () async{
+                              setState((){
                                 toggle5 = !toggle5;
                               });
 
                               await apiRegularHidePhoneNumber(hide: toggle5);
                             },
-                            icon: toggle5
-                                ? const Icon(Icons.visibility_rounded)
-                                : const Icon(Icons.visibility_off_rounded),
-                            color: toggle5
-                                ? const Color(0xff85DBF1)
-                                : const Color(0xff888888),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 80,
-                      ),
+
+                      const SizedBox(height: 80,),
+
                       MiscRegularButtonTemplate(
                         buttonText: 'Update',
-                        buttonTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                          fontFamily: 'NexaBold',
-                          color: const Color(0xffffffff),
-                        ),
+                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                         width: SizeConfig.screenWidth! / 2,
                         height: 45,
                         buttonColor: const Color(0xff04ECFF),
-                        onPressed: () async {
-                          if (details.data!.showOtherDetailsBirthdate !=
-                                  _key1.currentState!.controller.text ||
-                              details.data!.showOtherDetailsBirthplace !=
-                                  _key2.currentState!.controller.text ||
-                              details.data!.showOtherDetailsAddress !=
-                                  _key3.currentState!.controller.text ||
-                              details.data!.showOtherDetailsEmail !=
-                                  _key4.currentState!.controller.text ||
-                              details.data!.showOtherDetailsPhoneNumber !=
-                                  _key5.currentState!.controller.text) {
-                            bool confirmResult = await showDialog(
-                                context: (context),
-                                builder: (build) =>
-                                    const MiscRegularConfirmDialog(
-                                      title: 'Confirm',
-                                      content:
-                                          'Do you want to save the changes?',
-                                      confirmColor_1: const Color(0xff04ECFF),
-                                      confirmColor_2: const Color(0xffFF0000),
-                                    ));
+                        onPressed: () async{
+                          if(details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text ||
+                              details.data!.showOtherDetailsBirthplace != _key2.currentState!.controller.text ||
+                              details.data!.showOtherDetailsAddress != _key3.currentState!.controller.text ||
+                              details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text ||
+                              details.data!.showOtherDetailsPhoneNumber != _key5.currentState!.controller.text){
 
-                            if (confirmResult) {
+                            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
+
+                            if(confirmResult){
                               context.loaderOverlay.show();
 
                               bool result = await apiRegularUpdateOtherDetails(
@@ -320,116 +274,71 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 birthplace: _key2.currentState!.controller.text,
                                 address: _key3.currentState!.controller.text,
                                 email: _key4.currentState!.controller.text,
-                                phoneNumber:
-                                    _key5.currentState!.controller.text,
+                                phoneNumber: _key5.currentState!.controller.text,
                               );
 
                               context.loaderOverlay.hide();
 
-                              if (result) {
+                              if(result){
                                 await showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                          image: Image.asset(
-                                            'assets/icons/cover-icon.png',
-                                            fit: BoxFit.cover,
-                                          ),
-                                          title: Text(
-                                            'Success',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                                fontFamily: 'NexaRegular'),
-                                          ),
-                                          entryAnimation:
-                                              EntryAnimation.DEFAULT,
-                                          description: Text(
-                                            'Successfully updated the other details.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: SizeConfig
-                                                    .blockSizeVertical! *
-                                                    2.87,
-                                                fontFamily: 'NexaRegular'),
-                                          ),
-                                          onlyOkButton: true,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        ));
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            HomeRegularUserProfileDetails(
-                                              userId: userId,
-                                            )));
-                              } else {
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Successfully updated the other details.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                    onlyOkButton: true,
+                                    onOkButtonPressed: (){
+                                      Navigator.pop(context, true);
+                                    },
+                                  ),
+                                );
+
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
+                              }else{
                                 await showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                          image: Image.asset(
-                                            'assets/icons/cover-icon.png',
-                                            fit: BoxFit.cover,
-                                          ),
-                                          title: Text(
-                                            'Error',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                                fontFamily: 'NexaRegular'),
-                                          ),
-                                          entryAnimation:
-                                              EntryAnimation.DEFAULT,
-                                          description: Text(
-                                            'Something went wrong. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: SizeConfig
-                                                    .blockSizeVertical! *
-                                                    2.87,
-                                                fontFamily: 'NexaRegular'),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor:
-                                              const Color(0xffff0000),
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        ));
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                    onlyOkButton: true,
+                                    buttonOkColor: const Color(0xffff0000),
+                                    onOkButtonPressed: (){
+                                      Navigator.pop(context, true);
+                                    },
+                                  ),
+                                );
                               }
                             }
                           }
                         },
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+
+                      const SizedBox(height: 20,),
                     ],
                   ),
                 );
-              } else if (details.hasError) {
+              }else if(details.hasError){
                 return Container(
-                    height: SizeConfig.screenHeight,
-                    child: const Center(
-                      child: const Text(
-                        'Something went wrong. Please try again.',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: const Color(0xff000000),
-                        ),
+                  height: SizeConfig.screenHeight,
+                  child: const Center(
+                    child: const Text('Something went wrong. Please try again.',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: const Color(0xff000000),
                       ),
-                    ));
-              } else {
+                    ),
+                  ),
+                );
+              }else{
                 return Container(
                   height: SizeConfig.screenHeight,
                   child: Center(
                     child: Container(
-                      child: const SpinKitThreeBounce(
-                        color: const Color(0xff000000),
-                        size: 50.0,
-                      ),
+                      child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
                       color: const Color(0xffffffff),
                     ),
                   ),

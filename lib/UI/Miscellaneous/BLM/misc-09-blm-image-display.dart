@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 
 class MiscBLMImageDisplayFeedTemplate extends StatelessWidget{
-
   final String image;
   final double backSize;
   final double frontSize;
   final Color backgroundColor;
-
-  const MiscBLMImageDisplayFeedTemplate({
-    this.image = 'assets/icons/app-icon.png',
-    this.backSize = 20,
-    this.frontSize = 15,
-    this.backgroundColor = const Color(0xff000000),
-  });
+  const MiscBLMImageDisplayFeedTemplate({this.image = 'assets/icons/app-icon.png', this.backSize = 20, this.frontSize = 15, this.backgroundColor = const Color(0xff000000),});
 
   @override
   Widget build(BuildContext context){

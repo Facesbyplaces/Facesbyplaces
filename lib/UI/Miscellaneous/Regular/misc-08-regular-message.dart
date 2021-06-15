@@ -2,7 +2,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularErrorMessageTemplate extends StatelessWidget{
-
   const MiscRegularErrorMessageTemplate();
 
   @override
@@ -13,24 +12,17 @@ class MiscRegularErrorMessageTemplate extends StatelessWidget{
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-
             const SizedBox(height: 30,),
 
             Image.asset('assets/icons/app-icon.png', width: 300, height: 300,),
 
             const SizedBox(height: 100,),
 
-            Text('Error', textAlign: TextAlign.center,style: TextStyle(
-                fontSize:
-                SizeConfig.blockSizeVertical! * 3.16,
-                fontFamily: 'NexaRegular'),),
+            Text('Error', textAlign: TextAlign.center,style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
             
             const SizedBox(height: 30,),
 
-            Text('Something went wrong. Please try again.', textAlign: TextAlign.center,  style: TextStyle(
-                fontSize:
-                SizeConfig.blockSizeVertical! * 2.87,
-                fontFamily: 'NexaRegular'),),
+            Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
 
             const SizedBox(height: 30,),
 
@@ -39,14 +31,7 @@ class MiscRegularErrorMessageTemplate extends StatelessWidget{
               onPressed: () async{
                 Navigator.pop(context);
               },
-              child: Text('Go back',
-                style: TextStyle(
-                  fontSize:
-                  SizeConfig.blockSizeVertical! * 3.16,
-                    fontFamily: 'NexaRegular',
-                  color: const Color(0xffffffff),
-                ),
-              ),
+              child: Text('Go back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
               minWidth: SizeConfig.screenWidth! / 2,
               height: 45,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -54,7 +39,6 @@ class MiscRegularErrorMessageTemplate extends StatelessWidget{
             ),
 
             const SizedBox(height: 30,),
-
           ],
         ),
       ),
@@ -63,7 +47,6 @@ class MiscRegularErrorMessageTemplate extends StatelessWidget{
 }
 
 class MiscRegularLoginToContinue extends StatelessWidget{
-
   const MiscRegularLoginToContinue();
 
   @override
@@ -75,7 +58,6 @@ class MiscRegularLoginToContinue extends StatelessWidget{
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-
             const SizedBox(height: 30,),
 
             Image.asset('assets/icons/app-icon.png', width: 300, height: 300,),
@@ -98,7 +80,6 @@ class MiscRegularLoginToContinue extends StatelessWidget{
             ),
 
             const SizedBox(height: 30,),
-
           ],
         ),
       ),

@@ -13,7 +13,6 @@ import GoogleMaps
       UNUserNotificationCenter.current().delegate = self
     }
     FirebaseApp.configure()
-    BTAppSwitch.setReturnURLScheme("com.app.facesbyplaces.braintree")
     GMSServices.provideAPIKey("AIzaSyDdGbn-l8EjoPZOqQoedcCzkTa-ubuL9Do")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)

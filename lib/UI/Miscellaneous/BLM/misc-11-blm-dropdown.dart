@@ -23,6 +23,7 @@ class MiscBLMDropDownTemplate extends StatefulWidget {
   final String reportType;
   final String pageType;
   const MiscBLMDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
+
   MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState();
 }
 
@@ -40,20 +41,20 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
       publiclyIndex: true,
       locallyIndex: true,
       contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Post')
-        ..addCustomMetadata('link-post-id', widget.postId)
-        ..addCustomMetadata('link-like-status', widget.likePost)
-        ..addCustomMetadata('link-number-of-likes', widget.likesCount)
-        ..addCustomMetadata('link-type-of-account', 'Blm'),
-      );
+      ..addCustomMetadata('link-category', 'Post')
+      ..addCustomMetadata('link-post-id', widget.postId)
+      ..addCustomMetadata('link-like-status', widget.likePost)
+      ..addCustomMetadata('link-number-of-likes', widget.likesCount)
+      ..addCustomMetadata('link-type-of-account', 'Blm'),
+    );
 
     lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
     lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
-  Future<void> shareQRCode(String qrData) async {
+  Future<void> shareQRCode(String qrData) async{
     print('The qrData in Blm is $qrData');
-    try {
+    try{
       QrValidationResult qrValidationResult = QrValidator.validate(
         data: qrData,
         version: QrVersions.auto,
@@ -64,7 +65,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
       print('The validation is ${qrValidationResult.error}');
       print('The validation is ${qrValidationResult.qrCode}');
 
-      if (qrValidationResult.status == QrValidationStatus.valid) {
+      if(qrValidationResult.status == QrValidationStatus.valid){
         QrCode? qrCode = qrValidationResult.qrCode;
 
         final painter = QrPainter.withQr(
@@ -82,47 +83,32 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
         final file = await new File('${tempDir.path}/blm-qr-code.png').create();
         file.writeAsBytesSync(list);
 
-        print('The file  is ${file.path}');
+        print('The file is ${file.path}');
 
         Share.shareFiles(['${file.path}'], text: 'QR Code');
-      } else {
+      }else{
         await showDialog(
-            context: context,
-            builder: (_) => AssetGiffyDialog(
-                  image: Image.asset(
-                    'assets/icons/cover-icon.png',
-                    fit: BoxFit.cover,
-                  ),
-              title: Text(
-                'Error',
-                textAlign: TextAlign.center,
-                style:  TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                    fontFamily: 'NexaRegular'),
-              ),
-              entryAnimation: EntryAnimation.DEFAULT,
-              description: Text(
-                'Invalid QR Code.',
-                textAlign: TextAlign.center,
-                style:  TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                    fontFamily: 'NexaRegular'
-                ),
-              ),
-                  onlyOkButton: true,
-                  buttonOkColor: const Color(0xffff0000),
-                  onOkButtonPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                ));
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: (){
+              Navigator.pop(context, true);
+            },
+          ),
+        );
       }
-    } catch (e) {
+    }catch (e){
       print(e.toString());
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return BlocProvider(
       create: (BuildContext context) => BlocMiscBLMDropDown(),
@@ -130,85 +116,50 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
         builder: (context, dropDownList) {
           return DropdownButton<String>(
             underline: Container(height: 0),
-            icon: const Center(
-              child:
-                  const Icon(Icons.more_vert, color: const Color(0xffaaaaaa)),
-            ),
-            style: const TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 14,
-                color: const Color(0xff888888)),
-            items: <String>['Copy Link', 'Share', 'QR Code', 'Report']
-                .map((String value) {
+            icon: const Center(child: const Icon(Icons.more_vert, color: const Color(0xffaaaaaa)),),
+            style: const TextStyle(fontFamily: 'Roboto', fontSize: 14, color: const Color(0xff888888)),
+            items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Container(
-                  child: Text(value),
-                ),
+                child: Container(child: Text(value),),
               );
             }).toList(),
-            onChanged: (String? listValue) async {
+            onChanged: (String? listValue) async{
               dropDownList = listValue!;
-              if (dropDownList == 'Share') {
+              if(dropDownList == 'Share'){
                 initBranchShare();
-
                 FlutterBranchSdk.setIdentity('blm-share-link');
 
                 BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                    buo: buo!,
-                    linkProperties: lp!,
-                    messageText: 'FacesbyPlaces App',
-                    androidMessageTitle:
-                        'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                    androidSharingTitle:
-                        'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
+                  buo: buo!,
+                  linkProperties: lp!,
+                  messageText: 'FacesbyPlaces App',
+                  androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                  androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                );
 
-                if (response.success) {
+                if(response.success){
                   await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(
-                            image: Image.asset(
-                              'assets/icons/cover-icon.png',
-                              fit: BoxFit.cover,
-                            ),
-                        title: Text(
-                          'Success',
-                          textAlign: TextAlign.center,
-                          style:  TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                              fontFamily: 'NexaRegular'),
-                        ),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text(
-                          'Successfully shared the link.',
-                          textAlign: TextAlign.center,
-                          style:  TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular'
-                          ),
-                        ),
-                            onlyOkButton: true,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          ));
-                } else {
+                    context: context,
+                    builder: (_) => AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      onlyOkButton: true,
+                      onOkButtonPressed: (){
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                  );
+                }else{
                   FlutterBranchSdk.logout();
-                  print(
-                      'Error : ${response.errorCode} - ${response.errorMessage}');
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-              } else if (dropDownList == 'Report') {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomeBLMReport(
-                              postId: widget.postId,
-                              reportType: widget.reportType,
-                            )));
-              } else if (dropDownList == 'QR Code') {
-                String qrData =
-                    'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
-
+              }else if(dropDownList == 'Report'){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.postId, reportType: widget.reportType,)));
+              }else if(dropDownList == 'QR Code'){
+                String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
                 print('The qrData on click is $qrData');
 
                 showGeneralDialog(
@@ -217,8 +168,8 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                   barrierDismissible: true,
                   barrierLabel: 'Dialog',
                   transitionDuration: Duration(milliseconds: 0),
-                  pageBuilder: (_, __, ___) {
-                     return SizedBox.expand(
+                  pageBuilder: (_, __, ___){
+                    return SizedBox.expand(
                       child: SafeArea(
                         child: Column(
                           children: [
@@ -308,51 +259,31 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                     );
                   },
                 );
-              } else {
+              }else{
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('blm-share-copied-link');
 
-                BranchResponse response = await FlutterBranchSdk.getShortUrl(
-                    buo: buo!, linkProperties: lp!);
-                if (response.success) {
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
+                if(response.success){
                   await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(
-                            image: Image.asset(
-                              'assets/icons/cover-icon.png',
-                              fit: BoxFit.cover,
-                            ),
-                        title: Text(
-                          'Success',
-                          textAlign: TextAlign.center,
-                          style:  TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                              fontFamily: 'NexaRegular'),
-                        ),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text(
-                          'Successfully copied the link.',
-                          textAlign: TextAlign.center,
-                          style:  TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular'
-                          ),
-                        ),
-                            onlyOkButton: true,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          ));
-                } else {
+                    context: context,
+                    builder: (_) => AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      onlyOkButton: true,
+                      onOkButtonPressed: (){
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                  );
+                }else{
                   FlutterBranchSdk.logout();
-                  print(
-                      'Error : ${response.errorCode} - ${response.errorMessage}');
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
 
-                FlutterClipboard.copy(response.result)
-                    .then((value) => const ScaffoldMessenger(
-                          child: const Text('Link copied!'),
-                        ));
+                FlutterClipboard.copy(response.result).then((value) => const ScaffoldMessenger(child: const Text('Link copied!'),));
               }
             },
           );
@@ -367,58 +298,45 @@ class MiscBLMDropDownMemorialTemplate extends StatefulWidget {
   final int memorialId;
   final String pageType;
   final String reportType;
+  const MiscBLMDropDownMemorialTemplate({required this.memorialName, required this.memorialId, required this.pageType, required this.reportType});
 
-  const MiscBLMDropDownMemorialTemplate(
-      {required this.memorialName,
-      required this.memorialId,
-      required this.pageType,
-      required this.reportType});
-
-  MiscBLMDropDownMemorialTemplateState createState() =>
-      MiscBLMDropDownMemorialTemplateState();
+  MiscBLMDropDownMemorialTemplateState createState() => MiscBLMDropDownMemorialTemplateState();
 }
 
-class MiscBLMDropDownMemorialTemplateState
-    extends State<MiscBLMDropDownMemorialTemplate> {
-  final snackBar = const SnackBar(
-    content: const Text('Link copied!'),
-    backgroundColor: const Color(0xff4EC9D4),
-    duration: const Duration(seconds: 2),
-    behavior: SnackBarBehavior.floating,
-  );
-
+class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorialTemplate>{
+  final snackBar = const SnackBar(content: const Text('Link copied!'), backgroundColor: const Color(0xff4EC9D4), duration: const Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
+  GlobalKey qrKey = new GlobalKey();
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
-  GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare() {
     buo = BranchUniversalObject(
-        canonicalIdentifier: 'FacesbyPlaces',
-        title: 'FacesbyPlaces Link',
-        contentDescription: 'FacesbyPlaces link to the app',
-        keywords: ['FacesbyPlaces', 'Share', 'Link'],
-        publiclyIndex: true,
-        locallyIndex: true,
-        contentMetadata: BranchContentMetaData()
-          ..addCustomMetadata('link-category', 'Memorial')
-          ..addCustomMetadata('link-memorial-id', widget.memorialId)
-          ..addCustomMetadata('link-type-of-account', widget.pageType));
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Memorial')
+        ..addCustomMetadata('link-memorial-id', widget.memorialId)
+        ..addCustomMetadata('link-type-of-account', widget.pageType,
+      ),
+    );
 
-    lp = BranchLinkProperties(
-        feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
-    lp!.addControlParam(
-        'url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
-  Future<void> shareQRCode(String qrData) async {
-    try {
+  Future<void> shareQRCode(String qrData) async{
+    try{
       QrValidationResult qrValidationResult = QrValidator.validate(
         data: qrData,
         version: QrVersions.auto,
         errorCorrectionLevel: QrErrorCorrectLevel.L,
       );
 
-      if (qrValidationResult.status == QrValidationStatus.valid) {
+      if(qrValidationResult.status == QrValidationStatus.valid){
         QrCode? qrCode = qrValidationResult.qrCode;
 
         final painter = QrPainter.withQr(
@@ -437,128 +355,80 @@ class MiscBLMDropDownMemorialTemplateState
         file.writeAsBytesSync(list);
 
         Share.shareFiles(['${file.path}'], text: 'QR Code');
-      } else {
+      }else{
         await showDialog(
-            context: context,
-            builder: (_) => AssetGiffyDialog(
-                  image: Image.asset(
-                    'assets/icons/cover-icon.png',
-                    fit: BoxFit.cover,
-                  ),
-              title:  Text(
-                'Error',
-                textAlign: TextAlign.center,
-                style:  TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                    fontFamily: 'NexaRegular'),
-              ),
-              entryAnimation: EntryAnimation.DEFAULT,
-              description: Text(
-                'Invalid QR Code.',
-                textAlign: TextAlign.center,
-                style:  TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                    fontFamily: 'NexaRegular'
-                ),
-              ),
-                  onlyOkButton: true,
-                  buttonOkColor: const Color(0xffff0000),
-                  onOkButtonPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                ));
+          context: context,
+          builder: (_) => AssetGiffyDialog(
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+            entryAnimation: EntryAnimation.DEFAULT,
+            description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+            onlyOkButton: true,
+            buttonOkColor: const Color(0xffff0000),
+            onOkButtonPressed: (){
+              Navigator.pop(context, true);
+            },
+          ),
+        );
       }
-    } catch (e) {
+    }catch (e){
       print(e.toString());
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return BlocProvider(
       create: (BuildContext context) => BlocMiscBLMDropDown(),
       child: BlocBuilder<BlocMiscBLMDropDown, String>(
-        builder: (context, dropDownList) {
+        builder: (context, dropDownList){
           return DropdownButton<String>(
             underline: Container(height: 0),
-            icon: const Center(
-              child:
-                  const Icon(Icons.more_vert, color: const Color(0xffffffff)),
-            ),
-            style: const TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 14,
-                color: const Color(0xff888888)),
-            items: const <String>['Copy Link', 'Share', 'QR Code', 'Report']
-                .map((String value) {
+            icon: const Center(child: const Icon(Icons.more_vert, color: const Color(0xffffffff)),),
+            style: const TextStyle(fontFamily: 'Roboto', fontSize: 14, color: const Color(0xff888888)),
+            items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Container(
-                  child: Text(value),
-                ),
+                child: Container(child: Text(value),),
               );
             }).toList(),
-            onChanged: (String? listValue) async {
+            onChanged: (String? listValue) async{
               dropDownList = listValue!;
-              if (dropDownList == 'Share') {
+              if(dropDownList == 'Share'){
                 initBranchShare();
-
                 FlutterBranchSdk.setIdentity('blm-share-link');
 
                 BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                    buo: buo!,
-                    linkProperties: lp!,
-                    messageText: 'FacesbyPlaces App',
-                    androidMessageTitle:
-                        'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                    androidSharingTitle:
-                        'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
-                if (response.success) {
+                  buo: buo!,
+                  linkProperties: lp!,
+                  messageText: 'FacesbyPlaces App',
+                  androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                  androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                );
+
+                if(response.success){
                   await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(
-                            image: Image.asset(
-                              'assets/icons/cover-icon.png',
-                              fit: BoxFit.cover,
-                            ),
-                        title: Text(
-                          'Success',
-                          textAlign: TextAlign.center,
-                          style:  TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                              fontFamily: 'NexaRegular'),
-                        ),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text(
-                          'Successfully copied the link.',
-                          textAlign: TextAlign.center,
-                          style:  TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular'
-                          ),
-                        ),
-                            onlyOkButton: true,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          ));
-                } else {
+                    context: context,
+                    builder: (_) => AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',)),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      onlyOkButton: true,
+                      onOkButtonPressed: (){
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                  );
+                }else{
                   FlutterBranchSdk.logout();
-                  print(
-                      'Error : ${response.errorCode} - ${response.errorMessage}');
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-              } else if (dropDownList == 'Report') {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomeBLMReport(
-                              postId: widget.memorialId,
-                              reportType: widget.reportType,
-                            )));
-              } else if (dropDownList == 'QR Code') {
-                String qrData =
-                    'Memorial-${widget.memorialId}-${widget.pageType}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
+              }else if(dropDownList == 'Report'){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.memorialId, reportType: widget.reportType,)));
+              }else if(dropDownList == 'QR Code'){
+                String qrData = 'Memorial-${widget.memorialId}-${widget.pageType}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
 
                 showGeneralDialog(
                   context: context,
@@ -657,51 +527,31 @@ class MiscBLMDropDownMemorialTemplateState
                     );
                   },
                 );
-              } else {
+              }else{
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('blm-share-copied-link');
 
-                BranchResponse response = await FlutterBranchSdk.getShortUrl(
-                    buo: buo!, linkProperties: lp!);
-                if (response.success) {
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
+                if(response.success){
                   await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(
-                            image: Image.asset(
-                              'assets/icons/cover-icon.png',
-                              fit: BoxFit.cover,
-                            ),
-                        title: Text(
-                          'Success',
-                          textAlign: TextAlign.center,
-                          style:  TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                              fontFamily: 'NexaRegular'),
-                        ),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text(
-                          'Successfully copied the link.',
-                          textAlign: TextAlign.center,
-                          style:  TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular'
-                          ),
-                        ),
-                            onlyOkButton: true,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          ));
-                } else {
+                    context: context,
+                    builder: (_) => AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      onlyOkButton: true,
+                      onOkButtonPressed: (){
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                  );
+                }else{
                   FlutterBranchSdk.logout();
-                  print(
-                      'Error : ${response.errorCode} - ${response.errorMessage}');
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
 
-                FlutterClipboard.copy(response.result)
-                    .then((value) => const ScaffoldMessenger(
-                          child: const Text('Link copied!'),
-                        ));
+                FlutterClipboard.copy(response.result).then((value) => const ScaffoldMessenger(child: const Text('Link copied!'),));
               }
             },
           );
