@@ -7,13 +7,12 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       currency: 'usd',
       description: "Donation for #{memorial.name}",
       customer: stripe_account_id,
-      payment_method: payment_method
+      payment_method: params[:payment_method]
     })
 
     if intent.status == 'requires_confirmation'
       if transaction.save
         render json: {
-          # memorial_stripe_account: memorial.stripe_connect_account_id,
           publishable_key: Rails.configuration.stripe[:publishable_key],
           payment_intent: intent,
           transaction: transaction
