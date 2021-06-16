@@ -2,9 +2,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   before_action :check_user
 
   def set_payment_intent
-    require 'stripe'
-    Stripe.api_key = Rails.configuration.stripe[:secret_key]
-
     intent = Stripe::PaymentIntent.create({
       amount: amount,
       currency: 'usd',
@@ -31,9 +28,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   end
 
   def create_payment_method
-    require 'stripe'
-    Stripe.api_key = Rails.configuration.stripe[:secret_key]
-
     method = Stripe::PaymentMethod.create({
       type: 'card',
       card: {
