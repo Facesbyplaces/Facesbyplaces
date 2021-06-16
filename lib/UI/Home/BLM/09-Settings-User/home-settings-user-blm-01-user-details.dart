@@ -137,17 +137,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: widget.userId);
                         context.loaderOverlay.hide();
 
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                          HomeBLMUserOtherDetails(
-                              userId: widget.userId,
-                              toggleBirthdate: result.showOtherDetailsStatusHideBirthdate,
-                              toggleBirthplace: result.showOtherDetailsStatusHideBirthplace,
-                              toggleAddress: result.showOtherDetailsStatusHideAddress,
-                              toggleEmail: result.showOtherDetailsStatusHideEmail,
-                              toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,
-                            ),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
                       },
                     ),
 
@@ -170,15 +160,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                       height: 45,
                       buttonColor: const Color(0xff04ECFF),
                       onPressed: () async{
-                        bool logoutResult = await showDialog(
-                          context: (context),
-                          builder: (build) => MiscBLMConfirmDialog(
-                            title: 'Log out',
-                            content: 'Are you sure you want to log out from this account?',
-                            confirmColor_1: Color(0xff000000),
-                            confirmColor_2: Color(0xff888888),
-                          ),
-                        );
+                        bool logoutResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
 
                         print('The logoutResult is $logoutResult');
 

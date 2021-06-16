@@ -203,7 +203,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                               return CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: posts[i].imagesOrVideos[0],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }
@@ -228,7 +228,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                 : CachedNetworkImage(
                                   fit: BoxFit.cover,
                                   imageUrl: posts[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 ),
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
@@ -260,7 +260,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                   : CachedNetworkImage(
                                     fit: BoxFit.cover,
                                     imageUrl: posts[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   );
                                 }else{
@@ -305,7 +305,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                             CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl: posts[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                             ),
 
@@ -343,7 +343,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                         return CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: posts[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         );
                                       }

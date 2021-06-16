@@ -135,9 +135,12 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(70.0),
             child: AppBar(
+              leading: Container(),
+              backgroundColor: const Color(0xff04ECFF),
               flexibleSpace: Column(
                 children: [
                   Spacer(),
+
                   Row(
                     children: [
                       Align(
@@ -149,7 +152,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                           },
                         ),
                       ),
+
                       Spacer(),
+                      
                       Container(
                         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
                         width: SizeConfig.blockSizeHorizontal! * 79.06,
@@ -220,11 +225,10 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                       const SizedBox(width: 20,),
                     ],
                   ),
+
                   SizedBox(height: 5,),
                 ],
               ),
-              leading: Container(),
-              backgroundColor: const Color(0xff04ECFF),
             ),
           ),
           body: Container(
@@ -264,14 +268,9 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                       if(widget.isFamily){
                         String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
 
-                        if (choice != '') {
+                        if(choice != ''){
                           context.loaderOverlay.show();
-                          String result = await apiBLMAddFamily(
-                            memorialId: widget.memorialId,
-                            userId: users[index].userId,
-                            relationship: choice,
-                            accountType: users[index].accountType,
-                          );
+                          String result = await apiBLMAddFamily(memorialId: widget.memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
                           context.loaderOverlay.hide();
 
                           if(result != 'Success'){
@@ -290,13 +289,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                               ),
                             );
                           }else{
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(
-                              memorialId: widget.memorialId,
-                              memorialName: widget.memorialName,
-                              switchFamily: widget.switchFamily,
-                              switchFriends: widget.switchFriends, 
-                              switchFollowers: widget.switchFollowers)),
-                            );
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)),);
                           }
                         }
                       }else{
@@ -315,23 +308,14 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                               entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                               onlyOkButton: true,
-                              buttonOkColor:
-                                  const Color(0xffff0000),
+                              buttonOkColor: const Color(0xffff0000),
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
                             ),
                           );
                         }else{
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(
-                                memorialId: widget.memorialId,
-                                memorialName: widget.memorialName,
-                                switchFamily: widget.switchFamily,
-                                switchFriends: widget.switchFriends,
-                                switchFollowers: widget.switchFollowers,
-                              ),
-                            ),
-                          );
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers,),),);
                         }
                       }
                     },

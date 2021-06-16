@@ -37,30 +37,30 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
   final picker = ImagePicker();
   List<String> backgroundImages = ['assets/icons/blm-memorial-cover-1.jpeg', 'assets/icons/blm-memorial-cover-2.jpeg'];
 
-  Future getProfileImage() async {
-    try {
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
+  Future getProfileImage() async{
+    try{
+      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
-      if (pickedFile != null) {
+      if(pickedFile != null){
         profileImage.value = File(pickedFile.path);
       }
-    } catch (error) {
+    }catch (error){
       print('Error: ${error.toString()}');
     }
   }
 
-  Future getBackgroundImage() async {
-    try {
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture) {
+  Future getBackgroundImage() async{
+    try{
+      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
-      if (pickedFile != null) {
+      if(pickedFile != null){
         backgroundImage.value = File(pickedFile.path);
       }
-    } catch (error) {
+    }catch(error){
       print('Error: ${error.toString()}');
     }
   }
@@ -115,10 +115,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                             : Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: const AssetImage('assets/icons/blm-memorial-cover-1.jpeg'),
-                                ),
+                                image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/blm-memorial-cover-1.jpeg'),),
                               ),
                             ),
 
@@ -155,22 +152,14 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                               child: const CircleAvatar(
                                 radius: 25,
                                 backgroundColor: const Color(0xffffffff),
-                                child: const CircleAvatar(
-                                  radius: 25,
-                                  backgroundColor: Colors.transparent,
-                                  child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
-                                ),
+                                child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
                               ),
                             ),
 
                             const Positioned(
                               top: 10,
                               right: 10,
-                              child: const CircleAvatar(
-                                radius: 25,
-                                backgroundColor: const Color(0xffffffff),
-                                child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
-                              ),
+                              child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff), child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
                             ),
                           ],
                         ),
@@ -236,10 +225,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   )
                                   : Container(
@@ -250,10 +236,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   ),
                                 );
@@ -275,7 +258,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                         buttonText: 'Create my Memorial Page',
                         onPressed: () async{
-
                           if(backgroundImageToggle.value == 0 || backgroundImageToggle.value == 1){
                             final ByteData bytes = await rootBundle.load(backgroundImages[backgroundImageToggle.value]);
                             final Uint8List list = bytes.buffer.asUint8List();

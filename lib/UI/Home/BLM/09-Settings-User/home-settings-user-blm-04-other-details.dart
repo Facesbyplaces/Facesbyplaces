@@ -111,6 +111,8 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                           const SizedBox(width: 20,),
 
                           IconButton(
+                            icon: toggle1 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle1 ? const Color(0xff85DBF1) : const Color(0xff888888),
                             onPressed: () async{
                               setState((){
                                 toggle1 = !toggle1;
@@ -118,8 +120,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHideBirthdate(hide: toggle1);
                             },
-                            icon: toggle1 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
-                            color: toggle1 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
@@ -140,6 +140,8 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                           const SizedBox(width: 20,),
 
                           IconButton(
+                            icon: toggle2 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle2 ? const Color(0xff85DBF1) : const Color(0xff888888),
                             onPressed: () async{
                               setState((){
                                 toggle2 = !toggle2;
@@ -147,8 +149,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHideBirthplace(hide: toggle2);
                             },
-                            icon: toggle2 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
-                            color: toggle2 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
@@ -170,6 +170,8 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                           const SizedBox(width: 20,),
 
                           IconButton(
+                            icon: toggle3 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle3 ? const Color(0xff85DBF1) : const Color(0xff888888),
                             onPressed: () async{
                               setState((){
                                 toggle3 = !toggle3;
@@ -177,8 +179,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHideAddress(hide: toggle3);
                             },
-                            icon: toggle3 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
-                            color: toggle3 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
@@ -200,6 +200,8 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                           const SizedBox(width: 20,),
 
                           IconButton(
+                            icon: toggle4 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle4 ? const Color(0xff85DBF1) : const Color(0xff888888),
                             onPressed: () async{
                               setState((){
                                 toggle4 = !toggle4;
@@ -207,8 +209,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHideEmail(hide: toggle4);
                             },
-                            icon: toggle4 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
-                            color: toggle4 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
@@ -230,6 +230,8 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                           const SizedBox(width: 20,),
 
                           IconButton(
+                            icon: toggle5 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle5 ? const Color(0xff85DBF1) : const Color(0xff888888),
                             onPressed: () async{
                               setState((){
                                 toggle5 = !toggle5;
@@ -237,8 +239,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               await apiBLMHidePhoneNumber(hide: toggle5);
                             },
-                            icon: toggle5 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
-                            color: toggle5 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
@@ -252,31 +252,12 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                         height: 45,
                         buttonColor: const Color(0xff04ECFF),
                         onPressed: () async {
-                          if(details.data!.blmShowOtherDetailsBirthdate != _key1.currentState!.controller.text ||
-                              details.data!.blmShowOtherDetailsBirthplace != _key2.currentState!.controller.text ||
-                              details.data!.blmShowOtherDetailsAddress != _key3.currentState!.controller.text ||
-                              details.data!.blmShowOtherDetailsEmail != _key4.currentState!.controller.text ||
-                              details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller.text){
-
-                            bool confirmResult = await showDialog(
-                              context: (context),
-                              builder: (build) => const MiscBLMConfirmDialog(
-                                title: 'Confirm',
-                                content: 'Do you want to save the changes?',
-                                confirmColor_1: const Color(0xff04ECFF),
-                                confirmColor_2: const Color(0xffFF0000),
-                              ),
-                            );
+                          if(details.data!.blmShowOtherDetailsBirthdate != _key1.currentState!.controller.text || details.data!.blmShowOtherDetailsBirthplace != _key2.currentState!.controller.text || details.data!.blmShowOtherDetailsAddress != _key3.currentState!.controller.text || details.data!.blmShowOtherDetailsEmail != _key4.currentState!.controller.text || details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller.text){
+                            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
 
                             if(confirmResult){
                               context.loaderOverlay.show();
-                              bool result = await apiBLMUpdateOtherDetails(
-                                birthdate: _key1.currentState!.controller.text,
-                                birthplace: _key2.currentState!.controller.text,
-                                address: _key3.currentState!.controller.text,
-                                email: _key4.currentState!.controller.text,
-                                phoneNumber: _key5.currentState!.controller.text,
-                              );
+                              bool result = await apiBLMUpdateOtherDetails(birthdate: _key1.currentState!.controller.text, birthplace: _key2.currentState!.controller.text, address: _key3.currentState!.controller.text, email: _key4.currentState!.controller.text, phoneNumber: _key5.currentState!.controller.text,);
                               context.loaderOverlay.hide();
 
                               if(result){
@@ -288,7 +269,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                     entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('Successfully updated the other details.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                     onlyOkButton: true,
-                                    onOkButtonPressed: () {
+                                    onOkButtonPressed: (){
                                       Navigator.pop(context, true);
                                     },
                                   ),
@@ -322,22 +303,12 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
               }else if(details.hasError){
                 return Container(
                   height: SizeConfig.screenHeight,
-                  child: const Center(
-                    child: const Text('Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),
-                    ),
-                  ),
+                  child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
                 );
               }else{
                 return Container(
                   height: SizeConfig.screenHeight,
-                  child: Center(
-                    child: Container(
-                      child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                      color: const Color(0xffffffff),
-                    ),
-                  ),
+                  child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
                 );
               }
             },

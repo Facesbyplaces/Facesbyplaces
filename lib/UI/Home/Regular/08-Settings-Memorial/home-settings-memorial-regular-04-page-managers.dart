@@ -17,15 +17,14 @@ class RegularShowAdminSettings {
   const RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
 }
 
-class HomeRegularPageManagers extends StatefulWidget {
+class HomeRegularPageManagers extends StatefulWidget{
   final int memorialId;
   const HomeRegularPageManagers({required this.memorialId});
 
   HomeRegularPageManagersState createState() => HomeRegularPageManagersState();
 }
 
-class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
-
+class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   ScrollController scrollController = ScrollController();
   List<Widget> managers = [];
   int adminItemsRemaining = 1;
@@ -34,7 +33,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
   int page2 = 1;
   bool flag1 = false;
 
-  void initState() {
+  void initState(){
     super.initState();
     addManagers1();
     onLoading();
@@ -107,16 +106,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Error: $error.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                fontFamily: 'NexaRegular'
-              ),
-            ),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
             onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
             },
@@ -128,7 +121,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
 
       adminItemsRemaining = newValue.almAdminItemsRemaining;
 
-      for (int i = 0; i < newValue.almAdminList.length; i++) {
+      for(int i = 0; i < newValue.almAdminList.length; i++){
         managers.add(
           ListTile(
             leading: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage != ''
@@ -161,88 +154,58 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
               padding: EdgeInsets.zero,
               textColor: const Color(0xffffffff),
               splashColor: const Color(0xff04ECFF),
-              onPressed: () async {
+              child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
+              height: 40,
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
+              color: const Color(0xffE74C3C),
+              onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                        fontFamily: 'NexaRegular',
-                      ),
-                    ),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Are you sure you want to remove this user?',
-                      textAlign: TextAlign.center,
-                      style:  TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                        fontFamily: 'NexaRegular',
-                      ),
-                    ),
+                    description: Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                     onlyOkButton: false,
-                    onOkButtonPressed: () async {
+                    onOkButtonPressed: (){
                       Navigator.pop(context, true);
                     },
-                    onCancelButtonPressed: () {
+                    onCancelButtonPressed: (){
                       Navigator.pop(context, false);
                     },
                   ),
                 );
 
-                if (confirmation) {
+                if(confirmation){
                   context.loaderOverlay.show();
                   String result = await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: widget.memorialId, userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
 
-                  if (result != 'Success') {
+                  if(result != 'Success'){
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),
-                        ),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Error: $result.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                         onlyOkButton: true,
                         buttonOkColor: const Color(0xffff0000),
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
                       ),
                     );
-                  } else {
+                  }else{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text(
-                          'Successfully removed the user from the list.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                         onlyOkButton: true,
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           managers = [];
                           adminItemsRemaining = 1;
                           familyItemsRemaining = 1;
@@ -259,43 +222,32 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
                   }
                 }
               },
-              child: Text('Remove',
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                  fontFamily: 'HelveticaRegular',
-                  color: const Color(0xffffffff),
-                ),
-              ),
-              height: 40,
-              shape: const StadiumBorder(
-                side: const BorderSide(color: const Color(0xffE74C3C)),
-              ),
-              color: const Color(0xffE74C3C),
             ),
           ),
         );
       }
     }
 
-    if (mounted) setState(() {});
+    if(mounted)
+    setState(() {});
     page1++;
 
-    if (adminItemsRemaining == 0) {
+    if(adminItemsRemaining == 0){
       addManagers2();
       flag1 = true;
       onLoading();
     }
   }
 
-  void onLoading2() async {
-    if (familyItemsRemaining != 0) {
+  void onLoading2() async{
+    if(familyItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularShowAdminSettings(memorialId: widget.memorialId, page: page2);
       context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.almFamilyItemsRemaining;
 
-      for (int i = 0; i < newValue.almFamilyList.length; i++) {
+      for(int i = 0; i < newValue.almFamilyList.length; i++){
         managers.add(
           ListTile(
             leading: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage != ''
@@ -328,91 +280,58 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
               padding: EdgeInsets.zero,
               textColor: const Color(0xffffffff),
               splashColor: const Color(0xff04ECFF),
-              onPressed: () async {
+              child: Text('Make Manager', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular',),),
+              height: 40,
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF)),),
+              color: const Color(0xff04ECFF),
+              onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                        fontFamily: 'NexaRegular',
-                      ),
-                    ),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text(
-                      'Are you sure you want to make this user a manager?',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                        fontFamily: 'NexaRegular',
-                      ),
-                    ),
+                    description: Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                     onlyOkButton: false,
-                    onOkButtonPressed: () async {
+                    onOkButtonPressed: () async{
                       Navigator.pop(context, true);
                     },
-                    onCancelButtonPressed: () {
+                    onCancelButtonPressed: (){
                       Navigator.pop(context, false);
                     },
                   ),
                 );
 
-                if (confirmation) {
+                if(confirmation){
                   context.loaderOverlay.show();
                   String result = await apiRegularAddMemorialAdmin(pageType: 'Memorial', pageId: widget.memorialId, userId: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId);
                   context.loaderOverlay.hide();
 
-                  if (result != 'Success') {
+                  if(result != 'Success'){
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Error: $result.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                         onlyOkButton: true,
                         buttonOkColor: const Color(0xffff0000),
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
                       ),
                     );
-                  } else {
+                  }else{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Successfully removed the user from the list.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                         onlyOkButton: true,
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           managers = [];
                           adminItemsRemaining = 1;
                           familyItemsRemaining = 1;
@@ -429,17 +348,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
                   }
                 }
               },
-              child: Text('Make Manager',
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.2,
-                  fontFamily: 'NexaRegular',
-                ),
-              ),
-              height: 40,
-              shape: const StadiumBorder(
-                side: const BorderSide(color: const Color(0xff04ECFF)),
-              ),
-              color: const Color(0xff04ECFF),
             ),
           ),
         );
@@ -451,27 +359,21 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff04ECFF),
         title: Row(
           children: [
-            Text('Page Managers',
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                fontFamily: 'NexaRegular',
-                color: const Color(0xffffffff),
-              ),
-            ),
-            Spacer()
+            Text('Page Managers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            Spacer(),
           ],
         ),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.52,),
-          onPressed: () {
+          onPressed: (){
             Navigator.pop(context);
           },
         ),
@@ -483,12 +385,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
-            padding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
             itemCount: managers.length,
-            separatorBuilder: (c, i) =>
-                const Divider(height: 10, color: Colors.transparent),
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => managers[i],
           ),
         )
@@ -504,13 +404,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers> {
 
               const SizedBox(height: 45,),
 
-              Text('Managers list is empty',
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xffB1B1B1),
-                ),
-              ),
+              Text('Managers list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],

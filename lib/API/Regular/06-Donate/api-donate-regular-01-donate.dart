@@ -27,7 +27,7 @@ Future<String> apiRegularDonate({required String pageType, required int pageId, 
       'page_type': '$pageType',
       'page_id': '$pageId',
       'amount': '$amount',
-      'payment_method': '$paymentMethod',
+      // 'payment_method': '$paymentMethod',
     },
   );
 

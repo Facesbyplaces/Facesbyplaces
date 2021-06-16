@@ -35,7 +35,7 @@ class HomeBLMReport extends StatelessWidget {
             title: Row(
               children: [
                 Text('Report', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-                Spacer()
+                Spacer(),
               ],
             ),
             centerTitle: true,
@@ -75,8 +75,8 @@ class HomeBLMReport extends StatelessWidget {
                     labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
                   ),
 
-                  const SizedBox(height: 50,
-                  ),
+                  const SizedBox(height: 50,),
+
                   MiscBLMButtonTemplate(
                     buttonText: 'Report',
                     buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold'),
@@ -90,11 +90,11 @@ class HomeBLMReport extends StatelessWidget {
                           builder: (_) => AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: Text('Error',textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                             onlyOkButton: true,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),

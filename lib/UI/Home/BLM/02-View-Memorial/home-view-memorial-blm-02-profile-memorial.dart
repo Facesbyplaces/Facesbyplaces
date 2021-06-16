@@ -250,14 +250,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                     alignment: Alignment.centerRight,
                                                                     padding: const EdgeInsets.only(right: 20.0),
                                                                     child: GestureDetector(
-                                                                      onTap: (){
-                                                                        Navigator.pop(context);
-                                                                      },
                                                                       child: CircleAvatar(
                                                                         radius: 20,
                                                                         backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                                         child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                       ),
+                                                                      onTap: (){
+                                                                        Navigator.pop(context);
+                                                                      },
                                                                     ),
                                                                   ),
 
@@ -286,13 +286,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                 Container(
                                                   width: SizeConfig.screenWidth,
-                                                  decoration: const BoxDecoration(
-                                                    borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)),
-                                                    color: const Color(0xffffffff),
-                                                  ),
+                                                  decoration: const BoxDecoration(borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)), color: const Color(0xffffffff),),
                                                   child: Column(
                                                     children: [
-
                                                       const SizedBox(height: 120,),
 
                                                       Center(
@@ -301,28 +297,17 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           textAlign: TextAlign.center,
                                                           maxLines: 5,
                                                           overflow: TextOverflow.clip,
-                                                          style: TextStyle(
-                                                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                            fontFamily: 'NexaBold',
-                                                            color: const Color(0xff000000),
-                                                          ),
+                                                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
                                                         ),
                                                       ),
 
                                                       const SizedBox(height: 20,),
 
                                                       TextButton.icon(
-                                                        onPressed: (){
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
-                                                        },
                                                         icon: const CircleAvatar(
                                                           radius: 15,
                                                           backgroundColor: const Color(0xff000000),
-                                                          child: const CircleAvatar(
-                                                            radius: 10,
-                                                            backgroundColor: Colors.transparent,
-                                                            foregroundImage: const AssetImage('assets/icons/fist.png'),
-                                                          ),
+                                                          child: const CircleAvatar(radius: 10, backgroundColor: Colors.transparent, foregroundImage: const AssetImage('assets/icons/fist.png'),),
                                                         ),
                                                         label: Text('${profile.data!.blmMemorial.memorialFollowersCount}',
                                                           style: TextStyle(
@@ -331,6 +316,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             color: const Color(0xff2F353D),
                                                           ),
                                                         ),
+                                                        onPressed: (){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 2)));
+                                                        },
                                                       ),
 
                                                       const SizedBox(height: 20,),
@@ -355,14 +343,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                               alignment: Alignment.centerRight,
                                                                               padding: const EdgeInsets.only(right: 20.0),
                                                                               child: GestureDetector(
-                                                                                onTap: (){
-                                                                                  Navigator.pop(context);
-                                                                                },
                                                                                 child: CircleAvatar(
                                                                                   radius: 20,
                                                                                   backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                                                   child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                                 ),
+                                                                                onTap: (){
+                                                                                  Navigator.pop(context);
+                                                                                },
                                                                               ),
                                                                             ),
 
@@ -405,9 +393,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                     betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                       aspectRatio: 16 / 9,
                                                                       fit: BoxFit.contain,
-                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                        showControls: false,
-                                                                      ),
+                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                     ),
                                                                   );
                                                                 }else{
@@ -445,14 +431,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           children: [
                                                             Expanded(
                                                               child: GestureDetector(
-                                                                onTap: (){
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: widget.pageType, pageId: widget.memorialId, pageName: profile.data!.blmMemorial.memorialName)));
-                                                                },
                                                                 child: const CircleAvatar(
                                                                   radius: 25,
                                                                   backgroundColor: const Color(0xffE67E22),
                                                                   child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 25,),
                                                                 ),
+                                                                onTap: (){
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: widget.pageType, pageId: widget.memorialId, pageName: profile.data!.blmMemorial.memorialName)));
+                                                                },
                                                               ),
                                                             ),
                                                             Expanded(
@@ -461,6 +447,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                                                                 child: MaterialButton(
                                                                   padding: EdgeInsets.zero,
+                                                                  child: Text(joinListener ? 'Unjoin' : 'Join', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                                  minWidth: SizeConfig.screenWidth! / 2,
+                                                                  height: 45,
+                                                                  shape: const StadiumBorder(),
+                                                                  color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
                                                                   onPressed: () async{
                                                                     join.value = !join.value;
 
@@ -512,17 +503,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                       );
                                                                     }
                                                                   },
-                                                                  child: Text(joinListener ? 'Unjoin' : 'Join',
-                                                                    style: TextStyle(
-                                                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                                      fontFamily: 'NexaBold',
-                                                                      color: const Color(0xffFFFFFF),
-                                                                    ),
-                                                                  ),
-                                                                  minWidth: SizeConfig.screenWidth! / 2,
-                                                                  height: 45,
-                                                                  shape: const StadiumBorder(),
-                                                                  color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
                                                                 ),
                                                               ),
                                                             ),
@@ -671,26 +651,16 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           children: [
                                                             Expanded(
                                                               child: GestureDetector(
+                                                                child: Column(
+                                                                  children: [
+                                                                    Text('${profile.data!.blmMemorial.memorialPostsCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+
+                                                                    Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
+                                                                  ],
+                                                                ),
                                                                 onTap: (){
                                                                   Scrollable.ensureVisible(dataKey.currentContext!);
                                                                 },
-                                                                child: Column(
-                                                                  children: [
-                                                                    Text('${profile.data!.blmMemorial.memorialPostsCount}',
-                                                                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                                        fontFamily: 'NexaBold',
-                                                                        color: const Color(0xff000000),
-                                                                      ),
-                                                                    ),
-
-                                                                    Text('Post',
-                                                                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                                        fontFamily:'NexaRegular',
-                                                                        color: const Color(0xff677375),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
                                                               ),
                                                             ),
 
@@ -698,26 +668,16 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                             Expanded(
                                                               child: GestureDetector(
+                                                                child: Column(
+                                                                  children: [
+                                                                    Text('${profile.data!.blmMemorial.memorialFamilyCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+
+                                                                    Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
+                                                                  ],
+                                                                ),
                                                                 onTap: (){
                                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 0)));
                                                                 },
-                                                                child: Column(
-                                                                  children: [
-                                                                    Text('${profile.data!.blmMemorial.memorialFamilyCount}',
-                                                                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                                        fontFamily: 'NexaBold',
-                                                                        color: const Color(0xff000000),
-                                                                      ),
-                                                                    ),
-
-                                                                    Text('Family',
-                                                                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                                        fontFamily:'NexaRegular',
-                                                                        color: const Color(0xff677375),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
                                                               ),
                                                             ),
 
@@ -725,26 +685,16 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                             Expanded(
                                                               child: GestureDetector(
+                                                                child: Column(
+                                                                  children: [
+                                                                    Text('${profile.data!.blmMemorial.memorialFriendsCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+
+                                                                    Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
+                                                                  ],
+                                                                ),
                                                                 onTap: (){
                                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: widget.memorialId, newToggle: 1)));
                                                                 },
-                                                                child: Column(
-                                                                  children: [
-                                                                    Text('${profile.data!.blmMemorial.memorialFriendsCount}',
-                                                                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                                        fontFamily: 'NexaBold',
-                                                                        color: const Color(0xff000000),
-                                                                      ),
-                                                                    ),
-
-                                                                    Text('Friends',
-                                                                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                                        fontFamily:'NexaRegular',
-                                                                        color: const Color(0xff677375),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
                                                               ),
                                                             ),
 
@@ -822,7 +772,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                           barrierDismissible: true,
                                                                           barrierLabel: 'Dialog',
                                                                           transitionDuration: const Duration(milliseconds: 0),
-                                                                          pageBuilder: (_, __, ___) {
+                                                                          pageBuilder: (_, __, ___){
                                                                             return Scaffold(
                                                                               backgroundColor: Colors.black12.withOpacity(0.7),
                                                                               body: SizedBox.expand(
@@ -833,14 +783,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                         alignment: Alignment.centerRight,
                                                                                         padding: const EdgeInsets.only(right: 20.0),
                                                                                         child: GestureDetector(
-                                                                                          onTap: (){
-                                                                                            Navigator.pop(context);
-                                                                                          },
                                                                                           child: CircleAvatar(
                                                                                             radius: 20,
                                                                                             backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                                                             child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                                           ),
+                                                                                          onTap: (){
+                                                                                            Navigator.pop(context);
+                                                                                          },
                                                                                         ),
                                                                                       ),
 
@@ -849,8 +799,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                       Expanded(
                                                                                         child: CarouselSlider(
                                                                                           carouselController: buttonCarouselController,
-                                                                                          items: List.generate(profile.data!.blmMemorial.memorialImagesOrVideos.length, (next) =>
-                                                                                          ((){
+                                                                                          items: List.generate(profile.data!.blmMemorial.memorialImagesOrVideos.length, (next) => ((){
                                                                                             if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[next])?.contains('video') == true){
                                                                                               return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
                                                                                                 betterPlayerConfiguration: const BetterPlayerConfiguration(
@@ -868,7 +817,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                               );
                                                                                             }
-                                                                                          }()),
+                                                                                            }()),
                                                                                           ),
                                                                                           options: CarouselOptions(
                                                                                             autoPlay: false,
@@ -913,9 +862,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                                 aspectRatio: 1,
                                                                                 fit: BoxFit.contain,
-                                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                                  showControls: false,
-                                                                                ),
+                                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                               ),
                                                                             ),
                                                                           );
@@ -1002,7 +949,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           barrierDismissible: true,
                                                           barrierLabel: 'Dialog',
                                                           transitionDuration: const Duration(milliseconds: 0),
-                                                          pageBuilder: (_, __, ___) {
+                                                          pageBuilder: (_, __, ___){
                                                             return Scaffold(
                                                               backgroundColor: Colors.black12.withOpacity(0.7),
                                                               body: SizedBox.expand(
@@ -1013,14 +960,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                         alignment: Alignment.centerRight,
                                                                         padding: const EdgeInsets.only(right: 20.0),
                                                                         child: GestureDetector(
-                                                                          onTap: (){
-                                                                            Navigator.pop(context);
-                                                                          },
                                                                           child: CircleAvatar(
                                                                             radius: 20,
                                                                             backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                                             child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                           ),
+                                                                          onTap: (){
+                                                                            Navigator.pop(context);
+                                                                          },
                                                                         ),
                                                                       ),
 
@@ -1126,9 +1073,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                                                           return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
                                                             betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                showControls: false,
-                                                              ),
+                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                               aspectRatio: 16 / 9,
                                                               fit: BoxFit.contain,
                                                             ),
@@ -1151,13 +1096,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                                                           mainAxisSpacing: 4.0,
                                                           crossAxisSpacing: 4.0,
-                                                          itemBuilder: (BuildContext context, int index) =>
-                                                          lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
-                                                              ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                                          itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                                                          ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                             betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                showControls: false,
-                                                              ),
+                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                               aspectRatio: 16 / 9,
                                                               fit: BoxFit.contain,
                                                             ),
@@ -1302,16 +1244,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                   const SizedBox(height: 45,),
 
-                                  Center(
-                                    child: Text(
-                                      'Post is empty',
-                                      style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                                        fontFamily: 'NexaBold',
-                                        color: const Color(0xffB1B1B1),
-                                      ),
-                                    ),
-                                  ),
+                                  Center(child: Text('Post is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
 
                                   const SizedBox(height: 40,),
                                 ],

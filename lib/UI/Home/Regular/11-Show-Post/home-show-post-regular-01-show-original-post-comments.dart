@@ -281,13 +281,13 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                             color: const Color(0xffffffff),
                           ),
                         ),
-                        Spacer()
+                        Spacer(),
                       ],
                     ),
                     centerTitle: true,
                     leading: IconButton(
                       icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
-                      onPressed: () {
+                      onPressed: (){
                         Navigator.pop(context, numberOfComments);
                       },
                     ),
@@ -304,8 +304,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         ignoring: isGuestLoggedInListener,
                         child: FutureBuilder<APIRegularShowOriginalPostMain>(
                           future: showOriginalPost,
-                          builder: (context, originalPost) {
-                            if (originalPost.hasData) {
+                          builder: (context, originalPost){
+                            if(originalPost.hasData){
                               return FooterLayout(
                                 footer: showKeyboard(),
                                 child: RefreshIndicator(
@@ -327,41 +327,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     onTap: () async{
                                                       if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
                                                         if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(
-                                                                memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId,
-                                                                relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship,
-                                                                managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage,
-                                                                newlyCreated: false,
-                                                              ),
-                                                            ),
-                                                          );
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
                                                         }else{
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(
-                                                                memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId,
-                                                                pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType,
-                                                                newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,
-                                                              ),
-                                                            ),
-                                                          );
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
                                                         }
                                                       }else{
-                                                        if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true) {
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(
-                                                                memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId,
-                                                                relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship,
-                                                                managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage,
-                                                                newlyCreated: false,
-                                                              ),
-                                                            ),
-                                                          );
+                                                        if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage,newlyCreated: false,),),);
                                                         }else{
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(
-                                                                memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId,
-                                                                pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType,
-                                                                newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,
-                                                              ),
-                                                            ),
-                                                          );
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
                                                         }
                                                       }
                                                     },
@@ -381,42 +355,16 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       child: GestureDetector(
                                                         onTap: () async{
                                                           if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                            if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true) {
-                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(
-                                                                    memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId,
-                                                                    relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship,
-                                                                    managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage,
-                                                                    newlyCreated: false,
-                                                                  ),
-                                                                ),
-                                                              );
+                                                            if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
                                                             }else{
-                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(
-                                                                    memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId,
-                                                                    pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType,
-                                                                    newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,
-                                                                  ),
-                                                                ),
-                                                              );
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),),);
                                                             }
                                                           }else{
-                                                            if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true) {
-                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(
-                                                                    memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId,
-                                                                    relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship,
-                                                                    managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage,
-                                                                    newlyCreated: false,
-                                                                  ),
-                                                                ),
-                                                              );
+                                                            if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,),),);
                                                             }else{
-                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(
-                                                                    memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId,
-                                                                    pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType,
-                                                                    newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,
-                                                                  ),
-                                                                ),
-                                                              );
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,),));
                                                             }
                                                           }
                                                         },
@@ -459,27 +407,24 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                             Container(
                                               padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                               alignment: Alignment.centerLeft,
-                                              child: Text(originalPost.data!.almPost.showOriginalPostBody,
-                                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                                              ),
+                                              child: Text(originalPost.data!.almPost.showOriginalPostBody, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                             ),
                                             originalPost.data!.almPost.showOriginalPostImagesOrVideos.isNotEmpty
                                             ? Column(
                                               children: [
-
                                                 const SizedBox(height: 20),
 
                                                 Container(
-                                                  child: (() {
-                                                    if (originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 1) {
+                                                  child: ((){
+                                                    if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 1){
                                                       return GestureDetector(
-                                                        onTap: () {
+                                                        onTap: (){
                                                           showGeneralDialog(
                                                             context: context,
                                                             barrierDismissible: true,
                                                             barrierLabel: 'Dialog',
                                                             transitionDuration: const Duration(milliseconds: 0),
-                                                            pageBuilder: (_, __, ___) {
+                                                            pageBuilder: (_, __, ___){
                                                               return Scaffold(
                                                                 backgroundColor: Colors.black12.withOpacity(0.7),
                                                                 body: SizedBox.expand(
@@ -490,7 +435,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                           alignment: Alignment.centerRight,
                                                                           padding: const EdgeInsets.only(right: 20.0),
                                                                           child: GestureDetector(
-                                                                            onTap: () {
+                                                                            onTap: (){
                                                                               Navigator.pop(context);
                                                                             },
                                                                             child: CircleAvatar(
@@ -504,8 +449,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         const SizedBox(height: 10,),
 
                                                                         Expanded(
-                                                                          child: (() {
-                                                                            if (lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true) {
+                                                                          child: ((){
+                                                                            if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                               return BetterPlayer.network(
                                                                                 '${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                                                 betterPlayerConfiguration: const BetterPlayerConfiguration(
@@ -514,7 +459,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                   fit: BoxFit.contain,
                                                                                 ),
                                                                               );
-                                                                            } else {
+                                                                            }else{
                                                                               return CachedNetworkImage(
                                                                                 fit: BoxFit.contain,
                                                                                 imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
@@ -534,9 +479,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             },
                                                           );
                                                         },
-                                                        child:
-                                                        (() {
-                                                          if (lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true) {
+                                                        child: ((){
+                                                          if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                             return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                               betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                 aspectRatio: 16 / 9,
@@ -546,7 +490,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 ),
                                                               ),
                                                             );
-                                                          } else {
+                                                          }else{
                                                             return CachedNetworkImage(
                                                               fit: BoxFit.cover,
                                                               imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
@@ -556,15 +500,17 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           }
                                                         }()),
                                                       );
-                                                    } else if (originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 2) {
+                                                    }else if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 2){
                                                       return StaggeredGridView.countBuilder(
                                                         padding: EdgeInsets.zero,
                                                         shrinkWrap: true,
                                                         physics: const NeverScrollableScrollPhysics(),
                                                         crossAxisCount: 4,
                                                         itemCount: 2,
-                                                        itemBuilder: (BuildContext context, int index) =>
-                                                        GestureDetector(
+                                                        staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
+                                                        mainAxisSpacing: 4.0,
+                                                        crossAxisSpacing: 4.0,
+                                                        itemBuilder: (BuildContext context, int index) => GestureDetector(
                                                           onTap: () {
                                                             showGeneralDialog(
                                                               context: context,
@@ -602,7 +548,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             child: CarouselSlider(
                                                                               carouselController: buttonCarouselController,
                                                                               items: List.generate(
-                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => (() {
+                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
                                                                                   if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                                       betterPlayerConfiguration: const BetterPlayerConfiguration(
@@ -660,8 +606,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               },
                                                             );
                                                           },
-                                                          child: (() {
-                                                            if (lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true) {
+                                                          child: ((){
+                                                            if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                               return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                 betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                   aspectRatio: 16 / 9,
@@ -671,7 +617,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   ),
                                                                 ),
                                                               );
-                                                            } else {
+                                                            }else{
                                                               return CachedNetworkImage(
                                                                 fit: BoxFit.cover,
                                                                 imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
@@ -681,12 +627,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             }
                                                           }()),
                                                         ),
-                                                        staggeredTileBuilder: (int index) =>
-                                                        const StaggeredTile.count(2, 2),
-                                                        mainAxisSpacing: 4.0,
-                                                        crossAxisSpacing: 4.0,
                                                       );
-                                                    } else {
+                                                    }else{
                                                       return StaggeredGridView.countBuilder(
                                                         padding: EdgeInsets.zero,
                                                         shrinkWrap: true,
@@ -696,15 +638,14 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                                                         mainAxisSpacing: 4.0,
                                                         crossAxisSpacing: 4.0,
-                                                        itemBuilder: (BuildContext context, int index) =>
-                                                        GestureDetector(
-                                                          onTap: () {
+                                                        itemBuilder: (BuildContext context, int index) => GestureDetector(
+                                                          onTap: (){
                                                             showGeneralDialog(
                                                               context: context,
                                                               barrierDismissible: true,
                                                               barrierLabel: 'Dialog',
                                                               transitionDuration: const Duration(milliseconds: 0),
-                                                              pageBuilder: (_, __, ___) {
+                                                              pageBuilder: (_, __, ___){
                                                                 return Scaffold(
                                                                   backgroundColor: Colors.black12.withOpacity(0.7),
                                                                   body: SizedBox.expand(
@@ -715,16 +656,13 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             alignment: Alignment.centerRight,
                                                                             padding: const EdgeInsets.only(right: 20.0),
                                                                             child: GestureDetector(
-                                                                              onTap: () {
+                                                                              onTap: (){
                                                                                 Navigator.pop(context);
                                                                               },
                                                                               child: CircleAvatar(
                                                                                 radius: 20,
                                                                                 backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                                child: const Icon(
-                                                                                  Icons.close_rounded,
-                                                                                  color: const Color(0xffffffff),
-                                                                                ),
+                                                                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                               ),
                                                                             ),
                                                                           ),
@@ -735,8 +673,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             child: CarouselSlider(
                                                                               carouselController: buttonCarouselController,
                                                                               items: List.generate(
-                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => (() {
-                                                                                  if (lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true) {
+                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
+                                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
                                                                                       betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                                         deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
@@ -745,7 +683,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                         fit: BoxFit.contain,
                                                                                       ),
                                                                                     );
-                                                                                  } else {
+                                                                                  }else{
                                                                                     return CachedNetworkImage(
                                                                                       fit: BoxFit.contain,
                                                                                       imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
@@ -769,23 +707,16 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             children: [
                                                                               IconButton(
                                                                                 onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                icon: const Icon(
-                                                                                  Icons.arrow_back_rounded,
-                                                                                  color: const Color(0xffffffff),
-                                                                                ),
+                                                                                icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
                                                                               ),
                                                                               IconButton(
                                                                                 onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                icon: const Icon(
-                                                                                  Icons.arrow_forward_rounded,
-                                                                                  color: const Color(0xffffffff),
-                                                                                ),
+                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
                                                                               ),
                                                                             ],
                                                                           ),
-                                                                          const SizedBox(
-                                                                            height: 85,
-                                                                          ),
+
+                                                                          const SizedBox(height: 85,),
                                                                         ],
                                                                       ),
                                                                     ),
@@ -794,8 +725,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               },
                                                             );
                                                           },
-                                                          child:(() {
-                                                            if (index != 1) {
+                                                          child: ((){
+                                                            if(index != 1){
                                                               return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true 
                                                               ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                 betterPlayerConfiguration: const BetterPlayerConfiguration(
@@ -812,10 +743,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               );
-                                                            } else {
-                                                              return (() {
-                                                                if (originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3 > 0) {
-                                                                  if (lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true) {
+                                                            }else{
+                                                              return ((){
+                                                                if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3 > 0){
+                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                                     return Stack(
                                                                       fit: StackFit.expand,
                                                                       children: [
@@ -846,7 +777,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         ),
                                                                       ],
                                                                     );
-                                                                  } else {
+                                                                  }else{
                                                                     return Stack(
                                                                       fit: StackFit.expand,
                                                                       children: [
@@ -875,8 +806,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                       ],
                                                                     );
                                                                   }
-                                                                } else {
-                                                                  if (lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true) {
+                                                                }else{
+                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                       betterPlayerConfiguration: const BetterPlayerConfiguration(
                                                                         aspectRatio: 16 / 9,
@@ -886,7 +817,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         ),
                                                                       ),
                                                                     );
-                                                                  } else {
+                                                                  }else{
                                                                     return CachedNetworkImage(
                                                                       fit: BoxFit.cover,
                                                                       imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
@@ -1057,7 +988,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             ListTile(
                                                               title: const Text('Report'),
                                                               leading: const Icon(Icons.edit),
-                                                              onTap: () {
+                                                              onTap: (){
                                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
                                                               },
                                                             ),
@@ -1097,16 +1028,16 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       ),
                                                     ),
                                                     Expanded(
-                                                      child:  Align(
+                                                      child: Align(
                                                         alignment: Alignment.centerRight,
                                                         child: TextButton.icon(
-                                                          onPressed: () async {
-                                                            if (commentsLikes[i] == true) {
+                                                          onPressed: () async{
+                                                            if(commentsLikes[i] == true){
                                                               commentsLikes[i] = false;
                                                               commentsNumberOfLikes[i]--;
 
                                                               await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: commentsListener[i].commentId, likeStatus: false);
-                                                            } else {
+                                                            }else{
                                                               commentsLikes[i] = true;
                                                               commentsNumberOfLikes[i]++;
 
@@ -1135,8 +1066,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         Expanded(
                                                           child: Container(
                                                             padding: const EdgeInsets.all(10.0),
-                                                            child: Text(
-                                                              commentsListener[i].commentBody,
+                                                            child: Text(commentsListener[i].commentBody,
                                                               style: TextStyle(
                                                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                                                 fontFamily: 'NexaRegular',
@@ -1163,19 +1093,24 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             color: const Color(0xff000000),
                                                           ),
                                                         ),
+
                                                         const SizedBox(width: 20,),
+
                                                         GestureDetector(
-                                                          onTap: () async {
-                                                            if (controller.text != '') {
+                                                          onTap: () async{
+                                                            if(controller.text != ''){
                                                               controller.clear();
                                                             }
 
                                                             isComment = false;
                                                             currentCommentId = commentsListener[i].commentId;
-
                                                             print('show reply here 1');
 
-                                                            await showModalBottomSheet(context: context, builder: (context) => showKeyboard(isReply: true, toReply: commentsListener[i].commentBody, replyFrom: '${commentsListener[i].firstName}' + ' ' + '${commentsListener[i].lastName}'));
+                                                            await showModalBottomSheet(context: context, builder: (context) => showKeyboard(
+                                                              isReply: true, 
+                                                              toReply: commentsListener[i].commentBody, 
+                                                              replyFrom: '${commentsListener[i].firstName}' + ' ' + '${commentsListener[i].lastName}')
+                                                            );
                                                           },
                                                           child: Text('Reply',
                                                             style: TextStyle(
@@ -1192,219 +1127,211 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                     commentsListener[i].listOfReplies.length != 0
                                                     ? Column(
-                                                        children: List.generate(commentsListener[i].listOfReplies.length, (index) => ListTile(
-                                                          contentPadding: EdgeInsets.zero,
-                                                          visualDensity: const VisualDensity(vertical: 4.0),
-                                                          onTap: () {
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(
-                                                                  userId: commentsListener[i].listOfReplies[index].userId,
-                                                                  accountType: currentAccountType,
+                                                      children: List.generate(commentsListener[i].listOfReplies.length, (index) => ListTile(
+                                                        contentPadding: EdgeInsets.zero,
+                                                        visualDensity: const VisualDensity(vertical: 4.0),
+                                                        onTap: (){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: commentsListener[i].listOfReplies[index].userId, accountType: currentAccountType,),),);
+                                                        },
+                                                        onLongPress: () async{
+                                                          if(currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType){
+                                                            await showMaterialModalBottomSheet(
+                                                              context: context,
+                                                              builder: (context) => SafeArea(
+                                                                top: false,
+                                                                child: Column(
+                                                                  mainAxisSize: MainAxisSize.min,
+                                                                  children: <Widget>[
+                                                                    ListTile(
+                                                                      title: const Text('Edit'),
+                                                                      leading: const Icon(Icons.edit),
+                                                                      onTap: () async {
+                                                                        controller.text = controller.text + commentsListener[i].listOfReplies[index].replyBody;
+                                                                        await showModalBottomSheet(
+                                                                          context: context,
+                                                                          builder: (context) => showKeyboardEdit(isEdit: false, editId: commentsListener[i].listOfReplies[index].replyId),
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                    ListTile(
+                                                                      title: const Text('Delete'),
+                                                                      leading: const Icon(Icons.delete),
+                                                                      onTap: () async{
+                                                                        context.loaderOverlay.show();
+                                                                        await apiRegularDeleteReply(replyId: commentsListener[i].listOfReplies[index].replyId);
+                                                                        context.loaderOverlay.hide();
+
+                                                                        controller.clear();
+                                                                        itemRemaining = 1;
+                                                                        repliesRemaining = 1;
+                                                                        comments.value = [];
+                                                                        replies.value = [];
+                                                                        numberOfReplies = 0;
+                                                                        page1 = 1;
+                                                                        page2 = 1;
+                                                                        count.value = 0;
+                                                                        commentsLikes = [];
+                                                                        commentsNumberOfLikes = [];
+                                                                        repliesLikes = [];
+                                                                        repliesNumberOfLikes = [];
+                                                                        isComment = true;
+                                                                        numberOfLikes = 0;
+                                                                        numberOfComments = 0;
+                                                                        getOriginalPostInformation();
+                                                                        onLoading();
+                                                                        Navigator.pop(context);
+                                                                      },
+                                                                    )
+                                                                  ],
                                                                 ),
                                                               ),
                                                             );
-                                                          },
-                                                          onLongPress: () async {
-                                                            if(currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType){
-                                                              await showMaterialModalBottomSheet(
-                                                                context: context,
-                                                                builder: (context) => SafeArea(
-                                                                  top: false,
-                                                                  child: Column(
-                                                                    mainAxisSize: MainAxisSize.min,
-                                                                    children: <Widget>[
-                                                                      ListTile(
-                                                                        title: const Text('Edit'),
-                                                                        leading: const Icon(Icons.edit),
-                                                                        onTap: () async {
-                                                                          controller.text = controller.text + commentsListener[i].listOfReplies[index].replyBody;
-                                                                          await showModalBottomSheet(
-                                                                            context: context,
-                                                                            builder: (context) => showKeyboardEdit(isEdit: false, editId: commentsListener[i].listOfReplies[index].replyId),
-                                                                          );
-                                                                        },
-                                                                      ),
-                                                                      ListTile(
-                                                                        title: const Text('Delete'),
-                                                                        leading: const Icon(Icons.delete),
-                                                                        onTap: () async {
-                                                                          context.loaderOverlay.show();
-                                                                          await apiRegularDeleteReply(replyId: commentsListener[i].listOfReplies[index].replyId);
-                                                                          context.loaderOverlay.hide();
+                                                          }else{
+                                                            await showMaterialModalBottomSheet(
+                                                              context: context,
+                                                              builder: (context) => SafeArea(
+                                                                top: false,
+                                                                child: Column(
+                                                                  mainAxisSize: MainAxisSize.min,
+                                                                  children: <Widget>[
+                                                                    ListTile(
+                                                                      title: const Text('Report'),
+                                                                      leading: const Icon(Icons.edit),
+                                                                      onTap: (){
+                                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
+                                                                      },
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }
+                                                        },
+                                                        leading: commentsListener[i].listOfReplies[index].image != ''
+                                                        ? CircleAvatar(
+                                                          backgroundColor: const Color(0xff888888),
+                                                          foregroundImage: NetworkImage(commentsListener[i].listOfReplies[index].image),
+                                                        )
+                                                        : const CircleAvatar(
+                                                          backgroundColor: const Color(0xff888888),
+                                                          foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                                        ),
+                                                        title: Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child: currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType
+                                                              ? Text('You',
+                                                                style: TextStyle(
+                                                                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                                                  fontFamily: 'NexaBold',
+                                                                  color: const Color(0xff000000),
+                                                                ),
+                                                              )
+                                                              : Text(
+                                                                commentsListener[i].listOfReplies[index].firstName + ' ' + commentsListener[i].listOfReplies[index].lastName,
+                                                                style: TextStyle(
+                                                                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                                                  fontFamily: 'NexaBold',
+                                                                  color: const Color(0xff000000),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Align(
+                                                                alignment: Alignment.centerRight,
+                                                                child: TextButton.icon(
+                                                                  onPressed: () async{
+                                                                    if(repliesLikes[i][index] == true){
+                                                                      repliesLikes[i][index] = false;
+                                                                      repliesNumberOfLikes[i][index]--;
 
-                                                                          controller.clear();
-                                                                          itemRemaining = 1;
-                                                                          repliesRemaining = 1;
-                                                                          comments.value = [];
-                                                                          replies.value = [];
-                                                                          numberOfReplies = 0;
-                                                                          page1 = 1;
-                                                                          page2 = 1;
-                                                                          count.value = 0;
-                                                                          commentsLikes = [];
-                                                                          commentsNumberOfLikes = [];
-                                                                          repliesLikes = [];
-                                                                          repliesNumberOfLikes = [];
-                                                                          isComment = true;
-                                                                          numberOfLikes = 0;
-                                                                          numberOfComments = 0;
-                                                                          getOriginalPostInformation();
-                                                                          onLoading();
-                                                                          Navigator.pop(context);
-                                                                        },
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }else{
-                                                              await showMaterialModalBottomSheet(
-                                                                context: context,
-                                                                builder: (context) => SafeArea(
-                                                                  top: false,
-                                                                  child: Column(
-                                                                    mainAxisSize: MainAxisSize.min,
-                                                                    children: <Widget>[
-                                                                      ListTile(
-                                                                        title: const Text('Report'),
-                                                                        leading: const Icon(Icons.edit),
-                                                                        onTap: () {
-                                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: 'Post')));
-                                                                        },
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }
-                                                          },
-                                                          leading: commentsListener[i].listOfReplies[index].image != ''
-                                                          ? CircleAvatar(
-                                                            backgroundColor: const Color(0xff888888),
-                                                            foregroundImage: NetworkImage(commentsListener[i].listOfReplies[index].image),
-                                                          )
-                                                          : const CircleAvatar(
-                                                            backgroundColor: const Color(0xff888888),
-                                                            foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                                          ),
-                                                          title: Row(
-                                                            children: [
-                                                              Expanded(
-                                                                child: currentUserId == commentsListener[i].listOfReplies[index].userId && currentAccountType == commentsListener[i].listOfReplies[index].userAccountType
-                                                                ? Text('You',
-                                                                  style: TextStyle(
-                                                                    fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                    fontFamily: 'NexaBold',
-                                                                    color: const Color(0xff000000),
-                                                                  ),
-                                                                )
-                                                                : Text(
-                                                                  commentsListener[i].listOfReplies[index].firstName + ' ' + commentsListener[i].listOfReplies[index].lastName,
-                                                                  style: TextStyle(
-                                                                    fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                    fontFamily: 'NexaBold',
-                                                                    color: const Color(0xff000000),
+                                                                      await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: false);
+                                                                    }else{
+                                                                      repliesLikes[i][index] = true;
+                                                                      repliesNumberOfLikes[i][index]++;
+
+                                                                      await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: true);
+                                                                    }
+                                                                  },
+                                                                  icon: repliesLikes[i][index] == true
+                                                                  ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
+                                                                  : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
+                                                                  label: Text('${repliesNumberOfLikes[i][index]}',
+                                                                    style: TextStyle(
+                                                                      fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                                                      fontFamily: 'NexaRegular',
+                                                                      color: const Color(0xffBDC3C7),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                              Expanded(
-                                                                child: Align(
-                                                                  alignment: Alignment.centerRight,
-                                                                  child: TextButton.icon(
-                                                                    onPressed: () async {
-                                                                      if (repliesLikes[i][index] == true) {
-                                                                        repliesLikes[i][index] = false;
-                                                                        repliesNumberOfLikes[i][index]--;
-
-                                                                        await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: false);
-                                                                      } else {
-                                                                        repliesLikes[i][index] = true;
-                                                                        repliesNumberOfLikes[i][index]++;
-
-                                                                        await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: commentsListener[i].listOfReplies[index].replyId, likeStatus: true);
-                                                                      }
-                                                                    },
-                                                                    icon: repliesLikes[i][index] == true
-                                                                    ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
-                                                                    : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
-                                                                    label: Text('${repliesNumberOfLikes[i][index]}',
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        subtitle: Column(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Container(
+                                                                    padding: const EdgeInsets.all(10.0),
+                                                                    child: Text(commentsListener[i].listOfReplies[index].replyBody,
                                                                       style: TextStyle(
-                                                                        fontSize: SizeConfig.blockSizeVertical! * 1.76,
+                                                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                                                         fontFamily: 'NexaRegular',
-                                                                        color: const Color(0xffBDC3C7),
+                                                                        color: const Color(0xffFFFFFF),
                                                                       ),
+                                                                    ),
+                                                                    decoration: const BoxDecoration(
+                                                                      color: const Color(0xff4EC9D4),
+                                                                      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          subtitle: Column(
-                                                            children: [
-                                                              Row(
-                                                                children: [
-                                                                  Expanded(
-                                                                    child: Container(
-                                                                      padding: const EdgeInsets.all(10.0),
-                                                                      child: Text(
-                                                                        commentsListener[i].listOfReplies[index].replyBody,
-                                                                        style: TextStyle(
-                                                                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                          fontFamily: 'NexaRegular',
-                                                                          color: const Color(0xffFFFFFF),
-                                                                        ),
-                                                                      ),
-                                                                      decoration: const BoxDecoration(
-                                                                        color: const Color(0xff4EC9D4),
-                                                                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                                                                      ),
-                                                                    ),
+                                                              ],
+                                                            ),
+
+                                                            const SizedBox(height: 5,),
+
+                                                            Row(
+                                                              children: [
+                                                                Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt)),
+                                                                  style: TextStyle(
+                                                                    fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                                                                    fontFamily: 'NexaRegular',
+                                                                    color: const Color(0xff000000),
                                                                   ),
-                                                                ],
-                                                              ),
+                                                                ),
 
-                                                              const SizedBox(height: 5,),
+                                                                const SizedBox(width: 40,),
 
-                                                              Row(
-                                                                children: [
-                                                                  Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt)),
+                                                                GestureDetector(
+                                                                  onTap: () async{
+                                                                    print('show reply here 2');
+
+                                                                    if(controller.text != ''){
+                                                                      controller.clear();
+                                                                    }
+
+                                                                    controller.text = commentsListener[i].firstName + ' ' + commentsListener[i].lastName + ' ';
+                                                                    isComment = false;
+                                                                    currentCommentId = commentsListener[i].commentId;
+
+                                                                    await showModalBottomSheet(context: context, builder: (context) => showKeyboard(isReply: true, toReply: commentsListener[i].listOfReplies[index].replyBody, replyFrom: '${commentsListener[i].listOfReplies[index].firstName}' + ' ' + '${commentsListener[i].listOfReplies[index].lastName}'));
+                                                                  },
+                                                                  child: Text('Reply',
                                                                     style: TextStyle(
                                                                       fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                                                       fontFamily: 'NexaRegular',
                                                                       color: const Color(0xff000000),
                                                                     ),
                                                                   ),
-
-                                                                  const SizedBox(width: 40,),
-
-                                                                  GestureDetector(
-                                                                    onTap: () async {
-                                                                      print('show reply here 2');
-
-                                                                      if (controller.text != '') {
-                                                                        controller.clear();
-                                                                      }
-
-                                                                      controller.text = commentsListener[i].firstName + ' ' + commentsListener[i].lastName + ' ';
-
-                                                                      isComment = false;
-                                                                      currentCommentId = commentsListener[i].commentId;
-
-                                                                      await showModalBottomSheet(context: context, builder: (context) => showKeyboard(isReply: true, toReply: commentsListener[i].listOfReplies[index].replyBody, replyFrom: '${commentsListener[i].listOfReplies[index].firstName}' + ' ' + '${commentsListener[i].listOfReplies[index].lastName}'));
-                                                                    },
-                                                                    child: Text('Reply',
-                                                                      style: TextStyle(
-                                                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                        fontFamily: 'NexaRegular',
-                                                                        color: const Color(0xff000000),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ),
+                                                      ),),
                                                     )
                                                     : Container(height: 0,),
                                                   ],
@@ -1448,10 +1375,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     return SafeArea(
       top: false,
       child: Padding(
-        padding: EdgeInsets.only(
-          left: 20.0,
-          right: 20.0,
-        ),
+        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
         child: isReply == true
         ? Container(
           height: 200,
@@ -1486,7 +1410,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                       child: IconButton(
                         icon: Icon(Icons.close),
                         onPressed: (){
-                          print('Closed!');
                           Navigator.pop(context);
                         },
                       ),
@@ -1514,67 +1437,38 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         cursorColor: Color(0xffFFFFFF),
                         maxLines: 2,
                         keyboardType: TextInputType.text,
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xffFFFFFF),
-                        ),
+                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                         decoration: InputDecoration(
                           fillColor: Color(0xffBDC3C7),
                           filled: true,
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           labelText: 'Say something...',
-                          labelStyle: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                            fontFamily: 'NexaRegular',
-                            color: const Color(0xffFFFFFF),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xffBDC3C7),
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xffBDC3C7),
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
+                          labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                          border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                         ),
                       ),
                     ),
                   ),
                   GestureDetector(
-                    onTap: () async {
-                      if (controller.text == '') {
+                    child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                    onTap: () async{
+                      if(controller.text == ''){
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 3.16,
-                                  fontFamily: 'NexaRegular'),
-                            ),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Please input a comment.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize:
-                                  SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'),
-                            ),
+                            description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                             onlyOkButton: true,
                             buttonOkColor: Colors.red,
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
                         );
-                      } else if (isComment == true && controller.text != '') {
+                      }else if(isComment == true && controller.text != ''){
                         context.loaderOverlay.show();
                         await apiRegularAddComment(postId: widget.postId, commentBody: controller.text);
                         context.loaderOverlay.hide();
@@ -1597,7 +1491,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         numberOfComments = 0;
                         getOriginalPostInformation();
                         onLoading();
-                      } else {
+                      }else{
                         context.loaderOverlay.show();
                         apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
                         context.loaderOverlay.hide();
@@ -1622,13 +1516,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         onLoading();
                       }
                     },
-                    child: Text('Post',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaBold',
-                        color: const Color(0xff2F353D),
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -1654,67 +1541,38 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   cursorColor: Color(0xffFFFFFF),
                   maxLines: 2,
                   keyboardType: TextInputType.text,
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xffFFFFFF),
-                  ),
+                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                   decoration: InputDecoration(
                     fillColor: Color(0xffBDC3C7),
                     filled: true,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelText: 'Say something...',
-                    labelStyle: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xffFFFFFF),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xffBDC3C7),
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xffBDC3C7),
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
+                    labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                   ),
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () async {
-                if (controller.text == '') {
+              child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+              onTap: () async{
+                if(controller.text == ''){
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize:
-                            SizeConfig.blockSizeVertical! * 3.16,
-                            fontFamily: 'NexaRegular'),
-                      ),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Please input a comment.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize:
-                            SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular'),
-                      ),
+                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                       onlyOkButton: true,
                       buttonOkColor: Colors.red,
-                      onOkButtonPressed: () {
+                      onOkButtonPressed: (){
                         Navigator.pop(context, true);
                       },
                     ),
                   );
-                } else if (isComment == true && controller.text != '') {
+                }else if(isComment == true && controller.text != ''){
                   context.loaderOverlay.show();
                   await apiRegularAddComment(postId: widget.postId, commentBody: controller.text);
                   context.loaderOverlay.hide();
@@ -1737,7 +1595,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   numberOfComments = 0;
                   getOriginalPostInformation();
                   onLoading();
-                } else {
+                }else{
                   context.loaderOverlay.show();
                   apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
                   context.loaderOverlay.hide();
@@ -1762,13 +1620,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   onLoading();
                 }
               },
-              child: Text('Post',
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xff2F353D),
-                ),
-              ),
             ),
           ],
         ),
@@ -1776,7 +1627,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     );
   }
 
-  showKeyboardEdit({required bool isEdit, required int editId}) {
+  showKeyboardEdit({required bool isEdit, required int editId}){
     // isEdit - TRUE (COMMENT) | FALSE (REPLY)
     return SafeArea(
       top: false,
@@ -1801,61 +1652,38 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   cursorColor: Color(0xffFFFFFF),
                   maxLines: 2,
                   keyboardType: TextInputType.text,
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xffFFFFFF),
-                  ),
+                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                   decoration: InputDecoration(
                     fillColor: Color(0xffBDC3C7),
                     filled: true,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelText: 'Say something...',
-                    labelStyle: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xffFFFFFF),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xffBDC3C7),
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xffBDC3C7),
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
+                    labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                   ),
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () async {
-                if (controller.text == '') {
+              child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+              onTap: () async{
+                if(controller.text == ''){
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center,  style: TextStyle(
-                          fontSize:
-                          SizeConfig.blockSizeVertical! * 3.16,
-                          fontFamily: 'NexaRegular'),),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                       entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(
-                          fontSize:
-                          SizeConfig.blockSizeVertical! * 2.87,
-                          fontFamily: 'NexaRegular'),),
+                      description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                       onlyOkButton: true,
                       buttonOkColor: Colors.red,
-                      onOkButtonPressed: () {
+                      onOkButtonPressed: (){
                         Navigator.pop(context, true);
                       },
                     ),
                   );
-                } else if (isEdit == true) {
+                }else if(isEdit == true){
                   context.loaderOverlay.show();
                   await apiRegularEditComment(commentId: editId, commentBody: controller.text);
                   context.loaderOverlay.hide();
@@ -1878,7 +1706,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   numberOfComments = 0;
                   getOriginalPostInformation();
                   onLoading();
-                } else {
+                }else{
                   context.loaderOverlay.show();
                   await apiRegularEditReply(replyId: editId, replyBody: controller.text);
                   context.loaderOverlay.hide();
@@ -1903,13 +1731,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   onLoading();
                 }
               },
-              child: Text('Post',
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xff2F353D),
-                ),
-              ),
             ),
           ],
         ),

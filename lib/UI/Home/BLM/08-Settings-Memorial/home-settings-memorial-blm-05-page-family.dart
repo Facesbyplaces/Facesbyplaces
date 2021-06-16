@@ -47,7 +47,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   }
 
   Future<void> onRefresh() async{
-    setState(() {
+    setState((){
       onLoading();
     });
   }
@@ -111,7 +111,11 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
               padding: EdgeInsets.zero,
               textColor: const Color(0xffffffff),
               splashColor: const Color(0xff04ECFF),
-              onPressed: () async {
+              child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
+              height: 40,
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C),),),
+              color: const Color(0xffE74C3C),
+              onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
@@ -154,9 +158,9 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                       context: context,
                       builder: (_) => AssetGiffyDialog(
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),                          ),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),                          ),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                         onlyOkButton: true,
                         onOkButtonPressed: (){
                           family = [];
@@ -171,16 +175,13 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                   }
                 }
               },
-              child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              height: 40,
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C),),),
-              color: const Color(0xffE74C3C),
             ),
           ),
         );
       }
 
-      if (mounted) setState(() {});
+      if(mounted)
+      setState(() {});
       page++;
     }
   }
@@ -206,10 +207,10 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
         ),
         actions: [
           GestureDetector(
+            child: Center(child: Text('Add Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
             onTap: (){
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
             },
-            child: Center(child: Text('Add Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
           ),
         ],
       ),

@@ -32,35 +32,35 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
   File profileImage = File('');
   Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
 
-  Future getProfileImage() async {
+  Future getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
+    if(pickedFile != null){
       setState(() {
         profileImage = File(pickedFile.path);
       });
     }
   }
 
-  Future getBackgroundImage() async {
+  Future getBackgroundImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
+    if(pickedFile != null){
+      setState((){
         backgroundImage = File(pickedFile.path);
       });
     }
   }
 
-  Future<APIBLMShowPageImagesMain> getMemorialSettings(int memorialId) async {
+  Future<APIBLMShowPageImagesMain> getMemorialSettings(int memorialId) async{
     return await apiBLMShowPageImages(memorialId: memorialId);
   }
 
-  void initState() {
+  void initState(){
     super.initState();
     futureMemorialSettings = getMemorialSettings(widget.memorialId);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
@@ -68,16 +68,12 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
         title: Row(
           children: [
             Text('Page Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-            Spacer()
+            Spacer(),
           ],
         ),
         centerTitle: true,
         leading: IconButton(
-          icon:  Icon(
-            Icons.arrow_back,
-            color: const Color(0xffffffff),
-            size: SizeConfig.blockSizeVertical! * 3.52,
-          ),
+          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
           onPressed: () async{
             if(profileImage.path != '' || (backgroundImage.path != '' && backgroundImageToggle != 0)){
               bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
@@ -152,21 +148,13 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                               child: const CircleAvatar(
                                 radius: 25,
                                 backgroundColor: const Color(0xffffffff),
-                                child: const CircleAvatar(
-                                  radius: 25,
-                                  backgroundColor: Colors.transparent,
-                                  child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
-                                ),
+                                child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
                               ),
                             ),
                             const Positioned(
                               top: 10,
                               right: 10,
-                              child: const CircleAvatar(
-                                radius: 25,
-                                backgroundColor: const Color(0xffffffff),
-                                child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
-                              ),
+                              child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff), child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
                             ),
                           ],
                         ),
@@ -193,10 +181,10 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                           },
                           itemBuilder: (context, index){
                             return ((){
-                              if (index == 4) {
+                              if(index == 4){
                                 return GestureDetector(
                                   onTap: () async{
-                                    setState(() {
+                                    setState((){
                                       backgroundImageToggle = index;
                                     });
 
@@ -206,16 +194,12 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     width: 100,
                                     height: 100,
                                     child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: const Color(0xffcccccc),
-                                      border: Border.all(color: const Color(0xff000000),),
-                                    ),
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
                                   ),
                                 );
-                              } else {
+                              }else{
                                 return GestureDetector(
-                                  onTap: () async {
+                                  onTap: () async{
                                     final ByteData bytes = await rootBundle.load(backgroundImages[index]);
                                     final Uint8List list = bytes.buffer.asUint8List();
 
@@ -223,7 +207,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     final file = await new File('${tempDir.path}/blm-background-image-$index.png').create();
                                     file.writeAsBytesSync(list);
 
-                                    setState(() {
+                                    setState((){
                                       backgroundImageToggle = index;
                                       backgroundImage = file;
                                     });
@@ -237,10 +221,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   )
                                   : Container(
@@ -251,10 +232,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   ),
                                 );
@@ -296,22 +274,16 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                   },
                                 ),
                               );
-                              Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(
-                                  memorialId: widget.memorialId,
-                                  managed: true,
-                                  newlyCreated: false,
-                                  relationship: memorialImageSettings.data!.blmMemorial.showPageImagesRelationship,
-                                ),
-                              );
+                              Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.blmMemorial.showPageImagesRelationship,),);
                               Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                             }else{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                                   onlyOkButton: true,
                                   buttonOkColor: const Color(0xffff0000),
                                   onOkButtonPressed: (){
@@ -331,25 +303,12 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
           }else if(memorialImageSettings.hasError){
             return Container(
               height: SizeConfig.screenHeight,
-              child: const Center(
-                child: const Text('Something went wrong. Please try again.',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: const Color(0xff000000),
-                  ),
-                ),
-              ),
+              child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
             );
           }else{
             return Container(
               height: SizeConfig.screenHeight,
-              child: Center(
-                child: Container(
-                  child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                  color: const Color(0xffffffff),
-                ),
-              ),
+              child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
             );
           }
         },

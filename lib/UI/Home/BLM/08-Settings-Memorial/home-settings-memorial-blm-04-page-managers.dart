@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class BLMShowAdminSettings {
+class BLMShowAdminSettings{
   final int userId;
   final String firstName;
   final String lastName;
@@ -17,7 +17,7 @@ class BLMShowAdminSettings {
   const BLMShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
 }
 
-class HomeBLMPageManagers extends StatefulWidget {
+class HomeBLMPageManagers extends StatefulWidget{
   final int memorialId;
   const HomeBLMPageManagers({required this.memorialId});
 
@@ -160,6 +160,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
               padding: EdgeInsets.zero,
               textColor: const Color(0xffffffff),
               splashColor: const Color(0xff04ECFF),
+              child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
+              height: 40,
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
+              color: const Color(0xffE74C3C),
               onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
@@ -192,11 +196,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         title: Text('Error',textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Error: $result.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'
-                          ),
-                        ),
+                        description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                         onlyOkButton: true,
                         buttonOkColor: const Color(0xffff0000),
                         onOkButtonPressed: (){
@@ -230,10 +230,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   }
                 }
               },
-              child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              height: 40,
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
-              color: const Color(0xffE74C3C),
             ),
           ),
         );
@@ -292,6 +288,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
               padding: EdgeInsets.zero,
               textColor: const Color(0xffffffff),
               splashColor: const Color(0xff04ECFF),
+              child: Text('Make Manager', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular'),),
+              height: 40,
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF)),),
+              color: const Color(0xff04ECFF),
               onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
@@ -356,10 +356,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   }
                 }
               },
-              child: Text('Make Manager', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular'),),
-              height: 40,
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF)),),
-              color: const Color(0xff04ECFF),
             ),
           ),
         );

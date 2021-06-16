@@ -22,32 +22,32 @@ import 'package:we_slide/we_slide.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class HomeRegularUserProfileDetails extends StatefulWidget {
+class HomeRegularUserProfileDetails extends StatefulWidget{
   final int userId;
   const HomeRegularUserProfileDetails({required this.userId});
 
   HomeRegularUserProfileDetailsState createState() => HomeRegularUserProfileDetailsState();
 }
 
-class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDetails> {
+class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDetails>{
   Future<APIRegularShowProfileInformation>? showProfile;
   WeSlideController controller = WeSlideController();
   final picker = ImagePicker();
   File profileImage = File('');
 
-  Future<APIRegularShowProfileInformation> getProfileInformation() async {
+  Future<APIRegularShowProfileInformation> getProfileInformation() async{
     return await apiRegularShowProfileInformation();
   }
 
-  Future<bool> getProfileImage() async {
+  Future<bool> getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
-    if (pickedFile != null) {
+    if(pickedFile != null){
       setState(() {
         profileImage = File(pickedFile.path);
       });
       return true;
-    } else {
+    }else{
       return false;
     }
   }
@@ -78,12 +78,12 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                     Expanded(child: Container(),),
 
                     ListTile(
+                      title: Text('Update Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      subtitle: Text('Update your account details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       onTap: (){
                         print('The user id is ${widget.userId}');
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: widget.userId,)));
                       },
-                      title: Text('Update Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                      subtitle: Text('Update your account details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
 
                     const Divider(height: 20, color: const Color(0xff888888),),
@@ -103,16 +103,10 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Error: $error.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'
-                                ),
-                              ),
+                              description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                               onlyOkButton: true,
                               buttonOkColor: const Color(0xffff0000),
-                              onOkButtonPressed: () {
+                              onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
                             ),
@@ -142,17 +136,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
                         context.loaderOverlay.hide();
 
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                          HomeRegularUserOtherDetails(
-                              userId: widget.userId,
-                              toggleBirthdate: result.showOtherDetailsStatusHideBirthdate,
-                              toggleBirthplace: result.showOtherDetailsStatusHideBirthplace,
-                              toggleAddress: result.showOtherDetailsStatusHideAddress,
-                              toggleEmail: result.showOtherDetailsStatusHideEmail,
-                              toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,
-                            ),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeRegularUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
                       },
                       title: Text('Other info', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                       subtitle: Text('Optional informations you can share',style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
@@ -354,8 +338,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           SizedBox(height: SizeConfig.blockSizeVertical! * 2.03),
 
                           Center(
-                            child: Text(
-                              profile.data!.showProfileInformationEmail,
+                            child: Text(profile.data!.showProfileInformationEmail,
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                 fontFamily: 'NexaRegular',
@@ -379,10 +362,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
               height: SizeConfig.screenHeight,
               child: Center(
                 child: Container(
-                  child: const SpinKitThreeBounce(
-                    color: const Color(0xff000000),
-                    size: 50.0,
-                  ),
+                  child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
                   color: const Color(0xffffffff),
                 ),
               ),

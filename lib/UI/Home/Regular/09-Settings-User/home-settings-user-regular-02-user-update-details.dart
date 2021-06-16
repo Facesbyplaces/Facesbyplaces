@@ -15,24 +15,20 @@ class HomeRegularUserUpdateDetails extends StatefulWidget {
   final int userId;
   const HomeRegularUserUpdateDetails({required this.userId});
 
-  HomeRegularUserUpdateDetailsState createState() => HomeRegularUserUpdateDetailsState(userId: userId);
+  HomeRegularUserUpdateDetailsState createState() => HomeRegularUserUpdateDetailsState();
 }
 
 class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetails> {
-  final int userId;
-  HomeRegularUserUpdateDetailsState({required this.userId});
-
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularPhoneNumberTemplateState> _key4 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
   final GlobalKey<MiscRegularInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscRegularInputFieldSecurityQuestionsState>();
-
   Future<APIRegularShowAccountDetails>? accountDetails;
 
   void initState(){
     super.initState();
-    accountDetails = getAccountDetails(userId);
+    accountDetails = getAccountDetails(widget.userId);
   }
 
   Future<APIRegularShowAccountDetails> getAccountDetails(int userId) async{
@@ -134,30 +130,12 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                         height: 45,
                         buttonColor: const Color(0xff04ECFF),
                         onPressed: () async{
-                          if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text ||
-                              details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text ||
-                              details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text ||
-                              details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text ||
-                              details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
-                                bool confirmResult = await showDialog(
-                                  context: (context),
-                                  builder: (build) => const MiscRegularConfirmDialog(
-                                    title: 'Confirm',
-                                    content: 'Do you want to save the changes?',
-                                    confirmColor_1: const Color(0xff04ECFF),
-                                    confirmColor_2: const Color(0xffFF0000),
-                                  ),
-                                );
+                          if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
+                            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000), ),);
 
                             if(confirmResult){
                               context.loaderOverlay.show();
-                              bool result = await apiRegularUpdateAccountDetails(
-                                firstName: _key1.currentState!.controller.text,
-                                lastName: _key2.currentState!.controller.text,
-                                email: _key3.currentState!.controller.text,
-                                phoneNumber: _key4.currentState!.controller.text,
-                                question: _key5.currentState!.currentSelection,
-                              );
+                              bool result = await apiRegularUpdateAccountDetails(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, email: _key3.currentState!.controller.text, phoneNumber: _key4.currentState!.controller.text, question: _key5.currentState!.currentSelection,);
                               context.loaderOverlay.hide();
 
                               if(result){
@@ -174,7 +152,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                     },
                                   ),
                                 );
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
                               }else{
                                 await showDialog(
                                   context: context,

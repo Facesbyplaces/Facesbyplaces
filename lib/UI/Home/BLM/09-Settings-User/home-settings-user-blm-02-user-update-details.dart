@@ -40,7 +40,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails> {
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
@@ -134,48 +134,29 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails> {
                         height: 45,
                         buttonColor: const Color(0xff04ECFF),
                         onPressed: () async{
-                          if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text ||
-                              details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text ||
-                              details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text ||
-                              details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text ||
-                              details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
+                          if(details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text || details.data!.showAccountDetailsLastName != _key2.currentState!.controller.text || details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text || details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection){
+                            bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
 
-                              bool confirmResult = await showDialog(
-                                context: (context),
-                                builder: (build) => const MiscBLMConfirmDialog(
-                                  title: 'Confirm', 
-                                  content: 'Do you want to save the changes?',
-                                  confirmColor_1: const Color(0xff04ECFF),
-                                  confirmColor_2: const Color(0xffFF0000),
-                                ),
-                              );
+                            if(confirmResult) {
+                              context.loaderOverlay.show();
+                              bool result = await apiBLMUpdateAccountDetails(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, email: _key3.currentState!.controller.text, phoneNumber: _key4.currentState!.controller.text, question: _key5.currentState!.currentSelection,);
+                              context.loaderOverlay.hide();
 
-                              if(confirmResult) {
-                                context.loaderOverlay.show();
-                                bool result = await apiBLMUpdateAccountDetails(
-                                  firstName: _key1.currentState!.controller.text,
-                                  lastName: _key2.currentState!.controller.text,
-                                  email: _key3.currentState!.controller.text,
-                                  phoneNumber: _key4.currentState!.controller.text,
-                                  question: _key5.currentState!.currentSelection,
+                              if(result){
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                    onlyOkButton: true,
+                                    onOkButtonPressed: (){
+                                      Navigator.pop(context, true);
+                                    },
+                                  ),
                                 );
-                                context.loaderOverlay.hide();
-
-                                if(result){
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                      onlyOkButton: true,
-                                      onOkButtonPressed: (){
-                                        Navigator.pop(context, true);
-                                      },
-                                    ),
-                                  );
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: widget.userId,)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: widget.userId,)));
                               }else{
                                 await showDialog(
                                   context: context,
@@ -197,6 +178,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails> {
                           }
                         },
                       ),
+
                       const SizedBox(height: 20,),
                     ],
                   ),
@@ -204,22 +186,12 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails> {
               }else if(details.hasError){
                 return Container(
                   height: SizeConfig.screenHeight,
-                  child: const Center(
-                    child: const Text('Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),
-                    ),
-                  ),
+                  child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
                 );
               }else{
                 return Container(
                   height: SizeConfig.screenHeight,
-                  child: Center(
-                    child: Container(
-                      child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                      color: const Color(0xffffffff),
-                    ),
-                  ),
+                  child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
                 );
               }
             },

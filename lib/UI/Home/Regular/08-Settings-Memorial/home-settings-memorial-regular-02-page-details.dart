@@ -186,33 +186,12 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             height: 45,
                             buttonColor: const Color(0xff04ECFF),
                             onPressed: () async{
-                              if(memorialSettings.data!.almMemorial.showPageDetailsName != _key1.currentState!.controller.text ||
-                                memorialSettings.data!.almMemorial.showPageDetailsRelationship != _key2.currentState!.currentSelection ||
-                                memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text ||
-                                memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text ||
-                                memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key5.currentState!.controller.text ||
-                                memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery != _key6.currentState!.controller.text){
-                                bool confirmResult = await showDialog(
-                                  context: (context),
-                                  builder: (build) => const MiscRegularConfirmDialog(
-                                    title: 'Confirm', 
-                                    content:'Do you want to save the changes?',
-                                    confirmColor_1: const Color(0xff04ECFF),
-                                    confirmColor_2: const Color(0xffFF0000),
-                                  ),
-                                );
+                              if(memorialSettings.data!.almMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsRelationship != _key2.currentState!.currentSelection || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key5.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery != _key6.currentState!.controller.text){
+                                bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content:'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
 
                                 if(confirmResult){
                                   context.loaderOverlay.show();
-                                  bool result = await apiRegularUpdatePageDetails(
-                                    name: _key1.currentState!.controller.text,
-                                    relationship: _key2.currentState!.currentSelection,
-                                    dob: controller1.text,
-                                    rip: controller2.text,
-                                    country: _key5.currentState!.controller.text,
-                                    cemetery: _key6.currentState!.controller.text,
-                                    memorialId: widget.memorialId,
-                                  );
+                                  bool result = await apiRegularUpdatePageDetails(name: _key1.currentState!.controller.text, relationship: _key2.currentState!.currentSelection, dob: controller1.text, rip: controller2.text, country: _key5.currentState!.controller.text, cemetery: _key6.currentState!.controller.text, memorialId: widget.memorialId,);
                                   context.loaderOverlay.hide();
 
                                   if(result){
@@ -259,22 +238,12 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
               }else if(memorialSettings.hasError){
                 return Container(
                   height: SizeConfig.screenHeight,
-                  child: const Center(
-                    child: const Text('Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),
-                    ),
-                  )
+                  child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),)
                 );
               }else{
                 return Container(
                   height: SizeConfig.screenHeight,
-                  child: Center(
-                    child: Container(
-                      child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                      color: const Color(0xffffffff),
-                    ),
-                  ),
+                  child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
                 );
               }
             },

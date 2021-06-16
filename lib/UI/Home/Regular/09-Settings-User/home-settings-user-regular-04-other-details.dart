@@ -25,18 +25,10 @@ class HomeRegularUserOtherDetails extends StatefulWidget {
   final bool toggleNumber;
   const HomeRegularUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
-  HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthplace, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
+  HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState();
 }
 
 class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails> {
-  final int userId;
-  final bool toggleBirthdate;
-  final bool toggleBirthplace;
-  final bool toggleAddress;
-  final bool toggleEmail;
-  final bool toggleNumber;
-  HomeRegularUserOtherDetailsState({required this.userId,required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
-
   final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -52,12 +44,12 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
   void initState() {
     super.initState();
-    otherDetails = getOtherDetails(userId);
-    toggle1 = toggleBirthdate;
-    toggle2 = toggleBirthplace;
-    toggle3 = toggleAddress;
-    toggle4 = toggleEmail;
-    toggle5 = toggleNumber;
+    otherDetails = getOtherDetails(widget.userId);
+    toggle1 = widget.toggleBirthdate;
+    toggle2 = widget.toggleBirthplace;
+    toggle3 = widget.toggleAddress;
+    toggle4 = widget.toggleEmail;
+    toggle5 = widget.toggleNumber;
   }
 
   Future<APIRegularShowOtherDetails> getOtherDetails(int userId) async {
@@ -117,6 +109,8 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                           const SizedBox(height: 20,),
 
                           IconButton(
+                            icon: toggle1 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
+                            color: toggle1 ? const Color(0xff85DBF1) : const Color(0xff888888),
                             onPressed: () async{
                               setState((){
                                 toggle1 = !toggle1;
@@ -124,8 +118,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                               await apiRegularHideBirthdate(hide: toggle1);
                             },
-                            icon: toggle1 ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
-                            color: toggle1 ? const Color(0xff85DBF1) : const Color(0xff888888),
                           ),
                         ],
                       ),
@@ -258,25 +250,12 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                         height: 45,
                         buttonColor: const Color(0xff04ECFF),
                         onPressed: () async{
-                          if(details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text ||
-                              details.data!.showOtherDetailsBirthplace != _key2.currentState!.controller.text ||
-                              details.data!.showOtherDetailsAddress != _key3.currentState!.controller.text ||
-                              details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text ||
-                              details.data!.showOtherDetailsPhoneNumber != _key5.currentState!.controller.text){
-
+                          if(details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text || details.data!.showOtherDetailsBirthplace != _key2.currentState!.controller.text || details.data!.showOtherDetailsAddress != _key3.currentState!.controller.text || details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text || details.data!.showOtherDetailsPhoneNumber != _key5.currentState!.controller.text){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
 
                             if(confirmResult){
                               context.loaderOverlay.show();
-
-                              bool result = await apiRegularUpdateOtherDetails(
-                                birthdate: _key1.currentState!.controller.text,
-                                birthplace: _key2.currentState!.controller.text,
-                                address: _key3.currentState!.controller.text,
-                                email: _key4.currentState!.controller.text,
-                                phoneNumber: _key5.currentState!.controller.text,
-                              );
-
+                              bool result = await apiRegularUpdateOtherDetails(birthdate: _key1.currentState!.controller.text, birthplace: _key2.currentState!.controller.text, address: _key3.currentState!.controller.text, email: _key4.currentState!.controller.text, phoneNumber: _key5.currentState!.controller.text,);
                               context.loaderOverlay.hide();
 
                               if(result){
@@ -294,7 +273,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   ),
                                 );
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: widget.userId,)));
                               }else{
                                 await showDialog(
                                   context: context,
@@ -326,22 +305,14 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                   child: const Center(
                     child: const Text('Something went wrong. Please try again.',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: const Color(0xff000000),
-                      ),
+                      style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),
                     ),
                   ),
                 );
               }else{
                 return Container(
                   height: SizeConfig.screenHeight,
-                  child: Center(
-                    child: Container(
-                      child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                      color: const Color(0xffffffff),
-                    ),
-                  ),
+                  child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
                 );
               }
             },

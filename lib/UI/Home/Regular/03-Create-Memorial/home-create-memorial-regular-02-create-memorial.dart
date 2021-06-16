@@ -136,9 +136,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                 labelColor: const Color(0xff04ECFF),
                                 unselectedLabelColor: const Color(0xff000000),
                                 indicatorColor: Colors.transparent,
-                                onTap: (int number) {
-                                  toggle.value = number;
-                                },
                                 indicator: BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
                                 tabs: [
                                   Center(child: Text('Text', style: TextStyle(fontSize:SizeConfig.blockSizeVertical! * 2.0, fontFamily: 'NexaRegular',),),),
@@ -147,6 +144,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
                                   Center(child: Text('Slide', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.0, fontFamily: 'NexaRegular',),),),
                                 ],
+                                onTap: (int number) {
+                                  toggle.value = number;
+                                },
                               ),
                             ),
                           ),
@@ -202,19 +202,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                               newFiles.addAll(slideImages.value);
                             }
 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial3(
-                                  relationship: widget.relationship,
-                                  birthplace: widget.birthplace,
-                                  dob: widget.dob,
-                                  rip: widget.rip,
-                                  cemetery: widget.cemetery,
-                                  country: widget.country,
-                                  description: controllerStory.text,
-                                  memorialName: _key1.currentState!.controller.text,
-                                  imagesOrVideos: newFiles,
-                                ),
-                              ),
-                            );
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial3(relationship: widget.relationship, birthplace: widget.birthplace, dob: widget.dob, rip: widget.rip, cemetery: widget.cemetery, country: widget.country, description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
                           }
                         },
                       ),
@@ -328,13 +316,13 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                 right: 0,
                 child: IconButton(
                   iconSize: 25,
-                  onPressed: (){
-                    videoFile.value = File('');
-                  },
                   icon: const CircleAvatar(
                     backgroundColor: const Color(0xff000000),
                     child: const Icon(Icons.close, color: const Color(0xffffffff),),
                   ),
+                  onPressed: (){
+                    videoFile.value = File('');
+                  },
                 ),
               ),
             ],
@@ -375,9 +363,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     return ((){
                       if(index == slideCountListener){
                         return GestureDetector(
-                          onTap: () async{
-                            await getSlideImage();
-                          },
                           child: Container(
                             width: 80,
                             child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60),
@@ -387,6 +372,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                               border: Border.all(color: const Color(0xff000000),),
                             ),
                           ),
+                          onTap: () async{
+                            await getSlideImage();
+                          },
                         );
                       }else{
                         return GestureDetector(
@@ -411,14 +399,14 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                             alignment: Alignment.centerRight,
                                             padding: const EdgeInsets.only(right: 20.0),
                                             child: GestureDetector(
-                                              onTap: (){
-                                                Navigator.pop(context);
-                                              },
                                               child: CircleAvatar(
                                                 radius: 20,
                                                 backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                 child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                               ),
+                                              onTap: (){
+                                                Navigator.pop(context);
+                                              },
                                             ),
                                           ),
 

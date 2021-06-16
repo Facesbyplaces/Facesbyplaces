@@ -15,21 +15,21 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
 
-class BLMTaggedUsers {
+class BLMTaggedUsers{
   final String name;
   final int userId;
   final int accountType;
   const BLMTaggedUsers({required this.name, required this.userId, required this.accountType});
 }
 
-class BLMManagedPages {
+class BLMManagedPages{
   final String name;
   final int pageId;
   final String image;
   const BLMManagedPages({required this.name, required this.pageId, required this.image});
 }
 
-class HomeBLMCreatePost extends StatefulWidget {
+class HomeBLMCreatePost extends StatefulWidget{
   final String name;
   final int memorialId;
   const HomeBLMCreatePost({required this.name, required this.memorialId});
@@ -52,7 +52,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   int currentIdSelected = 0;
   int maxLines = 5;
 
-  void initState() {
+  void initState(){
     super.initState();
     currentSelection = widget.name;
     currentIdSelected = widget.memorialId;
@@ -80,7 +80,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
         return picture;
       });
 
-      if (pickedFile != null) {
+      if(pickedFile != null){
         slideImages.value.add(File(pickedFile.path));
         slideCount.value++;
       }
@@ -237,11 +237,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               child: InputDecorator(
                                 decoration: InputDecoration(
                                   alignLabelWithHint: true,
-                                  labelStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xff888888),
-                                  ),
+                                  labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
                                   focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none,),
                                   border: UnderlineInputBorder(borderSide: BorderSide.none,),
                                 ),
@@ -335,14 +331,11 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 labelPadding: const EdgeInsets.only(left: 8.0),
                                 label: Text(newLocationListener),
                                 deleteIcon: const Icon(Icons.close, size: 18,),
-                                onDeleted: () {
+                                onDeleted: (){
                                   newLocation.value = '';
                                 },
                               ),
-                              padding: const EdgeInsets.only(
-                                left: 20.0,
-                                right: 20.0,
-                              ),
+                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                               alignment: Alignment.centerLeft,
                             )
                             : Container(height: 0,),
@@ -474,14 +467,14 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                   top: 0,
                                                   right: 0,
                                                   child: GestureDetector(
-                                                    onTap: (){
-                                                      slideImages.value.removeAt(index);
-                                                      slideCount.value--;
-                                                    },
                                                     child: const CircleAvatar(
                                                       backgroundColor: const Color(0xff000000),
                                                       child: const Icon(Icons.close, color: const Color(0xffffffff),),
                                                     ),
+                                                    onTap: (){
+                                                      slideImages.value.removeAt(index);
+                                                      slideCount.value--;
+                                                    },
                                                   ),
                                                 )
                                                 : Container(height: 0),
@@ -512,13 +505,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                     top: 0,
                                                     right: 0,
                                                     child: GestureDetector(
-                                                      onTap: (){
-                                                        slideImages.value.removeAt(index);
-                                                      },
                                                       child: const CircleAvatar(
                                                         backgroundColor: const Color(0xff000000),
                                                         child: const Icon(Icons.close, color: const Color(0xffffffff),),
                                                       ),
+                                                      onTap: (){
+                                                        slideImages.value.removeAt(index);
+                                                      },
                                                     ),
                                                   )
                                                   : Container(height: 0),
@@ -535,6 +528,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 }
                               }()),
                             ),
+
                             Divider(color: const Color(0xff2F353D), thickness: 0.2,),
 
                             Container(
@@ -545,7 +539,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     child: GestureDetector(
                                       onTap: () async{
                                         String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
-
                                         newLocation.value = result;
                                       },
                                       child: Container(

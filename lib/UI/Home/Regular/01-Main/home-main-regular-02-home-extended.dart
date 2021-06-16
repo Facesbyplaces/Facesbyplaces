@@ -30,21 +30,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class HomeRegularScreenExtended extends StatefulWidget {
+class HomeRegularScreenExtended extends StatefulWidget{
   final int newToggleBottom;
   const HomeRegularScreenExtended({required this.newToggleBottom});
 
   HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState();
 }
 
-class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
-  ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
-  ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
+class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
+  ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
+  ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   Future<APIRegularShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<APIRegularShowProfileInformation> getDrawerInformation() async {
     return await apiRegularShowProfileInformation();
@@ -156,7 +156,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                       builder: (context, profileImage){
                         if(profileImage.hasData){
                           return Builder(
-                            builder: (context) {
+                            builder: (context){
                               return IconButton(
                                 icon: Container(
                                   decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 2,),),
@@ -204,15 +204,15 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                     centerTitle: true,
                     actions: [
                       GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context, '/home/regular/search');
-                        },
                         child: Container(
                           height: SizeConfig.blockSizeVertical! * 4.04,
                           width: SizeConfig.blockSizeHorizontal! * 12.18,
                           padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal! * 5),
                           child: Image.asset('assets/icons/zoom.png',),
                         ),
+                        onTap: (){
+                          Navigator.pushNamed(context, '/home/regular/search');
+                        },
                       ),
                     ],
                   ),
@@ -224,9 +224,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                           physics: const NeverScrollableScrollPhysics(),
                           child: Container(
                             height: SizeConfig.screenHeight,
-                            child: const MiscRegularBackgroundTemplate(
-                              image: const AssetImage('assets/icons/background2.png'),
-                            ),
+                            child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
                           ),
                         ),
                         Container(
@@ -411,7 +409,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended> {
                                                       child: CachedNetworkImage(
                                                         fit: BoxFit.cover,
                                                         imageUrl: manageDrawer.data!.showProfileInformationImage,
-                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                        // placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       ),
                                                     ),

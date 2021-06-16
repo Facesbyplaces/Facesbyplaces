@@ -153,16 +153,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               decoration: InputDecoration(
                                 alignLabelWithHint: true,
                                 labelText: 'DOB',
-                                labelStyle: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                  fontFamily: 'NexaRegular',
-                                  color: const Color(0xffBDC3C7),
-                                ),
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: const Color(0xff000000),
-                                  ),
-                                ),
+                                labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                                focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
                               ),
                             ),
 
@@ -233,42 +225,12 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                               height: 45,
                               buttonColor: const Color(0xff04ECFF),
                               onPressed: () async{
-                                if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text ||
-                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text ||
-                                  memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection ||
-                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text ||
-                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text ||
-                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text ||
-                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text ||
-                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text ||
-                                  memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text){
-                                  
-                                  bool confirmResult = await showDialog(
-                                    context: (context),
-                                    builder: (build) => MiscBLMConfirmDialog(
-                                      title: 'Confirm',
-                                      content: 'Do you want to save the changes?',
-                                      confirmColor_1: Color(0xff04ECFF),
-                                      confirmColor_2: Color(0xffFF0000),
-                                    ),
-                                  );
+                                if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text){
+                                  bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
 
                                   if(confirmResult){
                                     context.loaderOverlay.show();
-
-                                    bool result = await apiBLMUpdatePageDetails(
-                                      memorialId: widget.memorialId,
-                                      name: _key1.currentState!.controller.text,
-                                      description: _key2.currentState!.controller.text,
-                                      relationship: _key3.currentState!.currentSelection,
-                                      location: _key4.currentState!.controller.text,
-                                      dob: controller1.text,
-                                      rip: controller2.text,
-                                      state: _key7.currentState!.controller.text,
-                                      country: _key8.currentState!.controller.text,
-                                      precinct: _key9.currentState!.controller.text,
-                                    );
-
+                                    bool result = await apiBLMUpdatePageDetails(memorialId: widget.memorialId, name: _key1.currentState!.controller.text, description: _key2.currentState!.controller.text,relationship: _key3.currentState!.currentSelection, location: _key4.currentState!.controller.text, dob: controller1.text, rip: controller2.text, state: _key7.currentState!.controller.text, country: _key8.currentState!.controller.text, precinct: _key9.currentState!.controller.text,);
                                     context.loaderOverlay.hide();
 
                                     if(result){
@@ -329,12 +291,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                 }else{
                   return Container(
                     height: SizeConfig.screenHeight,
-                    child: Center(
-                      child: Container(
-                        child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                        color: const Color(0xffffffff),
-                      ),
-                    ),
+                    child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
                   );
                 }
               },

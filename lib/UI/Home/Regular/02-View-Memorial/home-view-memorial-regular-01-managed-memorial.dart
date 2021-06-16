@@ -203,7 +203,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                     child: CachedNetworkImage(
                                       fit: BoxFit.cover,
                                       imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
-                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     ),
                                   ),
@@ -247,7 +247,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                           child: CachedNetworkImage(
                                                             fit: BoxFit.contain, 
                                                             imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
-                                                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                           ),
                                                         ),
@@ -353,7 +353,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                         return CachedNetworkImage(
                                                                           fit: BoxFit.contain,
                                                                           imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[0],
-                                                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                         );
                                                                       }
@@ -768,7 +768,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                                       return CachedNetworkImage(
                                                                                         fit: BoxFit.contain,
                                                                                         imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
-                                                                                        placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                       );
                                                                                     }
@@ -834,7 +834,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                   child: CachedNetworkImage(
                                                                     fit: BoxFit.cover,
                                                                     imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
-                                                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                   ),
                                                                 );
@@ -947,7 +947,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                               child: CachedNetworkImage(
                                                                 fit: BoxFit.contain,
                                                                 imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
-                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                               ),
                                                             ),
@@ -1062,7 +1062,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 return CachedNetworkImage(
                                                   fit: BoxFit.cover,
                                                   imageUrl: posts[i].imagesOrVideos[0],
-                                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 );
                                               }
@@ -1086,7 +1086,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 )
                                                 : CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: posts[i].imagesOrVideos[index],placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                  imageUrl: posts[i].imagesOrVideos[index],
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 ),
                                               );
@@ -1114,7 +1115,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                     : CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl: posts[i].imagesOrVideos[index],
-                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                     );
                                                   }else{
@@ -1156,7 +1157,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                               CachedNetworkImage(
                                                                 fit: BoxFit.cover,
                                                                 imageUrl: posts[i].imagesOrVideos[index],
-                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               ),
 
@@ -1191,7 +1192,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                           return CachedNetworkImage(
                                                             fit: BoxFit.cover,
                                                             imageUrl: posts[i].imagesOrVideos[index],
-                                                            placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                           );
                                                         }

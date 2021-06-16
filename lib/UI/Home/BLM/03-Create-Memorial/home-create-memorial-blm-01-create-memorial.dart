@@ -211,19 +211,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
                             ),
                           );
                         }else{
-                          Navigator.push(context,
-                            MaterialPageRoute(
-                              builder: (context) => HomeBLMCreateMemorial2(
-                                relationship: _key1.currentState!.currentSelection,
-                                locationOfIncident: _key2.currentState!.controller.text,
-                                precinct: _key3.currentState!.controller.text,
-                                dob: controller1.text,
-                                rip: controller2.text,
-                                country: _key6.currentState!.controller.text,
-                                state: _key7.currentState!.controller.text,
-                              ),
-                            ),
-                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial2(relationship: _key1.currentState!.currentSelection, locationOfIncident: _key2.currentState!.controller.text, precinct: _key3.currentState!.controller.text, dob: controller1.text, rip: controller2.text, country: _key6.currentState!.controller.text, state: _key7.currentState!.controller.text,),),);
                         }
                       },
                     ),

@@ -52,7 +52,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   int itemRemaining = 1;
   int page = 1;
 
-  void initState() {
+  void initState(){
     super.initState();
     isGuest();
     scrollController.addListener((){
@@ -90,7 +90,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   }
 
   void onLoading() async{
-    if (itemRemaining != 0) {
+    if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMHomeFeedTab(page: page).onError((error, stackTrace){
         context.loaderOverlay.hide();
@@ -117,7 +117,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
       itemRemaining = newValue.blmItemsRemaining;
       count.value = count.value + newValue.blmFamilyMemorialList.length;
 
-      for (int i = 0; i < newValue.blmFamilyMemorialList.length; i++) {
+      for(int i = 0; i < newValue.blmFamilyMemorialList.length; i++){
         List<String> newList1 = [];
         List<String> newList2 = [];
         List<String> newList3 = [];
@@ -403,11 +403,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                         feedsListener[i].postBody,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 5,
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xff000000),
-                        ),
+                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                       ),
                     ),
 
@@ -517,7 +513,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                                   ),
                                                 ),
                                               ),
-
                                             ],
                                           );
                                         }else{
@@ -607,11 +602,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                 Container(
                   padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 2, right: SizeConfig.blockSizeHorizontal! * 2),
-                  child: Image.asset(
-                    'assets/icons/Welcome.png',
-                    width: SizeConfig.screenWidth,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.asset('assets/icons/Welcome.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
                 ),
 
                 SizedBox(height: SizeConfig.blockSizeVertical! * 4.04),
@@ -622,15 +613,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                 Padding(
                   padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 6, right: SizeConfig.blockSizeHorizontal! * 6),
-                  child:  Center(
-                    child: Text(
-                      'Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
+                  child: Center(
+                    child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xff2F353D),
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                     ),
                   ),
                 ),

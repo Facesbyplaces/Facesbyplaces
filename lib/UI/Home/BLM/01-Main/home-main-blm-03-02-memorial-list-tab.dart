@@ -99,13 +99,13 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
             Expanded(
               child: GestureDetector(
-                onTap: (){
-                  Navigator.pushNamed(context, '/home/blm/create-memorial');
-                },
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text('Create', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                 ),
+                onTap: (){
+                  Navigator.pushNamed(context, '/home/blm/create-memorial');
+                },
               ),
             ),
           ],
@@ -122,13 +122,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         color: const Color(0xffeeeeee),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            'My Friends',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff000000),),
-          ),
+          child: Text('My Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
         ),
       ),
     );

@@ -175,13 +175,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       print('The paymentMethod id is ${paymentMethod.id}');
 
                       // String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id);
+                      String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: 'pi_1J2q2tE1OZN8BRHaqwBeXkRX_secret_cGw2FpCgRheuZIdO31epdzOdn');
 
-                      // PaymentIntent confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(clientSecret, PaymentMethodParams.card(
-                      //     billingDetails: BillingDetails.fromJson(newCard!.toJson())
-                      //   ),
-                      // );
+                      PaymentIntent confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(clientSecret, PaymentMethodParams.card(
+                          billingDetails: BillingDetails.fromJson(newCard!.toJson())
+                        ),
+                      );
 
-                      // print('The confirmPaymentMethod is $confirmPaymentMethod');
+                      print('The confirmPaymentMethod is $confirmPaymentMethod');
 
                       context.loaderOverlay.hide();
 

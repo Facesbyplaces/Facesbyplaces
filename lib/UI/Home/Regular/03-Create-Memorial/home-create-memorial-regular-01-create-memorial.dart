@@ -41,16 +41,16 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
   DateTime rip = DateTime.now();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -61,7 +61,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
             backgroundColor: const Color(0xff04ECFF),
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
-              onPressed: () {
+              onPressed: (){
                 Navigator.pop(context);
               },
             ),
@@ -72,174 +72,154 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                 physics: const NeverScrollableScrollPhysics(),
                 child: Container(
                   height: SizeConfig.screenHeight,
-                  child: const MiscRegularBackgroundTemplate(
-                    image: const AssetImage('assets/icons/background2.png'),
-                  ),
+                  child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: ListView(
-                    physics: const ClampingScrollPhysics(),
-                    children: [
+                  physics: const ClampingScrollPhysics(),
+                  children: [
+                    MiscRegularInputFieldDropDown(key: _key1,),
 
-                      MiscRegularInputFieldDropDown(key: _key1,),
-
-                      const SizedBox(height: 20,),
-                      
-                      MiscRegularInputFieldTemplate(
-                        key: _key2, 
-                        labelText: 'Birthplace',
-                        labelTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xff000000),
-                        ),
+                    const SizedBox(height: 20,),
+                    
+                    MiscRegularInputFieldTemplate(
+                      key: _key2, 
+                      labelText: 'Birthplace',
+                      labelTextStyle: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff000000),
                       ),
+                    ),
 
-                      const SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
-                      TextFormField(
-                        controller: controller1,
-                        keyboardType: TextInputType.text,
-                        cursorColor: const Color(0xff000000),
-                        readOnly: true,
-                        onTap: () {
-                          DatePicker.showDatePicker(
-                            context,
-                            showTitleActions: true,
-                            minTime: dob,
-                            maxTime: rip,
-                            currentTime: DateTime.now(),
-                            locale: LocaleType.en,
-                            onConfirm: (date) {
-                              String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                              dob = date;
-                              controller1.text = format;
-                            },
+                    TextFormField(
+                      controller: controller1,
+                      keyboardType: TextInputType.text,
+                      cursorColor: const Color(0xff000000),
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.close), 
+                          onPressed: (){
+                            controller1.text = '';
+                            dob = DateTime(1000);
+                          },
+                        ),
+                        alignLabelWithHint: true,
+                        labelText: 'DOB',
+                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                      ),
+                      onTap: () {
+                        DatePicker.showDatePicker(
+                          context,
+                          showTitleActions: true,
+                          minTime: dob,
+                          maxTime: rip,
+                          currentTime: DateTime.now(),
+                          locale: LocaleType.en,
+                          onConfirm: (date) {
+                            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                            dob = date;
+                            controller1.text = format;
+                          },
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 20,),
+
+                    TextFormField(
+                      controller: controller2,
+                      keyboardType: TextInputType.text,
+                      cursorColor: const Color(0xff000000),
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.close), 
+                          onPressed: (){
+                            controller2.text = '';
+                            rip = DateTime.now();
+                          },
+                        ),
+                        alignLabelWithHint: true,
+                        labelText: 'RIP',                          
+                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                      ),
+                      onTap: () {
+                        DatePicker.showDatePicker(
+                          context,
+                          showTitleActions: true,
+                          minTime: dob,
+                          maxTime: DateTime.now(),
+                          currentTime: DateTime.now(),
+                          locale: LocaleType.en,
+                          onConfirm: (date) {
+                            String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                            rip = date;
+                            controller2.text = format;
+                          },
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 20,),
+
+                    MiscRegularInputFieldTemplate(
+                      key: _key5, 
+                      labelText: 'Cemetery',
+                      labelTextStyle: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.11, 
+                        fontFamily: 'NexaRegular', 
+                        color: const Color(0xff000000),
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 20,),
+
+                    MiscRegularInputFieldTemplate(
+                      key: _key6, labelText: 'Country',
+                      labelTextStyle: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
+                        fontFamily: 'NexaRegular',
+                        color: const Color(0xff000000),
+                      ),
+                    ),
+
+                    const SizedBox(height: 40,),
+
+                    MiscRegularButtonTemplate(
+                      width: SizeConfig.screenWidth! / 2,
+                      height: 45,
+                      buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                      onPressed: () async{
+                        if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                              onlyOkButton: true,
+                              buttonOkColor: const Color(0xffff0000),
+                              onOkButtonPressed: (){
+                                Navigator.pop(context, true);
+                              },
+                            ),
                           );
-                        },
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.close), 
-                            onPressed: (){
-                              controller1.text = '';
-                              dob = DateTime(1000);
-                            },
-                          ),
-                          alignLabelWithHint: true,
-                          labelText: 'DOB',
-                          labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                        ),
-                      ),
-
-                      const SizedBox(height: 20,),
-
-                      TextFormField(
-                        controller: controller2,
-                        keyboardType: TextInputType.text,
-                        cursorColor: const Color(0xff000000),
-                        readOnly: true,
-                        onTap: () {
-                          DatePicker.showDatePicker(
-                            context,
-                            showTitleActions: true,
-                            minTime: dob,
-                            maxTime: DateTime.now(),
-                            currentTime: DateTime.now(),
-                            locale: LocaleType.en,
-                            onConfirm: (date) {
-                              String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                              rip = date;
-                              controller2.text = format;
-                            },
-                          );
-                        },
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.close), 
-                            onPressed: (){
-                              controller2.text = '';
-                              rip = DateTime.now();
-                            },
-                          ),
-                          alignLabelWithHint: true,
-                          labelText: 'RIP',                          
-                          labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                        ),
-                      ),
-
-                      const SizedBox(height: 20,),
-
-                      MiscRegularInputFieldTemplate(
-                        key: _key5, 
-                        labelText: 'Cemetery',
-                        labelTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11, 
-                          fontFamily: 'NexaRegular', 
-                          color: const Color(0xff000000),
-                        ),
-                      ),
-                      
-                      const SizedBox(height: 20,),
-
-                      MiscRegularInputFieldTemplate(
-                        key: _key6, labelText: 'Country',
-                        labelTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xff000000),
-                        ),
-                      ),
-
-                      const SizedBox(height: 40,),
-
-                      MiscRegularButtonTemplate(
-                        width: SizeConfig.screenWidth! / 2,
-                        height: 45,
-                        buttonTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                          color: const Color(0xffffffff),
-                          fontFamily: 'NexaBold',
-                        ),
-                        onPressed: () async {
-                          if (_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == '') {
-                            await showDialog(
-                              context: context,
-                              builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Please complete the form before submitting.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ),
-                            );
-                          } else {
-                            Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(
-                                  relationship: _key1.currentState!.currentSelection,
-                                  birthplace: _key2.currentState!.controller.text,
-                                  dob: controller1.text,
-                                  rip: controller2.text,
-                                  cemetery: _key5.currentState!.controller.text,
-                                  country: _key6.currentState!.controller.text,
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: _key5.currentState!.controller.text, country: _key6.currentState!.controller.text,),),);
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

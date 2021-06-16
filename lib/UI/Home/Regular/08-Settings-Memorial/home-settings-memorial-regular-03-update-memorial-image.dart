@@ -25,7 +25,6 @@ class HomeRegularMemorialPageImage extends StatefulWidget {
 }
 
 class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage> {
-
   List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
   Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
   File backgroundImage = File('');
@@ -77,15 +76,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
           icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
           onPressed: () async{
             if(profileImage.path != '' || (backgroundImage.path != '' && backgroundImageToggle != 0)){
-              bool confirmResult = await showDialog(
-                context: (context),
-                builder: (build) => const MiscRegularConfirmDialog(
-                  title: 'Confirm',
-                  content: 'Do you want to discard the changes?',
-                  confirmColor_1: const Color(0xff04ECFF),
-                  confirmColor_2: const Color(0xffFF0000),
-                ),
-              );
+              bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to discard the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
+
               if(confirmResult){
                 Navigator.pop(context);
               }
@@ -118,14 +110,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                         height: 200,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), 
                         image: backgroundImage.path != ''
-                        ? DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('${backgroundImage.path}'),
-                        )
-                        : DecorationImage(
-                          fit: BoxFit.cover,
-                          image: CachedNetworkImageProvider('${memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage}'),),
-                        ),
+                        ? DecorationImage(fit: BoxFit.cover, image: AssetImage('${backgroundImage.path}'),)
+                        : DecorationImage(fit: BoxFit.cover, image: CachedNetworkImageProvider('${memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage}'),),),
                         child: Stack(
                           children: [
                             GestureDetector(
@@ -161,21 +147,13 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               child: const CircleAvatar(
                                 radius: 25,
                                 backgroundColor: const Color(0xffffffff),
-                                child: const CircleAvatar(
-                                  radius: 25,
-                                  backgroundColor: Colors.transparent,
-                                  child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
-                                ),
+                                child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
                               ),
                             ),
                             const Positioned(
                               top: 10,
                               right: 10,
-                              child: const CircleAvatar(
-                                radius: 25,
-                                backgroundColor: const Color(0xffffffff),
-                                child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
-                              ),
+                              child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff), child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
                             ),
                           ],
                         ),
@@ -246,10 +224,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   )
                                   : Container(
@@ -260,10 +235,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   ),
                                 );
