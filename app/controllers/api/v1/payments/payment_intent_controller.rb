@@ -9,7 +9,8 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       amount: amount,
       currency: 'usd',
       description: "Donation for #{memorial.name}",
-      payment_method: params[:payment_method]
+      payment_method: params[:payment_method],
+      payment_method_types: ['card'],
     }, stripe_account: stripe_account_id)
 
     if intent.status == 'requires_confirmation'
@@ -25,8 +26,25 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         }, status: 404
       end
     elsif intent.status == 'requires_payment_method'
-      render json: { intent: intent, status: "Requires Payment Method" }, status: 422
+      render json: { intent: intent.client_secret, status: "Requires Payment Method" }, status: 422
     end
+  end
+
+  def create_payment_method
+    require 'stripe'
+    Stripe.api_key = Rails.configuration.stripe[:secret_key]
+
+    method = Stripe::PaymentMethod.create({
+      type: 'card',
+      card: {
+        number: '4242424242424242',
+        exp_month: 6,
+        exp_year: 2022,
+        cvc: '314',
+      },
+    })
+
+    render json: { method: method }, status: 200
   end
 
   private

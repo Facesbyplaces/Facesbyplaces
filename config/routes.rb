@@ -363,6 +363,7 @@ Rails.application.routes.draw do
 
       namespace :payments do 
         post  'payment_intent', to: 'payment_intent#set_payment_intent'
+        post  'payment_method', to: 'payment_intent#create_payment_method'
         #Set Account ID Stripe
         get   'stripe_connect', to: 'stripe_connect#success_stripe_connect'
         #Set Paypal Account to Memorial
