@@ -2,13 +2,15 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   before_action :check_user
 
   def set_payment_intent
+    require 'stripe'
+    Stripe.api_key = Rails.configuration.stripe[:secret_key]
+
     intent = Stripe::PaymentIntent.create({
       amount: amount,
       currency: 'usd',
       description: "Donation for #{memorial.name}",
-      customer: stripe_account_id,
       payment_method: params[:payment_method]
-    })
+    }, stripe_account: stripe_account_id)
 
     if intent.status == 'requires_confirmation'
       if transaction.save
@@ -22,8 +24,8 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
           error: transaction.errors.full_messages,
         }, status: 404
       end
-    else 
-      render json: {status: "Transaction Failed"}, status: 422
+    elsif intent.status == 'requires_payment_method'
+      render json: { intent: intent, status: "Requires Payment Method" }, status: 422
     end
   end
 
