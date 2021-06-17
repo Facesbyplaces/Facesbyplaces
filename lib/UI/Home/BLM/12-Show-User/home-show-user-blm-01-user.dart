@@ -164,7 +164,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                             child: CachedNetworkImage(
                                               fit: BoxFit.contain,
                                               imageUrl: profile.data!.showUserInformationImage,
-                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                             )
                                           ),

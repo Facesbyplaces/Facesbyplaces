@@ -443,7 +443,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           child: (() {
                                                                             if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                               return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                   deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                   aspectRatio: 16 / 9,
                                                                                   fit: BoxFit.contain,
@@ -453,7 +454,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                               return CachedNetworkImage(
                                                                                 fit: BoxFit.contain,
                                                                                 imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                               );
                                                                             }
@@ -472,17 +473,18 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                         child: ((){
                                                           if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                             return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                 aspectRatio: 16 / 9,
                                                                 fit: BoxFit.contain,
-                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                               ),
                                                             );
                                                           }else{
                                                             return CachedNetworkImage(
                                                               fit: BoxFit.cover,
                                                               imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             );
                                                           }
@@ -535,7 +537,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                 originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) => ((){
                                                                                   if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                                     return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                         deviceOrientationsAfterFullScreen: [
                                                                                           DeviceOrientation.portraitUp
                                                                                         ],
@@ -548,7 +551,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                     return CachedNetworkImage(
                                                                                       fit: BoxFit.contain,
                                                                                       imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                     );
                                                                                   }
@@ -589,7 +592,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           child: (() {
                                                             if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                               return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                   aspectRatio: 16 / 9,
                                                                   fit: BoxFit.contain,
                                                                   controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
@@ -599,7 +603,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                               return CachedNetworkImage(
                                                                 fit: BoxFit.cover,
                                                                 imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               );
                                                             }
@@ -655,7 +659,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                   if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                                     return BetterPlayer.network(
                                                                                       '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
-                                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                         deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                         autoDispose: false,
                                                                                         aspectRatio: 16 / 9,
@@ -666,7 +671,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                     return CachedNetworkImage(
                                                                                       fit: BoxFit.contain,
                                                                                       imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                     );
                                                                                   }
@@ -708,7 +713,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             if(index != 1){
                                                               return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true 
                                                               ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                   aspectRatio: 16 / 9,
                                                                   fit: BoxFit.contain,
                                                                   controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
@@ -717,7 +723,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                               : CachedNetworkImage(
                                                                 fit: BoxFit.cover,
                                                                 imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               );
                                                             }else{
@@ -728,7 +734,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                       fit: StackFit.expand,
                                                                       children: [
                                                                         BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                             aspectRatio: 16 / 9,
                                                                             fit: BoxFit.contain,
                                                                             controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
@@ -759,7 +766,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                         CachedNetworkImage(
                                                                           fit: BoxFit.cover,
                                                                           imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                         ),
 
@@ -785,7 +792,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                                     return BetterPlayer.network(
                                                                       '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                         aspectRatio: 16 / 9,
                                                                         fit: BoxFit.contain,
                                                                         controlsConfiguration: const BetterPlayerControlsConfiguration(
@@ -797,7 +805,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                     return CachedNetworkImage(
                                                                       fit: BoxFit.cover,
                                                                       imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                     );
                                                                   }

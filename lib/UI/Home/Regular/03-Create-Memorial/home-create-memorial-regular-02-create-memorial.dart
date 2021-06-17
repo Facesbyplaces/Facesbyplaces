@@ -284,6 +284,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                   child: BetterPlayer.file(
                                     videoFileListener.path,
                                     betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                       deviceOrientationsAfterFullScreen: [
                                         DeviceOrientation.portraitUp
                                       ],
@@ -304,6 +305,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                 child: BetterPlayer.file(
                   videoFileListener.path,
                   betterPlayerConfiguration: BetterPlayerConfiguration(
+                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                     deviceOrientationsAfterFullScreen: [
                       DeviceOrientation.portraitUp
                     ],

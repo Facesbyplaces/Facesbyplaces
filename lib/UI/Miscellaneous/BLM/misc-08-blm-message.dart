@@ -12,7 +12,6 @@ class MiscBLMErrorMessageTemplate extends StatelessWidget{
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-
             const SizedBox(height: 30,),
 
             Image.asset('assets/icons/app-icon.png', width: 300, height: 300,),
@@ -29,24 +28,17 @@ class MiscBLMErrorMessageTemplate extends StatelessWidget{
 
             MaterialButton(
               padding: EdgeInsets.zero,
-              onPressed: () async{
-                Navigator.pop(context);
-              },
-              child: const Text('Go back',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xffffffff),
-                ),
-              ),
+              child: const Text('Go back', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
               minWidth: SizeConfig.screenWidth! / 2,
               height: 45,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               color: const Color(0xff888888),
+              onPressed: () async{
+                Navigator.pop(context);
+              },
             ),
 
             const SizedBox(height: 30,),
-
           ],
         ),
       ),
@@ -65,7 +57,6 @@ class MiscBLMLoginToContinue extends StatelessWidget{
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-
             const SizedBox(height: 30,),
 
             Image.asset('assets/icons/app-icon.png', width: 300, height: 300,),
@@ -81,14 +72,13 @@ class MiscBLMLoginToContinue extends StatelessWidget{
             const SizedBox(height: 100,),
 
             GestureDetector(
+              child: const Text('Sign in or sign up to continue', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff4EC9D4)),),
               onTap: (){
                 Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/login'));
               },
-              child: const Text('Sign in or sign up to continue', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff4EC9D4)),),
             ),
 
             const SizedBox(height: 30,),
-
           ],
         ),
       ),

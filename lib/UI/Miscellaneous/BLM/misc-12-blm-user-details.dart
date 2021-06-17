@@ -54,8 +54,8 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   void initState(){
     super.initState();
     onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    scrollController.addListener((){
+      if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(itemRemaining != 0){
           onLoading();
         }else{
@@ -129,7 +129,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: count,
@@ -178,10 +178,9 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                           if(posts[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                               return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -190,7 +189,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                               return CachedNetworkImage(
                                 fit: BoxFit.contain,
                                 imageUrl: posts[i].imagesOrVideos[0],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                               );
                             }
@@ -201,26 +200,24 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                               physics: const NeverScrollableScrollPhysics(),
                               crossAxisCount: 4,
                               itemCount: 2,
-                              itemBuilder: (BuildContext context, int index) =>  
-                                lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
-                                ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                      showControls: false,
-                                    ),
-                                    aspectRatio: 16 / 9,
-                                    fit: BoxFit.contain,
-                                  ),
-                                )
-                                : CachedNetworkImage(
-                                  fit: BoxFit.contain,
-                                  imageUrl: posts[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                ),
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                               mainAxisSpacing: 4.0,
                               crossAxisSpacing: 4.0,
+                              itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.contain,
+                                imageUrl: posts[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              ),
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
@@ -236,10 +233,9 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                 if(index != 1){
                                   return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                   ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                        showControls: false,
-                                      ),
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                       aspectRatio: 16 / 9,
                                       fit: BoxFit.contain,
                                     ),
@@ -247,7 +243,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                   : CachedNetworkImage(
                                     fit: BoxFit.contain,
                                     imageUrl: posts[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                   );
                                 }else{
@@ -257,10 +253,9 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                         return Stack(
                                           children: [
                                             BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                  showControls: false,
-                                                ),
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                 aspectRatio: 16 / 9,
                                                 fit: BoxFit.contain,
                                               ),
@@ -272,14 +267,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  '${posts[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -290,7 +278,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                             CachedNetworkImage(
                                               fit: BoxFit.fill,
                                               imageUrl: posts[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                             ),
 
@@ -300,14 +288,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  '${posts[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -316,10 +297,9 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                     }else{
                                       if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                         return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                              showControls: false,
-                                            ),
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                             aspectRatio: 16 / 9,
                                             fit: BoxFit.contain,
                                           ),
@@ -328,7 +308,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                                         return CachedNetworkImage(
                                           fit: BoxFit.fill,
                                           imageUrl: posts[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                         );
                                       }
@@ -343,7 +323,6 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                     ],
                   )
                   : Container(height: 0),
-
                 ],
               );
             },
@@ -356,18 +335,14 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
                 Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
                 const SizedBox(height: 45,),
 
-                Text('Post is empty', style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xffB1B1B1),
-                ),),
+                Text('Post is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
               ],
             ),
@@ -402,8 +377,8 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     super.initState();
     addMemorials1();
     onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    scrollController.addListener((){
+      if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(ownedItemsRemaining != 0 && followedItemsRemaining != 0){
           onLoading();
         }else{
@@ -436,13 +411,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
         color: const Color(0xffeeeeee),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Text('Owned',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
+          child: Text('Owned', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
         ),
       ),
     );
@@ -456,13 +425,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
         color: const Color(0xffeeeeee),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Text('Followed',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
+          child: Text('Followed', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
         ),
       ),
     );
@@ -477,7 +440,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   }
 
   void onLoading1() async{
-
     if(ownedItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page1);
@@ -515,7 +477,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   }
 
   void onLoading2() async{
-
     if(followedItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page2);
@@ -547,7 +508,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: count,
@@ -573,18 +534,13 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
                 Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
                 const SizedBox(height: 45,),
 
-                Text('Memorial is empty', style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xffB1B1B1),
-                ),),
+                Text('Memorial is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
               ],

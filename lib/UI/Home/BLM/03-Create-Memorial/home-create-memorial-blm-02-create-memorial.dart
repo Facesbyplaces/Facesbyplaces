@@ -282,6 +282,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                   child: BetterPlayer.file(
                                     videoFileListener.path,
                                     betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                       aspectRatio: 16 / 9,
                                     ),
@@ -299,8 +300,9 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                 },
                 child: BetterPlayer.file(videoFileListener.path,
                   betterPlayerConfiguration: BetterPlayerConfiguration(
-                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                     controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                     aspectRatio: 16 / 9,
                   ),
                 ),

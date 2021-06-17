@@ -178,10 +178,10 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                               padding: const EdgeInsets.only(right: 20.0),
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
+                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                                 onTap: (){
                                   Navigator.pop(context);
                                 },
-                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                               ),
                             ),
 
@@ -436,7 +436,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   barrierDismissible: true,
                   barrierLabel: 'Dialog',
                   transitionDuration: Duration(milliseconds: 0),
-                  pageBuilder: (_, __, ___) {
+                  pageBuilder: (_, __, ___){
                     return SizedBox.expand(
                       child: SafeArea(
                         child: Column(
@@ -446,10 +446,10 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                               padding: const EdgeInsets.only(right: 20.0),
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
+                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                                 onTap: (){
                                   Navigator.pop(context);
                                 },
-                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                               ),
                             ),
 

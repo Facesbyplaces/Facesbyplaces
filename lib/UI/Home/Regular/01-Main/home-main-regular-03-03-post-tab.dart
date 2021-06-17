@@ -191,10 +191,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                           if(posts[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                               return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -217,10 +216,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                               itemBuilder: (BuildContext context, int index) =>  
                                 lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                      showControls: false,
-                                    ),
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                     aspectRatio: 16 / 9,
                                     fit: BoxFit.contain,
                                   ),
@@ -249,10 +247,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                 if(index != 1){
                                   return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                   ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                        showControls: false,
-                                      ),
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                       aspectRatio: 16 / 9,
                                       fit: BoxFit.contain,
                                     ),
@@ -271,10 +268,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                           fit: StackFit.expand,
                                           children: [
                                             BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                  showControls: false,
-                                                ),
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                 aspectRatio: 16 / 9,
                                                 fit: BoxFit.contain,
                                               ),
@@ -331,10 +327,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                     }else{
                                       if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                         return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                              showControls: false,
-                                            ),
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                             aspectRatio: 16 / 9,
                                             fit: BoxFit.contain,
                                           ),

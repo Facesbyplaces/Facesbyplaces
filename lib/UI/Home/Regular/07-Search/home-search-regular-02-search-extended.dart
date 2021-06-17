@@ -770,14 +770,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           if(feeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
                               return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    loadingColor: const Color(0xff4EC9D4),
-                                    loadingWidget: const Center(
-                                      child: const CircularProgressIndicator(),
-                                    ),
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -786,7 +781,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               return CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[0],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }
@@ -799,12 +794,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    loadingColor: const Color(0xff4EC9D4),
-                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -812,9 +804,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               : CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => const Center(
-                                  child: const CircularProgressIndicator(),),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),),
                                 staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                                 mainAxisSpacing: 4.0,
                                 crossAxisSpacing: 4.0,
@@ -834,12 +825,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 if(index != 1){
                                   return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                                   ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                        loadingColor: const Color(0xff4EC9D4),
-                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                        showControls: false,
-                                      ),
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                       aspectRatio: 16 / 9,
                                       fit: BoxFit.contain,
                                     ),
@@ -847,7 +835,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   : CachedNetworkImage(
                                     fit: BoxFit.cover,
                                     imageUrl: feeds[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   );
                                 }else{
@@ -858,12 +846,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                           fit: StackFit.expand,
                                           children: [
                                             BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                  loadingColor: const Color(0xff4EC9D4),
-                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                                  showControls: false,
-                                                ),
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                 aspectRatio: 16 / 9,
                                                 fit: BoxFit.contain,
                                               ),
@@ -893,7 +878,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl: feeds[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                             ),
 
@@ -912,12 +897,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     }else{
                                       if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                         return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                              loadingColor: const Color(0xff4EC9D4),
-                                              loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                              showControls: false,
-                                            ),
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                             aspectRatio: 16 / 9,
                                             fit: BoxFit.contain,
                                           ),
@@ -926,7 +908,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         return CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: feeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         );
                                       }
@@ -976,14 +958,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           if(feeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
                               return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    loadingColor: const Color(0xff4EC9D4),
-                                    loadingWidget: const Center(
-                                      child: const CircularProgressIndicator(),
-                                    ),
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -992,7 +969,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               return CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[0],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }
@@ -1005,14 +982,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    loadingColor: const Color(0xff4EC9D4),
-                                    loadingWidget: const Center(
-                                      child: const CircularProgressIndicator(),
-                                    ),
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -1020,7 +992,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               : CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png',fit: BoxFit.cover, scale: 1.0,),
                               ),
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
@@ -1042,12 +1014,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 if(index != 1){
                                   return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                                   ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}', 
-                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                        loadingColor: const Color(0xff4EC9D4),
-                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                        showControls: false,
-                                      ),
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                       aspectRatio: 16 / 9,
                                       fit: BoxFit.contain,
                                     ),
@@ -1055,7 +1024,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   : CachedNetworkImage(
                                     fit: BoxFit.cover,
                                     imageUrl: feeds[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   );
                                 }else{
@@ -1066,12 +1035,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                           fit: StackFit.expand,
                                           children: [
                                             BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                  loadingColor: const Color(0xff4EC9D4),
-                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                                  showControls: false,
-                                                ),
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                 aspectRatio: 16 / 9,
                                                 fit: BoxFit.contain,
                                               ),
@@ -1095,7 +1061,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl: feeds[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                             ),
 
@@ -1120,12 +1086,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     }else{
                                       if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                         return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                              loadingColor: const Color(0xff4EC9D4),
-                                              loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                              showControls: false,
-                                            ),
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                             aspectRatio: 16 / 9,
                                             fit: BoxFit.contain,
                                           ),
@@ -1134,7 +1097,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         return CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: feeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         );
                                       }
@@ -1201,12 +1164,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             if(searchFeeds[i].imagesOrVideos.length == 1){
                               if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
                                 return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
-                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                      loadingColor: const Color(0xff4EC9D4),
-                                      loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                      showControls: false,
-                                    ),
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                     aspectRatio: 16 / 9,
                                     fit: BoxFit.contain,
                                   ),
@@ -1215,7 +1175,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 return CachedNetworkImage(
                                   fit: BoxFit.cover,
                                   imageUrl: searchFeeds[i].imagesOrVideos[0],
-                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 );
                               }
@@ -1228,12 +1188,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 itemCount: 2,
                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                      loadingColor: const Color(0xff4EC9D4),
-                                      loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                      showControls: false,
-                                    ),
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                     aspectRatio: 16 / 9,
                                     fit: BoxFit.contain,
                                   ),
@@ -1241,7 +1198,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 : CachedNetworkImage(
                                   fit: BoxFit.cover,
                                   imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 ),
                                 staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
@@ -1263,12 +1220,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   if(index != 1){
                                     return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                                     ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                          loadingColor: const Color(0xff4EC9D4),
-                                          loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                          showControls: false,
-                                        ),
+                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                         aspectRatio: 16 / 9,
                                         fit: BoxFit.contain,
                                       ),
@@ -1276,7 +1230,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     : CachedNetworkImage(
                                       fit: BoxFit.cover,
                                       imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     );
                                   }else{
@@ -1287,12 +1241,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             fit: StackFit.expand,
                                             children: [
                                               BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                    loadingColor: const Color(0xff4EC9D4),
-                                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                                    showControls: false,
-                                                  ),
+                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                   aspectRatio: 16 / 9,
                                                   fit: BoxFit.contain,
                                                 ),
@@ -1322,7 +1273,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                               CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               ),
                                               
@@ -1347,14 +1298,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                       }else{
                                         if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
                                           return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                loadingColor: const Color(0xff4EC9D4),
-                                                loadingWidget: const Center(
-                                                  child: const CircularProgressIndicator(),
-                                                ),
-                                                showControls: false,
-                                              ),
+                                            betterPlayerConfiguration: BetterPlayerConfiguration(
+                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                               aspectRatio: 16 / 9,
                                               fit: BoxFit.contain,
                                             ),
@@ -1363,7 +1309,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         return CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         );
                                       }
@@ -1420,12 +1366,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           if(searchFeeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(searchFeeds[i].imagesOrVideos[0])?.contains('video') == true){
                               return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[0]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    loadingColor: const Color(0xff4EC9D4),
-                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -1434,7 +1377,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               return CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: searchFeeds[i].imagesOrVideos[0],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               );
                             }
@@ -1447,12 +1390,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    loadingColor: const Color(0xff4EC9D4),
-                                    loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -1460,7 +1400,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               : CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               ),
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
@@ -1482,20 +1422,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 if(index != 1){
                                   return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                                   ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                       aspectRatio: 16 / 9,
                                       fit: BoxFit.contain,
-                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                        loadingColor: const Color(0xff4EC9D4),
-                                        loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                        showControls: false,
-                                      ),
                                     ),
                                   )
                                   : CachedNetworkImage(
                                     fit: BoxFit.cover,
                                     imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   );
                                 }else{
@@ -1506,12 +1443,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                           fit: StackFit.expand,
                                           children: [
                                             BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                  loadingColor: const Color(0xff4EC9D4),
-                                                  loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                                  showControls: false,
-                                                ),
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                 aspectRatio: 16 / 9,
                                                 fit: BoxFit.contain,
                                               ),
@@ -1535,7 +1469,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                             ),
 
@@ -1560,21 +1494,18 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     }else{
                                       if(lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true){
                                         return BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                             aspectRatio: 16 / 9,
                                             fit: BoxFit.contain,
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                              loadingColor: const Color(0xff4EC9D4),
-                                              loadingWidget: const Center(child: const CircularProgressIndicator(),),
-                                              showControls: false,
-                                            ),
                                           ),
                                         );
                                       }else{
                                         return CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         );
                                       }

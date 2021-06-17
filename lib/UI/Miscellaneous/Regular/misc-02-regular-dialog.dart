@@ -2,18 +2,14 @@ import '../../../Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularUploadFromDialog extends StatelessWidget{
-
   final String choice_1;
   final String choice_2;
-
   const MiscRegularUploadFromDialog({this.choice_1 = 'Camera', this.choice_2 = 'Gallery'});
 
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Dialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(5))
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5))),
       child: Container(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -25,31 +21,19 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
+              child: Text(choice_1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xffC1C1C1),),),
               onTap: (){
                 Navigator.pop(context, 1);
               },
-              child: Text(choice_1,
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                  fontFamily: 'NexaRegular',
-                  color: Color(0xffC1C1C1),
-                ),
-              ),
             ),
 
             const SizedBox(height: 40,),
 
             GestureDetector(
+              child: Text(choice_2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xffC1C1C1),),),
               onTap: (){
                 Navigator.pop(context, 2);
               },
-              child: Text(choice_2,
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                  fontFamily: 'NexaRegular',
-                  color: Color(0xffC1C1C1),
-                ),
-              ),
             ),
           ],
         ),

@@ -182,10 +182,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                           if(posts[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                               return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                                betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                    showControls: false,
-                                  ),
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,
                                 ),
@@ -194,7 +193,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                               return CachedNetworkImage(
                                 fit: BoxFit.contain,
                                 imageUrl: posts[i].imagesOrVideos[0],
-                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                               );
                             }
@@ -208,10 +207,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                               itemBuilder: (BuildContext context, int index) =>  
                                 lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                      showControls: false,
-                                    ),
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                     aspectRatio: 16 / 9,
                                     fit: BoxFit.contain,
                                   ),
@@ -219,7 +217,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                 : CachedNetworkImage(
                                   fit: BoxFit.contain,
                                   imageUrl: posts[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                 ),
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
@@ -240,10 +238,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                 if(index != 1){
                                   return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                   ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                      controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                        showControls: false,
-                                      ),
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                       aspectRatio: 16 / 9,
                                       fit: BoxFit.contain,
                                     ),
@@ -251,7 +248,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                   : CachedNetworkImage(
                                     fit: BoxFit.contain,
                                     imageUrl: posts[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                   );
                                 }else{
@@ -261,10 +258,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                         return Stack(
                                           children: [
                                             BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                  showControls: false,
-                                                ),
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                 aspectRatio: 16 / 9,
                                                 fit: BoxFit.contain,
                                               ),
@@ -294,7 +290,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                             CachedNetworkImage(
                                               fit: BoxFit.fill,
                                               imageUrl: posts[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                             ),
 
@@ -320,10 +316,9 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                     }else{
                                       if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                         return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                            controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                              showControls: false,
-                                            ),
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                             aspectRatio: 16 / 9,
                                             fit: BoxFit.contain,
                                           ),
@@ -332,7 +327,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                         return CachedNetworkImage(
                                           fit: BoxFit.fill,
                                           imageUrl: posts[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                         );
                                       }

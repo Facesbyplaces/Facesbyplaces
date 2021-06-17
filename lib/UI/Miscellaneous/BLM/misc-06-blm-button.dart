@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MiscBLMButtonTemplate extends StatelessWidget{
-
   final String buttonText;
   final TextStyle buttonTextStyle;
   final Function() onPressed;
   final double width;
   final double height;
   final Color buttonColor;
-
   MiscBLMButtonTemplate({
     this.buttonText = 'Next',
     this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,color: const Color(0xffffffff),),
@@ -23,9 +21,7 @@ class MiscBLMButtonTemplate extends StatelessWidget{
     return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: onPressed,
-      child: Text(buttonText,
-        style: buttonTextStyle,
-      ),
+      child: Text(buttonText, style: buttonTextStyle,),
       minWidth: width,
       height: height,
       shape: const StadiumBorder(),
@@ -35,7 +31,6 @@ class MiscBLMButtonTemplate extends StatelessWidget{
 }
 
 class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
-
   final String buttonText;
   final TextStyle buttonTextStyle;
   final Function() onPressed;
@@ -43,7 +38,6 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
   final double height;
   final Color buttonColor;
   final String image;
-
   MiscBLMButtonSignInWithTemplate({
     this.buttonText = '',
     this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300, color: const Color(0xff000000),),
@@ -61,24 +55,15 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
       onPressed: onPressed,
       minWidth: width,
       height: height,
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(height: 30, child: Image.asset(image),),
-          ),
-          Expanded(
-            flex: 2, 
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5), 
-              child: Text(buttonText, 
-                style: buttonTextStyle,
-              ),
-            ),
-          ),
-        ],
-      ),
       shape: const StadiumBorder(),
       color: buttonColor,
+      child: Row(
+        children: [
+          Expanded(child: Container(height: 30, child: Image.asset(image),),),
+
+          Expanded(flex: 2, child: Padding(padding: const EdgeInsets.only(left: 5), child: Text(buttonText, style: buttonTextStyle,),),),
+        ],
+      ),
     );
   }
 }

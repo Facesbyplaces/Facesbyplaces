@@ -10,7 +10,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class MiscBLMManageMemorialTab extends StatefulWidget {
+class MiscBLMManageMemorialTab extends StatefulWidget{
   final int index;
   final String memorialName;
   final String description;
@@ -37,22 +37,22 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: followButton,
       builder: (_, bool followButtonListener, __) => GestureDetector(
-        onTap: () async {
-          if (widget.pageType == 'Blm') {
-            if (widget.managed == true || widget.famOrFriends == true) {
+        onTap: () async{
+          if(widget.pageType == 'Blm'){
+            if(widget.managed == true || widget.famOrFriends == true){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
-            } else {
+            }else{
               followButton.value = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButtonListener,)));
             }
-          } else {
-            if (widget.managed == true || widget.famOrFriends == true) {
+          }else{
+            if(widget.managed == true || widget.famOrFriends == true){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
-            } else {
+            }else{
               followButton.value = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: followButtonListener,)));
             }
           }
@@ -76,19 +76,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
               widget.memorialName,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                fontFamily: 'NexaBold',
-                color: const Color(0xff000000),
-              ),
+              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
             ),
             subtitle: Text(
               widget.description,
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                fontFamily: 'NexaBold',
-                color: const Color(0xff888888),
-              ),
+              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xff888888),),
             ),
             trailing: (() {
               if(widget.managed == true || widget.famOrFriends == true){
@@ -97,27 +89,22 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                   padding: EdgeInsets.zero,
                   textColor: const Color(0xffffffff),
                   splashColor: const Color(0xff4EC9D4),
-                  onPressed: () async {
+                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                  height: 35,
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
+                  color: const Color(0xff04ECFF),
+                  onPressed: () async{
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Confirm',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
-                        ),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Are you sure you want to leave this page?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                         onlyOkButton: false,
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
-                        onCancelButtonPressed: () {
+                        onCancelButtonPressed: (){
                           Navigator.pop(context, false);
                         },
                       ),
@@ -134,20 +121,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Success', 
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
-                            ),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Successfully followed the page. You will receive notifications from this page.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular',
-                              ),
-                            ),
+                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                             onlyOkButton: true,
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -156,24 +134,12 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                fontFamily: 'NexaRegular',
-                              ),
-                            ),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular',
-                              ),
-                            ),
+                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                             onlyOkButton: true,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -181,19 +147,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                       }
                     }
                   },
-                  child: Text('Leave',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaBold',
-                      color: const Color(0xffFFFFFF),
-                    ),
-                  ),
-                  height: 35,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    side: const BorderSide(color: const Color(0xff04ECFF)),
-                  ),
-                  color: const Color(0xff04ECFF),
                 );
               }else if(followButtonListener == true){
                 return MaterialButton(
@@ -201,27 +154,22 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                   padding: EdgeInsets.zero,
                   textColor: const Color(0xffffffff),
                   splashColor: const Color(0xff4EC9D4),
+                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                  height: 35,
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
+                  color: const Color(0xff04ECFF),
                   onPressed: () async {
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Confirm',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),
-                        ),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                         entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Are you sure you want to leave this page?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                            fontFamily: 'NexaRegular',
-                          ),
-                        ),
+                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                         onlyOkButton: false,
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
-                        onCancelButtonPressed: () {
+                        onCancelButtonPressed: (){
                           Navigator.pop(context, false);
                         },
                       ),
@@ -238,23 +186,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Success',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                fontFamily: 'NexaRegular',
-                              ),
-                            ),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Successfully followed the page. You will receive notifications from this page.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular',
-                              ),
-                            ),
+                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                             onlyOkButton: true,
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -263,24 +199,12 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                fontFamily: 'NexaRegular',
-                              ),
-                            ),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                fontFamily: 'NexaRegular',
-                              ),
-                            ),
+                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                             onlyOkButton: true,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -288,19 +212,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                       }
                     }
                   },
-                  child: Text('Leave',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaBold',
-                      color: const Color(0xffFFFFFF),
-                    ),
-                  ),
-                  height: 35,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    side: const BorderSide(color: const Color(0xff04ECFF)),
-                  ),
-                  color: const Color(0xff04ECFF),
                 );
               }else{
                 return MaterialButton(
@@ -308,6 +219,10 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                   padding: EdgeInsets.zero,
                   textColor: const Color(0xff4EC9D4),
                   splashColor: const Color(0xff4EC9D4),
+                  child: Text('Join', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold',),),
+                  height: 35,
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff4EC9D4)),),
+                  color: const Color(0xffffffff),
                   onPressed: () async {
                     context.loaderOverlay.show();
                     bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: true);
@@ -319,21 +234,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',
-                            ),
-                          ),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Successfully followed the page. You will receive notifications from this page.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular',
-                            ),
-                          ),
+                          description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                           onlyOkButton: true,
-                          onOkButtonPressed: () {
+                          onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
                         ),
@@ -342,42 +247,18 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                              fontFamily: 'NexaRegular',
-                            ),
-                          ),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                              fontFamily: 'NexaRegular',
-                            ),
-                          ),
+                          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                           onlyOkButton: true,
                           buttonOkColor: const Color(0xffff0000),
-                          onOkButtonPressed: () {
+                          onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
                         ),
                       );
                     }
                   },
-                  child: Text('Join',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaBold',
-                    ),
-                  ),
-                  height: 35,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    side: const BorderSide(color: const Color(0xff4EC9D4)),
-                  ),
-                  color: const Color(0xffffffff),
                 );
               }
             }()),

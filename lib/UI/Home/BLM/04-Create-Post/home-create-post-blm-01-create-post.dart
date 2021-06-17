@@ -418,7 +418,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                               child: ((){
                                                                 if(lookupMimeType(slideImagesListener[index].path)?.contains('video') == true){
                                                                   return BetterPlayer.file('${slideImagesListener[index].path}',
-                                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                       autoDispose: false,
                                                                       aspectRatio: 16 / 9,
@@ -443,7 +444,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                             ? Stack(
                                               children: [
                                                 BetterPlayer.file('${slideImagesListener[index].path}',
-                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                     controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                     aspectRatio: 1,
                                                     fit: BoxFit.contain,

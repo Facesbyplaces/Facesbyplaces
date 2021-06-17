@@ -453,7 +453,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                               return BetterPlayer.network(
                                                                                 '${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
-                                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                   deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                   aspectRatio: 16 / 9,
                                                                                   fit: BoxFit.contain,
@@ -463,7 +464,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                               return CachedNetworkImage(
                                                                                 fit: BoxFit.contain,
                                                                                 imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
-                                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                               );
                                                                             }
@@ -482,7 +483,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         child: ((){
                                                           if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                             return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
-                                                              betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                 aspectRatio: 16 / 9,
                                                                 fit: BoxFit.contain,
                                                                 controlsConfiguration: const BetterPlayerControlsConfiguration(
@@ -494,7 +496,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             return CachedNetworkImage(
                                                               fit: BoxFit.cover,
                                                               imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
-                                                              placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             );
                                                           }
@@ -551,7 +553,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                 originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
                                                                                   if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                         deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                         autoDispose: false,
                                                                                         aspectRatio: 16 / 9,
@@ -562,7 +565,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                     return CachedNetworkImage(
                                                                                       fit: BoxFit.contain,
                                                                                       imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                     );
                                                                                   }
@@ -609,7 +612,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           child: ((){
                                                             if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                               return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                   aspectRatio: 16 / 9,
                                                                   fit: BoxFit.contain,
                                                                   controlsConfiguration: const BetterPlayerControlsConfiguration(
@@ -621,7 +625,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               return CachedNetworkImage(
                                                                 fit: BoxFit.cover,
                                                                 imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               );
                                                             }
@@ -676,7 +680,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                 originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
                                                                                   if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
                                                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
-                                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                         deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                         autoDispose: false,
                                                                                         aspectRatio: 16 / 9,
@@ -687,7 +692,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                     return CachedNetworkImage(
                                                                                       fit: BoxFit.contain,
                                                                                       imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                                     );
                                                                                   }
@@ -729,18 +734,17 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             if(index != 1){
                                                               return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true 
                                                               ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                   aspectRatio: 16 / 9,
                                                                   fit: BoxFit.contain,
-                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                    showControls: false,
-                                                                  ),
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                 ),
                                                               )
                                                               : CachedNetworkImage(
                                                                 fit: BoxFit.cover,
                                                                 imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                                placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               );
                                                             }else{
@@ -751,7 +755,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                       fit: StackFit.expand,
                                                                       children: [
                                                                         BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                             aspectRatio: 16 / 9,
                                                                             fit: BoxFit.contain,
                                                                             controlsConfiguration: const BetterPlayerControlsConfiguration(
@@ -784,7 +789,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         CachedNetworkImage(
                                                                           fit: BoxFit.cover,
                                                                           imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                                          placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                         ),
 
@@ -809,7 +814,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 }else{
                                                                   if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
                                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                         aspectRatio: 16 / 9,
                                                                         fit: BoxFit.contain,
                                                                         controlsConfiguration: const BetterPlayerControlsConfiguration(
@@ -821,7 +827,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     return CachedNetworkImage(
                                                                       fit: BoxFit.cover,
                                                                       imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                                      placeholder: (context, url) => const Center(child: const CircularProgressIndicator(),),
+                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                     );
                                                                   }

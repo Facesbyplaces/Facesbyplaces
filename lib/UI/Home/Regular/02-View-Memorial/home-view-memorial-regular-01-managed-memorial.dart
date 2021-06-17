@@ -341,7 +341,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                     child: ((){
                                                                       if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                                         return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                             deviceOrientationsAfterFullScreen: [
                                                                               DeviceOrientation.portraitUp
                                                                             ],
@@ -373,7 +374,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                     if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty) {
                                                       if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                         return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
-                                                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                             aspectRatio: 16 / 9,
                                                             fit: BoxFit.contain,
                                                             controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
@@ -755,7 +757,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                                     if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
                                                                                       return BetterPlayer.network(
                                                                                         '${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
-                                                                                        betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                          placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                           deviceOrientationsAfterFullScreen: [
                                                                                             DeviceOrientation.portraitUp
                                                                                           ],
@@ -820,7 +823,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                   width: 100,
                                                                   height: 100,
                                                                   child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
-                                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                       aspectRatio: 16 / 9,
                                                                       fit: BoxFit.contain,
                                                                       controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
@@ -1052,7 +1056,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                             if(posts[i].imagesOrVideos.length == 1){
                                               if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                                                 return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                     controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                     aspectRatio: 16 / 9,
                                                     fit: BoxFit.contain,
@@ -1078,7 +1083,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 crossAxisSpacing: 4.0,
                                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                                  betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                     controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                     aspectRatio: 16 / 9,
                                                     fit: BoxFit.contain,
@@ -1106,7 +1112,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                   if(index != 1){
                                                     return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                                     ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                                      betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                         controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                         aspectRatio: 16 / 9,
                                                         fit: BoxFit.contain,
@@ -1126,7 +1133,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                             fit: StackFit.expand,
                                                             children: [
                                                               BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                                                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                                   controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                   aspectRatio: 16 / 9,
                                                                   fit: BoxFit.contain,
@@ -1182,7 +1190,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                       }else{
                                                         if (lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                                           return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                                            betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                            betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                              placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                                               controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                               aspectRatio: 16 / 9,
                                                               fit: BoxFit.contain,

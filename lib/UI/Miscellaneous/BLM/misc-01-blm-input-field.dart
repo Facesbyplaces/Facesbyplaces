@@ -45,20 +45,12 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
       maxLines: widget.maxLines,
       readOnly: widget.readOnly,
       cursorColor: const Color(0xff000000),
-      style: TextStyle(
-        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-        fontFamily: 'NexaRegular',
-        color: const Color(0xff2F353D),
-      ),
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: widget.labelText,
         labelStyle: widget.labelTextStyle,
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
     );
   }
@@ -89,43 +81,28 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
   TextEditingController controller = TextEditingController(text: '');
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
       cursorColor: const Color(0xff000000),
       maxLines: widget.maxLines,
       keyboardType: widget.type,
       readOnly: widget.readOnly,
-      style: TextStyle(
-        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-        fontFamily: 'NexaRegular',
-        color: const Color(0xff2F353D),
-      ),
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         fillColor: widget.backgroundColor,
         filled: true,
         alignLabelWithHint: true,
         labelText: widget.labelText,
         labelStyle: widget.labelTextStyle,
-        border: const OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
+        border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+        focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
       ),
     );
   }
 }
 
 class MiscBLMInputFieldDropDown extends StatefulWidget{
-
   final String displayText;
   const MiscBLMInputFieldDropDown({required Key key, this.displayText = 'Father',}) : super(key: key);
 
@@ -134,7 +111,6 @@ class MiscBLMInputFieldDropDown extends StatefulWidget{
 }
 
 class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
-
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
   String currentSelection = 'Father';
 
@@ -149,33 +125,22 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xff000000)),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-        ),
+        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: currentSelection,
           isDense: true,
-          onChanged: (String? newValue) {
-            setState(() {
+          onChanged: (String? newValue){
+            setState((){
               currentSelection = newValue!;
             });
           },
-          items: relationship.map((String value) {
+          items: relationship.map((String value){
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value,
-                style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xff2F353D)),),
+              child: Text(value, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
             );
           }).toList(),
         ),
@@ -185,7 +150,6 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
 }
 
 class MiscBLMInputFieldSecurityQuestions extends StatefulWidget{
-
   final String displayText;
   const MiscBLMInputFieldSecurityQuestions({required Key key, this.displayText = 'What\'s the name of your first dog?',}) : super(key: key);
 
@@ -214,31 +178,20 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Security Question',
-        labelStyle:  TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 2.11,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xffBDC3C7)),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7)),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          style: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 2.2,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xff2F353D),
-          ),
+          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
           value: currentSelection,
           isDense: true,
-          onChanged: (String? newValue) {
-            setState(() {
+          onChanged: (String? newValue){
+            setState((){
               currentSelection = newValue!;
             });
           },
-          items: securityQuestions.map((String value) {
+          items: securityQuestions.map((String value){
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
@@ -251,10 +204,8 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
 }
 
 class MiscBLMInputFieldDateTimeTemplate extends StatefulWidget{
-
   final String labelText;
   final String displayText;
-
   const MiscBLMInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.displayText = ''}) : super(key: key);
 
   MiscBLMInputFieldDateTimeTemplateState createState() => MiscBLMInputFieldDateTimeTemplateState();
@@ -269,7 +220,7 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.text,
@@ -282,7 +233,7 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
           minTime: DateTime(1000),
           maxTime: DateTime.now(),
           currentTime: DateTime.now(),
-          onConfirm: (date) {
+          onConfirm: (date){
             String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
             print('The new format is $format');
             controller.text = format;
@@ -294,11 +245,7 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
         alignLabelWithHint: true,
         labelText: widget.labelText,
         labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
     );
   }
@@ -339,15 +286,15 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return InternationalPhoneNumberInput(
       selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,
       onInputChanged: (PhoneNumber number){
         print(number.phoneNumber);
       },
-      onInputValidated: (bool value) {
-        setState(() {
+      onInputValidated: (bool value){
+        setState((){
           valid = value;
         });
       },
@@ -360,11 +307,7 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
         alignLabelWithHint: true,
         labelText: widget.labelText,
         labelStyle: widget.labelTextStyle,
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: const BorderSide(
-            color: const Color(0xff000000),
-          ),
-        ),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
     );
   }

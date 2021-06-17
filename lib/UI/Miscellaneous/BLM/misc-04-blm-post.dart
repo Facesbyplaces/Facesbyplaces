@@ -14,7 +14,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc-11-blm-dropdown.dart';
 
-class MiscBLMPost extends StatefulWidget {
+class MiscBLMPost extends StatefulWidget{
   final List<Widget> contents;
   final int userId;
   final int postId;
@@ -39,12 +39,12 @@ class MiscBLMPost extends StatefulWidget {
   MiscBLMPostState createState() => MiscBLMPostState();
 }
 
-class MiscBLMPostState extends State<MiscBLMPost> {
+class MiscBLMPostState extends State<MiscBLMPost>{
   bool likePost = false;
   int likesCount = 0;
   int commentsCount = 0;
 
-  void initState() {
+  void initState(){
     super.initState();
     likePost = widget.likeStatus;
     likesCount = widget.numberOfLikes;
@@ -52,14 +52,14 @@ class MiscBLMPostState extends State<MiscBLMPost> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return GestureDetector(
-      onTap: () async {
+      onTap: () async{
         final returnValue = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: widget.postId)));
         print('The return value is $returnValue');
         commentsCount = int.parse(returnValue.toString());
-        setState(() {
+        setState((){
           print('Refreshed!');
         });
       },
@@ -131,195 +131,124 @@ class MiscBLMPostState extends State<MiscBLMPost> {
 
             widget.numberOfTagged != 0
             ? Column(
-                children: [
-                  const SizedBox(height: 10),
-                  
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: RichText(text: TextSpan(children: [const TextSpan(style: const TextStyle(color: const Color(0xff888888)), text: 'with '),
-                              TextSpan(
-                                children: List.generate(
-                                  widget.numberOfTagged,
-                                  (index) => TextSpan(
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color(0xff000000)),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: widget.taggedFirstName[index],
-                                        ),
-                                        const TextSpan(text: ' '),
-                                        TextSpan(
-                                          text: widget.taggedLastName[index],
-                                        ),
-                                        index < widget.numberOfTagged - 1
-                                            ? const TextSpan(text: ', ')
-                                            : const TextSpan(text: ''),
-                                      ],
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomeBLMUserProfile(
-                                                          userId:
-                                                              widget.taggedId[
-                                                                  index],
-                                                          accountType:
-                                                              widget.pageType ==
-                                                                      'BLM'
-                                                                  ? 1
-                                                                  : 2)));
-                                        }),
-                                ),
-                              ),
-                            ],
+              children: [
+                const SizedBox(height: 10),
+                
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        const TextSpan(style: const TextStyle(color: const Color(0xff888888)), text: 'with ',),
+
+                        TextSpan(
+                          children: List.generate(widget.numberOfTagged, (index) => TextSpan(
+                            style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
+                              children: <TextSpan>[
+                                TextSpan(text: widget.taggedFirstName[index],),
+
+                                const TextSpan(text: ' '),
+
+                                TextSpan(text: widget.taggedLastName[index],),
+
+                                index < widget.numberOfTagged - 1 ? const TextSpan(text: ', ') : const TextSpan(text: ''),
+                              ],
+                              recognizer: TapGestureRecognizer()
+                              ..onTap = (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: widget.taggedId[index], accountType: widget.pageType == 'BLM' ? 1 : 2)));
+                              }),
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                : Container(
-                    height: 0,
+                      ],
+                    ),
                   ),
+                ),
+              ],
+            )
+            : Container(height: 0,),
+
             Row(
               children: [
                 TextButton.icon(
-                  onPressed: () async {
-                    setState(() {
+                  onPressed: () async{
+                    setState((){
                       likePost = !likePost;
 
-                      if (likePost == true) {
+                      if(likePost == true){
                         likesCount++;
-                      } else {
+                      }else{
                         likesCount--;
                       }
                     });
 
-                    await apiBLMLikeOrUnlikePost(
-                        postId: widget.postId, like: likePost);
+                    await apiBLMLikeOrUnlikePost(postId: widget.postId, like: likePost);
                   },
-                  icon: likePost == true
-                      ? const FaIcon(
-                          FontAwesomeIcons.peace,
-                          color: const Color(0xffff0000),
-                        )
-                      : const FaIcon(
-                          FontAwesomeIcons.peace,
-                          color: const Color(0xff888888),
-                        ),
-                  label: Text(
-                    '$likesCount',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xff000000),
-                    ),
-                  ),
+                  icon: likePost == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
+                  label: Text('$likesCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                 ),
+
                 const SizedBox(width: 20),
+
                 TextButton.icon(
-                  onPressed: () async {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                HomeBLMShowOriginalPostComments(
-                                    postId: widget.postId)));
+                  onPressed: () async{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: widget.postId)));
                   },
-                  icon: const FaIcon(
-                    FontAwesomeIcons.solidComment,
-                    color: const Color(0xff4EC9D4),
-                  ),
-                  label: Text(
-                    '$commentsCount',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xff000000),
-                    ),
-                  ),
+                  icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
+                  label: Text('$commentsCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                 ),
-                Expanded(
-                  child: Container(),
-                ),
+
+                Expanded(child: Container(),),
+
                 IconButton(
                   alignment: Alignment.centerRight,
                   splashColor: Colors.transparent,
-                  icon: CircleAvatar(
-                    backgroundColor: const Color(0xff4EC9D4),
-                    child: const Icon(Icons.share_rounded,
-                        color: const Color(0xffffffff)),
-                  ),
-                  onPressed: () async {
+                  icon: CircleAvatar(backgroundColor: const Color(0xff4EC9D4), child: const Icon(Icons.share_rounded, color: const Color(0xffffffff),),),
+                  onPressed: () async{
                     BranchUniversalObject buo = BranchUniversalObject(
-                        canonicalIdentifier: 'FacesbyPlaces',
-                        title: 'FacesbyPlaces Link',
-                        contentDescription: 'FacesbyPlaces link to the app',
-                        keywords: ['FacesbyPlaces', 'Share', 'Link'],
-                        publiclyIndex: true,
-                        locallyIndex: true,
-                        contentMetadata: BranchContentMetaData()
-                          ..addCustomMetadata('link-category', 'Post')
-                          ..addCustomMetadata('link-post-id', widget.postId)
-                          ..addCustomMetadata('link-like-status', likePost)
-                          ..addCustomMetadata(
-                              'link-number-of-likes', likesCount)
-                          ..addCustomMetadata('link-type-of-account', 'Blm'));
+                      canonicalIdentifier: 'FacesbyPlaces',
+                      title: 'FacesbyPlaces Link',
+                      contentDescription: 'FacesbyPlaces link to the app',
+                      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+                      publiclyIndex: true,
+                      locallyIndex: true,
+                      contentMetadata: BranchContentMetaData()
+                      ..addCustomMetadata('link-category', 'Post')
+                      ..addCustomMetadata('link-post-id', widget.postId)
+                      ..addCustomMetadata('link-like-status', likePost)
+                      ..addCustomMetadata('link-number-of-likes', likesCount)
+                      ..addCustomMetadata('link-type-of-account', 'Blm',
+                      ),
+                    );
 
-                    BranchLinkProperties lp = BranchLinkProperties(
-                        feature: 'sharing',
-                        stage: 'new share',
-                        tags: ['one', 'two', 'three']);
-
-                    lp.addControlParam('url',
-                        'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+                    BranchLinkProperties lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
+                    lp.addControlParam('url','https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
 
                     FlutterBranchSdk.setIdentity('blm-share-link');
-
                     BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                        buo: buo,
-                        linkProperties: lp,
-                        messageText: 'FacesbyPlaces App',
-                        androidMessageTitle:
-                            'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                        androidSharingTitle:
-                            'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
+                      buo: buo,
+                      linkProperties: lp,
+                      messageText: 'FacesbyPlaces App',
+                      androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                      androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                    );
 
-                    if (response.success) {
+                    if(response.success){
                       await showDialog(
-                          context: context,
-                          builder: (_) => AssetGiffyDialog(
-                                image: Image.asset(
-                                  'assets/icons/cover-icon.png',
-                                  fit: BoxFit.cover,
-                                ),
-                            title: Text(
-                              'Success',
-                              textAlign: TextAlign.center,
-                              style:  TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                  fontFamily: 'NexaRegular'),
-                            ),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text(
-                              'Successfully shared the link.',
-                              textAlign: TextAlign.center,
-                              style:  TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular'
-                              ),
-                            ),
-                                onlyOkButton: true,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              ));
-                    } else {
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                          onlyOkButton: true,
+                          onOkButtonPressed: (){
+                            Navigator.pop(context, true);
+                          },
+                        ),
+                      );
+                    }else{
                       FlutterBranchSdk.logout();
-                      print(
-                          'Error : ${response.errorCode} - ${response.errorMessage}');
+                      print('Error : ${response.errorCode} - ${response.errorMessage}');
                     }
                   },
                 ),

@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -143,21 +142,21 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     height: 45,
                     onPressed: () async{
 
-                      String amount = '0.99';
+                      // String amount = '0.99';
 
-                      if(donateToggle == 0){
-                        amount = '0.99';
-                      }else if(donateToggle == 1){
-                        amount = '5.00';
-                      }else if(donateToggle == 2){
-                        amount = '15.00';
-                      }else if(donateToggle == 3){
-                        amount = '25.00';
-                      }else if(donateToggle == 4){
-                        amount = '50.00';
-                      }else if(donateToggle == 5){
-                        amount = '100.00';
-                      }
+                      // if(donateToggle == 0){
+                      //   amount = '0.99';
+                      // }else if(donateToggle == 1){
+                      //   amount = '5.00';
+                      // }else if(donateToggle == 2){
+                      //   amount = '15.00';
+                      // }else if(donateToggle == 3){
+                      //   amount = '25.00';
+                      // }else if(donateToggle == 4){
+                      //   amount = '50.00';
+                      // }else if(donateToggle == 5){
+                      //   amount = '100.00';
+                      // }
 
                       // await Stripe.instance.createPaymentMethod(data)
 
@@ -175,14 +174,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       print('The paymentMethod id is ${paymentMethod.id}');
 
                       // String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id);
-                      String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: 'pi_1J2q2tE1OZN8BRHaqwBeXkRX_secret_cGw2FpCgRheuZIdO31epdzOdn');
+                      // String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: 'pi_1J2q2tE1OZN8BRHaqwBeXkRX_secret_cGw2FpCgRheuZIdO31epdzOdn');
 
-                      PaymentIntent confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(clientSecret, PaymentMethodParams.card(
-                          billingDetails: BillingDetails.fromJson(newCard!.toJson())
-                        ),
-                      );
+                      // PaymentIntent confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(clientSecret, PaymentMethodParams.card(
+                      //     billingDetails: BillingDetails.fromJson(newCard!.toJson())
+                      //   ),
+                      // );
 
-                      print('The confirmPaymentMethod is $confirmPaymentMethod');
+                      // print('The confirmPaymentMethod is $confirmPaymentMethod');
 
                       context.loaderOverlay.hide();
 

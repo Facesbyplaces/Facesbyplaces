@@ -10,7 +10,7 @@ import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-class MiscBLMNotificationDisplayTemplate extends StatelessWidget {
+class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
   final String imageIcon;
   final String notification;
   final String dateCreated;
@@ -26,7 +26,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget {
   const MiscBLMNotificationDisplayTemplate({this.imageIcon = '', required this.notification, required this.dateCreated, required this.postId, required this.notificationType, required this.readStatus, required this.actor, required this.actorId, required this.actorAccountType, required this.recipient, required this.recipientId, required this.recipientAccountType});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
@@ -64,7 +64,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget {
             targetString: '$actor',
             style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
             recognizer: TapGestureRecognizer()
-            ..onTap = () {
+            ..onTap = (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: actorId, accountType: actorAccountType)));
             }
           ),
@@ -72,7 +72,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget {
             targetString: '$recipient',
             style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
             recognizer: TapGestureRecognizer()
-            ..onTap = () {
+            ..onTap = (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: recipientId, accountType: recipientAccountType)));
             }
           ),
