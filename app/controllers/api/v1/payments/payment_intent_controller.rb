@@ -1,30 +1,33 @@
 class Api::V1::Payments::PaymentIntentController < ApplicationController
   before_action :check_user
 
-  def set_payment_intent
+  # def create_transaction
+  #   if payment_intent.status == 'requires_confirmation'
+  #     if transaction.save
+  #       render json: {
+  #         publishable_key: Rails.configuration.stripe[:publishable_key],
+  #         payment_intent: payment_intent.client_secret,
+  #         transaction: transaction
+  #       }, status: 200
+  #     else
+  #       render json: {
+  #         error: transaction.errors.full_messages,
+  #       }, status: 404
+  #     end
+  #   elsif payment_intent.status == 'requires_payment_method'
+  #     render json: { intent: payment_intent, status: "Requires Payment Method" }, status: 422
+  #   end
+  # end
+
+  def payment_intent
     intent = Stripe::PaymentIntent.create({
       amount: amount,
       currency: 'usd',
       description: "Donation for #{memorial.name}",
       payment_method: params[:payment_method],
-      payment_method_types: ['card'],
     }, stripe_account: stripe_account_id)
 
-    if intent.status == 'requires_confirmation'
-      if transaction.save
-        render json: {
-          publishable_key: Rails.configuration.stripe[:publishable_key],
-          payment_intent: intent,
-          transaction: transaction
-        }, status: 200
-      else
-        render json: {
-          error: transaction.errors.full_messages,
-        }, status: 404
-      end
-    elsif intent.status == 'requires_payment_method'
-      render json: { intent: intent.client_secret, status: "Requires Payment Method" }, status: 422
-    end
+    return render json: { intent: intent }, status: 200
   end
 
   def create_payment_method
@@ -42,9 +45,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   end
 
   private
-  def report_params
-    params.require(:card).permit(:number, :exp_month, :exp_year, :cvc)
-  end
 
   def payment_method
     return params[:payment_method]
