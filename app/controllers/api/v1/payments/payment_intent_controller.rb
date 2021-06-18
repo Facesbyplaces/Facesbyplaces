@@ -6,7 +6,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       amount: amount,
       currency: 'usd',
       description: "Donation for #{memorial.name}",
-      payment_method: params[:payment_method],
+      payment_method: payment_method,
     }, stripe_account: stripe_account_id)
 
     if intent.status == 'requires_confirmation'
