@@ -55,11 +55,11 @@ export default function DataTableRowTransactionData({ transactions, search }) {
       </td>
       <td>
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {transaction.user.first_name} {transaction.user.last_name}
+          {transaction.owner.first_name} {transaction.owner.last_name}
         </span>
       </td>
       <td>
-        {transaction.user.account_type == 2 ? (
+        {transaction.owner.account_type == 2 ? (
           <span className={"label label-lg label-light-warning label-inline"}>
             ALM
           </span>

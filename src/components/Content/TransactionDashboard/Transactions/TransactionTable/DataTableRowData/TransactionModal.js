@@ -36,9 +36,25 @@ export const TransactionModal = ({ showModal, setShowModal, transaction }) => {
                         type="email"
                         className="form-control form-control-solid"
                         value={
-                          transaction.user.first_name +
+                          transaction.sender.first_name +
                           " " +
-                          transaction.user.last_name
+                          transaction.sender.last_name
+                        }
+                        disabled
+                      />
+                      {/* <span className="form-text text-muted">
+                        We'll never share your email with anyone else
+                      </span> */}
+                    </div>
+                    <div className="form-group" style={{ textAlign: "left" }}>
+                      <label>Owner:</label>
+                      <input
+                        type="email"
+                        className="form-control form-control-solid"
+                        value={
+                          transaction.owner.first_name +
+                          " " +
+                          transaction.owner.last_name
                         }
                         disabled
                       />
@@ -75,7 +91,7 @@ export const TransactionModal = ({ showModal, setShowModal, transaction }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="card-footer">
+                  <div className="card-footer pb-7">
                     <button
                       type="button"
                       className="btn btn-primary btn-md btn-block font-weight-bold"
