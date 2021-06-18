@@ -8,7 +8,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class RegularPasswordReset extends StatefulWidget {
+class RegularPasswordReset extends StatefulWidget{
   final String resetToken;
   RegularPasswordReset({required this.resetToken});
 
@@ -20,7 +20,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     FlutterBranchSdk.logout(); // TO RESET THE BRANCH
   }
@@ -56,10 +56,10 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: IconButton(
-                                  onPressed: () {
+                                  icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+                                  onPressed: (){
                                     Navigator.pop(context);
                                   },
-                                  icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                                 ),
                               ),
                             ],
@@ -67,28 +67,11 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
 
                           const SizedBox(height: 80),
 
-                          Center(
-                            child: Text('Change Password',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 5.28,
-                                fontFamily: 'NexaBold',
-                                color: Color(0xff2F353D),
-                              ),
-                            ),
-                          ),
+                          Center(child: Text('Change Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
 
                           const SizedBox(height: 40,),
 
-                          Center(
-                            child: Text('Please enter your new password',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
+                          Center(child: Text('Please enter your new password', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                           const SizedBox(height: 80,),
 
@@ -98,11 +81,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                               key: _key1,
                               labelText: 'New Password',
                               type: TextInputType.emailAddress,
-                              labelTextStyle: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xff000000),
-                              ),
+                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                               obscureText: true,
                             ),
                           ),
@@ -115,11 +94,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                               key: _key2,
                               labelText: 'Confirm Password',
                               type: TextInputType.emailAddress,
-                              labelTextStyle: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xff000000),
-                              ),
+                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                               obscureText: true,
                             ),
                           ),
@@ -128,11 +103,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
 
                           MiscRegularButtonTemplate(
                             buttonText: 'Change',
-                            buttonTextStyle: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                              fontFamily: 'NexaBold',
-                              color: Color(0xffFFFFFF),
-                            ),
+                            buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
                             width: SizeConfig.screenWidth! / 2,
                             height: 45,
                             buttonColor: const Color(0xff04ECFF),
@@ -162,7 +133,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                                     description: Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                                     onlyOkButton: true,
                                     buttonOkColor: const Color(0xffff0000),
-                                    onOkButtonPressed: () {
+                                    onOkButtonPressed: (){
                                       Navigator.pop(context, true);
                                     },
                                   ),
@@ -181,7 +152,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                                       entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                       onlyOkButton: true,
-                                      onOkButtonPressed: () {
+                                      onOkButtonPressed: (){
                                         Navigator.pop(context, true);
                                         Navigator.of(context).pushNamedAndRemoveUntil('/start', (Route<dynamic> route) =>false);
                                       },
@@ -197,7 +168,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                                       description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                       onlyOkButton: true,
                                       buttonOkColor: const Color(0xffff0000),
-                                      onOkButtonPressed: () {
+                                      onOkButtonPressed: (){
                                         Navigator.pop(context, true);
                                       },
                                     ),

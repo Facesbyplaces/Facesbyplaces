@@ -8,7 +8,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
-class RegularPasswordResetEmail extends StatelessWidget {
+class RegularPasswordResetEmail extends StatelessWidget{
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -18,9 +18,9 @@ class RegularPasswordResetEmail extends StatelessWidget {
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus){
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -35,37 +35,22 @@ class RegularPasswordResetEmail extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: IconButton(
-                        onPressed: () {
+                        icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+                        onPressed: (){
                           Navigator.pop(context);
                         },
-                        icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                       ),
                     ),
 
                     const SizedBox(height: 80,),
 
-                    Center(
-                      child: Text('Verify Email',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 5.28,
-                          fontFamily: 'NexaBold',
-                          color: Color(0xff2F353D),
-                        ),
-                      ),
-                    ),
+                    Center(child: Text('Verify Email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
 
                     const SizedBox(height: 40,),
 
                     Padding(
                       padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 11.25, right: SizeConfig.blockSizeHorizontal! * 11.25),
-                      child: Text('Please enter email address used on signing up.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                          fontFamily: 'NexaRegular',
-                          color: Color(0xff000000),
-                        ),
-                      ),
+                      child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
                     ),
 
                     const SizedBox(height: 80,),
@@ -95,7 +80,7 @@ class RegularPasswordResetEmail extends StatelessWidget {
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
                       buttonColor: const Color(0xff04ECFF),
-                      onPressed: () async {
+                      onPressed: () async{
                         bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.text);
 
                         if(controller.text == ''){
@@ -123,7 +108,7 @@ class RegularPasswordResetEmail extends StatelessWidget {
                               description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                               onlyOkButton: true,
                               buttonOkColor: const Color(0xffff0000),
-                              onOkButtonPressed: () {
+                              onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
                             ),
@@ -139,8 +124,8 @@ class RegularPasswordResetEmail extends StatelessWidget {
                             publiclyIndex: true,
                             locallyIndex: true,
                             contentMetadata: BranchContentMetaData()
-                              ..addCustomMetadata('custom_string', 'fbp-link')
-                              ..addCustomMetadata('reset-type', 'Regular'),
+                            ..addCustomMetadata('custom_string', 'fbp-link')
+                            ..addCustomMetadata('reset-type', 'Regular'),
                           );
 
                           BranchLinkProperties lp = BranchLinkProperties(
@@ -172,7 +157,7 @@ class RegularPasswordResetEmail extends StatelessWidget {
                                   entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                                   onlyOkButton: true,
-                                  onOkButtonPressed: () {
+                                  onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
                                 ),
@@ -187,7 +172,7 @@ class RegularPasswordResetEmail extends StatelessWidget {
                                   description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                                   onlyOkButton: true,
                                   buttonOkColor: const Color(0xffff0000),
-                                  onOkButtonPressed: () {
+                                  onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
                                 ),
@@ -198,18 +183,12 @@ class RegularPasswordResetEmail extends StatelessWidget {
                               context: context,
                               builder: (_) => AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                    fontFamily: 'NexaRegular',
-                                  ),
-                                ),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                                 onlyOkButton: true,
                                 buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
+                                onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },
                               ),
@@ -218,6 +197,7 @@ class RegularPasswordResetEmail extends StatelessWidget {
                         }
                       },
                     ),
+                    
                     const SizedBox(height: 20),
                   ],
                 ),

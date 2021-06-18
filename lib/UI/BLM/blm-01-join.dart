@@ -2,11 +2,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class BLMJoin extends StatelessWidget {
+class BLMJoin extends StatelessWidget{
   const BLMJoin();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
       body: SafeArea(
@@ -20,10 +20,10 @@ class BLMJoin extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: IconButton(
-                  onPressed: () {
+                  icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+                  onPressed: (){
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                 ),
               ),
               Container(
@@ -31,45 +31,22 @@ class BLMJoin extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-
                     Spacer(),
 
-                    Text('BLACK',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 3.65,
-                        color: const Color(0xff000000),
-                        fontFamily: 'NexaBold',
-                      ),
-                    ),
+                    Text('BLACK', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, color: const Color(0xff000000), fontFamily: 'NexaBold',),),
 
                     SizedBox(width: SizeConfig.blockSizeHorizontal! * 2),
 
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       alignment: Alignment.center,
-                      child: Text('LIVES',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.65,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xffffffff),
-                        ),
-                      ),
-                      decoration: const BoxDecoration(
-                        color: const Color(0xff000000),
-                        borderRadius:
-                        const BorderRadius.all(Radius.circular(10)),
-                      ),
+                      child: Text('LIVES', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                      decoration: const BoxDecoration(color: const Color(0xff000000), borderRadius: const BorderRadius.all(Radius.circular(10),),),
                     ),
 
                     SizedBox(width: SizeConfig.blockSizeHorizontal! * 2),
 
-                    Text('MATTER',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 3.65,
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xff000000),
-                      ),
-                    ),
+                    Text('MATTER', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
 
                     Spacer(),
                   ],
@@ -85,22 +62,13 @@ class BLMJoin extends StatelessWidget {
                       top: SizeConfig.blockSizeVertical! * 30,
                       child: Container(
                         height: SizeConfig.blockSizeVertical! * 30,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          image: const DecorationImage(
-                            fit: BoxFit.fill,
-                            image: const AssetImage('assets/icons/join6.png',
-                            ),
-                          ),
-                        ),
+                        decoration: const BoxDecoration(color: Colors.white, image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/join6.png',),),),
                         child: Container(color: Colors.white.withOpacity(0.4),),
                       ),
                     ),
-                    Container(
-                      width: SizeConfig.screenWidth,
-                      height: SizeConfig.blockSizeVertical! * 60,
-                      child: Image.asset('assets/icons/BLM Matter.png', fit: BoxFit.cover,),
-                    ),
+
+                    Container(width: SizeConfig.screenWidth, height: SizeConfig.blockSizeVertical! * 60, child: Image.asset('assets/icons/BLM Matter.png', fit: BoxFit.cover,),),
+
                     Positioned.fill(
                       top: SizeConfig.blockSizeVertical! * 45,
                       child: Center(
@@ -113,16 +81,13 @@ class BLMJoin extends StatelessWidget {
                         ),
                       ),
                     ),
+
                     Positioned.fill(
                       top: SizeConfig.blockSizeVertical! * 60,
                       child: Center(
                         child:  MiscBLMButtonTemplate(
                           buttonText: 'Join',
-                          buttonTextStyle: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 3.29,
-                            fontFamily: 'NexaBold',
-                            color: const Color(0xffffffff),
-                          ),
+                          buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.29, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                           width: SizeConfig.blockSizeHorizontal! * 55,
                           height: SizeConfig.blockSizeVertical! * 7.31,
                           buttonColor: const Color(0xff4EC9D4),

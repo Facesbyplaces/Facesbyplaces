@@ -35,10 +35,10 @@ class BLMPasswordResetEmail extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: IconButton(
+                        icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                         onPressed: (){
                           Navigator.pop(context);
                         },
-                        icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                       ),
                     ),
 
@@ -48,13 +48,7 @@ class BLMPasswordResetEmail extends StatelessWidget {
 
                     const SizedBox(height: 40),
 
-                    Padding(
-                      padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 11.25, right: SizeConfig.blockSizeHorizontal! * 11.25),
-                      child: Text('Please enter email address used on signing up.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
-                      ),
-                    ),
+                    Padding(padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 11.25, right: SizeConfig.blockSizeHorizontal! * 11.25), child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
 
                     const SizedBox(height: 80,),
 
@@ -108,9 +102,7 @@ class BLMPasswordResetEmail extends StatelessWidget {
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Invalid email address. Please try again.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                              description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                               onlyOkButton: true,
                               buttonOkColor: const Color(0xffff0000),
                               onOkButtonPressed: (){
@@ -129,8 +121,8 @@ class BLMPasswordResetEmail extends StatelessWidget {
                             publiclyIndex: true,
                             locallyIndex: true,
                             contentMetadata: BranchContentMetaData()
-                              ..addCustomMetadata('custom_string', 'fbp-link')
-                              ..addCustomMetadata('reset-type', 'Blm'),
+                            ..addCustomMetadata('custom_string', 'fbp-link')
+                            ..addCustomMetadata('reset-type', 'Blm',),
                           );
 
                           BranchLinkProperties lp = BranchLinkProperties(
@@ -158,9 +150,7 @@ class BLMPasswordResetEmail extends StatelessWidget {
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                  description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                   onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);

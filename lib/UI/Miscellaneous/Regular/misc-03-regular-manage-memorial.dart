@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
@@ -107,9 +108,18 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       ),
                     );
 
+                    print('Leave page here');
+                    print('The memorial id is ${widget.memorialId}');
+                    print('The page type is ${widget.pageType}');
+
                     if(confirmResult == true){
                       context.loaderOverlay.show();
-                      String result = await apiRegularLeavePage(memorialId: widget.memorialId);
+                      String result = 'Failed';
+                      if(widget.pageType == 'Memorial'){
+                        result = await apiRegularLeavePage(memorialId: widget.memorialId);
+                      }else{
+                        result = await apiBLMLeavePage(memorialId: widget.memorialId);
+                      }
                       context.loaderOverlay.hide();
 
                       if(result != 'Failed'){

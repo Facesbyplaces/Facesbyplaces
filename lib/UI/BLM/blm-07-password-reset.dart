@@ -8,19 +8,19 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class BLMPasswordReset extends StatefulWidget {
+class BLMPasswordReset extends StatefulWidget{
   final String resetToken;
   const BLMPasswordReset({required this.resetToken});
 
-  BLMPasswordResetState createState() =>BLMPasswordResetState();
+  BLMPasswordResetState createState() => BLMPasswordResetState();
 }
 
-class BLMPasswordResetState extends State<BLMPasswordReset> {
+class BLMPasswordResetState extends State<BLMPasswordReset>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     FlutterBranchSdk.logout();
   }
@@ -55,10 +55,10 @@ class BLMPasswordResetState extends State<BLMPasswordReset> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: IconButton(
+                                icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                                 onPressed: (){
                                   Navigator.pop(context);
                                 },
-                                icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                               ),
                             ),
                           ],

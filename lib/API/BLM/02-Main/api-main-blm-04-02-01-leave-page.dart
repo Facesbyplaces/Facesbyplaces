@@ -4,24 +4,30 @@ import 'package:dio/dio.dart';
 Future<String> apiBLMLeavePage({required int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
-  bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
-  String? getAccessToken;
-  String? getUID;
-  String? getClient;
+  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   String result = 'Failed';
 
-  if(userSessionRegular == true){
-    result = 'Memorial';
-    getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-    getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-    getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-  }else if(userSessionBLM == true){
-    result = 'Blm';
-    getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-    getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-    getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-  }
+  // final sharedPrefs = await SharedPreferences.getInstance();
+  // bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
+  // bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
+  // String? getAccessToken;
+  // String? getUID;
+  // String? getClient;
+  // String result = 'Failed';
+
+  // if(userSessionRegular == true){
+  //   result = 'Memorial';
+  //   getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  //   getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  //   getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  // }else if(userSessionBLM == true){
+  //   result = 'Blm';
+  //   getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  //   getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  //   getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  // }
 
   Dio dioRequest = Dio();
 

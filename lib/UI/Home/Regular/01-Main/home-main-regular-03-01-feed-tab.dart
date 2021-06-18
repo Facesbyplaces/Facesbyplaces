@@ -424,7 +424,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               if(lookupMimeType(feedsListener[i].imagesOrVideos[0])?.contains('video') == true){
                                 return BetterPlayer.network('${feedsListener[i].imagesOrVideos[0]}',
                                   betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                     controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                     aspectRatio: 16 / 9,
                                     fit: BoxFit.contain,

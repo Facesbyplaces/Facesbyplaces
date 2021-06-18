@@ -195,6 +195,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         addMemorials2();
         flag1 = true;
         onLoading();
+      }else{
+        onLoading();
       }
     }
   }
@@ -250,9 +252,13 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           ),
         );
       }
+    }
 
-      if(mounted)
-      page2++;
+    if(mounted)
+    page2++;
+
+    if(blmFriendsItemsRemaining != 0 || memorialFriendsItemsRemaining != 0){
+      onLoading();
     }
   }
 

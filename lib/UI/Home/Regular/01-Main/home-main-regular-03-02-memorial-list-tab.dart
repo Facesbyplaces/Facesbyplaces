@@ -195,10 +195,13 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       addMemorials2();
       flag1 = true;
       onLoading();
+    }else{
+      onLoading();
     }
   }
 
   void onLoading2() async{
+    print('onLoading2 called!');
     if(memorialFriendsItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularHomeMemorialsTab(page: page2);
@@ -249,9 +252,13 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
           ),
         );
       }
+    }
 
-      if(mounted)
-      page2++;
+    if(mounted)
+    page2++;
+
+    if(blmFriendsItemsRemaining != 0 || memorialFriendsItemsRemaining != 0){
+      onLoading();
     }
   }
 

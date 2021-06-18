@@ -36,11 +36,9 @@ class RegularVerifyEmail extends StatelessWidget{
                   children: [
                     SingleChildScrollView(
                       physics: const NeverScrollableScrollPhysics(),
-                      child: Container(
-                        height: SizeConfig.screenHeight,
-                        child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
-                      ),
+                      child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
                     ),
+
                     SingleChildScrollView(
                       physics: const ClampingScrollPhysics(),
                       child: Padding(
@@ -66,14 +64,9 @@ class RegularVerifyEmail extends StatelessWidget{
                             const SizedBox(height: 40),
 
                             Center(
-                              child: Text(
-                                'We have sent a verification code to your email address. Please enter the verification code to continue.',
+                              child: Text('We have sent a verification code to your email address. Please enter the verification code to continue.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                  fontFamily: 'NexaRegular',
-                                  color: Color(0xff000000),
-                                ),
+                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                               ),
                             ),
 
@@ -99,57 +92,50 @@ class RegularVerifyEmail extends StatelessWidget{
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: 'Didn\'t receive a code? ',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                      fontFamily: 'NexaRegular',
-                                      color: Color(0xff000000),
-                                    ),
+                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
                                   ),
+                                  
                                   TextSpan(
                                     text: 'Resend',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                      fontFamily: 'NexaBold',
-                                      color: Color(0xff000000),
-                                    ),
+                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff000000),),
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = () async{
-                                        context.loaderOverlay.show();
-                                        bool result = await apiRegularVerificationCodeResend();
-                                        context.loaderOverlay.hide();
+                                    ..onTap = () async{
+                                      context.loaderOverlay.show();
+                                      bool result = await apiRegularVerificationCodeResend();
+                                      context.loaderOverlay.hide();
 
-                                        if(result == true){
-                                          await showDialog(
-                                            context: context,
-                                            builder: (_) => AssetGiffyDialog(
-                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                              entryAnimation: EntryAnimation.DEFAULT,
-                                              description: Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                              onlyOkButton: true,
-                                              onOkButtonPressed: (){
-                                                Navigator.pop(context, true);
-                                              },
-                                            ),
-                                          );
-                                        }else{
-                                          await showDialog(
-                                            context: context,
-                                            builder: (_) => AssetGiffyDialog(
-                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                              entryAnimation: EntryAnimation.DEFAULT,
-                                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                              onlyOkButton: true,
-                                              buttonOkColor:
-                                              const Color(0xffff0000),
-                                              onOkButtonPressed: (){
-                                                Navigator.pop(context, true);
-                                              },
-                                            ),
-                                          );
-                                        }
-                                      },
+                                      if(result == true){
+                                        await showDialog(
+                                          context: context,
+                                          builder: (_) => AssetGiffyDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                            entryAnimation: EntryAnimation.DEFAULT,
+                                            description: Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                            onlyOkButton: true,
+                                            onOkButtonPressed: (){
+                                              Navigator.pop(context, true);
+                                            },
+                                          ),
+                                        );
+                                      }else{
+                                        await showDialog(
+                                          context: context,
+                                          builder: (_) => AssetGiffyDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                            entryAnimation: EntryAnimation.DEFAULT,
+                                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                            onlyOkButton: true,
+                                            buttonOkColor:
+                                            const Color(0xffff0000),
+                                            onOkButtonPressed: (){
+                                              Navigator.pop(context, true);
+                                            },
+                                          ),
+                                        );
+                                      }
+                                    },
                                   ),
                                 ],
                               ),

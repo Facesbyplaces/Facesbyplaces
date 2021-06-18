@@ -40,26 +40,20 @@ class BLMRegister extends StatelessWidget{
                 width: SizeConfig.screenWidth,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/icons/background2.png'),
-                    colorFilter: ColorFilter.srgbToLinearGamma(),
-                  ),
+                  image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
                 ),
                 child: Column(
                   children: [
                     Container(
                       height: SizeConfig.screenHeight! / 6,
-                      decoration: const BoxDecoration(
-                        image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background-blm.png'),),
-                      ),
+                      decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background-blm.png'),),),
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: IconButton(
+                          icon: Icon(Icons.arrow_back, color: Color(0xffFFFFFF), size: SizeConfig.blockSizeVertical! * 3.65,),
                           onPressed: (){
                             Navigator.pop(context);
                           },
-                          icon: Icon(Icons.arrow_back, color: Color(0xffFFFFFF), size: SizeConfig.blockSizeVertical! * 3.65,),
                         ),
                       ),
                     ),
@@ -74,66 +68,42 @@ class BLMRegister extends StatelessWidget{
                             key: _key1,
                             labelText: 'Your Name',
                             type: TextInputType.name,
-                            labelTextStyle: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           ),
 
                           MiscBLMInputFieldTemplate(
                             key: _key2,
                             labelText: 'Last Name',
                             type: TextInputType.name,
-                            labelTextStyle: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           ),
 
                           MiscBLMPhoneNumberTemplate(
                             key: _key3,
                             labelText: 'Mobile #',
                             type: TextInputType.phone,
-                            labelTextStyle: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           ),
 
                           MiscBLMInputFieldTemplate(
                             key: _key4,
                             labelText: 'Email Address',
                             type: TextInputType.emailAddress,
-                            labelTextStyle: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           ),
 
                           MiscBLMInputFieldTemplate(
                             key: _key5,
                             labelText: 'Username',
                             type: TextInputType.text,
-                            labelTextStyle: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           ),
 
                           MiscBLMInputFieldTemplate(
                             key: _key6,
                             labelText: 'Password',
                             type: TextInputType.text,
-                            labelTextStyle: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                             obscureText: true,
                           ),
                         ],
@@ -157,24 +127,12 @@ class BLMRegister extends StatelessWidget{
                             context: context,
                             builder: (_) => AssetGiffyDialog(
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                  fontFamily: 'NexaRegular',
-                                ),
-                              ),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Please complete the form before submitting.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular',
-                                ),
-                              ),
+                              description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                               onlyOkButton: true,
                               buttonOkColor: const Color(0xffff0000),
-                              onOkButtonPressed: () {
+                              onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
                             ),
@@ -184,37 +142,18 @@ class BLMRegister extends StatelessWidget{
                             context: context,
                             builder: (_) => AssetGiffyDialog(
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title:  Text('Error',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                  fontFamily: 'NexaRegular',
-                                ),
-                              ),
+                              title:  Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                               entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Invalid email address. Please try again.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.87,
-                                  fontFamily: 'NexaRegular',
-                                ),
-                              ),
+                              description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                               onlyOkButton: true,
                               buttonOkColor: const Color(0xffff0000),
-                              onOkButtonPressed: () {
+                              onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
                             ),
                           );
                         }else{
-                          APIBLMAccountRegistration account = APIBLMAccountRegistration(
-                            firstName: _key1.currentState!.controller.text,
-                            lastName: _key2.currentState!.controller.text,
-                            phoneNumber: _key3.currentState!.controller.text,
-                            email: _key4.currentState!.controller.text,
-                            username: _key5.currentState!.controller.text,
-                            password: _key6.currentState!.controller.text,
-                          );
+                          APIBLMAccountRegistration account = APIBLMAccountRegistration(firstName: _key1.currentState!.controller.text, lastName: _key2.currentState!.controller.text, phoneNumber: _key3.currentState!.controller.text, email: _key4.currentState!.controller.text, username: _key5.currentState!.controller.text, password: _key6.currentState!.controller.text,);
 
                           context.loaderOverlay.show();
                           String result = await apiBLMRegistration(account: account);
@@ -227,18 +166,12 @@ class BLMRegister extends StatelessWidget{
                               context: context,
                               builder: (_) => AssetGiffyDialog(
                                 image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.blockSizeVertical! * 3.87,
-                                    fontFamily: 'NexaRegular',
-                                  ),
-                                ),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
                                 entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('$result', textAlign: TextAlign.center,),
                                 onlyOkButton: true,
                                 buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
+                                onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },
                               ),
@@ -255,24 +188,16 @@ class BLMRegister extends StatelessWidget{
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Already have an account? ',
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           ),
 
                           TextSpan(
                             text: 'Login',
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff04ECFF),
-                            ),
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff04ECFF),),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pushNamed(context, '/blm/login');
-                              },
+                            ..onTap = () {
+                              Navigator.pushNamed(context, '/blm/login');
+                            },
                           ),
                         ],
                       ),
