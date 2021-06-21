@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularReport extends StatelessWidget {
+class HomeRegularReport extends StatelessWidget{
   final int postId;
   final String reportType;
   HomeRegularReport({required this.postId, required this.reportType});
@@ -35,6 +35,7 @@ class HomeRegularReport extends StatelessWidget {
             title: Row(
               children: [
                 Text('Report', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
                 Spacer(),
               ],
             ),
@@ -76,11 +77,11 @@ class HomeRegularReport extends StatelessWidget {
                 const SizedBox(height: 50,),
 
                 MiscRegularButtonTemplate(
-                  buttonText: 'Report',
                   buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
-                  width: SizeConfig.screenWidth! / 2,
-                  height: 45,
                   buttonColor: const Color(0xff04ECFF),
+                  width: SizeConfig.screenWidth! / 2,
+                  buttonText: 'Report',
+                  height: 45,
                   onPressed: () async{
                     if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                       await showDialog(

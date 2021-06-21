@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
-class HomeBLMCreateMemorial3 extends StatefulWidget {
+class HomeBLMCreateMemorial3 extends StatefulWidget{
   final String relationship;
   final String locationOfIncident;
   final String precinct;
@@ -30,12 +30,12 @@ class HomeBLMCreateMemorial3 extends StatefulWidget {
   HomeBLMCreateMemorial3State createState() => HomeBLMCreateMemorial3State();
 }
 
-class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
+class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
+  List<String> backgroundImages = ['assets/icons/blm-memorial-cover-1.jpeg', 'assets/icons/blm-memorial-cover-2.jpeg'];
   ValueNotifier<File> backgroundImage = ValueNotifier<File>(File(''));
   ValueNotifier<File> profileImage = ValueNotifier<File>(File(''));
   ValueNotifier<int> backgroundImageToggle = ValueNotifier<int>(0);
   final picker = ImagePicker();
-  List<String> backgroundImages = ['assets/icons/blm-memorial-cover-1.jpeg', 'assets/icons/blm-memorial-cover-2.jpeg'];
 
   Future getProfileImage() async{
     try{
@@ -66,7 +66,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: backgroundImage,
@@ -120,9 +120,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                             ),
 
                             GestureDetector(
-                              onTap: () async{
-                                await getProfileImage();
-                              },
                               child: Center(
                                 child: CircleAvatar(
                                   radius: 60,
@@ -144,6 +141,9 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                   ),
                                 ),
                               ),
+                              onTap: () async{
+                                await getProfileImage();
+                              },
                             ),
 
                             Positioned(
@@ -192,11 +192,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                                     width: 100,
                                     height: 100,
                                     child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: const Color(0xffcccccc),
-                                      border: Border.all(color: const Color(0xff000000),),
-                                    ),
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
                                   ),
                                   onTap: () async{
                                     backgroundImageToggle.value = index;
@@ -253,10 +249,10 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3> {
                       const SizedBox(height: 80,),
 
                       MiscBLMButtonTemplate(
-                        width: 150,
-                        height: 45,
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                         buttonText: 'Create my Memorial Page',
+                        width: 150,
+                        height: 45,
                         onPressed: () async{
                           if(backgroundImageToggle.value == 0 || backgroundImageToggle.value == 1){
                             final ByteData bytes = await rootBundle.load(backgroundImages[backgroundImageToggle.value]);

@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularMemorialSettingsWithHidden extends StatefulWidget {
+class HomeRegularMemorialSettingsWithHidden extends StatefulWidget{
   final int memorialId;
   final String relationship;
   const HomeRegularMemorialSettingsWithHidden({required this.memorialId, required this.relationship});
@@ -19,7 +19,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
   int toggle = 0;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
@@ -45,15 +45,15 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
                 labelColor: const Color(0xff04ECFF),
                 unselectedLabelColor: const Color(0xff000000),
                 indicatorColor: const Color(0xff04ECFF),
+                tabs: [
+                  const Center(child: const Text('Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
+                  const Center(child: const Text('Privacy', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
+                ],
                 onTap: (int index){
                   setState((){
                     toggle = index;
                   });
                 },
-                tabs: [
-                  const Center(child: const Text('Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
-                  const Center(child: const Text('Privacy', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
-                ],
               ),
             ),
           ),
@@ -223,7 +223,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
     );
   }
 
-  settingsTab2(int memorialId) {
+  settingsTab2(int memorialId){
     return ListView(
       physics: const ClampingScrollPhysics(),
       children: [
@@ -247,6 +247,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
                   subtitle: const Text('Show or hide family details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                 ),
               ),
+
               Switch(
                 value: false,
                 onChanged: (value) => {},
@@ -271,6 +272,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
                   subtitle: const Text('Show or hide friends details', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                 ),
               ),
+
               Switch(
                 value: false,
                 onChanged: (value) => {},
@@ -295,6 +297,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
                   subtitle: const Text('Show or hide your followers', style: const TextStyle(fontWeight: FontWeight.w300, color: const Color(0xffBDC3C7),),),
                 ),
               ),
+              
               Switch(
                 value: false,
                 onChanged: (value) => {},

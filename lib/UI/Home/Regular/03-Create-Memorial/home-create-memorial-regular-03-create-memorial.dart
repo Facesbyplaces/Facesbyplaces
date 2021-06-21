@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
-class HomeRegularCreateMemorial3 extends StatefulWidget {
+class HomeRegularCreateMemorial3 extends StatefulWidget{
   final String relationship;
   final String birthplace;
   final String dob;
@@ -29,8 +29,7 @@ class HomeRegularCreateMemorial3 extends StatefulWidget {
   HomeRegularCreateMemorial3State createState() => HomeRegularCreateMemorial3State();
 }
 
-class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> {
-
+class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
   ValueNotifier<File> backgroundImage = ValueNotifier<File>(File(''));
   ValueNotifier<File> profileImage = ValueNotifier<File>(File(''));
   ValueNotifier<int> backgroundImageToggle = ValueNotifier<int>(0);
@@ -109,24 +108,15 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
                           fit: StackFit.expand,
                           children: [
                             backgroundImageListener.path != ''
-                            ? ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.file(backgroundImageListener, fit: BoxFit.cover,),
-                            )
+                            ? ClipRRect(borderRadius: BorderRadius.circular(10), child: Image.file(backgroundImageListener, fit: BoxFit.cover,),)
                             : Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: const AssetImage('assets/icons/alm-memorial-cover-1.jpeg'),
-                                ),
+                                image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/alm-memorial-cover-1.jpeg'),),
                               ),
                             ),
 
                             GestureDetector(
-                              onTap: () async{
-                                await getProfileImage();
-                              },
                               child: Center(
                                 child: CircleAvatar(
                                   radius: 60,
@@ -148,6 +138,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
                                   ),
                                 ),
                               ),
+                              onTap: () async{
+                                await getProfileImage();
+                              },
                             ),
 
                             Positioned(
@@ -156,11 +149,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
                               child: const CircleAvatar(
                                 radius: 25,
                                 backgroundColor: const Color(0xffffffff),
-                                child: const CircleAvatar(
-                                  radius: 25,
-                                  backgroundColor: Colors.transparent,
-                                  child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
-                                ),
+                                child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
                               ),
                             ),
 
@@ -196,14 +185,10 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
                             return const SizedBox(width: 25,);
                           },
                           itemCount: 3,
-                          itemBuilder: (context, index) {
+                          itemBuilder: (context, index){
                             return ((){
-                              if (index == 2) {
+                              if(index == 2){
                                 return GestureDetector(
-                                  onTap: () async{
-                                    backgroundImageToggle.value = index;
-                                    await getBackgroundImage();
-                                  },
                                   child: Container(
                                     width: 100,
                                     height: 100,
@@ -211,11 +196,13 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: const Color(0xffcccccc),
-                                      border: Border.all(
-                                        color: const Color(0xff000000),
-                                      ),
+                                      border: Border.all(color: const Color(0xff000000),),
                                     ),
                                   ),
+                                  onTap: () async{
+                                    backgroundImageToggle.value = index;
+                                    await getBackgroundImage();
+                                  },
                                 );
                               }else{
                                 return GestureDetector(
@@ -239,10 +226,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   )
                                   : Container(
@@ -253,10 +237,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3> 
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   ),
                                 );

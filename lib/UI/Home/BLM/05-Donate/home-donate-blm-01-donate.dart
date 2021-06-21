@@ -14,10 +14,9 @@ class HomeBLMUserDonate extends StatefulWidget{
 }
 
 class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
-
-  int donateToggle = 0;
   final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/google-pay.svg', semanticsLabel: 'Google Pay Mark', height: 52, width: 52);
+  int donateToggle = 0;
 
   @override
   Widget build(BuildContext context){
@@ -59,8 +58,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                       const Text('Send a Gift', style: const TextStyle(fontSize: 24),),
 
-                      Expanded(child: Container(),)
-
+                      Expanded(child: Container(),),
                     ],
                   ),
 
@@ -76,11 +74,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       children: List.generate(6, 
                         (index){
                           return GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                donateToggle = index;
-                              });
-                            },
                             child: Container(
                               child: Column(
                                 children: [
@@ -109,6 +102,11 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                             ),
+                            onTap: (){
+                              setState(() {
+                                donateToggle = index;
+                              });
+                            },
                           );
                         }
                       ),
@@ -120,18 +118,16 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                   Container(
                     padding: EdgeInsets.only(left: 10.0),
                     alignment: Alignment.centerLeft,
-                    child: Platform.isIOS
-                    ? donateWithApple
-                    : donateWithGoogle
+                    child: Platform.isIOS ? donateWithApple : donateWithGoogle
                   ),
 
                   const SizedBox(height: 20,),
 
                   MiscBLMButtonTemplate(
+                    buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+                    width: SizeConfig.screenWidth! / 2,
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
-                    buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,  color: Color(0xffffffff),),
-                    width: SizeConfig.screenWidth! / 2, 
                     height: 45,
                     onPressed: () async{
 

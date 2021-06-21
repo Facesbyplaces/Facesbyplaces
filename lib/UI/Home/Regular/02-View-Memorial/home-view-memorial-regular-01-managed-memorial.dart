@@ -72,7 +72,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
   bool empty = true;
   int page = 1;
 
-  void initState() {
+  void initState(){
     super.initState();
     onLoading();
     showProfile = getProfileInformation(widget.memorialId);
@@ -107,8 +107,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
       List<String> newList3 = [];
       List<int> newList4 = [];
 
-      for (int i = 0; i < newValue.almFamilyMemorialList.length; i++) {
-        for (int j = 0; j < newValue.almFamilyMemorialList[i].homeProfilePostTagged.length; j++) {
+      for(int i = 0; i < newValue.almFamilyMemorialList.length; i++){
+        for(int j = 0; j < newValue.almFamilyMemorialList[i].homeProfilePostTagged.length; j++){
           newList1.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedFirstName);
           newList2.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedLastName);
           newList3.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedImage);
@@ -142,7 +142,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
         );
       }
 
-      if (mounted)
+      if(mounted)
       page++;
       context.loaderOverlay.hide();
     }
@@ -161,10 +161,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
       publiclyIndex: true,
       locallyIndex: true,
       contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Memorial')
-        ..addCustomMetadata('link-memorial-id', widget.memorialId)
-        ..addCustomMetadata('link-type-of-account', 'Memorial'),
-      );
+      ..addCustomMetadata('link-category', 'Memorial')
+      ..addCustomMetadata('link-memorial-id', widget.memorialId)
+      ..addCustomMetadata('link-type-of-account', 'Memorial'),
+    );
 
     lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
     lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
@@ -190,8 +190,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                   SliverToBoxAdapter(
                     child: FutureBuilder<APIRegularShowMemorialMain>(
                       future: showProfile,
-                      builder: (context, profile) {
-                        if (profile.hasData) {
+                      builder: (context, profile){
+                        if(profile.hasData){
                           return Column(
                             key: profileKey,
                             children: [
@@ -230,14 +230,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                           alignment: Alignment.centerRight,
                                                           padding: const EdgeInsets.only(right: 20.0),
                                                           child: GestureDetector(
-                                                            onTap: () {
-                                                              Navigator.pop(context);
-                                                            },
                                                             child: CircleAvatar(
                                                               radius: 20,
                                                               backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                               child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                             ),
+                                                            onTap: (){
+                                                              Navigator.pop(context);
+                                                            },
                                                           ),
                                                         ),
 
@@ -296,7 +296,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                   color: const Color(0xff2F353D),
                                                 ),
                                               ),
-                                              onPressed: () {
+                                              onPressed: (){
                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                               },
                                             ),
@@ -306,14 +306,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                             Column(
                                               children: [
                                                 GestureDetector(
-                                                  onTap: () {
+                                                  onTap: (){
                                                     showGeneralDialog(
                                                       context: context,
                                                       barrierDismissible: true,
                                                       barrierLabel: 'Dialog',
                                                       transitionDuration:
                                                       const Duration(milliseconds: 0),
-                                                      pageBuilder: (_, __, ___) {
+                                                      pageBuilder: (_, __, ___){
                                                         return Scaffold(
                                                           backgroundColor: Colors.black12.withOpacity(0.7),
                                                           body: SizedBox.expand(
@@ -371,7 +371,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                     );
                                                   },
                                                   child: ((){
-                                                    if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty) {
+                                                    if(profile.data!.almMemorial.showMemorialImagesOrVideos.isNotEmpty){
                                                       if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
                                                         return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[0]}',
                                                           betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -429,7 +429,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                         height: 45,
                                                         shape: const StadiumBorder(),
                                                         color: const Color(0xff2F353D),
-                                                        onPressed: () async {
+                                                        onPressed: () async{
                                                           if(widget.managed == true){
                                                             context.loaderOverlay.show();
                                                             APIRegularShowSwitchStatus
@@ -437,23 +437,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                             context.loaderOverlay.hide();
 
                                                             if(result.showSwitchStatusSuccess){
-                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(
-                                                                    memorialId: widget.memorialId,
-                                                                    memorialName: profile.data!.almMemorial.showMemorialName,
-                                                                    switchFamily: result.showSwitchStatusFamily,
-                                                                    switchFriends: result.showSwitchStatusFriends,
-                                                                    switchFollowers: result.showSwitchStatusFollowers,
-                                                                  ),
-                                                                ),
-                                                              );
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: widget.memorialId, memorialName: profile.data!.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers,),),);
                                                             }
                                                           }else{
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(
-                                                                memorialId: widget.memorialId,
-                                                                relationship: widget.relationship,
-                                                                ),
-                                                              ),
-                                                            );
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(memorialId: widget.memorialId, relationship: widget.relationship,),),);
                                                           }
                                                         },
                                                       ),
@@ -461,9 +448,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                   ),
                                                   Expanded(
                                                     child: GestureDetector(
+                                                      child: const CircleAvatar(
+                                                        radius: 25,
+                                                        backgroundColor: const Color(0xff3498DB),
+                                                        child: const Icon(Icons.share, color: const Color(0xffffffff), size: 25,),
+                                                      ),
                                                       onTap: () async{
                                                         initBranchShare();
-
                                                         FlutterBranchSdk.setIdentity('alm-share-link');
 
                                                         BranchResponse response = await FlutterBranchSdk.showShareSheet(
@@ -481,11 +472,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                           print('Error : ${response.errorCode} - ${response.errorMessage}');
                                                         }
                                                       },
-                                                      child: const CircleAvatar(
-                                                        radius: 25,
-                                                        backgroundColor: const Color(0xff3498DB),
-                                                        child: const Icon(Icons.share, color: const Color(0xffffffff), size: 25,),
-                                                      ),
                                                     ),
                                                   ),
                                                 ],
@@ -563,25 +549,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 children: [
                                                   Expanded(
                                                     child: GestureDetector(
+                                                      child: Column(
+                                                        children: [
+                                                          Text('${profile.data!.almMemorial.showMemorialPostsCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+
+                                                          Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
+                                                        ],
+                                                      ),
                                                       onTap: (){
                                                         Scrollable.ensureVisible(dataKey.currentContext!);
                                                       },
-                                                      child: Column(
-                                                        children: [
-                                                          Text('${profile.data!.almMemorial.showMemorialPostsCount}',
-                                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                              fontFamily: 'NexaBold',
-                                                              color: const Color(0xff000000),
-                                                            ),
-                                                          ),
-                                                          Text('Post',
-                                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                              fontFamily:'NexaRegular',
-                                                              color: const Color(0xff677375),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
                                                     ),
                                                   ),
 
@@ -589,31 +566,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
 
                                                   Expanded(
                                                     child: GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(
-                                                              memorialId: widget.memorialId,
-                                                              newToggle: 0,
-                                                            ),
-                                                          ),
-                                                        );
+                                                      onTap: (){
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 0,),),);
                                                       },
                                                       child: Column(
                                                         children: [
-                                                          Text('${profile.data!.almMemorial.showMemorialFamilyCount}',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                              fontFamily: 'NexaBold',
-                                                              color: const Color(0xff000000),
-                                                            ),
-                                                          ),
+                                                          Text('${profile.data!.almMemorial.showMemorialFamilyCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
-                                                          Text('Family',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                              fontFamily: 'NexaRegular',
-                                                              color: const Color(0xff677375),
-                                                            ),
-                                                          ),
+                                                          Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
                                                         ],
                                                       ),
                                                     ),
@@ -623,28 +583,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
 
                                                   Expanded(
                                                     child: GestureDetector(
-                                                      onTap: () {
+                                                      child: Column(
+                                                        children: [
+                                                          Text('${profile.data!.almMemorial.showMemorialFriendsCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+
+                                                          Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
+                                                        ],
+                                                      ),
+                                                      onTap: (){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 1,),),);
                                                       },
-                                                      child: Column(
-                                                        children: [
-                                                          Text('${profile.data!.almMemorial.showMemorialFriendsCount}',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                              fontFamily: 'NexaBold',
-                                                              color: const Color(0xff000000),
-                                                            ),
-                                                          ),
-
-                                                          Text('Friends',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                              fontFamily: 'NexaRegular',
-                                                              color: const Color(0xff677375),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
                                                     ),
                                                   ),
 
@@ -652,26 +600,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
 
                                                   Expanded(
                                                     child: GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
-                                                      },
                                                       child: Column(
                                                         children: [
-                                                          Text('${profile.data!.almMemorial.showMemorialFollowersCount}',
-                                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                              fontFamily: 'NexaBold',
-                                                              color: const Color(0xff000000),
-                                                            ),
-                                                          ),
-                                                          Text('Joined',
-                                                            style: TextStyle(
-                                                              fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                              fontFamily:'NexaRegular',
-                                                              color: const Color(0xff677375),
-                                                            ),
-                                                          ),
+                                                          Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+
+                                                          Text('Joined', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
                                                         ],
                                                       ),
+                                                      onTap: (){
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
+                                                      },
                                                     ),
                                                   ),
                                                 ],
@@ -685,16 +623,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                             Column(
                                               children: [
                                                 const SizedBox(height: 20),
+
                                                 Container(
                                                   padding: const EdgeInsets.only(left: 20.0),
                                                   alignment: Alignment.centerLeft,
-                                                  child: Text('Post',
-                                                    style: TextStyle(
-                                                      fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                      fontFamily: 'NexaBold',
-                                                      color: const Color(0xff000000),
-                                                    ),
-                                                  ),
+                                                  child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                                 ),
 
                                                 const SizedBox(height: 20),
@@ -721,7 +654,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                 barrierDismissible: true,
                                                                 barrierLabel: 'Dialog',
                                                                 transitionDuration: const Duration(milliseconds:0),
-                                                                pageBuilder: (_, __, ___) {
+                                                                pageBuilder: (_, __, ___){
                                                                   return Scaffold(
                                                                     backgroundColor: Colors.black12.withOpacity(0.7),
                                                                     body: SizedBox.expand(
@@ -732,17 +665,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                               alignment: Alignment.centerRight,
                                                                               padding: const EdgeInsets.only(right: 20.0),
                                                                               child: GestureDetector(
-                                                                                onTap: (){
-                                                                                  Navigator.pop(context);
-                                                                                },
                                                                                 child: CircleAvatar(
                                                                                   radius: 20,
                                                                                   backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                                  child: const Icon(
-                                                                                    Icons.close_rounded,
-                                                                                    color: const Color(0xffffffff),
-                                                                                  ),
+                                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                                 ),
+                                                                                onTap: (){
+                                                                                  Navigator.pop(context);
+                                                                                },
                                                                               ),
                                                                             ),
 
@@ -755,8 +685,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                                   profile.data!.almMemorial.showMemorialImagesOrVideos.length, (next) => 
                                                                                   ((){
                                                                                     if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[next])?.contains('video') == true){
-                                                                                      return BetterPlayer.network(
-                                                                                        '${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
+                                                                                      return BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                                         betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                                           placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                           deviceOrientationsAfterFullScreen: [
@@ -791,19 +720,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                               children: [
                                                                                 IconButton(
                                                                                   onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                  icon: const Icon(
-                                                                                    Icons.arrow_back_rounded,
-                                                                                    color: const Color(0xffffffff),
-                                                                                    size: 25,
-                                                                                  ),
+                                                                                  icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff), size: 25,),
                                                                                 ),
                                                                                 IconButton(
                                                                                   onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                  icon: const Icon(
-                                                                                    Icons.arrow_forward_rounded,
-                                                                                    color: const Color(0xffffffff),
-                                                                                    size: 25,
-                                                                                  ),
+                                                                                  icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff), size: 25,),
                                                                                 ),
                                                                               ],
                                                                             ),
@@ -872,6 +793,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                               padding:
                                               const EdgeInsets.only(left: 20.0),
                                               child: GestureDetector(
+                                                child: Row(
+                                                  children: [
+                                                    Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
+                                                    Text('Back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                  ],
+                                                ),
                                                 onTap: (){
                                                   if(widget.newlyCreated == true){
                                                     Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularScreenExtended(newToggleBottom: 1,),);
@@ -880,12 +807,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                     Navigator.pop(context);
                                                   }
                                                 },
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
-                                                    Text('Back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
-                                                  ],
-                                                ),
                                               ),
                                             ),
                                           ),
@@ -895,10 +816,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                               alignment: Alignment.centerRight,
                                               child: widget.managed == true
                                               ? GestureDetector(
+                                                child: Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                 onTap: () async{
                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
                                                 },
-                                                child: Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                               )
                                               : Container(height: 0,),
                                             ),
@@ -965,7 +886,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 },
                                               );
                                             },
-                                            child: CircleAvatar(
+                                            child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
                                               radius: 100,
                                               backgroundColor: const Color(0xff000000),
                                               child: Padding(
@@ -1038,11 +959,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                         posts[i].postBody,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 5,
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                          fontFamily: 'NexaRegular',
-                                          color: const Color(0xff000000),
-                                        ),
+                                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                       ),
                                     ),
 

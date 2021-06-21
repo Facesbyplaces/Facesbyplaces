@@ -11,7 +11,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularNotificationSettings extends StatefulWidget {
+class HomeRegularNotificationSettings extends StatefulWidget{
   final bool newMemorial;
   final bool newActivities;
   final bool postLikes;
@@ -25,7 +25,7 @@ class HomeRegularNotificationSettings extends StatefulWidget {
   HomeRegularNotificationSettingsState createState() => HomeRegularNotificationSettingsState(newMemorial: newMemorial, newActivities: newActivities, postLikes: postLikes, postComments: postComments, addFamily: addFamily, addFriends: addFriends, addAdmin: addAdmin);
 }
 
-class HomeRegularNotificationSettingsState extends State<HomeRegularNotificationSettings> {
+class HomeRegularNotificationSettingsState extends State<HomeRegularNotificationSettings>{
   final bool newMemorial;
   final bool newActivities;
   final bool postLikes;
@@ -43,7 +43,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
   bool toggle6 = false;
   bool toggle7 = false;
 
-  void initState() {
+  void initState(){
     super.initState();
     toggle1 = newMemorial;
     toggle2 = newActivities;
@@ -92,7 +92,8 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                       children: [
                         Row(
                           children: [
-                            Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                            Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+
                             Switch(
                               value: toggle1,
                               activeColor: const Color(0xffFFFFFF),
@@ -124,9 +125,11 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             ),
                           ],
                         ),
+
                         Row(
                           children: [
                             Expanded(child: Text('New Activities', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+
                             Switch(
                               value: toggle2,
                               activeColor: const Color(0xffFFFFFF),
@@ -158,9 +161,11 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             ),
                           ],
                         ),
+
                         Row(
                           children: [
-                            Expanded(child: Text('Post Likes', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                            Expanded(child: Text('Post Likes', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+
                             Switch(
                               value: toggle3,
                               activeColor: const Color(0xffFFFFFF),
@@ -192,9 +197,11 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             ),
                           ],
                         ),
+
                         Row(
                           children: [
-                            Expanded(child: Text('Post Comments', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                            Expanded(child: Text('Post Comments', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
+
                             Switch(
                               value: toggle4,
                               activeColor: const Color(0xffFFFFFF),
@@ -238,13 +245,13 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Page Invites', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'HelveticaBold', color: const Color(0xff000000),),
-                        ),
+                        Text('Page Invites', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'HelveticaBold', color: const Color(0xff000000),),),
+
                         const SizedBox(height: 10,),
 
                         Row(
                           children: [
-                            Expanded(child: Text( 'Add as Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),
+                            Expanded(child: Text('Add as Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),),),
 
                             Switch(
                               value: toggle5,
@@ -277,6 +284,7 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             ),
                           ],
                         ),
+                        
                         Row(
                           children: [
                             Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xff000000),),)),

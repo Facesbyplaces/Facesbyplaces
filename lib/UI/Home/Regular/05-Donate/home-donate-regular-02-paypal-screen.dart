@@ -37,6 +37,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
             title: Row(
               children: [
                 Text('Paypal', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
                 Spacer(),
               ],
             ),
@@ -49,9 +50,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
             ),
           ),
           body: InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F'),
-            ),
+            initialUrlRequest: URLRequest(url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmyaccount%2Fsummary%2F',),),
             onLoadStart: (InAppWebViewController app, uri) async{
               if(uri!.queryParameters['code'] != null){
                 String accessToken = await apiRegularMemorialPaypalAccessToken(code: '${uri.queryParameters['code']}');

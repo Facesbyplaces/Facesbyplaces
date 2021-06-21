@@ -496,6 +496,18 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                           child: TextFormField(
                                             keyboardType: TextInputType.text,
                                             controller: controller,
+                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                            decoration: InputDecoration(
+                                              contentPadding: const EdgeInsets.all(15.0),
+                                              filled: true,
+                                              fillColor: const Color(0xffffffff),
+                                              focusColor: const Color(0xffffffff),
+                                              hintText: 'Search Memorial',
+                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                            ),
                                             onChanged: (search){
                                               if(search == ''){
                                                 onSearch.value = false;
@@ -547,18 +559,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                 }
                                               }
                                             },
-                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                            decoration: InputDecoration(
-                                              contentPadding: const EdgeInsets.all(15.0),
-                                              filled: true,
-                                              fillColor: const Color(0xffffffff),
-                                              focusColor: const Color(0xffffffff),
-                                              hintText: 'Search Memorial',
-                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                            ),
                                           ),
                                         )
                                       ],
@@ -582,7 +582,16 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     labelColor: const Color(0xff04ECFF),
                                     unselectedLabelColor: const Color(0xff000000),
                                     indicatorColor: const Color(0xff04ECFF),
-                                    onTap: (int number) {
+                                    tabs: [
+                                      Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('Suggested', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('Nearby', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('BLM', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+                                    ],
+                                    onTap: (int number){
                                       toggle.value = number;
                                       searchFeeds = [];
                                       searchSuggested = [];
@@ -623,22 +632,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         onSearch.value = true;
                                       }
                                     },
-                                    tabs: [
-                                      Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-
-                                      Center(child: Text('Suggested', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-
-                                      Center(child: Text('Nearby', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-
-                                      Center(child: Text('BLM', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-                                    ],
                                   ),
                                 ),
                               ),
                             ),
                             Container(
-                              child: (() {
-                                switch (toggleListener) {
+                              child: ((){
+                                switch (toggleListener){
                                   case 0: return Container(height: 20,);
                                   case 1: return Container(height: 20,);
                                   case 2: return 
@@ -665,8 +665,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                       ),
                                     ),
                                   );
-                                  case 3: return
-                                  Container(
+                                  case 3: return Container(
                                     height: 40,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
@@ -720,7 +719,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     );
   }
 
-  searchPostExtended() {
+  searchPostExtended(){
     return ValueListenableBuilder(
       valueListenable: tabCount1,
       builder: (_, int tabCount1Listener, __) => ValueListenableBuilder(
@@ -787,10 +786,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             }
                           }else if(feeds[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                               physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
                               crossAxisCount: 4,
+                              shrinkWrap: true,
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
@@ -805,21 +807,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 fit: BoxFit.cover,
                                 imageUrl: feeds[i].imagesOrVideos[index],
                                 placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),),
-                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                mainAxisSpacing: 4.0,
-                                crossAxisSpacing: 4.0,
-                              );
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              ),
+                            );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                               physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              shrinkWrap: true,
                               crossAxisCount: 4,
                               itemCount: 3,
-                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
-                              crossAxisSpacing: 4.0,
                               itemBuilder: (BuildContext context, int index) =>
                               ((){
                                 if(index != 1){
@@ -860,13 +860,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -975,10 +969,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             }
                           }else if(feeds[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                               physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
                               crossAxisCount: 4,
+                              shrinkWrap: true,
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
@@ -995,20 +992,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png',fit: BoxFit.cover, scale: 1.0,),
                               ),
-                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
-                              crossAxisSpacing: 4.0,
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) =>
                               ((){
                                 if(index != 1){
@@ -1071,13 +1065,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -1147,11 +1135,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 contents: [
                   Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      searchFeeds[i].postBody,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 5,
-                    ),
+                    child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),
                   ),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
@@ -1181,10 +1165,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               }
                             }else if(searchFeeds[i].imagesOrVideos.length == 2){
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
+                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                                 physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
+                                crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
                                 crossAxisCount: 4,
+                                shrinkWrap: true,
                                 itemCount: 2,
                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
@@ -1201,20 +1188,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 ),
-                                staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                mainAxisSpacing: 4.0,
-                                crossAxisSpacing: 4.0,
                               );
                             }else{
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 3,
                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 3,
                                 itemBuilder: (BuildContext context, int index) =>
                                 ((){
                                   if(index != 1){
@@ -1283,13 +1267,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                    style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xffffffff),
-                                                    ),
-                                                  ),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                 ),
                                               ),
                                             ],
@@ -1349,11 +1327,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 contents: [
                   Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      searchFeeds[i].postBody,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 5,
-                    ),
+                    child: Text(searchFeeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),
                   ),
                   
                   searchFeeds[i].imagesOrVideos.isNotEmpty
@@ -1383,10 +1357,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             }
                           }else if(searchFeeds[i].imagesOrVideos.length == 2) {
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
+                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                               physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
                               crossAxisCount: 4,
+                              shrinkWrap: true,
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
@@ -1403,20 +1380,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                               ),
-                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
-                              crossAxisSpacing: 4.0,
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) =>
                               ((){
                                 if(index != 1){
@@ -1549,7 +1523,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     );
   }
 
-  searchSuggestedExtended() {
+  searchSuggestedExtended(){
     return ValueListenableBuilder(
       valueListenable: tabCount2,
       builder: (_, int tabCount2Listener, __) => ValueListenableBuilder(
@@ -1621,7 +1595,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     );
   }
 
-  searchNearbyExtended() {
+  searchNearbyExtended(){
     return ValueListenableBuilder(
       valueListenable: tabCount3,
       builder: (_, int tabCount3Listener, __) => ValueListenableBuilder(
@@ -1693,7 +1667,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     );
   }
 
-  searchBLMExtended() {
+  searchBLMExtended(){
     return ValueListenableBuilder(
       valueListenable: tabCount4,
       builder: (_, int tabCount4Listener, __) => ValueListenableBuilder(

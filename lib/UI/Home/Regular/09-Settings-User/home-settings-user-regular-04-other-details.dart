@@ -16,7 +16,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularUserOtherDetails extends StatefulWidget {
+class HomeRegularUserOtherDetails extends StatefulWidget{
   final int userId;
   final bool toggleBirthdate;
   final bool toggleBirthplace;
@@ -28,7 +28,7 @@ class HomeRegularUserOtherDetails extends StatefulWidget {
   HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState();
 }
 
-class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails> {
+class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails>{
   final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -52,19 +52,19 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
     toggle5 = widget.toggleNumber;
   }
 
-  Future<APIRegularShowOtherDetails> getOtherDetails(int userId) async {
+  Future<APIRegularShowOtherDetails> getOtherDetails(int userId) async{
     return await apiRegularShowOtherDetails(userId: userId);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
@@ -73,13 +73,14 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
+            centerTitle: true,
             title: Row(
               children: [
                 Text('Other Details', textAlign: TextAlign.left, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff)),),
+
                 Spacer(),
               ],
             ),
-            centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.65,),
               onPressed: (){
@@ -129,10 +130,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                           Expanded(
                             child: MiscRegularInputFieldTemplate(
                               key: _key2,
-                              labelText: 'Birthplace',
-                              displayText:
-                              details.data!.showOtherDetailsBirthplace,
                               labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              displayText: details.data!.showOtherDetailsBirthplace,
+                              labelText: 'Birthplace',
                             ),
                           ),
 
@@ -159,9 +159,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                           Expanded(
                             child: MiscRegularInputFieldTemplate(
                               key: _key3,
-                              labelText: 'Home Address',
-                              displayText: details.data!.showOtherDetailsAddress,
                               labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              displayText: details.data!.showOtherDetailsAddress,
+                              labelText: 'Home Address',
                             ),
                           ),
 
@@ -188,10 +188,10 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                           Expanded(
                             child: MiscRegularInputFieldTemplate(
                               key: _key4,
-                              labelText: 'Email',
+                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                               displayText: details.data!.showOtherDetailsEmail,
                               type: TextInputType.emailAddress,
-                              labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              labelText: 'Email',
                             ),
                           ),
 
@@ -218,9 +218,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                           Expanded(
                             child: MiscRegularPhoneNumberTemplate(
                               key: _key5,
-                              labelText: 'Contact Number',
                               labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',color: const Color(0xffBDC3C7),),
                               displayText: details.data!.showOtherDetailsPhoneNumber,
+                              labelText: 'Contact Number',
                               type: TextInputType.phone,
                             ),
                           ),
@@ -244,11 +244,11 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                       const SizedBox(height: 80,),
 
                       MiscRegularButtonTemplate(
-                        buttonText: 'Update',
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                        width: SizeConfig.screenWidth! / 2,
-                        height: 45,
                         buttonColor: const Color(0xff04ECFF),
+                        width: SizeConfig.screenWidth! / 2,
+                        buttonText: 'Update',
+                        height: 45,
                         onPressed: () async{
                           if(details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text || details.data!.showOtherDetailsBirthplace != _key2.currentState!.controller.text || details.data!.showOtherDetailsAddress != _key3.currentState!.controller.text || details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text || details.data!.showOtherDetailsPhoneNumber != _key5.currentState!.controller.text){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);
@@ -302,12 +302,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
               }else if(details.hasError){
                 return Container(
                   height: SizeConfig.screenHeight,
-                  child: const Center(
-                    child: const Text('Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),
-                    ),
-                  ),
+                  child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
                 );
               }else{
                 return Container(

@@ -10,32 +10,31 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class RegularSearchUsers {
+class RegularSearchUsers{
   final int userId;
   final String firstName;
   final String lastName;
   final String image;
   final String email;
   final int accountType;
-
   const RegularSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
+
 }
 
-class HomeRegularSearchUser extends StatefulWidget {
+class HomeRegularSearchUser extends StatefulWidget{
   final bool isFamily;
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-
   const HomeRegularSearchUser({required this.isFamily, required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
 
   @override
   HomeRegularSearchUserState createState() => HomeRegularSearchUserState();
 }
 
-class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
+class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
   List<RegularSearchUsers> users = [];
@@ -44,7 +43,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
   bool empty = true;
   int page = 1;
 
-  void initState() {
+  void initState(){
     super.initState();
     onLoading();
     scrollController.addListener((){
@@ -142,6 +141,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
               flexibleSpace: Column(
                 children: [
                   Spacer(),
+
                   Row(
                     children: [
                       Align(
@@ -177,6 +177,18 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 controller: controller,
+                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.all(15.0),
+                                  filled: true,
+                                  fillColor: const Color(0xffffffff),
+                                  focusColor: const Color(0xffffffff),
+                                  hintText: 'Search User',
+                                  hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                  border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                ),
                                 onChanged: (newPlaces){
                                   setState((){
                                     keywords = newPlaces;
@@ -205,18 +217,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                                     onLoading();
                                   }
                                 },
-                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(15.0),
-                                  filled: true,
-                                  fillColor: const Color(0xffffffff),
-                                  focusColor: const Color(0xffffffff),
-                                  hintText: 'Search User',
-                                  hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                  border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                ),
                               ),
                             )
                           ],
@@ -264,6 +264,17 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                   itemCount: users.length,
                   separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                   itemBuilder: (c, index) => ListTile(
+                    leading: users[index].image != ''
+                    ? CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: NetworkImage('${users[index].image}'),
+                    )
+                    : const CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                    ),
+                    title: Text('${users[index].firstName} ${users[index].lastName}'),
+                    subtitle: Text('${users[index].email}',),
                     onTap: () async{
                       if(widget.isFamily){
                         String choice = await showDialog(context: (context), builder: (build) => const MiscRegularRelationshipFromDialog()) ?? '';
@@ -316,17 +327,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser> {
                         }
                       }
                     },
-                    leading: users[index].image != ''
-                    ? CircleAvatar(
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: NetworkImage('${users[index].image}'),
-                    )
-                    : const CircleAvatar(
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                    ),
-                    title: Text('${users[index].firstName} ${users[index].lastName}'),
-                    subtitle: Text('${users[index].email}',),
                   ),
                 ),
               ),

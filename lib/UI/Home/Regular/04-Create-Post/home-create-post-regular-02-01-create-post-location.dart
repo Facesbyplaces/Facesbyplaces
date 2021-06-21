@@ -16,7 +16,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
@@ -28,6 +28,13 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
         },
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: const Color(0xff04ECFF),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
             title: TextFormField(
               onChanged: (newPlaces){
                 if(newPlaces == ''){
@@ -42,11 +49,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                   });
                 }
               },
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                fontFamily: 'NexaRegular',
-                color: const Color(0xff000000),
-              ),
+              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(15.0),
                 filled: true,
@@ -60,13 +63,6 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                 focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
               ),
             ),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-            backgroundColor: const Color(0xff04ECFF),
           ),
           body: Container(
             width: SizeConfig.screenWidth,
@@ -95,48 +91,23 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
               },
               itemBuilder: (context, index){
                 return GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context, places[index]);
+                  },
                   child: Container(
                     height: 80,
                     padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0,),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Text(
-                            places[index],
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            'Additional user information',
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            'Click to add on your post',
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
-                          ),
-                        ),
+                        Expanded(child: Text(places[index], style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+
+                        Expanded(child: Text('Additional user information', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+
+                        Expanded(child: Text('Click to add on your post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                       ],
                     ),
                   ),
-                  onTap: (){
-                    Navigator.pop(context, places[index]);
-                  },
                 );
               },
             ),

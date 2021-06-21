@@ -38,16 +38,15 @@ class HomeBLMScreenExtended extends StatefulWidget{
 }
 
 class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
-
-  ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
-  ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
   ValueNotifier<List<bool>> bottomTab = ValueNotifier<List<bool>>([true, false, false, false]);
   ValueNotifier<bool> isGuestLoggedIn = ValueNotifier<bool>(true);
+  ValueNotifier<int> unreadNotifications = ValueNotifier<int>(0);
+  ValueNotifier<int> toggleBottom = ValueNotifier<int>(0);
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   Future<APIBLMShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-  Future<APIBLMShowProfileInformation> getDrawerInformation() async {
+  Future<APIBLMShowProfileInformation> getDrawerInformation() async{
     return await apiBLMShowProfileInformation();
   }
 
@@ -130,7 +129,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
     SizeConfig.init(context);
     print('Home blm extended rebuild!');
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
@@ -159,10 +158,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             builder: (context){
                               return IconButton(
                                 icon: Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.white, width: 2,),
-                                  ),
+                                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 2,),),
                                   child: profileImage.data!.showProfileInformationImage != ''
                                   ? CircleAvatar(
                                     backgroundColor: const Color(0xff888888),
@@ -211,11 +207,9 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     children: [
                       SingleChildScrollView(
                         physics: const NeverScrollableScrollPhysics(),
-                        child: Container(
-                          height: SizeConfig.screenHeight,
-                          child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
-                        ),
+                        child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
                       ),
+
                       Container(
                         child: ((){
                           switch (toggleBottomListener){
@@ -399,10 +393,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                     },
                                     child: manageDrawer.data!.showProfileInformationImage != ''
                                     ? Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.white, width: 3,),
-                                      ),
+                                      decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.white, width: 3,),),
                                       child: CircleAvatar(
                                         radius: 100,
                                         backgroundColor: const Color(0xff888888),
@@ -460,21 +451,16 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    onTap: () async {
+                                    child: Text('Profile Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    onTap: () async{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                                     },
-                                    child: Text('Profile Settings',
-                                      style: TextStyle(
-                                        fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                                        fontFamily: 'NexaLight',
-                                        color: const Color(0xffffffff),
-                                      ),
-                                    ),
                                   ),
 
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
+                                    child: Text('Log Out', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
 
@@ -504,7 +490,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                         }
                                       }
                                     },
-                                    child: Text('Log Out', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                   ),
                                 ],
                               ),

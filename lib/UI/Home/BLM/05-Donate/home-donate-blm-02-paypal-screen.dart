@@ -7,17 +7,17 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMPaypal extends StatefulWidget {
+class HomeBLMPaypal extends StatefulWidget{
   final int pageId;
   const HomeBLMPaypal({required this.pageId});
 
   HomeBLMPaypalState createState() => HomeBLMPaypalState();
 }
 
-class HomeBLMPaypalState extends State<HomeBLMPaypal> {
+class HomeBLMPaypalState extends State<HomeBLMPaypal>{
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
       onWillPop: () async{
@@ -26,7 +26,7 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal> {
       child: GestureDetector(
         onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus){
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -34,13 +34,14 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal> {
           backgroundColor: const Color(0xffECF0F1),
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
+            centerTitle: true,
             title: Row(
               children: [
                 Text('Paypal', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
                 Spacer(),
               ],
             ),
-            centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
               onPressed: (){
@@ -59,8 +60,7 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal> {
                 if(result == false){
                   await showDialog(
                     context: context,
-                    builder: (_) => 
-                      AssetGiffyDialog(
+                    builder: (_) => AssetGiffyDialog(
                       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                       title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                       entryAnimation: EntryAnimation.DEFAULT,

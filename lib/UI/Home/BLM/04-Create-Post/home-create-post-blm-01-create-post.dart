@@ -134,6 +134,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                       title: Row(
                         children: [
                           Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
                           const Spacer(),
                         ],
                       ),
@@ -343,6 +344,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                             const SizedBox(height: 10,),
 
                             Container(
+                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              alignment: Alignment.centerLeft,
                               child: Wrap(
                                 spacing: 5.0,
                                 children: List.generate(
@@ -358,8 +361,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   ),
                                 ),
                               ),
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
-                              alignment: Alignment.centerLeft,
                             ),
 
                             const SizedBox(height: 10,),
@@ -380,6 +381,71 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         mainAxisSpacing: 4,
                                         children: List.generate(slideCountListener, (index){
                                           return GestureDetector(
+                                            child: lookupMimeType(slideImagesListener[index].path)?.contains('video') == true
+                                            ? Stack(
+                                              children: [
+                                                BetterPlayer.file('${slideImagesListener[index].path}',
+                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                    aspectRatio: 1,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+
+                                                Center(
+                                                  child: CircleAvatar(
+                                                    radius: 25,
+                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                    child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                  ),
+                                                ),
+                                                
+                                                removeAttachmentListener == index
+                                                ? Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    child: const CircleAvatar(backgroundColor: const Color(0xff000000), child: const Icon(Icons.close, color: const Color(0xffffffff),),),
+                                                    onTap: (){
+                                                      slideImages.value.removeAt(index);
+                                                      slideCount.value--;
+                                                    },
+                                                  ),
+                                                )
+                                                : Container(height: 0),
+                                              ],
+                                            )
+                                            : Container(
+                                              width: 80,
+                                              child: Stack(
+                                                fit: StackFit.expand,
+                                                children: [
+                                                  ClipRRect(borderRadius: BorderRadius.circular(10), child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),),
+
+                                                  Center(
+                                                    child: CircleAvatar(
+                                                      radius: 25,
+                                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                                      child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                    ),
+                                                  ),
+
+                                                  removeAttachmentListener == index
+                                                  ? Positioned(
+                                                    top: 0,
+                                                    right: 0,
+                                                    child: GestureDetector(
+                                                      child: const CircleAvatar(backgroundColor: const Color(0xff000000), child: const Icon(Icons.close, color: const Color(0xffffffff),),),
+                                                      onTap: (){
+                                                        slideImages.value.removeAt(index);
+                                                      },
+                                                    ),
+                                                  )
+                                                  : Container(height: 0),
+                                                ],
+                                              ),
+                                            ),
                                             onDoubleTap: (){
                                               removeAttachment.value = index;
                                             },
@@ -400,15 +466,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                               alignment: Alignment.centerRight,
                                                               padding: const EdgeInsets.only(right: 20.0),
                                                               child: GestureDetector(
+                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                 onTap: (){
                                                                   Navigator.pop(context);
                                                                 },
-                                                                child: CircleAvatar(
-                                                                  radius: 20,
-                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),
-                                                                  ),
-                                                                ),
                                                               ),
                                                             ),
 
@@ -431,6 +492,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                                 }
                                                               }()),
                                                             ),
+
                                                             const SizedBox(height: 80,),
                                                           ],
                                                         ),
@@ -440,86 +502,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                                 },
                                               );
                                             },
-                                            child: lookupMimeType(slideImagesListener[index].path)?.contains('video') == true
-                                            ? Stack(
-                                              children: [
-                                                BetterPlayer.file('${slideImagesListener[index].path}',
-                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                    aspectRatio: 1,
-                                                    fit: BoxFit.contain,
-                                                  ),
-                                                ),
-                                                Center(
-                                                  child: CircleAvatar(
-                                                    radius: 25,
-                                                    backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                    child: Text('${index + 1}',
-                                                      style: const TextStyle(
-                                                        fontSize: 40,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: const Color(0xffffffff),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                removeAttachmentListener == index
-                                                ? Positioned(
-                                                  top: 0,
-                                                  right: 0,
-                                                  child: GestureDetector(
-                                                    child: const CircleAvatar(
-                                                      backgroundColor: const Color(0xff000000),
-                                                      child: const Icon(Icons.close, color: const Color(0xffffffff),),
-                                                    ),
-                                                    onTap: (){
-                                                      slideImages.value.removeAt(index);
-                                                      slideCount.value--;
-                                                    },
-                                                  ),
-                                                )
-                                                : Container(height: 0),
-                                              ],
-                                            )
-                                            : Container(
-                                              width: 80,
-                                              child: Stack(
-                                                fit: StackFit.expand,
-                                                children: [
-                                                  ClipRRect(borderRadius: BorderRadius.circular(10), child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),),
-
-                                                  Center(
-                                                    child: CircleAvatar(
-                                                      radius: 25,
-                                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text('${index + 1}',
-                                                        style: const TextStyle(
-                                                          fontSize: 40,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: const Color(0xffffffff),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  removeAttachmentListener == index
-                                                  ? Positioned(
-                                                    top: 0,
-                                                    right: 0,
-                                                    child: GestureDetector(
-                                                      child: const CircleAvatar(
-                                                        backgroundColor: const Color(0xff000000),
-                                                        child: const Icon(Icons.close, color: const Color(0xffffffff),),
-                                                      ),
-                                                      onTap: (){
-                                                        slideImages.value.removeAt(index);
-                                                      },
-                                                    ),
-                                                  )
-                                                  : Container(height: 0),
-                                                ],
-                                              ),
-                                            ),
                                           );
                                         }),
                                       ),
@@ -539,28 +521,21 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 children: [
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () async{
-                                        String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
-                                        newLocation.value = result;
-                                      },
                                       child: Container(
                                         padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(
-                                              child: Text('Add a location',
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                  fontFamily: 'NexaRegular',
-                                                  color: const Color(0xff000000),
-                                                ),
-                                              ),
-                                            ),
+                                            Expanded(child: Text('Add a location', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+
                                             const Icon(Icons.place, color: const Color(0xff4EC9D4),),
                                           ],
                                         ),
                                       ),
+                                      onTap: () async{
+                                        String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
+                                        newLocation.value = result;
+                                      },
                                     ),
                                   ),
                                   
@@ -581,15 +556,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         color: Colors.transparent,
                                         child: Row(
                                           children: [
-                                            Expanded(
-                                              child: Text('Tag a person you are with',
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                  fontFamily: 'NexaRegular',
-                                                  color: const Color(0xff000000),
-                                                ),
-                                              ),
-                                            ),
+                                            Expanded(child: Text('Tag a person you are with', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+
                                             const Icon(Icons.person, color: const Color(0xff4EC9D4),),
                                           ],
                                         ),
@@ -601,6 +569,17 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                                   Expanded(
                                     child: GestureDetector(
+                                      child: Container(
+                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        color: Colors.transparent,
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                            
+                                            const Icon(Icons.image, color: const Color(0xff4EC9D4),),
+                                          ],
+                                        ),
+                                      ),
                                       onTap: () async{
                                         var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
 
@@ -614,24 +593,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                           }
                                         }
                                       },
-                                      child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text('Upload a Video / Image',
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                                  fontFamily: 'NexaRegular',
-                                                  color: const Color(0xff000000),
-                                                ),
-                                              ),
-                                            ),
-                                            const Icon(Icons.image, color: const Color(0xff4EC9D4),),
-                                          ],
-                                        ),
-                                      ),
                                     ),
                                   ),
                                 ],

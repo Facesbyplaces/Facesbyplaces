@@ -195,6 +195,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
         title: Row(
           children: [
             Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            
             Spacer(),
           ],
         ),

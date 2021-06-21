@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class HomeBLMMaps extends StatefulWidget {
+class HomeBLMMaps extends StatefulWidget{
   final double latitude;
   final double longitude;
   const HomeBLMMaps({required this.latitude, required this.longitude});
@@ -11,7 +11,7 @@ class HomeBLMMaps extends StatefulWidget {
   HomeBLMMapsState createState() => HomeBLMMapsState();
 }
 
-class HomeBLMMapsState extends State<HomeBLMMaps> {
+class HomeBLMMapsState extends State<HomeBLMMaps>{
   Completer<GoogleMapController> _controller = Completer();
   CameraPosition? _kGooglePlex;
 

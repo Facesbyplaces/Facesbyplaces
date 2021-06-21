@@ -9,7 +9,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularUserChangePassword extends StatefulWidget {
+class HomeRegularUserChangePassword extends StatefulWidget{
   final int userId;
   final bool isAddPassword;
   const HomeRegularUserChangePassword({required this.userId, required this.isAddPassword});
@@ -17,7 +17,7 @@ class HomeRegularUserChangePassword extends StatefulWidget {
   HomeRegularUserChangePasswordState createState() => HomeRegularUserChangePasswordState();
 }
 
-class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePassword> {
+class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePassword>{
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
@@ -63,11 +63,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                     key: _key1,
                     labelText: widget.isAddPassword == true ? 'New Password' : 'Current Password',
                     obscureText: true,
-                    labelTextStyle: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xffBDC3C7),
-                    ),
+                    labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                   ),
 
                   const SizedBox(height: 20,),
@@ -76,21 +72,17 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                     key: _key2,
                     labelText: widget.isAddPassword == true ? 'Confirm Password' : 'New Password',
                     obscureText: true,
-                    labelTextStyle: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xffBDC3C7),
-                    ),
+                    labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                   ),
 
                   const SizedBox(height: 80,),
 
                   MiscRegularButtonTemplate(
-                    buttonText: widget.isAddPassword == true ? 'Add' : 'Updated',
                     buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                    buttonText: widget.isAddPassword == true ? 'Add' : 'Updated',
+                    buttonColor: const Color(0xff04ECFF),
                     width: SizeConfig.screenWidth! / 2,
                     height: 45,
-                    buttonColor: const Color(0xff04ECFF),
                     onPressed: () async{
                       if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                         await showDialog(
@@ -163,8 +155,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                             );
                           }
                         }else{
-                          print('Change password here');
-
                           context.loaderOverlay.show();
                           bool result = await apiRegularChangePassword(currentPassword: _key1.currentState!.controller.text, newPassword: _key2.currentState!.controller.text);
                           context.loaderOverlay.hide();

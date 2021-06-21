@@ -101,6 +101,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
               flexibleSpace: Column(
                 children: [
                   Spacer(),
+
                   Row(
                     children: [
                       Align(
@@ -112,8 +113,32 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                           },
                         ),
                       ),
+
                       Expanded(
                         child: TextFormField(
+                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15.0),
+                            filled: true,
+                            fillColor: const Color(0xffffffff),
+                            focusColor: const Color(0xffffffff),
+                            hintText: 'Search User',
+                            hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                            border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                            enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                            focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                            prefixIcon: IconButton(
+                              onPressed: (){
+                                print('Search!');
+                                setState(() {
+                                  empty = false;
+                                });
+
+                                onLoading();
+                              },
+                              icon: const Icon(Icons.search, color: const Color(0xff888888)),
+                            ),
+                          ),
                           onChanged: (newPlace){
                             if(newPlace == ''){
                               setState(() {
@@ -132,34 +157,13 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
                             onLoading();
                           },
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15.0),
-                            filled: true,
-                            fillColor: const Color(0xffffffff),
-                            focusColor: const Color(0xffffffff),
-                            hintText: 'Search User',
-                            hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                            prefixIcon: IconButton(
-                              onPressed: (){
-                                print('Search!');
-                                setState(() {
-                                  empty = false;
-                                });
-
-                                onLoading();
-                              },
-                              icon: const Icon(Icons.search, color: const Color(0xff888888)),
-                            ),
-                            border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                            enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                            focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                          ),
                         ),
                       ),
+
                       const SizedBox(width: 20,),
                     ],
                   ),
+
                   SizedBox(height: 5,),
                 ],
               ),
@@ -176,9 +180,6 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
               separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
               itemBuilder: (c, i) {
                 return ListTile(
-                  onTap: (){
-                    Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType),);
-                  },
                   leading: users[i].image != ''
                   ? CircleAvatar(
                     maxRadius: 40,
@@ -190,17 +191,11 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                     backgroundColor: const Color(0xff888888),
                     foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                   ),
-                  title: Text(users[i].firstName + ' ' + users[i].lastName,
-                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                  ),
-                  subtitle: Text(
-                    users[i].email,
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xff000000),
-                    ),
-                  ),
+                  title: Text(users[i].firstName + ' ' + users[i].lastName, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                  subtitle: Text(users[i].email, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                  onTap: (){
+                    Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType),);
+                  },
                 );
               },
             ),

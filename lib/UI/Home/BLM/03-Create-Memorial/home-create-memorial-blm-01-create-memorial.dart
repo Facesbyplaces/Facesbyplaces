@@ -9,7 +9,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class BLMCreateMemorialValues {
+class BLMCreateMemorialValues{
   final String blmName;
   final String description;
   final String location;
@@ -25,11 +25,12 @@ class BLMCreateMemorialValues {
   const BLMCreateMemorialValues({required this.blmName, required this.description, required this.location, required this.dob, required this.rip, required this.state, required this.country, required this.precinct, required this.relationship, required this.imagesOrVideos, required this.latitude, required this.longitude,});
 }
 
-class HomeBLMCreateMemorial1 extends StatefulWidget {
+class HomeBLMCreateMemorial1 extends StatefulWidget{
+
   HomeBLMCreateMemorial1State createState() => HomeBLMCreateMemorial1State();
 }
 
-class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
+class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
   final GlobalKey<MiscBLMInputFieldDropDownState> _key1 = GlobalKey<MiscBLMInputFieldDropDownState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -70,10 +71,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
             children: [
               SingleChildScrollView(
                 physics: const NeverScrollableScrollPhysics(),
-                child: Container(
-                  height: SizeConfig.screenHeight,
-                  child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
-                ),
+                child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -105,6 +103,19 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
                       keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
                       readOnly: true,
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'DOB',
+                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.close), 
+                          onPressed: (){
+                            controller1.text = '';
+                            dob = DateTime(1000);
+                          },
+                        ),
+                      ),
                       onTap: (){
                         DatePicker.showDatePicker(
                           context,
@@ -120,19 +131,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
                           },
                         );
                       },
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        labelText: 'DOB',
-                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                        suffixIcon: IconButton(
-                          icon: Icon(Icons.close), 
-                          onPressed: (){
-                            controller1.text = '';
-                            dob = DateTime(1000);
-                          },
-                        ),
-                      ),
                     ),
                     
                     const SizedBox(height: 20,),
@@ -142,6 +140,19 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
                       keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
                       readOnly: true,
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'RIP',
+                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.close), 
+                          onPressed: (){
+                            controller2.text = '';
+                            rip = DateTime.now();
+                          },
+                        ),
+                      ),
                       onTap: () {
                         DatePicker.showDatePicker(
                           context,
@@ -157,19 +168,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
                           },
                         );
                       },
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        labelText: 'RIP',
-                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                        suffixIcon: IconButton(
-                          icon: Icon(Icons.close), 
-                          onPressed: (){
-                            controller2.text = '';
-                            rip = DateTime.now();
-                          },
-                        ),
-                      ),
                     ),
 
                     const SizedBox(height: 20,),
@@ -191,9 +189,9 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1> {
                     const SizedBox(height: 40,),
 
                     MiscBLMButtonTemplate(
+                      buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
-                      buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
                       onPressed: () async{
                         if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
                           await showDialog(

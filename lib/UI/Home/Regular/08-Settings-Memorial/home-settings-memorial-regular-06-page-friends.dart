@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularPageFriends extends StatefulWidget {
+class HomeRegularPageFriends extends StatefulWidget{
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
@@ -18,7 +18,7 @@ class HomeRegularPageFriends extends StatefulWidget {
   HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState();
 }
 
-class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
+class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
   ScrollController scrollController = ScrollController();
   int friendsItemsRemaining = 1;
   List<Widget> friends = [];
@@ -27,7 +27,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
   void initState() {
     super.initState();
     onLoading();
-    scrollController.addListener(() {
+    scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(friendsItemsRemaining != 0){
           setState((){
@@ -80,7 +80,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
 
       friendsItemsRemaining = newValue.almItemsRemaining;
 
-      for (int i = 0; i < newValue.almFriendsList.length; i++) {
+      for(int i = 0; i < newValue.almFriendsList.length; i++){
         friends.add(
           ListTile(
             leading: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage != ''
@@ -107,14 +107,14 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
               ),
             ),
             trailing: MaterialButton(
-              minWidth: SizeConfig.screenWidth! / 3.5,
-              padding: EdgeInsets.zero,
-              textColor: const Color(0xffffffff),
-              splashColor: const Color(0xff04ECFF),
               child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              height: 40,
               shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              splashColor: const Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
               color: const Color(0xffE74C3C),
+              padding: EdgeInsets.zero,
+              height: 40,
               onPressed: () async {
                 bool confirmation = await showDialog(
                   context: context,
@@ -195,6 +195,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
         title: Row(
           children: [
             Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
             Spacer(),
           ],
         ),
@@ -207,10 +208,10 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends> {
         ),
         actions: [
           GestureDetector(
+            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
             onTap: (){
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: false, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
             },
-            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
           ),
         ],
       ),

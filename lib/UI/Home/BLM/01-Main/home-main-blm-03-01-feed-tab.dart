@@ -14,7 +14,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 
-class BLMMainPagesFeeds {
+class BLMMainPagesFeeds{
   final int userId;
   final int postId;
   final int memorialId;
@@ -316,7 +316,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                                   ),
                                                 ),
                                               ),
-
                                             ],
                                           );
                                         }else{
@@ -345,7 +344,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                                   ),
                                                 ),
                                               ),
-
                                             ],
                                           );
                                         }

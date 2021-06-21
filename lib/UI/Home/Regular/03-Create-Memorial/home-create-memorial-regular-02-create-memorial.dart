@@ -24,7 +24,7 @@ class HomeRegularCreateMemorial2 extends StatefulWidget{
 }
 
 class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
   TextEditingController controllerStory = TextEditingController();
   ValueNotifier<File> videoFile = ValueNotifier<File>(File(''));
@@ -144,7 +144,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
                                   Center(child: Text('Slide', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.0, fontFamily: 'NexaRegular',),),),
                                 ],
-                                onTap: (int number) {
+                                onTap: (int number){
                                   toggle.value = number;
                                 },
                               ),
@@ -267,14 +267,10 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                   alignment: Alignment.centerRight,
                                   padding: const EdgeInsets.only(right: 20.0),
                                   child: GestureDetector(
+                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
-                                    child: CircleAvatar(
-                                      radius: 20,
-                                      backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                      child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                    ),
                                   ),
                                 ),
 
@@ -318,10 +314,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                 right: 0,
                 child: IconButton(
                   iconSize: 25,
-                  icon: const CircleAvatar(
-                    backgroundColor: const Color(0xff000000),
-                    child: const Icon(Icons.close, color: const Color(0xffffffff),),
-                  ),
+                  icon: const CircleAvatar(backgroundColor: const Color(0xff000000), child: const Icon(Icons.close, color: const Color(0xffffffff),),),
                   onPressed: (){
                     videoFile.value = File('');
                   },
@@ -332,11 +325,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
           : Container(
             height: 260,
             width: SizeConfig.screenWidth,
-            decoration: BoxDecoration(
-              color: const Color(0xffcccccc),
-              border: Border.all(color: const Color(0xff000000),),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
+            decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
             child: Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
           ),
         ),
@@ -368,11 +357,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                           child: Container(
                             width: 80,
                             child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: const Color(0xffcccccc),
-                              border: Border.all(color: const Color(0xff000000),),
-                            ),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
                           ),
                           onTap: () async{
                             await getSlideImage();
@@ -401,11 +386,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                             alignment: Alignment.centerRight,
                                             padding: const EdgeInsets.only(right: 20.0),
                                             child: GestureDetector(
-                                              child: CircleAvatar(
-                                                radius: 20,
-                                                backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                              ),
+                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                               onTap: (){
                                                 Navigator.pop(context);
                                               },
@@ -432,24 +413,16 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Image.file(
-                                    slideImagesListener[index],
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
                                 ),
+
                                 Stack(
                                   children: [
                                     Center(
                                       child: CircleAvatar(
                                         radius: 25,
                                         backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                        child: Text('${index + 1}',
-                                          style: const TextStyle(
-                                            fontSize: 40,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xffffffff),
-                                          ),
-                                        ),
+                                        child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                       ),
                                     ),
                                   ],
@@ -469,13 +442,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
             Align(
               alignment: Alignment.centerLeft,
-              child: Text('Double tap to remove images.',
-                style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                  fontFamily: 'NexaRegular',
-                  color: const Color(0xff2F353D),
-                ),
-              ),
+              child: Text('Double tap to remove images.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
             ),
           ],
         ),

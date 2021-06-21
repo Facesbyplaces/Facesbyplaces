@@ -3,16 +3,15 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class HomeRegularMaps extends StatefulWidget {
+class HomeRegularMaps extends StatefulWidget{
   final double latitude;
   final double longitude;
-
   const HomeRegularMaps({required this.latitude, required this.longitude});
 
   HomeRegularMapsState createState() => HomeRegularMapsState();
 }
 
-class HomeRegularMapsState extends State<HomeRegularMaps> {
+class HomeRegularMapsState extends State<HomeRegularMaps>{
   Completer<GoogleMapController> _controller = Completer();
   CameraPosition? _kGooglePlex;
 
@@ -26,19 +25,13 @@ class HomeRegularMapsState extends State<HomeRegularMaps> {
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Maps',
-          style: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 2.74,
-            fontFamily: 'NexaBold',
-            color: const Color(0xffffffff),
-          ),
-        ),
+        title: Text('Maps', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
       ),
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex!,
-        onMapCreated: (GoogleMapController controller) {
+        onMapCreated: (GoogleMapController controller){
           _controller.complete(controller);
         },
       ),

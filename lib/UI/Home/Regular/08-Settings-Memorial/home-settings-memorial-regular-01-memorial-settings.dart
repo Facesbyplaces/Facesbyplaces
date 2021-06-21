@@ -16,7 +16,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularMemorialSettings extends StatefulWidget {
+class HomeRegularMemorialSettings extends StatefulWidget{
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
@@ -27,7 +27,7 @@ class HomeRegularMemorialSettings extends StatefulWidget {
   HomeRegularMemorialSettingsState createState() => HomeRegularMemorialSettingsState();
 }
 
-class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings> {
+class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings>{
   ValueNotifier<int> toggle = ValueNotifier<int>(0);
   ValueNotifier<bool> isSwitched1 = ValueNotifier<bool>(false);
   ValueNotifier<bool> isSwitched2 = ValueNotifier<bool>(false);
@@ -53,6 +53,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           title: Row(
             children: [
               Text('Memorial Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
               const Spacer(),
             ],
           ),
@@ -76,13 +77,14 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                   unselectedLabelColor: const Color(0xff000000),
                   indicatorColor: const Color(0xff04ECFF),
                   indicatorSize: TabBarIndicatorSize.label,
+                  tabs: [
+                    Text('Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+
+                    Text('Privacy', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D)),),
+                  ],
                   onTap: (int index){
                     toggle.value = index;
                   },
-                  tabs: [
-                    Text('Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
-                    Text('Privacy', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D)),),
-                  ],
                 ),
               ),
             ),
@@ -244,6 +246,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                         subtitle: Text('Show or hide family details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       ),
                     ),
+
                     Switch(
                       value: isSwitched1Listener,
                       activeColor: const Color(0xff2F353D),
@@ -299,6 +302,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                         subtitle: Text('Show or hide your followers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       ),
                     ),
+                    
                     Switch(
                       value: isSwitched3Listener,
                       activeColor: const Color(0xff2F353D),

@@ -9,7 +9,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class RegularCreateMemorialValues {
+class RegularCreateMemorialValues{
   final String memorialName;
   final String description;
   final String birthplace;
@@ -24,12 +24,12 @@ class RegularCreateMemorialValues {
   const RegularCreateMemorialValues({required this.memorialName, required this.description, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.relationship, required this.imagesOrVideos, required this.latitude, required this.longitude,});
 }
 
-class HomeRegularCreateMemorial1 extends StatefulWidget {
+class HomeRegularCreateMemorial1 extends StatefulWidget{
 
   HomeRegularCreateMemorial1State createState() => HomeRegularCreateMemorial1State();
 }
 
-class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> {
+class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
   GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -70,10 +70,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
             children: [
               SingleChildScrollView(
                 physics: const NeverScrollableScrollPhysics(),
-                child: Container(
-                  height: SizeConfig.screenHeight,
-                  child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
-                ),
+                child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -87,11 +84,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                     MiscRegularInputFieldTemplate(
                       key: _key2, 
                       labelText: 'Birthplace',
-                      labelTextStyle: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xff000000),
-                      ),
+                      labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                     ),
 
                     const SizedBox(height: 20,),
@@ -102,6 +95,10 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                       cursorColor: const Color(0xff000000),
                       readOnly: true,
                       decoration: InputDecoration(
+                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                        alignLabelWithHint: true,
+                        labelText: 'DOB',
                         suffixIcon: IconButton(
                           icon: Icon(Icons.close), 
                           onPressed: (){
@@ -109,10 +106,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                             dob = DateTime(1000);
                           },
                         ),
-                        alignLabelWithHint: true,
-                        labelText: 'DOB',
-                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
                       ),
                       onTap: () {
                         DatePicker.showDatePicker(
@@ -122,7 +115,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                           maxTime: rip,
                           currentTime: DateTime.now(),
                           locale: LocaleType.en,
-                          onConfirm: (date) {
+                          onConfirm: (date){
                             String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
                             dob = date;
                             controller1.text = format;
@@ -139,6 +132,10 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                       cursorColor: const Color(0xff000000),
                       readOnly: true,
                       decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'RIP',                          
+                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
                         suffixIcon: IconButton(
                           icon: Icon(Icons.close), 
                           onPressed: (){
@@ -146,12 +143,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                             rip = DateTime.now();
                           },
                         ),
-                        alignLabelWithHint: true,
-                        labelText: 'RIP',                          
-                        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
                       ),
-                      onTap: () {
+                      onTap: (){
                         DatePicker.showDatePicker(
                           context,
                           showTitleActions: true,
@@ -159,7 +152,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                           maxTime: DateTime.now(),
                           currentTime: DateTime.now(),
                           locale: LocaleType.en,
-                          onConfirm: (date) {
+                          onConfirm: (date){
                             String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
                             rip = date;
                             controller2.text = format;
@@ -173,30 +166,22 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1> 
                     MiscRegularInputFieldTemplate(
                       key: _key5, 
                       labelText: 'Cemetery',
-                      labelTextStyle: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11, 
-                        fontFamily: 'NexaRegular', 
-                        color: const Color(0xff000000),
-                      ),
+                      labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                     ),
                     
                     const SizedBox(height: 20,),
 
                     MiscRegularInputFieldTemplate(
                       key: _key6, labelText: 'Country',
-                      labelTextStyle: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xff000000),
-                      ),
+                      labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                     ),
 
                     const SizedBox(height: 40,),
 
                     MiscRegularButtonTemplate(
+                      buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
-                      buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
                       onPressed: () async{
                         if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                           await showDialog(

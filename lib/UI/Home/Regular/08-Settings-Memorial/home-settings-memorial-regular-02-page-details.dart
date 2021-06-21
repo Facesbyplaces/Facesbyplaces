@@ -62,6 +62,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
             title: Row(
               children: [
                 Text('Page Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
                 Spacer(),
               ],
             ),
@@ -101,24 +102,9 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           TextFormField(
                             controller: controller1,
+                            readOnly: true,
                             keyboardType: TextInputType.text,
                             cursorColor: const Color(0xff000000),
-                            readOnly: true,
-                            onTap: (){
-                              DatePicker.showDatePicker(
-                                context,
-                                showTitleActions: true,
-                                minTime: dob,
-                                maxTime: rip,
-                                currentTime: DateTime.now(),
-                                onConfirm: (date) {
-                                  String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                                  dob = date;
-                                  controller1.text = format;
-                                },
-                                locale: LocaleType.en,
-                              );
-                            },
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             decoration: InputDecoration(
                               alignLabelWithHint: true,
@@ -126,30 +112,30 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                               labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                               focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
                             ),
+                            onTap: (){
+                              DatePicker.showDatePicker(
+                                context,
+                                currentTime: DateTime.now(),
+                                showTitleActions: true,
+                                locale: LocaleType.en,
+                                minTime: dob,
+                                maxTime: rip,
+                                onConfirm: (date) {
+                                  String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                                  dob = date;
+                                  controller1.text = format;
+                                },
+                              );
+                            },
                           ),
 
                           const SizedBox(height: 20,),
 
                           TextFormField(
                             controller: controller2,
+                            readOnly: true,
                             keyboardType: TextInputType.text,
                             cursorColor: const Color(0xff000000),
-                            readOnly: true,
-                            onTap: (){
-                              DatePicker.showDatePicker(
-                                context,
-                                showTitleActions: true,
-                                minTime: dob,
-                                maxTime: DateTime.now(),
-                                currentTime: DateTime.now(),
-                                onConfirm: (date){
-                                  String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-                                  rip = date;
-                                  controller2.text = format;
-                                },
-                                locale: LocaleType.en,
-                              );
-                            },
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             decoration: InputDecoration(
                               alignLabelWithHint: true,
@@ -157,6 +143,21 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                               labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                               focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
                             ),
+                            onTap: (){
+                              DatePicker.showDatePicker(
+                                context,
+                                maxTime: DateTime.now(),
+                                currentTime: DateTime.now(),
+                                showTitleActions: true,
+                                locale: LocaleType.en,
+                                minTime: dob,
+                                onConfirm: (date){
+                                  String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                                  rip = date;
+                                  controller2.text = format;
+                                },
+                              );
+                            },
                           ),
 
                           const SizedBox(height: 20,),
@@ -180,11 +181,11 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                           const SizedBox(height: 80,),
 
                           MiscRegularButtonTemplate(
-                            buttonText: 'Update',
                             buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                            buttonColor: const Color(0xff04ECFF),
+                            buttonText: 'Update',
                             width: 150,
                             height: 45,
-                            buttonColor: const Color(0xff04ECFF),
                             onPressed: () async{
                               if(memorialSettings.data!.almMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsRelationship != _key2.currentState!.currentSelection || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key5.currentState!.controller.text || memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery != _key6.currentState!.controller.text){
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Confirm', content:'Do you want to save the changes?', confirmColor_1: const Color(0xff04ECFF), confirmColor_2: const Color(0xffFF0000),),);

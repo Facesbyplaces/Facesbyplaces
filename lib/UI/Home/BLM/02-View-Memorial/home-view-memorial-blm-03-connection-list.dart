@@ -9,7 +9,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class BLMConnectionListItem {
+class BLMConnectionListItem{
   final int id;
   final int accountType;
   final String firstName;
@@ -19,7 +19,7 @@ class BLMConnectionListItem {
   const BLMConnectionListItem({required this.id, required this.accountType, required this.firstName, required this.lastName, required this.image, required this.relationship});
 }
 
-class HomeBLMConnectionList extends StatefulWidget {
+class HomeBLMConnectionList extends StatefulWidget{
   final int memorialId;
   final int newToggle;
   const HomeBLMConnectionList({required this.memorialId, required this.newToggle});
@@ -55,8 +55,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     onLoading1();
     onLoading2();
     onLoading3();
-    scrollController1.addListener(() {
-      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent){
+    scrollController1.addListener((){
+      if(scrollController1.position.pixels == scrollController1.position.maxScrollExtent){
         if(itemRemaining1 != 0){
           onLoading1();
         }else{
@@ -85,11 +85,11 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         }
       }
     });
-    scrollController3.addListener(() {
-      if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
-        if (itemRemaining3 != 0) {
+    scrollController3.addListener((){
+      if(scrollController3.position.pixels == scrollController3.position.maxScrollExtent){
+        if(itemRemaining3 != 0){
           onLoading1();
-        } else {
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: const Text('No more connection list followers to show'),
@@ -275,22 +275,45 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(70.0),
               child: AppBar(
+                backgroundColor: const Color(0xff04ECFF),
+                leading: Container(),
                 flexibleSpace: Column(
                   children: [
                     Spacer(),
+
                     Row(
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
                             icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
-                            onPressed: () {
+                            onPressed: (){
                               Navigator.pop(context);
                             },
                           ),
                         ),
+
                         Expanded(
                           child: TextFormField(
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(15.0),
+                              filled: true,
+                              fillColor: const Color(0xffffffff),
+                              focusColor: const Color(0xffffffff),
+                              hintText: ((){
+                                switch(toggleListener){
+                                  case 0: return 'Search Family';
+                                  case 1: return 'Search Friends';
+                                  case 2: return 'Search Followers';
+                                }
+                              }()),
+                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                              prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
+                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                            ),
                             onChanged: (search){
                               searchKeyword = search;
 
@@ -333,35 +356,16 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                 }
                               }
                             },
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.all(15.0),
-                              filled: true,
-                              fillColor: const Color(0xffffffff),
-                              focusColor: const Color(0xffffffff),
-                              hintText: ((){
-                                switch(toggleListener){
-                                  case 0: return 'Search Family';
-                                  case 1: return 'Search Friends';
-                                  case 2: return 'Search Followers';
-                                }
-                              }()),
-                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                              prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
-                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                            ),
                           ),
                         ),
+
                         const SizedBox(width: 20,),
                       ],
                     ),
+
                     SizedBox(height: 5,),
                   ],
                 ),
-                leading: Container(),
-                backgroundColor: const Color(0xff04ECFF),
               ),
             ),
             body: Column(
@@ -379,7 +383,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       indicatorColor: const Color(0xff04ECFF),
                       indicatorSize: TabBarIndicatorSize.label,
                       indicatorWeight: 5,
-                      onTap: (int number) {
+                      onTap: (int number){
                         toggle.value = number;
                         searches = [];
 
@@ -417,16 +421,20 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       },
                       tabs: [
                         Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
+
                         Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
+
                         Text('Followers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',),),
                       ],
                     ),
                   ),
                 ),
+
                 SizedBox(height: SizeConfig.blockSizeVertical! * 2.0),
+
                 Expanded(
-                  child: (() {
-                    switch (toggleListener) {
+                  child: ((){
+                    switch (toggleListener){
                       case 0: return connectionListFamilyWidget();
                       case 1: return connectionListFriendsWidget();
                       case 2: return connectionListFollowersWidget();

@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class RegularShowAdminSettings {
+class RegularShowAdminSettings{
   final int userId;
   final String firstName;
   final String lastName;
@@ -15,6 +15,7 @@ class RegularShowAdminSettings {
   final String relationship;
   final String email;
   const RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
+
 }
 
 class HomeRegularPageManagers extends StatefulWidget{
@@ -353,7 +354,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
         );
       }
 
-      if (mounted) setState(() {});
+      if (mounted)
+      setState(() {});
       page2++;
     }
   }
@@ -364,13 +366,14 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff04ECFF),
+        centerTitle: true,
         title: Row(
           children: [
             Text('Page Managers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+            
             Spacer(),
           ],
         ),
-        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.52,),
           onPressed: (){

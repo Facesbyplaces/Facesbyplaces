@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-class BLMMainPagesMemorials {
+class BLMMainPagesMemorials{
   final int blmId;
   final String blmName;
   final String blmDescription;
@@ -38,7 +38,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     isGuest();
     scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
-        if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0) {
+        if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0){
           onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
@@ -114,7 +114,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     );
   }
 
-  void addMemorials2() {
+  void addMemorials2(){
     finalMemorials.add(
       Container(
         height: 80,

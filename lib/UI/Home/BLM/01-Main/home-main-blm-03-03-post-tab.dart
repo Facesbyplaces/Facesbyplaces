@@ -40,7 +40,7 @@ class HomeBLMPostTab extends StatefulWidget{
   HomeBLMPostTabState createState() => HomeBLMPostTabState();
 }
 
-class HomeBLMPostTabState extends State<HomeBLMPostTab> {
+class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   ScrollController scrollController = ScrollController();
   ValueNotifier<int> count = ValueNotifier<int>(0);
   List<BLMMainPagesPosts> posts = [];
@@ -72,7 +72,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab> {
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
 
-    if (isGuestLoggedIn != true) {
+    if(isGuestLoggedIn != true){
       onLoading();
     }
   }
@@ -140,7 +140,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: count,
@@ -322,8 +322,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab> {
                                       }
                                     }else{
                                       if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
-                                        return BetterPlayer.network(
-                                          '${posts[i].imagesOrVideos[index]}',
+                                        return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                             placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
                                             controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),

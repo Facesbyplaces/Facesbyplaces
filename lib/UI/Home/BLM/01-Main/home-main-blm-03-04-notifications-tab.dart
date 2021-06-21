@@ -22,7 +22,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   void initState() {
     super.initState();
     isGuest();
-    scrollController.addListener(() {
+    scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(itemRemaining != 0){
           onLoading();

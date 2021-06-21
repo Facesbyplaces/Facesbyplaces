@@ -94,37 +94,24 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
               children: [
                 SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
-                  child: Container(
-                    height: SizeConfig.screenHeight,
-                    child: const MiscBLMBackgroundTemplate(
-                      image: const AssetImage('assets/icons/background2.png'),
-                    ),
-                  ),
+                  child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: ListView(
                     physics: const ClampingScrollPhysics(),
                     children: [
-                      MiscBLMInputFieldTemplate(key: _key1, labelText: 'Name of your Memorial Page',
-                        labelTextStyle: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                          fontFamily: 'NexaRegular',
-                          color: const Color(0xff000000),
-                        ),
+                      MiscBLMInputFieldTemplate(
+                        key: _key1, 
+                        labelText: 'Name of your Memorial Page',
+                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                       ),
 
                       const SizedBox(height: 40,),
 
                       Row(
                         children: [
-                          Text('Share your Story',
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                              fontFamily: 'NexaRegular',
-                              color: const Color(0xff000000),
-                            ),
-                          ),
+                          Text('Share your Story', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
                           Expanded(
                             child: DefaultTabController(
@@ -173,7 +160,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                         width: 150,
                         height: 45,
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
-                        onPressed: () async {
+                        onPressed: () async{
                           if(_key1.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
@@ -265,11 +252,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                   alignment: Alignment.centerRight,
                                   padding: const EdgeInsets.only(right: 20.0),
                                   child: GestureDetector(
-                                    child: CircleAvatar(
-                                      radius: 20,
-                                      backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                      child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                    ),
+                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
@@ -313,12 +296,9 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                   iconSize: 25,
                   icon: CircleAvatar(
                     backgroundColor: Color(0xff000000),
-                    child: Icon(
-                      Icons.close,
-                      color: Color(0xffffffff),
-                    ),
+                    child: Icon(Icons.close, color: Color(0xffffffff),),
                   ),
-                  onPressed: () {
+                  onPressed: (){
                     videoFile.value = File('');
                   },
                 ),
@@ -328,11 +308,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
           : Container(
             height: 260,
             width: SizeConfig.screenWidth,
-            decoration: BoxDecoration(
-              color: Color(0xffcccccc),
-              border: Border.all(color: Color(0xff000000),),
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
+            decoration: BoxDecoration(color: Color(0xffcccccc), border: Border.all(color: Color(0xff000000),), borderRadius: BorderRadius.all(Radius.circular(10)),),
             child: Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
           ),
         ),
@@ -340,7 +316,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
     );
   }
 
-  shareStory3() {
+  shareStory3(){
     return ValueListenableBuilder(
       valueListenable: slideImages,
       builder: (_, List<File> slideImagesListener, __) => ValueListenableBuilder(
@@ -361,21 +337,35 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                     return ((){
                       if(index == slideCountListener){
                         return GestureDetector(
-                          onTap: () async{
-                            await getSlideImage();
-                          },
                           child: Container(
                             width: 80,
                             child: Icon(Icons.add_rounded, color: Color(0xff000000), size: 60,),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color(0xffcccccc),
-                              border: Border.all(color: Color(0xff000000),),
-                            ),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xffcccccc), border: Border.all(color: Color(0xff000000),),),
                           ),
+                          onTap: () async{
+                            await getSlideImage();
+                          },
                         );
                       }else{
                         return GestureDetector(
+                          child: Container(
+                            width: 80,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
+                                ),
+
+                                Stack(
+                                  children: [
+                                    Center(child: CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff).withOpacity(.5), child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),),),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                           onDoubleTap: (){
                             slideImages.value.removeAt(index);
                             slideCount.value--;
@@ -410,13 +400,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                           
                                           SizedBox(height: 20,),
                                           
-                                          Expanded(
-                                            child: Image.asset(
-                                              slideImagesListener[index].path,
-                                              fit: BoxFit.cover,
-                                              scale: 1.0,
-                                            ),
-                                          ),
+                                          Expanded(child: Image.asset(slideImagesListener[index].path, fit: BoxFit.cover, scale: 1.0,),),
 
                                           SizedBox(height: 80,),
                                         ],
@@ -427,30 +411,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                               },
                             );
                           },
-                          child: Container(
-                            width: 80,
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
-                                ),
-
-                                Stack(
-                                  children: [
-                                    Center(
-                                      child: CircleAvatar(
-                                        radius: 25,
-                                        backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                        child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
                         );
                       }
                     }());

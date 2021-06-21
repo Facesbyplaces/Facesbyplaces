@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMReport extends StatelessWidget {
+class HomeBLMReport extends StatelessWidget{
   final int postId;
   final String reportType;
   HomeBLMReport({required this.postId, required this.reportType});
@@ -23,9 +23,9 @@ class HomeBLMReport extends StatelessWidget {
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -35,6 +35,7 @@ class HomeBLMReport extends StatelessWidget {
             title: Row(
               children: [
                 Text('Report', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+                
                 Spacer(),
               ],
             ),

@@ -15,21 +15,21 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
 
-class RegularTaggedUsers {
+class RegularTaggedUsers{
   final String name;
   final int userId;
   final int accountType;
   const RegularTaggedUsers({required this.name, required this.userId, required this.accountType});
 }
 
-class RegularManagedPages {
+class RegularManagedPages{
   final String name;
   final int pageId;
   final String image;
   const RegularManagedPages({required this.name, required this.pageId, required this.image});
 }
 
-class HomeRegularCreatePost extends StatefulWidget {
+class HomeRegularCreatePost extends StatefulWidget{
   final String name;
   final int memorialId;
   const HomeRegularCreatePost({required this.name, required this.memorialId});
@@ -91,7 +91,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
     }
   }
 
-  Future getSlideFiles() async {
+  Future getSlideFiles() async{
     try{
       final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
         return picture;
@@ -136,6 +136,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                       title: Row(
                         children: [
                           Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
                           Spacer(),
                         ],
                       ),
@@ -149,6 +150,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                       ),
                       actions: [
                         GestureDetector(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+                          ),
                           onTap: () async{
                             Location.Location location = new Location.Location();
 
@@ -215,18 +220,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                               );
                             }
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 20.0),
-                            child: Center(
-                              child: Text('Post',
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                  fontFamily: 'NexaRegular',
-                                  color: const Color(0xffffffff),
-                                ),
-                              ),
-                            ),
-                          ),
                         ),
                       ],
                     ),
@@ -287,13 +280,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                             ),
                             FocusScope(
                               child: Focus(
-                                onFocusChange: (focus){
-                                  if(focus){
-                                    maxLines = 10;
-                                  }else{
-                                    maxLines = 5;
-                                  }
-                                },
                                 child: Container(
                                   height: SizeConfig.blockSizeVertical! * 50,
                                   padding: const EdgeInsets.all(10),
@@ -314,6 +300,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                     ),
                                   ),
                                 ),
+                                onFocusChange: (focus){
+                                  if(focus){
+                                    maxLines = 10;
+                                  }else{
+                                    maxLines = 5;
+                                  }
+                                },
                               ),
                             ),
 
@@ -321,6 +314,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
 
                             newLocationListener != ''
                             ? Container(
+                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              alignment: Alignment.centerLeft,
                               child: Chip(
                                 labelPadding: const EdgeInsets.only(left: 8.0),
                                 label: Text(newLocationListener),
@@ -329,14 +324,14 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                   newLocation.value = '';
                                 },
                               ),
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
-                              alignment: Alignment.centerLeft,
                             )
                             : Container(height: 0,),
 
                             const SizedBox(height: 10,),
 
                             Container(
+                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                              alignment: Alignment.centerLeft,
                               child: Wrap(
                                 spacing: 5.0,
                                 children: List.generate(
@@ -352,8 +347,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                   ),
                                 ),
                               ),
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
-                              alignment: Alignment.centerLeft,
                             ),
 
                             const SizedBox(height: 10,),
@@ -488,13 +481,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                                     child: CircleAvatar(
                                                       radius: 25,
                                                       backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text('${index + 1}',
-                                                        style: const TextStyle(
-                                                          fontSize: 40,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: const Color(0xffffffff),
-                                                        ),
-                                                      ),
+                                                      child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                     ),
                                                   ),
                                                   
@@ -503,14 +490,14 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                                     top: 0,
                                                     right: 0,
                                                     child: GestureDetector(
-                                                      onTap: (){
-                                                        slideImages.value.removeAt(index);
-                                                        slideCount.value--;
-                                                      },
                                                       child: const CircleAvatar(
                                                         backgroundColor: const Color(0xff000000),
                                                         child: const Icon(Icons.close, color: const Color(0xffffffff),),
                                                       ),
+                                                      onTap: (){
+                                                        slideImages.value.removeAt(index);
+                                                        slideCount.value--;
+                                                      },
                                                     ),
                                                   )
                                                   : Container(height: 0),
@@ -536,10 +523,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                 children: [
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () async {
-                                        String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchLocation()));
-                                        newLocation.value = result;
-                                      },
                                       child: Container(
                                         padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                                         color: Colors.transparent,
@@ -551,6 +534,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                           ],
                                         ),
                                       ),
+                                      onTap: () async{
+                                        String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchLocation()));
+                                        newLocation.value = result;
+                                      },
                                     ),
                                   ),
 
@@ -558,14 +545,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
 
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () async{
-                                        RegularTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchUser()));
-
-                                        if(result != null){
-                                          userCount.value++;
-                                          users.add(result);
-                                        }
-                                      },
                                       child: Container(
                                         padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                                         color: Colors.transparent,
@@ -577,6 +556,14 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                           ],
                                         ),
                                       ),
+                                      onTap: () async{
+                                        RegularTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchUser()));
+
+                                        if(result != null){
+                                          userCount.value++;
+                                          users.add(result);
+                                        }
+                                      },
                                     ),
                                   ),
 
@@ -584,6 +571,17 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
 
                                   Expanded(
                                     child: GestureDetector(
+                                      child: Container(
+                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                                        color: Colors.transparent,
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+
+                                            const Icon(Icons.image, color: const Color(0xff4EC9D4),),
+                                          ],
+                                        ),
+                                      ),
                                       onTap: () async{
                                         var choice = await showDialog(context: (context), builder: (build) => const MiscRegularUploadFromDialog(choice_1: 'Image', choice_2: 'Video',),);
 
@@ -597,17 +595,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                           }
                                         }
                                       },
-                                      child: Container(
-                                        padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          children: [
-                                            Expanded(child: Text('Upload a Video / Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
-
-                                            const Icon(Icons.image, color: const Color(0xff4EC9D4),),
-                                          ],
-                                        ),
-                                      ),
                                     ),
                                   ),
                                 ],

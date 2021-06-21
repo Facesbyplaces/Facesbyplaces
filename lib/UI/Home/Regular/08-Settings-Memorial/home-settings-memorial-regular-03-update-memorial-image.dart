@@ -17,14 +17,14 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
-class HomeRegularMemorialPageImage extends StatefulWidget {
+class HomeRegularMemorialPageImage extends StatefulWidget{
   final int memorialId;
   const HomeRegularMemorialPageImage({required this.memorialId});
 
   HomeRegularMemorialPageImageState createState() => HomeRegularMemorialPageImageState();
 }
 
-class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage> {
+class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage>{
   List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
   Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
   File backgroundImage = File('');
@@ -68,6 +68,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
         title: Row(
           children: [
             Text('Page Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
             Spacer(),
           ],
         ),
@@ -115,9 +116,6 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                         child: Stack(
                           children: [
                             GestureDetector(
-                              onTap: () async{
-                                await getProfileImage();
-                              },
                               child: Center(
                                 child: CircleAvatar(
                                   radius: 50,
@@ -140,7 +138,11 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                   ),
                                 ),
                               ),
+                              onTap: () async{
+                                await getProfileImage();
+                              },
                             ),
+
                             Positioned(
                               bottom: 40,
                               left: SizeConfig.screenWidth! / 2,
@@ -150,6 +152,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                 child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
                               ),
                             ),
+
                             const Positioned(
                               top: 10,
                               right: 10,
@@ -182,13 +185,6 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                             return ((){
                               if(index == 4){
                                 return GestureDetector(
-                                  onTap: () async{
-                                    setState((){
-                                      backgroundImageToggle = index;
-                                    });
-
-                                    await getBackgroundImage();
-                                  },
                                   child: Container(
                                     width: 100,
                                     height: 100,
@@ -199,22 +195,16 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                       border: Border.all(color: const Color(0xff000000),),
                                     ),
                                   ),
+                                  onTap: () async{
+                                    setState((){
+                                      backgroundImageToggle = index;
+                                    });
+
+                                    await getBackgroundImage();
+                                  },
                                 );
                               }else{
                                 return GestureDetector(
-                                  onTap: () async{
-                                    final ByteData bytes = await rootBundle.load(backgroundImages[index]);
-                                    final Uint8List list = bytes.buffer.asUint8List();
-
-                                    final tempDir = await getTemporaryDirectory();
-                                    final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
-                                    file.writeAsBytesSync(list);
-
-                                    setState((){
-                                      backgroundImageToggle = index;
-                                      backgroundImage = file;
-                                    });
-                                  },
                                   child: backgroundImageToggle == index
                                   ? Container(
                                     padding: const EdgeInsets.all(5),
@@ -238,6 +228,19 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   ),
+                                  onTap: () async{
+                                    final ByteData bytes = await rootBundle.load(backgroundImages[index]);
+                                    final Uint8List list = bytes.buffer.asUint8List();
+
+                                    final tempDir = await getTemporaryDirectory();
+                                    final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
+                                    file.writeAsBytesSync(list);
+
+                                    setState((){
+                                      backgroundImageToggle = index;
+                                      backgroundImage = file;
+                                    });
+                                  },
                                 );
                               }
                             }());
@@ -252,11 +255,11 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                       const SizedBox(height: 80,),
 
                       MiscRegularButtonTemplate(
-                        buttonText: 'Speak Out',
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF)),
+                        buttonColor: const Color(0xff000000),
+                        buttonText: 'Speak Out',
                         width: 150,
                         height: 45,
-                        buttonColor: const Color(0xff000000),
                         onPressed: () async{
                           if(profileImage.path != '' || backgroundImage.path != ''){
                             context.loaderOverlay.show();
@@ -307,22 +310,12 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
           }else if(memorialImageSettings.hasError){
             return Container(
               height: SizeConfig.screenHeight,
-              child: const Center(
-                child: const Text('Something went wrong. Please try again.',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),
-                ),
-              ),
+              child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
             );
           }else{
             return Container(
               height: SizeConfig.screenHeight,
-              child: Center(
-                child: Container(
-                  child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                  color: const Color(0xffffffff),
-                ),
-              ),
+              child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
             );
           }
         },

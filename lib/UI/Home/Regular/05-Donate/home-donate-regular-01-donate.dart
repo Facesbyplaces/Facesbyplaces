@@ -15,15 +15,13 @@ class HomeRegularUserDonate extends StatefulWidget{
 }
 
 class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
-  int donateToggle = 0;
-
   final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/google-pay.svg', semanticsLabel: 'Google Pay Mark', height: 52, width: 52);
-
   CardFieldInputDetails? newCard;
+  int donateToggle = 0;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
       onWillPop: () async{
@@ -41,10 +39,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              decoration: BoxDecoration(
-                color: const Color(0xffffffff),
-                borderRadius: BorderRadius.circular(20.0),
-              ),
+              decoration: BoxDecoration(color: const Color(0xffffffff), borderRadius: BorderRadius.circular(20.0),),
               child: Column(
                 children: [
                   const SizedBox(height: 20),
@@ -71,12 +66,11 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       children: List.generate(6, 
                         (index){
                           return GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                donateToggle = index;
-                              });
-                            },
                             child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(width: index == donateToggle ? 2 : .5, color: index == donateToggle ? const Color(0xff70D8FF) : const Color(0xff888888),),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
                               child: Column(
                                 children: [
                                   const SizedBox(height: 10),
@@ -99,69 +93,31 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                   ),
                                 ],
                               ),
-                              decoration: BoxDecoration(
-                                border: Border.all(width: index == donateToggle ? 2 : .5, color: index == donateToggle ? const Color(0xff70D8FF) : const Color(0xff888888),),
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
                             ),
+                            onTap: (){
+                              setState(() {
+                                donateToggle = index;
+                              });
+                            },
                           );
                         }
                       ),
                     ),
                   ),
 
-                  // const SizedBox(height: 20),
-
-                  // Container(
-                  //   padding: EdgeInsets.only(left: 10.0),
-                  //   alignment: Alignment.centerLeft,
-                  //   child: Platform.isIOS
-                  //   ? donateWithApple
-                  //   : donateWithGoogle
-                  // ),
-
                   CardField(
                     onCardChanged: (card){
-                      // print(card);
                       newCard = card;
                     },
-                    // onFocus: (card){
-                    //   print('$card');
-                    // },
                   ),
 
-
-
-                  // const SizedBox(height: 20),
-
                   MiscRegularButtonTemplate(
-                    buttonColor: Color(0xff4EC9D4),
-                    buttonText: 'Send Gift',
                     buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
                     width: SizeConfig.screenWidth! / 2, 
+                    buttonColor: Color(0xff4EC9D4),
+                    buttonText: 'Send Gift',
                     height: 45,
                     onPressed: () async{
-
-                      // String amount = '0.99';
-
-                      // if(donateToggle == 0){
-                      //   amount = '0.99';
-                      // }else if(donateToggle == 1){
-                      //   amount = '5.00';
-                      // }else if(donateToggle == 2){
-                      //   amount = '15.00';
-                      // }else if(donateToggle == 3){
-                      //   amount = '25.00';
-                      // }else if(donateToggle == 4){
-                      //   amount = '50.00';
-                      // }else if(donateToggle == 5){
-                      //   amount = '100.00';
-                      // }
-
-                      // await Stripe.instance.createPaymentMethod(data)
-
-                      // print('The newCard is $newCard');
-
                       context.loaderOverlay.show();
 
                       PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
@@ -172,113 +128,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                       print('The paymentMethod is $paymentMethod');
                       print('The paymentMethod id is ${paymentMethod.id}');
-
-                      // String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id);
-                      // String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: 'pi_1J2q2tE1OZN8BRHaqwBeXkRX_secret_cGw2FpCgRheuZIdO31epdzOdn');
-
-                      // PaymentIntent confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(clientSecret, PaymentMethodParams.card(
-                      //     billingDetails: BillingDetails.fromJson(newCard!.toJson())
-                      //   ),
-                      // );
-
-                      // print('The confirmPaymentMethod is $confirmPaymentMethod');
-
                       context.loaderOverlay.hide();
-
-                      // print('The confirmPaymentMethod is $confirmPaymentMethod');
-                      // print('The confirmPaymentMethod is ${confirmPaymentMethod.clientSecret}');
-
-                      
-
-                      // Stripe.instance.confirmPaymentMethod(, data)
-                      
-                      // final paymentIntent = await Stripe.instance.retrievePaymentIntent('sk_test_51Hp23FE1OZN8BRHaFUWRZXzsf6p20xlgnqnEKIspzG6CWRpZ2t8TEpY9zXo7tKB0m6z263qSDfcLQ4r6EYWoJfi100BzfylDfs');
-                      // print('The paymentIntent is $paymentIntent');
-
-
-                      // print('The paymentIntent is ${paymentIntent.}');
-
-
-                      // final cardAction = await Stripe.instance.handleCardAction(
-
-                      // );
-
-                      // print('start');
-
-                      // await Stripe.instance.initPaymentSheet(
-                      //   paymentSheetParameters: SetupPaymentSheetParameters(
-                      //     applePay: true,
-                      //     googlePay: true,
-                      //     style: ThemeMode.dark,
-                      //     testEnv: true,
-                      //     merchantCountryCode: 'US',
-                      //     merchantDisplayName: 'Flutter Stripe Store Demo',
-                      //     customerId: '',
-                      //     paymentIntentClientSecret: '',
-                      //     customerEphemeralKeySecret: '',
-                      //   ),
-                      // ).onError((error, stackTrace) => print('The error is $error'));
-
-                      // print('1');
-
-                      // await Stripe.instance.presentPaymentSheet(
-                      //   parameters: PresentPaymentSheetParameters(clientSecret: 'sk_test_51Hp23FE1OZN8BRHaFUWRZXzsf6p20xlgnqnEKIspzG6CWRpZ2t8TEpY9zXo7tKB0m6z263qSDfcLQ4r6EYWoJfi100BzfylDfs'),
-                      // ).onError((error, stackTrace) => print('The error is $error'));
-
-                      // print('2');
-
-                      // await Stripe.instance.confirmPaymentSheetPayment();
-
-                      // print('3');
-
-                      // print('done');
-
-                      // await Stripe.instance.initPaymentSheet(
-                      //   paymentSheetParameters: SetupPaymentSheetParameters(
-                      //     applePay: true,
-                      //     googlePay: true,
-                      //     style: ThemeMode.dark,
-                      //     testEnv: true,
-                      //     merchantCountryCode: 'US',
-                      //     merchantDisplayName: 'Flutter Stripe Store Demo',
-                      //     customerId: '',
-                      //     paymentIntentClientSecret: '',
-                      //     customerEphemeralKeySecret: '',
-                      //   ),
-                      // );
-
-                      // await Stripe.instance.presentPaymentSheet(
-                      //   parameters: PresentPaymentSheetParameters(
-
-                      //   ),
-                      // );
-
-                      // await Stripe.instance.presentApplePay(
-                      //   ApplePayPresentParams(
-                      //     cartItems: [
-                      //       ApplePayCartSummaryItem(
-                      //         label: 'Product Test',
-                      //         amount: amount,
-                      //       ),
-                      //     ],
-                      //     country: 'US',
-                      //     currency: 'USD',
-                      //   ),
-                      // );
-
-
-                      // await Stripe.instance.presentApplePay(
-                      //   ApplePayPresentParams(
-                      //     cartItems: [
-                      //       ApplePayCartSummaryItem(
-                      //         label: 'Product Test',
-                      //         amount: amount,
-                      //       ),
-                      //     ],
-                      //     country: 'US',
-                      //     currency: 'USD',
-                      //   ),
-                      // );
                     },
                   ),
 

@@ -58,7 +58,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
       body: FutureBuilder<APIRegularShowProfileInformation>(
@@ -89,6 +89,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                     const Divider(height: 20, color: const Color(0xff888888),),
 
                     ListTile(
+                      subtitle: Text('Change your login password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                      title: Text('Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                       onTap: () async{
                         final sharedPrefs = await SharedPreferences.getInstance();
                         bool socialAppSession = sharedPrefs.getBool('regular-social-app-session') ?? false;
@@ -124,13 +126,13 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: widget.userId, isAddPassword: false,)));
                         }
                       },
-                      title: Text('Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                      subtitle: Text('Change your login password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
 
                     const Divider(height: 20, color: const Color(0xff888888),),
 
                     ListTile(
+                      subtitle: Text('Optional informations you can share',style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                      title: Text('Other info', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                       onTap: () async{
                         context.loaderOverlay.show();
                         APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: widget.userId);
@@ -138,16 +140,14 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                         Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeRegularUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
                       },
-                      title: Text('Other info', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                      subtitle: Text('Optional informations you can share',style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                     ),
 
                     const Divider(height: 20, color: const Color(0xff888888),),
 
                     ListTile(
-                      onTap: () => {},
-                      title: Text('Privacy Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                       subtitle: Text('Control what others see', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                      title: Text('Privacy Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                      onTap: () => {},
                     ),
 
                     const Divider(height: 20, color: const Color(0xff888888),),
@@ -155,21 +155,13 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                     const SizedBox(height: 20,),
 
                     MiscRegularButtonTemplate(
-                      buttonText: 'Logout',
                       buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                      width: SizeConfig.screenWidth! / 2,
-                      height: 45,
                       buttonColor: const Color(0xff04ECFF),
+                      width: SizeConfig.screenWidth! / 2,
+                      buttonText: 'Logout',
+                      height: 45,
                       onPressed: () async{
-                        bool logoutResult = await showDialog(
-                          context: (context),
-                          builder: (build) => const MiscRegularConfirmDialog(
-                            title: 'Log out',
-                            content: 'Are you sure you want to log out from this account?',
-                            confirmColor_1: const Color(0xff000000),
-                            confirmColor_2: const Color(0xff888888),
-                          ),
-                        );
+                        bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),),);
 
                         print('The logoutResult is $logoutResult');
 
@@ -191,7 +183,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                 description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                                 onlyOkButton: true,
                                 buttonOkColor: const Color(0xffff0000),
-                                onOkButtonPressed: () {
+                                onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },
                               ),
@@ -294,11 +286,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                 const Positioned(
                                   top: 0,
                                   right: 20,
-                                  child: const CircleAvatar(
-                                    radius: 30,
-                                    backgroundColor: const Color(0xff888888),
-                                    child: const Icon(Icons.camera, size: 50, color: const Color(0xffffffff),),
-                                  ),
+                                  child: const CircleAvatar(radius: 30, backgroundColor: const Color(0xff888888), child: const Icon(Icons.camera, size: 50, color: const Color(0xffffffff),),),
                                 )
                               ],
                             ),
@@ -311,10 +299,10 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
+                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
                         onPressed: (){
                           Navigator.of(context).popAndPushNamed('/home/regular');
                         },
-                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
                       ),
                     ),
                   ),
@@ -324,28 +312,11 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       width: SizeConfig.screenWidth,
                       child: Column(
                         children: [
-                          Center(
-                            child: Text(
-                              profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                                fontFamily: 'NexaBold',
-                                color: const Color(0xff000000),
-                              ),
-                            ),
-                          ),
+                          Center(child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
 
                           SizedBox(height: SizeConfig.blockSizeVertical! * 2.03),
 
-                          Center(
-                            child: Text(profile.data!.showProfileInformationEmail,
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: const Color(0xffBDC3C7),
-                              ),
-                            ),
-                          ),
+                          Center(child: Text(profile.data!.showProfileInformationEmail, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),),
 
                           const SizedBox(height: 40,),
                         ],
@@ -360,12 +331,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
           }else{
             return Container(
               height: SizeConfig.screenHeight,
-              child: Center(
-                child: Container(
-                  child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                  color: const Color(0xffffffff),
-                ),
-              ),
+              child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
             );
           }
         },
