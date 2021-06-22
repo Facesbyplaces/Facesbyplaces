@@ -36,19 +36,6 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
               },
             ),
             title: TextFormField(
-              onChanged: (newPlaces){
-                if(newPlaces == ''){
-                  setState((){
-                    empty = true;
-                    places = [];
-                  });
-                }else{
-                  setState((){
-                    empty = false;
-                    places.add(newPlaces);
-                  });
-                }
-              },
               style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(15.0),
@@ -62,6 +49,19 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                 enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                 focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
               ),
+              onChanged: (newPlaces){
+                if(newPlaces == ''){
+                  setState((){
+                    empty = true;
+                    places = [];
+                  });
+                }else{
+                  setState((){
+                    empty = false;
+                    places.add(newPlaces);
+                  });
+                }
+              },
             ),
           ),
           body: Container(
@@ -91,9 +91,6 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
               },
               itemBuilder: (context, index){
                 return GestureDetector(
-                  onTap: (){
-                    Navigator.pop(context, places[index]);
-                  },
                   child: Container(
                     height: 80,
                     padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0,),
@@ -108,6 +105,9 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                       ],
                     ),
                   ),
+                  onTap: (){
+                    Navigator.pop(context, places[index]);
+                  },
                 );
               },
             ),

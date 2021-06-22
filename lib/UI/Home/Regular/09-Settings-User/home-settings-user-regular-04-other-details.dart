@@ -66,7 +66,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
       child: GestureDetector(
         onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },

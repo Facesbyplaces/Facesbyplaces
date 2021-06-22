@@ -128,6 +128,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                             enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                             focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                             prefixIcon: IconButton(
+                              icon: const Icon(Icons.search, color: const Color(0xff888888)),
                               onPressed: (){
                                 print('Search!');
                                 setState(() {
@@ -136,7 +137,6 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
                                 onLoading();
                               },
-                              icon: const Icon(Icons.search, color: const Color(0xff888888)),
                             ),
                           ),
                           onChanged: (newPlace){

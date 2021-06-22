@@ -190,14 +190,10 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               if(index == 2){
                                 return GestureDetector(
                                   child: Container(
-                                    width: 100,
-                                    height: 100,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
                                     child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: const Color(0xffcccccc),
-                                      border: Border.all(color: const Color(0xff000000),),
-                                    ),
+                                    height: 100,
+                                    width: 100,
                                   ),
                                   onTap: () async{
                                     backgroundImageToggle.value = index;
@@ -224,9 +220,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                     height: 100,
                                     decoration: BoxDecoration(color: const Color(0xff04ECFF), borderRadius: BorderRadius.circular(10),),
                                     child: Container(
-                                      width: 100,
-                                      height: 100,
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
+                                      height: 100,
+                                      width: 100,
                                     ),
                                   )
                                   : Container(
@@ -235,9 +231,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                     height: 100,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
                                     child: Container(
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                       width: 100,
                                       height: 100,
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   ),
                                 );
@@ -271,7 +267,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                           }
 
                           Location.Location location = new Location.Location();
-
                           bool serviceEnabled = await location.serviceEnabled();
 
                           if(!serviceEnabled){

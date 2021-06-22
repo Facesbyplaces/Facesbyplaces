@@ -7,6 +7,7 @@ import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +100,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiRegularUpdateNotificationMemorial(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -135,7 +138,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiRegularUpdateNotificationActivities(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -171,7 +176,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiRegularUpdateNotificationPostLikes(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -207,7 +214,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiRegularUpdateNotificationPostComments(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -258,7 +267,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiRegularUpdateNotificationAddFamily(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -294,7 +305,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiRegularUpdateNotificationAddFriends(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -329,7 +342,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiRegularUpdateNotificationAddAdmin(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){

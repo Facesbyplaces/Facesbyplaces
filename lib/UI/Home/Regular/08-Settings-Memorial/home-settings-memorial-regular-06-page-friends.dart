@@ -115,7 +115,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
               color: const Color(0xffE74C3C),
               padding: EdgeInsets.zero,
               height: 40,
-              onPressed: () async {
+              onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
@@ -222,11 +222,11 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
-            itemCount: friends.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => friends[i],
+            itemCount: friends.length,
           ),
         )
         : SingleChildScrollView(

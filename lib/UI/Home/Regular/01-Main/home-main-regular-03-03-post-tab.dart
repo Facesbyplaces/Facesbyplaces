@@ -41,7 +41,6 @@ class HomeRegularPostTab extends StatefulWidget{
 }
 
 class HomeRegularPostTabState extends State<HomeRegularPostTab>{
-  
   ScrollController scrollController = ScrollController();
   ValueNotifier<int> count = ValueNotifier<int>(0);
   List<RegularMainPagesPosts> posts = [];
@@ -141,7 +140,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     print('Post tab rebuild!');
     return ValueListenableBuilder(
@@ -153,10 +152,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
-            padding: const EdgeInsets.all(10.0),
-            physics: const ClampingScrollPhysics(),
-            itemCount: countListener,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.all(10.0),
+            itemCount: countListener,
             itemBuilder: (c, i) {
               return MiscRegularPost(
                 key: ValueKey('$i'),
@@ -208,41 +207,40 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                             }
                           }else if(posts[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 2,
-                              itemBuilder: (BuildContext context, int index) =>  
-                                lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
-                                ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                    controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                    aspectRatio: 16 / 9,
-                                    fit: BoxFit.contain,
-                                  ),
-                                )
-                                : CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: posts[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                ),
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                  aspectRatio: 16 / 9,
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: posts[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              ),
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) => ((){
                                 if(index != 1){
                                   return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
@@ -282,14 +280,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  '${posts[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -311,14 +302,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  '${posts[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],

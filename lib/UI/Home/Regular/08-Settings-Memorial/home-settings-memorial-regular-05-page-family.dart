@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularPageFamily extends StatefulWidget {
+class HomeRegularPageFamily extends StatefulWidget{
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
@@ -18,7 +18,7 @@ class HomeRegularPageFamily extends StatefulWidget {
   HomeRegularPageFamilyState createState() => HomeRegularPageFamilyState();
 }
 
-class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
+class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
   ScrollController scrollController = ScrollController();
   int familyItemsRemaining = 1;
   List<Widget> family = [];
@@ -27,7 +27,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
   void initState(){
     super.initState();
     onLoading();
-    scrollController.addListener(() {
+    scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(familyItemsRemaining != 0){
           setState((){
@@ -80,7 +80,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
 
       familyItemsRemaining = newValue.almItemsRemaining;
 
-      for (int i = 0; i < newValue.almFamilyList.length; i++) {
+      for(int i = 0; i < newValue.almFamilyList.length; i++){
         family.add(
           ListTile(
             leading: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage != ''
@@ -127,7 +127,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
                     onOkButtonPressed: () async{
                       Navigator.pop(context, true);
                     },
-                    onCancelButtonPressed: () {
+                    onCancelButtonPressed: (){
                       Navigator.pop(context, false);
                     },
                   ),
@@ -187,7 +187,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
@@ -208,10 +208,10 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
         ),
         actions: [
           GestureDetector(
+            child: Center(child: Text('Add Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
             onTap: (){
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: true, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
             },
-            child: Center(child: Text('Add Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
           ),
         ],
       ),
@@ -222,11 +222,11 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily> {
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
-            itemCount: family.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => family[i],
+            itemCount: family.length,
           ),
         )
         : SingleChildScrollView(

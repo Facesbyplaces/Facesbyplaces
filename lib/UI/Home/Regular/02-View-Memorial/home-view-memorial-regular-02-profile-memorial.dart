@@ -176,11 +176,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
       ..addCustomMetadata('link-type-of-account', widget.pageType)
     );
 
-    lp = BranchLinkProperties(
-      feature: 'sharing',
-      stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
+    lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
     lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
@@ -257,14 +253,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                   alignment: Alignment.centerRight,
                                                                   padding: const EdgeInsets.only(right: 20.0),
                                                                   child: GestureDetector(
+                                                                    child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                     onTap: (){
                                                                       Navigator.pop(context);
                                                                     },
-                                                                    child: CircleAvatar(
-                                                                      radius: 20,
-                                                                      backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                      child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                    ),
                                                                   ),
                                                                 ),
 
@@ -292,36 +284,25 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                               Container(
                                                 width: SizeConfig.screenWidth,
-                                                decoration: const BoxDecoration(
-                                                  borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)),
-                                                  color: const Color(0xffffffff),
-                                                ),
+                                                decoration: const BoxDecoration(borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)), color: const Color(0xffffffff),),
                                                 child: Column(
                                                   children: [
-
                                                     const SizedBox(height: 120,),
 
                                                     Center(
-                                                      child: Text(
-                                                        profile.data!.almMemorial.showMemorialName,
-                                                        textAlign: TextAlign.center,
-                                                        maxLines: 5,
-                                                        overflow: TextOverflow.clip,
+                                                      child: Text(profile.data!.almMemorial.showMemorialName,
                                                         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),
+                                                        textAlign: TextAlign.center,
+                                                        overflow: TextOverflow.clip,
+                                                        maxLines: 5,
                                                       ),
                                                     ),
 
                                                     const SizedBox(height: 20,),
 
                                                     TextButton.icon(
+                                                      label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: const Color(0xff000000),),),
                                                       icon: const CircleAvatar(radius: 15, backgroundColor: const Color(0xffE67E22), child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 18,),),
-                                                      label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}',
-                                                        style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight: FontWeight.w500,
-                                                          color: const Color(0xff000000),
-                                                        ),
-                                                      ),
                                                       onPressed: (){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                                       },
@@ -353,9 +334,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                           onTap: (){
                                                             showGeneralDialog(
                                                               context: context,
+                                                              transitionDuration: const Duration(milliseconds: 0),
                                                               barrierDismissible: true,
                                                               barrierLabel: 'Dialog',
-                                                              transitionDuration: const Duration(milliseconds: 0),
                                                               pageBuilder: (_, __, ___) {
                                                                 return Scaffold(
                                                                   backgroundColor: Colors.black12.withOpacity(0.7),
@@ -367,14 +348,14 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                             alignment: Alignment.centerRight,
                                                                             padding: const EdgeInsets.only(right: 20.0),
                                                                             child: GestureDetector(
-                                                                              onTap: (){
-                                                                                Navigator.pop(context);
-                                                                              },
                                                                               child: CircleAvatar(
                                                                                 radius: 20,
                                                                                 backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                                                 child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                                                               ),
+                                                                              onTap: (){
+                                                                                Navigator.pop(context);
+                                                                              },
                                                                             ),
                                                                           ),
 
@@ -420,14 +401,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             return Container(
                                                               alignment: Alignment.center,
                                                               padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription,
-                                                                textAlign: TextAlign.center,
-                                                                style: const TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight: FontWeight.w300,
-                                                                  color: const Color(0xff000000),
-                                                                ),
-                                                              ),
+                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
                                                             );
                                                           }else{
                                                             return Container(height: 0,);
@@ -449,6 +423,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               },
                                                             ),
                                                           ),
+
                                                           Expanded(
                                                             flex: 2,
                                                             child: Padding(
@@ -478,16 +453,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                   if(result){
                                                                     await showDialog(
                                                                       context: context,
-                                                                      builder: (_) => 
-                                                                        AssetGiffyDialog(
-                                                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                      builder: (_) => AssetGiffyDialog(
+                                                                        description: Text(join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center,),
                                                                         title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                         entryAnimation: EntryAnimation.DEFAULT,
-                                                                        description: Text(join.value != true
-                                                                          ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.'
-                                                                          : 'Successfully followed the page. You will receive notifications from this page.',
-                                                                          textAlign: TextAlign.center,
-                                                                        ),
                                                                         onlyOkButton: true,
                                                                         onOkButtonPressed: (){
                                                                           Navigator.pop(context, true);
@@ -497,14 +467,13 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                   }else{
                                                                     await showDialog(
                                                                       context: context,
-                                                                      builder: (_) => 
-                                                                        AssetGiffyDialog(
-                                                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                      builder: (_) => AssetGiffyDialog(
                                                                         title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                                                        entryAnimation: EntryAnimation.DEFAULT,
                                                                         description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
-                                                                        onlyOkButton: true,
+                                                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                        entryAnimation: EntryAnimation.DEFAULT,
                                                                         buttonOkColor: const Color(0xffff0000),
+                                                                        onlyOkButton: true,
                                                                         onOkButtonPressed: (){
                                                                           Navigator.pop(context, true);
                                                                         },
@@ -515,6 +484,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               ),
                                                             ),
                                                           ),
+
                                                           Expanded(
                                                             child: GestureDetector(
                                                               child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xff3498DB), child: const Icon(Icons.share, color: const Color(0xffffffff), size: 25,),),
@@ -549,7 +519,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                       padding: const EdgeInsets.only(left: 20),
                                                       child: Column(
                                                         children: [
-
                                                           Row(
                                                             children: [
                                                               Image.asset('assets/icons/prayer_logo.png', height: 25,),
@@ -607,10 +576,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               GestureDetector(
                                                                 child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 14, color: const Color(0xff3498DB),),),
                                                                 onTap: () async{
-                                                                  // final launcher = const GoogleMapsLauncher(); // MAPS
-                                                                  // await launcher.launch(
-                                                                  //   geoPoint: GeoPoint(0.0, 0.0),
-                                                                  // );
                                                                   print('The latitude is ${profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude}');
                                                                   print('The longitude is ${profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude}');
                                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude,)));
@@ -737,11 +702,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                           child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                               placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                               aspectRatio: 16 / 9,
                                                                               fit: BoxFit.contain,
-                                                                              controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                                showControls: false,
-                                                                              ),
                                                                             ),
                                                                           ),
                                                                         );
@@ -761,9 +724,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                     onTap: (){
                                                                       showGeneralDialog(
                                                                         context: context,
+                                                                        transitionDuration: const Duration(milliseconds: 0),
                                                                         barrierDismissible: true,
                                                                         barrierLabel: 'Dialog',
-                                                                        transitionDuration: const Duration(milliseconds: 0),
                                                                         pageBuilder: (_, __, ___) {
                                                                           return Scaffold(
                                                                             backgroundColor: Colors.black12.withOpacity(0.7),
@@ -889,8 +852,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                           Positioned(
                                             top: SizeConfig.screenHeight! / 5,
                                             child: Container(
-                                              height: 160,
                                               width: SizeConfig.screenWidth,
+                                              height: 160,
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
@@ -1030,10 +993,13 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             }
                                                           }else if(posts[i].imagesOrVideos.length == 2){
                                                             return StaggeredGridView.countBuilder(
-                                                              padding: EdgeInsets.zero,
-                                                              shrinkWrap: true,
+                                                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
                                                               physics: const NeverScrollableScrollPhysics(),
+                                                              padding: EdgeInsets.zero,
+                                                              crossAxisSpacing: 4.0,
+                                                              mainAxisSpacing: 4.0,
                                                               crossAxisCount: 4,
+                                                              shrinkWrap: true,
                                                               itemCount: 2,
                                                               itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                                               ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
@@ -1050,20 +1016,17 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                 placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               ),
-                                                              staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                                              mainAxisSpacing: 4.0,
-                                                              crossAxisSpacing: 4.0,
                                                             );
                                                           }else{
                                                             return StaggeredGridView.countBuilder(
-                                                              padding: EdgeInsets.zero,
-                                                              shrinkWrap: true,
-                                                              physics: const NeverScrollableScrollPhysics(),
-                                                              crossAxisCount: 4,
-                                                              itemCount: 3,
                                                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                                              mainAxisSpacing: 4.0,
+                                                              physics: const NeverScrollableScrollPhysics(),
+                                                              padding: EdgeInsets.zero,
                                                               crossAxisSpacing: 4.0,
+                                                              mainAxisSpacing: 4.0,
+                                                              crossAxisCount: 4,
+                                                              shrinkWrap: true,
+                                                              itemCount: 3,
                                                               itemBuilder: (BuildContext context, int index) => ((){
                                                                 if(index != 1){
                                                                   return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true

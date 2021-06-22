@@ -258,7 +258,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
-
                                 Container(
                                   child: ((){
                                     if(profileImage.path != ''){

@@ -7,6 +7,7 @@ import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-not
 import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiBLMUpdateNotificationMemorial(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -125,7 +128,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiBLMUpdateNotificationActivities(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -160,7 +165,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiBLMUpdateNotificationPostLikes(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -195,7 +202,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiBLMUpdateNotificationPostComments(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -248,7 +257,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiBLMUpdateNotificationAddFamily(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -283,7 +294,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiBLMUpdateNotificationAddFriends(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){
@@ -318,7 +331,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                               activeColor: const Color(0xffFFFFFF),
                               activeTrackColor: const Color(0xff3498DB),
                               onChanged: (value) async{
+                                context.loaderOverlay.show();
                                 bool result = await apiBLMUpdateNotificationAddAdmin(hide: value);
+                                context.loaderOverlay.hide();
 
                                 if(result){
                                   setState((){

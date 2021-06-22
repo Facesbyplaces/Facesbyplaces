@@ -15,7 +15,6 @@ class RegularShowAdminSettings{
   final String relationship;
   final String email;
   const RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
-
 }
 
 class HomeRegularPageManagers extends StatefulWidget{
@@ -77,21 +76,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   }
 
   void addManagers1(){
-    managers.add(
-      Padding(
-        padding: const EdgeInsets.only(left: 20.0,),
-        child: Text('Admin', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),
-      ),
-    );
+    managers.add(Padding(padding: const EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
   }
 
   void addManagers2(){
-    managers.add(
-      Padding(
-        padding: const EdgeInsets.only(left: 20.0,),
-        child: Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),
-      ),
-    );
+    managers.add(Padding(padding: const EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
   }
 
   void onLoading1() async{

@@ -36,10 +36,7 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
             child: Container(
               height: SizeConfig.screenHeight,
               width: SizeConfig.screenWidth,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
-              ),
+              decoration: BoxDecoration(color: Colors.white, image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
               child: SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
                 child: Column(
@@ -68,6 +65,7 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                             child: Row(
                               children: [
                                 IconButton(
+                                  icon: Icon(Icons.search, color: Color(0xff888888), size: SizeConfig.blockSizeVertical! * 3.65,),
                                   onPressed: () async{
                                     Location.Location location = new Location.Location();
                                     bool serviceEnabled = await location.serviceEnabled();
@@ -131,12 +129,23 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,)));
                                     }
                                   },
-                                  icon: Icon(Icons.search, color: Color(0xff888888), size: SizeConfig.blockSizeVertical! * 3.65,),
                                 ),
                                 Expanded(
                                   child: TextFormField(
-                                    keyboardType: TextInputType.text,
                                     controller: controller,
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.all(15.0),
+                                      filled: true,
+                                      fillColor: const Color(0xffffffff),
+                                      focusColor: const Color(0xffffffff),
+                                      hintText: 'Search a Post',
+                                      hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                      border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                    ),
+                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                    keyboardType: TextInputType.text,
                                     onFieldSubmitted: (String keyword) async{
                                       Location.Location location = new Location.Location();
                                       bool serviceEnabled = await location.serviceEnabled();
@@ -198,18 +207,6 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,),),);
                                       }
                                     },
-                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.all(15.0),
-                                      filled: true,
-                                      fillColor: const Color(0xffffffff),
-                                      focusColor: const Color(0xffffffff),
-                                      hintText: 'Search a Post',
-                                      hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                      border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                                    ),
                                   ),
                                 )
                               ],

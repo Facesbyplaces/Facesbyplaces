@@ -492,6 +492,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             }
                                           },
                                         ),
+
                                         Expanded(
                                           child: TextFormField(
                                             keyboardType: TextInputType.text,
@@ -641,8 +642,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 switch (toggleListener){
                                   case 0: return Container(height: 20,);
                                   case 1: return Container(height: 20,);
-                                  case 2: return 
-                                  Container(
+                                  case 2: return Container(
                                     height: 40,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
@@ -730,10 +730,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           child: onSearchListener != true
           ? ListView.separated(
             controller: scrollController1,
-            padding: const EdgeInsets.all(10.0),
-            physics: const ClampingScrollPhysics(),
-            itemCount: feeds.length,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.all(10.0),
+            itemCount: feeds.length,
             itemBuilder: (c, i) {
               return feeds[i].pageType == 'Blm'
               ? MiscBLMPost(
@@ -1106,10 +1106,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           )
           : ListView.separated(
             controller: scrollController1,
-            padding: const EdgeInsets.all(10.0),
-            physics: const ClampingScrollPhysics(),
-            itemCount: searchFeeds.length,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.all(10.0),
+            itemCount: searchFeeds.length,
             itemBuilder: (c, i) {
               return searchFeeds[i].pageType == 'Blm'
               ? MiscBLMPost(
@@ -1239,13 +1239,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                      style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xffffffff),
-                                                    ),
-                                                  ),
+                                                  child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                 ),
                                               ),
                                             ],
@@ -1678,10 +1672,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           child: onSearchListener != true
           ? ListView.separated(
             controller: scrollController3,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
             itemCount: blm.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => MiscRegularManageMemorialTab(
               index: i,
               memorialName: blm[i].memorialName,
@@ -1697,10 +1691,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           )
           : ListView.separated(
             controller: scrollController3,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
             itemCount: searchBlm.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => MiscRegularManageMemorialTab(
               index: i,
               memorialName: searchBlm[i].memorialName,

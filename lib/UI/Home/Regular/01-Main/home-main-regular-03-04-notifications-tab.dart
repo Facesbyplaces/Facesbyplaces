@@ -26,7 +26,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
     isGuest();
     scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
-        if (itemRemaining != 0){
+        if(itemRemaining != 0){
           onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
@@ -72,7 +72,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
             onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
           ),
@@ -122,18 +122,18 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             onRefresh: onRefresh,
             child: ListView.separated(
               controller: scrollController,
-              physics: const ClampingScrollPhysics(),
-              itemCount: countListener,
               separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
               itemBuilder: (c, i) => notifications[i],
+              physics: const ClampingScrollPhysics(),
+              itemCount: countListener,
             )
           )
           : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Container(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 

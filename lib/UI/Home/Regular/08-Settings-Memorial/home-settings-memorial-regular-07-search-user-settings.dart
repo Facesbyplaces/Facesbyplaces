@@ -18,7 +18,6 @@ class RegularSearchUsers{
   final String email;
   final int accountType;
   const RegularSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
-
 }
 
 class HomeRegularSearchUser extends StatefulWidget{
@@ -162,6 +161,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                         child: Row(
                           children: [
                             IconButton(
+                              icon: const Icon(Icons.search, color: const Color(0xff888888)),
                               onPressed: (){
                                 setState((){
                                   keywords = controller.text;
@@ -171,7 +171,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                   onLoading();
                                 }
                               },
-                              icon: const Icon(Icons.search, color: const Color(0xff888888)),
                             ),
                             Expanded(
                               child: TextFormField(
@@ -259,10 +258,10 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                 onRefresh: onRefresh,
                 child: ListView.separated(
                   controller: scrollController,
+                  separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
                   physics: const ClampingScrollPhysics(),
                   itemCount: users.length,
-                  separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                   itemBuilder: (c, index) => ListTile(
                     leading: users[index].image != ''
                     ? CircleAvatar(

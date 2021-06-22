@@ -38,7 +38,7 @@ class HomeRegularCreatePost extends StatefulWidget{
   HomeRegularCreatePostState createState() => HomeRegularCreatePostState();
 }
 
-class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
+class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   ValueNotifier<List<File>> slideImages = ValueNotifier<List<File>>([]);
   ValueNotifier<String> newLocation = ValueNotifier<String>('');
   ValueNotifier<int> removeAttachment = ValueNotifier<int>(0);
@@ -367,68 +367,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                         mainAxisSpacing: 4,
                                         children: List.generate(slideCountListener, (index){
                                           return GestureDetector(
-                                            onDoubleTap: (){
-                                              removeAttachment.value = index;
-                                            },
-                                            onTap: (){
-                                              showGeneralDialog(
-                                                context: context,
-                                                barrierDismissible: true,
-                                                barrierLabel: 'Dialog',
-                                                transitionDuration: const Duration(milliseconds: 0),
-                                                pageBuilder: (_, __, ___){
-                                                  return Scaffold(
-                                                    backgroundColor: Colors.black12.withOpacity(0.7),
-                                                    body: SizedBox.expand(
-                                                      child: SafeArea(
-                                                        child: Column(
-                                                          children: [
-                                                            Container(
-                                                              alignment: Alignment.centerRight,
-                                                              padding: const EdgeInsets.only(right: 20.0),
-                                                              child: GestureDetector(
-                                                                child: CircleAvatar(
-                                                                  radius: 20,
-                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                ),
-                                                                onTap: (){
-                                                                  Navigator.pop(context);
-                                                                },
-                                                              ),
-                                                            ),
-
-                                                            const SizedBox(height: 20,),
-
-                                                            Expanded(
-                                                              child: ((){
-                                                                if(lookupMimeType(slideImagesListener[index].path)?.contains('video') == true){
-                                                                  return BetterPlayer.file('${slideImagesListener[index].path}',
-                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                      deviceOrientationsAfterFullScreen: [
-                                                                        DeviceOrientation.portraitUp
-                                                                      ],
-                                                                      autoDispose: false,
-                                                                      aspectRatio: 16 / 9,
-                                                                      fit: BoxFit.contain,
-                                                                    ),
-                                                                  );
-                                                                }else{
-                                                                  return Image.file(slideImagesListener[index], fit: BoxFit.contain,);
-                                                                }
-                                                              }()),
-                                                            ),
-
-                                                            const SizedBox(height: 80,),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
                                             child: lookupMimeType(slideImagesListener[index].path)?.contains('video') == true
                                             ? Stack(
                                               children: [
@@ -504,6 +442,68 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost> {
                                                 ],
                                               ),
                                             ),
+                                            onDoubleTap: (){
+                                              removeAttachment.value = index;
+                                            },
+                                            onTap: (){
+                                              showGeneralDialog(
+                                                context: context,
+                                                barrierDismissible: true,
+                                                barrierLabel: 'Dialog',
+                                                transitionDuration: const Duration(milliseconds: 0),
+                                                pageBuilder: (_, __, ___){
+                                                  return Scaffold(
+                                                    backgroundColor: Colors.black12.withOpacity(0.7),
+                                                    body: SizedBox.expand(
+                                                      child: SafeArea(
+                                                        child: Column(
+                                                          children: [
+                                                            Container(
+                                                              alignment: Alignment.centerRight,
+                                                              padding: const EdgeInsets.only(right: 20.0),
+                                                              child: GestureDetector(
+                                                                child: CircleAvatar(
+                                                                  radius: 20,
+                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                                ),
+                                                                onTap: (){
+                                                                  Navigator.pop(context);
+                                                                },
+                                                              ),
+                                                            ),
+
+                                                            const SizedBox(height: 20,),
+
+                                                            Expanded(
+                                                              child: ((){
+                                                                if(lookupMimeType(slideImagesListener[index].path)?.contains('video') == true){
+                                                                  return BetterPlayer.file('${slideImagesListener[index].path}',
+                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                      deviceOrientationsAfterFullScreen: [
+                                                                        DeviceOrientation.portraitUp
+                                                                      ],
+                                                                      autoDispose: false,
+                                                                      aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
+                                                                    ),
+                                                                  );
+                                                                }else{
+                                                                  return Image.file(slideImagesListener[index], fit: BoxFit.contain,);
+                                                                }
+                                                              }()),
+                                                            ),
+
+                                                            const SizedBox(height: 80,),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
                                           );
                                         }),
                                       ),

@@ -51,7 +51,6 @@ class RegularOriginalComment{
   final int userAccountType;
   final List<RegularOriginalReply> listOfReplies;
   const RegularOriginalComment({required this.commentId, required this.postId, required this.userId, required this.commentBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.commentLikes, required this.commentNumberOfLikes, required this.userAccountType, required this.listOfReplies});
-
 }
 
 class RegularOriginalReply{
@@ -67,7 +66,6 @@ class RegularOriginalReply{
   final int replyNumberOfLikes;
   final int userAccountType;
   const RegularOriginalReply({required this.replyId, required this.commentId, required this.userId, required this.replyBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.replyLikes, required this.replyNumberOfLikes, required this.userAccountType});
-
 }
 
 class HomeRegularShowOriginalPostComments extends StatefulWidget{
@@ -364,7 +362,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                             Expanded(
                                                               child: Align(
                                                                 alignment: Alignment.topLeft,
-                                                                child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreatedAt)),
+                                                                child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreatedAt),),
                                                                   maxLines: 1,
                                                                   style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaBold', color: const Color(0xffBDC3C7),),
                                                                 ),
@@ -471,9 +469,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                 aspectRatio: 16 / 9,
                                                                 fit: BoxFit.contain,
-                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                  showControls: false,
-                                                                ),
+                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                               ),
                                                             );
                                                           }else{
@@ -514,11 +510,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             alignment: Alignment.centerRight,
                                                                             padding: const EdgeInsets.only(right: 20.0),
                                                                             child: GestureDetector(
-                                                                              child: CircleAvatar(
-                                                                                radius: 20,
-                                                                                backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                              ),
+                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                               onTap: (){
                                                                                 Navigator.pop(context);
                                                                               },
@@ -819,7 +811,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               children: <TextSpan>[
                                                                 TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
                                                                 recognizer: TapGestureRecognizer()
-                                                                  ..onTap = () {
+                                                                  ..onTap = (){
                                                                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
                                                                   },
                                                                 ),
@@ -1018,13 +1010,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   icon: repliesLikes[i][index] == true
                                                                   ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
                                                                   : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
-                                                                  label: Text('${repliesNumberOfLikes[i][index]}',
-                                                                    style: TextStyle(
-                                                                      fontSize: SizeConfig.blockSizeVertical! * 1.76,
-                                                                      fontFamily: 'NexaRegular',
-                                                                      color: const Color(0xffBDC3C7),
-                                                                    ),
-                                                                  ),
+                                                                  label: Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                                                                 ),
                                                               ),
                                                             ),
@@ -1037,17 +1023,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 Expanded(
                                                                   child: Container(
                                                                     padding: const EdgeInsets.all(10.0),
-                                                                    child: Text(commentsListener[i].listOfReplies[index].replyBody,
-                                                                      style: TextStyle(
-                                                                        fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                        fontFamily: 'NexaRegular',
-                                                                        color: const Color(0xffFFFFFF),
-                                                                      ),
-                                                                    ),
-                                                                    decoration: const BoxDecoration(
-                                                                      color: const Color(0xff4EC9D4),
-                                                                      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                                                                    ),
+                                                                    child: Text(commentsListener[i].listOfReplies[index].replyBody, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),),
+                                                                    decoration: const BoxDecoration(color: const Color(0xff4EC9D4), borderRadius: const BorderRadius.all(Radius.circular(10.0)),),
                                                                   ),
                                                                 ),
                                                               ],
@@ -1057,7 +1034,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                             Row(
                                                               children: [
-                                                                Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt)),
+                                                                Text(timeago.format(DateTime.parse(commentsListener[i].listOfReplies[index].createdAt),),
                                                                   style: TextStyle(
                                                                     fontSize: SizeConfig.blockSizeVertical! * 2.11,
                                                                     fontFamily: 'NexaRegular',
@@ -1068,6 +1045,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 const SizedBox(width: 40,),
 
                                                                 GestureDetector(
+                                                                  child: Text('Reply', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                                   onTap: () async{
                                                                     print('show reply here 2');
 
@@ -1081,13 +1059,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                                                                     await showModalBottomSheet(context: context, builder: (context) => showKeyboard(isReply: true, toReply: commentsListener[i].listOfReplies[index].replyBody, replyFrom: '${commentsListener[i].listOfReplies[index].firstName}' + ' ' + '${commentsListener[i].listOfReplies[index].lastName}'));
                                                                   },
-                                                                  child: Text('Reply',
-                                                                    style: TextStyle(
-                                                                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                                                      fontFamily: 'NexaRegular',
-                                                                      color: const Color(0xff000000),
-                                                                    ),
-                                                                  ),
                                                                 ),
                                                               ],
                                                             ),

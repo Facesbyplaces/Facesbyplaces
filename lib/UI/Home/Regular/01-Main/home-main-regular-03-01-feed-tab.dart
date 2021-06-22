@@ -97,14 +97,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
@@ -176,10 +174,10 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
             onRefresh: onRefresh,
             child: ListView.separated(
               controller: scrollController,
-              padding: const EdgeInsets.all(10.0),
-              physics: const ClampingScrollPhysics(),
-              itemCount: countListener,
               separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
+              itemCount: countListener,
               itemBuilder: (c, i){
                 return feedsListener[i].pageType == 'Blm'
                 ? MiscBLMPost(
@@ -205,11 +203,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   contents: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        feedsListener[i].postBody,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 5,
-                      ),
+                      child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),
                     ),
                         
                     feedsListener[i].imagesOrVideos.isNotEmpty
@@ -239,14 +233,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               }
                             }else if(feedsListener[i].imagesOrVideos.length == 2){
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 2,
                                 staggeredTileBuilder:(int index) => const StaggeredTile.count(2, 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 2,
                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
                                     betterPlayerConfiguration: BetterPlayerConfiguration(placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
@@ -264,14 +258,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               );
                             }else{
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 3,
                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 3,
                                 itemBuilder: (BuildContext context, int index) => 
                                 ((){
                                   if(index != 1){
@@ -312,13 +306,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
-                                                    style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xffffffff),
-                                                    ),
-                                                  ),
+                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                 ),
                                               ),
                                             ],
@@ -340,13 +328,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
-                                                    style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xffffffff),
-                                                    ),
-                                                  ),
+                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                 ),
                                               ),
                                             ],
@@ -406,12 +388,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   contents: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        feedsListener[i].postBody,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 5,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                      ),
+                      child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                     ),
                     
                     feedsListener[i].imagesOrVideos.isNotEmpty
@@ -440,14 +417,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               }
                             }else if(feedsListener[i].imagesOrVideos.length == 2){
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 2,
                                 staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 2,
                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
                                   betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -466,14 +443,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               );
                             }else{
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 3,
                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 3,
                                 itemBuilder: (BuildContext context, int index) =>
                                 ((){
                                   if(index != 1){
@@ -495,7 +472,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                   }else{
                                     return ((){
                                       if(feedsListener[i].imagesOrVideos.length - 3 > 0){
-                                        if (lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true) {
+                                        if(lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true){
                                           return Stack(
                                             fit: StackFit.expand,
                                             children: [
@@ -514,18 +491,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
-                                                    style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xffffffff),
-                                                    ),
-                                                  ),
+                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                 ),
                                               ),
                                             ],
                                           );
-                                        } else {
+                                        }else{
                                           return Stack(
                                             fit: StackFit.expand,
                                             children: [
@@ -542,13 +513,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
-                                                    style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xffffffff),
-                                                    ),
-                                                  ),
+                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                 ),
                                               ),
                                             ],
@@ -602,19 +567,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                       children:  <TextSpan>[
                         TextSpan(
                           text: 'Welcome to\n',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                            fontFamily: 'NexaBold',
-                            color: const Color(0xff2F353D),
-                          ),
+                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
                         ),
+
                         TextSpan(
                           text: 'Faces by Places',
-                          style:  TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                            fontFamily: 'NexaBold',
-                            color: const Color(0xff2F353D),
-                          ),
+                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
                         ),
                       ],
                     ),
@@ -630,26 +588,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
                 SizedBox(height: SizeConfig.blockSizeVertical! * 4.04),
 
-                Center(
-                  child: Text('Feed is empty',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                      fontFamily: 'NexaBold',
-                      color: const Color(0xffB1B1B1),
-                    ),
-                  ),
-                ),
+                Center(child: Text('Feed is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
 
                 Padding(
                   padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 6, right: SizeConfig.blockSizeHorizontal! * 6),
                   child: Center(
                     child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xff2F353D),
-                      ),
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                     ),
                   ),
                 ),
@@ -659,11 +605,11 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 isGuestLoggedInListener
                 ? Container(height: 0,)
                 : MiscRegularButtonTemplate(
-                  buttonText: 'Create',
                   buttonTextStyle:  TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                  width: SizeConfig.screenWidth! / 2,
-                  height: 45,
                   buttonColor: const Color(0xff04ECFF),
+                  width: SizeConfig.screenWidth! / 2,
+                  buttonText: 'Create',
+                  height: 45,
                   onPressed: (){
                     Navigator.pushNamed(context, '/home/regular/create-memorial');
                   },

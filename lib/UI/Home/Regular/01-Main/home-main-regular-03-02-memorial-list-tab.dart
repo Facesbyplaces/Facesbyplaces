@@ -21,13 +21,13 @@ class HomeRegularManageTab extends StatefulWidget{
 }
 
 class HomeRegularManageTabState extends State<HomeRegularManageTab>{
-  ValueNotifier<int> count = ValueNotifier<int>(0);
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<Widget> finalMemorials = [];
-  int memorialFamilyItemsRemaining = 1;
   int memorialFriendsItemsRemaining = 1;
-  int blmFamilyItemsRemaining = 1;
+  int memorialFamilyItemsRemaining = 1;
   int blmFriendsItemsRemaining = 1;
+  int blmFamilyItemsRemaining = 1;
   bool isGuestLoggedIn = true;
   bool flag1 = false;
   int page1 = 1;
@@ -119,10 +119,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         height: 80,
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         color: const Color(0xffeeeeee),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text('My Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-        ),
+        child: Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
       ),
     );
   }
@@ -275,11 +272,11 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            itemBuilder: (c, i) => finalMemorials[i],
             physics: const ClampingScrollPhysics(),
             itemCount: finalMemorials.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            itemBuilder: (c, i) => finalMemorials[i],
           ),
         )
         : SingleChildScrollView(

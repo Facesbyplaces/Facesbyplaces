@@ -94,10 +94,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
               children: [
                 SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
-                  child: Container(
-                    height: SizeConfig.screenHeight,
-                    child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
-                  ),
+                  child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -243,9 +240,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
       builder: (_, File videoFileListener, __) => Container(
         width: SizeConfig.screenWidth,
         child: GestureDetector(
-          onTap: () async{
-            await getVideo();
-          },
           child: videoFileListener.path != ''
           ? Stack(
             children: [
@@ -328,6 +322,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
             decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
             child: Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
           ),
+          onTap: () async{
+            await getVideo();
+          },
         ),
       ),
     );
