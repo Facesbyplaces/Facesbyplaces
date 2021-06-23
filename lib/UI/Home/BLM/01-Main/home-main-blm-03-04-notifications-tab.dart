@@ -77,9 +77,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
             actor: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorFirstName,
             actorId: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorId,
             actorAccountType: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorAccountType,
-            recipient: newValue.blmNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientFirstName + ' ' + newValue.blmNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientLastName,
-            recipientId: newValue.blmNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientId,
-            recipientAccountType: newValue.blmNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientAccountType,
           ),
         );
       }

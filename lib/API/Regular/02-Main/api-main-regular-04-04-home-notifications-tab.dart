@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -37,7 +36,6 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({requir
 class APIRegularHomeTabNotificationMain{
   int almItemsRemaining;
   List<APIRegularHomeTabNotificationExtended> almNotification;
-
   APIRegularHomeTabNotificationMain({required this.almItemsRemaining, required this.almNotification});
 
   factory APIRegularHomeTabNotificationMain.fromJson(Map<String, dynamic> parsedJson){
@@ -57,13 +55,11 @@ class APIRegularHomeTabNotificationExtended{
   String homeTabNotificationCreatedAt;
   String homeTabNotificationUpdatedAt;
   APIRegularHomeTabNotificationExtendedActor homeTabNotificationActor;
-  APIRegularHomeTabNotificationExtendedRecipient homeTabNotificationRecipient;
   bool homeTabNotificationRead;
   String homeTabNotificationAction;
   int homeTabNotificationPostId;
   String homeTabNotificationNotificationType;
-
-  APIRegularHomeTabNotificationExtended({required this.homeTabNotificationId, required this.homeTabNotificationCreatedAt, required this.homeTabNotificationUpdatedAt, required this.homeTabNotificationActor, required this.homeTabNotificationRecipient, required this.homeTabNotificationRead, required this.homeTabNotificationAction, required this.homeTabNotificationPostId, required this.homeTabNotificationNotificationType});
+  APIRegularHomeTabNotificationExtended({required this.homeTabNotificationId, required this.homeTabNotificationCreatedAt, required this.homeTabNotificationUpdatedAt, required this.homeTabNotificationActor, required this.homeTabNotificationRead, required this.homeTabNotificationAction, required this.homeTabNotificationPostId, required this.homeTabNotificationNotificationType});
 
   factory APIRegularHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -72,7 +68,6 @@ class APIRegularHomeTabNotificationExtended{
       homeTabNotificationCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
       homeTabNotificationUpdatedAt: parsedJson['updated_at'] != null ? parsedJson['updated_at'] : '',
       homeTabNotificationActor: APIRegularHomeTabNotificationExtendedActor.fromJson(parsedJson['actor']),
-      homeTabNotificationRecipient: APIRegularHomeTabNotificationExtendedRecipient.fromJson(parsedJson['recipient']),
       homeTabNotificationRead: parsedJson['read'],
       homeTabNotificationAction: parsedJson['action'] != null ? parsedJson['action'] : '',
       homeTabNotificationPostId: parsedJson['postId'],
@@ -86,7 +81,6 @@ class APIRegularHomeTabNotificationExtendedActor{
   String homeTabNotificationActorImage;
   String homeTabNotificationActorFirstName;
   int homeTabNotificationActorAccountType;
-
   APIRegularHomeTabNotificationExtendedActor({required this.homeTabNotificationActorId, required this.homeTabNotificationActorImage, required this.homeTabNotificationActorFirstName, required this.homeTabNotificationActorAccountType});
 
   factory APIRegularHomeTabNotificationExtendedActor.fromJson(Map<String, dynamic> parsedJson){
@@ -96,27 +90,6 @@ class APIRegularHomeTabNotificationExtendedActor{
       homeTabNotificationActorImage: parsedJson['image'] != null ? parsedJson['image'] : '',
       homeTabNotificationActorFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
       homeTabNotificationActorAccountType: parsedJson['account_type'] != null ? parsedJson['account_type'] : '',
-    );
-  }
-}
-
-class APIRegularHomeTabNotificationExtendedRecipient{
-  int homeTabNotificationRecipientId;
-  String homeTabNotificationRecipientImage;
-  String homeTabNotificationRecipientFirstName;
-  String homeTabNotificationRecipientLastName;
-  int homeTabNotificationRecipientAccountType;
-
-  APIRegularHomeTabNotificationExtendedRecipient({required this.homeTabNotificationRecipientId, required this.homeTabNotificationRecipientImage, required this.homeTabNotificationRecipientFirstName, required this.homeTabNotificationRecipientLastName, required this.homeTabNotificationRecipientAccountType});
-
-  factory APIRegularHomeTabNotificationExtendedRecipient.fromJson(Map<String, dynamic> parsedJson){
-
-    return APIRegularHomeTabNotificationExtendedRecipient(
-      homeTabNotificationRecipientId: parsedJson['id'],
-      homeTabNotificationRecipientImage: parsedJson['image'] != null ? parsedJson['image'] : '',
-      homeTabNotificationRecipientFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      homeTabNotificationRecipientLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      homeTabNotificationRecipientAccountType: parsedJson['account_type'] != null ? parsedJson['account_type'] : '',
     );
   }
 }

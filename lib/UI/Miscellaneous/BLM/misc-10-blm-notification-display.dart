@@ -20,10 +20,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
   final String actor;
   final int actorId;
   final int actorAccountType;
-  final String recipient;
-  final int recipientId;
-  final int recipientAccountType;
-  const MiscBLMNotificationDisplayTemplate({this.imageIcon = '', required this.notification, required this.dateCreated, required this.postId, required this.notificationType, required this.readStatus, required this.actor, required this.actorId, required this.actorAccountType, required this.recipient, required this.recipientId, required this.recipientAccountType});
+  const MiscBLMNotificationDisplayTemplate({this.imageIcon = '', required this.notification, required this.dateCreated, required this.postId, required this.notificationType, required this.readStatus, required this.actor, required this.actorId, required this.actorAccountType});
 
   @override
   Widget build(BuildContext context){
@@ -62,18 +59,11 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
         patternList: [
           EasyRichTextPattern(
             targetString: '$actor',
+            matchOption: 'first',
             style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
             recognizer: TapGestureRecognizer()
             ..onTap = (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: actorId, accountType: actorAccountType)));
-            }
-          ),
-          EasyRichTextPattern(
-            targetString: '$recipient',
-            style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
-            recognizer: TapGestureRecognizer()
-            ..onTap = (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: recipientId, accountType: recipientAccountType)));
             }
           ),
         ],

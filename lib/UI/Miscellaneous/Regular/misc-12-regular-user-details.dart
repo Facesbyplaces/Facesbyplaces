@@ -33,7 +33,6 @@ class RegularMiscDraggablePost{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
   const RegularMiscDraggablePost({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
@@ -45,7 +44,6 @@ class MiscRegularDraggablePost extends StatefulWidget{
 }
 
 class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
-  
   ScrollController scrollController = ScrollController();
   List<RegularMiscDraggablePost> posts = [];
   int itemRemaining = 1;
@@ -55,8 +53,8 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   void initState(){
     super.initState();
     onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    scrollController.addListener((){
+      if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(itemRemaining != 0){
           onLoading();
         }else{
@@ -144,10 +142,10 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             physics: const ClampingScrollPhysics(),
             itemCount: posts.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i){
               return MiscRegularPost(
                 key: ValueKey('$i'),
@@ -272,14 +270,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  '${posts[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -300,14 +291,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  '${posts[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -360,11 +344,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
 
                 const SizedBox(height: 45,),
 
-                Text('Post is empty', style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xffB1B1B1),
-                ),),
+                Text('Post is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
               ],
@@ -380,18 +360,15 @@ class MiscRegularDraggableMemorials extends StatefulWidget{
   final int userId;
   const MiscRegularDraggableMemorials({required this.userId});
 
-  MiscRegularDraggableMemorialsState createState() => MiscRegularDraggableMemorialsState(userId: userId);
+  MiscRegularDraggableMemorialsState createState() => MiscRegularDraggableMemorialsState();
 }
 
 class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemorials>{
-  final int userId;
-  MiscRegularDraggableMemorialsState({required this.userId});
-
-  ValueNotifier<int> count = ValueNotifier<int>(0);
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<Widget> finalMemorials = [];
-  int ownedItemsRemaining = 1;
   int followedItemsRemaining = 1;
+  int ownedItemsRemaining = 1;
   bool flag1 = false;
   int page1 = 1;
   int page2 = 1;
@@ -400,8 +377,8 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
     super.initState();
     addMemorials1();
     onLoading();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    scrollController.addListener((){
+      if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(ownedItemsRemaining != 0 && followedItemsRemaining != 0){
           onLoading();
         }else{
@@ -432,16 +409,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         height: 80,
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         color: const Color(0xffeeeeee),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Owned',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-        ),
+        child: Align(alignment: Alignment.centerLeft, child: Text('Owned', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
       ),
     );
   }
@@ -452,16 +420,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         height: 80,
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         color: const Color(0xffeeeeee),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Followed',
-            style: TextStyle(
-              fontSize: SizeConfig.blockSizeVertical! * 2.64,
-              fontFamily: 'NexaBold',
-              color: const Color(0xff2F353D),
-            ),
-          ),
-        ),
+        child: Align(alignment: Alignment.centerLeft, child: Text('Followed', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
       ),
     );
   }
@@ -477,7 +436,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   void onLoading1() async{
     if(ownedItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowUserMemorials(userId: userId, page: page1);
+      var newValue = await apiRegularShowUserMemorials(userId: widget.userId, page: page1);
 
       ownedItemsRemaining = newValue.almOwnedItemsRemaining;
       count.value = count.value + newValue.almOwned.length;
@@ -514,7 +473,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   void onLoading2() async{
     if(followedItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowUserMemorials(userId: userId, page: page2);
+      var newValue = await apiRegularShowUserMemorials(userId: widget.userId, page: page2);
 
       followedItemsRemaining = newValue.almFollowedItemsRemaining;
       count.value = count.value + newValue.almFollowed.length;
@@ -556,11 +515,11 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            itemBuilder: (c, i) => finalMemorials[i],
             physics: const ClampingScrollPhysics(),
             itemCount: finalMemorials.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            itemBuilder: (c, i) => finalMemorials[i],
           )
         )
         : SingleChildScrollView(
@@ -570,18 +529,13 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
                 Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
                 const SizedBox(height: 45,),
 
-                Text('Memorial is empty', style: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical! * 3.52,
-                  fontFamily: 'NexaBold',
-                  color: const Color(0xffB1B1B1),
-                ),),
+                Text('Memorial is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
               ],

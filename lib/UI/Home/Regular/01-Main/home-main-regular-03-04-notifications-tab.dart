@@ -85,7 +85,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       count.value = count.value + newValue.almNotification.length;
 
       for(int i = 0; i < newValue.almNotification.length; i++){
-        print('The recipient is ${newValue.almNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientFirstName}');
         notifications.add(
           MiscRegularNotificationDisplayTemplate(
             imageIcon: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
@@ -97,9 +96,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             actor: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorFirstName,
             actorId: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorId,
             actorAccountType: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorAccountType,
-            recipient: newValue.almNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientFirstName + ' ' + newValue.almNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientLastName,
-            recipientId: newValue.almNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientId,
-            recipientAccountType: newValue.almNotification[i].homeTabNotificationRecipient.homeTabNotificationRecipientAccountType,
           ),
         );
       }

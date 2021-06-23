@@ -10,7 +10,7 @@ import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-class MiscRegularNotificationDisplayTemplate extends StatelessWidget {
+class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
   final String imageIcon;
   final String notification;
   final String dateCreated;
@@ -20,17 +20,38 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget {
   final String actor;
   final int actorId;
   final int actorAccountType;
-  final String recipient;
-  final int recipientId;
-  final int recipientAccountType;
-  const MiscRegularNotificationDisplayTemplate({this.imageIcon = '', required this.notification, required this.dateCreated, required this.postId, required this.notificationType, required this.readStatus, required this.actor, required this.actorId, required this.actorAccountType, required this.recipient, required this.recipientId, required this.recipientAccountType});
+  const MiscRegularNotificationDisplayTemplate({this.imageIcon = '', required this.notification, required this.dateCreated, required this.postId, required this.notificationType, required this.readStatus, required this.actor, required this.actorId, required this.actorAccountType});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       tileColor: readStatus == true ? const Color(0xffffffff) : const Color(0xffdddddd),
+      leading: imageIcon != ''
+      ? CircleAvatar(
+        backgroundColor: const Color(0xff888888),
+        foregroundImage: NetworkImage(imageIcon),
+        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+      )
+      : const CircleAvatar(
+        backgroundColor: const Color(0xff888888),
+        foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+      ),
+      title: EasyRichText(notification,
+        patternList: [
+          EasyRichTextPattern(
+            targetString: '$actor',
+            matchOption: 'first',
+            style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
+            recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: actorId, accountType: actorAccountType)));
+            }
+          ),
+        ],
+      ),
+      subtitle: Text(dateCreated, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'RobotoLight', color: const Color(0xff000000),),),
       onTap: () async{
         if(notificationType == 'Memorial'){
           context.loaderOverlay.show();
@@ -48,37 +69,6 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget {
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
         }
       },
-      leading: imageIcon != ''
-      ? CircleAvatar(
-        backgroundColor: const Color(0xff888888),
-        foregroundImage: NetworkImage(imageIcon),
-        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-      )
-      : const CircleAvatar(
-        backgroundColor: const Color(0xff888888),
-        foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-      ),
-      title: EasyRichText(notification,
-        patternList: [
-          EasyRichTextPattern(
-            targetString: '$actor',
-            style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
-            recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: actorId, accountType: actorAccountType)));
-            }
-          ),
-          EasyRichTextPattern(
-            targetString: '$recipient',
-            style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
-            recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: recipientId, accountType: recipientAccountType)));
-            }
-          ),
-        ],
-      ),
-      subtitle: Text(dateCreated, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'RobotoLight', color: const Color(0xff000000),),),
     );
   }
 }

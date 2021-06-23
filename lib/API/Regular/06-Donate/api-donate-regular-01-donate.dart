@@ -27,7 +27,7 @@ Future<String> apiRegularDonate({required String pageType, required int pageId, 
       'page_type': '$pageType',
       'page_id': '$pageId',
       'amount': '$amount',
-      // 'payment_method': '$paymentMethod',
+      'payment_method': '$paymentMethod',
     },
   );
 
@@ -36,8 +36,7 @@ Future<String> apiRegularDonate({required String pageType, required int pageId, 
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
-    var paymentIntent = newData['payment_intent'];
-    String clientSecret = paymentIntent['client_secret'];
+    String clientSecret = newData['payment_intent'];
 
     print('The clientSecret is $clientSecret');
 

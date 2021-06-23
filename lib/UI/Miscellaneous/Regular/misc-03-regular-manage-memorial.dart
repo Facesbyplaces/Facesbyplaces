@@ -11,7 +11,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class MiscRegularManageMemorialTab extends StatefulWidget {
+class MiscRegularManageMemorialTab extends StatefulWidget{
   final int index;
   final String memorialName;
   final String description;
@@ -27,23 +27,23 @@ class MiscRegularManageMemorialTab extends StatefulWidget {
   MiscRegularManageMemorialTabState createState() => MiscRegularManageMemorialTabState();
 }
 
-class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialTab> {
-  bool manageButton = false;
+class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialTab>{
   ValueNotifier<bool> followButton = ValueNotifier<bool>(false);
+  bool manageButton = false;
 
-  void initState() {
+  void initState(){
     super.initState();
     followButton.value = widget.follower;
     manageButton = widget.managed;
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return ValueListenableBuilder(
       valueListenable: followButton,
       builder: (_, bool followButtonListener, __) => GestureDetector(
-        onTap: () async {
+        onTap: () async{
           if(widget.pageType == 'Memorial'){
             if(widget.managed == true || widget.famOrFriends == true){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
@@ -73,24 +73,20 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
               backgroundColor: const Color(0xff888888),
               foregroundImage: const AssetImage('assets/icons/app-icon.png'),
             ),
-            title: Text(
-              widget.memorialName,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
-            ),
-            subtitle: Text(
-              widget.description,
-              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xff888888),),
-            ),
-            trailing: (() {
+            title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+            subtitle: Text(widget.description, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
+            trailing: ((){
               if(widget.managed == true || widget.famOrFriends == true){
                 return MaterialButton(
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
-                  textColor: const Color(0xffffffff),
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
+                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                   splashColor: const Color(0xff4EC9D4),
-                  onPressed: () async {
+                  textColor: const Color(0xffffffff),
+                  color: const Color(0xff04ECFF),
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  height: 35,
+                  onPressed: () async{
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
@@ -99,10 +95,10 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                         onlyOkButton: false,
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
-                        onCancelButtonPressed: () {
+                        onCancelButtonPressed: (){
                           Navigator.pop(context, false);
                         },
                       ),
@@ -128,12 +124,11 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, 
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                            entryAnimation: EntryAnimation.DEFAULT,
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                             description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -143,11 +138,11 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           context: context,
                           builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                            entryAnimation: EntryAnimation.DEFAULT,
                             description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                            onlyOkButton: true,
+                            entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onlyOkButton: true,
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -155,29 +150,30 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       }
                     }
                   },
-                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
-                  height: 35,
-                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
-                  color: const Color(0xff04ECFF),
                 );
-              }else if (followButtonListener == true){
+              }else if(followButtonListener == true){
                 return MaterialButton(
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
-                  textColor: const Color(0xffffffff),
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
+                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                   splashColor: const Color(0xff4EC9D4),
-                  onPressed: () async {
+                  textColor: const Color(0xffffffff),
+                  color: const Color(0xff04ECFF),
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  height: 35,
+                  onPressed: () async{
                     bool confirmResult = await showDialog(
                       context: context,
-                      builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
+                      builder: (_) => AssetGiffyDialog(
                         description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: false,
-                        onOkButtonPressed: () {
+                        onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
-                        onCancelButtonPressed: () {
+                        onCancelButtonPressed: (){
                           Navigator.pop(context, false);
                         },
                       ),
@@ -193,12 +189,13 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
 
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                            entryAnimation: EntryAnimation.DEFAULT,
+                          builder: (_) => AssetGiffyDialog(
                             description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
-                            onOkButtonPressed: () {
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -206,13 +203,14 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       }else{
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                            entryAnimation: EntryAnimation.DEFAULT,
+                          builder: (_) => AssetGiffyDialog(
                             description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            onlyOkButton: true,
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
-                            onOkButtonPressed: () {
+                            onlyOkButton: true,
+                            onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           ),
@@ -220,18 +218,18 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       }
                     }
                   },
-                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
-                  height: 35,
-                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
-                  color: const Color(0xff04ECFF),
                 );
               }else{
                 return MaterialButton(
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
-                  textColor: const Color(0xff4EC9D4),
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff4EC9D4)),),
+                  child: Text('Join', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold'),),
                   splashColor: const Color(0xff4EC9D4),
-                  onPressed: () async {
+                  textColor: const Color(0xff4EC9D4),
+                  color: const Color(0xffffffff),
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  height: 35,
+                  onPressed: () async{
                     context.loaderOverlay.show();
                     bool result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId,follow: true);
                     context.loaderOverlay.hide();
@@ -241,12 +239,13 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
 
                       await showDialog(
                         context: context,
-                        builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                          entryAnimation: EntryAnimation.DEFAULT,
+                        builder: (_) => AssetGiffyDialog(
                           description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular', ),),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          entryAnimation: EntryAnimation.DEFAULT,
                           onlyOkButton: true,
-                          onOkButtonPressed: () {
+                          onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
                         ),
@@ -254,23 +253,20 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     }else{
                       await showDialog(
                         context: context,
-                        builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                          entryAnimation: EntryAnimation.DEFAULT,
+                        builder: (_) => AssetGiffyDialog(
                           description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                          onlyOkButton: true,
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),
-                          onOkButtonPressed: () {
+                          onlyOkButton: true,
+                          onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
                         ),
                       );
                     }
                   },
-                  child: Text('Join', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold'),),
-                  height: 35,
-                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff4EC9D4)),),
-                  color: const Color(0xffffffff),
                 );
               }
             }()),

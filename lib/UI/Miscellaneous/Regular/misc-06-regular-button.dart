@@ -19,13 +19,13 @@ class MiscRegularButtonTemplate extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return MaterialButton(
+      child: Text(buttonText, style: buttonTextStyle,),
+      shape: const StadiumBorder(),
       padding: EdgeInsets.zero,
       onPressed: onPressed,
-      child: Text(buttonText, style: buttonTextStyle,),
+      color: buttonColor,
       minWidth: width,
       height: height,
-      shape: const StadiumBorder(),
-      color: buttonColor,
     );
   }
 }
@@ -51,26 +51,19 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return MaterialButton(
+      shape: const StadiumBorder(),
       padding: EdgeInsets.zero,
       onPressed: onPressed,
+      color: buttonColor,
       minWidth: width,
       height: height,
       child: Row(
         children: [
           Expanded(child: Container(height: 30, child: Image.asset(image),),),
-          Expanded(
-            flex: 2, 
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Text(buttonText,
-                style: buttonTextStyle,
-              ),
-            ),
-          ),
+
+          Expanded(flex: 2, child: Padding(padding: const EdgeInsets.only(left: 5), child: Text(buttonText, style: buttonTextStyle,),),),
         ],
       ),
-      shape: const StadiumBorder(),
-      color: buttonColor,
     );
   }
 }

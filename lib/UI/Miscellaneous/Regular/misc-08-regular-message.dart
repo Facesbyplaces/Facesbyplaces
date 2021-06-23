@@ -27,15 +27,15 @@ class MiscRegularErrorMessageTemplate extends StatelessWidget{
             const SizedBox(height: 30,),
 
             MaterialButton(
+              child: Text('Go back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              minWidth: SizeConfig.screenWidth! / 2,
+              color: const Color(0xff888888),
               padding: EdgeInsets.zero,
+              height: 45,
               onPressed: () async{
                 Navigator.pop(context);
               },
-              child: Text('Go back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-              minWidth: SizeConfig.screenWidth! / 2,
-              height: 45,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-              color: const Color(0xff888888),
             ),
 
             const SizedBox(height: 30,),
@@ -73,10 +73,10 @@ class MiscRegularLoginToContinue extends StatelessWidget{
             const SizedBox(height: 100,),
 
             GestureDetector(
+              child: const Text('Sign in or sign up to continue', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff4EC9D4)),),
               onTap: (){
                 Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/login'));
               },
-              child: const Text('Sign in or sign up to continue', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff4EC9D4)),),
             ),
 
             const SizedBox(height: 30,),

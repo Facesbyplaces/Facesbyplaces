@@ -13,7 +13,6 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
   final bool includeSuffixIcon;
   final String displayText;
   final bool edited;
-
   const MiscRegularInputFieldTemplate({
     required Key key,
     this.labelText = '',
@@ -48,12 +47,7 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
       readOnly: widget.readOnly,
       cursorColor: const Color(0xff000000),
       style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: widget.labelText,
-        labelStyle: widget.labelTextStyle,
-        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-      ),
+      decoration: InputDecoration(alignLabelWithHint: true, labelText: widget.labelText, labelStyle: widget.labelTextStyle, focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
     );
   }
 }
@@ -65,7 +59,6 @@ class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget {
   final int maxLines;
   final bool readOnly;
   final Color backgroundColor;
-
   const MiscRegularInputFieldMultiTextTemplate({
     required Key key,
     this.labelText = '',
@@ -116,7 +109,7 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
   String currentSelection = 'Father';
 
-  void initState() {
+  void initState(){
     super.initState();
     currentSelection = widget.displayText;
   }
@@ -206,7 +199,7 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
   }
 }
 
-class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget {
+class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
   final String labelText;
   final String displayText;
   const MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.displayText = ''}) : super(key: key);
@@ -214,22 +207,28 @@ class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget {
   MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState();
 }
 
-class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate> {
+class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
   TextEditingController controller = TextEditingController(text: '');
 
-  void initState() {
+  void initState(){
     super.initState();
     controller = TextEditingController(text: widget.displayText);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
-      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: widget.labelText,
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+      ),
       cursorColor: const Color(0xff000000),
+      keyboardType: TextInputType.text,
       readOnly: true,
-      onTap: () {
+      onTap: (){
         DatePicker.showDatePicker(
           context,
           showTitleActions: true,
@@ -237,18 +236,12 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
           maxTime: DateTime.now(),
           currentTime: DateTime.now(),
           locale: LocaleType.en,
-          onConfirm: (date) {
+          onConfirm: (date){
             String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
             controller.text = format;
           },
         );
       },
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: widget.labelText,
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
-        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-      ),
     );
   }
 }
@@ -262,7 +255,6 @@ class MiscRegularPhoneNumberTemplate extends StatefulWidget{
   final bool readOnly;
   final bool includeSuffixIcon;
   final String displayText;
-
   const MiscRegularPhoneNumberTemplate({
     required Key key,
     this.labelText = '',
@@ -290,6 +282,8 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
   @override
   Widget build(BuildContext context){
     return InternationalPhoneNumberInput(
+      inputDecoration: InputDecoration(alignLabelWithHint: true, labelText: widget.labelText, labelStyle: widget.labelTextStyle, focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
+      textStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,
       onInputChanged: (PhoneNumber number){
@@ -300,13 +294,6 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
           valid = value;
         });
       },
-      textStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-      inputDecoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: widget.labelText,
-        labelStyle: widget.labelTextStyle,
-        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-      ),
     );
   }
 }

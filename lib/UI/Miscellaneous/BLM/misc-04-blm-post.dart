@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
@@ -6,6 +5,7 @@ import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-use
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-post-like-or-unlike.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -41,8 +41,8 @@ class MiscBLMPost extends StatefulWidget{
 
 class MiscBLMPostState extends State<MiscBLMPost>{
   bool likePost = false;
-  int likesCount = 0;
   int commentsCount = 0;
+  int likesCount = 0;
 
   void initState(){
     super.initState();
@@ -83,6 +83,20 @@ class MiscBLMPostState extends State<MiscBLMPost>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: widget.profileImage != ''
+              ? CircleAvatar(
+                backgroundColor: const Color(0xff888888),
+                foregroundImage: NetworkImage(widget.profileImage),
+                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+              )
+              : const CircleAvatar(
+                backgroundColor: const Color(0xff888888),
+                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+              ),
+              title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+              subtitle: Text(widget.timeCreated, maxLines: 1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.56, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),),
+              trailing: MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType,),
               onTap: (){
                 if(widget.pageType == 'Memorial'){
                   if(widget.managed == true || widget.famOrFriends == true){
@@ -98,33 +112,6 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                   }
                 }
               },
-              contentPadding: EdgeInsets.zero,
-              leading: widget.profileImage != ''
-              ? CircleAvatar(
-                backgroundColor: const Color(0xff888888),
-                foregroundImage: NetworkImage(widget.profileImage),
-                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-              )
-              : const CircleAvatar(
-                backgroundColor: const Color(0xff888888),
-                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-              ),
-              title: Text(widget.memorialName,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
-              ),
-              subtitle: Text(
-                widget.timeCreated,
-                maxLines: 1,
-                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.56, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-              ),
-              trailing: MiscBLMDropDownTemplate(
-                postId: widget.postId,
-                likePost: likePost,
-                likesCount: likesCount,
-                reportType: 'Post',
-                pageType: widget.pageType,
-              ),
             ),
 
             Column(children: widget.contents,),
@@ -156,7 +143,8 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: widget.taggedId[index], accountType: widget.pageType == 'BLM' ? 1 : 2)));
-                              }),
+                              }
+                            ),
                           ),
                         ),
                       ],
@@ -170,6 +158,8 @@ class MiscBLMPostState extends State<MiscBLMPost>{
             Row(
               children: [
                 TextButton.icon(
+                  icon: likePost == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
+                  label: Text('$likesCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                   onPressed: () async{
                     setState((){
                       likePost = !likePost;
@@ -183,18 +173,16 @@ class MiscBLMPostState extends State<MiscBLMPost>{
 
                     await apiBLMLikeOrUnlikePost(postId: widget.postId, like: likePost);
                   },
-                  icon: likePost == true ? const FaIcon(FontAwesomeIcons.peace, color: const Color(0xffff0000),) : const FaIcon(FontAwesomeIcons.peace, color: const Color(0xff888888),),
-                  label: Text('$likesCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                 ),
 
                 const SizedBox(width: 20),
 
                 TextButton.icon(
+                  icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
+                  label: Text('$commentsCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                   onPressed: () async{
                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: widget.postId)));
                   },
-                  icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                  label: Text('$commentsCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                 ),
 
                 Expanded(child: Container(),),

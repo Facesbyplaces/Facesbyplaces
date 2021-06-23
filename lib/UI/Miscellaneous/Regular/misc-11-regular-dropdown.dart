@@ -16,7 +16,7 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:io';
 
-class MiscRegularDropDownTemplate extends StatefulWidget {
+class MiscRegularDropDownTemplate extends StatefulWidget{
   final int postId;
   final bool likePost;
   final int likesCount;
@@ -27,10 +27,10 @@ class MiscRegularDropDownTemplate extends StatefulWidget {
   MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState();
 }
 
-class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate> {
+class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate>{
+  GlobalKey qrKey = GlobalKey();
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
-  GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare(){
     buo = BranchUniversalObject(
@@ -120,10 +120,8 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
             style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Color(0xff888888)),
             items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
+                child: Container(child: Text(value),),
                 value: value,
-                child: Container(
-                  child: Text(value),
-                ),
               );
             }).toList(),
             onChanged: (String? listValue) async{
@@ -144,10 +142,10 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
@@ -162,29 +160,28 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.postId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
                 String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
-
                 print('The qrData on click is $qrData');
 
                 showGeneralDialog(
                   context: context,
                   barrierColor: Colors.black12.withOpacity(0.7),
+                  transitionDuration: Duration(milliseconds: 0),
                   barrierDismissible: true,
                   barrierLabel: 'Dialog',
-                  transitionDuration: Duration(milliseconds: 0),
-                  pageBuilder: (_, __, ___) {
+                  pageBuilder: (_, __, ___){
                     return SizedBox.expand(
                       child: SafeArea(
                         child: Column(
                           children: [
                             Container(
-                              height: 50,
                               padding: EdgeInsets.only(right: 20.0),
                               alignment: Alignment.centerRight,
+                              height: 50,
                               child: GestureDetector(
+                                child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
                                 onTap: (){
                                   Navigator.pop(context);
                                 },
-                                child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
                               ),
                             ),
 
@@ -202,34 +199,15 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                                   child: Column(
                                     children: [
                                       Spacer(),
-                                      Center(
-                                        child: RepaintBoundary(
-                                          key: qrKey,
-                                          child: QrImage(
-                                            data: qrData,
-                                            version: QrVersions.auto,
-                                            size: 320,
-                                            gapless: false,
-                                          ),
-                                        ),
-                                      ),
+
+                                      Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
+
                                       Spacer(),
-                                      Text(
-                                        'Karen Cruz Memorial',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                          fontFamily: 'NexaBold',
-                                          color: Color(0xff2F353D),
-                                        ),
-                                      ),
-                                      Text(
-                                        'QR Code',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                          fontFamily: 'NexaBold',
-                                          color: const Color(0xff2F353D),
-                                        ),
-                                      ),
+
+                                      Text('Karen Cruz Memorial', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+
+                                      Text('QR Code', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+
                                       Spacer(),
                                     ],
                                   ),
@@ -271,10 +249,10 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
@@ -296,7 +274,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
   }
 }
 
-class MiscRegularDropDownMemorialTemplate extends StatefulWidget {
+class MiscRegularDropDownMemorialTemplate extends StatefulWidget{
   final String memorialName;
   final int memorialId;
   final String pageType;
@@ -308,12 +286,12 @@ class MiscRegularDropDownMemorialTemplate extends StatefulWidget {
 
 class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDownMemorialTemplate>{
   final snackBar = const SnackBar(content: const Text('Link copied!'), backgroundColor: const Color(0xff4EC9D4), duration: const Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
-  GlobalKey qrKey = new GlobalKey();
+  GlobalKey qrKey = GlobalKey();
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
   File? shareImage;
 
-  void initBranchShare() {
+  void initBranchShare(){
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
@@ -362,12 +340,12 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT, 
             description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',)),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT, 
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
@@ -388,16 +366,12 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
         builder: (context, dropDownList) {
           return DropdownButton<String>(
             underline: Container(height: 0),
-            icon: const Center(
-              child: const Icon(Icons.more_vert, color: const Color(0xffffffff)),
-            ),
+            icon: const Center(child: const Icon(Icons.more_vert, color: const Color(0xffffffff)),),
             style: const TextStyle(fontFamily: 'Roboto', fontSize: 14, color: const Color(0xff888888)),
             items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value) {
               return DropdownMenuItem<String>(
+                child: Container(child: Text(value),),
                 value: value,
-                child: Container(
-                  child: Text(value),
-                ),
               );
             }).toList(),
             onChanged: (String? listValue) async{
@@ -454,10 +428,10 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                               padding: const EdgeInsets.only(right: 20.0),
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
+                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                                 onTap: (){
                                   Navigator.pop(context);
                                 },
-                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                               ),
                             ),
 
@@ -467,42 +441,19 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                                 color: Colors.black26,
                                 padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 10, right: SizeConfig.blockSizeHorizontal! * 10, top: SizeConfig.blockSizeHorizontal! * 20, bottom: SizeConfig.blockSizeHorizontal! * 25),
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffffffff),
-                                    border: Border.all(color: Color(0xffffffff),),
-                                    borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
-                                  ),
+                                  decoration: BoxDecoration(color: const Color(0xffffffff), border: Border.all(color: Color(0xffffffff),), borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),),
                                   child: Column(
                                     children: [
                                       Spacer(),
-                                      Center(
-                                        child: RepaintBoundary(
-                                          key: qrKey,
-                                          child: QrImage(
-                                            data: qrData,
-                                            version: QrVersions.auto,
-                                            size: 320,
-                                            gapless: false,
-                                          ),
-                                        ),
-                                      ),
+
+                                      Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
+                                      
                                       Spacer(),
-                                      Text(
-                                        'Karen Cruz Memorial',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                          fontFamily: 'NexaBold',
-                                          color: Color(0xff2F353D),
-                                        ),
-                                      ),
-                                      Text(
-                                        'QR Code',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                          fontFamily: 'NexaBold',
-                                          color: const Color(0xff2F353D),
-                                        ),
-                                      ),
+                                      
+                                      Text('Karen Cruz Memorial', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+
+                                      Text('QR Code', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+
                                       Spacer(),
                                     ],
                                   ),
@@ -544,10 +495,10 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
