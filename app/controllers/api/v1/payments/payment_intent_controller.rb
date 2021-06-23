@@ -1,20 +1,22 @@
 class Api::V1::Payments::PaymentIntentController < ApplicationController
   before_action :check_user
-
+  
   def payment_intent
     intent = Stripe::PaymentIntent.create({
       amount: amount,
       currency: 'usd',
-      description: "Donation for #{memorial.name}",
+      payment_method_types: ['card'],
       payment_method: payment_method,
-    }, stripe_account: stripe_account_id)
+    },{
+        stripe_account: stripe_account_id,
+    })
 
     if intent.status == 'requires_confirmation'
       if transaction.save
         render json: {
           payment_intent: intent.client_secret,
-          # publishable_key: Rails.configuration.stripe[:publishable_key],
-          # transaction: transaction
+          publishable_key: Rails.configuration.stripe[:publishable_key],
+          transaction: transaction
         }, status: 200
       else
         render json: {
@@ -40,12 +42,33 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     render json: { method: method }, status: 200
   end
 
-  private
+  def customer 
+    customer = Stripe::Customer.create({
+      email: user().email,
+    }) 
+
+    Stripe::PaymentMethod.attach(
+      params[:payment_method],
+      {customer: customer.id},
+    )
+    return customer.id
+  end
 
   def payment_method
-    return params[:payment_method]
+    payment_method = Stripe::PaymentMethod.create({
+      customer: customer,
+      payment_method: params[:payment_method],
+    }, {
+      stripe_account: stripe_account_id,
+    })
+
+    return payment_method.id
+    # render json: { payment_method: payment_method.id }, status: 200
   end
+
   
+  private
+
   def stripe_account_id
     return User.find_by(email: "admin@email.com").device_token
   end
