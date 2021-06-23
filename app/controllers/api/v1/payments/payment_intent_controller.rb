@@ -5,8 +5,10 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     intent = Stripe::PaymentIntent.create({
       amount: amount,
       currency: 'usd',
+      description: "Donation for #{memorial.name}",
       payment_method_types: ['card'],
       payment_method: payment_method,
+      customer: "cus_JitgXxZHgGMSll",
     },{
         stripe_account: stripe_account_id,
     })
@@ -15,8 +17,8 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       if transaction.save
         render json: {
           payment_intent: intent.client_secret,
-          publishable_key: Rails.configuration.stripe[:publishable_key],
-          transaction: transaction
+          # publishable_key: Rails.configuration.stripe[:publishable_key],
+          # transaction: transaction
         }, status: 200
       else
         render json: {
@@ -42,7 +44,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     render json: { method: method }, status: 200
   end
 
-  def customer 
+  def platform_account_customer 
     customer = Stripe::Customer.create({
       email: user().email,
     }) 
@@ -56,16 +58,15 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
 
   def payment_method
     payment_method = Stripe::PaymentMethod.create({
-      customer: customer,
+      customer: platform_account_customer,
       payment_method: params[:payment_method],
     }, {
       stripe_account: stripe_account_id,
     })
 
     return payment_method.id
-    # render json: { payment_method: payment_method.id }, status: 200
+    # render json: { payment_method: payment_method }, status: 200
   end
-
   
   private
 
