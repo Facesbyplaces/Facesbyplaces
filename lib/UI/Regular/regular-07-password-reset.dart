@@ -15,7 +15,7 @@ class RegularPasswordReset extends StatefulWidget{
   RegularPasswordResetState createState() => RegularPasswordResetState();
 }
 
-class RegularPasswordResetState extends State<RegularPasswordReset> {
+class RegularPasswordResetState extends State<RegularPasswordReset>{
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
@@ -104,20 +104,20 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                           MiscRegularButtonTemplate(
                             buttonText: 'Change',
                             buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
+                            buttonColor: const Color(0xff04ECFF),
                             width: SizeConfig.screenWidth! / 2,
                             height: 45,
-                            buttonColor: const Color(0xff04ECFF),
                             onPressed: () async{
                               if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                    onlyOkButton: true,
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
+                                    onlyOkButton: true,
                                     onOkButtonPressed: (){
                                       Navigator.pop(context, true);
                                     },
@@ -127,12 +127,12 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('Passwords don\'t match. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                    onlyOkButton: true,
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
+                                    onlyOkButton: true,
                                     onOkButtonPressed: (){
                                       Navigator.pop(context, true);
                                     },
@@ -147,10 +147,10 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Successfully updated the password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
                                       onlyOkButton: true,
                                       onOkButtonPressed: (){
                                         Navigator.pop(context, true);
@@ -162,12 +162,12 @@ class RegularPasswordResetState extends State<RegularPasswordReset> {
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                      onlyOkButton: true,
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
                                       onOkButtonPressed: (){
                                         Navigator.pop(context, true);
                                       },

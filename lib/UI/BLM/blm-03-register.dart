@@ -115,8 +115,8 @@ class BLMRegister extends StatelessWidget{
                     MiscBLMButtonTemplate(
                       buttonText: 'Next',
                       buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                      width: SizeConfig.blockSizeHorizontal! * 55,
                       height: SizeConfig.blockSizeVertical! * 7.04,
+                      width: SizeConfig.blockSizeHorizontal! * 55,
                       buttonColor: const Color(0xff000000),
                       onPressed: () async{
                         bool validEmail = false;
@@ -126,12 +126,12 @@ class BLMRegister extends StatelessWidget{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                              onlyOkButton: true,
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
@@ -141,12 +141,12 @@ class BLMRegister extends StatelessWidget{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title:  Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                              onlyOkButton: true,
+                              title:  Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
@@ -165,12 +165,12 @@ class BLMRegister extends StatelessWidget{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                                entryAnimation: EntryAnimation.DEFAULT,
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                 description: Text('$result', textAlign: TextAlign.center,),
-                                onlyOkButton: true,
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
+                                onlyOkButton: true,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },

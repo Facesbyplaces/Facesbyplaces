@@ -2,11 +2,11 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class UILogin01 extends StatelessWidget {
+class UILogin01 extends StatelessWidget{
   const UILogin01();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -37,29 +37,29 @@ class UILogin01 extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 3, right: SizeConfig.blockSizeHorizontal! * 3),
                 child: MaterialButton(
-                  padding: EdgeInsets.zero,
-                  minWidth: SizeConfig.screenWidth! / 1.5,
                   height: SizeConfig.blockSizeVertical! * 10.00,
+                  minWidth: SizeConfig.screenWidth! / 1.5,
+                  color: const Color(0xffF2F2F2),
+                  shape: const StadiumBorder(),
+                  padding: EdgeInsets.zero,
                   child: Row(
                     children: [
                       CircleAvatar(
-                        minRadius: 35,
-                        backgroundColor: const Color(0xff000000),
                         child: Center(child: Image.asset('assets/icons/fist.png', height: SizeConfig.blockSizeVertical! * 10,),),
+                        backgroundColor: const Color(0xff000000),
+                        minRadius: 35,
                       ),
 
                       Expanded(
                         child: Container(
+                          child: Text('Speak for a loved one killed by law enforcement', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.5, color: const Color(0xff2F353D), fontFamily: 'NexaRegular'),),
                           padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 3.75, right: SizeConfig.blockSizeHorizontal! * 0,),
                           alignment: Alignment.center,
-                          child: Text('Speak for a loved one killed by law enforcement', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.5, color: const Color(0xff2F353D), fontFamily: 'NexaRegular'),),
                         ),
                       ),
                     ],
                   ),
-                  shape: const StadiumBorder(),
-                  color: const Color(0xffF2F2F2),
-                  onPressed: () {
+                  onPressed: (){
                     Navigator.pushNamed(context, '/blm/join');
                   },
                 ),
@@ -74,15 +74,17 @@ class UILogin01 extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 3, right: SizeConfig.blockSizeHorizontal! * 3),
                 child: MaterialButton(
-                  padding: EdgeInsets.zero,
-                  minWidth: SizeConfig.screenWidth! / 1.5,
                   height: SizeConfig.blockSizeVertical! * 10.0,
+                  minWidth: SizeConfig.screenWidth! / 1.5,
+                  color: const Color(0xffE6FDFF),
+                  shape: const StadiumBorder(),
+                  padding: EdgeInsets.zero,
                   child: Row(
                     children: [
                       CircleAvatar(
-                        minRadius: 35,
-                        backgroundColor: const Color(0xff04ECFF),
                         child: Icon(Icons.favorite, size: SizeConfig.blockSizeVertical! * 5.0, color: const Color(0xffffffff),),
+                        backgroundColor: const Color(0xff04ECFF),
+                        minRadius: 35,
                       ),
 
                       Expanded(
@@ -94,9 +96,7 @@ class UILogin01 extends StatelessWidget {
                       ),
                     ],
                   ),
-                  shape: const StadiumBorder(),
-                  color: const Color(0xffE6FDFF),
-                  onPressed: () {
+                  onPressed: (){
                     Navigator.pushNamed(context, '/regular/join');
                   },
                 ),
@@ -110,12 +110,8 @@ class UILogin01 extends StatelessWidget {
                     TextSpan(text: 'Already have an Account? ', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular'),),
 
                     TextSpan(
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff04ECFF), fontFamily: 'NexaRegular',),
                       text: 'Login',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                        color: const Color(0xff04ECFF),
-                        fontFamily: 'NexaRegular',
-                      ),
                       recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         Navigator.pushNamed(context, '/regular/login');

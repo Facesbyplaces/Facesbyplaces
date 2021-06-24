@@ -14,7 +14,7 @@ class UINewlyInstalled extends StatefulWidget{
 class UINewlyInstalledState extends State<UINewlyInstalled> with TickerProviderStateMixin{
   List<Widget> screens = [UINewlyInstalled01(), UINewlyInstalled02(), UINewlyInstalled03()];
 
-  newlyInstalled() async {
+  newlyInstalled() async{
     final sharedPrefs = await SharedPreferences.getInstance();
     sharedPrefs.setBool('newly-installed', false);
   }
@@ -30,7 +30,7 @@ class UINewlyInstalledState extends State<UINewlyInstalled> with TickerProviderS
     return BlocProvider(
       create: (BuildContext context) => BlocMiscStartNewlyInstalled(),
       child: BlocBuilder<BlocMiscStartNewlyInstalled, int>(
-        builder: (context, content) {
+        builder: (context, content){
           return RepaintBoundary(
             child: DefaultTabController(
               length: 3,
@@ -65,10 +65,7 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
           Container(
             decoration: BoxDecoration(
               color: const Color(0xffffffff).withOpacity(0.5),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: const AssetImage('assets/icons/stephen-hawking.jpeg'),
-              ),
+              image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/stephen-hawking.jpeg'),),
             ),
             child: new BackdropFilter(
               filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
@@ -108,19 +105,12 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Born ',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: const Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),
                             ),
+
                             TextSpan(
                               text: 'January 8, 1942',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaBold',
-                                color: const Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xfFFFFFFF),),
                             ),
                           ],
                         ),
@@ -142,19 +132,12 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
                           children: <TextSpan>[
                              TextSpan(
                               text: 'Died ',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xfFFFFFFF),),
                             ),
+
                             TextSpan(
                               text: 'March 14, 2018',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaBold',
-                                color: const Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xfFFFFFFF),),
                             ),
                           ],
                         ),
@@ -166,11 +149,7 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
 
                   Text('"If human life were long enough to find the ultimate theory, everything would have been solved by previous generations. Nothing would be left to be discovered."',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xfFFFFFFF),
-                    ),
+                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),
                   ),
 
                   Container(
@@ -179,12 +158,12 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
                     width: 100,
                     child: TabBar(
                       controller: controller,
-                      isScrollable: false,
-                      labelColor: const Color(0xff04ECFF),
-                      unselectedLabelColor: const Color(0xffCDEAEC),
-                      indicatorColor: const Color(0xff04ECFF),
                       indicator: BoxDecoration(color: Colors.transparent),
+                      unselectedLabelColor: const Color(0xffCDEAEC),
                       indicatorSize: TabBarIndicatorSize.label,
+                      indicatorColor: const Color(0xff04ECFF),
+                      labelColor: const Color(0xff04ECFF),
+                      isScrollable: false,
                       tabs: [
                         const Icon(Icons.circle, size: 15,),
 
@@ -196,18 +175,12 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
                   ),
 
                   MaterialButton(
+                    child: Text('Next', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),),
+                    color: const Color(0xff04ECFF),
+                    shape: const StadiumBorder(),
                     padding: EdgeInsets.zero,
-                    child: Text('Next',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xfFFFFFFF),
-                      ),
-                    ),
                     minWidth: 200,
                     height: 45,
-                    shape: const StadiumBorder(),
-                    color: const Color(0xff04ECFF),
                     onPressed: (){
                       context.read<BlocMiscStartNewlyInstalled>().modify(1);
                     },
@@ -224,12 +197,12 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
   }
 }
 
-class UINewlyInstalled02 extends StatefulWidget {
+class UINewlyInstalled02 extends StatefulWidget{
 
   UINewlyInstalled02State createState() => UINewlyInstalled02State();
 }
 
-class UINewlyInstalled02State extends State<UINewlyInstalled02> {
+class UINewlyInstalled02State extends State<UINewlyInstalled02>{
   final TabController controller = TabController(initialIndex: 1, length: 3, vsync: UINewlyInstalledState());
 
   @override
@@ -280,19 +253,12 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Born ',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xfFFFFFFF),),
                             ),
+
                             TextSpan(
                               text: 'August 23, 1978',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaBold',
-                                color: const Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xfFFFFFFF),),
                             ),
                           ],
                         ),
@@ -314,19 +280,12 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Died ',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xfFFFFFFF),),
                             ),
+
                             TextSpan(
                               text: 'January 26, 2020',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaBold',
-                                color: const Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xfFFFFFFF),),
                             ),
                           ],
                         ),
@@ -338,11 +297,7 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
 
                   Text('"I\'ll do whatever it takes to win games, whether it\'s sitting on a bench waving a towel, handing a cup of water to a teammate, or hitting the game-winning shot."',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xfFFFFFFF),
-                    ),
+                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),
                   ),
 
                   Container(
@@ -351,12 +306,12 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                     width: 100,
                     child: TabBar(
                       controller: controller,
-                      isScrollable: false,
-                      labelColor: const Color(0xff04ECFF),
-                      unselectedLabelColor: const Color(0xffCDEAEC),
-                      indicatorColor: const Color(0xff04ECFF),
                       indicator: BoxDecoration(color: Colors.transparent),
+                      unselectedLabelColor: const Color(0xffCDEAEC),
                       indicatorSize: TabBarIndicatorSize.label,
+                      indicatorColor: const Color(0xff04ECFF),
+                      labelColor: const Color(0xff04ECFF),
+                      isScrollable: false,
                       tabs: [
                         const Icon(Icons.circle, size: 15,),
 
@@ -367,19 +322,13 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
                     ),
                   ),
                   MaterialButton(
+                    child: Text('Next', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),),
+                    color: const Color(0xff04ECFF),
+                    shape: const StadiumBorder(),
                     padding: EdgeInsets.zero,
-                    child: Text('Next',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xfFFFFFFF),
-                      ),
-                    ),
                     minWidth: 200,
                     height: 45,
-                    shape: const StadiumBorder(),
-                    color: const Color(0xff04ECFF),
-                    onPressed: () {
+                    onPressed: (){
                       context.read<BlocMiscStartNewlyInstalled>().modify(2);
                     },
                   ),
@@ -395,16 +344,16 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02> {
   }
 }
 
-class UINewlyInstalled03 extends StatefulWidget {
+class UINewlyInstalled03 extends StatefulWidget{
 
   UINewlyInstalled03State createState() => UINewlyInstalled03State();
 }
 
-class UINewlyInstalled03State extends State<UINewlyInstalled03> {
+class UINewlyInstalled03State extends State<UINewlyInstalled03>{
   final TabController controller = TabController(initialIndex: 2, length: 3, vsync: UINewlyInstalledState());
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return RepaintBoundary(
       child: Stack(
         children: [
@@ -451,19 +400,12 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Born ',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xfFFFFFFF),),
                             ),
+
                             TextSpan(
                               text: 'December 28, 1922',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaBold',
-                                color: const Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xfFFFFFFF),),
                             ),
                           ],
                         ),
@@ -485,19 +427,12 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Died ',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xfFFFFFFF),),
                             ),
+
                             TextSpan(
                               text: 'November 12, 2018',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                                fontFamily: 'NexaBold',
-                                color: const Color(0xfFFFFFFF),
-                              ),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xfFFFFFFF),),
                             ),
                           ],
                         ),
@@ -509,11 +444,7 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
 
                   Text('"I\'ve been the luckiest man in the world because I\'ve had friends, and to have the right friends is everything: people you can depend on, people who tell you the truth if you ask something."',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2.11,
-                      fontFamily: 'NexaRegular',
-                      color: const Color(0xfFFFFFFF),
-                    ),
+                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),
                   ),
                   
                   Container(
@@ -522,12 +453,12 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                     width: 100,
                     child: TabBar(
                       controller: controller,
-                      isScrollable: false,
-                      labelColor: const Color(0xff04ECFF),
-                      unselectedLabelColor: const Color(0xffCDEAEC),
-                      indicatorColor: const Color(0xff04ECFF),
                       indicator: BoxDecoration(color: Colors.transparent),
+                      unselectedLabelColor: const Color(0xffCDEAEC),
                       indicatorSize: TabBarIndicatorSize.label,
+                      indicatorColor: const Color(0xff04ECFF),
+                      labelColor: const Color(0xff04ECFF),
+                      isScrollable: false,
                       tabs: [
                         const Icon(Icons.circle, size: 15,),
 
@@ -538,19 +469,13 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03> {
                     ),
                   ),
                   MaterialButton(
+                    child: Text('Next', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfFFFFFFF),),),
+                    color: const Color(0xff04ECFF),
+                    shape: const StadiumBorder(),
                     padding: EdgeInsets.zero,
-                    child: Text('Next',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                        fontFamily: 'NexaRegular',
-                        color: const Color(0xfFFFFFFF),
-                      ),
-                    ),
                     minWidth: 200,
                     height: 45,
-                    shape: const StadiumBorder(),
-                    color: const Color(0xff04ECFF),
-                    onPressed: () {
+                    onPressed: (){
                       Navigator.pushReplacementNamed(context, '/start');
                     },
                   ),

@@ -87,12 +87,10 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                       bool confirmation = await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                           title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                           onlyOkButton: false,
                                           onOkButtonPressed: (){
                                             Navigator.pop(context, true);
@@ -134,15 +132,15 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                   child: TextFormField(
                                     controller: controller,
                                     decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                      border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                      hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                       contentPadding: const EdgeInsets.all(15.0),
-                                      filled: true,
                                       fillColor: const Color(0xffffffff),
                                       focusColor: const Color(0xffffffff),
                                       hintText: 'Search a Post',
-                                      hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                      border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                                      enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                                      focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                      filled: true,
                                     ),
                                     style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                     keyboardType: TextInputType.text,

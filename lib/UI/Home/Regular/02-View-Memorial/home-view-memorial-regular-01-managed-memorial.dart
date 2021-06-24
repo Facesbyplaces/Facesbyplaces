@@ -56,7 +56,7 @@ class HomeRegularProfile extends StatefulWidget{
   HomeRegularProfileState createState() => HomeRegularProfileState();
 }
 
-class HomeRegularProfileState extends State<HomeRegularProfile> {
+class HomeRegularProfileState extends State<HomeRegularProfile>{
   ValueNotifier<bool> showFloatingButton = ValueNotifier<bool>(false);
   CarouselController buttonCarouselController = CarouselController();
   GlobalKey profileKey = GlobalKey<HomeRegularProfileState>();
@@ -201,23 +201,22 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                     height: SizeConfig.screenHeight! / 3,
                                     width: SizeConfig.screenWidth,
                                     child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
-                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                   Column(
                                     children: [
                                       GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
                                         child: Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
-                                        onTap: () {
+                                        onTap: (){
                                           showGeneralDialog(
                                             context: context,
+                                            transitionDuration: const Duration(milliseconds: 0),
                                             barrierDismissible: true,
                                             barrierLabel: 'Dialog',
-                                            transitionDuration:
-                                            const Duration(milliseconds: 0),
                                             pageBuilder: (_, __, ___){
                                               return Scaffold(
                                                 backgroundColor: Colors.black12.withOpacity(0.7),
@@ -226,8 +225,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                     child: Column(
                                                       children: [
                                                         Container(
-                                                          alignment: Alignment.centerRight,
                                                           padding: const EdgeInsets.only(right: 20.0),
+                                                          alignment: Alignment.centerRight,
                                                           child: GestureDetector(
                                                             child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                             onTap: (){
@@ -240,10 +239,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
 
                                                         Expanded(
                                                           child: CachedNetworkImage(
-                                                            fit: BoxFit.contain, 
-                                                            imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
-                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            imageUrl: profile.data!.almMemorial.showMemorialBackgroundImage,
+                                                            fit: BoxFit.contain, 
                                                           ),
                                                         ),
 
@@ -259,28 +258,25 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                       ),
                                       Container(
                                         width: SizeConfig.screenWidth,
-                                        decoration: const BoxDecoration(
-                                          borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20),),
-                                          color: const Color(0xffffffff),
-                                        ),
+                                        decoration: const BoxDecoration(borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20),), color: const Color(0xffffffff),),
                                         child: Column(
                                           children: [
                                             const SizedBox(height: 150,),
 
                                             Center(
                                               child: Text(profile.data!.almMemorial.showMemorialName,
-                                                textAlign: TextAlign.center,
                                                 style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
-                                                maxLines: 5,
+                                                textAlign: TextAlign.center,
                                                 overflow: TextOverflow.clip,
+                                                maxLines: 5,
                                               ),
                                             ),
 
                                             const SizedBox(height: 20,),
 
                                             TextButton.icon(
-                                              icon: const CircleAvatar(radius: 15, backgroundColor: const Color(0xffE67E22), child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 18,),),
                                               label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                              icon: const CircleAvatar(radius: 15, backgroundColor: const Color(0xffE67E22), child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 18,),),
                                               onPressed: (){
                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
                                               },
@@ -323,14 +319,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                               child: Column(
                                                                 children: [
                                                                   Container(
+                                                                    padding: const EdgeInsets.only(right: 20.0),
                                                                     alignment: Alignment.centerRight,
-                                                                    padding: const EdgeInsets.only(right:20.0),
                                                                     child: GestureDetector(
-                                                                      child: CircleAvatar(
-                                                                        radius: 20,
-                                                                        backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                        child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                      ),
+                                                                      child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                       onTap: (){
                                                                         Navigator.pop(context);
                                                                       },
@@ -354,10 +346,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                         );
                                                                       }else{
                                                                         return CachedNetworkImage(
-                                                                          fit: BoxFit.contain,
-                                                                          imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[0],
-                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                          imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[0],
+                                                                          fit: BoxFit.contain,
                                                                         );
                                                                       }
                                                                     }()),
@@ -379,8 +371,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 ((){
                                                   if(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription != ''){
                                                     return Container(
-                                                      alignment: Alignment.center,
                                                       padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                      alignment: Alignment.center,
                                                       child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription,
                                                         textAlign: TextAlign.center,
                                                         style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
@@ -405,12 +397,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                     child: Padding(
                                                       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                                                       child: MaterialButton(
-                                                        padding: EdgeInsets.zero,
                                                         child: Text('Manage', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                         minWidth: SizeConfig.screenWidth! / 2,
-                                                        height: 45,
-                                                        shape: const StadiumBorder(),
                                                         color: const Color(0xff2F353D),
+                                                        shape: const StadiumBorder(),
+                                                        padding: EdgeInsets.zero,
+                                                        height: 45,
                                                         onPressed: () async{
                                                           if(widget.managed == true){
                                                             context.loaderOverlay.show();
@@ -627,11 +619,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                               alignment: Alignment.centerRight,
                                                                               padding: const EdgeInsets.only(right: 20.0),
                                                                               child: GestureDetector(
-                                                                                child: CircleAvatar(
-                                                                                  radius: 20,
-                                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                                ),
+                                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                                 onTap: (){
                                                                                   Navigator.pop(context);
                                                                                 },
@@ -653,27 +641,27 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                                           deviceOrientationsAfterFullScreen: [
                                                                                             DeviceOrientation.portraitUp
                                                                                           ],
-                                                                                          autoDispose: false,
                                                                                           aspectRatio: 16 / 9,
                                                                                           fit: BoxFit.contain,
+                                                                                          autoDispose: false,
                                                                                         ),
                                                                                       );
                                                                                     }else{
                                                                                       return CachedNetworkImage(
-                                                                                        fit: BoxFit.contain,
-                                                                                        imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
-                                                                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                        imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[next],
+                                                                                        fit: BoxFit.contain,
                                                                                       );
                                                                                     }
                                                                                   }()),
                                                                                 ),
                                                                                 options: CarouselOptions(
-                                                                                  autoPlay: false,
                                                                                   enlargeCenterPage: true,
-                                                                                  aspectRatio: 1,
                                                                                   viewportFraction: 1,
                                                                                   initialPage: index,
+                                                                                  autoPlay: false,
+                                                                                  aspectRatio: 1,
                                                                                 ),
                                                                               ),
                                                                             ),
@@ -708,9 +696,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                   child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
                                                                     betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                       placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                       aspectRatio: 16 / 9,
                                                                       fit: BoxFit.contain,
-                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                     ),
                                                                   ),
                                                                 );
@@ -719,10 +707,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                                   width: 100,
                                                                   height: 100,
                                                                   child: CachedNetworkImage(
-                                                                    fit: BoxFit.cover,
-                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
-                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
+                                                                    fit: BoxFit.cover,
                                                                   ),
                                                                 );
                                                               }
@@ -794,8 +782,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                   Positioned(
                                     top: SizeConfig.screenHeight! / 5,
                                     child: Container(
-                                      height: 160,
                                       width: SizeConfig.screenWidth,
+                                      height: 160,
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
@@ -803,10 +791,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                             onTap: () {
                                               showGeneralDialog(
                                                 context: context,
+                                                transitionDuration: const Duration(milliseconds: 0),
                                                 barrierDismissible: true,
                                                 barrierLabel: 'Dialog',
-                                                transitionDuration:
-                                                const Duration(milliseconds: 0),
                                                 pageBuilder: (_, __, ___) {
                                                   return Scaffold(
                                                     backgroundColor: Colors.black12.withOpacity(0.7),
@@ -815,8 +802,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                         child: Column(
                                                           children: [
                                                             Container(
-                                                              alignment: Alignment.centerRight,
                                                               padding: const EdgeInsets.only(right: 20.0),
+                                                              alignment: Alignment.centerRight,
                                                               child: GestureDetector(
                                                                 child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                 onTap: (){
@@ -829,10 +816,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
 
                                                             Expanded(
                                                               child: CachedNetworkImage(
-                                                                fit: BoxFit.contain,
-                                                                imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
-                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                imageUrl: profile.data!.almMemorial.showMemorialProfileImage,
+                                                                fit: BoxFit.contain,
                                                               ),
                                                             ),
 
@@ -914,11 +901,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                   contents: [
                                     Container(
                                       alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        posts[i].postBody,
+                                      child: Text(posts[i].postBody,
+                                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 5,
-                                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                       ),
                                     ),
 
@@ -941,22 +927,22 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                 );
                                               }else{
                                                 return CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: posts[i].imagesOrVideos[0],
-                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  imageUrl: posts[i].imagesOrVideos[0],
+                                                  fit: BoxFit.cover,
                                                 );
                                               }
                                             }else if(posts[i].imagesOrVideos.length == 2){
                                               return StaggeredGridView.countBuilder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                crossAxisCount: 4,
-                                                itemCount: 2,
                                                 staggeredTileBuilder: (int index) =>const StaggeredTile.count(2, 2),
-                                                mainAxisSpacing: 4.0,
+                                                physics: const NeverScrollableScrollPhysics(),
+                                                padding: EdgeInsets.zero,
                                                 crossAxisSpacing: 4.0,
+                                                mainAxisSpacing: 4.0,
+                                                crossAxisCount: 4,
+                                                shrinkWrap: true,
+                                                itemCount: 2,
                                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -967,22 +953,22 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                   ),
                                                 )
                                                 : CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: posts[i].imagesOrVideos[index],
-                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  imageUrl: posts[i].imagesOrVideos[index],
+                                                  fit: BoxFit.cover,
                                                 ),
                                               );
                                             }else{
                                               return StaggeredGridView.countBuilder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                crossAxisCount: 4,
-                                                itemCount: 3,
                                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                                mainAxisSpacing: 4.0,
+                                                physics: const NeverScrollableScrollPhysics(),
+                                                padding: EdgeInsets.zero,
                                                 crossAxisSpacing: 4.0,
+                                                mainAxisSpacing: 4.0,
+                                                crossAxisCount: 4,
+                                                shrinkWrap: true,
+                                                itemCount: 3,
                                                 itemBuilder: (BuildContext context, int index) =>
                                                 ((){
                                                   if(index != 1){
@@ -996,10 +982,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                       ),
                                                     )
                                                     : CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      imageUrl: posts[i].imagesOrVideos[index],
-                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                      imageUrl: posts[i].imagesOrVideos[index],
+                                                      fit: BoxFit.cover,
                                                     );
                                                   }else{
                                                     return ((){
@@ -1021,9 +1007,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
 
                                                               Center(
                                                                 child: CircleAvatar(
-                                                                  radius: 25,
-                                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                   child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                  radius: 25,
                                                                 ),
                                                               ),
                                                             ],
@@ -1033,19 +1019,19 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                             fit: StackFit.expand,
                                                             children: [
                                                               CachedNetworkImage(
-                                                                fit: BoxFit.cover,
-                                                                imageUrl: posts[i].imagesOrVideos[index],
-                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                imageUrl: posts[i].imagesOrVideos[index],
+                                                                fit: BoxFit.cover,
                                                               ),
 
                                                               Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                                               Center(
                                                                 child: CircleAvatar(
-                                                                  radius: 25,
-                                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                   child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                  radius: 25,
                                                                 ),
                                                               ),
                                                             ],
@@ -1063,10 +1049,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> {
                                                           );
                                                         }else{
                                                           return CachedNetworkImage(
-                                                            fit: BoxFit.cover,
-                                                            imageUrl: posts[i].imagesOrVideos[index],
-                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            imageUrl: posts[i].imagesOrVideos[index],
+                                                            fit: BoxFit.cover,
                                                           );
                                                         }
                                                       }

@@ -114,9 +114,9 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 MiscRegularButtonTemplate(
                   buttonText: imageListener.path != '' ? 'Sign Up' : 'Next',
                   buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                  buttonColor: const Color(0xff04ECFF),
                   width: SizeConfig.screenWidth! / 2,
                   height: 45,
-                  buttonColor: const Color(0xff04ECFF),
                   onPressed: () async{
                     if(imageListener.path != ''){
                       context.loaderOverlay.show();
@@ -129,12 +129,12 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                            entryAnimation: EntryAnimation.DEFAULT,
                             description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            onlyOkButton: true,
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: Colors.red,
+                            onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
@@ -145,12 +145,12 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                          entryAnimation: EntryAnimation.DEFAULT,
                           description: Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                          onlyOkButton: true,
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: Colors.red,
+                          onlyOkButton: true,
                           onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },

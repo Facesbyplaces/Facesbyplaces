@@ -68,9 +68,9 @@ class RegularLoginState extends State<RegularLogin>{
                       SizedBox(height: SizeConfig.blockSizeVertical! * 3.65),
 
                       Container(
+                        child: Text('Log In', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 4.93, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
                         padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75),
                         alignment: Alignment.centerLeft,
-                        child: Text('Log In', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 4.93, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
                       ),
 
                       SizedBox(height: SizeConfig.blockSizeVertical! * 3.65),
@@ -83,10 +83,7 @@ class RegularLoginState extends State<RegularLogin>{
                             width: 16.93 * SizeConfig.blockSizeHorizontal!,
                             height: 14.93 * SizeConfig.blockSizeHorizontal!,
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: const Color(0xff3A559F),
-                                shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),
-                              ),
+                              style: ElevatedButton.styleFrom(primary: const Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
                               child: Center(child: Image.asset('assets/icons/Facebook2.png',),),
                               onPressed: () async{
                                 final fb = FacebookLogin();
@@ -158,10 +155,7 @@ class RegularLoginState extends State<RegularLogin>{
                             width: 14.93 * SizeConfig.blockSizeHorizontal!,
                             height: 14.93 * SizeConfig.blockSizeHorizontal!,
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Color(0xffFFFFFF),
-                                shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),
-                              ),
+                              style: ElevatedButton.styleFrom(primary: Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
                               child: Center(child: Image.asset('assets/icons/google.png',),),
                               onPressed: () async{
                                 User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
@@ -178,14 +172,12 @@ class RegularLoginState extends State<RegularLogin>{
                           const Spacer(),
 
                           SizedBox(
-                            width: 14.93 * SizeConfig.blockSizeHorizontal!,
                             height: 14.93 * SizeConfig.blockSizeHorizontal!,
+                            width: 14.93 * SizeConfig.blockSizeHorizontal!,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: const Color(0xff000000),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: const BorderRadius.all(Radius.circular(10),),
-                                ),
+                                shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),
                               ),
                               child: Center(child: Image.asset('assets/icons/apple.png',),),
                               onPressed: () async{
@@ -241,9 +233,9 @@ class RegularLoginState extends State<RegularLogin>{
                         padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
                         child: MiscRegularInputFieldTemplate(
                           key: _key1,
-                          labelText: 'Email Address',
-                          type: TextInputType.emailAddress,
                           labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff000000), fontFamily: 'NexaRegular',),
+                          type: TextInputType.emailAddress,
+                          labelText: 'Email Address',
                         ),
                       ),
 
@@ -251,9 +243,9 @@ class RegularLoginState extends State<RegularLogin>{
                         padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
                         child: MiscRegularInputFieldTemplate(
                           key: _key2,
-                          labelText: 'Password',
-                          type: TextInputType.text,
                           labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff000000), fontFamily: 'NexaRegular'),
+                          type: TextInputType.text,
+                          labelText: 'Password',
                           obscureText: true,
                         ),
                       ),
@@ -268,8 +260,8 @@ class RegularLoginState extends State<RegularLogin>{
 
                             GestureDetector(
                               child: Align(
-                                alignment: Alignment.centerRight,
                                 child: Text('Forgot Password?', style: TextStyle(color: const Color(0xff2F353D), fontSize: SizeConfig.blockSizeVertical! * 2.19, fontFamily: 'NexaRegular',),),
+                                alignment: Alignment.centerRight,
                               ),
                               onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordResetEmail()));
@@ -284,9 +276,9 @@ class RegularLoginState extends State<RegularLogin>{
                       MiscRegularButtonTemplate(
                         buttonText: 'Log In',
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.29, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                        buttonColor: const Color(0xff4EC9D4),
                         width: SizeConfig.screenWidth! / 2,
                         height: 45,
-                        buttonColor: const Color(0xff4EC9D4),
                         onPressed: () async{
                           bool validEmail = false;
                           validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
@@ -340,13 +332,12 @@ class RegularLoginState extends State<RegularLogin>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  buttonOkColor: const Color(0xffff0000),
                                   onlyOkButton: true,
-                                  buttonOkColor:
-                                  const Color(0xffff0000),
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },

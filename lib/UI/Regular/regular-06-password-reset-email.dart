@@ -77,9 +77,9 @@ class RegularPasswordResetEmail extends StatelessWidget{
                     MiscRegularButtonTemplate(
                       buttonText: 'Next',
                       buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
+                      buttonColor: const Color(0xff04ECFF),
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
-                      buttonColor: const Color(0xff04ECFF),
                       onPressed: () async{
                         bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.text);
 
@@ -128,12 +128,7 @@ class RegularPasswordResetEmail extends StatelessWidget{
                             ..addCustomMetadata('reset-type', 'Regular'),
                           );
 
-                          BranchLinkProperties lp = BranchLinkProperties(
-                            channel: 'facebook',
-                            feature: 'sharing',
-                            stage: 'new share',
-                            tags: ['one', 'two', 'three'],
-                          );
+                          BranchLinkProperties lp = BranchLinkProperties(channel: 'facebook', feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three'],);
                           lp.addControlParam('url','https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
 
                           FlutterBranchSdk.setIdentity('alm-user-forgot-password');
@@ -152,10 +147,10 @@ class RegularPasswordResetEmail extends StatelessWidget{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
@@ -166,12 +161,12 @@ class RegularPasswordResetEmail extends StatelessWidget{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  onlyOkButton: true,
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
+                                  onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
@@ -182,12 +177,12 @@ class RegularPasswordResetEmail extends StatelessWidget{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                onlyOkButton: true,
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
+                                onlyOkButton: true,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },

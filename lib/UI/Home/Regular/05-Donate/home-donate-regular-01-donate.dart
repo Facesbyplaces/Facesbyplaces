@@ -16,8 +16,8 @@ class HomeRegularUserDonate extends StatefulWidget{
 }
 
 class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
-  final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/google-pay.svg', semanticsLabel: 'Google Pay Mark', height: 52, width: 52);
+  final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
   CardFieldInputDetails? newCard;
   int donateToggle = 0;
 
@@ -59,8 +59,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                   Expanded(
                     child: GridView.count(
-                      physics: const ClampingScrollPhysics(),
                       padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
+                      physics: const ClampingScrollPhysics(),
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       crossAxisCount: 2,
@@ -119,8 +119,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     buttonText: 'Send Gift',
                     height: 45,
                     onPressed: () async{
-
-
                       String amount = '0.99';
 
                       if(donateToggle == 0){

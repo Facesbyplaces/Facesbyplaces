@@ -38,7 +38,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
         return picture;
       });
 
-      if (pickedFile != null) {
+      if(pickedFile != null){
         videoFile.value = File(pickedFile.path);
       }
     }catch (error){
@@ -72,7 +72,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
       child: GestureDetector(
         onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -81,8 +81,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
           builder: (_, int toggleListener, __) => Scaffold(
             appBar: AppBar(
               title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff))),
-              centerTitle: true,
               backgroundColor: const Color(0xff04ECFF),
+              centerTitle: true,
               leading: IconButton(
                 icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
                 onPressed: (){
@@ -129,11 +129,11 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                             child: DefaultTabController(
                               length: 3,
                               child: TabBar(
-                                isScrollable: false,
-                                labelColor: const Color(0xff04ECFF),
-                                unselectedLabelColor: const Color(0xff000000),
-                                indicatorColor: Colors.transparent,
                                 indicator: BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
+                                unselectedLabelColor: const Color(0xff000000),
+                                labelColor: const Color(0xff04ECFF),
+                                indicatorColor: Colors.transparent,
+                                isScrollable: false,
                                 tabs: [
                                   Center(child: Text('Text', style: TextStyle(fontSize:SizeConfig.blockSizeVertical! * 2.0, fontFamily: 'NexaRegular',),),),
 
@@ -169,20 +169,20 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                       const SizedBox(height: 80,),
 
                       MiscRegularButtonTemplate(
+                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
                         width: 150,
                         height: 45,
-                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
                         onPressed: () async{
                           if(_key1.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                onlyOkButton: true,
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
+                                onlyOkButton: true,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },
@@ -217,11 +217,11 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   shareStory1(){
     return TextFormField(
       controller: controllerStory,
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       cursorColor: const Color(0xff000000),
-      maxLines: 10,
       keyboardType: TextInputType.text,
       readOnly: false,
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      maxLines: 10,
       decoration: const InputDecoration(
         fillColor: const Color(0xffffffff),
         filled: true,
@@ -247,10 +247,10 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                 onTap: (){
                   showGeneralDialog(
                     context: context,
+                    transitionDuration: const Duration(milliseconds: 0),
                     barrierDismissible: true,
                     barrierLabel: 'Dialog',
-                    transitionDuration: const Duration(milliseconds: 0),
-                    pageBuilder: (_, __, ___) {
+                    pageBuilder: (_, __, ___){
                       return Scaffold(
                         backgroundColor: Colors.black12.withOpacity(0.7),
                         body: SizedBox.expand(
@@ -258,8 +258,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                             child: Column(
                               children: [
                                 Container(
-                                  alignment: Alignment.centerRight,
                                   padding: const EdgeInsets.only(right: 20.0),
+                                  alignment: Alignment.centerRight,
                                   child: GestureDetector(
                                     child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                     onTap: (){
@@ -292,8 +292,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     },
                   );
                 },
-                child: BetterPlayer.file(
-                  videoFileListener.path,
+                child: BetterPlayer.file(videoFileListener.path,
                   betterPlayerConfiguration: BetterPlayerConfiguration(
                     placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                     deviceOrientationsAfterFullScreen: [
@@ -317,10 +316,10 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
             ],
           )
           : Container(
-            height: 260,
-            width: SizeConfig.screenWidth,
             decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
             child: Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
+            width: SizeConfig.screenWidth,
+            height: 260,
           ),
           onTap: () async{
             await getVideo();
@@ -338,23 +337,23 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
         builder: (_, int slideCountListener, __) => Column(
           children: [
             Container(
-              height: 260,
               width: SizeConfig.screenWidth,
+              height: 260,
               child: Container(
                 height: 100,
                 child: GridView.count(
                   physics: const ClampingScrollPhysics(),
-                  crossAxisCount: 4,
                   crossAxisSpacing: 4,
                   mainAxisSpacing: 4,
+                  crossAxisCount: 4,
                   children: List.generate(slideCountListener + 1, (index){
                     return ((){
                       if(index == slideCountListener){
                         return GestureDetector(
                           child: Container(
-                            width: 80,
-                            child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60),
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
+                            child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60),
+                            width: 80,
                           ),
                           onTap: () async{
                             await getSlideImage();
@@ -369,9 +368,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                           onTap: (){
                             showGeneralDialog(
                               context: context,
+                              transitionDuration: const Duration(milliseconds: 0),
                               barrierDismissible: true,
                               barrierLabel: 'Dialog',
-                              transitionDuration: const Duration(milliseconds: 0),
                               pageBuilder: (_, __, ___){
                                 return Scaffold(
                                   backgroundColor: Colors.black12.withOpacity(0.7),
@@ -380,8 +379,8 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                       child: Column(
                                         children: [
                                           Container(
-                                            alignment: Alignment.centerRight,
                                             padding: const EdgeInsets.only(right: 20.0),
+                                            alignment: Alignment.centerRight,
                                             child: GestureDetector(
                                               child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                               onTap: (){
@@ -417,9 +416,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                                   children: [
                                     Center(
                                       child: CircleAvatar(
-                                        radius: 25,
-                                        backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                         child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                        backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                        radius: 25,
                                       ),
                                     ),
                                   ],

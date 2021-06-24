@@ -118,15 +118,15 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                         child: TextFormField(
                           style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15.0),
-                            filled: true,
-                            fillColor: const Color(0xffffffff),
-                            focusColor: const Color(0xffffffff),
-                            hintText: 'Search User',
-                            hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                            border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                             enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                             focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                            border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                            hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                            contentPadding: const EdgeInsets.all(15.0),
+                            focusColor: const Color(0xffffffff),
+                            fillColor: const Color(0xffffffff),
+                            hintText: 'Search User',
+                            filled: true,
                             prefixIcon: IconButton(
                               icon: const Icon(Icons.search, color: const Color(0xff888888)),
                               onPressed: (){
@@ -174,10 +174,10 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
             onRefresh: onRefresh,
             child: ListView.separated(
               controller: scrollController,
-              padding: const EdgeInsets.all(10.0),
-              physics: const ClampingScrollPhysics(),
-              itemCount: users.length,
               separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
+              itemCount: users.length,
               itemBuilder: (c, i) {
                 return ListTile(
                   leading: users[i].image != ''

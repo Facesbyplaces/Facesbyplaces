@@ -163,10 +163,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                     Positioned(
                       top: SizeConfig.blockSizeVertical! * 10.0,
                       left: SizeConfig.blockSizeVertical! * 6,
-                      child: Image.asset('assets/icons/logo.png',
-                        height: SizeConfig.blockSizeVertical! * 27.98,
-                        width: SizeConfig.blockSizeVertical! * 45.81,
-                      ),
+                      child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical! * 27.98, width: SizeConfig.blockSizeVertical! * 45.81,),
                     ),
                   ],
                 )
@@ -174,25 +171,12 @@ class UIGetStartedState extends State<UIGetStarted>{
 
               Container(
                 height: SizeConfig.blockSizeVertical! * 54,
-                decoration: const BoxDecoration(
-                  image: const DecorationImage(
-                    fit: BoxFit.fill,
-                    image: const AssetImage('assets/icons/background.png'),
-                  ),
-                ),
+                decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background.png'),),),
                 child: Column(
                   children: [
                     SizedBox(height: SizeConfig.blockSizeVertical! * 3),
 
-                    Center(
-                      child: Text('FacesByPlaces.com',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 3.65,
-                          color: Color(0xff04ECFF),
-                          fontFamily: 'NexaBold',
-                        ),
-                      ),
-                    ),
+                    Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, color: Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
 
                     SizedBox(height: SizeConfig.blockSizeVertical! * 3),
 
@@ -201,11 +185,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                       child: Center(
                         child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2.92,
-                            fontFamily: 'NexaRegular',
-                            color: const Color(0xffffffff),
-                          ),
+                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.92, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),
                         ),
                       ),
                     ),
@@ -213,19 +193,13 @@ class UIGetStartedState extends State<UIGetStarted>{
                     Spacer(),
 
                     MaterialButton(
-                      padding: EdgeInsets.zero,
-                      child: Text('Get Started',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 2.74,
-                          color: const Color(0xffffffff),
-                          fontFamily: 'NexaBold',
-                        ),
-                      ),
+                      child: Text('Get Started', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),
                       minWidth: SizeConfig.blockSizeHorizontal! * 80,
-                      height: 45,
-                      shape: const StadiumBorder(),
                       color: const Color(0xff04ECFF),
-                      onPressed: () {
+                      shape: const StadiumBorder(),
+                      padding: EdgeInsets.zero,
+                      height: 45,
+                      onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
                       },
                     ),

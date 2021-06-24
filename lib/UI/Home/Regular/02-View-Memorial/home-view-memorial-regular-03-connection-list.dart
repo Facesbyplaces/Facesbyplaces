@@ -122,14 +122,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -169,14 +167,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -216,14 +212,12 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -298,9 +292,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(15.0),
-                              filled: true,
-                              fillColor: const Color(0xffffffff),
                               focusColor: const Color(0xffffffff),
+                              fillColor: const Color(0xffffffff),
+                              filled: true,
                               hintText: ((){
                                 switch (toggleListener){
                                   case 0: return 'Search Family';
@@ -308,11 +302,11 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                                   case 2: return 'Search Followers';
                                 }
                               }()),
-                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                              prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
-                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
                               enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                              prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
                             ),
                             onChanged: (search){
                               searchKeyword = search;
@@ -378,10 +372,10 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                     initialIndex: toggleListener,
                     length: 3,
                     child: TabBar(
-                      labelColor: const Color(0xff04ECFF),
                       unselectedLabelColor: const Color(0xff2F353D),
-                      indicatorColor: const Color(0xff04ECFF),
                       indicatorSize: TabBarIndicatorSize.label,
+                      indicatorColor: const Color(0xff04ECFF),
+                      labelColor: const Color(0xff04ECFF),
                       indicatorWeight: 5,
                       onTap: (int number) {
                         toggle.value = number;
@@ -460,8 +454,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
             onRefresh: onRefresh1,
             child: GridView.count(
               controller: scrollController1,
-              padding: const EdgeInsets.all(10.0),
               physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
               crossAxisSpacing: 2,
               mainAxisSpacing: 20,
               crossAxisCount: 4,
@@ -523,24 +517,24 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                     SizedBox(height: SizeConfig.blockSizeVertical! * 1.0),
 
                     onSearchListener
-                    ? Text('${searches[index].firstName} ${searches[index].lastName}',
+                    ? Text('${searches[index].firstName} ${searches[index].lastName}', 
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     )
                     : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
 
                     Text('${listsFamily[index].relationship}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                     ),
                   ],
                 ),
@@ -563,8 +557,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
             onRefresh: onRefresh2,
             child: GridView.count(
               controller: scrollController2,
-              padding: const EdgeInsets.all(10.0),
               physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
               crossAxisSpacing: 2,
               mainAxisSpacing: 20,
               crossAxisCount: 4,
@@ -627,16 +621,16 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     )
                     : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
                   ],
                 ),
@@ -659,8 +653,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
             onRefresh: onRefresh3,
             child: GridView.count(
               controller: scrollController3,
-              padding: const EdgeInsets.all(10.0),
               physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
               crossAxisSpacing: 2,
               mainAxisSpacing: 20,
               crossAxisCount: 4,
@@ -723,16 +717,16 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.clip,
-                        maxLines: 1,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
-                      )
-                    : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
+                    )
+                    : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}',
                       style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      maxLines: 1,
                     ),
                   ],
                 ),

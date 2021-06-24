@@ -499,15 +499,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             controller: controller,
                                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                             decoration: InputDecoration(
-                                              contentPadding: const EdgeInsets.all(15.0),
-                                              filled: true,
-                                              fillColor: const Color(0xffffffff),
-                                              focusColor: const Color(0xffffffff),
-                                              hintText: 'Search Memorial',
-                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                               enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                               focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                              contentPadding: const EdgeInsets.all(15.0),
+                                              focusColor: const Color(0xffffffff),
+                                              fillColor: const Color(0xffffffff),
+                                              hintText: 'Search Memorial',
+                                              filled: true,
                                             ),
                                             onChanged: (search){
                                               if(search == ''){
@@ -778,10 +778,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               );
                             }else{
                               return CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: feeds[i].imagesOrVideos[0],
-                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                imageUrl: feeds[i].imagesOrVideos[0],
+                                fit: BoxFit.cover,
                               );
                             }
                           }else if(feeds[i].imagesOrVideos.length == 2){
@@ -804,10 +804,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 ),
                               )
                               : CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                fit: BoxFit.cover,
                               ),
                             );
                           }else{
@@ -833,10 +833,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     ),
                                   )
                                   : CachedNetworkImage(
-                                    fit: BoxFit.cover,
-                                    imageUrl: feeds[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    fit: BoxFit.cover,
                                   );
                                 }else{
                                   return ((){
@@ -858,9 +858,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                radius: 25,
-                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                radius: 25,
                                               ),
                                             ),
                                           ],
@@ -870,19 +870,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                           fit: StackFit.expand,
                                           children: [
                                             CachedNetworkImage(
-                                              fit: BoxFit.cover,
-                                              imageUrl: feeds[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              imageUrl: feeds[i].imagesOrVideos[index],
+                                              fit: BoxFit.cover,
                                             ),
 
                                             Container(color: Colors.black.withOpacity(0.5),),
 
                                             Center(
                                               child: CircleAvatar(
-                                                radius: 25,
-                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                radius: 25,
                                               ),
                                             ),
                                           ],
@@ -900,10 +900,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         );
                                       }else{
                                         return CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: feeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          imageUrl: feeds[i].imagesOrVideos[index],
+                                          fit: BoxFit.cover,
                                         );
                                       }
                                     }
@@ -961,10 +961,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               );
                             }else{
                               return CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: feeds[i].imagesOrVideos[0],
-                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                imageUrl: feeds[i].imagesOrVideos[0],
+                                fit: BoxFit.cover,
                               );
                             }
                           }else if(feeds[i].imagesOrVideos.length == 2){
@@ -987,10 +987,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 ),
                               )
                               : CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png',fit: BoxFit.cover, scale: 1.0,),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                fit: BoxFit.cover,
                               ),
                             );
                           }else{
@@ -1041,9 +1041,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             
                                             Center(
                                               child: CircleAvatar(
-                                                radius: 25, 
-                                                backgroundColor: const Color(0xffffffff).withOpacity(.5), 
                                                 child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5), 
+                                                radius: 25,
                                               ),
                                             ),
                                           ],
@@ -1053,19 +1053,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                           fit: StackFit.expand,
                                           children: [
                                             CachedNetworkImage(
-                                              fit: BoxFit.cover,
-                                              imageUrl: feeds[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              imageUrl: feeds[i].imagesOrVideos[index],
+                                              fit: BoxFit.cover,
                                             ),
 
                                             Container(color: const Color(0xff000000).withOpacity(0.5),),
                                             
                                             Center(
                                               child: CircleAvatar(
-                                                radius: 25,
-                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                radius: 25,
                                               ),
                                             ),
                                           ],

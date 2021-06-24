@@ -23,11 +23,11 @@ class HomeRegularManageTab extends StatefulWidget{
 class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   ScrollController scrollController = ScrollController();
   ValueNotifier<int> count = ValueNotifier<int>(0);
-  List<Widget> finalMemorials = [];
   int memorialFriendsItemsRemaining = 1;
   int memorialFamilyItemsRemaining = 1;
   int blmFriendsItemsRemaining = 1;
   int blmFamilyItemsRemaining = 1;
+  List<Widget> finalMemorials = [];
   bool isGuestLoggedIn = true;
   bool flag1 = false;
   int page1 = 1;

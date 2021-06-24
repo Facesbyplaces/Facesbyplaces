@@ -32,6 +32,7 @@ class HomeRegularReport extends StatelessWidget{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
+            centerTitle: true,
             title: Row(
               children: [
                 Text('Report', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
@@ -39,7 +40,6 @@ class HomeRegularReport extends StatelessWidget{
                 Spacer(),
               ],
             ),
-            centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
               onPressed: (){
@@ -48,8 +48,8 @@ class HomeRegularReport extends StatelessWidget{
             ),
           ),
           body: SingleChildScrollView(
-            padding: const EdgeInsets.all(20.0),
             physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
                 Align(
@@ -87,12 +87,12 @@ class HomeRegularReport extends StatelessWidget{
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                          entryAnimation: EntryAnimation.DEFAULT,
                           description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                          onlyOkButton: true,
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),
+                          onlyOkButton: true,
                           onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
@@ -107,10 +107,10 @@ class HomeRegularReport extends StatelessWidget{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                            entryAnimation: EntryAnimation.DEFAULT,
                             description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
@@ -122,12 +122,12 @@ class HomeRegularReport extends StatelessWidget{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular')),
-                            entryAnimation: EntryAnimation.DEFAULT,
                             description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            onlyOkButton: true,
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular')),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
+                            onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },

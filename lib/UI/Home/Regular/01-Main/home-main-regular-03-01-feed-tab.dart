@@ -55,7 +55,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   void initState(){
     super.initState();
     isGuest();
-    scrollController.addListener((){
+    scrollController.addListener((){ // SHOWS WHEN THE USER HAS REACHED THE BOTTOM OF THE LIST
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(itemRemaining != 0){
           onLoading();
@@ -72,7 +72,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
     });
   }
 
-  Future<void> onRefresh() async{
+  Future<void> onRefresh() async{ // PULL TO REFRESH FUNCTIONALITY
     page = 1;
     itemRemaining = 1;
     count.value = 0;
@@ -80,7 +80,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
     onLoading();
   }
 
-  void isGuest() async{
+  void isGuest() async{ // CHECKS IF THE USER IS A GUEST
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn.value = sharedPrefs.getBool('user-guest-session') ?? false;
 
@@ -89,7 +89,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
     }
   }
 
-  void onLoading() async{
+  void onLoading() async{ // FETCHING THE DATA
     if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiRegularHomeFeedTab(page: page).onError((error, stackTrace){
@@ -201,10 +201,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   famOrFriends: feedsListener[i].famOrFriends,
                   relationship: feedsListener[i].relationship,
                   contents: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),
-                    ),
+                    Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
                         
                     feedsListener[i].imagesOrVideos.isNotEmpty
                     ? Column(
@@ -605,7 +602,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 isGuestLoggedInListener
                 ? Container(height: 0,)
                 : MiscRegularButtonTemplate(
-                  buttonTextStyle:  TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                  buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                   buttonColor: const Color(0xff04ECFF),
                   width: SizeConfig.screenWidth! / 2,
                   buttonText: 'Create',

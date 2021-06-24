@@ -133,6 +133,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   valueListenable: newLocation,
                   builder: (_, String newLocationListener, __) => Scaffold(
                     appBar: AppBar(
+                      backgroundColor: const Color(0xff04ECFF),
+                      centerTitle: true,
                       title: Row(
                         children: [
                           Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
@@ -140,8 +142,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                           Spacer(),
                         ],
                       ),
-                      centerTitle: true,
-                      backgroundColor: const Color(0xff04ECFF),
                       leading: IconButton(
                         icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
                         onPressed: (){
@@ -207,12 +207,12 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  onlyOkButton: true,
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
+                                  onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
@@ -285,10 +285,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   padding: const EdgeInsets.all(10),
                                   child: TextFormField(
                                     controller: controller,
-                                    cursorColor: const Color(0xff000000),
-                                    maxLines: maxLines,
-                                    keyboardType: TextInputType.text,
                                     style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),
+                                    cursorColor: const Color(0xff000000),
+                                    keyboardType: TextInputType.text,
+                                    maxLines: maxLines,
                                     decoration: InputDecoration(
                                       fillColor: const Color(0xffffffff),
                                       alignLabelWithHint: true,
@@ -392,10 +392,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                   top: 0,
                                                   right: 0,
                                                   child: GestureDetector(
-                                                    child: const CircleAvatar(
-                                                      backgroundColor: const Color(0xff000000),
-                                                      child: const Icon(Icons.close, color: const Color(0xffffffff),),
-                                                    ),
+                                                    child: const CircleAvatar(backgroundColor: const Color(0xff000000), child: const Icon(Icons.close, color: const Color(0xffffffff),),),
                                                     onTap: (){
                                                       slideImages.value.removeAt(index);
                                                       slideCount.value--;
@@ -428,10 +425,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                     top: 0,
                                                     right: 0,
                                                     child: GestureDetector(
-                                                      child: const CircleAvatar(
-                                                        backgroundColor: const Color(0xff000000),
-                                                        child: const Icon(Icons.close, color: const Color(0xffffffff),),
-                                                      ),
+                                                      child: const CircleAvatar(backgroundColor: const Color(0xff000000), child: const Icon(Icons.close, color: const Color(0xffffffff),),),
                                                       onTap: (){
                                                         slideImages.value.removeAt(index);
                                                         slideCount.value--;
@@ -462,11 +456,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                                               alignment: Alignment.centerRight,
                                                               padding: const EdgeInsets.only(right: 20.0),
                                                               child: GestureDetector(
-                                                                child: CircleAvatar(
-                                                                  radius: 20,
-                                                                  backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                  child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                ),
+                                                                child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                 onTap: (){
                                                                   Navigator.pop(context);
                                                                 },

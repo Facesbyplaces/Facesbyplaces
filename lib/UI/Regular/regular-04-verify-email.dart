@@ -108,10 +108,10 @@ class RegularVerifyEmail extends StatelessWidget{
                                         await showDialog(
                                           context: context,
                                           builder: (_) => AssetGiffyDialog(
-                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                            entryAnimation: EntryAnimation.DEFAULT,
                                             description: Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            entryAnimation: EntryAnimation.DEFAULT,
                                             onlyOkButton: true,
                                             onOkButtonPressed: (){
                                               Navigator.pop(context, true);
@@ -122,13 +122,12 @@ class RegularVerifyEmail extends StatelessWidget{
                                         await showDialog(
                                           context: context,
                                           builder: (_) => AssetGiffyDialog(
-                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                            entryAnimation: EntryAnimation.DEFAULT,
                                             description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            entryAnimation: EntryAnimation.DEFAULT,
+                                            buttonOkColor: const Color(0xffff0000),
                                             onlyOkButton: true,
-                                            buttonOkColor:
-                                            const Color(0xffff0000),
                                             onOkButtonPressed: (){
                                               Navigator.pop(context, true);
                                             },
@@ -144,23 +143,22 @@ class RegularVerifyEmail extends StatelessWidget{
                             const SizedBox(height: 120),
 
                             MiscRegularButtonTemplate(
-                              buttonText:
-                              controller.text.length != 3 ? 'Next' : 'Sign Up',
+                              buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
                               buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold'),
+                              buttonColor: const Color(0xff04ECFF),
                               width: SizeConfig.screenWidth! / 2,
                               height: 45,
-                              buttonColor: const Color(0xff04ECFF),
                               onPressed: () async{
                                 if(controller.text.length != 3){
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Please enter the verification code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                      onlyOkButton: true,
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
                                       onOkButtonPressed: (){
                                         Navigator.pop(context, true);
                                       },
@@ -177,12 +175,12 @@ class RegularVerifyEmail extends StatelessWidget{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
                                         description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                        onlyOkButton: true,
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
+                                        onlyOkButton: true,
                                         onOkButtonPressed: (){
                                           Navigator.pop(context, true);
                                         },

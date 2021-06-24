@@ -46,37 +46,38 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   Future<APIRegularShowProfileInformation>? drawerSettings;
   String _scanBarcode = 'Error';
 
-  Future<APIRegularShowProfileInformation> getDrawerInformation() async {
+  Future<APIRegularShowProfileInformation> getDrawerInformation() async{
     return await apiRegularShowProfileInformation();
   }
 
-  void getUnreadNotifications() async {
+  void getUnreadNotifications() async{ // NUMBER OF NOTIFICATIONS - RED ICON DISPLAYED AT THE TOP OF NOTIFICATION ICON
     var value = await apiRegularShowUnreadNotifications();
     unreadNotifications.value = value;
   }
 
-  void isGuest() async {
+  void isGuest() async{ // CHECKS IF THE USER IS A GUEST
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn.value = sharedPrefs.getBool('user-guest-session') ?? false;
 
-    if (isGuestLoggedIn.value != true) {
+    if(isGuestLoggedIn.value != true){
       getUnreadNotifications();
       drawerSettings = getDrawerInformation();
     }
   }
 
-  Future<void> scanQR() async {
+  Future<void> scanQR() async{ // QR SCANNER FUNCTION
     String barcodeScanRes;
-    try {
+
+    try{
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
       print('Scanning: $barcodeScanRes');
-    } on PlatformException {
+    }on PlatformException{
       barcodeScanRes = 'Failed to get platform version.';
     }
 
     if (!mounted) return;
 
-    setState(() {
+    setState((){
       _scanBarcode = barcodeScanRes;
     });
 
@@ -100,14 +101,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
       }
     }else{
       await showDialog(
-        context: context,
-          builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',  textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-          entryAnimation: EntryAnimation.DEFAULT,
+        context: context, 
+        builder: (_) => AssetGiffyDialog(
           description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-          onlyOkButton: true,
+          title: Text('Error',  textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          entryAnimation: EntryAnimation.DEFAULT,
           buttonOkColor: const Color(0xffff0000),
+          onlyOkButton: true,
           onOkButtonPressed: (){
             Navigator.pop(context, true);
           },
@@ -120,8 +121,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
     super.initState();
     isGuest();
     toggleBottom.value = widget.newToggleBottom;
-    bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false];
-    var newMessage = PushNotificationService(_firebaseMessaging, context);
+    bottomTab.value = toggleBottom.value == 0 ? [true, false, false, false] : [false, true, false, false]; // ICON TOGGLE - DEFAULT IS 0 OR FIRST ICON
+    var newMessage = PushNotificationService(_firebaseMessaging, context); // PUSH NOTIFICATION
     newMessage.initialise();
   }
 
@@ -184,15 +185,12 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               backgroundColor: const Color(0xff888888),
                               foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
                             ),
-                            onPressed: () async {
+                            onPressed: () async{
                               Scaffold.of(context).openDrawer();
                             },
                           );
                         }else{
-                          return Container(
-                            child: const CircularProgressIndicator(),
-                            padding: const EdgeInsets.all(20.0),
-                          );
+                          return Container(child: const CircularProgressIndicator(), padding: const EdgeInsets.all(20.0),);
                         }
                       },
                     ),
@@ -216,10 +214,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                       children: [
                         SingleChildScrollView(
                           physics: const NeverScrollableScrollPhysics(),
-                          child: Container(
-                            height: SizeConfig.screenHeight,
-                            child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
-                          ),
+                          child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
                         ),
 
                         Container(
@@ -243,7 +238,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     },
                   ),
                   floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-                  bottomNavigationBar: SingleChildScrollView(
+                  bottomNavigationBar: SingleChildScrollView( // TOGGLE ICONS
                     scrollDirection: Axis.horizontal,
                     child: Container(
                       alignment: Alignment.center,
@@ -355,7 +350,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     ),
                   ),
                   drawer: isGuestLoggedInListener != true
-                  ? FutureBuilder<APIRegularShowProfileInformation>(
+                  ? FutureBuilder<APIRegularShowProfileInformation>( // DRAWER
                     future: drawerSettings,
                     builder: (context, manageDrawer){
                       if(manageDrawer.hasData){
@@ -373,9 +368,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     onTap: (){
                                       showGeneralDialog(
                                         context: context,
+                                        transitionDuration: const Duration(milliseconds: 0),
                                         barrierDismissible: true,
                                         barrierLabel: 'Dialog',
-                                        transitionDuration: const Duration(milliseconds: 0),
                                         pageBuilder: (_, __, ___){
                                           return Scaffold(
                                             backgroundColor: Colors.black12.withOpacity(0.7),
@@ -495,12 +490,12 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                              entryAnimation: EntryAnimation.DEFAULT,
                                               description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                              onlyOkButton: true,
+                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                              entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
+                                              onlyOkButton: true,
                                               onOkButtonPressed: (){
                                                 Navigator.pop(context, true);
                                               },
@@ -564,18 +559,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           ),
                         );
                       }else{
-                        return Container(
-                          child: Center(
-                            child: Container(
-                              child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,),
-                              color: const Color(0xffffffff),
-                            ),
-                          ),
-                        );
+                        return Container(child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
                       }
                     },
                   )
-                  : Drawer(
+                  : Drawer( // DRAWER FOR GUEST LOGIN
                     child: Container(
                       alignment: Alignment.topCenter,
                       color: const Color(0xff4EC9D4),

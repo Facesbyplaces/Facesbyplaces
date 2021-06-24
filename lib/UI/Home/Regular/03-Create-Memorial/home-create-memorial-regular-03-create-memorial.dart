@@ -30,11 +30,11 @@ class HomeRegularCreateMemorial3 extends StatefulWidget{
 }
 
 class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
+  List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
   ValueNotifier<File> backgroundImage = ValueNotifier<File>(File(''));
   ValueNotifier<File> profileImage = ValueNotifier<File>(File(''));
   ValueNotifier<int> backgroundImageToggle = ValueNotifier<int>(0);
   final picker = ImagePicker();
-  List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
 
   Future getProfileImage() async{
     try{
@@ -77,8 +77,8 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
           builder: (_, int backgroundImageToggleListener, __) => Scaffold(
             appBar: AppBar(
               title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-              centerTitle: true,
               backgroundColor: const Color(0xff04ECFF),
+              centerTitle: true,
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
                 onPressed: (){
@@ -144,22 +144,22 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             ),
 
                             Positioned(
-                              bottom: 40,
                               left: SizeConfig.screenWidth! / 2,
+                              bottom: 40,
                               child: const CircleAvatar(
-                                radius: 25,
-                                backgroundColor: const Color(0xffffffff),
                                 child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                                backgroundColor: const Color(0xffffffff),
+                                radius: 25,
                               ),
                             ),
 
                             const Positioned(
-                              top: 10,
                               right: 10,
+                              top: 10,
                               child: const CircleAvatar(
-                                radius: 25,
-                                backgroundColor: const Color(0xffffffff),
                                 child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),
+                                backgroundColor: const Color(0xffffffff),
+                                radius: 25,
                               ),
                             ),
                           ],
@@ -216,8 +216,8 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                   child: backgroundImageToggleListener == index
                                   ? Container(
                                     padding: const EdgeInsets.all(5),
-                                    width: 100,
                                     height: 100,
+                                    width: 100,
                                     decoration: BoxDecoration(color: const Color(0xff04ECFF), borderRadius: BorderRadius.circular(10),),
                                     child: Container(
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
@@ -227,13 +227,13 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                   )
                                   : Container(
                                     padding: const EdgeInsets.all(5),
-                                    width: 100,
                                     height: 100,
+                                    width: 100,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
                                     child: Container(
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
-                                      width: 100,
                                       height: 100,
+                                      width: 100,
                                     ),
                                   ),
                                 );
@@ -250,10 +250,10 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       const SizedBox(height: 80,),
 
                       MiscRegularButtonTemplate(
-                        width: 150,
-                        height: 45,
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                         buttonText: 'Create my Memorial Page',
+                        width: 150,
+                        height: 45,
                         onPressed: () async{
                           if(backgroundImageToggle.value == 0 || backgroundImageToggle.value == 1){
                             final ByteData bytes = await rootBundle.load(backgroundImages[backgroundImageToggle.value]);
@@ -282,10 +282,10 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             bool confirmation = await showDialog(
                               context: context, 
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 onlyOkButton: false,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);

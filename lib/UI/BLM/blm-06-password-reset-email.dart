@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class BLMPasswordResetEmail extends StatelessWidget {
+class BLMPasswordResetEmail extends StatelessWidget{
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -74,9 +74,9 @@ class BLMPasswordResetEmail extends StatelessWidget {
                     MiscBLMButtonTemplate(
                       buttonText: 'Next',
                       buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
+                      buttonColor: const Color(0xff04ECFF),
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
-                      buttonColor: const Color(0xff04ECFF),
                       onPressed: () async{
                         bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.text);
 
@@ -84,12 +84,12 @@ class BLMPasswordResetEmail extends StatelessWidget {
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                              onlyOkButton: true,
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
@@ -99,12 +99,12 @@ class BLMPasswordResetEmail extends StatelessWidget {
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                              onlyOkButton: true,
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
@@ -125,12 +125,7 @@ class BLMPasswordResetEmail extends StatelessWidget {
                             ..addCustomMetadata('reset-type', 'Blm',),
                           );
 
-                          BranchLinkProperties lp = BranchLinkProperties(
-                            channel: 'facebook',
-                            feature: 'sharing',
-                            stage: 'new share',
-                            tags: ['one', 'two', 'three'],
-                          );
+                          BranchLinkProperties lp = BranchLinkProperties(channel: 'facebook', feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three'],);
                           lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
 
                           FlutterBranchSdk.setIdentity('blm-user-forgot-password');
@@ -147,10 +142,10 @@ class BLMPasswordResetEmail extends StatelessWidget {
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
@@ -161,12 +156,12 @@ class BLMPasswordResetEmail extends StatelessWidget {
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                  onlyOkButton: true,
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
+                                  onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
@@ -177,12 +172,12 @@ class BLMPasswordResetEmail extends StatelessWidget {
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                onlyOkButton: true,
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
+                                onlyOkButton: true,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },

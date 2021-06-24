@@ -70,14 +70,8 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                               Container(color: const Color(0xffffffff),),
 
                               imageListener.path != ''
-                              ? Align(
-                                alignment: Alignment.center,
-                                child: Container(decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: FileImage(imageListener),),),),
-                              )
-                              : Align(
-                                alignment: Alignment.center,
-                                child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),
-                              ),
+                              ? Align(alignment: Alignment.center, child: Container(decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: FileImage(imageListener),),),),)
+                              : Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
                             ],
                           ),
                         ),
@@ -114,9 +108,9 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
               MiscBLMButtonTemplate(
                 buttonText: imageListener.path != '' ? 'Sign Up' : 'Speak Now',
                 buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                buttonColor: imageListener.path != '' ? const Color(0xff04ECFF) : const Color(0xff000000),
                 width: SizeConfig.screenWidth! / 2,
                 height: 45,
-                buttonColor: imageListener.path != '' ? const Color(0xff04ECFF) : const Color(0xff000000),
                 onPressed: () async{
                   if(imageListener.path != ''){
                     context.loaderOverlay.show();
@@ -129,12 +123,12 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                          entryAnimation: EntryAnimation.DEFAULT,
                           description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                          onlyOkButton: true,
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),
+                          onlyOkButton: true,
                           onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
@@ -145,12 +139,12 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                        onlyOkButton: true,
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
+                        onlyOkButton: true,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },

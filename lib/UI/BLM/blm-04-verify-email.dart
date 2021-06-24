@@ -34,10 +34,7 @@ class BLMVerifyEmail extends StatelessWidget{
               children: [
                 SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
-                  child: Container(
-                    height: SizeConfig.screenHeight,
-                    child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
-                  ),
+                  child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
                 ),
 
                 SingleChildScrollView(
@@ -89,20 +86,13 @@ class BLMVerifyEmail extends StatelessWidget{
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
-                            TextSpan(
-                              text: 'Didn\'t receive a code? ',
-                              style: TextStyle(
-                                fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                fontFamily: 'NexaRegular',
-                                color: Color(0xff000000),
-                              ),
-                            ),
+                            TextSpan(text: 'Didn\'t receive a code? ', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
 
                             TextSpan(
                               text: 'Resend',
                               style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff000000),),
                               recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
+                              ..onTap = () async{
                                 context.loaderOverlay.show();
                                 bool result = await apiBLMVerificationCodeResend();
                                 context.loaderOverlay.hide();
@@ -111,10 +101,10 @@ class BLMVerifyEmail extends StatelessWidget{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Another code has been sent to your email address. Please check your inbox.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
                                       onlyOkButton: true,
                                       onOkButtonPressed: (){
                                         Navigator.pop(context, true);
@@ -125,12 +115,12 @@ class BLMVerifyEmail extends StatelessWidget{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                      onlyOkButton: true,
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
                                       onOkButtonPressed: (){
                                         Navigator.pop(context, true);
                                       },
@@ -148,20 +138,20 @@ class BLMVerifyEmail extends StatelessWidget{
                       MiscBLMButtonTemplate(
                         buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold'),
+                        buttonColor: const Color(0xff000000),
                         width: SizeConfig.screenWidth! / 2,
                         height: 45,
-                        buttonColor: const Color(0xff000000),
                         onPressed: () async{
                           if(controller.text.length != 3){
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Please enter the verification code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                onlyOkButton: true,
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
+                                onlyOkButton: true,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },
@@ -178,12 +168,12 @@ class BLMVerifyEmail extends StatelessWidget{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  onlyOkButton: true,
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
+                                  onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
