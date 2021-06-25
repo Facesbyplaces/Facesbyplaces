@@ -44,13 +44,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             onLoading();
           });
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: const Text('No more users to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more users to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
         }
       }
     });
@@ -91,14 +85,12 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -140,22 +132,22 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               ),
             ),
             trailing: MaterialButton(
-              minWidth: SizeConfig.screenWidth! / 3.5,
-              padding: EdgeInsets.zero,
-              textColor: const Color(0xffffffff),
-              splashColor: const Color(0xff04ECFF),
               child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              height: 40,
               shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              splashColor: const Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
               color: const Color(0xffE74C3C),
+              padding: EdgeInsets.zero,
+              height: 40,
               onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                    entryAnimation: EntryAnimation.DEFAULT,
                     description: Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
                     onOkButtonPressed: (){
                       Navigator.pop(context, true);
@@ -175,12 +167,12 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                        onlyOkButton: true,
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
+                        onlyOkButton: true,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
@@ -190,10 +182,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
                         onOkButtonPressed: (){
                           managers = [];
@@ -266,22 +258,22 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               ),
             ),
             trailing: MaterialButton(
-              minWidth: SizeConfig.screenWidth! / 3.5,
-              padding: EdgeInsets.zero,
-              textColor: const Color(0xffffffff),
-              splashColor: const Color(0xff04ECFF),
               child: Text('Make Manager', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular',),),
-              height: 40,
               shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF)),),
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              splashColor: const Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
               color: const Color(0xff04ECFF),
+              padding: EdgeInsets.zero,
+              height: 40,
               onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                    entryAnimation: EntryAnimation.DEFAULT,
                     description: Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
                       Navigator.pop(context, true);
@@ -301,12 +293,12 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                        onlyOkButton: true,
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
+                        onlyOkButton: true,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
@@ -316,10 +308,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
                         onOkButtonPressed: (){
                           managers = [];
@@ -377,11 +369,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
-            itemCount: managers.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => managers[i],
+            itemCount: managers.length,  
           ),
         )
         : SingleChildScrollView(

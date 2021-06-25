@@ -27,6 +27,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
 // ignore: import_of_legacy_library_into_null_safe
@@ -443,11 +444,21 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                 ),
                                                                               );
                                                                             }else{
-                                                                              return CachedNetworkImage(
+                                                                              // return CachedNetworkImage(
+                                                                              //   fit: BoxFit.contain,
+                                                                              //   imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
+                                                                              //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                              //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                              // );
+                                                                              return ExtendedImage.network(
+                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
                                                                                 fit: BoxFit.contain,
-                                                                                imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
-                                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                loadStateChanged: (ExtendedImageState loading){
+                                                                                  if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
+                                                                                    return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                                                  }
+                                                                                },
+                                                                                mode: ExtendedImageMode.gesture,
                                                                               );
                                                                             }
                                                                           }()),
@@ -535,11 +546,21 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                       ),
                                                                                     );
                                                                                   }else{
-                                                                                    return CachedNetworkImage(
+                                                                                    // return CachedNetworkImage(
+                                                                                    //   fit: BoxFit.contain,
+                                                                                    //   imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
+                                                                                    //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                    //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                    // );
+                                                                                    return ExtendedImage.network(
+                                                                                      originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
                                                                                       fit: BoxFit.contain,
-                                                                                      imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                      loadStateChanged: (ExtendedImageState loading){
+                                                                                        if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
+                                                                                          return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                                                        }
+                                                                                      },
+                                                                                      mode: ExtendedImageMode.gesture,
                                                                                     );
                                                                                   }
                                                                                 }()),
@@ -650,11 +671,21 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                       ),
                                                                                     );
                                                                                   }else{
-                                                                                    return CachedNetworkImage(
+                                                                                    // return CachedNetworkImage(
+                                                                                    //   fit: BoxFit.contain,
+                                                                                    //   imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
+                                                                                    //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                    //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                    // );
+                                                                                    return ExtendedImage.network(
+                                                                                      originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
                                                                                       fit: BoxFit.contain,
-                                                                                      imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                      loadStateChanged: (ExtendedImageState loading){
+                                                                                        if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
+                                                                                          return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                                                        }
+                                                                                      },
+                                                                                      mode: ExtendedImageMode.gesture,
                                                                                     );
                                                                                   }
                                                                                 }()),

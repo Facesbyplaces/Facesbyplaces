@@ -1016,10 +1016,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     ),
                                   )
                                   : CachedNetworkImage(
-                                    fit: BoxFit.cover,
-                                    imageUrl: feeds[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    fit: BoxFit.cover,
                                   );
                                 }else{
                                   return ((){
@@ -1083,10 +1083,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         );
                                       }else{
                                         return CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: feeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          imageUrl: feeds[i].imagesOrVideos[index],
+                                          fit: BoxFit.cover,
                                         );
                                       }
                                     }
@@ -1157,10 +1157,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 );
                               }else{
                                 return CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: searchFeeds[i].imagesOrVideos[0],
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  imageUrl: searchFeeds[i].imagesOrVideos[0],
+                                  fit: BoxFit.cover,
                                 );
                               }
                             }else if(searchFeeds[i].imagesOrVideos.length == 2){
@@ -1183,10 +1183,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   ),
                                 )
                                 : CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                  fit: BoxFit.cover,
                                 ),
                               );
                             }else{
@@ -1212,10 +1212,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                       ),
                                     )
                                     : CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                      fit: BoxFit.cover,
                                     );
                                   }else{
                                     return ((){
@@ -1237,9 +1237,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  radius: 25,
-                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                  radius: 25,
                                                 ),
                                               ),
                                             ],
@@ -1249,10 +1249,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             fit: StackFit.expand,
                                             children: [
                                               CachedNetworkImage(
-                                                fit: BoxFit.cover,
-                                                imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                                fit: BoxFit.cover,
                                               ),
                                               
                                               Container(color: const Color(0xff000000).withOpacity(0.5),),
@@ -1279,10 +1279,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                           );
                                         }else{
                                         return CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                          fit: BoxFit.cover,
                                         );
                                       }
                                     }
@@ -1343,10 +1343,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               );
                             }else{
                               return CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: searchFeeds[i].imagesOrVideos[0],
-                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                imageUrl: searchFeeds[i].imagesOrVideos[0],
+                                fit: BoxFit.cover,
                               );
                             }
                           }else if(searchFeeds[i].imagesOrVideos.length == 2) {
@@ -1369,10 +1369,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 ),
                               )
                               : CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                fit: BoxFit.cover,
                               ),
                             );
                           }else{
@@ -1398,10 +1398,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                     ),
                                   )
                                   : CachedNetworkImage(
-                                    fit: BoxFit.cover,
-                                    imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                    fit: BoxFit.cover,
                                   );
                                 }else{
                                   return ((){
@@ -1423,9 +1423,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                             Center(
                                               child: CircleAvatar(
-                                                radius: 25,
-                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                 child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                radius: 25,
                                               ),
                                             ),
                                           ],
@@ -1435,25 +1435,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                           fit: StackFit.expand,
                                           children: [
                                             CachedNetworkImage(
-                                              fit: BoxFit.cover,
-                                              imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                              fit: BoxFit.cover,
                                             ),
 
                                             Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                             Center(
                                               child: CircleAvatar(
-                                                radius: 25,
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                radius: 25,
                                               ),
                                             ),
                                           ],
@@ -1471,10 +1465,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                         );
                                       }else{
                                         return CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          imageUrl: searchFeeds[i].imagesOrVideos[index],
+                                          fit: BoxFit.cover,
                                         );
                                       }
                                     }

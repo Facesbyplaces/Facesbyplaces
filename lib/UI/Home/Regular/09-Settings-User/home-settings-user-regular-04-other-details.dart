@@ -42,7 +42,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
   bool toggle4 = false;
   bool toggle5 = false;
 
-  void initState() {
+  void initState(){
     super.initState();
     otherDetails = getOtherDetails(widget.userId);
     toggle1 = widget.toggleBirthdate;
@@ -262,10 +262,10 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('Successfully updated the other details.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    entryAnimation: EntryAnimation.DEFAULT,
                                     onlyOkButton: true,
                                     onOkButtonPressed: (){
                                       Navigator.pop(context, true);
@@ -278,12 +278,12 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 await showDialog(
                                   context: context,
                                   builder: (_) => AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
                                     description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                    onlyOkButton: true,
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    entryAnimation: EntryAnimation.DEFAULT,
                                     buttonOkColor: const Color(0xffff0000),
+                                    onlyOkButton: true,
                                     onOkButtonPressed: (){
                                       Navigator.pop(context, true);
                                     },
@@ -300,15 +300,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                   ),
                 );
               }else if(details.hasError){
-                return Container(
-                  height: SizeConfig.screenHeight,
-                  child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
-                );
+                return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),);
               }else{
-                return Container(
-                  height: SizeConfig.screenHeight,
-                  child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
-                );
+                return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
               }
             },
           ),

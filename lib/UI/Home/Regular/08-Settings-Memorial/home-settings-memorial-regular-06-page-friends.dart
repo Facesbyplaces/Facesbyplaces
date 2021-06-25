@@ -34,13 +34,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
             onLoading();
           });
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: const Text('No more users to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more users to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
         }
       }
     });
@@ -232,8 +226,8 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
         : SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 

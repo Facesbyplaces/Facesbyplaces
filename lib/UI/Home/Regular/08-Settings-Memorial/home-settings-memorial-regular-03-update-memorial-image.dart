@@ -65,6 +65,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff04ECFF),
+        centerTitle: true,
         title: Row(
           children: [
             Text('Page Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
@@ -72,7 +73,6 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
             Spacer(),
           ],
         ),
-        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
           onPressed: () async{
@@ -109,7 +109,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                       Container(
                         height: 200,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), 
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
                         image: backgroundImage.path != ''
                         ? DecorationImage(fit: BoxFit.cover, image: AssetImage('${backgroundImage.path}'),)
                         : DecorationImage(fit: BoxFit.cover, image: CachedNetworkImageProvider('${memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage}'),),),
@@ -118,8 +118,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                             GestureDetector(
                               child: Center(
                                 child: CircleAvatar(
-                                  radius: 50,
                                   backgroundColor: const Color(0xffffffff),
+                                  radius: 50,
                                   child: Padding(
                                     padding: const EdgeInsets.all(5),
                                     child: profileImage.path != ''
@@ -144,19 +144,19 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                             ),
 
                             Positioned(
-                              bottom: 40,
                               left: SizeConfig.screenWidth! / 2,
+                              bottom: 40,
                               child: const CircleAvatar(
-                                radius: 25,
-                                backgroundColor: const Color(0xffffffff),
                                 child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                                backgroundColor: const Color(0xffffffff),
+                                radius: 25,
                               ),
                             ),
 
                             const Positioned(
-                              top: 10,
-                              right: 10,
                               child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff), child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                              right: 10,
+                              top: 10,
                             ),
                           ],
                         ),
@@ -207,25 +207,25 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                 return GestureDetector(
                                   child: backgroundImageToggle == index
                                   ? Container(
+                                    decoration: BoxDecoration(color: const Color(0xff04ECFF), borderRadius: BorderRadius.circular(10),),
                                     padding: const EdgeInsets.all(5),
-                                    width: 100,
                                     height: 100,
-                                    decoration: BoxDecoration(color: const Color(0xff04ECFF), borderRadius: BorderRadius.circular(10),                                            ),
+                                    width: 100,
                                     child: Container(
-                                      width: 100,
-                                      height: 100,
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
+                                      height: 100,
+                                      width: 100,
                                     ),
                                   )
                                   : Container(
-                                    padding: const EdgeInsets.all(5),
-                                    width: 100,
-                                    height: 100,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
+                                    padding: const EdgeInsets.all(5),
+                                    height: 100,
+                                    width: 100,
                                     child: Container(
-                                      width: 100,
-                                      height: 100,
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
+                                      height: 100,
+                                      width: 100,
                                     ),
                                   ),
                                   onTap: () async{
@@ -270,11 +270,10 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Success',
-                                  textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
@@ -287,12 +286,12 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  onlyOkButton: true,
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
+                                  onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },
@@ -308,15 +307,9 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
               ],
             );
           }else if(memorialImageSettings.hasError){
-            return Container(
-              height: SizeConfig.screenHeight,
-              child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
-            );
+            return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),);
           }else{
-            return Container(
-              height: SizeConfig.screenHeight,
-              child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
-            );
+            return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
           }
         },
       ),

@@ -59,6 +59,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
+            centerTitle: true,
             title: Row(
               children: [
                 Text('Page Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
@@ -66,7 +67,6 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                 Spacer(),
               ],
             ),
-            centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
               onPressed: (){
@@ -102,16 +102,11 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           TextFormField(
                             controller: controller1,
-                            readOnly: true,
-                            keyboardType: TextInputType.text,
-                            cursorColor: const Color(0xff000000),
+                            decoration: InputDecoration(alignLabelWithHint: true, labelText: 'DOB', labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),), focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                            decoration: InputDecoration(
-                              alignLabelWithHint: true,
-                              labelText: 'DOB',
-                              labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
-                              focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                            ),
+                            cursorColor: const Color(0xff000000),
+                            keyboardType: TextInputType.text,
+                            readOnly: true,
                             onTap: (){
                               DatePicker.showDatePicker(
                                 context,
@@ -120,7 +115,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                 locale: LocaleType.en,
                                 minTime: dob,
                                 maxTime: rip,
-                                onConfirm: (date) {
+                                onConfirm: (date){
                                   String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
                                   dob = date;
                                   controller1.text = format;
@@ -133,16 +128,11 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
                           TextFormField(
                             controller: controller2,
-                            readOnly: true,
-                            keyboardType: TextInputType.text,
-                            cursorColor: const Color(0xff000000),
+                            decoration: InputDecoration(alignLabelWithHint: true, labelText: 'RIP', labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),), focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                            decoration: InputDecoration(
-                              alignLabelWithHint: true,
-                              labelText: 'RIP',
-                              labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
-                              focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                            ),
+                            cursorColor: const Color(0xff000000),
+                            keyboardType: TextInputType.text,
+                            readOnly: true,
                             onTap: (){
                               DatePicker.showDatePicker(
                                 context,
@@ -199,10 +189,10 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
                                         description: Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        entryAnimation: EntryAnimation.DEFAULT,
                                         onlyOkButton: true,
                                         onOkButtonPressed: (){
                                           Navigator.pop(context, true);
@@ -215,12 +205,12 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
                                         description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                        onlyOkButton: true,
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
+                                        onlyOkButton: true,
                                         onOkButtonPressed: (){
                                           Navigator.pop(context, true);
                                         },
@@ -237,15 +227,9 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                   ],
                 );
               }else if(memorialSettings.hasError){
-                return Container(
-                  height: SizeConfig.screenHeight,
-                  child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),)
-                );
+                return Container(height: SizeConfig.screenHeight, child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),));
               }else{
-                return Container(
-                  height: SizeConfig.screenHeight,
-                  child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),
-                );
+                return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: const SpinKitThreeBounce(color: const Color(0xff000000), size: 50.0,), color: const Color(0xffffffff),),),);
               }
             },
           ),
