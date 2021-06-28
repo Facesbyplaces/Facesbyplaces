@@ -17,6 +17,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       if transaction.save
         render json: {
           payment_intent: intent.client_secret,
+          account_id: stripe_account_id,
           # publishable_key: Rails.configuration.stripe[:publishable_key],
           # transaction: transaction
         }, status: 200
