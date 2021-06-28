@@ -16,8 +16,8 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     if intent.status == 'requires_confirmation'
       if transaction.save
         render json: {
-          payment_intent: intent.client_secret,
-          account_id: stripe_account_id,
+          payment_intent: intent.id,
+          payment_method: intent.payment_method,
           # publishable_key: Rails.configuration.stripe[:publishable_key],
           # transaction: transaction
         }, status: 200
@@ -67,6 +67,15 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
 
     return payment_method.id
     # render json: { payment_method: payment_method }, status: 200
+  end
+
+  def confirm_payment_intent
+    charge = Stripe::PaymentIntent.confirm(
+      params[:client_secret],
+      {payment_method: params[:payment_method]}, 
+      stripe_account: stripe_account_id)
+
+    render json: { charge: charge, status: charge.status }, status: 200
   end
   
   private
