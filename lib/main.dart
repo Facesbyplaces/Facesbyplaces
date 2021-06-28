@@ -48,7 +48,9 @@ void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey =  'pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik';
+  // Stripe.publishableKey =  'acct_1J2Xt2LfCmylQmt9';
   Stripe.merchantIdentifier = 'merchant.com.app.facesbyplaces';
+  // Stripe.stripeAccountId = 'acct_1J2Xt2LfCmylQmt9';
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
 

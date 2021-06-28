@@ -437,7 +437,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                               return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                  // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                                  // showPlaceholderUntilPlay: true,
+                                                                                  placeholderOnTop: false,
                                                                                   deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                   aspectRatio: 16 / 9,
                                                                                   fit: BoxFit.contain,

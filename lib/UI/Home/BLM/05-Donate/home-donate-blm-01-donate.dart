@@ -1,8 +1,13 @@
+import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-01-donate.dart';
+import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-05-confirm-payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 class HomeBLMUserDonate extends StatefulWidget{
   final String pageType;
@@ -16,6 +21,7 @@ class HomeBLMUserDonate extends StatefulWidget{
 class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/google-pay.svg', semanticsLabel: 'Google Pay Mark', height: 52, width: 52);
+  CardFieldInputDetails? newCard;
   int donateToggle = 0;
 
   @override
@@ -75,6 +81,10 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                         (index){
                           return GestureDetector(
                             child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(width: index == donateToggle ? 2 : .5, color: index == donateToggle ? const Color(0xff70D8FF) : const Color(0xff888888),),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
                               child: Column(
                                 children: [
                                   const SizedBox(height: 10,),
@@ -97,10 +107,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                   ),
                                 ],
                               ),
-                              decoration: BoxDecoration(
-                                border: Border.all(width: index == donateToggle ? 2 : .5, color: index == donateToggle ? const Color(0xff70D8FF) : const Color(0xff888888),),
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
                             ),
                             onTap: (){
                               setState(() {
@@ -113,15 +119,22 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  // const SizedBox(height: 20),
 
-                  Container(
-                    padding: EdgeInsets.only(left: 10.0),
-                    alignment: Alignment.centerLeft,
-                    child: Platform.isIOS ? donateWithApple : donateWithGoogle
+                  // Container(
+                  //   padding: EdgeInsets.only(left: 10.0),
+                  //   alignment: Alignment.centerLeft,
+                  //   child: Platform.isIOS ? donateWithApple : donateWithGoogle
+                  // ),
+
+                  // const SizedBox(height: 20,),
+
+                  CardField(
+                    onCardChanged: (card){
+                      newCard = card;
+                    },
                   ),
-
-                  const SizedBox(height: 20,),
+                  
 
                   MiscBLMButtonTemplate(
                     buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
@@ -130,6 +143,138 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     buttonText: 'Send Gift',
                     height: 45,
                     onPressed: () async{
+
+                      if(newCard != null){
+                        String amount = '0.99';
+
+                        if(donateToggle == 0){
+                          amount = '0.99';
+                        }else if(donateToggle == 1){
+                          amount = '5.00';
+                        }else if(donateToggle == 2){
+                          amount = '15.00';
+                        }else if(donateToggle == 3){
+                          amount = '25.00';
+                        }else if(donateToggle == 4){
+                          amount = '50.00';
+                        }else if(donateToggle == 5){
+                          amount = '100.00';
+                        }
+
+                        context.loaderOverlay.show();
+
+                        PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
+                          PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),
+                        ).onError((error, stackTrace){
+                          context.loaderOverlay.hide();
+                          showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
+                              onOkButtonPressed: (){
+                                Navigator.pop(context, true);
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          throw Exception('$error');
+                        });
+
+                        print('The paymentMethod is $paymentMethod');
+                        print('The paymentMethod id is ${paymentMethod.id}');
+                        
+                        List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
+                          context.loaderOverlay.hide();
+                          showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
+                              onOkButtonPressed: (){
+                                Navigator.pop(context, true);
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          throw Exception('$error');
+                        });
+                        bool confirmPaymentResult = await apiBLMConfirmPayment(clientSecret: newValue[0], paymentMethod: newValue[1]).onError((error, stackTrace){
+                          context.loaderOverlay.hide();
+                          showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
+                              onOkButtonPressed: (){
+                                Navigator.pop(context, true);
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          throw Exception('$error');
+                        });
+
+                        context.loaderOverlay.hide();
+
+                        if(confirmPaymentResult == true){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                              description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
+                              title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              onlyOkButton: true,
+                              onOkButtonPressed: (){
+                                Navigator.pop(context);
+                              },
+                            ),
+                          );
+                        }else{
+                          await showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                              title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
+                              onOkButtonPressed: (){
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                        }
+                      }else{
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AssetGiffyDialog(
+                            title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            description: const Text('Please input your card information first before proceeding.', textAlign: TextAlign.center,),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            buttonOkColor: const Color(0xffff0000),
+                            onlyOkButton: true,
+                            onOkButtonPressed: (){
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
+                      }
 
                     }
                   ),

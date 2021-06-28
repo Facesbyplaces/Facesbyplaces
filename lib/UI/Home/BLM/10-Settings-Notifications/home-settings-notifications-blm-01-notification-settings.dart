@@ -12,7 +12,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMNotificationSettings extends StatefulWidget {
+class HomeBLMNotificationSettings extends StatefulWidget{
   final bool newMemorial;
   final bool newActivities;
   final bool postLikes;
@@ -26,7 +26,7 @@ class HomeBLMNotificationSettings extends StatefulWidget {
   HomeBLMNotificationSettingsState createState() => HomeBLMNotificationSettingsState();
 }
 
-class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings> {
+class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings>{
   bool toggle1 = false;
   bool toggle2 = false;
   bool toggle3 = false;
@@ -35,7 +35,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
   bool toggle6 = false;
   bool toggle7 = false;
 
-  void initState() {
+  void initState(){
     super.initState();
     toggle1 = widget.newMemorial;
     toggle2 = widget.newActivities;

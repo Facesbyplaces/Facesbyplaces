@@ -954,6 +954,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                  placeholderOnTop: false,
                                   controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                   aspectRatio: 16 / 9,
                                   fit: BoxFit.contain,

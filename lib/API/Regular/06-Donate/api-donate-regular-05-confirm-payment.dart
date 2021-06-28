@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<List<String>> apiBLMDonate({required String pageType, required int pageId, required double amount, required String paymentMethod}) async{
+Future<bool> apiRegularConfirmPayment({required String clientSecret, required String paymentMethod}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
@@ -20,9 +20,10 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
+
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
+  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/confirm_payment_intent',
     options: Options(
       followRedirects: false,
       validateStatus: (status) {
@@ -33,29 +34,20 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
-      },
+      }
     ),
     queryParameters: <String, dynamic>{
-      'page_type': '$pageType',
-      'page_id': '$pageId',
-      'amount': '$amount',
+      'client_secret': '$clientSecret',
       'payment_method': '$paymentMethod',
     },
   );
 
-  print('The status code of blm donate is ${response.statusCode}');
-  print('The status data of blm donate is ${response.data}');
+  print('The status code of regular confirm payment is ${response.statusCode}');
+  print('The status data of regular confirm payment is ${response.data}');
 
   if(response.statusCode == 200){
-    var newData = Map<String, dynamic>.from(response.data);
-    String clientSecret = newData['payment_intent'];
-    String paymentMethod = newData['payment_method'];
-
-    print('The clientSecret is $clientSecret');
-    print('The payment_method is $paymentMethod');
-
-    return [clientSecret, paymentMethod];
+    return true;
   }else{
-    throw Exception('Something went wrong. Please try again.');
+    return false;
   }
 }

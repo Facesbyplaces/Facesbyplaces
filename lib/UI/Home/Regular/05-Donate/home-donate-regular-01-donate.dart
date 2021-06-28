@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-05-confirm-payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
@@ -106,12 +112,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ),
                   ),
 
-                  CardField(
-                    onCardChanged: (card){
-                      newCard = card;
-                    },
-                  ),
-
                   MiscRegularButtonTemplate(
                     buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
                     width: SizeConfig.screenWidth! / 2, 
@@ -119,144 +119,269 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     buttonText: 'Send Gift',
                     height: 45,
                     onPressed: () async{
-                      String amount = '0.99';
 
-                      if(donateToggle == 0){
-                        amount = '0.99';
-                      }else if(donateToggle == 1){
-                        amount = '5.00';
-                      }else if(donateToggle == 2){
-                        amount = '15.00';
-                      }else if(donateToggle == 3){
-                        amount = '25.00';
-                      }else if(donateToggle == 4){
-                        amount = '50.00';
-                      }else if(donateToggle == 5){
-                        amount = '100.00';
-                      }
+                      await showMaterialModalBottomSheet(
+                        context: context,
+                        builder: (context) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            SizedBox(height: 10,),
 
-                      // await Stripe.instance.createPaymentMethod(data)
+                            // Container(
+                            //   padding: EdgeInsets.only(left: 10.0),
+                            //   alignment: Alignment.centerLeft,
+                            //   child: Platform.isIOS ? donateWithApple : donateWithGoogle
+                            // ),
+                            Row(
+                              children: [
+                                SizedBox(width: 10,),
 
-                      // print('The newCard is $newCard');
+                                donateWithApple,
 
-                      context.loaderOverlay.show();
+                                SizedBox(width: 5,),
 
-                      PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
-                        PaymentMethodParams.card(
-                          billingDetails: BillingDetails.fromJson(newCard!.toJson())
+                                donateWithGoogle
+                              ],
+                            ),
+
+                            SizedBox(height: 10,),
+
+                            Text('Select donation options', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
+
+                            SizedBox(height: 20,),
+
+                            // Align(
+                            //   alignment: Alignment.center,
+                            //   child: 
+                            // ),
+                            // ListTile(
+                            //   title: const Text('Donate with Apple'),
+                            //   leading: const Icon(Icons.edit),
+                            //   onTap: () async{
+
+                            //   },
+                            // ),
+
+                            // ListTile(
+                            //   title: const Text('Donate with Google'),
+                            //   leading: const Icon(Icons.edit),
+                            //   onTap: () async{
+
+                            //   },
+                            // ),
+
+                            // ListTile(
+                            //   title: const Text('Donate with Credit Card'),
+                            //   leading: const Icon(Icons.edit),
+                            //   onTap: () async{
+
+                            //   },
+                            // ),
+
+
+                            GestureDetector(
+                              child: Text('Donate with Apple', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular',),),
+                              onTap: () async{
+                                await Stripe.instance.presentApplePay(
+                                  ApplePayPresentParams(cartItems: [ApplePayCartSummaryItem(label: 'Product Test', amount: '20',),], country: 'US', currency: 'USD',),
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 10,),
+
+                            GestureDetector(
+                              child: Text('Donate with Google', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular',),),
+                              onTap: () async{
+                                
+                              },
+                            ),
+
+                            SizedBox(height: 10,),
+
+                            GestureDetector(
+                              child: Text('Donate with Credit Card', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular',),),
+                              onTap: () async{
+
+                                await showMaterialModalBottomSheet(
+                                  context: context,
+                                  builder: (context) => Container(
+                                    height: SizeConfig.screenHeight! / 1.5,
+                                    child: Column(
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: IconButton(
+                                            onPressed: (){
+
+                                            },
+                                            icon: Icon(Icons.arrow_back),
+                                          ),
+                                        ),
+
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                          child: CardField(
+                                            onCardChanged: (card){
+                                              newCard = card;
+                                            },
+                                          ),
+                                        ),
+
+                                        SizedBox(height: 20,),
+
+                                        MiscRegularButtonTemplate(
+                                          buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+                                          width: SizeConfig.screenWidth! / 2, 
+                                          buttonColor: Color(0xff4EC9D4),
+                                          buttonText: 'Send Gift',
+                                          height: 45,
+                                          onPressed: () async{
+
+                                            if(newCard != null){
+                                              String amount = '0.99';
+
+                                              if(donateToggle == 0){
+                                                amount = '0.99';
+                                              }else if(donateToggle == 1){
+                                                amount = '5.00';
+                                              }else if(donateToggle == 2){
+                                                amount = '15.00';
+                                              }else if(donateToggle == 3){
+                                                amount = '25.00';
+                                              }else if(donateToggle == 4){
+                                                amount = '50.00';
+                                              }else if(donateToggle == 5){
+                                                amount = '100.00';
+                                              }
+
+                                              context.loaderOverlay.show();
+
+                                              PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
+                                                PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),
+                                              ).onError((error, stackTrace){
+                                                context.loaderOverlay.hide();
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (_) => AssetGiffyDialog(
+                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    buttonOkColor: const Color(0xffff0000),
+                                                    onlyOkButton: true,
+                                                    onOkButtonPressed: (){
+                                                      Navigator.pop(context, true);
+                                                      Navigator.pop(context, true);
+                                                    },
+                                                  ),
+                                                );
+                                                throw Exception('$error');
+                                              });
+                                              
+                                              List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
+                                                context.loaderOverlay.hide();
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (_) => AssetGiffyDialog(
+                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    buttonOkColor: const Color(0xffff0000),
+                                                    onlyOkButton: true,
+                                                    onOkButtonPressed: (){
+                                                      Navigator.pop(context, true);
+                                                      Navigator.pop(context, true);
+                                                    },
+                                                  ),
+                                                );
+                                                throw Exception('$error');
+                                              });
+                                              bool confirmPaymentResult = await apiRegularConfirmPayment(clientSecret: newValue[0], paymentMethod: newValue[1]).onError((error, stackTrace){
+                                                context.loaderOverlay.hide();
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (_) => AssetGiffyDialog(
+                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    buttonOkColor: const Color(0xffff0000),
+                                                    onlyOkButton: true,
+                                                    onOkButtonPressed: (){
+                                                      Navigator.pop(context, true);
+                                                      Navigator.pop(context, true);
+                                                    },
+                                                  ),
+                                                );
+                                                throw Exception('$error');
+                                              });
+
+                                              context.loaderOverlay.hide();
+
+                                              if(confirmPaymentResult == true){
+                                                await showDialog(
+                                                  context: context,
+                                                  builder: (_) => AssetGiffyDialog(
+                                                    description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
+                                                    title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    onlyOkButton: true,
+                                                    onOkButtonPressed: (){
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                );
+                                              }else{
+                                                await showDialog(
+                                                  context: context,
+                                                  builder: (_) => AssetGiffyDialog(
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                    description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    buttonOkColor: const Color(0xffff0000),
+                                                    onlyOkButton: true,
+                                                    onOkButtonPressed: (){
+                                                      Navigator.pop(context, true);
+                                                    },
+                                                  ),
+                                                );
+                                              }
+                                            }else{
+                                              await showDialog(
+                                                context: context,
+                                                builder: (_) => AssetGiffyDialog(
+                                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                  description: const Text('Please input your card information first before proceeding.', textAlign: TextAlign.center,),
+                                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                  entryAnimation: EntryAnimation.DEFAULT,
+                                                  buttonOkColor: const Color(0xffff0000),
+                                                  onlyOkButton: true,
+                                                  onOkButtonPressed: (){
+                                                    Navigator.pop(context, true);
+                                                  },
+                                                )
+                                              );
+                                            }
+
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+
+                              },
+                            ),
+
+                            SizedBox(height: 10,),
+                          ],
                         ),
                       );
-
-                      print('The paymentMethod is $paymentMethod');
-                      print('The paymentMethod id is ${paymentMethod.id}');
-
-                      String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id);
-                      // String clientSecret = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: 'pi_1J2q2tE1OZN8BRHaqwBeXkRX_secret_cGw2FpCgRheuZIdO31epdzOdn');
-
-                      PaymentIntent confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(clientSecret, PaymentMethodParams.card(
-                          billingDetails: BillingDetails.fromJson(newCard!.toJson())
-                        ),
-                      );
-
-                      print('The confirmPaymentMethod is $confirmPaymentMethod');
-
-                      context.loaderOverlay.hide();
-
-                      // print('The confirmPaymentMethod is $confirmPaymentMethod');
-                      // print('The confirmPaymentMethod is ${confirmPaymentMethod.clientSecret}');
-
                       
-
-                      // Stripe.instance.confirmPaymentMethod(, data)
-                      
-                      // final paymentIntent = await Stripe.instance.retrievePaymentIntent('sk_test_51Hp23FE1OZN8BRHaFUWRZXzsf6p20xlgnqnEKIspzG6CWRpZ2t8TEpY9zXo7tKB0m6z263qSDfcLQ4r6EYWoJfi100BzfylDfs');
-                      // print('The paymentIntent is $paymentIntent');
-
-
-                      // print('The paymentIntent is ${paymentIntent.}');
-
-
-                      // final cardAction = await Stripe.instance.handleCardAction(
-
-                      // );
-
-                      // print('start');
-
-                      // await Stripe.instance.initPaymentSheet(
-                      //   paymentSheetParameters: SetupPaymentSheetParameters(
-                      //     applePay: true,
-                      //     googlePay: true,
-                      //     style: ThemeMode.dark,
-                      //     testEnv: true,
-                      //     merchantCountryCode: 'US',
-                      //     merchantDisplayName: 'Flutter Stripe Store Demo',
-                      //     customerId: '',
-                      //     paymentIntentClientSecret: '',
-                      //     customerEphemeralKeySecret: '',
-                      //   ),
-                      // ).onError((error, stackTrace) => print('The error is $error'));
-
-                      // print('1');
-
-                      // await Stripe.instance.presentPaymentSheet(
-                      //   parameters: PresentPaymentSheetParameters(clientSecret: 'sk_test_51Hp23FE1OZN8BRHaFUWRZXzsf6p20xlgnqnEKIspzG6CWRpZ2t8TEpY9zXo7tKB0m6z263qSDfcLQ4r6EYWoJfi100BzfylDfs'),
-                      // ).onError((error, stackTrace) => print('The error is $error'));
-
-                      // print('2');
-
-                      // await Stripe.instance.confirmPaymentSheetPayment();
-
-                      // print('3');
-
-                      // print('done');
-
-                      // await Stripe.instance.initPaymentSheet(
-                      //   paymentSheetParameters: SetupPaymentSheetParameters(
-                      //     applePay: true,
-                      //     googlePay: true,
-                      //     style: ThemeMode.dark,
-                      //     testEnv: true,
-                      //     merchantCountryCode: 'US',
-                      //     merchantDisplayName: 'Flutter Stripe Store Demo',
-                      //     customerId: '',
-                      //     paymentIntentClientSecret: '',
-                      //     customerEphemeralKeySecret: '',
-                      //   ),
-                      // );
-
-                      // await Stripe.instance.presentPaymentSheet(
-                      //   parameters: PresentPaymentSheetParameters(
-
-                      //   ),
-                      // );
-
-                      // await Stripe.instance.presentApplePay(
-                      //   ApplePayPresentParams(
-                      //     cartItems: [
-                      //       ApplePayCartSummaryItem(
-                      //         label: 'Product Test',
-                      //         amount: amount,
-                      //       ),
-                      //     ],
-                      //     country: 'US',
-                      //     currency: 'USD',
-                      //   ),
-                      // );
-
-
-                      // await Stripe.instance.presentApplePay(
-                      //   ApplePayPresentParams(
-                      //     cartItems: [
-                      //       ApplePayCartSummaryItem(
-                      //         label: 'Product Test',
-                      //         amount: amount,
-                      //       ),
-                      //     ],
-                      //     country: 'US',
-                      //     currency: 'USD',
-                      //   ),
-                      // );
-
                     },
                   ),
 
