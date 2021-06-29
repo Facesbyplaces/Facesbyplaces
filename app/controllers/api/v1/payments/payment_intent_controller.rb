@@ -2,22 +2,33 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   before_action :check_user
   
   def payment_intent
-    intent = Stripe::PaymentIntent.create({
-      amount: amount,
-      currency: 'usd',
-      description: "Donation for #{memorial.name}",
-      payment_method_types: ['card'],
-      payment_method: payment_method,
-      customer: "cus_JitgXxZHgGMSll",
-    },{
-        stripe_account: stripe_account_id,
-    })
+    if payment_method != false
+      intent = Stripe::PaymentIntent.create({
+        amount: amount,
+        currency: 'usd',
+        description: "Donation for #{memorial.name}",
+        payment_method_types: ['card'],
+        payment_method: payment_method,
+        customer:  connected_account_customer, #Retrieve id from connected account customer
+      }, {
+          stripe_account: stripe_account_id,
+      })
+    else
+      intent = Stripe::PaymentIntent.create({
+        amount: amount,
+        currency: 'usd',
+        description: "Donation for #{memorial.name}",
+      }, {
+          stripe_account: stripe_account_id,
+      })
+    end
 
     if intent.status == 'requires_confirmation'
       if transaction.save
         render json: {
           payment_intent: intent.id,
           payment_method: intent.payment_method,
+          client_secret:  intent.client_secret,
           # publishable_key: Rails.configuration.stripe[:publishable_key],
           # transaction: transaction
         }, status: 200
@@ -29,6 +40,50 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     elsif intent.status == 'requires_payment_method'
       render json: { intent: intent, status: "Requires Payment Method" }, status: 422
     end
+  end
+
+  def platform_account_customer 
+    if user().stripe_customer_account != nil
+      customer = Stripe::Customer.retrieve(user().stripe_customer_account)
+    else
+      customer = Stripe::Customer.create({
+        email: user().email,
+      })
+    end
+
+    Stripe::PaymentMethod.attach(
+      params[:payment_method],
+      {customer: customer.id},
+    )
+
+    user().update(stripe_customer_account: customer.id)
+
+    return customer.id
+  end
+
+  def payment_method
+    if params[:payment_method].present?
+      payment_method = Stripe::PaymentMethod.create({
+        customer: platform_account_customer,
+        payment_method: params[:payment_method],
+      }, {
+        stripe_account: stripe_account_id,
+      })
+
+      return payment_method.id
+    else
+      return false
+    end
+    # render json: { payment_method: payment_method }, status: 200
+  end
+
+  def confirm_payment_intent
+    charge = Stripe::PaymentIntent.confirm(
+      params[:client_secret],
+      {payment_method: params[:payment_method]}, 
+      stripe_account: stripe_account_id)
+
+    render json: { charge: charge, status: charge.status }, status: 200
   end
 
   def create_payment_method
@@ -44,44 +99,15 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
 
     render json: { method: method }, status: 200
   end
-
-  def platform_account_customer 
-    customer = Stripe::Customer.create({
-      email: user().email,
-    }) 
-
-    Stripe::PaymentMethod.attach(
-      params[:payment_method],
-      {customer: customer.id},
-    )
-    return customer.id
-  end
-
-  def payment_method
-    payment_method = Stripe::PaymentMethod.create({
-      customer: platform_account_customer,
-      payment_method: params[:payment_method],
-    }, {
-      stripe_account: stripe_account_id,
-    })
-
-    return payment_method.id
-    # render json: { payment_method: payment_method }, status: 200
-  end
-
-  def confirm_payment_intent
-    charge = Stripe::PaymentIntent.confirm(
-      params[:client_secret],
-      {payment_method: params[:payment_method]}, 
-      stripe_account: stripe_account_id)
-
-    render json: { charge: charge, status: charge.status }, status: 200
-  end
   
   private
 
   def stripe_account_id
     return User.find_by(email: "admin@email.com").device_token
+  end
+
+  def connected_account_customer
+    return Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :connected_account_customer)
   end
 
   def amount

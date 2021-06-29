@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2021_06_14_092608) do
     t.string "facebook_id"
     t.string "device_token"
     t.boolean "password_update", default: false
+    t.string "stripe_customer_account"
     t.index ["confirmation_token"], name: "index_alm_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_alm_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_alm_users_on_reset_password_token", unique: true
@@ -385,6 +386,7 @@ ActiveRecord::Schema.define(version: 2021_06_14_092608) do
     t.string "facebook_id"
     t.string "device_token"
     t.boolean "password_update", default: false
+    t.string "stripe_customer_account"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
