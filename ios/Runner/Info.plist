@@ -41,7 +41,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb674832526555519</string>
+				<string>fb293806305805032</string>
 			</array>
 		</dict>
 		<dict>
@@ -62,7 +62,9 @@
 	<key>FacebookAdvertiserIDCollectionEnabled</key>
 	<false/>
 	<key>FacebookAppID</key>
-	<string>674832526555519</string>
+	<string>293806305805032</string>
+	<key>FacebookClientToken</key>
+	<string>6166b801e7f998d2d03b28fa1c963b00</string>
 	<key>FacebookAutoLogAppEventsEnabled</key>
 	<false/>
 	<key>FacebookDisplayName</key>

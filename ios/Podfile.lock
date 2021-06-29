@@ -463,6 +463,8 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
+  - pay_ios (0.0.1):
+    - Flutter
   - PromisesObjC (1.2.12)
   - share (0.0.1):
     - Flutter
@@ -513,6 +515,7 @@ DEPENDENCIES:
   - location (from `.symlinks/plugins/location/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
@@ -602,6 +605,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  pay_ios:
+    :path: ".symlinks/plugins/pay_ios/ios"
   share:
     :path: ".symlinks/plugins/share/ios"
   shared_preferences:
@@ -671,6 +676,7 @@ SPEC CHECKSUMS:
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
@@ -682,6 +688,6 @@ SPEC CHECKSUMS:
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
   ZLPhotoBrowser: 809878607ea92e9411c580797ce1be23896b8d7f
 
-PODFILE CHECKSUM: 61d33472197d3b37c7aed4cb30c6f7d7313a304f
+PODFILE CHECKSUM: e27110cec5b2de70101b86249053b189cf03cd56
 
 COCOAPODS: 1.10.1

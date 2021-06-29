@@ -37,6 +37,7 @@ public final class GeneratedPluginRegistrant {
     flutterEngine.getPlugins().add(new com.lyokone.location.LocationPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.packageinfo.PackageInfoPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
+    flutterEngine.getPlugins().add(new io.flutter.plugins.pay_android.PayPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.share.SharePlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin());
     flutterEngine.getPlugins().add(new com.aboutyou.dart_packages.sign_in_with_apple.SignInWithApplePlugin());
