@@ -38,7 +38,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         }, status: 404
       end
     elsif intent.status == 'requires_payment_method'
-      render json: { intent: intent.client_secret }, status: 200
+      render json: { client_secret: intent.client_secret }, status: 200
     end
   end
 
@@ -123,8 +123,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       }, {
         stripe_account: stripe_account_id,
       })
-
-      user().update(payment_method: payment_method.id)
 
       return payment_method
     else
