@@ -8,7 +8,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         currency: 'usd',
         description: "Donation for #{memorial.name}",
         payment_method_types: ['card'],
-        payment_method: payment_method,
+        payment_method: payment_method.id,
         customer:  connected_account_customer, #Retrieve id from connected account customer
       }, {
           stripe_account: stripe_account_id,
@@ -38,44 +38,49 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         }, status: 404
       end
     elsif intent.status == 'requires_payment_method'
-      render json: { intent: intent, status: "Requires Payment Method" }, status: 422
+      render json: { intent: intent.client_secret }, status: 200
     end
   end
 
+  #Create or Retrieve the Platform Account Customer
   def platform_account_customer 
-    if user().stripe_customer_account != nil
-      customer = Stripe::Customer.retrieve(user().stripe_customer_account)
+    if user().platform_account_customer != nil
+      customer = Stripe::Customer.retrieve(user().platform_account_customer)
     else
       customer = Stripe::Customer.create({
         email: user().email,
       })
     end
 
+    #Attach Payment Method
     Stripe::PaymentMethod.attach(
       params[:payment_method],
       {customer: customer.id},
     )
 
-    user().update(stripe_customer_account: customer.id)
+    user().update(platform_account_customer: customer.id)
 
     return customer.id
   end
 
-  def payment_method
-    if params[:payment_method].present?
-      payment_method = Stripe::PaymentMethod.create({
-        customer: platform_account_customer,
-        payment_method: params[:payment_method],
-      }, {
-        stripe_account: stripe_account_id,
-      })
+  #Create or Retrieve the Connected Account Customer
+  # def connected_account_customer
+  #   if user().connected_account_customer != nil
+  #     customer = Stripe::Customer.retrieve(user().connected_account_customer)
+  #   else
+  #     customer = Stripe::Customer.create({
+  #       source: token,
+  #     }, {
+  #       stripe_account: stripe_account_id,
+  #     })
+  #   end
 
-      return payment_method.id
-    else
-      return false
-    end
-    # render json: { payment_method: payment_method }, status: 200
-  end
+  #   user().update(connected_account_customer: customer.id)
+
+  #   return customer.id
+  # end
+
+  # PAYMENT TEST ACTIONS
 
   def confirm_payment_intent
     charge = Stripe::PaymentIntent.confirm(
@@ -108,6 +113,34 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
 
   def connected_account_customer
     return Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :connected_account_customer)
+  end
+
+  def payment_method
+    if params[:payment_method].present?
+      payment_method = Stripe::PaymentMethod.create({
+        customer: platform_account_customer,
+        payment_method: params[:payment_method],
+      }, {
+        stripe_account: stripe_account_id,
+      })
+
+      user().update(payment_method: payment_method.id)
+
+      return payment_method
+    else
+      return false
+    end
+    # render json: { payment_method: payment_method }, status: 200
+  end
+
+  def token
+    token = Stripe::Token.create({
+      customer: platform_account_customer, 
+    }, {
+      stripe_account: stripe_account_id,
+    })
+
+    return token.id
   end
 
   def amount
