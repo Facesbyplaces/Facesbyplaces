@@ -1,11 +1,7 @@
-
-
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-05-confirm-payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -14,14 +10,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart' as pay;
-
-const _paymentItems = [
-  pay.PaymentItem(
-    label: 'Total',
-    amount: '5.00',
-    status: pay.PaymentItemStatus.final_price,
-  )
-];
+import 'dart:io';
 
 class HomeRegularUserDonate extends StatefulWidget{
   final String pageType;
@@ -93,7 +82,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                 children: [
                                   const SizedBox(height: 10),
 
-                                  Expanded(child: Image.asset('assets/icons/gift.png'),),
+                                  Image.asset('assets/icons/gift.png', height: 120, width: 120),
 
                                   const SizedBox(height: 10),
 
@@ -147,73 +136,37 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                         amount = '100.00';
                       }
 
-
                       await showMaterialModalBottomSheet(
                         context: context,
                         builder: (context) => Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            SizedBox(height: 10,),
-
-                            // Container(
-                            //   padding: EdgeInsets.only(left: 10.0),
-                            //   alignment: Alignment.centerLeft,
-                            //   child: Platform.isIOS ? donateWithApple : donateWithGoogle
-                            // ),
-                            Row(
-                              children: [
-                                SizedBox(width: 10,),
-
-                                donateWithApple,
-
-                                SizedBox(width: 5,),
-
-                                donateWithGoogle
-                              ],
-                            ),
-
-                            SizedBox(height: 10,),
+                            SizedBox(height: 20,),
 
                             Text('Select donation options', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular',),),
 
                             SizedBox(height: 20,),
 
-                            // Align(
-                            //   alignment: Alignment.center,
-                            //   child: 
-                            // ),
-                            // ListTile(
-                            //   title: const Text('Donate with Apple'),
-                            //   leading: const Icon(Icons.edit),
-                            //   onTap: () async{
+                            Platform.isIOS 
+                            ? pay.RawApplePayButton(
+                              type: pay.ApplePayButtonType.donate,
+                              onPressed: () async{
+                                bool onError = false;
 
-                            //   },
-                            // ),
-
-                            // ListTile(
-                            //   title: const Text('Donate with Google'),
-                            //   leading: const Icon(Icons.edit),
-                            //   onTap: () async{
-
-                            //   },
-                            // ),
-
-                            // ListTile(
-                            //   title: const Text('Donate with Credit Card'),
-                            //   leading: const Icon(Icons.edit),
-                            //   onTap: () async{
-
-                            //   },
-                            // ),
-
-
-                            GestureDetector(
-                              child: Text('Donate with Apple', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular',),),
-                              onTap: () async{
                                 await Stripe.instance.presentApplePay(
-                                  ApplePayPresentParams(cartItems: [ApplePayCartSummaryItem(label: 'Donation for ${widget.pageName}', amount: '20',),], country: 'US', currency: 'USD',),
-                                ).onError((error, stackTrace){
-                                  context.loaderOverlay.hide();
+                                  ApplePayPresentParams(
+                                    cartItems: [
+                                      ApplePayCartSummaryItem(
+                                        label: 'Donation for ${widget.pageName}',
+                                        amount: amount,
+                                      ),
+                                    ],
+                                    country: 'US',
+                                    currency: 'USD',
+                                  ),
+                                );
+
+                                List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
                                   showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
@@ -229,107 +182,26 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                       },
                                     ),
                                   );
+                                  onError = true;
                                   throw Exception('$error');
                                 });
 
-                                
-
-                                // List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
-                                //   context.loaderOverlay.hide();
-                                //   showDialog(
-                                //     context: context,
-                                //     builder: (_) => AssetGiffyDialog(
-                                //       description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //       entryAnimation: EntryAnimation.DEFAULT,
-                                //       buttonOkColor: const Color(0xffff0000),
-                                //       onlyOkButton: true,
-                                //       onOkButtonPressed: (){
-                                //         Navigator.pop(context, true);
-                                //         Navigator.pop(context, true);
-                                //       },
-                                //     ),
-                                //   );
-                                //   throw Exception('$error');
-                                // });
+                                if(onError != true){
+                                  await Stripe.instance.confirmApplePayPayment(newValue[0]);
+                                }
+                              },
+                            )
+                            : pay.RawGooglePayButton(
+                              type: pay.GooglePayButtonType.donate,
+                              onPressed: () async{
 
                               },
                             ),
 
-                            SizedBox(height: 10,),
-
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: pay.GooglePayButton(
-                                paymentConfigurationAsset: 'google_pay_payment_profile.json',
-                                paymentItems: _paymentItems,
-                                margin: const EdgeInsets.only(top: 15),
-                                onPaymentResult: onGooglePayResult,
-                                // loadingIndicator: const Center(
-                                //   child: CircularProgressIndicator(),
-                                // ),
-                                onPressed: () async {
-                                  print('hdhdh');
-                                  // 1. Add your stripe publishable key to assets/google_pay_payment_profile.json
-                                  await debugChangedStripePublishableKey();
-                                },
-                                onError: (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'There was an error while trying to perform the payment'),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-
-                            // Padding(
-                            //   // padding: const EdgeInsets.all(16),
-                            //   child: 
-                            // ),
-                            pay.ApplePayButton(
-                              paymentItems: [],
-                              onPaymentResult: onGooglePayResult,
-                              paymentConfigurationAsset: 'apple_pay_payment_profile.json',
-                              onPressed: (){
-                                
-                              },
-                            ),
-
-                            // GestureDetector(
-                            //   child: Text('Donate with Google', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular',),),
-                            //   onTap: () async{
-                                
-                            //     // List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
-                            //     //   context.loaderOverlay.hide();
-                            //     //   showDialog(
-                            //     //     context: context,
-                            //     //     builder: (_) => AssetGiffyDialog(
-                            //     //       description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            //     //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                            //     //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     //       entryAnimation: EntryAnimation.DEFAULT,
-                            //     //       buttonOkColor: const Color(0xffff0000),
-                            //     //       onlyOkButton: true,
-                            //     //       onOkButtonPressed: (){
-                            //     //         Navigator.pop(context, true);
-                            //     //         Navigator.pop(context, true);
-                            //     //       },
-                            //     //     ),
-                            //     //   );
-                            //     //   throw Exception('$error');
-                            //     // });
-
-                            //     PaymentMethodParams.cardFromToken(token: 'sampletoken');
-                            //   },
-                            // ),
-
-                            SizedBox(height: 10,),
+                            SizedBox(height: 15,),
 
                             GestureDetector(
-                              child: Text('Donate with Credit Card', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular',),),
+                              child: Text('Donate with Credit Card', style: TextStyle(fontSize: 14, fontFamily: 'NexaRegular',),),
                               onTap: () async{
 
                                 await showMaterialModalBottomSheet(
@@ -509,54 +381,3 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
     );
   }
 }
-
-Future<void> onGooglePayResult(paymentResult) async {
-    try {
-      // 1. Add your stripe publishable key to assets/google_pay_payment_profile.json
-
-      // debugPrint(paymentResult.toString());
-      // // 2. fetch Intent Client Secret from backend
-      // final response = await fetchPaymentIntentClientSecret();
-      // final clientSecret = response['clientSecret'];
-      // final token =
-      //     paymentResult['paymentMethodData']['tokenizationData']['token'];
-      // final tokenJson = Map.castFrom(json.decode(token));
-      // print(tokenJson);
-
-      // final params = PaymentMethodParams.cardFromToken(
-      //   token: tokenJson['id'], // TODO extract the actual token
-      // );
-
-      // // 3. Confirm Google pay payment method
-      // await Stripe.instance.confirmPaymentMethod(
-      //   clientSecret,
-      //   params,
-      // );
-
-      print('Google Pay payment succesfully completed');
-
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   const SnackBar(
-      //       content: Text('Google Pay payment succesfully completed')),
-      // );
-    } catch (e) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(content: Text('Error: $e')),
-      // );
-      print('Error: $e');
-    }
-  }
-
-    Future<void> debugChangedStripePublishableKey() async {
-      print('dsaflkjasdflkzxc iouasdfoiuad');
-
-      if (kDebugMode) {
-        final profile =
-            await rootBundle.loadString('assets/google_pay_payment_profile.json');
-        final isValidKey = !profile.contains('pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik');
-        assert(
-          isValidKey,
-          'No stripe publishable key added to assets/google_pay_payment_profile.json',
-        );
-      }
-    }

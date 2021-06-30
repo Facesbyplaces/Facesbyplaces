@@ -47,15 +47,22 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
   print('The status data of regular donate is ${response.data}');
   // print('The status data of regular donate is ${response.headers}');
 
-  if(response.statusCode == 200){
+  if(response.statusCode == 200 || response.statusCode == 422){
     var newData = Map<String, dynamic>.from(response.data);
-    String clientSecret = newData['payment_intent'];
-    String paymentMethod = newData['payment_method'];
+    if(paymentMethod != ''){
+      String clientSecret = newData['payment_intent'];
+      String paymentMethod = newData['payment_method'];
 
-    print('The clientSecret is $clientSecret');
-    print('The payment_method is $paymentMethod');
+      print('The clientSecret is $clientSecret');
+      print('The payment_method is $paymentMethod');
 
-    return [clientSecret, paymentMethod];
+      return [clientSecret, paymentMethod];
+    }else{
+      String clientSecret = newData['intent'];
+
+      print('The clientSecret is $clientSecret');
+      return [clientSecret, ''];
+    }
   }else{
     throw Exception('Something went wrong. Please try again.');
   }

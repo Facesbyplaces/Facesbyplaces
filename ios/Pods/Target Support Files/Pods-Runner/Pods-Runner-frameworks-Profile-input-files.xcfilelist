@@ -30,6 +30,7 @@ ${BUILT_PRODUCTS_DIR}/flutter_branch_sdk/flutter_branch_sdk.framework
 ${BUILT_PRODUCTS_DIR}/flutter_inappwebview/flutter_inappwebview.framework
 ${BUILT_PRODUCTS_DIR}/flutter_keyboard_visibility/flutter_keyboard_visibility.framework
 ${BUILT_PRODUCTS_DIR}/flutter_login_facebook/flutter_login_facebook.framework
+${BUILT_PRODUCTS_DIR}/flutter_pay/flutter_pay.framework
 ${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework
 ${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework
 ${BUILT_PRODUCTS_DIR}/geocoding/geocoding.framework
