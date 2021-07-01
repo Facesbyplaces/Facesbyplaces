@@ -58,8 +58,8 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
         child: Scaffold(
           appBar: AppBar(
             title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-            centerTitle: true,
             backgroundColor: const Color(0xff04ECFF),
+            centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
               onPressed: (){
@@ -69,10 +69,8 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
           ),
           body: Stack(
             children: [
-              SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
-              ),
+              SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
+
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: ListView(
@@ -100,8 +98,8 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                     TextFormField(
                       controller: controller1,
-                      keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
+                      keyboardType: TextInputType.text,
                       readOnly: true,
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
@@ -137,14 +135,14 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                     TextFormField(
                       controller: controller2,
-                      keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
+                      keyboardType: TextInputType.text,
                       readOnly: true,
                       decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        labelText: 'RIP',
                         labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                        alignLabelWithHint: true,
+                        labelText: 'RIP',
                         suffixIcon: IconButton(
                           icon: Icon(Icons.close), 
                           onPressed: (){
@@ -197,12 +195,12 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                              onlyOkButton: true,
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },

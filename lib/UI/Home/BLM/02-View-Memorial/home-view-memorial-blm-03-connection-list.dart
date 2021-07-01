@@ -49,7 +49,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   int page2 = 1;
   int page3 = 1;
 
-  void initState() {
+  void initState(){
     super.initState();
     toggle.value = widget.newToggle;
     onLoading1();
@@ -60,13 +60,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         if(itemRemaining1 != 0){
           onLoading1();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: const Text('No more connection list family to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more connection list family to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
         }
       }
     });
@@ -75,13 +69,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         if(itemRemaining2 != 0){
           onLoading1();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: const Text('No more connection list friends to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more connection list friends to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
         }
       }
     });
@@ -90,13 +78,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         if(itemRemaining3 != 0){
           onLoading1();
         }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: const Text('No more connection list followers to show'),
-              duration: const Duration(seconds: 1),
-              backgroundColor: const Color(0xff4EC9D4),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more connection list followers to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
         }
       }
     });
@@ -122,14 +104,12 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -170,14 +150,12 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           context: context,
           builder: (_) => AssetGiffyDialog(
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onlyOkButton: true,
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
             },
@@ -217,13 +195,11 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           context: context,
           builder: (_) => AssetGiffyDialog(
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -298,9 +274,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                             style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(15.0),
-                              filled: true,
-                              fillColor: const Color(0xffffffff),
                               focusColor: const Color(0xffffffff),
+                              fillColor: const Color(0xffffffff),
+                              filled: true,
                               hintText: ((){
                                 switch(toggleListener){
                                   case 0: return 'Search Family';
@@ -308,11 +284,11 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                                   case 2: return 'Search Followers';
                                 }
                               }()),
-                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                              prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
-                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                               focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                              prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
                             ),
                             onChanged: (search){
                               searchKeyword = search;
@@ -372,16 +348,16 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
               children: [
                 Container(
                   width: SizeConfig.screenWidth,
-                  height: 70,
                   color: const Color(0xffffffff),
+                  height: 70,
                   child: DefaultTabController(
                     initialIndex: toggleListener,
                     length: 3,
                     child: TabBar(
-                      labelColor: const Color(0xff04ECFF),
                       unselectedLabelColor: const Color(0xff000000),
-                      indicatorColor: const Color(0xff04ECFF),
                       indicatorSize: TabBarIndicatorSize.label,
+                      indicatorColor: const Color(0xff04ECFF),
+                      labelColor: const Color(0xff04ECFF),
                       indicatorWeight: 5,
                       onTap: (int number){
                         toggle.value = number;
@@ -460,8 +436,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             onRefresh: onRefresh1,
             child: GridView.count(
               controller: scrollController1,
-              padding: const EdgeInsets.all(10.0),
               physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
               crossAxisSpacing: 2,
               mainAxisSpacing: 20,
               crossAxisCount: 4,
@@ -563,8 +539,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             onRefresh: onRefresh2,
             child: GridView.count(
               controller: scrollController2,
-              padding: const EdgeInsets.all(10.0),
               physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
               crossAxisSpacing: 2,
               mainAxisSpacing: 20,
               crossAxisCount: 4,
@@ -659,8 +635,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             onRefresh: onRefresh3,
             child: GridView.count(
               controller: scrollController3,
-              padding: const EdgeInsets.all(10.0),
               physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
               crossAxisSpacing: 2,
               mainAxisSpacing: 20,
               crossAxisCount: 4,

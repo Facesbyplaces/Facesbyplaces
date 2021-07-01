@@ -47,15 +47,6 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
   print('The status data of blm donate is ${response.data}');
 
   if(response.statusCode == 200){
-    // var newData = Map<String, dynamic>.from(response.data);
-    // String clientSecret = newData['payment_intent'];
-    // String paymentMethod = newData['payment_method'];
-
-    // print('The clientSecret is $clientSecret');
-    // print('The payment_method is $paymentMethod');
-
-    // return [clientSecret, paymentMethod];
-
     var newData = Map<String, dynamic>.from(response.data);
     if(paymentMethod != ''){
       String clientSecret = newData['payment_intent'];
@@ -66,10 +57,11 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
 
       return [clientSecret, paymentMethod];
     }else{
-      String clientSecret = newData['intent'];
+      String clientSecret = newData['client_secret'];
+      String token = newData['token'];
 
       print('The clientSecret is $clientSecret');
-      return [clientSecret, ''];
+      return [clientSecret, token];
     }
   }else{
     throw Exception('Something went wrong. Please try again.');

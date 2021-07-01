@@ -21,6 +21,8 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
   }
 
   Dio dioRequest = Dio();
+  
+  print('The payment method in donate api is $paymentMethod');
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
     options: Options(
@@ -58,10 +60,11 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
 
       return [clientSecret, paymentMethod];
     }else{
-      String clientSecret = newData['intent'];
+      String clientSecret = newData['client_secret'];
+      String token = newData['token'];
 
       print('The clientSecret is $clientSecret');
-      return [clientSecret, ''];
+      return [clientSecret, token];
     }
   }else{
     throw Exception('Something went wrong. Please try again.');

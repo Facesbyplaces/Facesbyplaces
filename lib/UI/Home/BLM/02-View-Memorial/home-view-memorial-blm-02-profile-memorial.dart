@@ -243,8 +243,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                               child: Column(
                                                                 children: [
                                                                   Container(
-                                                                    alignment: Alignment.centerRight,
                                                                     padding: const EdgeInsets.only(right: 20.0),
+                                                                    alignment: Alignment.centerRight,
                                                                     child: GestureDetector(
                                                                       child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                       onTap: (){
@@ -257,10 +257,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                                   Expanded(
                                                                     child: CachedNetworkImage(
-                                                                      fit: BoxFit.contain,
-                                                                      imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
-                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                      imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
+                                                                      fit: BoxFit.contain,
                                                                     ),
                                                                   ),
 
@@ -283,12 +283,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       const SizedBox(height: 120,),
 
                                                       Center(
-                                                        child: Text(
-                                                          profile.data!.blmMemorial.memorialName,
-                                                          textAlign: TextAlign.center,
-                                                          maxLines: 5,
-                                                          overflow: TextOverflow.clip,
+                                                        child: Text(profile.data!.blmMemorial.memorialName,
                                                           style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
+                                                          textAlign: TextAlign.center,
+                                                          overflow: TextOverflow.clip,
+                                                          maxLines: 5,
                                                         ),
                                                       ),
 
@@ -310,9 +309,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             onTap: (){
                                                               showGeneralDialog(
                                                                 context: context,
+                                                                transitionDuration: const Duration(milliseconds: 0),
                                                                 barrierDismissible: true,
                                                                 barrierLabel: 'Dialog',
-                                                                transitionDuration: const Duration(milliseconds: 0),
                                                                 pageBuilder: (_, __, ___) {
                                                                   return Scaffold(
                                                                     backgroundColor: Colors.black12.withOpacity(0.7),
@@ -321,8 +320,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                         child: Column(
                                                                           children: [
                                                                             Container(
-                                                                              alignment: Alignment.centerRight,
                                                                               padding: const EdgeInsets.only(right: 20.0),
+                                                                              alignment: Alignment.centerRight,
                                                                               child: GestureDetector(
                                                                                 child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                                 onTap: (){
@@ -346,10 +345,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                   );
                                                                                 }else{
                                                                                   return CachedNetworkImage(
-                                                                                    fit: BoxFit.contain,
-                                                                                    imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
-                                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                    imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
+                                                                                    fit: BoxFit.contain,
                                                                                   );
                                                                                 }
                                                                               }()),
@@ -389,9 +388,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           ((){
                                                             if(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription != ''){
                                                               return Container(
-                                                                alignment: Alignment.center,
-                                                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                                 child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription, textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                                alignment: Alignment.center,
                                                               );
                                                             }else{
                                                               return Container(height: 0,);
@@ -443,11 +442,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                       await showDialog(
                                                                         context: context,
                                                                         builder: (_) => AssetGiffyDialog(
-                                                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                                          description: Text(join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                                                           title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                           entryAnimation: EntryAnimation.DEFAULT,
-                                                                          description: Text(join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.',
-                                                                          textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                                                                           onlyOkButton: true,
                                                                           onOkButtonPressed: (){
                                                                             Navigator.pop(context, true);
@@ -458,16 +456,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                       await showDialog(
                                                                         context: context,
                                                                         builder: (_) => AssetGiffyDialog(
+                                                                          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                                                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                                          title: Text('Error',
-                                                                          textAlign: TextAlign.center, 
-                                                                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                                                                           entryAnimation: EntryAnimation.DEFAULT,
-                                                                          description: Text('Something went wrong. Please try again.',
-                                                                          textAlign: TextAlign.center,
-                                                                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                                                          onlyOkButton: true,
                                                                           buttonOkColor: const Color(0xffff0000),
+                                                                          onlyOkButton: true,
                                                                           onOkButtonPressed: (){
                                                                             Navigator.pop(context, true);
                                                                           },
@@ -666,9 +660,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           SizedBox(height: 20,),
 
                                                           Container(
+                                                            child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                                             padding: const EdgeInsets.only(left: 20.0),
                                                             alignment: Alignment.centerLeft,
-                                                            child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                                           ),
 
                                                           const SizedBox(height: 20,),
@@ -677,9 +671,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           ? Column(
                                                             children: [
                                                               Container(
+                                                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                                 width: SizeConfig.screenWidth,
                                                                 height: 100,
-                                                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                                 child: ListView.separated(
                                                                   physics: const ClampingScrollPhysics(),
                                                                   scrollDirection: Axis.horizontal,
@@ -692,9 +686,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                       onTap: (){
                                                                         showGeneralDialog(
                                                                           context: context,
+                                                                          transitionDuration: const Duration(milliseconds: 0),
                                                                           barrierDismissible: true,
                                                                           barrierLabel: 'Dialog',
-                                                                          transitionDuration: const Duration(milliseconds: 0),
                                                                           pageBuilder: (_, __, ___){
                                                                             return Scaffold(
                                                                               backgroundColor: Colors.black12.withOpacity(0.7),
@@ -703,8 +697,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                   child: Column(
                                                                                     children: [
                                                                                       Container(
-                                                                                        alignment: Alignment.centerRight,
                                                                                         padding: const EdgeInsets.only(right: 20.0),
+                                                                                        alignment: Alignment.centerRight,
                                                                                         child: GestureDetector(
                                                                                           child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                                           onTap: (){
@@ -731,20 +725,20 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                                               );
                                                                                             }else{
                                                                                               return CachedNetworkImage(
-                                                                                                fit: BoxFit.contain,
-                                                                                                imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
-                                                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                                imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
+                                                                                                fit: BoxFit.contain
                                                                                               );
                                                                                             }
                                                                                             }()),
                                                                                           ),
                                                                                           options: CarouselOptions(
-                                                                                            autoPlay: false,
                                                                                             enlargeCenterPage: true,
-                                                                                            aspectRatio: 1,
                                                                                             viewportFraction: 1,
                                                                                             initialPage: index,
+                                                                                            autoPlay: false,                                                                                            
+                                                                                            aspectRatio: 1,
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -776,8 +770,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                       child: ((){
                                                                         if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[index])?.contains('video') == true){
                                                                           return Container(
-                                                                            width: 100,
                                                                             height: 100,
+                                                                            width: 100,
                                                                             child: BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[index]}',
                                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                                 placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
@@ -789,13 +783,13 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                           );
                                                                         }else{
                                                                           return Container(
-                                                                            width: 100,
                                                                             height: 100,
+                                                                            width: 100,
                                                                             child: CachedNetworkImage(
-                                                                              fit: BoxFit.cover,
-                                                                              imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
-                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                              imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
+                                                                              fit: BoxFit.cover,
                                                                             ),
                                                                           );
                                                                         }
@@ -831,6 +825,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           child: Row(
                                                             children: [
                                                               Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
+
                                                               Text('Back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                             ],
                                                           ),
@@ -867,9 +862,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       onTap: (){
                                                         showGeneralDialog(
                                                           context: context,
+                                                          transitionDuration: const Duration(milliseconds: 0),
                                                           barrierDismissible: true,
                                                           barrierLabel: 'Dialog',
-                                                          transitionDuration: const Duration(milliseconds: 0),
                                                           pageBuilder: (_, __, ___){
                                                             return Scaffold(
                                                               backgroundColor: Colors.black12.withOpacity(0.7),
@@ -881,11 +876,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                         alignment: Alignment.centerRight,
                                                                         padding: const EdgeInsets.only(right: 20.0),
                                                                         child: GestureDetector(
-                                                                          child: CircleAvatar(
-                                                                            radius: 20,
-                                                                            backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                            child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                          ),
+                                                                          child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                           onTap: (){
                                                                             Navigator.pop(context);
                                                                           },
@@ -896,10 +887,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                                       Expanded(
                                                                         child: CachedNetworkImage(
-                                                                          fit: BoxFit.contain,
-                                                                          imageUrl: profile.data!.blmMemorial.memorialProfileImage,
-                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                          imageUrl: profile.data!.blmMemorial.memorialProfileImage,
+                                                                          fit: BoxFit.contain,
                                                                         ),
                                                                       ),
 
@@ -1028,10 +1019,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             ),
                                                           )
                                                           : CachedNetworkImage(
-                                                            fit: BoxFit.cover,
-                                                            imageUrl: posts[i].imagesOrVideos[index],
-                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            imageUrl: posts[i].imagesOrVideos[index],
+                                                            fit: BoxFit.cover,
                                                           ),
                                                         );
                                                       }else{
@@ -1056,10 +1047,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                 ),
                                                               )
                                                               : CachedNetworkImage(
-                                                                fit: BoxFit.cover,
-                                                                imageUrl: posts[i].imagesOrVideos[index],
-                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                imageUrl: posts[i].imagesOrVideos[index],
+                                                                fit: BoxFit.cover,
                                                               );
                                                             }else{
                                                               return ((){
@@ -1081,9 +1072,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                                         Center(
                                                                           child: CircleAvatar(
-                                                                            radius: 25,
-                                                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                             child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                            radius: 25,
                                                                           ),
                                                                         ),
                                                                       ],
@@ -1093,19 +1084,19 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                       fit: StackFit.expand,
                                                                       children: [
                                                                         CachedNetworkImage(
-                                                                          fit: BoxFit.cover,
-                                                                          imageUrl: posts[i].imagesOrVideos[index],
-                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                          imageUrl: posts[i].imagesOrVideos[index],
+                                                                          fit: BoxFit.cover,
                                                                         ),
 
                                                                         Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                                                         Center(
                                                                           child: CircleAvatar(
-                                                                            radius: 25,
-                                                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                             child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                            backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                            radius: 25,
                                                                           ),
                                                                         ),
                                                                       ],
@@ -1123,10 +1114,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                     );
                                                                   }else{
                                                                     return CachedNetworkImage(
-                                                                      fit: BoxFit.cover,
-                                                                      imageUrl: posts[i].imagesOrVideos[index],
-                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                      imageUrl: posts[i].imagesOrVideos[index],
+                                                                      fit: BoxFit.cover,
                                                                     );
                                                                   }
                                                                 }
@@ -1179,8 +1170,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
               floatingActionButton: Visibility(
                 visible: showFloatingButtonListener,
                 child: FloatingActionButton(
-                  backgroundColor: const Color(0xff4EC9D4,),
                   child: const Icon(Icons.arrow_upward_rounded, color: const Color(0xffffffff),),
+                  backgroundColor: const Color(0xff4EC9D4,),
                   onPressed: (){
                     Scrollable.ensureVisible(profileKey.currentContext!);
                   },
