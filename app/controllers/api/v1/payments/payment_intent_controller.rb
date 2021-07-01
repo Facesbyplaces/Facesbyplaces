@@ -9,7 +9,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         description: "Donation for #{memorial.name}",
         payment_method_types: ['card'],
         payment_method: payment_method.id,
-        customer:  user().connected_account_customer, #Retrieve id from connected account customer
+        customer: connected_account_customer,
       }, {
           stripe_account: stripe_account_id,
       })
@@ -28,9 +28,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         render json: {
           payment_intent: intent.id,
           payment_method: intent.payment_method,
-          client_secret:  intent.client_secret,
-          # publishable_key: Rails.configuration.stripe[:publishable_key],
-          # transaction: transaction
+          # client_secret:  intent.client_secret,
         }, status: 200
       else
         render json: {
@@ -112,10 +110,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     return User.find_by(email: "admin@email.com").device_token
   end
 
-  # def connected_account_customer
-  #   return Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :connected_account_customer)
-  # end
-
   def payment_method
     if params[:payment_method].present?
       payment_method = Stripe::PaymentMethod.create({
@@ -130,16 +124,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       return false
     end
     # render json: { payment_method: payment_method }, status: 200
-  end
-
-  def token
-    token = Stripe::Token.create({
-      customer: platform_account_customer, 
-    }, {
-      stripe_account: stripe_account_id,
-    })
-
-    return token.id
   end
 
   def amount
