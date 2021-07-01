@@ -9,7 +9,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         description: "Donation for #{memorial.name}",
         payment_method_types: ['card'],
         payment_method: payment_method.id,
-        customer:  connected_account_customer, #Retrieve id from connected account customer
+        customer:  user().connected_account_customer, #Retrieve id from connected account customer
       }, {
           stripe_account: stripe_account_id,
       })
@@ -64,21 +64,22 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   end
 
   #Create or Retrieve the Connected Account Customer
-  # def connected_account_customer
-  #   if user().connected_account_customer != nil
-  #     customer = Stripe::Customer.retrieve(user().connected_account_customer)
-  #   else
-  #     customer = Stripe::Customer.create({
-  #       source: token,
-  #     }, {
-  #       stripe_account: stripe_account_id,
-  #     })
-  #   end
+  def connected_account_customer
+    if user().connected_account_customer != nil
+      customer = Stripe::Customer.retrieve(user().connected_account_customer)
+    else
+      customer = Stripe::Customer.create({
+        email: user().email,
+        payment_method: payment_method.id,
+      }, {
+        stripe_account: stripe_account_id,
+      })
+    end
 
-  #   user().update(connected_account_customer: customer.id)
+    user().update(connected_account_customer: customer.id)
 
-  #   return customer.id
-  # end
+    return customer.id
+  end
 
   # PAYMENT TEST ACTIONS
 
@@ -111,9 +112,9 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     return User.find_by(email: "admin@email.com").device_token
   end
 
-  def connected_account_customer
-    return Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :connected_account_customer)
-  end
+  # def connected_account_customer
+  #   return Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :connected_account_customer)
+  # end
 
   def payment_method
     if params[:payment_method].present?
