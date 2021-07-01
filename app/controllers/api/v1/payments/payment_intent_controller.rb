@@ -36,7 +36,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         }, status: 404
       end
     elsif intent.status == 'requires_payment_method'
-      render json: { client_secret: intent.client_secret }, status: 200
+      render json: { client_secret: intent.client_secret, token: token }, status: 200
     end
   end
 
@@ -124,6 +124,19 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       return false
     end
     # render json: { payment_method: payment_method }, status: 200
+  end
+
+  def token
+    token = Stripe::Token.create({
+      card: {
+        number: '4242424242424242',
+        exp_month: 7,
+        exp_year: 2022,
+        cvc: '314',
+      },
+    })
+
+    return token.id
   end
 
   def amount
