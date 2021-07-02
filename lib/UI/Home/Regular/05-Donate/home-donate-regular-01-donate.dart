@@ -288,6 +288,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                                                             print('The payment method id is $paymentMethod');
                                                             print('The payment method id is ${paymentMethod.id}');
+                                                            print('The amount is $amount');
                                                             
                                                             List<String> newValue = await apiRegularDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
                                                               context.loaderOverlay.hide();
@@ -400,6 +401,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                             onPressed: () async{
                                               bool onError = false;
 
+                                              print('The amount on apple pay is $amount');
+
                                               await Stripe.instance.presentApplePay(
                                                 ApplePayPresentParams(
                                                   cartItems: [
@@ -432,6 +435,9 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                 onError = true;
                                                 throw Exception('$error');
                                               });
+
+                                              print('The newValue[0] is ${newValue[0]}');
+                                              print('The newValue[1] is ${newValue[1]}');
 
                                               if(onError != true){
                                                 await Stripe.instance.confirmApplePayPayment(newValue[0]);

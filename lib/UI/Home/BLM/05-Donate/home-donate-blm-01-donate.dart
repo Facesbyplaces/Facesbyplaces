@@ -190,7 +190,16 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                 print('The index is $index');
                                                 print('The paymentToggle is $paymentToggle');
                                               },
-                                              child: index == 0 ? Icon(Icons.credit_card_rounded, color: Colors.black) : donateWithApple,
+                                              // child: index == 0 ? Icon(Icons.credit_card_rounded, color: Colors.black) : donateWithApple,
+                                              child: ((){
+                                                if(index == 0){
+                                                  return Icon(Icons.credit_card_rounded, color: Colors.black);
+                                                }else if(Platform.isIOS){
+                                                  return donateWithApple;
+                                                }else{
+                                                  return donateWithGoogle;
+                                                }
+                                              }()),
                                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                             ),
                                           );
@@ -272,6 +281,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                               throw Exception('$error');
                                                             });
 
+
+                                                            print('The payment method id is $paymentMethod');
                                                             print('The payment method id is ${paymentMethod.id}');
                                                             
                                                             List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: paymentMethod.id).onError((error, stackTrace){
@@ -428,12 +439,79 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                             type: pay.GooglePayButtonType.donate,
                                             onPressed: () async{
 
+                                              bool onError = false;
+
+                                              List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (_) => AssetGiffyDialog(
+                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    buttonOkColor: const Color(0xffff0000),
+                                                    onlyOkButton: true,
+                                                    onOkButtonPressed: (){
+                                                      Navigator.pop(context, true);
+                                                      Navigator.pop(context, true);
+                                                    },
+                                                  ),
+                                                );
+                                                onError = true;
+                                                throw Exception('$error');
+                                              });
+
+                                              print('heheh');
+
+                                              await Stripe.instance.presentPaymentSheet(parameters: PresentPaymentSheetParameters(clientSecret: newValue[0]));
+
+                                              print('The newValue[0] is ${newValue[0]}');
+                                              print('The newValue[1] is ${newValue[1]}');
+
+                                              if(onError != true){
+                                                
+                                                final params = PaymentMethodParams.cardFromToken(
+                                                  token: newValue[1],
+                                                );
+
+                                                print('The params is $params');
+
+                                                // PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),
+
+                                                // PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
+                                                //   PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),
+                                                // ).onError((error, stackTrace){
+                                                //   context.loaderOverlay.hide();
+                                                //   showDialog(
+                                                //     context: context,
+                                                //     builder: (_) => AssetGiffyDialog(
+                                                //       description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                                //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                //       entryAnimation: EntryAnimation.DEFAULT,
+                                                //       buttonOkColor: const Color(0xffff0000),
+                                                //       onlyOkButton: true,
+                                                //       onOkButtonPressed: (){
+                                                //         Navigator.pop(context, true);
+                                                //         Navigator.pop(context, true);
+                                                //       },
+                                                //     ),
+                                                //   );
+                                                //   throw Exception('$error');
+                                                // });
+
+                                                final confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(newValue[0], params);
+                                                // final confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(newValue[0], PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),);
+
+                                                print('The confirmPaymentMethod is $confirmPaymentMethod');
+                                              }
+
                                             },
                                           );
                                         }
                                       }()),
                                     ),
-                                    
+
                                     SizedBox(height: 10,),
                                   ],
                                 ),

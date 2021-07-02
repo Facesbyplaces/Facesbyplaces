@@ -36,7 +36,7 @@ flutter_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  shared_preferences: ^2.0.5
+  shared_preferences: ^2.0.6
   dio: ^4.0.0-beta6
   date_time_format: ^2.0.1
   flutter_bloc: ^7.0.0-nullsafety.4
