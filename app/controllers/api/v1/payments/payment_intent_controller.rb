@@ -53,7 +53,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     method = Stripe::PaymentMethod.create({
       type: 'card',
       card: {
-        number: '4242424242424242',
+        number: '5555555555554444',
         exp_month: 6,
         exp_year: 2022,
         cvc: '314',
@@ -126,7 +126,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   def token
     token = Stripe::Token.create({
       card: {
-        number: '5555555555554444',
+        number: '4242424242424242',
         exp_month: 7,
         exp_year: 2022,
         cvc: '314',
