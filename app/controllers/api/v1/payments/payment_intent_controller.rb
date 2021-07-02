@@ -82,7 +82,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     else
       return false
     end
-    # render json: { payment_method: payment_method }, status: 200
   end
 
   #Create or Retrieve the Platform Account Customer
@@ -127,7 +126,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   def token
     token = Stripe::Token.create({
       card: {
-        number: '4242424242424242',
+        number: '5555555555554444',
         exp_month: 7,
         exp_year: 2022,
         cvc: '314',
