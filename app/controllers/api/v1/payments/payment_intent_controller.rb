@@ -110,20 +110,20 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
 
   #Create or Retrieve the Connected Account Customer
   def connected_account_customer
-    # if user().connected_account_customer != nil
-    #   customer = Stripe::Customer.retrieve(user().connected_account_customer)
-    # else
-    #   customer = Stripe::Customer.create({
-    #     email: user().email,
-    #     payment_method: payment_method,
-    #   }, {
-    #     stripe_account: stripe_account_id,
-    #   })
-    # end
+    if user().connected_account_customer != nil
+      customer = Stripe::Customer.retrieve(user().connected_account_customer)
+    else
+      customer = Stripe::Customer.create({
+        email: user().email,
+        payment_method: payment_method,
+      }, {
+        stripe_account: stripe_account_id,
+      })
+    end
 
-    # user().update(connected_account_customer: customer.id)
-    customer = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :connected_account_customer)
-    return customer
+    user().update(connected_account_customer: customer.id)
+
+    return customer.id
   end
 
   def token
