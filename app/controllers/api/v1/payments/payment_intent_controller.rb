@@ -36,7 +36,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
         }, status: 404
       end
     elsif intent.status == 'requires_payment_method'
-      render json: { client_secret: intent.client_secret, token: token }, status: 200
+      render json: { client_secret: intent.client_secret, payment_intent: intent.id, token: token }, status: 200
     end
   end
 
