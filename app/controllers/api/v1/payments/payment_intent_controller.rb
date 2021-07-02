@@ -68,7 +68,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   private
 
   def stripe_account_id
-    return User.find_by(email: "admin@email.com").device_token
+    return Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :connected_account_id)
   end
 
   def payment_method
