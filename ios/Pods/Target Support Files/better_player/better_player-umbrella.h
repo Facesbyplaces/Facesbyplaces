@@ -10,7 +10,11 @@
 #endif
 #endif
 
-#import "FLTBetterPlayerPlugin.h"
+#import "BetterPlayer.h"
+#import "BetterPlayerEzDrmAssetsLoaderDelegate.h"
+#import "BetterPlayerPlugin.h"
+#import "BetterPlayerTimeUtils.h"
+#import "BetterPlayerView.h"
 
 FOUNDATION_EXPORT double better_playerVersionNumber;
 FOUNDATION_EXPORT const unsigned char better_playerVersionString[];

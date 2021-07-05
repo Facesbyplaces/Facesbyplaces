@@ -4,8 +4,8 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<better_player/FLTBetterPlayerPlugin.h>)
-#import <better_player/FLTBetterPlayerPlugin.h>
+#if __has_include(<better_player/BetterPlayerPlugin.h>)
+#import <better_player/BetterPlayerPlugin.h>
 #else
 @import better_player;
 #endif
@@ -112,10 +112,10 @@
 @import location;
 #endif
 
-#if __has_include(<package_info/FLTPackageInfoPlugin.h>)
-#import <package_info/FLTPackageInfoPlugin.h>
+#if __has_include(<package_info_plus/FLTPackageInfoPlusPlugin.h>)
+#import <package_info_plus/FLTPackageInfoPlusPlugin.h>
 #else
-@import package_info;
+@import package_info_plus;
 #endif
 
 #if __has_include(<path_provider/FLTPathProviderPlugin.h>)
@@ -175,7 +175,7 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [FLTBetterPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTBetterPlayerPlugin"]];
+  [BetterPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"BetterPlayerPlugin"]];
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTFirebaseMessagingPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseMessagingPlugin"]];
@@ -193,7 +193,7 @@
   [LibphonenumberPlugin registerWithRegistrar:[registry registrarForPlugin:@"LibphonenumberPlugin"]];
   [FLTLibphonenumberPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTLibphonenumberPlugin"]];
   [LocationPlugin registerWithRegistrar:[registry registrarForPlugin:@"LocationPlugin"]];
-  [FLTPackageInfoPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPackageInfoPlugin"]];
+  [FLTPackageInfoPlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPackageInfoPlusPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [PayPlugin registerWithRegistrar:[registry registrarForPlugin:@"PayPlugin"]];
   [FLTSharePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharePlugin"]];

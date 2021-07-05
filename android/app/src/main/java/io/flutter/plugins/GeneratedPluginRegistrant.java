@@ -35,7 +35,7 @@ public final class GeneratedPluginRegistrant {
       com.codeheadlabs.libphonenumber.LibphonenumberPlugin.registerWith(shimPluginRegistry.registrarFor("com.codeheadlabs.libphonenumber.LibphonenumberPlugin"));
     flutterEngine.getPlugins().add(new com.example.libphonenumber_plugin.LibphonenumberPlugin());
     flutterEngine.getPlugins().add(new com.lyokone.location.LocationPlugin());
-    flutterEngine.getPlugins().add(new io.flutter.plugins.packageinfo.PackageInfoPlugin());
+    flutterEngine.getPlugins().add(new dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.pay_android.PayPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.share.SharePlugin());

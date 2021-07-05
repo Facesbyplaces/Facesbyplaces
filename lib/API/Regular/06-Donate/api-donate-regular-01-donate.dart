@@ -60,8 +60,8 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
 
       return [clientSecret, paymentMethod];
     }else{
-      // String clientSecret = newData['client_secret'];
-      String clientSecret = newData['payment_intent'];
+      String clientSecret = newData['client_secret'];
+      // String clientSecret = newData['payment_intent'];
       String token = newData['token'];
 
       print('The clientSecret is $clientSecret');
