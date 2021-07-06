@@ -63,16 +63,18 @@
 	<false/>
 	<key>FacebookAppID</key>
 	<string>293806305805032</string>
-	<key>FacebookClientToken</key>
-	<string>6166b801e7f998d2d03b28fa1c963b00</string>
 	<key>FacebookAutoLogAppEventsEnabled</key>
 	<false/>
+	<key>FacebookClientToken</key>
+	<string>6166b801e7f998d2d03b28fa1c963b00</string>
 	<key>FacebookDisplayName</key>
 	<string>FacesbyPlaces</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -147,8 +149,6 @@
 		<string>4n5z1-alternate.test-app.link</string>
 	</array>
 	<key>io.flutter.embedded_views_preview</key>
-	<true/>
-	<key>FlutterDeepLinkingEnabled</key>
 	<true/>
 </dict>
 </plist>

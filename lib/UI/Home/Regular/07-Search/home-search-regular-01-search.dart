@@ -84,6 +84,7 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                     print('The permissionGranted is $permissionGranted');
 
                                     if(permissionGranted != Location.PermissionStatus.granted){
+                                      print('Here 1');
                                       bool confirmation = await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
@@ -116,8 +117,11 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,),),);
                                       }
                                     }else{
+                                      print('Here 2');
                                       context.loaderOverlay.show();
                                       Location.LocationData locationData = await location.getLocation();
+                                      print('The latitude is ${locationData.latitude}');
+                                      print('The longitude is ${locationData.longitude}');
                                       List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                                       context.loaderOverlay.hide();
 
@@ -162,6 +166,7 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                       print('The permissionGranted is $permissionGranted');
 
                                       if(permissionGranted != Location.PermissionStatus.granted){
+                                        print('Here 1');
                                         bool confirmation = await showDialog(
                                           context: context,
                                           builder: (_) => AssetGiffyDialog(
@@ -194,8 +199,11 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name!,),),);
                                         }
                                       }else{
+                                        print('Here 2');
                                         context.loaderOverlay.show();
                                         Location.LocationData locationData = await location.getLocation();
+                                        print('The latitude is ${locationData.latitude}');
+                                        print('The latitude is ${locationData.longitude}');
                                         List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
                                         context.loaderOverlay.hide();
 

@@ -435,77 +435,137 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                             },
                                           );
                                         }else{
-                                          return pay.RawGooglePayButton(
+                                          var _paymentItems = [
+                                            pay.PaymentItem(
+                                              label: 'Donation for ${widget.pageName}',
+                                              amount: amount,
+                                              status: pay.PaymentItemStatus.final_price,
+                                            )
+                                          ];
+
+                                          return pay.GooglePayButton(
+                                            paymentConfigurationAsset: 'google_pay_payment_profile.json',
+                                            paymentItems: _paymentItems,
+                                            margin: const EdgeInsets.only(top: 15),
                                             type: pay.GooglePayButtonType.donate,
-                                            onPressed: () async{
+                                            onPaymentResult: (payment) async{
+                                              try{
+                                                bool onError = false;
 
-                                              bool onError = false;
+                                                List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    ),
+                                                  );
+                                                  onError = true;
+                                                  throw Exception('$error');
+                                                });
 
-                                              List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
-                                                showDialog(
+                                                print('heheh');
+                                                print('The newValue[0] is ${newValue[0]}');
+                                                print('The newValue[1] is ${newValue[1]}');
+
+                                                if(onError != true){
+                                                  final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
+
+                                                  print('The params is $params');
+                                                  
+                                                  PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPaymentMethod(newValue[0], params,);
+
+                                                  print('The google payment is $confirmGooglePayment');
+                                                  print('The google payment status is ${confirmGooglePayment.status}');
+
+                                                  if(confirmGooglePayment.status == PaymentIntentsStatus.Succeeded){
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder: (_) => AssetGiffyDialog(
+                                                        description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
+                                                        title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                        entryAnimation: EntryAnimation.DEFAULT,
+                                                        onlyOkButton: true,
+                                                        onOkButtonPressed: (){
+                                                          Navigator.pop(context);
+                                                        },
+                                                      ),
+                                                    );
+                                                  }else{
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder: (_) => AssetGiffyDialog(
+                                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                        entryAnimation: EntryAnimation.DEFAULT,
+                                                        buttonOkColor: const Color(0xffff0000),
+                                                        onlyOkButton: true,
+                                                        onOkButtonPressed: (){
+                                                          Navigator.pop(context, true);
+                                                        },
+                                                      ),
+                                                    );
+                                                  }
+                                                }
+
+                                                await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                    description: const Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.', textAlign: TextAlign.center,),
+                                                    title: const Text('Thank you', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    onlyOkButton: true,
+                                                    onOkButtonPressed: (){
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                );
+                                              }catch(e){
+                                                await showDialog(
+                                                  context: context,
+                                                  builder: (_) => AssetGiffyDialog(
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                    description: Text('Error: $e', textAlign: TextAlign.center,),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
                                                     onlyOkButton: true,
                                                     onOkButtonPressed: (){
                                                       Navigator.pop(context, true);
-                                                      Navigator.pop(context, true);
                                                     },
                                                   ),
                                                 );
-                                                onError = true;
-                                                throw Exception('$error');
-                                              });
-
-                                              print('heheh');
-
-                                              await Stripe.instance.presentPaymentSheet(parameters: PresentPaymentSheetParameters(clientSecret: newValue[0]));
-
-                                              print('The newValue[0] is ${newValue[0]}');
-                                              print('The newValue[1] is ${newValue[1]}');
-
-                                              if(onError != true){
-                                                
-                                                final params = PaymentMethodParams.cardFromToken(
-                                                  token: newValue[1],
-                                                );
-
-                                                print('The params is $params');
-
-                                                // PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),
-
-                                                // PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
-                                                //   PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),
-                                                // ).onError((error, stackTrace){
-                                                //   context.loaderOverlay.hide();
-                                                //   showDialog(
-                                                //     context: context,
-                                                //     builder: (_) => AssetGiffyDialog(
-                                                //       description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                                //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                                                //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                                //       entryAnimation: EntryAnimation.DEFAULT,
-                                                //       buttonOkColor: const Color(0xffff0000),
-                                                //       onlyOkButton: true,
-                                                //       onOkButtonPressed: (){
-                                                //         Navigator.pop(context, true);
-                                                //         Navigator.pop(context, true);
-                                                //       },
-                                                //     ),
-                                                //   );
-                                                //   throw Exception('$error');
-                                                // });
-
-                                                final confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(newValue[0], params);
-                                                // final confirmPaymentMethod = await Stripe.instance.confirmPaymentMethod(newValue[0], PaymentMethodParams.card(billingDetails: BillingDetails.fromJson(newCard!.toJson(),),),);
-
-                                                print('The confirmPaymentMethod is $confirmPaymentMethod');
                                               }
 
+                                            },
+                                            loadingIndicator: const Center(child: CircularProgressIndicator(),),
+                                            onPressed: () async{},
+                                            onError: (e) async{
+                                              await showDialog(
+                                                context: context,
+                                                builder: (_) => AssetGiffyDialog(
+                                                  title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                  description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                  entryAnimation: EntryAnimation.DEFAULT,
+                                                  buttonOkColor: const Color(0xffff0000),
+                                                  onlyOkButton: true,
+                                                  onOkButtonPressed: (){
+                                                    Navigator.pop(context, true);
+                                                  },
+                                                ),
+                                              );
                                             },
                                           );
                                         }
