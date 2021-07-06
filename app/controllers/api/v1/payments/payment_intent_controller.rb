@@ -21,6 +21,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       })
     end
 
+    # Save to Transaction
     if intent.status == 'requires_confirmation'
       if transaction.save
         render json: {
@@ -39,7 +40,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   end
 
   # PAYMENT TEST ACTIONS
-
   def confirm_payment_intent
     charge = Stripe::PaymentIntent.confirm(
       params[:client_secret],
@@ -69,6 +69,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     return Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :connected_account_id)
   end
 
+  # Clone payment method to connected account id
   def payment_method
     if params[:payment_method].present?
       payment_method = Stripe::PaymentMethod.create({
@@ -84,7 +85,21 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     end
   end
 
-  #Create or Retrieve the Platform Account Customer
+  # Create or Retrieve the Connected Account Customer
+  def connected_account_customer
+    customer = Stripe::Customer.create({
+      email: user().email,
+      payment_method: payment_method,
+    }, {
+      stripe_account: stripe_account_id,
+    })
+
+    user().update(connected_account_customer: customer.id)
+
+    return customer.id
+  end
+
+  # Create or Retrieve the Platform Account Customer
   def platform_account_customer 
     if user().platform_account_customer != nil
       customer = Stripe::Customer.retrieve(user().platform_account_customer)
@@ -94,31 +109,13 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       })
     end
 
-    #Attach Payment Method
+    # Attach Payment Method
     Stripe::PaymentMethod.attach(
       params[:payment_method],
       {customer: customer.id},
     )
 
     user().update(platform_account_customer: customer.id)
-
-    return customer.id
-  end
-
-  #Create or Retrieve the Connected Account Customer
-  def connected_account_customer
-    if user().connected_account_customer != nil
-      customer = Stripe::Customer.retrieve(user().connected_account_customer)
-    else
-      customer = Stripe::Customer.create({
-        email: user().email,
-        payment_method: payment_method,
-      }, {
-        stripe_account: stripe_account_id,
-      })
-    end
-
-    user().update(connected_account_customer: customer.id)
 
     return customer.id
   end
