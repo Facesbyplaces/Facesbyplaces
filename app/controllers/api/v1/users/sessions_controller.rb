@@ -2,14 +2,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
     def create
       #Facebook Login
-      account_type = params[:account_type].to_i
       if params[:facebook_id].present?
-        if account_type == 1
-          @user = User.where(email: params[:email], account_type: params[:account_type]).first
-        elsif account_type == 2
-          @user = AlmUser.where(email: params[:email], account_type: params[:account_type]).first
-        end
-
+        @user = existing_user
         if @user
           if params[:password].present? 
             @user.update({ device_token: params[:device_token] })
@@ -27,121 +21,35 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             super
           end
         else # If user's first login
-          if account_type == 1
-            @user = User.new(sign_up_params)
-          elsif account_type == 2
-            @user = AlmUser.new(sign_up_params)
-          end
-
-          @user.update({ device_token: params[:device_token] })
-          @user.device_token = params[:device_token]
-          @user.facebook_id = @user.facebook_id
-          @user.hideBirthdate = false 
-          @user.hideBirthplace = false 
-          @user.hideEmail = false 
-          @user.hideAddress = false 
-          @user.hidePhonenumber = false 
-          @user.is_verified = true
-
-          # image
-          if params[:image].present? 
-            require 'open-uri'
-            downloaded_image = URI.open(params[:image])
-            filename = File.basename(URI.parse(params[:image]).path)
-            @user.image.attach(io: downloaded_image  , filename: filename)
-          end
-
-          params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-          puts "Password: "
-          puts params[:password]
-          @user.password = @user.password_confirmation = params[:password]
-          @user.save
-          # render json: { success: true, user:  @user, status: 200 }, status: 200
-
-          Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
-          super || render_create_success2 && super
+          sign_up_user
+          super
         end
-
+      
       #Google Login
       elsif params[:google_id].present?
-        validator = GoogleIDToken::Validator.new
-        required_audience = JWT.decode(params[:google_id], nil, false)[0]['aud']
-
-        # required_client = JWT.decode(params[:google_id], nil, false)[0]['azp']
-        puts required_audience
-
-        begin
-          payload = validator.check(params[:google_id], required_audience, required_audience)
-          logger.info "Payload ==> #{payload}"
-          puts payload
-          if params[:account_type] == "1"
-            @user = User.where(email: payload['email'], account_type: params[:account_type]).first 
+        if valid_token
+          @user = existing_user
+          if @user
+            params[:email] = @user.email
+            if params[:password].present? 
+              @user.update({ device_token: params[:device_token] })
+              @user.save
+              render json: { success: true, user:  @user, status: 200 }, status: 200
+              super
+            else
+              params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+              @user.password = @user.password_confirmation = params[:password]
+              @user.update({ device_token: params[:device_token] })
+              @user.save
+              render json: { success: true, user:  @user, status: 200 }, status: 200
+              super
+            end
           else
-            @user = AlmUser.where(email: payload['email'], account_type: params[:account_type]).first
-          end
-
-        rescue GoogleIDToken::ValidationError => e
-          @user = nil
-          return render json: {status: "Cannot validate: #{e}"}, status: 422
-        end
-
-        if @user
-          params[:email] = @user.email
-          if params[:password].present? 
-            @user.update({ device_token: params[:device_token] })
-            @user.save
-            render json: { success: true, user:  @user, status: 200 }, status: 200
-            super
-          else
-            params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-            @user.password = @user.password_confirmation = params[:password]
-            @user.update({ device_token: params[:device_token] })
-            @user.save
-            render json: { success: true, user:  @user, status: 200 }, status: 200
+            sign_up_user
             super
           end
         else
-
-          if account_type == 1
-            @user = User.new(sign_up_params)
-          elsif account_type == 2
-            @user = AlmUser.new(sign_up_params)
-          end
-
-          validator = GoogleIDToken::Validator.new
-          token = @user.google_id
-          required_audience = JWT.decode(token, nil, false)[0]['aud'] 
-
-          begin
-            payload = validator.check(token, required_audience, required_audience)
-            email = payload['email']
-
-            @user.update({ device_token: params[:device_token] })
-            @user.hideBirthdate = false 
-            @user.hideBirthplace = false 
-            @user.hideEmail = false 
-            @user.hideAddress = false 
-            @user.hidePhonenumber = false 
-            @user.is_verified = true
-
-            # image
-            if params[:image].present? 
-              require 'open-uri'
-              downloaded_image = URI.open(params[:image])
-              filename = File.basename(URI.parse(params[:image]).path)
-              @user.image.attach(io: downloaded_image  , filename: filename)
-            end
-
-            params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-            @user.password = @user.password_confirmation = params[:password]
-            @user.save!
-            render json: { success: true, user:  @user, status: 200 }, status: 200
-
-            Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
-            super
-          rescue GoogleIDToken::ValidationError => e
-            return render json: {status: "Cannot validate: #{e}"}, status: 422
-          end
+          return render json: {status: "Cannot validate: Invalid Token"}, status: 422
         end
 
       # Apple Login
@@ -163,63 +71,21 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           render json: { success: true, user:  @user, status: 200 }, status: 200
           super
         else
-
-          if account_type == 1
-            @user = User.new(sign_up_params)
-          elsif account_type == 2
-            @user = AlmUser.new(sign_up_params)
-          end
-
-          @user.update({ device_token: params[:device_token] })
-          @user.email = apple[:email]
-          @user.hideBirthdate = false 
-          @user.hideBirthplace = false 
-          @user.hideEmail = false 
-          @user.hideAddress = false 
-          @user.hidePhonenumber = false 
-          @user.is_verified = true
-
-          @user.save
-
-          if params[:first_name]
-            @user.first_name = "John"
-            @user.last_name = "Doe #{@user.id}"
-
-            @user.save
-          end
-
-          params[:email] = @user.email
-          params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-          @user.password = @user.password_confirmation = params[:password]
-          @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
-
-          Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
+          sign_up_user
           super
         end
-        
       # Fbp Login
       else
-        account_type = params[:account_type].to_i
-
-        if account_type == 1
-          @user = User.find_by(email: params[:email])
-        else
-          @user = AlmUser.find_by(email: params[:email])
-        end 
-
-        # Check if account exist or not
-        if @user == nil
-          if account_type == 1
+        if existing_user == nil
+          if params[:account_type] === "1"
             return render json: { message: "BLM account not found. Register to login to the page.", status: 401 }, status: 401
-          elsif account_type == 2
+          else
             return render json: { message: "ALM account not found. Register to login to the page.", status: 401 }, status: 401
           end
         end 
 
-        if @user.is_verified?
-          @user.update({ device_token: params[:device_token] })
-          # render json: { success: true, user:  user, status: 200 }, status: 200
+        if existing_user.is_verified?
+          existing_user.update({ device_token: params[:device_token] })
           super || render_create_success2 && super
         else
           render json: {
@@ -227,10 +93,9 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           }, status: 401
         end
       end
-      
     end
     
-    protected
+    private
 
     def sign_up_params
       params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
@@ -247,5 +112,59 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def render_create_success2
       render json: { success: true, user:  @user, status: 200 }, status: 200
     end
+
+    def valid_token
+      require 'google/apis/oauth2_v2'
+      oauth2 = Google::Apis::Oauth2V2::Oauth2Service.new
+      id_token = params[:google_id]
+
+      begin
+        userinfo = oauth2.tokeninfo(id_token: id_token)
+        return true
+      rescue Google::Apis::ClientError
+        return false
+      end
+    end
+
+    def existing_user
+      email = params[:email]
+      if params[:account_type] == "1"
+        return @user = User.where(email: email, account_type: params[:account_type]).first 
+      else
+        return @user = AlmUser.where(email: email, account_type: params[:account_type]).first
+      end
+    end  
+
+    def sign_up_user
+      if params[:account_type] === "1"
+        @user = User.new(sign_up_params)
+      else
+        @user = AlmUser.new(sign_up_params)
+      end
+
+      @user.update({ device_token: params[:device_token] })
+      @user.hideBirthdate = false 
+      @user.hideBirthplace = false 
+      @user.hideEmail = false 
+      @user.hideAddress = false 
+      @user.hidePhonenumber = false 
+      @user.is_verified = true
+
+      # image
+      if params[:image].present? 
+        require 'open-uri'
+        downloaded_image = URI.open(params[:image])
+        filename = File.basename(URI.parse(params[:image]).path)
+        @user.image.attach(io: downloaded_image  , filename: filename)
+      end
+
+      params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+      @user.password = @user.password_confirmation = params[:password]
+      @user.save!
+      render json: { success: true, user:  @user, status: 200 }, status: 200
+
+      Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
+    end
+
     
 end
