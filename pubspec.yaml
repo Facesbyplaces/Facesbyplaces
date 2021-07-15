@@ -82,7 +82,9 @@ dev_dependencies:
   google_maps_flutter: ^2.0.6
   flutter_google_places: ^0.3.0
   easy_rich_text: ^0.5.6
+  flutter_stripe: ^1.1.0
   flutter_launcher_icons: ^0.9.0
+  pay: ^1.0.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

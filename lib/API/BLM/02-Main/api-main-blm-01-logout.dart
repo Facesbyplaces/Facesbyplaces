@@ -55,7 +55,7 @@ Future<bool> apiBLMLogout() async{
     bool isGoogleSignedIn = await googleSignIn.isSignedIn();
     if(isGoogleSignedIn == true){
       await googleSignIn.signOut();
-      await googleSignIn.disconnect();
+      // await googleSignIn.disconnect();
     }
 
     FacebookLogin fb = FacebookLogin();
