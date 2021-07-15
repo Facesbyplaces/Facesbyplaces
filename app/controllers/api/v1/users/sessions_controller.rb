@@ -76,18 +76,18 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end
       # Fbp Login
       else
-        if existing_user == nil
+        @user = existing_user
+
+        if @user.is_verified?
+          @user.update({ device_token: params[:device_token] })
+          super || render_create_success2 && super
+        elsif @user == nil
           if params[:account_type] === "1"
             return render json: { message: "BLM account not found. Register to login to the page.", status: 401 }, status: 401
           else
             return render json: { message: "ALM account not found. Register to login to the page.", status: 401 }, status: 401
           end
-        end 
-
-        if existing_user.is_verified?
-          existing_user.update({ device_token: params[:device_token] })
-          super || render_create_success2 && super
-        else
+        else 
           render json: {
               message: "Verify email to login to the app.",
           }, status: 401
@@ -128,10 +128,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
     def existing_user
       email = params[:email]
+      
       if params[:account_type] == "1"
-        return @user = User.where(email: email, account_type: params[:account_type]).first 
+        return user = User.where(email: email, account_type: params[:account_type]).first 
       else
-        return @user = AlmUser.where(email: email, account_type: params[:account_type]).first
+        return user = AlmUser.where(email: email, account_type: params[:account_type]).first
       end
     end  
 

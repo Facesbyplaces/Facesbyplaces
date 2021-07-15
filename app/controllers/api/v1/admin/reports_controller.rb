@@ -2,21 +2,25 @@ class Api::V1::Admin::ReportsController < ApplicationController
     before_action :check_user
     before_action :admin_only
 
-    # Report
+    # Searh Report
+    def searchReport
+        reportsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Report').pluck('searchable_id')
+        puts reportsId
+        reports = Report.where(id: reportsId)
+
+        render json: {  itemsremaining:  itemsRemaining(reports),
+                        reports: reports
+                        # reports: ActiveModel::SerializableResource.new(
+                        #     reports, 
+                        #     each_serializer: PostSerializer
+                        # )
+                    }
+    end
     # Index Report
     def allReports
         reports = Report.all 
-                            
-        reports = reports.page(params[:page]).per(numberOfPage)
-        if reports.total_count == 0 || (reports.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif reports.total_count < numberOfPage
-            itemsremaining = reports.total_count 
-        else
-            itemsremaining = reports.total_count - (params[:page].to_i * numberOfPage)
-        end
 
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(reports),
                         reports: reports
                     }
     end
@@ -106,29 +110,6 @@ class Api::V1::Admin::ReportsController < ApplicationController
             render json: {status: "Report not found"}
         end
     end
-    # Searh Report
-    def searchReport
-        reportsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Report').pluck('searchable_id')
-        puts reportsId
-        reports = Report.where(id: reportsId)
-        
-        reports = reports.page(params[:page]).per(numberOfPage)
-        if reports.total_count == 0 || (reports.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif reports.total_count < numberOfPage
-            itemsremaining = reports.total_count 
-        else
-            itemsremaining = reports.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
-                        reports: reports
-                        # reports: ActiveModel::SerializableResource.new(
-                        #     reports, 
-                        #     each_serializer: PostSerializer
-                        # )
-                    }
-    end
 
     def transactions
         transactions = Transaction.where(page_type: params[:page_type], page_id: params[:page_id])
@@ -147,6 +128,17 @@ class Api::V1::Admin::ReportsController < ApplicationController
     def report_params
         params.require(:report).permit(:subject, :description, :reportable_type, :reportable_id)
     end
+
+    def itemsRemaining(reports)
+        reports = reports.page(params[:page]).per(numberOfPage)
+        if reports.total_count == 0 || (reports.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif reports.total_count < numberOfPage
+            itemsremaining = reports.total_count 
+        else
+            itemsremaining = reports.total_count - (params[:page].to_i * numberOfPage)
+        end
+    end 
 
     def admin_only
         if !user.has_role? :admin 

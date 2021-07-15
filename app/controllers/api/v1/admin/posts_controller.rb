@@ -155,16 +155,7 @@ class Api::V1::Admin::PostsController < ApplicationController
     def allPosts  
         posts = Post.all
 
-        posts = posts.page(params[:page]).per(numberOfPage)
-        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif posts.total_count < numberOfPage
-            itemsremaining = posts.total_count 
-        else
-            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(posts),
                         posts: ActiveModel::SerializableResource.new(
                                 posts, 
                                 each_serializer: PostSerializer
@@ -172,14 +163,27 @@ class Api::V1::Admin::PostsController < ApplicationController
                     }
     end
 
+    def searchPost
+        postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
+
+        posts = Post.where(id: postsId)
+        
+        render json: {  itemsremaining:  itemsRemaining(posts),
+                        posts: ActiveModel::SerializableResource.new(
+                            posts, 
+                            each_serializer: PostSerializer
+                        )
+                    }
+    end
+
     def showPost
-        post = Post.find(params[:id])
+        post = get_post
 
         render json: PostSerializer.new( post ).attributes
     end
 
     def editPost
-        post = Post.find(params[:id])
+        post = get_post
         
         # check if data sent is empty or not
         check = params_presence(params)
@@ -194,7 +198,7 @@ class Api::V1::Admin::PostsController < ApplicationController
     end
 
     def editImageOrVideosPost
-        post = Post.find(params[:id])
+        post = get_post
         
         # check if data sent is empty or not
         check = params_presence(params)
@@ -209,32 +213,10 @@ class Api::V1::Admin::PostsController < ApplicationController
     end
 
     def deletePost
-        post = Post.find(params[:id])
+        post = get_post
         post.destroy 
 
         render json: {status: :deleted}
-    end
-
-    def searchPost
-        postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
-
-        posts = Post.where(id: postsId)
-        
-        posts = posts.page(params[:page]).per(numberOfPage)
-        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif posts.total_count < numberOfPage
-            itemsremaining = posts.total_count 
-        else
-            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
-                        posts: ActiveModel::SerializableResource.new(
-                            posts, 
-                            each_serializer: PostSerializer
-                        )
-                    }
     end
 
     private
@@ -245,6 +227,21 @@ class Api::V1::Admin::PostsController < ApplicationController
 
     def post_image_params
         params.permit(imagesOrVideos: [])
+    end
+
+    def get_post
+        post = Post.find(params[:id])
+    end
+
+    def itemsRemaining(posts)
+        posts = posts.page(params[:page]).per(numberOfPage)
+        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
+            return itemsremaining = 0
+        elsif posts.total_count < numberOfPage
+            return itemsremaining = posts.total_count 
+        else
+            return itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
+        end
     end
 
     def admin_only
