@@ -2,17 +2,8 @@ class Api::V1::Users::ResendVerificationCodeController < ApplicationController
     before_action :check_user
 
     def create
-        # Find User
-        if params[:account_type] == "1"
-            @user = User.find(params[:user_id])
-        else
-            @user = AlmUser.find(params[:user_id])
-        end
-
-        # Set User's Code
-        code = rand(100..999)
-        @user.verification_code = code
-        @user.save!
+        @user = user
+        set_user_code(@user)
 
         # Tell the UserMailer to send a code to verify email after save
         ResendVerificationMailer.resend_verify_email(@user).deliver_now
@@ -20,4 +11,19 @@ class Api::V1::Users::ResendVerificationCodeController < ApplicationController
 
     end
 
+    def user
+        # Find User
+        if params[:account_type] == "1"
+            return user = User.find(params[:user_id])
+        else
+            return user = AlmUser.find(params[:user_id])
+        end
+    end
+
+    def set_user_code(user)
+        # Set User's Code
+        code = rand(100..999)
+        user.verification_code = code
+        user.save!
+    end
 end

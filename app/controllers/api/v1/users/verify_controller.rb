@@ -6,11 +6,7 @@ class Api::V1::Users::VerifyController < ApplicationController
     end
 
     def create
-        if params[:account_type] == "1"
-            @user = User.find(params[:user_id])
-        else
-            @user = AlmUser.find(params[:user_id])
-        end
+        @user = user
         
         if verify_code_params[:verification_code] === @user.verification_code
             @user.update_attribute(:is_verified, true)
@@ -19,6 +15,14 @@ class Api::V1::Users::VerifyController < ApplicationController
             render json: {success: false, message: "Invalid Code", status: 401}, status: 401
         elsif @user.errors.present?
             render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404
+        end
+    end
+
+    def user
+        if params[:account_type] == "1"
+            return user = User.find(params[:user_id])
+        else
+            return user = AlmUser.find(params[:user_id])
         end
     end
 

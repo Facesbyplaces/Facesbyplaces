@@ -5,17 +5,8 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   end
 
   def create
-    account_type = params[:account_type].to_i
-    puts account_type
+    @user = user
     
-    if account_type  == 1 
-      # BLM USER SIGN_UP
-      @user = User.new(sign_up_params)
-    else
-      # ALM USER SIGN_UP
-      @user = AlmUser.new(sign_up_params)
-    end
-
     super do |resource|
       logger.info ">>>Error: #{resource.errors.full_messages}"
         @user = resource
@@ -43,6 +34,16 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         #   status: :success,
         #   user: UserSerializer.new( @user ).attributes
         #   }, status: 200
+    end
+  end
+
+  def user 
+    if params[:account_type]  == "1" 
+      # BLM USER SIGN_UP
+      return user = User.new(sign_up_params)
+    else
+      # ALM USER SIGN_UP
+      return user = AlmUser.new(sign_up_params)
     end
   end
 

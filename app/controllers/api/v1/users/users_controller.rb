@@ -25,6 +25,17 @@ class Api::V1::Users::UsersController < ApplicationController
     # end
     ##
 
+    def changePassword
+        if user().valid_password?(params[:current_password])
+            user().password = user().password_confirmation = params[:new_password]
+            user().save
+
+            render json: {}, status: 200
+        else
+            render json: {error: "Incorrect current password"}, status: 406
+        end
+    end
+
     def check_password        
         if user().password_update == true
             render json: { success: true, password_updated: user().password_update, status: 200 }, status: 200
@@ -34,11 +45,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
     
     def edit
-        if params[:account_type] == "1"
-            @user = User.find(params[:id])
-        else
-            @user = AlmUser.find(params[:id])
-        end
+        @user = user
         
         render json: {
             success: true, 
@@ -60,33 +67,6 @@ class Api::V1::Users::UsersController < ApplicationController
         end
     end
 
-    def getDetails
-        if params[:account_type] == "1"
-            user = User.find(params[:user_id])
-        else
-            user = AlmUser.find(params[:user_id])
-        end
-
-        render json: {
-            first_name: user.first_name, 
-            last_name: user.last_name,
-            email: user.email,
-            phone_number: user.phone_number,
-            question: user.question
-        }
-    end
-
-    def changePassword
-        if user().valid_password?(params[:current_password])
-            user().password = user().password_confirmation = params[:new_password]
-            user().save
-
-            render json: {}, status: 200
-        else
-            render json: {error: "Incorrect current password"}, status: 406
-        end
-    end
-
     def updateOtherInfos
         if user()
             user().update(updateOtherInfos_params)
@@ -96,43 +76,54 @@ class Api::V1::Users::UsersController < ApplicationController
         end
     end
 
-    def getOtherInfos
-        if params[:account_type] == "1"
-            user = User.find(params[:user_id])
-        else
-            user = AlmUser.find(params[:user_id])
-        end
+    def getDetails
+        @user = user
 
         render json: {
-            birthdate: user.birthdate, 
-            birthplace: user.birthplace,
-            email: user.email,
-            address: user.address,
-            phone_number: user.phone_number,
+            first_name: @user.first_name, 
+            last_name: @user.last_name,
+            email: @user.email,
+            phone_number: @user.phone_number,
+            question: @user.question
         }
     end
 
-    def show
-        if params[:account_type] == "1"
-            user = User.find(params[:user_id])
-        else
-            user = AlmUser.find(params[:user_id])
-        end
+    def getOtherInfos
+        @user = user
 
-        render json: UserSerializer.new( user ).attributes
-        
-        # UserSerializer.new( user ).attributes
+        render json: {
+            birthdate: @user.birthdate, 
+            birthplace: @user.birthplace,
+            email: @user.email,
+            address: @user.address,
+            phone_number: @user.phone_number,
+        }
+    end
+
+    def otherDetailsStatus
+        if user()
+            render json: {
+                hideBirthdate: user().hideBirthdate,
+                hideBirthplace: user().hideBirthplace,
+                hideEmail: user().hideEmail,
+                hideAddress: user().hideAddress,
+                hidePhonenumber: user().hidePhonenumber,
+            }
+        else
+            render json: {error: "no current user"}, status: 404
+        end
+    end
+
+    def show
+        @user = user
+
+        render json: UserSerializer.new( @user ).attributes
     end
 
     def posts
-        # Posts that they created or owned
-        if params[:account_type] == "1"
-            user = User.find(params[:user_id])
-        else
-            user = AlmUser.find(params[:user_id])
-        end
+        @user = user
 
-        posts = Post.where(account: user).order(created_at: :desc)
+        posts = Post.where(account: @user).order(created_at: :desc)
         
         posts = posts.page(params[:page]).per(numberOfPage)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -152,16 +143,11 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def memorials
-        if params[:account_type] == "1"
-            user = User.find(params[:user_id])
-        else
-            user = AlmUser.find(params[:user_id])
-        end
-        # Own or part of fam or friend of page
-        owned = user.relationships.select("page_type, page_id")
-        # Followed
-        followed = user.followers.select("page_type, page_id")
+        @user = user
 
+        # Own or part of fam or friend of page
+        owned = @user.relationships.select("page_type, page_id")
+        
         owned = owned.page(params[:page]).per(numberOfPage)
         if owned.total_count == 0 || (owned.total_count - (params[:page].to_i * numberOfPage)) < 0
             ownedItemsRemaining = 0
@@ -170,6 +156,9 @@ class Api::V1::Users::UsersController < ApplicationController
         else
             ownedItemsRemaining = owned.total_count - (params[:page].to_i * numberOfPage)
         end
+
+        # Followed
+        followed = @user.followers.select("page_type, page_id")
 
         followed = followed.page(params[:page]).per(numberOfPage)
         if followed.total_count == 0 || (followed.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -194,68 +183,24 @@ class Api::V1::Users::UsersController < ApplicationController
         }
     end
 
-    def otherDetailsStatus
-        if user()
-            render json: {
-                hideBirthdate: user().hideBirthdate,
-                hideBirthplace: user().hideBirthplace,
-                hideEmail: user().hideEmail,
-                hideAddress: user().hideAddress,
-                hidePhonenumber: user().hidePhonenumber,
-            }
-        else
-            render json: {error: "no current user"}, status: 404
-        end
-    end
-
     def hideOrUnhideBirthdate
-        if params[:hide].downcase == 'true'
-            user().update(hideBirthdate: true)
-        else
-            user().update(hideBirthdate: false)
-        end
-
-        render json: {}, status: 200
+        hideOrUnhide("birthdate")
     end
 
     def hideOrUnhideBirthplace
-        if params[:hide].downcase == 'true'
-            user().update(hideBirthplace: true)
-        else
-            user().update(hideBirthplace: false)
-        end
-
-        render json: {}, status: 200
+        hideOrUnhide("birthplace")
     end
 
     def hideOrUnhideEmail
-        if params[:hide].downcase == 'true'
-            user().update(hideEmail: true)
-        else
-            user().update(hideEmail: false)
-        end
-
-        render json: {}, status: 200
+        hideOrUnhide("email")
     end
 
     def hideOrUnhideAddress
-        if params[:hide].downcase == 'true'
-            user().update(hideAddress: true)
-        else
-            user().update(hideAddress: false)
-        end
-
-        render json: {}, status: 200
+        hideOrUnhide("address")
     end
 
     def hideOrUnhidePhonenumber
-        if params[:hide].downcase == 'true'
-            user().update(hidePhonenumber: true)
-        else
-            user().update(hidePhonenumber: false)
-        end
-
-        render json: {}, status: 200
+        hideOrUnhide("phone_number")
     end
 
     private
@@ -270,4 +215,38 @@ class Api::V1::Users::UsersController < ApplicationController
     def updateOtherInfos_params
         params.permit(:birthdate, :birthplace, :email, :address, :phone_number)
     end
+
+    def user
+        if params[:account_type] == "1"
+            return user = User.find(params[:user_id])
+        else
+            return user = AlmUser.find(params[:user_id])
+        end
+    end
+
+    def hideOrUnhide(detail)
+        if params[:hide].downcase == 'true'
+            hide = true
+        else
+            hide = false
+        end
+
+        case detail 
+        when "birthdate"
+            user().update(hideBirthdate: hide)
+        when "birthplace"
+            user().update(hideBirthplace: hide)
+        when "email"
+            user().update(hideEmail: hide)
+        when "address"
+            user().update(hideAddress: hide)
+        when "phone_number"
+            user().update(hidePhonenumber: hide)
+        else
+            return render json: { message: "Detail unavailable", status: 401 }, status: 401
+        end
+
+        render json: {}, status: 200
+    end
+
 end

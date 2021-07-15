@@ -5,8 +5,6 @@ class Api::V1::Users::PasswordsController < DeviseTokenAuth::PasswordsController
       super do |resource|
         resource.update(password_update: true)    
       end
-      # super
-      # resource.update(password_update: true)    
     end
     
     protected

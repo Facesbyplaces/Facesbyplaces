@@ -40,10 +40,6 @@ class ApplicationController < ActionController::Base
             10
         end
 
-        def user
-            current_alm_user || current_user
-        end
-
         def params_presence(data)
             # list of optional parameters
             list = ['description', 'backgroundImage', 'imagesOrVideos', 'profileImage', 'precinct']
@@ -81,10 +77,12 @@ class ApplicationController < ActionController::Base
             ) AS user"
         end
         
+        def user
+            current_alm_user || current_user
+        end
         
         def set_current_user
             AlmUser.current = current_alm_user || User.current = current_user
-            # current_user != nil ? User.current = current_user : ""
         end
 
         def check_user

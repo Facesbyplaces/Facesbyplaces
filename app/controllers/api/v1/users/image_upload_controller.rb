@@ -6,35 +6,24 @@ class Api::V1::Users::ImageUploadController < ApplicationController
     end
 
     def create
-        if params[:account_type] == "1"
-            user = User.find(params[:user_id])
-        else
-            user = AlmUser.find(params[:user_id])
-        end
-
-        if user != nil
-            user.update(image: params[:image])
-
-            if user.errors.present?
-                render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
-            else
-                render json: {success: true, message: "Successfully Uploaded Image", status: 200}, status: 200
-            end
-        else
-            render json: {error: "User not found. Sign in or Sign up to continue"}, status: 422
-        end
+        update_user_image(user)
     end
 
     def update
-        
-        if params[:account_type] == "1"
-            user = User.find(params[:user_id])
-        elsif params[:account_type] == "2"
-            user = AlmUser.find(params[:user_id])
-        else
-            user = user()
-        end
+        update_user_image(user)
+    end
 
+    def user
+        if params[:account_type] == "1"
+            return user = User.find(params[:user_id])
+        elsif params[:account_type] == "2"
+            return user = AlmUser.find(params[:user_id])
+        else
+            return user = user()
+        end
+    end
+
+    def update_user_image(user)
         if user != nil
             user.update(image: params[:image])
 
