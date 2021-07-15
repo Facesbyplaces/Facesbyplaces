@@ -19,7 +19,7 @@ export function Login() {
       </div>
       <Formik
         initialValues={{
-          account_type: 1,
+          account_type: "1",
           email: "",
           password: "",
         }}

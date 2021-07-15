@@ -82,11 +82,11 @@ export const PayoutModal = ({
                 <h4 className="modal-dialog">
                   Are you sure{" "}
                   <b style={{ color: "red" }}>you have transferred</b> the
-                  donation of ${transaction.amount} to{" "}
+                  donation of ${transaction.amount / 100} to{" "}
                   <b>
-                    {transaction.user.first_name +
+                    {transaction.owner.first_name +
                       " " +
-                      transaction.user.last_name}
+                      transaction.owner.last_name}
                   </b>
                   ?
                 </h4>

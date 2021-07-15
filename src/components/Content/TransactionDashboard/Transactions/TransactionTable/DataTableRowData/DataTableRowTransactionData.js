@@ -50,7 +50,7 @@ export default function DataTableRowTransactionData({ transactions, search }) {
       </td>
       <td>
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {transaction.amount}
+          {transaction.amount / 100}
         </span>
       </td>
       <td>
