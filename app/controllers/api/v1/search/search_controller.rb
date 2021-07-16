@@ -1,5 +1,5 @@
 class Api::V1::Search::SearchController < ApplicationController
-    before_action :check_user, only: [:nearby, :suggested, :test]
+    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) , only: [:nearby, :suggested, :test]
 
     def posts
         postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')

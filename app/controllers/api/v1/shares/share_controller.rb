@@ -1,6 +1,6 @@
 class Api::V1::Shares::ShareController < ApplicationController
     # include Shareable
-    before_action :check_user
+    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) 
 
     def getLink
         case params[:content_type].to_i

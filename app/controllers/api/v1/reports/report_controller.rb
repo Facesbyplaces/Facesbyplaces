@@ -1,5 +1,5 @@
 class Api::V1::Reports::ReportController < ApplicationController
-    before_action :check_user
+    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) 
 
     def create
         @report = Report.new(report_params)

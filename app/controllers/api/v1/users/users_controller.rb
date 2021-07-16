@@ -1,5 +1,5 @@
 class Api::V1::Users::UsersController < ApplicationController
-    before_action :check_user, except: [:guest, :create_guest_user]
+    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) 
 
     ## SIGN_IN AS GUEST
     # def blm_guest
@@ -25,22 +25,22 @@ class Api::V1::Users::UsersController < ApplicationController
     # end
     ##
 
-    def changePassword
-        if user().valid_password?(params[:current_password])
-            user().password = user().password_confirmation = params[:new_password]
-            user().save
+    # def changePassword
+    #     if signed_in_user.valid_password?(params[:current_password])
+    #         signed_in_user.password = signed_in_user.password_confirmation = params[:new_password]
+    #         signed_in_user.save
 
-            render json: {}, status: 200
-        else
-            render json: {error: "Incorrect current password"}, status: 406
-        end
-    end
+    #         render json: {}, status: 200
+    #     else
+    #         render json: {error: "Incorrect current password"}, status: 406
+    #     end
+    # end
 
     def check_password        
-        if user().password_update == true
-            render json: { success: true, password_updated: user().password_update, status: 200 }, status: 200
+        if signed_in_user.password_update == true
+            render json: { success: true, password_updated: signed_in_user.password_update, status: 200 }, status: 200
         else
-            render json: { success: true, password_updated: user().password_update, status: 200 }, status: 200  
+            render json: { success: true, password_updated: signed_in_user.password_update, status: 200 }, status: 200  
         end
     end
     
@@ -59,18 +59,18 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def updateDetails
-        if user()
-            user().update(updateDetails_params)
-            render json: UserSerializer.new( user() ).attributes
+        if signed_in_user
+            signed_in_user.update(updateDetails_params)
+            render json: UserSerializer.new( signed_in_user ).attributes
         else
             render json: {error: "no current user"}, status: 404
         end
     end
 
     def updateOtherInfos
-        if user()
-            user().update(updateOtherInfos_params)
-            render json: UserSerializer.new( user() ).attributes
+        if signed_in_user
+            signed_in_user.update(updateOtherInfos_params)
+            render json: UserSerializer.new( signed_in_user ).attributes
         else
             render json: {error: "no current user"}, status: 404
         end
@@ -101,13 +101,13 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def otherDetailsStatus
-        if user()
+        if signed_in_user
             render json: {
-                hideBirthdate: user().hideBirthdate,
-                hideBirthplace: user().hideBirthplace,
-                hideEmail: user().hideEmail,
-                hideAddress: user().hideAddress,
-                hidePhonenumber: user().hidePhonenumber,
+                hideBirthdate: signed_in_user.hideBirthdate,
+                hideBirthplace: signed_in_user.hideBirthplace,
+                hideEmail: signed_in_user.hideEmail,
+                hideAddress: signed_in_user.hideAddress,
+                hidePhonenumber: signed_in_user.hidePhonenumber,
             }
         else
             render json: {error: "no current user"}, status: 404
@@ -204,6 +204,15 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     private
+
+    def signed_in_user
+        if current_alm_user
+            return current_alm_user
+        else
+            return current_user
+        end
+    end
+
     def sign_up_params
         params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
     end
@@ -233,15 +242,15 @@ class Api::V1::Users::UsersController < ApplicationController
 
         case detail 
         when "birthdate"
-            user().update(hideBirthdate: hide)
+            signed_in_user.update(hideBirthdate: hide)
         when "birthplace"
-            user().update(hideBirthplace: hide)
+            signed_in_user.update(hideBirthplace: hide)
         when "email"
-            user().update(hideEmail: hide)
+            signed_in_user.update(hideEmail: hide)
         when "address"
-            user().update(hideAddress: hide)
+            signed_in_user.update(hideAddress: hide)
         when "phone_number"
-            user().update(hidePhonenumber: hide)
+            signed_in_user.update(hidePhonenumber: hide)
         else
             return render json: { message: "Detail unavailable", status: 401 }, status: 401
         end

@@ -1,5 +1,5 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
-    before_action :check_user, except: [:show]
+    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) , except: [:show]
     before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
     before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
 

@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-        before_action :set_current_user 
         include DeviseTokenAuth::Concerns::SetUserByToken
 
         protect_from_forgery with: :null_session 
@@ -13,6 +12,14 @@ class ApplicationController < ActionController::Base
         end
       
         private
+
+        def set_account_type
+            if params[:account_type] === "1"
+                return 1
+            else
+                return 2
+            end
+        end
 
         def guest_user
             User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id]) || AlmUser.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
@@ -75,26 +82,6 @@ class ApplicationController < ActionController::Base
                 UNION
                 SELECT id, 'AlmUser' AS user_type FROM alm_users
             ) AS user"
-        end
-        
-        def user
-            current_alm_user || current_user
-        end
-        
-        def set_current_user
-            AlmUser.current = current_alm_user || User.current = current_user
-        end
-
-        def check_user
-            if user() != nil   
-                if user().account_type == 1 || "1" 
-                    return :authenticate_user!  
-                else
-                    return :authenticate_alm_user! 
-                end
-            else
-                return render json: {error: "Account is needed to proceed."}, status: 404
-            end
         end
 
         def is_guest_user?

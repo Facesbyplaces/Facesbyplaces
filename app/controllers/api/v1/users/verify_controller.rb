@@ -1,5 +1,5 @@
 class Api::V1::Users::VerifyController < ApplicationController
-    before_action :check_user
+    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) 
 
     def verify_code_params
         params.permit(:verification_code, :user_id, :account_type)
