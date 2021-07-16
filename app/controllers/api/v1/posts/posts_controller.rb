@@ -1,5 +1,5 @@
 class Api::V1::Posts::PostsController < ApplicationController
-    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) , except: [:index, :show, :pagePosts]
+    set_account_type = 1 ? (before_action :authenticate_user! , except: [:index, :show, :pagePosts]) : (before_action :authenticate_alm_user! , except: [:index, :show, :pagePosts])
     before_action :set_up, only: [:create]
 
     def index  
