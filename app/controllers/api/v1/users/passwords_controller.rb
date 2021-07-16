@@ -1,5 +1,5 @@
 class Api::V1::Users::PasswordsController < DeviseTokenAuth::PasswordsController
-    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) , except: [:create]
+    set_account_type = 1 ? (before_action :authenticate_user! , except: [:create]) : (before_action :authenticate_alm_user! , except: [:create])
 
     def update
       super do |resource|
