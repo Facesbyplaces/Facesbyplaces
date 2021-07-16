@@ -130,7 +130,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def existing_user
       email = params[:email]
       
-      if params[:account_type] == "1" || 1
+      if params[:account_type] == "1" 
         return user = User.where(email: email, account_type: params[:account_type]).first 
       else
         return user = AlmUser.where(email: email, account_type: params[:account_type]).first
