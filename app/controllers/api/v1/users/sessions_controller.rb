@@ -56,7 +56,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       elsif params[:user_identification].present? && params[:identity_token].present?
         apple = AppleAuth::UserIdentity.new(params[:user_identification], params[:identity_token]).validate!
         
-        if account_type == 2
+        if params[:account_type] == "2"
           @user = AlmUser.where(email: apple[:email], account_type: params[:account_type]).first 
         else
           @user = User.where(email: apple[:email], account_type: params[:account_type]).first
@@ -83,7 +83,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.update({ device_token: params[:device_token] })
           super || render_create_success2 && super
         elsif @user == nil
-          if params[:account_type] === "1" || 1
+          if params[:account_type] === "1"
             return render json: { message: "BLM account not found. Register to login to the page.", status: 401 }, status: 401
           else
             return render json: { message: "ALM account not found. Register to login to the page.", status: 401 }, status: 401
@@ -130,7 +130,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def existing_user
       email = params[:email]
       
-      if params[:account_type] == "1"
+      if params[:account_type] == "1" || 1
         return user = User.where(email: email, account_type: params[:account_type]).first 
       else
         return user = AlmUser.where(email: email, account_type: params[:account_type]).first

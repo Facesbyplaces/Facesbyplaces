@@ -18,7 +18,8 @@ class Api::V1::Admin::ReportsController < ApplicationController
     end
     # Index Report
     def allReports
-        reports = Report.all 
+        reports = Report.all
+        reports = reports.page(params[:page]).per(numberOfPage)
 
         render json: {  itemsremaining:  itemsRemaining(reports),
                         reports: reports
@@ -129,7 +130,6 @@ class Api::V1::Admin::ReportsController < ApplicationController
     end
 
     def itemsRemaining(reports)
-        reports = reports.page(params[:page]).per(numberOfPage)
         if reports.total_count == 0 || (reports.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif reports.total_count < numberOfPage

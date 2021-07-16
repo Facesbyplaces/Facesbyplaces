@@ -2,7 +2,32 @@ class Api::V1::Admin::UsersController < ApplicationController
     before_action :check_user
     before_action :admin_only
 
-    # USER
+    def searchUsers
+        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
+            if searchObject.searchable_type == 'User'
+                User.find(searchObject.searchable_id)
+            else
+                AlmUser.find(searchObject.searchable_id)
+            end
+        }.flatten.uniq
+
+        users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
+        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif users.total_count < numberOfPage
+            itemsremaining = users.total_count 
+        else
+            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        users: ActiveModel::SerializableResource.new(
+                            users, 
+                            each_serializer: UserSerializer
+                        )
+                    }
+    end
+
     def allUsers
         users = User.all.where.not(guest: true, username: "admin")
         # _except(User.guest).order("users.id DESC")
@@ -35,10 +60,6 @@ class Api::V1::Admin::UsersController < ApplicationController
                             blm: users,
                             alm: alm_users
                         },
-                        # users: ActiveModel::SerializableResource.new(
-                        #             allUsers, 
-                        #             each_serializer: UserSerializer
-                        #         ),
                         user: user,
                     }
     end
@@ -52,12 +73,6 @@ class Api::V1::Admin::UsersController < ApplicationController
         end
 
         render json: UserSerializer.new( user ).attributes
-        # UserSerializer.new( user ).attributes
-        # id:             user.id, 
-            # username:       user.username, 
-            # first_name:     user.first_name, 
-            # last_name:      user.last_name, 
-            # phone_number:   user.phone_number, 
     end
 
     def editUser
@@ -96,32 +111,6 @@ class Api::V1::Admin::UsersController < ApplicationController
         else
             render json: {error: "pls login"}, status: 422
         end
-    end
-
-    def searchUsers
-        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
-            if searchObject.searchable_type == 'User'
-                User.find(searchObject.searchable_id)
-            else
-                AlmUser.find(searchObject.searchable_id)
-            end
-        }.flatten.uniq
-
-        users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
-        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif users.total_count < numberOfPage
-            itemsremaining = users.total_count 
-        else
-            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
-                        users: ActiveModel::SerializableResource.new(
-                            users, 
-                            each_serializer: UserSerializer
-                        )
-                    }
     end
 
     def contactUser

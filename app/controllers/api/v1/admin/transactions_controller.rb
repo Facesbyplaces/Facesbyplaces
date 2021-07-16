@@ -4,19 +4,10 @@ class Api::V1::Admin::TransactionsController < ApplicationController
 
     # Index Report
     def allTransactions
-        transactions = Transaction.all
-                            
+        transactions = Transaction.all         
         transactions = transactions.page(params[:page]).per(numberOfPage)
 
-        if transactions.total_count == 0 || (transactions.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif transactions.total_count < numberOfPage
-            itemsremaining = transactions.total_count 
-        else
-            itemsremaining = transactions.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(transactions),
                         transactions: ActiveModel::SerializableResource.new(
                             transactions,
                             each_serializer: TransactionSerializer
@@ -25,13 +16,10 @@ class Api::V1::Admin::TransactionsController < ApplicationController
     end
 
     def showTransaction
-        transaction = Transaction.find(params[:id])
-
         render json: TransactionSerializer.new( transaction ).attributes
     end
 
     def payoutTransaction
-        transaction = Transaction.find(params[:id])
         if transaction.status === "pending"
             transaction.update(status: "transferred")
         elsif transaction.status === "transferred"
@@ -43,9 +31,19 @@ class Api::V1::Admin::TransactionsController < ApplicationController
 
     private
 
-    # def report_params
-    #     params.require(:report).permit(:subject, :description, :reportable_type, :reportable_id)
-    # end
+    def itemsRemaining(transactions)
+        if transactions.total_count == 0 || (transactions.total_count - (params[:page].to_i * numberOfPage)) < 0
+            return itemsremaining = 0
+        elsif transactions.total_count < numberOfPage
+            return itemsremaining = transactions.total_count 
+        else
+            return itemsremaining = transactions.total_count - (params[:page].to_i * numberOfPage)
+        end
+    end
+
+    def transaction
+        return transaction = Transaction.find(params[:id])
+    end 
 
     def admin_only
         if !user.has_role? :admin 
