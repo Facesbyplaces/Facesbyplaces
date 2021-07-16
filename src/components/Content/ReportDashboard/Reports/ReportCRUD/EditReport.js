@@ -84,8 +84,8 @@ export default function EditReport() {
     axios
       .get(`/api/v1/admin/reports/${reportTab.id}`)
       .then((response) => {
-        setReport(response.data);
-        console.log("Response: ", response.data);
+        setReport(response.data.report);
+        console.log("Response: ", response.data.report);
       })
       .catch((error) => {
         console.log(error.errors);
