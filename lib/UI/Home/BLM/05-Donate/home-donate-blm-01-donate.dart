@@ -394,43 +394,60 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                           return pay.RawApplePayButton(
                                             type: pay.ApplePayButtonType.donate,
                                             onPressed: () async{
-                                              bool onError = false;
+                                              if(Stripe.instance.isApplePaySupported.value == true){
+                                                bool onError = false;
 
-                                              await Stripe.instance.presentApplePay(
-                                                ApplePayPresentParams(
-                                                  cartItems: [
-                                                    ApplePayCartSummaryItem(
-                                                      label: 'Donation for ${widget.pageName}',
-                                                      amount: amount,
+                                                await Stripe.instance.presentApplePay(
+                                                  ApplePayPresentParams(
+                                                    cartItems: [
+                                                      ApplePayCartSummaryItem(
+                                                        label: 'Donation for ${widget.pageName}',
+                                                        amount: amount,
+                                                      ),
+                                                    ],
+                                                    country: 'US',
+                                                    currency: 'USD',
+                                                  ),
+                                                );
+
+                                                List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (_) => AssetGiffyDialog(
+                                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      buttonOkColor: const Color(0xffff0000),
+                                                      onlyOkButton: true,
+                                                      onOkButtonPressed: (){
+                                                        Navigator.pop(context, true);
+                                                        Navigator.pop(context, true);
+                                                      },
                                                     ),
-                                                  ],
-                                                  country: 'US',
-                                                  currency: 'USD',
-                                                ),
-                                              );
+                                                  );
+                                                  onError = true;
+                                                  throw Exception('$error');
+                                                });
 
-                                              List<String> newValue = await apiBLMDonate(pageType: widget.pageType, pageId: widget.pageId, amount: double.parse(amount), paymentMethod: '').onError((error, stackTrace){
-                                                showDialog(
+                                                if(onError != true){
+                                                  await Stripe.instance.confirmApplePayPayment(newValue[0]);
+                                                }
+                                              }else{
+                                                await showDialog(
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
-                                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                                                    title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                    description: const Text('Apple pay is not setup on this phone\'s settings. Please try again.', textAlign: TextAlign.center,),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
                                                     onlyOkButton: true,
                                                     onOkButtonPressed: (){
                                                       Navigator.pop(context, true);
-                                                      Navigator.pop(context, true);
                                                     },
                                                   ),
                                                 );
-                                                onError = true;
-                                                throw Exception('$error');
-                                              });
-
-                                              if(onError != true){
-                                                await Stripe.instance.confirmApplePayPayment(newValue[0]);
                                               }
                                             },
                                           );
