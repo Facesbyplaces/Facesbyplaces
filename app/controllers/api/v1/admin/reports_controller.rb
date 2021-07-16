@@ -63,8 +63,7 @@ class Api::V1::Admin::ReportsController < ApplicationController
     end 
 
     # Show Report
-    def showReport
-        report = Report.find(params[:id])
+    def showReport  
         case report.reportable_type
             when "Memorial"
                 reportable = Memorial.find(report.reportable_id)
@@ -86,8 +85,6 @@ class Api::V1::Admin::ReportsController < ApplicationController
     end
     # Edit Report
     def editReport
-        report = Report.find(params[:id])
-
          # check if data sent is empty or not
          check = params_presence(params)
          if check == true
@@ -101,8 +98,6 @@ class Api::V1::Admin::ReportsController < ApplicationController
     end
     # Delete Report
     def deleteReport
-        report = Report.find(params[:id])
-
         if report
             report.destroy 
             render json: {status: :deleted}
@@ -127,6 +122,10 @@ class Api::V1::Admin::ReportsController < ApplicationController
 
     def report_params
         params.require(:report).permit(:subject, :description, :reportable_type, :reportable_id)
+    end
+
+    def report
+        return report = Report.find(params[:id])
     end
 
     def itemsRemaining(reports)
