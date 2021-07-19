@@ -19,8 +19,9 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
         params: { keywords: keywords, page: page },
       })
       .then((response) => {
-        setBlmUsers(response.data.users.blm);
-        setAlmUsers(response.data.users.alm);
+        console.log("Searched User: ", response);
+        setAlmUsers(response.data.users);
+        setBlmUsers(response.data.users);
       })
       .catch((error) => {
         console.log(error.response);
