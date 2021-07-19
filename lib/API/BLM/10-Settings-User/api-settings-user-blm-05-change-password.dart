@@ -9,14 +9,10 @@ Future<bool> apiBLMChangePassword({required String currentPassword, required Str
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   Dio dioRequest = Dio();
-  FormData formData = FormData();
 
-  formData.files.addAll([
-    MapEntry('current_password', MultipartFile.fromString(currentPassword),),
-    MapEntry('new_password', MultipartFile.fromString(newPassword)),
-  ]);
-
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/changePassword', data: formData,
+  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/changePassword', data: formData,
+  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/auth/password', data: formData,
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/auth/password?password=$currentPassword&password_confirmation=$newPassword',
     options: Options(
       followRedirects: false,
       validateStatus: (status) {

@@ -135,6 +135,12 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: widget.userId);
                         context.loaderOverlay.hide();
 
+                        print('The birthdate is ${result.showOtherDetailsStatusHideBirthdate}');
+                        print('The birth place is ${result.showOtherDetailsStatusHideBirthplace}');
+                        print('The address is ${result.showOtherDetailsStatusHideAddress}');
+                        print('The email is ${result.showOtherDetailsStatusHideEmail}');
+                        print('The phone number is ${result.showOtherDetailsStatusHidePhoneNumber}');
+
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
                       },
                     ),

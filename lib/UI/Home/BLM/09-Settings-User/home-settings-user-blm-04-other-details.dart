@@ -23,7 +23,6 @@ class HomeBLMUserOtherDetails extends StatefulWidget{
   final bool toggleAddress;
   final bool toggleEmail;
   final bool toggleNumber;
-
   const HomeBLMUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
   HomeBLMUserOtherDetailsState createState() => HomeBLMUserOtherDetailsState();
@@ -43,7 +42,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
   bool toggle4 = false;
   bool toggle5 = false;
 
-  void initState() {
+  void initState(){
     super.initState();
     otherDetails = getOtherDetails(widget.userId);
     toggle1 = widget.toggleBirthdate;
@@ -104,8 +103,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                             child: MiscBLMInputFieldDateTimeTemplate(
                               key: _key1,
                               labelText: 'Birthdate',
-                              displayText: details.data!.blmShowOtherDetailsBirthdate.substring(0, details.data!.blmShowOtherDetailsBirthdate.indexOf('T'),
-                              ),
+                              displayText: details.data!.blmShowOtherDetailsBirthdate,
                             ),
                           ),
 

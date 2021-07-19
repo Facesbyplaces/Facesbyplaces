@@ -9,14 +9,21 @@ Future<bool> apiRegularChangePassword({required String currentPassword, required
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   Dio dioRequest = Dio();
-  FormData formData = FormData();
+  // FormData formData = FormData();
 
-  formData.files.addAll([
-    MapEntry('current_password', MultipartFile.fromString(currentPassword),),
-    MapEntry('new_password', MultipartFile.fromString(newPassword)),
-  ]);
+  // formData.files.addAll([
+  //   MapEntry('password', MultipartFile.fromString(currentPassword),),
+  //   MapEntry('password_confirmation', MultipartFile.fromString(newPassword)),
+  // ]);
 
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/changePassword', data: formData,
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
+
+  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/changePassword', data: formData,
+  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/alm_auth/password?', data: formData,
+  // 'http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&password=$password&email=$email&device_token=$deviceToken'
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/alm_auth/password?password=$currentPassword&password_confirmation=$newPassword',
     options: Options(
       followRedirects: false,
       validateStatus: (status) {
