@@ -11,15 +11,8 @@ class Api::V1::Admin::UsersController < ApplicationController
         }.flatten.uniq
 
         users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
-        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif users.total_count < numberOfPage
-            itemsremaining = users.total_count 
-        else
-            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
-        end
 
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(users),
                         users: ActiveModel::SerializableResource.new(
                             users, 
                             each_serializer: UserSerializer
@@ -29,30 +22,16 @@ class Api::V1::Admin::UsersController < ApplicationController
 
     def allUsers
         users = User.all.where.not(guest: true, username: "admin")
-        # _except(User.guest).order("users.id DESC")
         alm_users = AlmUser.all
 
         # BLM Users
         users = users.page(params[:page]).per(numberOfPage)
-        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif users.total_count < numberOfPage
-            itemsremaining = users.total 
-        else
-            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
-        end
+        itemsremaining = itemsRemaining(users)
 
         # ALM Users
         alm_users = alm_users.page(params[:page]).per(numberOfPage)
-        if alm_users.total_count == 0 || (alm_users.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif alm_users.total_count < numberOfPage
-            itemsremaining = alm_users.total 
-        else
-            itemsremaining = alm_users.total_count - (params[:page].to_i * numberOfPage)
-        end
+        itemsremaining = itemsRemaining(alm_users)
 
-        allUsers = users.order("users.id DESC") + alm_users.order("alm_users.id DESC")
 
         render json: {  itemsremaining:  itemsremaining,
                         users: {
@@ -63,64 +42,47 @@ class Api::V1::Admin::UsersController < ApplicationController
     end
 
     def showUser
-        # image = user.image ? rails_blob_url(user.image) : nil
-        if params[:account_type] == '1'
-            user = User.find(params[:id]) 
-        else
-            user = AlmUser.find(params[:id]) 
-        end
+        @user = fetched_user
 
-        render json: UserSerializer.new( user ).attributes
+        render json: UserSerializer.new( @user ).attributes
     end
 
     def editUser
-        if params[:account_type].to_i == 1
-            user = User.find(params[:id])
-        else
-            user = AlmUser.find(params[:id])
-        end
+        @user = fetched_user
 
-        if user != nil
-            user.update(editUser_params)
-            if user.errors.present?
-                render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
+        if @user != nil
+            @user.update(editUser_params)
+            if @user.errors.present?
+                render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404
             else
-                render json: {success: true, message: "Successfully Edited User", user: user, status: 200}, status: 200
+                render json: {success: true, message: "Successfully Edited User", user: @user, status: 200}, status: 200
             end
         else
-            render json: {error: "pls login"}, status: 422
+            render json: {error: "User not found"}, status: 404
         end
     end
 
     def deleteUser
-        if params[:account_type].to_i == 1
-            user = User.find(params[:id])
-        else
-            user = AlmUser.find(params[:id])
-        end
+        @user = fetched_user
 
-        if user != nil
-            user.destroy!
-            if user.errors.present?
-                render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
+        if @user != nil
+            @user.destroy!
+            if @user.errors.present?
+                render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404
             else
-                render json: {success: true, message: "Successfully Deleted User", user: user, status: 200}, status: 200
+                render json: {success: true, message: "Successfully Deleted User", user: @user, status: 200}, status: 200
             end
         else
-            render json: {error: "pls login"}, status: 422
+            render json: {error: "User not found"}, status: 404
         end
     end
 
     def contactUser
+        @user = fetched_user
         message = params[:message]
-        if params[:account_type] == '1' || 1
-            userEmail = User.find(params[:id]).email
-        else
-            userEmail = AlmUser.find(params[:id]).email
-        end
         subject = params[:subject]
 
-        ContactUserMailer.with(message: message, email: userEmail, subject: subject).contact_user.deliver_later
+        ContactUserMailer.with(message: message, email: @user.email, subject: subject).contact_user.deliver_later
 
         render json: {status: "Email Sent"}
     end
@@ -136,4 +98,24 @@ class Api::V1::Admin::UsersController < ApplicationController
             return render json: {status: "Must be an admin to continue"}, status: 401
         end
     end
+
+    def fetched_user
+        if params[:account_type].to_i == 1
+            return User.find(params[:id])
+        else
+            return AlmUser.find(params[:id])
+        end
+    end
+
+    def itemsRemaining(users)
+        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
+            return 0
+        elsif users.total_count < numberOfPage
+            return users.total_count 
+        else
+            return users.total_count - (params[:page].to_i * numberOfPage)
+        end
+    end
+
+    
 end

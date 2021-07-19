@@ -6,84 +6,32 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
     end
 
     def newMemorial
-        if params[:setting].downcase == 'true'
-            user().notifsetting.update(newMemorial: true)
-        else
-            user().notifsetting.update(newMemorial: false)
-        end
-
-        render json: {}, status: 200
+        updateNotif("memorial")
     end
 
     def newActivities
-        if params[:setting].downcase == 'true'
-            user().notifsetting.update(newActivities: true)
-        else
-            user().notifsetting.update(newActivities: false)
-        end
-
-        render json: {}, status: 200
+        updateNotif("activities")
     end
 
     def postLikes
-        if params[:setting].downcase == 'true'
-            user().notifsetting.update(postLikes: true)
-        else
-            user().notifsetting.update(postLikes: false)
-        end
-
-        render json: {}, status: 200
+        updateNotif("likes")
     end
 
     def postComments
-        if params[:setting].downcase == 'true'
-            user().notifsetting.update(postComments: true)
-        else
-            user().notifsetting.update(postComments: false)
-        end
-
-        render json: {}, status: 200
+        updateNotif("comments")
     end
 
     def addFamily
-        if params[:setting].downcase == 'true'
-            user().notifsetting.update(addFamily: true)
-        else
-            user().notifsetting.update(addFamily: false)
-        end
-
-        render json: {}, status: 200
+        updateNotif("family")
     end
 
     def addFriends
-        if params[:setting].downcase == 'true'
-            user().notifsetting.update(addFriends: true)
-        else
-            user().notifsetting.update(addFriends: false)
-        end
-
-        render json: {}, status: 200
+        updateNotif("friends")
     end
 
     def addAdmin
-        if params[:setting].downcase == 'true'
-            user().notifsetting.update(addAdmin: true)
-        else
-            user().notifsetting.update(addAdmin: false)
-        end
-
-        render json: {}, status: 200
+        updateNotif("admin")
     end
-
-    # def push_notif
-    #     notification = user().notifications.where(read: false).first 
-
-    #     render json: {notification: ActiveModel::SerializableResource.new(
-    #                                     notification, 
-    #                                     each_serializer: NotificationSerializer
-    #                                 )
-    #                 }, status: 200
-    # end
 
     # Mark Notifications as read
     def read
@@ -104,8 +52,33 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
     end
     
     private
+
     def ignore_params
         params.permit(:ignore_type, :ignore_id)
     end
     
+    def updateNotif(notif)
+        case notif
+        when "memorial"
+            user().notifsetting.update(newMemorial: params[:setting])
+        when "activities"
+            user().notifsetting.update(newActivities: params[:setting])
+        when "likes"
+            user().notifsetting.update(postLikes: params[:setting])
+        when "comments"
+            user().notifsetting.update(postComments: params[:setting])
+        when "family"
+            user().notifsetting.update(addFamily: params[:setting])
+        when "friends"
+            user().notifsetting.update(addFriends: params[:setting])
+        when "admin"
+            user().notifsetting.update(addAdmin: params[:setting])
+        else
+            return render json: { error: true, message: "Notif not found", status: 404 }, status: 404
+        end
+
+        render json: {}, status: 200
+    end
+
+
 end

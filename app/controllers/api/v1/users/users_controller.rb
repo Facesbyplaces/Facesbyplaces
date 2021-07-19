@@ -226,23 +226,17 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def hideOrUnhide(detail)
-        if params[:hide].downcase == 'true'
-            hide = true
-        else
-            hide = false
-        end
-
         case detail 
         when "birthdate"
-            user().update(hideBirthdate: hide)
+            user().update(hideBirthdate: params[:hide])
         when "birthplace"
-            user().update(hideBirthplace: hide)
+            user().update(hideBirthplace: params[:hide])
         when "email"
-            user().update(hideEmail: hide)
+            user().update(hideEmail: params[:hide])
         when "address"
-            user().update(hideAddress: hide)
+            user().update(hideAddress: params[:hide])
         when "phone_number"
-            user().update(hidePhonenumber: hide)
+            user().update(hidePhonenumber: params[:hide])
         else
             return render json: { message: "Detail unavailable", status: 401 }, status: 401
         end
