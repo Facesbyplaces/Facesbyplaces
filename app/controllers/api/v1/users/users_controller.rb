@@ -45,7 +45,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
     
     def edit
-        @user = user
+        @user = fetched_user
         
         render json: {
             success: true, 
@@ -77,7 +77,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def getDetails
-        @user = user
+        @user = fetched_user
 
         render json: {
             first_name: @user.first_name, 
@@ -89,7 +89,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def getOtherInfos
-        @user = user
+        @user = fetched_user
 
         render json: {
             birthdate: @user.birthdate, 
@@ -115,13 +115,13 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        @user = user
+        @user = fetched_user
 
         render json: UserSerializer.new( @user ).attributes
     end
 
     def posts
-        @user = user
+        @user = fetched_user
 
         posts = Post.where(account: @user).order(created_at: :desc)
         
@@ -143,7 +143,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def memorials
-        @user = user
+        @user = fetched_user
 
         # Own or part of fam or friend of page
         owned = @user.relationships.select("page_type, page_id")
@@ -217,7 +217,7 @@ class Api::V1::Users::UsersController < ApplicationController
         params.permit(:birthdate, :birthplace, :email, :address, :phone_number)
     end
 
-    def user
+    def fetched_user
         if params[:account_type] == "1"
             return user = User.find(params[:user_id])
         else
