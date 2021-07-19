@@ -1,5 +1,4 @@
 class Api::V1::Admin::UsersController < ApplicationController
-    before_action :authenticate_user
     before_action :admin_only
 
     def searchUsers
@@ -133,7 +132,7 @@ class Api::V1::Admin::UsersController < ApplicationController
     end
 
     def admin_only
-        if user().has_role? :admin 
+        unless user().has_role? :admin
             return render json: {status: "Must be an admin to continue"}, status: 401
         end
     end
