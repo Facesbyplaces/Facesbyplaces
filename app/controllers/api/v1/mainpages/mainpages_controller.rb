@@ -1,5 +1,5 @@
 class Api::V1::Mainpages::MainpagesController < ApplicationController
-    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) 
+    before_action :authenticate_user
 
     # user's feed
     def feed

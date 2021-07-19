@@ -1,5 +1,5 @@
 class Api::V1::Posts::CommentsController < ApplicationController
-    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) 
+    before_action :authenticate_user
     # before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
 
     def editComment

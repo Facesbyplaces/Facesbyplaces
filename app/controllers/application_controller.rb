@@ -10,14 +10,18 @@ class ApplicationController < ActionController::Base
         rescue_from CanCan::AccessDenied do |exception|
             render json: {status: exception.message}
         end
-      
+
         private
 
-        def set_account_type
-            if params[:account_type] === "1"
-                return 1
-            else
-                return 2
+        def user
+            current_user || current_alm_user
+        end
+
+        def authenticate_user
+            begin
+                :authenticate_user!
+            rescue Devise::FailureApp
+                :authenticate_alm_user!
             end
         end
 

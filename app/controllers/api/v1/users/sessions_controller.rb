@@ -1,5 +1,4 @@
 class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
-    after_action :set_account_type
 
     def create
       #Facebook Login

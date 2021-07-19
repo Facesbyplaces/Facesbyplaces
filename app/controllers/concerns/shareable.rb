@@ -11,7 +11,7 @@ module Shareable
   
   
     def pagy_shares
-      if current_user.present?
+      if user().present?
         collection = Share.order(created_at: :desc)
       end
       

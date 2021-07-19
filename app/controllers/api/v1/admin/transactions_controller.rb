@@ -1,5 +1,5 @@
 class Api::V1::Admin::TransactionsController < ApplicationController
-    set_account_type = 1 ? (before_action :authenticate_user!) : (before_action :authenticate_alm_user!) 
+    before_action :authenticate_user
     before_action :admin_only
 
     # Index Report
@@ -46,7 +46,7 @@ class Api::V1::Admin::TransactionsController < ApplicationController
     end 
 
     def admin_only
-        if !current_user.has_role? :admin  
+        if user().has_role? :admin  
             return render json: {status: "Must be an admin to continue"}, status: 401
         end
     end
