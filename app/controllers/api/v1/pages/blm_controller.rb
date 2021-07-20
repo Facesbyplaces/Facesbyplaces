@@ -1,137 +1,63 @@
 class Api::V1::Pages::BlmController < ApplicationController
     before_action :authenticate_user, except: [:show]
     before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
+    before_action :set_blm, except: [:create, :followersIndex, :familyIndex, :adminIndex]
     before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
-
-    def show
-        blm = Blm.find(params[:id])
-        
-        # add count to view of page
-        page = Pageowner.where(page_type: 'Blm', page_id: blm.id).first
-
-        if page == nil
-            return render json: {errors: "Page not found"}, status: 400
-        end
-        
-        if page.view == nil
-            page.update(view: 1)
-        else
-            page.update(view: (page.view + 1))
-        end
-        
-        render json: {blm: BlmSerializer.new( blm ).attributes}
-    end
 
     def create
         # create new blm page
         blm = Blm.new(blm_params)
-        # check if the params sent is valid or not
-        check = params_presence(params[:blm])
-        if check == true
-            # set privacy to public
-            blm.privacy = "public"
-            blm.hideFamily = false
-            blm.hideFriends = false
-            blm.hideFollowers = false
 
+        if valid_params(params[:blm]) == true
             # save blm
-            if blm.save 
-
-                # save the owner of the user
-                pageowner = Pageowner.new(account_type:  "User", account_id: user().id, view: 0)
-                blm.pageowner = pageowner
-
-                blm.update(latitude: blm_params[:latitude], longitude: blm_params[:longitude])
-                # save relationship of the user to the page
-                relationship = blm.relationships.new(account: user(), relationship: params[:relationship])
-                if relationship.save 
-
-                    # Make the user as admin of the 
-                    user().add_role "pageadmin", blm
-
-                    # Tell the Mailer to send link to register stripe user account after save
-                    redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
-                    client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
-                    SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, user(), blm.id).deliver_now
-                    
-                    render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
-
-                    # Notify all Users
-                    blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'User' AND notifsettings.account_id != #{user().id}")
-                    almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
-                    
-                    blmUsersDeviceToken = []
-                    blmUsers.each do |user|
-                        Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
-                        blmUsersDeviceToken << user.device_token
-                    end
-
-                    almUsersDeviceToken = []
-                    almUsers.each do |user|
-                        Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
-                        almUsersDeviceToken << user.device_token
-                    end
-
-                    device_tokens = almUsersDeviceToken + blmUsersDeviceToken
-                    title = "New Memorial Page"
-                    message = "#{user().first_name} created a new page"
-                    PushNotification(device_tokens, title, message, user, user(), blm.id, "Blm", " ")
-                else
-                    render json: {errors: relationship.errors}, status: 500
-                end
-            else  
-                render json: {errors: blm.errors}, status: 500
-                blm.destroy
-            end
+            save_blm(blm)
         else
-            render json: {status: "#{check} is empty"}
+            render json: {status: "#{valid_params} is empty"}
         end
     end
 
+    def show
+        # add count to view of page
+        add_view_count
+
+        render json: {blm: BlmSerializer.new( @blm ).attributes}
+    end
+
     def editDetails
-        blm = Blm.find(params[:id])
         # render memorial details that be editted
-        render json: {blm: BlmSerializer.new( blm ).attributes}
+        render json: {blm: BlmSerializer.new( @blm ).attributes}
     end
 
     def updateDetails
-        blm = Blm.find(params[:id])
-        
-        # check if data sent is empty or not
-        check = params_presence(params)
-        if check == true
+        if valid_params(params) == true
             # Update blm details
-            blm.update(blm_details_params)
+            @blm.update(blm_details_params)
 
             # Update relationship of the current page admin to the page
-            blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
+            @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
-            return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated details"}
+            return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated details"}
         else
-            return render json: {error: "#{check} is empty"}
+            return render json: {error: "#{valid_params} is empty"}
         end
     end
 
     def editImages
-        blm = Blm.find(params[:id])
         # render memorial images that be editted
-        render json: {blm: BlmSerializer.new( blm ).attributes}
+        render json: {blm: BlmSerializer.new( @blm ).attributes}
     end
 
     def updateImages
-        blm = Blm.find(params[:id])
-        
         # check if memorial is updated successfully
-        if blm.update(blm_images_params)
-            return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated images"}
+        if @blm.update(blm_images_params)
+            return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"}
         else
             return render json: {status: 'Error'}
         end
     end
 
     def delete
-        blm = Blm.find(params[:id])
-        blm.destroy()
+        @blm.destroy()
 
         adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
 
@@ -143,16 +69,14 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def setPrivacy
-        blm = Blm.find(params[:id])
-        blm.update(privacy: params[:privacy])
+        @blm.update(privacy: params[:privacy])
+        
         render json: {status: :success}
     end
 
     def setRelationship   # for friends and families
-        blm = Blm.find(params[:id])
-
-        if blm.relationships.where(account: user()).first
-            blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
+        if @blm.relationships.where(account: user()).first
+            @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
             render json: {status: :success}
         else
@@ -161,15 +85,14 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def leaveBLM        # leave blm page for family and friends
-        blm = Blm.find(params[:id])
-        if blm.relationships.where(account: user()).first != nil
+        if @blm.relationships.where(account: user()).first != nil
             # check if the user is a pageadmin
-            if user().has_role? :pageadmin, blm
-                if User.with_role(:pageadmin, blm).count != 1
+            if user().has_role? :pageadmin, @blm
+                if User.with_role(:pageadmin, @blm).count != 1
                     # remove user from the page
-                    if blm.relationships.where(account: user()).first.destroy 
+                    if @blm.relationships.where(account: user()).first.destroy 
                         # remove role as a page admin
-                        user().remove_role :pageadmin, blm
+                        user().remove_role :pageadmin, @blm
                         render json: {}, status: 200
                     else
                         render json: {}, status: 500
@@ -179,7 +102,7 @@ class Api::V1::Pages::BlmController < ApplicationController
                 end
             else
                 # remove user from the page
-                if blm.relationships.where(account: user()).first.destroy 
+                if @blm.relationships.where(account: user()).first.destroy 
                     render json: {}, status: 200
                 else
                     render json: {}, status: 500
@@ -191,19 +114,10 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def familyIndex
-        blm = Blm.find(params[:id])
-
-        family = blm.relationships.where("relationship != 'Friend'").page(params[:page]).per(numberOfPage)
-        if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif family.total_count < numberOfPage
-            itemsremaining = family.total_count 
-        else
-            itemsremaining = family.total_count - (params[:page].to_i * numberOfPage)
-        end
+        family = @blm.relationships.where("relationship != 'Friend'").page(params[:page]).per(numberOfPage)
 
         render json: {
-            itemsremaining: itemsremaining,
+            itemsremaining: itemsRemaining(family),
             family: ActiveModel::SerializableResource.new(
                         family, 
                         each_serializer: RelationshipSerializer
@@ -212,19 +126,10 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def friendsIndex
-        blm = Blm.find(params[:id])
-
-        friends = blm.relationships.where(relationship: 'Friend').page(params[:page]).per(numberOfPage)
-        if friends.total_count == 0 || (friends.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif friends.total_count < numberOfPage
-            itemsremaining = friends.total_count 
-        else
-            itemsremaining = friends.total_count - (params[:page].to_i * numberOfPage)
-        end
+        friends = @blm.relationships.where(relationship: 'Friend').page(params[:page]).per(numberOfPage)
 
         render json: {
-            itemsremaining: itemsremaining,
+            itemsremaining: itemsRemaining(friends),
             friends: ActiveModel::SerializableResource.new(
                         friends, 
                         each_serializer: RelationshipSerializer
@@ -234,18 +139,10 @@ class Api::V1::Pages::BlmController < ApplicationController
 
     def followersIndex
         blmFollowersRaw = Follower.where(page_type: 'Blm', page_id: params[:id]).map{|follower| follower.account}
-
         blmFollowers = Kaminari.paginate_array(blmFollowersRaw).page(params[:page]).per(numberOfPage)
-        if blmFollowers.total_count == 0 || (blmFollowers.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif blmFollowers.total_count < numberOfPage
-            itemsremaining = blmFollowers.total_count 
-        else
-            itemsremaining = blmFollowers.total_count - (params[:page].to_i * numberOfPage)
-        end
 
         render json: {
-            itemsremaining: itemsremaining,
+            itemsremaining: itemsRemaining(blmFollowers),
             followers: ActiveModel::SerializableResource.new(
                             blmFollowers, 
                             each_serializer: UserSerializer
@@ -255,37 +152,18 @@ class Api::V1::Pages::BlmController < ApplicationController
 
     def adminIndex
         adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
-        admins = Relationship.where(page_type: 'Blm', page_id: params[:page_id], account_type: 'User', account_id: adminsRaw)
-        admins = admins.page(params[:page]).per(numberOfPage)
-
-        if admins.total_count == 0 || (admins.total_count - (params[:page].to_i * numberOfPage)) < 0
-            adminsitemsremaining = 0
-        elsif admins.total_count < numberOfPage
-            adminsitemsremaining = admins.total_count 
-        else
-            adminsitemsremaining = admins.total_count - (params[:page].to_i * numberOfPage)
-        end
-        
-        familyRaw = Blm.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'User' AND account_id NOT IN (?)", adminsRaw)
-        family = familyRaw.page(params[:page]).per(numberOfPage)
-
-        if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0
-            familyitemsremaining = 0
-        elsif admins.total_count < numberOfPage
-            familyitemsremaining = family.total_count 
-        else
-            familyitemsremaining = family.total_count - (params[:page].to_i * numberOfPage)
-        end
+        @admins = admins_index(adminsRaw)
+        @family = family_index(adminsRaw)
 
         render json: {
-            adminsitemsremaining: adminsitemsremaining,
+            adminsitemsremaining: itemsRemaining(@admins),
             admins: ActiveModel::SerializableResource.new(
-                        admins, 
+                        @admins, 
                         each_serializer: RelationshipSerializer
                     ),
-            familyitemsremaining: familyitemsremaining,
+            familyitemsremaining: itemsRemaining(@family),
             family: ActiveModel::SerializableResource.new(
-                        family, 
+                        @family,
                         each_serializer: RelationshipSerializer
                     )
         }
@@ -297,6 +175,16 @@ class Api::V1::Pages::BlmController < ApplicationController
         if user().account_type == 2
             render json: {status: "Oops! Looks like your account is not registered as Black Lives Matter account. Register to continue."}
         end
+    end
+
+    def authorize
+        if user().has_role? :pageadmin, @blm == false
+            return render json: {status: "Access Denied"}
+        end
+    end
+
+    def set_blm
+        @blm = Blm.find(params[:id])
     end
 
     def blm_params
@@ -311,12 +199,113 @@ class Api::V1::Pages::BlmController < ApplicationController
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
     end
 
-    def authorize
-        blm = Blm.find(params[:id])
+    def valid_params(params)
+        return params_presence(params)
+    end
 
-        if !user().has_role? :pageadmin, blm 
-            return render json: {status: "Access Denied"}
+    def save_blm(blm)
+        # set privacy to public
+        set_privacy(blm)
+
+        if blm.save
+            # save the user as owner
+            save_owner(blm)
+            # update blm location
+            update_location(blm)
+            # save relationship of the user to the page
+            save_relationship(blm)
+        else  
+            render json: {errors: blm.errors}, status: 500
+            blm.destroy
+        end
+    end
+
+    def set_privacy(blm)
+        blm.privacy = "public"
+        blm.hideFamily = false
+        blm.hideFriends = false
+        blm.hideFollowers = false
+    end
+
+    def save_owner(blm)
+        pageowner = Pageowner.new(account_type: "User", account_id: user().id, view: 0)
+        blm.pageowner = pageowner
+    end
+
+    def update_location(blm)
+        blm.update(latitude: blm_params[:latitude], longitude: blm_params[:longitude])
+    end
+
+    def save_relationship(blm)
+        relationship = blm.relationships.new(account: user(), relationship: params[:relationship])
+        if relationship.save 
+            # set current user as admin
+            set_admin(blm)
+            # notify all Users
+            notify_users(blm)
+            return render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
+        else
+            return render json: {errors: relationship.errors}, status: 500
+        end
+    end
+
+    def set_admin(blm)
+        user().add_role "pageadmin", blm
+    end
+
+    def notify_users(blm)
+        blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'User' AND notifsettings.account_id != #{user().id}")
+        almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
+        
+        blmUsersDeviceToken = []
+        blmUsers.each do |user|
+            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
+            blmUsersDeviceToken << user.device_token
+        end
+
+        almUsersDeviceToken = []
+        almUsers.each do |user|
+            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
+            almUsersDeviceToken << user.device_token
+        end
+
+        device_tokens = almUsersDeviceToken + blmUsersDeviceToken
+        title = "New Memorial Page"
+        message = "#{user().first_name} created a new page"
+        PushNotification(device_tokens, title, message, user, user(), blm.id, "Blm", " ")
+    end
+
+    def add_view_count
+        page = Pageowner.where(page_type: 'Blm', page_id: @blm.id).first
+
+        if page == nil
+            return render json: {errors: "Page not found"}, status: 400
+        end
+        
+        if page.view == nil
+            page.update(view: 1)
+        else
+            page.update(view: (page.view + 1))
+        end
+    end
+
+    def itemsRemaining(item)
+        if item.total_count == 0 || (item.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif item.total_count < numberOfPage
+            itemsremaining = item.total_count 
+        else
+            itemsremaining = item.total_count - (params[:page].to_i * numberOfPage)
         end
     end
     
+    def admins_index(adminsRaw)
+        admins = Relationship.where(page_type: 'Blm', page_id: params[:page_id], account_type: 'User', account_id: adminsRaw)
+        return admins = admins.page(params[:page]).per(numberOfPage)
+    end
+
+    def family_index(adminsRaw)
+        familyRaw = Blm.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'User' AND account_id NOT IN (?)", adminsRaw)
+        return family = familyRaw.page(params[:page]).per(numberOfPage)
+    end
 end
