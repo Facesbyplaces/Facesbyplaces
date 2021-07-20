@@ -165,13 +165,13 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     def is_page_admin
         if params[:account_type] == "1"
             # check if user is already a page admin
-            User.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? return false : return true
+            User.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? (return false) : (return true)
         elsif params[:account_type] == "2"
             # check if user is already a page admin
-            AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? return false : return true
-        # elsif @user.has_role? :pageadmin, @page 
-        #     # check if user is already a page admin
-        #     return render json: {error: "Cannot remove admin"}, status: 422
+            AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? (return false) : (return true)
+            # elsif @user.has_role? :pageadmin, @page 
+            #     # check if user is already a page admin
+            #     return render json: {error: "Cannot remove admin"}, status: 422
         end  
     end
 
