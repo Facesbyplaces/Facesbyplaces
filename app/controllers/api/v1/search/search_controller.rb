@@ -2,20 +2,9 @@ class Api::V1::Search::SearchController < ApplicationController
     before_action :authenticate_user, only: [:nearby, :suggested, :test]
 
     def posts
-        postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
+        @posts = fetched_posts
 
-        posts = Post.where(id: postsId)
-        
-        posts = posts.page(params[:page]).per(numberOfPage)
-        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif posts.total_count < numberOfPage
-            itemsremaining = posts.total_count 
-        else
-            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
                             posts, 
                             each_serializer: PostSerializer
@@ -24,23 +13,9 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def memorials
-        memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Blm')
-        # if user().account_type == 1
-        #     memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Blm')
-        # else
-        #     memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Memorial')
-        # end
-        
-        memorials = memorials.page(params[:page]).per(numberOfPage)
-        if memorials.total_count == 0 || (memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif memorials.total_count < numberOfPage
-            itemsremaining = memorials.total_count 
-        else
-            itemsremaining = memorials.total_count - (params[:page].to_i * numberOfPage)
-        end
+        @memorials = fetched_memorials
 
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(@memorials),
                         memorials: ActiveModel::SerializableResource.new(
                                     memorials, 
                                     each_serializer: SearchmemorialSerializer
@@ -49,24 +24,9 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def users
-        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
-            if searchObject.searchable_type == 'User'
-                User.find(searchObject.searchable_id)
-            else
-                AlmUser.find(searchObject.searchable_id)
-            end
-        }.flatten.uniq
+        @users = fetched_users
 
-        users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
-        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif users.total_count < numberOfPage
-            itemsremaining = users.total_count 
-        else
-            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(@users),
                         users: ActiveModel::SerializableResource.new(
                             users, 
                             each_serializer: UserSerializer
@@ -75,16 +35,118 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def followers
+        @followers = fetched_followers
+
+        render json: {  itemsremaining:  itemsRemaining(@followers),
+                        followers: ActiveModel::SerializableResource.new(
+                            followers, 
+                            each_serializer: UserSerializer
+                        )
+                    }
+    end
+
+    def nearby
+        # get user location
+        user_location
+        # get account type
+        account
+
+        @blms = fetched_nearby_blms
+        @memorials = fetched_nearby_alms
+
+        render json: {
+            blmItemsRemaining: itemsRemaining(@blms),
+            blm: ActiveModel::SerializableResource.new(
+                    @blm, 
+                    each_serializer: BlmSerializer
+                ),
+            memorialItemsRemaining: itemsRemaining(@memorials),
+            memorial: ActiveModel::SerializableResource.new(
+                    @memorials, 
+                    each_serializer: MemorialSerializer
+                )
+        }
+    end
+
+    def suggested
+        @pages = fetched_suggested_pages
+
+        render json: {
+            itemsRemaining: itemsRemaining(@pages),
+            pages: ActiveModel::SerializableResource.new(
+                        @pages, 
+                        each_serializer: PageownerSerializer
+                    )
+        }
+    end
+
+    def test
+        render json: {user: user().first_name, type: user().account_type}
+    end
+
+    private
+
+    def fetched_page
         case params[:page_type]
         when "Blm"
-            page = Blm.find(params[:page_id])
+           return page = Blm.find(params[:page_id])
         when "Memorial"
-            page = Memorial.find(params[:page_id])
+           return page = Memorial.find(params[:page_id])
         end 
+    end
 
+    def user_location
+        lon = params[:longitude].to_f
+        lat = params[:latitude].to_f
+
+        return user_location = Geocoder.search([lat,lon])
+    end
+
+    def account
+        if user().account_type == 1
+            return account = 'User'
+        else
+            return account = 'AlmUser'
+        end
+    end
+
+    def fetched_posts
+        postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
+
+        posts = Post.where(id: postsId)
+        
+        return posts = posts.page(params[:page]).per(numberOfPage)
+    end
+
+    def fetched_memorials
+        # search only blm memorials as implemented from mockup
+        memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Blm')
+
+        # if user().account_type == 1
+        #     memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Blm')
+        # else
+        #     memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Memorial')
+        # end
+        
+        return memorials = memorials.page(params[:page]).per(numberOfPage)
+    end
+
+    def fetched_users
+        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
+            if searchObject.searchable_type == 'User'
+                User.find(searchObject.searchable_id)
+            else
+                AlmUser.find(searchObject.searchable_id)
+            end
+        }.flatten.uniq
+
+        return users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
+    end
+
+    def fetched_followers 
         # get the followers of the page (users are the followers of the page)
         followers = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
-            if searchObject.searchable.followers.where(page: page).first
+            if searchObject.searchable.followers.where(page: fetched_page).first
                 if searchObject.searchable_type == 'User'
                     User.find(searchObject.searchable_id)
                 else
@@ -95,74 +157,24 @@ class Api::V1::Search::SearchController < ApplicationController
             end
         }.flatten.uniq
 
-        followers = Kaminari.paginate_array(followers).page(params[:page]).per(numberOfPage)
-        if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif followers.total_count < numberOfPage
-            itemsremaining = followers.total_count 
-        else
-            itemsremaining = followers.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
-                        followers: ActiveModel::SerializableResource.new(
-                            followers, 
-                            each_serializer: UserSerializer
-                        )
-                    }
+        return followers = Kaminari.paginate_array(followers).page(params[:page]).per(numberOfPage)
     end
 
-    def nearby
-        lon = params[:longitude].to_f
-        lat = params[:latitude].to_f
-
-        user_location = Geocoder.search([lat,lon])
-
-        if user().account_type == 1
-            account = 'User'
-        else
-            account = 'AlmUser'
-        end
-
+    def fetched_nearby_blms
         blm_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Blm').pluck('page_id') : []
         blm = Blm.where.not(id: blm_pages_owned).near([lat,lon], 50)
         
-        blm = blm.page(params[:page]).per(numberOfPage)
-        if blm.total_count == 0 || (blm.total_count - (params[:page].to_i * numberOfPage)) < 0
-            blmitemsremaining = 0
-        elsif blm.total_count < numberOfPage
-            blmitemsremaining = blm.total_count 
-        else
-            blmitemsremaining = blm.total_count - (params[:page].to_i * numberOfPage)
-        end
+        return blm = blm.page(params[:page]).per(numberOfPage)
+    end
 
+    def fetched_nearby_alms
         memorial_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Memorial').pluck('page_id') : []
         memorial = Memorial.where.not(id: memorial_pages_owned).near([lat,lon], 50)
         
-        memorial = memorial.page(params[:page]).per(numberOfPage)
-        if memorial.total_count == 0 || (memorial.total_count - (params[:page].to_i * numberOfPage)) < 0
-            memorialitemsremaining = 0
-        elsif memorial.total_count < numberOfPage
-            memorialitemsremaining = memorial.total 
-        else
-            memorialitemsremaining = memorial.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {
-            blmItemsRemaining: blmitemsremaining,
-            blm: ActiveModel::SerializableResource.new(
-                    blm, 
-                    each_serializer: BlmSerializer
-                ),
-            memorialItemsRemaining: memorialitemsremaining,
-            memorial: ActiveModel::SerializableResource.new(
-                memorial, 
-                    each_serializer: MemorialSerializer
-                )
-        }
+        return memorial = memorial.page(params[:page]).per(numberOfPage)
     end
 
-    def suggested
+    def fetched_suggested_pages
         # get all the pages in descending order based on their view count
         if user().guest == false
             followers_page_type = user().followers.pluck("page_type")
@@ -193,26 +205,16 @@ class Api::V1::Search::SearchController < ApplicationController
             pages = Pageowner.all 
         end
 
-            pages = pages.page(params[:page]).per(numberOfPage)
-
-            if pages.total_count == 0 || (pages.total_count - (params[:page].to_i * numberOfPage)) < 0
-                itemsRemaining = 0
-            elsif pages.total_count < numberOfPage
-                itemsRemaining = pages.total_count 
-            else
-                itemsRemaining = pages.total_count - (params[:page].to_i * numberOfPage)
-            end
-
-        render json: {
-            itemsRemaining: itemsRemaining,
-            pages: ActiveModel::SerializableResource.new(
-                        pages, 
-                        each_serializer: PageownerSerializer
-                    )
-        }
+        return pages = pages.page(params[:page]).per(numberOfPage)
     end
 
-    def test
-        render json: {user: user().first_name, type: user().account_type}
+    def itemsRemaining(data)
+        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif data.total_count < numberOfPage
+            itemsremaining = data.total_count 
+        else
+            itemsremaining = data.total_count - (params[:page].to_i * numberOfPage)
+        end
     end
 end

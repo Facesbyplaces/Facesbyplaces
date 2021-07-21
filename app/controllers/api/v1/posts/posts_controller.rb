@@ -7,7 +7,7 @@ class Api::V1::Posts::PostsController < ApplicationController
 
         render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
-                                posts, 
+                                @posts, 
                                 each_serializer: PostSerializer
                             )
                     }
@@ -38,7 +38,7 @@ class Api::V1::Posts::PostsController < ApplicationController
 
         render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
-                            posts, 
+                            @posts, 
                             each_serializer: PostSerializer
                         )
                     }

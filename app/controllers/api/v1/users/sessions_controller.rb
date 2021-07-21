@@ -8,8 +8,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           if params[:password].present? 
             @user.update({ device_token: params[:device_token] })
             @user.save
-            render json: { success: true, user:  @user, status: 200 }, status: 200
-            super
+            # Workaround to show the error message
+            super || render_create_success2 && super
           else
             params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
             puts "Password: "
@@ -17,8 +17,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user.password = @user.password_confirmation = params[:password]
             @user.update({ device_token: params[:device_token] })
             @user.save
-            render json: { success: true, user:  @user, status: 200 }, status: 200
-            super
+            # Workaround to show the error message
+            super || render_create_success2 && super
           end
         else # If user's first login
           sign_up_user
@@ -34,15 +34,15 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             if params[:password].present? 
               @user.update({ device_token: params[:device_token] })
               @user.save
-              render json: { success: true, user:  @user, status: 200 }, status: 200
-              super
+              # Workaround to show the error message
+              super || render_create_success2 && super
             else
               params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
               @user.password = @user.password_confirmation = params[:password]
               @user.update({ device_token: params[:device_token] })
               @user.save
-              render json: { success: true, user:  @user, status: 200 }, status: 200
-              super
+              # Workaround to show the error message
+              super || render_create_success2 && super
             end
           else
             sign_up_user
@@ -68,8 +68,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.password = @user.password_confirmation = params[:password]
           @user.update({ device_token: params[:device_token] })
           @user.save
-          render json: { success: true, user:  @user, status: 200 }, status: 200
-          super
+          # Workaround to show the error message
+          super || render_create_success2 && super
         else
           sign_up_user
           super
