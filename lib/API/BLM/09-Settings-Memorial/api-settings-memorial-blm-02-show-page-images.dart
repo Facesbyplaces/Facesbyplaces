@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowPageImagesMain> apiBLMShowPageImages({required int memorialId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMShowPageImagesMain> apiBLMShowPageImages({required int memorialId})
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/editImages',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -36,9 +35,7 @@ Future<APIBLMShowPageImagesMain> apiBLMShowPageImages({required int memorialId})
 }
 
 class APIBLMShowPageImagesMain{
-
   APIBLMShowPageImagesExtended blmMemorial;
-
   APIBLMShowPageImagesMain({required this.blmMemorial});
 
   factory APIBLMShowPageImagesMain.fromJson(Map<String, dynamic> parsedJson){
@@ -52,7 +49,6 @@ class APIBLMShowPageImagesExtended{
   dynamic showPageImagesBackgroundImage;
   dynamic showPageImagesProfileImage;
   String showPageImagesRelationship;
-
   APIBLMShowPageImagesExtended({required this.showPageImagesBackgroundImage, required this.showPageImagesProfileImage, required this.showPageImagesRelationship,});
 
   factory APIBLMShowPageImagesExtended.fromJson(Map<String, dynamic> parsedJson){

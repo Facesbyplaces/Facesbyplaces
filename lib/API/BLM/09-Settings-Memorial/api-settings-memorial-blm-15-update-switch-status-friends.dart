@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiBLMUpdateSwitchStatusFriends({required int memorialId, required bool status}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<bool> apiBLMUpdateSwitchStatusFriends({required int memorialId, required 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFriends/Blm/$memorialId?hide=$status',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{

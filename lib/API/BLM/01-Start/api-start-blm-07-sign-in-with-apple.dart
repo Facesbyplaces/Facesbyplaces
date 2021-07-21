@@ -2,13 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiBLMSignInWithApple({required String userIdentification, required String identityToken}) async{
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=', 
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{

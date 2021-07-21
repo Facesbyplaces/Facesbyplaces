@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int memorialId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int me
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -35,7 +34,6 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int me
 }
 
 class APIRegularShowPageDetailsMain{
-
   APIRegularShowPageDetailsExtended almMemorial;
   APIRegularShowPageDetailsMain({required this.almMemorial});
 
@@ -50,7 +48,6 @@ class APIRegularShowPageDetailsExtended{
   String showPageDetailsName;
   APIRegularShowPageDetailsExtendedDetails showPageDetailsDetails;
   String showPageDetailsRelationship;
-
   APIRegularShowPageDetailsExtended({required this.showPageDetailsName, required this.showPageDetailsDetails, required this.showPageDetailsRelationship});
 
   factory APIRegularShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -68,7 +65,6 @@ class APIRegularShowPageDetailsExtendedDetails{
   String showPageDetailsDetailsDob;
   String showPageDetailsDetailsRip;
   String showPageDetailsDetailsCountry;
-
   APIRegularShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsCemetery, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsCountry});
 
   factory APIRegularShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

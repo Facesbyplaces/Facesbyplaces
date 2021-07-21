@@ -79,7 +79,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
 
                   MiscRegularButtonTemplate(
                     buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                    buttonText: widget.isAddPassword == true ? 'Add' : 'Updated',
+                    buttonText: widget.isAddPassword == true ? 'Add' : 'Update',
                     buttonColor: const Color(0xff04ECFF),
                     width: SizeConfig.screenWidth! / 2,
                     height: 45,

@@ -3,7 +3,6 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowUserInformation> apiRegularShowUserInformation({required int userId, required int accountType}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -21,13 +20,12 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({required in
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -59,11 +57,9 @@ class APIRegularShowUserInformation{
   String showUserInformationEmailAddress;
   String showUserInformationContactNumber;
   String showUserInformationImage;
-  
   APIRegularShowUserInformation({required this.showUserInformationId, required this.showUserInformationFirstName, required this.showUserInformationLastName, required this.showUserInformationBirthdate, required this.showUserInformationBirthplace, required this.showUserInformationHomeAddress, required this.showUserInformationEmailAddress, required this.showUserInformationContactNumber, required this.showUserInformationImage});
 
   factory APIRegularShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
-
     DateTime dateTime;
     String newBirthdate;
 
@@ -88,5 +84,3 @@ class APIRegularShowUserInformation{
     );
   }
 }
-
-

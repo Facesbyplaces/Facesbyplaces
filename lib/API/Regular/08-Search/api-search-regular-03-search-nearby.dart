@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, required double latitude, required double longitude}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, re
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -40,7 +39,6 @@ class APIRegularSearchNearbyMain{
   int memorialItemsRemaining;
   List<APIRegularSearchNearbyExtended> blmList;
   List<APIRegularSearchNearbyExtended> memorialList;
-
   APIRegularSearchNearbyMain({required this.blmItemsRemaining, required this.memorialItemsRemaining, required this.blmList, required this.memorialList});
 
   factory APIRegularSearchNearbyMain.fromJson(Map<String, dynamic> parsedJson){
@@ -69,7 +67,6 @@ class APIRegularSearchNearbyExtended{
   bool searchNearbyFamOrFriends;
   bool searchNearbyFollower;
   String searchNearbyPageType;
-
   APIRegularSearchNearbyExtended({required this.searchNearbyId, required this.searchNearbyName, required this.searchNearbyDetails, required this.searchNearbyProfileImage, required this.searchNearbyRelationship, required this.searchNearbyManage, required this.searchNearbyFamOrFriends, required this.searchNearbyFollower, required this.searchNearbyPageType,});
 
   factory APIRegularSearchNearbyExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -89,7 +86,6 @@ class APIRegularSearchNearbyExtended{
 
 class APIRegularSearchNearbyExtendedPageDetails{
   String searchNearbyPageDetailsDescription;
-
   APIRegularSearchNearbyExtendedPageDetails({required this.searchNearbyPageDetailsDescription,});
 
   factory APIRegularSearchNearbyExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){

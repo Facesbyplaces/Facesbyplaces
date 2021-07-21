@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) asy
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,11 +37,9 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) asy
 class APIBLMSearchSuggestedMain{
   int blmItemsRemaining;
   List<APIBLMSearchSuggestedExtended> blmPages;
-
   APIBLMSearchSuggestedMain({required this.blmItemsRemaining, required this.blmPages});
 
   factory APIBLMSearchSuggestedMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList = parsedJson['pages'] as List;
     List<APIBLMSearchSuggestedExtended> pagesList = newList.map((i) => APIBLMSearchSuggestedExtended.fromJson(i)).toList();
 
@@ -56,11 +53,9 @@ class APIBLMSearchSuggestedMain{
 class APIBLMSearchSuggestedExtended{
   int searchSuggestedId;
   APIBLMSearchSuggestedExtendedPage searchSuggestedPage;
-
   APIBLMSearchSuggestedExtended({required this.searchSuggestedId, required this.searchSuggestedPage});
 
   factory APIBLMSearchSuggestedExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     return APIBLMSearchSuggestedExtended(
       searchSuggestedId: parsedJson['id'],
       searchSuggestedPage: APIBLMSearchSuggestedExtendedPage.fromJson(parsedJson['page'])
@@ -78,7 +73,6 @@ class APIBLMSearchSuggestedExtendedPage{
   bool searchSuggestedPageFamOrFriends;
   bool searchSuggestedPageFollower;
   String searchSuggestedPagePageType;
-
   APIBLMSearchSuggestedExtendedPage({required this.searchSuggestedPageId, required this.searchSuggestedPageName, required this.searchSuggestedPageDetails, required this.searchSuggestedPageProfileImage, required this.searchSuggestedPageRelationship, required this.searchSuggestedPageManage, required this.searchSuggestedPageFamOrFriends, required this.searchSuggestedPageFollower, required this.searchSuggestedPagePageType});
 
   factory APIBLMSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -98,7 +92,6 @@ class APIBLMSearchSuggestedExtendedPage{
 
 class APIBLMSearchSuggestedPageDetails{
   String searchSuggestedPageDetailsDescription;
-
   APIBLMSearchSuggestedPageDetails({required this.searchSuggestedPageDetailsDescription});
 
   factory APIBLMSearchSuggestedPageDetails.fromJson(Map<String, dynamic> parsedJson){

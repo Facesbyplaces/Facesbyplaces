@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab({required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab({required int p
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -35,14 +34,11 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab({required int p
 }
 
 class APIRegularHomeTabMemorialMain{
-
   APIRegularHomeTabMemorialFamilyExtended almFamilyMemorialList;
   APIRegularHomeTabMemorialFriendsExtended almFriendsMemorialList;
-
   APIRegularHomeTabMemorialMain({required this.almFamilyMemorialList, required this.almFriendsMemorialList});
 
   factory APIRegularHomeTabMemorialMain.fromJson(Map<String, dynamic> parsedJson){
-
     return APIRegularHomeTabMemorialMain(
       almFamilyMemorialList: APIRegularHomeTabMemorialFamilyExtended.fromJson(parsedJson['family']),
       almFriendsMemorialList: APIRegularHomeTabMemorialFriendsExtended.fromJson(parsedJson['friends']),
@@ -55,11 +51,9 @@ class APIRegularHomeTabMemorialFamilyExtended{
   int memorialHomeTabMemorialFamilyItemsRemaining;
   List<APIRegularHomeTabMemorialExtendedPage> blmHomeTabMemorialPage;
   List<APIRegularHomeTabMemorialExtendedPage> memorialHomeTabMemorialPage;
-
   APIRegularHomeTabMemorialFamilyExtended({required this.blmHomeTabMemorialPage, required this.memorialHomeTabMemorialPage, required this.blmHomeTabMemorialFamilyItemsRemaining, required this.memorialHomeTabMemorialFamilyItemsRemaining});
 
   factory APIRegularHomeTabMemorialFamilyExtended.fromJson(Map<String, dynamic> parsedJson){
-
     var blmList = parsedJson['blm'] as List;
     var memorialList = parsedJson['memorial'] as List;
 
@@ -92,11 +86,9 @@ class APIRegularHomeTabMemorialFriendsExtended{
   int memorialHomeTabMemorialFriendsItemsRemaining;
   List<APIRegularHomeTabMemorialExtendedPage> blmHomeTabMemorialPage;
   List<APIRegularHomeTabMemorialExtendedPage> memorialHomeTabMemorialPage;
-
   APIRegularHomeTabMemorialFriendsExtended({required this.blmHomeTabMemorialPage, required this.memorialHomeTabMemorialPage, required this.blmHomeTabMemorialFriendsItemsRemaining, required this.memorialHomeTabMemorialFriendsItemsRemaining});
 
   factory APIRegularHomeTabMemorialFriendsExtended.fromJson(Map<String, dynamic> parsedJson){
-
     var blmList = parsedJson['blm'] as List;
     var memorialList = parsedJson['memorial'] as List;
 
@@ -134,7 +126,6 @@ class APIRegularHomeTabMemorialExtendedPage{
   bool blmHomeTabMemorialPageFamOrFriends;
   bool blmHomeTabMemorialPageFollower;
   String blmHomeTabMemorialPagePageType;
-
   APIRegularHomeTabMemorialExtendedPage({required this.blmHomeTabMemorialPageId, required this.blmHomeTabMemorialPageName, required this.blmHomeTabMemorialPageDetails, required this.blmHomeTabMemorialPageProfileImage, required this.blmHomeTabMemorialPageRelationship, required this.blmHomeTabMemorialPageManage, required this.blmHomeTabMemorialPageFamOrFriends, required this.blmHomeTabMemorialPageFollower, required this.blmHomeTabMemorialPagePageType});
 
   factory APIRegularHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -154,7 +145,6 @@ class APIRegularHomeTabMemorialExtendedPage{
 
 class APIRegularHomeTabMemorialExtendedPageDetails{
   String blmHomeTabMemorialPageDetailsDescription;
-
   APIRegularHomeTabMemorialExtendedPageDetails({required this.blmHomeTabMemorialPageDetailsDescription});
 
   factory APIRegularHomeTabMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){

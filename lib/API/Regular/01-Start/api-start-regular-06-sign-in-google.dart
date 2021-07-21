@@ -2,13 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularSignInWithGoogle({required String firstName, required String lastName, required String email, required String username, required String googleId, required String image}) async{
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&first_name=$firstName&last_name=$lastName&email=$email&username=$username&google_id=$googleId&image=$image',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -23,7 +22,6 @@ Future<bool> apiRegularSignInWithGoogle({required String firstName, required Str
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['user'];
     int userId = user['id'];
-
     final sharedPrefs = await SharedPreferences.getInstance();
 
     sharedPrefs.setInt('regular-user-id', userId);

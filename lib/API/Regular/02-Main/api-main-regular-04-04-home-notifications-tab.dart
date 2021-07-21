@@ -12,7 +12,7 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({requir
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -39,7 +39,6 @@ class APIRegularHomeTabNotificationMain{
   APIRegularHomeTabNotificationMain({required this.almItemsRemaining, required this.almNotification});
 
   factory APIRegularHomeTabNotificationMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList = parsedJson['notifs'] as List;
     List<APIRegularHomeTabNotificationExtended> newNotification = newList.map((i) => APIRegularHomeTabNotificationExtended.fromJson(i)).toList();
 
@@ -62,7 +61,6 @@ class APIRegularHomeTabNotificationExtended{
   APIRegularHomeTabNotificationExtended({required this.homeTabNotificationId, required this.homeTabNotificationCreatedAt, required this.homeTabNotificationUpdatedAt, required this.homeTabNotificationActor, required this.homeTabNotificationRead, required this.homeTabNotificationAction, required this.homeTabNotificationPostId, required this.homeTabNotificationNotificationType});
 
   factory APIRegularHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
-
     return APIRegularHomeTabNotificationExtended(
       homeTabNotificationId: parsedJson['id'],
       homeTabNotificationCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
@@ -84,7 +82,6 @@ class APIRegularHomeTabNotificationExtendedActor{
   APIRegularHomeTabNotificationExtendedActor({required this.homeTabNotificationActorId, required this.homeTabNotificationActorImage, required this.homeTabNotificationActorFirstName, required this.homeTabNotificationActorAccountType});
 
   factory APIRegularHomeTabNotificationExtendedActor.fromJson(Map<String, dynamic> parsedJson){
-
     return APIRegularHomeTabNotificationExtendedActor(
       homeTabNotificationActorId: parsedJson['id'],
       homeTabNotificationActorImage: parsedJson['image'] != null ? parsedJson['image'] : '',

@@ -4,7 +4,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiBLMLogout() async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -15,7 +14,7 @@ Future<bool> apiBLMLogout() async{
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/auth/sign_out',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -44,18 +43,11 @@ Future<bool> apiBLMLogout() async{
 
     sharedPrefs.remove('user-guest-session');
 
-    GoogleSignIn googleSignIn = GoogleSignIn(
-      scopes: [
-        'profile',
-        'email',
-        'openid'
-      ],
-    );
+    GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['profile', 'email', 'openid'],);
     
     bool isGoogleSignedIn = await googleSignIn.isSignedIn();
     if(isGoogleSignedIn == true){
       await googleSignIn.signOut();
-      // await googleSignIn.disconnect();
     }
 
     FacebookLogin fb = FacebookLogin();

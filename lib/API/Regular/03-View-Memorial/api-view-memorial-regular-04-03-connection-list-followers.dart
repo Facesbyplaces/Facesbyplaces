@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/followers/index?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -50,11 +49,9 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
 class APIRegularConnectionListFollowersMain{
   int almItemsRemaining;
   List<APIRegularConnectionListFollowersExtendedDetails> almFollowersList;
-
   APIRegularConnectionListFollowersMain({required this.almItemsRemaining, required this.almFollowersList});
 
   factory APIRegularConnectionListFollowersMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['followers'] as List;
     List<APIRegularConnectionListFollowersExtendedDetails> familyList = newList1.map((i) => APIRegularConnectionListFollowersExtendedDetails.fromJson(i)).toList();
 
@@ -66,13 +63,11 @@ class APIRegularConnectionListFollowersMain{
 }
 
 class APIRegularConnectionListFollowersExtendedDetails{
-
   int connectionListFollowersDetailsId;
   String connectionListFollowersDetailsFirstName;
   String connectionListFollowersDetailsLastName;
   String connectionListFollowersDetailsImage;
   int connectionListFollowersAccountType;
-
   APIRegularConnectionListFollowersExtendedDetails({required this.connectionListFollowersDetailsId, required this.connectionListFollowersDetailsFirstName, required this.connectionListFollowersDetailsLastName, required this.connectionListFollowersDetailsImage, required this.connectionListFollowersAccountType});
 
   factory APIRegularConnectionListFollowersExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

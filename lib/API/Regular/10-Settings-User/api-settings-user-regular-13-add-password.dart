@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularAddPassword({required String newPassword}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -19,7 +18,7 @@ Future<bool> apiRegularAddPassword({required String newPassword}) async{
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/alm_auth/password', data: formData,
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, String>{

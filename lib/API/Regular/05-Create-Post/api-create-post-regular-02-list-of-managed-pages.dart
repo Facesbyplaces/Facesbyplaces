@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -37,11 +36,9 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
 
 class APIRegularShowListOfManagedPages{
   List<APIRegularShowListOfManagedPagesExtended> almPagesList;
-
   APIRegularShowListOfManagedPages({required this.almPagesList});
 
   factory APIRegularShowListOfManagedPages.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['pages'] as List;
     List<APIRegularShowListOfManagedPagesExtended> pagesList = newList1.map((i) => APIRegularShowListOfManagedPagesExtended.fromJson(i)).toList();
 
@@ -55,7 +52,6 @@ class APIRegularShowListOfManagedPagesExtended{
   int showListOfManagedPagesId;
   String showListOfManagedPagesName;
   String showListOfManagedPagesProfileImage;
-
   APIRegularShowListOfManagedPagesExtended({required this.showListOfManagedPagesId, required this.showListOfManagedPagesName, required this.showListOfManagedPagesProfileImage});
 
   factory APIRegularShowListOfManagedPagesExtended.fromJson(Map<String, dynamic> parsedJson){

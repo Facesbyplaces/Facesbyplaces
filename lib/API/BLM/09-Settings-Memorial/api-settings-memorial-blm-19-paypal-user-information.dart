@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowPaypalUserInformation> apiBLMMemorialPaypalUserInformation({required String accessToken}) async{
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('https://api-m.sandbox.paypal.com/v1/identity/oauth2/userinfo?schema=paypalv1.1',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -27,14 +26,12 @@ Future<APIBLMShowPaypalUserInformation> apiBLMMemorialPaypalUserInformation({req
 }
 
 class APIBLMShowPaypalUserInformation{
-
   String userId;
   String name;
   List<APIBLMShowPaypalUserInformationExtended> emails;
   APIBLMShowPaypalUserInformation({required this.userId, required this.name, required this.emails});
 
   factory APIBLMShowPaypalUserInformation.fromJson(Map<String, dynamic> parsedJson){
-
     var newList = parsedJson['emails'] as List;
     List<APIBLMShowPaypalUserInformationExtended> emailsList = newList.map((i) => APIBLMShowPaypalUserInformationExtended.fromJson(i)).toList();
 
@@ -47,7 +44,6 @@ class APIBLMShowPaypalUserInformation{
 }
 
 class APIBLMShowPaypalUserInformationExtended{
-
   String email;
   APIBLMShowPaypalUserInformationExtended({required this.email});
 

@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<List<String>> apiBLMDonate({required String pageType, required int pageId, required double amount, required String paymentMethod}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<List<String>> apiBLMDonate({required String pageType, required int pageId
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{

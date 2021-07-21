@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 
 Future<String> apiBLMMemorialPaypalAccessToken({required String code}) async{
-
   Dio dioRequest = Dio();
   var auth = 'Basic '+base64Encode(utf8.encode('AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT:ELQ49uFroNvBtx-DUQ1uIiLv4vpEMk5WM7VRqzq92KANWsTgHe6SJdAibXqAulq4g9tSixZPFrLzCN0m'));
 
@@ -14,7 +13,7 @@ Future<String> apiBLMMemorialPaypalAccessToken({required String code}) async{
   var response = await dioRequest.post('https://api-m.sandbox.paypal.com/v1/oauth2/token',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, String>{'authorization': auth},

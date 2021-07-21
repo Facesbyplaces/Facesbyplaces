@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required int userId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required in
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=2',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -52,16 +51,13 @@ class APIRegularShowUserMemorialsMain{
   int almFollowedItemsRemaining;
   List<APIRegularShowUserMemorialsExtended> almOwned;
   List<APIRegularShowUserMemorialsExtended> almFollowed;
-
   APIRegularShowUserMemorialsMain({required this.almOwnedItemsRemaining, required this.almFollowedItemsRemaining, required this.almOwned, required this.almFollowed});
 
   factory APIRegularShowUserMemorialsMain.fromJson(Map<String, dynamic> parsedJson){
-
     var ownedList = parsedJson['owned'] as List;
     var followedList = parsedJson['followed'] as List;
 
     List<APIRegularShowUserMemorialsExtended> newOwnedList = ownedList.map((e) => APIRegularShowUserMemorialsExtended.fromJson(e)).toList();
-
     List<APIRegularShowUserMemorialsExtended> newFollowedList = followedList.map((e) => APIRegularShowUserMemorialsExtended.fromJson(e)).toList();
 
     return APIRegularShowUserMemorialsMain(
@@ -74,9 +70,7 @@ class APIRegularShowUserMemorialsMain{
 }
 
 class APIRegularShowUserMemorialsExtended{
-
   APIRegularShowUserMemorialsExtendedPage showUserMemorialsPage;
-
   APIRegularShowUserMemorialsExtended({required this.showUserMemorialsPage});
 
   factory APIRegularShowUserMemorialsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -96,7 +90,6 @@ class APIRegularShowUserMemorialsExtendedPage{
   bool showUserMemorialsPageFamOrFriends;
   bool showUserMemorialsPageFollower;
   String showUserMemorialsPageType;
-
   APIRegularShowUserMemorialsExtendedPage({required this.showUserMemorialsPageId, required this.showUserMemorialsPageName, required this.showUserMemorialsPageDetails, required this.showUserMemorialsPageProfileImage, required this.showUserMemorialsPageRelationship, required this.showUserMemorialsPageManage, required this.showUserMemorialsPageFamOrFriends, required this.showUserMemorialsPageFollower, required this.showUserMemorialsPageType,});
 
   factory APIRegularShowUserMemorialsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -116,7 +109,6 @@ class APIRegularShowUserMemorialsExtendedPage{
 
 class APIRegularShowUserMemorialsExtendedPageDetails{
   String showUserMemorialsPageDetailsDescription;
-
   APIRegularShowUserMemorialsExtendedPageDetails({required this.showUserMemorialsPageDetailsDescription,});
   
   factory APIRegularShowUserMemorialsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){

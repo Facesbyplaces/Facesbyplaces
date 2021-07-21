@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMHomeProfilePostMain> apiBLMProfilePost({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost({required int memorialId, re
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/page/Blm/$memorialId?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,7 +37,6 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost({required int memorialId, re
 class APIBLMHomeProfilePostMain{
   int blmItemsRemaining;
   List<APIBLMHomeProfilePostExtended> blmFamilyMemorialList;
-
   APIBLMHomeProfilePostMain({required this.blmItemsRemaining, required this.blmFamilyMemorialList});
 
   factory APIBLMHomeProfilePostMain.fromJson(Map<String, dynamic> parsedJson){
@@ -62,11 +60,9 @@ class APIBLMHomeProfilePostExtended{
   int profilePostNumberOfLikes;
   int profilePostNumberOfComments;
   bool profilePostLikeStatus;
-
   APIBLMHomeProfilePostExtended({required this.profilePostId, required this.profilePostPage, required this.profilePostBody, required this.profilePostImagesOrVideos, required this.profilePostPostTagged, required this.profilePostCreatedAt, required this.profilePostNumberOfLikes, required this.profilePostNumberOfComments, required this.profilePostLikeStatus});
 
   factory APIBLMHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
@@ -101,7 +97,6 @@ class APIBLMHomeProfilePostExtendedPage{
   bool profilePageFamOrFriends;
   bool profilePageFollower;
   String profilePagePageType;
-
   APIBLMHomeProfilePostExtendedPage({required this.profilePageId, required this.profilePageName, required this.profilePageProfileImage, required this.profilePageRelationship, required this.profilePagePageCreator, required this.profilePageManage, required this.profilePageFamOrFriends, required this.profilePageFollower, required this.profilePagePageType});
 
   factory APIBLMHomeProfilePostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -121,7 +116,6 @@ class APIBLMHomeProfilePostExtendedPage{
 
 class APIBLMHomeProfilePostExtendedPageCreator{
   int profilePageCreatorId;
-
   APIBLMHomeProfilePostExtendedPageCreator({required this.profilePageCreatorId});
 
   factory APIBLMHomeProfilePostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
@@ -136,7 +130,6 @@ class APIBLMHomeProfilePostExtendedTagged{
   String profilePageTaggedFirstName;
   String profilePageTaggedLastName;
   String profilePageTaggedImage;
-
   APIBLMHomeProfilePostExtendedTagged({required this.profilePageTaggedId, required this.profilePageTaggedFirstName, required this.profilePageTaggedLastName, required this.profilePageTaggedImage});
 
   factory APIBLMHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){

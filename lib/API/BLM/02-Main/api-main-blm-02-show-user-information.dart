@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/image_show', 
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -55,13 +54,10 @@ class APIBLMShowProfileInformation{
   String showProfileInformationEmail;
   bool showProfileInformationGuest;
   int showProfileInformationAccountType;
-
   APIBLMShowProfileInformation({required this.showProfileInformationUserId, required this.showProfileInformationFirstName, required this.showProfileInformationLastName, required this.showProfileInformationImage, required this.showProfileInformationEmail, required this.showProfileInformationGuest, required this.showProfileInformationAccountType});
 
   factory APIBLMShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
-
     var newValue = parsedJson['user'];
-
     return APIBLMShowProfileInformation(
       showProfileInformationUserId: newValue['id'],
       showProfileInformationFirstName: newValue['first_name'] != null ? newValue['first_name'] : '',

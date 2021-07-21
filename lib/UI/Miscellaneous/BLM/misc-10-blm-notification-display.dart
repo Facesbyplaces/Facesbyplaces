@@ -45,15 +45,20 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
         }
       },
-      leading: imageIcon != ''
-      ? CircleAvatar(
-        backgroundColor: const Color(0xff888888),
-        foregroundImage: NetworkImage(imageIcon),
-        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-      )
-      : const CircleAvatar(
-        backgroundColor: const Color(0xff888888),
-        foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+      leading: GestureDetector(
+        child: imageIcon != ''
+        ? CircleAvatar(
+          backgroundColor: const Color(0xff888888),
+          foregroundImage: NetworkImage(imageIcon),
+          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+        )
+        : const CircleAvatar(
+          backgroundColor: const Color(0xff888888),
+          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+        ),
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: actorId, accountType: actorAccountType)));
+        },
       ),
       title: EasyRichText(notification,
         patternList: [

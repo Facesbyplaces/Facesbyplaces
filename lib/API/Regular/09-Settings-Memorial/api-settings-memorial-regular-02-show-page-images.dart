@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({required int memorialId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({required int memo
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/editImages',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -35,7 +34,6 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({required int memo
 }
 
 class APIRegularShowPageImagesMain{
-
   APIRegularShowPageImagesExtended almMemorial;
   APIRegularShowPageImagesMain({required this.almMemorial});
 
@@ -50,7 +48,6 @@ class APIRegularShowPageImagesExtended{
   String showPageImagesBackgroundImage;
   String showPageImagesProfileImage;
   String showPageImagesRelationship;
-
   APIRegularShowPageImagesExtended({required this.showPageImagesBackgroundImage, required this.showPageImagesProfileImage, required this.showPageImagesRelationship});
 
   factory APIRegularShowPageImagesExtended.fromJson(Map<String, dynamic> parsedJson){

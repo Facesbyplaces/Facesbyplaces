@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus({required int userId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus({requi
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/otherDetailsStatus',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -40,7 +39,6 @@ class APIRegularShowOtherDetailsStatus{
   bool showOtherDetailsStatusHideEmail;
   bool showOtherDetailsStatusHideAddress;
   bool showOtherDetailsStatusHidePhoneNumber;
-
   APIRegularShowOtherDetailsStatus({required this.showOtherDetailsStatusHideBirthdate, required this.showOtherDetailsStatusHideBirthplace, required this.showOtherDetailsStatusHideEmail, required this.showOtherDetailsStatusHideAddress, required this.showOtherDetailsStatusHidePhoneNumber});
 
   factory APIRegularShowOtherDetailsStatus.fromJson(Map<String, dynamic> parsedJson){

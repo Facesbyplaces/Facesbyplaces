@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiBLMUpdateUserProfilePicture({required dynamic image, required int userId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -11,14 +10,12 @@ Future<bool> apiBLMUpdateUserProfilePicture({required dynamic image, required in
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
-  formData = FormData.fromMap({
-    'image': await MultipartFile.fromFile(image.path, filename: image.path),
-  });
+  formData = FormData.fromMap({'image': await MultipartFile.fromFile(image.path, filename: image.path),});
 
   var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, String>{

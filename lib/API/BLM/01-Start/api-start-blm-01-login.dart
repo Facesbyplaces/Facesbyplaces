@@ -2,13 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<String> apiBLMLogin({required String email, required String password, required String deviceToken}) async{
-
   Dio dioRequest = Dio();
 
   Response<dynamic> response = await dioRequest.post('http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&password=$password&email=$email&device_token=$deviceToken',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -18,7 +17,6 @@ Future<String> apiBLMLogin({required String email, required String password, req
   );
 
   print('The status code of blm login is ${response.statusCode}');
-  print('The status body of blm login is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

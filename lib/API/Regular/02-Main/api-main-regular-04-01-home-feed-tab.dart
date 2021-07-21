@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -37,7 +36,6 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
 class APIRegularHomeTabFeedMain{
   int almItemsRemaining;
   List<APIRegularHomeTabFeedExtended> almFamilyMemorialList;
-
   APIRegularHomeTabFeedMain({required this.almItemsRemaining, required this.almFamilyMemorialList});
 
   factory APIRegularHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
@@ -61,11 +59,9 @@ class APIRegularHomeTabFeedExtended{
   int homeTabFeedNumberOfLikes;
   int homeTabFeedNumberOfComments;
   bool homeTabFeedLikeStatus;
-
   APIRegularHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
 
   factory APIRegularHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
@@ -100,7 +96,6 @@ class APIRegularHomeTabFeedExtendedPage{
   bool homeTabFeedPageFamOrFriends;
   bool homeTabFeedPageFollower;
   String homeTabFeedPagePageType;
-
   APIRegularHomeTabFeedExtendedPage({required this.homeTabFeedPageId, required this.homeTabFeedPageName, required this.homeTabFeedPageProfileImage, required this.homeTabFeedPageRelationship, required this.homeTabFeedPagePageCreator, required this.homeTabFeedPageFollower, required this.homeTabFeedPageManage, required this.homeTabFeedPageFamOrFriends, required this.homeTabFeedPagePageType});
 
   factory APIRegularHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -120,7 +115,6 @@ class APIRegularHomeTabFeedExtendedPage{
 
 class APIRegularHomeTabFeedExtendedPageCreator{
   int homeTabFeedPageCreatorId;
-
   APIRegularHomeTabFeedExtendedPageCreator({required this.homeTabFeedPageCreatorId});
 
   factory APIRegularHomeTabFeedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
@@ -135,7 +129,6 @@ class APIRegularHomeTabFeedExtendedTagged{
   String homeTabFeedTaggedFirstName;
   String homeTabFeedTaggedLastName;
   String homeTabFeedTaggedImage;
-
   APIRegularHomeTabFeedExtendedTagged({required this.homeTabFeedTaggedId, required this.homeTabFeedTaggedFirstName, required this.homeTabFeedTaggedLastName, required this.homeTabFeedTaggedImage});
 
   factory APIRegularHomeTabFeedExtendedTagged.fromJson(Map<String, dynamic> parsedJson){

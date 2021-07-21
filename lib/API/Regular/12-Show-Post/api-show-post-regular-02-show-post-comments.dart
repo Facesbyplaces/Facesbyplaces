@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int postId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -49,11 +48,9 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int 
 class APIRegularShowListOfComments{
   int almItemsRemaining;
   List<APIRegularShowListOfCommentsExtended> almCommentsList;
-
   APIRegularShowListOfComments({required this.almItemsRemaining, required this.almCommentsList});
 
   factory APIRegularShowListOfComments.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['comments'] as List;
     List<APIRegularShowListOfCommentsExtended> commentsList = newList1.map((i) => APIRegularShowListOfCommentsExtended.fromJson(i)).toList();
 
@@ -70,7 +67,6 @@ class APIRegularShowListOfCommentsExtended{
   APIRegularShowListOfCommentsExtendedUser showListOfCommentsUser;
   String showListOfCommentsCommentBody;
   String showListOfCommentsCreatedAt;
-
   APIRegularShowListOfCommentsExtended({required this.showListOfCommentsCommentId, required this.showListOfCommentsPostId, required this.showListOfCommentsCommentBody, required this.showListOfCommentsUser, required this.showListOfCommentsCreatedAt});
 
   factory APIRegularShowListOfCommentsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -90,7 +86,6 @@ class APIRegularShowListOfCommentsExtendedUser{
   String showListOfCommentsUserLastName;
   String showListOfCommentsUserImage;
   int showListOfCommentsUserAccountType;
-
   APIRegularShowListOfCommentsExtendedUser({required this.showListOfCommentsUserId, required this.showListOfCommentsUserFirstName, required this.showListOfCommentsUserLastName, required this.showListOfCommentsUserImage, required this.showListOfCommentsUserAccountType});
 
   factory APIRegularShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){

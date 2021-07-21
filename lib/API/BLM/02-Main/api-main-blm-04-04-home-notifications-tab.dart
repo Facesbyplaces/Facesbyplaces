@@ -12,7 +12,7 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({required int p
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -37,7 +37,6 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({required int p
 class APIBLMHomeTabNotificationMain{
   int blmItemsRemaining;
   List<APIBLMHomeTabNotificationExtended> blmNotification;
-
   APIBLMHomeTabNotificationMain({required this.blmItemsRemaining, required this.blmNotification});
 
   factory APIBLMHomeTabNotificationMain.fromJson(Map<String, dynamic> parsedJson){
@@ -64,7 +63,6 @@ class APIBLMHomeTabNotificationExtended{
   APIBLMHomeTabNotificationExtended({required this.homeTabNotificationId, required this.homeTabNotificationCreatedAt, required this.homeTabNotificationUpdatedAt, required this.homeTabNotificationActor, required this.homeTabNotificationRead, required this.homeTabNotificationAction, required this.homeTabNotificationPostId, required this.homeTabNotificationNotificationType});
 
   factory APIBLMHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
-
     return APIBLMHomeTabNotificationExtended(
       homeTabNotificationId: parsedJson['id'],
       homeTabNotificationCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
@@ -86,7 +84,6 @@ class APIBLMHomeTabNotificationExtendedActor{
   APIBLMHomeTabNotificationExtendedActor({required this.homeTabNotificationActorId, required this.homeTabNotificationActorImage, required this.homeTabNotificationActorFirstName, required this.homeTabNotificationActorAccountType});
 
   factory APIBLMHomeTabNotificationExtendedActor.fromJson(Map<String, dynamic> parsedJson){
-
     return APIBLMHomeTabNotificationExtendedActor(
       homeTabNotificationActorId: parsedJson['id'],
       homeTabNotificationActorImage: parsedJson['image'] != null ? parsedJson['image'] : '',

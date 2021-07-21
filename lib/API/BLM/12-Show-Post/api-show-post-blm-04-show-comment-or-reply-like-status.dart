@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowCommentOrReplyLikeStatus> apiBLMShowCommentOrReplyLikeStatus({required String commentableType, required int commentableId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIBLMShowCommentOrReplyLikeStatus> apiBLMShowCommentOrReplyLikeStatus({r
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -50,11 +49,9 @@ Future<APIBLMShowCommentOrReplyLikeStatus> apiBLMShowCommentOrReplyLikeStatus({r
 class APIBLMShowCommentOrReplyLikeStatus{
   bool showCommentOrReplyLikeStatus;
   int showCommentOrReplyNumberOfLikes;
-
   APIBLMShowCommentOrReplyLikeStatus({required this.showCommentOrReplyLikeStatus, required this.showCommentOrReplyNumberOfLikes});
 
   factory APIBLMShowCommentOrReplyLikeStatus.fromJson(Map<String, dynamic> parsedJson){
-
     return APIBLMShowCommentOrReplyLikeStatus(
       showCommentOrReplyLikeStatus: parsedJson['like'],
       showCommentOrReplyNumberOfLikes: parsedJson['numberOfLikes'],

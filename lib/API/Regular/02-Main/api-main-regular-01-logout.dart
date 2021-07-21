@@ -4,7 +4,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularLogout() async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -15,7 +14,7 @@ Future<bool> apiRegularLogout() async{
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/alm_auth/sign_out',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -44,18 +43,11 @@ Future<bool> apiRegularLogout() async{
 
     sharedPrefs.remove('user-guest-session');
 
-    GoogleSignIn googleSignIn = GoogleSignIn(
-      scopes: [
-        'profile',
-        'email',
-        'openid'
-      ],
-    );
+    GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['profile','email', 'openid'],);
 
     bool isGoogleSignedIn = await googleSignIn.isSignedIn();
     if(isGoogleSignedIn == true){
       await googleSignIn.signOut();
-      // await googleSignIn.disconnect();
     }
 
     FacebookLogin fb = FacebookLogin();

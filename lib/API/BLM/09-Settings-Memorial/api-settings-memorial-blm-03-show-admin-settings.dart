@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({required int memori
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/adminIndex/index?page=$page&page_id=$memorialId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -39,11 +38,9 @@ class APIBLMShowAdminsSettingMain{
   int blmFamilyItemsRemaining;
   List<APIBLMShowAdminsSettingExtended> blmAdminList;
   List<APIBLMShowAdminsSettingExtended> blmFamilyList;
-
   APIBLMShowAdminsSettingMain({required this.blmAdminItemsRemaining, required this.blmFamilyItemsRemaining, required this.blmAdminList, required this.blmFamilyList});
 
   factory APIBLMShowAdminsSettingMain.fromJson(Map<String, dynamic> parsedJson){
-
     var adminList = parsedJson['admins'] as List;
     var familyList = parsedJson['family'] as List;
 
@@ -60,10 +57,8 @@ class APIBLMShowAdminsSettingMain{
 }
 
 class APIBLMShowAdminsSettingExtended{
-
   APIBLMShowAdminsSettingExtendedUser showAdminsSettingsUser;
   String showAdminsSettingsRelationship;
-
   APIBLMShowAdminsSettingExtended({required this.showAdminsSettingsUser, required this.showAdminsSettingsRelationship});
 
   factory APIBLMShowAdminsSettingExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -80,7 +75,6 @@ class APIBLMShowAdminsSettingExtendedUser{
   String showAdminsSettingsUserLastName;
   String showAdminsSettingsUserImage;
   String showAdminsSettingsUserEmail;
-
   APIBLMShowAdminsSettingExtendedUser({required this.showAdminsSettingsUserId, required this.showAdminsSettingsUserFirstName, required this.showAdminsSettingsUserLastName, required this.showAdminsSettingsUserImage, required this.showAdminsSettingsUserEmail});
 
   factory APIBLMShowAdminsSettingExtendedUser.fromJson(Map<String, dynamic> parsedJson){

@@ -2,13 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiRegularSignInWithFacebook({required String firstName, required String lastName, required String email, required String username, required String facebookId, required String image}) async{
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -23,7 +22,6 @@ Future<bool> apiRegularSignInWithFacebook({required String firstName, required S
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['user'];
     int userId = user['id'];
-
     final sharedPrefs = await SharedPreferences.getInstance();
 
     sharedPrefs.setInt('regular-user-id', userId);

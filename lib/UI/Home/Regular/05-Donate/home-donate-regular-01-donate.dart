@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-05-confirm-payment.dart';
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-02-confirm-payment.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

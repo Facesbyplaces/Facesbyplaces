@@ -2,13 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) async{
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1', 
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -49,6 +48,5 @@ class APIBLMAccountRegistration{
   String email;
   String username;
   String password;
-
   APIBLMAccountRegistration({required this.firstName, required this.lastName, required this.phoneNumber, required this.email, required this.username, required this.password});
 }

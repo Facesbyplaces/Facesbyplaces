@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowUsersPostsMain> apiRegularShowUserPosts({required int userId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -20,13 +19,12 @@ Future<APIRegularShowUsersPostsMain> apiRegularShowUserPosts({required int userI
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -51,7 +49,6 @@ Future<APIRegularShowUsersPostsMain> apiRegularShowUserPosts({required int userI
 class APIRegularShowUsersPostsMain{
   int almItemsRemaining;
   List<APIRegularShowUsersPostsExtended> almFamilyMemorialList;
-
   APIRegularShowUsersPostsMain({required this.almItemsRemaining, required this.almFamilyMemorialList});
 
   factory APIRegularShowUsersPostsMain.fromJson(Map<String, dynamic> parsedJson){
@@ -75,11 +72,9 @@ class APIRegularShowUsersPostsExtended{
   int showUsersPostsNumberOfLikes;
   int showUsersPostsNumberOfComments;
   bool showUsersPostsLikeStatus;
-
   APIRegularShowUsersPostsExtended({required this.showUsersPostsId, required this.showUsersPostsPage, required this.showUsersPostsBody, required this.showUsersPostsImagesOrVideos, required this.showUsersPostsPostTagged, required this.showUsersPostsCreatedAt, required this.showUsersPostsNumberOfLikes, required this.showUsersPostsNumberOfComments, required this.showUsersPostsLikeStatus});
 
   factory APIRegularShowUsersPostsExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
@@ -114,7 +109,6 @@ class APIRegularShowUsersPostsExtendedPage{
   bool showUsersPostsPageManage;
   bool showUsersPostsPageFamOrFriends;
   String showUsersPostsPagePageType;
-
   APIRegularShowUsersPostsExtendedPage({required this.showUsersPostsPageId, required this.showUsersPostsPageName, required this.showUsersPostsPageProfileImage, required this.showUsersPostsPageRelationship, required this.showUsersPostsPagePageCreator, required this.showUsersPostsPageFollower, required this.showUsersPostsPageFamOrFriends, required this.showUsersPostsPageManage, required this.showUsersPostsPagePageType});
 
   factory APIRegularShowUsersPostsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -134,7 +128,6 @@ class APIRegularShowUsersPostsExtendedPage{
 
 class APIRegularShowUsersPostsExtendedPageCreator{
   int showUsersPostsPageCreatorId;
-
   APIRegularShowUsersPostsExtendedPageCreator({required this.showUsersPostsPageCreatorId});
 
   factory APIRegularShowUsersPostsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
@@ -149,7 +142,6 @@ class APIRegularShowUsersPostsExtendedTagged{
   String showUsersPostsTaggedFirstName;
   String showUsersPostsTaggedLastName;
   String showUsersPostsTaggedImage;
-
   APIRegularShowUsersPostsExtendedTagged({required this.showUsersPostsTaggedId, required this.showUsersPostsTaggedFirstName, required this.showUsersPostsTaggedLastName, required this.showUsersPostsTaggedImage});
 
   factory APIRegularShowUsersPostsExtendedTagged.fromJson(Map<String, dynamic> parsedJson){

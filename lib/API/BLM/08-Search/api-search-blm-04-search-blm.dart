@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMSearchMemorialMain> apiBLMSearchBLM({required String keywords, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMSearchMemorialMain> apiBLMSearchBLM({required String keywords, requ
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,11 +37,9 @@ Future<APIBLMSearchMemorialMain> apiBLMSearchBLM({required String keywords, requ
 class APIBLMSearchMemorialMain{
   int blmItemsRemaining;
   List<APIBLMSearchMemorialPage> blmMemorialList;
-
   APIBLMSearchMemorialMain({required this.blmItemsRemaining, required this.blmMemorialList});
 
   factory APIBLMSearchMemorialMain.fromJson(Map<String, dynamic> parsedJson){
-
     var memorialList = parsedJson['memorials'] as List;
     List<APIBLMSearchMemorialPage> newMemorialList = memorialList.map((e) => APIBLMSearchMemorialPage.fromJson(e)).toList();
 
@@ -56,7 +53,6 @@ class APIBLMSearchMemorialMain{
 class APIBLMSearchMemorialPage{
   int searchMemorialId;
   APIBLMSearchMemorialExtended searchMemorialPage;
-
   APIBLMSearchMemorialPage({required this.searchMemorialId, required this.searchMemorialPage});
 
   factory APIBLMSearchMemorialPage.fromJson(Map<String, dynamic> parsedJson){
@@ -77,11 +73,9 @@ class APIBLMSearchMemorialExtended{
   bool searchMemorialFamOrFriends;
   bool searchMemorialFollower;
   String searchMemorialPageType;
-
   APIBLMSearchMemorialExtended({required this.searchMemorialId, required this.searchMemorialName, required this.searchMemorialDetails, required this.searchMemorialProfileImage, required this.searchMemorialRelationship, required this.searchMemorialManage, required this.searchMemorialFamOrFriends, required this.searchMemorialFollower, required this.searchMemorialPageType});
 
   factory APIBLMSearchMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
-
     return APIBLMSearchMemorialExtended(
       searchMemorialId: parsedJson['id'],
       searchMemorialName: parsedJson['name'] != null ? parsedJson['name'] : '',
@@ -98,7 +92,6 @@ class APIBLMSearchMemorialExtended{
 
 class APIBLMSearchMemorialExtendedPageDetails{
   String searchMemorialPageDetailsDescription;
-
   APIBLMSearchMemorialExtendedPageDetails({required this.searchMemorialPageDetailsDescription});
 
   factory APIBLMSearchMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){

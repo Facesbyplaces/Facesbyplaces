@@ -28,15 +28,20 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       tileColor: readStatus == true ? const Color(0xffffffff) : const Color(0xffdddddd),
-      leading: imageIcon != ''
-      ? CircleAvatar(
-        backgroundColor: const Color(0xff888888),
-        foregroundImage: NetworkImage(imageIcon),
-        backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-      )
-      : const CircleAvatar(
-        backgroundColor: const Color(0xff888888),
-        foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+      leading: GestureDetector(
+        child: imageIcon != ''
+        ? CircleAvatar(
+          backgroundColor: const Color(0xff888888),
+          foregroundImage: NetworkImage(imageIcon),
+          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+        )
+        : const CircleAvatar(
+          backgroundColor: const Color(0xff888888),
+          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+        ),
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: actorId, accountType: actorAccountType)));
+        },
       ),
       title: EasyRichText(notification,
         patternList: [
@@ -45,7 +50,7 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
             matchOption: 'first',
             style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
             recognizer: TapGestureRecognizer()
-            ..onTap = () {
+            ..onTap = (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: actorId, accountType: actorAccountType)));
             }
           ),

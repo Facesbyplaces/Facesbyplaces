@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({required int postId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({required int postId})
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/$postId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -49,7 +48,6 @@ Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({required int postId})
 
 class APIBLMShowOriginalPostMain{
   APIBLMShowOriginalPostExtended blmPost;
-  
   APIBLMShowOriginalPostMain({required this.blmPost});
 
   factory APIBLMShowOriginalPostMain.fromJson(Map<String, dynamic> parsedJson){
@@ -69,11 +67,9 @@ class APIBLMShowOriginalPostExtended{
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
   bool showOriginalPostLikeStatus;
-
   APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
 
   factory APIBLMShowOriginalPostExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     List<dynamic>? newList;
 
     if(parsedJson['imagesOrVideos'] != null){
@@ -108,7 +104,6 @@ class APIBLMShowOriginalPostExtendedPage{
   bool showOriginalPostPageFamOrFriends;
   bool showOriginalPostPageFollower;
   String showOriginalPostPagePageType;
-
   APIBLMShowOriginalPostExtendedPage({required this.showOriginalPostPageId, required this.showOriginalPostPageName, required this.showOriginalPostPageProfileImage, required this.showOriginalPostPageRelationship, required this.showOriginalPostPagePageCreator, required this.showOriginalPostPageManage, required this.showOriginalPostPageFamOrFriends, required this.showOriginalPostPageFollower, required this.showOriginalPostPagePageType,});
 
   factory APIBLMShowOriginalPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -128,7 +123,6 @@ class APIBLMShowOriginalPostExtendedPage{
 
 class APIBLMShowOriginalPostExtendedPageCreator{
   int showOriginalPostPageCreatorAccountType;
-
   APIBLMShowOriginalPostExtendedPageCreator({required this.showOriginalPostPageCreatorAccountType});
 
   factory APIBLMShowOriginalPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
@@ -142,7 +136,6 @@ class APIBLMShowOriginalPostExtendedTagged{
   int showOriginalPostTaggedId;
   String showOriginalPostTaggedFirstName;
   String showOriginalPostTaggedLastName;
-
   APIBLMShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName});
 
   factory APIBLMShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){

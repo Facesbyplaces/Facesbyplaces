@@ -3,7 +3,6 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) async{
-  
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -21,16 +20,12 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) asy
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -53,7 +48,6 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) asy
 }
 
 class APIBLMShowMemorialMain{
-
   APIBLMShowMemorialExtended blmMemorial;
   APIBLMShowMemorialMain({required this.blmMemorial});
 
@@ -79,7 +73,6 @@ class APIBLMShowMemorialExtended{
   int memorialFamilyCount;
   int memorialFriendsCount;
   int memorialFollowersCount;
-
   APIBLMShowMemorialExtended({required this.memorialId, required this.memorialName, required this.memorialDetails, required this.memorialBackgroundImage, required this.memorialProfileImage, required this.memorialImagesOrVideos, required this.memorialRelationship, required this.memorialManage, required this.memorialFamOrFriends, required this.memorialFollower, required this.memorialPostsCount, required this.memorialFamilyCount, required this.memorialFriendsCount, required this.memorialFollowersCount});
 
   factory APIBLMShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -120,11 +113,9 @@ class APIBLMShowMemorialExtendedDetails{
   bool memorialAcceptDonations;
   double memorialLatitude;
   double memorialLongitude;
-
   APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsDob, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry, required this.memorialAcceptDonations, required this.memorialLatitude, required this.memorialLongitude});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
-
     String newDOB = parsedJson['dob'];
     DateTime dob = DateTime.parse(newDOB);
     String newRIP = parsedJson['rip'];

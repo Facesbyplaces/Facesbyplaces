@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<String> apiBLMDeleteMemorialAdmin({required String pageType, required int pageId, required int userId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -33,7 +32,7 @@ Future<String> apiBLMDeleteMemorialAdmin({required String pageType, required int
   var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pageadmin', data: formData,
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, String>{

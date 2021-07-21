@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({required int memorialId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({required int memo
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Memorial/$memorialId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -39,11 +38,9 @@ class APIRegularShowSwitchStatus{
   bool showSwitchStatusFriends;
   bool showSwitchStatusFollowers;
   bool showSwitchStatusSuccess;
-
   APIRegularShowSwitchStatus({required this.showSwitchStatusFamily, required this.showSwitchStatusFriends, required this.showSwitchStatusFollowers, required this.showSwitchStatusSuccess});
 
   factory APIRegularShowSwitchStatus.fromJson(Map<String, dynamic> parsedJson){
-
     return APIRegularShowSwitchStatus(
       showSwitchStatusFamily: parsedJson['family'],
       showSwitchStatusFriends: parsedJson['friends'],

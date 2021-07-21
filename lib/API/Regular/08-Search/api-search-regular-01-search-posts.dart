@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,7 +37,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords
 class APIRegularSearchPostMain{
   int almItemsRemaining;
   List<APIRegularSearchPostExtended> almSearchPostList;
-
   APIRegularSearchPostMain({required this.almItemsRemaining, required this.almSearchPostList});
 
   factory APIRegularSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
@@ -62,11 +60,9 @@ class APIRegularSearchPostExtended{
   int searchPostNumberOfLikes;
   int searchPostNumberOfComments;
   bool searchPostLikeStatus;
-
   APIRegularSearchPostExtended({required this.searchPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
 
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
@@ -101,7 +97,6 @@ class APIRegularSearchPostExtendedPage{
   bool searchPostPageFamOrFriends;
   bool searchPostPageFollower;
   String searchPostPagePageType;
-
   APIRegularSearchPostExtendedPage({required this.searchPostPageId, required this.searchPostPageName, required this.searchPostPageProfileImage, required this.searchPostPageRelationship, required this.searchPostPagePageCreator, required this.searchPostPageManage, required this.searchPostPageFamOrFriends, required this.searchPostPageFollower, required this.searchPostPagePageType,});
 
   factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -135,7 +130,6 @@ class APIRegularSearchPostExtendedTagged{
   String searchPostTaggedFirstName;
   String searchPostTaggedLastName;
   String searchPostTaggedImage;
-
   APIRegularSearchPostExtendedTagged({required this.searchPostTaggedId, required this.searchPostTaggedFirstName, required this.searchPostTaggedLastName, required this.searchPostTaggedImage});
 
   factory APIRegularSearchPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){

@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<String> apiRegularAddFriends({required int memorialId, required int userId, required int accountType}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -22,7 +21,7 @@ Future<String> apiRegularAddFriends({required int memorialId, required int userI
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFriend', data: formData,
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{

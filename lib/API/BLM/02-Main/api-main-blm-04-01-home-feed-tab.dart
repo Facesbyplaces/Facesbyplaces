@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({required int page}) async{
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,13 +37,11 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({required int page}) async{
 class APIBLMHomeTabFeedMain{
   int blmItemsRemaining;
   List<APIBLMHomeTabFeedExtended> blmFamilyMemorialList;
-
   APIBLMHomeTabFeedMain({required this.blmFamilyMemorialList, required this.blmItemsRemaining});
 
   factory APIBLMHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIBLMHomeTabFeedExtended> familyMemorials = newList.map((i) => APIBLMHomeTabFeedExtended.fromJson(i)).toList();
-
     return APIBLMHomeTabFeedMain(
       blmFamilyMemorialList: familyMemorials,
       blmItemsRemaining: parsedJson['itemsremaining'],
@@ -62,7 +59,6 @@ class APIBLMHomeTabFeedExtended{
   int homeTabFeedNumberOfLikes;
   int homeTabFeedNumberOfComments;
   bool homeTabFeedLikeStatus;
-
   APIBLMHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
 
   factory APIBLMHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -101,7 +97,6 @@ class APIBLMHomeTabFeedExtendedPage{
   bool homeTabFeedPageFamOrFriends;
   bool homeTabFeedPageFollower;
   String homeTabFeedPagePageType;
-
   APIBLMHomeTabFeedExtendedPage({required this.homeTabFeedPageId, required this.homeTabFeedPageName, required this.homeTabFeedPageProfileImage, required this.homeTabFeedPageRelationship, required this.homeTabFeedPagePageCreator, required this.homeTabFeedPageManage, required this.homeTabFeedPageFamOrFriends, required this.homeTabFeedPageFollower, required this.homeTabFeedPagePageType,});
 
   factory APIBLMHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -121,7 +116,6 @@ class APIBLMHomeTabFeedExtendedPage{
 
 class APIBLMHomeTabFeedExtendedPageCreator{
   int homeTabFeedPageCreatorId;
-
   APIBLMHomeTabFeedExtendedPageCreator({required this.homeTabFeedPageCreatorId,});
 
   factory APIBLMHomeTabFeedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
@@ -136,7 +130,6 @@ class APIBLMHomeTabFeedExtendedTagged{
   String homeTabFeedTaggedFirstName;
   String homeTabFeedTaggedLastName;
   String homeTabFeedTaggedImage;
-
   APIBLMHomeTabFeedExtendedTagged({required this.homeTabFeedTaggedId, required this.homeTabFeedTaggedFirstName, required this.homeTabFeedTaggedLastName, required this.homeTabFeedTaggedImage});
 
   factory APIBLMHomeTabFeedExtendedTagged.fromJson(Map<String, dynamic> parsedJson){

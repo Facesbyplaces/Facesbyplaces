@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowAdminsSettingsMain> apiRegularShowAdminSettings({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularShowAdminsSettingsMain> apiRegularShowAdminSettings({required i
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -39,11 +38,9 @@ class APIRegularShowAdminsSettingsMain{
   int almFamilyItemsRemaining;
   List<APIRegularShowAdminsSettingsExtended> almAdminList;
   List<APIRegularShowAdminsSettingsExtended> almFamilyList;
-
   APIRegularShowAdminsSettingsMain({required this.almAdminItemsRemaining, required this.almFamilyItemsRemaining, required this.almAdminList, required this.almFamilyList});
 
   factory APIRegularShowAdminsSettingsMain.fromJson(Map<String, dynamic> parsedJson){
-
     var adminList = parsedJson['admins'] as List;
     var familyList = parsedJson['family'] as List;
 
@@ -60,10 +57,8 @@ class APIRegularShowAdminsSettingsMain{
 }
 
 class APIRegularShowAdminsSettingsExtended{
-
   APIRegularShowAdminsSettingsExtendedUser showAdminsSettingsUser;
   String showAdminsSettingsRelationship;
-
   APIRegularShowAdminsSettingsExtended({required this.showAdminsSettingsUser, required this.showAdminsSettingsRelationship});
 
   factory APIRegularShowAdminsSettingsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -80,7 +75,6 @@ class APIRegularShowAdminsSettingsExtendedUser{
   String showAdminsSettingsUserLastName;
   String showAdminsSettingsUserImage;
   String showAdminsSettingsUserEmail;
-
   APIRegularShowAdminsSettingsExtendedUser({required this.showAdminsSettingsUserId, required this.showAdminsSettingsUserFirstName, required this.showAdminsSettingsUserLastName, required this.showAdminsSettingsUserImage, required this.showAdminsSettingsUserEmail});
 
   factory APIRegularShowAdminsSettingsExtendedUser.fromJson(Map<String, dynamic> parsedJson){

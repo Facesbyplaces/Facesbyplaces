@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<List<String>> apiRegularDonate({required String pageType, required int pageId, required double amount, required String paymentMethod}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -27,7 +26,7 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -46,25 +45,16 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
   );
 
   print('The status code of regular donate is ${response.statusCode}');
-  print('The status data of regular donate is ${response.data}');
-  // print('The status data of regular donate is ${response.headers}');
 
   if(response.statusCode == 200 || response.statusCode == 422){
     var newData = Map<String, dynamic>.from(response.data);
     if(paymentMethod != ''){
       String clientSecret = newData['payment_intent'];
       String paymentMethod = newData['payment_method'];
-
-      print('The clientSecret is $clientSecret');
-      print('The payment_method is $paymentMethod');
-
       return [clientSecret, paymentMethod];
     }else{
       String clientSecret = newData['client_secret'];
-      // String clientSecret = newData['payment_intent'];
       String token = newData['token'];
-
-      print('The clientSecret is $clientSecret');
       return [clientSecret, token];
     }
   }else{

@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({required in
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/friends/index?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -50,11 +49,9 @@ Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({required in
 class APIBLMConnectionListFriendsMain{
   int blmItemsRemaining;
   List<APIBLMConnectionListFriendsExtended> blmFriendsList;
-
   APIBLMConnectionListFriendsMain({required this.blmItemsRemaining, required this.blmFriendsList});
 
   factory APIBLMConnectionListFriendsMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['friends'] as List;
     List<APIBLMConnectionListFriendsExtended> familyList = newList1.map((i) => APIBLMConnectionListFriendsExtended.fromJson(i)).toList();
 
@@ -68,7 +65,6 @@ class APIBLMConnectionListFriendsMain{
 class APIBLMConnectionListFriendsExtended{
   APIBLMConnectionListFriendsExtendedDetails connectionListFriendsUser;
   String connectionListFriendsRelationship;
-
   APIBLMConnectionListFriendsExtended({required this.connectionListFriendsUser, required this.connectionListFriendsRelationship});
 
   factory APIBLMConnectionListFriendsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -80,13 +76,11 @@ class APIBLMConnectionListFriendsExtended{
 }
 
 class APIBLMConnectionListFriendsExtendedDetails{
-
   int connectionListFriendsDetailsId;
   String connectionListFriendsDetailsFirstName;
   String connectionListFriendsDetailsLastName;
   String connectionListFriendsDetailsImage;
   int connectionListFriendsAccountType;
-
   APIBLMConnectionListFriendsExtendedDetails({required this.connectionListFriendsDetailsId, required this.connectionListFriendsDetailsFirstName, required this.connectionListFriendsDetailsLastName, required this.connectionListFriendsDetailsImage, required this.connectionListFriendsAccountType});
 
   factory APIBLMConnectionListFriendsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

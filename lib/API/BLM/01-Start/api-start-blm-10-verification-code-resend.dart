@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<bool> apiBLMVerificationCodeResend() async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -14,7 +13,7 @@ Future<bool> apiBLMVerificationCodeResend() async{
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=1',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{

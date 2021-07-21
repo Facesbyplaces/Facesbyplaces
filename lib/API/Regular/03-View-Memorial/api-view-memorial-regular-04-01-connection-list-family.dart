@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({requi
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -50,11 +49,9 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({requi
 class APIRegularConnectionListFamilyMain{
   int almItemsRemaining;
   List<APIRegularConnectionListFamilyExtended> almFamilyList;
-
   APIRegularConnectionListFamilyMain({required this.almItemsRemaining, required this.almFamilyList});
 
   factory APIRegularConnectionListFamilyMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['family'] as List;
     List<APIRegularConnectionListFamilyExtended> familyList = newList1.map((i) => APIRegularConnectionListFamilyExtended.fromJson(i)).toList();
 
@@ -68,7 +65,6 @@ class APIRegularConnectionListFamilyMain{
 class APIRegularConnectionListFamilyExtended{
   APIRegularConnectionListFamilyExtendedDetails connectionListFamilyUser;
   String connectionListFamilyRelationship;
-
   APIRegularConnectionListFamilyExtended({required this.connectionListFamilyUser, required this.connectionListFamilyRelationship});
 
   factory APIRegularConnectionListFamilyExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -80,13 +76,11 @@ class APIRegularConnectionListFamilyExtended{
 }
 
 class APIRegularConnectionListFamilyExtendedDetails{
-
   int connectionListFamilyDetailsId;
   String connectionListFamilyDetailsFirstName;
   String connectionListFamilyDetailsLastName;
   String connectionListFamilyDetailsImage;
   int connectionListFamilyAccountType;
-
   APIRegularConnectionListFamilyExtendedDetails({required this.connectionListFamilyDetailsId, required this.connectionListFamilyDetailsFirstName, required this.connectionListFamilyDetailsLastName, required this.connectionListFamilyDetailsImage, required this.connectionListFamilyAccountType});
 
   factory APIRegularConnectionListFamilyExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

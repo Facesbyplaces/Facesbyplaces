@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({required int userId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({required int userId})
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -41,7 +40,6 @@ class APIBLMShowAccountDetails{
   String showAccountDetailsEmail;
   String showAccountDetailsPhoneNumber;
   String showAccountDetailsQuestion;
-  
   APIBLMShowAccountDetails({required this.showAccountDetailsFirstName, required this.showAccountDetailsLastName, required this.showAccountDetailsEmail, required this.showAccountDetailsPhoneNumber, required this.showAccountDetailsQuestion});
 
   factory APIBLMShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){

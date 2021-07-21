@@ -2,13 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<String> apiRegularLogin({required String email, required String password, required String deviceToken}) async{
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -18,6 +17,7 @@ Future<String> apiRegularLogin({required String email, required String password,
   );
 
   print('The status code of regular login is ${response.statusCode}');
+  print('The status code of regular login is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

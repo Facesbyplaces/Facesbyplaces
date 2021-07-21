@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int pa
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,11 +37,9 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int pa
 class APIRegularSearchSuggestedMain{
   int almItemsRemaining;
   List<APIRegularSearchSuggestedExtended> almSearchSuggestedPages;
-
   APIRegularSearchSuggestedMain({required this.almItemsRemaining, required this.almSearchSuggestedPages});
 
   factory APIRegularSearchSuggestedMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList = parsedJson['pages'] as List;
     List<APIRegularSearchSuggestedExtended> pagesList = newList.map((i) => APIRegularSearchSuggestedExtended.fromJson(i)).toList();
 
@@ -56,11 +53,9 @@ class APIRegularSearchSuggestedMain{
 class APIRegularSearchSuggestedExtended{
   int searchSuggestedId;
   APIRegularSearchSuggestedExtendedPage searchSuggestedPage;
-
   APIRegularSearchSuggestedExtended({required this.searchSuggestedId, required this.searchSuggestedPage});
 
   factory APIRegularSearchSuggestedExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     return APIRegularSearchSuggestedExtended(
       searchSuggestedId: parsedJson['id'],
       searchSuggestedPage: APIRegularSearchSuggestedExtendedPage.fromJson(parsedJson['page'])
@@ -78,7 +73,6 @@ class APIRegularSearchSuggestedExtendedPage{
   bool searchSuggestedPageFamOrFriends;
   bool searchSuggestedPageFollower;
   String searchSuggestedPagePageType;
-
   APIRegularSearchSuggestedExtendedPage({required this.searchSuggestedPageId, required this.searchSuggestedPageName, required this.searchSuggestedPageDetails, required this.searchSuggestedPageProfileImage, required this.searchSuggestedPageRelationship, required this.searchSuggestedPageManage, required this.searchSuggestedPageFamOrFriends, required this.searchSuggestedPageFollower, required this.searchSuggestedPagePageType});
 
   factory APIRegularSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -98,7 +92,6 @@ class APIRegularSearchSuggestedExtendedPage{
 
 class APIRegularSearchSuggestedExtendedPageDetails{
   String searchSuggestedPageDetailsDescription;
-
   APIRegularSearchSuggestedExtendedPageDetails({required this.searchSuggestedPageDetailsDescription});
 
   factory APIRegularSearchSuggestedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){

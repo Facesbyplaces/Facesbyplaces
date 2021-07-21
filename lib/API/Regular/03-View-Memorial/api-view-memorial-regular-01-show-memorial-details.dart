@@ -3,7 +3,6 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorialId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -21,16 +20,12 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
   Dio dioRequest = Dio();
 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -53,7 +48,6 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
 }
 
 class APIRegularShowMemorialMain{
-
   APIRegularShowMemorialExtended almMemorial;
   APIRegularShowMemorialMain({required this.almMemorial});
 
@@ -76,11 +70,9 @@ class APIRegularShowMemorialExtended{
   int showMemorialFamilyCount;
   int showMemorialFriendsCount;
   int showMemorialFollowersCount;
-
   APIRegularShowMemorialExtended({required this.showMemorialId, required this.showMemorialName, required this.showMemorialDetails, required this.showMemorialBackgroundImage, required this.showMemorialProfileImage, required this.showMemorialImagesOrVideos, required this.showMemorialFollower, required this.showMemorialPostsCount, required this.showMemorialFamilyCount, required this.showMemorialFriendsCount, required this.showMemorialFollowersCount});
 
   factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
-
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
@@ -114,7 +106,6 @@ class APIRegularShowMemorialExtendedDetails{
   bool showMemorialAcceptDonations;
   double showMemorialLatitude;
   double showMemorialLongitude;
-
   APIRegularShowMemorialExtendedDetails({required this.showMemorialDetailsDescription, required this.showMemorialDetailsBirthPlace, required this.showMemorialDetailsDob, required this.showMemorialDetailsRip, required this.showMemorialDetailsCemetery, required this.showMemorialDetailsCountry, required this.showMemorialAcceptDonations, required this.showMemorialLatitude, required this.showMemorialLongitude});
 
   factory APIRegularShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
@@ -123,6 +114,7 @@ class APIRegularShowMemorialExtendedDetails{
 
     String newRIP = parsedJson['rip'];
     DateTime rip = DateTime.parse(newRIP);
+    
     return APIRegularShowMemorialExtendedDetails(
       showMemorialDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
       showMemorialDetailsBirthPlace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',

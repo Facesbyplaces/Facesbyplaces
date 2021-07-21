@@ -8,12 +8,12 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
-class BLMGoogleAuthentication {
-  static Future<FirebaseApp> initializeFirebase({required BuildContext context}) async {
+class BLMGoogleAuthentication{
+  static Future<FirebaseApp> initializeFirebase({required BuildContext context}) async{
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     User? user = FirebaseAuth.instance.currentUser;
 
-    if (user != null) {
+    if(user != null){
       bool result = await apiBLMSignInWithGoogle(
         firstName: user.displayName!, 
         lastName: '', 
@@ -31,7 +31,7 @@ class BLMGoogleAuthentication {
     return firebaseApp;
   }
 
-  static Future<User?> signInWithGoogle({required BuildContext context}) async {
+  static Future<User?> signInWithGoogle({required BuildContext context}) async{
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
@@ -39,7 +39,7 @@ class BLMGoogleAuthentication {
     context.loaderOverlay.show();
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
-    if (googleSignInAccount != null) {
+    if(googleSignInAccount != null){
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
       FlutterClipboard.copy('${googleSignInAuthentication.idToken}').then(( value ) => print('copied!'));
 
@@ -54,17 +54,14 @@ class BLMGoogleAuthentication {
         context.loaderOverlay.hide();
         showDialog(
           context: context,
-          builder: (_) => 
-            AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          builder: (_) => AssetGiffyDialog(
             title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: const Text('Something went wrong. Please try again.',
-              textAlign: TextAlign.center,
-            ),
-            onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onlyOkButton: true,
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
           )
@@ -74,67 +71,55 @@ class BLMGoogleAuthentication {
 
       print('The result is $result');
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
+      final AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleSignInAuthentication.accessToken, idToken: googleSignInAuthentication.idToken,);
 
-      try {
+      try{
         final UserCredential userCredential = await auth.signInWithCredential(credential);
         user = userCredential.user;
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'account-exists-with-different-credential') {
+      }on FirebaseAuthException catch (e){
+        if(e.code == 'account-exists-with-different-credential'){
           await showDialog(
             context: context,
-            builder: (_) => 
-              AssetGiffyDialog(
-              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            builder: (_) => AssetGiffyDialog(
               title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+              description: const Text('The account already exists with a different credential.', textAlign: TextAlign.center,),
+              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
               entryAnimation: EntryAnimation.DEFAULT,
-              description: const Text('The account already exists with a different credential.',
-                textAlign: TextAlign.center,
-              ),
-              onlyOkButton: true,
               buttonOkColor: const Color(0xffff0000),
-              onOkButtonPressed: () {
+              onlyOkButton: true,
+              onOkButtonPressed: (){
                 Navigator.pop(context, true);
               },
             )
           );
         }
-        else if (e.code == 'invalid-credential') {
+        else if(e.code == 'invalid-credential'){
           await showDialog(
             context: context,
-            builder: (_) => 
-              AssetGiffyDialog(
-              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            builder: (_) => AssetGiffyDialog(
               title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+              description: const Text('Error occurred while accessing credentials. Try again.', textAlign: TextAlign.center,),
+              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
               entryAnimation: EntryAnimation.DEFAULT,
-              description: const Text('Error occurred while accessing credentials. Try again.',
-                textAlign: TextAlign.center,
-              ),
-              onlyOkButton: true,
               buttonOkColor: const Color(0xffff0000),
-              onOkButtonPressed: () {
+              onlyOkButton: true,
+              onOkButtonPressed: (){
                 Navigator.pop(context, true);
               },
             )
           );
         }
-      } catch (e) {
+      }catch(e){
         await showDialog(
           context: context,
-          builder: (_) => 
-            AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          builder: (_) => AssetGiffyDialog(
             title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+            description: const Text('Error occurred while accessing credentials. Try again.', textAlign: TextAlign.center,),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
-            description: const Text('Error occurred while accessing credentials. Try again.',
-              textAlign: TextAlign.center,
-            ),
-            onlyOkButton: true,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onlyOkButton: true,
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
           )
@@ -146,23 +131,20 @@ class BLMGoogleAuthentication {
     return user;
   }
 
-  static Future<void> signOut({required BuildContext context}) async {
-    try {
+  static Future<void> signOut({required BuildContext context}) async{
+    try{
       await FirebaseAuth.instance.signOut();
-    } catch (e) {
+    }catch(e){
       await showDialog(
         context: context,
-        builder: (_) => 
-          AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+        builder: (_) => AssetGiffyDialog(
           title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          description: const Text('Error signing out. Try again.', textAlign: TextAlign.center,),
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           entryAnimation: EntryAnimation.DEFAULT,
-          description: const Text('Error signing out. Try again.',
-            textAlign: TextAlign.center,
-          ),
-          onlyOkButton: true,
           buttonOkColor: const Color(0xffff0000),
-          onOkButtonPressed: () {
+          onlyOkButton: true,
+          onOkButtonPressed: (){
             Navigator.pop(context, true);
           },
         )

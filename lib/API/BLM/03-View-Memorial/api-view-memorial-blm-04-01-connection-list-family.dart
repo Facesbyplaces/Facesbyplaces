@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({required int 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/family/index?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -50,11 +49,9 @@ Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({required int 
 class APIBLMConnectionListFamilyMain{
   int blmItemsRemaining;
   List<APIBLMConnectionListFamilyExtended> blmFamilyList;
-
   APIBLMConnectionListFamilyMain({required this.blmItemsRemaining, required this.blmFamilyList});
 
   factory APIBLMConnectionListFamilyMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['family'] as List;
     List<APIBLMConnectionListFamilyExtended> familyList = newList1.map((i) => APIBLMConnectionListFamilyExtended.fromJson(i)).toList();
 
@@ -68,7 +65,6 @@ class APIBLMConnectionListFamilyMain{
 class APIBLMConnectionListFamilyExtended{
   APIBLMConnectionListFamilyExtendedDetails connectionListFamilyUser;
   String connectionListFamilyRelationship;
-
   APIBLMConnectionListFamilyExtended({required this.connectionListFamilyUser, required this.connectionListFamilyRelationship});
 
   factory APIBLMConnectionListFamilyExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -80,13 +76,11 @@ class APIBLMConnectionListFamilyExtended{
 }
 
 class APIBLMConnectionListFamilyExtendedDetails{
-
   int connectionListFamilyDetailsId;
   String connectionListFamilyDetailsFirstName;
   String connectionListFamilyDetailsLastName;
   String connectionListFamilyDetailsImage;
   int connectionListFamilyAccountType;
-
   APIBLMConnectionListFamilyExtendedDetails({required this.connectionListFamilyDetailsId, required this.connectionListFamilyDetailsFirstName, required this.connectionListFamilyDetailsLastName, required this.connectionListFamilyDetailsImage, required this.connectionListFamilyAccountType});
 
   factory APIBLMConnectionListFamilyExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

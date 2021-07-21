@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({require
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -37,11 +36,9 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({require
 class APIRegularShowFriendsSettingsMain{
   int almItemsRemaining;
   List<APIRegularShowFriendsSettingsExtended> almFriendsList;
-
   APIRegularShowFriendsSettingsMain({required this.almItemsRemaining, required this.almFriendsList});
 
   factory APIRegularShowFriendsSettingsMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['friends'] as List;
     List<APIRegularShowFriendsSettingsExtended> familyList = newList1.map((i) => APIRegularShowFriendsSettingsExtended.fromJson(i)).toList();
 
@@ -56,7 +53,6 @@ class APIRegularShowFriendsSettingsMain{
 class APIRegularShowFriendsSettingsExtended{
   APIRegularShowFriendsSettingsExtendedDetails showFriendsSettingsUser;
   String showFriendsSettingsRelationship;
-
   APIRegularShowFriendsSettingsExtended({required this.showFriendsSettingsUser, required this.showFriendsSettingsRelationship});
 
   factory APIRegularShowFriendsSettingsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -68,14 +64,12 @@ class APIRegularShowFriendsSettingsExtended{
 }
 
 class APIRegularShowFriendsSettingsExtendedDetails{
-
   int showFriendsSettingsDetailsId;
   String showFriendsSettingsDetailsFirstName;
   String showFriendsSettingsDetailsLastName;
   String showFriendsSettingsDetailsImage;
   String showFriendsSettingsDetailsEmail;
   int showFriendsSettingsDetailsAccountType;
-
   APIRegularShowFriendsSettingsExtendedDetails({required this.showFriendsSettingsDetailsId, required this.showFriendsSettingsDetailsFirstName, required this.showFriendsSettingsDetailsLastName, required this.showFriendsSettingsDetailsImage, required this.showFriendsSettingsDetailsEmail, required this.showFriendsSettingsDetailsAccountType});
 
   factory APIRegularShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

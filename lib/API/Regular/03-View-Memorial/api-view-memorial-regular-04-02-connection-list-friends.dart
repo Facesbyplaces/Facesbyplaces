@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularConnectionListFriendsMain> apiRegularConnectionListFriends({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -24,7 +23,7 @@ Future<APIRegularConnectionListFriendsMain> apiRegularConnectionListFriends({req
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -49,11 +48,9 @@ Future<APIRegularConnectionListFriendsMain> apiRegularConnectionListFriends({req
 class APIRegularConnectionListFriendsMain{
   int almItemsRemaining;
   List<APIRegularConnectionListFriendsExtended> almFriendsList;
-
   APIRegularConnectionListFriendsMain({required this.almItemsRemaining, required this.almFriendsList});
 
   factory APIRegularConnectionListFriendsMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['friends'] as List;
     List<APIRegularConnectionListFriendsExtended> familyList = newList1.map((i) => APIRegularConnectionListFriendsExtended.fromJson(i)).toList();
 
@@ -67,7 +64,6 @@ class APIRegularConnectionListFriendsMain{
 class APIRegularConnectionListFriendsExtended{
   APIRegularConnectionListFriendsExtendedDetails connectionListFriendsUser;
   String connectionListFriendsRelationship;
-
   APIRegularConnectionListFriendsExtended({required this.connectionListFriendsUser, required this.connectionListFriendsRelationship});
 
   factory APIRegularConnectionListFriendsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -79,13 +75,11 @@ class APIRegularConnectionListFriendsExtended{
 }
 
 class APIRegularConnectionListFriendsExtendedDetails{
-
   int connectionListFriendsDetailsId;
   String connectionListFriendsDetailsFirstName;
   String connectionListFriendsDetailsLastName;
   String connectionListFriendsDetailsImage;
   int connectionListFriendsAccountType;
-
   APIRegularConnectionListFriendsExtendedDetails({required this.connectionListFriendsDetailsId, required this.connectionListFriendsDetailsFirstName, required this.connectionListFriendsDetailsLastName, required this.connectionListFriendsDetailsImage, required this.connectionListFriendsAccountType});
 
   factory APIRegularConnectionListFriendsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

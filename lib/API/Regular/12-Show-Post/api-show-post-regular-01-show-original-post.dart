@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int postId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/$postId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -48,7 +47,6 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({required int 
 
 class APIRegularShowOriginalPostMain{
   APIRegularShowOriginalPostMainExtended almPost;
-
   APIRegularShowOriginalPostMain({required this.almPost});
 
   factory APIRegularShowOriginalPostMain.fromJson(Map<String, dynamic> parsedJson){
@@ -67,11 +65,9 @@ class APIRegularShowOriginalPostMainExtended{
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
   bool showOriginalPostLikeStatus;
-
   APIRegularShowOriginalPostMainExtended({required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
 
   factory APIRegularShowOriginalPostMainExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
@@ -105,7 +101,6 @@ class APIRegularShowOriginalPostMainExtendedPage{
   bool showOriginalPostPageFamOrFriends;
   bool showOriginalPostPageFollower;
   String showOriginalPostPagePageType;
-
   APIRegularShowOriginalPostMainExtendedPage({required this.showOriginalPostPageId, required this.showOriginalPostPageName, required this.showOriginalPostPageProfileImage, required this.showOriginalPostPageRelationship, required this.showOriginalPostPagePageCreator, required this.showOriginalPostPageManage, required this.showOriginalPostPageFamOrFriends, required this.showOriginalPostPageFollower, required this.showOriginalPostPagePageType,});
 
   factory APIRegularShowOriginalPostMainExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -125,7 +120,6 @@ class APIRegularShowOriginalPostMainExtendedPage{
 
 class APIRegularShowOriginalPostMainExtendedPageCreator{
   int showOriginalPostPageCreatorAccountType;
-
   APIRegularShowOriginalPostMainExtendedPageCreator({required this.showOriginalPostPageCreatorAccountType});
 
   factory APIRegularShowOriginalPostMainExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
@@ -139,7 +133,6 @@ class APIRegularShowOriginalPostExtendedTagged{
   int showOriginalPostTaggedId;
   String showOriginalPostTaggedFirstName;
   String showOriginalPostTaggedLastName;
-
   APIRegularShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName});
 
   factory APIRegularShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){

@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({required int postId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({required int po
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/index/replies/$postId?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -49,11 +48,9 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({required int po
 class APIRegularShowListOfReplies{
   int almItemsRemaining;
   List<APIRegularShowListOfRepliesExtended> almRepliesList;
-
   APIRegularShowListOfReplies({required this.almItemsRemaining, required this.almRepliesList});
 
   factory APIRegularShowListOfReplies.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['replies'] as List;
     List<APIRegularShowListOfRepliesExtended> repliesList = newList1.map((i) => APIRegularShowListOfRepliesExtended.fromJson(i)).toList();
 
@@ -70,7 +67,6 @@ class APIRegularShowListOfRepliesExtended{
   APIRegularShowListOfRepliesExtendedUser showListOfRepliesUser;
   String showListOfRepliesReplyBody;
   String showListOfRepliesCreatedAt;
-
   APIRegularShowListOfRepliesExtended({required this.showListOfRepliesReplyId, required this.showListOfRepliesCommentId, required this.showListOfRepliesReplyBody, required this.showListOfRepliesUser, required this.showListOfRepliesCreatedAt});
 
   factory APIRegularShowListOfRepliesExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -90,7 +86,6 @@ class APIRegularShowListOfRepliesExtendedUser{
   String showListRepliesUserLastName;
   String showListRepliesUserImage;
   int showListOfCommentsUserAccountType;
-
   APIRegularShowListOfRepliesExtendedUser({required this.showListRepliesUserUserId, required this.showListRepliesUserFirstName, required this.showListRepliesUserLastName, required this.showListRepliesUserImage, required this.showListOfCommentsUserAccountType});
 
   factory APIRegularShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){

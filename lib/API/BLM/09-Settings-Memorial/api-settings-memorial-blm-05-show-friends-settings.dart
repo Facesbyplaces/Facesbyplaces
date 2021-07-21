@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings({required int me
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/friends/index?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,11 +37,9 @@ Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings({required int me
 class APIBLMShowFriendsSettingsMain{
   int blmItemsRemaining;
   List<APIBLMShowFriendsSettingsExtended> blmFriendsList;
-
   APIBLMShowFriendsSettingsMain({required this.blmItemsRemaining, required this.blmFriendsList});
 
   factory APIBLMShowFriendsSettingsMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['friends'] as List;
     List<APIBLMShowFriendsSettingsExtended> familyList = newList1.map((i) => APIBLMShowFriendsSettingsExtended.fromJson(i)).toList();
 
@@ -56,7 +53,6 @@ class APIBLMShowFriendsSettingsMain{
 class APIBLMShowFriendsSettingsExtended{
   APIBLMShowFriendsSettingsExtendedDetails showFriendsSettingsUser;
   String showFriendsSettingsRelationship;
-
   APIBLMShowFriendsSettingsExtended({required this.showFriendsSettingsUser, required this.showFriendsSettingsRelationship});
 
   factory APIBLMShowFriendsSettingsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -74,7 +70,6 @@ class APIBLMShowFriendsSettingsExtendedDetails{
   dynamic showFriendsSettingsDetailsImage;
   String showFriendsSettingsDetailsEmail;
   int showFriendsSettingsDetailsAccountType;
-
   APIBLMShowFriendsSettingsExtendedDetails({required this.showFriendsSettingsDetailsId, required this.showFriendsSettingsDetailsFirstName, required this.showFriendsSettingsDetailsLastName, required this.showFriendsSettingsDetailsImage, required this.showFriendsSettingsDetailsEmail, required this.showFriendsSettingsDetailsAccountType});
 
   factory APIBLMShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keywords, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keyword
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,7 +37,6 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers({required String keyword
 class APIRegularSearchUsersMain{
   int almItemsRemaining;
   List<APIBLMSearchUsersExtended> almSearchUsers;
-
   APIRegularSearchUsersMain({required this.almItemsRemaining, required this.almSearchUsers});
 
   factory APIRegularSearchUsersMain.fromJson(Map<String, dynamic> parsedJson){
@@ -59,11 +57,9 @@ class APIBLMSearchUsersExtended{
   String searchUsersEmail;
   int searchUsersAccountType;
   String searchUsersImage;
-
   APIBLMSearchUsersExtended({required this.searchUsersId, required this.searchUsersFirstName, required this.searchUsersLastName, required this.searchUsersEmail, required this.searchUsersAccountType, required this.searchUsersImage});
 
   factory APIBLMSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
-
     return APIBLMSearchUsersExtended(
       searchUsersId: parsedJson['id'],
       searchUsersFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',

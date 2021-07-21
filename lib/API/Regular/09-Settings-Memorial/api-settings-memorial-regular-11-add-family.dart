@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<String> apiRegularAddFamily({required int memorialId, required int userId, required String relationship, required int accountType}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -34,7 +33,7 @@ Future<String> apiRegularAddFamily({required int memorialId, required int userId
   var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFamily', data: formData,
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{

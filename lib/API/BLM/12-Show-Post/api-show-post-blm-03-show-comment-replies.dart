@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -25,7 +24,7 @@ Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, re
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/index/replies/$postId?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -50,11 +49,9 @@ Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({required int postId, re
 class APIBLMShowListOfReplies{
   int blmItemsRemaining;
   List<APIBLMShowListOfRepliesExtended> blmRepliesList;
-
   APIBLMShowListOfReplies({required this.blmItemsRemaining, required this.blmRepliesList});
 
   factory APIBLMShowListOfReplies.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['replies'] as List;
     List<APIBLMShowListOfRepliesExtended> repliesList = newList1.map((i) => APIBLMShowListOfRepliesExtended.fromJson(i)).toList();
 
@@ -71,7 +68,6 @@ class APIBLMShowListOfRepliesExtended{
   APIBLMShowListOfRepliesExtendedUser showListRepliesUser;
   String showListRepliesReplyBody;
   String showListRepliesCreatedAt;
-
   APIBLMShowListOfRepliesExtended({required this.showListRepliesReplyId, required this.showListRepliesCommentId, required this.showListRepliesReplyBody, required this.showListRepliesUser, required this.showListRepliesCreatedAt});
 
   factory APIBLMShowListOfRepliesExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -91,7 +87,6 @@ class APIBLMShowListOfRepliesExtendedUser{
   String showListRepliesUserLastName;
   String showListRepliesUserImage;
   int showListRepliesUserAccountType;
-
   APIBLMShowListOfRepliesExtendedUser({required this.showListRepliesUserUserId, required this.showListRepliesUserFirstName, required this.showListRepliesUserLastName, required this.showListRepliesUserImage, required this.showListRepliesUserAccountType});
 
   factory APIBLMShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){

@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({required int memorialId, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({required 
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -37,11 +36,9 @@ Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({required 
 class APIRegularShowFamilySettingsMain{
   int almItemsRemaining;
   List<APIRegularShowFamilySettingsExtended> almFamilyList;
-
   APIRegularShowFamilySettingsMain({required this.almItemsRemaining, required this.almFamilyList});
 
   factory APIRegularShowFamilySettingsMain.fromJson(Map<String, dynamic> parsedJson){
-
     var newList1 = parsedJson['family'] as List;
     List<APIRegularShowFamilySettingsExtended> familyList = newList1.map((i) => APIRegularShowFamilySettingsExtended.fromJson(i)).toList();
 
@@ -56,7 +53,6 @@ class APIRegularShowFamilySettingsMain{
 class APIRegularShowFamilySettingsExtended{
   APIRegularShowFamilySettingsExtendedDetails showFamilySettingsUser;
   String showFamilySettingsRelationship;
-
   APIRegularShowFamilySettingsExtended({required this.showFamilySettingsUser, required this.showFamilySettingsRelationship});
 
   factory APIRegularShowFamilySettingsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -68,14 +64,12 @@ class APIRegularShowFamilySettingsExtended{
 }
 
 class APIRegularShowFamilySettingsExtendedDetails{
-
   int showFamilySettingsDetailsId;
   String showFamilySettingsDetailsFirstName;
   String showFamilySettingsDetailsLastName;
   String showFamilySettingsDetailsImage;
   String showFamilySettingsDetailsEmail;
   int showFamilySettingsDetailsAccountType;
-
   APIRegularShowFamilySettingsExtendedDetails({required this.showFamilySettingsDetailsId, required this.showFamilySettingsDetailsFirstName, required this.showFamilySettingsDetailsLastName, required this.showFamilySettingsDetailsImage, required this.showFamilySettingsDetailsEmail, required this.showFamilySettingsDetailsAccountType});
 
   factory APIRegularShowFamilySettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){

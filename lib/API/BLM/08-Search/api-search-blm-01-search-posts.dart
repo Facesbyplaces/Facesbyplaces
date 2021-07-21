@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMSearchPostMain> apiBLMSearchPosts({required String keywords, required int page}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({required String keywords, requir
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -38,13 +37,12 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({required String keywords, requir
 class APIBLMSearchPostMain{
   int blmItemsRemaining;
   List<APIBLMSearchPostExtended> blmSearchPostList;
-
   APIBLMSearchPostMain({required this.blmItemsRemaining, required this.blmSearchPostList});
 
   factory APIBLMSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIBLMSearchPostExtended> familyMemorials = newList.map((i) => APIBLMSearchPostExtended.fromJson(i)).toList();
-
+    
     return APIBLMSearchPostMain(
       blmItemsRemaining: parsedJson['itemsremaining'],
       blmSearchPostList: familyMemorials,
@@ -62,11 +60,9 @@ class APIBLMSearchPostExtended{
   int searchPostNumberOfLikes;
   int searchPostNumberOfComments;
   bool searchPostLikeStatus;
-
   APIBLMSearchPostExtended({required this.searchPostPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
 
   factory APIBLMSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
-    
     List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
@@ -101,7 +97,6 @@ class APIBLMSearchPostExtendedPage{
   bool searchPostPageFamOrFriends;
   bool searchPostPageFollower;
   String searchPostPagePageType;
-
   APIBLMSearchPostExtendedPage({required this.searchPostPagePageId, required this.searchPostPageName, required this.searchPostPageProfileImage, required this.searchPostPageRelationship, required this.searchPostPagePageCreator, required this.searchPostPageManage, required this.searchPostPageFamOrFriends, required this.searchPostPageFollower, required this.searchPostPagePageType});
 
   factory APIBLMSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
@@ -121,7 +116,6 @@ class APIBLMSearchPostExtendedPage{
 
 class APIBLMSearchPostExtendedPageCreator{
   int searchPostPageCreatorCreatorId;
-
   APIBLMSearchPostExtendedPageCreator({required this.searchPostPageCreatorCreatorId});
 
   factory APIBLMSearchPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
@@ -136,7 +130,6 @@ class APIBLMSearchPostExtendedTagged{
   String searchPostTaggedFirstName;
   String searchPostTaggedLastName;
   String searchPostTaggedImage;
-
   APIBLMSearchPostExtendedTagged({required this.searchPostTaggedId, required this.searchPostTaggedFirstName, required this.searchPostTaggedLastName, required this.searchPostTaggedImage});
 
   factory APIBLMSearchPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){

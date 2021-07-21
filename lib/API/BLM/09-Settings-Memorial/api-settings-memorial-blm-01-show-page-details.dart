@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({required int memorialId}) async{
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -13,7 +12,7 @@ Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({required int memorialId
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId',
     options: Options(
       followRedirects: false,
-      validateStatus: (status) {
+      validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
@@ -36,9 +35,7 @@ Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({required int memorialId
 }
 
 class APIBLMShowPageDetailsMain{
-
   APIBLMShowPageDetailsExtended blmMemorial;
-
   APIBLMShowPageDetailsMain({required this.blmMemorial});
 
   factory APIBLMShowPageDetailsMain.fromJson(Map<String, dynamic> parsedJson){
@@ -53,7 +50,6 @@ class APIBLMShowPageDetailsExtended{
   String showPageDetailsName;
   APIBLMShowPageDetailsExtendedDetails showPageDetailsDetails;
   String showPageDetailsRelationship;
-
   APIBLMShowPageDetailsExtended({required this.showPageDetailsName, required this.showPageDetailsDetails, required this.showPageDetailsRelationship,});
 
   factory APIBLMShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
@@ -74,7 +70,6 @@ class APIBLMShowPageDetailsExtendedDetails{
   String showPageDetailsDetailsRip;
   String showPageDetailsDetailsState;
   String showPageDetailsDetailsCountry;
-
   APIBLMShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsLocation, required this.showPageDetailsDetailsPrecinct, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsState, required this.showPageDetailsDetailsCountry});
 
   factory APIBLMShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
