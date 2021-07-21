@@ -3,18 +3,9 @@ class Api::V1::Posts::PostsController < ApplicationController
     before_action :set_up, only: [:create]
 
     def index  
-        posts = Post.where(account: user())
+        @posts = posts_index
 
-        posts = posts.page(params[:page]).per(numberOfPage)
-        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif posts.total_count < numberOfPage
-            itemsremaining = posts.total_count 
-        else
-            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
                                 posts, 
                                 each_serializer: PostSerializer
@@ -27,101 +18,8 @@ class Api::V1::Posts::PostsController < ApplicationController
         post.account = user()
 
         if post.save
-            # check if there are people that have been tagged
-            people_tags = params[:tag_people] || []
-
-            people = []
-
-            people_tags.each do |key, value|
-                user_id = value[:user_id].to_i
-                account_type = value[:account_type].to_i 
-
-                if account_type == 1
-                    user = User.find(user_id)
-                    tag = Tagperson.new(post_id: post.id, account: user)
-                    if !tag.save
-                        return render json: {errors: tag.errors}, status: 500
-                    end
-                else
-                    user = AlmUser.find(user_id)
-                    tag = Tagperson.new(post_id: post.id, account: user)
-                    if !tag.save
-                        return render json: {errors: tag.errors}, status: 500
-                    end
-                end
-
-                people.push([user_id,account_type])
-            end
-
-            puts people
-                
             # Add to notification
-                # For blm followers
-                (post.page.users.uniq - user_in_page(1)).each do |user|
-                    # check if this user can get notification
-                    if user.notifsetting.newActivities == true
-                        # check if the user is in the tag people
-                        if people.include?([user.id, user.account_type])
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                            #Push Notification
-                            device_token = user.device_token
-                            title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                            PushNotification(device_token, title, message, user, user(), post.id, "Post", post.page_type)
-                        else
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                            #Push Notification
-                            device_token = user.device_token
-                            title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
-                            PushNotification(device_token, title, message, user, user(), post.id, "Post", post.page_type)
-                        end
-                    end
-                end
-
-                # For alm followers
-                (post.page.alm_users.uniq - user_in_page(2)).each do |user|
-                    # check if this user can get notification
-                    if user.notifsetting.newActivities == true
-                        # check if the user is in the tag people
-                        if people.include?([user.id, user.account_type])
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                            #Push Notification
-                            device_token = user.device_token
-                            title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                            PushNotification(device_token, title, message, user, user(), post.id, "Post", post.page_type)
-                        else
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                            #Push Notification
-                            device_token = user.device_token
-                            title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
-                            PushNotification(device_token, title, message, user, user(), post.id, "Post", post.page_type)
-                        end
-                    end
-                end
-
-                # For families and friends
-                (post.page.relationships).each do |relationship|
-                    if relationship.account != user() && relationship.account.notifsetting.newActivities == true
-                        if people.include?([relationship.account.id, relationship.account.account_type])
-                            Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                            #Push Notification
-                            device_token = relationship.account.device_token
-                            title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                            PushNotification(device_token, title, message, relationship.account, user(), post.id, "Post", post.page_type)
-                        else
-                            Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                            #Push Notification
-                            device_token = relationship.account.device_token
-                            title = "FacesbyPlaces Notification"
-                            message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
-                            PushNotification(device_token, title, message, relationship.account, user(), post.id, "Post", post.page_type)
-                        end
-                    end
-                end
+            notify_followers_of_a_post(post)
 
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
@@ -136,18 +34,9 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     def pagePosts
-        posts = Post.where(page_type: params[:page_type], page_id: params[:page_id]).order(created_at: :desc)
+        @posts = page_posts_index
 
-        posts = posts.page(params[:page]).per(numberOfPage)
-        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif posts.total_count < numberOfPage
-            itemsremaining = posts.total_count 
-        else
-            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
                             posts, 
                             each_serializer: PostSerializer
@@ -163,7 +52,6 @@ class Api::V1::Posts::PostsController < ApplicationController
         end
     end
 
-    # pages that the user can manage
     def listOfPages
         if user().account_type == 1
             pagesId = user().roles.select('id')
@@ -217,82 +105,24 @@ class Api::V1::Posts::PostsController < ApplicationController
             return render json: {}, status: 401
         end
     end
+    
+    def notif_type
+        @notif_type = 'Post'
+    end
 
     def like
         if Postslike.where(account: user(), post_id: params[:post_id]).first == nil
             like = Postslike.new(post_id: params[:post_id], account: user())
             if like.save 
                 # Add to notification
-                    post = Post.find(params[:post_id])
-                    people_blm_users = post.users
-                    people_alm_users = post.alm_users
-                    # For blm followers
-                    (post.page.users.uniq - user_in_page(1)).each do |user|
-                        # check if the user can get notification from this api
-                        if user.notifsetting.postLikes == true
-                            # check if the user is in the tag people
-                            if people_blm_users.include?(user) || people_alm_users.include?(user)
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false, notif_type: 'Post')
-                            else
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                            end
-                        end
-                    end
-                    # For alm followers
-                    (post.page.alm_users.uniq - user_in_page(2)).each do |user|
-                        # check if the user can get notification from this api
-                        if user.notifsetting.postLikes == true
-                            # check if the user is in the tag people
-                            if people_blm_users.include?(user) || people_alm_users.include?(user)
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false, notif_type: 'Post')
-                            else
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                            end
-                        end
-                    end
+                notify_followers_of_a_like
 
-                    # For families and friends
-                    (post.page.relationships).each do |relationship|
-                        if relationship.account != user() && relationship.account.notifsetting.postLikes == true
-                            if people_blm_users.include?(relationship.account) || people_alm_users.include?(relationship.account)
-                                Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false, notif_type: 'Post')
-                                #Push Notification
-                                device_token = relationship.account.device_token
-                                title = "FacesbyPlaces Notification"
-                                message = "#{user().first_name} liked a post that you're tagged in"
-                                PushNotification(device_token, title, message)
-                            elsif relationship.account == post.account 
-                                Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} liked your post", postId: post.id, read: false, notif_type: 'Post')
-                                #Push Notification
-                                device_token = relationship.account.device_token
-                                title = "FacesbyPlaces Notification"
-                                message = "#{user().first_name} liked your post"
-                                PushNotification(device_token, title, message)
-                            else
-                                Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
-                                #Push Notification
-                                device_token = relationship.account.device_token
-                                title = "FacesbyPlaces Notification"
-                                message = "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
-                                PushNotification(device_token, title, message)
-                            end
-                        end
-                    end
-
-                render json: { user: user }, status: 200
+                render json: { status: "Liked Post" }, status: 200
             else
                 render json: {errors: like.errors}, status: 500
             end
         else
             render json: {error: 'Account required.'}, status: 409
-        end
-    end
-
-    def user_in_page(account_type)
-        if user().account_type == account_type
-            return [user()]
-        else
-            return []
         end
     end
 
@@ -307,6 +137,170 @@ class Api::V1::Posts::PostsController < ApplicationController
         else
             render json: {error: "Account required."}, status: 404
         end
+    end
+
+    def user_in_page(account_type)
+        if user().account_type == account_type
+            return [user()]
+        else
+            return []
+        end
+    end
+
+    def posts_index
+        posts = Post.where(account: user())
+        return posts = posts.page(params[:page]).per(numberOfPage)
+    end
+
+    def page_posts_index
+        posts = Post.where(page_type: params[:page_type], page_id: params[:page_id]).order(created_at: :desc)
+        return posts = posts.page(params[:page]).per(numberOfPage)
+    end
+
+    def itemsRemaining(data)
+        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif data.total_count < numberOfPage
+            itemsremaining = data.total_count 
+        else
+            itemsremaining = data.total_count - (params[:page].to_i * numberOfPage)
+        end
+    end
+
+    def notify_followers_of_a_post(post)
+        # Add tagged people
+        people = tag_people
+        
+        # For blm followers
+        (post.page.users.uniq - user_in_page(1)).each do |user|
+            # check if this user can get notification
+            if user.notifsetting.newActivities == true
+                # check if the user is in the tag people
+                if people.include?([user.id, user.account_type])
+                    message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                    send_notif(user, message, post, notif_type)
+                else
+                    message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                    send_notif(user, message, post, notif_type)                    
+                end
+            end
+        end
+
+        # For alm followers
+        (post.page.alm_users.uniq - user_in_page(2)).each do |user|
+            # check if this user can get notification
+            if user.notifsetting.newActivities == true
+                # check if the user is in the tag people
+                if people.include?([user.id, user.account_type])
+                    message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                    send_notif(user, message, post, notif_type)
+                else
+                    message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                    send_notif(user, message, post, notif_type)
+                end
+            end
+        end
+
+        # For families and friends
+        (post.page.relationships).each do |relationship|
+            if relationship.account != user() && relationship.account.notifsetting.newActivities == true
+                if people.include?([relationship.account.id, relationship.account.account_type])
+                    message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                    send_notif(relationship.account, message, post, notif_type)
+                else
+                    message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                    send_notif(relationship.account, message, post, notif_type)
+                end
+            end
+        end
+    end
+
+    def notify_followers_of_a_like
+        post = Post.find(params[:post_id])
+        people_blm_users = post.users
+        people_alm_users = post.alm_users
+        
+        # For blm followers
+        (post.page.users.uniq - user_in_page(1)).each do |user|
+            # check if the user can get notification from this api
+            if user.notifsetting.postLikes == true
+                # check if the user is in the tag people
+                if people_blm_users.include?(user) || people_alm_users.include?(user)
+                    message = "#{user().first_name} liked a post that you're tagged in"
+                    send_notif(user, message, post, notif_type)
+                else
+                    message = "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                    send_notif(user, message, post, notif_type)
+                end
+            end
+        end
+        # For alm followers
+        (post.page.alm_users.uniq - user_in_page(2)).each do |user|
+            # check if the user can get notification from this api
+            if user.notifsetting.postLikes == true
+                # check if the user is in the tag people
+                if people_blm_users.include?(user) || people_alm_users.include?(user)
+                    message = "#{user().first_name} liked a post that you're tagged in"
+                    send_notif(user, message, post, notif_type)
+                else
+                    message = "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                    send_notif(user, message, post, notif_type)
+                end
+            end
+        end
+
+        # For families and friends
+        (post.page.relationships).each do |relationship|
+            if relationship.account != user() && relationship.account.notifsetting.postLikes == true
+                if people_blm_users.include?(relationship.account) || people_alm_users.include?(relationship.account)
+                    message = "#{user().first_name} liked a post that you're tagged in"
+                    send_notif(relationship.account, message, post, notif_type)
+                elsif relationship.account == post.account 
+                    message = "#{user().first_name} liked your post"
+                    send_notif(relationship.account, message, post, notif_type)
+                else
+                    message = "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                    send_notif(relationship.account, message, post, notif_type)
+                end
+            end
+        end
+    end
+
+    def tag_people
+        people_tags = params[:tag_people] || []
+        people = []
+
+        people_tags.each do |key, value|
+            user_id = value[:user_id].to_i
+            account_type = value[:account_type].to_i 
+
+            if account_type == 1
+                user = User.find(user_id)
+                tag = Tagperson.new(post_id: post.id, account: user)
+                if !tag.save
+                    return render json: {errors: tag.errors}, status: 500
+                end
+            else
+                user = AlmUser.find(user_id)
+                tag = Tagperson.new(post_id: post.id, account: user)
+                if !tag.save
+                    return render json: {errors: tag.errors}, status: 500
+                end
+            end
+
+            people.push([user_id,account_type])
+        end
+
+        return people
+    end
+
+    def send_notif(recipient, message, action, notif_type)
+        Notification.create(recipient: recipient, actor: user(), action: message, postId: action.id, read: false, notif_type: notif_type)
+        
+        #Push Notification
+        device_token = recipient.device_token
+        title = "FacesbyPlaces Notification"
+        PushNotification(device_token, title, message, recipient, user(), action.id, notif_type, action.page_type)
     end
 
 end

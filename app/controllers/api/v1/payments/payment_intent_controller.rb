@@ -21,47 +21,37 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
       })
     end
 
-    # Save to Transaction
     if intent.status == 'requires_confirmation'
-      if transaction.save
-        render json: {
-          payment_intent: intent.id,
-          payment_method: intent.payment_method,
-          # client_secret:  intent.client_secret,
-        }, status: 200
-      else
-        render json: {
-          error: transaction.errors.full_messages,
-        }, status: 404
-      end
+      # Save to Transaction
+      save_transaction(intent)
     elsif intent.status == 'requires_payment_method'
       render json: { client_secret: intent.client_secret, token: token }, status: 200
     end
   end
 
   # PAYMENT TEST ACTIONS
-  def confirm_payment_intent
-    charge = Stripe::PaymentIntent.confirm(
-      params[:client_secret],
-      {payment_method: params[:payment_method]}, 
-      stripe_account: stripe_account_id)
+    def confirm_payment_intent
+      charge = Stripe::PaymentIntent.confirm(
+        params[:client_secret],
+        {payment_method: params[:payment_method]}, 
+        stripe_account: stripe_account_id)
 
-    render json: { charge: charge, status: charge.status }, status: 200
-  end
+      render json: { charge: charge, status: charge.status }, status: 200
+    end
 
-  def create_payment_method
-    method = Stripe::PaymentMethod.create({
-      type: 'card',
-      card: {
-        number: '5555555555554444',
-        exp_month: 6,
-        exp_year: 2022,
-        cvc: '314',
-      },
-    })
+    def create_payment_method
+      method = Stripe::PaymentMethod.create({
+        type: 'card',
+        card: {
+          number: '5555555555554444',
+          exp_month: 6,
+          exp_year: 2022,
+          cvc: '314',
+        },
+      })
 
-    render json: { method: method }, status: 200
-  end
+      render json: { method: method }, status: 200
+    end
   
   private
 
@@ -85,7 +75,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     end
   end
 
-  # Create or Retrieve the Connected Account Customer
+  # Create the Connected Account Customer
   def connected_account_customer
     customer = Stripe::Customer.create({
       email: user().email,
@@ -146,8 +136,20 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     end
   end
 
-  def transaction
-    return Transaction.create(page: memorial, account: user(), amount: amount)
+  def save_transaction(intent)
+    transaction = Transaction.create(page: memorial, account: user(), amount: amount)
+
+    if transaction.save
+      render json: {
+        payment_intent: intent.id,
+        payment_method: intent.payment_method,
+        # client_secret:  intent.client_secret,
+      }, status: 200
+    else
+      render json: {
+        error: transaction.errors.full_messages,
+      }, status: 404
+    end
   end
 
 end

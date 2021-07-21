@@ -106,14 +106,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       params[:facebook_id].present? || params[:google_id].present? ? "" : resource_params[:password] && key && val
     end
 
-    def render_create_success
-      # render json: { success: true, user:  user, status: 200 }, status: 200
-    end
-
-    def render_create_success2
-      render json: { success: true, user:  @user, status: 200 }, status: 200
-    end
-
     def valid_token
       require 'google/apis/oauth2_v2'
       oauth2 = Google::Apis::Oauth2V2::Oauth2Service.new
@@ -166,6 +158,27 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       render json: { success: true, user:  @user, status: 200 }, status: 200
 
       Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
+    end
+
+    def render_create_success
+      # render json: { success: true, user:  user, status: 200 }, status: 200
+    end
+
+    def render_create_success2
+      render json: { success: true, user:  @user, status: 200 }, status: 200
+    end
+
+    def render_create_error_bad_credentials
+      render_error(401, I18n.t('devise_token_auth.sessions.bad_credentials'))
+    end
+
+    def render_error(status, message, data = nil)
+      response = {
+        success: false,
+        message: [message]
+      }
+      response = response.merge(data) if data
+      render json: response, status: status
     end
 
     
