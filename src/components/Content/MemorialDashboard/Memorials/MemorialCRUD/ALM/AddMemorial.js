@@ -168,22 +168,24 @@ export default function AddMemorial() {
     profileImageSelectedFile != null
       ? formData.append("profileImage", profileImageSelectedFile)
       : console.log("No Profile Image Uploaded");
-    backgroundImageSelectedFile
+    backgroundImageSelectedFile != null
       ? formData.append("backgroundImage", backgroundImageSelectedFile)
       : console.log("No Background Image Uploaded");
-    imagesOrVideosFilesSelected
+    imagesOrVideosFilesSelected != null
       ? formData.append("imagesOrVideos[]", imagesOrVideosFilesSelected)
       : console.log("No Images or Videos Uploaded");
     formData.append("memorial_id", memorial.id);
-    console.log("Form Data: ", formData);
+    formData != null
+      ? console.log("Form Data: ", formData)
+      : console.log("Form Data: Null");
     axios
       .put(`/api/v1/admin/memorials/image/${memorial.id}`, formData)
       .then((response) => {
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error.response.data.errors);
-        setErrors(error.response.data.errors);
+        console.log(error.response);
+        setErrors(error.response);
       });
   };
 
