@@ -1,51 +1,52 @@
 class Api::V1::Admin::MemorialsController < ApplicationController
     before_action :admin_only
+    before_action :set_memorial, only: [:updateMemorial, :updateMemorialImages, :deleteMemorial]
+    before_action :set_blm, only: [:updateBlm, :updateBlmImages, :deleteMemorial]
 
     # Memorial
     def usersSelection #for create memorial users selection
         users = User.all.where.not(guest: true, username: "admin")
-        # _except(User.guest).order("users.id DESC")
         alm_users = AlmUser.all
 
         allUsers = users.order("users.id DESC") + alm_users.order("alm_users.id DESC")
         render json: {success: true,  users: allUsers }, status: 200
     end
 
-    # Index Memorials
     def allMemorials
+        @blm_memorials = fetched_blm_memorials
+        blmMemorials = ActiveModel::SerializableResource.new(
+                            @blm_memorials, 
+                            each_serializer: BlmSerializer
+                        )
+
+        @alm_memorials = fetched_alm_memorials
+        almMemorials = ActiveModel::SerializableResource.new(
+                            @alm_memorials, 
+                            each_serializer: MemorialSerializer
+                        )
         render json: {
-            # itemsremaining:  itemsRemaining,
+            itemsremaining:  itemsRemaining(@blm_memorials),
             memorials: {
-                blm: blm_memorials,
-                alm: alm_memorials
+                blm: blmMemorials,
+                alm: almMemorials
             }
         }
     end
-    # Search Memorial
+    
     def searchMemorial
-        memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['Memorial', 'Blm'])
-        memorials = memorials.page(params[:page]).per(numberOfPage)
+        @memorials = fetched_searched_memorials
 
-        if memorials.total_count == 0 || (memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif memorials.total_count < numberOfPage
-            itemsremaining = memorials.total_count 
-        else
-            itemsremaining = memorials.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        page_type = ''
-        memorials = memorials.collect do |memorial|
+        memorials = @memorials.collect do |memorial|
             if memorial.searchable_type == 'Blm'
                 memorial = Blm.find(memorial.searchable_id)
-                page_type = 1
+                set_page_type(1)
                 ActiveModel::SerializableResource.new(
                     memorial, 
                     each_serializer: BlmSerializer
                 )
             else
                 memorial = Memorial.find(memorial.searchable_id)
-                page_type = 2
+                set_page_type(2)
                 ActiveModel::SerializableResource.new(
                     memorial, 
                     each_serializer: MemorialSerializer
@@ -53,69 +54,30 @@ class Api::V1::Admin::MemorialsController < ApplicationController
             end
         end
 
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(@memorials),
                         memorials: memorials,
-                        page_type: page_type,
+                        page_type: @page_type,
                     }
     end
-    # Create Memorial
+    
     def createMemorial
         #IF MEMORIAL IS OF TYPE ALM
         if params[:page_type].to_i == 2
+            # create new alm page
             memorial = Memorial.new(memorial_params)
             # get user for associating them to the memorial
             user = AlmUser.find(params[:user_id])
-    
+
             # check if the params sent is valid or not
             check = params_presence(params[:memorial])
             if check == true
-                # set privacy to public
-                memorial.privacy = "public"
-                memorial.hideFamily = false
-                memorial.hideFriends = false
-                memorial.hideFollowers = false
-    
-                # save memorial
-                memorial.save
-    
-                # save the owner of the user
-                pageowner = Pageowner.new(account_type:  "AlmUser", account_id: user.id, view: 0)
-                memorial.pageowner = pageowner
-    
-                # save relationship of the user to the page
-                relationship = memorial.relationships.new(account: user, relationship: params[:relationship])
-                relationship.save 
-    
-                # Make the user as admin of the 
-                user.add_role "pageadmin", memorial
-    
+                save_memorial(memorial, user)
                 render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
-    
-                # Notify all Users
-                blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true)
-                almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'AlmUser' AND notifsettings.account_id != #{user().id}")
-                
-                blmUsersDeviceToken = []
-                blmUsers.each do |user|
-                    Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
-                    blmUsersDeviceToken << user.device_token
-                end
-    
-                almUsersDeviceToken = []
-                almUsers.each do |user|
-                    Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
-                    almUsersDeviceToken << user.device_token
-                end
-    
-                device_tokens = almUsersDeviceToken + blmUsersDeviceToken
-                title = "New Memorial Page"
-                message = "#{user().first_name} created a new page"
-                PushNotification(device_tokens, title, message, user, user(), memorial.id, "Memorial", " ")
             else
                 render json: {status: "#{check} is empty"}
             end
         #IF MEMORIAL IS OF TYPE BLM    
-        elsif params[:page_type] == 1 || "1"
+        elsif params[:page_type].to_i == 1
             # create new blm page
             blm = Blm.new(blm_params)
             # get user for associating them to a memorial
@@ -124,55 +86,8 @@ class Api::V1::Admin::MemorialsController < ApplicationController
             # check if the params sent is valid or not
             check = params_presence(params[:blm])
             if check == true
-                # set privacy to public
-                blm.privacy = "public"
-                blm.hideFamily = false
-                blm.hideFriends = false
-                blm.hideFollowers = false
-    
-                # save blm
-                if blm.save 
-    
-                    # save the owner of the user
-                    pageowner = Pageowner.new(account_type:  "User", account_id: user().id, view: 0)
-                    blm.pageowner = pageowner
-    
-                    # save relationship of the user to the page
-                    relationship = blm.relationships.new(account: user, relationship: params[:relationship])
-                    if relationship.save 
-    
-                        # Make the user as admin of the 
-                        user.add_role "pageadmin", blm
-    
-                        render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
-    
-                        # Notify all Users
-                        blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'User' AND notifsettings.account_id != #{user().id}")
-                        almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
-                        
-                        blmUsersDeviceToken = []
-                        blmUsers.each do |user|
-                            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
-                            blmUsersDeviceToken << user.device_token
-                        end
-    
-                        almUsersDeviceToken = []
-                        almUsers.each do |user|
-                            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
-                            almUsersDeviceToken << user.device_token
-                        end
-    
-                        device_tokens = almUsersDeviceToken + blmUsersDeviceToken
-                        title = "New Memorial Page"
-                        message = "#{user().first_name} created a new page"
-                        PushNotification(device_tokens, title, message, user, user(), blm.id, "Blm", " ")
-                    else
-                        render json: {errors: relationship.errors}, status: 500
-                    end
-                else  
-                    render json: {errors: blm.errors}, status: 500
-                    blm.destroy
-                end
+                save_memorial(blm, user)
+                render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
             else
                 render json: {status: "#{check} is empty"}
             end
@@ -180,7 +95,7 @@ class Api::V1::Admin::MemorialsController < ApplicationController
             puts params[:page_type].class
         end
     end
-    # Show Memorial
+    
     def showMemorial
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
         
@@ -190,71 +105,59 @@ class Api::V1::Admin::MemorialsController < ApplicationController
             render json: {errors: "Page not found"}
         end
     end
-    # Update Memorial
+    
     def updateMemorial
-        memorial = Memorial.find(params[:id])
-        # user = User.find(params[:user_id]) ? User.find(params[:user_id]) : AlmUser.find(params[:user_id])
-        
         # check if data sent is empty or not
         check = params_presence(params)
         if check == true
             # Update memorial details
-            memorial.update(memorial_details_params)
+            @memorial.update(memorial_details_params)
 
             # Update relationship of the current page admin to the page
             # memorial.relationships.where(account: user).first.update(relationship: params[:relationship])
 
-            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated details"}
+            return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated details"}
         else
             return render json: {error: "#{check} is empty"}
         end
     end
-    # Update Memorial Images
+    
     def updateMemorialImages
-        memorial = Memorial.find(params[:id])
-
-        if memorial.update(memorial_images_params)
-            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated images"}
+        if @memorial.update(memorial_images_params)
+            return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated images"}
         else
             return render json: {status: 'Error'}
         end
     end
 
-    # BLM
-    # Update BLM
     def updateBlm
-        blm = Blm.find(params[:id])
-        
         # check if data sent is empty or not
         check = params_presence(params)
         if check == true
             # Update blm details
-            blm.update(blm_details_params)
+            @blm.update(blm_details_params)
 
             # Update relationship of the current page admin to the page
             # blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
-            return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated details"}
+            return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated details"}
         else
             return render json: {error: "#{check} is empty"}
         end
     end
-    # Update BLM Images
+
     def updateBlmImages
-        blm = Blm.find(params[:id])
-        
         # check if memorial is updated successfully
-        if blm.update(blm_images_params)
-            return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated images"}
+        if @blm.update(blm_images_params)
+            return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"}
         else
             return render json: {status: 'Error'}
         end
     end  
-    # Delete Memorial
+    
     def deleteMemorial
         if params[:page] == "Memorial"
-            memorial = Memorial.find(params[:id])
-            memorial.destroy()
+            @memorial.destroy()
 
             adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
 
@@ -264,8 +167,7 @@ class Api::V1::Admin::MemorialsController < ApplicationController
             
             render json: {status: "deleted"}
         elsif params[:page] == "Blm"
-            blm = Blm.find(params[:id])
-            blm.destroy()
+            @blm.destroy()
 
             adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
 
@@ -316,43 +218,115 @@ class Api::V1::Admin::MemorialsController < ApplicationController
         params.permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country, :longitude, :latitude)
     end
 
-    def blm_memorials
-        # BLM Memorials
-        blm_memorials = Blm.all
-        # BLM
-        blm_memorials = blm_memorials.page(params[:page]).per(numberOfPage)
-        if blm_memorials.total_count == 0 || (blm_memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsRemaining = 0
-        elsif blm_memorials.total_count < numberOfPage
-            itemsRemaining = blm_memorials.total_count 
+    def notif_type
+        if params[:page_type].to_i == 2
+            return 'Memorial'
         else
-            itemsRemaining = blm_memorials.total_count - (params[:page].to_i * numberOfPage)
+            return 'Blm'
         end
-
-        return blmMemorials = ActiveModel::SerializableResource.new(
-                            blm_memorials, 
-                            each_serializer: BlmSerializer
-                        )
     end
 
-    def alm_memorials
-        #ALM Memorials
-        alm_memorials = Memorial.all
-        # ALM
-        alm_memorials = alm_memorials.page(params[:page]).per(numberOfPage)
-        if alm_memorials.total_count == 0 || (alm_memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsRemaining = 0
-        elsif alm_memorials.total_count < numberOfPage
-            itemsRemaining = alm_memorials.total_count 
+    def set_memorial
+        @memorial = Memorial.find(params[:id])
+    end
+
+    def set_blm
+        @blm = Blm.find(params[:id])
+    end
+
+    def save_memorial(memorial, user)        
+        set_privacy(memorial)
+
+        # save memorial
+        if memorial.save
+            # save the owner of the user
+            save_owner(memorial, user)
+            # save relationship of the user to the page
+            save_relationship(memorial, user)
+        else  
+            render json: {errors: memorial.errors}, status: 500
+            memorial.destroy
+        end
+    end
+
+    def set_privacy(memorial)
+        memorial.privacy = "public"
+        memorial.hideFamily = false
+        memorial.hideFriends = false
+        memorial.hideFollowers = false
+    end
+
+    def save_owner(memorial, user)
+        account_type = user.account_type == 2 ? "AlmUser" : "User"
+        pageowner = Pageowner.new(account_type: account_type, account_id: user.id, view: 0)
+        memorial.pageowner = pageowner
+    end
+
+    def save_relationship(memorial, user)
+        relationship = memorial.relationships.new(account: user, relationship: params[:relationship])
+        if relationship.save
+            # Net user as admin
+            set_admin(memorial, user)
+            # Notify all Users
+            notify_users(memorial, user)
         else
-            itemsRemaining = alm_memorials.total_count - (params[:page].to_i * numberOfPage)
+            return render json: {errors: relationship.errors}, status: 500
+        end
+    end
+
+    def set_admin(memorial, user)
+        user.add_role "pageadmin", memorial
+    end
+
+    def notify_users(memorial, user2)
+        # Notify all Users
+        if params[:page_type].to_i == 2 
+            blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'User' AND notifsettings.account_id != #{user2.id}")
+            almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
+        else
+            blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true)
+            almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'AlmUser' AND notifsettings.account_id != #{user2.id}")
+        end
+        
+        blmUsersDeviceToken = []
+        blmUsers.each do |user|
+            message = "#{user.first_name} created a new page"
+            send_notif(user, message, memorial, notif_type)
         end
 
-        return almMemorials = ActiveModel::SerializableResource.new(
-                            alm_memorials, 
-                            each_serializer: MemorialSerializer
-                        )
+        almUsersDeviceToken = []
+        almUsers.each do |user|
+            message = "#{user.first_name} created a new page"
+            send_notif(user, message, memorial, notif_type)
+        end
+    end
 
+    def send_notif(user, message, memorial, notif_type)
+        Notification.create(recipient: user, actor: user(), read: false, action: message, postId: memorial.id, notif_type: notif_type)
+        
+        # Send push notif
+        device_tokens = user.device_token
+        title = "New Memorial Page"
+        PushNotification(device_tokens, title, message, user, user(), memorial.id, notif_type, " ") 
+    end
+
+    def fetched_blm_memorials
+        blm_memorials = Blm.all
+        return blm_memorials = blm_memorials.page(params[:page]).per(numberOfPage)        
+    end
+
+    def fetched_alm_memorials
+        alm_memorials = Memorial.all
+        return alm_memorials = alm_memorials.page(params[:page]).per(numberOfPage)
+    end
+
+    def fetched_searched_memorials
+        memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['Memorial', 'Blm'])
+        return memorials = memorials.page(params[:page]).per(numberOfPage)
+    end
+
+    def set_page_type(i)
+        @page_type = i
     end
 
     def collect_memorials(memorials)
@@ -375,6 +349,16 @@ class Api::V1::Admin::MemorialsController < ApplicationController
             end
         end
         return memorials
+    end
+
+    def itemsRemaining(data)
+        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsRemaining = 0
+        elsif data.total_count < numberOfPage
+            itemsRemaining = data.total_count 
+        else
+            itemsRemaining = data.total_count - (params[:page].to_i * numberOfPage)
+        end
     end
 
     def admin_only

@@ -1,5 +1,6 @@
 class Api::V1::Admin::CommentsController < ApplicationController
     before_action :admin_only
+    before_action :set_comment, only: [:editComment, :deleteComment]
 
     def usersSelection #for create comment users selection
         users = User.all.where.not(guest: true, username: "admin")
@@ -8,18 +9,28 @@ class Api::V1::Admin::CommentsController < ApplicationController
         allUsers = users.order("users.id DESC") + alm_users.order("alm_users.id DESC")
         render json: {success: true,  users: allUsers }, status: 200
     end
-    
-    def editComment
-        comment = Comment.find(params[:id])
 
-        comment.update(body: edit_comment_params[:body])
-        comment.account = user()
+    def commentsIndex
+        @comments = fetched_comments
+
+        render json: {  itemsremaining:  itemsRemaining(@comments),
+                        comments: ActiveModel::SerializableResource.new(
+                            @comments, 
+                            each_serializer: CommentSerializer
+                        )
+                    }
+    end
+
+    def searchComment
+        commentsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Comment').pluck('searchable_id')
+        @comments = Comment.where(id: commentsId)
         
-        if comment
-            render json: {status: :success, comment: comment}
-        else
-            render json: {status: comment.errors}
-        end
+        render json: {  itemsremaining:  itemsRemaining(@comments),
+                        comments: ActiveModel::SerializableResource.new(
+                            @comments, 
+                            each_serializer: CommentSerializer
+                        )
+                    }
     end
 
     def addComment
@@ -33,28 +44,23 @@ class Api::V1::Admin::CommentsController < ApplicationController
             render json: {status: comment.errors}, status: 404
         end
     end
-
-    def commentsIndex
-        post = Post.find(params[:id])
-        comments = post.comments 
-
-        render_comments(comments)
-    end
+    
+    def editComment
+        @comment.update(body: edit_comment_params[:body])
+        @comment.account = user()
+        
+        if @comment
+            render json: {status: :success, comment: @comment}
+        else
+            render json: {status: @comment.errors}
+        end
+    end  
 
     def deleteComment
-        comment = Comment.find(params[:id])
-        comment.destroy 
+        @comment.destroy 
 
         render json: {status: :destroy}, status: 200
-    end
-
-    def searchComment
-        commentsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Comment').pluck('searchable_id')
-        puts commentsId
-        comments = Comment.where(id: commentsId)
-        
-        render_comments(comments)
-    end
+    end 
 
     private
     def comment_params
@@ -63,6 +69,16 @@ class Api::V1::Admin::CommentsController < ApplicationController
 
     def edit_comment_params
         params.require(:comment).permit(:body)
+    end
+
+    def admin_only
+        unless user().has_role? :admin 
+            return render json: {status: "Must be an admin to continue"}, status: 401
+        end
+    end
+
+    def set_comment
+        @comment = Comment.find(params[:id])
     end
 
     def send_notif(comment, userActor)
@@ -160,28 +176,23 @@ class Api::V1::Admin::CommentsController < ApplicationController
             end
     end
     
-    def render_comments(comments)
-        comments = comments.page(params[:page]).per(numberOfPage)
-        if comments.total_count == 0 || (comments.total_count - (params[:page].to_i * numberOfPage)) < 0
+    def fetched_comments(comments)
+        post = Post.find(params[:id])
+        comments = post.comments 
+
+        return comments = comments.page(params[:page]).per(numberOfPage)
+    end
+
+    def itemsRemaining(data)
+        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
-        elsif comments.total_count < numberOfPage
-            itemsremaining = comments.total_count 
+        elsif data.total_count < numberOfPage
+            itemsremaining = data.total_count 
         else
-            itemsremaining = comments.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
-                        comments: ActiveModel::SerializableResource.new(
-                            comments, 
-                            each_serializer: CommentSerializer
-                        )
-                    }
-    end
-
-    def admin_only
-        unless user().has_role? :admin 
-            return render json: {status: "Must be an admin to continue"}, status: 401
+            itemsremaining = data.total_count - (params[:page].to_i * numberOfPage)
         end
     end
+
+    
     
 end

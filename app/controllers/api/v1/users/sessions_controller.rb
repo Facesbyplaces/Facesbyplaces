@@ -79,15 +79,15 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       else
         @user = existing_user
 
-        if @user.is_verified?
-          @user.update({ device_token: params[:device_token] })
-          super || render_create_success2 && super
-        elsif @user == nil
+        if @user == nil
           if params[:account_type] === "1"
             return render json: { message: "BLM account not found. Register to login to the page.", status: 401 }, status: 401
           else
             return render json: { message: "ALM account not found. Register to login to the page.", status: 401 }, status: 401
           end
+        elsif @user.is_verified?
+          @user.update({ device_token: params[:device_token] })
+          super || render_create_success2 && super
         else 
           render json: {
               message: "Verify email to login to the app.",
