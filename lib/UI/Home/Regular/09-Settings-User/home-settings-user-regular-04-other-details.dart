@@ -103,7 +103,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             child: MiscRegularInputFieldDateTimeTemplate(
                               key: _key1,
                               labelText: 'Birthdate',
-                              displayText: details.data!.showOtherDetailsBirthdate,
+                              displayText: details.data!.showOtherDetailsBirthdate.substring(0, details.data!.showOtherDetailsBirthdate.indexOf('T'),),
                             ),
                           ),
 

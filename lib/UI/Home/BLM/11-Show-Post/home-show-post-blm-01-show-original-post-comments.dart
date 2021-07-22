@@ -38,7 +38,7 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';
 
-class BLMOriginalComment {
+class BLMOriginalComment{
   final int commentId;
   final int postId;
   final int userId;
@@ -54,7 +54,7 @@ class BLMOriginalComment {
   const BLMOriginalComment({required this.commentId, required this.postId, required this.userId, required this.commentBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.commentLikes, required this.commentNumberOfLikes, required this.userAccountType, required this.listOfReplies});
 }
 
-class BLMOriginalReply {
+class BLMOriginalReply{
   final int replyId;
   final int commentId;
   final int userId;
@@ -409,16 +409,34 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   child: ((){
                                                     if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 1){
                                                       return GestureDetector(
+                                                        child: ((){
+                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
+                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
+                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                aspectRatio: 16 / 9,
+                                                                fit: BoxFit.contain,
+                                                              ),
+                                                            );
+                                                          }else{
+                                                            return CachedNetworkImage(
+                                                              fit: BoxFit.cover,
+                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
+                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            );
+                                                          }
+                                                        }()),
                                                         onTap: (){
                                                           showGeneralDialog(
                                                             context: context,
+                                                            transitionDuration: Duration(milliseconds: 0),
                                                             barrierDismissible: true,
                                                             barrierLabel: 'Dialog',
-                                                            transitionDuration: Duration(milliseconds: 0),
-                                                            pageBuilder: (_, __, ___) {
+                                                            pageBuilder: (_, __, ___){
                                                               return Scaffold(
-                                                                backgroundColor:
-                                                                Colors.black12.withOpacity(0.7),
+                                                                backgroundColor: Colors.black12.withOpacity(0.7),
                                                                 body: SizedBox.expand(
                                                                   child: SafeArea(
                                                                     child: Column(
@@ -427,14 +445,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           alignment: Alignment.centerRight,
                                                                           padding: const EdgeInsets.only(right: 20.0),
                                                                           child: GestureDetector(
+                                                                            child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                             onTap: (){
                                                                               Navigator.pop(context);
                                                                             },
-                                                                            child: CircleAvatar(
-                                                                              radius: 20,
-                                                                              backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                              child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                            ),
                                                                           ),
                                                                         ),
 
@@ -452,12 +466,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                 ),
                                                                               );
                                                                             }else{
-                                                                              // return CachedNetworkImage(
-                                                                              //   fit: BoxFit.contain,
-                                                                              //   imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                                              //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                              //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                              // );
                                                                               return ExtendedImage.network(
                                                                                 originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
                                                                                 fit: BoxFit.contain,
@@ -481,36 +489,37 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             },
                                                           );
                                                         },
-                                                        child: ((){
-                                                          if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
-                                                            return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
-                                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                aspectRatio: 16 / 9,
-                                                                fit: BoxFit.contain,
-                                                              ),
-                                                            );
-                                                          }else{
-                                                            return CachedNetworkImage(
-                                                              fit: BoxFit.cover,
-                                                              imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
-                                                              placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                            );
-                                                          }
-                                                        }()),
                                                       );
                                                     }else if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 2){
-                                                      return StaggeredGridView.countBuilder(padding: EdgeInsets.zero,
-                                                        shrinkWrap: true,
-                                                        physics: const NeverScrollableScrollPhysics(),
-                                                        crossAxisCount: 4,
-                                                        itemCount: 2,
+                                                      return StaggeredGridView.countBuilder(
                                                         staggeredTileBuilder: (int index) => const StaggeredTile.count(2,2),
-                                                        mainAxisSpacing: 4.0,
+                                                        physics: const NeverScrollableScrollPhysics(),
+                                                        padding: EdgeInsets.zero,
                                                         crossAxisSpacing: 4.0,
+                                                        mainAxisSpacing: 4.0,
+                                                        crossAxisCount: 4,
+                                                        shrinkWrap: true,
+                                                        itemCount: 2,
                                                         itemBuilder: (BuildContext context, int index) => GestureDetector(
+                                                          child: (() {
+                                                            if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                              return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                  aspectRatio: 16 / 9,
+                                                                  fit: BoxFit.contain,
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                ),
+                                                              );
+                                                            }else{
+                                                              return CachedNetworkImage(
+                                                                fit: BoxFit.cover,
+                                                                imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                              );
+                                                            }
+                                                          }()),
                                                           onTap: (){
                                                             showGeneralDialog(
                                                               context: context,
@@ -559,12 +568,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                                       ),
                                                                                     );
                                                                                   }else{
-                                                                                    // return CachedNetworkImage(
-                                                                                    //   fit: BoxFit.contain,
-                                                                                    //   imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                                    //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                    //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                                    // );
                                                                                     return ExtendedImage.network(
                                                                                       originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
                                                                                       fit: BoxFit.contain,
@@ -610,145 +613,28 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                               },
                                                             );
                                                           },
-                                                          child: (() {
-                                                            if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                              return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
-                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                  aspectRatio: 16 / 9,
-                                                                  fit: BoxFit.contain,
-                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                ),
-                                                              );
-                                                            }else{
-                                                              return CachedNetworkImage(
-                                                                fit: BoxFit.cover,
-                                                                imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
-                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                              );
-                                                            }
-                                                          }()),
                                                         ),
                                                       );
                                                     }else{
                                                       return StaggeredGridView.countBuilder(
-                                                        padding: EdgeInsets.zero,
-                                                        shrinkWrap: true,
-                                                        physics: const NeverScrollableScrollPhysics(),
-                                                        crossAxisCount: 4,
-                                                        itemCount: 3,
                                                         staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                                        mainAxisSpacing: 4.0,
+                                                        physics: const NeverScrollableScrollPhysics(),
+                                                        padding: EdgeInsets.zero,
                                                         crossAxisSpacing: 4.0,
+                                                        mainAxisSpacing: 4.0,
+                                                        crossAxisCount: 4,
+                                                        shrinkWrap: true,
+                                                        itemCount: 3,
                                                         itemBuilder: (BuildContext context, int index) => GestureDetector(
-                                                          onTap: (){
-                                                            showGeneralDialog(
-                                                              context: context,
-                                                              barrierDismissible: true,
-                                                              barrierLabel: 'Dialog',
-                                                              transitionDuration: Duration(milliseconds: 0),
-                                                              pageBuilder: (_, __, ___){
-                                                                return Scaffold(
-                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
-                                                                  body: SizedBox.expand(
-                                                                    child: SafeArea(
-                                                                      child: Column(
-                                                                        children: [
-                                                                          Container(
-                                                                            alignment: Alignment.centerRight,
-                                                                            padding: const EdgeInsets.only(right: 20.0),
-                                                                            child: GestureDetector(
-                                                                              child: CircleAvatar(
-                                                                                radius: 20,
-                                                                                backgroundColor: const Color(0xff000000).withOpacity(0.8),
-                                                                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
-                                                                              ),
-                                                                              onTap: (){
-                                                                                Navigator.pop(context);
-                                                                              },
-                                                                            ),
-                                                                          ),
-
-                                                                          SizedBox(height: 10,),
-
-                                                                          Expanded(
-                                                                            child: CarouselSlider(
-                                                                              carouselController: buttonCarouselController,
-                                                                              items: List.generate(
-                                                                                originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) => (() {
-                                                                                  if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
-                                                                                    return BetterPlayer.network(
-                                                                                      '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
-                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                        autoDispose: false,
-                                                                                        aspectRatio: 16 / 9,
-                                                                                        fit: BoxFit.contain,
-                                                                                      ),
-                                                                                    );
-                                                                                  }else{
-                                                                                    // return CachedNetworkImage(
-                                                                                    //   fit: BoxFit.contain,
-                                                                                    //   imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                                    //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                    //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                                    // );
-                                                                                    return ExtendedImage.network(
-                                                                                      originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                                      fit: BoxFit.contain,
-                                                                                      loadStateChanged: (ExtendedImageState loading){
-                                                                                        if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
-                                                                                          return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
-                                                                                        }
-                                                                                      },
-                                                                                      mode: ExtendedImageMode.gesture,
-                                                                                    );
-                                                                                  }
-                                                                                }()),
-                                                                              ),
-                                                                              options: CarouselOptions(
-                                                                                autoPlay: false,
-                                                                                enlargeCenterPage: true,
-                                                                                aspectRatio: 1,
-                                                                                viewportFraction: 1,
-                                                                                initialPage: index,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          Row(
-                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                            children: [
-                                                                              IconButton(
-                                                                                onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
-                                                                              ),
-                                                                              IconButton(
-                                                                                onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-
-                                                                          const SizedBox(height: 85,),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                            );
-                                                          },
                                                           child: ((){
                                                             if(index != 1){
                                                               return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true 
                                                               ? BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                   placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                   aspectRatio: 16 / 9,
                                                                   fit: BoxFit.contain,
-                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                 ),
                                                               )
                                                               : CachedNetworkImage(
@@ -767,9 +653,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                         BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                             placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                             aspectRatio: 16 / 9,
                                                                             fit: BoxFit.contain,
-                                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                           ),
                                                                         ),
 
@@ -779,13 +665,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           child: CircleAvatar(
                                                                             radius: 25,
                                                                             backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                            child: Text('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
-                                                                              style: TextStyle(
-                                                                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                                                                fontFamily: 'NexaBold',
-                                                                                color: const Color(0xffFFFFFF),
-                                                                              ),
-                                                                            ),
+                                                                            child: Text('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -807,13 +687,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           child: CircleAvatar(
                                                                             radius: 25,
                                                                             backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                            child: Text('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
-                                                                              style: TextStyle(
-                                                                                fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                                                                                fontFamily: 'NexaBold',
-                                                                                color: const Color(0xffFFFFFF),
-                                                                              ),
-                                                                            ),
+                                                                            child: Text('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -821,15 +695,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   }
                                                                 }else{
                                                                   if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                                    return BetterPlayer.network(
-                                                                      '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                    return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                         placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                         aspectRatio: 16 / 9,
                                                                         fit: BoxFit.contain,
-                                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(
-                                                                          showControls: false,
-                                                                        ),
                                                                       ),
                                                                     );
                                                                   }else{
@@ -844,6 +715,93 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                               }());
                                                             }
                                                           }()),
+                                                          onTap: (){
+                                                            showGeneralDialog(
+                                                              context: context,
+                                                              transitionDuration: Duration(milliseconds: 0),
+                                                              barrierDismissible: true,
+                                                              barrierLabel: 'Dialog',
+                                                              pageBuilder: (_, __, ___){
+                                                                return Scaffold(
+                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                  body: SizedBox.expand(
+                                                                    child: SafeArea(
+                                                                      child: Column(
+                                                                        children: [
+                                                                          Container(
+                                                                            alignment: Alignment.centerRight,
+                                                                            padding: const EdgeInsets.only(right: 20.0),
+                                                                            child: GestureDetector(
+                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                                              onTap: (){
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                            ),
+                                                                          ),
+
+                                                                          SizedBox(height: 10,),
+
+                                                                          Expanded(
+                                                                            child: CarouselSlider(
+                                                                              carouselController: buttonCarouselController,
+                                                                              items: List.generate(
+                                                                                originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) => ((){
+                                                                                  if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
+                                                                                    return BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        autoDispose: false,
+                                                                                        aspectRatio: 16 / 9,
+                                                                                        fit: BoxFit.contain,
+                                                                                      ),
+                                                                                    );
+                                                                                  }else{
+                                                                                    return ExtendedImage.network(
+                                                                                      originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                                      fit: BoxFit.contain,
+                                                                                      loadStateChanged: (ExtendedImageState loading){
+                                                                                        if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
+                                                                                          return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                                                        }
+                                                                                      },
+                                                                                      mode: ExtendedImageMode.gesture,
+                                                                                    );
+                                                                                  }
+                                                                                }()),
+                                                                              ),
+                                                                              options: CarouselOptions(
+                                                                                autoPlay: false,
+                                                                                enlargeCenterPage: true,
+                                                                                aspectRatio: 1,
+                                                                                viewportFraction: 1,
+                                                                                initialPage: index,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: [
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+
+                                                                          const SizedBox(height: 85,),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
                                                         ),
                                                       );
                                                     }
@@ -929,80 +887,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                             Column(
                                               children: List.generate(
                                                 commentsListener.length, (i) => ListTile(
-                                                  onTap: () {
-                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: commentsListener[i].userId, accountType: commentsListener[i].userAccountType,),),);
-                                                  },
-                                                  onLongPress: () async{
-                                                    if(currentUserId == commentsListener[i].userId && currentAccountType == commentsListener[i].userAccountType){
-                                                      await showMaterialModalBottomSheet(
-                                                        context: context,
-                                                        builder: (context) => SafeArea(
-                                                          top: false,
-                                                          child: Column(
-                                                            mainAxisSize: MainAxisSize.min,
-                                                            children: <Widget>[
-                                                              ListTile(
-                                                                title: const Text('Edit'),
-                                                                leading: const Icon(Icons.edit),
-                                                                onTap: () async{
-                                                                  controller.text = controller.text + commentsListener[i].commentBody;
-                                                                  await showModalBottomSheet(context: context, builder: (context) => showKeyboardEdit(isEdit: true, editId: commentsListener[i].commentId),);
-                                                                },
-                                                              ),
-                                                              ListTile(
-                                                                title: const Text('Delete'),
-                                                                leading: const Icon(Icons.delete),
-                                                                onTap: () async{
-                                                                  context.loaderOverlay.show();
-                                                                  await apiBLMDeleteComment(commentId: commentsListener[i].commentId);
-                                                                  context.loaderOverlay.hide();
-
-                                                                  controller.clear();
-                                                                  itemRemaining = 1;
-                                                                  repliesRemaining = 1;
-                                                                  comments.value = [];
-                                                                  replies.value = [];
-                                                                  numberOfReplies = 0;
-                                                                  page1 = 1;
-                                                                  page2 = 1;
-                                                                  count.value = 0;
-                                                                  commentsLikes = [];
-                                                                  commentsNumberOfLikes = [];
-                                                                  repliesLikes = [];
-                                                                  repliesNumberOfLikes = [];
-                                                                  isComment = true;
-                                                                  numberOfLikes = 0;
-                                                                  numberOfComments = 0;
-                                                                  getOriginalPostInformation();
-                                                                  onLoading();
-                                                                  Navigator.pop(context);
-                                                                },
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }else{
-                                                      await showMaterialModalBottomSheet(
-                                                        context: context,
-                                                        builder: (context) => SafeArea(
-                                                          top: false,
-                                                          child: Column(
-                                                            mainAxisSize: MainAxisSize.min,
-                                                            children: <Widget>[
-                                                              ListTile(
-                                                                title: const Text('Report'),
-                                                                leading: const Icon(Icons.edit),
-                                                                onTap: (){
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.postId, reportType: 'Post')));
-                                                                },
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }
-                                                  },
                                                   visualDensity: const VisualDensity(vertical: 4.0),
                                                   leading: commentsListener[i].image != ''
                                                   ? CircleAvatar(
@@ -1305,6 +1189,80 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       : Container(height: 0,),
                                                     ],
                                                   ),
+                                                  onTap: (){
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: commentsListener[i].userId, accountType: commentsListener[i].userAccountType,),),);
+                                                  },
+                                                  onLongPress: () async{
+                                                    if(currentUserId == commentsListener[i].userId && currentAccountType == commentsListener[i].userAccountType){
+                                                      await showMaterialModalBottomSheet(
+                                                        context: context,
+                                                        builder: (context) => SafeArea(
+                                                          top: false,
+                                                          child: Column(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: <Widget>[
+                                                              ListTile(
+                                                                title: const Text('Edit'),
+                                                                leading: const Icon(Icons.edit),
+                                                                onTap: () async{
+                                                                  controller.text = controller.text + commentsListener[i].commentBody;
+                                                                  await showModalBottomSheet(context: context, builder: (context) => showKeyboardEdit(isEdit: true, editId: commentsListener[i].commentId),);
+                                                                },
+                                                              ),
+                                                              ListTile(
+                                                                title: const Text('Delete'),
+                                                                leading: const Icon(Icons.delete),
+                                                                onTap: () async{
+                                                                  context.loaderOverlay.show();
+                                                                  await apiBLMDeleteComment(commentId: commentsListener[i].commentId);
+                                                                  context.loaderOverlay.hide();
+
+                                                                  controller.clear();
+                                                                  itemRemaining = 1;
+                                                                  repliesRemaining = 1;
+                                                                  comments.value = [];
+                                                                  replies.value = [];
+                                                                  numberOfReplies = 0;
+                                                                  page1 = 1;
+                                                                  page2 = 1;
+                                                                  count.value = 0;
+                                                                  commentsLikes = [];
+                                                                  commentsNumberOfLikes = [];
+                                                                  repliesLikes = [];
+                                                                  repliesNumberOfLikes = [];
+                                                                  isComment = true;
+                                                                  numberOfLikes = 0;
+                                                                  numberOfComments = 0;
+                                                                  getOriginalPostInformation();
+                                                                  onLoading();
+                                                                  Navigator.pop(context);
+                                                                },
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }else{
+                                                      await showMaterialModalBottomSheet(
+                                                        context: context,
+                                                        builder: (context) => SafeArea(
+                                                          top: false,
+                                                          child: Column(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: <Widget>[
+                                                              ListTile(
+                                                                title: const Text('Report'),
+                                                                leading: const Icon(Icons.edit),
+                                                                onTap: (){
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: widget.postId, reportType: 'Post')));
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -1404,15 +1362,15 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: controller,
-                        cursorColor: const Color(0xff000000),
-                        maxLines: 2,
-                        keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                        cursorColor: const Color(0xff000000),
+                        keyboardType: TextInputType.text,
+                        maxLines: 2,
                         decoration: InputDecoration(
-                          fillColor: const Color(0xffBDC3C7),
                           filled: true,
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                           labelText: 'Say something...',
+                          fillColor: const Color(0xffBDC3C7),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
                           labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                           border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                           focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
@@ -1427,12 +1385,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                            entryAnimation: EntryAnimation.DEFAULT,
                             description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            onlyOkButton: true,
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
+                            onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
@@ -1513,10 +1471,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                   decoration: InputDecoration(
-                    fillColor: const Color(0xffBDC3C7),
                     filled: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelText: 'Say something...',
+                    fillColor: const Color(0xffBDC3C7),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                     border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                     focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
@@ -1531,12 +1489,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                      onlyOkButton: true,
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: const Color(0xffff0000),
+                      onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
                       },
@@ -1627,10 +1585,10 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                   decoration: InputDecoration(
-                    fillColor: const Color(0xffBDC3C7),
                     filled: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelText: 'Say something...',
+                    fillColor: const Color(0xffBDC3C7),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                     border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
                     focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffBDC3C7),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
@@ -1645,12 +1603,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                      onlyOkButton: true,
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: const Color(0xffff0000),
+                      onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
                       },

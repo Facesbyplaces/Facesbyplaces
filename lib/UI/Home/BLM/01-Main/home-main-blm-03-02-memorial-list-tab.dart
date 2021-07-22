@@ -120,10 +120,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         height: 80,
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         color: const Color(0xffeeeeee),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text('My Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-        ),
+        child: Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
       ),
     );
   }
@@ -274,10 +271,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
             itemCount: finalMemorials.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => finalMemorials[i],
           ),
         )

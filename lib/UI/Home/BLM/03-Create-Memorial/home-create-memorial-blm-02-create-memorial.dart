@@ -203,10 +203,10 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   shareStory1(){
     return TextFormField(
       controller: controllerStory,
-      cursorColor: Color(0xff000000),
-      maxLines: 10,
       keyboardType: TextInputType.text,
+      cursorColor: Color(0xff000000),
       readOnly: false,
+      maxLines: 10,
       style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),), borderRadius: BorderRadius.all(Radius.circular(10)),),
@@ -291,11 +291,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
               Positioned(
                 right: 0,
                 child: IconButton(
+                  icon: CircleAvatar(backgroundColor: Color(0xff000000), child: Icon(Icons.close, color: Color(0xffffffff),),),
                   iconSize: 25,
-                  icon: CircleAvatar(
-                    backgroundColor: Color(0xff000000),
-                    child: Icon(Icons.close, color: Color(0xffffffff),),
-                  ),
                   onPressed: (){
                     videoFile.value = File('');
                   },

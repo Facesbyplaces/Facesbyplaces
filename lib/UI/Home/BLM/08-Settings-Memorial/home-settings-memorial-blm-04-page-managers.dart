@@ -65,7 +65,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
   }
 
   Future<void> onRefresh() async{
-    if (adminItemsRemaining == 0 && flag1 == false) {
+    if(adminItemsRemaining == 0 && flag1 == false){
       setState((){
         flag1 = true;
       });
@@ -107,15 +107,13 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
-            onOkButtonPressed: () {
+            onlyOkButton: true,
+            onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
             },
@@ -127,7 +125,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
       adminItemsRemaining = newValue.blmAdminItemsRemaining;
 
-      for (int i = 0; i < newValue.blmAdminList.length; i++) {
+      for(int i = 0; i < newValue.blmAdminList.length; i++){
         managers.add(
           ListTile(
             leading: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage != ''
@@ -156,24 +154,22 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
               ),
             ),
             trailing: MaterialButton(
-              minWidth: SizeConfig.screenWidth! / 3.5,
-              padding: EdgeInsets.zero,
-              textColor: const Color(0xffffffff),
-              splashColor: const Color(0xff04ECFF),
               child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              height: 40,
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C),),),
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              splashColor: const Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
               color: const Color(0xffE74C3C),
+              padding: EdgeInsets.zero,
+              height: 40,
               onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    description: Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                     title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Are you sure you want to remove this user?',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
                       Navigator.pop(context, true);
@@ -193,12 +189,12 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error',textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                        onlyOkButton: true,
+                        title: Text('Error',textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
+                        onlyOkButton: true,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
@@ -208,10 +204,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
                         onOkButtonPressed: (){
                           managers = [];
@@ -248,7 +244,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
   }
 
   void onLoading2() async{
-    if (familyItemsRemaining != 0) {
+    if(familyItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMShowAdminSettings(memorialId: widget.memorialId, page: page2);
       context.loaderOverlay.hide();
@@ -284,22 +280,22 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
               ),
             ),
             trailing: MaterialButton(
-              minWidth: SizeConfig.screenWidth! / 3.5,
-              padding: EdgeInsets.zero,
-              textColor: const Color(0xffffffff),
-              splashColor: const Color(0xff04ECFF),
               child: Text('Make Manager', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.2, fontFamily: 'NexaRegular'),),
-              height: 40,
-              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF)),),
+              shape: const StadiumBorder(side: const BorderSide(color: const Color(0xff04ECFF),),),
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              splashColor: const Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
               color: const Color(0xff04ECFF),
+              padding: EdgeInsets.zero,
+              height: 40,
               onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                    entryAnimation: EntryAnimation.DEFAULT,
                     description: Text('Are you sure you want to make this user a manager?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
                       Navigator.pop(context, true);
@@ -319,12 +315,12 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                        onlyOkButton: true,
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
+                        onlyOkButton: true,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
@@ -334,10 +330,10 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
                         onOkButtonPressed: (){
                           managers = [];
@@ -376,6 +372,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
         title: Row(
           children: [
             Text('Page Managers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
             Spacer(),
           ],
         ),
@@ -394,11 +391,11 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
-            itemCount: managers.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => managers[i],
+            itemCount: managers.length,
           ),
         )
         : SingleChildScrollView(

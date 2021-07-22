@@ -214,7 +214,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Stack(
                                         children: [
-
                                           Container(
                                             height: SizeConfig.screenHeight! / 3,
                                             width: SizeConfig.screenWidth,
@@ -239,10 +238,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 onTap: (){
                                                   showGeneralDialog(
                                                     context: context,
+                                                    transitionDuration: const Duration(milliseconds: 0),
                                                     barrierDismissible: true,
                                                     barrierLabel: 'Dialog',
-                                                    transitionDuration: const Duration(milliseconds: 0),
-                                                    pageBuilder: (_, __, ___) {
+                                                    pageBuilder: (_, __, ___){
                                                       return Scaffold(
                                                         backgroundColor: Colors.black12.withOpacity(0.7),
                                                         body: SizedBox.expand(
@@ -337,7 +336,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               transitionDuration: const Duration(milliseconds: 0),
                                                               barrierDismissible: true,
                                                               barrierLabel: 'Dialog',
-                                                              pageBuilder: (_, __, ___) {
+                                                              pageBuilder: (_, __, ___){
                                                                 return Scaffold(
                                                                   backgroundColor: Colors.black12.withOpacity(0.7),
                                                                   body: SizedBox.expand(
@@ -880,9 +879,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                     onTap: (){
                                                       showGeneralDialog(
                                                         context: context,
+                                                        transitionDuration: const Duration(milliseconds: 0),
                                                         barrierDismissible: true,
                                                         barrierLabel: 'Dialog',
-                                                        transitionDuration: const Duration(milliseconds: 0),
                                                         pageBuilder: (_, __, ___) {
                                                           return Scaffold(
                                                             backgroundColor: Colors.black12.withOpacity(0.7),
@@ -891,8 +890,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                 child: Column(
                                                                   children: [
                                                                     Container(
-                                                                      alignment: Alignment.centerRight,
                                                                       padding: const EdgeInsets.only(right: 20.0),
+                                                                      alignment: Alignment.centerRight,
                                                                       child: GestureDetector(
                                                                         child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                         onTap: (){

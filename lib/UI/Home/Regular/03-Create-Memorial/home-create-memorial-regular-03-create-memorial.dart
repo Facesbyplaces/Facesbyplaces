@@ -202,17 +202,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                 );
                               }else{
                                 return GestureDetector(
-                                  onTap: () async{
-                                    final ByteData bytes = await rootBundle.load(backgroundImages[index]);
-                                    final Uint8List list = bytes.buffer.asUint8List();
-
-                                    final tempDir = await getTemporaryDirectory();
-                                    final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
-                                    file.writeAsBytesSync(list);
-
-                                    backgroundImageToggle.value = index;
-                                    backgroundImage.value = file;
-                                  },
                                   child: backgroundImageToggleListener == index
                                   ? Container(
                                     padding: const EdgeInsets.all(5),
@@ -236,6 +225,17 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                                       width: 100,
                                     ),
                                   ),
+                                  onTap: () async{
+                                    final ByteData bytes = await rootBundle.load(backgroundImages[index]);
+                                    final Uint8List list = bytes.buffer.asUint8List();
+
+                                    final tempDir = await getTemporaryDirectory();
+                                    final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
+                                    file.writeAsBytesSync(list);
+
+                                    backgroundImageToggle.value = index;
+                                    backgroundImage.value = file;
+                                  },
                                 );
                               }
                             }());

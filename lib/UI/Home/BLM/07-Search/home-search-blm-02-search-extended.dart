@@ -421,10 +421,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                   child: Container(
                     height: SizeConfig.screenHeight,
                     width: SizeConfig.screenWidth,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
-                    ),
+                    decoration: BoxDecoration(color: Colors.white, image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
                     child: Stack(
                       children: [
                         SingleChildScrollView(physics: const NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),),
@@ -500,8 +497,20 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         ),
                                         Expanded(
                                           child: TextFormField(
-                                            keyboardType: TextInputType.text,
                                             controller: controller,
+                                            keyboardType: TextInputType.text,
+                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                            decoration: InputDecoration(
+                                              contentPadding: const EdgeInsets.all(15.0),
+                                              filled: true,
+                                              fillColor: const Color(0xffffffff),
+                                              focusColor: const Color(0xffffffff),
+                                              hintText: 'Search Memorial',
+                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
+                                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                            ),
                                             onChanged: (search){
                                               if(search == ''){
                                                 onSearch.value = false;
@@ -553,18 +562,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                                 }
                                               }
                                             },
-                                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                            decoration: InputDecoration(
-                                              contentPadding: const EdgeInsets.all(15.0),
-                                              filled: true,
-                                              fillColor: const Color(0xffffffff),
-                                              focusColor: const Color(0xffffffff),
-                                              hintText: 'Search Memorial',
-                                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25),),),
-                                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                            ),
                                           ),
                                         )
                                       ],
@@ -578,16 +575,25 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             IgnorePointer(
                               ignoring: isGuestLoggedInListener,
                               child: Container(
+                                color: const Color(0xffffffff),
                                 alignment: Alignment.center,
                                 height: 55,
-                                color: const Color(0xffffffff),
                                 child: DefaultTabController(
                                   length: 4,
                                   child: TabBar(
-                                    isScrollable: true,
-                                    labelColor: const Color(0xff04ECFF),
                                     unselectedLabelColor: const Color(0xff000000),
                                     indicatorColor: const Color(0xff04ECFF),
+                                    labelColor: const Color(0xff04ECFF),
+                                    isScrollable: true,
+                                    tabs: [
+                                      Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('Suggested', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('Nearby', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+
+                                      Center(child: Text('BLM', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
+                                    ],
                                     onTap: (int number){
                                       toggle.value = number;
                                       searchFeeds = [];
@@ -629,15 +635,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         onSearch.value = true;
                                       }
                                     },
-                                    tabs: [
-                                      Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-
-                                      Center(child: Text('Suggested', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-
-                                      Center(child: Text('Nearby', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-
-                                      Center(child: Text('BLM', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular'),),),
-                                    ],
                                   ),
                                 ),
                               ),
@@ -739,10 +736,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           child: onSearchListener != true
           ? ListView.separated(
             controller: scrollController1,
-            padding: const EdgeInsets.all(10.0),
-            physics: const ClampingScrollPhysics(),
-            itemCount: feeds.length,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.all(10.0),
+            itemCount: feeds.length,
             itemBuilder: (c, i) {
               return feeds[i].pageType == 'Blm'
               ? MiscBLMPost(
@@ -795,14 +792,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             }
                           }else if(feeds[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 2,
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -821,14 +818,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) => ((){
                                 if(index != 1){
                                   return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
@@ -868,13 +865,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -896,13 +887,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -989,14 +974,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             }
                           }else if(feeds[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 2,
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -1015,14 +1000,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) => ((){
                                 if(index != 1){
                                   return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
@@ -1062,13 +1047,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -1090,13 +1069,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${feeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${feeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -1193,14 +1166,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             }
                           }else if(searchFeeds[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 2,
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -1219,14 +1192,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) => ((){
                                 if(index != 1){
                                   return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
@@ -1266,13 +1239,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -1294,13 +1261,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -1387,14 +1348,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             }
                           }else if(searchFeeds[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 2,
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${searchFeeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -1413,14 +1374,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) => ((){
                                 if(index != 1){
                                   return lookupMimeType(searchFeeds[i].imagesOrVideos[index])?.contains('video') == true
@@ -1460,13 +1421,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor:const  Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -1488,13 +1443,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${searchFeeds[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -1569,10 +1518,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           child: onSearchListener != true
           ? ListView.separated(
             controller: scrollController2,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
             itemCount: suggested.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => MiscBLMManageMemorialTab(
               index: i,
               memorialName: suggested[i].memorialName,
@@ -1588,10 +1537,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           )
           : ListView.separated(
             controller: scrollController2,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
             itemCount: searchSuggested.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => MiscBLMManageMemorialTab(
               index: i,
               memorialName: searchSuggested[i].memorialName,
@@ -1641,10 +1590,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         child: onSearchListener != true
         ? ListView.separated(
           controller: scrollController3,
+          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
           physics: const ClampingScrollPhysics(),
           itemCount: nearby.length,
-          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i) => MiscBLMManageMemorialTab(
             index: i,
             memorialName: nearby[i].memorialName,
@@ -1660,10 +1609,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         )
         : ListView.separated(
           controller: scrollController3,
+          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
           physics: const ClampingScrollPhysics(),
           itemCount: searchNearby.length,
-          separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
           itemBuilder: (c, i) => MiscBLMManageMemorialTab(
             index: i,
             memorialName: searchNearby[i].memorialName,
@@ -1713,10 +1662,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           child: onSearchListener != true
           ? ListView.separated(
             controller: scrollController3,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
             itemCount: blm.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => MiscBLMManageMemorialTab(
               index: i,
               memorialName: blm[i].memorialName,
@@ -1732,10 +1681,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           )
           : ListView.separated(
             controller: scrollController3,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
             itemCount: searchBlm.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => MiscBLMManageMemorialTab(
               index: i,
               memorialName: searchBlm[i].memorialName,

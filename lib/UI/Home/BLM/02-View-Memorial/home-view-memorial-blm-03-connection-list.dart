@@ -149,9 +149,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
             title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
             onlyOkButton: true,
@@ -194,9 +194,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
             title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
             onlyOkButton: true,

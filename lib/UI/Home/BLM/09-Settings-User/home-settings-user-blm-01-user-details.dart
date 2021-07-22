@@ -70,9 +70,9 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
               panelMaxSize: SizeConfig.screenHeight! / 1.5,
               backgroundColor: const Color(0xffECF0F1),
               panel: Container(
-                height: SizeConfig.screenHeight! / 1.5,
-                padding: const EdgeInsets.only(left: 50.0, right: 50.0),
                 decoration: const BoxDecoration(color: const Color(0xffffffff), borderRadius: const BorderRadius.only(topLeft: const Radius.circular(50.0),),),
+                padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                height: SizeConfig.screenHeight! / 1.5,
                 child: Column(
                   children: [
                     Expanded(child: Container(),),
@@ -114,9 +114,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         });
                         context.loaderOverlay.hide();
 
-                        print('The value of socialAppSession is $socialAppSession');
-                        print('The value of checkAccount is $checkAccount');
-
                         if(socialAppSession == true && checkAccount == false){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserChangePassword(userId: widget.userId, isAddPassword: true,)));
                         }else{
@@ -134,12 +131,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         context.loaderOverlay.show();
                         APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: widget.userId);
                         context.loaderOverlay.hide();
-
-                        print('The birthdate is ${result.showOtherDetailsStatusHideBirthdate}');
-                        print('The birth place is ${result.showOtherDetailsStatusHideBirthplace}');
-                        print('The address is ${result.showOtherDetailsStatusHideAddress}');
-                        print('The email is ${result.showOtherDetailsStatusHideEmail}');
-                        print('The phone number is ${result.showOtherDetailsStatusHidePhoneNumber}');
 
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: widget.userId, toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, toggleAddress: result.showOtherDetailsStatusHideAddress, toggleEmail: result.showOtherDetailsStatusHideEmail, toggleNumber: result.showOtherDetailsStatusHidePhoneNumber,),),);
                       },
@@ -164,9 +155,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                       width: SizeConfig.screenWidth! / 2,
                       height: 45,
                       onPressed: () async{
-                        bool logoutResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
-
-                        print('The logoutResult is $logoutResult');
+                        bool logoutResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),),);
 
                         if(logoutResult){
                           context.loaderOverlay.show();

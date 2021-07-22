@@ -12,7 +12,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMPageDetails extends StatefulWidget {
+class HomeBLMPageDetails extends StatefulWidget{
   final int memorialId;
   const HomeBLMPageDetails({required this.memorialId});
 
@@ -39,7 +39,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
     futureMemorialSettings = getMemorialSettings(widget.memorialId);
   }
 
-  Future<APIBLMShowPageDetailsMain> getMemorialSettings(int memorialId) async {
+  Future<APIBLMShowPageDetailsMain> getMemorialSettings(int memorialId) async{
     var newValue = await apiBLMShowPageDetails(memorialId: memorialId);
     controller1 = TextEditingController(text: newValue.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob);
     controller2 = TextEditingController(text: newValue.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip);
@@ -47,16 +47,16 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
     return WillPopScope(
-      onWillPop: () async {
+      onWillPop: () async{
         return Navigator.canPop(context);
       },
       child: GestureDetector(
-        onTap: () {
+        onTap: (){
           FocusNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
+          if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
           }
         },
@@ -65,15 +65,9 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
             backgroundColor: const Color(0xff04ECFF),
             title: Row(
               children: [
-                Text(
-                  'Page Details',
-                  style: TextStyle(
-                    fontSize: SizeConfig.blockSizeVertical! * 3.16,
-                    fontFamily: 'NexaRegular',
-                    color: const Color(0xffffffff),
-                  ),
-                ),
-                Spacer()
+                Text('Page Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
+                Spacer(),
               ],
             ),
             centerTitle: true,
@@ -87,8 +81,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
           body: SafeArea(
             child: FutureBuilder<APIBLMShowPageDetailsMain>(
               future: futureMemorialSettings,
-              builder: (context, memorialSettings) {
-                if (memorialSettings.hasData) {
+              builder: (context, memorialSettings){
+                if(memorialSettings.hasData){
                   return Stack(
                     children: [
                       Container(
@@ -131,48 +125,56 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             TextFormField(
                               controller: controller1,
-                              keyboardType: TextInputType.text,
                               cursorColor: const Color(0xff000000),
+                              keyboardType: TextInputType.text,
                               readOnly: true,
-                              onTap: () {
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                              decoration: InputDecoration(
+                                labelText: 'DOB',
+                                alignLabelWithHint: true,
+                                focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                                labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              ),
+                              onTap: (){
                                 DatePicker.showDatePicker(
                                   context,
+                                  currentTime: DateTime.now(),
                                   showTitleActions: true,
+                                  locale: LocaleType.en,
                                   minTime: dob,
                                   maxTime: rip,
-                                  currentTime: DateTime.now(),
-                                  onConfirm: (date) {
+                                  onConfirm: (date){
                                     String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
                                     dob = date;
                                     controller1.text = format;
                                   },
-                                  locale: LocaleType.en,
+                                  
                                 );
                               },
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                              decoration: InputDecoration(
-                                alignLabelWithHint: true,
-                                labelText: 'DOB',
-                                labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
-                                focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                              ),
                             ),
 
                             const SizedBox(height: 20,),
 
                             TextFormField(
                               controller: controller2,
-                              keyboardType: TextInputType.text,
                               cursorColor: const Color(0xff000000),
+                              keyboardType: TextInputType.text,
                               readOnly: true,
-                              onTap: () {
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                              decoration: InputDecoration(
+                                labelText: 'RIP',
+                                alignLabelWithHint: true,
+                                focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                                labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
+                              ),
+                              onTap: (){
                                 DatePicker.showDatePicker(
                                   context,
                                   showTitleActions: true,
                                   minTime: dob,
                                   maxTime: DateTime.now(),
                                   currentTime: DateTime.now(),
-                                  onConfirm: (date) {
+                                  onConfirm: (date){
                                     String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
                                     rip = date;
                                     controller2.text = format;
@@ -180,13 +182,6 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                   locale: LocaleType.en,
                                 );
                               },
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                              decoration: InputDecoration(
-                                alignLabelWithHint: true,
-                                labelText: 'RIP',
-                                labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
-                                focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                              ),
                             ),
                             
                             const SizedBox(height: 20,),
@@ -221,9 +216,9 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                             MiscBLMButtonTemplate(
                               buttonText: 'Update',
                               buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                              buttonColor: const Color(0xff04ECFF),
                               width: 150,
                               height: 45,
-                              buttonColor: const Color(0xff04ECFF),
                               onPressed: () async{
                                 if(memorialSettings.data!.blmMemorial.showPageDetailsName != _key1.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription != _key2.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob != controller1.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip != controller2.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text || memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text){
                                   bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),),);
@@ -237,10 +232,10 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) =>  AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
                                           description: Text('Successfully updated the account details.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          entryAnimation: EntryAnimation.DEFAULT,
                                           onlyOkButton: true,
                                           onOkButtonPressed: (){
                                             Navigator.pop(context, true);
@@ -255,12 +250,12 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
                                           description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                          onlyOkButton: true,
+                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          entryAnimation: EntryAnimation.DEFAULT,
                                           buttonOkColor: const Color(0xffff0000),
+                                          onlyOkButton: true,
                                           onOkButtonPressed: (){
                                             Navigator.pop(context, true);
                                           },
@@ -281,12 +276,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                 }else if(memorialSettings.hasError){
                   return Container(
                     height: SizeConfig.screenHeight,
-                    child: const Center(
-                      child: const Text('Something went wrong. Please try again.',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),
-                      ),
-                    ),
+                    child: const Center(child: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: const Color(0xff000000),),),),
                   );
                 }else{
                   return Container(

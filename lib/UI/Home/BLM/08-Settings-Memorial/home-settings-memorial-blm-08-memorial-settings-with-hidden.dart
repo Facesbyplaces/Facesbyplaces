@@ -42,33 +42,18 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
             child: DefaultTabController(
               length: 2,
               child: TabBar(
-                labelColor: const Color(0xff04ECFF),
                 unselectedLabelColor: const Color(0xff000000),
                 indicatorColor: const Color(0xff04ECFF),
+                labelColor: const Color(0xff04ECFF),
                 onTap: (int index){
                   setState(() {
                     toggle = index;
                   });
                 },
                 tabs: [
+                  const Center(child: const Text('Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
 
-                  const Center(
-                    child: const Text('Page',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-
-                  const Center(
-                    child: const Text('Privacy',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
+                  const Center(child: const Text('Privacy', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
                 ],
               ),
             ),
@@ -93,7 +78,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
     return ListView(
       physics: const ClampingScrollPhysics(),
       children: [
-
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
           title: const Text('Page Details', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
@@ -148,12 +132,11 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
               if(result == true){
                 await showDialog(
                   context: context,
-                  builder: (_) => 
-                    AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Success', textAlign: TextAlign.center,  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                    entryAnimation: EntryAnimation.DEFAULT,
+                  builder: (_) => AssetGiffyDialog(
                     description: Text('Successfully updated the relationship setting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                    title: Text('Success', textAlign: TextAlign.center,  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: true,
                     onOkButtonPressed: (){
                       Navigator.pop(context, true);
@@ -163,14 +146,13 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
               }else{
                 await showDialog(
                   context: context,
-                  builder: (_) => 
-                    AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                    entryAnimation: EntryAnimation.DEFAULT,
+                  builder: (_) => AssetGiffyDialog(
                     description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                    onlyOkButton: true,
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
                     buttonOkColor: const Color(0xffff0000),
+                    onlyOkButton: true,
                     onOkButtonPressed: (){
                       Navigator.pop(context, true);
                     },
@@ -201,14 +183,13 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
               }else{
                 await showDialog(
                   context: context,
-                  builder: (_) => 
-                    AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                    entryAnimation: EntryAnimation.DEFAULT,
+                  builder: (_) => AssetGiffyDialog(
                     description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                    onlyOkButton: true,
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
                     buttonOkColor: const Color(0xffff0000),
+                    onlyOkButton: true,
                     onOkButtonPressed: (){
                       Navigator.pop(context, true);
                     },
@@ -248,7 +229,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
     return ListView(
       physics: const ClampingScrollPhysics(),
       children: [
-
         const ListTile(
           tileColor: const Color(0xffaaaaaa),
           title: const Text('Customize shown info', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),

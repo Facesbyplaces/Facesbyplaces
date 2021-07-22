@@ -151,12 +151,12 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                                     MaterialButton(
                                       minWidth: 0,
+                                      child: Icon(Icons.close, color: Colors.grey,),
+                                      shape: CircleBorder(),
                                       color: Colors.white,
                                       onPressed: (){
                                         Navigator.pop(context);
                                       },
-                                      child: Icon(Icons.close, color: Colors.grey,),
-                                      shape: CircleBorder()
                                     ),
 
                                     SizedBox(height: 10,),
@@ -172,11 +172,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (BuildContext context, int index){
                                           return Container(
+                                            decoration: BoxDecoration(color: paymentToggle == index ? Colors.green : Colors.white, borderRadius: BorderRadius.circular(10)),
                                             padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                              color: paymentToggle == index ? Colors.green : Colors.white,
-                                              borderRadius: BorderRadius.circular(10)
-                                            ),
                                             child: MaterialButton(
                                               height: 80,
                                               minWidth: 120,
@@ -190,7 +187,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                 print('The index is $index');
                                                 print('The paymentToggle is $paymentToggle');
                                               },
-                                              // child: index == 0 ? Icon(Icons.credit_card_rounded, color: Colors.black) : donateWithApple,
                                               child: ((){
                                                 if(index == 0){
                                                   return Icon(Icons.credit_card_rounded, color: Colors.black);
@@ -216,10 +212,11 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                       child: ((){
                                         if(paymentToggle == 0){
                                           return MaterialButton(
-                                            minWidth: 0,
+                                            child: Icon(Icons.arrow_forward_rounded, color: Colors.white,),
+                                            shape: CircleBorder(),
                                             color: Colors.black,
+                                            minWidth: 0,
                                             onPressed: () async{
-
                                               await showMaterialModalBottomSheet(
                                                 context: context,
                                                 builder: (context) => Container(
@@ -229,10 +226,10 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                       Align(
                                                         alignment: Alignment.centerLeft,
                                                         child: IconButton(
+                                                          icon: Icon(Icons.arrow_back),
                                                           onPressed: (){
                                                             Navigator.pop(context);
                                                           },
-                                                          icon: Icon(Icons.arrow_back),
                                                         ),
                                                       ),
 
@@ -254,9 +251,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                         buttonText: 'Send Gift',
                                                         height: 45,
                                                         onPressed: () async{
-
                                                           if(newCard != null){
-
                                                             context.loaderOverlay.show();
 
                                                             PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
@@ -280,7 +275,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                               );
                                                               throw Exception('$error');
                                                             });
-
 
                                                             print('The payment method id is $paymentMethod');
                                                             print('The payment method id is ${paymentMethod.id}');
@@ -385,10 +379,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                   ),
                                                 ),
                                               );
-
                                             },
-                                            child: Icon(Icons.arrow_forward_rounded, color: Colors.white,),
-                                            shape: CircleBorder()
                                           );
                                         }else if(Platform.isIOS){
                                           return pay.RawApplePayButton(
@@ -553,8 +544,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                   context: context,
                                                   builder: (_) => AssetGiffyDialog(
                                                     title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                                    description: Text('Error: $e', textAlign: TextAlign.center,),
                                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    description: Text('Error: $e', textAlign: TextAlign.center,),
                                                     entryAnimation: EntryAnimation.DEFAULT,
                                                     buttonOkColor: const Color(0xffff0000),
                                                     onlyOkButton: true,

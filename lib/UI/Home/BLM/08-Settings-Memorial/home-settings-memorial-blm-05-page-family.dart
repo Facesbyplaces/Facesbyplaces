@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMPageFamily extends StatefulWidget {
+class HomeBLMPageFamily extends StatefulWidget{
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
@@ -60,14 +60,12 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -119,10 +117,10 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                    entryAnimation: EntryAnimation.DEFAULT,
                     description: Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
                       Navigator.pop(context, true);
@@ -142,12 +140,12 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                        onlyOkButton: true,
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         buttonOkColor: const Color(0xffff0000),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        onlyOkButton: true,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
@@ -157,10 +155,10 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),                          ),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
                         onOkButtonPressed: (){
                           family = [];
@@ -195,6 +193,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
         title: Row(
           children: [
             Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
             Spacer(),
           ],
         ),
@@ -221,11 +220,11 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
-            itemCount: family.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => family[i],
+            itemCount: family.length,
           ),
         )
         : SingleChildScrollView(

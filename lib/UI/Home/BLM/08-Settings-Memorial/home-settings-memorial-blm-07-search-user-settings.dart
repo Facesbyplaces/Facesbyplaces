@@ -10,7 +10,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class BLMSearchUsers {
+class BLMSearchUsers{
   final int userId;
   final String firstName;
   final String lastName;
@@ -20,7 +20,7 @@ class BLMSearchUsers {
   const BLMSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
 }
 
-class HomeBLMSearchUser extends StatefulWidget {
+class HomeBLMSearchUser extends StatefulWidget{
   final bool isFamily;
   final int memorialId;
   final String memorialName;
@@ -33,7 +33,7 @@ class HomeBLMSearchUser extends StatefulWidget {
   HomeBLMSearchUserState createState() => HomeBLMSearchUserState();
 }
 
-class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
+class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
   List<BLMSearchUsers> users = [];
@@ -71,21 +71,19 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
   }
 
   void onLoading() async{
-    if (itemRemaining != 0){
+    if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMSearchUsers(keywords: keywords, page: page).onError((error, stackTrace){
         context.loaderOverlay.hide();
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -98,7 +96,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
 
       itemRemaining = newValue.blmItemsRemaining;
 
-      for (int i = 0; i < newValue.blmUsers.length; i++) {
+      for(int i = 0; i < newValue.blmUsers.length; i++){
         users.add(
           BLMSearchUsers(
             userId: newValue.blmUsers[i].searchUsersUserId,
@@ -174,8 +172,20 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                             ),
                             Expanded(
                               child: TextFormField(
-                                keyboardType: TextInputType.text,
                                 controller: controller,
+                                keyboardType: TextInputType.text,
+                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.all(15.0),
+                                  filled: true,
+                                  fillColor: const Color(0xffffffff),
+                                  focusColor: const Color(0xffffffff),
+                                  hintText: 'Search User',
+                                  hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                  border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                ),
                                 onChanged: (newPlaces){
                                   setState((){
                                     keywords = newPlaces;
@@ -204,18 +214,6 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                                     onLoading();
                                   }
                                 },
-                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(15.0),
-                                  filled: true,
-                                  fillColor: const Color(0xffffffff),
-                                  focusColor: const Color(0xffffffff),
-                                  hintText: 'Search User',
-                                  hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                  border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                ),
                               ),
                             )
                           ],
@@ -259,11 +257,22 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                 onRefresh: onRefresh,
                 child: ListView.separated(
                   controller: scrollController,
+                  separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
                   physics: const ClampingScrollPhysics(),
                   itemCount: users.length,
-                  separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
                   itemBuilder: (c, index) => ListTile(
+                    leading: users[index].image != ''
+                    ? CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: NetworkImage('${users[index].image}'),
+                    )
+                    : const CircleAvatar(
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                    ),
+                    title: Text('${users[index].firstName} ${users[index].lastName}'),
+                    subtitle: Text('${users[index].email}',),
                     onTap: () async{
                       if(widget.isFamily){
                         String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
@@ -277,12 +286,12 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                onlyOkButton: true,
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
+                                onlyOkButton: true,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },
@@ -301,14 +310,12 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                              onlyOkButton: true,
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
@@ -319,18 +326,6 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser> {
                         }
                       }
                     },
-                    leading: users[index].image != ''
-                    ? CircleAvatar(
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: NetworkImage('${users[index].image}'),
-                    )
-                    : const CircleAvatar(
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                    ),
-                    title: Text('${users[index].firstName} ${users[index].lastName}'),
-                    subtitle: Text('${users[index].email}',
-                    ),
                   ),
                 ),
               ),

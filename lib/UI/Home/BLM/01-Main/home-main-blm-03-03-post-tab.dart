@@ -151,8 +151,8 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
-            padding: const EdgeInsets.all(10.0),
             physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.all(10.0),
             itemCount: countListener,
             separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) {
@@ -233,13 +233,13 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                           }else{
                             return StaggeredGridView.countBuilder(
                               padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) =>
                               ((){
                                 if(index != 1){
@@ -280,13 +280,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${posts[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],
@@ -308,13 +302,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                                               child: CircleAvatar(
                                                 radius: 25,
                                                 backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                child: Text('${posts[i].imagesOrVideos.length - 3}',
-                                                  style: const TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: const Color(0xffffffff),
-                                                  ),
-                                                ),
+                                                child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                               ),
                                             ),
                                           ],

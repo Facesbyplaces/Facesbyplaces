@@ -103,7 +103,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                             child: MiscBLMInputFieldDateTimeTemplate(
                               key: _key1,
                               labelText: 'Birthdate',
-                              displayText: details.data!.blmShowOtherDetailsBirthdate,
+                              displayText: details.data!.blmShowOtherDetailsBirthdate.substring(0, details.data!.blmShowOtherDetailsBirthdate.indexOf('T'),),
                             ),
                           ),
 

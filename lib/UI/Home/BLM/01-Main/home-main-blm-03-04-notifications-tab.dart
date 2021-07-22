@@ -98,9 +98,9 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             physics: const ClampingScrollPhysics(),
             itemCount: countListener,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => notifications[i],
           ),
         )

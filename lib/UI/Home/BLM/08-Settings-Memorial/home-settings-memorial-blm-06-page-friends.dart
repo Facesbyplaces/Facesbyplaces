@@ -60,14 +60,12 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
               Navigator.pop(context, true);
@@ -107,24 +105,22 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
               ),
             ),
             trailing: MaterialButton(
-              minWidth: SizeConfig.screenWidth! / 3.5,
-              padding: EdgeInsets.zero,
-              textColor: const Color(0xffffffff),
-              splashColor: const Color(0xff04ECFF),
               child: Text('Remove', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'HelveticaRegular', color: const Color(0xffffffff),),),
-              height: 40,
               shape: const StadiumBorder(side: const BorderSide(color: const Color(0xffE74C3C)),),
+              minWidth: SizeConfig.screenWidth! / 3.5,
+              splashColor: const Color(0xff04ECFF),
+              textColor: const Color(0xffffffff),
               color: const Color(0xffE74C3C),
-              onPressed: () async {
+              padding: EdgeInsets.zero,
+              height: 40,
+              onPressed: () async{
                 bool confirmation = await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
+                    description: Text('Are you sure you want to remove this user?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                    title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Confirm',
-                    textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                     entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Are you sure you want to remove this user?',
-                    textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                     onlyOkButton: false,
                     onOkButtonPressed: () async{
                       Navigator.pop(context, true);
@@ -144,12 +140,12 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                        onlyOkButton: true,
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         buttonOkColor: const Color(0xffff0000),
+                        onlyOkButton: true,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
                         },
@@ -159,10 +155,10 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                     await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Successfully removed the user from the list.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: true,
                         onOkButtonPressed: (){
                           friends = [];
@@ -197,6 +193,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
         title: Row(
           children: [
             Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
             Spacer(),
           ],
         ),
@@ -223,11 +220,11 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             physics: const ClampingScrollPhysics(),
-            itemCount: friends.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             itemBuilder: (c, i) => friends[i],
+            itemCount: friends.length,
           ),
         )
         : SingleChildScrollView(

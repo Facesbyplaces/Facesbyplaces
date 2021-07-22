@@ -91,8 +91,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                     TextFormField(
                       controller: controller1,
-                      keyboardType: TextInputType.text,
                       cursorColor: const Color(0xff000000),
+                      keyboardType: TextInputType.text,
                       readOnly: true,
                       decoration: InputDecoration(
                         labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
@@ -110,11 +110,11 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       onTap: () {
                         DatePicker.showDatePicker(
                           context,
+                          currentTime: DateTime.now(),
                           showTitleActions: true,
+                          locale: LocaleType.en,
                           minTime: dob,
                           maxTime: rip,
-                          currentTime: DateTime.now(),
-                          locale: LocaleType.en,
                           onConfirm: (date){
                             String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
                             dob = date;

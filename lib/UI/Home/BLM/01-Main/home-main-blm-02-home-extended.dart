@@ -343,6 +343,20 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                 children: [
                                   const SizedBox(height: 20),
                                   GestureDetector(
+                                    child: manageDrawer.data!.showProfileInformationImage != ''
+                                    ? Container(
+                                      decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.white, width: 3,),),
+                                      child: CircleAvatar(
+                                        radius: 100,
+                                        backgroundColor: const Color(0xff888888),
+                                        foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                                      ),
+                                    )
+                                    : const CircleAvatar(
+                                      radius: 100,
+                                      backgroundColor: const Color(0xff888888),
+                                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                    ),
                                     onTap: (){
                                       showGeneralDialog(
                                         context: context,
@@ -391,20 +405,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                         },
                                       );
                                     },
-                                    child: manageDrawer.data!.showProfileInformationImage != ''
-                                    ? Container(
-                                      decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.white, width: 3,),),
-                                      child: CircleAvatar(
-                                        radius: 100,
-                                        backgroundColor: const Color(0xff888888),
-                                        foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
-                                      ),
-                                    )
-                                    : const CircleAvatar(
-                                      radius: 100,
-                                      backgroundColor: const Color(0xff888888),
-                                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                    ),
                                   ),
 
                                   const SizedBox(height: 20),

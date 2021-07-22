@@ -38,11 +38,7 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
               width: SizeConfig.screenWidth,
               decoration: BoxDecoration(
                 color: Colors.white,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/icons/background2.png'),
-                  colorFilter: ColorFilter.srgbToLinearGamma(),
-                ),
+                image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
               ),
               child: SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
@@ -55,7 +51,9 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                       child: Row(
                         children: [
                           Align(alignment: Alignment.centerLeft, child: IconButton(icon:  Icon(Icons.arrow_back, color: const Color(0xffffffff),size: SizeConfig.blockSizeVertical! * 3.52,), onPressed: (){Navigator.pop(context);},),),
+
                           Spacer(),
+
                           Container(
                             decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
                             width: SizeConfig.blockSizeHorizontal! * 79.06,
@@ -83,10 +81,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                                       bool confirmation = await showDialog(
                                         context: context,
                                         builder: (_) => AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
                                           description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                          title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          entryAnimation: EntryAnimation.DEFAULT,
                                           onlyOkButton: false,
                                           onOkButtonPressed: (){
                                             Navigator.pop(context, true);
@@ -150,10 +148,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                                         bool confirmation = await showDialog(
                                           context: context,
                                           builder: (_) => AssetGiffyDialog(
-                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                            title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                            entryAnimation: EntryAnimation.DEFAULT,
                                             description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                            title: const Text('Confirm', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            entryAnimation: EntryAnimation.DEFAULT,
                                             onlyOkButton: false,
                                             onOkButtonPressed: (){
                                               Navigator.pop(context, true);
@@ -192,12 +190,12 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                                     },
                                     style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                                     decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.all(15.0),
-                                      filled: true,
-                                      fillColor: const Color(0xffffffff),
-                                      focusColor: const Color(0xffffffff),
                                       hintText: 'Search a Memorial',
                                       hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                      contentPadding: const EdgeInsets.all(15.0),
+                                      focusColor: const Color(0xffffffff),
+                                      fillColor: const Color(0xffffffff),
+                                      filled: true,
                                       border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                       enabledBorder:  const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                                       focusedBorder:  const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),

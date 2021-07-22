@@ -210,6 +210,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   Column(
                                     children: [
                                       GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                                        child: Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
                                         onTap: (){
                                           showGeneralDialog(
                                             context: context,
@@ -258,7 +259,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             },
                                           );
                                         },
-                                        child: Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
                                       ),
 
                                       Container(
@@ -292,6 +292,24 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             Column(
                                               children: [
                                                 GestureDetector(
+                                                  child: ((){
+                                                    if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
+                                                      if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                        return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                            aspectRatio: 16 / 9,
+                                                            fit: BoxFit.contain,
+                                                          ),
+                                                        );
+                                                      }else{
+                                                        return Container(height: 0,);
+                                                      }
+                                                    }else{
+                                                      return Container(height: 0,);
+                                                    }
+                                                  }()),
                                                   onTap: (){
                                                     showGeneralDialog(
                                                       context: context,
@@ -349,24 +367,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                       },
                                                     );
                                                   },
-                                                  child: ((){
-                                                    if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
-                                                      if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
-                                                        return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                            placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                            aspectRatio: 16 / 9,
-                                                            fit: BoxFit.contain,
-                                                          ),
-                                                        );
-                                                      }else{
-                                                        return Container(height: 0,);
-                                                      }
-                                                    }else{
-                                                      return Container(height: 0,);
-                                                    }
-                                                  }()),
                                                 ),
 
                                                 const SizedBox(height: 20,),

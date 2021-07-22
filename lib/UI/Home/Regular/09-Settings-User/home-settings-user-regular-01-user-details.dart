@@ -161,7 +161,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       buttonText: 'Logout',
                       height: 45,
                       onPressed: () async{
-                        bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),),);
+                        bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),),);
 
                         print('The logoutResult is $logoutResult');
 

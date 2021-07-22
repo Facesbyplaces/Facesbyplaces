@@ -594,14 +594,41 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                       height: 100,
                                                       padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                       child: ListView.separated(
+                                                        itemCount: profile.data!.almMemorial.showMemorialImagesOrVideos.length,
                                                         physics: const ClampingScrollPhysics(),
-                                                        scrollDirection: Axis.horizontal,
                                                         separatorBuilder: (context, index){
                                                           return const SizedBox(width: 20);
                                                         },
-                                                        itemCount: profile.data!.almMemorial.showMemorialImagesOrVideos.length,
+                                                        scrollDirection: Axis.horizontal,
                                                         itemBuilder: (context, index){
                                                           return GestureDetector(
+                                                            child: ((){
+                                                              if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[index])?.contains('video') == true){
+                                                                return Container(
+                                                                  width: 100,
+                                                                  height: 100,
+                                                                  child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
+                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                      aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }else{
+                                                                return Container(
+                                                                  width: 100,
+                                                                  height: 100,
+                                                                  child: CachedNetworkImage(
+                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
+                                                                    fit: BoxFit.cover,
+                                                                  ),
+                                                                );
+                                                              }
+                                                            }()),
                                                             onTap: (){
                                                               showGeneralDialog(
                                                                 context: context,
@@ -688,33 +715,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                 },
                                                               );
                                                             },
-                                                            child: ((){
-                                                              if(lookupMimeType(profile.data!.almMemorial.showMemorialImagesOrVideos[index])?.contains('video') == true){
-                                                                return Container(
-                                                                  width: 100,
-                                                                  height: 100,
-                                                                  child: BetterPlayer.network('${profile.data!.almMemorial.showMemorialImagesOrVideos[index]}',
-                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                      aspectRatio: 16 / 9,
-                                                                      fit: BoxFit.contain,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }else{
-                                                                return Container(
-                                                                  width: 100,
-                                                                  height: 100,
-                                                                  child: CachedNetworkImage(
-                                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                    imageUrl: profile.data!.almMemorial.showMemorialImagesOrVideos[index],
-                                                                    fit: BoxFit.cover,
-                                                                  ),
-                                                                );
-                                                              }
-                                                            }()),
                                                           );
                                                         },
                                                       ),
@@ -788,7 +788,25 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           GestureDetector(
-                                            onTap: () {
+                                            child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
+                                              radius: 100,
+                                              backgroundColor: const Color(0xff000000),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(5),
+                                                child: profile.data!.almMemorial.showMemorialProfileImage != ''
+                                                ? CircleAvatar(
+                                                  radius: 100,
+                                                  backgroundColor: const Color(0xff888888),
+                                                  foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
+                                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),)
+                                                : const CircleAvatar(
+                                                  radius: 100,
+                                                  backgroundColor: const Color(0xff888888),
+                                                  foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                ),
+                                              ),
+                                            ),
+                                            onTap: (){
                                               showGeneralDialog(
                                                 context: context,
                                                 transitionDuration: const Duration(milliseconds: 0),
@@ -832,24 +850,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                 },
                                               );
                                             },
-                                            child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
-                                              radius: 100,
-                                              backgroundColor: const Color(0xff000000),
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(5),
-                                                child: profile.data!.almMemorial.showMemorialProfileImage != ''
-                                                ? CircleAvatar(
-                                                  radius: 100,
-                                                  backgroundColor: const Color(0xff888888),
-                                                  foregroundImage: NetworkImage(profile.data!.almMemorial.showMemorialProfileImage),
-                                                  backgroundImage: const AssetImage('assets/icons/app-icon.png'),)
-                                                : const CircleAvatar(
-                                                  radius: 100,
-                                                  backgroundColor: const Color(0xff888888),
-                                                  foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                                ),
-                                              ),
-                                            ),
                                           ),
                                         ],
                                       ),

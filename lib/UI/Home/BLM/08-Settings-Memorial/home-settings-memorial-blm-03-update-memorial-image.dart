@@ -17,7 +17,7 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
-class HomeBLMMemorialPageImage extends StatefulWidget {
+class HomeBLMMemorialPageImage extends StatefulWidget{
   final int memorialId;
   HomeBLMMemorialPageImage({required this.memorialId});
 
@@ -26,11 +26,11 @@ class HomeBLMMemorialPageImage extends StatefulWidget {
 
 class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
   final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
   int backgroundImageToggle  = 0;
-  final picker = ImagePicker();
   File backgroundImage = File('');
   File profileImage = File('');
-  Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
+  final picker = ImagePicker();
 
   Future getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -68,6 +68,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
         title: Row(
           children: [
             Text('Page Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+
             Spacer(),
           ],
         ),
@@ -116,9 +117,6 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                         child: Stack(
                           children: [
                             GestureDetector(
-                              onTap: () async{
-                                await getProfileImage();
-                              },
                               child: Center(
                                 child: CircleAvatar(
                                   radius: 50,
@@ -141,6 +139,9 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                   ),
                                 ),
                               ),
+                              onTap: () async{
+                                await getProfileImage();
+                              },
                             ),
                             Positioned(
                               bottom: 40,
@@ -174,15 +175,21 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                         height: 100,
                         child: ListView.separated(
                           physics: const ClampingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 5,
                           separatorBuilder: (context, index){
                             return const SizedBox(width: 25,);
                           },
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 5,
                           itemBuilder: (context, index){
                             return ((){
                               if(index == 4){
                                 return GestureDetector(
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
+                                  ),
                                   onTap: () async{
                                     setState((){
                                       backgroundImageToggle = index;
@@ -190,28 +197,9 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                                     await getBackgroundImage();
                                   },
-                                  child: Container(
-                                    width: 100,
-                                    height: 100,
-                                    child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
-                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
-                                  ),
                                 );
                               }else{
                                 return GestureDetector(
-                                  onTap: () async{
-                                    final ByteData bytes = await rootBundle.load(backgroundImages[index]);
-                                    final Uint8List list = bytes.buffer.asUint8List();
-
-                                    final tempDir = await getTemporaryDirectory();
-                                    final file = await new File('${tempDir.path}/blm-background-image-$index.png').create();
-                                    file.writeAsBytesSync(list);
-
-                                    setState((){
-                                      backgroundImageToggle = index;
-                                      backgroundImage = file;
-                                    });
-                                  },
                                   child: backgroundImageToggle == index
                                   ? Container(
                                     padding: const EdgeInsets.all(5),
@@ -235,6 +223,19 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
                                     ),
                                   ),
+                                  onTap: () async{
+                                    final ByteData bytes = await rootBundle.load(backgroundImages[index]);
+                                    final Uint8List list = bytes.buffer.asUint8List();
+
+                                    final tempDir = await getTemporaryDirectory();
+                                    final file = await new File('${tempDir.path}/blm-background-image-$index.png').create();
+                                    file.writeAsBytesSync(list);
+
+                                    setState((){
+                                      backgroundImageToggle = index;
+                                      backgroundImage = file;
+                                    });
+                                  },
                                 );
                               }
                             }());
@@ -251,9 +252,9 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                       MiscBLMButtonTemplate(
                         buttonText: 'Update',
                         buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                        buttonColor: Color(0xff04ECFF),
                         width: 150,
                         height: 45,
-                        buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
                           if(profileImage.path != '' || backgroundImage.path != ''){
                             context.loaderOverlay.show();
@@ -264,10 +265,10 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Successfully updated the memorial image.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87,fontFamily: 'NexaRegular'),),
+                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
@@ -280,12 +281,12 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                               await showDialog(
                                 context: context,
                                 builder: (_) => AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
                                   description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  onlyOkButton: true,
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
                                   buttonOkColor: const Color(0xffff0000),
+                                  onlyOkButton: true,
                                   onOkButtonPressed: (){
                                     Navigator.pop(context, true);
                                   },

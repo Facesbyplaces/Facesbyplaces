@@ -365,6 +365,16 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
+                                    child: manageDrawer.data!.showProfileInformationImage != ''
+                                    ? Container(
+                                      child: CircleAvatar(radius: 100, backgroundColor: const Color(0xff888888), foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),),
+                                      decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 3,),),
+                                    )
+                                    : const CircleAvatar(
+                                      radius: 100,
+                                      backgroundColor: const Color(0xff888888),
+                                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                    ),
                                     onTap: (){
                                       showGeneralDialog(
                                         context: context,
@@ -409,16 +419,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                         },
                                       );
                                     },
-                                    child: manageDrawer.data!.showProfileInformationImage != ''
-                                    ? Container(
-                                      child: CircleAvatar(radius: 100, backgroundColor: const Color(0xff888888), foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),),
-                                      decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 3,),),
-                                    )
-                                    : const CircleAvatar(
-                                      radius: 100,
-                                      backgroundColor: const Color(0xff888888),
-                                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                                    ),
                                   ),
 
                                   const SizedBox(height: 20),

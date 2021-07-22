@@ -223,10 +223,10 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
       readOnly: false,
       maxLines: 10,
       decoration: const InputDecoration(
-        fillColor: const Color(0xffffffff),
         filled: true,
-        alignLabelWithHint: true,
         labelText: '',
+        alignLabelWithHint: true,
+        fillColor: const Color(0xffffffff),
         labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: const Color(0xff888888)),
         border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10),),),
         focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
@@ -361,6 +361,30 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                         );
                       }else{
                         return GestureDetector(
+                          child: Container(
+                            width: 80,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
+                                ),
+
+                                Stack(
+                                  children: [
+                                    Center(
+                                      child: CircleAvatar(
+                                        child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                        backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                        radius: 25,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                           onDoubleTap: (){
                             slideImages.value.removeAt(index);
                             slideCount.value--;
@@ -402,30 +426,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                               },
                             );
                           },
-                          child: Container(
-                            width: 80,
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.file(slideImagesListener[index], fit: BoxFit.cover,),
-                                ),
-
-                                Stack(
-                                  children: [
-                                    Center(
-                                      child: CircleAvatar(
-                                        child: Text('${index + 1}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
-                                        backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                        radius: 25,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
                         );
                       }
                     }());

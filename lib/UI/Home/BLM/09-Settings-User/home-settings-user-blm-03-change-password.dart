@@ -60,8 +60,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
               children: [
                 MiscBLMInputFieldTemplate(
                   key: _key1,
-                  labelText: widget.isAddPassword == true ? 'New Password' : 'Current Password',
                   obscureText: true,
+                  labelText: widget.isAddPassword == true ? 'New Password' : 'Current Password',
                   labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                 ),
 
@@ -69,8 +69,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
 
                 MiscBLMInputFieldTemplate(
                   key: _key2,
-                  labelText: widget.isAddPassword == true ? 'Confirm Password' : 'New Password',
                   obscureText: true,
+                  labelText: widget.isAddPassword == true ? 'Confirm Password' : 'New Password',
                   labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),
                 ),
 

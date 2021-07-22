@@ -32,13 +32,13 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
             title: TextFormField(
               style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
               decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(15.0),
-                filled: true,
-                fillColor: const Color(0xffffffff),
-                focusColor: const Color(0xffffffff),
-                hintText: 'Search Location',
                 hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                 prefixIcon: const Icon(Icons.search, color: const Color(0xff888888)),
+                contentPadding: const EdgeInsets.all(15.0),
+                focusColor: const Color(0xffffffff),
+                fillColor: const Color(0xffffffff),
+                hintText: 'Search Location',
+                filled: true,
                 border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                 enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
                 focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
@@ -85,10 +85,10 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
             )
             : ListView.separated(
               physics: const ClampingScrollPhysics(),
-              itemCount: places.length,
               separatorBuilder: (context, index){
                 return const Divider(thickness: 1, color: const Color(0xff888888),);
               },
+              itemCount: places.length,
               itemBuilder: (context, index){
                 return GestureDetector(
                   child: Container(

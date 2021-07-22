@@ -281,10 +281,10 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                             bool confirmation = await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 onlyOkButton: false,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);

@@ -97,14 +97,12 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
@@ -176,11 +174,11 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
             onRefresh: onRefresh,
             child: ListView.separated(
               controller: scrollController,
-              padding: const EdgeInsets.all(10.0),
-              physics: const ClampingScrollPhysics(),
-              itemCount: countListener,
               separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-              itemBuilder: (c, i) {
+              physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(10.0),
+              itemCount: countListener,
+              itemBuilder: (c, i){
                 return feedsListener[i].pageType == 'Blm'
                 ? MiscBLMPost(
                   key: ValueKey('$i'),
@@ -259,14 +257,14 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                               );
                             }else{
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 3,
                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 3,
                                 itemBuilder: (BuildContext context, int index) => 
                                 ((){
                                   if(index != 1){
@@ -335,13 +333,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                                 child: CircleAvatar(
                                                   radius: 25,
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
-                                                    style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xffffffff),
-                                                    ),
-                                                  ),
+                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                 ),
                                               ),
                                             ],
@@ -635,9 +627,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                 : MiscBLMButtonTemplate(
                   buttonText: 'Create',
                   buttonTextStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
+                  buttonColor: const Color(0xff000000),
                   width: SizeConfig.screenWidth! / 2,
                   height: 45,
-                  buttonColor: const Color(0xff000000),
                   onPressed: (){
                     Navigator.pushNamed(context, '/home/blm/create-memorial');
                   },

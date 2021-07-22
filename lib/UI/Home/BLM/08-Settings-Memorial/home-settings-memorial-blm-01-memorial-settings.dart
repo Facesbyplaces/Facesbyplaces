@@ -16,7 +16,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMMemorialSettings extends StatefulWidget {
+class HomeBLMMemorialSettings extends StatefulWidget{
   final int memorialId;
   final String memorialName;
   final bool switchFamily;
@@ -27,11 +27,11 @@ class HomeBLMMemorialSettings extends StatefulWidget {
   HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState();
 }
 
-class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings> {
-  ValueNotifier<int> toggle = ValueNotifier<int>(0);
+class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
   ValueNotifier<bool> isSwitched1 = ValueNotifier<bool>(false);
   ValueNotifier<bool> isSwitched2 = ValueNotifier<bool>(false);
   ValueNotifier<bool> isSwitched3 = ValueNotifier<bool>(false);
+  ValueNotifier<int> toggle = ValueNotifier<int>(0);
   Future? switchStatus;
 
   void initState(){
@@ -52,6 +52,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings> {
           title: Row(
             children: [
               Text('Memorial Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              
               Spacer(),
             ],
           ),
@@ -77,6 +78,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings> {
                   indicatorSize: TabBarIndicatorSize.label,
                   tabs: [
                     Text('Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+
                     Text('Privacy', style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
                   ],
                   onTap: (int index){
@@ -189,12 +191,12 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings> {
                 await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                    entryAnimation: EntryAnimation.DEFAULT,
                     description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                    onlyOkButton: true,
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
                     buttonOkColor: const Color(0xffff0000),
+                    onlyOkButton: true,
                     onOkButtonPressed: (){
                       Navigator.pop(context, true);
                     },

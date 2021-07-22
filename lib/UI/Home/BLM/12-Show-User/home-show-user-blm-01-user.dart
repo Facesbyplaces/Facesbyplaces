@@ -54,8 +54,8 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                   ],
                   color: const Color(0xffffffff),
                   borderRadius: const BorderRadius.only(
-                    topLeft: const Radius.circular(50.0),
                     topRight: const Radius.circular(50.0),
+                    topLeft: const Radius.circular(50.0),
                   ),
                 ),
                 child: Column(
@@ -69,16 +69,15 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                         initialIndex: currentIndex,
                         child: TabBar(
                           isScrollable: false,
-                          labelColor: const Color(0xff04ECFF),
                           unselectedLabelColor: const Color(0xffCDEAEC),
                           indicatorColor: const Color(0xff04ECFF),
+                          labelColor: const Color(0xff04ECFF),
                           onTap: (int number){
                             setState(() {
                               currentIndex = number;
                             });
                           },
                           tabs: [
-
                             Container(
                               width: SizeConfig.screenWidth! / 2.5,
                               child: Center(
@@ -130,13 +129,34 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                         CustomPaint(size: Size.infinite, painter: MiscBLMCurvePainter(),),
 
                         GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                          child: Container(
+                            padding: const EdgeInsets.only(bottom: 20.0),
+                            alignment: Alignment.bottomCenter,
+                            child: profile.data!.showUserInformationImage != '' 
+                            ? Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.white, width: 3,),
+                              ),
+                              child: CircleAvatar(
+                                radius: 100,
+                                backgroundColor: const Color(0xff888888),
+                                foregroundImage: NetworkImage(profile.data!.showUserInformationImage),
+                              ),
+                            )
+                            : const CircleAvatar(
+                              radius: 100, 
+                              backgroundColor: const Color(0xff888888), 
+                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                            ),
+                          ),
                           onTap: (){
                             showGeneralDialog(
                               context: context,
                               barrierDismissible: true,
                               barrierLabel: 'Dialog',
                               transitionDuration: const Duration(milliseconds: 0),
-                              pageBuilder: (_, __, ___) {
+                              pageBuilder: (_, __, ___){
                                 return Scaffold(
                                   backgroundColor: Colors.black12.withOpacity(0.7),
                                   body: SizedBox.expand(
@@ -147,14 +167,14 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                             alignment: Alignment.centerRight,
                                             padding: const EdgeInsets.only(right: 20.0),
                                             child: GestureDetector(
-                                              onTap: (){
-                                                Navigator.pop(context);
-                                              },
                                               child: CircleAvatar(
                                                 radius: 20,
                                                 backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                 child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
                                               ),
+                                              onTap: (){
+                                                Navigator.pop(context);
+                                              },
                                             ),
                                           ),
 
@@ -178,30 +198,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                               },
                             );
                           },
-                          child: Container(
-                            padding: const EdgeInsets.only(bottom: 20.0),
-                            alignment: Alignment.bottomCenter,
-                            child: profile.data!.showUserInformationImage != '' 
-                            ? Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 3,
-                                ),
-                              ),
-                              child: CircleAvatar(
-                                radius: 100,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: NetworkImage(profile.data!.showUserInformationImage),
-                              ),
-                            )
-                            : const CircleAvatar(
-                              radius: 100, 
-                              backgroundColor: const Color(0xff888888), 
-                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                            ),
-                          ),
                         ),
                       ],
                     ),
@@ -211,10 +207,10 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10.0),
                       child: IconButton(
+                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
                         onPressed: (){
                           Navigator.pop(context);
                         },
-                        icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52),
                       ),
                     ),
                   ),

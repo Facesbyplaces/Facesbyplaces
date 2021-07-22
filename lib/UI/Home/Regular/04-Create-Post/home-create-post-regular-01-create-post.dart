@@ -239,9 +239,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<int>(
                                     value: currentIdSelected,
-                                    onChanged: (int? newValue){
-                                      currentIdSelected = newValue!;
-                                    },
                                     items: managedPages.map((RegularManagedPages value){
                                       return DropdownMenuItem<int>(
                                         value: value.pageId,
@@ -263,6 +260,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                         ),
                                       );
                                     }).toList(),
+                                    onChanged: (int? newValue){
+                                      currentIdSelected = newValue!;
+                                    },
                                   ),
                                 ),
                               ),

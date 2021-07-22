@@ -306,6 +306,24 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       Column(
                                                         children: [
                                                           GestureDetector(
+                                                            child: ((){
+                                                              if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
+                                                                if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
+                                                                  return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
+                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                      aspectRatio: 16 / 9,
+                                                                      fit: BoxFit.contain,
+                                                                    ),
+                                                                  );
+                                                                }else{
+                                                                  return Container(height: 0,);
+                                                                }
+                                                              }else{
+                                                                return Container(height: 0,);
+                                                              }
+                                                            }()),
                                                             onTap: (){
                                                               showGeneralDialog(
                                                                 context: context,
@@ -363,24 +381,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                 },
                                                               );
                                                             },
-                                                            child: ((){
-                                                              if(profile.data!.blmMemorial.memorialImagesOrVideos.isNotEmpty){
-                                                                if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
-                                                                  return BetterPlayer.network('${profile.data!.blmMemorial.memorialImagesOrVideos[0]}',
-                                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                      placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                      controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                      aspectRatio: 16 / 9,
-                                                                      fit: BoxFit.contain,
-                                                                    ),
-                                                                  );
-                                                                }else{
-                                                                  return Container(height: 0,);
-                                                                }
-                                                              }else{
-                                                                return Container(height: 0,);
-                                                              }
-                                                            }()),
                                                           ),
 
                                                           const SizedBox(height: 20,),
@@ -859,6 +859,25 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     GestureDetector(
+                                                      child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
+                                                        radius: 100,
+                                                        backgroundColor: const Color(0xff04ECFF),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.all(5),
+                                                          child: profile.data!.blmMemorial.memorialProfileImage != ''
+                                                          ? CircleAvatar(
+                                                            radius: 100,
+                                                            backgroundColor: const Color(0xff888888),
+                                                            foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
+                                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                          )
+                                                          : const CircleAvatar(
+                                                            radius: 100,
+                                                            backgroundColor: const Color(0xff888888),
+                                                            foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                                                          ),
+                                                        ),
+                                                      ),
                                                       onTap: (){
                                                         showGeneralDialog(
                                                           context: context,
@@ -903,25 +922,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           },
                                                         );
                                                       },
-                                                      child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
-                                                        radius: 100,
-                                                        backgroundColor: const Color(0xff04ECFF),
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.all(5),
-                                                          child: profile.data!.blmMemorial.memorialProfileImage != ''
-                                                          ? CircleAvatar(
-                                                            radius: 100,
-                                                            backgroundColor: const Color(0xff888888),
-                                                            foregroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
-                                                            backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                                          )
-                                                          : const CircleAvatar(
-                                                            radius: 100,
-                                                            backgroundColor: const Color(0xff888888),
-                                                            foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-                                                          ),
-                                                        ),
-                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -1001,14 +1001,14 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         }
                                                       }else if(posts[i].imagesOrVideos.length == 2){
                                                         return StaggeredGridView.countBuilder(
-                                                          padding: EdgeInsets.zero,
-                                                          shrinkWrap: true,
-                                                          physics: const NeverScrollableScrollPhysics(),
-                                                          crossAxisCount: 4,
-                                                          itemCount: 2,
                                                           staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                                          mainAxisSpacing: 4.0,
+                                                          physics: const NeverScrollableScrollPhysics(),
+                                                          padding: EdgeInsets.zero,
                                                           crossAxisSpacing: 4.0,
+                                                          mainAxisSpacing: 4.0,
+                                                          crossAxisCount: 4,
+                                                          shrinkWrap: true,
+                                                          itemCount: 2,
                                                           itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                                           ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
