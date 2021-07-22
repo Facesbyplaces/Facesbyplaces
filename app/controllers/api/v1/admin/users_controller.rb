@@ -1,20 +1,12 @@
 class Api::V1::Admin::UsersController < ApplicationController
     before_action :admin_only
+    before_action :set_user, except: [:searchUsers, :allUsers]
 
     def searchUsers
-        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
-            if searchObject.searchable_type == 'User'
-                User.find(searchObject.searchable_id)
-            else
-                AlmUser.find(searchObject.searchable_id)
-            end
-        }.flatten.uniq
-
-        users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
-
-        render json: {  itemsremaining:  itemsRemaining(users),
+        @users = fetched_searched_users
+        render json: {  itemsremaining:  itemsRemaining(@users),
                         users: ActiveModel::SerializableResource.new(
-                            users, 
+                            @users, 
                             each_serializer: UserSerializer
                         )
                     }
@@ -42,14 +34,10 @@ class Api::V1::Admin::UsersController < ApplicationController
     end
 
     def showUser
-        @user = fetched_user
-
         render json: UserSerializer.new( @user ).attributes
     end
 
     def editUser
-        @user = fetched_user
-
         if @user != nil
             @user.update(editUser_params)
             if @user.errors.present?
@@ -63,8 +51,6 @@ class Api::V1::Admin::UsersController < ApplicationController
     end
 
     def deleteUser
-        @user = fetched_user
-
         if @user != nil
             @user.destroy!
             if @user.errors.present?
@@ -78,7 +64,6 @@ class Api::V1::Admin::UsersController < ApplicationController
     end
 
     def contactUser
-        @user = fetched_user
         message = params[:message]
         subject = params[:subject]
 
@@ -99,12 +84,24 @@ class Api::V1::Admin::UsersController < ApplicationController
         end
     end
 
-    def fetched_user
+    def set_user
         if params[:account_type].to_i == 1
-            return User.find(params[:id])
+            @suer = User.find(params[:id])
         else
-            return AlmUser.find(params[:id])
+            @suer = AlmUser.find(params[:id])
         end
+    end
+
+    def fetched_searched_users
+        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
+            if searchObject.searchable_type == 'User'
+                User.find(searchObject.searchable_id)
+            else
+                AlmUser.find(searchObject.searchable_id)
+            end
+        }.flatten.uniq
+
+        return users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
     end
 
     def itemsRemaining(users)
@@ -117,5 +114,4 @@ class Api::V1::Admin::UsersController < ApplicationController
         end
     end
 
-    
 end

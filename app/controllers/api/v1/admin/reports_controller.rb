@@ -1,10 +1,10 @@
 class Api::V1::Admin::ReportsController < ApplicationController
     before_action :admin_only
+    before_action :set_report, only: [:showReport, :editReport, :deleteReport]
 
     # Searh Report
     def searchReport
         reportsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Report').pluck('searchable_id')
-        puts reportsId
         reports = Report.where(id: reportsId)
 
         render json: {  itemsremaining:  itemsRemaining(reports),
@@ -17,9 +17,6 @@ class Api::V1::Admin::ReportsController < ApplicationController
     end
     # Index Report
     def allReports
-        reports = Report.all
-        reports = reports.page(params[:page]).per(numberOfPage)
-
         render json: {  itemsremaining:  itemsRemaining(reports),
                         reports: reports
                     }
@@ -62,44 +59,43 @@ class Api::V1::Admin::ReportsController < ApplicationController
         end
     end 
 
-    # Show Report
     def showReport  
-        case report.reportable_type
+        case @report.reportable_type
             when "Memorial"
-                reportable = Memorial.find(report.reportable_id)
+                reportable = Memorial.find(@report.reportable_id)
                 reported = reportable.name
             when "AlmUser"
-                reportable = AlmUser.find(report.reportable_id)
+                reportable = AlmUser.find(@report.reportable_id)
                 reported = reportable.first_name + " " + reportable.last_name
             when "Blm"
-                reportable = Blm.find(report.reportable_id)
+                reportable = Blm.find(@report.reportable_id)
                 reported = reportable.name
             when "User"
-                reportable = User.find(report.reportable_id)
+                reportable = User.find(@report.reportable_id)
                 reported = reportable.first_name + " " + reportable.last_name
             when "Post"
-                reportable = Post.find(report.reportable_id)
+                reportable = Post.find(@report.reportable_id)
                 reported = reportable.body
         end
-        render json: { report: report, reported: reported }, status: 200
+        render json: { report: @report, reported: reported }, status: 200
     end
-    # Edit Report
+
     def editReport
          # check if data sent is empty or not
          check = params_presence(params)
          if check == true
              # Update memorial details
-             report.update(report_params)
+             @report.update(report_params)
  
-             return render json: {success: "Report updated", report: report}, status: 200
+             return render json: {success: "Report updated", report: @report}, status: 200
          else
              return render json: {error: "#{check} is empty"}
          end
     end
-    # Delete Report
+    
     def deleteReport
-        if report
-            report.destroy 
+        if @report
+            @report.destroy 
             render json: {status: :deleted}
         else
             render json: {status: "Report not found"}
@@ -124,8 +120,13 @@ class Api::V1::Admin::ReportsController < ApplicationController
         params.require(:report).permit(:subject, :description, :reportable_type, :reportable_id)
     end
 
-    def report
-        return report = Report.find(params[:id])
+    def reports
+        reports = Report.all
+        return reports = reports.page(params[:page]).per(numberOfPage)
+    end
+
+    def set_report
+        @report = Report.find(params[:id])
     end
 
     def itemsRemaining(reports)
