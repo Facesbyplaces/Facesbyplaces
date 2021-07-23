@@ -6,7 +6,7 @@ class Api::V1::Search::SearchController < ApplicationController
 
         render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
-                            posts, 
+                            @posts, 
                             each_serializer: PostSerializer
                         )
                     }
@@ -17,7 +17,7 @@ class Api::V1::Search::SearchController < ApplicationController
 
         render json: {  itemsremaining:  itemsRemaining(@memorials),
                         memorials: ActiveModel::SerializableResource.new(
-                                    memorials, 
+                                    @memorials, 
                                     each_serializer: SearchmemorialSerializer
                                 )
                     }
@@ -28,7 +28,7 @@ class Api::V1::Search::SearchController < ApplicationController
 
         render json: {  itemsremaining:  itemsRemaining(@users),
                         users: ActiveModel::SerializableResource.new(
-                            users, 
+                            @users, 
                             each_serializer: UserSerializer
                         )
                     }
@@ -39,7 +39,7 @@ class Api::V1::Search::SearchController < ApplicationController
 
         render json: {  itemsremaining:  itemsRemaining(@followers),
                         followers: ActiveModel::SerializableResource.new(
-                            followers, 
+                            @followers, 
                             each_serializer: UserSerializer
                         )
                     }

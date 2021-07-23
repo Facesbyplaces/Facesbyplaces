@@ -86,9 +86,9 @@ class Api::V1::Admin::UsersController < ApplicationController
 
     def set_user
         if params[:account_type].to_i == 1
-            @suer = User.find(params[:id])
+            @user = User.find(params[:id])
         else
-            @suer = AlmUser.find(params[:id])
+            @user = AlmUser.find(params[:id])
         end
     end
 
