@@ -57,7 +57,7 @@ class Api::V1::Search::SearchController < ApplicationController
         render json: {
             blmItemsRemaining: itemsRemaining(@blms),
             blm: ActiveModel::SerializableResource.new(
-                    @blm, 
+                    @blms, 
                     each_serializer: BlmSerializer
                 ),
             memorialItemsRemaining: itemsRemaining(@memorials),
