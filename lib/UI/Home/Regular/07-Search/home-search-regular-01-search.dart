@@ -123,7 +123,7 @@ class HomeRegularSearchState extends State<HomeRegularSearch>{
                                       print('The latitude is ${locationData.latitude}');
                                       print('The longitude is ${locationData.longitude}');
                                       List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude!, locationData.longitude!);
-                                      // context.loaderOverlay.hide();
+                                      context.loaderOverlay.hide();
 
                                       print('The latitude is ${locationData.latitude}');
                                       print('The latitude is ${locationData.longitude}');

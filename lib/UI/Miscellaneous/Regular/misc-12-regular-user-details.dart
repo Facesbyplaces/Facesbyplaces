@@ -45,10 +45,10 @@ class MiscRegularDraggablePost extends StatefulWidget{
 
 class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<RegularMiscDraggablePost> posts = [];
   int itemRemaining = 1;
   int page = 1;
-  ValueNotifier<int> count = ValueNotifier<int>(0);
 
   void initState(){
     super.initState();

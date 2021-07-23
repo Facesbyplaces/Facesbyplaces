@@ -89,8 +89,8 @@ class UILogin01 extends StatelessWidget{
 
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 3.75, right: SizeConfig.blockSizeHorizontal! * 5,),
                           alignment: Alignment.center,
+                          padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 3.75, right: SizeConfig.blockSizeHorizontal! * 5,),
                           child: Text('Remembering friends and family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.5, color: const Color(0xff2F353D), fontFamily: 'NexaRegular'),),
                         ),
                       ),

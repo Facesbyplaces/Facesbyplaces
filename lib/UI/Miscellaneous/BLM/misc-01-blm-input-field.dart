@@ -12,7 +12,6 @@ class MiscBLMInputFieldTemplate extends StatefulWidget{
   final bool readOnly;
   final bool includeSuffixIcon;
   final String displayText;
-
   const MiscBLMInputFieldTemplate({
     required Key key,
     this.labelText = '',
@@ -37,20 +36,20 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      cursorColor: const Color(0xff000000),
       obscureText: widget.obscureText,
       keyboardType: widget.type,
       maxLines: widget.maxLines,
       readOnly: widget.readOnly,
-      cursorColor: const Color(0xff000000),
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: widget.labelText,
-        labelStyle: widget.labelTextStyle,
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+        labelStyle: widget.labelTextStyle,
+        labelText: widget.labelText,
+        alignLabelWithHint: true,
       ),
     );
   }
@@ -63,7 +62,6 @@ class MiscBLMInputFieldMultiTextTemplate extends StatefulWidget{
   final int maxLines;
   final bool readOnly;
   final Color backgroundColor;
-
   const MiscBLMInputFieldMultiTextTemplate({
     required Key key,
     this.labelText = '',
@@ -84,16 +82,16 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
   Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       cursorColor: const Color(0xff000000),
       maxLines: widget.maxLines,
       keyboardType: widget.type,
       readOnly: widget.readOnly,
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
-        fillColor: widget.backgroundColor,
         filled: true,
         alignLabelWithHint: true,
         labelText: widget.labelText,
+        fillColor: widget.backgroundColor,
         labelStyle: widget.labelTextStyle,
         border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
         focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
@@ -223,29 +221,28 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
   Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
-      keyboardType: TextInputType.text,
       cursorColor: const Color(0xff000000),
+      keyboardType: TextInputType.text,
       readOnly: true,
       onTap: (){
         DatePicker.showDatePicker(
           context, 
+          currentTime: DateTime.now(),
           showTitleActions: true,
           minTime: DateTime(1000),
           maxTime: DateTime.now(),
-          currentTime: DateTime.now(),
           onConfirm: (date){
             String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-            print('The new format is $format');
             controller.text = format;
           },
           locale: LocaleType.en,
         );
       },
       decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: widget.labelText,
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+        labelText: widget.labelText,
+        alignLabelWithHint: true,
       ),
     );
   }
@@ -260,7 +257,6 @@ class MiscBLMPhoneNumberTemplate extends StatefulWidget{
   final bool readOnly;
   final bool includeSuffixIcon;
   final String displayText;
-
   const MiscBLMPhoneNumberTemplate({
     required Key key,
     this.labelText = '',
@@ -288,8 +284,15 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
   @override
   Widget build(BuildContext context){
     return InternationalPhoneNumberInput(
-      selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,
+      selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
+      textStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, color: const Color(0xff2F353D), fontFamily: 'NexaRegular',),
+      inputDecoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: widget.labelText,
+        labelStyle: widget.labelTextStyle,
+        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+      ),
       onInputChanged: (PhoneNumber number){
         print(number.phoneNumber);
       },
@@ -298,17 +301,6 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
           valid = value;
         });
       },
-      textStyle: TextStyle(
-        fontSize: SizeConfig.blockSizeVertical! * 2.64,
-        fontFamily: 'NexaRegular',
-        color: const Color(0xff2F353D),
-      ),
-      inputDecoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: widget.labelText,
-        labelStyle: widget.labelTextStyle,
-        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-      ),
     );
   }
 }

@@ -46,10 +46,10 @@ class MiscBLMDraggablePost extends StatefulWidget{
 
 class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<BLMMiscDraggablePost> posts = [];
   int itemRemaining = 1;
   int page = 1;
-  ValueNotifier<int> count = ValueNotifier<int>(0);
 
   void initState(){
     super.initState();
@@ -520,11 +520,11 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
           onRefresh: onRefresh,
           child: ListView.separated(
             controller: scrollController,
+            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            itemBuilder: (c, i) => finalMemorials[i],
             physics: const ClampingScrollPhysics(),
             itemCount: finalMemorials.length,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            itemBuilder: (c, i) => finalMemorials[i],
           )
         )
         : SingleChildScrollView(

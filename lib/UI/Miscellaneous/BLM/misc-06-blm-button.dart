@@ -19,13 +19,13 @@ class MiscBLMButtonTemplate extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return MaterialButton(
+      child: Text(buttonText, style: buttonTextStyle,),
+      shape: const StadiumBorder(),
       padding: EdgeInsets.zero,
       onPressed: onPressed,
-      child: Text(buttonText, style: buttonTextStyle,),
+      color: buttonColor,
       minWidth: width,
       height: height,
-      shape: const StadiumBorder(),
-      color: buttonColor,
     );
   }
 }

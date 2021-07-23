@@ -224,10 +224,10 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                          entryAnimation: EntryAnimation.DEFAULT,
                           description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          entryAnimation: EntryAnimation.DEFAULT,
                           onlyOkButton: true,
                           onOkButtonPressed: (){
                             Navigator.pop(context, true);

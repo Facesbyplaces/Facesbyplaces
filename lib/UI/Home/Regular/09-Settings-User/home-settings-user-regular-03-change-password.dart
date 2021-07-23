@@ -101,7 +101,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                         );
                       }else{
                         if(widget.isAddPassword == true){
-                          print('Add password here');
                           if(_key1.currentState!.controller.text == _key2.currentState!.controller.text){
                             context.loaderOverlay.show();
                             bool result = await apiRegularAddPassword(newPassword: _key1.currentState!.controller.text);

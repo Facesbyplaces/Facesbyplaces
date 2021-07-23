@@ -409,9 +409,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         onTap: (){
                                                           showGeneralDialog(
                                                             context: context,
+                                                            transitionDuration: const Duration(milliseconds: 0),
                                                             barrierDismissible: true,
                                                             barrierLabel: 'Dialog',
-                                                            transitionDuration: const Duration(milliseconds: 0),
                                                             pageBuilder: (_, __, ___){
                                                               return Scaffold(
                                                                 backgroundColor: Colors.black12.withOpacity(0.7),
@@ -437,9 +437,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                             if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                               return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                  // placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
                                                                                   placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                                  // showPlaceholderUntilPlay: true,
                                                                                   placeholderOnTop: false,
                                                                                   deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
                                                                                   aspectRatio: 16 / 9,
@@ -447,12 +445,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                 ),
                                                                               );
                                                                             }else{
-                                                                              // return CachedNetworkImage(
-                                                                              //   fit: BoxFit.contain,
-                                                                              //   imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
-                                                                              //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                              //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                              // );
                                                                               return ExtendedImage.network(
                                                                                 originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
                                                                                 fit: BoxFit.contain,
@@ -507,13 +499,32 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         shrinkWrap: true,
                                                         itemCount: 2,
                                                         itemBuilder: (BuildContext context, int index) => GestureDetector(
-                                                          onTap: () {
+                                                          child: ((){
+                                                            if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
+                                                              return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
+                                                                  aspectRatio: 16 / 9,
+                                                                  fit: BoxFit.contain,
+                                                                ),
+                                                              );
+                                                            }else{
+                                                              return CachedNetworkImage(
+                                                                fit: BoxFit.cover,
+                                                                imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                              );
+                                                            }
+                                                          }()),
+                                                          onTap: (){
                                                             showGeneralDialog(
                                                               context: context,
+                                                              transitionDuration: const Duration(milliseconds: 0),
                                                               barrierDismissible: true,
                                                               barrierLabel: 'Dialog',
-                                                              transitionDuration: const Duration(milliseconds: 0),
-                                                              pageBuilder: (_, __, ___) {
+                                                              pageBuilder: (_, __, ___){
                                                                 return Scaffold(
                                                                   backgroundColor: Colors.black12.withOpacity(0.7),
                                                                   body: SizedBox.expand(
@@ -549,12 +560,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                                       ),
                                                                                     );
                                                                                   }else{
-                                                                                    // return CachedNetworkImage(
-                                                                                    //   fit: BoxFit.contain,
-                                                                                    //   imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                    //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                    //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                                    // );
                                                                                     return ExtendedImage.network(
                                                                                       originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
                                                                                       fit: BoxFit.contain,
@@ -600,25 +605,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               },
                                                             );
                                                           },
-                                                          child: ((){
-                                                            if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true){
-                                                              return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
-                                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                  placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
-                                                                  aspectRatio: 16 / 9,
-                                                                  fit: BoxFit.contain,
-                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
-                                                                ),
-                                                              );
-                                                            }else{
-                                                              return CachedNetworkImage(
-                                                                fit: BoxFit.cover,
-                                                                imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
-                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                              );
-                                                            }
-                                                          }()),
                                                         ),
                                                       );
                                                     }else{
@@ -632,109 +618,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         shrinkWrap: true,
                                                         itemCount: 3,
                                                         itemBuilder: (BuildContext context, int index) => GestureDetector(
-                                                          onTap: (){
-                                                            showGeneralDialog(
-                                                              context: context,
-                                                              barrierDismissible: true,
-                                                              barrierLabel: 'Dialog',
-                                                              transitionDuration: const Duration(milliseconds: 0),
-                                                              pageBuilder: (_, __, ___){
-                                                                return Scaffold(
-                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
-                                                                  body: SizedBox.expand(
-                                                                    child: SafeArea(
-                                                                      child: Column(
-                                                                        children: [
-                                                                          Container(
-                                                                            alignment: Alignment.centerRight,
-                                                                            padding: const EdgeInsets.only(right: 20.0),
-                                                                            child: GestureDetector(
-                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
-                                                                              onTap: (){
-                                                                                Navigator.pop(context);
-                                                                              },
-                                                                            ),
-                                                                          ),
-                                                                          
-                                                                          const SizedBox(height: 10,),
-
-                                                                          Expanded(
-                                                                            child: CarouselSlider(
-                                                                              carouselController: buttonCarouselController,
-                                                                              items: List.generate(
-                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
-                                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
-                                                                                    return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
-                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
-                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-                                                                                        autoDispose: false,
-                                                                                        aspectRatio: 16 / 9,
-                                                                                        fit: BoxFit.contain,
-                                                                                      ),
-                                                                                    );
-                                                                                  }else{
-                                                                                    // return CachedNetworkImage(
-                                                                                    //   fit: BoxFit.contain,
-                                                                                    //   imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                    //   placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                                                    //   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                                                    // );
-                                                                                    return ExtendedImage.network(
-                                                                                      originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
-                                                                                      fit: BoxFit.contain,
-                                                                                      loadStateChanged: (ExtendedImageState loading){
-                                                                                        if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
-                                                                                          return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
-                                                                                        }
-                                                                                      },
-                                                                                      mode: ExtendedImageMode.gesture,
-                                                                                    );
-                                                                                  }
-                                                                                }()),
-                                                                              ),
-                                                                              options: CarouselOptions(
-                                                                                autoPlay: false,
-                                                                                enlargeCenterPage: true,
-                                                                                aspectRatio: 1,
-                                                                                viewportFraction: 1,
-                                                                                initialPage: index,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-
-                                                                          Row(
-                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                            children: [
-                                                                              IconButton(
-                                                                                onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
-                                                                              ),
-                                                                              IconButton(
-                                                                                onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
-                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-
-                                                                          const SizedBox(height: 85,),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                            );
-                                                          },
                                                           child: ((){
                                                             if(index != 1){
                                                               return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true 
                                                               ? BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                   placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                   aspectRatio: 16 / 9,
                                                                   fit: BoxFit.contain,
-                                                                  controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                 ),
                                                               )
                                                               : CachedNetworkImage(
@@ -753,9 +645,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                             placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                             aspectRatio: 16 / 9,
                                                                             fit: BoxFit.contain,
-                                                                            controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                           ),
                                                                         ),
 
@@ -798,9 +690,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                         placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 16 / 9),
+                                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                         aspectRatio: 16 / 9,
                                                                         fit: BoxFit.contain,
-                                                                        controlsConfiguration: const BetterPlayerControlsConfiguration(showControls: false,),
                                                                       ),
                                                                     );
                                                                   }else{
@@ -815,6 +707,94 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               }());
                                                             }
                                                           }()),
+                                                          onTap: (){
+                                                            showGeneralDialog(
+                                                              context: context,
+                                                              transitionDuration: const Duration(milliseconds: 0),
+                                                              barrierDismissible: true,
+                                                              barrierLabel: 'Dialog',
+                                                              pageBuilder: (_, __, ___){
+                                                                return Scaffold(
+                                                                  backgroundColor: Colors.black12.withOpacity(0.7),
+                                                                  body: SizedBox.expand(
+                                                                    child: SafeArea(
+                                                                      child: Column(
+                                                                        children: [
+                                                                          Container(
+                                                                            alignment: Alignment.centerRight,
+                                                                            padding: const EdgeInsets.only(right: 20.0),
+                                                                            child: GestureDetector(
+                                                                              child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
+                                                                              onTap: (){
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                            ),
+                                                                          ),
+                                                                          
+                                                                          const SizedBox(height: 10,),
+
+                                                                          Expanded(
+                                                                            child: CarouselSlider(
+                                                                              carouselController: buttonCarouselController,
+                                                                              items: List.generate(
+                                                                                originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) => ((){
+                                                                                  if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true){
+                                                                                    return BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
+                                                                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                                        placeholder: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 16 / 9),
+                                                                                        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+                                                                                        autoDispose: false,
+                                                                                        aspectRatio: 16 / 9,
+                                                                                        fit: BoxFit.contain,
+                                                                                      ),
+                                                                                    );
+                                                                                  }else{
+                                                                                    return ExtendedImage.network(
+                                                                                      originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
+                                                                                      fit: BoxFit.contain,
+                                                                                      loadStateChanged: (ExtendedImageState loading){
+                                                                                        if(loading.extendedImageLoadState == LoadState.loading || loading.extendedImageLoadState == LoadState.failed){
+                                                                                          return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                                                                        }
+                                                                                      },
+                                                                                      mode: ExtendedImageMode.gesture,
+                                                                                    );
+                                                                                  }
+                                                                                }()),
+                                                                              ),
+                                                                              options: CarouselOptions(
+                                                                                autoPlay: false,
+                                                                                enlargeCenterPage: true,
+                                                                                aspectRatio: 1,
+                                                                                viewportFraction: 1,
+                                                                                initialPage: index,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+
+                                                                          Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: [
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_back_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+                                                                              IconButton(
+                                                                                onPressed: () => buttonCarouselController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear),
+                                                                                icon: const Icon(Icons.arrow_forward_rounded, color: const Color(0xffffffff),),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+
+                                                                          const SizedBox(height: 85,),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
                                                         ),
                                                       );
                                                     }
@@ -1113,7 +1093,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     ListTile(
                                                                       title: const Text('Edit'),
                                                                       leading: const Icon(Icons.edit),
-                                                                      onTap: () async {
+                                                                      onTap: () async{
                                                                         controller.text = controller.text + commentsListener[i].listOfReplies[index].replyBody;
                                                                         await showModalBottomSheet(
                                                                           context: context,
@@ -1352,15 +1332,15 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                       padding: EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: controller,
+                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                        keyboardType: TextInputType.text,
                         cursorColor: Color(0xffFFFFFF),
                         maxLines: 2,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                         decoration: InputDecoration(
-                          fillColor: Color(0xffBDC3C7),
                           filled: true,
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                           labelText: 'Say something...',
+                          fillColor: Color(0xffBDC3C7),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
                           labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                           border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
@@ -1375,12 +1355,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                            entryAnimation: EntryAnimation.DEFAULT,
                             description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            onlyOkButton: true,
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: Colors.red,
+                            onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
@@ -1461,10 +1441,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                   decoration: InputDecoration(
-                    fillColor: Color(0xffBDC3C7),
                     filled: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Color(0xffBDC3C7),
                     labelText: 'Say something...',
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                     border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
@@ -1479,10 +1459,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
                       buttonOkColor: Colors.red,
                       onOkButtonPressed: (){
@@ -1572,10 +1552,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                   decoration: InputDecoration(
-                    fillColor: Color(0xffBDC3C7),
                     filled: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Color(0xffBDC3C7),
                     labelText: 'Say something...',
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                     border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffBDC3C7),), borderRadius: BorderRadius.all(Radius.circular(10)),),
@@ -1590,12 +1570,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Please input a comment.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                      onlyOkButton: true,
+                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       buttonOkColor: Colors.red,
+                      onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
                       },

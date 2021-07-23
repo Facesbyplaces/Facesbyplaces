@@ -103,12 +103,12 @@ class BLMLogin extends StatelessWidget{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
                                       description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                      onlyOkButton: true,
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
                                       buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
                                       onOkButtonPressed: (){
                                         Navigator.pop(context, true);
                                       },
@@ -165,8 +165,8 @@ class BLMLogin extends StatelessWidget{
                         Spacer(),
 
                         SizedBox(
-                          width: 14.93 * SizeConfig.blockSizeHorizontal!,
                           height: 14.93 * SizeConfig.blockSizeHorizontal!,
+                          width: 14.93 * SizeConfig.blockSizeHorizontal!,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(primary: Color(0xff000000), shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10),),),),
                             child: Center(child: Image.asset('assets/icons/apple.png',),),
@@ -273,12 +273,12 @@ class BLMLogin extends StatelessWidget{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                              onlyOkButton: true,
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
@@ -288,12 +288,12 @@ class BLMLogin extends StatelessWidget{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                              onlyOkButton: true,
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
@@ -315,12 +315,12 @@ class BLMLogin extends StatelessWidget{
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                entryAnimation: EntryAnimation.DEFAULT,
                                 description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                onlyOkButton: true,
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                entryAnimation: EntryAnimation.DEFAULT,
                                 buttonOkColor: const Color(0xffff0000),
+                                onlyOkButton: true,
                                 onOkButtonPressed: (){
                                   Navigator.pop(context, true);
                                 },

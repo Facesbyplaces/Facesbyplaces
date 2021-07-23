@@ -27,12 +27,12 @@ class MiscBLMErrorMessageTemplate extends StatelessWidget{
             const SizedBox(height: 30,),
 
             MaterialButton(
-              padding: EdgeInsets.zero,
               child: const Text('Go back', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
               minWidth: SizeConfig.screenWidth! / 2,
-              height: 45,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               color: const Color(0xff888888),
+              padding: EdgeInsets.zero,
+              height: 45,
               onPressed: () async{
                 Navigator.pop(context);
               },

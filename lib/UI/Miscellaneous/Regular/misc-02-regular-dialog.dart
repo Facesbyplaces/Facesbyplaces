@@ -112,8 +112,8 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
     return Dialog(
       shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5))),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
         physics: const ClampingScrollPhysics(),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,

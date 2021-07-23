@@ -75,9 +75,9 @@ class RegularVerifyEmail extends StatelessWidget{
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                               child: PinPut(
-                                fieldsAlignment: MainAxisAlignment.spaceEvenly,
                                 controller: controller,
                                 fieldsCount: 3,
+                                fieldsAlignment: MainAxisAlignment.spaceEvenly,
                                 textStyle: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold, color: const Color(0xff000000),),
                                 followingFieldDecoration: const BoxDecoration(border: const Border(bottom: const BorderSide(color: const Color(0xff000000),),),),
                                 selectedFieldDecoration: const BoxDecoration(border: const Border(bottom: const BorderSide(color: const Color(0xff000000),),),),

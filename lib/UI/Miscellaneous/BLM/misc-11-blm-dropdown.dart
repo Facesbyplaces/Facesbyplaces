@@ -16,7 +16,7 @@ import 'dart:typed_data';
 import 'dart:io';
 import 'dart:ui';
 
-class MiscBLMDropDownTemplate extends StatefulWidget {
+class MiscBLMDropDownTemplate extends StatefulWidget{
   final int postId;
   final bool likePost;
   final int likesCount;
@@ -27,12 +27,12 @@ class MiscBLMDropDownTemplate extends StatefulWidget {
   MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState();
 }
 
-class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
+class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
   GlobalKey qrKey = new GlobalKey();
 
-  void initBranchShare() {
+  void initBranchShare(){
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
@@ -53,17 +53,12 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
   }
 
   Future<void> shareQRCode(String qrData) async{
-    print('The qrData in Blm is $qrData');
     try{
       QrValidationResult qrValidationResult = QrValidator.validate(
         data: qrData,
         version: QrVersions.auto,
         errorCorrectionLevel: QrErrorCorrectLevel.L,
       );
-
-      print('The validation is ${qrValidationResult.status}');
-      print('The validation is ${qrValidationResult.error}');
-      print('The validation is ${qrValidationResult.qrCode}');
 
       if(qrValidationResult.status == QrValidationStatus.valid){
         QrCode? qrCode = qrValidationResult.qrCode;
@@ -73,8 +68,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
           color: const Color(0xff000000),
           gapless: true,
         );
-
-        print('The painter is $painter');
 
         final ByteData bytes = (await painter.toImageData(320))!;
         final Uint8List list = bytes.buffer.asUint8List();
@@ -90,12 +83,12 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
@@ -142,10 +135,10 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
@@ -165,9 +158,9 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                 showGeneralDialog(
                   context: context,
                   barrierColor: Colors.black12.withOpacity(0.7),
+                  transitionDuration: Duration(milliseconds: 0),
                   barrierDismissible: true,
                   barrierLabel: 'Dialog',
-                  transitionDuration: Duration(milliseconds: 0),
                   pageBuilder: (_, __, ___){
                     return SizedBox.expand(
                       child: SafeArea(
@@ -210,7 +203,9 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                                           ),
                                         ),
                                       ),
+
                                       Spacer(),
+
                                       Text(
                                         'Karen Cruz Memorial',
                                         style: TextStyle(
@@ -219,6 +214,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                                           color: Color(0xff2F353D),
                                         ),
                                       ),
+
                                       Text(
                                         'QR Code',
                                         style: TextStyle(
@@ -227,6 +223,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                                           color: const Color(0xff2F353D),
                                         ),
                                       ),
+
                                       Spacer(),
                                     ],
                                   ),
@@ -268,10 +265,10 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate> {
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
@@ -359,12 +356,12 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
@@ -411,10 +408,10 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',)),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',)),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);
@@ -433,9 +430,9 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                 showGeneralDialog(
                   context: context,
                   barrierColor: Colors.black12.withOpacity(0.7),
+                  transitionDuration: Duration(milliseconds: 0),
                   barrierDismissible: true,
                   barrierLabel: 'Dialog',
-                  transitionDuration: Duration(milliseconds: 0),
                   pageBuilder: (_, __, ___){
                     return SizedBox.expand(
                       child: SafeArea(
@@ -467,6 +464,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                   child: Column(
                                     children: [
                                       Spacer(),
+
                                       Center(
                                         child: RepaintBoundary(
                                           key: qrKey,
@@ -478,7 +476,9 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                           ),
                                         ),
                                       ),
+
                                       Spacer(),
+
                                       Text(
                                         'Karen Cruz Memorial',
                                         style: TextStyle(
@@ -487,6 +487,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                           color: Color(0xff2F353D),
                                         ),
                                       ),
+
                                       Text(
                                         'QR Code',
                                         style: TextStyle(
@@ -495,6 +496,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                           color: const Color(0xff2F353D),
                                         ),
                                       ),
+
                                       Spacer(),
                                     ],
                                   ),
@@ -536,10 +538,10 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   await showDialog(
                     context: context,
                     builder: (_) => AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                      entryAnimation: EntryAnimation.DEFAULT,
                       description: Text('Successfully copied the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      entryAnimation: EntryAnimation.DEFAULT,
                       onlyOkButton: true,
                       onOkButtonPressed: (){
                         Navigator.pop(context, true);

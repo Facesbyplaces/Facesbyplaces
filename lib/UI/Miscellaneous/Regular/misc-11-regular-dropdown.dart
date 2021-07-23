@@ -53,17 +53,12 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
   }
 
   Future<void> shareQRCode(String qrData) async{
-    print('The qrData in regular is $qrData');
     try{
       QrValidationResult qrValidationResult = QrValidator.validate(
         data: qrData,
         version: QrVersions.auto,
         errorCorrectionLevel: QrErrorCorrectLevel.L,
       );
-
-      print('The validation is ${qrValidationResult.status}');
-      print('The validation is ${qrValidationResult.error}');
-      print('The validation is ${qrValidationResult.qrCode}');
 
       if(qrValidationResult.status == QrValidationStatus.valid){
         QrCode? qrCode = qrValidationResult.qrCode;
@@ -73,8 +68,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
           color: const Color(0xff000000),
           gapless: true,
         );
-
-        print('The painter is $painter');
 
         final ByteData bytes = (await painter.toImageData(320))!;
         final Uint8List list = bytes.buffer.asUint8List();
@@ -90,12 +83,12 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
         await showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-            entryAnimation: EntryAnimation.DEFAULT,
             description: Text('Invalid QR Code.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-            onlyOkButton: true,
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+            entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
+            onlyOkButton: true,
             onOkButtonPressed: (){
               Navigator.pop(context, true);
             },
@@ -410,15 +403,14 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: widget.memorialId, reportType: widget.reportType,)));
               }else if(dropDownList == 'QR Code'){
                 String qrData = 'Memorial-${widget.memorialId}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
-                // String qrData = 'Post-${widget.postId}-${widget.likePost == true ? 1 : 0}-${widget.likesCount}-${widget.pageType == 'Blm' ? 'Blm' : 'Alm'}'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
 
                 showGeneralDialog(
                   context: context,
                   barrierColor: Colors.black12.withOpacity(0.7),
+                  transitionDuration: Duration(milliseconds: 0),
                   barrierDismissible: true,
                   barrierLabel: 'Dialog',
-                  transitionDuration: Duration(milliseconds: 0),
-                  pageBuilder: (_, __, ___) {
+                  pageBuilder: (_, __, ___){
                     return SizedBox.expand(
                       child: SafeArea(
                         child: Column(

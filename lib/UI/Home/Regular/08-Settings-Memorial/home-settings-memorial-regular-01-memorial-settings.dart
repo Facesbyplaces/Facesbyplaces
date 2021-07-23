@@ -34,7 +34,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
   ValueNotifier<bool> isSwitched3 = ValueNotifier<bool>(false);
   Future<bool>? switchStatus;
 
-  void initState() {
+  void initState(){
     super.initState();
     isSwitched1.value = widget.switchFamily;
     isSwitched2.value = widget.switchFriends;

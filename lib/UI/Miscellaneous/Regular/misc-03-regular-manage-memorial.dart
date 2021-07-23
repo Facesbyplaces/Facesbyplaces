@@ -90,10 +90,10 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
                         description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: false,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
@@ -103,10 +103,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         },
                       ),
                     );
-
-                    print('Leave page here');
-                    print('The memorial id is ${widget.memorialId}');
-                    print('The page type is ${widget.pageType}');
 
                     if(confirmResult == true){
                       context.loaderOverlay.show();
@@ -123,9 +119,10 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
 
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                          builder: (_) => AssetGiffyDialog(
                             description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
                             onOkButtonPressed: (){
@@ -136,9 +133,10 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       }else{
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                          builder: (_) => AssetGiffyDialog(
                             description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
                             onlyOkButton: true,

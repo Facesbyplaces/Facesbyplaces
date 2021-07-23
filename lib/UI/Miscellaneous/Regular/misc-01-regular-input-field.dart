@@ -41,10 +41,10 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
-      obscureText: widget.obscureText,
       keyboardType: widget.type,
       maxLines: widget.maxLines,
       readOnly: widget.readOnly,
+      obscureText: widget.obscureText,
       cursorColor: const Color(0xff000000),
       style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(alignLabelWithHint: true, labelText: widget.labelText, labelStyle: widget.labelTextStyle, focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
@@ -52,7 +52,7 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   }
 }
 
-class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget {
+class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget{
   final String labelText;
   final TextStyle labelTextStyle;
   final TextInputType type;
@@ -79,16 +79,16 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
   Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
-      cursorColor: const Color(0xff000000),
       maxLines: widget.maxLines,
       keyboardType: widget.type,
       readOnly: widget.readOnly,
+      cursorColor: const Color(0xff000000),
       style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
-        fillColor: widget.backgroundColor,
         filled: true,
         alignLabelWithHint: true,
         labelText: widget.labelText,
+        fillColor: widget.backgroundColor,
         labelStyle: widget.labelTextStyle,
         border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
         focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
@@ -231,10 +231,10 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
       onTap: (){
         DatePicker.showDatePicker(
           context,
+          currentTime: DateTime.now(),
           showTitleActions: true,
           minTime: DateTime(1000),
           maxTime: DateTime.now(),
-          currentTime: DateTime.now(),
           locale: LocaleType.en,
           onConfirm: (date){
             String format = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";

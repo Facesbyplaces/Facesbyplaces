@@ -28,23 +28,6 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       tileColor: readStatus == true ? const Color(0xffffffff) : const Color(0xffdddddd),
-      onTap: () async{
-        if(notificationType == 'Memorial'){
-          context.loaderOverlay.show();
-          var memorialProfile = await apiRegularShowMemorial(memorialId: postId);
-          context.loaderOverlay.hide();
-
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: memorialProfile.almMemorial.showMemorialFollower,)));
-        }else if (notificationType == 'Blm'){
-          context.loaderOverlay.show();
-          var blmProfile = await apiBLMShowMemorial(memorialId: postId);
-          context.loaderOverlay.hide();
-
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: blmProfile.blmMemorial.memorialFollower,)));
-        }else if (notificationType == 'Post'){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
-        }
-      },
       leading: GestureDetector(
         child: imageIcon != ''
         ? CircleAvatar(
@@ -74,6 +57,23 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
         ],
       ),
       subtitle: Text(dateCreated, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'RobotoLight', color: const Color(0xff000000),),),
+      onTap: () async{
+        if(notificationType == 'Memorial'){
+          context.loaderOverlay.show();
+          var memorialProfile = await apiRegularShowMemorial(memorialId: postId);
+          context.loaderOverlay.hide();
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: memorialProfile.almMemorial.showMemorialFollower,)));
+        }else if (notificationType == 'Blm'){
+          context.loaderOverlay.show();
+          var blmProfile = await apiBLMShowMemorial(memorialId: postId);
+          context.loaderOverlay.hide();
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: blmProfile.blmMemorial.memorialFollower,)));
+        }else if (notificationType == 'Post'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
+        }
+      },
     );
   }
 }

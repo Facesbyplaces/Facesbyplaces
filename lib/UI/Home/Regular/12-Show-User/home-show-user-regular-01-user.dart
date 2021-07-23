@@ -20,10 +20,9 @@ class HomeRegularUserProfile extends StatefulWidget{
 
 class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   Future<APIRegularShowUserInformation>? showProfile;
-
   WeSlideController controller = WeSlideController();
-  int currentIndex = 0;
   List<Widget> children = [];
+  int currentIndex = 0;
 
   Future<APIRegularShowUserInformation> getProfileInformation() async{
     return await apiRegularShowUserInformation(userId: widget.userId, accountType: widget.accountType);
@@ -69,15 +68,10 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                         length: 2,
                         initialIndex: currentIndex,
                         child: TabBar(
-                          isScrollable: false,
-                          labelColor: const Color(0xff04ECFF),
                           unselectedLabelColor: const Color(0xffCDEAEC),
                           indicatorColor: const Color(0xff04ECFF),
-                          onTap: (int number){
-                            setState(() {
-                              currentIndex = number;
-                            });
-                          },
+                          labelColor: const Color(0xff04ECFF),
+                          isScrollable: false,
                           tabs: [
                             Container(
                               width: SizeConfig.screenWidth! / 2.5,
@@ -89,6 +83,11 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                               child: Center(child: Text('Memorials', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold',),),),
                             ),
                           ],
+                          onTap: (int number){
+                            setState(() {
+                              currentIndex = number;
+                            });
+                          },
                         ),
                       ),
                     ),
@@ -115,13 +114,34 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                         CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
 
                         GestureDetector( // BACKGROUND IMAGE FOR ZOOMING IN
+                          child: Container(
+                            padding: const EdgeInsets.only(bottom: 20.0),
+                            alignment: Alignment.bottomCenter,
+                            child: profile.data!.showUserInformationImage != ''
+                            ? Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.white, width: 3,),
+                              ),
+                              child: CircleAvatar(
+                                radius: 100,
+                                backgroundColor: const Color(0xff888888),
+                                foregroundImage: NetworkImage(profile.data!.showUserInformationImage),
+                              ),
+                            )
+                            : const CircleAvatar(
+                              radius: 100, 
+                              backgroundColor: const Color(0xff888888), 
+                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                            ),
+                          ),
                           onTap: (){
                             showGeneralDialog(
                               context: context,
+                              transitionDuration: const Duration(milliseconds: 0),
                               barrierDismissible: true,
                               barrierLabel: 'Dialog',
-                              transitionDuration: const Duration(milliseconds: 0),
-                              pageBuilder: (_, __, ___) {
+                              pageBuilder: (_, __, ___){
                                 return Scaffold(
                                   backgroundColor: Colors.black12.withOpacity(0.7),
                                   body: SizedBox.expand(
@@ -159,27 +179,6 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                               },
                             );
                           },
-                          child: Container(
-                            padding: const EdgeInsets.only(bottom: 20.0),
-                            alignment: Alignment.bottomCenter,
-                            child: profile.data!.showUserInformationImage != ''
-                            ? Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 3,),
-                              ),
-                              child: CircleAvatar(
-                                radius: 100,
-                                backgroundColor: const Color(0xff888888),
-                                foregroundImage: NetworkImage(profile.data!.showUserInformationImage),
-                              ),
-                            )
-                            : const CircleAvatar(
-                              radius: 100, 
-                              backgroundColor: const Color(0xff888888), 
-                              foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                            ),
-                          ),
                         ),
                       ],
                     ),

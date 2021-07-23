@@ -81,7 +81,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       title: Text('Update Details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                       subtitle: Text('Update your account details', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
                       onTap: (){
-                        print('The user id is ${widget.userId}');
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: widget.userId,)));
                       },
                     ),
@@ -100,14 +99,12 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                              entryAnimation: EntryAnimation.DEFAULT,
                               description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                              onlyOkButton: true,
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
                               buttonOkColor: const Color(0xffff0000),
+                              onlyOkButton: true,
                               onOkButtonPressed: (){
                                 Navigator.pop(context, true);
                               },
@@ -116,9 +113,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           throw Exception('$error');
                         });
                         context.loaderOverlay.hide();
-
-                        print('The value of socialAppSession is $socialAppSession');
-                        print('The value of checkAccount is $checkAccount');
 
                         if(socialAppSession == true && checkAccount == false){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: widget.userId, isAddPassword: true,)));
@@ -162,8 +156,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                       height: 45,
                       onPressed: () async{
                         bool logoutResult = await showDialog(context: (context), builder: (build) => const MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),),);
-
-                        print('The logoutResult is $logoutResult');
 
                         if(logoutResult){
                           context.loaderOverlay.show();

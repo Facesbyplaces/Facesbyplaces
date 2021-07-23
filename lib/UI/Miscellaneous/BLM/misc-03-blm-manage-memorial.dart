@@ -27,7 +27,7 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
   MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState();
 }
 
-class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
+class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
   bool manageButton = false;
   ValueNotifier<bool> followButton = ValueNotifier<bool>(false);
 
@@ -86,21 +86,22 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
             trailing: (() {
               if(widget.managed == true || widget.famOrFriends == true){
                 return MaterialButton(
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
-                  textColor: const Color(0xffffffff),
-                  splashColor: const Color(0xff4EC9D4),
+                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF),),),
                   child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
-                  height: 35,
-                  shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
+                  splashColor: const Color(0xff4EC9D4),
+                  textColor: const Color(0xffffffff),
                   color: const Color(0xff04ECFF),
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  height: 35,
                   onPressed: () async{
                     bool confirmResult = await showDialog(
                       context: context,
-                      builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
+                      builder: (_) => AssetGiffyDialog(
                         description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: false,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
@@ -112,9 +113,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                     );
 
                     if(confirmResult == true){
-                      // context.loaderOverlay.show();
-                      // String result = await apiBLMLeavePage(memorialId: widget.memorialId);
-                      // context.loaderOverlay.hide();
                       String result = 'Failed';
                       if(widget.pageType == 'Memorial'){
                         result = await apiRegularLeavePage(memorialId: widget.memorialId);
@@ -127,10 +125,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
 
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                            entryAnimation: EntryAnimation.DEFAULT,
+                          builder: (_) => AssetGiffyDialog(
                             description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
@@ -140,12 +139,13 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                       }else{
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                            entryAnimation: EntryAnimation.DEFAULT,
+                          builder: (_) => AssetGiffyDialog(
                             description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            onlyOkButton: true,
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
+                            onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
@@ -157,21 +157,22 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                 );
               }else if(followButtonListener == true){
                 return MaterialButton(
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
-                  textColor: const Color(0xffffffff),
-                  splashColor: const Color(0xff4EC9D4),
-                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
-                  height: 35,
                   shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
+                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                  splashColor: const Color(0xff4EC9D4),
+                  textColor: const Color(0xffffffff),
                   color: const Color(0xff04ECFF),
-                  onPressed: () async {
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  height: 35,
+                  onPressed: () async{
                     bool confirmResult = await showDialog(
                       context: context,
-                      builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                        entryAnimation: EntryAnimation.DEFAULT,
+                      builder: (_) => AssetGiffyDialog(
                         description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: false,
                         onOkButtonPressed: (){
                           Navigator.pop(context, true);
@@ -192,10 +193,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
 
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                            entryAnimation: EntryAnimation.DEFAULT,
+                          builder: (_) => AssetGiffyDialog(
                             description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
@@ -205,12 +207,13 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                       }else{
                         await showDialog(
                           context: context,
-                          builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                            entryAnimation: EntryAnimation.DEFAULT,
+                          builder: (_) => AssetGiffyDialog(
                             description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            onlyOkButton: true,
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
+                            onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
                             },
@@ -222,15 +225,15 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                 );
               }else{
                 return MaterialButton(
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
-                  textColor: const Color(0xff4EC9D4),
-                  splashColor: const Color(0xff4EC9D4),
-                  child: Text('Join', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold',),),
-                  height: 35,
                   shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff4EC9D4)),),
+                  child: Text('Join', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold',),),
+                  splashColor: const Color(0xff4EC9D4),
+                  textColor: const Color(0xff4EC9D4),
                   color: const Color(0xffffffff),
-                  onPressed: () async {
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  height: 35,
+                  onPressed: () async{
                     context.loaderOverlay.show();
                     bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: true);
                     context.loaderOverlay.hide();
@@ -240,10 +243,11 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
 
                       await showDialog(
                         context: context,
-                        builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                          entryAnimation: EntryAnimation.DEFAULT,
+                        builder: (_) => AssetGiffyDialog(
                           description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          entryAnimation: EntryAnimation.DEFAULT,
                           onlyOkButton: true,
                           onOkButtonPressed: (){
                             Navigator.pop(context, true);
@@ -253,12 +257,13 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab> {
                     }else{
                       await showDialog(
                         context: context,
-                        builder: (_) => AssetGiffyDialog(image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                          entryAnimation: EntryAnimation.DEFAULT,
+                        builder: (_) => AssetGiffyDialog(
                           description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                          onlyOkButton: true,
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),
+                          onlyOkButton: true,
                           onOkButtonPressed: (){
                             Navigator.pop(context, true);
                           },
