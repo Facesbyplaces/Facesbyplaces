@@ -46,11 +46,6 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def nearby
-        # get user location
-        user_location
-        # get account type
-        account
-
         @blms = fetched_nearby_blms
         @memorials = fetched_nearby_alms
 
@@ -161,6 +156,13 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def fetched_nearby_blms
+        lon = params[:longitude].to_f
+        lat = params[:latitude].to_f
+
+        user_location = Geocoder.search([lat,lon])
+        # get account type
+        account
+
         blm_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Blm').pluck('page_id') : []
         blm = Blm.where.not(id: blm_pages_owned).near([lat,lon], 50)
         
@@ -168,6 +170,13 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def fetched_nearby_alms
+        lon = params[:longitude].to_f
+        lat = params[:latitude].to_f
+
+        user_location = Geocoder.search([lat,lon])
+        # get account type
+        account
+        
         memorial_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Memorial').pluck('page_id') : []
         memorial = Memorial.where.not(id: memorial_pages_owned).near([lat,lon], 50)
         
