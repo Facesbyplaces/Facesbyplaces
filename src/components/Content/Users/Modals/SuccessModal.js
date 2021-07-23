@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TableUserAction, ViewUserAction } from "../../../../../redux/actions";
+import { TableUserAction, ViewUserAction } from "../../../../redux/actions";
 
 export const SuccessModal = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
@@ -24,8 +24,6 @@ export const SuccessModal = ({ showModal, setShowModal }) => {
         return "foo";
     }
   };
-
-  console.log("Action: ", tab.option);
 
   return (
     <>
@@ -103,17 +101,29 @@ export const SuccessModal = ({ showModal, setShowModal }) => {
                 }
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-md btn-primary font-weight-bold"
-                  style={{ width: "200px" }}
-                  data-dismiss="modal"
-                  onClick={() =>
-                    handleActionClick(tab.id, tab.account_type, "v")
-                  }
-                >
-                  Okay
-                </button>
+                {tab.option == "d" || tab.option == "a" ? (
+                  <button
+                    type="button"
+                    className="btn btn-md btn-primary font-weight-bold"
+                    style={{ width: "200px" }}
+                    data-dismiss="modal"
+                    onClick={() => handleActionClick()}
+                  >
+                    Okay
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-md btn-primary font-weight-bold"
+                    style={{ width: "200px" }}
+                    data-dismiss="modal"
+                    onClick={() =>
+                      handleActionClick(tab.id, tab.account_type, "v")
+                    }
+                  >
+                    Okay
+                  </button>
+                )}
               </div>
             </div>
           </div>

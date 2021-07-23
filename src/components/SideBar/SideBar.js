@@ -35,7 +35,7 @@ export default function SideBar() {
             data-menu-dropdown-timeout={500}
           >
             {/*begin::Menu Nav*/}
-            <ul className="menu-nav">
+            {/* <ul className="menu-nav">
               <li
                 className="menu-item menu-item-submenu"
                 aria-haspopup="true"
@@ -134,7 +134,7 @@ export default function SideBar() {
                   </ul>
                 </div>
               </li>
-            </ul>
+            </ul> */}
             {/*end::Menu Nav*/}
           </div>
           {/*end::Menu Container*/}

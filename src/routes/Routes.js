@@ -12,7 +12,7 @@ import axios from "../auxiliary/axios";
 
 //COMPONENTS
 import { Home } from "../components/Home";
-import UserDashboard from "../components/Content/UserDashboard/UserDashboard";
+import Dashboard from "../components/Content/Dashboard/Dashboard";
 import MemorialDashboard from "../components/Content/MemorialDashboard/MemorialDashboard";
 import PostDashboard from "../components/Content/PostDashboard/PostDashboard";
 import ReportDashboard from "../components/Content/ReportDashboard/ReportDashboard";
@@ -55,11 +55,11 @@ export const Routes = withRouter(({ history }) => {
     return (
       <Switch>
         <Redirect from="/admin" to="/users" />
-        <Route path="/users" component={UserDashboard} />
-        <Route path="/memorials" component={MemorialDashboard} />
-        <Route path="/posts" component={PostDashboard} />
-        <Route path="/reports" component={ReportDashboard} />
-        <Route path="/transactions" component={TransactionDashboard} />
+        <Route path="/users" component={Dashboard} />
+        <Route path="/memorials" component={Dashboard} />
+        <Route path="/posts" component={Dashboard} />
+        <Route path="/reports" component={Dashboard} />
+        <Route path="/transactions" component={Dashboard} />
 
         {/* Invalid Urls */}
         <Route path="/404" component={Oops} />

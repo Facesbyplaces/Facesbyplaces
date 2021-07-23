@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TableUserAction, ViewUserAction } from "../../../../../redux/actions";
+import { TableUserAction, ViewUserAction } from "../../../../redux/actions";
 import HashLoader from "react-spinners/HashLoader";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 
 export const ContactUser = ({ user, showModal, setShowModal }) => {
   const dispatch = useDispatch();

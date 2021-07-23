@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { TableUserAction } from "../../../../../redux/actions";
+import { useSelector } from "react-redux";
 
 import Header from "./Header";
-import Body from "./Body";
-import User from "../UserProfile/User";
+import DataTable from "./DataTable";
+import ViewUser from "../UserProfile/ViewUser";
 import AddUser from "../UserProfile/AddUser";
-import { SuccessModal } from "../UserProfile/SuccessModal";
+import { SuccessModal } from "../Modals/SuccessModal";
 
 export default function UsersTable() {
+  const [search, setSearch] = useState(false);
+  const [keywords, setKeywords] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [pageType, setPageType] = useState(2);
   const { tab } = useSelector(({ tab }) => ({
@@ -23,9 +24,9 @@ export default function UsersTable() {
       {(() => {
         switch (tab.option) {
           case "v":
-            return <User />;
+            return <ViewUser />;
           case "e":
-            return <User />;
+            return <ViewUser />;
           case "a":
             return <AddUser />;
           case "d":
@@ -38,7 +39,7 @@ export default function UsersTable() {
                 />
                 <div className="card card-custom">
                   <Header />
-                  <Body />
+                  <DataTable />
                 </div>
               </div>
             );
@@ -46,8 +47,20 @@ export default function UsersTable() {
             return (
               <div className="container">
                 <div className="card card-custom">
-                  <Header />
-                  <Body pageType={pageType} setPageType={setPageType} />
+                  <Header
+                    pageType={pageType}
+                    setPageType={setPageType}
+                    search={search}
+                    setSearch={setSearch}
+                    keywords={keywords}
+                    setKeywords={setKeywords}
+                  />
+                  <DataTable
+                    search={search}
+                    setSearch={setSearch}
+                    keywords={keywords}
+                    pageType={pageType}
+                  />
                 </div>
               </div>
             );

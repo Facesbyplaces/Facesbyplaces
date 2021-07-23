@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { DeleteUserAction } from "../../../../../../redux/actions";
-import axios from "../../../../../../auxiliary/axios";
+import { DeleteUserAction } from "../../../../redux/actions";
+import axios from "../../../../auxiliary/axios";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";
@@ -15,8 +15,6 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
 
   const handleDeleteUser = (id, account_type, option) => {
     setLoading(true);
-    console.log("ID: ", tab.id);
-    console.log("Account Type: ", tab.account_type);
     axios
       .post("/api/v1/admin/users/delete", {
         id: tab.id,

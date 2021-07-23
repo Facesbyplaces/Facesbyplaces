@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { TableUserAction } from "../../../../../redux/actions";
+import { TableUserAction } from "../../../../redux/actions";
 import EditUser from "./EditUser";
-import { ContactUser } from "./ContactUser";
+import { ContactUser } from "../Modals/ContactUser";
 
-export default function User() {
+export default function ViewUser() {
   const dispatch = useDispatch();
   const [user, setUser] = useState([]);
   const [image, setImage] = useState(null);
@@ -15,15 +15,9 @@ export default function User() {
   const { tab } = useSelector(({ tab }) => ({
     tab: tab,
   }));
-  console.log(profile);
 
   const handleTableClick = () => {
     dispatch(TableUserAction());
-  };
-
-  const handleProfileClick = () => {
-    setProfile((prev) => !prev);
-    console.log(profile);
   };
 
   useEffect(() => {
@@ -34,7 +28,6 @@ export default function User() {
       .then((response) => {
         setUser(response.data);
         setImage(response.data.image);
-        console.log("Response: ", response.data);
       })
       .catch((error) => {
         console.log(error);

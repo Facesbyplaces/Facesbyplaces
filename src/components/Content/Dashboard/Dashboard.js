@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
+import {
+  TableUserAction,
+  TableMemorialAction,
+  TablePostAction,
+  TableReportAction,
+} from "../../../redux/actions";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
@@ -7,14 +13,18 @@ import HashLoader from "react-spinners/HashLoader";
 import Navbar from "../../Navbar/Navbar";
 import Topbar from "../../Navbar/Topbar/Topbar";
 import SideBar from "../../SideBar/SideBar";
-import Footer from "../../Footer";
-import UsersTable from "./Users/UserTable/UsersTable";
 import Assets from "../../Assets";
+import Footer from "../../Footer";
+import UsersTable from "../Users/UserTable/UsersTable";
+import MemorialsTable from "../MemorialDashboard/Memorials/MemorialTable/MemorialsTable";
+import PostTable from "../PostDashboard/Posts/PostTable/PostTable";
+import ReportTable from "../ReportDashboard/Reports/ReportTable/ReportTable";
+import TransactionTable from "../TransactionDashboard/Transactions/TransactionTable/TransactionTable";
 // import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
 
-const UserDashboard = () => {
+const Dashboard = (props) => {
   const [loading, setLoading] = useState(false);
-  const [item, setItem] = useState("users");
+  const [item, setItem] = useState(props.match.path.substring(1));
 
   useEffect(() => {
     setLoading(true);
@@ -34,46 +44,32 @@ const UserDashboard = () => {
         ) : (
           <div className="d-flex flex-row flex-column-fluid page">
             <SideBar />
-            {/*begin::Wrapper*/}
             <div
               className="d-flex flex-column flex-row-fluid wrapper"
               id="kt_wrapper"
             >
-              {/*begin::Header*/}
               <div id="kt_header" className="header">
-                {/*begin::Container*/}
                 <div className="container-fluid d-flex align-items-stretch justify-content-between">
                   <Navbar item={item} />
                   <Topbar />
                 </div>
-                {/*end::Container*/}
               </div>
-              {/*end::Header*/}
-
-              {/*begin::Content*/}
-
-              <UsersTable />
-
-              {/*end::Content*/}
+              {
+                {
+                  users: <UsersTable />,
+                  memorials: <MemorialsTable />,
+                  posts: <PostTable />,
+                  reports: <ReportTable />,
+                  transactions: <TransactionTable />,
+                }[item]
+              }
               <Footer />
             </div>
-            {/*end::Wrapper*/}
           </div>
         )}
       </div>
-      {/*end::Main*/}
-
-      {/*begin::Global Config(global config for global JS scripts)*/}
-      {/*end::Global Config*/}
-      {/*begin::Global Theme Bundle(used by all pages)*/}
-      {/*end::Global Theme Bundle*/}
-      {/*begin::Page Vendors(used by this page)*/}
-      {/*end::Page Vendors*/}
-      {/*begin::Page Scripts(used by this page)*/}
-      {/*end::Page Scripts*/}
-      {/*end::Body*/}
     </div>
   );
 };
 
-export default UserDashboard;
+export default Dashboard;

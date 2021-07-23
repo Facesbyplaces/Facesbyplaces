@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DeleteModal } from "./DeleteModal";
+import { DeleteModal } from "../../Modals/DeleteModal";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
@@ -8,7 +8,7 @@ import {
   ViewUserAction,
   EditUserAction,
   DeleteUserAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
 export default function DataTableRowUserData({ users, search }) {
   const [showModal, setShowModal] = useState(false);
@@ -31,10 +31,10 @@ export default function DataTableRowUserData({ users, search }) {
   const renderedUsers = users.map((user) => (
     <tr>
       <td className="pl-2 py-6">
-        <label className="checkbox checkbox-lg checkbox-inline">
+        {/* <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
           <span />
-        </label>
+        </label> */}
       </td>
       <td>
         <a

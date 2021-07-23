@@ -9,9 +9,6 @@ import {
 
 export default function Navbar({ item }) {
   const dispatch = useDispatch();
-  const { navbarTab } = useSelector(({ navbarTab }) => ({
-    navbarTab: navbarTab,
-  }));
   const { auth_data } = useSelector(({ auth_data }) => ({
     auth_data: auth_data,
   }));

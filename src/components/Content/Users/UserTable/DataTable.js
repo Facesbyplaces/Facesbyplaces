@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 
 import DataTableRowUserData from "./DataTableRowData/DataTableRowUserData";
 //Loader
@@ -19,7 +19,6 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
         params: { keywords: keywords, page: page },
       })
       .then((response) => {
-        console.log("Searched User: ", response);
         setAlmUsers(response.data.users);
         setBlmUsers(response.data.users);
       })
@@ -30,7 +29,7 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
   };
 
   {
-    search ? handleSearch() : console.log("");
+    search ? handleSearch() : console.log("Fetching...");
   }
 
   useEffect(() => {
@@ -165,8 +164,7 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
         setLoader(false);
         setBlmUsers(response.data.users.blm);
         setAlmUsers(response.data.users.alm);
-
-        console.log("User Response: ", response.data.users);
+        console.log("Fetched!");
       })
       .catch((error) => {
         console.log(error.response);
@@ -174,68 +172,70 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
   };
 
   return (
-    <div className="table-responsive">
-      <table
-        className="table table-hover table-head-custom table-vertical-center"
-        id="kt_advance_table_widget_2"
-      >
-        <thead>
-          <tr className="text-uppercase">
-            <th className="pl-2" style={{ width: "40px" }}>
-              <label className="checkbox checkbox-lg checkbox-inline mr-2">
-                <input type="checkbox" defaultValue={1} />
-                <span />
-              </label>
-            </th>
-            <th className="pl-0" style={{ minWidth: "100px" }}>
-              user id
-            </th>
-            <th style={{ minWidth: "120px" }}>email</th>
-            <th style={{ minWidth: "150px" }}>name</th>
-            <th style={{ minWidth: "150px" }}>verified</th>
-            <th style={{ minWidth: "130px" }}>type</th>
-            <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
-              action
-            </th>
-          </tr>
-        </thead>
-        {loader ? (
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div
-                  className="loader-container"
-                  style={{ width: "100%", height: "100vh" }}
-                >
-                  <HashLoader color={"#04ECFF"} loading={loader} size={70} />
-                </div>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
+    <div className="card-body pt-0">
+      <div className="table-responsive">
+        <table
+          className="table table-hover table-head-custom table-vertical-center"
+          id="kt_advance_table_widget_2"
+        >
+          <thead>
+            <tr className="text-uppercase">
+              <th className="pl-2" style={{ width: "40px" }}>
+                {/* <label className="checkbox checkbox-lg checkbox-inline mr-2">
+                  <input type="checkbox" defaultValue={1} />
+                  <span />
+                </label> */}
+              </th>
+              <th className="pl-0" style={{ minWidth: "100px" }}>
+                user id
+              </th>
+              <th style={{ minWidth: "120px" }}>email</th>
+              <th style={{ minWidth: "150px" }}>name</th>
+              <th style={{ minWidth: "150px" }}>verified</th>
+              <th style={{ minWidth: "130px" }}>type</th>
+              <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
+                action
+              </th>
             </tr>
-          </tbody>
-        ) : pageType == 2 ? (
-          <DataTableRowUserData users={alm_users} search={search} />
-        ) : (
-          <DataTableRowUserData users={blm_users} search={search} />
-        )}
-      </table>
-      <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <div className="d-flex align-items-center">
-          {renderBackButton()}
-          <a
-            className={
-              "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
-            }
-          >
-            {page}
-          </a>
-          {renderNextButton()}
+          </thead>
+          {loader ? (
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div
+                    className="loader-container"
+                    style={{ width: "100%", height: "100vh" }}
+                  >
+                    <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          ) : pageType == 2 ? (
+            <DataTableRowUserData users={alm_users} search={search} />
+          ) : (
+            <DataTableRowUserData users={blm_users} search={search} />
+          )}
+        </table>
+        <div className="d-flex justify-content-between align-items-center flex-wrap">
+          <div className="d-flex align-items-center">
+            {renderBackButton()}
+            <a
+              className={
+                "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+              }
+            >
+              {page}
+            </a>
+            {renderNextButton()}
+          </div>
         </div>
       </div>
     </div>
