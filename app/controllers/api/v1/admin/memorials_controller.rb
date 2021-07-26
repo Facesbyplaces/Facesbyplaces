@@ -230,7 +230,7 @@ class Api::V1::Admin::MemorialsController < ApplicationController
     end
 
     def set_memorial
-        if params[:page].present? || blm_details_params[:precinct].present? || params[:page] === "Blm"
+        if params[:page].present? && params[:page] === "Blm" || blm_details_params[:precinct].present?
             @blm = Blm.find(params[:id])
         else
             @memorial = Memorial.find(params[:id])

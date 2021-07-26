@@ -113,11 +113,6 @@ class ApplicationController < ActionController::Base
                     "content_available": true,
                 },
                 "priority": "high",
-                "android": {
-                    "notification": {
-                        "sound": 'default'
-                    },
-                },
                 "data": {
                     "recipient": recipient,
                     "actor": actor,
