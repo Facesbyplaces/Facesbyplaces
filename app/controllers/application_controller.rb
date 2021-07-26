@@ -110,6 +110,13 @@ class ApplicationController < ActionController::Base
                     "title": title,    
                     "body": message,
                     "sound": "default",
+                    "content_available": true,
+                },
+                "priority": "high",
+                "android": {
+                    "notification": {
+                        "sound": 'default'
+                    },
                 },
                 "data": {
                     "recipient": recipient,
