@@ -136,12 +136,12 @@ class Api::V1::Admin::MemorialsController < ApplicationController
         check = params_presence(params)
         if check == true
             # Update blm details
-            @blm.update(blm_details_params)
+            @memorial.update(blm_details_params)
 
             # Update relationship of the current page admin to the page
             # blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
-            return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated details"}
+            return render json: {blm: BlmSerializer.new( @memorial ).attributes, status: "updated details"}
         else
             return render json: {error: "#{check} is empty"}
         end
@@ -149,8 +149,8 @@ class Api::V1::Admin::MemorialsController < ApplicationController
 
     def updateBlmImages
         # check if memorial is updated successfully
-        if @blm.update(blm_images_params)
-            return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"}
+        if @memorial.update(blm_images_params)
+            return render json: {blm: BlmSerializer.new( @memorial ).attributes, status: "updated images"}
         else
             return render json: {status: 'Error'}
         end
@@ -230,8 +230,8 @@ class Api::V1::Admin::MemorialsController < ApplicationController
     end
 
     def set_memorial
-        if params[:page].present? && params[:page] === "Blm" || blm_details_params[:precinct].present?
-            @blm = Blm.find(params[:id])
+        if (params[:page].present? && params[:page] === "Blm") || (blm_details_params[:precinct].present?)
+            @memorial = Blm.find(params[:id])
         else
             @memorial = Memorial.find(params[:id])
         end
