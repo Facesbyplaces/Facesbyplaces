@@ -58,7 +58,7 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
   final TabController controller = TabController(initialIndex: 0, length: 3, vsync: UINewlyInstalledState());
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return RepaintBoundary(
       child: Stack(
         children: [
@@ -206,7 +206,7 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02>{
   final TabController controller = TabController(initialIndex: 1, length: 3, vsync: UINewlyInstalledState());
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return RepaintBoundary(
       child: Stack(
         children: [
@@ -368,8 +368,8 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03>{
             ),
           ),
           SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            physics: const ClampingScrollPhysics(),
             child: Align(
               alignment: Alignment.center,
               child: Column(

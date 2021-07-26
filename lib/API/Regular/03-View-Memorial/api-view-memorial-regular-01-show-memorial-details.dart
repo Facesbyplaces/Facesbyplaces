@@ -22,6 +22,8 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
 
   Dio dioRequest = Dio();
 
+  print('The memorial id is $memorialId');
+
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
     options: Options(
       followRedirects: false,
@@ -36,7 +38,7 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
       }
     ),  
   );
-
+  
   print('The status code of regular show memorial details is ${response.statusCode}');
 
   if(response.statusCode == 200){

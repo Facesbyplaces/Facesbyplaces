@@ -21,6 +21,8 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({requi
 
   Dio dioRequest = Dio();
 
+  print('The memorial id is $memorialId');
+
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
     options: Options(
       followRedirects: false,

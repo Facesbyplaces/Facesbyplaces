@@ -89,9 +89,9 @@ class UILogin01 extends StatelessWidget{
 
                       Expanded(
                         child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 3.75, right: SizeConfig.blockSizeHorizontal! * 5,),
                           child: Text('Remembering friends and family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.5, color: const Color(0xff2F353D), fontFamily: 'NexaRegular'),),
+                          padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 3.75, right: SizeConfig.blockSizeHorizontal! * 5,),
+                          alignment: Alignment.center,
                         ),
                       ),
                     ],
@@ -113,7 +113,7 @@ class UILogin01 extends StatelessWidget{
                       style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff04ECFF), fontFamily: 'NexaRegular',),
                       text: 'Login',
                       recognizer: TapGestureRecognizer()
-                      ..onTap = () {
+                      ..onTap = (){
                         Navigator.pushNamed(context, '/regular/login');
                       },
                     ),

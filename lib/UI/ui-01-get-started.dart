@@ -21,7 +21,6 @@ class PushNotificationService{
   PushNotificationService(this.fcm, this.context);
 
   Future initialise() async{
-
     String token = (await fcm.getToken())!;
     print("FirebaseMessaging token: $token");
 
@@ -41,7 +40,6 @@ class PushNotificationService{
       print('The message on pressed is ${event.data['dataType']}');
       print('The message on pressed is ${event.notification!.title}');
       print('The message on pressed is ${event.notification!.body}');
-
 
       if(event.data['dataType'] == 'Post'){
         if(event.data['postType'] == 'Blm'){
@@ -92,7 +90,6 @@ class UIGetStartedState extends State<UIGetStarted>{
 
     if(login){
       var value1 = await FlutterBranchSdk.getLatestReferringParams();
-
       if(resetType == 'Regular'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
       }else{
@@ -107,7 +104,6 @@ class UIGetStartedState extends State<UIGetStarted>{
 
     if(login){
       FlutterBranchSdk.logout();
-
       if(pageType == 'Blm'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
       }else{
@@ -154,16 +150,16 @@ class UIGetStartedState extends State<UIGetStarted>{
                 child: Stack(
                   children: [
                     Container(
-                      color: Colors.black,
-                      width: SizeConfig.screenWidth,
-                      height: SizeConfig.blockSizeVertical!* 50,
                       child: Image.asset('assets/icons/Collage Image.png', fit: BoxFit.contain,),
+                      height: SizeConfig.blockSizeVertical!* 50,
+                      width: SizeConfig.screenWidth,
+                      color: Colors.black,
                     ),
 
                     Positioned(
+                      child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical! * 27.98, width: SizeConfig.blockSizeVertical! * 45.81,),
                       top: SizeConfig.blockSizeVertical! * 10.0,
                       left: SizeConfig.blockSizeVertical! * 6,
-                      child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical! * 27.98, width: SizeConfig.blockSizeVertical! * 45.81,),
                     ),
                   ],
                 )

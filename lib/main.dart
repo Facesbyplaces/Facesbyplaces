@@ -62,6 +62,12 @@ void main() async{
     sound: true,
   );
 
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
   print('User granted permission for push notification: ${settings.authorizationStatus}');
 
   final sharedPrefs = await SharedPreferences.getInstance();
