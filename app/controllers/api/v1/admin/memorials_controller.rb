@@ -1,7 +1,6 @@
 class Api::V1::Admin::MemorialsController < ApplicationController
     before_action :admin_only
     before_action :set_memorial, only: [:updateMemorial, :updateMemorialImages, :updateBlm, :updateBlmImages, :showMemorial, :deleteMemorial]
-    # before_action :set_blm, only: [:updateBlm, :updateBlmImages]
 
     # Memorial
     def usersSelection #for create memorial users selection
@@ -141,7 +140,8 @@ class Api::V1::Admin::MemorialsController < ApplicationController
             # Update relationship of the current page admin to the page
             # blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
-            return render json: {blm: BlmSerializer.new( @memorial ).attributes, status: "updated details"}
+            return render json: @memorial
+            # {blm: BlmSerializer.new( @memorial ).attributes, status: "updated details"}
         else
             return render json: {error: "#{check} is empty"}
         end
@@ -235,10 +235,6 @@ class Api::V1::Admin::MemorialsController < ApplicationController
         else
             @memorial = Memorial.find(params[:id])
         end
-    end
-
-    def set_blm
-        @blm = Blm.find(params[:id])
     end
 
     def save_memorial(memorial, user)        
