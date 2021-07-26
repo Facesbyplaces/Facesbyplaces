@@ -1,7 +1,7 @@
 class Api::V1::Admin::MemorialsController < ApplicationController
     before_action :admin_only
-    before_action :set_memorial, only: [:updateMemorial, :updateMemorialImages, :deleteMemorial]
-    before_action :set_blm, only: [:updateBlm, :updateBlmImages, :deleteMemorial]
+    before_action :set_memorial, only: [:updateMemorial, :updateMemorialImages, :updateBlm, :updateBlmImages, :showMemorial, :deleteMemorial]
+    # before_action :set_blm, only: [:updateBlm, :updateBlmImages]
 
     # Memorial
     def usersSelection #for create memorial users selection
@@ -97,12 +97,13 @@ class Api::V1::Admin::MemorialsController < ApplicationController
     end
     
     def showMemorial
-        memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
+        # memorial = Blm.find(params[:id])
+        # where(page_id: params[:id]).where(page_type: params[:page]).first
         
-        if memorial
-            render json: memorial
+        if @memorial
+            render json: @memorial
         else
-            render json: {errors: "Page not found"}
+            render json: {errors: "Page not found"}, status: 404
         end
     end
     
@@ -156,24 +157,26 @@ class Api::V1::Admin::MemorialsController < ApplicationController
     end  
     
     def deleteMemorial
-        if params[:page] == "Memorial"
-            @memorial.destroy()
+        if params[:page] === "Memorial"
+            # @memorial = set_memorial
 
             adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
-
             adminsRaw.each do |admin_id|
                 AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: params[:id]).first.destroy 
             end
+
+            @memorial.destroy()
             
             render json: {status: "deleted"}
-        elsif params[:page] == "Blm"
-            @blm.destroy()
+        elsif params[:page] === "Blm"
+            # @blm = set_blm
 
-            adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
-
+            adminsRaw = Blm.find(params[:id]).roles.first.users.pluck('id')
             adminsRaw.each do |admin_id|
                 User.find(admin_id).roles.where(resource_type: 'Blm', resource_id: params[:id]).first.destroy 
             end
+
+            @blm.destroy()
             
             render json: {status: "deleted"}
         end
@@ -227,7 +230,11 @@ class Api::V1::Admin::MemorialsController < ApplicationController
     end
 
     def set_memorial
-        @memorial = Memorial.find(params[:id])
+        if params[:page].present? || blm_details_params[:precinct].present? || params[:page] === "Blm"
+            @blm = Blm.find(params[:id])
+        else
+            @memorial = Memorial.find(params[:id])
+        end
     end
 
     def set_blm

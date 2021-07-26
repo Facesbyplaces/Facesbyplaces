@@ -1,7 +1,7 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :authenticate_user, except: [:show]
     before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
-    before_action :set_memorial, except: [:create, :followersIndex, :familyIndex, :adminIndex]
+    before_action :set_memorial, except: [:create, :followersIndex, :adminIndex]
     before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
 
     def create
@@ -185,6 +185,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def set_memorial
+        id = params[:id] || params[:memorialId]
         @memorial = Memorial.find(params[:id])
     end
 

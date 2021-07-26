@@ -109,6 +109,7 @@ class ApplicationController < ActionController::Base
                 "notification": { 
                     "title": title,    
                     "body": message,
+                    "sound": "default",
                 },
                 "data": {
                     "recipient": recipient,
