@@ -147,7 +147,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
 
     def notif_type
-        @notif_type = "Post"
+        return notif_type = "Post"
     end
 
     def like
@@ -185,10 +185,10 @@ class Api::V1::Posts::CommentsController < ApplicationController
                 # check if user owns the post
                 if user == comment.post.account 
                     message = "#{user().first_name} commented on your post"
-                    send_notif(user, message, comment, @notif_type)
+                    send_notif(user, message, comment, notif_type)
                 else comment.post.tagpeople.where(account: user).first
                     message = "#{user().first_name} commented on a post that you're tagged in"
-                    send_notif(user, message, comment, @notif_type)
+                    send_notif(user, message, comment, notif_type)
                 # else
                 #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
                 #     #Push Notification
@@ -207,10 +207,10 @@ class Api::V1::Posts::CommentsController < ApplicationController
                 # check if user owns the post
                 if user == comment.post.account 
                     message = "#{user().first_name} commented on your post"
-                    send_notif(user, message, comment, @notif_type)
+                    send_notif(user, message, comment, notif_type)
                 else comment.post.tagpeople.where(account: user).first
                     message = "#{user().first_name} commented on a post that you're tagged in"
-                    send_notif(user, message, comment, @notif_type)
+                    send_notif(user, message, comment, notif_type)
                 # else
                 #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
                 #     #Push Notification
@@ -231,10 +231,10 @@ class Api::V1::Posts::CommentsController < ApplicationController
                     # check if user owns the post
                     if user == comment.post.account 
                         message = "#{user().first_name} commented on your post"
-                        send_notif(user, message, comment, @notif_type)
+                        send_notif(user, message, comment, notif_type)
                     else comment.post.tagpeople.where(account: user).first
                         message = "#{user().first_name} commented on a post that you're tagged in"
-                        send_notif(user, message, comment, @notif_type)
+                        send_notif(user, message, comment, notif_type)
                     # else
                     #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
                     #     #Push Notification

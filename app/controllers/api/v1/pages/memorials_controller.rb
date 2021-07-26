@@ -185,7 +185,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def set_memorial
-        id = params[:id] || params[:memorialId]
+        id = params[:id] 
         @memorial = Memorial.find(params[:id])
     end
 
