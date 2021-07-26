@@ -13,10 +13,6 @@ import axios from "../auxiliary/axios";
 //COMPONENTS
 import { Home } from "../components/Home";
 import Dashboard from "../components/Content/Dashboard/Dashboard";
-import MemorialDashboard from "../components/Content/MemorialDashboard/MemorialDashboard";
-import PostDashboard from "../components/Content/PostDashboard/PostDashboard";
-import ReportDashboard from "../components/Content/ReportDashboard/ReportDashboard";
-import TransactionDashboard from "../components/Content/TransactionDashboard/TransactionDashboard";
 import Oops from "../components/Oops";
 
 export const Routes = withRouter(({ history }) => {

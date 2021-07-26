@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DeleteModal } from "./DeleteModal";
+import { DeleteModal } from "../../Modals/DeleteModal";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
@@ -8,17 +8,14 @@ import {
   ViewMemorialAction,
   EditMemorialAction,
   DeleteMemorialAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
 export default function DataTableRowBlmData({ memorials, search, pageType }) {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const page_type = pageType === 2 ? "Memorial" : "Blm";
 
-  console.log(memorials);
-
   const handleViewClick = (id, page, option, type) => {
-    console.log(id, option);
     dispatch(ViewMemorialAction({ id, page, option, type }));
   };
 
@@ -31,13 +28,15 @@ export default function DataTableRowBlmData({ memorials, search, pageType }) {
     setShowModal((prev) => !prev);
   };
 
+  console.log("Memorials: ", memorials);
+
   const renderedMemorials = memorials.map((memorial) => (
     <tr>
       <td className="pl-2 py-6">
-        <label className="checkbox checkbox-lg checkbox-inline">
+        {/* <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
           <span />
-        </label>
+        </label> */}
       </td>
       <td>
         <a
@@ -201,8 +200,6 @@ export default function DataTableRowBlmData({ memorials, search, pageType }) {
       </td>
     </tr>
   ));
-
-  console.log({ renderedMemorials });
 
   return search ? (
     <tbody>

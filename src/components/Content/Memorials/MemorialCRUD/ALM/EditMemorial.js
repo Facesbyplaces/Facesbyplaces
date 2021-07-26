@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "../../../../../../auxiliary/axios";
-import { SuccessModal } from "../SuccessModal";
+import axios from "../../../../../auxiliary/axios";
+import { SuccessModal } from "../../Modals/SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 import {
   TableMemorialAction,
   ViewMemorialAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
 export default function EditMemorial() {
   const dispatch = useDispatch();
@@ -111,13 +111,16 @@ export default function EditMemorial() {
     formData.append("memorial_id", memorial.id);
     console.log("Form Data: ", formData);
     axios
-      .put(`/api/v1/admin/memorials/image/${memorial.id}`, formData)
+      .put(
+        `/api/v1/admin/memorials/image/${memorialTab.id}/${memorialTab.page}`,
+        formData
+      )
       .then((response) => {
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error.response.data.errors);
-        setErrors(error.response.data.errors);
+        console.log(error);
+        setErrors(error);
       });
   };
 
@@ -254,13 +257,13 @@ export default function EditMemorial() {
     axios
       .get(`/api/v1/admin/memorials/${memorialTab.id}/${memorialTab.page}`)
       .then((response) => {
-        setMemorial(response.data.page);
-        setMemorialDetails(response.data.page.details);
-        response.data.page.imagesOrVideos
-          ? setImagesOrVideos(response.data.page.imagesOrVideos)
+        setMemorial(response.data);
+        setMemorialDetails(response.data.details);
+        response.data.imagesOrVideos
+          ? setImagesOrVideos(response.data.imagesOrVideos)
           : setImagesOrVideosEmpty(true);
-        setPageCreator(response.data.page.page_creator.id);
-        console.log("Response: ", response.data);
+        setPageCreator(response.data.page_creator.id);
+        console.log("Fetched!");
       })
       .catch((error) => {
         console.log(error.errors);

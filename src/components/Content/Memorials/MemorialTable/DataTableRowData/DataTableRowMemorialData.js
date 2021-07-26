@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DeleteModal } from "./DeleteModal";
+import { DeleteModal } from "../../Modals/DeleteModal";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
@@ -8,7 +8,7 @@ import {
   ViewMemorialAction,
   EditMemorialAction,
   DeleteMemorialAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
 export default function DataTableRowMemorialData({
   memorials,
@@ -19,10 +19,7 @@ export default function DataTableRowMemorialData({
   const dispatch = useDispatch();
   const page_type = pageType === 2 ? "Memorial" : "Blm";
 
-  console.log(memorials);
-
   const handleViewClick = (id, page, option, type) => {
-    console.log(id, option);
     dispatch(ViewMemorialAction({ id, page, option, type }));
   };
 
@@ -38,10 +35,10 @@ export default function DataTableRowMemorialData({
   const renderedMemorials = memorials.map((memorial) => (
     <tr>
       <td className="pl-2 py-6">
-        <label className="checkbox checkbox-lg checkbox-inline">
+        {/* <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
           <span />
-        </label>
+        </label> */}
       </td>
       <td>
         <a

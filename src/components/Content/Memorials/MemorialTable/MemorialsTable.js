@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import Header from "./Header";
-import Body from "./Body";
+import DataTable from "./DataTable";
 // Memorial CRUD
 import ViewMemorial from "../MemorialCRUD/ALM/ViewMemorial";
 import EditMemorial from "../MemorialCRUD/ALM/EditMemorial";
@@ -11,9 +11,11 @@ import AddMemorial from "../MemorialCRUD/ALM/AddMemorial";
 import ViewBlm from "../MemorialCRUD/BLM/ViewBlm";
 import EditBlm from "../MemorialCRUD/BLM/EditBlm";
 import AddBlm from "../MemorialCRUD/BLM/AddBlm";
-import { SuccessModal } from "../MemorialCRUD/SuccessModal";
+import { SuccessModal } from "../Modals/SuccessModal";
 
 export default function MemorialsTable() {
+  const [search, setSearch] = useState(false);
+  const [keywords, setKeywords] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [pageType, setPageType] = useState(2);
   const { memorialTab } = useSelector(({ memorialTab }) => ({
@@ -43,7 +45,7 @@ export default function MemorialsTable() {
                   />
                   <div className="card card-custom">
                     <Header />
-                    <Body />
+                    <DataTable />
                   </div>
                 </div>
               );
@@ -51,8 +53,20 @@ export default function MemorialsTable() {
               return (
                 <div className="container">
                   <div className="card card-custom">
-                    <Header pageType={pageType} setPageType={setPageType} />
-                    <Body pageType={pageType} setPageType={setPageType} />
+                    <Header
+                      pageType={pageType}
+                      setPageType={setPageType}
+                      search={search}
+                      setSearch={setSearch}
+                      keywords={keywords}
+                      setKeywords={setKeywords}
+                    />
+                    <DataTable
+                      search={search}
+                      setSearch={setSearch}
+                      keywords={keywords}
+                      pageType={pageType}
+                    />
                   </div>
                 </div>
               );
@@ -74,7 +88,7 @@ export default function MemorialsTable() {
                   />
                   <div className="card card-custom">
                     <Header />
-                    <Body />
+                    <DataTable />
                   </div>
                 </div>
               );
@@ -82,8 +96,20 @@ export default function MemorialsTable() {
               return (
                 <div className="container">
                   <div className="card card-custom">
-                    <Header pageType={pageType} setPageType={setPageType} />
-                    <Body pageType={pageType} setPageType={setPageType} />
+                    <Header
+                      pageType={pageType}
+                      setPageType={setPageType}
+                      search={search}
+                      setSearch={setSearch}
+                      keywords={keywords}
+                      setKeywords={setKeywords}
+                    />
+                    <DataTable
+                      search={search}
+                      setSearch={setSearch}
+                      keywords={keywords}
+                      pageType={pageType}
+                    />
                   </div>
                 </div>
               );

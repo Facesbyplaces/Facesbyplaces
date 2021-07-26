@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../../auxiliary/axios";
+import axios from "../../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
   TableMemorialAction,
   EditMemorialAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
 export default function ViewMemorial() {
   const dispatch = useDispatch();
@@ -56,15 +56,15 @@ export default function ViewMemorial() {
     axios
       .get(`/api/v1/admin/memorials/${memorialTab.id}/${memorialTab.page}`)
       .then((response) => {
-        setMemorial(response.data.page);
-        setMemorialDetails(response.data.page.details);
-        response.data.page.imagesOrVideos
-          ? setImagesOrVideos(response.data.page.imagesOrVideos)
+        setMemorial(response.data);
+        setMemorialDetails(response.data.details);
+        response.data.imagesOrVideos
+          ? setImagesOrVideos(response.data.imagesOrVideos)
           : setImagesOrVideosEmpty(true);
-        console.log("Response: ", response.data);
+        console.log("Response: ", response);
       })
       .catch((error) => {
-        console.log(error.errors);
+        console.log(error);
       });
   }, memorial.id);
 
@@ -127,7 +127,7 @@ export default function ViewMemorial() {
                   <div className="card-header py-3 pl-5">
                     <div className="card-title align-items-start flex-column mb-2">
                       <h3 className="card-label font-weight-bolder text-dark">
-                        Memorial Information
+                        BLM Information
                       </h3>
 
                       <span className="text-muted font-weight-bold font-size-sm mt-1">
@@ -162,7 +162,7 @@ export default function ViewMemorial() {
                       {imagesOrVideosEmpty ? (
                         <div className="form-group row pl-4">
                           <div
-                            className="card card-custom pb-3 card-stretch pr-3"
+                            className="card border-0 pb-3 card-stretch pr-3"
                             style={{
                               marginRight: "auto",
                               marginLeft: "auto",
@@ -311,14 +311,14 @@ export default function ViewMemorial() {
                       {/*begin::Group*/}
                       <div className="form-group row">
                         <label className="col-form-label col-3 text-lg-right text-left">
-                          Birthplace
+                          Location
                         </label>
                         <div className="col-9">
                           <input
                             className="form-control form-control-lg border-0 placeholder-dark-75"
                             type="last_name"
                             name="last_name"
-                            defaultValue={memorialDetails.birthplace}
+                            defaultValue={memorialDetails.location}
                             disabled
                           />
                         </div>
@@ -327,14 +327,30 @@ export default function ViewMemorial() {
                       {/*begin::Group*/}
                       <div className="form-group row">
                         <label className="col-form-label col-3 text-lg-right text-left">
-                          Cemetery
+                          Precinct
                         </label>
                         <div className="col-9">
                           <input
                             className="form-control form-control-lg border-0 placeholder-dark-75"
                             type="last_name"
                             name="last_name"
-                            defaultValue={memorialDetails.cemetery}
+                            defaultValue={memorialDetails.precinct}
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      {/*end::Group*/}
+                      {/*begin::Group*/}
+                      <div className="form-group row">
+                        <label className="col-form-label col-3 text-lg-right text-left">
+                          State
+                        </label>
+                        <div className="col-9">
+                          <input
+                            className="form-control form-control-lg border-0 placeholder-dark-75"
+                            type="last_name"
+                            name="last_name"
+                            defaultValue={memorialDetails.state}
                             disabled
                           />
                         </div>
@@ -405,7 +421,7 @@ export default function ViewMemorial() {
                                       memorial.id,
                                       memorial.page_type,
                                       "e",
-                                      2
+                                      1
                                     )
                                   }
                                 >

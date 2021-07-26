@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
 import { useDispatch } from "react-redux";
-import { AddUserAction } from "../../../../redux/actions";
+import { AddMemorialAction } from "../../../../redux/actions";
 
 export default function Header({
   pageType,
@@ -12,6 +11,12 @@ export default function Header({
 }) {
   const dispatch = useDispatch();
 
+  const handleAddClick = (option) => {
+    console.log(option);
+    const type = pageType;
+    dispatch(AddMemorialAction({ option, type }));
+  };
+
   const handleClick = () => {
     setSearch(true);
   };
@@ -21,19 +26,14 @@ export default function Header({
     // setSearch(true);
   };
 
-  const handleAddClick = (option) => {
-    console.log(option);
-    dispatch(AddUserAction({ option }));
-  };
-
   return (
     <>
       <div className="card-header flex-wrap border-0 pt-6 pb-0">
         <div className="card-title">
           <h3 className="card-label">
-            User Datatable
+            Memorial Datatable
             <span className="d-block text-muted pt-2 font-size-sm">
-              List of ALM and BLM Users
+              List of ALM and BLM Memorials
             </span>
           </h3>
         </div>
@@ -65,13 +65,12 @@ export default function Header({
               </svg>
               {/*end::Svg Icon*/}
             </span>
-            Create User
+            Create Memorial
           </a>
           {/*end::Button*/}
         </div>
       </div>
-      <div className="card-body">
-        {/*begin::Search Form*/}
+      <div className="card-body pb-0">
         <div>
           <div className="row align-items-center">
             <div className="col-lg-9 col-xl-8">
@@ -139,7 +138,6 @@ export default function Header({
           </div>
         </div>
       </div>
-      {/*end::Search Form*/}
     </>
   );
 }

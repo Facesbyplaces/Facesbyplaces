@@ -16,7 +16,7 @@ import SideBar from "../../SideBar/SideBar";
 import Assets from "../../Assets";
 import Footer from "../../Footer";
 import UsersTable from "../Users/UserTable/UsersTable";
-import MemorialsTable from "../MemorialDashboard/Memorials/MemorialTable/MemorialsTable";
+import MemorialsTable from "../Memorials/MemorialTable/MemorialsTable";
 import PostTable from "../PostDashboard/Posts/PostTable/PostTable";
 import ReportTable from "../ReportDashboard/Reports/ReportTable/ReportTable";
 import TransactionTable from "../TransactionDashboard/Transactions/TransactionTable/TransactionTable";

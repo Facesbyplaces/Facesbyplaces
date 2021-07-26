@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../../auxiliary/axios";
-import { SuccessModal } from "../SuccessModal";
+import axios from "../../../../../auxiliary/axios";
+import { SuccessModal } from "../../Modals/SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 import {
   TableMemorialAction,
   ViewMemorialAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
-export default function EditMemorial() {
+export default function AddMemorial() {
   const dispatch = useDispatch();
   const { memorialTab } = useSelector(({ memorialTab }) => ({
     memorialTab: memorialTab,
@@ -35,8 +35,6 @@ export default function EditMemorial() {
     setBackgroundImageSelectedFile,
   ] = useState(null);
   // ImageOrVideos Variables
-  const [imagesOrVideosEmpty, setImagesOrVideosEmpty] = useState([]);
-  const [imagesOrVideos, setImagesOrVideos] = useState([]);
   const [
     imagesOrVideosTemporaryImageDisplay,
     setImagesOrVideosTemporaryImageDisplay,
@@ -44,65 +42,53 @@ export default function EditMemorial() {
   const [
     imagesOrVideosFilesSelected,
     setImagesOrVideosFilesSelected,
-  ] = useState(null);
+  ] = useState([]);
 
   // Form Data
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState([]);
-  const [blmLocation, setBlmLocation] = useState("");
+  const [users, setUsers] = useState([]); // users to be rendered
+  const [user, setUser] = useState([]); // user to associate a memorial
+  const [birthPlace, setBirthPlace] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [dateOfDeath, setDateOfDeath] = useState("");
-  const [blmPrecinct, setBlmPrecinct] = useState("");
-  const [blmState, setBlmState] = useState("");
-  const [blmCountry, setBlmCountry] = useState("");
-  const [blmName, setBlmName] = useState("");
-  const [blmDescription, setBlmDescription] = useState("");
-  const [blmRelationship, setBlmRelationship] = useState("");
-  const [blmLatitude, setBlmLatitude] = useState("");
-  const [blmLongitude, setBlmLongitude] = useState("");
+  const [memorialCemetery, setMemorialCemetery] = useState("");
+  const [memorialCountry, setMemorialCountry] = useState("");
+  const [memorialName, setMemorialName] = useState("");
+  const [memorialDescription, setMemorialDescription] = useState("");
+  const [memorialRelationship, setMemorialRelationship] = useState("");
+  const [memorialLatitude, setMemorialLatitude] = useState("");
+  const [memorialLongitude, setMemorialLongitude] = useState("");
 
   // Form Data Images
   const imageOrVideosSelectedHandler = (e) => {
-    setImagesOrVideosTemporaryImageDisplay(
-      URL.createObjectURL(e.target.files[0])
-    );
+    {
+      e.target.files[0]
+        ? setImagesOrVideosTemporaryImageDisplay(
+            URL.createObjectURL(e.target.files[0])
+          )
+        : console.log("No Images/Videos Attached.");
+    }
     setImagesOrVideosFilesSelected(e.target.files[0]);
     console.log("Images Or Videos", imagesOrVideosFilesSelected);
   };
   const profileImageSelectedHandler = (e) => {
-    setProfileImageTemporaryDisplay(URL.createObjectURL(e.target.files[0]));
+    {
+      e.target.files[0]
+        ? setProfileImageTemporaryDisplay(
+            URL.createObjectURL(e.target.files[0])
+          )
+        : console.log("No Profile Image Attached.");
+    }
     setProfileImageSelectedFile(e.target.files[0]);
-    console.log("Profile Image: ", profileImageSelectedFile);
   };
   const backgroundImageSelectedHandler = (e) => {
-    setBackgroundImageTemporaryDisplay(URL.createObjectURL(e.target.files[0]));
+    {
+      e.target.files[0]
+        ? setBackgroundImageTemporaryDisplay(
+            URL.createObjectURL(e.target.files[0])
+          )
+        : console.log("No Background Image Attached.");
+    }
     setBackgroundImageSelectedFile(e.target.files[0]);
-    // console.log(URL.createObjectURL(e.target.files[0]));
-  };
-
-  const uploadImage = (memorial) => {
-    console.log("Images or Videos: ", imagesOrVideosFilesSelected);
-    const formData = new FormData();
-    profileImageSelectedFile != null
-      ? formData.append("profileImage", profileImageSelectedFile)
-      : console.log("No Profile Image Uploaded");
-    backgroundImageSelectedFile
-      ? formData.append("backgroundImage", backgroundImageSelectedFile)
-      : console.log("No Background Image Uploaded");
-    imagesOrVideosFilesSelected
-      ? formData.append("imagesOrVideos[]", imagesOrVideosFilesSelected)
-      : console.log("No Images or Videos Uploaded");
-    formData.append("memorial_id", memorial.id);
-    console.log("Form Data: ", formData);
-    axios
-      .put(`/api/v1/admin/memorials/blm/image/${memorial.id}`, formData)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data.errors);
-        setErrors(error.response.data.errors);
-      });
   };
 
   // Form Data Handlers
@@ -110,8 +96,8 @@ export default function EditMemorial() {
     setUser(e.target.value);
     console.log("User: ", e.target.value);
   };
-  const handleLocationChange = (e) => {
-    setBlmLocation(e.target.value);
+  const handleBirthPlaceChange = (e) => {
+    setBirthPlace(e.target.value);
   };
   const handleDateOfBirthChange = (e) => {
     setDateOfBirth(e.target.value);
@@ -119,29 +105,26 @@ export default function EditMemorial() {
   const handleDateOfDeathChange = (e) => {
     setDateOfDeath(e.target.value);
   };
-  const handlePrecinctChange = (e) => {
-    setBlmPrecinct(e.target.value);
-  };
-  const handleStateChange = (e) => {
-    setBlmState(e.target.value);
+  const handleCemeteryChange = (e) => {
+    setMemorialCemetery(e.target.value);
   };
   const handleCountryChange = (e) => {
-    setBlmCountry(e.target.value);
+    setMemorialCountry(e.target.value);
   };
   const handleNameChange = (e) => {
-    setBlmName(e.target.value);
+    setMemorialName(e.target.value);
   };
   const handleDescriptionChange = (e) => {
-    setBlmDescription(e.target.value);
+    setMemorialDescription(e.target.value);
   };
   const handleRelationshipChange = (e) => {
-    setBlmRelationship(e.target.value);
+    setMemorialRelationship(e.target.value);
   };
   const handleLatitudeChange = (e) => {
-    setBlmLatitude(e.target.value);
+    setMemorialLatitude(e.target.value);
   };
   const handleLongitudeChange = (e) => {
-    setBlmLongitude(e.target.value);
+    setMemorialLongitude(e.target.value);
   };
 
   // Tab Data
@@ -170,58 +153,84 @@ export default function EditMemorial() {
   }, [users.id]);
 
   const renderedUsers = users.map((user) =>
-    user.account_type == 1 ? (
+    user.account_type == 2 ? (
       <option value={user.id}>
         {user.first_name} {user.last_name}
       </option>
     ) : (
-      console.log("Not a Blm User")
+      console.log("Not an Alm User")
     )
   );
 
+  const uploadImage = (memorial) => {
+    console.log("Images or Videos: ", imagesOrVideosFilesSelected);
+    const formData = new FormData();
+    profileImageSelectedFile != null
+      ? formData.append("profileImage", profileImageSelectedFile)
+      : console.log("No Profile Image Uploaded");
+    backgroundImageSelectedFile != null
+      ? formData.append("backgroundImage", backgroundImageSelectedFile)
+      : console.log("No Background Image Uploaded");
+    imagesOrVideosFilesSelected != null
+      ? formData.append("imagesOrVideos[]", imagesOrVideosFilesSelected)
+      : console.log("No Images or Videos Uploaded");
+    formData.append("memorial_id", memorial.id);
+    formData != null
+      ? console.log("Form Data: ", formData)
+      : console.log("Form Data: Null");
+    axios
+      .put(`/api/v1/admin/memorials/image/${memorial.id}`, formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setErrors(error.response);
+      });
+  };
+
   const handleSubmit = (e) => {
+    setLoading(true);
+
     const user_id = parseInt(user, 10);
     const page_type = memorialTab.type;
-    const location = blmLocation;
+    const relationship = memorialRelationship;
+    const birthplace = birthPlace;
     const dob = dateOfBirth;
     const rip = dateOfDeath;
-    const precinct = blmPrecinct;
-    const state = blmState;
-    const country = blmCountry;
-    const name = blmName;
-    const description = blmDescription;
-    const relationship = blmRelationship;
-    const latitude = blmLatitude;
-    const longitude = blmLongitude;
+    const cemetery = memorialCemetery;
+    const country = memorialCountry;
+    const name = memorialName;
+    const description = memorialDescription;
+    const latitude = memorialLatitude;
+    const longitude = memorialLongitude;
 
-    console.log("User ID: ", user_id);
-    console.log("Page Type: ", page_type);
-    console.log("Location: ", location);
+    console.log("User ID: ", parseInt(user, 10));
+    console.log("Page Type: ", memorialTab.type);
+    console.log("Relationship: ", memorialRelationship);
+    console.log("Birthplace: ", birthPlace);
     console.log("Date of Birth: ", dateOfBirth);
     console.log("Date of Death: ", dateOfDeath);
-    console.log("Precinct: ", precinct);
-    console.log("State: ", state);
-    console.log("Country: ", country);
-    console.log("Page Name: ", name);
-    console.log("Description: ", description);
-    console.log("Relationship: ", relationship);
-    console.log("Latitude: ", latitude);
-    console.log("Longitude: ", longitude);
+    console.log("Cemetery: ", memorialCemetery);
+    console.log("Country: ", memorialCountry);
+    console.log("Page Name: ", memorialName);
+    console.log("Description: ", memorialDescription);
+    console.log("Latitude: ", memorialLatitude);
+    console.log("Longitude: ", memorialLongitude);
 
-    setLoading(true);
     axios
       .post(`/api/v1/admin/memorials/add`, {
         user_id,
         page_type,
-        blm: {
-          location,
+        relationship,
+        memorial: {
+          birthplace,
           dob,
           rip,
-          precinct,
+          cemetery,
           country,
           name,
           description,
-          relationship,
           latitude,
           longitude,
         },
@@ -229,7 +238,7 @@ export default function EditMemorial() {
       .then((response) => {
         console.log(response.data);
         setTimeout(() => {
-          uploadImage(response.data.blm);
+          uploadImage(response.data.memorial);
           setLoading(false);
         }, 1000);
         openModal();
@@ -328,6 +337,7 @@ export default function EditMemorial() {
                 <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
               </div>
             </div>
+
             {/*end::Hero*/}
             {/*begin::Section*/}
             <div className="container mt-n15 gutter-b">
@@ -355,6 +365,7 @@ export default function EditMemorial() {
                                   : `url( "assets/media/users/blank.png" )`,
                               }}
                             />
+
                             <label
                               className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                               data-action="change"
@@ -431,11 +442,11 @@ export default function EditMemorial() {
                         <div className="card-header py-3 pl-5">
                           <div className="card-title align-items-start flex-column mb-2">
                             <h3 className="card-label font-weight-bolder text-dark">
-                              Add BLM Information
+                              Add Memorial Information
                             </h3>
 
                             <span className="text-muted font-weight-bold font-size-sm mt-1">
-                              Add user's blm information
+                              Add user's memorial information
                             </span>
                           </div>
                         </div>
@@ -546,7 +557,6 @@ export default function EditMemorial() {
                             {/*end::Group*/}
                             <div className="separator separator-solid my-10" />
                             {/*begin::Row*/}
-
                             <div className="row">
                               <div className="col-9">
                                 <h6 className="text-dark font-weight-bold mb-10">
@@ -576,7 +586,6 @@ export default function EditMemorial() {
                             </div>
                             <div className="separator separator-solid my-10" />
                             {/*begin::Row*/}
-
                             <div className="row">
                               <div className="col-9">
                                 <h6 className="text-dark font-weight-bold mb-10">
@@ -609,13 +618,13 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="username"
+                                  type="text"
                                   name="username"
                                   onChange={handleNameChange}
                                 />
                               </div>
                             </div>
-                            {/*end::Group*/}
+                            {/* end::Group*/}
                             {/*begin::Group*/}
                             <div className="form-group row">
                               <label className="col-form-label col-3 text-lg-right text-left">
@@ -624,14 +633,14 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
+                                  type="relationship"
                                   name="relationship"
                                   onChange={handleRelationshipChange}
                                 />
                               </div>
                             </div>
                             {/*end::Group*/}
-                            {/*begin::Group*/}
+                            {/*begin::Group */}
                             <div className="form-group row">
                               <label className="col-form-label col-3 text-lg-right text-left">
                                 Description
@@ -703,14 +712,14 @@ export default function EditMemorial() {
                             {/*begin::Group*/}
                             <div className="form-group row">
                               <label className="col-form-label col-3 text-lg-right text-left">
-                                Location
+                                Birthplace
                               </label>
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
                                   type="text"
-                                  name="location"
-                                  onChange={handleLocationChange}
+                                  name="birthplace"
+                                  onChange={handleBirthPlaceChange}
                                 />
                               </div>
                             </div>
@@ -718,29 +727,14 @@ export default function EditMemorial() {
                             {/*begin::Group*/}
                             <div className="form-group row">
                               <label className="col-form-label col-3 text-lg-right text-left">
-                                Precinct
+                                Cemetery
                               </label>
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
                                   type="text"
-                                  name="precinct"
-                                  onChange={handlePrecinctChange}
-                                />
-                              </div>
-                            </div>
-                            {/*end::Group*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                State
-                              </label>
-                              <div className="col-9">
-                                <input
-                                  className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
-                                  name="state"
-                                  onChange={handleStateChange}
+                                  name="cemetery"
+                                  onChange={handleCemeteryChange}
                                 />
                               </div>
                             </div>
@@ -784,7 +778,7 @@ export default function EditMemorial() {
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
                                   type="text"
-                                  name="longitude"
+                                  name="latitude"
                                   onChange={handleLongitudeChange}
                                 />
                               </div>

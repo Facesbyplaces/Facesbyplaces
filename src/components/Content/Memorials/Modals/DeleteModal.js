@@ -1,7 +1,7 @@
 import React, { useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { DeleteMemorialAction } from "../../../../../../redux/actions";
-import axios from "../../../../../../auxiliary/axios";
+import { DeleteMemorialAction } from "../../../../redux/actions";
+import axios from "../../../../auxiliary/axios";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";

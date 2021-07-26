@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 //Data Table
 import DataTableRowMemorialData from "./DataTableRowData/DataTableRowMemorialData";
 import DataTableRowBlmData from "./DataTableRowData/DataTableRowBlmData";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
-export default function MemorialDataTable({
-  search,
-  setSearch,
-  keywords,
-  pageType,
-}) {
+export default function DataTable({ search, setSearch, keywords, pageType }) {
   const [page, setPage] = useState(1);
   const [loader, setLoader] = useState(false);
   const [memorials, setMemorials] = useState([]);
@@ -34,7 +29,7 @@ export default function MemorialDataTable({
   };
 
   {
-    search ? handleSearch() : console.log("Memorial Remaining: ", blms.length);
+    search ? handleSearch() : console.log("Fetching...");
   }
 
   useEffect(() => {
@@ -169,7 +164,7 @@ export default function MemorialDataTable({
         setLoader(false);
         setMemorials(response.data.memorials.alm);
         setBlms(response.data.memorials.blm);
-        console.log("Response: ", response.data);
+        console.log("Fetched!");
       })
       .catch((error) => {
         console.log(error.response);
@@ -177,82 +172,85 @@ export default function MemorialDataTable({
   };
 
   return (
-    <div className="table-responsive">
-      <table
-        className="table table-hover table-head-custom table-vertical-center"
-        id="kt_advance_table_widget_2"
-      >
-        <thead>
-          <tr className="text-uppercase">
-            <th className="pl-2" style={{ width: "40px" }}>
-              <label className="checkbox checkbox-lg checkbox-inline mr-2">
-                <input type="checkbox" defaultValue={1} />
-                <span />
-              </label>
-            </th>
-            <th className="pl-0" style={{ minWidth: "100px" }}>
-              memorial id
-            </th>
-            <th style={{ minWidth: "120px" }}>name</th>
-            {pageType === 2 ? (
-              <th style={{ minWidth: "120px" }}>birthplace</th>
-            ) : (
-              <th style={{ minWidth: "120px" }}>location</th>
-            )}
-            <th style={{ minWidth: "150px" }}>country</th>
-            <th style={{ minWidth: "150px" }}>privacy</th>
-            <th style={{ minWidth: "130px" }}>page type</th>
-            <th style={{ minWidth: "130px" }}>accept donations</th>
-            <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
-              action
-            </th>
-          </tr>
-        </thead>
-        {loader ? (
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div
-                  className="loader-container"
-                  style={{ width: "100%", height: "100vh" }}
-                >
-                  <HashLoader color={"#04ECFF"} loading={loader} size={70} />
-                </div>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
+    <div className="card-body">
+      <div className="table-responsive">
+        <table
+          className="table table-hover table-head-custom table-vertical-center"
+          id="kt_advance_table_widget_2"
+        >
+          <thead>
+            <tr className="text-uppercase">
+              <th className="pl-2" style={{ width: "40px" }}>
+                {/* <label className="checkbox checkbox-lg checkbox-inline mr-2">
+                  <input type="checkbox" defaultValue={1} />
+                  <span />
+                </label> */}
+              </th>
+              <th className="pl-0" style={{ minWidth: "100px" }}>
+                memorial id
+              </th>
+              <th style={{ minWidth: "120px" }}>name</th>
+              {pageType === 2 ? (
+                <th style={{ minWidth: "120px" }}>birthplace</th>
+              ) : (
+                <th style={{ minWidth: "120px" }}>location</th>
+              )}
+              <th style={{ minWidth: "150px" }}>country</th>
+              <th style={{ minWidth: "150px" }}>privacy</th>
+              <th style={{ minWidth: "130px" }}>page type</th>
+              <th style={{ minWidth: "130px" }}>accept donations</th>
+              <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
+                action
+              </th>
             </tr>
-          </tbody>
-        ) : pageType == 2 ? (
-          <DataTableRowMemorialData
-            memorials={memorials}
-            search={search}
-            pageType={pageType}
-          />
-        ) : (
-          <DataTableRowBlmData
-            memorials={blms}
-            search={search}
-            pageType={pageType}
-          />
-        )}
-      </table>
-      <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <div className="d-flex align-items-center">
-          {renderBackButton()}
-          <a
-            className={
-              "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
-            }
-          >
-            {page}
-          </a>
-          {renderNextButton()}
+          </thead>
+          {loader ? (
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div
+                    className="loader-container"
+                    style={{ width: "100%", height: "100vh" }}
+                  >
+                    <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          ) : pageType == 2 ? (
+            <DataTableRowMemorialData
+              memorials={memorials}
+              search={search}
+              pageType={pageType}
+            />
+          ) : (
+            <DataTableRowBlmData
+              memorials={blms}
+              search={search}
+              pageType={pageType}
+            />
+          )}
+        </table>
+        <div className="d-flex justify-content-between align-items-center flex-wrap">
+          <div className="d-flex align-items-center">
+            {renderBackButton()}
+            <a
+              className={
+                "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+              }
+            >
+              {page}
+            </a>
+            {renderNextButton()}
+          </div>
         </div>
       </div>
     </div>
