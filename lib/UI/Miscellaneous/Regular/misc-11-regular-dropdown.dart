@@ -16,13 +16,16 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:io';
 
+import 'misc-06-regular-button.dart';
+
 class MiscRegularDropDownTemplate extends StatefulWidget{
   final int postId;
   final bool likePost;
   final int likesCount;
   final String reportType;
   final String pageType;
-  const MiscRegularDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
+  final String pageName;
+  const MiscRegularDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType, required this.pageName});
 
   MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState();
 }
@@ -189,7 +192,8 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                                     border: Border.all(color: Color(0xffffffff),),
                                     borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
                                   ),
-                                  child: Column(
+                                  child: Material(
+                                    child: Column(
                                     children: [
                                       Spacer(),
 
@@ -197,36 +201,34 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
                                       Spacer(),
 
-                                      Text('Karen Cruz Memorial', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                      Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
 
-                                      Text('QR Code', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                      Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+
+                                      Spacer(),
+
+                                      MiscRegularButtonTemplate(
+                                        buttonText: 'Share',
+                                        buttonTextStyle: TextStyle(
+                                          fontSize: 16, 
+                                          fontWeight: FontWeight.bold, 
+                                          color: Color(0xffffffff),
+                                        ),
+                                        width: SizeConfig.screenWidth! / 2,
+                                        height: 45,
+                                        buttonColor: Color(0xff04ECFF), 
+                                        onPressed: () async{
+                                          await shareQRCode(qrData);
+                                        },
+                                      ),
 
                                       Spacer(),
                                     ],
                                   ),
+                                  ),
                                 ),
                               ),
                             ),
-
-                           /* SizedBox(height: 20,),
-
-                            MiscRegularButtonTemplate(
-                              buttonText: 'Share',
-                              buttonTextStyle: TextStyle(
-                                fontSize: 16, 
-                                fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
-                              ),
-                              width: SizeConfig.screenWidth! / 2,
-                              height: 45,
-                              buttonColor: Color(0xff04ECFF), 
-                              onPressed: () async{
-                                await shareQRCode(qrData);
-                              },
-                            ),
-
-                            SizedBox(height: 20,),*/
-
                           ],
                         ),
                       ),
@@ -433,45 +435,48 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                                 color: Colors.black26,
                                 padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 10, right: SizeConfig.blockSizeHorizontal! * 10, top: SizeConfig.blockSizeHorizontal! * 20, bottom: SizeConfig.blockSizeHorizontal! * 25),
                                 child: Container(
-                                  decoration: BoxDecoration(color: const Color(0xffffffff), border: Border.all(color: Color(0xffffffff),), borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),),
-                                  child: Column(
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xffffffff),
+                                    border: Border.all(color: Color(0xffffffff),),
+                                    borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
+                                  ),
+                                  child: Material(
+                                    child: Column(
                                     children: [
                                       Spacer(),
 
                                       Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
-                                      
-                                      Spacer(),
-                                      
-                                      Text('Karen Cruz Memorial', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
 
-                                      Text('QR Code', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                      Spacer(),
+
+                                      Text('${widget.memorialName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+
+                                      Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+
+                                      Spacer(),
+
+                                      MiscRegularButtonTemplate(
+                                        buttonText: 'Share',
+                                        buttonTextStyle: TextStyle(
+                                          fontSize: 16, 
+                                          fontWeight: FontWeight.bold, 
+                                          color: Color(0xffffffff),
+                                        ),
+                                        width: SizeConfig.screenWidth! / 2,
+                                        height: 45,
+                                        buttonColor: Color(0xff04ECFF), 
+                                        onPressed: () async{
+                                          await shareQRCode(qrData);
+                                        },
+                                      ),
 
                                       Spacer(),
                                     ],
                                   ),
+                                  ),
                                 ),
                               ),
                             ),
-
-                           /* const SizedBox(height: 20,),
-
-                            MiscRegularButtonTemplate(
-                              buttonText: 'Share',
-                              buttonTextStyle: const TextStyle(
-                                fontSize: 16, 
-                                fontWeight: FontWeight.bold, 
-                                color: const Color(0xffffffff),
-                              ),
-                              width: SizeConfig.screenWidth! / 2,
-                              height: 45,
-                              buttonColor: const Color(0xff04ECFF), 
-                              onPressed: () async{
-                                await shareQRCode(qrData);
-                              },
-                            ),
-
-                            const SizedBox(height: 20,),*/
-
                           ],
                         ),
                       ),

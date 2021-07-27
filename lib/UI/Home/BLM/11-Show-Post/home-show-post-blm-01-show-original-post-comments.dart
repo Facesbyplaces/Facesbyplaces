@@ -92,6 +92,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   List<List<bool>> repliesLikes = [];
   List<bool> commentsLikes = [];
   String currentUserImage = '';
+  String pageName = '';
   int currentAccountType = 1;
   int currentCommentId = 1;
   int repliesRemaining = 1;
@@ -284,6 +285,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                         likesCount: likesCount,
                         reportType: 'Post',
                         pageType: 'Blm',
+                        pageName: pageName,
                       ),
                     ],
                   ),

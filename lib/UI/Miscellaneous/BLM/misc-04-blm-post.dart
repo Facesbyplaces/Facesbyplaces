@@ -96,7 +96,7 @@ class MiscBLMPostState extends State<MiscBLMPost>{
               ),
               title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
               subtitle: Text(widget.timeCreated, maxLines: 1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.56, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),),
-              trailing: MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType,),
+              trailing: MiscBLMDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType, pageName: widget.memorialName),
               onTap: (){
                 if(widget.pageType == 'Memorial'){
                   if(widget.managed == true || widget.famOrFriends == true){

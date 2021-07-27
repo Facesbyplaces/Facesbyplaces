@@ -16,13 +16,16 @@ import 'dart:typed_data';
 import 'dart:io';
 import 'dart:ui';
 
+import 'misc-06-blm-button.dart';
+
 class MiscBLMDropDownTemplate extends StatefulWidget{
   final int postId;
   final bool likePost;
   final int likesCount;
   final String reportType;
   final String pageType;
-  const MiscBLMDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
+  final String pageName;
+  const MiscBLMDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType, required this.pageName});
 
   MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState();
 }
@@ -192,36 +195,30 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                                   child: Column(
                                     children: [
                                       Spacer(),
-                                      Center(
-                                        child: RepaintBoundary(
-                                          key: qrKey,
-                                          child: QrImage(
-                                            data: qrData,
-                                            version: QrVersions.auto,
-                                            size: 320,
-                                            gapless: false,
-                                          ),
-                                        ),
-                                      ),
+
+                                      Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
 
                                       Spacer(),
 
-                                      Text(
-                                        'Karen Cruz Memorial',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                          fontFamily: 'NexaBold',
-                                          color: Color(0xff2F353D),
-                                        ),
-                                      ),
+                                      Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
 
-                                      Text(
-                                        'QR Code',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                          fontFamily: 'NexaBold',
-                                          color: const Color(0xff2F353D),
+                                      Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+
+                                      Spacer(),
+
+                                      MiscBLMButtonTemplate(
+                                        buttonText: 'Share',
+                                        buttonTextStyle: const TextStyle(
+                                          fontSize: 16, 
+                                          fontWeight: FontWeight.bold, 
+                                          color: const Color(0xffffffff),
                                         ),
+                                        width: SizeConfig.screenWidth! / 2,
+                                        height: 45,
+                                        buttonColor: const Color(0xff04ECFF), 
+                                        onPressed: () async{
+                                          await shareQRCode(qrData);
+                                        },
                                       ),
 
                                       Spacer(),
@@ -230,26 +227,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                                 ),
                               ),
                             ),
-
-                            /*const SizedBox(height: 20,),
-
-                            MiscBLMButtonTemplate(
-                              buttonText: 'Share',
-                              buttonTextStyle: const TextStyle(
-                                fontSize: 16, 
-                                fontWeight: FontWeight.bold, 
-                                color: const Color(0xffffffff),
-                              ),
-                              width: SizeConfig.screenWidth! / 2,
-                              height: 45,
-                              buttonColor: const Color(0xff04ECFF), 
-                              onPressed: () async{
-                                await shareQRCode(qrData);
-                              },
-                            ),
-
-                            const SizedBox(height: 20,),*/
-
                           ],
                         ),
                       ),
@@ -465,36 +442,29 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                     children: [
                                       Spacer(),
 
-                                      Center(
-                                        child: RepaintBoundary(
-                                          key: qrKey,
-                                          child: QrImage(
-                                            data: qrData,
-                                            version: QrVersions.auto,
-                                            size: 320,
-                                            gapless: false,
-                                          ),
-                                        ),
-                                      ),
+                                      Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
 
                                       Spacer(),
 
-                                      Text(
-                                        'Karen Cruz Memorial',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                          fontFamily: 'NexaBold',
-                                          color: Color(0xff2F353D),
-                                        ),
-                                      ),
+                                      Text('${widget.memorialName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
 
-                                      Text(
-                                        'QR Code',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                          fontFamily: 'NexaBold',
-                                          color: const Color(0xff2F353D),
+                                      Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+
+                                      Spacer(),
+
+                                      MiscBLMButtonTemplate(
+                                        buttonText: 'Share',
+                                        buttonTextStyle: const TextStyle(
+                                          fontSize: 16, 
+                                          fontWeight: FontWeight.bold, 
+                                          color: const Color(0xffffffff),
                                         ),
+                                        width: SizeConfig.screenWidth! / 2,
+                                        height: 45,
+                                        buttonColor: const Color(0xff04ECFF), 
+                                        onPressed: () async{
+                                          await shareQRCode(qrData);
+                                        },
                                       ),
 
                                       Spacer(),
@@ -503,26 +473,6 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                 ),
                               ),
                             ),
-
-                           /* const SizedBox(height: 20,),
-
-                            MiscBLMButtonTemplate(
-                              buttonText: 'Share',
-                              buttonTextStyle: const TextStyle(
-                                fontSize: 16, 
-                                fontWeight: FontWeight.bold, 
-                                color: const Color(0xffffffff),
-                              ),
-                              width: SizeConfig.screenWidth! / 2,
-                              height: 45,
-                              buttonColor: const Color(0xff04ECFF), 
-                              onPressed: () async{
-                                await shareQRCode(qrData);
-                              },
-                            ),
-
-                            const SizedBox(height: 20,),*/
-
                           ],
                         ),
                       ),

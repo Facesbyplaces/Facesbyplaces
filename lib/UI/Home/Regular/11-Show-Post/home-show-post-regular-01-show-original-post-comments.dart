@@ -92,6 +92,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   List<List<bool>> repliesLikes = [];
   List<bool> commentsLikes = [];
   String currentUserImage = '';
+  String pageName = '';
   int currentAccountType = 1;
   int currentCommentId = 1;
   int repliesRemaining = 1;
@@ -158,6 +159,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     numberOfLikes = originalPostInformation.almPost.showOriginalPostNumberOfLikes;
     numberOfComments = originalPostInformation.almPost.showOriginalPostNumberOfComments;
     likePost = originalPostInformation.almPost.showOriginalPostLikeStatus;
+    pageName = originalPostInformation.almPost.showOriginalPostPage.showOriginalPostPageName;
   }
 
   void getProfilePicture() async{
@@ -288,7 +290,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                       },
                     ),
                     actions: [
-                      MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Alm'),
+                      MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Alm', pageName: pageName),
                     ],
                   ),
                   backgroundColor: const Color(0xffffffff),
