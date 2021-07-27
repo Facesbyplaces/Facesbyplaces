@@ -52,12 +52,14 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def manage
-    if object.currentAlmUser
+    if object.currentAlmUser != nil
       if object.currentAlmUser.has_role? :pageadmin, object 
         return true
       else
         return false
       end
+    else
+      return false
     end 
   end
 
@@ -109,11 +111,12 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def famOrFriends
-    if object.currentAlmUser == nil
-      return false 
-    end
-    if object.relationships.where(account: object.currentAlmUser).first
-      return true
+    if object.currentAlmUser != nil
+      if object.relationships.where(account: object.currentAlmUser).first
+        return true
+      else
+        return false 
+      end
     else
       return false 
     end

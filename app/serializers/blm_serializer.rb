@@ -55,12 +55,14 @@ class BlmSerializer < ActiveModel::Serializer
   end
 
   def manage
-    if object.currentUser
+    if object.currentUser != nil
       if object.currentUser.has_role? :pageadmin, object
         return true
       else
         return false
       end
+    else
+      return false
     end
   end
 
@@ -121,10 +123,11 @@ class BlmSerializer < ActiveModel::Serializer
 
   def famOrFriends
     if object.currentUser == nil
-      return false 
-    end
-    if object.relationships.where(account: object.currentUser).first
-      return true
+      if object.relationships.where(account: object.currentUser).first
+        return true
+      else
+        return false 
+      end
     else
       return false 
     end
