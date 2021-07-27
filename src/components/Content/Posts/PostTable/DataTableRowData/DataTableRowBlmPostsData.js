@@ -8,7 +8,7 @@ import {
   ViewPostAction,
   EditPostAction,
   DeletePostAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
 export default function DataTableRowBlmPostsData({ posts, search, pageType }) {
   const [showModal, setShowModal] = useState(false);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 //Data Table
 import DataTableRowMemorialPostsData from "./DataTableRowData/DataTableRowMemorialPostsData";
 import DataTableRowBlmPostsData from "./DataTableRowData/DataTableRowBlmPostsData";
