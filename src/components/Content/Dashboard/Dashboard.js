@@ -17,7 +17,7 @@ import Assets from "../../Assets";
 import Footer from "../../Footer";
 import UsersTable from "../Users/UserTable/UsersTable";
 import MemorialsTable from "../Memorials/MemorialTable/MemorialsTable";
-import PostTable from "../PostDashboard/Posts/PostTable/PostTable";
+import PostTable from "../Posts/PostTable/PostTable";
 import ReportTable from "../ReportDashboard/Reports/ReportTable/ReportTable";
 import TransactionTable from "../TransactionDashboard/Transactions/TransactionTable/TransactionTable";
 // import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
