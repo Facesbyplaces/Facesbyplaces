@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :postslikes, as: :account, dependent: :destroy
   has_many :comments, as: :account, dependent: :destroy
   has_many :commentslikes, as: :account, dependent: :destroy
-  has_one :notifsetting, as: :account, dependent: :destroy
+  has_one  :notifsetting, as: :account, dependent: :destroy
   has_many :tagpeople, as: :account, dependent: :destroy
   has_many :transactions, as: :account, dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy
@@ -52,12 +52,12 @@ class User < ActiveRecord::Base
     self.users
   end
 
-  def self.current
-    Thread.current[:user]
+  def self.current_user
+    Thread.current[:current_user]
   end
   
-  # def self.current=(user)
-  #   Thread.current[:user] = user
-  # end
+  def self.current_user=(user)
+    Thread.current[:current_user] = user
+  end
 
 end

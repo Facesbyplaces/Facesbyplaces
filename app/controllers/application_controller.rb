@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
         include DeviseTokenAuth::Concerns::SetUserByToken
-
+        before_action :set_current_user
+        before_action :set_current_alm_user
         protect_from_forgery with: :null_session 
 
         rescue_from ActiveRecord::RecordNotFound, :with => :known_error
@@ -11,10 +12,16 @@ class ApplicationController < ActionController::Base
             render json: {status: exception.message}
         end
 
-        private
+        private        
+        
+        # set current user for serializer
+        def set_current_user
+            User.current_user = current_user
+        end
 
-        def user
-            current_user || current_alm_user
+        # set current alm user for serializer
+        def set_current_alm_user
+            AlmUser.current_alm_user = current_alm_user
         end
 
         def authenticate_user
@@ -23,6 +30,10 @@ class ApplicationController < ActionController::Base
             rescue Devise::FailureApp
                 :authenticate_alm_user!
             end
+        end
+
+        def user
+            current_user || current_alm_user
         end
 
         def guest_user

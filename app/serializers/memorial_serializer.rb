@@ -17,8 +17,8 @@ class MemorialSerializer < ActiveModel::Serializer
         accept_donations:   object.stripe_connect_account_id.present? ? true : false
       }
     when "followers"
-      if object.currentUser
-        if object.followers.where(user_id: object.currentUser.id).first || object.relationships.where(user_id: object.currentUser.id).first 
+      if object.currentAlmUser
+        if object.followers.where(user_id: object.currentAlmUser.id).first || object.relationships.where(user_id: object.currentAlmUser.id).first 
           {
             description:        object.description,
             birthplace:         object.birthplace,
@@ -33,8 +33,8 @@ class MemorialSerializer < ActiveModel::Serializer
         end
       end
     when "familyOrFriends"
-      if object.currentUser
-        if object.relationships.where(user_id: object.currentUser.id).first 
+      if object.currentAlmUser
+        if object.relationships.where(user_id: object.currentAlmUser.id).first 
           {
             description:        object.description,
             birthplace:         object.birthplace,
@@ -52,13 +52,13 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def manage
-    if object.currentUser
-      if object.currentUser.has_role? :pageadmin, object 
+    if object.currentAlmUser
+      if object.currentAlmUser.has_role? :pageadmin, object 
         return true
+      else
+        return false
       end
-    end
-    
-    return false 
+    end 
   end
 
   def page_creator
@@ -101,32 +101,32 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def relationship
-    if object.relationships.where(account: object.currentUser).first
-      object.relationships.where(account: object.currentUser).first.relationship
+    if object.relationships.where(account: object.currentAlmUser).first
+      object.relationships.where(account: object.currentAlmUser).first.relationship
     elsif object.relationships.first
       object.relationships.first.relationship
     end
   end
 
   def famOrFriends
-    if object.currentUser == nil
+    if object.currentAlmUser == nil
       return false 
     end
-    if object.relationships.where(account: object.currentUser).first
+    if object.relationships.where(account: object.currentAlmUser).first
       return true
+    else
+      return false 
     end
-    
-    return false 
   end
 
   def follower
-    if object.currentUser
-      if object.currentUser.account_type == 1
-        if object.users.where(id: object.currentUser.id).first
+    if object.currentAlmUser
+      if object.currentAlmUser.account_type == 1
+        if object.users.where(id: object.currentAlmUser.id).first
           return true
         end
       else
-        if object.alm_users.where(id: object.currentUser.id).first
+        if object.alm_users.where(id: object.currentAlmUser.id).first
           return true
         end
       end

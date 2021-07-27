@@ -53,12 +53,12 @@ class AlmUser < ActiveRecord::Base
   #     new { |u| u.guest = true }
   # end
 
-  def self.current
-    Thread.current[:user]
+  def self.current_alm_user
+    Thread.current[:current_alm_user]
   end
   
-  # def self.current=(user)
-  #   Thread.current[:user] = user
-  # end
+  def self.current_alm_user=(user)
+    Thread.current[:current_alm_user] = user
+  end
   
 end

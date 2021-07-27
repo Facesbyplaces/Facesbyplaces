@@ -2,7 +2,6 @@ class Api::V1::Admin::TransactionsController < ApplicationController
     before_action :admin_only
     before_action :set_transaction, only: [:payoutTransaction, :showTransaction]
 
-    # Index Report
     def allTransactions
         render json: {  itemsremaining:  itemsRemaining(transactions),
                         transactions: ActiveModel::SerializableResource.new(
@@ -43,7 +42,7 @@ class Api::V1::Admin::TransactionsController < ApplicationController
         return transactions = transactions.page(params[:page]).per(numberOfPage)
     end
 
-    def transaction
+    def set_transaction
         @transaction = Transaction.find(params[:id])
     end 
 

@@ -12,8 +12,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             super || render_create_success2 && super
           else
             params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-            puts "Password: "
-            puts params[:password]
             @user.password = @user.password_confirmation = params[:password]
             @user.update({ device_token: params[:device_token] })
             @user.save

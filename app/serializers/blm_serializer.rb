@@ -56,12 +56,12 @@ class BlmSerializer < ActiveModel::Serializer
 
   def manage
     if object.currentUser
-      if object.currentUser.has_role? :pageadmin, object 
+      if object.currentUser.has_role? :pageadmin, object
         return true
+      else
+        return false
       end
     end
-    
-    return false 
   end
 
   def page_creator
@@ -125,9 +125,9 @@ class BlmSerializer < ActiveModel::Serializer
     end
     if object.relationships.where(account: object.currentUser).first
       return true
+    else
+      return false 
     end
-    
-    return false 
   end
 
   def follower

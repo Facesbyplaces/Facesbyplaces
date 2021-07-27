@@ -1,5 +1,6 @@
 class Api::V1::Admin::PostsController < ApplicationController
     before_action :admin_only
+    before_action :set_posts, only: [:allPosts]
     before_action :set_post, only: [:showPost, :editPost, :editImageOrVideosPost, :deletePost]
     before_action :set_user, only: [:createPost]
 
@@ -54,13 +55,18 @@ class Api::V1::Admin::PostsController < ApplicationController
     
     # Index Posts
     def allPosts  
-        posts = Post.all
+        @alm_posts = fetched_alm_posts
+        @blm_posts = fetched_blm_posts
 
-        render json: {  itemsremaining:  itemsRemaining(posts),
-                        posts: ActiveModel::SerializableResource.new(
-                                posts, 
+        render json: {  itemsremaining:  itemsRemaining(@posts),
+                        alm: ActiveModel::SerializableResource.new(
+                                @alm_posts, 
                                 each_serializer: PostSerializer
-                            )
+                            ),
+                        blm: ActiveModel::SerializableResource.new(
+                            @blm_posts, 
+                            each_serializer: PostSerializer
+                        ),
                     }
     end
 
@@ -123,6 +129,25 @@ class Api::V1::Admin::PostsController < ApplicationController
         params.permit(imagesOrVideos: [])
     end
 
+    def set_posts
+        # page_type = params[:page_type].to_i == 2 ? "Memorial" : "Blm"
+        posts = Post.all
+
+        @posts = posts.page(params[:page]).per(numberOfPage)
+    end
+
+    def fetched_alm_posts
+        alm_posts = @posts.where(page_type: "Memorial")
+
+        return alm_posts = alm_posts.page(params[:page]).per(numberOfPage)
+    end
+
+    def fetched_blm_posts
+        blm_posts = @posts.where(page_type: "Blm")
+        
+        return blm_posts = blm_posts.page(params[:page]).per(numberOfPage)
+    end
+
     def set_post
         @post = Post.find(params[:id])
     end
@@ -150,10 +175,10 @@ class Api::V1::Admin::PostsController < ApplicationController
                     # check if the user is in the tag people
                     if people.include?([user.id, user.account_type])
                         message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                        send_notif(user, message, post, notif_type)
+                        send_notif(user, message, post)
                     else
                         message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
-                        send_notif(user, message, post, notif_type)                        
+                        send_notif(user, message, post)                        
                     end
                 end
             end
@@ -165,10 +190,10 @@ class Api::V1::Admin::PostsController < ApplicationController
                     # check if the user is in the tag people
                     if people.include?([user.id, user.account_type])
                         message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                        send_notif(user, message, post, notif_type)  
+                        send_notif(user, message, post)  
                     else
                         message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
-                        send_notif(user, message, post, notif_type) 
+                        send_notif(user, message, post) 
                     end
                 end
             end
@@ -178,10 +203,10 @@ class Api::V1::Admin::PostsController < ApplicationController
                 if relationship.account != @user && relationship.account.notifsetting.newActivities == true
                     if people.include?([relationship.account.id, relationship.account.account_type])
                         message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                        send_notif(relationship.account, message, post, notif_type)
+                        send_notif(relationship.account, message, post)
                     else
                         message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
-                        send_notif(relationship.account, message, post, notif_type)
+                        send_notif(relationship.account, message, post)
                     end
                 end
             end
@@ -215,7 +240,7 @@ class Api::V1::Admin::PostsController < ApplicationController
         return people
     end
 
-    def send_notif(user, message, post, notif_type)
+    def send_notif(user, message, post)
         Notification.create(recipient: user, actor: @user, action: message, postId: post.id, read: false, notif_type: notif_type)
         
         #Push Notification

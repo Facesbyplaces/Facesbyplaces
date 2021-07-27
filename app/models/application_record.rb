@@ -3,6 +3,12 @@ class ApplicationRecord < ActiveRecord::Base
   
   # current user for the serializer
   def currentUser
-      User.current
+    User.current_user
   end
+
+  # current alm user for the serializer
+  def currentAlmUser
+    AlmUser.current_alm_user
+  end
+
 end
