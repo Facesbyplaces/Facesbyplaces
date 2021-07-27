@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import Header from "./Header";
-import Body from "./Body";
+import DataTable from "./DataTable";
 
 // Post
 import EditPost from "../PostCRUD/EditPost";
 import ViewPost from "../PostCRUD/ViewPost";
 import AddPost from "../PostCRUD/AddPost";
 
-import { SuccessModal } from "../PostCRUD/SuccessModal";
+import { SuccessModal } from "../Modals/SuccessModal";
 
 export default function PostTable() {
+  const [search, setSearch] = useState(false);
+  const [keywords, setKeywords] = useState([]);
   const [showModal, setShowModal] = useState(true);
-  const [pageType, setPageType] = useState(0);
+  const [pageType, setPageType] = useState(2);
   const { postTab } = useSelector(({ postTab }) => ({
     postTab: postTab,
   }));
@@ -40,7 +42,7 @@ export default function PostTable() {
                 />
                 <div className="card card-custom">
                   <Header />
-                  <Body />
+                  <DataTable />
                 </div>
               </div>
             );
@@ -48,8 +50,20 @@ export default function PostTable() {
             return (
               <div className="container">
                 <div className="card card-custom">
-                  <Header pageType={pageType} setPageType={setPageType} />
-                  <Body pageType={pageType} setPageType={setPageType} />
+                  <Header
+                    pageType={pageType}
+                    setPageType={setPageType}
+                    search={search}
+                    setSearch={setSearch}
+                    keywords={keywords}
+                    setKeywords={setKeywords}
+                  />
+                  <DataTable
+                    search={search}
+                    setSearch={setSearch}
+                    keywords={keywords}
+                    pageType={pageType}
+                  />
                 </div>
               </div>
             );

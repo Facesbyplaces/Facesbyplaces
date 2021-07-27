@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { TablePostAction, EditPostAction } from "../../../../../redux/actions";
+import { TablePostAction, EditPostAction } from "../../../../redux/actions";
 import CommentTable from "../CommentTable/CommentTable";
 
 export default function ViewPost() {
@@ -118,7 +118,7 @@ export default function ViewPost() {
                       {imagesOrVideosEmpty ? (
                         <div className="form-group row pl-4">
                           <div
-                            className="card card-custom pb-3 card-stretch pr-3"
+                            className="card border-0 pb-3 card-stretch pr-3"
                             style={{
                               marginRight: "auto",
                               marginLeft: "auto",

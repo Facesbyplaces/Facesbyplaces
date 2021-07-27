@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../../../../../../auxiliary/axios";
+import axios from "../../../../../auxiliary/axios";
 
 export const AddCommentModal = ({
   id,

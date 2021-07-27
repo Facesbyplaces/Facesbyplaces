@@ -16,9 +16,9 @@ export function Home() {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <Assets />
-      <div className="d-flex flex-column flex-root">
+      <div className="d-flex flex-column flex-root" style={{ height: "100%" }}>
         {loading ? (
           <div className="loader-container">
             <HashLoader color={"#04ECFF"} loading={loading} size={90} />

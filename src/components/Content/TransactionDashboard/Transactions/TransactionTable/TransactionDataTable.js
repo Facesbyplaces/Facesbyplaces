@@ -32,7 +32,7 @@ export default function PostDataTable({
   };
 
   {
-    search ? handleSearch() : console.log("");
+    search ? handleSearch() : console.log("Fetching...");
   }
 
   useEffect(() => {
@@ -164,11 +164,11 @@ export default function PostDataTable({
     axios
       .get(`/api/v1/admin/transactions`, { params: { page: page } })
       .then((response) => {
-        console.log("Response: ", response.data);
+        console.log("Response: ", response);
         setTransactions(response.data.transactions);
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
   };
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "../../../../../auxiliary/axios";
-import { SuccessModal } from "./SuccessModal";
+import axios from "../../../../auxiliary/axios";
+import { SuccessModal } from "../Modals/SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { TablePostAction, ViewPostAction } from "../../../../../redux/actions";
+import { TablePostAction, ViewPostAction } from "../../../../redux/actions";
 
 export default function AddPost() {
   var dateFormat = require("dateformat");

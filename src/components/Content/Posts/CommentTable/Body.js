@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CommentDataTable from "./CommentDataTable";
-import { AddMemorialAction } from "../../../../../redux/actions";
+import { AddMemorialAction } from "../../../../redux/actions";
 
 export default function Body() {
   const [search, setSearch] = useState(false);

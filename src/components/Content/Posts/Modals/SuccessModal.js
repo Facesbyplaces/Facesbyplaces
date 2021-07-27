@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TablePostAction, ViewPostAction } from "../../../../../redux/actions";
+import { TablePostAction, ViewPostAction } from "../../../../redux/actions";
 
 export const SuccessModal = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();

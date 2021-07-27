@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../../../../../../auxiliary/axios";
+import axios from "../../../../../auxiliary/axios";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";

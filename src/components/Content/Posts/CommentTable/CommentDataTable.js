@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 //Data Table
 import DataTableRowPostCommentsData from "./DataTableRowData/DataTableRowPostCommentsData";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
-export default function PostDataTable({ search, setSearch, keywords }) {
+export default function DataTable({ search, setSearch, keywords }) {
   const { postTab } = useSelector(({ postTab }) => ({
     postTab: postTab,
   }));

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DeleteModal } from "./DeleteModal";
+import { DeleteModal } from "../../Modals/DeleteModal";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
@@ -8,7 +8,7 @@ import {
   ViewPostAction,
   EditPostAction,
   DeletePostAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
 export default function DataTableRowMemorialPostsData({
   posts,
@@ -18,8 +18,6 @@ export default function DataTableRowMemorialPostsData({
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const page_type = pageType === 2 ? "Memorial" : "Blm";
-
-  console.log("Memorial: ", posts);
 
   const handleViewClick = (id, option, type) => {
     console.log(id, option);
@@ -39,10 +37,10 @@ export default function DataTableRowMemorialPostsData({
   const renderedPosts = posts.map((post) => (
     <tr>
       <td className="pl-2 py-6">
-        <label className="checkbox checkbox-lg checkbox-inline">
+        {/* <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
           <span />
-        </label>
+        </label> */}
       </td>
       <td>
         <a
@@ -112,22 +110,23 @@ export default function DataTableRowMemorialPostsData({
               xmlnsXlink="http://www.w3.org/1999/xlink"
             >
               {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
-              <title>Stockholm-icons / General / Heart</title>
+              <title>Stockholm-icons / Map / Location-arrow</title>
               <desc>Created with Sketch.</desc>
               <defs />
               <g
-                id="Stockholm-icons-/-General-/-Heart"
+                id="Stockholm-icons-/-Map-/-Location-arrow"
                 stroke="none"
                 strokeWidth={1}
                 fill="none"
                 fillRule="evenodd"
               >
-                <polygon id="Shape" points="0 0 24 0 24 24 0 24" />
+                <rect id="bound" x={0} y={0} width={24} height={24} />
                 <path
-                  d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z"
-                  id="Shape"
+                  d="M4.88230018,17.2353996 L13.2844582,0.431083506 C13.4820496,0.0359007077 13.9625881,-0.12427877 14.3577709,0.0733126292 C14.5125928,0.15072359 14.6381308,0.276261584 14.7155418,0.431083506 L23.1176998,17.2353996 C23.3152912,17.6305824 23.1551117,18.1111209 22.7599289,18.3087123 C22.5664522,18.4054506 22.3420471,18.4197165 22.1378777,18.3482572 L14,15.5 L5.86212227,18.3482572 C5.44509941,18.4942152 4.98871325,18.2744737 4.84275525,17.8574509 C4.77129597,17.6532815 4.78556182,17.4288764 4.88230018,17.2353996 Z"
+                  id="Path-99"
                   fill="#000000"
                   fillRule="nonzero"
+                  transform="translate(14.000087, 9.191034) rotate(-315.000000) translate(-14.000087, -9.191034) "
                 />
               </g>
             </svg>
