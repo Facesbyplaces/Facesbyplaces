@@ -22,19 +22,17 @@ class Api::V1::Admin::CommentsController < ApplicationController
     end
 
     def searchComment
-        commentsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Comment').pluck('searchable_id')
-        @comments = Comment.where(id: commentsId)
-        
-        render json: {  itemsremaining:  itemsRemaining(@comments),
+        puts comments
+        render json: {  #itemsremaining:  itemsRemaining(@comments),
                         comments: ActiveModel::SerializableResource.new(
-                            @comments, 
+                            comments, 
                             each_serializer: CommentSerializer
                         )
                     }
     end
 
     def addComment
-        userActor = User.find(params[:user_id])
+        
         comment = Comment.new(comment_params)
         comment.account = userActor
         if comment.save
@@ -75,6 +73,28 @@ class Api::V1::Admin::CommentsController < ApplicationController
         unless user().has_role? :admin 
             return render json: {status: "Must be an admin to continue"}, status: 401
         end
+    end
+
+    def userActor
+        begin 
+            return User.find(params[:user_id])
+        rescue StandardError
+            return AlmUser.find(params[:user_id])
+        end
+    end
+
+    def comments
+        commentsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Comment').pluck('searchable_id')
+        c = Comment.where(id: commentsId)
+        comments = []
+        
+        c.map{ |comment| 
+            if comment.post.id == params[:page_id].to_i
+                comments.push(comment)
+            end
+        }
+
+        return comments
     end
 
     def set_comment
@@ -176,7 +196,7 @@ class Api::V1::Admin::CommentsController < ApplicationController
             end
     end
     
-    def fetched_comments(comments)
+    def fetched_comments
         post = Post.find(params[:id])
         comments = post.comments 
 
