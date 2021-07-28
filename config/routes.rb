@@ -206,96 +206,96 @@ Rails.application.routes.draw do
       namespace :admin do
 
         # all users
-        get 'users',                              to: 'users#allUsers'
+        get 'users',                                to: 'users#allUsers'
         # view user
-        get 'users/show',                         to: 'users#showUser'
+        get 'users/show',                           to: 'users#showUser'
         # edit user
-        put 'users/edit',                         to: 'users#editUser'
+        put 'users/edit',                           to: 'users#editUser'
         # delete user
-        post 'users/delete',                      to: 'users#deleteUser'
+        post 'users/delete',                        to: 'users#deleteUser'
         # search user
-        get 'users/search',                       to: 'users#searchUsers'
+        get 'users/search',                         to: 'users#searchUsers'
         # contact user
-        post 'users/contact',                     to: 'users#contactUser'
+        post 'users/contact',                       to: 'users#contactUser'
 
         # index post
-        get 'posts',                              to: 'posts#allPosts'
+        get 'posts',                                to: 'posts#allPosts'
         # add post
-        post 'posts/create',                      to: 'posts#createPost'
+        post 'posts/create',                        to: 'posts#createPost'
         # edit post
-        put 'posts/edit/:id',                     to: 'posts#editPost'
+        put 'posts/edit/:id',                       to: 'posts#editPost'
         # edit post image
-        put 'posts/image/:id',                    to: 'posts#editImageOrVideosPost'
+        put 'posts/image/:id',                      to: 'posts#editImageOrVideosPost'
         # index memorial post
-        get 'posts/memorials',                    to: 'posts#memorialSelection'
+        get 'posts/memorials',                      to: 'posts#memorialSelection'
         # index memorial post page admins
-        get 'posts/pageAdmins',                   to: 'posts#pageAdmins'
+        get 'posts/pageAdmins',                     to: 'posts#pageAdmins'
         # view post
-        get 'posts/:id',                          to: 'posts#showPost'
+        get 'posts/:id',                            to: 'posts#showPost'
         # remove post
-        delete 'posts/:id',                       to: 'posts#deletePost'
+        delete 'posts/:id',                         to: 'posts#deletePost'
         # search post
-        get 'search/post',                        to: 'posts#searchPost'
+        get 'search/post',                          to: 'posts#searchPost'
         
         # COMMENTS
 
         # all users without paginations
-        get 'comments/users/selection',           to: 'comments#usersSelection'
+        get 'comments/users/selection/:page_type',  to: 'comments#usersSelection'
         # comments
-        get 'comments',                           to: 'comments#commentsIndex'
+        get 'comments',                             to: 'comments#commentsIndex'
         # edit comment
-        put 'comments/edit/:id',                  to: 'comments#editComment'
+        put 'comments/edit/:id',                    to: 'comments#editComment'
         # add comment
-        post 'comments/add',                      to: 'comments#addComment'
+        post 'comments/add',                        to: 'comments#addComment'
         # delete comment
-        delete 'comments/delete/:id',             to: 'comments#deleteComment'
+        delete 'comments/delete/:id',               to: 'comments#deleteComment'
         # delete comment
-        get 'search/comments',                    to: 'comments#searchComment'
+        get 'search/comments',                      to: 'comments#searchComment'
 
         # MEMORIALS
 
         # all users without paginations
-        get 'memorials/users/selection',          to: 'memorials#usersSelection'
+        get 'memorials/users/selection',            to: 'memorials#usersSelection'
         # all memorials
-        get 'memorials',                          to: 'memorials#allMemorials'
+        get 'memorials',                            to: 'memorials#allMemorials'
         # add memorials
-        post 'memorials/add',                     to: 'memorials#createMemorial'
+        post 'memorials/add',                       to: 'memorials#createMemorial'
         # view memorial
-        get 'memorials/:id/:page',                to: 'memorials#showMemorial'
+        get 'memorials/:id/:page',                  to: 'memorials#showMemorial'
         # update memorial
-        put 'memorials/:id',                      to: 'memorials#updateMemorial'
+        put 'memorials/:id',                        to: 'memorials#updateMemorial'
         # update memorial images
-        put 'memorials/image/:id/:page',          to: 'memorials#updateMemorialImages'
+        put 'memorials/image/:id/:page',            to: 'memorials#updateMemorialImages'
         # update blm
-        put 'memorials/blm/:id',                  to: 'memorials#updateBlm'
+        put 'memorials/blm/:id',                    to: 'memorials#updateBlm'
         # update blm images
-        put 'memorials/blm/image/:id/:page',      to: 'memorials#updateBlmImages'
+        put 'memorials/blm/image/:id/:page',        to: 'memorials#updateBlmImages'
         # remove memorial
-        delete 'memorials/:id/:page',             to: 'memorials#deleteMemorial'
+        delete 'memorials/:id/:page',               to: 'memorials#deleteMemorial'
         # search memorial
-        get 'search/memorial',                    to: 'memorials#searchMemorial'
+        get 'search/memorial',                      to: 'memorials#searchMemorial'
   
         # all reports
-        get 'reports',                            to: 'reports#allReports'
+        get 'reports',                              to: 'reports#allReports'
         # fetch all datas
-        get 'reports/fetchData/:reportable_type', to: 'reports#fetchData'
+        get 'reports/fetchData/:reportable_type',   to: 'reports#fetchData'
         # add report
-        post 'reports/create',                    to: 'reports#createReport'
+        post 'reports/create',                      to: 'reports#createReport'
         # show report
-        get 'reports/:id',                        to: 'reports#showReport'
+        get 'reports/:id',                          to: 'reports#showReport'
         # edit report
-        put 'reports/edit/:id',                   to: 'reports#editReport'
+        put 'reports/edit/:id',                     to: 'reports#editReport'
         # delete report
-        delete 'reports/delete/:id',              to: 'reports#deleteReport'
+        delete 'reports/delete/:id',                to: 'reports#deleteReport'
         # search post
-        get 'search/report',                      to: 'reports#searchReport'
+        get 'search/report',                        to: 'reports#searchReport'
 
         # all transactions
-        get 'transactions',                       to: 'transactions#allTransactions'
+        get 'transactions',                         to: 'transactions#allTransactions'
         # show transaction
-        get 'transactions/show',                  to: 'transactions#showTransaction'
+        get 'transactions/show',                    to: 'transactions#showTransaction'
         # payout transaction
-        put 'transactions/payout/:id',            to: 'transactions#payoutTransaction'
+        put 'transactions/payout/:id',              to: 'transactions#payoutTransaction'
 
       end
 

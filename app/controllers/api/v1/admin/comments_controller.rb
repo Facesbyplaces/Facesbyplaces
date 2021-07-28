@@ -3,11 +3,13 @@ class Api::V1::Admin::CommentsController < ApplicationController
     before_action :set_comment, only: [:editComment, :deleteComment]
 
     def usersSelection #for create comment users selection
-        users = User.all.where.not(guest: true, username: "admin")
-        alm_users = AlmUser.all
+        if params[:page_type].to_i == 2
+            users = AlmUser.all 
+        else
+            users = User.all.where.not(guest: true, username: "admin")
+        end
 
-        allUsers = users.order("users.id DESC") + alm_users.order("alm_users.id DESC")
-        render json: {success: true,  users: allUsers }, status: 200
+        render json: {success: true,  users: users }, status: 200
     end
 
     def commentsIndex
@@ -76,9 +78,9 @@ class Api::V1::Admin::CommentsController < ApplicationController
     end
 
     def userActor
-        begin 
+        if params[:page_type].to_i == 1
             return User.find(params[:user_id])
-        rescue StandardError
+        else 
             return AlmUser.find(params[:user_id])
         end
     end
@@ -87,7 +89,7 @@ class Api::V1::Admin::CommentsController < ApplicationController
         commentsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Comment').pluck('searchable_id')
         c = Comment.where(id: commentsId)
         comments = []
-        
+
         c.map{ |comment| 
             if comment.post.id == params[:page_id].to_i
                 comments.push(comment)
