@@ -379,7 +379,7 @@ export default function AddPost() {
                                     className={`btn btn-outline-warning ${
                                       pageType === 2 ? "active" : ""
                                     }`}
-                                    style={{ width: "56px" }}
+                                    style={{ width: "233px" }}
                                     onClick={() => setPage(2)}
                                   >
                                     <input type="radio" name="options" />
@@ -389,7 +389,7 @@ export default function AddPost() {
                                     className={`btn btn-outline-warning ${
                                       pageType === 1 ? "active" : ""
                                     }`}
-                                    style={{ width: "56px" }}
+                                    style={{ width: "233px" }}
                                   >
                                     <input
                                       type="radio"

@@ -190,7 +190,7 @@ export default function ViewPost() {
                               <button
                                 type="button"
                                 className={"btn active btn-outline-info mr-2"}
-                                style={{ width: "206px" }}
+                                style={{ width: "230px" }}
                               >
                                 ALM
                               </button>
@@ -198,7 +198,7 @@ export default function ViewPost() {
                               <button
                                 type="button"
                                 className={"btn btn-outline-info mr-2"}
-                                style={{ width: "206px" }}
+                                style={{ width: "230px" }}
                                 disabled
                               >
                                 ALM
@@ -208,7 +208,7 @@ export default function ViewPost() {
                               <button
                                 type="button"
                                 className={"btn active btn-outline-info mr-2"}
-                                style={{ width: "206px" }}
+                                style={{ width: "230px" }}
                               >
                                 Blm
                               </button>
@@ -216,7 +216,7 @@ export default function ViewPost() {
                               <button
                                 type="button"
                                 className={"btn btn-outline-info mr-2"}
-                                style={{ width: "206px" }}
+                                style={{ width: "230px" }}
                                 disabled
                               >
                                 Blm

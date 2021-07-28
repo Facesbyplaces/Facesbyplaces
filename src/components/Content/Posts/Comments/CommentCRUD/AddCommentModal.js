@@ -13,15 +13,17 @@ export const AddCommentModal = ({
   const [body, setBody] = useState("");
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState();
+  const [pageType, setPageType] = useState(2);
 
   const [showModal, setShowModal] = useState(false);
   const [action, setAction] = useState("add");
   const [loader, setLoader] = useState(false);
 
-  const fetchUsers = () => {
+  const fetchUsers = (e) => {
     axios
-      .get(`/api/v1/admin/comments/users/selection`)
+      .get(`/api/v1/admin/comments/users/selection/${e}`)
       .then((response) => {
+        console.log(response);
         setUsers(response.data.users);
         setFetched(true);
       })
@@ -39,6 +41,7 @@ export const AddCommentModal = ({
           post_id: id,
           body: body,
         },
+        page_type: pageType,
       })
       .then((response) => {
         setLoader(false);
@@ -65,8 +68,13 @@ export const AddCommentModal = ({
     createComment(id, user, body);
   };
 
+  const handlePageTypeClick = (e) => {
+    setPageType(e);
+    fetchUsers(e);
+  };
+
   {
-    fetched ? console.log() : fetchUsers();
+    fetched ? console.log() : fetchUsers(2);
   }
 
   const renderedUsers = users.map((user) => (
@@ -102,6 +110,51 @@ export const AddCommentModal = ({
                   </div>
                   <div className="modal-body">
                     <form className="form">
+                      <div className="card-body pt-0 pb-0">
+                        <div
+                          className="form-group"
+                          style={{ textAlign: "left" }}
+                        >
+                          <label>Account Type:</label>
+                          <div className="input-group input-group-lg">
+                            <div
+                              className="btn-group btn-group-toggle"
+                              style={{
+                                display: "inline-block",
+                                textAlign: "center",
+                              }}
+                              data-toggle="buttons"
+                            >
+                              <label
+                                className={`btn btn-outline-warning ${
+                                  pageType === 2 ? "active" : ""
+                                }`}
+                                style={{ width: "198px" }}
+                                onClick={() => handlePageTypeClick(2)}
+                              >
+                                <input type="radio" name="options" />
+                                ALM
+                              </label>
+                              <label
+                                className={`btn btn-outline-warning ${
+                                  pageType === 1 ? "active" : ""
+                                }`}
+                                style={{ width: "198px" }}
+                              >
+                                <input
+                                  type="radio"
+                                  name="options"
+                                  onClick={() => handlePageTypeClick(1)}
+                                />
+                                BLM
+                              </label>
+                            </div>
+                            <span className="form-text text-muted">
+                              Pick an account type first before choosing a user.
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                       <div className="card-body pt-0 pb-0">
                         <div
                           className="form-group"
