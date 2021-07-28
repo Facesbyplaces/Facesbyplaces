@@ -25,7 +25,8 @@ class HomeBLMMemorialPageImage extends StatefulWidget{
 }
 
 class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
-  final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  // final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  List<String> backgroundImages = ['assets/icons/blm-memorial-cover-1.jpeg', 'assets/icons/blm-memorial-cover-2.jpeg'];
   Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
   int backgroundImageToggle  = 0;
   File backgroundImage = File('');
@@ -179,10 +180,10 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                             return const SizedBox(width: 25,);
                           },
                           scrollDirection: Axis.horizontal,
-                          itemCount: 5,
+                          itemCount: 3,
                           itemBuilder: (context, index){
                             return ((){
-                              if(index == 4){
+                              if(index == 2){
                                 return GestureDetector(
                                   child: Container(
                                     width: 100,

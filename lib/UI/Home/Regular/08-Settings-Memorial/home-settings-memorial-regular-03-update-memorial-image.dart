@@ -25,7 +25,8 @@ class HomeRegularMemorialPageImage extends StatefulWidget{
 }
 
 class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage>{
-  List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
+  // List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
+  List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
   Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
   File backgroundImage = File('');
   File profileImage = File('');
@@ -177,13 +178,13 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                         child: ListView.separated(
                           physics: const ClampingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          itemCount: 5,
+                          itemCount: 3,
                           separatorBuilder: (context, index){
                             return const SizedBox(width: 25,);
                           },
                           itemBuilder: (context, index){
                             return ((){
-                              if(index == 4){
+                              if(index == 2){
                                 return GestureDetector(
                                   child: Container(
                                     width: 100,

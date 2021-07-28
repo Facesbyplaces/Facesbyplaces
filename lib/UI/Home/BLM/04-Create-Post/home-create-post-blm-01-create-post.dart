@@ -528,7 +528,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                       ),
                                       onTap: () async{
                                         String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
-                                        newLocation.value = result;
+                                        
+                                        if(result != ''){
+                                          newLocation.value = result;
+                                        }
                                       },
                                     ),
                                   ),

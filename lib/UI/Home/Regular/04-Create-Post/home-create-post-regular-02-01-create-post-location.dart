@@ -32,7 +32,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
             leading: IconButton(
               icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
               onPressed: (){
-                Navigator.pop(context);
+                Navigator.pop(context, '');
               },
             ),
             title: TextFormField(

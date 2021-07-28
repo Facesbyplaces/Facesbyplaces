@@ -526,7 +526,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                       ),
                                       onTap: () async{
                                         String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchLocation()));
-                                        newLocation.value = result;
+
+                                        if(result != ''){
+                                          newLocation.value = result;
+                                        }
                                       },
                                     ),
                                   ),
