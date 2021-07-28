@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { AddCommentModal } from "./CommentCRUD/AddCommentModal";
 
-export default function Header(setSearch, keywords, setKeywords) {
+export default function Header({ setSearch, keywords, setKeywords }) {
   const { postTab } = useSelector(({ postTab }) => ({
     postTab: postTab,
   }));
   const [showAddModal, setShowAddModal] = useState(false);
   const [fetched, setFetched] = useState(false);
-  const dispatch = useDispatch();
 
   const handleAddClick = () => {
     setShowAddModal((prev) => !prev);
@@ -20,7 +19,6 @@ export default function Header(setSearch, keywords, setKeywords) {
 
   const handleChange = (e) => {
     setKeywords(e.target.value);
-    // setSearch(true);
   };
 
   return (
@@ -75,8 +73,8 @@ export default function Header(setSearch, keywords, setKeywords) {
           {/*end::Button*/}
         </div>
       </div>
-      <div className="card-body">
-        <div className="mb-7">
+      <div className="card-body pb-0">
+        <div>
           <div className="row align-items-center">
             <div className="col-lg-9 col-xl-8">
               <div className="row align-items-center">

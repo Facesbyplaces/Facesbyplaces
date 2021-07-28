@@ -3,7 +3,7 @@ import axios from "../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { TablePostAction, EditPostAction } from "../../../../redux/actions";
-import CommentTable from "../CommentTable/CommentTable";
+import CommentTable from "../Comments/CommentTable";
 
 export default function ViewPost() {
   var dateFormat = require("dateformat");
@@ -24,7 +24,6 @@ export default function ViewPost() {
   };
 
   const handleEditClick = (id, option, type) => {
-    console.log(id, option, type);
     dispatch(EditPostAction({ id, option, type }));
   };
 
@@ -64,7 +63,6 @@ export default function ViewPost() {
         response.data.imagesOrVideos
           ? setImagesOrVideos(response.data.imagesOrVideos)
           : setImagesOrVideosEmpty(true);
-        console.log("Response: ", response.data);
       })
       .catch((error) => {
         console.log(error.errors);

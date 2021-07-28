@@ -1,29 +1,28 @@
-import React, { useState, memo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { DeletePostAction } from "../../../../../../redux/actions";
-import axios from "../../../../../../auxiliary/axios";
+import React, { useState } from "react";
+import axios from "../../../../../auxiliary/axios";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";
+import { SuccessModal } from "../Modals/SuccessModal";
 
-export const DeleteModal = ({ showModal, setShowModal }) => {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const { postTab } = useSelector(({ postTab }) => ({
-    postTab: postTab,
-  }));
+export const DeleteCommentModal = ({
+  showDeleteModal,
+  setShowDeleteModal,
+  id,
+}) => {
+  const [showModal, setShowModal] = useState(false);
+  const [action, setAction] = useState("delete");
+  const [loader, setLoader] = useState(false);
 
-  const handleDeleteMemorial = (id, page, option) => {
-    setLoading(true);
-    console.log("ID: ", postTab.id);
+  const handleDeleteClicked = (id) => {
+    setLoader(true);
     axios
-      .delete(`/api/v1/admin/posts/${postTab.id}`, {
-        id: postTab.id,
+      .delete(`/api/v1/admin/comments/delete/${id}`, {
+        id: id,
       })
       .then((response) => {
-        console.log(response.data);
-        setLoading(false);
-        dispatch(DeletePostAction({ id, page, option }));
+        setLoader(false);
+        setShowModal((prev) => !prev);
       })
       .catch((error) => {
         console.log(error.response);
@@ -32,14 +31,22 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
 
   return (
     <>
-      {showModal ? (
-        <div className="modal" showModal={showModal}>
-          {loading ? (
-            <div className="loader-container">
-              <HashLoader color={"#04ECFF"} loading={loading} size={90} />
-            </div>
-          ) : (
-            <div className="modal-dialog modal-dialog-centered" role="document">
+      {showDeleteModal ? (
+        <div className="modal" showDeleteModal={showDeleteModal}>
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            {loader ? (
+              <div
+                className="modal-content"
+                style={{ height: "500px", width: "448px" }}
+              >
+                <HashLoader
+                  color={"#04ECFF"}
+                  loading={loader}
+                  size={70}
+                  css={{ margin: "auto" }}
+                />
+              </div>
+            ) : (
               <div className="modal-content">
                 <div className="pt-10">
                   <span className="svg-icon svg-icon-10x svg-icon-danger">
@@ -87,8 +94,8 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
                 </div>
                 <div className="modal-body">
                   <h5 className="modal-dialog">
-                    Do you really want to delete this post? This process cannot
-                    be undone.
+                    Do you really want to delete this comment? This process
+                    cannot be undone.
                   </h5>
                 </div>
                 <div className="modal-footer">
@@ -96,21 +103,27 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
                     type="button"
                     className="btn btn-primary font-weight-bold"
                     data-dismiss="modal"
-                    onClick={() => setShowModal((prev) => !prev)}
+                    onClick={() => setShowDeleteModal((prev) => !prev)}
                   >
                     Close
                   </button>
                   <button
                     type="button"
                     className="btn btn-danger font-weight-bold"
-                    onClick={() => handleDeleteMemorial("", "", "d")}
+                    onClick={() => handleDeleteClicked(id)}
                   >
                     Delete
                   </button>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+            <SuccessModal
+              showModal={showModal}
+              setShowModal={setShowModal}
+              setShowDeleteModal={setShowDeleteModal}
+              action={action}
+            />
+          </div>
           )}
         </div>
       ) : null}

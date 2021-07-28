@@ -30,9 +30,10 @@ export default function DataTable({ search, setSearch, keywords }) {
   const handleSearch = () => {
     axios
       .get(`/api/v1/admin/search/comments`, {
-        params: { keywords: keywords, page: page },
+        params: { keywords: keywords, page: page, page_id: postTab.id },
       })
       .then((response) => {
+        console.log(response);
         setComments(response.data.comments);
       })
       .catch((error) => {
@@ -42,11 +43,11 @@ export default function DataTable({ search, setSearch, keywords }) {
   };
 
   {
-    search ? handleSearch() : console.log("Search", search);
+    search ? handleSearch() : console.log("Fetching...");
   }
 
   {
-    fetched ? console.log(" ") : fetchComments(page);
+    fetched ? console.log("Fetched!") : fetchComments(page);
   }
 
   const handleNextClick = () => {
@@ -170,64 +171,66 @@ export default function DataTable({ search, setSearch, keywords }) {
   };
 
   return (
-    <div className="table-responsive">
-      <table
-        className="table table-hover table-head-custom table-vertical-center"
-        id="kt_advance_table_widget_2"
-      >
-        <thead>
-          <tr className="text-uppercase">
-            {/* <th className="pl-2" style={{ width: "40px" }}>
-              <label className="checkbox checkbox-lg checkbox-inline mr-2">
-                <input type="checkbox" defaultValue={1} />
-                <span />
-              </label>
-            </th> */}
-            <th className="pl-0" style={{ minWidth: "100px" }}>
-              post id
-            </th>
-            <th style={{ minWidth: "150px" }}>user</th>
-            <th style={{ minWidth: "150px" }}>body</th>
-            <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
-              action
-            </th>
-          </tr>
-        </thead>
-        {loader ? (
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div
-                  className="loader-container"
-                  style={{ width: "100%", height: "100vh" }}
-                >
-                  <HashLoader color={"#04ECFF"} loading={loader} size={70} />
-                </div>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
+    <div className="card-body">
+      <div className="table-responsive">
+        <table
+          className="table table-hover table-head-custom table-vertical-center"
+          id="kt_advance_table_widget_2"
+        >
+          <thead>
+            <tr className="text-uppercase">
+              <th className="pl-2" style={{ width: "40px" }}>
+                {/* <label className="checkbox checkbox-lg checkbox-inline mr-2">
+                  <input type="checkbox" defaultValue={1} />
+                  <span />
+                </label> */}
+              </th>
+              <th className="pl-0" style={{ minWidth: "100px" }}>
+                comment id
+              </th>
+              <th style={{ minWidth: "150px" }}>user</th>
+              <th style={{ minWidth: "150px" }}>body</th>
+              <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
+                action
+              </th>
             </tr>
-          </tbody>
-        ) : (
-          <DataTableRowPostCommentsData search={search} comments={comments} />
-        )}
-      </table>
-      <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <div className="d-flex align-items-center">
-          {renderBackButton()}
-          <a
-            className={
-              "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
-            }
-          >
-            {page}
-          </a>
-          {renderNextButton()}
+          </thead>
+          {loader ? (
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div
+                    className="loader-container"
+                    style={{ width: "100%", height: "100vh" }}
+                  >
+                    <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          ) : (
+            <DataTableRowPostCommentsData search={search} comments={comments} />
+          )}
+        </table>
+        <div className="d-flex justify-content-between align-items-center flex-wrap">
+          <div className="d-flex align-items-center">
+            {renderBackButton()}
+            <a
+              className={
+                "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+              }
+            >
+              {page}
+            </a>
+            {renderNextButton()}
+          </div>
         </div>
       </div>
     </div>
