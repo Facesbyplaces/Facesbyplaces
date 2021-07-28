@@ -12,11 +12,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share/share.dart';
+import 'misc-06-blm-button.dart';
 import 'dart:typed_data';
 import 'dart:io';
 import 'dart:ui';
-
-import 'misc-06-blm-button.dart';
 
 class MiscBLMDropDownTemplate extends StatefulWidget{
   final int postId;
@@ -186,43 +185,41 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                                 height: SizeConfig.screenHeight! - 400,
                                 color: Colors.black26,
                                 padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 10, right: SizeConfig.blockSizeHorizontal! * 10, top: SizeConfig.blockSizeHorizontal! * 20, bottom: SizeConfig.blockSizeHorizontal! * 25),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffffffff),
-                                    border: Border.all(color: Color(0xffffffff),),
-                                    borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Spacer(),
+                                child: Material(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffffffff),
+                                      border: Border.all(color: Color(0xffffffff),),
+                                      borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
 
-                                      Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
+                                        Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
 
-                                      Spacer(),
+                                        Spacer(),
 
-                                      Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                        Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
 
-                                      Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                        Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
-                                      Spacer(),
+                                        Spacer(),
 
-                                      MiscBLMButtonTemplate(
-                                        buttonText: 'Share',
-                                        buttonTextStyle: const TextStyle(
-                                          fontSize: 16, 
-                                          fontWeight: FontWeight.bold, 
-                                          color: const Color(0xffffffff),
+                                        MiscBLMButtonTemplate(
+                                          buttonText: 'Share',
+                                          buttonTextStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
+                                          buttonColor: const Color(0xff04ECFF),
+                                          width: SizeConfig.screenWidth! / 2,
+                                          height: 45,
+                                          onPressed: () async{
+                                            await shareQRCode(qrData);
+                                          },
                                         ),
-                                        width: SizeConfig.screenWidth! / 2,
-                                        height: 45,
-                                        buttonColor: const Color(0xff04ECFF), 
-                                        onPressed: () async{
-                                          await shareQRCode(qrData);
-                                        },
-                                      ),
 
-                                      Spacer(),
-                                    ],
+                                        Spacer(),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -432,43 +429,41 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                 height: SizeConfig.screenHeight! - 400,
                                 color: Colors.black26,
                                 padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 10, right: SizeConfig.blockSizeHorizontal! * 10, top: SizeConfig.blockSizeHorizontal! * 20, bottom: SizeConfig.blockSizeHorizontal! * 25),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffffffff),
-                                    border: Border.all(color: Color(0xffffffff),),
-                                    borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Spacer(),
+                                child: Material(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffffffff),
+                                      border: Border.all(color: Color(0xffffffff),),
+                                      borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
 
-                                      Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
+                                        Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
 
-                                      Spacer(),
+                                        Spacer(),
 
-                                      Text('${widget.memorialName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                        Text('${widget.memorialName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
 
-                                      Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                        Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
-                                      Spacer(),
+                                        Spacer(),
 
-                                      MiscBLMButtonTemplate(
-                                        buttonText: 'Share',
-                                        buttonTextStyle: const TextStyle(
-                                          fontSize: 16, 
-                                          fontWeight: FontWeight.bold, 
-                                          color: const Color(0xffffffff),
+                                        MiscBLMButtonTemplate(
+                                          buttonText: 'Share',
+                                          buttonTextStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
+                                          buttonColor: const Color(0xff04ECFF),
+                                          width: SizeConfig.screenWidth! / 2,
+                                          height: 45,
+                                          onPressed: () async{
+                                            await shareQRCode(qrData);
+                                          },
                                         ),
-                                        width: SizeConfig.screenWidth! / 2,
-                                        height: 45,
-                                        buttonColor: const Color(0xff04ECFF), 
-                                        onPressed: () async{
-                                          await shareQRCode(qrData);
-                                        },
-                                      ),
 
-                                      Spacer(),
-                                    ],
+                                        Spacer(),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

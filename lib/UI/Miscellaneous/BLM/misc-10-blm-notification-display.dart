@@ -33,11 +33,11 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
         ? CircleAvatar(
           backgroundColor: const Color(0xff888888),
           foregroundImage: NetworkImage(imageIcon),
-          backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+          backgroundImage: const AssetImage('assets/icons/user-placeholder.png'),
         )
         : const CircleAvatar(
           backgroundColor: const Color(0xff888888),
-          foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+          foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
         ),
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: actorId, accountType: actorAccountType)));
