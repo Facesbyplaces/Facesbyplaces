@@ -166,7 +166,7 @@ export default function DataTable() {
   };
 
   return (
-    <div className="card-body pt-2">
+    <div className="card-body pt-10">
       <div className="table-responsive">
         <table
           className="table table-hover table-head-custom table-vertical-center"

@@ -23,7 +23,7 @@ export default function DataTableRowTransactionData({ transactions }) {
   };
 
   const renderedTransactions = transactions.map((transaction) => (
-    <tr>
+    <tr style={{ height: "75px" }}>
       <td className="pl-2 py-6">
         {/* <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
