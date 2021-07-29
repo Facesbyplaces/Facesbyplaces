@@ -5,7 +5,8 @@ class Api::V1::Admin::ReportsController < ApplicationController
     # Searh Report
     def searchReport
         reportsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Report').pluck('searchable_id')
-        reports = Report.where(id: reportsId)
+        searchedReports = Report.where(id: reportsId)
+        reports = searchedReports.page(params[:page]).per(numberOfPage)
 
         render json: {  itemsremaining:  itemsRemaining(reports),
                         reports: reports
