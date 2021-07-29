@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 import HashLoader from "react-spinners/HashLoader";
 import { SuccessModal } from "./SuccessModal";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  TableReportAction,
-  ViewReportAction,
-} from "../../../../../redux/actions";
+import { TableReportAction, ViewReportAction } from "../../../../redux/actions";
 
 export default function EditReport() {
   var dateFormat = require("dateformat");
@@ -101,9 +98,10 @@ export default function EditReport() {
       })
       .then((response) => {
         console.log("Response: ", response.data);
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+        // setTimeout(() => {
+        //   setLoading(false);
+        // }, 1000);
+        setLoading(false);
         openModal();
       })
       .catch((error) => {
@@ -289,7 +287,7 @@ export default function EditReport() {
                                 <textarea
                                   className="form-control form-control-solid form-control-lg"
                                   id="exampleTextarea"
-                                  rows={6}
+                                  rows={10}
                                   defaultValue={report.description}
                                   onChange={handleDescriptionChange}
                                 />

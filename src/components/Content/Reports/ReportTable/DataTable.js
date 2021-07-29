@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 import DataTableRowReportsData from "./DataTableRowData/DataTableRowReportsData";
+import Empty from "../../Empty";
 
-export default function PostDataTable({
-  search,
-  setSearch,
-  keywords,
-  pageType,
-}) {
+export default function DataTable({ search, setSearch, keywords, pageType }) {
   const [page, setPage] = useState(1);
   const [clicked, setClicked] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -27,7 +23,7 @@ export default function PostDataTable({
         params: { keywords: keywords, page: page },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log("Fetched!");
         setReports(response.data.reports);
       })
       .catch((error) => {
@@ -37,7 +33,7 @@ export default function PostDataTable({
   };
 
   {
-    search ? handleSearch() : console.log("");
+    search ? handleSearch() : console.log("Fetching...");
   }
 
   useEffect(() => {
@@ -203,8 +199,6 @@ export default function PostDataTable({
         setMemorialReportUsers(memorialUsers);
         setPosts(posts);
         setReports(response.data.reports);
-
-        console.log("Response: ", response.data);
       })
       .catch((error) => {
         console.log(error.response);
@@ -212,77 +206,96 @@ export default function PostDataTable({
   };
 
   return (
-    <div className="table-responsive">
-      <table
-        className="table table-hover table-head-custom table-vertical-center"
-        id="kt_advance_table_widget_2"
-      >
-        <thead>
-          <tr className="text-uppercase">
-            <th className="pl-2" style={{ width: "40px" }}>
-              <label className="checkbox checkbox-lg checkbox-inline mr-2">
-                <input type="checkbox" defaultValue={1} />
-                <span />
-              </label>
-            </th>
-            <th className="pl-0" style={{ minWidth: "100px" }}>
-              report id
-            </th>
-            <th style={{ minWidth: "120px" }}>report subject</th>
-            <th style={{ minWidth: "130px" }}>reportable type</th>
-            <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
-              action
-            </th>
-          </tr>
-        </thead>
-        {loader ? (
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div
-                  className="loader-container"
-                  style={{ width: "100%", height: "100vh" }}
-                >
-                  <HashLoader color={"#04ECFF"} loading={loader} size={70} />
-                </div>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
+    <div className="card-body pt-0">
+      <div className="table-responsive">
+        <table
+          className="table table-hover table-head-custom table-vertical-center"
+          id="kt_advance_table_widget_2"
+        >
+          <thead>
+            <tr className="text-uppercase">
+              <th className="pl-2" style={{ width: "40px" }}>
+                {/* <label className="checkbox checkbox-lg checkbox-inline mr-2">
+                  <input type="checkbox" defaultValue={1} />
+                  <span />
+                </label> */}
+              </th>
+              <th className="pl-0" style={{ minWidth: "100px" }}>
+                report id
+              </th>
+              <th style={{ minWidth: "120px" }}>report subject</th>
+              <th style={{ minWidth: "130px" }}>reportable type</th>
+              <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
+                action
+              </th>
             </tr>
-          </tbody>
+          </thead>
+          {loader ? (
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div
+                    className="loader-container"
+                    style={{ width: "100%", height: "100vh" }}
+                  >
+                    <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          ) : (
+            <DataTableRowReportsData
+              reports={
+                {
+                  0: reports,
+                  1: memorialReports,
+                  2: memorialReportUsers,
+                  3: blmReports,
+                  4: blmReportUsers,
+                  5: posts,
+                }[pageType]
+              }
+              search={search}
+              pageType={pageType}
+            />
+          )}
+        </table>
+        {/* Empty display */}
+        {pageType == 0 && reports.length == 0 ? (
+          <Empty />
+        ) : pageType == 1 && memorialReports.length == 0 ? (
+          <Empty />
+        ) : pageType == 2 && memorialReportUsers.length == 0 ? (
+          <Empty />
+        ) : pageType == 3 && blmReports.length == 0 ? (
+          <Empty />
+        ) : pageType == 4 && blmReportUsers.length == 0 ? (
+          <Empty />
+        ) : pageType == 5 && posts.length == 0 ? (
+          <Empty />
         ) : (
-          <DataTableRowReportsData
-            reports={
-              {
-                0: reports,
-                1: memorialReports,
-                2: memorialReportUsers,
-                3: blmReports,
-                4: blmReportUsers,
-                5: posts,
-              }[pageType]
-            }
-            search={search}
-            pageType={pageType}
-          />
+          ""
         )}
-      </table>
-      <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <div className="d-flex align-items-center">
-          {renderBackButton()}
-          <a
-            className={
-              "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
-            }
-          >
-            {page}
-          </a>
-          {renderNextButton()}
+        {/* Empty display */}
+        <div className="d-flex justify-content-between align-items-center flex-wrap">
+          <div className="d-flex align-items-center">
+            {renderBackButton()}
+            <a
+              className={
+                "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+              }
+            >
+              {page}
+            </a>
+            {renderNextButton()}
+          </div>
         </div>
       </div>
     </div>

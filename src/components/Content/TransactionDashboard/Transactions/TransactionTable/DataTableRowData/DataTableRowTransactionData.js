@@ -24,12 +24,12 @@ export default function DataTableRowTransactionData({ transactions, search }) {
 
   const renderedTransactions = transactions.map((transaction) => (
     <tr>
-      {/* <td className="pl-2 py-6">
-        <label className="checkbox checkbox-lg checkbox-inline">
+      <td className="pl-2 py-6">
+        {/* <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
           <span />
-        </label>
-      </td> */}
+        </label> */}
+      </td>
       <td>
         <a
           href="#"
@@ -81,7 +81,6 @@ export default function DataTableRowTransactionData({ transactions, search }) {
         )}
       </td>
       <td className="pr-2 text-left">
-        {/* View Transaction Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
           onClick={() => handleViewClick(transaction)}
@@ -125,7 +124,6 @@ export default function DataTableRowTransactionData({ transactions, search }) {
             {/*end::Svg Icon*/}
           </span>
         </a>
-        {/* Payout Transaction Icon */}
         <a
           className={
             transaction.status === "pending"
@@ -215,7 +213,7 @@ export default function DataTableRowTransactionData({ transactions, search }) {
     </tbody>
   ) : (
     <tbody>
-      {renderedTransactions}{" "}
+      {renderedTransactions}
       <TransactionModal
         showModal={showModal}
         setShowModal={setShowModal}
@@ -231,7 +229,6 @@ export default function DataTableRowTransactionData({ transactions, search }) {
         showModal={showSuccessModal}
         setShowModal={setShowSuccessModal}
       />
-      ;
     </tbody>
   );
   // <div>

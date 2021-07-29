@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
 import Header from "./Header";
-import Body from "./Body";
+import DataTable from "./DataTable";
 
 export default function TransactionTable() {
-  const [pageType, setPageType] = useState(0);
+  const [search, setSearch] = useState(false);
+  const [keywords, setKeywords] = useState([]);
 
   return (
     <div
@@ -13,8 +14,16 @@ export default function TransactionTable() {
     >
       <div className="container">
         <div className="card card-custom">
-          <Header pageType={pageType} setPageType={setPageType} />
-          <Body pageType={pageType} setPageType={setPageType} />
+          <Header
+            setSearch={setSearch}
+            keywords={keywords}
+            setKeywords={setKeywords}
+          />
+          <DataTable
+            search={search}
+            setSearch={setSearch}
+            keywords={keywords}
+          />
         </div>
       </div>
     </div>

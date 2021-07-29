@@ -8,14 +8,12 @@ import {
   ViewReportAction,
   EditReportAction,
   DeleteReportAction,
-} from "../../../../../../redux/actions";
+} from "../../../../../redux/actions";
 
 export default function DataTableRowReportData({ reports, search, pageType }) {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const page_type = pageType === 2 ? "Memorial" : "Blm";
-
-  console.log("Memorial: ", reports);
 
   const handleViewClick = (id, option, type) => {
     console.log(id, option);
@@ -35,10 +33,10 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
   const renderedPosts = reports.map((report) => (
     <tr>
       <td className="pl-2 py-6">
-        <label className="checkbox checkbox-lg checkbox-inline">
+        {/* <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
           <span />
-        </label>
+        </label> */}
       </td>
       <td>
         <a
@@ -58,7 +56,7 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
           {
             Memorial: (
               <span
-                className="label label-lg label-primary label-inline"
+                className="label label-lg label-warning label-inline"
                 style={{ width: "100px", height: "35px" }}
               >
                 ALM
@@ -66,7 +64,7 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
             ),
             Blm: (
               <span
-                className="label label-lg label-light-primary label-inline"
+                className="label label-lg label-primary label-inline"
                 style={{ width: "100px", height: "35px" }}
               >
                 BLM
@@ -74,7 +72,7 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
             ),
             User: (
               <span
-                className="label label-lg label-info label-inline"
+                className="label label-lg label-light-primary label-inline"
                 style={{ width: "100px", height: "35px" }}
               >
                 BLM USER
@@ -82,7 +80,7 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
             ),
             AlmUser: (
               <span
-                className="label label-lg label-light-info label-inline"
+                className="label label-lg label-light-warning label-inline"
                 style={{ width: "100px", height: "35px" }}
               >
                 ALM USER
@@ -90,7 +88,7 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
             ),
             Post: (
               <span
-                className="label label-lg label-light-success label-inline"
+                className="label label-lg label-success label-inline"
                 style={{ width: "100px", height: "35px" }}
               >
                 POST
@@ -105,7 +103,7 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
           onClick={() => handleViewClick(report.id, "v", 2)}
         >
-          <span className="svg-icon svg-icon-md svg-icon-primary">
+          <span className="svg-icon svg-icon-lg svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
             <svg
               width="24px"
@@ -116,25 +114,25 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
               xmlnsXlink="http://www.w3.org/1999/xlink"
             >
               {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
-              <title>Stockholm-icons / General / Heart</title>
+              <title>Stockholm-icons / General / Bookmark</title>
               <desc>Created with Sketch.</desc>
               <defs />
               <g
-                id="Stockholm-icons-/-General-/-Heart"
+                id="Stockholm-icons-/-General-/-Bookmark"
                 stroke="none"
                 strokeWidth={1}
                 fill="none"
                 fillRule="evenodd"
               >
-                <polygon id="Shape" points="0 0 24 0 24 24 0 24" />
+                <rect id="bound" x={0} y={0} width={24} height={24} />
                 <path
-                  d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z"
-                  id="Shape"
+                  d="M8,4 L16,4 C17.1045695,4 18,4.8954305 18,6 L18,17.726765 C18,18.2790497 17.5522847,18.726765 17,18.726765 C16.7498083,18.726765 16.5087052,18.6329798 16.3242754,18.4639191 L12.6757246,15.1194142 C12.2934034,14.7689531 11.7065966,14.7689531 11.3242754,15.1194142 L7.67572463,18.4639191 C7.26860564,18.8371115 6.63603827,18.8096086 6.26284586,18.4024896 C6.09378519,18.2180598 6,17.9769566 6,17.726765 L6,6 C6,4.8954305 6.8954305,4 8,4 Z"
+                  id="Rectangle-31"
                   fill="#000000"
-                  fillRule="nonzero"
                 />
               </g>
             </svg>
+
             {/*end::Svg Icon*/}
           </span>
         </a>

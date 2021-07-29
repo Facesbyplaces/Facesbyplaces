@@ -1,9 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  TableReportAction,
-  ViewReportAction,
-} from "../../../../../redux/actions";
+import { TableReportAction, ViewReportAction } from "../../../../redux/actions";
 
 export const SuccessModal = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();

@@ -5,6 +5,7 @@ import DataTableRowMemorialPostsData from "./DataTableRowData/DataTableRowMemori
 import DataTableRowBlmPostsData from "./DataTableRowData/DataTableRowBlmPostsData";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
+import Empty from "../../Empty";
 
 export default function DataTable({ search, setSearch, keywords, pageType }) {
   const [page, setPage] = useState(1);
@@ -249,6 +250,13 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
             />
           )}
         </table>
+        {pageType == 2 && memorialPosts.length == 0 ? (
+          <Empty />
+        ) : pageType == 1 && blmPosts.length == 0 ? (
+          <Empty />
+        ) : (
+          ""
+        )}
         <div className="d-flex justify-content-between align-items-center flex-wrap">
           <div className="d-flex align-items-center">
             {renderBackButton()}

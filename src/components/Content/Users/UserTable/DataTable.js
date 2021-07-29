@@ -4,6 +4,7 @@ import axios from "../../../../auxiliary/axios";
 import DataTableRowUserData from "./DataTableRowData/DataTableRowUserData";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
+import Empty from "../../Empty";
 
 export default function DataTable({ search, setSearch, keywords, pageType }) {
   const [page, setPage] = useState(1);
@@ -224,6 +225,13 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
             <DataTableRowUserData users={blm_users} search={search} />
           )}
         </table>
+        {pageType == 1 && blm_users.length == 0 ? (
+          <Empty />
+        ) : pageType == 2 && alm_users.length == 0 ? (
+          <Empty />
+        ) : (
+          ""
+        )}
         <div className="d-flex justify-content-between align-items-center flex-wrap">
           <div className="d-flex align-items-center">
             {renderBackButton()}

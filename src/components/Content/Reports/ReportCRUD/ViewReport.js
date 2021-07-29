@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  TableReportAction,
-  EditReportAction,
-} from "../../../../../redux/actions";
+import { TableReportAction, EditReportAction } from "../../../../redux/actions";
 
 export default function ViewReport() {
   var dateFormat = require("dateformat");

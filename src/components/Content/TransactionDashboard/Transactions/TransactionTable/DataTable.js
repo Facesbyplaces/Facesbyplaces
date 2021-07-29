@@ -3,13 +3,9 @@ import axios from "../../../../../auxiliary/axios";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 import DataTableRowTransactionData from "./DataTableRowData/DataTableRowTransactionData";
+import Empty from "../../../Empty";
 
-export default function PostDataTable({
-  search,
-  setSearch,
-  keywords,
-  pageType,
-}) {
+export default function DataTable({ search, setSearch, keywords }) {
   const [page, setPage] = useState(1);
   const [clicked, setClicked] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -37,6 +33,7 @@ export default function PostDataTable({
 
   useEffect(() => {
     fetchTransactions(page);
+    console.log(transactions);
   }, [transactions.id]);
 
   const handleNextClick = () => {
@@ -173,72 +170,75 @@ export default function PostDataTable({
   };
 
   return (
-    <div className="table-responsive">
-      <table
-        className="table table-hover table-head-custom table-vertical-center"
-        id="kt_advance_table_widget_2"
-      >
-        <thead>
-          <tr className="text-uppercase">
-            {/* <th className="pl-2" style={{ width: "40px" }}>
-              <label className="checkbox checkbox-lg checkbox-inline mr-2">
+    <div className="card-body pt-0">
+      <div className="table-responsive">
+        <table
+          className="table table-hover table-head-custom table-vertical-center"
+          id="kt_advance_table_widget_2"
+        >
+          <thead>
+            <tr className="text-uppercase">
+              <th className="pl-2" style={{ width: "40px" }}>
+                {/* <label className="checkbox checkbox-lg checkbox-inline mr-2">
                 <input type="checkbox" defaultValue={1} />
                 <span />
-              </label>
-            </th> */}
-            <th className="pl-0" style={{ minWidth: "100px" }}>
-              id
-            </th>
-            <th style={{ minWidth: "180px" }}>memorial</th>
-            <th style={{ minWidth: "120px" }}>page type</th>
-            <th style={{ minWidth: "100px" }}>amount</th>
-            <th style={{ minWidth: "180px" }}>user</th>
-            <th style={{ minWidth: "120px" }}>account type</th>
-            <th style={{ minWidth: "120px" }}>status</th>
-            <th className="pr-0 text-left" style={{ minWidth: "120px" }}>
-              action
-            </th>
-          </tr>
-        </thead>
-        {loader ? (
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div
-                  className="loader-container"
-                  style={{ width: "100%", height: "100vh" }}
-                >
-                  <HashLoader color={"#04ECFF"} loading={loader} size={70} />
-                </div>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
+              </label> */}
+              </th>
+              <th className="pl-0" style={{ minWidth: "100px" }}>
+                id
+              </th>
+              <th style={{ minWidth: "180px" }}>memorial</th>
+              <th style={{ minWidth: "120px" }}>page type</th>
+              <th style={{ minWidth: "100px" }}>amount</th>
+              <th style={{ minWidth: "180px" }}>user</th>
+              <th style={{ minWidth: "120px" }}>account type</th>
+              <th style={{ minWidth: "120px" }}>status</th>
+              <th className="pr-0 text-left" style={{ minWidth: "120px" }}>
+                action
+              </th>
             </tr>
-          </tbody>
-        ) : (
-          <DataTableRowTransactionData
-            transactions={transactions}
-            search={search}
-            pageType={pageType}
-          />
-        )}
-      </table>
-      <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <div className="d-flex align-items-center">
-          {renderBackButton()}
-          <a
-            className={
-              "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
-            }
-          >
-            {page}
-          </a>
-          {renderNextButton()}
+          </thead>
+          {loader ? (
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div
+                    className="loader-container"
+                    style={{ width: "100%", height: "100vh" }}
+                  >
+                    <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          ) : (
+            <DataTableRowTransactionData
+              transactions={transactions}
+              search={search}
+            />
+          )}
+        </table>
+        {transactions.length != 0 ? "" : <Empty />}
+
+        <div className="d-flex justify-content-between align-items-center flex-wrap">
+          <div className="d-flex align-items-center">
+            {renderBackButton()}
+            <a
+              className={
+                "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+              }
+            >
+              {page}
+            </a>
+            {renderNextButton()}
+          </div>
         </div>
       </div>
     </div>
