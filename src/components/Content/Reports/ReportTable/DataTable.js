@@ -168,11 +168,11 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
   };
 
   const fetchReports = (page) => {
-    // setLoader(true);
+    setLoader(true);
     axios
       .get(`/api/v1/admin/reports`, { params: { page: page } })
       .then((response) => {
-        // setLoader(false);
+        setLoader(false);
         const memorials = [];
         const memorialUsers = [];
         const blms = [];
@@ -231,25 +231,7 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
             </tr>
           </thead>
           {loader ? (
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <div
-                    className="loader-container"
-                    style={{ width: "100%", height: "100vh" }}
-                  >
-                    <HashLoader color={"#04ECFF"} loading={loader} size={70} />
-                  </div>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
+            ""
           ) : (
             <DataTableRowReportsData
               reports={
@@ -268,7 +250,14 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
           )}
         </table>
         {/* Empty display */}
-        {pageType == 0 && reports.length == 0 ? (
+        {loader ? (
+          <div
+            className="loader-container"
+            style={{ width: "100%", height: "100vh" }}
+          >
+            <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+          </div>
+        ) : pageType == 0 && reports.length == 0 ? (
           <Empty />
         ) : pageType == 1 && memorialReports.length == 0 ? (
           <Empty />
@@ -283,6 +272,7 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
         ) : (
           ""
         )}
+
         {/* Empty display */}
         <div className="d-flex justify-content-between align-items-center flex-wrap">
           <div className="d-flex align-items-center">

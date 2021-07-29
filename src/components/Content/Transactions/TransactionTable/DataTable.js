@@ -194,30 +194,21 @@ export default function DataTable() {
             </tr>
           </thead>
           {loader ? (
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <div
-                    className="loader-container"
-                    style={{ width: "100%", height: "100vh" }}
-                  >
-                    <HashLoader color={"#04ECFF"} loading={loader} size={70} />
-                  </div>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
+            ""
           ) : (
             <DataTableRowTransactionData transactions={transactions} />
           )}
         </table>
-        {transactions.length != 0 ? "" : <Empty />}
+        {loader ? (
+          <div
+            className="loader-container"
+            style={{ width: "100%", height: "100vh" }}
+          >
+            <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+          </div>
+        ) : (
+          <>{transactions.length != 0 ? "" : <Empty />}</>
+        )}
 
         <div className="d-flex justify-content-between align-items-center flex-wrap">
           <div className="d-flex align-items-center">

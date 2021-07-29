@@ -200,25 +200,7 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
             </tr>
           </thead>
           {loader ? (
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <div
-                    className="loader-container"
-                    style={{ width: "100%", height: "100vh" }}
-                  >
-                    <HashLoader color={"#04ECFF"} loading={loader} size={70} />
-                  </div>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
+            ""
           ) : pageType == 2 ? (
             <DataTableRowUserData users={alm_users} search={search} />
           ) : (
@@ -226,7 +208,12 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
           )}
         </table>
         {loader ? (
-          ""
+          <div
+            className="loader-container"
+            style={{ width: "100%", height: "100vh" }}
+          >
+            <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+          </div>
         ) : (
           <>
             {pageType == 1 && blm_users.length == 0 ? (
