@@ -71,7 +71,7 @@ export const TransactionModal = ({ showModal, setShowModal, transaction }) => {
                         <input
                           type="text"
                           className="form-control form-control-solid"
-                          value={transaction.amount}
+                          value={transaction.amount / 100}
                           disabled
                         />
                       </div>
