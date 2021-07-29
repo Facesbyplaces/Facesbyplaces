@@ -22,8 +22,8 @@ export default function Header({ setSearch, keywords, setKeywords }) {
           </h3>
         </div>
       </div>
-      <div className="card-body ">
-        {/*begin::Search Form*/}
+      {/* <div className="card-body ">
+        
         <div>
           <div className="row align-items-center">
             <div className="col-lg-5 col-xl-8">
@@ -54,8 +54,8 @@ export default function Header({ setSearch, keywords, setKeywords }) {
             </div>
           </div>
         </div>
-        {/*end::Search Form*/}
-      </div>
+        
+      </div> */}
     </>
   );
 }

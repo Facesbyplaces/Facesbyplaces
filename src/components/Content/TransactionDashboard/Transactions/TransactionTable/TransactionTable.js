@@ -4,8 +4,8 @@ import Header from "./Header";
 import DataTable from "./DataTable";
 
 export default function TransactionTable() {
-  const [search, setSearch] = useState(false);
-  const [keywords, setKeywords] = useState([]);
+  // const [search, setSearch] = useState(false);
+  // const [keywords, setKeywords] = useState([]);
 
   return (
     <div
@@ -15,14 +15,14 @@ export default function TransactionTable() {
       <div className="container">
         <div className="card card-custom">
           <Header
-            setSearch={setSearch}
-            keywords={keywords}
-            setKeywords={setKeywords}
+          // setSearch={setSearch}
+          // keywords={keywords}
+          // setKeywords={setKeywords}
           />
           <DataTable
-            search={search}
-            setSearch={setSearch}
-            keywords={keywords}
+          // search={search}
+          // setSearch={setSearch}
+          // keywords={keywords}
           />
         </div>
       </div>

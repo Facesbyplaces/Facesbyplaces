@@ -5,31 +5,27 @@ import HashLoader from "react-spinners/HashLoader";
 import DataTableRowTransactionData from "./DataTableRowData/DataTableRowTransactionData";
 import Empty from "../../../Empty";
 
-export default function DataTable({ search, setSearch, keywords }) {
+export default function DataTable() {
   const [page, setPage] = useState(1);
   const [clicked, setClicked] = useState(false);
   const [loader, setLoader] = useState(false);
   // Reports
   const [transactions, setTransactions] = useState([]);
 
-  const handleSearch = () => {
-    axios
-      .get(`/api/v1/admin/search/report`, {
-        params: { keywords: keywords, page: page },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setTransactions(response.data.transactions);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-    setSearch(false);
-  };
-
-  {
-    search ? handleSearch() : console.log("Fetching...");
-  }
+  // const handleSearch = () => {
+  //   axios
+  //     .get(`/api/v1/admin/search/report`, {
+  //       params: { keywords: keywords, page: page },
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setTransactions(response.data.transactions);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response);
+  //     });
+  //   setSearch(false);
+  // };
 
   useEffect(() => {
     fetchTransactions(page);
@@ -170,7 +166,7 @@ export default function DataTable({ search, setSearch, keywords }) {
   };
 
   return (
-    <div className="card-body pt-0">
+    <div className="card-body pt-2">
       <div className="table-responsive">
         <table
           className="table table-hover table-head-custom table-vertical-center"
@@ -219,10 +215,7 @@ export default function DataTable({ search, setSearch, keywords }) {
               </tr>
             </tbody>
           ) : (
-            <DataTableRowTransactionData
-              transactions={transactions}
-              search={search}
-            />
+            <DataTableRowTransactionData transactions={transactions} />
           )}
         </table>
         {transactions.length != 0 ? "" : <Empty />}

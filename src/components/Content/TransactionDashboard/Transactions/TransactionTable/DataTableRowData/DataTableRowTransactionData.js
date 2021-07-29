@@ -6,7 +6,7 @@ import { PayoutModal } from "./PayoutModal";
 import { SuccessModal } from "./SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
 
-export default function DataTableRowTransactionData({ transactions, search }) {
+export default function DataTableRowTransactionData({ transactions }) {
   const [showModal, setShowModal] = useState(false);
   const [showPayoutModal, setShowPayoutModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -191,27 +191,7 @@ export default function DataTableRowTransactionData({ transactions, search }) {
     </tr>
   ));
 
-  return search ? (
-    <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <div
-            className="loader-container"
-            style={{ width: "100%", height: "100vh" }}
-          >
-            <HashLoader color={"#04ECFF"} loading={search} size={70} />
-          </div>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  ) : (
+  return (
     <tbody>
       {renderedTransactions}
       <TransactionModal
@@ -231,22 +211,4 @@ export default function DataTableRowTransactionData({ transactions, search }) {
       />
     </tbody>
   );
-  // <div>
-  //   {props.users.length == 0 ? (
-  //     <tbody>
-  //       <tr>
-  //         <td className="pl-0">
-  //           <a
-  //             href="#"
-  //             className="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"
-  //           >
-  //             No results found.
-  //           </a>
-  //         </td>
-  //       </tr>
-  //     </tbody>
-  //   ) : (
-  //     <tbody>{renderedUsers}</tbody>
-  //   )}
-  // </div>
 }
