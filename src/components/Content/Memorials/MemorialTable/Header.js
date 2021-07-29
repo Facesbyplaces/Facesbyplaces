@@ -134,6 +134,9 @@ export default function Header({
                   </label>
                 </div>
               </div>
+              <span className="d-block text-muted pt-2 font-size-s pl-37 mr-0">
+                Choose memorial type before creating
+              </span>
             </div>
           </div>
         </div>

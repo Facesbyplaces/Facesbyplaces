@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Header from "./Header";
 import DataTable from "./DataTable";
@@ -9,10 +9,11 @@ export default function TransactionTable() {
 
   return (
     <div
-      className="content content-height d-flex flex-column flex-column-fluid"
+      className="content content-height d-flex flex-column flex-column-fluid pb-0 pt-0"
       id="kt_content"
+      style={{ height: "100%" }}
     >
-      <div className="container">
+      <div className="container" style={{ margin: "auto" }}>
         <div className="card card-custom">
           <Header
           // setSearch={setSearch}

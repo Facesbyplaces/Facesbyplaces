@@ -24,8 +24,9 @@ export default function MemorialsTable() {
 
   return (
     <div
-      className="content content-height d-flex flex-column flex-column-fluid"
+      className="content content-height d-flex flex-column flex-column-fluid pb-0 pt-0"
       id="kt_content"
+      style={{ height: "100%" }}
     >
       {(() => {
         if (memorialTab.type === 2) {
@@ -38,7 +39,7 @@ export default function MemorialsTable() {
               return <AddMemorial />;
             case "d":
               return (
-                <div className="container">
+                <div className="container" style={{ margin: "auto" }}>
                   <SuccessModal
                     showModal={showModal}
                     setShowModal={setShowModal}
@@ -51,7 +52,7 @@ export default function MemorialsTable() {
               );
             default:
               return (
-                <div className="container">
+                <div className="container" style={{ margin: "auto" }}>
                   <div className="card card-custom">
                     <Header
                       pageType={pageType}
@@ -81,7 +82,7 @@ export default function MemorialsTable() {
               return <AddBlm />;
             case "d":
               return (
-                <div className="container">
+                <div className="container" style={{ margin: "auto" }}>
                   <SuccessModal
                     showModal={showModal}
                     setShowModal={setShowModal}
@@ -94,7 +95,7 @@ export default function MemorialsTable() {
               );
             default:
               return (
-                <div className="container">
+                <div className="container" style={{ margin: "auto" }}>
                   <div className="card card-custom">
                     <Header
                       pageType={pageType}

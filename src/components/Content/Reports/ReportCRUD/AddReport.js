@@ -81,11 +81,6 @@ export default function EditReport() {
   };
 
   const handleSubmit = (e) => {
-    console.log("Reportable Type: ", reportType);
-    console.log("Reportable Id: ", reportId);
-    console.log("Subject: ", reportSubject);
-    console.log("Description: ", reportDescription);
-
     setLoading(true);
     axios
       .post(`/api/v1/admin/reports/create`, {
@@ -152,7 +147,7 @@ export default function EditReport() {
   };
 
   return (
-    <div className="d-flex flex-column flex-column-fluid mt-25">
+    <div className="container" style={{ margin: "auto" }}>
       <SuccessModal showModal={showModal} setShowModal={setShowModal} />
       <>
         {loading ? (
@@ -162,46 +157,41 @@ export default function EditReport() {
         ) : (
           <>
             {/*begin::Section*/}
-            <div className="container mt-n15 gutter-b">
-              <div className="card card-custom">
-                <div className="card-body">
-                  <form className="form" onSubmit={handleSubmit}>
-                    <div className="tab-content">
-                      {/*begin::Tab*/}
-                      <div className="tab-pane show active px-7 mt-5">
-                        <div className="card-header py-3 pl-5">
-                          <div className="card-title align-items-start flex-column mb-2">
-                            <h3 className="card-label font-weight-bolder text-dark">
-                              Add Report Information
-                            </h3>
+            <div className="card card-custom">
+              <div className="card-body">
+                <form className="form" onSubmit={handleSubmit}>
+                  <div className="tab-content">
+                    {/*begin::Tab*/}
+                    <div className="tab-pane show active px-7 mt-5">
+                      <div className="card-header py-3 pl-5">
+                        <div className="card-title align-items-start flex-column mb-2">
+                          <h3 className="card-label font-weight-bolder text-dark">
+                            Add Report Information
+                          </h3>
 
-                            <span className="text-muted font-weight-bold font-size-sm mt-1">
-                              Add Users, Memorials, and Posts' Report
-                              Information
-                            </span>
-                          </div>
+                          <span className="text-muted font-weight-bold font-size-sm mt-1">
+                            Add Users, Memorials, and Posts' Report Information
+                          </span>
                         </div>
                       </div>
-                      <div
-                        className="tab-pane show active px-7"
-                        role="tabpanel"
-                      >
-                        {/*begin::Row*/}
-                        <div className="row mb-10">
-                          <div className="col-xl-2" />
-                          <div className="col-xl-7 my-2">
-                            {/*begin::Row*/}
-                            <div className="row">
-                              <div className="col-9">
-                                <h6 className="text-dark font-weight-bold mb-10">
-                                  Report Info:
-                                </h6>
-                              </div>
+                    </div>
+                    <div className="tab-pane show active px-7" role="tabpanel">
+                      {/*begin::Row*/}
+                      <div className="row mb-10">
+                        <div className="col-xl-2" />
+                        <div className="col-xl-7 my-2">
+                          {/*begin::Row*/}
+                          <div className="row">
+                            <div className="col-9">
+                              <h6 className="text-dark font-weight-bold mb-10">
+                                Report Info:
+                              </h6>
                             </div>
-                            {/*end::Row*/}
-                            {/*begin::Group*/}
-                            {/* Show Errors if existing */}
-                            {/* <div className="form-group row">
+                          </div>
+                          {/*end::Row*/}
+                          {/*begin::Group*/}
+                          {/* Show Errors if existing */}
+                          {/* <div className="form-group row">
                                   <label className="col-form-label col-3 text-lg-right text-left"></label>
                                   <div className="col-9">
                                     {errors ? (
@@ -216,119 +206,118 @@ export default function EditReport() {
                                     )}
                                   </div>
                                 </div> */}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Report Type
-                              </label>
-                              <div className="col-9">
-                                <div className="input-group input-group-lg input-group-solid">
-                                  <select
-                                    id="users"
-                                    className="form-control form-control-lg form-control-solid"
-                                    name="users"
-                                    onChange={handleReportTypeChange}
-                                  >
-                                    <option selected>Select Report Type</option>
-                                    <option value="Memorial">ALM</option>
-                                    <option value="AlmUser">ALM USER</option>
-                                    <option value="Blm">BLM</option>
-                                    <option value="User">BLM User</option>
-                                    <option value="Post">POST</option>
-                                  </select>
-                                </div>
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Report Type
+                            </label>
+                            <div className="col-9">
+                              <div className="input-group input-group-lg input-group-solid">
+                                <select
+                                  id="users"
+                                  className="form-control form-control-lg form-control-solid"
+                                  name="users"
+                                  onChange={handleReportTypeChange}
+                                >
+                                  <option selected>Select Report Type</option>
+                                  <option value="Memorial">ALM</option>
+                                  <option value="AlmUser">ALM USER</option>
+                                  <option value="Blm">BLM</option>
+                                  <option value="User">BLM User</option>
+                                  <option value="Post">POST</option>
+                                </select>
                               </div>
                             </div>
-                            {/*end::Group*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Report A Content
-                              </label>
-                              <div className="col-9">
-                                <div className="input-group input-group-lg input-group-solid">
-                                  <select
-                                    id="users"
-                                    className="form-control form-control-lg form-control-solid"
-                                    name="users"
-                                    onChange={handleReportableIdChange}
-                                  >
-                                    <option selected>
-                                      Select a content to report
-                                    </option>
-                                    {renderFetchedDatas()}
-                                  </select>
-                                </div>
+                          </div>
+                          {/*end::Group*/}
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Report A Content
+                            </label>
+                            <div className="col-9">
+                              <div className="input-group input-group-lg input-group-solid">
+                                <select
+                                  id="users"
+                                  className="form-control form-control-lg form-control-solid"
+                                  name="users"
+                                  onChange={handleReportableIdChange}
+                                >
+                                  <option selected>
+                                    Select a content to report
+                                  </option>
+                                  {renderFetchedDatas()}
+                                </select>
                               </div>
                             </div>
-                            {/*end::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Subject
-                              </label>
-                              <div className="col-9">
-                                <input
-                                  className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="username"
-                                  name="username"
-                                  defaultValue={report.subject}
-                                  onChange={handleSubjectChange}
-                                />
-                              </div>
+                          </div>
+                          {/*end::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Subject
+                            </label>
+                            <div className="col-9">
+                              <input
+                                className="form-control form-control-lg form-control-solid placeholder-dark-75"
+                                type="username"
+                                name="username"
+                                defaultValue={report.subject}
+                                onChange={handleSubjectChange}
+                              />
                             </div>
-                            {/*end::Group*/}
+                          </div>
+                          {/*end::Group*/}
 
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Body
-                              </label>
-                              <div className="col-9">
-                                <textarea
-                                  className="form-control form-control-solid form-control-lg"
-                                  id="exampleTextarea"
-                                  rows={10}
-                                  defaultValue={report.description}
-                                  onChange={handleDescriptionChange}
-                                />
-                              </div>
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Body
+                            </label>
+                            <div className="col-9">
+                              <textarea
+                                className="form-control form-control-solid form-control-lg"
+                                id="exampleTextarea"
+                                rows={10}
+                                defaultValue={report.description}
+                                onChange={handleDescriptionChange}
+                              />
                             </div>
-                            {/*end::Group*/}
+                          </div>
+                          {/*end::Group*/}
 
-                            {/*begin::Footer*/}
-                            <div className="card-footer pb-0">
-                              <div className="row">
-                                <div className="col-xl-2 pt-5" />
-                                <div className="col-xl-7">
-                                  <div className="row">
-                                    <div className="col-3" />
-                                    <div className="col-9">
-                                      <button
-                                        type="submit"
-                                        className="btn btn-success font-weight-bold mr-2"
-                                      >
-                                        Save changes
-                                      </button>
-                                      <a
-                                        className="btn btn-secondary font-weight-bold"
-                                        onClick={() => handleTableClick()}
-                                      >
-                                        Cancel
-                                      </a>
-                                    </div>
+                          {/*begin::Footer*/}
+                          <div className="card-footer pb-0">
+                            <div className="row">
+                              <div className="col-xl-2 pt-5" />
+                              <div className="col-xl-7">
+                                <div className="row">
+                                  <div className="col-3" />
+                                  <div className="col-9">
+                                    <button
+                                      type="submit"
+                                      className="btn btn-success font-weight-bold mr-2"
+                                    >
+                                      Save changes
+                                    </button>
+                                    <a
+                                      className="btn btn-secondary font-weight-bold"
+                                      onClick={() => handleTableClick()}
+                                    >
+                                      Cancel
+                                    </a>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            {/*end::Footer*/}
                           </div>
+                          {/*end::Footer*/}
                         </div>
-                        {/*end::Row*/}
                       </div>
-                      {/*end::Tab*/}
+                      {/*end::Row*/}
                     </div>
-                  </form>
-                </div>
+                    {/*end::Tab*/}
+                  </div>
+                </form>
               </div>
             </div>
             {/*end::Section*/}

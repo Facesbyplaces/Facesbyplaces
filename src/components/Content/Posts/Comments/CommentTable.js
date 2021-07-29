@@ -7,24 +7,15 @@ export default function CommentTable() {
   const [keywords, setKeywords] = useState([]);
 
   return (
-    <div
-      className="content content-height d-flex flex-column flex-column-fluid"
-      id="kt_content"
-    >
-      <div className="container">
-        <div className="card card-custom">
-          <Header
-            search={search}
-            setSearch={setSearch}
-            keywords={keywords}
-            setKeywords={setKeywords}
-          />
-          <DataTable
-            search={search}
-            setSearch={setSearch}
-            keywords={keywords}
-          />
-        </div>
+    <div className="container" style={{ margin: "auto" }}>
+      <div className="card card-custom">
+        <Header
+          search={search}
+          setSearch={setSearch}
+          keywords={keywords}
+          setKeywords={setKeywords}
+        />
+        <DataTable search={search} setSearch={setSearch} keywords={keywords} />
       </div>
     </div>
   );

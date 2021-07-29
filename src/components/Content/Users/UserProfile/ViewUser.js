@@ -36,12 +36,16 @@ export default function ViewUser() {
 
   return (
     <div
-      className="content content-height d-flex flex-column flex-column-fluid"
+      className="content content-height d-flex flex-column flex-column-fluid pb-0 pt-0"
       id="kt_content"
+      style={{ height: "100%" }}
     >
-      <div className="d-flex flex-column-fluid">
+      <div
+        className="d-flex flex-column-fluid"
+        style={{ marginTop: "auto", marginBottom: "auto" }}
+      >
         {/*begin::Container*/}
-        <div className="container">
+        <div className="container" style={{ margin: "auto" }}>
           {/*begin::Card*/}
           <div className="card card-custom gutter-b">
             <div className="pt-5 pl-8">

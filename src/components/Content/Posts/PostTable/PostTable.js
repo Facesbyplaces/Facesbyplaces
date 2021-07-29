@@ -22,8 +22,9 @@ export default function PostTable() {
 
   return (
     <div
-      className="content content-height d-flex flex-column flex-column-fluid"
+      className="content content-height d-flex flex-column flex-column-fluid pb-0 pt-0"
       id="kt_content"
+      style={{ height: "100%" }}
     >
       {(() => {
         switch (postTab.option) {
@@ -35,7 +36,7 @@ export default function PostTable() {
             return <AddPost pageType={pageType} setPageType={setPageType} />;
           case "d":
             return (
-              <div className="container">
+              <div className="container" style={{ margin: "auto" }}>
                 <SuccessModal
                   showModal={showModal}
                   setShowModal={setShowModal}
@@ -48,7 +49,7 @@ export default function PostTable() {
             );
           default:
             return (
-              <div className="container">
+              <div className="container" style={{ margin: "auto" }}>
                 <div className="card card-custom">
                   <Header
                     pageType={pageType}

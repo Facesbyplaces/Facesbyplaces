@@ -123,7 +123,7 @@ export default function AddUser() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ margin: "auto" }}>
       {loading ? (
         <div className="loader-container">
           <HashLoader color={"#04ECFF"} loading={loading} size={90} />

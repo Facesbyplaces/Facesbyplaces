@@ -25,6 +25,7 @@ export default function SideBar() {
         <div
           className="aside-menu-wrapper flex-column-fluid"
           id="kt_aside_menu_wrapper"
+          style={{ height: "100%", backgroundColor: "#1f1e2e" }}
         >
           {/*begin::Menu Container*/}
           <div

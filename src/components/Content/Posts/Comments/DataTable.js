@@ -5,6 +5,7 @@ import axios from "../../../../auxiliary/axios";
 import DataTableRowPostCommentsData from "./DataTableRowData/DataTableRowPostCommentsData";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
+import Empty from "../../Empty";
 
 export default function DataTable({ search, setSearch, keywords }) {
   const { postTab } = useSelector(({ postTab }) => ({
@@ -219,6 +220,7 @@ export default function DataTable({ search, setSearch, keywords }) {
             <DataTableRowPostCommentsData search={search} comments={comments} />
           )}
         </table>
+        {comments.length == 0 ? <Empty /> : ""}
         <div className="d-flex justify-content-between align-items-center flex-wrap">
           <div className="d-flex align-items-center">
             {renderBackButton()}

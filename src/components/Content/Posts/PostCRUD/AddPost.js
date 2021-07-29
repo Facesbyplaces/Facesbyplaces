@@ -201,7 +201,7 @@ export default function AddPost() {
   };
 
   return (
-    <div className="d-flex flex-column flex-column-fluid mt-25">
+    <div className="container" style={{ margin: "auto" }}>
       <SuccessModal showModal={showModal} setShowModal={setShowModal} />
       <>
         {loading ? (
@@ -212,141 +212,137 @@ export default function AddPost() {
           <>
             {/*begin::Entry*/}
             {/*begin::Section*/}
-            <div className="container mt-n15 gutter-b">
-              <div className="card card-custom">
-                <div className="card-body">
-                  <form className="form" onSubmit={handleSubmit}>
-                    <div className="tab-content">
-                      {/*begin::Tab*/}
-                      <div className="tab-pane show active px-7 mt-5">
-                        <div className="card-header py-3 pl-5">
-                          <div className="card-title align-items-start flex-column mb-2">
-                            <h3 className="card-label font-weight-bolder text-dark">
-                              Add Post Information
-                            </h3>
+            <div className="card card-custom">
+              <div className="card-body">
+                <form className="form" onSubmit={handleSubmit}>
+                  <div className="tab-content">
+                    {/*begin::Tab*/}
+                    <div className="tab-pane show active px-7 mt-5">
+                      <div className="card-header py-3 pl-5">
+                        <div className="card-title align-items-start flex-column mb-2">
+                          <h3 className="card-label font-weight-bolder text-dark">
+                            Add Post Information
+                          </h3>
 
-                            <span className="text-muted font-weight-bold font-size-sm mt-1">
-                              Add user's post information
-                            </span>
-                          </div>
+                          <span className="text-muted font-weight-bold font-size-sm mt-1">
+                            Add user's post information
+                          </span>
                         </div>
                       </div>
-                      <div
-                        className="tab-pane show active px-7"
-                        role="tabpanel"
-                      >
-                        {/*begin::Row*/}
-                        <div className="row mt-10 mb-10">
-                          <div className="col-xl-2" />
-                          <div className="col-xl-7 my-2">
-                            {/*begin::Row*/}
-                            <div className="row">
-                              <div className="col-9">
-                                <h6 className="text-dark font-weight-bold mb-10">
-                                  Images/Videos:
-                                </h6>
-                              </div>
+                    </div>
+                    <div className="tab-pane show active px-7" role="tabpanel">
+                      {/*begin::Row*/}
+                      <div className="row mt-10 mb-10">
+                        <div className="col-xl-2" />
+                        <div className="col-xl-7 my-2">
+                          {/*begin::Row*/}
+                          <div className="row">
+                            <div className="col-9">
+                              <h6 className="text-dark font-weight-bold mb-10">
+                                Images/Videos:
+                              </h6>
                             </div>
-                            {/*end::Row*/}
-                            {/*begin::Row*/}
-                            <div className="form-group row pl-4">
-                              <div className="image-input image-input-empty image-input-outline">
-                                <div
-                                  className="card card-custom pb-3 card-stretch pr-3"
+                          </div>
+                          {/*end::Row*/}
+                          {/*begin::Row*/}
+                          <div className="form-group row pl-4">
+                            <div className="image-input image-input-empty image-input-outline">
+                              <div
+                                className="card card-custom pb-3 card-stretch pr-3"
+                                style={{
+                                  height: "200px",
+                                  width: "200px",
+                                  backgroundColor: "#f3f6f9",
+                                  backgroundImage: imagesOrVideosTemporaryImageDisplay
+                                    ? `url( ${imagesOrVideosTemporaryImageDisplay})`
+                                    : ``,
+                                  backgroundSize: "cover",
+                                  opacity: "1",
+                                }}
+                              >
+                                <label
+                                  className="btn btn-lg btn-icon btn-hover-text-primary"
+                                  data-action="change"
+                                  data-toggle="tooltip"
+                                  title
+                                  data-original-title="Change avatar"
                                   style={{
-                                    height: "200px",
-                                    width: "200px",
-                                    backgroundColor: "#f3f6f9",
-                                    backgroundImage: imagesOrVideosTemporaryImageDisplay
-                                      ? `url( ${imagesOrVideosTemporaryImageDisplay})`
-                                      : ``,
-                                    backgroundSize: "cover",
-                                    opacity: "1",
+                                    marginTop: "90px",
+                                    marginRight: "85px",
                                   }}
                                 >
-                                  <label
-                                    className="btn btn-lg btn-icon btn-hover-text-primary"
-                                    data-action="change"
-                                    data-toggle="tooltip"
-                                    title
-                                    data-original-title="Change avatar"
-                                    style={{
-                                      marginTop: "90px",
-                                      marginRight: "85px",
-                                    }}
-                                  >
-                                    <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
-                                      <svg
-                                        width="24px"
-                                        height="24px"
-                                        viewBox="0 0 24 24"
-                                        version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                  <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
+                                    <svg
+                                      width="24px"
+                                      height="24px"
+                                      viewBox="0 0 24 24"
+                                      version="1.1"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                                    >
+                                      {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+                                      <title>
+                                        Stockholm-icons / Design / Edit
+                                      </title>
+                                      <desc>Created with Sketch.</desc>
+                                      <defs />
+                                      <g
+                                        id="Stockholm-icons-/-Design-/-Edit"
+                                        stroke="none"
+                                        strokeWidth={1}
+                                        fill="none"
+                                        fillRule="evenodd"
                                       >
-                                        {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
-                                        <title>
-                                          Stockholm-icons / Design / Edit
-                                        </title>
-                                        <desc>Created with Sketch.</desc>
-                                        <defs />
-                                        <g
-                                          id="Stockholm-icons-/-Design-/-Edit"
-                                          stroke="none"
-                                          strokeWidth={1}
-                                          fill="none"
-                                          fillRule="evenodd"
-                                        >
-                                          <rect
-                                            id="bound"
-                                            x={0}
-                                            y={0}
-                                            width={24}
-                                            height={24}
-                                          />
-                                          <path
-                                            d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
-                                            id="Path-11"
-                                            fill="#000000"
-                                            fillRule="nonzero"
-                                            transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
-                                          />
-                                          <rect
-                                            id="Rectangle"
-                                            fill="#000000"
-                                            opacity="0.3"
-                                            x={5}
-                                            y={20}
-                                            width={15}
-                                            height={2}
-                                            rx={1}
-                                          />
-                                        </g>
-                                      </svg>
-                                    </span>
-                                    <input
-                                      type="file"
-                                      accept=".png, .jpg, .jpeg"
-                                      onChange={imageOrVideosSelectedHandler}
-                                    />
-                                  </label>
-                                </div>
+                                        <rect
+                                          id="bound"
+                                          x={0}
+                                          y={0}
+                                          width={24}
+                                          height={24}
+                                        />
+                                        <path
+                                          d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                                          id="Path-11"
+                                          fill="#000000"
+                                          fillRule="nonzero"
+                                          transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
+                                        />
+                                        <rect
+                                          id="Rectangle"
+                                          fill="#000000"
+                                          opacity="0.3"
+                                          x={5}
+                                          y={20}
+                                          width={15}
+                                          height={2}
+                                          rx={1}
+                                        />
+                                      </g>
+                                    </svg>
+                                  </span>
+                                  <input
+                                    type="file"
+                                    accept=".png, .jpg, .jpeg"
+                                    onChange={imageOrVideosSelectedHandler}
+                                  />
+                                </label>
                               </div>
                             </div>
-                            {/*end::Group*/}
-                            <div className="separator separator-solid my-10" />
-                            {/*begin::Row*/}
-                            <div className="row">
-                              <div className="col-9">
-                                <h6 className="text-dark font-weight-bold mb-10">
-                                  Memorial Post Info:
-                                </h6>
-                              </div>
+                          </div>
+                          {/*end::Group*/}
+                          <div className="separator separator-solid my-10" />
+                          {/*begin::Row*/}
+                          <div className="row">
+                            <div className="col-9">
+                              <h6 className="text-dark font-weight-bold mb-10">
+                                Memorial Post Info:
+                              </h6>
                             </div>
-                            {/*end::Row*/}
-                            {/*begin::Group*/}
-                            {/* Show Errors if existing */}
-                            {/* <div className="form-group row">
+                          </div>
+                          {/*end::Row*/}
+                          {/*begin::Group*/}
+                          {/* Show Errors if existing */}
+                          {/* <div className="form-group row">
                             <label className="col-form-label col-3 text-lg-right text-left"></label>
                             <div className="col-9">
                               {errors ? (
@@ -361,202 +357,201 @@ export default function AddPost() {
                               )}
                             </div>
                           </div> */}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Post Type
-                              </label>
-                              <div className="col-9">
-                                <div
-                                  className="btn-group btn-group-toggle"
-                                  style={{
-                                    display: "inline-block",
-                                    textAlign: "center",
-                                  }}
-                                  data-toggle="buttons"
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Post Type
+                            </label>
+                            <div className="col-9">
+                              <div
+                                className="btn-group btn-group-toggle"
+                                style={{
+                                  display: "inline-block",
+                                  textAlign: "center",
+                                }}
+                                data-toggle="buttons"
+                              >
+                                <label
+                                  className={`btn btn-outline-warning ${
+                                    pageType === 2 ? "active" : ""
+                                  }`}
+                                  style={{ width: "252px" }}
+                                  onClick={() => setPage(2)}
                                 >
-                                  <label
-                                    className={`btn btn-outline-warning ${
-                                      pageType === 2 ? "active" : ""
-                                    }`}
-                                    style={{ width: "252px" }}
-                                    onClick={() => setPage(2)}
-                                  >
-                                    <input type="radio" name="options" />
-                                    ALM
-                                  </label>
-                                  <label
-                                    className={`btn btn-outline-warning ${
-                                      pageType === 1 ? "active" : ""
-                                    }`}
-                                    style={{ width: "253px" }}
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="options"
-                                      onClick={() => setPage(1)}
-                                    />
-                                    BLM
-                                  </label>
-                                </div>
-                                <span className="form-text text-muted">
-                                  Pick a post type first before choosing a page
-                                  admin.
-                                </span>
+                                  <input type="radio" name="options" />
+                                  ALM
+                                </label>
+                                <label
+                                  className={`btn btn-outline-warning ${
+                                    pageType === 1 ? "active" : ""
+                                  }`}
+                                  style={{ width: "253px" }}
+                                >
+                                  <input
+                                    type="radio"
+                                    name="options"
+                                    onClick={() => setPage(1)}
+                                  />
+                                  BLM
+                                </label>
+                              </div>
+                              <span className="form-text text-muted">
+                                Pick a post type first before choosing a page
+                                admin.
+                              </span>
+                            </div>
+                          </div>
+                          {/*end::Group*/}
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Page Admins
+                            </label>
+                            <div className="col-9">
+                              <div className="input-group input-group-lg input-group-solid">
+                                <select
+                                  id="users"
+                                  className="form-control form-control-lg form-control-solid"
+                                  name="users"
+                                  onChange={handleUserChange}
+                                >
+                                  <option selected>Select Page Admin</option>
+                                  {renderedUsers}
+                                </select>
                               </div>
                             </div>
-                            {/*end::Group*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Page Admins
-                              </label>
-                              <div className="col-9">
-                                <div className="input-group input-group-lg input-group-solid">
-                                  <select
-                                    id="users"
-                                    className="form-control form-control-lg form-control-solid"
-                                    name="users"
-                                    onChange={handleUserChange}
-                                  >
-                                    <option selected>Select Page Admin</option>
-                                    {renderedUsers}
-                                  </select>
-                                </div>
+                          </div>
+                          {/*end::Group*/}
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Memorial
+                            </label>
+                            <div className="col-9">
+                              <div className="input-group input-group-lg input-group-solid">
+                                <select
+                                  id="users"
+                                  className="form-control form-control-lg form-control-solid"
+                                  name="users"
+                                  onChange={handleMemorialChange}
+                                >
+                                  <option selected>Select a Memorial</option>
+                                  {renderedMemorials}
+                                </select>
                               </div>
+                              <span className="form-text text-muted">
+                                Pick a page admin first before choosing a
+                                memorial.
+                              </span>
                             </div>
-                            {/*end::Group*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Memorial
-                              </label>
-                              <div className="col-9">
-                                <div className="input-group input-group-lg input-group-solid">
-                                  <select
-                                    id="users"
-                                    className="form-control form-control-lg form-control-solid"
-                                    name="users"
-                                    onChange={handleMemorialChange}
-                                  >
-                                    <option selected>Select a Memorial</option>
-                                    {renderedMemorials}
-                                  </select>
-                                </div>
-                                <span className="form-text text-muted">
-                                  Pick a page admin first before choosing a
-                                  memorial.
-                                </span>
-                              </div>
+                          </div>
+                          {/*end::Group*/}
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Location
+                            </label>
+                            <div className="col-9">
+                              <input
+                                className="form-control form-control-lg form-control-solid placeholder-dark-75"
+                                type="relationship"
+                                name="relationship"
+                                onChange={handleLocationChange}
+                              />
                             </div>
-                            {/*end::Group*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Location
-                              </label>
-                              <div className="col-9">
-                                <input
-                                  className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="relationship"
-                                  name="relationship"
-                                  onChange={handleLocationChange}
-                                />
-                              </div>
+                          </div>
+                          {/*end::Group*/}
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Body
+                            </label>
+                            <div className="col-9">
+                              <textarea
+                                className="form-control form-control-solid form-control-lg"
+                                id="exampleTextarea"
+                                rows={6}
+                                onChange={handleBodyChange}
+                              />
                             </div>
-                            {/*end::Group*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Body
-                              </label>
-                              <div className="col-9">
-                                <textarea
-                                  className="form-control form-control-solid form-control-lg"
-                                  id="exampleTextarea"
-                                  rows={6}
-                                  onChange={handleBodyChange}
-                                />
-                              </div>
-                            </div>
-                            {/*end::Group*/}
-                            <div className="separator separator-solid my-10" />
+                          </div>
+                          {/*end::Group*/}
+                          <div className="separator separator-solid my-10" />
 
-                            {/*begin::Row*/}
+                          {/*begin::Row*/}
+                          <div className="row">
+                            <div className="col-9">
+                              <h6 className="text-dark font-weight-bold mb-10">
+                                Other Memorial Post Infos:
+                              </h6>
+                            </div>
+                          </div>
+                          {/*end::Row*/}
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Lattitude
+                            </label>
+                            <div className="col-9">
+                              <input
+                                className="form-control form-control-lg form-control-solid placeholder-dark-75"
+                                type="text"
+                                name="latitude"
+                                onChange={handleLatitudeChange}
+                              />
+                            </div>
+                          </div>
+                          {/*end::Group*/}
+                          {/*begin::Group*/}
+                          <div className="form-group row">
+                            <label className="col-form-label col-3 text-lg-right text-left">
+                              Longitude
+                            </label>
+                            <div className="col-9">
+                              <input
+                                className="form-control form-control-lg form-control-solid placeholder-dark-75"
+                                type="text"
+                                name="longitude"
+                                onChange={handleLongitudeChange}
+                              />
+                            </div>
+                          </div>
+                          {/*end::Group*/}
+
+                          {/*begin::Footer*/}
+                          <div className="card-footer pb-0">
                             <div className="row">
-                              <div className="col-9">
-                                <h6 className="text-dark font-weight-bold mb-10">
-                                  Other Memorial Post Infos:
-                                </h6>
-                              </div>
-                            </div>
-                            {/*end::Row*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Lattitude
-                              </label>
-                              <div className="col-9">
-                                <input
-                                  className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
-                                  name="latitude"
-                                  onChange={handleLatitudeChange}
-                                />
-                              </div>
-                            </div>
-                            {/*end::Group*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Longitude
-                              </label>
-                              <div className="col-9">
-                                <input
-                                  className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
-                                  name="longitude"
-                                  onChange={handleLongitudeChange}
-                                />
-                              </div>
-                            </div>
-                            {/*end::Group*/}
-
-                            {/*begin::Footer*/}
-                            <div className="card-footer pb-0">
-                              <div className="row">
-                                <div className="col-xl-2 pt-5" />
-                                <div className="col-xl-7">
-                                  <div className="row">
-                                    <div className="col-3" />
-                                    <div className="col-9">
-                                      <button
-                                        type="submit"
-                                        className="btn btn-success font-weight-bold mr-2"
-                                      >
-                                        Save changes
-                                      </button>
-                                      <a
-                                        className="btn btn-secondary font-weight-bold"
-                                        onClick={() => handleTableClick()}
-                                      >
-                                        Cancel
-                                      </a>
-                                    </div>
+                              <div className="col-xl-2 pt-5" />
+                              <div className="col-xl-7">
+                                <div className="row">
+                                  <div className="col-3" />
+                                  <div className="col-9">
+                                    <button
+                                      type="submit"
+                                      className="btn btn-success font-weight-bold mr-2"
+                                    >
+                                      Save changes
+                                    </button>
+                                    <a
+                                      className="btn btn-secondary font-weight-bold"
+                                      onClick={() => handleTableClick()}
+                                    >
+                                      Cancel
+                                    </a>
                                   </div>
                                 </div>
                               </div>
                             </div>
-
-                            {/*end::Footer*/}
                           </div>
+
+                          {/*end::Footer*/}
                         </div>
-                        {/*end::Row*/}
                       </div>
-                      {/*end::Tab*/}
+                      {/*end::Row*/}
                     </div>
-                  </form>
-                </div>
+                    {/*end::Tab*/}
+                  </div>
+                </form>
               </div>
             </div>
             {/*end::Section*/}

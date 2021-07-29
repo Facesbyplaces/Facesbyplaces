@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 import DataTableRowTransactionData from "./DataTableRowData/DataTableRowTransactionData";
-import Empty from "../../../Empty";
+import Empty from "../../Empty";
 
 export default function DataTable() {
   const [page, setPage] = useState(1);
-  const [clicked, setClicked] = useState(false);
   const [loader, setLoader] = useState(false);
   // Reports
   const [transactions, setTransactions] = useState([]);

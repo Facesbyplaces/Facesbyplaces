@@ -12,7 +12,7 @@ import UsersTable from "../Users/UserTable/UsersTable";
 import MemorialsTable from "../Memorials/MemorialTable/MemorialsTable";
 import PostTable from "../Posts/PostTable/PostTable";
 import ReportTable from "../Reports/ReportTable/ReportTable";
-import TransactionTable from "../TransactionDashboard/Transactions/TransactionTable/TransactionTable";
+import TransactionTable from "../Transactions/TransactionTable/TransactionTable";
 
 const Dashboard = (props) => {
   const [loading, setLoading] = useState(false);

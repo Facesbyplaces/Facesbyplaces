@@ -70,14 +70,14 @@ export default function ViewPost() {
   }, post.id);
 
   return (
-    <div className="d-flex flex-column flex-column-fluid mt-25">
-      <div className="container mt-n15 gutter-b">
+    <>
+      <div className="container" style={{ margin: "auto" }}>
         <div className="card card-custom">
           <div className="card-body">
             <form className="form">
               <div className="tab-content">
                 {/*begin::Tab*/}
-                <div className="tab-pane show active px-7 mt-5">
+                <div className="tab-pane show active px-7">
                   <div className="card-header py-3 pl-5">
                     <div className="card-title align-items-start flex-column mb-2">
                       <h3 className="card-label font-weight-bolder text-dark">
@@ -353,9 +353,7 @@ export default function ViewPost() {
           </div>
         </div>
       </div>
-      {/*end::Section*/}
-      {/*end::Entry*/}
       <CommentTable />
-    </div>
+    </>
   );
 }

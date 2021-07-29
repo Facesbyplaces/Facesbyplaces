@@ -250,12 +250,18 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
             />
           )}
         </table>
-        {pageType == 2 && memorialPosts.length == 0 ? (
-          <Empty />
-        ) : pageType == 1 && blmPosts.length == 0 ? (
-          <Empty />
-        ) : (
+        {loader ? (
           ""
+        ) : (
+          <>
+            {pageType == 2 && memorialPosts.length == 0 ? (
+              <Empty />
+            ) : pageType == 1 && blmPosts.length == 0 ? (
+              <Empty />
+            ) : (
+              ""
+            )}
+          </>
         )}
         <div className="d-flex justify-content-between align-items-center flex-wrap">
           <div className="d-flex align-items-center">

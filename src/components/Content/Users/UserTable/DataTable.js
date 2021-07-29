@@ -225,12 +225,18 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
             <DataTableRowUserData users={blm_users} search={search} />
           )}
         </table>
-        {pageType == 1 && blm_users.length == 0 ? (
-          <Empty />
-        ) : pageType == 2 && alm_users.length == 0 ? (
-          <Empty />
-        ) : (
+        {loader ? (
           ""
+        ) : (
+          <>
+            {pageType == 1 && blm_users.length == 0 ? (
+              <Empty />
+            ) : pageType == 2 && alm_users.length == 0 ? (
+              <Empty />
+            ) : (
+              ""
+            )}
+          </>
         )}
         <div className="d-flex justify-content-between align-items-center flex-wrap">
           <div className="d-flex align-items-center">
