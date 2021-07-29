@@ -25,7 +25,6 @@ class HomeBLMMemorialPageImage extends StatefulWidget{
 }
 
 class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
-  // final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
   List<String> backgroundImages = ['assets/icons/blm-memorial-cover-1.jpeg', 'assets/icons/blm-memorial-cover-2.jpeg'];
   Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
   int backgroundImageToggle  = 0;

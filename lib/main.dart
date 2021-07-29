@@ -30,6 +30,9 @@ import 'UI/ui-02-login.dart';
 import 'UI/ui-03-newly-installed.dart';
 import 'dart:async';
 
+import 'UI/ui-04-test-map.dart';
+import 'UI/ui-05-new-test-map.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("Handling a background message: $message");
@@ -99,6 +102,8 @@ void main() async{
               }
             }
           }()),
+          // home: TestMap(),
+          // home: LocationAppExample(),
           builder: (context, widget) => ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),
             maxWidth: 1200,

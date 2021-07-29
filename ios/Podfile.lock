@@ -212,6 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (5.4.3)
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
@@ -348,6 +349,11 @@ PODS:
   - flutter_login_facebook (0.5.0):
     - FBSDKLoginKit (~> 9.1)
     - Flutter
+  - flutter_osm_plugin (0.0.1):
+    - Alamofire
+    - Flutter
+    - Polyline
+    - Tangram-es
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -466,6 +472,7 @@ PODS:
     - Flutter
   - pay_ios (0.0.1):
     - Flutter
+  - Polyline (5.0.2)
   - PromisesObjC (1.2.12)
   - share (0.0.1):
     - Flutter
@@ -482,6 +489,7 @@ PODS:
   - stripe_ios (0.0.1):
     - Flutter
     - Stripe (~> 21.5.1)
+  - Tangram-es (0.16.2)
   - url_launcher (0.0.1):
     - Flutter
   - wakelock (0.0.1):
@@ -505,6 +513,7 @@ DEPENDENCIES:
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_login_facebook (from `.symlinks/plugins/flutter_login_facebook/ios`)
+  - flutter_osm_plugin (from `.symlinks/plugins/flutter_osm_plugin/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
   - geolocator (from `.symlinks/plugins/geolocator/ios`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
@@ -528,6 +537,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
     - AppAuth
     - BoringSSL-GRPC
     - Branch
@@ -558,8 +568,10 @@ SPEC REPOS:
     - libPhoneNumber-iOS
     - nanopb
     - OrderedSet
+    - Polyline
     - PromisesObjC
     - Stripe
+    - Tangram-es
     - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
@@ -583,6 +595,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_login_facebook:
     :path: ".symlinks/plugins/flutter_login_facebook/ios"
+  flutter_osm_plugin:
+    :path: ".symlinks/plugins/flutter_osm_plugin/ios"
   geocoding:
     :path: ".symlinks/plugins/geocoding/ios"
   geolocator:
@@ -624,6 +638,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   better_player: a4383402f457e53720525888c0fc5d337ef6ba11
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
@@ -648,6 +663,7 @@ SPEC CHECKSUMS:
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_login_facebook: 41fcf15687d2ce7a75bb89aa3476df54a00845a3
+  flutter_osm_plugin: a74c1830739ff6f1870cee85a0320071a157dd77
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
   geolocator: f5e3de65e241caba7ce3e8a618803387bda73384
@@ -676,6 +692,7 @@ SPEC CHECKSUMS:
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
+  Polyline: fce41d72e1146c41c6d081f7656827226f643dff
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
@@ -683,6 +700,7 @@ SPEC CHECKSUMS:
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Stripe: 515db5536fd659b5d79a0898ce1b882b61ab597e
   stripe_ios: ce035050135b58a5a838e0d410d53b26f1dc026a
+  Tangram-es: 7a4b5ecc0bf0d8f5a8f3b9734445866a0f136357
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
   ZLPhotoBrowser: 809878607ea92e9411c580797ce1be23896b8d7f

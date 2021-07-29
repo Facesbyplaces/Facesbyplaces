@@ -25,7 +25,6 @@ class HomeRegularMemorialPageImage extends StatefulWidget{
 }
 
 class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage>{
-  // List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
   List<String> backgroundImages = ['assets/icons/alm-memorial-cover-1.jpeg', 'assets/icons/alm-memorial-cover-2.jpeg'];
   Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
   File backgroundImage = File('');
