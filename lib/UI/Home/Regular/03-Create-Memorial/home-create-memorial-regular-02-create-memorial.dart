@@ -18,7 +18,9 @@ class HomeRegularCreateMemorial2 extends StatefulWidget{
   final String rip;
   final String cemetery;
   final String country;
-  const HomeRegularCreateMemorial2({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country});
+  final String latitude;
+  final String longitude;
+  const HomeRegularCreateMemorial2({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.latitude, required this.longitude});
 
   HomeRegularCreateMemorial2State createState() => HomeRegularCreateMemorial2State();
 }
@@ -199,7 +201,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                               newFiles.addAll(slideImages.value);
                             }
 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial3(relationship: widget.relationship, birthplace: widget.birthplace, dob: widget.dob, rip: widget.rip, cemetery: widget.cemetery, country: widget.country, description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial3(relationship: widget.relationship, birthplace: widget.birthplace, dob: widget.dob, rip: widget.rip, cemetery: widget.cemetery, country: widget.country, latitude: widget.latitude, longitude: widget.longitude, description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
                           }
                         },
                       ),

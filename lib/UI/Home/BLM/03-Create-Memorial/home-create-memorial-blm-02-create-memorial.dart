@@ -19,7 +19,9 @@ class HomeBLMCreateMemorial2 extends StatefulWidget{
   final String rip;
   final String country;
   final String state;
-  const HomeBLMCreateMemorial2({required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.state});
+  final String latitude;
+  final String longitude;
+  const HomeBLMCreateMemorial2({required this.relationship, required this.locationOfIncident, required this.precinct, required this.dob, required this.rip, required this.country, required this.state, required this.latitude, required this.longitude});
 
   HomeBLMCreateMemorial2State createState() => HomeBLMCreateMemorial2State();
 }
@@ -185,7 +187,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                               newFiles.addAll(slideImages.value);
                             }
 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial3(relationship: widget.relationship, locationOfIncident: widget.locationOfIncident, precinct: widget.precinct, dob: widget.dob, rip: widget.rip, country: widget.country, state: widget.state, description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorial3(relationship: widget.relationship, locationOfIncident: widget.locationOfIncident, precinct: widget.precinct, dob: widget.dob, rip: widget.rip, country: widget.country, state: widget.state, latitude: widget.latitude, longitude: widget.longitude,  description: controllerStory.text, memorialName: _key1.currentState!.controller.text, imagesOrVideos: newFiles,),),);
                           }
                         },
                       ),

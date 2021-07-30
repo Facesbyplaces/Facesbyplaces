@@ -1,7 +1,7 @@
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 class HomeBLMMaps extends StatefulWidget{
   final double latitude;
@@ -12,12 +12,16 @@ class HomeBLMMaps extends StatefulWidget{
 }
 
 class HomeBLMMapsState extends State<HomeBLMMaps>{
-  Completer<GoogleMapController> _controller = Completer();
-  CameraPosition? _kGooglePlex;
+  List<StaticPositionGeoPoint> staticPoints = [];
+  MapController controller = MapController();
 
   void initState(){
     super.initState();
-    _kGooglePlex = CameraPosition(target: LatLng(widget.latitude, widget.longitude), zoom: 14.4746,);
+    controller = MapController(initMapWithUserPosition: false, initPosition: GeoPoint(latitude: widget.latitude, longitude: widget.longitude),);
+    staticPoints.add(StaticPositionGeoPoint('Marker', MarkerIcon(icon: Icon(MdiIcons.graveStone, color: Colors.blue,)), [GeoPoint(latitude: widget.latitude, longitude: widget.longitude)],),);
+    Future.delayed(Duration(seconds: 5), () async {
+      await controller.zoom(5);
+    });
   }
 
   @override
@@ -27,13 +31,24 @@ class HomeBLMMapsState extends State<HomeBLMMaps>{
       appBar: AppBar(
         title: Text('Maps', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
+        actions: [
+          IconButton(
+            onPressed: () async{
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex!,
-        onMapCreated: (GoogleMapController controller){
-          _controller.complete(controller);
+      body: OSMFlutter( 
+        controller: controller,
+        trackMyPosition: false,
+        onGeoPointClicked: (GeoPoint value){
+          print('The latitude is ${value.latitude}');
+          print('The longitude is ${value.longitude}');
         },
+        staticPoints: staticPoints,
+        road: Road(startIcon: MarkerIcon(icon: Icon(Icons.person, size: 64, color: Colors.brown,),), roadColor: Colors.yellowAccent,),
+        markerOption: MarkerOption(defaultMarker: MarkerIcon(icon: Icon(Icons.person_pin_circle, color: Colors.blue, size: 56,),),),
       ),
     );
   }

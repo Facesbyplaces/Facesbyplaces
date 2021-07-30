@@ -5,12 +5,11 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-regular-02-create-memorial.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'home-create-memorial-regular-04-locate-map.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
-import 'home-create-memorial-regular-04-locate-map.dart';
 
 class RegularCreateMemorialValues{
   final String memorialName;
@@ -254,7 +253,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             );
                           }else{
                             // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: _key5.currentState!.controller.text, country: _key6.currentState!.controller.text,),),);
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: controller4.text, country: _key6.currentState!.controller.text,),),);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: controller4.text, country: _key6.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
                           }
                         },
                       ),

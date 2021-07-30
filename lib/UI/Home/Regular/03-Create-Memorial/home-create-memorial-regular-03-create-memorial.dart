@@ -3,11 +3,8 @@ import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,10 +18,12 @@ class HomeRegularCreateMemorial3 extends StatefulWidget{
   final String rip;
   final String cemetery;
   final String country;
+  final String latitude;
+  final String longitude;
   final String description;
   final String memorialName;
   final List<dynamic> imagesOrVideos;
-  const HomeRegularCreateMemorial3({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.description, required this.memorialName, required this.imagesOrVideos});
+  const HomeRegularCreateMemorial3({required this.relationship, required this.birthplace, required this.dob, required this.rip, required this.cemetery, required this.country, required this.latitude, required this.longitude, required this.description, required this.memorialName, required this.imagesOrVideos});
 
   HomeRegularCreateMemorial3State createState() => HomeRegularCreateMemorial3State();
 }
@@ -266,112 +265,42 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             backgroundImage.value = file;
                           }
 
-                          Location.Location location = new Location.Location();
-                          bool serviceEnabled = await location.serviceEnabled();
+                          if(profileImage.value.path == ''){
+                            final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
+                            final Uint8List list = bytes.buffer.asUint8List();
 
-                          if(!serviceEnabled){
-                            serviceEnabled = await location.requestService();
-                            if(!serviceEnabled){
-                              return;
-                            }
+                            final tempDir = await getTemporaryDirectory();
+                            final file = await new File('${tempDir.path}/regular-profile-image.png').create();
+                            file.writeAsBytesSync(list);
+
+                            profileImage.value = file;
                           }
 
-                          Location.PermissionStatus permissionGranted = await location.hasPermission();
+                          APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
+                            almRelationship: widget.relationship,
+                            almBirthPlace: widget.birthplace,
+                            almDob: widget.dob,
+                            almRip: widget.rip,
+                            almCemetery: widget.cemetery,
+                            almCountry: widget.country,
+                            almMemorialName: widget.memorialName,
+                            almDescription: widget.description,
+                            almBackgroundImage: backgroundImage.value,
+                            almProfileImage: profileImage.value,
+                            almImagesOrVideos: widget.imagesOrVideos,
+                            almLatitude: widget.latitude,
+                            almLongitude: widget.longitude,
+                          );
 
-                          if(permissionGranted != Location.PermissionStatus.granted){
-                            bool confirmation = await showDialog(
-                              context: context, 
-                              builder: (_) => AssetGiffyDialog(
-                                description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                onlyOkButton: false,
-                                onOkButtonPressed: (){
-                                  Navigator.pop(context, true);
-                                },
-                                onCancelButtonPressed: (){
-                                  Navigator.pop(context, false);
-                                },
-                              ),
-                            );
+                          context.loaderOverlay.show();
+                          int result = await apiRegularCreateMemorial(memorial: memorial);
+                          context.loaderOverlay.hide();
 
-                            if(confirmation == true){
-                              permissionGranted = await location.requestPermission();
+                          print('The latitude is ${widget.latitude}');
+                          print('The longitude is ${widget.longitude}');
 
-                              if(profileImage.value.path == ''){
-                                final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
-                                final Uint8List list = bytes.buffer.asUint8List();
-
-                                final tempDir = await getTemporaryDirectory();
-                                final file = await new File('${tempDir.path}/regular-profile-image.png').create();
-                                file.writeAsBytesSync(list);
-
-                                profileImage.value = file;
-                              }
-
-                              Location.LocationData locationData = await location.getLocation();
-
-                              APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
-                                almRelationship: widget.relationship,
-                                almBirthPlace: widget.birthplace,
-                                almDob: widget.dob,
-                                almRip: widget.rip,
-                                almCemetery: widget.cemetery,
-                                almCountry: widget.country,
-                                almMemorialName: widget.memorialName,
-                                almDescription: widget.description,
-                                almBackgroundImage: backgroundImage.value,
-                                almProfileImage: profileImage.value,
-                                almImagesOrVideos: widget.imagesOrVideos,
-                                almLatitude: '${locationData.latitude}',
-                                almLongitude: '${locationData.longitude}',
-                              );
-
-                              context.loaderOverlay.show();
-                              int result = await apiRegularCreateMemorial(memorial: memorial);
-                              context.loaderOverlay.hide();
-
-                              Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
-                              Navigator.pushReplacement(context, newRoute);
-                            }
-                          }else{
-                            if(profileImage.value.path == ''){
-                              final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
-                              final Uint8List list = bytes.buffer.asUint8List();
-
-                              final tempDir = await getTemporaryDirectory();
-                              final file = await new File('${tempDir.path}/regular-profile-image.png').create();
-                              file.writeAsBytesSync(list);
-
-                              profileImage.value = file;
-                            }
-
-                            Location.LocationData locationData = await location.getLocation();
-
-                            APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
-                              almRelationship: widget.relationship,
-                              almBirthPlace: widget.birthplace,
-                              almDob: widget.dob,
-                              almRip: widget.rip,
-                              almCemetery: widget.cemetery,
-                              almCountry: widget.country,
-                              almMemorialName: widget.memorialName,
-                              almDescription: widget.description,
-                              almBackgroundImage: backgroundImage.value,
-                              almProfileImage: profileImage.value,
-                              almImagesOrVideos: widget.imagesOrVideos,
-                              almLatitude: '${locationData.latitude}',
-                              almLongitude: '${locationData.longitude}',
-                            );
-
-                            context.loaderOverlay.show();
-                            int result = await apiRegularCreateMemorial(memorial: memorial);
-                            context.loaderOverlay.hide();
-
-                            Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
-                            Navigator.pushReplacement(context, newRoute);
-                          }
+                          Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
+                          Navigator.pushReplacement(context, newRoute); 
                         },
                       ),
                     ],
