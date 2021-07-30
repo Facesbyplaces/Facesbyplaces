@@ -152,11 +152,11 @@ export default function DataTable() {
   };
 
   const fetchTransactions = (page) => {
-    // setLoader(true);
+    setLoader(true);
     axios
       .get(`/api/v1/admin/transactions`, { params: { page: page } })
       .then((response) => {
-        console.log("Response: ", response);
+        setLoader(false);
         setTransactions(response.data.transactions);
       })
       .catch((error) => {
