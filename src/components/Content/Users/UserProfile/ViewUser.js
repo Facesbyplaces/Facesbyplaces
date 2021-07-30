@@ -40,6 +40,11 @@ export default function ViewUser() {
       id="kt_content"
       style={{ height: "100%" }}
     >
+      <ContactUser
+        user={user}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
       <div
         className="d-flex flex-column-fluid"
         style={{ marginTop: "auto", marginBottom: "auto" }}
@@ -241,11 +246,6 @@ export default function ViewUser() {
                             contact user
                           </a>
                         </div>
-                        <ContactUser
-                          user={user}
-                          showModal={showModal}
-                          setShowModal={setShowModal}
-                        />
                       </div>
                     </div>
                   </div>

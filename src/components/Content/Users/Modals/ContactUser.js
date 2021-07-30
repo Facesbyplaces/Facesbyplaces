@@ -155,6 +155,63 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
                 ) : (
                   <div className="modal-content">
                     <form className="form" onSubmit={handleSubmit}>
+                      <div className="pt-5 pr-5">
+                        <a
+                          className="btn btn-icon btn-danger btn-circle btn-xs"
+                          style={{ float: "right" }}
+                          onClick={() => setShowModal((prev) => !prev)}
+                        >
+                          <span className="svg-icon svg-icon-md svg-icon-light-secondary ml-3 mr-3">
+                            <svg
+                              width="24px"
+                              height="24px"
+                              viewBox="0 0 24 24"
+                              version="1.1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlnsXlink="http://www.w3.org/1999/xlink"
+                            >
+                              {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+                              <title>
+                                Stockholm-icons / Navigation / Close
+                              </title>
+                              <desc>Created with Sketch.</desc>
+                              <defs />
+                              <g
+                                id="Stockholm-icons-/-Navigation-/-Close"
+                                stroke="none"
+                                strokeWidth={1}
+                                fill="none"
+                                fillRule="evenodd"
+                              >
+                                <g
+                                  id="Group"
+                                  transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                                  fill="#000000"
+                                >
+                                  <rect
+                                    id="Rectangle-185"
+                                    x={0}
+                                    y={7}
+                                    width={16}
+                                    height={2}
+                                    rx={1}
+                                  />
+                                  <rect
+                                    id="Rectangle-185-Copy"
+                                    opacity="0.3"
+                                    transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) "
+                                    x={0}
+                                    y={7}
+                                    width={16}
+                                    height={2}
+                                    rx={1}
+                                  />
+                                </g>
+                              </g>
+                            </svg>
+                          </span>
+                        </a>
+                      </div>
                       <div className="modal-body">
                         <div className="tab-content">
                           {/*begin::Tab*/}
@@ -164,64 +221,7 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
                           >
                             {/*begin::Row*/}
                             <div className="row mt-10">
-                              <div className="col-xxl-1">
-                                <a
-                                  className="btn btn-icon btn-danger btn-circle btn-xs"
-                                  style={{ float: "right" }}
-                                  onClick={() => setShowModal((prev) => !prev)}
-                                >
-                                  <span className="svg-icon svg-icon-md svg-icon-light-secondary ml-3 mr-3">
-                                    <svg
-                                      width="24px"
-                                      height="24px"
-                                      viewBox="0 0 24 24"
-                                      version="1.1"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                                    >
-                                      {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
-                                      <title>
-                                        Stockholm-icons / Navigation / Close
-                                      </title>
-                                      <desc>Created with Sketch.</desc>
-                                      <defs />
-                                      <g
-                                        id="Stockholm-icons-/-Navigation-/-Close"
-                                        stroke="none"
-                                        strokeWidth={1}
-                                        fill="none"
-                                        fillRule="evenodd"
-                                      >
-                                        <g
-                                          id="Group"
-                                          transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
-                                          fill="#000000"
-                                        >
-                                          <rect
-                                            id="Rectangle-185"
-                                            x={0}
-                                            y={7}
-                                            width={16}
-                                            height={2}
-                                            rx={1}
-                                          />
-                                          <rect
-                                            id="Rectangle-185-Copy"
-                                            opacity="0.3"
-                                            transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) "
-                                            x={0}
-                                            y={7}
-                                            width={16}
-                                            height={2}
-                                            rx={1}
-                                          />
-                                        </g>
-                                      </g>
-                                    </svg>
-                                  </span>
-                                </a>
-                              </div>
-                              <div className="col-xxl-1 my-2">
+                              <div className="col-xxl my-2">
                                 {/*begin::Row*/}
                                 <div className="row">
                                   <div className="col-12">
@@ -236,7 +236,7 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
                                 {/*end::Row*/}
                                 {/*begin::Group*/}
                                 <div className="form-group row">
-                                  <div className="col-xxl-1">
+                                  <div className="col-xxl">
                                     <div className="input-group input-group-lg input-group-solid">
                                       <div className="input-group-prepend">
                                         <span className="svg-icon svg-icon-md svg-icon-light-secondary ml-3 mr-3">
@@ -299,7 +299,7 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
 
                                 {/*begin::Group*/}
                                 <div className="form-group row">
-                                  <div className="col-xxl-1">
+                                  <div className="col-xxl">
                                     <div className="input-group input-group-lg input-group-solid">
                                       <input
                                         type="text"
@@ -315,7 +315,7 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
 
                                 {/*begin::Group */}
                                 <div className="form-group row">
-                                  <div className="col-xxl-1">
+                                  <div className="col-xxl">
                                     <textarea
                                       className="form-control form-control-solid form-control-lg"
                                       id="exampleTextarea"
@@ -335,11 +335,11 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
                         </div>
                         {/*begin::Footer*/}
                         <div
-                          className="card-footer pb-7"
+                          className="card-footer"
                           style={{ borderTop: "none" }}
                         >
                           <div className="row">
-                            <div className="col-xxl-1">
+                            <div className="col-xxl">
                               <button
                                 type="submit"
                                 className="btn btn-success btn-lg btn-block font-weight-bold mr-2"
