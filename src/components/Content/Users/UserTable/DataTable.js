@@ -168,6 +168,7 @@ export default function DataTable({ search, setSearch, keywords, pageType }) {
         console.log("Fetched!");
       })
       .catch((error) => {
+        setLoader(false);
         console.log(error.response);
       });
   };

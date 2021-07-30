@@ -28,6 +28,10 @@ export default function DataTableRowUserData({ users, search }) {
     setShowModal((prev) => !prev);
   };
 
+  function removeBackground(e) {
+    e.target.style.background = "#ffffff";
+  }
+
   const renderedUsers = users.map((user) => (
     <tr>
       <td className="pl-2 py-6">
@@ -206,6 +210,24 @@ export default function DataTableRowUserData({ users, search }) {
     </tr>
   ));
 
+  const blankRows = (blanks) => {
+    let rows = [];
+    for (let i = 0; i < blanks; i++) {
+      rows.push(
+        <tr style={{ height: "60px", backgroundColor: "#ffffff" }}>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+        </tr>
+      );
+    }
+    return rows;
+  };
+
   return search ? (
     <tbody>
       <tr>
@@ -227,7 +249,10 @@ export default function DataTableRowUserData({ users, search }) {
       </tr>
     </tbody>
   ) : (
-    <tbody>{renderedUsers}</tbody>
+    <tbody>
+      {renderedUsers}
+      {users.length == 0 ? "" : blankRows(10 - users.length)}
+    </tbody>
   );
   // <div>
   //   {props.users.length == 0 ? (

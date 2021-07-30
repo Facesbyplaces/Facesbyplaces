@@ -161,6 +161,7 @@ export default function DataTable() {
       })
       .catch((error) => {
         console.log(error);
+        setLoader(false);
       });
   };
 

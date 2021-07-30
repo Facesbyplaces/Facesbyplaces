@@ -34,6 +34,24 @@ export default function DataTableRowMemorialPostsData({
     setShowModal((prev) => !prev);
   };
 
+  const blankRows = (blanks) => {
+    let rows = [];
+    for (let i = 0; i < blanks; i++) {
+      rows.push(
+        <tr style={{ height: "60px", backgroundColor: "#ffffff" }}>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+        </tr>
+      );
+    }
+    return rows;
+  };
+
   const renderedPosts = posts.map((post) => (
     <tr>
       <td className="pl-2 py-6">
@@ -230,6 +248,7 @@ export default function DataTableRowMemorialPostsData({
     <tbody>
       {/* <h1>Hi</h1> */}
       {renderedPosts}
+      {posts.length == 0 ? "" : blankRows(10 - posts.length)}
     </tbody>
   );
   // <div>

@@ -22,6 +22,24 @@ export default function DataTableRowTransactionData({ transactions }) {
     setShowPayoutModal((prev) => !prev);
   };
 
+  const blankRows = (blanks) => {
+    let rows = [];
+    for (let i = 0; i < blanks; i++) {
+      rows.push(
+        <tr style={{ height: "60px", backgroundColor: "#ffffff" }}>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+        </tr>
+      );
+    }
+    return rows;
+  };
+
   const renderedTransactions = transactions.map((transaction) => (
     <tr style={{ height: "75px" }}>
       <td className="pl-2 py-6">
@@ -194,6 +212,7 @@ export default function DataTableRowTransactionData({ transactions }) {
   return (
     <tbody>
       {renderedTransactions}
+      {transactions.length == 0 ? "" : blankRows(10 - transactions.length)}
       <TransactionModal
         showModal={showModal}
         setShowModal={setShowModal}

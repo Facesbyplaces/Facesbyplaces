@@ -28,7 +28,23 @@ export default function DataTableRowBlmData({ memorials, search, pageType }) {
     setShowModal((prev) => !prev);
   };
 
-  console.log("Memorials: ", memorials);
+  const blankRows = (blanks) => {
+    let rows = [];
+    for (let i = 0; i < blanks; i++) {
+      rows.push(
+        <tr style={{ height: "60px", backgroundColor: "#ffffff" }}>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+        </tr>
+      );
+    }
+    return rows;
+  };
 
   const renderedMemorials = memorials.map((memorial) => (
     <tr>
@@ -225,6 +241,7 @@ export default function DataTableRowBlmData({ memorials, search, pageType }) {
     <tbody>
       {/* <h1>Hi</h1> */}
       {renderedMemorials}
+      {memorials.length == 0 ? "" : blankRows(10 - memorials.length)}
     </tbody>
   );
   // <div>

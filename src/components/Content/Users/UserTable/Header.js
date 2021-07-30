@@ -41,6 +41,7 @@ export default function Header({
           {/*begin::Button*/}
           <a
             className="btn btn-primary font-weight-bolder"
+            style={{ width: "168px" }}
             onClick={() => handleAddClick("a")}
           >
             <span className="svg-icon svg-icon-md">

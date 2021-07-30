@@ -30,6 +30,24 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
     setShowModal((prev) => !prev);
   };
 
+  const blankRows = (blanks) => {
+    let rows = [];
+    for (let i = 0; i < blanks; i++) {
+      rows.push(
+        <tr style={{ height: "60px", backgroundColor: "#ffffff" }}>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+          <td style={{ borderTop: "0" }}></td>
+        </tr>
+      );
+    }
+    return rows;
+  };
+
   const renderedPosts = reports.map((report) => (
     <tr>
       <td className="pl-2 py-6">
@@ -230,7 +248,10 @@ export default function DataTableRowReportData({ reports, search, pageType }) {
       </tr>
     </tbody>
   ) : (
-    <tbody>{renderedPosts}</tbody>
+    <tbody>
+      {renderedPosts}{" "}
+      {reports.length == 0 ? "" : blankRows(10 - reports.length)}
+    </tbody>
   );
   // <div>
   //   {props.users.length == 0 ? (
