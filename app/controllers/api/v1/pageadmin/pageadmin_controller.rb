@@ -219,3 +219,40 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
 
 end
+
+# def addAdmin
+#     if is_page_admin == false
+#         case params[:page_type]
+#         when "Blm"
+#             if @user.account_type == 1
+#                 # Check if the user if part of the family or friends
+#                 if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
+#                     # Add page admin rights to the user
+#                     @user.add_role "pageadmin", @page
+
+#                     render json: {}, status: 200
+#                 else
+#                     render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
+#                 end
+#             else
+#                 render json: {}, status: 401
+#             end
+#         when "Memorial"
+#             if @user.account_type == 2
+#                 # Check if the user if part of the family or friends
+#                 if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
+#                     # Add page admin rights to the user
+#                     @user.add_role "pageadmin", @page
+
+#                     render json: {}, status: 200
+#                 else
+#                     render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
+#                 end
+#             else
+#                 render json: {}, status: 401
+#             end
+#         end
+#     else
+#         render json: {error: "User is already part of the admin"}, status: 409
+#     end
+# end

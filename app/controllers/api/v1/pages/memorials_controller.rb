@@ -57,13 +57,13 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def delete
-        @memorial.destroy()
-
         adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
         
         adminsRaw.each do |admin_id|
             AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: params[:id]).first.destroy 
         end
+
+        @memorial.destroy()
         
         render json: {status: "deleted"}
     end
@@ -88,15 +88,10 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         if @memorial.relationships.where(account: user()).first != nil
             # check if the user is a pageadmin
             if user().has_role? :pageadmin, @memorial
-                if AlmUser.with_role(:pageadmin, @memorial).count != 1
-                    # remove user from the page
-                    if @memorial.relationships.where(account: user()).first.destroy 
-                        # remove role as a page admin
-                        user().remove_role :pageadmin, @memorial
-                        render json: {}, status: 200
-                    else
-                        render json: {}, status: 500
-                    end
+                if AlmUser.with_role(:pageadmin, @memorial).count != 1 && @memorial.relationships.where(account: user()).first.destroy 
+                    # remove role as a page admin
+                    user().remove_role :pageadmin, @memorial
+                    render json: {}, status: 200
                 else
                     render json: {}, status: 406
                 end
@@ -185,7 +180,6 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def set_memorial
-        id = params[:id] 
         @memorial = Memorial.find(params[:id])
     end
 
