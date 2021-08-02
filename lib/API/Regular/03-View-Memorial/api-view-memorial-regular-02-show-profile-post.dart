@@ -54,13 +54,16 @@ class APIRegularHomeProfilePostExtended{
   int homeProfilePostId;
   APIRegularHomeProfilePostExtendedPage homeProfilePostPage;
   String homeProfilePostBody;
+  String homeProfilePostLocation;
+  double homeProfilePostLatitude;
+  double homeProfilePostLongitude;
   List<dynamic> homeProfilePostImagesOrVideos;
   List<APIRegularHomeProfilePostExtendedTagged> homeProfilePostTagged;
   String homeProfilePostCreatedAt;
   int homeProfilePostNumberOfLikes;
   int homeProfilePostNumberOfComments;
   bool homeProfilePostLikeStatus;
-  APIRegularHomeProfilePostExtended({required this.homeProfilePostId, required this.homeProfilePostPage, required this.homeProfilePostBody, required this.homeProfilePostImagesOrVideos, required this.homeProfilePostTagged, required this.homeProfilePostCreatedAt, required this.homeProfilePostNumberOfLikes, required this.homeProfilePostNumberOfComments, required this.homeProfilePostLikeStatus});
+  APIRegularHomeProfilePostExtended({required this.homeProfilePostId, required this.homeProfilePostPage, required this.homeProfilePostBody, required this.homeProfilePostLocation, required this.homeProfilePostLatitude, required this.homeProfilePostLongitude, required this.homeProfilePostImagesOrVideos, required this.homeProfilePostTagged, required this.homeProfilePostCreatedAt, required this.homeProfilePostNumberOfLikes, required this.homeProfilePostNumberOfComments, required this.homeProfilePostLikeStatus});
 
   factory APIRegularHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -77,6 +80,9 @@ class APIRegularHomeProfilePostExtended{
       homeProfilePostId: parsedJson['id'],
       homeProfilePostPage: APIRegularHomeProfilePostExtendedPage.fromJson(parsedJson['page']),
       homeProfilePostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      homeProfilePostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      homeProfilePostLatitude: parsedJson['latitude'],
+      homeProfilePostLongitude: parsedJson['longitude'],
       homeProfilePostImagesOrVideos: newList1 != null ? newList1 : [],
       homeProfilePostTagged: taggedList,
       homeProfilePostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',

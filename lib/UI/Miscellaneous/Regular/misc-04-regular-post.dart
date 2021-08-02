@@ -34,7 +34,10 @@ class MiscRegularPost extends StatefulWidget{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-  const MiscRegularPost({required Key key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship}) : super(key: key);
+  final String location;
+  final double latitude;
+  final double longitude;
+  const MiscRegularPost({required Key key, required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude}) : super(key: key);
 
   MiscRegularPostState createState() => MiscRegularPostState();
 }

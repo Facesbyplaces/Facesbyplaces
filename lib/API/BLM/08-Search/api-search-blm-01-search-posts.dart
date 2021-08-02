@@ -54,13 +54,16 @@ class APIBLMSearchPostExtended{
   int searchPostPostId;
   APIBLMSearchPostExtendedPage searchPostPage;
   String searchPostBody;
+  String searchPostLocation;
+  double searchPostLatitude;
+  double searchPostLongitude;
   List<dynamic> searchPostImagesOrVideos;
   List<APIBLMSearchPostExtendedTagged> searchPostPostTagged;
   String searchPostCreatedAt;
   int searchPostNumberOfLikes;
   int searchPostNumberOfComments;
   bool searchPostLikeStatus;
-  APIBLMSearchPostExtended({required this.searchPostPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
+  APIBLMSearchPostExtended({required this.searchPostPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostLocation, required this.searchPostLatitude, required this.searchPostLongitude, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
 
   factory APIBLMSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -77,6 +80,9 @@ class APIBLMSearchPostExtended{
       searchPostPostId: parsedJson['id'],
       searchPostPage: APIBLMSearchPostExtendedPage.fromJson(parsedJson['page']),
       searchPostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      searchPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      searchPostLatitude: parsedJson['latitude'],
+      searchPostLongitude: parsedJson['longitude'],
       searchPostImagesOrVideos: newList1 != null ? newList1 : [],
       searchPostPostTagged: taggedList,
       searchPostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',

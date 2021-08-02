@@ -45,7 +45,10 @@ class RegularProfilePosts{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-  const RegularProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  final String location;
+  final double latitude;
+  final double longitude;
+  const RegularProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude});
 }
 
 class HomeRegularMemorialProfile extends StatefulWidget{
@@ -148,6 +151,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
             pageType: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageType,
             famOrFriends: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFamOrFriends,
             relationship: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageRelationship,
+            location: newValue.almFamilyMemorialList[i].homeProfilePostLocation,
+            latitude: newValue.almFamilyMemorialList[i].homeProfilePostLatitude,
+            longitude: newValue.almFamilyMemorialList[i].homeProfilePostLongitude,
           ),
         );
       }
@@ -962,6 +968,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 pageType: posts[i].pageType,
                                                 famOrFriends: posts[i].famOrFriends,
                                                 relationship: posts[i].relationship,
+                                                location: posts[i].location,
+                                                latitude: posts[i].latitude,
+                                                longitude: posts[i].longitude,
                                                 contents: [
                                                   Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 

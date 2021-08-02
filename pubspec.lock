@@ -749,6 +749,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0+1"
+  osm_nominatim:
+    dependency: "direct dev"
+    description:
+      name: osm_nominatim
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   package_info_plus:
     dependency: transitive
     description:

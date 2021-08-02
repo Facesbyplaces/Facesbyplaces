@@ -53,13 +53,16 @@ class APIBLMHomeTabFeedExtended{
   int homeTabFeedId;
   APIBLMHomeTabFeedExtendedPage homeTabFeedPage;
   String homeTabFeedBody;
+  String homeTabFeedLocation;
+  double homeTabFeedLatitude;
+  double homeTabFeedLongitude;
   List<dynamic> homeTabFeedImagesOrVideos;
   List<APIBLMHomeTabFeedExtendedTagged> homeTabFeedPostTagged;
   String homeTabFeedCreatedAt;
   int homeTabFeedNumberOfLikes;
   int homeTabFeedNumberOfComments;
   bool homeTabFeedLikeStatus;
-  APIBLMHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
+  APIBLMHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedLocation, required this.homeTabFeedLatitude, required this.homeTabFeedLongitude, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
 
   factory APIBLMHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -77,6 +80,9 @@ class APIBLMHomeTabFeedExtended{
       homeTabFeedId: parsedJson['id'],
       homeTabFeedPage: APIBLMHomeTabFeedExtendedPage.fromJson(parsedJson['page']),
       homeTabFeedBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      homeTabFeedLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      homeTabFeedLatitude: parsedJson['latitude'],
+      homeTabFeedLongitude: parsedJson['longitude'],
       homeTabFeedImagesOrVideos: newList1 != null ? newList1 : [],
       homeTabFeedPostTagged: taggedList,
       homeTabFeedCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',

@@ -32,7 +32,10 @@ class RegularMainPagesPosts{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-  const RegularMainPagesPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship,});
+  final String location;
+  final double latitude;
+  final double longitude;
+  const RegularMainPagesPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude});
 }
 
 class HomeRegularPostTab extends StatefulWidget{
@@ -130,6 +133,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             famOrFriends: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageFamOrFriends,
             pageType: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPagePageType,
             relationship: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageRelationship,
+
+            location: newValue.familyMemorialList[i].homeTabPostLocation,
+            latitude: newValue.familyMemorialList[i].homeTabPostLatitude,
+            longitude: newValue.familyMemorialList[i].homeTabPostLongitude,
           ),
         );
       }
@@ -177,6 +184,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                 pageType: posts[i].pageType,
                 famOrFriends: posts[i].famOrFriends,
                 relationship: posts[i].relationship,
+                location: posts[i].location,
+                latitude: posts[i].latitude,
+                longitude: posts[i].longitude,
                 contents: [
                   Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 

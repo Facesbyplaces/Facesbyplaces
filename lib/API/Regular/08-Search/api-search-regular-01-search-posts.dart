@@ -54,13 +54,16 @@ class APIRegularSearchPostExtended{
   int searchPostId;
   APIRegularSearchPostExtendedPage searchPostPage;
   String searchPostBody;
+  String searchPostLocation;
+  double searchPostLatitude;
+  double searchPostLongitude;
   List<dynamic> searchPostImagesOrVideos;
   List<APIRegularSearchPostExtendedTagged> searchPostPostTagged;
   String searchPostCreatedAt;
   int searchPostNumberOfLikes;
   int searchPostNumberOfComments;
   bool searchPostLikeStatus;
-  APIRegularSearchPostExtended({required this.searchPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
+  APIRegularSearchPostExtended({required this.searchPostId, required this.searchPostPage, required this.searchPostBody, required this.searchPostLocation, required this.searchPostLatitude, required this.searchPostLongitude, required this.searchPostImagesOrVideos, required this.searchPostPostTagged, required this.searchPostCreatedAt, required this.searchPostNumberOfLikes, required this.searchPostNumberOfComments, required this.searchPostLikeStatus});
 
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -77,6 +80,9 @@ class APIRegularSearchPostExtended{
       searchPostId: parsedJson['id'],
       searchPostPage: APIRegularSearchPostExtendedPage.fromJson(parsedJson['page']),
       searchPostBody: parsedJson['body'],
+      searchPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      searchPostLatitude: parsedJson['latitude'],
+      searchPostLongitude: parsedJson['longitude'],
       searchPostImagesOrVideos: newList1 != null ? newList1 : [],
       searchPostPostTagged: taggedList,
       searchPostCreatedAt: parsedJson['created_at'],

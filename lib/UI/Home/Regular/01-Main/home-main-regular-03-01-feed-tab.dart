@@ -36,7 +36,10 @@ class RegularMainPagesFeeds{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-  const RegularMainPagesFeeds({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  final String location;
+  final double latitude;
+  final double longitude;
+  const RegularMainPagesFeeds({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude});
 }
 
 class HomeRegularFeedTab extends StatefulWidget{
@@ -150,6 +153,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
             pageType: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageType,
             famOrFriends: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageFamOrFriends,
             relationship: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageRelationship,
+            location: newValue.almFamilyMemorialList[i].homeTabFeedLocation,
+            latitude: newValue.almFamilyMemorialList[i].homeTabFeedLatitude,
+            longitude: newValue.almFamilyMemorialList[i].homeTabFeedLongitude,
           ),
         );
       }
@@ -200,6 +206,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   pageType: feedsListener[i].pageType,
                   famOrFriends: feedsListener[i].famOrFriends,
                   relationship: feedsListener[i].relationship,
+                  location: feedsListener[i].location,
+                  latitude: feedsListener[i].latitude,
+                  longitude: feedsListener[i].longitude,
                   contents: [
                     Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
                         
@@ -382,6 +391,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   pageType: feedsListener[i].pageType,
                   famOrFriends: feedsListener[i].famOrFriends,
                   relationship: feedsListener[i].relationship,
+                  location: feedsListener[i].location,
+                  latitude: feedsListener[i].latitude,
+                  longitude: feedsListener[i].longitude,
                   contents: [
                     Container(
                       alignment: Alignment.centerLeft,

@@ -105,7 +105,6 @@ class HomeRegularCreateMemorialLocateMapTopWidget extends StatefulWidget{
 
 class HomeRegularCreateMemorialLocateMapTopWidgetState extends State<HomeRegularCreateMemorialLocateMapTopWidget>{
   late PickerMapController controller;
-  ValueNotifier<GeoPoint?> notifierGeoPoint = ValueNotifier(null);
   ValueNotifier<bool> notifierAutoCompletion = ValueNotifier(false);
 
   late StreamController<List<SearchInfo>> streamSuggestion = StreamController();

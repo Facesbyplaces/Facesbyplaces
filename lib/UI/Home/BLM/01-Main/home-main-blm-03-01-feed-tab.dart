@@ -36,7 +36,10 @@ class BLMMainPagesFeeds{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-  const BLMMainPagesFeeds({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus,required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  final String location;
+  final double latitude;
+  final double longitude;
+  const BLMMainPagesFeeds({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus,required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude});
 }
 
 class HomeBLMFeedTab extends StatefulWidget{
@@ -151,6 +154,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
             pageType: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageType,
             famOrFriends: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageFamOrFriends,
             relationship: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageRelationship,
+            location: newValue.blmFamilyMemorialList[i].homeTabFeedLocation,
+            latitude: newValue.blmFamilyMemorialList[i].homeTabFeedLatitude,
+            longitude: newValue.blmFamilyMemorialList[i].homeTabFeedLongitude,
           ),
         );
       }
@@ -201,6 +207,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                   pageType: feedsListener[i].pageType,
                   famOrFriends: feedsListener[i].famOrFriends,
                   relationship: feedsListener[i].relationship,
+                  location: feedsListener[i].location,
+                  latitude: feedsListener[i].latitude,
+                  longitude: feedsListener[i].longitude,
                   contents: [
                     Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
@@ -390,6 +399,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                   pageType: feedsListener[i].pageType,
                   famOrFriends: feedsListener[i].famOrFriends,
                   relationship: feedsListener[i].relationship,
+                  location: feedsListener[i].location,
+                  latitude: feedsListener[i].latitude,
+                  longitude: feedsListener[i].longitude,
                   contents: [
                     Container(
                       alignment: Alignment.centerLeft,

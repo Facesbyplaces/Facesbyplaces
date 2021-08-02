@@ -53,13 +53,16 @@ class APIRegularHomeTabPostExtended{
   int homeTabPostId;
   APIRegularHomeTabPostExtendedPage homeTabPostPage;
   String homeTabPostBody;
+  String homeTabPostLocation;
+  double homeTabPostLatitude;
+  double homeTabPostLongitude;
   List<dynamic> homeTabPostImagesOrVideos;
   List<APIRegularHomeTabPostExtendedTagged> homeTabPostPostTagged;
   String homeTabPostCreatedAt;
   int homeTabPostNumberOfLikes;
   int homeTabPostNumberOfComments;
   bool homeTabPostLikeStatus;
-  APIRegularHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreatedAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus});
+  APIRegularHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostLocation, required this.homeTabPostLatitude, required this.homeTabPostLongitude, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreatedAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus});
 
   factory APIRegularHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -76,6 +79,9 @@ class APIRegularHomeTabPostExtended{
       homeTabPostId: parsedJson['id'],
       homeTabPostPage: APIRegularHomeTabPostExtendedPage.fromJson(parsedJson['page']),
       homeTabPostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      homeTabPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      homeTabPostLatitude: parsedJson['latitude'],
+      homeTabPostLongitude: parsedJson['longitude'],
       homeTabPostImagesOrVideos: newList1 != null ? newList1 : [],
       homeTabPostPostTagged: taggedList,
       homeTabPostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',

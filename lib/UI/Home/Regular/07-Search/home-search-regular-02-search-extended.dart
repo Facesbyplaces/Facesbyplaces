@@ -39,7 +39,10 @@ class RegularSearchMainPosts{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-  const RegularSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  final String location;
+  final double latitude;
+  final double longitude;
+  const RegularSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude});
 }
 
 class RegularSearchMainSuggested{
@@ -185,6 +188,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             pageType: newValue.almSearchPostList[i].searchPostPage.searchPostPagePageType,
             famOrFriends: newValue.almSearchPostList[i].searchPostPage.searchPostPageFamOrFriends,
             relationship: newValue.almSearchPostList[i].searchPostPage.searchPostPageRelationship,
+            location: newValue.almSearchPostList[i].searchPostLocation,
+            latitude: newValue.almSearchPostList[i].searchPostLatitude,
+            longitude: newValue.almSearchPostList[i].searchPostLongitude,
           ),
         );
       }
@@ -756,6 +762,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 pageType: feeds[i].pageType,
                 famOrFriends: feeds[i].famOrFriends,
                 relationship: feeds[i].relationship,
+                location: feeds[i].location,
+                latitude: feeds[i].latitude,
+                longitude: feeds[i].longitude,
                 contents: [
                   Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
                   
@@ -939,6 +948,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 pageType: feeds[i].pageType,
                 famOrFriends: feeds[i].famOrFriends,
                 relationship: feeds[i].relationship,
+                location: feeds[i].location,
+                latitude: feeds[i].latitude,
+                longitude: feeds[i].longitude,
                 contents: [
                   Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
                   
@@ -1133,6 +1145,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 pageType: searchFeeds[i].pageType,
                 famOrFriends: searchFeeds[i].famOrFriends,
                 relationship: searchFeeds[i].relationship,
+                location: feeds[i].location,
+                latitude: feeds[i].latitude,
+                longitude: feeds[i].longitude,
                 contents: [
                   Container(
                     alignment: Alignment.centerLeft,
@@ -1319,6 +1334,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 pageType: searchFeeds[i].pageType,
                 famOrFriends: searchFeeds[i].famOrFriends,
                 relationship: searchFeeds[i].relationship,
+                location: feeds[i].location,
+                latitude: feeds[i].latitude,
+                longitude: feeds[i].longitude,
                 contents: [
                   Container(
                     alignment: Alignment.centerLeft,

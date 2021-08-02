@@ -54,13 +54,16 @@ class APIBLMHomeTabPostExtended{
   int homeTabPostId;
   APIBLMHomeTabPostExtendedPage homeTabPostPage;
   String homeTabPostBody;
+  String homeTabPostLocation;
+  double homeTabPostLatitude;
+  double homeTabPostLongitude;
   List<dynamic> homeTabPostImagesOrVideos;
   List<APIBLMHomeTabPostExtendedTagged> homeTabPostPostTagged;
   String homeTabPostCreatedAt;
   int homeTabPostNumberOfLikes;
   int homeTabPostNumberOfComments;
   bool homeTabPostLikeStatus;
-  APIBLMHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreatedAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus});
+  APIBLMHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostLocation, required this.homeTabPostLatitude, required this.homeTabPostLongitude, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreatedAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus});
 
   factory APIBLMHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -77,6 +80,9 @@ class APIBLMHomeTabPostExtended{
       homeTabPostId: parsedJson['id'],
       homeTabPostPage: APIBLMHomeTabPostExtendedPage.fromJson(parsedJson['page']),
       homeTabPostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      homeTabPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      homeTabPostLatitude: parsedJson['latitude'],
+      homeTabPostLongitude: parsedJson['longitude'],
       homeTabPostImagesOrVideos: newList1 != null ? newList1 : [],
       homeTabPostPostTagged: taggedList,
       homeTabPostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',

@@ -45,7 +45,10 @@ class BLMProfilePosts{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-  const BLMProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  final String location;
+  final double latitude;
+  final double longitude;
+  const BLMProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude});
 }
 
 class HomeBLMMemorialProfile extends StatefulWidget{
@@ -117,6 +120,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
           pageType: newValue.blmFamilyMemorialList[i].profilePostPage.profilePagePageType,
           famOrFriends: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageFamOrFriends,
           relationship: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageRelationship,
+          location: newValue.blmFamilyMemorialList[i].homeProfilePostLocation,
+          latitude: newValue.blmFamilyMemorialList[i].homeProfilePostLatitude,
+          longitude: newValue.blmFamilyMemorialList[i].homeProfilePostLongitude,
           ),
         );
       }
@@ -971,6 +977,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                             pageType: posts[i].pageType,
                                             famOrFriends: posts[i].famOrFriends,
                                             relationship: posts[i].relationship,
+                                            location: posts[i].location,
+                                            latitude: posts[i].latitude,
+                                            longitude: posts[i].longitude,
                                             contents: [
                                               Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 

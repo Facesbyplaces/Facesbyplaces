@@ -33,8 +33,10 @@ class BLMMiscDraggablePost{
   final String pageType;
   final bool famOrFriends;
   final String relationship;
-
-  const BLMMiscDraggablePost({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  final String location;
+  final double latitude;
+  final double longitude;
+  const BLMMiscDraggablePost({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship, required this.location, required this.latitude, required this.longitude});
 }
 
 class MiscBLMDraggablePost extends StatefulWidget{
@@ -118,7 +120,10 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           pageType: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPagePageType,
           famOrFriends: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageFamOrFriends,
           relationship: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageRelationship,
-          ),    
+          location: newValue.blmFamilyMemorialList[i].showUsersPostsLocation,
+          latitude: newValue.blmFamilyMemorialList[i].showUsersPostsLatitude,
+          longitude: newValue.blmFamilyMemorialList[i].showUsersPostsLongitude,
+          ),
         );
       }
 
@@ -165,6 +170,9 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                 pageType: posts[i].pageType,
                 famOrFriends: posts[i].famOrFriends,
                 relationship: posts[i].relationship,
+                location: posts[i].location,
+                latitude: posts[i].latitude,
+                longitude: posts[i].longitude,
                 contents: [
                   Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 

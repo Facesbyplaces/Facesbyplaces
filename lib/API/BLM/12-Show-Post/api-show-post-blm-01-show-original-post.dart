@@ -61,13 +61,16 @@ class APIBLMShowOriginalPostExtended{
   int showOriginalPostId;
   APIBLMShowOriginalPostExtendedPage showOriginalPostPage;
   String showOriginalPostBody;
+  String showOriginalPostLocation;
+  double showOriginalPostLatitude;
+  double showOriginalPostLongitude;
   List<dynamic> showOriginalPostImagesOrVideos;
   List<APIBLMShowOriginalPostExtendedTagged> showOriginalPostPostTagged;
   String showOriginalPostCreatedAt;
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
   bool showOriginalPostLikeStatus;
-  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
+  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostLocation, required this.showOriginalPostLatitude, required this.showOriginalPostLongitude, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreatedAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
 
   factory APIBLMShowOriginalPostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList;
@@ -84,6 +87,9 @@ class APIBLMShowOriginalPostExtended{
       showOriginalPostId: parsedJson['id'],
       showOriginalPostPage: APIBLMShowOriginalPostExtendedPage.fromJson(parsedJson['page']),
       showOriginalPostBody: parsedJson['body'],
+      showOriginalPostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      showOriginalPostLatitude: parsedJson['latitude'],
+      showOriginalPostLongitude: parsedJson['longitude'],
       showOriginalPostImagesOrVideos: newList != null ? newList : [],
       showOriginalPostPostTagged: taggedList,
       showOriginalPostCreatedAt: parsedJson['created_at'],

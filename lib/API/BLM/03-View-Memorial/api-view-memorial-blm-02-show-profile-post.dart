@@ -54,13 +54,16 @@ class APIBLMHomeProfilePostExtended{
   int profilePostId;
   APIBLMHomeProfilePostExtendedPage profilePostPage;
   String profilePostBody;
+  String homeProfilePostLocation;
+  double homeProfilePostLatitude;
+  double homeProfilePostLongitude;
   List<dynamic> profilePostImagesOrVideos;
   List<APIBLMHomeProfilePostExtendedTagged> profilePostPostTagged;
   String profilePostCreatedAt;
   int profilePostNumberOfLikes;
   int profilePostNumberOfComments;
   bool profilePostLikeStatus;
-  APIBLMHomeProfilePostExtended({required this.profilePostId, required this.profilePostPage, required this.profilePostBody, required this.profilePostImagesOrVideos, required this.profilePostPostTagged, required this.profilePostCreatedAt, required this.profilePostNumberOfLikes, required this.profilePostNumberOfComments, required this.profilePostLikeStatus});
+  APIBLMHomeProfilePostExtended({required this.profilePostId, required this.profilePostPage, required this.profilePostBody, required this.homeProfilePostLocation, required this.homeProfilePostLatitude, required this.homeProfilePostLongitude, required this.profilePostImagesOrVideos, required this.profilePostPostTagged, required this.profilePostCreatedAt, required this.profilePostNumberOfLikes, required this.profilePostNumberOfComments, required this.profilePostLikeStatus});
 
   factory APIBLMHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -77,6 +80,9 @@ class APIBLMHomeProfilePostExtended{
       profilePostId: parsedJson['id'],
       profilePostPage: APIBLMHomeProfilePostExtendedPage.fromJson(parsedJson['page']),
       profilePostBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      homeProfilePostLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      homeProfilePostLatitude: parsedJson['latitude'],
+      homeProfilePostLongitude: parsedJson['longitude'],
       profilePostImagesOrVideos: newList1 != null ? newList1 : [],
       profilePostPostTagged: taggedList,
       profilePostCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',

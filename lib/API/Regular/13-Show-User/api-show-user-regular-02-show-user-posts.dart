@@ -66,13 +66,16 @@ class APIRegularShowUsersPostsExtended{
   int showUsersPostsId;
   APIRegularShowUsersPostsExtendedPage showUsersPostsPage;
   String showUsersPostsBody;
+  String showUsersPostsLocation;
+  double showUsersPostsLatitude;
+  double showUsersPostsLongitude;
   List<dynamic> showUsersPostsImagesOrVideos;
   List<APIRegularShowUsersPostsExtendedTagged> showUsersPostsPostTagged;
   String showUsersPostsCreatedAt;
   int showUsersPostsNumberOfLikes;
   int showUsersPostsNumberOfComments;
   bool showUsersPostsLikeStatus;
-  APIRegularShowUsersPostsExtended({required this.showUsersPostsId, required this.showUsersPostsPage, required this.showUsersPostsBody, required this.showUsersPostsImagesOrVideos, required this.showUsersPostsPostTagged, required this.showUsersPostsCreatedAt, required this.showUsersPostsNumberOfLikes, required this.showUsersPostsNumberOfComments, required this.showUsersPostsLikeStatus});
+  APIRegularShowUsersPostsExtended({required this.showUsersPostsId, required this.showUsersPostsPage, required this.showUsersPostsBody, required this.showUsersPostsLocation, required this.showUsersPostsLatitude, required this.showUsersPostsLongitude, required this.showUsersPostsImagesOrVideos, required this.showUsersPostsPostTagged, required this.showUsersPostsCreatedAt, required this.showUsersPostsNumberOfLikes, required this.showUsersPostsNumberOfComments, required this.showUsersPostsLikeStatus});
 
   factory APIRegularShowUsersPostsExtended.fromJson(Map<String, dynamic> parsedJson){
     List<dynamic>? newList1;
@@ -89,6 +92,9 @@ class APIRegularShowUsersPostsExtended{
       showUsersPostsId: parsedJson['id'],
       showUsersPostsPage: APIRegularShowUsersPostsExtendedPage.fromJson(parsedJson['page']),
       showUsersPostsBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      showUsersPostsLocation: parsedJson['location'] != null ? parsedJson['location'] : '',
+      showUsersPostsLatitude: parsedJson['latitude'],
+      showUsersPostsLongitude: parsedJson['longitude'],
       showUsersPostsImagesOrVideos: newList1 != null ? newList1 : [],
       showUsersPostsPostTagged: taggedList,
       showUsersPostsCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
