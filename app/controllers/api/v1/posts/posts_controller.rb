@@ -169,7 +169,7 @@ class Api::V1::Posts::PostsController < ApplicationController
 
     def notify_followers_of_a_post(post)
         # Add tagged people
-        people = tag_people
+        people = tag_people(post)
         
         # For blm followers
         (post.page.users.uniq - user_in_page(1)).each do |user|
@@ -266,7 +266,7 @@ class Api::V1::Posts::PostsController < ApplicationController
         end
     end
 
-    def tag_people
+    def tag_people(post)
         people_tags = params[:tag_people] || []
         people = []
 

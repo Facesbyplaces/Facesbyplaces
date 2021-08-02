@@ -35,7 +35,7 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
 
     # Mark Notifications as read
     def read
-        unreadNotifs = user.notifications.where(read: false)
+        unreadNotifs = user().notifications.where(read: false)
 
         unreadNotifs.each do |unreadNotif|
             unreadNotif.update(read: true)

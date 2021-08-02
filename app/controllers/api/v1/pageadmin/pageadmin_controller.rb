@@ -1,43 +1,24 @@
 class Api::V1::Pageadmin::PageadminController < ApplicationController
     before_action :authenticate_user
     before_action :verify_page_admin
+    before_action :verify_admin_account_type, only: [:addAdmin]
     before_action :fetch_page, except: [:editPost, :updatePost, :deletePost]
     before_action :fetch_user, except: [:editPost, :updatePost, :deletePost, :unhideOrHideFamily, :unhideOrHideFollowers, :unhideOrHideFriends]
     before_action :fetch_post, only: [:editPost, :updatePost, :deletePost]
 
     def addAdmin
-        verify_admin_account_type
-
         if is_page_admin == false
             case params[:page_type]
-            when "Blm"
-                if @user.account_type == 1
-                    # Check if the user if part of the family or friends
-                    if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
-                        # Add page admin rights to the user
-                        @user.add_role "pageadmin", @page
-
-                        render json: {}, status: 200
-                    else
-                        render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
-                    end
-                else
-                    render json: {}, status: 401
-                end
-            when "Memorial"
-                if @user.account_type == 2
-                    # Check if the user if part of the family or friends
-                    if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
-                        # Add page admin rights to the user
-                        @user.add_role "pageadmin", @page
-
-                        render json: {}, status: 200
-                    else
-                        render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
-                    end
-                else
-                    render json: {}, status: 401
-                end
+            when "Blm" && @user.account_type == 1 && @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
+                # Add page admin rights to the user
+                @user.add_role "pageadmin", @page
+                render json: {}, status: 200
+            when "Memorial" && @user.account_type == 2 && @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
+                # Add page admin rights to the user
+                @user.add_role "pageadmin", @page
+                render json: {}, status: 200
+            else
+                render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
             end
         else
             render json: {error: "User is already part of the admin"}, status: 409
@@ -131,6 +112,27 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         end
     end
 
+    def verify_admin_account_type
+        if params[:account_type] == "1" && params[:page_type] == "Memorial"
+            return render json: {error: "User is not a Blm User"}, status: 401
+        elsif params[:account_type] == "2" && params[:page_type] == "Blm"
+            return render json: {error: "User is not a Alm User"}, status: 401
+        end
+    end
+
+    def is_page_admin
+        if params[:account_type] == "1"
+            # check if user is already a page admin
+            User.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? (return false) : (return true)
+        elsif params[:account_type] == "2"
+            # check if user is already a page admin
+            AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? (return false) : (return true)
+            # elsif @user.has_role? :pageadmin, @page 
+            #     # check if user is already a page admin
+            #     return render json: {error: "Cannot remove admin"}, status: 422
+        end  
+    end
+
     def fetch_page
         case params[:page_type]
         when "Blm"
@@ -154,27 +156,6 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         @post = Post.find(params[:post_id])
     end
 
-    def verify_admin_account_type
-        if params[:account_type] == "1" && params[:page_type] == "Memorial"
-            return render json: {error: "User is not a Blm User"}, status: 401
-        elsif params[:account_type] == "2" && params[:page_type] == "Blm"
-            return render json: {error: "User is not a Alm User"}, status: 401
-        end
-    end
-
-    def is_page_admin
-        if params[:account_type] == "1"
-            # check if user is already a page admin
-            User.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? (return false) : (return true)
-        elsif params[:account_type] == "2"
-            # check if user is already a page admin
-            AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? (return false) : (return true)
-            # elsif @user.has_role? :pageadmin, @page 
-            #     # check if user is already a page admin
-            #     return render json: {error: "Cannot remove admin"}, status: 422
-        end  
-    end
-
     def is_page_owner
         if @page.pageowner.account == @user
             return render json: {error: "Cannot remove pageowner"}, status: 422
@@ -183,14 +164,14 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def has_relationship
         if @page.relationships.where(account: @user).first == nil && Follower.where(account: @user, page_type: params[:page_type], page_id: params[:page_id]).first == nil
-            return true
+            return false
         else
             return render json: {}, status: 409
         end
     end
 
     def add_relationship(relationship)
-        if has_relationship
+        if has_relationship == false
             case relationship
             when "family"
                 if @user.notifsetting.addFamily == true
