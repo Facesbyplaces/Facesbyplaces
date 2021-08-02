@@ -1,6 +1,8 @@
 class Api::V1::Posts::PostsController < ApplicationController
+    include Postable
     before_action :authenticate_user, except: [:index, :show, :pagePosts]
     before_action :set_up, only: [:create]
+    before_action :set_posts, only: [:pagePosts]
 
     def index  
         @posts = posts_index
@@ -34,8 +36,6 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     def pagePosts
-        @posts = page_posts_index
-
         render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
                             @posts, 

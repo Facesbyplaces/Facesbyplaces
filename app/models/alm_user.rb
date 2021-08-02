@@ -53,6 +53,20 @@ class AlmUser < ActiveRecord::Base
   #     new { |u| u.guest = true }
   # end
 
+  def owned(page)
+    owned = self.relationships.select("page_type, page_id")
+    return owned = owned.page(page).per(numberOfPage)
+  end
+
+  def followed(page)
+      followed = self.followers.select("page_type, page_id")
+      return followed = followed.page(page).per(numberOfPage)
+  end
+
+  def numberOfPage
+    10
+  end
+
   def self.current_alm_user
     Thread.current[:current_alm_user]
   end

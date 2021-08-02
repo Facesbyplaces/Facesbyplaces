@@ -33,12 +33,13 @@ Rails.application.routes.draw do
       
       
       namespace :users do 
-        resources :verify, only: [:create]
+        # resources :verify, only: [:create]
         resources :resend_verification_code, only: [:create]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
 
         get 'check_password', to: 'users#check_password'
+        post 'verify_code', to: 'verify#verify'
 
         post 'signin-blm-guest', to: 'users#blm_guest'
         post 'signin-alm-guest', to: 'users#alm_guest'
@@ -60,8 +61,7 @@ Rails.application.routes.draw do
         put 'hideOrUnhideEmail', to: 'users#hideOrUnhideEmail'
         put 'hideOrUnhideAddress', to: 'users#hideOrUnhideAddress'
         put 'hideOrUnhidePhonenumber', to: 'users#hideOrUnhidePhonenumber'
-
-        post 'changePassword', to: 'users#changePassword'
+        
       end
       
       namespace :reports do 
@@ -318,7 +318,8 @@ Rails.application.routes.draw do
 
       namespace :followers do
         get '/', to: 'followers#followStatus'
-        put '/', to: 'followers#followOrUnfollow'
+        put '/follow', to: 'followers#follow'
+        put '/unfollow', to: 'followers#unfollow'
       end
 
       namespace :pageadmin do

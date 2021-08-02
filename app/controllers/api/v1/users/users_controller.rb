@@ -1,5 +1,7 @@
 class Api::V1::Users::UsersController < ApplicationController
+    include Postable
     before_action :authenticate_user
+    before_action :set_posts, only: [:posts]
 
     ## SIGN_IN AS GUEST
     # def blm_guest
@@ -37,25 +39,7 @@ class Api::V1::Users::UsersController < ApplicationController
     # end
 
     def check_password        
-        if user().password_update == true
-            render json: { success: true, password_updated: user().password_update, status: 200 }, status: 200
-        else
-            render json: { success: true, password_updated: user().password_update, status: 200 }, status: 200  
-        end
-    end
-    
-    def edit
-        @user = fetched_user
-        
-        render json: {
-            success: true, 
-            first_name: @user.first_name, 
-            last_name: @user.last_name, 
-            phone_number: @user.phone_number,
-            email: @user.email,
-            username: @user.username,
-            image: @user.image,
-            status: 200}, status: 200
+        render json: { success: true, password_updated: user().password_update, status: 200 }, status: 200
     end
 
     def updateDetails
@@ -63,7 +47,7 @@ class Api::V1::Users::UsersController < ApplicationController
             user().update(updateDetails_params)
             render json: UserSerializer.new( user() ).attributes
         else
-            render json: {error: "no current user"}, status: 404
+            render json: {error: "No current user"}, status: 404
         end
     end
 
@@ -72,32 +56,36 @@ class Api::V1::Users::UsersController < ApplicationController
             user().update(updateOtherInfos_params)
             render json: UserSerializer.new( user() ).attributes
         else
-            render json: {error: "no current user"}, status: 404
+            render json: {error: "No current user"}, status: 404
         end
     end
 
     def getDetails
-        @user = fetched_user
-
-        render json: {
-            first_name: @user.first_name, 
-            last_name: @user.last_name,
-            email: @user.email,
-            phone_number: @user.phone_number,
-            question: @user.question
-        }
+        if user()
+            render json: {
+                first_name: user().first_name, 
+                last_name: user().last_name,
+                email: user().email,
+                phone_number: user().phone_number,
+                question: user().question
+            }
+        else
+            render json: {error: "No current user"}, status: 404
+        end
     end
 
     def getOtherInfos
-        @user = fetched_user
-
-        render json: {
-            birthdate: @user.birthdate, 
-            birthplace: @user.birthplace,
-            email: @user.email,
-            address: @user.address,
-            phone_number: @user.phone_number,
-        }
+        if user()
+            render json: {
+                birthdate: user().birthdate, 
+                birthplace: user().birthplace,
+                email: user().email,
+                address: user().address,
+                phone_number: user().phone_number,
+            }
+        else
+            render json: {error: "No current user"}, status: 404
+        end
     end
 
     def otherDetailsStatus
@@ -110,74 +98,37 @@ class Api::V1::Users::UsersController < ApplicationController
                 hidePhonenumber: user().hidePhonenumber,
             }
         else
-            render json: {error: "no current user"}, status: 404
+            render json: {error: "No current user"}, status: 404
         end
     end
 
     def show
-        @user = fetched_user
-
-        render json: UserSerializer.new( @user ).attributes
+        if user()
+            render json: UserSerializer.new( user() ).attributes
+        else
+            render json: {error: "No current user"}, status: 404
+        end
     end
 
     def posts
-        @user = fetched_user
-
-        posts = Post.where(account: @user).order(created_at: :desc)
-        
-        posts = posts.page(params[:page]).per(numberOfPage)
-        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif posts.total_count < numberOfPage
-            itemsremaining = posts.total_count 
-        else
-            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
-                                posts, 
+                                @posts, 
                                 each_serializer: PostSerializer
                             )
                     }
     end
 
     def memorials
-        @user = fetched_user
-
-        # Own or part of fam or friend of page
-        owned = @user.relationships.select("page_type, page_id")
-        
-        owned = owned.page(params[:page]).per(numberOfPage)
-        if owned.total_count == 0 || (owned.total_count - (params[:page].to_i * numberOfPage)) < 0
-            ownedItemsRemaining = 0
-        elsif owned.total_count < numberOfPage
-            ownedItemsRemaining = owned.total_count 
-        else
-            ownedItemsRemaining = owned.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        # Followed
-        followed = @user.followers.select("page_type, page_id")
-
-        followed = followed.page(params[:page]).per(numberOfPage)
-        if followed.total_count == 0 || (followed.total_count - (params[:page].to_i * numberOfPage)) < 0
-            followedItemsRemaining = 0
-        elsif followed.total_count < numberOfPage
-            followedItemsRemaining = followed.total_count 
-        else
-            followedItemsRemaining = followed.total_count - (params[:page].to_i * numberOfPage)
-        end
-
         render json: {
-            ownedItemsRemaining: ownedItemsRemaining,
+            ownedItemsRemaining: itemsRemaining(user().owned(params[:page])),
             owned: ActiveModel::SerializableResource.new(
-                        owned, 
+                        user().owned(params[:page]), 
                         each_serializer: PageSerializer
                     ),
-            followedItemsRemaining: followedItemsRemaining,
+            followedItemsRemaining: itemsRemaining(user().followed(params[:page])),
             followed: ActiveModel::SerializableResource.new(
-                        followed, 
+                        user().followed(params[:page]), 
                         each_serializer: PageSerializer
                     ),
         }
@@ -217,14 +168,6 @@ class Api::V1::Users::UsersController < ApplicationController
         params.permit(:birthdate, :birthplace, :email, :address, :phone_number)
     end
 
-    def fetched_user
-        if params[:account_type] == "1"
-            return user = User.find(params[:user_id])
-        else
-            return user = AlmUser.find(params[:user_id])
-        end
-    end
-
     def hideOrUnhide(detail)
         case detail 
         when "birthdate"
@@ -242,6 +185,16 @@ class Api::V1::Users::UsersController < ApplicationController
         end
 
         render json: {}, status: 200
+    end
+
+    def itemsRemaining(data)
+        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif data.total_count < numberOfPage
+            itemsremaining = data.total_count 
+        else
+            itemsremaining = data.total_count - (params[:page].to_i * numberOfPage)
+        end
     end
 
 end
