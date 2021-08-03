@@ -1,10 +1,11 @@
 class Api::V1::Posts::PostsController < ApplicationController
     include Postable
     before_action :authenticate_user, except: [:index, :show, :pagePosts]
+    before_action :set_page, only: [:create]
     before_action :verify_page_admin, only: [:create]
     before_action :set_posts, only: [:index]
     before_action :set_page_posts, only: [:pagePosts]
-    before_action :set_post, only: [:show]
+    before_action :set_post, only: [:show]    
 
     def index  
         render json: {  itemsremaining:  itemsRemaining(@posts),
@@ -91,7 +92,7 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     def verify_page_admin
-        if user().has_role? :pageadmin, page 
+        if user().has_role? :pageadmin, @page == true
             return render json: {error: "Access Denied."}, status: 401
         end
     end

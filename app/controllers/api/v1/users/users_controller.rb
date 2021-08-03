@@ -2,6 +2,7 @@ class Api::V1::Users::UsersController < ApplicationController
     include Postable
     before_action :authenticate_user
     before_action :set_posts, only: [:posts]
+    before_action :check_user, only: [:updateDetails, :updateOtherInfos, :getDetails, :getOtherInfos, :getOtherInfos]
 
     ## SIGN_IN AS GUEST
     # def blm_guest
@@ -43,63 +44,43 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def updateDetails
-        if user()
-            user().update(updateDetails_params)
-            render json: UserSerializer.new( user() ).attributes
-        else
-            render json: {error: "No current user"}, status: 404
-        end
+        user().update(updateDetails_params)
+        render json: UserSerializer.new( user() ).attributes
     end
 
     def updateOtherInfos
-        if user()
-            user().update(updateOtherInfos_params)
-            render json: UserSerializer.new( user() ).attributes
-        else
-            render json: {error: "No current user"}, status: 404
-        end
+        user().update(updateOtherInfos_params)
+        render json: UserSerializer.new( user() ).attributes
     end
 
     def getDetails
-        if user()
-            render json: {
-                first_name: user().first_name, 
-                last_name: user().last_name,
-                email: user().email,
-                phone_number: user().phone_number,
-                question: user().question
-            }
-        else
-            render json: {error: "No current user"}, status: 404
-        end
+        render json: {
+            first_name: user().first_name, 
+            last_name: user().last_name,
+            email: user().email,
+            phone_number: user().phone_number,
+            question: user().question
+        }
     end
 
     def getOtherInfos
-        if user()
-            render json: {
-                birthdate: user().birthdate, 
-                birthplace: user().birthplace,
-                email: user().email,
-                address: user().address,
-                phone_number: user().phone_number,
-            }
-        else
-            render json: {error: "No current user"}, status: 404
-        end
+        render json: {
+            birthdate: user().birthdate, 
+            birthplace: user().birthplace,
+            email: user().email,
+            address: user().address,
+            phone_number: user().phone_number,
+        }
     end
 
     def otherDetailsStatus
-        if user()
-            render json: {
-                hideBirthdate: user().hideBirthdate,
-                hideBirthplace: user().hideBirthplace,
-                hideEmail: user().hideEmail,
-                hideAddress: user().hideAddress,
-                hidePhonenumber: user().hidePhonenumber,
-            }
-        else
-            render json: {error: "No current user"}, status: 404
-        end
+        render json: {
+            hideBirthdate: user().hideBirthdate,
+            hideBirthplace: user().hideBirthplace,
+            hideEmail: user().hideEmail,
+            hideAddress: user().hideAddress,
+            hidePhonenumber: user().hidePhonenumber,
+        }
     end
 
     def show
@@ -157,6 +138,10 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     private
+
+    def check_user
+        return render json: {error: "No current user"}, status: 404 unless user()
+    end
 
     def sign_up_params
         params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
