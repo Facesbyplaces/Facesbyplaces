@@ -7,13 +7,10 @@ class Api::V1::Pages::BlmController < ApplicationController
     def create
         # create new blm page
         blm = Blm.new(blm_params)
-
-        if valid_params(params[:blm]) == true
-            # save blm
-            save_blm(blm)
-        else
-            render json: {status: "#{valid_params} is empty"}
-        end
+        return render json: {status: "#{valid_params} is empty"} unless valid_params(params[:blm]) == true
+        
+        # save blm
+        save_blm(blm)
     end
 
     def show
@@ -29,17 +26,14 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def updateDetails
-        if valid_params(params) == true
-            # Update blm details
-            @blm.update(blm_details_params)
+        return render json: {error: "#{valid_params} is empty"} unless valid_params(params) == true
+        # Update blm details
+        @blm.update(blm_details_params)
 
-            # Update relationship of the current page admin to the page
-            @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
+        # Update relationship of the current page admin to the page
+        @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
-            return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated details"}
-        else
-            return render json: {error: "#{valid_params} is empty"}
-        end
+        render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated details"}
     end
 
     def editImages
@@ -57,13 +51,12 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def delete
-        @blm.destroy()
-
         adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
-
         adminsRaw.each do |admin_id|
             User.find(admin_id).roles.where(resource_type: 'Blm', resource_id: params[:id]).first.destroy 
         end
+
+        @blm.destroy()
         
         render json: {status: "deleted"}
     end
@@ -75,41 +68,30 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def setRelationship   # for friends and families
-        if @blm.relationships.where(account: user()).first
-            @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
-
-            render json: {status: :success}
-        else
-            render json: {status: "You're not part of the family or friends"}
-        end
+        return render json: {status: "You're not part of the family or friends"} unless @blm.relationships.where(account: user()).first
+        
+        @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
+        render json: {status: :success}
     end
 
     def leaveBLM        # leave blm page for family and friends
-        if @blm.relationships.where(account: user()).first != nil
-            # check if the user is a pageadmin
-            if user().has_role? :pageadmin, @blm
-                if User.with_role(:pageadmin, @blm).count != 1
-                    # remove user from the page
-                    if @blm.relationships.where(account: user()).first.destroy 
-                        # remove role as a page admin
-                        user().remove_role :pageadmin, @blm
-                        render json: {}, status: 200
-                    else
-                        render json: {}, status: 500
-                    end
-                else
-                    render json: {}, status: 406
-                end
+        return render json: {}, status: 404 unless @blm.relationships.where(account: user()).first != nil
+        
+        # check if the user is a pageadmin
+        if user().has_role? :pageadmin, @blm
+            if User.with_role(:pageadmin, @blm).count != 1 && @blm.relationships.where(account: user()).first.destroy 
+                # remove role as a page admin
+                user().remove_role :pageadmin, @blm
             else
-                # remove user from the page
-                if @blm.relationships.where(account: user()).first.destroy 
-                    render json: {}, status: 200
-                else
-                    render json: {}, status: 500
-                end
+                render json: {}, status: 401
             end
         else
-            render json: {}, status: 404
+            # remove user from the page
+            if @blm.relationships.where(account: user()).first.destroy 
+                render json: {}, status: 200
+            else
+                render json: {}, status: 401
+            end
         end
     end
 
@@ -172,15 +154,15 @@ class Api::V1::Pages::BlmController < ApplicationController
     private
 
     def verify_user_account_type
-        if user().account_type == 2
-            render json: {status: "Oops! Looks like your account is not registered as Black Lives Matter account. Register to continue."}
-        end
+        return render json: {status: "Oops! Looks like your account is not registered as Black Lives Matter account. Register to continue."} unless user().account_type == 1
     end
 
     def authorize
-        if user().has_role? :pageadmin, @blm == false
-            return render json: {status: "Access Denied"}
-        end
+        return render json: {status: "Access Denied"} unless user().has_role? :pageadmin, @blm == true
+    end
+
+    def valid_params(params)
+        return params_presence(params)
     end
 
     def set_blm
@@ -197,10 +179,6 @@ class Api::V1::Pages::BlmController < ApplicationController
 
     def blm_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
-    end
-
-    def valid_params(params)
-        return params_presence(params)
     end
 
     def save_blm(blm)
@@ -238,6 +216,7 @@ class Api::V1::Pages::BlmController < ApplicationController
 
     def save_relationship(blm)
         relationship = blm.relationships.new(account: user(), relationship: params[:relationship])
+        
         if relationship.save 
             # set current user as admin
             set_admin(blm)
@@ -277,10 +256,7 @@ class Api::V1::Pages::BlmController < ApplicationController
 
     def add_view_count
         page = Pageowner.where(page_type: 'Blm', page_id: @blm.id).first
-
-        if page == nil
-            return render json: {errors: "Page not found"}, status: 400
-        end
+        return render json: {errors: "Page not found"}, status: 400 unless page != nil
         
         if page.view == nil
             page.update(view: 1)

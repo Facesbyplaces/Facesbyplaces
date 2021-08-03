@@ -1,5 +1,8 @@
 class Api::V1::Posts::CommentsController < ApplicationController
+    include Commentable
     before_action :authenticate_user
+    before_action :set_comments, only: [:commentsIndex]
+    before_action :set_replies, only: [:repliesIndex]
     before_action :set_comment, only: [:editComment, :deleteComment]
     before_action :set_reply, only: [:editReply, :deleteReply]
     # before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
@@ -53,8 +56,6 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
 
     def commentsIndex
-        @comments = comments_index
-
         render json: {  itemsremaining:  itemsRemaining(@comments),
                         comments: ActiveModel::SerializableResource.new(
                                         @comments, 
@@ -64,8 +65,6 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
     
     def repliesIndex
-        @replies = replies_index
-
         render json: {  itemsremaining:  itemsRemaining(@replies),
                         replies: ActiveModel::SerializableResource.new(
                                     @replies, 
@@ -97,12 +96,12 @@ class Api::V1::Posts::CommentsController < ApplicationController
     def likeStatus
         numberOfLikes = Commentslike.where(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).count
         
-        case params[:commentable_type]
-        when 'Comment'
-            comment = Comment.find(params[:commentable_id])
-        when 'Reply'
-            comment = Reply.find(params[:commentable_id])
-        end
+        # case params[:commentable_type]
+        # when 'Comment'
+        #     comment = Comment.find(params[:commentable_id])
+        # when 'Reply'
+        #     comment = Reply.find(params[:commentable_id])
+        # end
         
         if Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first
             render json: {
@@ -138,16 +137,8 @@ class Api::V1::Posts::CommentsController < ApplicationController
         params.permit(:commentable_type, :commentable_id)
     end
 
-    def set_comment
-        @comment = Comment.find(params[:comment_id])
-    end
-
-    def set_reply
-        @reply = Reply.find(params[:reply_id])
-    end
-
     def notif_type
-        return notif_type = "Post"
+        return "Post"
     end
 
     def like
@@ -301,20 +292,6 @@ class Api::V1::Posts::CommentsController < ApplicationController
         device_token = recipient.device_token
         title = "FacesbyPlaces Notification"
         PushNotification(device_token, title, message, recipient, user(), action.post.id, notif_type, action.post.page_type)
-    end
-
-    def comments_index
-        post = Post.find(params[:id])
-        comments = post.comments 
-
-        return comments = comments.page(params[:page]).per(numberOfPage)
-    end
-
-    def replies_index
-        comment = Comment.find(params[:id])
-        replies = comment.replies 
-
-        return replies = replies.page(params[:page]).per(numberOfPage)
     end
 
     def itemsRemaining(data)

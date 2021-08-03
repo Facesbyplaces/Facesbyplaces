@@ -244,11 +244,11 @@ Rails.application.routes.draw do
         # comments
         get 'comments',                             to: 'comments#commentsIndex'
         # edit comment
-        put 'comments/edit/:id',                    to: 'comments#editComment'
+        put 'comments/edit',                        to: 'comments#editComment'
         # add comment
         post 'comments/add',                        to: 'comments#addComment'
         # delete comment
-        delete 'comments/delete/:id',               to: 'comments#deleteComment'
+        delete 'comments/delete',                   to: 'comments#deleteComment'
         # delete comment
         get 'search/comments',                      to: 'comments#searchComment'
 

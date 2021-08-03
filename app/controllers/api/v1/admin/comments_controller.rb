@@ -1,5 +1,7 @@
 class Api::V1::Admin::CommentsController < ApplicationController
+    include Commentable
     before_action :admin_only
+    before_action :set_comments, only: [:commentsIndex]
     before_action :set_comment, only: [:editComment, :deleteComment]
 
     def usersSelection #for create comment users selection
@@ -13,8 +15,6 @@ class Api::V1::Admin::CommentsController < ApplicationController
     end
 
     def commentsIndex
-        @comments = fetched_comments
-
         render json: {  itemsremaining:  itemsRemaining(@comments),
                         comments: ActiveModel::SerializableResource.new(
                             @comments, 
@@ -24,7 +24,6 @@ class Api::V1::Admin::CommentsController < ApplicationController
     end
 
     def searchComment
-        puts comments
         render json: {  #itemsremaining:  itemsRemaining(@comments),
                         comments: ActiveModel::SerializableResource.new(
                             comments, 
@@ -97,10 +96,6 @@ class Api::V1::Admin::CommentsController < ApplicationController
         }
 
         return comments
-    end
-
-    def set_comment
-        @comment = Comment.find(params[:id])
     end
 
     def send_notif(comment, userActor)
@@ -197,13 +192,6 @@ class Api::V1::Admin::CommentsController < ApplicationController
                 end
             end
     end
-    
-    def fetched_comments
-        post = Post.find(params[:id])
-        comments = post.comments 
-
-        return comments = comments.page(params[:page]).per(numberOfPage)
-    end
 
     def itemsRemaining(data)
         if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -213,8 +201,5 @@ class Api::V1::Admin::CommentsController < ApplicationController
         else
             itemsremaining = data.total_count - (params[:page].to_i * numberOfPage)
         end
-    end
-
-    
-    
+    end 
 end

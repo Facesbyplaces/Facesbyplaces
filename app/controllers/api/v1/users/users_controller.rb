@@ -103,8 +103,10 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        if user()
-            render json: UserSerializer.new( user() ).attributes
+        @user = User.find_by(id: params[:user_id].to_i), account_type: params[:account_type].to_i)
+
+        if @user
+            render json: UserSerializer.new( @user ).attributes
         else
             render json: {error: "No current user"}, status: 404
         end

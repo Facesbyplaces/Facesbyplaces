@@ -3,17 +3,14 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
     before_action :set_memorial, except: [:create, :followersIndex, :adminIndex]
     before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
+    
 
     def create
+        return render json: {status: "#{check} is empty"} unless valid_params(params[:memorial]) == true
         # create new memorial page
         memorial = Memorial.new(memorial_params)
-
-        if valid_params(params[:memorial]) == true
-            # save memorial
-            save_memorial(memorial)
-        else
-            render json: {status: "#{check} is empty"}
-        end
+        # save memorial
+        save_memorial(memorial)
     end
 
     def show
@@ -29,17 +26,13 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def updateDetails
-        if valid_params(params) == true
-            # Update memorial details
-            @memorial.update(memorial_details_params)
+        return render json: {error: "#{check} is empty"} unless valid_params(params) == true
+        # Update memorial details
+        @memorial.update(memorial_details_params)
+        # Update relationship of the current page admin to the page
+        @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
-            # Update relationship of the current page admin to the page
-            @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
-
-            return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated details"}
-        else
-            return render json: {error: "#{check} is empty"}
-        end
+        return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated details"}
     end
 
     def editImages
@@ -58,7 +51,6 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def delete
         adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
-        
         adminsRaw.each do |admin_id|
             AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: params[:id]).first.destroy 
         end
@@ -75,36 +67,31 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def setRelationship   # for friends and families
-        if @memorial.relationships.where(account: user()).first
-            @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
-
-            render json: {status: :success}
-        else
-            render json: {status: "You're not part of the family or friends"}
-        end
+        return render json: {status: "You're not part of the family or friends"} unless @memorial.relationships.where(account: user()).first
+        
+        @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
+        render json: {status: :success}
     end
 
-    def leaveMemorial       # leave memorial page for family and friends
-        if @memorial.relationships.where(account: user()).first != nil
-            # check if the user is a pageadmin
-            if user().has_role? :pageadmin, @memorial
-                if AlmUser.with_role(:pageadmin, @memorial).count != 1 && @memorial.relationships.where(account: user()).first.destroy 
-                    # remove role as a page admin
-                    user().remove_role :pageadmin, @memorial
-                    render json: {}, status: 200
-                else
-                    render json: {}, status: 406
-                end
+    def leaveMemorial       # leave memorial page for family and friends-]
+        return render json: {}, status: 404 unless @memorial.relationships.where(account: user()).first != nil
+        
+        # check if the user is a pageadmin
+        if user().has_role? :pageadmin, @memorial
+            if AlmUser.with_role(:pageadmin, @memorial).count != 1 && @memorial.relationships.where(account: user()).first.destroy 
+                # remove role as a page admin
+                user().remove_role :pageadmin, @memorial
+                render json: {}, status: 200
             else
-                # remove user from the page
-                if @memorial.relationships.where(account: user()).first.destroy 
-                    render json: {}, status: 200
-                else
-                    render json: {}, status: 500
-                end
+                render json: {}, status: 401
             end
         else
-            render json: {}, status: 404
+            # remove user from the page
+            if @memorial.relationships.where(account: user()).first.destroy 
+                render json: {}, status: 200
+            else
+                render json: {}, status: 401
+            end
         end
     end
 
@@ -166,17 +153,15 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     private
     def verify_user_account_type
-        if user.account_type == 1
-            render json: {status: "Oops! Looks like your account is not registered as All Lives Matter account. Register to continue."}
-        end
+        return render json: {status: "Oops! Looks like your account is not registered as All Lives Matter account. Register to continue."} unless user.account_type == 2
+    end
+
+    def valid_params(params)
+        return params_presence(params)
     end
 
     def authorize
-        memorial = Memorial.find(params[:id])
-
-        if !user().has_role? :pageadmin, memorial 
-            return render json: {status: "Access Denied"}
-        end
+        return render json: {status: "Access Denied"} unless user().has_role? :pageadmin, @memorial == true
     end
 
     def set_memorial
@@ -193,10 +178,6 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def memorial_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
-    end
-
-    def valid_params(params)
-        return params_presence(params)
     end
 
     def save_memorial(memorial)
@@ -275,10 +256,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def add_view_count
         page = Pageowner.where(page_type: 'Memorial', page_id: @memorial.id).first
-
-        if page == nil
-            return render json: {errors: "Page not found"}, status: 400
-        end
+        return render json: {errors: "Page not found"}, status: 400 unless page != nil
         
         if page.view == nil
             page.update(view: 1)
