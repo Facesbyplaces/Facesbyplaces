@@ -1,4 +1,5 @@
 class Api::V1::Pages::BlmController < ApplicationController
+    include Blmable
     before_action :authenticate_user, except: [:show]
     before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
     before_action :set_blm, except: [:create, :followersIndex, :adminIndex]
@@ -29,7 +30,6 @@ class Api::V1::Pages::BlmController < ApplicationController
         return render json: {error: "#{valid_params} is empty"} unless valid_params(params) == true
         # Update blm details
         @blm.update(blm_details_params)
-
         # Update relationship of the current page admin to the page
         @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
@@ -42,12 +42,8 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def updateImages
-        # check if memorial is updated successfully
-        if @blm.update(blm_images_params)
-            return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"}
-        else
-            return render json: {status: 'Error'}
-        end
+        return render json: {status: 'Error'} unless @blm.update(blm_images_params)
+        render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"}
     end
 
     def delete
@@ -163,10 +159,6 @@ class Api::V1::Pages::BlmController < ApplicationController
 
     def valid_params(params)
         return params_presence(params)
-    end
-
-    def set_blm
-        @blm = Blm.find(params[:id])
     end
 
     def blm_params

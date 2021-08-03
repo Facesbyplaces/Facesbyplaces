@@ -194,6 +194,20 @@ class Api::V1::Posts::PostsController < ApplicationController
                 end
             end
         end
+
+        # For tagged people
+        (post.tagpeople).each do |user|
+            next unless post.page.relationships.find_by(account_id: user.account_id) == nil
+            next unless post.page.followers.find_by(account_id: user.account_id) == nil
+             
+            if user.account_type == "AlmUser" 
+                message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                send_notif(user.account, message, post, notif_type)
+            else
+                message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                send_notif(user.account, message, post, notif_type)
+            end
+        end
     end
 
     def notify_followers_of_a_like
@@ -215,6 +229,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 end
             end
         end
+
         # For alm followers
         (post.page.alm_users.uniq - user_in_page(2)).each do |user|
             # check if the user can get notification from this api
@@ -245,6 +260,22 @@ class Api::V1::Posts::PostsController < ApplicationController
                 end
             end
         end
+
+        # For tagged people
+        (post.tagpeople).each do |user|
+            next unless post.page.relationships.find_by(account_id: user.account_id) == nil
+            next unless post.page.followers.find_by(account_id: user.account_id) == nil
+
+            if user.account_type == "AlmUser" 
+                @u = AlmUser.find(user.account_id)
+                message = "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}"
+                send_notif(@u, message, post, notif_type)
+            else
+                @u = User.find(user.account_id)
+                message = "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}"
+                send_notif(@u, message, post, notif_type)
+            end
+        end
     end
 
     def tag_people(post)
@@ -258,18 +289,14 @@ class Api::V1::Posts::PostsController < ApplicationController
             if account_type == 1
                 user = User.find(user_id)
                 tag = Tagperson.new(post_id: post.id, account: user)
-                if !tag.save
-                    return render json: {errors: tag.errors}, status: 500
-                end
+                return render json: {errors: tag.errors}, status: 500 unless tag.save
             else
                 user = AlmUser.find(user_id)
                 tag = Tagperson.new(post_id: post.id, account: user)
-                if !tag.save
-                    return render json: {errors: tag.errors}, status: 500
-                end
+                return render json: {errors: tag.errors}, status: 500 unless tag.save
             end
 
-            people.push([user_id,account_type])
+            people.push([user_id, account_type])
         end
 
         return people
