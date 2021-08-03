@@ -1,12 +1,12 @@
 class Api::V1::Posts::PostsController < ApplicationController
     include Postable
     before_action :authenticate_user, except: [:index, :show, :pagePosts]
-    before_action :set_up, only: [:create]
-    before_action :set_posts, only: [:pagePosts]
+    before_action :verify_page_admin, only: [:create]
+    before_action :set_posts, only: [:index]
+    before_action :set_page_posts, only: [:pagePosts]
+    before_action :set_post, only: [:show]
 
     def index  
-        @posts = posts_index
-
         render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
                                 @posts, 
@@ -16,23 +16,21 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     def create
-        post = Post.new(post_params)
-        post.account = user()
+        @post = Post.new(post_params)
+        @post.account = user()
 
-        if post.save
+        if @post.save
             # Add to notification
-            notify_followers_of_a_post(post)
+            notify_followers_of_a_post(@post)
 
-            render json: {post: PostSerializer.new( post ).attributes, status: :created}
+            render json: {post: PostSerializer.new( @post ).attributes, status: :created}
         else
-            render json: {errors: post.errors}, status: 500
+            render json: {errors: @post.errors}, status: 500
         end
     end
 
     def show
-        post = Post.find(params[:id])
-
-        render json: {post: PostSerializer.new( post ).attributes}
+        render json: {post: PostSerializer.new( @post ).attributes}
     end
 
     def pagePosts
@@ -92,17 +90,9 @@ class Api::V1::Posts::PostsController < ApplicationController
         params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
     end
 
-    def set_up
-        # find page
-        case params[:post][:page_type]
-        when "Blm"
-            page = Blm.find(params[:post][:page_id])
-        when "Memorial"
-            page = Memorial.find(params[:post][:page_id])
-        end
-
-        if !user().has_role? :pageadmin, page 
-            return render json: {}, status: 401
+    def verify_page_admin
+        if user().has_role? :pageadmin, page 
+            return render json: {error: "Access Denied."}, status: 401
         end
     end
     
@@ -145,16 +135,6 @@ class Api::V1::Posts::PostsController < ApplicationController
         else
             return []
         end
-    end
-
-    def posts_index
-        posts = Post.where(account: user())
-        return posts = posts.page(params[:page]).per(numberOfPage)
-    end
-
-    def page_posts_index
-        posts = Post.where(page_type: params[:page_type], page_id: params[:page_id]).order(created_at: :desc)
-        return posts = posts.page(params[:page]).per(numberOfPage)
     end
 
     def itemsRemaining(data)

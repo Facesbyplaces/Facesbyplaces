@@ -1,9 +1,14 @@
 class Api::V1::Search::SearchController < ApplicationController
     before_action :authenticate_user, only: [:nearby, :suggested, :test]
+    before_action :set_posts, only: [:posts]
+    before_action :set_memorials, only: [:memorials]
+    before_action :set_users, only: [:users]
+    before_action :set_followers, only: [:followers]
+    before_action :set_nearby_alms, only: [:nearby]
+    before_action :set_nearby_blms, only: [:nearby]
+    before_action :set_suggested_pages, only: [:suggested]
 
     def posts
-        @posts = fetched_posts
-
         render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
                             @posts, 
@@ -13,8 +18,6 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def memorials
-        @memorials = fetched_memorials
-
         render json: {  itemsremaining:  itemsRemaining(@memorials),
                         memorials: ActiveModel::SerializableResource.new(
                                     @memorials, 
@@ -24,8 +27,6 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def users
-        @users = fetched_users
-
         render json: {  itemsremaining:  itemsRemaining(@users),
                         users: ActiveModel::SerializableResource.new(
                             @users, 
@@ -35,8 +36,6 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def followers
-        @followers = fetched_followers
-
         render json: {  itemsremaining:  itemsRemaining(@followers),
                         followers: ActiveModel::SerializableResource.new(
                             @followers, 
@@ -46,9 +45,6 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def nearby
-        @blms = fetched_nearby_blms
-        @memorials = fetched_nearby_alms
-
         render json: {
             blmItemsRemaining: itemsRemaining(@blms),
             blm: ActiveModel::SerializableResource.new(
@@ -64,8 +60,6 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def suggested
-        @pages = fetched_suggested_pages
-
         render json: {
             itemsRemaining: itemsRemaining(@pages),
             pages: ActiveModel::SerializableResource.new(
@@ -105,15 +99,15 @@ class Api::V1::Search::SearchController < ApplicationController
         end
     end
 
-    def fetched_posts
+    def set_posts
         postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
 
         posts = Post.where(id: postsId)
         
-        return posts = posts.page(params[:page]).per(numberOfPage)
+        @posts = posts.page(params[:page]).per(numberOfPage)
     end
 
-    def fetched_memorials
+    def set_memorials
         # search only blm memorials as implemented from mockup
         memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Blm')
 
@@ -123,10 +117,10 @@ class Api::V1::Search::SearchController < ApplicationController
         #     memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Memorial')
         # end
         
-        return memorials = memorials.page(params[:page]).per(numberOfPage)
+        @memorials = memorials.page(params[:page]).per(numberOfPage)
     end
 
-    def fetched_users
+    def set_users
         users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
             if searchObject.searchable_type == 'User'
                 User.find(searchObject.searchable_id)
@@ -135,10 +129,10 @@ class Api::V1::Search::SearchController < ApplicationController
             end
         }.flatten.uniq
 
-        return users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
+        @users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
     end
 
-    def fetched_followers 
+    def set_followers 
         # get the followers of the page (users are the followers of the page)
         followers = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
             if searchObject.searchable.followers.where(page: fetched_page).first
@@ -152,24 +146,10 @@ class Api::V1::Search::SearchController < ApplicationController
             end
         }.flatten.uniq
 
-        return followers = Kaminari.paginate_array(followers).page(params[:page]).per(numberOfPage)
+        @followers = Kaminari.paginate_array(followers).page(params[:page]).per(numberOfPage)
     end
 
-    def fetched_nearby_blms
-        lon = params[:longitude].to_f
-        lat = params[:latitude].to_f
-
-        user_location = Geocoder.search([lat,lon])
-        # get account type
-        account
-
-        blm_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Blm').pluck('page_id') : []
-        blm = Blm.where.not(id: blm_pages_owned).near([lat,lon], 50)
-        
-        return blm = blm.page(params[:page]).per(numberOfPage)
-    end
-
-    def fetched_nearby_alms
+    def set_nearby_alms
         lon = params[:longitude].to_f
         lat = params[:latitude].to_f
 
@@ -180,10 +160,24 @@ class Api::V1::Search::SearchController < ApplicationController
         memorial_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Memorial').pluck('page_id') : []
         memorial = Memorial.where.not(id: memorial_pages_owned).near([lat,lon], 50)
         
-        return memorial = memorial.page(params[:page]).per(numberOfPage)
+        @memorials = memorial.page(params[:page]).per(numberOfPage)
+    end
+    
+    def set_nearby_blms
+        lon = params[:longitude].to_f
+        lat = params[:latitude].to_f
+
+        user_location = Geocoder.search([lat,lon])
+        # get account type
+        account
+
+        blm_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Blm').pluck('page_id') : []
+        blm = Blm.where.not(id: blm_pages_owned).near([lat,lon], 50)
+        
+        @blms = blm.page(params[:page]).per(numberOfPage)
     end
 
-    def fetched_suggested_pages
+    def set_suggested_pages
         # get all the pages in descending order based on their view count
         if user().guest == false
             followers_page_type = user().followers.pluck("page_type")
@@ -214,7 +208,7 @@ class Api::V1::Search::SearchController < ApplicationController
             pages = Pageowner.all 
         end
 
-        return pages = pages.page(params[:page]).per(numberOfPage)
+        @pages = pages.page(params[:page]).per(numberOfPage)
     end
 
     def itemsRemaining(data)
