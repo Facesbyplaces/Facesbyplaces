@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class HomeRegularMaps extends StatefulWidget{
   final double latitude;
   final double longitude;
-  const HomeRegularMaps({required this.latitude, required this.longitude});
+  final bool isMemorial;
+  const HomeRegularMaps({required this.latitude, required this.longitude, required this.isMemorial});
 
   HomeRegularMapsState createState() => HomeRegularMapsState();
 }
@@ -18,7 +19,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
   void initState(){
     super.initState();
     controller = MapController(initMapWithUserPosition: false, initPosition: GeoPoint(latitude: widget.latitude, longitude: widget.longitude),);
-    staticPoints.add(StaticPositionGeoPoint('Marker', MarkerIcon(icon: Icon(MdiIcons.graveStone, color: Colors.blue,)), [GeoPoint(latitude: widget.latitude, longitude: widget.longitude)],),);
+    staticPoints.add(StaticPositionGeoPoint('Marker', MarkerIcon(icon: widget.isMemorial == true ? Icon(MdiIcons.graveStone, color: Colors.blue,) : Icon(MdiIcons.human, color: Colors.blue,)), [GeoPoint(latitude: widget.latitude, longitude: widget.longitude)],),);
     Future.delayed(Duration(seconds: 5), () async {
       await controller.zoom(5);
     });
@@ -34,46 +35,6 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
         actions: [
           IconButton(
             onPressed: () async{
-              // controller.selectPosition(icon: MarkerIcon(icon: Icon(Icons.person_pin_circle, color: Colors.blue, size: 56,)));
-
-              // try {
-              //   await controller.removeLastRoad();
-
-              //   ///selection geoPoint
-              //   GeoPoint point = await controller.selectPosition(
-              //       icon: MarkerIcon(
-              //     icon: Icon(
-              //       Icons.location_history,
-              //       color: Colors.amber,
-              //       size: 48,
-              //     ),
-              //   ));
-
-              //   // GeoPoint pointM1 = await controller.selectPosition();
-              //   // GeoPoint pointM2 = await controller.selectPosition(
-              //   //     imageURL:
-              //   //         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png");
-              //   //
-              //   GeoPoint point2 = await controller.selectPosition();
-              //   RoadInfo roadInformation = await controller.drawRoad(
-              //       point, point2,
-              //       //interestPoints: [pointM1, pointM2],
-              //       roadOption: RoadOption(
-              //           roadWidth: 10,
-              //           roadColor: Colors.blue,
-              //           showMarkerOfPOI: false));
-              //   print(
-              //       "duration:${Duration(seconds: roadInformation.duration!.toInt()).inMinutes}");
-              //   print("distance:${roadInformation.distance}Km");
-              // } on RoadException catch (e) {
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //     SnackBar(
-              //       content: Text(
-              //         "${e.errorMessage()}",
-              //       ),
-              //     ),
-              //   );
-              // }
             },
             icon: Icon(Icons.add),
           ),

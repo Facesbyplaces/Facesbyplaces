@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMModifyFollowPage({required String pageType, required int pageId, required bool follow}) async{
+Future<bool> apiBLMModifyFollowPage({required String pageType, required int pageId}) async{
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -21,7 +21,7 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers',
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers/follow',
     options: Options(
       followRedirects: false,
       validateStatus: (status){
@@ -37,7 +37,7 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
     queryParameters: <String, dynamic>{
       'page_type': '$pageType',
       'page_id': '$pageId',
-      'follow': '$follow',
+      'follow': true,
     }
   );
 

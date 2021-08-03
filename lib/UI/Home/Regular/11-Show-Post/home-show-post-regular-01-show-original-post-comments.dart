@@ -14,6 +14,7 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-bl
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-04-maps.dart';
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
@@ -838,6 +839,30 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                         ),
                                                       ],
                                                     ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                            : Container(height: 0,),
+
+                                            originalPost.data!.almPost.showOriginalPostLocation != ''
+                                            ? Column(
+                                              children: [
+                                                SizedBox(height: 10,),
+
+                                                Padding(
+                                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.place, color: Color(0xff888888)),
+
+                                                      GestureDetector(
+                                                        child: Text('${originalPost.data!.almPost.showOriginalPostLocation}', style: TextStyle(fontWeight: FontWeight.bold),),
+                                                        onTap: (){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: originalPost.data!.almPost.showOriginalPostLatitude, longitude: originalPost.data!.almPost.showOriginalPostLongitude, isMemorial: false)));
+                                                        },
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],

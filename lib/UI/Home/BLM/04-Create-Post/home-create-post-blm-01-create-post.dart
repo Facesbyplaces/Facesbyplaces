@@ -45,6 +45,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   TextEditingController controller = TextEditingController();
   ValueNotifier<int> slideCount = ValueNotifier<int>(0);
   ValueNotifier<int> userCount = ValueNotifier<int>(0);
+  double latitude = 0.0;
+  double longitude = 0.0;
   List<BLMManagedPages> managedPages = [];
   List<BLMTaggedUsers> users = [];
   final picker = ImagePicker();
@@ -131,6 +133,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   valueListenable: newLocation,
                   builder: (_, String newLocationListener, __) => Scaffold(
                     appBar: AppBar(
+                      backgroundColor: const Color(0xff04ECFF),
+                      centerTitle: true,
                       title: Row(
                         children: [
                           Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
@@ -138,8 +142,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                           const Spacer(),
                         ],
                       ),
-                      centerTitle: true,
-                      backgroundColor: const Color(0xff04ECFF),
                       leading: IconButton(
                         icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
                         onPressed: (){
@@ -148,29 +150,14 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                       ),
                       actions: [
                         GestureDetector(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: Center(child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+                          ),
                           onTap: () async{
-                            Location.Location location = new Location.Location();
-
-                            bool serviceEnabled = await location.serviceEnabled();
-                            if(!serviceEnabled){
-                              serviceEnabled = await location.requestService();
-                              if(!serviceEnabled){
-                                return;
-                              }
-                            }
-
-                            Location.PermissionStatus permissionGranted = await location.hasPermission();
-                            if(permissionGranted == Location.PermissionStatus.denied){
-                              permissionGranted = await location.requestPermission();
-                              if(permissionGranted != Location.PermissionStatus.granted){
-                                return;
-                              }
-                            }
-
-                            context.loaderOverlay.show();
-
-                            Location.LocationData locationData = await location.getLocation();
                             List<BLMTaggedPeople> userIds = [];
+                            List<File> newFiles = [];
+                            APIBLMCreatePost? post;
 
                             if(userCount.value != 0){
                               for(int i = 0; i < userCount.value; i++){
@@ -178,20 +165,53 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               }
                             }
 
-                            List<File> newFiles = [];
                             newFiles.addAll(slideImages.value);
 
-                            APIBLMCreatePost post = APIBLMCreatePost(
-                              blmPostPageType: 'Blm',
-                              blmPostPostBody: controller.text,
-                              blmPostPageId: currentIdSelected,
-                              blmPostLocation: newLocation.value,
-                              blmPostImagesOrVideos: newFiles,
-                              blmPostLatitude: locationData.latitude!,
-                              blmPostLongitude: locationData.longitude!,
-                              blmPostTagPeople: userIds,
-                            );
+                            if(newLocation.value == ''){
+                              Location.Location location = new Location.Location();
 
+                              bool serviceEnabled = await location.serviceEnabled();
+                              if(!serviceEnabled){
+                                serviceEnabled = await location.requestService();
+                                if(!serviceEnabled){
+                                  return;
+                                }
+                              }
+
+                              Location.PermissionStatus permissionGranted = await location.hasPermission();
+                              if(permissionGranted == Location.PermissionStatus.denied){
+                                permissionGranted = await location.requestPermission();
+                                if(permissionGranted != Location.PermissionStatus.granted){
+                                  return;
+                                }
+                              }
+
+                              Location.LocationData locationData = await location.getLocation();
+
+                              post = APIBLMCreatePost(
+                                blmPostPageType: 'Blm',
+                                blmPostPostBody: controller.text,
+                                blmPostPageId: currentIdSelected,
+                                blmPostLocation: '',
+                                blmPostImagesOrVideos: newFiles,
+                                blmPostLatitude: locationData.latitude!,
+                                blmPostLongitude: locationData.longitude!,
+                                blmPostTagPeople: userIds,
+                              );
+                            }else{
+                              post = APIBLMCreatePost(
+                                blmPostPageType: 'Blm',
+                                blmPostPostBody: controller.text,
+                                blmPostPageId: currentIdSelected,
+                                blmPostLocation: newLocation.value,
+                                blmPostImagesOrVideos: newFiles,
+                                blmPostLatitude: latitude,
+                                blmPostLongitude: longitude,
+                                blmPostTagPeople: userIds,
+                              );
+                            }
+
+                            context.loaderOverlay.show();
                             bool result = await apiBLMHomeCreatePost(post: post);
                             context.loaderOverlay.hide();
 
@@ -214,18 +234,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               );
                             }
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 20.0),
-                            child: Center(
-                              child: Text('Post',
-                                style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 2.64,
-                                  fontFamily: 'NexaRegular',
-                                  color: const Color(0xffffffff),
-                                ),
-                              ),
-                            ),
-                          ),
                         ),
                       ],
                     ),
@@ -527,10 +535,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         ),
                                       ),
                                       onTap: () async{
-                                        String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
-                                        
-                                        if(result != ''){
-                                          newLocation.value = result;
+                                        List<dynamic> result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchLocation()));
+
+                                        if(result[0] != ''){
+                                          newLocation.value = result[0];
+                                          latitude = result[1];
+                                          longitude = result[2];
                                         }
                                       },
                                     ),

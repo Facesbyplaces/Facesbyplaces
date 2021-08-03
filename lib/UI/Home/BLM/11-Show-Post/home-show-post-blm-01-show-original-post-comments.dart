@@ -10,6 +10,7 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-09-delete-c
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-10-edit-comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-11-delete-reply.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-12-edit-reply.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-04-maps.dart';
 import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
@@ -843,6 +844,30 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                         ),
                                                       ],
                                                     ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                            : Container(height: 0,),
+
+                                            originalPost.data!.blmPost.showOriginalPostLocation != ''
+                                            ? Column(
+                                              children: [
+                                                SizedBox(height: 10,),
+
+                                                Padding(
+                                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.place, color: Color(0xff888888)),
+
+                                                      GestureDetector(
+                                                        child: Text('${originalPost.data!.blmPost.showOriginalPostLocation}', style: TextStyle(fontWeight: FontWeight.bold),),
+                                                        onTap: (){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: originalPost.data!.blmPost.showOriginalPostLatitude, longitude: originalPost.data!.blmPost.showOriginalPostLongitude, isMemorial: false)));
+                                                        },
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],

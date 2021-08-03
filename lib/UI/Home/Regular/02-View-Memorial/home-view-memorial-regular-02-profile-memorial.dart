@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-03-unfollow-page.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-memorial-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
@@ -445,15 +446,21 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                                                   print('The value of join is $join');
 
+                                                                  bool result = false;
+
                                                                   if(join.value == true){
                                                                     profile.data!.almMemorial.showMemorialFollowersCount++;
-                                                                  }else{
-                                                                    profile.data!.almMemorial.showMemorialFollowersCount--;
-                                                                  }
 
                                                                   context.loaderOverlay.show();
-                                                                  bool result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: join.value);
+                                                                  result = await apiRegularModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
                                                                   context.loaderOverlay.hide();
+                                                                  }else{
+                                                                    profile.data!.almMemorial.showMemorialFollowersCount--;
+
+                                                                    context.loaderOverlay.show();
+                                                                    result = await apiRegularModifyUnfollowPage(pageType: widget.pageType, pageId: widget.memorialId);
+                                                                    context.loaderOverlay.hide();
+                                                                  }
 
                                                                   if(result){
                                                                     await showDialog(
@@ -581,9 +588,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               GestureDetector(
                                                                 child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 14, color: const Color(0xff3498DB),),),
                                                                 onTap: () async{
-                                                                  print('The latitude is ${profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude}');
-                                                                  print('The longitude is ${profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude}');
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude,)));
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude, isMemorial: true)));
                                                                 },
                                                               ),
                                                             ],

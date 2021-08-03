@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-03-unfollow-page.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
@@ -185,7 +186,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
 
                     if(confirmResult == true){
                       context.loaderOverlay.show();
-                      bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: false);
+                      bool result = await apiBLMModifyUnfollowPage(pageType: widget.pageType, pageId: widget.memorialId);
                       context.loaderOverlay.hide();
 
                       if(result){
@@ -235,7 +236,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   height: 35,
                   onPressed: () async{
                     context.loaderOverlay.show();
-                    bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: true);
+                    bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
                     context.loaderOverlay.hide();
 
                     if(result){

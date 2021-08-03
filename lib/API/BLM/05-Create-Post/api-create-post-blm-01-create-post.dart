@@ -9,7 +9,7 @@ Future<bool> apiBLMHomeCreatePost({required APIBLMCreatePost post}) async{
 
   Dio dioRequest = Dio();
   FormData formData = FormData();
-  List<Map<String, dynamic>> tagPeopleValue = [];
+  List<Map<String, dynamic>> tagPeopleValue = [];  
 
   for(int i = 0; i < post.blmPostTagPeople.length; i++){
     tagPeopleValue.add({'user_id': post.blmPostTagPeople[i].userId, 'account_type': post.blmPostTagPeople[i].accountType});

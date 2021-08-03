@@ -89,14 +89,6 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                             places.value.add(searchResult[i].nameDetails!['name'] ?? '');
                             descriptionPlaces.value.add(searchResult[i].displayName);
                             locationPlaces.value.add([searchResult[i].lat, searchResult[i].lon]);
-                            print('The searchResult is ${searchResult[i].displayName}');
-                            print('The searchResult details is ${searchResult[i].nameDetails!['name'] ?? ''}');
-                            print('The searchResult details is ${searchResult[i].lat}');
-                            print('The searchResult details is ${searchResult[i].lon}');
-
-
-                            // json.encode(searchResult[i].nameDetails);
-                            // String nameDetails = searchResult[i].nameDetails![''];
                           }
                         }
                       },
@@ -138,8 +130,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
 
                               SizedBox(height: 5,),
 
-                              // Text('Click to add on your post', style: TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
-                              Text('Latitude: ${locationPlacesListener[index][0]} || Longitude: ${locationPlacesListener[index][1]}', style: TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
+                              Text('Click to add on your post', style: TextStyle(fontSize: 12, fontFamily: 'NexaRegular', color: const Color(0xff888888),),),
                             ],
                           ),
                           onTap: (){

@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-03-unfollow-page.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
@@ -434,15 +435,19 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                                     print('The value of join is ${join.value}');
 
+                                                                    bool result = false;
+
                                                                     if(join.value == true){
                                                                       profile.data!.blmMemorial.memorialFollowersCount++;
+                                                                      context.loaderOverlay.show();
+                                                                      result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId);
+                                                                      context.loaderOverlay.hide();
                                                                     }else{
                                                                       profile.data!.blmMemorial.memorialFollowersCount--;
+                                                                      context.loaderOverlay.show();
+                                                                      result = await apiBLMModifyUnfollowPage(pageType: widget.pageType, pageId: widget.memorialId);
+                                                                      context.loaderOverlay.hide();
                                                                     }
-
-                                                                    context.loaderOverlay.show();
-                                                                    bool result = await apiBLMModifyFollowPage(pageType: widget.pageType, pageId: widget.memorialId, follow: join.value);
-                                                                    context.loaderOverlay.hide();
 
                                                                     if(result){
                                                                       await showDialog(
@@ -570,9 +575,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                   child: GestureDetector(
                                                                     child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff3498DB)),),
                                                                     onTap: () async{
-                                                                      print('The latitude is ${profile.data!.blmMemorial.memorialDetails.memorialLatitude}');
-                                                                      print('The longitude is ${profile.data!.blmMemorial.memorialDetails.memorialLongitude}');
-                                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude,)));
+                                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true,)));
                                                                     },
                                                                   ),
                                                                 ),

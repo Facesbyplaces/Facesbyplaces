@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularModifyFollowPage({required String pageType, required int pageId}) async{
+Future<bool> apiBLMModifyUnfollowPage({required String pageType, required int pageId}) async{
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -21,13 +21,14 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers/follow',
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers/unfollow',
     options: Options(
       followRedirects: false,
       validateStatus: (status){
         return status! < 600;
       },
       headers: <String, dynamic>{
+        'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
@@ -36,11 +37,11 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
     queryParameters: <String, dynamic>{
       'page_type': '$pageType',
       'page_id': '$pageId',
-      'follow': true,
+      'follow': false,
     }
   );
 
-  print('The status code of regular follow page is ${response.statusCode}');
+  print('The status code of blm follow page is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

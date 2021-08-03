@@ -158,6 +158,22 @@ class MiscBLMPostState extends State<MiscBLMPost>{
             )
             : Container(height: 0,),
 
+            widget.location != ''
+            ? Column(
+              children: [
+                SizedBox(height: 10,),
+
+                Row(
+                  children: [
+                    Icon(Icons.place, color: Color(0xff888888)),
+
+                    Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),
+                  ],
+                ),
+              ],
+            )
+            : Container(height: 0,),
+
             Row(
               children: [
                 TextButton.icon(
