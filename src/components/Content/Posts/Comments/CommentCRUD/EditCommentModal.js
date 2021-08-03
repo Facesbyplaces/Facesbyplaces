@@ -25,7 +25,8 @@ export const EditCommentModal = ({
     setLoader(true);
     const finalComment = editComment ? editComment : comment.body;
     axios
-      .put(`/api/v1/admin/comments/edit/${id}`, {
+      .put(`/api/v1/admin/comments/edit`, {
+        comment_id: id,
         comment: {
           body: finalComment,
         },

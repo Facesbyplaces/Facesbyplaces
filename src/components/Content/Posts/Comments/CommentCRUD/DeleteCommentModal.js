@@ -17,9 +17,7 @@ export const DeleteCommentModal = ({
   const handleDeleteClicked = (id) => {
     setLoader(true);
     axios
-      .delete(`/api/v1/admin/comments/delete/${id}`, {
-        id: id,
-      })
+      .delete(`/api/v1/admin/comments/delete?comment_id=${id}`)
       .then((response) => {
         setLoader(false);
         setShowModal((prev) => !prev);
