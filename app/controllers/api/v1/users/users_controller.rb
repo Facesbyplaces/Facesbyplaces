@@ -103,7 +103,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        @user = User.find_by(id: params[:user_id]), account_type: params[:account_type])
+        @user = User.find_by(id: params[:user_id], account_type: params[:account_type])
 
         if @user
             render json: UserSerializer.new( @user ).attributes
