@@ -1,60 +1,54 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
+    include Memorialable
     before_action :authenticate_user, except: [:show]
-    before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
     before_action :set_memorial, except: [:create, :followersIndex, :adminIndex]
-    before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
+    before_action :verify_update_images_params, only: [:updateImages]
+    before_action :verify_relationship, only: [:setRelationship]
+    before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
+    before_action :verify_create_params, only: [:create]
+    before_action :verify_update_params, only: [:updateDetails]
+    before_action :verify_page_admin, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
+    before_action :set_adminsRaw, only: [:adminIndex, :delete]
+    before_action :set_families, only: [:familyIndex]
+    before_action :set_friends, only: [:friendIndex]
+    before_action :set_followers, only: [:followersIndex]
+    before_action :set_adminsRaw, only: [:adminIndex, :delete]
+    before_action :set_admins, only: [:adminIndex]
+    before_action :set_family_admins, only: [:adminIndex]
     
-
     def create
-        return render json: {status: "#{check} is empty"} unless valid_params(params[:memorial]) == true
-        # create new memorial page
         memorial = Memorial.new(memorial_params)
-        # save memorial
         save_memorial(memorial)
     end
 
     def show
-        # add count to view of page
         add_view_count
-        
         render json: {memorial: MemorialSerializer.new( @memorial ).attributes}
     end
 
     def editDetails
-        # render memorial details that can be edited
         render json: {memorial: MemorialSerializer.new( @memorial ).attributes}
     end
 
     def updateDetails
-        return render json: {error: "#{check} is empty"} unless valid_params(params) == true
-        # Update memorial details
         @memorial.update(memorial_details_params)
-        # Update relationship of the current page admin to the page
         @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
         return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated details"}
     end
 
     def editImages
-        # render memorial images that be editted
         render json: {memorial: MemorialSerializer.new( @memorial ).attributes}
     end
 
     def updateImages
-        # check if memorial is updated successfully
-        if @memorial.update(memorial_images_params)
-            return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated images"}
-        else
-            return render json: {status: 'Error'}
-        end
+        render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated images"}
     end
 
     def delete
-        adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
-        adminsRaw.each do |admin_id|
+        @adminsRaw.each do |admin_id|
             AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: params[:id]).first.destroy 
         end
-
         @memorial.destroy()
         
         render json: {status: "deleted"}
@@ -67,8 +61,6 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def setRelationship   # for friends and families
-        return render json: {status: "You're not part of the family or friends"} unless @memorial.relationships.where(account: user()).first
-        
         @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
         render json: {status: :success}
     end
@@ -76,76 +68,56 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def leaveMemorial       # leave memorial page for family and friends-]
         return render json: {}, status: 404 unless @memorial.relationships.where(account: user()).first != nil
         
-        # check if the user is a pageadmin
-        if user().has_role? :pageadmin, @memorial
-            if AlmUser.with_role(:pageadmin, @memorial).count != 1 && @memorial.relationships.where(account: user()).first.destroy 
-                # remove role as a page admin
-                user().remove_role :pageadmin, @memorial
-                render json: {}, status: 200
-            else
-                render json: {}, status: 401
-            end
+        if user().has_role? :pageadmin, @memorial && AlmUser.with_role(:pageadmin, @memorial).count != 1 && @memorial.relationships.where(account: user()).first.destroy 
+            user().remove_role :pageadmin, @memorial
+            render json: {}, status: 200
+        elsif @memorial.relationships.where(account: user()).first.destroy 
+            render json: {}, status: 200
         else
-            # remove user from the page
-            if @memorial.relationships.where(account: user()).first.destroy 
-                render json: {}, status: 200
-            else
-                render json: {}, status: 401
-            end
+            render json: {}, status: 401
         end
     end
 
     def familyIndex
-        family = @memorial.relationships.where("relationship != 'Friend'").page(params[:page]).per(numberOfPage)
-
         render json: {
-            itemsremaining: itemsRemaining(family),
+            itemsremaining: itemsRemaining(@families),
             family: ActiveModel::SerializableResource.new(
-                        family, 
+                        @families, 
                         each_serializer: RelationshipSerializer
                     )
         }
     end
 
     def friendsIndex
-        friends = @memorial.relationships.where(relationship: 'Friend').page(params[:page]).per(numberOfPage)
-        
         render json: {
-            itemsremaining: itemsRemaining(friends),
+            itemsremaining: itemsRemaining(@friends),
             friends: ActiveModel::SerializableResource.new(
-                        friends, 
+                        @friends, 
                         each_serializer: RelationshipSerializer
                     )
         }
     end
 
     def followersIndex
-        memorialFollowers = Follower.where(page_type: 'Memorial', page_id: params[:id]).map{|follower| follower.account}
-        memorialFollowers = Kaminari.paginate_array(memorialFollowers).page(params[:page]).per(numberOfPage)
-
         render json: {
-            itemsremaining: itemsRemaining(memorialFollowers),
+            itemsremaining: itemsRemaining(@followers),
             followers: ActiveModel::SerializableResource.new(
-                            memorialFollowers, 
+                            @followers, 
                             each_serializer: UserSerializer
                         )
         }
     end
 
     def adminIndex
-        adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:page_id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
-        @admins = admins_index(adminsRaw)
-        @family = family_index(adminsRaw)
-
         render json: {
             adminsitemsremaining: itemsRemaining(@admins),
             admins: ActiveModel::SerializableResource.new(
                         @admins, 
                         each_serializer: RelationshipSerializer
                     ),
-            familyitemsremaining: itemsRemaining(@family),
+            familyitemsremaining: itemsRemaining(@family_admins),
             family: ActiveModel::SerializableResource.new(
-                        @family, 
+                        @family_admins, 
                         each_serializer: RelationshipSerializer
                     )
         }
@@ -156,16 +128,20 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         return render json: {status: "Oops! Looks like your account is not registered as All Lives Matter account. Register to continue."} unless user.account_type == 2
     end
 
-    def valid_params(params)
-        return params_presence(params)
+    def verify_create_params
+        return render json: {error: "#{check} is empty"} unless params_presence(memorial_params) == true
     end
 
-    def authorize
-        return render json: {status: "Access Denied"} unless user().has_role? :pageadmin, @memorial == true
+    def verify_update_params
+        return render json: {error: "#{check} is empty"} unless params_presence(memorial_details_params) == true
     end
 
-    def set_memorial
-        @memorial = Memorial.find(params[:id])
+    def verify_update_images_params
+        return render json: {error: "#{check} is empty"} unless params_presence(memorial_images_params) == true
+    end
+
+    def verify_relationship
+        return render json: {status: "You're not part of the family or friends"} unless @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship]) == true
     end
 
     def memorial_params
@@ -178,6 +154,10 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def memorial_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
+    end
+
+    def verify_page_admin
+        return render json: {status: "Access Denied"} if user().has_role? :pageadmin, @memorial == false
     end
 
     def save_memorial(memorial)
@@ -275,14 +255,4 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         end
     end
 
-    def admins_index(adminsRaw)
-        admins = Relationship.where(page_type: 'Memorial', page_id: params[:page_id], account_type: 'AlmUser', account_id: adminsRaw)
-        return admins = admins.page(params[:page]).per(numberOfPage)
-    end
-
-    def family_index(adminsRaw)
-        familyRaw = Memorial.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'AlmUser' AND account_id NOT IN (?)", adminsRaw)
-        return family = familyRaw.page(params[:page]).per(numberOfPage)
-    end
-    
 end
