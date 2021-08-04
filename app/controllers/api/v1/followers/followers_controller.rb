@@ -1,4 +1,5 @@
 class Api::V1::Followers::FollowersController < ApplicationController
+    include Followerable
     before_action :authenticate_user
     before_action :no_guest_users
     before_action :set_follower, except: [:followStatus]
@@ -13,43 +14,27 @@ class Api::V1::Followers::FollowersController < ApplicationController
     end
 
     def follow
-        if @follower.save 
-            message = "#{user().first_name} followed your memorial."
-            send_notif(@page.pageowner.account, message, @page.page_name.capitalize)
-
-            render json: {status: "Success", follower: @follower, user: user}
-        else
-            render json: {success: false, errors: @follower }, status: 500
-        end
+        return render json: {success: false, errors: @follower }, status: 500 unless @follower.save 
+        message = "#{user().first_name} followed your memorial."
+        send_notif(@page.pageowner.account, message, @page.page_name.capitalize)
+        
+        render json: {status: "Success", follower: @follower, user: user}
     end
 
     def unfollow
-        if @follower
-            if @follower.destroy 
-                render json: {status: "Unfollowed"}
-            else
-                render json: {success: false, errors: @follower }, status: 500
-            end
+        return render json: {success: false, errors: "You are not a follower of this page." }, status: 409 unless @follower
+        
+        if @follower.destroy 
+            render json: {status: "Unfollowed"}
         else
-            render json: {success: false, errors: "You are not a follower of this page." }, status: 409
-        end
+            render json: {success: false, errors: @follower }, status: 500
+        end        
     end
 
     private
 
     def follower_params
         params.permit(:page_type, :page_id)
-    end
-
-    def set_follower
-        if Follower.where(account: user(), page_type: params[:page_type], page_id: params[:page_id]).first == nil && Relationship.where(page_type: params[:page_type], page_id: params[:page_id], account: user()).first == nil
-            @follower = Follower.new(follower_params)
-            @follower.account = user()
-        elsif Follower.where(page_type: params[:page_type], page_id: params[:page_id], account: user()).first
-            @follower = Follower.where(page_type: params[:page_type], page_id: params[:page_id], account: user()).first
-        else
-            render json: {success: false, errors: "You either followed this page already or you are part of the family or a friend." }, status: 409
-        end
     end
     
     def set_page

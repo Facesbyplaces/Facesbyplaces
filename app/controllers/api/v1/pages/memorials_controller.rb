@@ -56,7 +56,6 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def setPrivacy
         @memorial.update(privacy: params[:privacy])
-
         render json: {status: :success}
     end
 
@@ -144,6 +143,10 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         return render json: {status: "You're not part of the family or friends"} unless @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship]) == true
     end
 
+    def verify_page_admin
+        return render json: {status: "Access Denied"} if user().has_role? :pageadmin, @memorial == false
+    end
+
     def memorial_params
         params.require(:memorial).permit(:name, :description, :birthplace, :dob, :rip, :cemetery, :country, :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
     end
@@ -154,10 +157,6 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def memorial_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
-    end
-
-    def verify_page_admin
-        return render json: {status: "Access Denied"} if user().has_role? :pageadmin, @memorial == false
     end
 
     def save_memorial(memorial)
