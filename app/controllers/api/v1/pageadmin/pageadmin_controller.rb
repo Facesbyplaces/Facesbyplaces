@@ -135,7 +135,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         if @page.relationships.where(account: @user).first == nil && Follower.where(account: @user, page_type: params[:page_type], page_id: params[:page_id]).first == nil
             return false
         else
-            return render json: {}, status: 409
+            return render json: {error: "User is already part of the Family or a Friend."}, status: 409
         end
     end
 
@@ -170,6 +170,9 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                 if @user.notifsetting.addFamily == true
                     # add new relationship to the page
                     family = @page.relationships.new(relationship: params[:relationship], account: @user)
+
+                    message = "#{user().first_name} added you as family on #{@page.name}."
+                    notify_user(message)
                     # save relationship
                     if family.save 
                         render json: {status: "Added Successfuly", relationship_id: family.id}
@@ -183,6 +186,9 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                 if @user.notifsetting.addFriends == true
                     # add new relationship to the page
                     friend = @page.relationships.new(relationship: params[:relationship], account: @user)
+
+                    message = "#{user().first_name} added you as friend on #{@page.name}."
+                    notify_user(message)
                     # save relationship
                     if friend.save 
                         render json: {status: "Added Successfuly", relationship_id: friend.id}
@@ -194,6 +200,14 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                 end
             end
         end
+    end
+
+    def notify_user(message)
+        Notification.create(recipient: @user, actor: user(), read: false, action: message, postId: @page.id, notif_type: params[:page_type])
+
+        device_tokens = user.device_token
+        title = "Faces By Places"
+        PushNotification(device_tokens, title, message, @user, user(), @page.id, params[:page_type], " ")
     end
 
     def hideOrUnhide(detail)

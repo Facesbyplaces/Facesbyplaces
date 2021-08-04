@@ -19,12 +19,12 @@ module Memorialable
     end
 
     def set_admins
-        admins = Relationship.where(page_type: 'Memorial', page_id: params[:page_id], account_type: 'AlmUser', account_id: adminsRaw)
+        admins = Relationship.where(page_type: 'Memorial', page_id: params[:page_id], account_type: 'AlmUser', account_id: @adminsRaw)
         @admins = admins.page(params[:page]).per(numberOfPage)
     end
 
     def set_family_admins
-        familyRaw = Memorial.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'AlmUser' AND account_id NOT IN (?)", adminsRaw)
+        familyRaw = Memorial.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'AlmUser' AND account_id NOT IN (?)", @adminsRaw)
         @family_admins = familyRaw.page(params[:page]).per(numberOfPage)
     end
 
