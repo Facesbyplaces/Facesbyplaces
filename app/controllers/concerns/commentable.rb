@@ -7,6 +7,20 @@ module Commentable
         @comments = comments.page(params[:page]).per(numberOfPage)
     end
 
+    def set_search_comments
+        commentsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Comment').pluck('searchable_id')
+        c = Comment.where(id: commentsId)
+        @search_comments = []
+
+        c.map{ |comment| 
+            if comment.post.id == params[:page_id].to_i
+                @search_comments.push(comment)
+            end
+        }
+
+        @search_comments
+    end
+
     def set_replies
         comment = Comment.find(params[:id])
         replies = comment.replies

@@ -13,18 +13,13 @@ class Api::V1::Followers::FollowersController < ApplicationController
         return render json: {success: false, errors: @follower }, status: 500 unless @follower.save 
         message = "#{user().first_name} followed your memorial."
         send_notif(@page.pageowner.account, message, @page.page_name.capitalize)
-        
         render json: {status: "Success", follower: @follower, user: user}
     end
 
     def unfollow
         return render json: {success: false, errors: "You are not a follower of this page." }, status: 409 unless @follower
-        
-        if @follower.destroy 
-            render json: {status: "Unfollowed"}
-        else
-            render json: {success: false, errors: @follower }, status: 500
-        end        
+        return render json: {success: false, errors: @follower }, status: 500 unless @follower.destroy
+        render json: {status: "Unfollowed"}
     end
 
     private

@@ -31,7 +31,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     def removeAdmin
         is_page_owner
         return render json: {error: "User is not part of the admin"}, status: 422 unless is_page_admin == true
-        # Remove page admin rights to the user
+        
         @user.remove_role "pageadmin", @page
         render json: {status: "Removed Admin"}
     end

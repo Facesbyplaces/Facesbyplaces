@@ -3,7 +3,6 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     before_action :authenticate_user
     before_action :set_posts
 
-    # user's feed
     def feed
         render json: {  itemsremaining:  itemsRemaining(postsFeed),
                         posts: ActiveModel::SerializableResource.new(
@@ -13,7 +12,6 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     }
     end
     
-    # user's posts
     def posts
         render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
@@ -23,7 +21,6 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     }
     end
 
-    # user's notifications
     def notifications
         render json: {  itemsremaining:  itemsRemaining(notifs),
                         notifs: ActiveModel::SerializableResource.new(
@@ -33,7 +30,6 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     }
     end
 
-    # user's memorials
     def memorials
         render json: {
             family: {

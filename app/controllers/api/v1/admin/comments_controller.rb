@@ -2,6 +2,7 @@ class Api::V1::Admin::CommentsController < ApplicationController
     include Commentable
     before_action :admin_only
     before_action :set_comments, only: [:commentsIndex]
+    before_action :set_search_comments, only: [:searchComment]
     before_action :set_comment, only: [:editComment, :deleteComment]
 
     def usersSelection #for create comment users selection
@@ -26,14 +27,13 @@ class Api::V1::Admin::CommentsController < ApplicationController
     def searchComment
         render json: {  #itemsremaining:  itemsRemaining(@comments),
                         comments: ActiveModel::SerializableResource.new(
-                            comments, 
+                            @search_comments, 
                             each_serializer: CommentSerializer
                         )
                     }
     end
 
     def addComment
-        
         comment = Comment.new(comment_params)
         comment.account = userActor
         if comment.save
@@ -82,20 +82,6 @@ class Api::V1::Admin::CommentsController < ApplicationController
         else 
             return AlmUser.find(params[:user_id])
         end
-    end
-
-    def comments
-        commentsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Comment').pluck('searchable_id')
-        c = Comment.where(id: commentsId)
-        comments = []
-
-        c.map{ |comment| 
-            if comment.post.id == params[:page_id].to_i
-                comments.push(comment)
-            end
-        }
-
-        return comments
     end
 
     def send_notif(comment, userActor)
