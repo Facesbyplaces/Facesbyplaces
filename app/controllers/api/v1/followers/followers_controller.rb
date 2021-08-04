@@ -6,11 +6,7 @@ class Api::V1::Followers::FollowersController < ApplicationController
     before_action :set_page, only: [:follow]
     
     def followStatus
-        if Follower.where(account: user(), page_type: params[:page_type], page_id: params[:page_id]).first == nil
-            render json: {follow: false}
-        else
-            render json: {follow: true}
-        end
+        Follower.where(account: user(), page_type: params[:page_type], page_id: params[:page_id]).first == nil ? (render json: {follow: false}) : (render json: {follow: true})
     end
 
     def follow

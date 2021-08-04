@@ -46,7 +46,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def removeFamilyorFriend
         is_page_owner
-        return render json: {error: "Cannot remove admin"}, status: 422 unless is_page_admin == true
+        return render json: {error: "Cannot remove admin"}, status: 422 if is_page_admin == false
         
         # check if relation exist or not
         if @page.relationships.where(account: @user).first != nil && @page.relationships.where(account: @user).first.destroy 
@@ -117,10 +117,8 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def is_page_admin
         if params[:account_type] == "1"
-            # check if user is already a page admin
             User.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? (return false) : (return true)
         elsif params[:account_type] == "2"
-            # check if user is already a page admin
             AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil ? (return false) : (return true)
         end  
     end
@@ -138,7 +136,6 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
             return render json: {error: "User is already part of the Family or a Friend."}, status: 409
         end
     end
-
 
     def set_page
         case params[:page_type]
