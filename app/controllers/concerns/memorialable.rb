@@ -6,7 +6,7 @@ module Memorialable
     end
 
     def set_families
-        @family = @memorial.relationships.where("relationship != 'Friend'").page(params[:page]).per(numberOfPage)
+        @families = @memorial.relationships.where("relationship != 'Friend'").page(params[:page]).per(numberOfPage)
     end
 
     def set_friends

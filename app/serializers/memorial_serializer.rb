@@ -113,6 +113,8 @@ class MemorialSerializer < ActiveModel::Serializer
   def famOrFriends
     if object.currentAlmUser != nil && object.relationships.where(account: object.currentAlmUser).first 
       return true
+    elsif object.currentUser != nil && object.relationships.where(account: object.currentUser).first 
+      return true
     else
       return false 
     end

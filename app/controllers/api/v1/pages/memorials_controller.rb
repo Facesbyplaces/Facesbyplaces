@@ -10,7 +10,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :verify_page_admin, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
     before_action :set_adminsRaw, only: [:adminIndex, :delete]
     before_action :set_families, only: [:familyIndex]
-    before_action :set_friends, only: [:friendIndex]
+    before_action :set_friends, only: [:friendsIndex]
     before_action :set_followers, only: [:followersIndex]
     before_action :set_adminsRaw, only: [:adminIndex, :delete]
     before_action :set_admins, only: [:adminIndex]

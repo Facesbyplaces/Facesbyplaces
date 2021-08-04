@@ -124,8 +124,10 @@ class BlmSerializer < ActiveModel::Serializer
   def famOrFriends
     if object.currentUser != nil && object.relationships.where(account: object.currentUser).first 
       return true
+    elsif object.currentAlmUser != nil && object.relationships.where(account: object.currentAlmUser).first 
+      return true
     else
-      return false 
+      return false
     end
   end
 
