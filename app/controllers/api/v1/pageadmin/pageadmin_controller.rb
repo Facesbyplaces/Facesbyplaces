@@ -46,7 +46,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def removeFamilyorFriend
         is_page_owner
-        return render json: {error: "Cannot remove admin"}, status: 422 if is_page_admin == false
+        return render json: {error: "Cannot remove admin"}, status: 422 if is_page_admin == true
         
         # check if relation exist or not
         if @page.relationships.where(account: @user).first != nil && @page.relationships.where(account: @user).first.destroy 
