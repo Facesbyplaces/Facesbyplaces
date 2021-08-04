@@ -267,13 +267,11 @@ class Api::V1::Posts::PostsController < ApplicationController
             next unless post.page.followers.find_by(account_id: user.account_id) == nil
 
             if user.account_type == "AlmUser" 
-                @u = AlmUser.find(user.account_id)
                 message = "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}"
-                send_notif(@u, message, post, notif_type)
+                send_notif(user.account, message, post, notif_type)
             else
-                @u = User.find(user.account_id)
                 message = "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}"
-                send_notif(@u, message, post, notif_type)
+                send_notif(user.account, message, post, notif_type)
             end
         end
     end
