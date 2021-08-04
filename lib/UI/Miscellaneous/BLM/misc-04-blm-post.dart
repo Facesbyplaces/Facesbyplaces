@@ -167,7 +167,7 @@ class MiscBLMPostState extends State<MiscBLMPost>{
                   children: [
                     Icon(Icons.place, color: Color(0xff888888)),
 
-                    Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),
+                    Expanded(child: Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),),
                   ],
                 ),
               ],

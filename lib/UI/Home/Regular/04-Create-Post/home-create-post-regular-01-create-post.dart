@@ -332,38 +332,61 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                             ? Container(
                               padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                               alignment: Alignment.centerLeft,
-                              child: Chip(
-                                labelPadding: const EdgeInsets.only(left: 8.0),
-                                label: Text(newLocationListener),
-                                deleteIcon: const Icon(Icons.close, size: 18,),
-                                onDeleted: (){
-                                  newLocation.value = '';
-                                },
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.place, color: Color(0xff888888)),
+
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Chip(
+                                        labelPadding: const EdgeInsets.only(left: 8.0),
+                                        label: Text(newLocationListener),
+                                        deleteIcon: const Icon(Icons.close, size: 18,),
+                                        onDeleted: (){
+                                          newLocation.value = '';
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             )
                             : Container(height: 0,),
 
                             const SizedBox(height: 10,),
 
-                            Container(
+                            userCountListener != 0
+                            ? Container(
                               padding: const EdgeInsets.only(left: 20.0, right: 20.0,),
                               alignment: Alignment.centerLeft,
-                              child: Wrap(
-                                spacing: 5.0,
-                                children: List.generate(
-                                  users.length,
-                                  (index) => Chip(
-                                    labelPadding: const EdgeInsets.only(left: 8.0),
-                                    label: Text(users[index].name),
-                                    deleteIcon: const Icon(Icons.close, size: 18,),
-                                    onDeleted: (){
-                                      userCount.value--;
-                                      users.removeAt(index);
-                                    },
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.people, color: Color(0xff888888)),
+
+                                  Expanded(
+                                    child: Wrap(
+                                      spacing: 5.0,
+                                      children: List.generate(
+                                        users.length,
+                                        (index) => Chip(
+                                          labelPadding: const EdgeInsets.only(left: 8.0),
+                                          label: Text(users[index].name),
+                                          deleteIcon: const Icon(Icons.close, size: 18,),
+                                          onDeleted: (){
+                                            userCount.value--;
+                                            users.removeAt(index);
+                                          },
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ),
+                            )
+                            : Container(height: 0,),
 
                             const SizedBox(height: 10,),
 

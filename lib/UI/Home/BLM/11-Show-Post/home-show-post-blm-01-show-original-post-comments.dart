@@ -826,7 +826,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   child: RichText(
                                                     text: TextSpan(
                                                       children: [
-                                                        const TextSpan(style: const TextStyle(color: const Color(0xff888888),),text: 'with '),
+                                                        const TextSpan(style: const TextStyle(color: const Color(0xff888888),), text: 'with '),
 
                                                         TextSpan(
                                                           children: List.generate(originalPost.data!.blmPost.showOriginalPostPostTagged.length, (index) => TextSpan(style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
@@ -858,14 +858,17 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 Padding(
                                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                                   child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Icon(Icons.place, color: Color(0xff888888)),
 
-                                                      GestureDetector(
-                                                        child: Text('${originalPost.data!.blmPost.showOriginalPostLocation}', style: TextStyle(fontWeight: FontWeight.bold),),
-                                                        onTap: (){
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: originalPost.data!.blmPost.showOriginalPostLatitude, longitude: originalPost.data!.blmPost.showOriginalPostLongitude, isMemorial: false)));
-                                                        },
+                                                      Expanded(
+                                                        child: GestureDetector(
+                                                          child: Text('${originalPost.data!.blmPost.showOriginalPostLocation}', style: TextStyle(fontWeight: FontWeight.bold),),
+                                                          onTap: (){
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: originalPost.data!.blmPost.showOriginalPostLatitude, longitude: originalPost.data!.blmPost.showOriginalPostLongitude, isMemorial: false)));
+                                                          },
+                                                        ),
                                                       ),
                                                     ],
                                                   ),

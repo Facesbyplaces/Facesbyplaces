@@ -101,8 +101,6 @@ class MiscRegularPostState extends State<MiscRegularPost>{
               subtitle: Text(widget.timeCreated, maxLines: 1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.56, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),),
               trailing: MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType, pageName: widget.memorialName),
               onTap: (){
-                print('The value of managed is ${widget.managed}');
-                print('The value of famOrFriends is ${widget.famOrFriends}');
                 if(widget.pageType == 'Memorial'){
                   if(widget.managed == true || widget.famOrFriends == true){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
@@ -171,7 +169,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                   children: [
                     Icon(Icons.place, color: Color(0xff888888)),
 
-                    Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),
+                    Expanded(child: Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),),
                   ],
                 ),
               ],

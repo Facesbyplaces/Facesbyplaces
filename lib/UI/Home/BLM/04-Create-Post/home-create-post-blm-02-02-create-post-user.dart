@@ -23,9 +23,9 @@ class HomeBLMCreatePostSearchUser extends StatefulWidget{
 class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser>{
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<BLMSearchUsers> users = [];
   int itemRemaining = 1;
-  bool empty = true;
   int page = 1;
 
   void initState(){
@@ -33,9 +33,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
     scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(itemRemaining != 0){
-          setState((){
-            onLoading();
-          });
+          onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -50,16 +48,20 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
   }
 
   Future<void> onRefresh() async{
-    setState((){
-      onLoading();
-    });
+    itemRemaining = 1;
+    count.value = 0;
+    users = [];
+    page = 1;
+    onLoading();
   }
 
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMSearchUsers(keywords: controller.text, page: page);
+      context.loaderOverlay.hide();
       itemRemaining = newValue.blmItemsRemaining;
+      count.value = count.value + newValue.blmUsers.length;
 
       for(int i = 0; i < newValue.blmUsers.length; i++){
         users.add(BLMSearchUsers(
@@ -71,12 +73,10 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
           image: newValue.blmUsers[i].searchUsersImage,
         ));
       }
-
-      if(mounted) 
-      setState(() {});
-      page++;
-      context.loaderOverlay.hide();
     }
+
+    if(mounted) 
+    page++;
   }
 
   @override
@@ -93,131 +93,123 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
             currentFocus.unfocus();
           }
         },
-        child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(70.0),
-            child: AppBar(
-              backgroundColor: Color(0xff04ECFF),
-              leading: Container(),
-              flexibleSpace: Column(
-                children: [
-                  Spacer(),
-                  
-                  Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
-                          onPressed: (){
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-
-                      Expanded(
-                        child: TextFormField(
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(15.0),
-                            focusColor: const Color(0xffffffff),
-                            fillColor: const Color(0xffffffff),
-                            hintText: 'Search User',
-                            filled: true,
-                            hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
-                            border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                            enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                            focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                            prefixIcon: IconButton(
-                              onPressed: () {
-                                print('Search!');
-                                setState(() {
-                                  empty = false;
-                                });
-
-                                onLoading();
-                              },
-                              icon:
-                              const Icon(Icons.search, color: const Color(0xff888888),),
-                            ),
+        child: ValueListenableBuilder(
+          valueListenable: count,
+          builder: (_, int countListener, __) => Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(70.0),
+              child: AppBar(
+                leading: Container(),
+                backgroundColor: const Color(0xff04ECFF),
+                flexibleSpace: Column(
+                  children: [
+                    Spacer(),
+                    
+                    Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
                           ),
-                          onChanged: (newPlace){
-                            if(newPlace == ''){
-                              setState(() {
-                                empty = true;
+                        ),
+
+                        Expanded(
+                          child: TextFormField(
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(15.0),
+                              focusColor: const Color(0xffffffff),
+                              fillColor: const Color(0xffffffff),
+                              hintText: 'Search User',
+                              filled: true,
+                              hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
+                              border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                              prefixIcon: IconButton(
+                                icon: const Icon(Icons.search, color: const Color(0xff888888),),
+                                onPressed: () {
+                                  print('Search!');
+                                  onLoading();
+                                },
+                              ),
+                            ),
+                            onChanged: (newPlace){
+                              if(newPlace == ''){
+                                count.value = 0;
                                 users = [];
                                 itemRemaining = 1;
                                 page = 1;
-                              });
-                            }
-                          },
-                          onFieldSubmitted: (newPlace){
-                            setState(() {
+                              }
+                            },
+                            onFieldSubmitted: (newPlace){
                               controller.text = newPlace;
-                              empty = false;
-                            });
-
-                            onLoading();
-                          },
+                              onLoading();
+                            },
+                          ),
                         ),
-                      ),
 
-                      const SizedBox(width: 20,),
-                    ],
-                  ),
-                  
-                  SizedBox(height: 5,),
-                ],
+                        const SizedBox(width: 20,),
+                      ],
+                    ),
+                    
+                    SizedBox(height: 5,),
+                  ],
+                ),
               ),
             ),
-          ),
-          body: empty == false
-          ? RefreshIndicator(
-            onRefresh: onRefresh,
-            child: ListView.separated(
-              controller: scrollController,
-              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.all(10.0),
-              itemCount: users.length,
-              itemBuilder: (c, i) {
-                return ListTile(
-                  leading: users[i].image != ''
-                  ? CircleAvatar(
-                    maxRadius: 40,
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: NetworkImage(users[i].image),
-                  )
-                  : const CircleAvatar(
-                    maxRadius: 40,
-                    backgroundColor: const Color(0xff888888),
-                    foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                  ),
-                  title: Text(users[i].firstName + ' ' + users[i].lastName, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                  subtitle: Text(users[i].email, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                  onTap: (){
-                    Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
-                  },
-                );
-              },
-            ),
-          )
-          : Container(
-            width: SizeConfig.screenWidth,
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Column(
-                children: [
-                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+            body: countListener != 0
+            ? RefreshIndicator(
+              onRefresh: onRefresh,
+              child: ListView.separated(
+                controller: scrollController,
+                separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+                physics: const ClampingScrollPhysics(),
+                padding: const EdgeInsets.all(10.0),
+                itemCount: users.length,
+                itemBuilder: (c, i) {
+                  return ListTile(
+                    leading: users[i].image != ''
+                    ? CircleAvatar(
+                      maxRadius: 40,
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: NetworkImage(users[i].image),
+                    )
+                    : const CircleAvatar(
+                      maxRadius: 40,
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                    ),
+                    title: Text(users[i].firstName + ' ' + users[i].lastName, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                    subtitle: Text(users[i].email, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                    onTap: (){
+                      Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
+                    },
+                  );
+                },
+              ),
+            )
+            : Container(
+              width: SizeConfig.screenWidth,
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Column(
+                  children: [
+                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
-                  Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
+                    Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
-                  const SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
 
-                  Text('Search a location to add on your post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                    Text('Search a location to add on your post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
-                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-                ],
+                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+                  ],
+                ),
               ),
             ),
           ),
