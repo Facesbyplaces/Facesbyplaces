@@ -50,10 +50,6 @@ class ApplicationController < ActionController::Base
             return render json: {errors: exception}, status: 400
         end
 
-        def invalid_stripe_transaction
-            return render json: {errors: "Token is invalid or has been used twice"}, status: 400
-        end
-
         def same_email(exception)
             return render json: {errors: exception}, status: 406
         end

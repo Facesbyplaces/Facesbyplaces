@@ -1,9 +1,11 @@
 class Api::V1::Admin::UsersController < ApplicationController
+    include Userable
     before_action :admin_only
+    before_action :set_searched_users, only: [:searchUsers]
+    before_action :set_users, only: [:allUsers]
     before_action :set_user, except: [:searchUsers, :allUsers]
 
     def searchUsers
-        @users = fetched_searched_users
         render json: {  itemsremaining:  itemsRemaining(@users),
                         users: ActiveModel::SerializableResource.new(
                             @users, 
@@ -13,22 +15,10 @@ class Api::V1::Admin::UsersController < ApplicationController
     end
 
     def allUsers
-        users = User.all.where.not(guest: true, username: "admin")
-        alm_users = AlmUser.all
-
-        # BLM Users
-        users = users.page(params[:page]).per(numberOfPage)
-        itemsremaining = itemsRemaining(users)
-
-        # ALM Users
-        alm_users = alm_users.page(params[:page]).per(numberOfPage)
-        itemsremaining = itemsRemaining(alm_users)
-
-
-        render json: {  itemsremaining:  itemsremaining,
+        render json: {  itemsremaining:  itemsRemaining(@alm_users),
                         users: {
-                            blm: users,
-                            alm: alm_users
+                            blm: @blm_users,
+                            alm: @alm_users
                         },
                     }
     end
@@ -38,37 +28,19 @@ class Api::V1::Admin::UsersController < ApplicationController
     end
 
     def editUser
-        if @user != nil
-            @user.update(editUser_params)
-            if @user.errors.present?
-                render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404
-            else
-                render json: {success: true, message: "Successfully Edited User", user: @user, status: 200}, status: 200
-            end
-        else
-            render json: {error: "User not found"}, status: 404
-        end
+        return render json: {error: "User not found"}, status: 404 unless @user != nil
+        return render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404 unless @user.update(editUser_params)
+        render json: {success: true, message: "Successfully Edited User", user: @user, status: 200}, status: 200 
     end
 
     def deleteUser
-        if @user != nil
-            @user.destroy!
-            if @user.errors.present?
-                render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404
-            else
-                render json: {success: true, message: "Successfully Deleted User", user: @user, status: 200}, status: 200
-            end
-        else
-            render json: {error: "User not found"}, status: 404
-        end
+        return render json: {error: "User not found"}, status: 404 unless @user != nil
+        return render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404 unless @user.destroy!
+        render json: {success: true, message: "Successfully Deleted User", user: @user, status: 200}, status: 200
     end
 
     def contactUser
-        message = params[:message]
-        subject = params[:subject]
-
-        ContactUserMailer.with(message: message, email: @user.email, subject: subject).contact_user.deliver_later
-
+        ContactUserMailer.with(message: params[:message], email: @user.email, subject: params[:subject]).contact_user.deliver_later
         render json: {status: "Email Sent"}
     end
 
@@ -82,26 +54,6 @@ class Api::V1::Admin::UsersController < ApplicationController
         unless user().has_role? :admin
             return render json: {status: "Must be an admin to continue"}, status: 401
         end
-    end
-
-    def set_user
-        if params[:account_type].to_i == 1
-            @user = User.find(params[:id])
-        else
-            @user = AlmUser.find(params[:id])
-        end
-    end
-
-    def fetched_searched_users
-        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
-            if searchObject.searchable_type == 'User'
-                User.find(searchObject.searchable_id)
-            else
-                AlmUser.find(searchObject.searchable_id)
-            end
-        }.flatten.uniq
-
-        return users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
     end
 
     def itemsRemaining(users)

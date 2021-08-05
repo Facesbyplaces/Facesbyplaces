@@ -236,8 +236,6 @@ Rails.application.routes.draw do
         delete 'posts/:id',                         to: 'posts#deletePost'
         # search post
         get 'search/post',                          to: 'posts#searchPost'
-        
-        # COMMENTS
 
         # all users without paginations
         get 'comments/users/selection/:page_type',  to: 'comments#usersSelection'
@@ -251,8 +249,6 @@ Rails.application.routes.draw do
         delete 'comments/delete',                   to: 'comments#deleteComment'
         # delete comment
         get 'search/comments',                      to: 'comments#searchComment'
-
-        # MEMORIALS
 
         # all users without paginations
         get 'memorials/users/selection',            to: 'memorials#usersSelection'

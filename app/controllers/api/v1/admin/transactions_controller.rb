@@ -1,11 +1,13 @@
 class Api::V1::Admin::TransactionsController < ApplicationController
+    include Transactionable
     before_action :admin_only
+    before_action :set_transactions, only: [:allTransactions]
     before_action :set_transaction, only: [:payoutTransaction, :showTransaction]
 
     def allTransactions
-        render json: {  itemsremaining:  itemsRemaining(transactions),
+        render json: {  itemsremaining:  itemsRemaining(@transactions),
                         transactions: ActiveModel::SerializableResource.new(
-                            transactions,
+                            @transactions,
                             each_serializer: TransactionSerializer
                         )
                     }
@@ -16,12 +18,7 @@ class Api::V1::Admin::TransactionsController < ApplicationController
     end
 
     def payoutTransaction
-        if @transaction.status === "pending"
-            @transaction.update(status: "transferred")
-        elsif @transaction.status === "transferred"
-            @transaction.update(status: "pending")
-        end
-
+        @transaction.status === "pending" ? @transaction.update(status: "transferred") : @transaction.update(status: "pending")
         render json: TransactionSerializer.new( @transaction ).attributes
     end
 
@@ -36,15 +33,6 @@ class Api::V1::Admin::TransactionsController < ApplicationController
             return itemsremaining = transactions.total_count - (params[:page].to_i * numberOfPage)
         end
     end
-
-    def transactions
-        transactions = Transaction.all         
-        return transactions = transactions.page(params[:page]).per(numberOfPage)
-    end
-
-    def set_transaction
-        @transaction = Transaction.find(params[:id])
-    end 
 
     def admin_only
         unless user().has_role? :admin  

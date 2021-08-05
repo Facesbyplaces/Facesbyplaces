@@ -1,5 +1,5 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
-    include Memorialable
+    include Almable
     before_action :authenticate_user, except: [:show]
     before_action :set_memorial, except: [:create, :followersIndex, :adminIndex]
     before_action :verify_update_images_params, only: [:updateImages]

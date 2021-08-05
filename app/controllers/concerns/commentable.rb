@@ -1,6 +1,14 @@
 module Commentable
     include ApplicationConcern
   
+    def set_users
+        if params[:page_type].to_i == 2
+            @users = AlmUser.all 
+        else
+            @users = User.all.where.not(guest: true, username: "admin")
+        end
+    end
+    
     def set_comments
         post = Post.find(params[:id])
         comments = post.comments 
