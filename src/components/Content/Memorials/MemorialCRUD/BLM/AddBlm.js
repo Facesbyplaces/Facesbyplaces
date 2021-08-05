@@ -194,20 +194,6 @@ export default function EditMemorial() {
     const latitude = blmLatitude;
     const longitude = blmLongitude;
 
-    console.log("User ID: ", user_id);
-    console.log("Page Type: ", page_type);
-    console.log("Location: ", location);
-    console.log("Date of Birth: ", dateOfBirth);
-    console.log("Date of Death: ", dateOfDeath);
-    console.log("Precinct: ", precinct);
-    console.log("State: ", state);
-    console.log("Country: ", country);
-    console.log("Page Name: ", name);
-    console.log("Description: ", description);
-    console.log("Relationship: ", relationship);
-    console.log("Latitude: ", latitude);
-    console.log("Longitude: ", longitude);
-
     setLoading(true);
     axios
       .post(`/api/v1/admin/memorials/add`, {
@@ -246,90 +232,91 @@ export default function EditMemorial() {
     <div className="d-flex flex-column flex-column-fluid">
       <SuccessModal showModal={showModal} setShowModal={setShowModal} />
       <>
-        {loading ? (
-          <div className="loader-container">
-            <HashLoader color={"#04ECFF"} loading={loading} size={90} />
-          </div>
-        ) : (
-          <>
-            {/*begin::Entry*/}
-            {/*begin::Hero*/}
-            <div className="image-input image-input-outline image-input-circle">
-              <label
-                className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                data-action="change"
-                data-toggle="tooltip"
-                title
-                data-original-title="Change avatar"
-              >
-                <i className="fa fa-pen icon-sm text-muted" />
-                <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
-                  <svg
-                    width="24px"
-                    height="24px"
-                    viewBox="0 0 24 24"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                  >
-                    Generator: Sketch 50.2 (55047) -
-                    http://www.bohemiancoding.com/sketch
-                    <title>Stockholm-icons / Design / Edit</title>
-                    <desc>Created with Sketch.</desc>
-                    <defs />
-                    <g
-                      id="Stockholm-icons-/-Design-/-Edit"
-                      stroke="none"
-                      strokeWidth={1}
-                      fill="none"
-                      fillRule="evenodd"
-                    >
-                      <rect id="bound" x={0} y={0} width={24} height={24} />
-                      <path
-                        d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
-                        id="Path-11"
-                        fill="#000000"
-                        fillRule="nonzero"
-                        transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
-                      />
-                      <rect
-                        id="Rectangle"
-                        fill="#000000"
-                        opacity="0.3"
-                        x={5}
-                        y={20}
-                        width={15}
-                        height={2}
-                        rx={1}
-                      />
-                    </g>
-                  </svg>
-                </span>
-
-                <input
-                  type="file"
-                  accept=".png, .jpg, .jpeg"
-                  onChange={backgroundImageSelectedHandler}
-                />
-                <input type="hidden" name="profile_avatar_remove" />
-              </label>
-            </div>
-
-            <div
-              className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
-              style={{
-                backgroundImage: backgroundImageTemporaryDisplay
-                  ? `url( ${backgroundImageTemporaryDisplay})`
-                  : `url( "assets/media/bg/bg-1.jpg" )`,
-                height: "350px",
-              }}
+        <>
+          <div className="image-input image-input-outline image-input-circle">
+            <label
+              className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+              data-action="change"
+              data-toggle="tooltip"
+              title
+              data-original-title="Change avatar"
             >
-              <div className="container">
-                <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+              <i className="fa fa-pen icon-sm text-muted" />
+              <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
+                <svg
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                >
+                  Generator: Sketch 50.2 (55047) -
+                  http://www.bohemiancoding.com/sketch
+                  <title>Stockholm-icons / Design / Edit</title>
+                  <desc>Created with Sketch.</desc>
+                  <defs />
+                  <g
+                    id="Stockholm-icons-/-Design-/-Edit"
+                    stroke="none"
+                    strokeWidth={1}
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <rect id="bound" x={0} y={0} width={24} height={24} />
+                    <path
+                      d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                      id="Path-11"
+                      fill="#000000"
+                      fillRule="nonzero"
+                      transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
+                    />
+                    <rect
+                      id="Rectangle"
+                      fill="#000000"
+                      opacity="0.3"
+                      x={5}
+                      y={20}
+                      width={15}
+                      height={2}
+                      rx={1}
+                    />
+                  </g>
+                </svg>
+              </span>
+
+              <input
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                onChange={backgroundImageSelectedHandler}
+              />
+              <input type="hidden" name="profile_avatar_remove" />
+            </label>
+          </div>
+          <div
+            className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
+            style={{
+              backgroundImage: backgroundImageTemporaryDisplay
+                ? `url( ${backgroundImageTemporaryDisplay})`
+                : `url( "assets/media/bg/bg-1.jpg" )`,
+              height: "350px",
+            }}
+          >
+            <div className="container">
+              <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+            </div>
+          </div>
+          {loading ? (
+            <div className="container mt-n15 gutter-b">
+              <div className="card card-custom">
+                <div className="card-body">
+                  <div className="loader-container">
+                    <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+                  </div>
+                </div>
               </div>
             </div>
-            {/*end::Hero*/}
-            {/*begin::Section*/}
+          ) : (
             <div className="container mt-n15 gutter-b">
               <div className="card card-custom">
                 <div className="card-body">
@@ -828,10 +815,8 @@ export default function EditMemorial() {
                 </div>
               </div>
             </div>
-            {/*end::Section*/}
-            {/*end::Entry*/}
-          </>
-        )}
+          )}
+        </>
       </>
     </div>
   );

@@ -37,8 +37,15 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
       {showModal ? (
         <div className="modal" showModal={showModal}>
           {loading ? (
-            <div className="loader-container">
-              <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+            <div className="modal-dialog modal-dialog-centered" role="document">
+              <div className="modal-content">
+                <div
+                  className="loader-container"
+                  style={{ height: "400px", width: "500px" }}
+                >
+                  <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+                </div>
+              </div>
             </div>
           ) : (
             <div className="modal-dialog modal-dialog-centered" role="document">

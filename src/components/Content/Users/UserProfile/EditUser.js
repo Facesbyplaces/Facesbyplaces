@@ -8,9 +8,9 @@ import { SuccessModal } from "../Modals/SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
 
 export default function EditUser({ user, image }) {
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [username, setUsername] = useState("");
@@ -112,8 +112,10 @@ export default function EditUser({ user, image }) {
   return (
     <div className="container">
       {loading ? (
-        <div className="loader-container">
-          <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+        <div className="card card-custom">
+          <div className="loader-container">
+            <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+          </div>
         </div>
       ) : (
         <div className="card card-custom">
