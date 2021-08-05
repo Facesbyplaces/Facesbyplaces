@@ -106,7 +106,7 @@ class Api::V1::Admin::MemorialsController < ApplicationController
                 User.find(admin_id).roles.where(resource_type: 'Blm', resource_id: params[:id]).first.destroy 
             end
 
-            @blm.destroy()
+            @memorial.destroy()
             
             render json: {status: "deleted"}
         end
