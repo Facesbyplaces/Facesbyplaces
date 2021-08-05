@@ -14,7 +14,7 @@ export default function AddPost() {
   const [errors, setErrors] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [pageType, setPageType] = useState(0);
+  const [pageType, setPageType] = useState(2);
   const type = postTab.type == 2 ? "Memorial" : "Blm";
 
   // ImageOrVideos Variables
@@ -72,7 +72,7 @@ export default function AddPost() {
   const fetchMemorial = (e) => {
     axios
       .get(
-        `/api/v1/admin/posts/memorials?user_id=${e}&account_type=${postTab.type}`
+        `/api/v1/admin/posts/memorials?user_id=${e}&account_type=${pageType}`
       )
       .then((response) => {
         setMemorials(response.data.memorials);
@@ -83,26 +83,22 @@ export default function AddPost() {
       });
   };
 
-  const fetchPageAdmin = (e) => {
+  const fetchPageAdmin = () => {
     axios
       .get(`/api/v1/admin/posts/pageAdmins`)
       .then((response) => {
-        response.data.pageadmins.map((pageadmin) =>
-          pageadmin.account_type == e
-            ? setUsers(response.data.pageadmins)
-            : setUsers(response.data.pageadmins)
-        );
+        setUsers(response.data.pageadmins);
         console.log("Response: ", response.data);
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
   };
 
   //
   const setPage = (e) => {
     setPageType(e);
-    fetchPageAdmin(e);
+    fetchPageAdmin();
   };
 
   // Form Data Handlers
@@ -142,7 +138,6 @@ export default function AddPost() {
 
   useEffect(() => {
     fetchPageAdmin(postTab.type);
-    setPageType(postTab.type);
   }, [users.id]);
 
   const renderedUsers = users.map((user) =>

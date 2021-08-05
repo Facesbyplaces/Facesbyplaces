@@ -87,7 +87,7 @@ export default function EditUser({ user, image }) {
     setLoading(true);
     axios
       .put("/api/v1/admin/users/edit", {
-        id: user.id,
+        user_id: user.id,
         account_type: user.account_type,
         username: user_name,
         first_name: first_name,

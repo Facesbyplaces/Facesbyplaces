@@ -57,7 +57,7 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
     axios
       .post("/api/v1/admin/users/contact", {
         message: message,
-        id: user.id,
+        user_id: user.id,
         subject: subject,
         account_type: user.account_type,
       })
@@ -79,8 +79,13 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
         <div className="modal" showModal={showModal}>
           <div className="modal-dialog modal-dialog-centered" role="document">
             {loading ? (
-              <div className="loader-container">
-                <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+              <div className="modal-content">
+                <div
+                  className="loader-container"
+                  style={{ height: "500px", width: "500px" }}
+                >
+                  <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+                </div>
               </div>
             ) : (
               <>

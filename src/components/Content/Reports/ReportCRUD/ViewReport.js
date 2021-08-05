@@ -30,7 +30,7 @@ export default function ViewReport() {
         console.log("Response: ", response.data);
       })
       .catch((error) => {
-        console.log(error.errors);
+        console.log(error);
       });
   }, report.id);
 

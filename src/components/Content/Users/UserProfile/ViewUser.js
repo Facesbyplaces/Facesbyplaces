@@ -23,7 +23,7 @@ export default function ViewUser() {
   useEffect(() => {
     axios
       .get(`/api/v1/admin/users/show`, {
-        params: { id: tab.id, account_type: tab.account_type },
+        params: { user_id: tab.id, account_type: tab.account_type },
       })
       .then((response) => {
         setUser(response.data);

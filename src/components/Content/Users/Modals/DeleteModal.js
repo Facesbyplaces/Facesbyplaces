@@ -17,7 +17,7 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
     setLoading(true);
     axios
       .post("/api/v1/admin/users/delete", {
-        id: tab.id,
+        user_id: tab.id,
         account_type: tab.account_type,
       })
       .then((response) => {
@@ -34,12 +34,17 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
     <>
       {showModal ? (
         <div className="modal" showModal={showModal}>
-          {loading ? (
-            <div className="loader-container">
-              <HashLoader color={"#04ECFF"} loading={loading} size={90} />
-            </div>
-          ) : (
-            <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            {loading ? (
+              <div className="modal-content">
+                <div
+                  className="loader-container"
+                  style={{ height: "400px", width: "489px" }}
+                >
+                  <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+                </div>
+              </div>
+            ) : (
               <div className="modal-content">
                 <div className="pt-10">
                   <span className="svg-icon svg-icon-10x svg-icon-danger">
@@ -109,9 +114,9 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
                   </button>
                 </div>
               </div>
-            </div>
-          )}
-          )}
+            )}
+            )}
+          </div>
         </div>
       ) : null}
     </>

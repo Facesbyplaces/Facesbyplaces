@@ -37,7 +37,9 @@ export default function AddUser() {
   const uploadImage = (user) => {
     console.log(user);
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    selectedFile != null
+      ? formData.append("image", selectedFile)
+      : console.log("No Profile Image Uploaded");
     formData.append("user_id", user.id);
     formData.append("account_type", user.account_type);
     console.log("Form Data: ", formData);
@@ -47,8 +49,8 @@ export default function AddUser() {
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error.response.data.errors);
-        setErrors(error.response.data.errors);
+        console.log(error);
+        // setErrors(error.response.data.errors);
       });
   };
 
@@ -125,8 +127,10 @@ export default function AddUser() {
   return (
     <div className="container" style={{ margin: "auto" }}>
       {loading ? (
-        <div className="loader-container">
-          <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+        <div className="card card-custom">
+          <div className="loader-container">
+            <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+          </div>
         </div>
       ) : (
         <div className="card card-custom">
