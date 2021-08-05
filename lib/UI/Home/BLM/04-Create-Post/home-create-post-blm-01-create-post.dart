@@ -182,6 +182,20 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               if(permissionGranted == Location.PermissionStatus.denied){
                                 permissionGranted = await location.requestPermission();
                                 if(permissionGranted != Location.PermissionStatus.granted){
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      description: Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
                                   return;
                                 }
                               }

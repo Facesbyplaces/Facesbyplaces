@@ -170,14 +170,14 @@ class UIGetStartedState extends State<UIGetStarted>{
                 decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background.png'),),),
                 child: Column(
                   children: [
-                    SizedBox(height: SizeConfig.blockSizeVertical! * 3),
+                    SizedBox(height: 30),
 
                     Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, color: Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical! * 3),
+                    SizedBox(height: 30),
 
                     Container(
-                      padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! *4.06, right: SizeConfig.blockSizeHorizontal! * 4.06),
+                      padding: EdgeInsets.only(left: 30, right: 30),
                       child: Center(
                         child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
                           textAlign: TextAlign.center,

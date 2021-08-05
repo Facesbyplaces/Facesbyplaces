@@ -1,6 +1,9 @@
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMMaps extends StatefulWidget{
@@ -32,17 +35,9 @@ class HomeBLMMapsState extends State<HomeBLMMaps>{
       appBar: AppBar(
         title: Text('Maps', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
-        actions: [
-          IconButton(
-            onPressed: () async{
-            },
-            icon: Icon(Icons.add),
-          ),
-        ],
       ),
       body: OSMFlutter( 
         controller: controller,
-        trackMyPosition: false,
         onGeoPointClicked: (GeoPoint value){
           print('The latitude is ${value.latitude}');
           print('The longitude is ${value.longitude}');
@@ -50,6 +45,62 @@ class HomeBLMMapsState extends State<HomeBLMMaps>{
         staticPoints: staticPoints,
         road: Road(startIcon: MarkerIcon(icon: Icon(Icons.person, size: 64, color: Colors.brown,),), roadColor: Colors.yellowAccent,),
         markerOption: MarkerOption(defaultMarker: MarkerIcon(icon: Icon(Icons.person_pin_circle, color: Colors.blue, size: 56,),),),
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: 'button1',
+            child: Icon(Icons.select_all),
+            onPressed: () async{
+              context.loaderOverlay.show();
+              await controller.removeLastRoad();
+              context.loaderOverlay.hide();
+
+              GeoPoint point1 = await controller.selectPosition(icon: MarkerIcon(icon: Icon(Icons.location_history, color: Colors.blue, size: 48,),),);
+              RoadInfo roadInformation = await controller.drawRoad(point1, GeoPoint(latitude: 37.78556405447126, longitude: -122.40161667090938), roadOption: RoadOption(roadWidth: 10, roadColor: Colors.green, showMarkerOfPOI: false));
+
+              await showDialog(
+                context: context,
+                builder: (_) => AssetGiffyDialog(
+                  description: Text('Approximately ${roadInformation.distance! * 0.62137} miles from the location.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  entryAnimation: EntryAnimation.DEFAULT,
+                  onlyOkButton: true,
+                  onOkButtonPressed: (){
+                    Navigator.pop(context, true);
+                  },
+                ),
+              );
+
+              print('The distance is ${roadInformation.distance}');
+              print('The travel time in minutes is ${Duration(seconds: roadInformation.duration!.toInt()).inMinutes}');
+            },  
+          ),
+
+          SizedBox(height: 10,),
+
+          FloatingActionButton(
+            heroTag: 'button2',
+            child: Icon(Icons.add),
+            onPressed: () async{
+              await controller.zoomIn();
+            },
+          ),
+
+          SizedBox(height: 10,),
+
+          FloatingActionButton(
+            heroTag: 'button3',
+            child: Icon(Icons.remove),
+            onPressed: () async{
+              await controller.zoomOut();
+            },
+          ),
+
+          SizedBox(height: 10,),
+        ],
       ),
     );
   }

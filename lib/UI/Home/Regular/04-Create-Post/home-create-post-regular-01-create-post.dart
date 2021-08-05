@@ -172,6 +172,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                             if(newLocation.value == ''){
                               Location.Location location = new Location.Location();
 
+                              print('Here 1');
+
                               bool serviceEnabled = await location.serviceEnabled();
                               if(!serviceEnabled){
                                 serviceEnabled = await location.requestService();
@@ -180,15 +182,38 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 }
                               }
 
+                              print('Here 2');
+
                               Location.PermissionStatus permissionGranted = await location.hasPermission();
                               if(permissionGranted == Location.PermissionStatus.denied){
+                                print('Test here 1');
                                 permissionGranted = await location.requestPermission();
+                                print('Test here 2');
                                 if(permissionGranted != Location.PermissionStatus.granted){
+                                  print('Test here 3');
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      description: Text('Permission to access location has been denied from this app. In order to turn it on, go to settings and allow location access permission for this app.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
                                   return;
                                 }
                               }
 
+                              print('Here 3');
+
                               Location.LocationData locationData = await location.getLocation();
+
+                              print('Here 4');
 
                               post = APIRegularCreatePost(
                                 almPageType: 'Memorial',
@@ -200,6 +225,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 almLongitude: locationData.longitude!,
                                 almTagPeople: userIds,
                               );
+
+                              print('Here 5');
                             }else{
                               post = APIRegularCreatePost(
                                 almPageType: 'Memorial',
