@@ -106,34 +106,33 @@ class ApplicationController < ActionController::Base
             end
         end
         
-        def PushNotification(device_tokens, title, message, recipient, actor, data, type, postType)
-            require 'fcm'
-            puts        "\n-- Device Token : --\n#{device_tokens}"
-            logger.info "\n-- Device Token : --\n#{device_tokens}"
+        # def PushNotification(device_tokens, title, message, recipient, actor, data, type, postType)
+        #     require 'fcm'
+        #     puts        "\n-- Device Token : --\n#{device_tokens}"
+        #     logger.info "\n-- Device Token : --\n#{device_tokens}"
     
-            fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
-            options = { 
-                "notification": { 
-                    "title": title,    
-                    "body": message,
-                    "sound": "default",
-                },
-                "data": {
-                    "recipient": recipient,
-                    "actor": actor,
-                    "dataID": data,
-                    "dataType": type,
-                    "postType": postType
-                }
-            }
+        #     fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
+        #     options = { 
+        #         "notification": { 
+        #             "title": title,    
+        #             "body": message,
+        #             "sound": "default",
+        #         },
+        #         "data": {
+        #             "recipient": recipient,
+        #             "actor": actor,
+        #             "dataID": data,
+        #             "dataType": type,
+        #             "postType": postType
+        #         }
+        #     }
     
-            begin
-                response = fcm_client.send(device_tokens, options)
-            rescue StandardError => err
-                puts        "\n-- PushNotification : Error --\n#{err}"
-                logger.info "\n-- PushNotification : Error --\n#{err}"
-            end
+        #     begin
+        #         response = fcm_client.send(device_tokens, options)
+        #     rescue StandardError => err
+        #         puts        "\n-- PushNotification : Error --\n#{err}"
+        #     end
     
-            puts response
-        end
+        #     puts response
+        # end
 end

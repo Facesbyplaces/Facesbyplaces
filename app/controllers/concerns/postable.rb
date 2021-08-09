@@ -18,7 +18,7 @@ module Postable
     end
 
     def set_page
-        case params[:post][:page_type]
+        case params[:post][:page_type] 
         when "Blm"
             @page = Blm.find(params[:post][:page_id])
         when "Memorial"

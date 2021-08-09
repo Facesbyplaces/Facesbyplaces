@@ -1,12 +1,15 @@
 class Api::V1::Mainpages::MainpagesController < ApplicationController
-    include Postable
+    include Mainpageable
     before_action :authenticate_user
     before_action :set_posts, only: [:posts]
+    before_action :set_feeds, only: [:feed]
+    before_action :set_notifs, only: [:notifications]
+    before_action :set_blmFamilies, :set_blmFriends, :set_memorialFamilies, :set_memorialFriends, only: [:memorials]
 
     def feed
-        render json: {  itemsremaining:  itemsRemaining(postsFeed),
+        render json: {  itemsremaining:  itemsRemaining(@posts),
                         posts: ActiveModel::SerializableResource.new(
-                            postsFeed, 
+                            @posts, 
                             each_serializer: PostSerializer
                         )
                     }
@@ -22,9 +25,9 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     end
 
     def notifications
-        render json: {  itemsremaining:  itemsRemaining(notifs),
+        render json: {  itemsremaining:  itemsRemaining(@notifs),
                         notifs: ActiveModel::SerializableResource.new(
-                                notifs, 
+                                @notifs, 
                                 each_serializer: NotificationSerializer
                             )
                     }
@@ -33,87 +36,30 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     def memorials
         render json: {
             family: {
-                blmFamilyItemsRemaining: itemsRemaining(blmFamilies),
+                blmFamilyItemsRemaining: itemsRemaining(@blmFamily),
                 blm: blmFamily = ActiveModel::SerializableResource.new(
-                                    blmFamilies, 
+                                    @blmFamily, 
                                     each_serializer: BlmSerializer
                                 ),
-                memorialFamilyItemsRemaining: itemsRemaining(memorialFamilies),
+                memorialFamilyItemsRemaining: itemsRemaining(@memorialFamily),
                 memorial: memorialFamily = ActiveModel::SerializableResource.new(
-                                                memorialFamilies, 
+                                                @memorialFamily, 
                                                 each_serializer: MemorialSerializer
                                             )
             }, 
             friends: {
-                blmFriendsItemsRemaining: itemsRemaining(blmFriends),
+                blmFriendsItemsRemaining: itemsRemaining(@blmFriends),
                 blm: blmFriend = ActiveModel::SerializableResource.new(
-                                    blmFriends, 
+                                    @blmFriends, 
                                     each_serializer: BlmSerializer
                                 ),
-                memorialFriendsItemsRemaining: itemsRemaining(memorialFriends),
+                memorialFriendsItemsRemaining: itemsRemaining(@memorialFriends),
                 memorial: memorialFriend = ActiveModel::SerializableResource.new(
-                                                memorialFriends, 
+                                                @memorialFriends, 
                                                 each_serializer: MemorialSerializer
                                             )
             }
         }
-    end
-
-    private
-
-    def account
-        if user().account_type == 1
-           return account = 'User'
-        else
-           return account = 'AlmUser'
-        end
-    end
-
-    def itemsRemaining(data)
-        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
-            return 0
-        elsif data.total_count < numberOfPage
-            return data.total_count 
-        else
-            return data.total_count - (params[:page].to_i * numberOfPage)
-        end
-    end
-
-    def postsFeed
-        posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type INNER JOIN #{relationship_sql} ON relationship.account_id = #{user().id} AND relationship.account_type = '#{account}' AND relationship.page_type = pages.object_type AND relationship.page_id = pages.id")
-                    .order(created_at: :desc)
-                    .select("posts.*")
-
-        return posts.page(params[:page]).per(numberOfPage)
-    end
-
-    def notifs
-        notifs = user().notifications.order(created_at: :desc)
-        return notifs.page(params[:page]).per(numberOfPage)
-    end
-
-    def blmFamilies
-        blmFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Blm'").pluck('page_id')
-        blmFamily = Blm.where(id: blmFamily).order(created_at: :desc)
-        return blmFamily.page(params[:page]).per(numberOfPage)
-    end
-
-    def blmFriends
-        blmFriends = user().relationships.where(relationship: 'Friend', page_type: 'Blm').pluck('page_id')
-        blmFriends = Blm.where(id: blmFriends).order(created_at: :desc)
-        return blmFriends.page(params[:page]).per(numberOfPage)
-    end
-
-    def memorialFamilies
-        memorialFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Memorial'").pluck('page_id')
-        memorialFamily = Memorial.where(id: memorialFamily).order(created_at: :desc)
-        return memorialFamily.page(params[:page]).per(numberOfPage)
-    end
-    
-    def memorialFriends
-        memorialFriends = user().relationships.where(relationship: 'Friend', page_type: 'Memorial').pluck('page_id')
-        memorialFriends = Memorial.where(id: memorialFriends).order(created_at: :desc)
-        return memorialFriends.page(params[:page]).per(numberOfPage)
     end
     
 end

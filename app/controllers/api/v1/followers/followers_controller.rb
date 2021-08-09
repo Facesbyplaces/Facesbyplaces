@@ -11,13 +11,23 @@ class Api::V1::Followers::FollowersController < ApplicationController
 
     def follow
         return render json: {success: false, errors: @follower }, status: 500 unless @follower.save 
-        message = "#{user().first_name} followed your memorial."
-        send_notif(@page.pageowner.account, message, @page.page_name.capitalize)
-        render json: {status: "Success", follower: @follower, user: user}
+        
+        notification = Notification::Builder.new(
+            device_tokens:   @page.pageowner.account.device_token,
+            title:          "FacesbyPlaces Notification",
+            message:        "#{user().first_name} followed your memorial.",
+            recipient:      @page.pageowner.account,
+            actor:          user(),
+            data:           params[:page_id],
+            type:           @page.page_name.capitalize,
+            postType:       " ",
+        )
+        notification.notify
+
+        render json: {status: "Success", follower: @follower, user: user()}
     end
 
     def unfollow
-        return render json: {success: false, errors: "You are not a follower of this page." }, status: 409 unless @follower
         return render json: {success: false, errors: @follower }, status: 500 unless @follower.destroy
         render json: {status: "Unfollowed"}
     end
@@ -26,14 +36,5 @@ class Api::V1::Followers::FollowersController < ApplicationController
 
     def follower_params
         params.permit(:page_type, :page_id)
-    end
-
-    def send_notif(user, message, notif_type)
-        Notification.create(recipient: user, actor: user(), action: message, postId: params[:page_id], read: false, notif_type: notif_type)            
-                    
-        #Push Notification
-        device_token = user.device_token
-        title = "FacesbyPlaces Notification"
-        PushNotification(device_token, title, message, user, user(), params[:page_id], notif_type, " ")
     end
 end
