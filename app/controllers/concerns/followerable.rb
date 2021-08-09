@@ -11,4 +11,12 @@ module Followerable
             render json: {success: false, errors: "You either followed this page already or you are part of the family or a friend." }, status: 409
         end
     end
+
+    def set_page
+        if params[:page_type] == "Memorial"
+            @page = Memorial.find(params[:page_id])
+        elsif params[:page_type] == "Blm"
+            @page = Blm.find(params[:page_id])
+        end
+    end
 end

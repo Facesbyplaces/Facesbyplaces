@@ -85,12 +85,8 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def show
         @user = params[:account_type] === "1" ? User.find(params[:user_id]) : AlmUser.find(params[:user_id])
-
-        if @user
-            render json: UserSerializer.new( @user ).attributes
-        else
-            render json: {error: "No current user"}, status: 404
-        end
+        return render json: {error: "No current user"}, status: 404 unless @user
+        render json: UserSerializer.new( @user ).attributes
     end
 
     def posts

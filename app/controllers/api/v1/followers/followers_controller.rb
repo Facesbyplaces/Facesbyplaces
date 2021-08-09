@@ -27,14 +27,6 @@ class Api::V1::Followers::FollowersController < ApplicationController
     def follower_params
         params.permit(:page_type, :page_id)
     end
-    
-    def set_page
-        if params[:page_type] == "Memorial"
-            @page = Memorial.find(params[:page_id])
-        elsif params[:page_type] == "Blm"
-            @page = Blm.find(params[:page_id])
-        end
-    end
 
     def send_notif(user, message, notif_type)
         Notification.create(recipient: user, actor: user(), action: message, postId: params[:page_id], read: false, notif_type: notif_type)            

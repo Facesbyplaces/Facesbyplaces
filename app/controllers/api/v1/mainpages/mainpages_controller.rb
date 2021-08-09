@@ -1,7 +1,7 @@
 class Api::V1::Mainpages::MainpagesController < ApplicationController
     include Postable
     before_action :authenticate_user
-    before_action :set_posts
+    before_action :set_posts, only: [:posts]
 
     def feed
         render json: {  itemsremaining:  itemsRemaining(postsFeed),

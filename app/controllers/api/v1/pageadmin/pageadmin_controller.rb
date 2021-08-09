@@ -46,14 +46,9 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def removeFamilyorFriend
         is_page_owner
-        return render json: {error: "Cannot remove admin"}, status: 422 if is_page_admin == true
-        
-        # check if relation exist or not
-        if @page.relationships.where(account: @user).first != nil && @page.relationships.where(account: @user).first.destroy 
-            render json: {status: "Deleted Successfully"}
-        else
-            render json: {}, status: 400
-        end
+        return render json: {error: "Cannot remove admin"}, status: 422 if is_page_admin == true        
+        return render json: {}, status: 400 unless @page.relationships.where(account: @user).first != nil && @page.relationships.where(account: @user).first.destroy 
+        render json: {status: "Deleted Successfully"}
     end
 
     def editPost
@@ -62,13 +57,9 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def updatePost
         post_creator = @post.account
-        
-        if @post.update(@post_params)
-            @post.account = post_creator
-            render json: {post: PostSerializer.new( @post ).attributes, status: :updated}
-        else
-            render json: {errors: @post.errors}
-        end
+        render json: {errors: @post.errors} unless @post.update(@post_params)
+        @post.account = post_creator
+        render json: {post: PostSerializer.new( @post ).attributes, status: :updated}
     end
 
     def deletePost
