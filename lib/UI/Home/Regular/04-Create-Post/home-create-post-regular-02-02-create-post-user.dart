@@ -15,6 +15,8 @@ class RegularSearchUsers{
 }
 
 class HomeRegularCreatePostSearchUser extends StatefulWidget{
+  final List<RegularTaggedUsers> taggedUsers;
+  HomeRegularCreatePostSearchUser({required this.taggedUsers});
 
   @override
   HomeRegularCreatePostSearchUserState createState() => HomeRegularCreatePostSearchUserState();
@@ -64,8 +66,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
       count.value = count.value + newValue.almSearchUsers.length;
 
       for(int i = 0; i < newValue.almSearchUsers.length; i++){
-        users.add(
-          RegularSearchUsers(
+        users.add(RegularSearchUsers(
             userId: newValue.almSearchUsers[i].searchUsersId,
             firstName: newValue.almSearchUsers[i].searchUsersFirstName,
             lastName: newValue.almSearchUsers[i].searchUsersLastName,
@@ -74,6 +75,22 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
             image: newValue.almSearchUsers[i].searchUsersImage,
           ),
         );
+      }
+
+      if(widget.taggedUsers.length > 0){
+        List<RegularSearchUsers> filteredList = users.where((element){
+          bool value = true;
+
+          for(int j = 0; j < widget.taggedUsers.length; j++){
+            if(element.userId == widget.taggedUsers[j].userId && element.accountType == widget.taggedUsers[j].accountType){
+              value = false;
+            }
+          }
+
+          return value;
+        }).toList();
+
+        users = filteredList;
       }
     }
 

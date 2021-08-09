@@ -618,7 +618,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                         ),
                                       ),
                                       onTap: () async{
-                                        RegularTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchUser()));
+                                        RegularTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePostSearchUser(taggedUsers: users,)));
 
                                         if(result != null){
                                           userCount.value++;

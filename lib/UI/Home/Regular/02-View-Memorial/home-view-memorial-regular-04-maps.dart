@@ -63,7 +63,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
               await showDialog(
                 context: context,
                 builder: (_) => AssetGiffyDialog(
-                  description: Text('Approximately ${roadInformation.distance! * 0.62137} miles from the location.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                  description: Text('Approximately ${(roadInformation.distance! * 0.62137).truncate()} miles from the location.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                   entryAnimation: EntryAnimation.DEFAULT,

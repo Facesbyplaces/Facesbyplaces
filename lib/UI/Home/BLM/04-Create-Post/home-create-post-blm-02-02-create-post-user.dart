@@ -15,6 +15,8 @@ class BLMSearchUsers{
 }
 
 class HomeBLMCreatePostSearchUser extends StatefulWidget{
+  final List<BLMTaggedUsers> taggedUsers;
+  HomeBLMCreatePostSearchUser({required this.taggedUsers});
 
   @override
   HomeBLMCreatePostSearchUserState createState() => HomeBLMCreatePostSearchUserState();
@@ -72,6 +74,40 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
           accountType: newValue.blmUsers[i].searchUsersAccountType,
           image: newValue.blmUsers[i].searchUsersImage,
         ));
+      }
+
+      // if(widget.taggedUsers.length > 0){
+      //   List<BLMSearchUsers> filteredList = [];
+
+      //   for(int j = 0; j < widget.taggedUsers.length; j++){
+      //     print('The tagged user name is ${widget.taggedUsers[j].name}');
+      //     print('The tagged user userId is ${widget.taggedUsers[j].userId}');
+      //     print('The tagged user accountType is ${widget.taggedUsers[j].accountType}\n');
+      //     filteredList = users.where((element) => !(element.userId == widget.taggedUsers[j].userId && element.accountType == widget.taggedUsers[j].accountType)).toList();
+      //   }
+
+      //   users = filteredList;
+      //   setState(() {});
+      // }else{
+      //   print('heheheh');
+      // }
+
+      // List<BLMSearchUsers> filteredList = users.where((element) => !(element.userId == widget.taggedUsers[j].userId && element.accountType == widget.taggedUsers[j].accountType)).toList();
+
+      if(widget.taggedUsers.length > 0){
+        List<BLMSearchUsers> filteredList = users.where((element){
+          bool value = true;
+
+          for(int j = 0; j < widget.taggedUsers.length; j++){
+            if(element.userId == widget.taggedUsers[j].userId && element.accountType == widget.taggedUsers[j].accountType){
+              value = false;
+            }
+          }
+
+          return value;
+        }).toList();
+
+        users = filteredList;
       }
     }
 

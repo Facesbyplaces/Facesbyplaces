@@ -123,7 +123,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
             SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Grandfather', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Grandfather', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Grandfather');
               },

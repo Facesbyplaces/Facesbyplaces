@@ -1,12 +1,10 @@
 import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
-import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart';
 import 'UI/Home/Regular/07-Search/home-search-regular-01-search.dart';
 import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
-import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,8 +27,6 @@ import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
 import 'UI/ui-03-newly-installed.dart';
 import 'dart:async';
-
-import 'UI/ui-05-new-test-map.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -101,7 +97,6 @@ void main() async{
               }
             }
           }()),
-          // home: TestMap(),
           builder: (context, widget) => ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),
             maxWidth: 1200,
@@ -136,13 +131,13 @@ void main() async{
             '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
 
             '/home/blm': (BuildContext context) => HomeBLMScreen(),
-            '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
+            // '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
             '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
             '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
             '/home/blm/search': (BuildContext context) => HomeBLMSearch(), // BLM HOME SCREEN
 
             '/home/regular': (BuildContext context) => HomeRegularScreen(),
-            '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
+            // '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
             '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
             '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
             '/home/regular/search': (BuildContext context) => HomeRegularSearch(), // ALM HOME SCREEN

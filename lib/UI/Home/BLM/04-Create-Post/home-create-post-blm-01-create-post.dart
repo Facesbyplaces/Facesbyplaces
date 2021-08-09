@@ -587,7 +587,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        BLMTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchUser()));
+                                        BLMTaggedUsers? result = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePostSearchUser(taggedUsers: users,)));
 
                                         if(result != null){
                                           userCount.value++;
