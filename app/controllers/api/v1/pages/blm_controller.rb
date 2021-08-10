@@ -16,8 +16,9 @@ class Api::V1::Pages::BlmController < ApplicationController
     before_action :set_family_admins, only: [:adminIndex]
 
     def create
-        blm = Blm.new(blm_params)
-        save_blm(blm)
+        @blm = Memorials::Blm::Create.new( memorial: blm_params, user: user(), relationship: params[:relationship] )
+        @blm.execute
+        render json: { blm: @blm, status: :created }
     end
 
     def show
@@ -153,7 +154,7 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def blm_params
-        params.require(:blm).permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country,  :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
+        params.require(:blm).permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country, :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
     end
 
     def blm_details_params
@@ -162,79 +163,6 @@ class Api::V1::Pages::BlmController < ApplicationController
 
     def blm_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
-    end
-
-    def save_blm(blm)
-        # set privacy to public
-        set_privacy(blm)
-
-        if blm.save
-            # save the user as owner
-            save_owner(blm)
-            # update blm location
-            update_location(blm)
-            # save relationship of the user to the page
-            save_relationship(blm)
-        else  
-            render json: {errors: blm.errors}, status: 500
-            blm.destroy
-        end
-    end
-
-    def set_privacy(blm)
-        blm.privacy = "public"
-        blm.hideFamily = false
-        blm.hideFriends = false
-        blm.hideFollowers = false
-    end
-
-    def save_owner(blm)
-        pageowner = Pageowner.new(account_type: "User", account_id: user().id, view: 0)
-        blm.pageowner = pageowner
-    end
-
-    def update_location(blm)
-        blm.update(latitude: blm_params[:latitude], longitude: blm_params[:longitude])
-    end
-
-    def save_relationship(blm)
-        relationship = blm.relationships.new(account: user(), relationship: params[:relationship])
-        
-        if relationship.save 
-            # set current user as admin
-            set_admin(blm)
-            # notify all Users
-            notify_users(blm)
-            return render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
-        else
-            return render json: {errors: relationship.errors}, status: 500
-        end
-    end
-
-    def set_admin(blm)
-        user().add_role "pageadmin", blm
-    end
-
-    def notify_users(blm)
-        blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'User' AND notifsettings.account_id != #{user().id}")
-        almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
-        
-        blmUsersDeviceToken = []
-        blmUsers.each do |user|
-            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
-            blmUsersDeviceToken << user.device_token
-        end
-
-        almUsersDeviceToken = []
-        almUsers.each do |user|
-            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
-            almUsersDeviceToken << user.device_token
-        end
-
-        device_tokens = almUsersDeviceToken + blmUsersDeviceToken
-        title = "New Memorial Page"
-        message = "#{user().first_name} created a new page"
-        PushNotification(device_tokens, title, message, user, user(), blm.id, "Blm", " ")
     end
 
     def add_view_count
