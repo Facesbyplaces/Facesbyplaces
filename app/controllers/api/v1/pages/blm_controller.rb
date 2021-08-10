@@ -16,9 +16,9 @@ class Api::V1::Pages::BlmController < ApplicationController
     before_action :set_family_admins, only: [:adminIndex]
 
     def create
-        @blm = Memorials::Blm::Create.new( memorial: blm_params, user: user(), relationship: params[:relationship] )
-        @blm.execute
-        render json: { blm: @blm, status: :created }
+        Memorials::Blm::Create.new( memorial: blm_params, user: user(), relationship: params[:relationship] ).execute
+        
+        render json: { blm: { memorial: Blm.last, user: user(), relationship: params[:relationship] }, status: :created }
     end
 
     def show
@@ -29,32 +29,25 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def editDetails
-        # render memorial details that be editted
         render json: {blm: BlmSerializer.new( @blm ).attributes}
     end
 
     def updateDetails
         @blm.update(blm_details_params)
         @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
-
         render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated details"}
     end
 
     def editImages
-        # render memorial images that be editted
         render json: {blm: BlmSerializer.new( @blm ).attributes}
     end
 
     def updateImages
-        return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"}
+        return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"} if @blm.update(blm_images_params)
     end
 
     def delete
-        @adminsRaw.each do |admin_id|
-            User.find(admin_id).roles.where(resource_type: 'Blm', resource_id: params[:id]).first.destroy
-        end
-
-        @blm.destroy()
+        Memorials::Blm::Destroy.new( memorial: @blm, admins: @adminsRaw, id: params[:id] ).execute
         
         render json: {status: "deleted"}
     end
