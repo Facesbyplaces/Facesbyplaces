@@ -14,17 +14,21 @@ class Api::V1::Pages::BlmController < ApplicationController
     before_action :set_adminsRaw, only: [:adminIndex, :delete]
     before_action :set_admins, only: [:adminIndex]
     before_action :set_family_admins, only: [:adminIndex]
+    before_action :add_view_count, only: [:show]
 
     def create
         Memorials::Blm::Create.new( memorial: blm_params, user: user(), relationship: params[:relationship] ).execute
-        
+
         render json: { blm: { memorial: Blm.last, user: user(), relationship: params[:relationship] }, status: :created }
     end
 
-    def show
-        # add count to view of page
-        add_view_count
+    def delete
+        Memorials::Blm::Destroy.new( memorial: @blm, admins: @adminsRaw, id: params[:id] ).execute
+        
+        render json: {status: "deleted"}
+    end
 
+    def show
         render json: {blm: BlmSerializer.new( @blm ).attributes}
     end
 
@@ -32,24 +36,12 @@ class Api::V1::Pages::BlmController < ApplicationController
         render json: {blm: BlmSerializer.new( @blm ).attributes}
     end
 
-    def updateDetails
-        @blm.update(blm_details_params)
-        @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
-        render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated details"}
-    end
-
     def editImages
         render json: {blm: BlmSerializer.new( @blm ).attributes}
     end
 
     def updateImages
-        return render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"} if @blm.update(blm_images_params)
-    end
-
-    def delete
-        Memorials::Blm::Destroy.new( memorial: @blm, admins: @adminsRaw, id: params[:id] ).execute
-        
-        render json: {status: "deleted"}
+        render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated images"} if @blm.update(blm_images_params)
     end
 
     def setPrivacy
@@ -62,17 +54,19 @@ class Api::V1::Pages::BlmController < ApplicationController
         render json: {status: :success}
     end
 
+    def updateDetails
+        @blm.update(blm_details_params)
+        @blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
+
+        render json: {blm: BlmSerializer.new( @blm ).attributes, status: "updated details"}
+    end
+    
     def leaveBLM        # leave blm page for family and friends
         return render json: {}, status: 404 unless @blm.relationships.where(account: user()).first != nil
+        return render json: {}, status: 401 unless user().has_role? :pageadmin, @blm && User.with_role(:pageadmin, @blm).count != 1 && @blm.relationships.where(account: user()).first.destroy 
         
-        # check if the user is a pageadmin
-        if user().has_role? :pageadmin, @blm && User.with_role(:pageadmin, @blm).count != 1 && @blm.relationships.where(account: user()).first.destroy 
-            user().remove_role :pageadmin, @blm
-        elsif @blm.relationships.where(account: user()).first.destroy 
-            render json: {}, status: 200
-        else
-            render json: {}, status: 401
-        end
+        user().remove_role :pageadmin, @blm
+        render json: {}, status: 200
     end
 
     def familyIndex
@@ -158,24 +152,4 @@ class Api::V1::Pages::BlmController < ApplicationController
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
     end
 
-    def add_view_count
-        page = Pageowner.where(page_type: 'Blm', page_id: @blm.id).first
-        return render json: {errors: "Page not found"}, status: 400 unless page != nil
-        
-        if page.view == nil
-            page.update(view: 1)
-        else
-            page.update(view: (page.view + 1))
-        end
-    end
-
-    def itemsRemaining(item)
-        if item.total_count == 0 || (item.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif item.total_count < numberOfPage
-            itemsremaining = item.total_count 
-        else
-            itemsremaining = item.total_count - (params[:page].to_i * numberOfPage)
-        end
-    end
 end
