@@ -3,7 +3,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     before_action :authenticate_user
     before_action :verify_admin_account_type, only: [:addAdmin]
     before_action :set_page, except: [:editPost, :updatePost, :deletePost]
-    before_action :set_user, except: [:editPost, :updatePost, :deletePost, :unhideOrHideFamily, :unhideOrHideFollowers, :unhideOrHideFriends]
+    before_action :set_user, except: [:editPost, :updatePost, :deletePost, :unhideOrHideFamily, :unhideOrHideFollowers, :unhideOrHideFriends, :hideStatus]
     before_action :set_post, only: [:editPost, :updatePost, :deletePost]
     before_action :verify_page_admin
     before_action :check_is_page_admin, only: [:addAdmin, :removeAdmin, :removeFamilyorFriend]
@@ -89,7 +89,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
 
     def verify_page_admin
-        if user().has_role? :pageadmin, @page 
+        unless user().has_role? :pageadmin, @page 
             return render json: {status: "Access Denied"}, status: 401
         end
     end
