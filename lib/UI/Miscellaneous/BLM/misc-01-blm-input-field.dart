@@ -39,18 +39,13 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
   Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-      cursorColor: const Color(0xff000000),
-      obscureText: widget.obscureText,
       keyboardType: widget.type,
       maxLines: widget.maxLines,
       readOnly: widget.readOnly,
-      decoration: InputDecoration(
-        focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-        labelStyle: widget.labelTextStyle,
-        labelText: widget.labelText,
-        alignLabelWithHint: true,
-      ),
+      obscureText: widget.obscureText,
+      cursorColor: const Color(0xff000000),
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      decoration: InputDecoration(focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),), labelStyle: widget.labelTextStyle, labelText: widget.labelText, alignLabelWithHint: true,),
     );
   }
 }
@@ -82,11 +77,11 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
   Widget build(BuildContext context){
     return TextFormField(
       controller: controller,
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-      cursorColor: const Color(0xff000000),
       maxLines: widget.maxLines,
       keyboardType: widget.type,
       readOnly: widget.readOnly,
+      cursorColor: const Color(0xff000000),
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         filled: true,
         alignLabelWithHint: true,

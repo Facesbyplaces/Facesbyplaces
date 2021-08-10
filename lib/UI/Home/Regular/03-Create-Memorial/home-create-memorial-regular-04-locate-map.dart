@@ -80,8 +80,9 @@ class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMem
         ),
       ),
       topWidgetPicker: HomeRegularCreateMemorialLocateMapTopWidget(),
-      bottomWidgetPicker: Align(
+      bottomWidgetPicker: Container(
         alignment: Alignment.bottomRight,
+        padding: EdgeInsets.all(5),
         child: FloatingActionButton(
           onPressed: () async {
             GeoPoint p = await controller.getCurrentPositionAdvancedPositionPicker();
@@ -89,7 +90,7 @@ class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMem
             print('The geopoint longitude is ${p.longitude}');
             Navigator.pop(context, p);
           },
-          child: Icon(Icons.arrow_forward),
+          child: Icon(Icons.location_pin),
         ),
       ),
     );
