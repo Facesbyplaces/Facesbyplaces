@@ -10,6 +10,10 @@ Future<bool> apiRegularUpdatePageImages({required int memorialId, required dynam
   Dio dioRequest = Dio();
   FormData formData = FormData.fromMap({});
 
+  print('The value of memorialId is $memorialId');
+  print('The value of backgroundImage is ${backgroundImage.path}');
+  print('The value of profileImage is ${profileImage.path}');
+
   if(backgroundImage.path != ''){
     var file = await MultipartFile.fromFile(backgroundImage.path, filename: backgroundImage.path);
     formData.files.add(MapEntry('backgroundImage', file));

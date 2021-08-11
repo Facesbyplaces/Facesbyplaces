@@ -22,6 +22,9 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({required in
 
   Dio dioRequest = Dio();
 
+  print('The user id in regular is $userId');
+  print('The accountType in regular is $accountType');
+
   var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
     options: Options(
       followRedirects: false,

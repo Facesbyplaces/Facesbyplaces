@@ -62,8 +62,6 @@ Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) as
 
   if(response.statusCode == 200){
     var value = response.data;
-    // var user = value['blm']['user'];
-    // int userId = user['id'];
     int userId = value['blm']['memorial']['id'];
     print('The userId is $userId');
     

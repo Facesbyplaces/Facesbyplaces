@@ -26,6 +26,7 @@ class HomeRegularPageManagers extends StatefulWidget{
 
 class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<Widget> managers = [];
   int adminItemsRemaining = 1;
   int familyItemsRemaining = 1;
@@ -40,9 +41,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(adminItemsRemaining != 0 && familyItemsRemaining != 0){
-          setState((){
-            onLoading();
-          });
+          onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('No more users to show'), duration: const Duration(seconds: 1), backgroundColor: const Color(0xff4EC9D4),),);
         }
@@ -60,11 +59,15 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
 
   Future<void> onRefresh() async{
     if (adminItemsRemaining == 0 && flag1 == false){
-      setState((){
-        flag1 = true;
-      });
+      flag1 = true;
       onLoading1();
     }else{
+      adminItemsRemaining = 1;
+      familyItemsRemaining = 1;
+      page1 = 1;
+      page2 = 1;
+      count.value = 0;
+      flag1 = false;
       onLoading2();
     }
   }
@@ -102,6 +105,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       context.loaderOverlay.hide();
 
       adminItemsRemaining = newValue.almAdminItemsRemaining;
+      count.value = count.value + newValue.almAdminList.length;
 
       for(int i = 0; i < newValue.almAdminList.length; i++){
         managers.add(
@@ -211,7 +215,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     }
 
     if(mounted)
-    setState(() {});
     page1++;
 
     if(adminItemsRemaining == 0){
@@ -228,6 +231,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.almFamilyItemsRemaining;
+      count.value = count.value + newValue.almFamilyList.length;
 
       for(int i = 0; i < newValue.almFamilyList.length; i++){
         managers.add(
@@ -334,64 +338,66 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
           ),
         );
       }
-
-      if (mounted)
-      setState(() {});
-      page2++;
     }
+
+    if (mounted)
+    page2++;
   }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff04ECFF),
-        centerTitle: true,
-        title: Row(
-          children: [
-            Text('Page Managers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-            
-            Spacer(),
-          ],
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.52,),
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: Container(
-        width: SizeConfig.screenWidth,
-        child: managers.length != 0
-        ? RefreshIndicator(
-          onRefresh: onRefresh,
-          child: ListView.separated(
-            controller: scrollController,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            physics: const ClampingScrollPhysics(),
-            itemBuilder: (c, i) => managers[i],
-            itemCount: managers.length,  
-          ),
-        )
-        : SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xff04ECFF),
+          centerTitle: true,
+          title: Row(
             children: [
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
-
-              const SizedBox(height: 45,),
-
-              Text('Managers list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
-
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              Text('Page Managers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              
+              Spacer(),
             ],
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.52,),
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: Container(
+          width: SizeConfig.screenWidth,
+          child: countListener != 0
+          ? RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+              physics: const ClampingScrollPhysics(),
+              itemBuilder: (c, i) => managers[i],
+              itemCount: managers.length,  
+            ),
+          )
+          : SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                const SizedBox(height: 45,),
+
+                Text('Managers list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              ],
+            ),
           ),
         ),
       ),

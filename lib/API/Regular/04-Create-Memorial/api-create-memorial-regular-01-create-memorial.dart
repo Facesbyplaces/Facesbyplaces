@@ -60,8 +60,10 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
 
   if(response.statusCode == 200){
     var value = response.data;
-    var user = value['memorial'];
-    int userId = user['id'];
+    // var user = value['memorial'];
+    // int userId = user['id'];
+    int userId = value['alm']['memorial']['id'];
+    print('The userId is $userId');
     
     return userId;
   }else{
