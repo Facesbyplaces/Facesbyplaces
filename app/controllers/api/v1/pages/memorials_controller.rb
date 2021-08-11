@@ -14,14 +14,21 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :set_adminsRaw, only: [:adminIndex, :delete]
     before_action :set_admins, only: [:adminIndex]
     before_action :set_family_admins, only: [:adminIndex]
+    before_action :add_view_count, only: [:show]
     
     def create
-        memorial = Memorial.new(memorial_params)
-        save_memorial(memorial)
+        Memorials::Create.new( memorial: memorial_params, user: user(), relationship: params[:relationship], type: "Memorial" ).execute
+
+        render json: { alm: { memorial: Memorial.last, user: user(), relationship: params[:relationship] }, status: :created }
+    end
+
+    def delete
+        Memorials::Blm::Destroy.new( memorial: @memorial, admins: @adminsRaw, id: params[:id], type: "Memorial" ).execute
+        
+        render json: {status: "deleted"}
     end
 
     def show
-        add_view_count
         render json: {memorial: MemorialSerializer.new( @memorial ).attributes}
     end
 
@@ -29,28 +36,12 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         render json: {memorial: MemorialSerializer.new( @memorial ).attributes}
     end
 
-    def updateDetails
-        @memorial.update(memorial_details_params)
-        @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
-
-        return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated details"}
-    end
-
     def editImages
         render json: {memorial: MemorialSerializer.new( @memorial ).attributes}
     end
 
     def updateImages
-        render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated images"}
-    end
-
-    def delete
-        @adminsRaw.each do |admin_id|
-            AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: params[:id]).first.destroy 
-        end
-        @memorial.destroy()
-        
-        render json: {status: "deleted"}
+        render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated images"} if @memorial.update(memorial_images_params)
     end
 
     def setPrivacy
@@ -61,6 +52,13 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def setRelationship   # for friends and families
         @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
         render json: {status: :success}
+    end
+
+    def updateDetails
+        @memorial.update(memorial_details_params)
+        @memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
+
+        return render json: {memorial: MemorialSerializer.new( @memorial ).attributes, status: "updated details"}
     end
 
     def leaveMemorial       # leave memorial page for family and friends-]
@@ -157,100 +155,4 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def memorial_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
     end
-
-    def save_memorial(memorial)
-            set_privacy(memorial)
-
-            if memorial.save
-                # save the user as owner
-                save_owner(memorial)
-                # update memorial location
-                update_location(memorial)
-                # save relationship of the user to the page
-                save_relationship(memorial)
-            else  
-                render json: {errors: memorial.errors}, status: 500
-                memorial.destroy
-            end
-    end
-
-    def set_privacy(memorial)
-        # set privacy to public
-        memorial.privacy = "public"
-        memorial.hideFamily = false
-        memorial.hideFriends = false
-        memorial.hideFollowers = false
-    end
-
-    def save_owner(memorial)
-        pageowner = Pageowner.new(account_type:  "AlmUser", account_id: user().id, view: 0)
-        memorial.pageowner = pageowner
-    end
-
-    def update_location(memorial)
-        memorial.update(latitude: memorial_params[:latitude], longitude: memorial_params[:longitude])
-    end
-
-    def save_relationship(memorial)
-        # save relationship of the user to the page
-        relationship = memorial.relationships.new(account: user(), relationship: params[:relationship])
-        if relationship.save 
-            # set current user as admin
-            set_admin(memorial)
-            # notify all Users
-            notify_users(memorial)
-
-            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
-        else
-            return render json: {errors: relationship.errors}, status: 500
-        end
-    end
-
-    def set_admin(memorial)
-        user().add_role "pageadmin", memorial
-    end
-
-    def notify_users(memorial)
-        blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true)
-        almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'AlmUser' AND notifsettings.account_id != #{user().id}")
-        
-        blmUsersDeviceToken = []
-        blmUsers.each do |user|
-            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
-            blmUsersDeviceToken << user.device_token
-        end
-
-        almUsersDeviceToken = []
-        almUsers.each do |user|
-            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
-            almUsersDeviceToken << user.device_token
-        end
-
-        device_tokens = almUsersDeviceToken + blmUsersDeviceToken
-        title = "New Memorial Page"
-        message = "#{user().first_name} created a new page"
-        PushNotification(device_tokens, title, message, user, user(), memorial.id, "Memorial", " ")
-    end
-
-    def add_view_count
-        page = Pageowner.where(page_type: 'Memorial', page_id: @memorial.id).first
-        return render json: {errors: "Page not found"}, status: 400 unless page != nil
-        
-        if page.view == nil
-            page.update(view: 1)
-        else
-            page.update(view: (page.view + 1))
-        end
-    end
-
-    def itemsRemaining(item)
-        if item.total_count == 0 || (item.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif item.total_count < numberOfPage
-            itemsremaining = item.total_count 
-        else
-            itemsremaining = item.total_count - (params[:page].to_i * numberOfPage)
-        end
-    end
-
 end

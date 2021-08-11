@@ -28,4 +28,9 @@ module Userable
         @alm_users = alm_users.page(params[:page]).per(numberOfPage)
     end
 
+    def set_posts
+        posts = @user.posts.order("posts.id DESC")
+        @posts = posts.page(params[:page]).per(numberOfPage)
+    end
+
 end

@@ -1,6 +1,7 @@
 class Api::V1::Users::UsersController < ApplicationController
-    include Postable
+    include Userable
     before_action :authenticate_user
+    before_action :set_user, only: [:show, :posts, :memorials]
     before_action :set_posts, only: [:posts]
     before_action :check_user, only: [:updateDetails, :updateOtherInfos, :getDetails, :getOtherInfos, :getOtherInfos]
 
@@ -84,7 +85,6 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        @user = params[:account_type] === "1" ? User.find(params[:user_id]) : AlmUser.find(params[:user_id])
         return render json: {error: "No current user"}, status: 404 unless @user
         render json: UserSerializer.new( @user ).attributes
     end
@@ -100,14 +100,14 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def memorials
         render json: {
-            ownedItemsRemaining: itemsRemaining(user().owned(params[:page])),
+            ownedItemsRemaining: itemsRemaining(@user.owned(params[:page])),
             owned: ActiveModel::SerializableResource.new(
-                        user().owned(params[:page]), 
+                        @user.owned(params[:page]), 
                         each_serializer: PageSerializer
                     ),
-            followedItemsRemaining: itemsRemaining(user().followed(params[:page])),
+            followedItemsRemaining: itemsRemaining(@user.followed(params[:page])),
             followed: ActiveModel::SerializableResource.new(
-                        user().followed(params[:page]), 
+                        @user.followed(params[:page]), 
                         each_serializer: PageSerializer
                     ),
         }

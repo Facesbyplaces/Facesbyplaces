@@ -17,13 +17,13 @@ class Api::V1::Pages::BlmController < ApplicationController
     before_action :add_view_count, only: [:show]
 
     def create
-        Memorials::Blm::Create.new( memorial: blm_params, user: user(), relationship: params[:relationship] ).execute
+        Memorials::Create.new( memorial: blm_params, user: user(), relationship: params[:relationship], type: "Blm" ).execute
 
         render json: { blm: { memorial: Blm.last, user: user(), relationship: params[:relationship] }, status: :created }
     end
 
     def delete
-        Memorials::Blm::Destroy.new( memorial: @blm, admins: @adminsRaw, id: params[:id] ).execute
+        Memorials::Blm::Destroy.new( memorial: @blm, admins: @adminsRaw, id: params[:id], type: "Blm" ).execute
         
         render json: {status: "deleted"}
     end
