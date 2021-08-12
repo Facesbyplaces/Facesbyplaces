@@ -26,6 +26,7 @@ class HomeBLMPageManagers extends StatefulWidget{
 
 class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<Widget> managers = [];
   int adminItemsRemaining = 1;
   int familyItemsRemaining = 1;
@@ -40,9 +41,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(adminItemsRemaining != 0 && familyItemsRemaining != 0){
-          setState((){
-            onLoading();
-          });
+          onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -66,37 +65,25 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
 
   Future<void> onRefresh() async{
     if(adminItemsRemaining == 0 && flag1 == false){
-      setState((){
-        flag1 = true;
-      });
+      flag1 = true;
       onLoading1();
-    } else {
+    }else{
+      adminItemsRemaining = 1;
+      familyItemsRemaining = 1;
+      page1 = 1;
+      page2 = 1;
+      count.value = 0;
+      flag1 = false;
       onLoading2();
     }
   }
 
   void addManagers1(){
-    managers.add(
-       Padding(
-        padding: const EdgeInsets.only(left: 20.0,),
-        child: Text('Admin', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),
-      ),
-    );
+    managers.add(Padding(padding: const EdgeInsets.only(left: 20.0,), child: Text('Admin', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
   }
 
   void addManagers2(){
-    managers.add(
-      Padding(
-        padding: const EdgeInsets.only(left: 20.0,),
-        child: Text('Family',
-          style: TextStyle(
-            fontSize: SizeConfig.blockSizeVertical! * 1.76,
-            fontFamily: 'NexaRegular',
-            color: const Color(0xff9F9F9F),
-          ),
-        ),
-      ),
-    );
+    managers.add(Padding(padding: const EdgeInsets.only(left: 20.0,), child: Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff9F9F9F),),),),);
   }
 
   void onLoading1() async{
@@ -124,6 +111,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       context.loaderOverlay.hide();
 
       adminItemsRemaining = newValue.blmAdminItemsRemaining;
+      count.value = count.value + newValue.blmAdminList.length;
 
       for(int i = 0; i < newValue.blmAdminList.length; i++){
         managers.add(
@@ -233,7 +221,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     }
 
     if(mounted)
-    setState(() {});
     page1++;
 
     if(adminItemsRemaining == 0){
@@ -250,6 +237,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       context.loaderOverlay.hide();
 
       familyItemsRemaining = newValue.blmFamilyItemsRemaining;
+      count.value = count.value + newValue.blmFamilyList.length;
 
       for(int i = 0; i < newValue.blmFamilyList.length; i++){
         managers.add(
@@ -356,64 +344,66 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
           ),
         );
       }
-
-      if(mounted)
-      setState(() {});
-      page2++;
     }
+
+    if(mounted)
+    page2++;
   }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff04ECFF),
-        title: Row(
-          children: [
-            Text('Page Managers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-
-            Spacer(),
-          ],
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.52,),
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: Container(
-        width: SizeConfig.screenWidth,
-        child: managers.length != 0
-        ? RefreshIndicator(
-          onRefresh: onRefresh,
-          child: ListView.separated(
-            controller: scrollController,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            physics: const ClampingScrollPhysics(),
-            itemBuilder: (c, i) => managers[i],
-            itemCount: managers.length,
-          ),
-        )
-        : SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xff04ECFF),
+          title: Row(
             children: [
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              Text('Page Managers', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
-
-              const SizedBox(height: 45,),
-
-              Text('Managers list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
-
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              Spacer(),
             ],
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back,size: SizeConfig.blockSizeVertical! * 3.52,),
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: Container(
+          width: SizeConfig.screenWidth,
+          child: countListener != 0
+          ? RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+              physics: const ClampingScrollPhysics(),
+              itemBuilder: (c, i) => managers[i],
+              itemCount: managers.length,
+            ),
+          )
+          : SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                const SizedBox(height: 45,),
+
+                Text('Managers list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              ],
+            ),
           ),
         ),
       ),

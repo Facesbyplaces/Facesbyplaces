@@ -340,7 +340,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       }
     }
 
-    if (mounted)
+    if(mounted)
     page2++;
   }
 

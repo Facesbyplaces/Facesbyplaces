@@ -212,7 +212,6 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
         ),
         body: Container(
           width: SizeConfig.screenWidth,
-          // child: family.length != 0
           child: countListener != 0
           ? RefreshIndicator(
             onRefresh: onRefresh,

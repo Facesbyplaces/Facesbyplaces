@@ -24,10 +24,9 @@ class HomeBLMUserDonate extends StatefulWidget{
 class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/google-pay.svg', semanticsLabel: 'Google Pay Mark', height: 52, width: 52);
+  ValueNotifier<int> donateToggle = ValueNotifier<int>(0);
   CardFieldInputDetails? newCard;
   int paymentToggle = 0;
-  // int donateToggle = 0;
-  ValueNotifier<int> donateToggle = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context){
@@ -106,9 +105,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                 ),
                               ),
                               onTap: (){
-                                // setState(() {
-                                //   donateToggle = index;
-                                // });
                                 donateToggle.value = index;
                               },
                             );
@@ -124,7 +120,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       buttonText: 'Send Gift',
                       height: 45,
                       onPressed: () async{
-
                         String amount = '0.99';
 
                         if(donateToggle.value == 0){

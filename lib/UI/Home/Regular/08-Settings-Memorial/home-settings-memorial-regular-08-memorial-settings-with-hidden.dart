@@ -16,58 +16,59 @@ class HomeRegularMemorialSettingsWithHidden extends StatefulWidget{
 }
 
 class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemorialSettingsWithHidden>{
-  int toggle = 0;
+  ValueNotifier<int> toggle = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Memorial Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
-        backgroundColor: const Color(0xff04ECFF),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-            Navigator.pop(context);
-          },
+    return ValueListenableBuilder(
+      valueListenable: toggle,
+      builder: (_, int toggleListener, __) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Memorial Settings', style: const TextStyle(fontSize: 16, color: const Color(0xffffffff),),),
+          backgroundColor: const Color(0xff04ECFF),
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            width: SizeConfig.screenWidth,
-            height: 70,
-            child: DefaultTabController(
-              length: 2,
-              child: TabBar(
-                unselectedLabelColor: const Color(0xff000000),
-                indicatorColor: const Color(0xff04ECFF),
-                labelColor: const Color(0xff04ECFF),
-                tabs: [
-                  const Center(child: const Text('Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
-                  const Center(child: const Text('Privacy', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
-                ],
-                onTap: (int index){
-                  setState((){
-                    toggle = index;
-                  });
-                },
+        body: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              width: SizeConfig.screenWidth,
+              height: 70,
+              child: DefaultTabController(
+                length: 2,
+                child: TabBar(
+                  unselectedLabelColor: const Color(0xff000000),
+                  indicatorColor: const Color(0xff04ECFF),
+                  labelColor: const Color(0xff04ECFF),
+                  tabs: [
+                    const Center(child: const Text('Page', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
+                    const Center(child: const Text('Privacy', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),),
+                  ],
+                  onTap: (int index){
+                    toggle.value = index;
+                  },
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              child: ((){
-                switch(toggle){
-                  case 0: return settingsTab1(widget.memorialId);
-                  case 1: return settingsTab2(widget.memorialId);
-                }
-              }()),
+            Expanded(
+              child: Container(
+                child: ((){
+                  switch(toggleListener){
+                    case 0: return settingsTab1(widget.memorialId);
+                    case 1: return settingsTab2(widget.memorialId);
+                  }
+                }()),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

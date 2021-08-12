@@ -20,6 +20,7 @@ class HomeBLMPageFriends extends StatefulWidget{
 
 class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   int friendsItemsRemaining = 1;
   List<Widget> friends = [];
   int page = 1;
@@ -30,9 +31,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
     scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
         if(friendsItemsRemaining != 0){
-          setState((){
-            onLoading();
-          });
+          onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -47,13 +46,15 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   }
 
   Future<void> onRefresh() async{
-    setState((){
-      onLoading();
-    });
+    count.value = 0;
+    friendsItemsRemaining = 1;
+    friends = [];
+    page = 1;
+    onLoading();
   }
 
-  void onLoading() async {
-    if (friendsItemsRemaining != 0) {
+  void onLoading() async{
+    if(friendsItemsRemaining != 0){
       context.loaderOverlay.show();
       var newValue = await apiBLMShowFriendsSettings(memorialId: widget.memorialId, page: page).onError((error, stackTrace){
         context.loaderOverlay.hide();
@@ -77,6 +78,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
       context.loaderOverlay.hide();
 
       friendsItemsRemaining = newValue.blmItemsRemaining;
+      count.value = count.value + newValue.blmFriendsList.length;
 
       for(int i = 0; i < newValue.blmFriendsList.length; i++){
         friends.add(
@@ -177,72 +179,74 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
           ),
         );
       }
-
-      if(mounted)
-      setState(() {});
-      page++;
     }
+
+    if(mounted)
+    page++;
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff04ECFF),
-        title: Row(
-          children: [
-            Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+    return ValueListenableBuilder(
+      valueListenable: count,
+      builder: (_, int countListener, __) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xff04ECFF),
+          title: Row(
+            children: [
+              Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
 
-            Spacer(),
-          ],
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          GestureDetector(
-            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
-            onTap: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
+              Spacer(),
+            ],
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+            onPressed: (){
+              Navigator.pop(context);
             },
           ),
-        ],
-      ),
-      body: Container(
-        width: SizeConfig.screenWidth,
-        child: friends.length != 0
-        ? RefreshIndicator(
-          onRefresh: onRefresh,
-          child: ListView.separated(
-            controller: scrollController,
-            separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+          actions: [
+            GestureDetector(
+              child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),),
+              onTap: (){
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)));
+              },
+            ),
+          ],
+        ),
+        body: Container(
+          width: SizeConfig.screenWidth,
+          child: countListener != 0
+          ? RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+              physics: const ClampingScrollPhysics(),
+              itemBuilder: (c, i) => friends[i],
+              itemCount: friends.length,
+            ),
+          )
+          : SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
-            itemBuilder: (c, i) => friends[i],
-            itemCount: friends.length,
-          ),
-        )
-        : SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
-              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+                Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-              const SizedBox(height: 45,),
+                const SizedBox(height: 45,),
 
-              Text('Friends list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                Text('Friends list is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
-            ],
+                SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
+              ],
+            ),
           ),
         ),
       ),

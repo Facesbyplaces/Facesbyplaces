@@ -24,10 +24,9 @@ class HomeRegularUserDonate extends StatefulWidget{
 class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   final Widget donateWithGoogle = SvgPicture.asset('assets/icons/google-pay.svg', semanticsLabel: 'Google Pay Mark', height: 52, width: 52);
   final Widget donateWithApple = SvgPicture.asset('assets/icons/apple-pay.svg', semanticsLabel: 'Apple Pay Mark', height: 32, width: 32);
+  ValueNotifier<int> donateToggle = ValueNotifier<int>(0);
   CardFieldInputDetails? newCard;
   int paymentToggle = 0;
-  // int donateToggle = 0;
-  ValueNotifier<int> donateToggle = ValueNotifier<int>(0);
 
   void initState(){
     super.initState();
@@ -110,10 +109,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                 ),
                               ),
                               onTap: (){
-                                // setState(() {
-                                //   donateToggle = index;
-                                // });
-
                                 donateToggle.value = index;
                               },
                             );
@@ -129,7 +124,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       buttonText: 'Send Gift',
                       height: 45,
                       onPressed: () async{
-
                         String amount = '0.99';
 
                         if(donateToggle.value == 0){

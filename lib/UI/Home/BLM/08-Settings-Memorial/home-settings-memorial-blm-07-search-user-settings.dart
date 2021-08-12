@@ -36,21 +36,20 @@ class HomeBLMSearchUser extends StatefulWidget{
 class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
+  ValueNotifier<int> count = ValueNotifier<int>(0);
   List<BLMSearchUsers> users = [];
   int itemRemaining = 1;
   String keywords = '';
   bool empty = true;
   int page = 1;
 
-  void initState() {
+  void initState(){
     super.initState();
     onLoading();
     scrollController.addListener((){
       if(scrollController.position.pixels == scrollController.position.maxScrollExtent){
-        if (itemRemaining != 0) {
-          setState((){
-            onLoading();
-          });
+        if(itemRemaining != 0){
+          onLoading();
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -65,9 +64,11 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   }
 
   Future<void> onRefresh() async{
-    setState((){
-      onLoading();
-    });
+    users = [];
+    itemRemaining = 1;
+    count.value = 0;
+    page = 1;
+    onLoading();
   }
 
   void onLoading() async{
@@ -95,6 +96,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
       context.loaderOverlay.hide();
 
       itemRemaining = newValue.blmItemsRemaining;
+      count.value = count.value + newValue.blmUsers.length;
 
       for(int i = 0; i < newValue.blmUsers.length; i++){
         users.add(
@@ -108,11 +110,10 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
           ),
         );
       }
-
-      if(mounted)
-      setState(() {});
-      page++;
     }
+
+    if(mounted)
+    page++;
   }
 
   @override
@@ -129,157 +130,174 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
             currentFocus.unfocus();
           }
         },
-        child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(70.0),
-            child: AppBar(
-              leading: Container(),
-              backgroundColor: const Color(0xff04ECFF),
-              flexibleSpace: Column(
-                children: [
-                  Spacer(),
+        child: ValueListenableBuilder(
+          valueListenable: count,
+          builder: (_, int countListener, __) => Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(70.0),
+              child: AppBar(
+                leading: Container(),
+                backgroundColor: const Color(0xff04ECFF),
+                flexibleSpace: Column(
+                  children: [
+                    Spacer(),
 
-                  Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
-                          onPressed: (){
-                            Navigator.pop(context);
-                          },
+                    Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                          ),
                         ),
-                      ),
 
-                      Spacer(),
-                      
-                      Container(
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
-                        width: SizeConfig.blockSizeHorizontal! * 79.06,
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: (){
-                                setState((){
+                        Spacer(),
+                        
+                        Container(
+                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25),),
+                          width: SizeConfig.blockSizeHorizontal! * 79.06,
+                          child: Row(
+                            children: [
+                              IconButton(
+                                onPressed: (){
                                   keywords = controller.text;
-                                });
 
-                                if(controller.text != ''){
-                                  onLoading();
-                                }
-                              },
-                              icon: const Icon(Icons.search, color: const Color(0xff888888)),
-                            ),
-                            Expanded(
-                              child: TextFormField(
-                                controller: controller,
-                                keyboardType: TextInputType.text,
-                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(15.0),
-                                  filled: true,
-                                  fillColor: const Color(0xffffffff),
-                                  focusColor: const Color(0xffffffff),
-                                  hintText: 'Search User',
-                                  hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
-                                  border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                  focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
-                                ),
-                                onChanged: (newPlaces){
-                                  setState((){
-                                    keywords = newPlaces;
-                                  });
-
-                                  if(newPlaces != ''){
-                                    setState((){
-                                      empty = false;
-                                      itemRemaining = 1;
-                                      page = 1;
-                                      keywords = '';
-                                    });
-                                  }else{
-                                    empty = true;
-                                    setState((){
-                                      users = [];
-                                    });
-                                  }
-                                },
-                                onFieldSubmitted: (newPlaces){
-                                  setState((){
-                                    keywords = newPlaces;
-                                  });
-
-                                  if(newPlaces != ''){
+                                  if(controller.text != ''){
                                     onLoading();
                                   }
                                 },
+                                icon: const Icon(Icons.search, color: const Color(0xff888888)),
                               ),
-                            )
-                          ],
+                              Expanded(
+                                child: TextFormField(
+                                  controller: controller,
+                                  keyboardType: TextInputType.text,
+                                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(15.0),
+                                    filled: true,
+                                    fillColor: const Color(0xffffffff),
+                                    focusColor: const Color(0xffffffff),
+                                    hintText: 'Search User',
+                                    hintStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
+                                    border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                    enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                    focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff)), borderRadius: const BorderRadius.all(Radius.circular(25)),),
+                                  ),
+                                  onChanged: (newPlaces){
+                                    keywords = newPlaces;
+
+                                    if(newPlaces != ''){
+                                      itemRemaining = 1;
+                                      page = 1;
+                                      keywords = '';
+                                    }else{
+                                      itemRemaining = 1;
+                                      count.value = 0;
+                                      users = [];
+                                      page = 1;
+                                    }
+                                  },
+                                  onFieldSubmitted: (newPlaces){
+                                    keywords = newPlaces;
+
+                                    if(newPlaces != ''){
+                                      onLoading();
+                                    }
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
 
-                      const SizedBox(width: 20,),
-                    ],
-                  ),
+                        const SizedBox(width: 20,),
+                      ],
+                    ),
 
-                  SizedBox(height: 5,),
-                ],
+                    SizedBox(height: 5,),
+                  ],
+                ),
               ),
             ),
-          ),
-          body: Container(
-            height: SizeConfig.screenHeight! - kToolbarHeight,
-            width: SizeConfig.screenWidth,
-            child: empty
-            ? SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              padding: EdgeInsets.zero,
-              child: Column(
-                children: [
-
-                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-
-                  Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
-
-                  const SizedBox(height: 20,),
-
-                  Text('Search to add users', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
-
-                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
-                ],
-              ),
-            )
-            : Container(
+            body: Container(
+              height: SizeConfig.screenHeight! - kToolbarHeight,
               width: SizeConfig.screenWidth,
-              child: RefreshIndicator(
-                onRefresh: onRefresh,
-                child: ListView.separated(
-                  controller: scrollController,
-                  separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: users.length,
-                  itemBuilder: (c, index) => ListTile(
-                    leading: users[index].image != ''
-                    ? CircleAvatar(
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: NetworkImage('${users[index].image}'),
-                    )
-                    : const CircleAvatar(
-                      backgroundColor: const Color(0xff888888),
-                      foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
-                    ),
-                    title: Text('${users[index].firstName} ${users[index].lastName}'),
-                    subtitle: Text('${users[index].email}',),
-                    onTap: () async{
-                      if(widget.isFamily){
-                        String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
+              child: countListener == 0
+              ? SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                padding: EdgeInsets.zero,
+                child: Column(
+                  children: [
 
-                        if(choice != ''){
+                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+
+                    Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
+
+                    const SizedBox(height: 20,),
+
+                    Text('Search to add users', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+
+                    SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
+                  ],
+                ),
+              )
+              : Container(
+                width: SizeConfig.screenWidth,
+                child: RefreshIndicator(
+                  onRefresh: onRefresh,
+                  child: ListView.separated(
+                    controller: scrollController,
+                    separatorBuilder: (c, i) => const Divider(height: 10, color: Colors.transparent),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: users.length,
+                    itemBuilder: (c, index) => ListTile(
+                      leading: users[index].image != ''
+                      ? CircleAvatar(
+                        backgroundColor: const Color(0xff888888),
+                        foregroundImage: NetworkImage('${users[index].image}'),
+                      )
+                      : const CircleAvatar(
+                        backgroundColor: const Color(0xff888888),
+                        foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                      ),
+                      title: Text('${users[index].firstName} ${users[index].lastName}'),
+                      subtitle: Text('${users[index].email}',),
+                      onTap: () async{
+                        if(widget.isFamily){
+                          String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog()) ?? '';
+
+                          if(choice != ''){
+                            context.loaderOverlay.show();
+                            String result = await apiBLMAddFamily(memorialId: widget.memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
+                            context.loaderOverlay.hide();
+
+                            if(result != 'Success'){
+                              await showDialog(
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                  description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  buttonOkColor: const Color(0xffff0000),
+                                  onlyOkButton: true,
+                                  onOkButtonPressed: (){
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
+                              );
+                            }else{
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)),);
+                            }
+                          }
+                        }else{
                           context.loaderOverlay.show();
-                          String result = await apiBLMAddFamily(memorialId: widget.memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
+                          String result = await apiBLMAddFriends(memorialId: widget.memorialId, userId: users[index].userId, accountType: users[index].accountType);
                           context.loaderOverlay.hide();
 
                           if(result != 'Success'){
@@ -298,34 +316,11 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                               ),
                             );
                           }else{
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers)),);
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers,),),);
                           }
                         }
-                      }else{
-                        context.loaderOverlay.show();
-                        String result = await apiBLMAddFriends(memorialId: widget.memorialId, userId: users[index].userId, accountType: users[index].accountType);
-                        context.loaderOverlay.hide();
-
-                        if(result != 'Success'){
-                          await showDialog(
-                            context: context,
-                            builder: (_) => AssetGiffyDialog(
-                              description: Text('Error: $result.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              buttonOkColor: const Color(0xffff0000),
-                              onlyOkButton: true,
-                              onOkButtonPressed: (){
-                                Navigator.pop(context, true);
-                              },
-                            ),
-                          );
-                        }else{
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: widget.memorialId, memorialName: widget.memorialName, switchFamily: widget.switchFamily, switchFriends: widget.switchFriends, switchFollowers: widget.switchFollowers,),),);
-                        }
-                      }
-                    },
+                      },
+                    ),
                   ),
                 ),
               ),
