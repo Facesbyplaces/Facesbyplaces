@@ -22,7 +22,6 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
     end
 
     if intent.status == 'requires_confirmation'
-      # Save to Transaction
       save_transaction(intent)
     elsif intent.status == 'requires_payment_method'
       render json: { client_secret: intent.client_secret, token: token }, status: 200
@@ -124,7 +123,7 @@ class Api::V1::Payments::PaymentIntentController < ApplicationController
   end
 
   def amount
-    return (params[:amount].to_i * 100).to_i
+    return (params[:amount].to_f * 100).to_i
   end
 
   def memorial
