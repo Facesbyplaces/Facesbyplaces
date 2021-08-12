@@ -2,7 +2,7 @@ module Transactionable
     include ApplicationConcern
   
     def set_transactions
-        transactions = Transaction.all         
+        transactions = Transaction.all.order("transactions.id DESC")
         @transactions = transactions.page(params[:page]).per(numberOfPage)
     end
 

@@ -1,4 +1,4 @@
-class Memorials::Blm::Destroy
+class Memorials::Destroy
 
     def initialize( memorial:, admins:, id:, type: )
         @memorial   = memorial

@@ -6,37 +6,42 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
     end
 
     def newMemorial
-        updateNotif("memorial")
+        Notifsettings::Update.new( user: user(), setting: params[:setting], type: "memorial" ).execute
+        render json: {}, status: 200
     end
 
     def newActivities
-        updateNotif("activities")
+        Notifsettings::Update.new( user: user(), setting: params[:setting], type: "activities" ).execute
+        render json: {}, status: 200
     end
 
     def postLikes
-        updateNotif("likes")
+        Notifsettings::Update.new( user: user(), setting: params[:setting], type: "likes" ).execute
+        render json: {}, status: 200
     end
 
     def postComments
-        updateNotif("comments")
+        Notifsettings::Update.new( user: user(), setting: params[:setting], type: "comments" ).execute
+        render json: {}, status: 200
     end
 
     def addFamily
-        updateNotif("family")
+        Notifsettings::Update.new( user: user(), setting: params[:setting], type: "family" ).execute
+        render json: {}, status: 200
     end
 
     def addFriends
-        updateNotif("friends")
+        Notifsettings::Update.new( user: user(), setting: params[:setting], type: "friends" ).execute
+        render json: {}, status: 200
     end
 
     def addAdmin
-        updateNotif("admin")
+        Notifsettings::Update.new( user: user(), setting: params[:setting], type: "admin" ).execute
+        render json: {}, status: 200
     end
 
     # Mark Notifications as read
     def read
-        unreadNotifs = user().notifications.where(read: false)
-
         unreadNotifs.each do |unreadNotif|
             unreadNotif.update(read: true)
         end
@@ -46,9 +51,7 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
 
     # Number of unread notifications
     def numOfUnread
-        number_of_unread_notifs = user().notifications.where(read: false).count
-
-        render json: {number_of_unread_notifs: number_of_unread_notifs}
+        render json: {number_of_unread_notifs: unreadNotifs.count}
     end
     
     private
@@ -56,28 +59,9 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
     def ignore_params
         params.permit(:ignore_type, :ignore_id)
     end
-    
-    def updateNotif(notif)
-        case notif
-        when "memorial"
-            user().notifsetting.update(newMemorial: params[:setting])
-        when "activities"
-            user().notifsetting.update(newActivities: params[:setting])
-        when "likes"
-            user().notifsetting.update(postLikes: params[:setting])
-        when "comments"
-            user().notifsetting.update(postComments: params[:setting])
-        when "family"
-            user().notifsetting.update(addFamily: params[:setting])
-        when "friends"
-            user().notifsetting.update(addFriends: params[:setting])
-        when "admin"
-            user().notifsetting.update(addAdmin: params[:setting])
-        else
-            return render json: { error: true, message: "Notif not found", status: 404 }, status: 404
-        end
 
-        render json: {}, status: 200
+    def unreadNotifs
+        return user().notifications.where(read: false)
     end
 
 

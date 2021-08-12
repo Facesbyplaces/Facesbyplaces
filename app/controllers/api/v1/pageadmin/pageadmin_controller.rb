@@ -53,7 +53,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def updatePost
         post_creator = @post.account
-        render json: {errors: @post.errors} unless @post.update(@post_params)
+        render json: {errors: @post.errors} unless @post.update(post_params)
         @post.account = post_creator
         render json: {post: PostSerializer.new( @post ).attributes, status: :updated}
     end

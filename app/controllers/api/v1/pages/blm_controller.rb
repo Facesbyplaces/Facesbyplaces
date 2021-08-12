@@ -23,7 +23,7 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def delete
-        Memorials::Blm::Destroy.new( memorial: @blm, admins: @adminsRaw, id: params[:id], type: "Blm" ).execute
+        Memorials::Destroy.new( memorial: @blm, admins: @adminsRaw, id: params[:id], type: "Blm" ).execute
         
         render json: {status: "deleted"}
     end

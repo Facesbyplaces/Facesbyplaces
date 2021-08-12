@@ -11,48 +11,34 @@ class Api::V1::Posts::CommentsController < ApplicationController
         comment = Comment.new(comment_params)
         comment.account = user()
 
-        if comment.save
-            # Add to notification
-            notify_followers_of_a_comment(comment)
-            render json: {status: :success, comment: comment}
-        else
-            render json: {status: comment.errors}, status: 404
-        end
+        return render json: {status: comment.errors}, status: 404 unless comment.save
+        notify_followers_of_a_comment(comment)
+        render json: {status: :success, comment: comment}
     end
 
     def addReply
         reply = Reply.new(reply_params)
         reply.account = user()
 
-        if reply.save 
-            # Add to notification
-            notify_followers_of_a_reply(reply)
-            render json: {status: :success, reply: reply}
-        else
-            render json: {status: comment.errors}, status: 500
-        end
+        return render json: {status: comment.errors}, status: 500 unless reply.save 
+        notify_followers_of_a_reply(reply)
+        render json: {status: :success, reply: reply}
     end
 
     def editComment
         @comment.update(body: params[:body])
         @comment.account = user()
         
-        if @comment
-            render json: {status: :success, comment: @comment}
-        else
-            render json: {status: @comment.errors}
-        end
+        return render json: {status: @comment.errors} unless @comment
+        render json: {status: :success, comment: @comment}
     end
 
     def editReply
         @reply.update(body: params[:body])
         @reply.account = user()
         
-        if @reply
-            render json: {status: :success, reply: @reply}
-        else
-            render json: {status: @reply.errors}
-        end
+        return render json: {status: @reply.errors} unless @reply
+        render json: {status: :success, reply: @reply}
     end
 
     def commentsIndex
@@ -74,28 +60,22 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
 
     def deleteComment
-        if @comment.account == user() || @comment.account.guest == true
-            @comment.destroy 
+        return render json: {status: "This is not your comment"}, status: 401 unless @comment.account == user() || @comment.account.guest == true
+        @comment.destroy 
 
-            render json: {status: :destroy}, status: 200
-        else
-            render json: {status: "This is not your comment"}, status: 401
-        end
+        render json: {status: :destroy}, status: 200
     end
 
     def deleteReply
-        if @reply.account == user() || @comment.user.guest == true
-            @reply.destroy 
-
-            render json: {status: :destroy}, status: 200
-        else
-            render json: {status: "This is not your reply"}, status: 401
-        end
+        return render json: {status: "This is not your reply"}, status: 401 unless @reply.account == user() || @comment.user.guest == true
+        @reply.destroy 
+        
+        render json: {status: :destroy}, status: 200
     end
 
     def likeStatus
         numberOfLikes = Commentslike.where(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).count
-        
+  
         # case params[:commentable_type]
         # when 'Comment'
         #     comment = Comment.find(params[:commentable_id])
@@ -142,31 +122,22 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
 
     def like
-        if Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
-            like = Commentslike.new(comment_like_params)
-            like.account = user()
-            like.save 
+        return render json: {}, status: 409 unless Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
+        like = Commentslike.new(comment_like_params)
+        like.account = user()
+        like.save 
 
-            # Add to notification
-            notify_followers_of_a_like(like)
+        notify_followers_of_a like
 
-            render json: {}, status: 200
-        else
-            render json: {}, status: 409
-        end
+        render json: {}, status: 200
     end
     
     def unlike
-        if Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first != nil
-            unlike = Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first 
-             if unlike.destroy 
-                render json: {}, status: 200
-             else
-                render json: {}, status: 500
-             end
-        else
-            render json: {}, status: 404
-        end
+        return render json: {}, status: 404 unless Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first != nil
+        unlike = Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first 
+        return render json: {}, status: 500 unless unlike.destroy 
+        
+        render json: {}, status: 200
     end
 
     def notify_followers_of_a_comment(comment)
@@ -271,7 +242,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
         end
     end
 
-    def notify_followers_of_a_like(like)
+    def notify_followers_of_a like
         if like.commentable_type == "Comment"
             if like.commentable.account != user() && like.commentable.account.notifsetting.postLikes == true
                 message = "#{user().first_name} liked your comment"
