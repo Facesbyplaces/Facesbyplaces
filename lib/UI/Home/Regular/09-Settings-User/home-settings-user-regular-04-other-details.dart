@@ -34,19 +34,12 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularPhoneNumberTemplateState> _key5 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
-
-  Future<APIRegularShowOtherDetails>? otherDetails;
-  // bool toggle1 = false;
-  // bool toggle2 = false;
-  // bool toggle3 = false;
-  // bool toggle4 = false;
-  // bool toggle5 = false;
-
   ValueNotifier<bool> toggle1 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle2 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle3 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle4 = ValueNotifier<bool>(false);
   ValueNotifier<bool> toggle5 = ValueNotifier<bool>(false);
+  Future<APIRegularShowOtherDetails>? otherDetails;
 
   void initState(){
     super.initState();

@@ -139,13 +139,15 @@ class APIRegularShowOriginalPostExtendedTagged{
   int showOriginalPostTaggedId;
   String showOriginalPostTaggedFirstName;
   String showOriginalPostTaggedLastName;
-  APIRegularShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName});
+  int showOriginalPostAccountType;
+  APIRegularShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName, required this.showOriginalPostAccountType});
 
   factory APIRegularShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostExtendedTagged(
       showOriginalPostTaggedId: parsedJson['id'],
       showOriginalPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
       showOriginalPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showOriginalPostAccountType: parsedJson['account_type'],
     );
   }
 }

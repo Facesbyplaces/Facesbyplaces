@@ -142,13 +142,15 @@ class APIBLMShowOriginalPostExtendedTagged{
   int showOriginalPostTaggedId;
   String showOriginalPostTaggedFirstName;
   String showOriginalPostTaggedLastName;
-  APIBLMShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName});
+  int showOriginalPostAccountType;
+  APIBLMShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName, required this.showOriginalPostAccountType});
 
   factory APIBLMShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostExtendedTagged(
       showOriginalPostTaggedId: parsedJson['id'],
       showOriginalPostTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
       showOriginalPostTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showOriginalPostAccountType: parsedJson['account_type'],
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
-import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-post-like-or-unlike.dart';
@@ -143,10 +142,6 @@ class MiscBLMPostState extends State<MiscBLMPost>{
 
                                 index < widget.numberOfTagged - 1 ? const TextSpan(text: ', ') : const TextSpan(text: ''),
                               ],
-                              recognizer: TapGestureRecognizer()
-                              ..onTap = (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: widget.taggedId[index], accountType: widget.pageType == 'BLM' ? 1 : 2)));
-                              }
                             ),
                           ),
                         ),

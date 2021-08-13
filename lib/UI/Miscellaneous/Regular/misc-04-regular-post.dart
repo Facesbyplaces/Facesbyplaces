@@ -3,7 +3,6 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-bl
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
-import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-post-like-or-unlike.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
@@ -134,21 +133,15 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                           TextSpan(
                             children: List.generate(widget.numberOfTagged, (index) => TextSpan(
                               style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
-                              children: <TextSpan>[
-                                TextSpan(text: widget.taggedFirstName[index],),
+                                children: <TextSpan>[
+                                  TextSpan(text: widget.taggedFirstName[index],),
 
-                                TextSpan(text: ' '),
+                                  TextSpan(text: ' '),
 
-                                TextSpan(text: widget.taggedLastName[index],),
+                                  TextSpan(text: widget.taggedLastName[index],),
 
-                                index < widget.numberOfTagged - 1
-                                ? const TextSpan(text: ', ')
-                                : const TextSpan(text: ''),
-                              ],
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: widget.taggedId[index], accountType: widget.pageType == 'BLM' ? 1 : 2)));
-                                },
+                                  index < widget.numberOfTagged - 1 ? const TextSpan(text: ', ') : const TextSpan(text: ''),
+                                ],
                               ),
                             ),
                           ),

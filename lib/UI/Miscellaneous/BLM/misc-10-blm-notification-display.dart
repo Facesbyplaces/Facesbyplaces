@@ -58,6 +58,11 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
       ),
       subtitle: Text(dateCreated, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'RobotoLight', color: const Color(0xff000000),),),
       onTap: () async{
+        // print('The actor id is $actorId');
+        // print('The actor account type is $actorAccountType');
+        print('The notification type is $notificationType');
+        print('The postId is $postId');
+
         if(notificationType == 'Memorial'){
           context.loaderOverlay.show();
           var memorialProfile = await apiRegularShowMemorial(memorialId: postId);

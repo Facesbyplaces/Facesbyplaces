@@ -248,7 +248,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Show original BLM post comments screen rebuild!');
+    // print('Show original BLM post comments screen rebuild!');
+    print('BLM Show Post screen!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -834,7 +835,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 TextSpan(text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName + ' ' + originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,
                                                                 recognizer: TapGestureRecognizer()
                                                                   ..onTap = (){
-                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
+                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostAccountType)));
                                                                   }
                                                                 ),
                                                                 index < originalPost.data!.blmPost.showOriginalPostPostTagged.length - 1 ? const TextSpan(text: ', ') : const TextSpan(text: ''),
