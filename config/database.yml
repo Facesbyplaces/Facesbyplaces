@@ -53,7 +53,7 @@ test:
 
 production:
   <<: *default
-  database: fbp
+  database: deploy
   username: fbp
   password: facesbyplaces
 
