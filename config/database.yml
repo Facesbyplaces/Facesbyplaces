@@ -53,8 +53,8 @@ test:
 
 production:
   <<: *default
-  database: deploy
-  username: fbp
+  database: fbp
+  username: deploy
   password: facesbyplaces
 
   # adapter: mysql2
