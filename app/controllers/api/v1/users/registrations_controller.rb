@@ -47,14 +47,12 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
     
     begin 
       notifsetting.save
-    rescue ActiveRecord::RecordInvalid
-      rescue ActiveRecord::StatementInvalid => e
-        if e.message =~ /^PG::NotNullViolation/
-          notifsetting.ignore_id = notifsetting.id
-          notifsetting.ignore_type = false
-          notifsetting.user_id = notifsetting.account_id
-          notifsetting.save
-        end
+    rescue ActiveRecord::StatementInvalid => e
+      if e.message =~ /^PG::NotNullViolation/
+        notifsetting.ignore_id = notifsetting.id
+        notifsetting.ignore_type = false
+        notifsetting.user_id = notifsetting.account_id
+        notifsetting.save
       end
     end
   end
