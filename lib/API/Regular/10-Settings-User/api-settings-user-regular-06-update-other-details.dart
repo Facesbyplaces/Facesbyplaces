@@ -18,7 +18,8 @@ Future<bool> apiRegularUpdateOtherDetails({required String birthdate, required S
     MapEntry('phone_number', MultipartFile.fromString(phoneNumber)),
   ]);
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos', data: formData,
+  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos', data: formData,
+  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/users/updateOtherInfos', data: formData,
     options: Options(
       followRedirects: false,
       validateStatus: (status){

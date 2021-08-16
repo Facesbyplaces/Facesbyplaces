@@ -21,7 +21,8 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers/follow',
+  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/followers/follow',
+  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/followers/follow',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

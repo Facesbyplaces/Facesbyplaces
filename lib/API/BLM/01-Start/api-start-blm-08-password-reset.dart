@@ -3,7 +3,8 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMPasswordReset({required String email, required String redirectLink}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth/password?email=$email&redirect_url=$redirectLink',
+  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth/password?email=$email&redirect_url=$redirectLink',
+  var response = await dioRequest.post('http://45.33.66.25:3001/auth/password?email=$email&redirect_url=$redirectLink',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

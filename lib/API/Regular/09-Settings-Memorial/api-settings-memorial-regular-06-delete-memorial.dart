@@ -9,7 +9,8 @@ Future<bool> apiRegularDeleteMemorial({required int memorialId}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+  // var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+  var response = await dioRequest.delete('http://45.33.66.25:3001/api/v1/pages/memorials/$memorialId',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

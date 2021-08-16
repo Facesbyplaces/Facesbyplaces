@@ -11,7 +11,8 @@ Future<bool> apiRegularLogout() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.delete('http://fbp.dev1.koda.ws/alm_auth/sign_out',
+  // var response = await dioRequest.delete('http://fbp.dev1.koda.ws/alm_auth/sign_out',
+  var response = await dioRequest.delete('http://45.33.66.25:3001/alm_auth/sign_out',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

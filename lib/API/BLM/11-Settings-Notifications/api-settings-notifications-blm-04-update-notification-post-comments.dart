@@ -9,7 +9,7 @@ Future<bool> apiBLMUpdateNotificationPostComments({required bool hide}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/notifications/postComments?setting=$hide',
+  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/notifications/postComments?setting=$hide',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

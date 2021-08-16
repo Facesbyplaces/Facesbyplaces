@@ -9,7 +9,8 @@ Future<bool> apiBLMUpdateOtherDetails({required String birthdate, required Strin
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
+  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
+  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

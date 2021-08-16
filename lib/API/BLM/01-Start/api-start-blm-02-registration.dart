@@ -4,7 +4,8 @@ import 'package:dio/dio.dart';
 Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1', 
+  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
+  var response = await dioRequest.post('http://45.33.66.25:3001/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
     options: Options(
       followRedirects: false,
       validateStatus: (status){
@@ -17,11 +18,14 @@ Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) 
   );
 
   print('The status code of blm registration is ${response.statusCode}');
+  print('The status data of blm registration is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);
     var user = newData['data'];
     int userId = user['id'];
+
+    print('The value of data in blm registration is $user');
 
     final sharedPrefs = await SharedPreferences.getInstance();
 

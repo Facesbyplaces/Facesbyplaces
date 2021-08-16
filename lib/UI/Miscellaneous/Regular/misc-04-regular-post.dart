@@ -42,222 +42,226 @@ class MiscRegularPost extends StatefulWidget{
 }
 
 class MiscRegularPostState extends State<MiscRegularPost>{
-  bool likePost = false;
-  int commentsCount = 0;
+  ValueNotifier<bool> likePost = ValueNotifier<bool>(false);
+  ValueNotifier<int> commentsCount = ValueNotifier<int>(0);
   int likesCount = 0;
 
   void initState(){
     super.initState();
-    likePost = widget.likeStatus;
+    likePost.value = widget.likeStatus;
     likesCount = widget.numberOfLikes;
-    commentsCount = widget.numberOfComments;
+    commentsCount.value = widget.numberOfComments;
   }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    return GestureDetector(
-      onTap: () async{
-        final returnValue = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
-        print('The return value is $returnValue');
-        commentsCount = int.parse(returnValue.toString());
-        setState(() {
-          print('Refreshed!');
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
-        decoration: BoxDecoration(
-          color: const Color(0xffffffff),
-          borderRadius: const BorderRadius.all(Radius.circular(15),),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: const Color(0xff888888).withOpacity(0.5),
-              offset: const Offset(0, 0),
-              spreadRadius: 1,
-              blurRadius: 5,
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: widget.profileImage != ''
-              ? CircleAvatar(
-                backgroundColor: const Color(0xff888888),
-                foregroundImage: NetworkImage(widget.profileImage),
-                backgroundImage: const AssetImage('assets/icons/app-icon.png'),
-              )
-              : const CircleAvatar(
-                backgroundColor: const Color(0xff888888),
-                foregroundImage: const AssetImage('assets/icons/app-icon.png'),
-              ),
-              title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-              subtitle: Text(widget.timeCreated, maxLines: 1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.56, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),),
-              trailing: MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType, pageName: widget.memorialName),
-              onTap: (){
-                if(widget.pageType == 'Memorial'){
-                  if(widget.managed == true || widget.famOrFriends == true){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
-                  }else{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
-                  }
-                }else{
-                  if(widget.managed == true || widget.famOrFriends == true){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
-                  }else{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
-                  }
-                }
-              },
-            ),
-
-            Column(children: widget.contents,),
-
-            widget.numberOfTagged != 0
-            ? Column(
-                children: [
-                  const SizedBox(height: 10),
-
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(style: const TextStyle(color: const Color(0xff888888)), text: 'with '),
-
-                          TextSpan(
-                            children: List.generate(widget.numberOfTagged, (index) => TextSpan(
-                              style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
-                                children: <TextSpan>[
-                                  TextSpan(text: widget.taggedFirstName[index],),
-
-                                  TextSpan(text: ' '),
-
-                                  TextSpan(text: widget.taggedLastName[index],),
-
-                                  index < widget.numberOfTagged - 1 ? const TextSpan(text: ', ') : const TextSpan(text: ''),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            : Container(height: 0,),
-            
-            widget.location != ''
-            ? Column(
-              children: [
-                SizedBox(height: 10,),
-
-                Row(
-                  children: [
-                    Icon(Icons.place, color: Color(0xff888888)),
-
-                    Expanded(child: Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),),
-                  ],
+    return ValueListenableBuilder(
+      valueListenable: likePost,
+      builder: (_, bool likePostListener, __) => ValueListenableBuilder(
+        valueListenable: commentsCount,
+        builder: (_, int commentsCountListener, __) => GestureDetector(
+          onTap: () async{
+            final returnValue = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
+            print('The return value is $returnValue');
+            commentsCount.value = int.parse(returnValue.toString());
+            print('New refreshed!');
+          },
+          child: Container(
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0,),
+            decoration: BoxDecoration(
+              color: const Color(0xffffffff),
+              borderRadius: const BorderRadius.all(Radius.circular(15),),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: const Color(0xff888888).withOpacity(0.5),
+                  offset: const Offset(0, 0),
+                  spreadRadius: 1,
+                  blurRadius: 5,
                 ),
               ],
-            )
-            : Container(height: 0,),
-
-            Row(
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton.icon(
-                  icon: likePost == true
-                  ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
-                  : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
-                  label: Text('$likesCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                  onPressed: () async{
-                    setState((){
-                      likePost = !likePost;
-
-                      if(likePost == true){
-                        likesCount++;
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: widget.profileImage != ''
+                  ? CircleAvatar(
+                    backgroundColor: const Color(0xff888888),
+                    foregroundImage: NetworkImage(widget.profileImage),
+                    backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                  )
+                  : const CircleAvatar(
+                    backgroundColor: const Color(0xff888888),
+                    foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                  ),
+                  title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                  subtitle: Text(widget.timeCreated, maxLines: 1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.56, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),),
+                  trailing: MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePostListener, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType, pageName: widget.memorialName),
+                  onTap: (){
+                    if(widget.pageType == 'Memorial'){
+                      if(widget.managed == true || widget.famOrFriends == true){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
                       }else{
-                        likesCount--;
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
                       }
-                    });
-
-                    await apiRegularLikeOrUnlikePost(postId: widget.postId, like: likePost);
-                  },
-                ),
-
-                const SizedBox(width: 20),
-
-                TextButton.icon(
-                  icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                  label: Text('$commentsCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                  onPressed: () async{
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
-                  },
-                ),
-
-                Expanded(child: Container(),),
-
-                IconButton(
-                  alignment: Alignment.centerRight,
-                  splashColor: Colors.transparent,
-                  icon: const CircleAvatar(backgroundColor: const Color(0xff4EC9D4), child: const Icon(Icons.share_rounded, color: const Color(0xffffffff)),),
-                  onPressed: () async{
-                    BranchUniversalObject buo = BranchUniversalObject(
-                      canonicalIdentifier: 'FacesbyPlaces',
-                      title: 'FacesbyPlaces Link',
-                      contentDescription: 'FacesbyPlaces link to the app',
-                      keywords: ['FacesbyPlaces', 'Share', 'Link'],
-                      publiclyIndex: true,
-                      locallyIndex: true,
-                      contentMetadata: BranchContentMetaData()
-                      ..addCustomMetadata('link-category', 'Post')
-                      ..addCustomMetadata('link-post-id', widget.postId)
-                      ..addCustomMetadata('link-like-status', likePost)
-                      ..addCustomMetadata('link-number-of-likes', likesCount)
-                      ..addCustomMetadata('link-type-of-account', 'Memorial'),
-                    );
-
-                    BranchLinkProperties lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three'],);
-                    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-
-                    FlutterBranchSdk.setIdentity('alm-share-link');
-
-                    BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                      buo: buo,
-                      linkProperties: lp,
-                      messageText: 'FacesbyPlaces App',
-                      androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                      androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                    );
-
-                    if(response.success){
-                      await showDialog(
-                        context: context,
-                        builder: (_) => AssetGiffyDialog(
-                          description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          onlyOkButton: true,
-                          onOkButtonPressed: (){
-                            Navigator.pop(context, true);
-                          },
-                        ),
-                      );
                     }else{
-                      FlutterBranchSdk.logout();
+                      if(widget.managed == true || widget.famOrFriends == true){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, relationship: widget.relationship, managed: widget.managed, newlyCreated: false,)));
+                      }else{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: widget.memorialId, pageType: widget.pageType, newJoin: widget.joined,)));
+                      }
                     }
                   },
                 ),
+
+                Column(children: widget.contents,),
+
+                widget.numberOfTagged != 0
+                ? Column(
+                    children: [
+                      const SizedBox(height: 10),
+
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(style: const TextStyle(color: const Color(0xff888888)), text: 'with '),
+
+                              TextSpan(
+                                children: List.generate(widget.numberOfTagged, (index) => TextSpan(
+                                  style: const TextStyle(fontWeight: FontWeight.bold, color: const Color(0xff000000)),
+                                    children: <TextSpan>[
+                                      TextSpan(text: widget.taggedFirstName[index],),
+
+                                      TextSpan(text: ' '),
+
+                                      TextSpan(text: widget.taggedLastName[index],),
+
+                                      index < widget.numberOfTagged - 1 ? const TextSpan(text: ', ') : const TextSpan(text: ''),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Container(height: 0,),
+                
+                widget.location != ''
+                ? Column(
+                  children: [
+                    SizedBox(height: 10,),
+
+                    Row(
+                      children: [
+                        Icon(Icons.place, color: Color(0xff888888)),
+
+                        Expanded(child: Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),),
+                      ],
+                    ),
+                  ],
+                )
+                : Container(height: 0,),
+
+                Row(
+                  children: [
+                    TextButton.icon(
+                      icon: likePostListener == true
+                      ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
+                      : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
+                      label: Text('$likesCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      onPressed: () async{
+                        likePost.value = !likePost.value;
+
+                        print('post hehehehe');
+
+                        if(likePost.value == true){
+                          likesCount++;
+                        }else{
+                          likesCount--;
+                        }
+
+                        await apiRegularLikeOrUnlikePost(postId: widget.postId, like: likePost.value);
+                      },
+                    ),
+
+                    const SizedBox(width: 20),
+
+                    TextButton.icon(
+                      icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
+                      label: Text('$commentsCountListener', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      onPressed: () async{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
+                      },
+                    ),
+
+                    Expanded(child: Container(),),
+
+                    IconButton(
+                      alignment: Alignment.centerRight,
+                      splashColor: Colors.transparent,
+                      icon: const CircleAvatar(backgroundColor: const Color(0xff4EC9D4), child: const Icon(Icons.share_rounded, color: const Color(0xffffffff)),),
+                      onPressed: () async{
+                        BranchUniversalObject buo = BranchUniversalObject(
+                          canonicalIdentifier: 'FacesbyPlaces',
+                          title: 'FacesbyPlaces Link',
+                          contentDescription: 'FacesbyPlaces link to the app',
+                          keywords: ['FacesbyPlaces', 'Share', 'Link'],
+                          publiclyIndex: true,
+                          locallyIndex: true,
+                          contentMetadata: BranchContentMetaData()
+                          ..addCustomMetadata('link-category', 'Post')
+                          ..addCustomMetadata('link-post-id', widget.postId)
+                          ..addCustomMetadata('link-like-status', likePost.value)
+                          ..addCustomMetadata('link-number-of-likes', likesCount)
+                          ..addCustomMetadata('link-type-of-account', 'Memorial'),
+                        );
+
+                        BranchLinkProperties lp = BranchLinkProperties(feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three'],);
+                        lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+
+                        FlutterBranchSdk.setIdentity('alm-share-link');
+
+                        BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                          buo: buo,
+                          linkProperties: lp,
+                          messageText: 'FacesbyPlaces App',
+                          androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                          androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                        );
+
+                        if(response.success){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => AssetGiffyDialog(
+                              description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              onlyOkButton: true,
+                              onOkButtonPressed: (){
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                        }else{
+                          FlutterBranchSdk.logout();
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

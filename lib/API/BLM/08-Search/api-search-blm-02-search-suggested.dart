@@ -9,7 +9,8 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) asy
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
+  // var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
+  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/search/suggested/?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

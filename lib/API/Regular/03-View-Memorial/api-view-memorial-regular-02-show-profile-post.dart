@@ -9,7 +9,8 @@ Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({required int memori
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId?page=$page',
+  // var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId?page=$page',
+  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/posts/page/Memorial/$memorialId?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

@@ -9,7 +9,8 @@ Future<bool> apiRegularReport({required int postId, required String reportType, 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/reports/report?report[reportable_type]=$reportType&report[reportable_id]=$postId&report[subject]=$subject&report[description]=$body',
+  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/reports/report?report[reportable_type]=$reportType&report[reportable_id]=$postId&report[subject]=$subject&report[description]=$body',
+  var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/reports/report?report[reportable_type]=$reportType&report[reportable_id]=$postId&report[subject]=$subject&report[description]=$body',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

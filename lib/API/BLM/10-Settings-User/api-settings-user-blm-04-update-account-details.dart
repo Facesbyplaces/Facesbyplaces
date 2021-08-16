@@ -18,7 +18,8 @@ Future<bool> apiBLMUpdateAccountDetails({required String firstName, required Str
     MapEntry('question', MultipartFile.fromString(question)),
   ]);
 
-  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/updateDetails', data: formData,
+  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/updateDetails', data: formData,
+  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/users/updateDetails', data: formData,
     options: Options(
       followRedirects: false,
       validateStatus: (status){

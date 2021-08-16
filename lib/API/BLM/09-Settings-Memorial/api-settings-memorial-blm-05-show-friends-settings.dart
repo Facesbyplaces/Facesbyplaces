@@ -9,7 +9,8 @@ Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings({required int me
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/friends/index?page=$page',
+  // var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/friends/index?page=$page',
+  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/pages/blm/$memorialId/friends/index?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

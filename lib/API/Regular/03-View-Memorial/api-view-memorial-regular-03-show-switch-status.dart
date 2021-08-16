@@ -11,7 +11,8 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({required int memo
 
   print('The memorial id is $memorialId');
 
-  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Memorial/$memorialId',
+  // var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Memorial/$memorialId',
+  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/pageadmin/hideStatus/Memorial/$memorialId',
     options: Options(
       followRedirects: false,
       validateStatus: (status){
