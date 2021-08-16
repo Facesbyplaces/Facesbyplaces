@@ -113,7 +113,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 render json: {errors: like.errors}, status: 500
             end
         else
-            render json: {error: 'Account required.'}, status: 409
+            render json: {error: 'Already liked the post'}, status: 409
         end
     end
 
@@ -126,7 +126,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 render json: {errors: unlike.errors}, status: 500
             end
         else
-            render json: {error: "Account required."}, status: 404
+            render json: {error: "Already unliked the post"}, status: 409
         end
     end
 
