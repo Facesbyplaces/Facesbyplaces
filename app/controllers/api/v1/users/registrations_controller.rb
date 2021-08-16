@@ -32,18 +32,18 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
 
   def set_user_details(user)
     code = rand(100..999)
-    @user.verification_code = code
-    @user.question = "What's the name of your first dog?"
-    @user.hideBirthdate = false 
-    @user.hideBirthplace = false 
-    @user.hideEmail = false 
-    @user.hideAddress = false 
-    @user.hidePhonenumber = false 
-    @user.is_verified = false
-    @user.update({ device_token: params[:device_token] })
+    user.verification_code = code
+    user.question = "What's the name of your first dog?"
+    user.hideBirthdate = false 
+    user.hideBirthplace = false 
+    user.hideEmail = false 
+    user.hideAddress = false 
+    user.hidePhonenumber = false 
+    user.is_verified = false
+    user.update({ device_token: params[:device_token] })
 
     notifsetting = Notifsetting.new(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true)
-    notifsetting.account = @user
+    notifsetting.account = user
     notifsetting.save
   end
 
