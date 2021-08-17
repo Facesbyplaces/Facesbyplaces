@@ -21,7 +21,6 @@ Future<bool> apiBLMEditComment({required int commentId, required String commentB
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/posts/comment',
   var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/posts/comment',
     options: Options(
       followRedirects: false,

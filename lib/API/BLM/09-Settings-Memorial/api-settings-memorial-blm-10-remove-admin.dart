@@ -29,7 +29,6 @@ Future<String> apiBLMDeleteMemorialAdmin({required String pageType, required int
     'account_type': '1'
   });
 
-  // var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/pageadmin', data: formData,
   var response = await dioRequest.delete('http://45.33.66.25:3001/api/v1/pageadmin', data: formData,
     options: Options(
       followRedirects: false,

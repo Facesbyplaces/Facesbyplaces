@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMMemorialPaypalConnect({required String userId, required String name, required String email, required int memorialId}) async{
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/braintree?paypal_user_id=$userId&paypalable_id=$memorialId&paypalable_type=Blm&name=$name&email=$email',
   var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/payments/braintree?paypal_user_id=$userId&paypalable_id=$memorialId&paypalable_type=Blm&name=$name&email=$email',
     options: Options(
       followRedirects: false,

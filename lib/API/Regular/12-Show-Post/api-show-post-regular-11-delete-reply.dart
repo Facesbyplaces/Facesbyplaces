@@ -21,7 +21,6 @@ Future<bool> apiRegularDeleteReply({required int replyId}) async{
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.delete('http://fbp.dev1.koda.ws/api/v1/posts/reply?reply_id=$replyId',
   var response = await dioRequest.delete('http://45.33.66.25:3001/api/v1/posts/reply?reply_id=$replyId',
     options: Options(
       followRedirects: false,

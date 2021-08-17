@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 Future<String> apiRegularLogin({required String email, required String password, required String deviceToken}) async{
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
   var response = await dioRequest.post('http://45.33.66.25:3001/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
     options: Options(
       followRedirects: false,

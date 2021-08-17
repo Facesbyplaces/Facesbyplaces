@@ -10,10 +10,6 @@ Future<bool> apiRegularUpdatePageImages({required int memorialId, required dynam
   Dio dioRequest = Dio();
   FormData formData = FormData.fromMap({});
 
-  print('The value of memorialId is $memorialId');
-  print('The value of backgroundImage is ${backgroundImage.path}');
-  print('The value of profileImage is ${profileImage.path}');
-
   if(backgroundImage.path != ''){
     var file = await MultipartFile.fromFile(backgroundImage.path, filename: backgroundImage.path);
     formData.files.add(MapEntry('backgroundImage', file));
@@ -24,7 +20,6 @@ Future<bool> apiRegularUpdatePageImages({required int memorialId, required dynam
     formData.files.add(MapEntry('profileImage', file));
   }
 
-  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/images', data: formData,
   var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/pages/memorials/$memorialId/images', data: formData,
     options: Options(
       followRedirects: false,

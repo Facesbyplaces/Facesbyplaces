@@ -22,10 +22,6 @@ Future<APIBLMShowUserInformation> apiBLMShowUserInformation({required int userId
 
   Dio dioRequest = Dio();
 
-  print('The user id in blm is $userId');
-  print('The accountType in blm is $accountType');
-
-  // var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
   var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
     options: Options(
       followRedirects: false,

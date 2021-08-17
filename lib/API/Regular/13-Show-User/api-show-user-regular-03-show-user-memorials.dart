@@ -21,7 +21,6 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required in
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=2',
   var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/memorials?user_id=$userId&page=$page&account_type=2',
     options: Options(
       followRedirects: false,

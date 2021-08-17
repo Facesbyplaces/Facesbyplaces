@@ -222,7 +222,7 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: widget.labelText,
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+        labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: const Color(0xffBDC3C7),),
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
       cursorColor: const Color(0xff000000),

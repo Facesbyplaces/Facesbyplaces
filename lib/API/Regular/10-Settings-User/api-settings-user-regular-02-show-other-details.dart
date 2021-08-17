@@ -9,7 +9,6 @@ Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails({required int user
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId',
   var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/getOtherInfos?user_id=$userId',
     options: Options(
       followRedirects: false,
@@ -25,6 +24,7 @@ Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails({required int user
   );
 
   print('The status code of regular show other details is ${response.statusCode}');
+  print('The status data of regular show other details is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

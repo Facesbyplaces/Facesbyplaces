@@ -42,7 +42,6 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
     }
   }
 
-  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorials', data: formData,
   var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/pages/memorials', data: formData,
     options: Options(
       followRedirects: false,
@@ -61,8 +60,6 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
 
   if(response.statusCode == 200){
     var value = response.data;
-    // var user = value['memorial'];
-    // int userId = user['id'];
     int userId = value['alm']['memorial']['id'];
     print('The userId is $userId');
     

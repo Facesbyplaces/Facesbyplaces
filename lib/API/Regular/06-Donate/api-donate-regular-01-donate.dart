@@ -20,10 +20,7 @@ Future<List<String>> apiRegularDonate({required String pageType, required int pa
   }
 
   Dio dioRequest = Dio();
-  
-  print('The payment method in donate api is $paymentMethod');
 
-  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/payment_intent',
   var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/payments/payment_intent',
     options: Options(
       followRedirects: false,

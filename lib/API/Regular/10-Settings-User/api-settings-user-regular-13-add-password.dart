@@ -9,13 +9,11 @@ Future<bool> apiRegularAddPassword({required String newPassword}) async{
 
   Dio dioRequest = Dio();
   FormData formData = FormData();
-
   formData.files.addAll([
     MapEntry('password', MultipartFile.fromString(newPassword),),
     MapEntry('password_confirmation', MultipartFile.fromString(newPassword)),
   ]);
 
-  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/alm_auth/password', data: formData,
   var response = await dioRequest.put('http://45.33.66.25:3001/alm_auth/password', data: formData,
     options: Options(
       followRedirects: false,

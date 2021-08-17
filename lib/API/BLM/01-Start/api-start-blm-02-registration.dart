@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 Future<String> apiBLMRegistration({required APIBLMAccountRegistration account}) async{
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
   var response = await dioRequest.post('http://45.33.66.25:3001/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
     options: Options(
       followRedirects: false,

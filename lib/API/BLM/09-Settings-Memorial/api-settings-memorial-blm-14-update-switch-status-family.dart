@@ -9,7 +9,6 @@ Future<bool> apiBLMUpdateSwitchStatusFamily({required int memorialId, required b
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFamily/Blm/$memorialId?hide=$status',
   var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/pageadmin/unhideOrHideFamily/Blm/$memorialId?hide=$status',
     options: Options(
       followRedirects: false,

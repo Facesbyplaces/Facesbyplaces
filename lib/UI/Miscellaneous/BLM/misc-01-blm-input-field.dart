@@ -235,7 +235,7 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
       },
       decoration: InputDecoration(
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: const Color(0xff888888),),
+        labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: const Color(0xffBDC3C7),),
         labelText: widget.labelText,
         alignLabelWithHint: true,
       ),

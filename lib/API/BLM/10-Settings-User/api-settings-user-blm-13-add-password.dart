@@ -15,7 +15,6 @@ Future<bool> apiBLMAddPassword({required String newPassword}) async{
     MapEntry('password_confirmation', MultipartFile.fromString(newPassword)),
   ]);
 
-  // var response = await dioRequest.put('http://fbp.dev1.koda.ws/auth/password', data: formData,
   var response = await dioRequest.put('http://45.33.66.25:3001/auth/password', data: formData,
     options: Options(
       followRedirects: false,

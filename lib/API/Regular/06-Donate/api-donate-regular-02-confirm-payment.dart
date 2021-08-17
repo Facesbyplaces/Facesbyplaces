@@ -20,10 +20,8 @@ Future<bool> apiRegularConfirmPayment({required String clientSecret, required St
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/payments/confirm_payment_intent',
   var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/payments/confirm_payment_intent',
     options: Options(
       followRedirects: false,

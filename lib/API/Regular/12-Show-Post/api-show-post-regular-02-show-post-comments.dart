@@ -21,7 +21,6 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int 
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
   var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/posts/index/comments/$postId?page=$page',
     options: Options(
       followRedirects: false,
