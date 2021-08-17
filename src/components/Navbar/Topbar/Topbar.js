@@ -35,7 +35,7 @@ export default function Topbar() {
             Hi,
           </span>
           <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-            {user.first_name}
+            {user.last_name}
           </span>
           <span className="symbol symbol-35 symbol-light-success">
             <span className="symbol-label font-size-h5 font-weight-bold">
