@@ -14,8 +14,8 @@
 
 # Admin
 admin = User.new(
-            first_name: "Fyodor",
-            last_name: "Dostoevsky",
+            first_name: "FBP",
+            last_name: "Admin",
             account_type: 1,
             phone_number: '09053536495',
             email: "admin@email.com",
