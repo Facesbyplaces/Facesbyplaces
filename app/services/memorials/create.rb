@@ -17,9 +17,7 @@ class Memorials::Create
     end
 
     def save_memorial(memorial, latitude, longitude)
-        set_privacy(memorial)
-        #workaround in case memorial may need the stripe account id column
-        memorial.stripe_connect_account_id = "false"
+        set_privacy(memorial)        
         memorial.save
         save_owner(memorial)
         update_location(memorial, latitude, longitude)
