@@ -110,7 +110,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { :host => 'http://45.33.66.25:3001/' }
+  config.action_mailer.default_url_options = { :host => '45.33.66.25', port: 3001 }
   config.action_mailer.default_options = { from: 'facesbyplaces.mailer@gmail.com' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
