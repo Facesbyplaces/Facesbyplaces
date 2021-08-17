@@ -117,7 +117,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
-    port:                 2525,
+    port:                 25,
     domain:               'gmail.com',
     user_name:            'facesbyplaces.mailer@gmail.com',
     password:             'MVW@3Rk#SjN$X46q',
