@@ -10,7 +10,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         # @user.save!
 
         # Tell the UserMailer to send a code to verify email after save
-        VerificationMailer.verify_email(@user).deliver_now
+        # VerificationMailer.verify_email(@user).deliver_now
     end
   end
 
