@@ -53,10 +53,10 @@ class Api::V1::Posts::PostsController < ApplicationController
 
     def listOfPages
         if user().account_type == 1
-            pagesId = user().roles.select('id')
+            pagesId = user().roles.select('resource_id')
 
             pages = pagesId.collect do |page|
-                page = Blm.find(page.id)
+                page = Blm.find(page.resource_id)
 
                 ActiveModel::SerializableResource.new(
                     page, 
@@ -64,7 +64,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 )
     
             rescue ActiveRecord::RecordNotFound                    
-                page = Blm.find(page.id - 1)
+                page = Blm.find(page.resource_id - 1)
 
                 ActiveModel::SerializableResource.new(
                     page, 
@@ -72,13 +72,13 @@ class Api::V1::Posts::PostsController < ApplicationController
                 )
             end
         else
-            pagesId = user().roles.select('id')
+            pagesId = user().roles.select('resource_id')
 
             pages = pagesId.collect do |page|
-                page = Memorial.find(page.id)
+                page = Memorial.find(page.resource_id)
                 ActiveModel::SerializableResource.new(
                     page, 
-                    each_serializer: BlmSerializer
+                    each_serializer: MemorialSerializer
                 )
             end
         end
