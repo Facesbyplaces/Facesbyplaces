@@ -95,7 +95,7 @@ export default function EditMemorial() {
     formData.append("memorial_id", memorial.id);
     console.log("Form Data: ", formData);
     axios
-      .put(`/api/v1/admin/memorials/blm/image/${memorial.id}`, formData)
+      .put(`/api/v1/admin/memorials/blm/image/${memorial.id}/Blm`, formData)
       .then((response) => {
         console.log(response.data);
       })

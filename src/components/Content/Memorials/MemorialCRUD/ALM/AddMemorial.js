@@ -179,7 +179,7 @@ export default function AddMemorial() {
       ? console.log("Form Data: ", formData)
       : console.log("Form Data: Null");
     axios
-      .put(`/api/v1/admin/memorials/image/${memorial.id}`, formData)
+      .put(`/api/v1/admin/memorials/image/${memorial.id}/Memorial`, formData)
       .then((response) => {
         console.log(response.data);
       })
