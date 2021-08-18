@@ -17,7 +17,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :add_view_count, only: [:show]
     
     def create
-        Memorials::Create.new( memorial: memorial_params, user: user(), relationship: params[:relationship], type: "Memorial" ).execute
+        Memorials::Create.new( memorial: memorial_params, images: memorial_images_params, user: user(), relationship: params[:relationship], type: "Memorial" ).execute
 
         render json: { alm: { memorial: Memorial.last, user: user(), relationship: params[:relationship] }, status: :created }
     end

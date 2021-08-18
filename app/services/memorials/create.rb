@@ -1,7 +1,8 @@
 class Memorials::Create
 
-    def initialize( memorial:, user:, relationship:, type: )
+    def initialize( memorial:, images:, user:, relationship:, type: )
         @memorial       = memorial
+        @images         = images
         @user           = user
         @relationship   = relationship
         @type           = type
@@ -19,6 +20,7 @@ class Memorials::Create
     def save_memorial(memorial, latitude, longitude)
         set_privacy(memorial)        
         memorial.save
+        memorial.update(images)
         save_owner(memorial)
         update_location(memorial, latitude, longitude)
         save_relationship(memorial)
