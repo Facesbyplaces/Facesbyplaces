@@ -5,5 +5,6 @@ class RemoveReferencesToNotifsettings < ActiveRecord::Migration[6.0]
     remove_column :memorials, :user_id, :integer if Memorial.column_names.include?('user_id')
     remove_column :blms, :user_id, :integer if Blm.column_names.include?('user_id')
     remove_column :pageowners, :user_id, :integer if Pageowner.column_names.include?('user_id')
+    remove_column :relationships, :user_id, :integer if Relationship.column_names.include?('user_id')
   end
 end
