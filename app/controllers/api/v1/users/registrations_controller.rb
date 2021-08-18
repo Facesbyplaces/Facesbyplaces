@@ -44,17 +44,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
 
     notifsetting = Notifsetting.new(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true)
     notifsetting.account = user
-    
-    begin 
-      notifsetting.save
-    rescue ActiveRecord::StatementInvalid => e
-      if e.message =~ /^PG::NotNullViolation/
-        notifsetting.ignore_type = false
-        notifsetting.ignore_id = notifsetting.id == nil ? 1 : Notifsetting.last.id + 1
-        notifsetting.user_id = notifsetting.account_id
-        notifsetting.save
-      end
-    end
+    notifsetting.save
   end
 
 end

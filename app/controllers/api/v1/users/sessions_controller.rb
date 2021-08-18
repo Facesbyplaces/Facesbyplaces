@@ -173,7 +173,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def render_error(status, message, data = nil)
       response = {
         success: false,
-        message: [message]
+        message: message
       }
       response = response.merge(data) if data
       render json: response, status: status
