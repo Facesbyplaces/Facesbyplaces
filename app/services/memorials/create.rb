@@ -15,12 +15,12 @@ class Memorials::Create
             memorial = Memorial.new(@memorial)
         end
         save_memorial(memorial, memorial.latitude, memorial.longitude)
+        memorial.update(@images)
     end
 
     def save_memorial(memorial, latitude, longitude)
         set_privacy(memorial)        
         memorial.save
-        memorial.update(images)
         save_owner(memorial)
         update_location(memorial, latitude, longitude)
         save_relationship(memorial)
