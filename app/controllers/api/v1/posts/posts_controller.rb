@@ -60,7 +60,7 @@ class Api::V1::Posts::PostsController < ApplicationController
 
                 ActiveModel::SerializableResource.new(
                     page, 
-                    each_serializer: MemorialSerializer
+                    each_serializer: BlmSerializer
                 )
     
             rescue ActiveRecord::RecordNotFound                    
@@ -68,7 +68,7 @@ class Api::V1::Posts::PostsController < ApplicationController
 
                 ActiveModel::SerializableResource.new(
                     page, 
-                    each_serializer: MemorialSerializer
+                    each_serializer: BlmSerializer
                 )
             end
         else
@@ -78,7 +78,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 page = Memorial.find(page.id)
                 ActiveModel::SerializableResource.new(
                     page, 
-                    each_serializer: MemorialSerializer
+                    each_serializer: BlmSerializer
                 )
             end
         end
