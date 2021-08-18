@@ -8,5 +8,6 @@ class RemoveReferencesToNotifsettings < ActiveRecord::Migration[6.0]
     remove_column :relationships, :user_id, :integer if Relationship.column_names.include?('user_id')
     remove_reference :notifications, :notify, polymorphic: true, null: false if Notification.column_names.include?('notify_id')
     remove_reference :notifications, :user, null: false, foreign_key: true if Notification.column_names.include?('user_id')
+    remove_column :posts, :memorial_id, :integer if Post.column_names.include?('memorial_id')
   end
 end
