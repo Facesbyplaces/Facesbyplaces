@@ -56,9 +56,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
   void initState(){
     super.initState();
+    getManagedPages();
     currentSelection = widget.name;
     currentIdSelected = widget.memorialId;
-    getManagedPages();
   }
 
   void getManagedPages() async{
@@ -73,6 +73,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
         image: newValue.blmPagesList[i].blmManagedPagesProfileImage,
       ));
     }
+
     setState(() {});
   }
 

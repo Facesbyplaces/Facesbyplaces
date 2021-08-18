@@ -34,7 +34,6 @@ class HomeRegularCreateMemorial1 extends StatefulWidget{
 class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
   GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  // GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
@@ -169,12 +168,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                       const SizedBox(height: 20,),
 
-                      // MiscRegularInputFieldTemplate(
-                      //   key: _key5, 
-                      //   labelText: 'Cemetery',
-                      //   labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                      // ),
-
                       TextFormField(
                         controller: controller4,
                         keyboardType: TextInputType.text,
@@ -221,7 +214,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         height: 45,
                         onPressed: () async{
                           if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || controller4.text == '' || _key6.currentState!.controller.text == ''){
-                          // if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => AssetGiffyDialog(
@@ -252,7 +244,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                               ),
                             );
                           }else{
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: _key5.currentState!.controller.text, country: _key6.currentState!.controller.text,),),);
                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorial2(relationship: _key1.currentState!.currentSelection, birthplace: _key2.currentState!.controller.text, dob: controller1.text, rip: controller2.text, cemetery: controller4.text, country: _key6.currentState!.controller.text, latitude: '${location.value!.latitude}', longitude: '${location.value!.longitude}',),),);
                           }
                         },

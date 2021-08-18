@@ -56,16 +56,16 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   void initState(){
     super.initState();
+    getManagedPages();
     currentSelection = widget.name;
     currentIdSelected = widget.memorialId;
-    getManagedPages();
   }
 
   void getManagedPages() async{
     context.loaderOverlay.show();
     var newValue = await apiRegularShowListOfManagedPages();
     context.loaderOverlay.hide();
-
+    
     for(int i = 0; i < newValue.almPagesList.length; i++){
       managedPages.add(
         RegularManagedPages(
@@ -75,6 +75,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
         ),
       );
     }
+
     setState(() {});
   }
 

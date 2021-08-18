@@ -35,7 +35,6 @@ class HomeBLMCreateMemorial1 extends StatefulWidget{
 
 class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
   final GlobalKey<MiscBLMInputFieldDropDownState> _key1 = GlobalKey<MiscBLMInputFieldDropDownState>();
-  // final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key6 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key7 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -86,12 +85,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                       MiscBLMInputFieldDropDown(key: _key1,),
 
                       const SizedBox(height: 20,),
-                      
-                      // MiscBLMInputFieldTemplate(
-                      //   key: _key2, 
-                      //   labelText: 'Location of the incident',
-                      //   labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                      // ),
 
                       TextFormField(
                         controller: controller3,
@@ -107,16 +100,11 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                           suffixIcon: IconButton(
                             icon: Icon(Icons.add_location), 
                             onPressed: () async{
-
                               var p = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorialLocateMap()));
 
                               if(p != null){
                                 location.value = p as GeoPoint;
-
-                              print('The location latitude is ${location.value!.latitude}');
-                              print('The location longitude is ${location.value!.latitude}');
                               }
-
                             },
                           ),
                         ),

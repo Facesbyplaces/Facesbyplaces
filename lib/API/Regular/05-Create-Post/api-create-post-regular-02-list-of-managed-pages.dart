@@ -25,6 +25,7 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
   );
 
   print('The status code of regular list of managed pages is ${response.statusCode}');
+  print('The status data of regular list of managed pages is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

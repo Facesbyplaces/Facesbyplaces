@@ -18,9 +18,12 @@ class HomeRegularMaps extends StatefulWidget{
 class HomeRegularMapsState extends State<HomeRegularMaps>{
   List<StaticPositionGeoPoint> staticPoints = [];
   MapController controller = MapController();
+  // MapController currentController = MapController();
 
   void initState(){
     super.initState();
+    // currentController = MapController(initMapWithUserPosition: true);
+    // currentController = MapController(initMapWithUserPosition: true);
     controller = MapController(initMapWithUserPosition: false, initPosition: GeoPoint(latitude: widget.latitude, longitude: widget.longitude),);
     staticPoints.add(StaticPositionGeoPoint('Marker', MarkerIcon(icon: widget.isMemorial == true ? Icon(MdiIcons.graveStone, color: Colors.blue,) : Icon(MdiIcons.human, color: Colors.blue,)), [GeoPoint(latitude: widget.latitude, longitude: widget.longitude)],),);
     Future.delayed(Duration(seconds: 5), () async {
@@ -58,7 +61,7 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
               context.loaderOverlay.hide();
 
               GeoPoint point1 = await controller.selectPosition(icon: MarkerIcon(icon: Icon(Icons.location_history, color: Colors.blue, size: 48,),),);
-              RoadInfo roadInformation = await controller.drawRoad(point1, GeoPoint(latitude: 37.78556405447126, longitude: -122.40161667090938), roadOption: RoadOption(roadWidth: 10, roadColor: Colors.green, showMarkerOfPOI: false));
+              RoadInfo roadInformation = await controller.drawRoad(point1, GeoPoint(latitude: widget.latitude, longitude: widget.longitude), roadOption: RoadOption(roadWidth: 10, roadColor: Colors.green, showMarkerOfPOI: false));
 
               await showDialog(
                 context: context,
@@ -97,6 +100,47 @@ class HomeRegularMapsState extends State<HomeRegularMaps>{
             onPressed: () async{
               await controller.zoomOut();
             },
+          ),
+
+          SizedBox(height: 10,),
+
+          FloatingActionButton(
+            heroTag: 'button4',
+            child: Icon(Icons.location_pin),
+            onPressed: () async{
+              context.loaderOverlay.show();
+              MapController currentController = MapController(initMapWithUserPosition: true);
+              print('The default latitude is ${widget.latitude}');
+              print('The default longitude is ${widget.longitude}');
+              await controller.removeLastRoad();
+              context.loaderOverlay.hide();
+
+              print('Heree 2');
+
+              GeoPoint point1 = await controller.selectPosition(icon: MarkerIcon(icon: Icon(Icons.location_history, color: Colors.blue, size: 48,),),);
+              print('Heree 3');
+
+              RoadInfo roadInformation = await controller.drawRoad(point1, GeoPoint(latitude: currentController.initPosition!.latitude, longitude: currentController.initPosition!.longitude), roadOption: RoadOption(roadWidth: 10, roadColor: Colors.green, showMarkerOfPOI: false));
+
+              print('Heree 4');
+
+              await showDialog(
+                context: context,
+                builder: (_) => AssetGiffyDialog(
+                  description: Text('Approximately ${(roadInformation.distance! * 0.62137).truncate()} miles from the location.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  entryAnimation: EntryAnimation.DEFAULT,
+                  onlyOkButton: true,
+                  onOkButtonPressed: (){
+                    Navigator.pop(context, true);
+                  },
+                ),
+              );
+
+              print('The distance is ${roadInformation.distance}');
+              print('The travel time in minutes is ${Duration(seconds: roadInformation.duration!.toInt()).inMinutes}');
+            },  
           ),
 
           SizedBox(height: 10,),
