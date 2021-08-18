@@ -68,7 +68,7 @@ class PostSerializer < ActiveModel::Serializer
   def getImage(images)
     sendImages = []
     images.each do |image|
-      sendImages.push(rails_blob_url(image))
+      sendImages.push(url_for(image))
     end
     return sendImages
   end

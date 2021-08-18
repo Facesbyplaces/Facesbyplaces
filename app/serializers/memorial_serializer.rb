@@ -74,13 +74,13 @@ class MemorialSerializer < ActiveModel::Serializer
   
   def backgroundImage
     if object.backgroundImage.present?
-      rails_blob_url(object.backgroundImage)
+      url_for(object.backgroundImage)
     end
   end
 
   def profileImage
     if object.profileImage.present?
-      rails_blob_url(object.profileImage)
+      url_for(object.profileImage)
     end
   end
 
@@ -148,7 +148,7 @@ class MemorialSerializer < ActiveModel::Serializer
   def getImage(images)
     sendImages = []
     images.each do |image|
-      sendImages.push(rails_blob_url(image))
+      sendImages.push(url_for(image))
     end
     return sendImages
   end

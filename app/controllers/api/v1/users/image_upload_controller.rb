@@ -18,7 +18,7 @@ class Api::V1::Users::ImageUploadController < ApplicationController
     def update_user_image
         return render json: {error: "No Current User"}, status: 422 unless user() != nil
         return render json: {success: false, errors: user().errors.full_messages, status: 404}, status: 200 unless user().update(image: params[:image])
-        render json: {success: true, message: "Successfully Uploaded Image", user: rails_blob_url(user().image), status: 200}, status: 200
+        render json: {success: true, message: "Successfully Uploaded Image", user: url_for(user().image), status: 200}, status: 200
     end
 
 

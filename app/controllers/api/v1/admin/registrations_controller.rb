@@ -12,7 +12,7 @@ class Api::V1::Admin::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         id: admin.id,
         email: admin.email,
         name: admin.full_name.to_s,
-        # image: admin.image.attached? ? (request.base_url+url_for(admin.image)) : "",
+        # image: admin.image.attached? ? (url_for(admin.image)) : "",
       },
       status: "created"
     }, status: 200
