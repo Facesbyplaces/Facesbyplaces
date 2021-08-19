@@ -161,7 +161,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                         recipient:      user,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify
                 else
@@ -169,11 +169,11 @@ class Api::V1::Posts::PostsController < ApplicationController
                     Notification::Builder.new(
                         device_tokens:  user.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}",
                         recipient:      user,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify                    
                 end
@@ -189,22 +189,22 @@ class Api::V1::Posts::PostsController < ApplicationController
                     Notification::Builder.new(
                         device_tokens:  user.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                        message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}",
                         recipient:      user,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify      
                 else
                     Notification::Builder.new(
                         device_tokens:  user.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}",
                         recipient:      user,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify  
                 end
@@ -218,22 +218,22 @@ class Api::V1::Posts::PostsController < ApplicationController
                     Notification::Builder.new(
                         device_tokens:  relationship.account.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                        message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}",
                         recipient:      relationship.account,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify  
                 else
                     Notification::Builder.new(
                         device_tokens:  relationship.account.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}",
                         recipient:      relationship.account,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify  
                 end
@@ -248,11 +248,11 @@ class Api::V1::Posts::PostsController < ApplicationController
             Notification::Builder.new(
                     device_tokens:  user.account.device_token,
                     title:          "FacesByPlaces Notification",
-                    message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                    message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}",
                     recipient:      user.account,
                     actor:          user(),
                     data:           post.id,
-                    type:           'Post',
+                    type:           "Post",
                     postType:       post.page_type,
             ).notify  
         end
@@ -272,22 +272,22 @@ class Api::V1::Posts::PostsController < ApplicationController
                     Notification::Builder.new(
                         device_tokens:  user.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} liked a post that you're tagged in"
+                        message:        "#{user().first_name} liked a post that you're tagged in",
                         recipient:      user,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify
                 else
                     Notification::Builder.new(
                         device_tokens:  user.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}",
                         recipient:      user,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify
                 end
@@ -303,22 +303,22 @@ class Api::V1::Posts::PostsController < ApplicationController
                     Notification::Builder.new(
                         device_tokens:  user.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} liked a post that you're tagged in"
+                        message:        "#{user().first_name} liked a post that you're tagged in",
                         recipient:      user,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify
                 else
                     Notification::Builder.new(
                         device_tokens:  user.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}",
                         recipient:      user,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify
                 end
@@ -332,33 +332,33 @@ class Api::V1::Posts::PostsController < ApplicationController
                     Notification::Builder.new(
                         device_tokens:  relationship.account.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} liked a post that you're tagged in"
+                        message:        "#{user().first_name} liked a post that you're tagged in",
                         recipient:      relationship.account,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify
                 elsif relationship.account == post.account 
                     Notification::Builder.new(
                         device_tokens:  relationship.account.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} liked your post"
+                        message:        "#{user().first_name} liked your post",
                         recipient:      relationship.account,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify
                 else
                     Notification::Builder.new(
                         device_tokens:  relationship.account.device_token,
                         title:          "FacesByPlaces Notification",
-                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}",
                         recipient:      relationship.account,
                         actor:          user(),
                         data:           post.id,
-                        type:           'Post',
+                        type:           "Post",
                         postType:       post.page_type,
                     ).notify
                 end
@@ -373,11 +373,11 @@ class Api::V1::Posts::PostsController < ApplicationController
             Notification::Builder.new(
                     device_tokens:  user.account.device_token,
                     title:          "FacesByPlaces Notification",
-                    message:        "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}"
+                    message:        "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}",
                     recipient:      user.account,
                     actor:          user(),
                     data:           post.id,
-                    type:           'Post',
+                    type:           "Post",
                     postType:       post.page_type,
             ).notify
         end
