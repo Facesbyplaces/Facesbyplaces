@@ -7,12 +7,13 @@ class Notification::Builder
       @recipient        = recipient
       @actor            = actor
       @data             = data
+      @type             = type
       @postType         = postType
       @notification     = Notification.new(recipient: @recipient, actor: @actor, action: @message, postId: @data, read: false, notif_type: @type)
-      add_notifications_to_user
     end
   
     def notify
+      add_notifications_to_user
       push_notify
     end
 

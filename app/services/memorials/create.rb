@@ -76,7 +76,7 @@ class Memorials::Create
                 actor:          @user,
                 data:           memorial.id,
                 type:           @type,
-                postType:       " ",
+                postType:       @type,
             )
             notification.notify
         end
@@ -90,7 +90,7 @@ class Memorials::Create
                 actor:          @user,
                 data:           memorial.id,
                 type:           @type,
-                postType:       " ",
+                postType:       @type,
             )
             notification.notify
         end

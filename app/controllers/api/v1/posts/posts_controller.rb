@@ -96,10 +96,6 @@ class Api::V1::Posts::PostsController < ApplicationController
             return render json: {error: "Access Denied."}, status: 401
         end
     end
-    
-    def notif_type
-        @notif_type = 'Post'
-    end
 
     def like
         if Postslike.where(account: user(), post_id: params[:post_id]).first == nil
@@ -158,11 +154,28 @@ class Api::V1::Posts::PostsController < ApplicationController
             if user.notifsetting.newActivities == true
                 # check if the user is in the tag people
                 if people.include?([user.id, user.account_type])
-                    message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                    send_notif(user, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  user.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}",
+                        recipient:      user,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify
                 else
                     message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
-                    send_notif(user, message, post, notif_type)                    
+                    Notification::Builder.new(
+                        device_tokens:  user.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                        recipient:      user,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify                    
                 end
             end
         end
@@ -173,11 +186,27 @@ class Api::V1::Posts::PostsController < ApplicationController
             if user.notifsetting.newActivities == true
                 # check if the user is in the tag people
                 if people.include?([user.id, user.account_type])
-                    message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                    send_notif(user, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  user.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                        recipient:      user,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify      
                 else
-                    message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
-                    send_notif(user, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  user.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                        recipient:      user,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify  
                 end
             end
         end
@@ -186,11 +215,27 @@ class Api::V1::Posts::PostsController < ApplicationController
         (post.page.relationships).each do |relationship|
             if relationship.account != user() && relationship.account.notifsetting.newActivities == true
                 if people.include?([relationship.account.id, relationship.account.account_type])
-                    message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                    send_notif(relationship.account, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  relationship.account.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                        recipient:      relationship.account,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify  
                 else
-                    message = "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
-                    send_notif(relationship.account, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  relationship.account.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} posted in #{post.page.name} #{post.page_type}"
+                        recipient:      relationship.account,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify  
                 end
             end
         end
@@ -200,13 +245,16 @@ class Api::V1::Posts::PostsController < ApplicationController
             next unless post.page.relationships.find_by(account_id: user.account_id) == nil
             next unless post.page.followers.find_by(account_id: user.account_id) == nil
              
-            if user.account_type == "AlmUser" 
-                message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                send_notif(user.account, message, post, notif_type)
-            else
-                message = "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                send_notif(user.account, message, post, notif_type)
-            end
+            Notification::Builder.new(
+                    device_tokens:  user.account.device_token,
+                    title:          "FacesByPlaces Notification",
+                    message:        "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
+                    recipient:      user.account,
+                    actor:          user(),
+                    data:           post.id,
+                    type:           'Post',
+                    postType:       post.page_type,
+            ).notify  
         end
     end
 
@@ -221,11 +269,27 @@ class Api::V1::Posts::PostsController < ApplicationController
             if user.notifsetting.postLikes == true
                 # check if the user is in the tag people
                 if people_blm_users.include?(user) || people_alm_users.include?(user)
-                    message = "#{user().first_name} liked a post that you're tagged in"
-                    send_notif(user, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  user.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} liked a post that you're tagged in"
+                        recipient:      user,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify
                 else
-                    message = "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
-                    send_notif(user, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  user.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                        recipient:      user,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify
                 end
             end
         end
@@ -236,11 +300,27 @@ class Api::V1::Posts::PostsController < ApplicationController
             if user.notifsetting.postLikes == true
                 # check if the user is in the tag people
                 if people_blm_users.include?(user) || people_alm_users.include?(user)
-                    message = "#{user().first_name} liked a post that you're tagged in"
-                    send_notif(user, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  user.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} liked a post that you're tagged in"
+                        recipient:      user,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify
                 else
-                    message = "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
-                    send_notif(user, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  user.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                        recipient:      user,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify
                 end
             end
         end
@@ -249,14 +329,38 @@ class Api::V1::Posts::PostsController < ApplicationController
         (post.page.relationships).each do |relationship|
             if relationship.account != user() && relationship.account.notifsetting.postLikes == true
                 if people_blm_users.include?(relationship.account) || people_alm_users.include?(relationship.account)
-                    message = "#{user().first_name} liked a post that you're tagged in"
-                    send_notif(relationship.account, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  relationship.account.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} liked a post that you're tagged in"
+                        recipient:      relationship.account,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify
                 elsif relationship.account == post.account 
-                    message = "#{user().first_name} liked your post"
-                    send_notif(relationship.account, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  relationship.account.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} liked your post"
+                        recipient:      relationship.account,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify
                 else
-                    message = "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
-                    send_notif(relationship.account, message, post, notif_type)
+                    Notification::Builder.new(
+                        device_tokens:  relationship.account.device_token,
+                        title:          "FacesByPlaces Notification",
+                        message:        "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}"
+                        recipient:      relationship.account,
+                        actor:          user(),
+                        data:           post.id,
+                        type:           'Post',
+                        postType:       post.page_type,
+                    ).notify
                 end
             end
         end
@@ -266,13 +370,16 @@ class Api::V1::Posts::PostsController < ApplicationController
             next unless post.page.relationships.find_by(account_id: user.account_id) == nil
             next unless post.page.followers.find_by(account_id: user.account_id) == nil
 
-            if user.account_type == "AlmUser" 
-                message = "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}"
-                send_notif(user.account, message, post, notif_type)
-            else
-                message = "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}"
-                send_notif(user.account, message, post, notif_type)
-            end
+            Notification::Builder.new(
+                    device_tokens:  user.account.device_token,
+                    title:          "FacesByPlaces Notification",
+                    message:        "#{user().first_name} liked a post that tagged you in a post in #{post.page.name} #{post.page_type}"
+                    recipient:      user.account,
+                    actor:          user(),
+                    data:           post.id,
+                    type:           'Post',
+                    postType:       post.page_type,
+            ).notify
         end
     end
 
@@ -298,15 +405,6 @@ class Api::V1::Posts::PostsController < ApplicationController
         end
 
         return people
-    end
-
-    def send_notif(recipient, message, action, notif_type)
-        Notification.create(recipient: recipient, actor: user(), action: message, postId: action.id, read: false, notif_type: notif_type)
-        
-        #Push Notification
-        device_token = recipient.device_token
-        title = "FacesbyPlaces Notification"
-        PushNotification(device_token, title, message, recipient, user(), action.id, notif_type, action.page_type)
     end
 
 end
