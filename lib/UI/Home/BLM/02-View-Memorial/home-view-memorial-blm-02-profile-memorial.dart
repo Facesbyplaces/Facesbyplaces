@@ -519,23 +519,18 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                           children: [
                                                             Row(
                                                               children: [
-                                                                Image.asset('assets/icons/prayer_logo.png', height: 25,),
-
-                                                                const SizedBox(width: 20,),
-
-                                                                Expanded(child: Text('Roman Catholic', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
-                                                              ],
-                                                            ),
-
-                                                            const SizedBox(height: 20,),
-
-                                                            Row(
-                                                              children: [
                                                                 const Icon(Icons.place, color: const Color(0xff000000), size: 25,),
 
                                                                 const SizedBox(width: 20,),
 
-                                                                Expanded(child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsPrecinct, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
+                                                                Expanded(
+                                                                  child: GestureDetector(
+                                                                    child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff3498DB)),),
+                                                                    onTap: () async{
+                                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true,)));
+                                                                    },
+                                                                  ),
+                                                                ),
                                                               ],
                                                             ),
 
@@ -560,25 +555,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                 const SizedBox(width: 20,),
 
                                                                 Expanded(child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsRip, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
-                                                              ],
-                                                            ),
-
-                                                            const SizedBox(height: 20,),
-
-                                                            Row(
-                                                              children: [
-                                                                Image.asset('assets/icons/grave_logo.png', height: 25,),
-
-                                                                const SizedBox(width: 20,),
-
-                                                                Expanded(
-                                                                  child: GestureDetector(
-                                                                    child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff3498DB)),),
-                                                                    onTap: () async{
-                                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMaps(latitude: profile.data!.blmMemorial.memorialDetails.memorialLatitude, longitude: profile.data!.blmMemorial.memorialDetails.memorialLongitude, isMemorial: true,)));
-                                                                    },
-                                                                  ),
-                                                                ),
                                                               ],
                                                             ),
                                                           ],

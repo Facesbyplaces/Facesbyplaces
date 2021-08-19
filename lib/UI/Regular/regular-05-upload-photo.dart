@@ -19,7 +19,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
   final picker = ImagePicker();
 
   Future getImage() async{
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
       image.value = File(pickedFile.path);
@@ -27,7 +27,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
   }
 
   Future openCamera() async{
-    final profilePicture = await picker.getImage(source: ImageSource.camera);
+    final profilePicture = await picker.pickImage(source: ImageSource.camera);
 
     if(profilePicture != null){
       image.value = File(profilePicture.path);

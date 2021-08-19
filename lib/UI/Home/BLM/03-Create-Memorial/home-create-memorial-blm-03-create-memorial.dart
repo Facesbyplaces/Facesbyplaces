@@ -38,7 +38,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
   Future getProfileImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -52,7 +52,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
   Future getBackgroundImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -294,7 +294,6 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                           context.loaderOverlay.show();
                           int result = await apiBLMCreateMemorial(blmMemorial: memorial);
-                          print('The result is $result');
                           context.loaderOverlay.hide();
 
                           Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);

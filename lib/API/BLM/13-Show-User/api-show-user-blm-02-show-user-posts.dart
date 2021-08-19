@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, required int page}) async{
+Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, required int accountType, required int page}) async{
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -21,7 +21,7 @@ Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, requi
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/posts?user_id=$userId&page=$page',
+  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/posts?user_id=$userId&page=$page&account_type=$accountType',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

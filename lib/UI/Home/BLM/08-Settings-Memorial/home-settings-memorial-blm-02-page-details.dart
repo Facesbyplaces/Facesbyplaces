@@ -27,10 +27,9 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key7 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key8 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key9 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  Future<APIBLMShowPageDetailsMain>? futureMemorialSettings;
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
-
+  Future<APIBLMShowPageDetailsMain>? futureMemorialSettings;
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
 
@@ -245,7 +244,6 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                                       Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: widget.memorialId, managed: true, newlyCreated: false, relationship: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,));
                                       Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
-                                      
                                     }else{
                                       await showDialog(
                                         context: context,

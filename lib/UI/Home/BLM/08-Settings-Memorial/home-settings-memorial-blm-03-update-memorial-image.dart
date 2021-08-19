@@ -26,15 +26,15 @@ class HomeBLMMemorialPageImage extends StatefulWidget{
 
 class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
   List<String> backgroundImages = ['assets/icons/blm-memorial-cover-1.jpeg', 'assets/icons/blm-memorial-cover-2.jpeg'];
-  Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
   ValueNotifier<File> backgroundImage = ValueNotifier<File>(File(''));
   ValueNotifier<File> profileImage = ValueNotifier<File>(File(''));
   ValueNotifier<int> backgroundImageToggle = ValueNotifier<int>(0);
+  Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
   final picker = ImagePicker();
 
   Future getProfileImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -48,7 +48,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
   Future getBackgroundImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 

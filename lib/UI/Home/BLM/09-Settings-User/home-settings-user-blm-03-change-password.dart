@@ -100,7 +100,6 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                       );
                     }else{
                       if(widget.isAddPassword == true){
-                        print('Add password here');
                         if(_key1.currentState!.controller.text == _key2.currentState!.controller.text){
                           context.loaderOverlay.show();
                           bool result = await apiBLMAddPassword(newPassword: _key1.currentState!.controller.text);
@@ -154,8 +153,6 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                           );
                         }
                       }else{
-                        print('Change password here');
-
                         context.loaderOverlay.show();
                         bool result = await apiBLMChangePassword(currentPassword: _key1.currentState!.controller.text, newPassword: _key2.currentState!.controller.text);
                         context.loaderOverlay.hide();

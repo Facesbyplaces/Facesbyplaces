@@ -40,18 +40,12 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
   }
 
   Future<bool> getProfileImage() async{
-    try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
-        return picture;
-      });
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-      if(pickedFile != null){
-        profileImage.value = File(pickedFile.path);
-      }
-
+    if(pickedFile != null){
+      profileImage.value = File(pickedFile.path);
       return true;
-    }catch (error){
-      print('Error: ${error.toString()}');
+    }else{
       return false;
     }
   }

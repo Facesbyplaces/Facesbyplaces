@@ -41,7 +41,8 @@ class RegularMiscDraggablePost{
 
 class MiscRegularDraggablePost extends StatefulWidget{
   final int userId;
-  const MiscRegularDraggablePost({required this.userId});
+  final int accountType;
+  const MiscRegularDraggablePost({required this.userId, required this.accountType});
 
   MiscRegularDraggablePostState createState() => MiscRegularDraggablePostState();
 }
@@ -80,7 +81,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowUserPosts(userId: widget.userId, page: page);
+      var newValue = await apiRegularShowUserPosts(userId: widget.userId, accountType: widget.accountType, page: page);
 
       itemRemaining = newValue.almItemsRemaining;
       count.value = count.value + newValue.almFamilyMemorialList.length;
@@ -367,7 +368,8 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
 
 class MiscRegularDraggableMemorials extends StatefulWidget{
   final int userId;
-  const MiscRegularDraggableMemorials({required this.userId});
+  final int accountType;
+  const MiscRegularDraggableMemorials({required this.userId, required this.accountType});
 
   MiscRegularDraggableMemorialsState createState() => MiscRegularDraggableMemorialsState();
 }
@@ -445,7 +447,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   void onLoading1() async{
     if(ownedItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowUserMemorials(userId: widget.userId, page: page1);
+      var newValue = await apiRegularShowUserMemorials(userId: widget.userId, accountType: widget.accountType, page: page1);
 
       ownedItemsRemaining = newValue.almOwnedItemsRemaining;
       count.value = count.value + newValue.almOwned.length;
@@ -482,7 +484,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   void onLoading2() async{
     if(followedItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiRegularShowUserMemorials(userId: widget.userId, page: page2);
+      var newValue = await apiRegularShowUserMemorials(userId: widget.userId, accountType: widget.accountType, page: page2);
 
       followedItemsRemaining = newValue.almFollowedItemsRemaining;
       count.value = count.value + newValue.almFollowed.length;
@@ -513,7 +515,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    print('User details screen memorial rebuild!');
     return ValueListenableBuilder(
       valueListenable: count,
       builder: (_, int countListener, __) => Container(

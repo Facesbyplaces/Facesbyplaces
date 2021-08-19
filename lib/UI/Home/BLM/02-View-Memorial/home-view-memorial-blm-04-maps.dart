@@ -18,7 +18,6 @@ class HomeBLMMaps extends StatefulWidget{
 class HomeBLMMapsState extends State<HomeBLMMaps>{
   List<StaticPositionGeoPoint> staticPoints = [];
   MapController controller = MapController();
-  MapController currentController = MapController(initMapWithUserPosition: true);
 
   void initState(){
     super.initState();
@@ -59,13 +58,12 @@ class HomeBLMMapsState extends State<HomeBLMMaps>{
               context.loaderOverlay.hide();
 
               GeoPoint point1 = await controller.selectPosition(icon: MarkerIcon(icon: Icon(Icons.location_history, color: Colors.blue, size: 48,),),);
-              // RoadInfo roadInformation = await controller.drawRoad(point1, GeoPoint(latitude: 37.78556405447126, longitude: -122.40161667090938), roadOption: RoadOption(roadWidth: 10, roadColor: Colors.green, showMarkerOfPOI: false));
               RoadInfo roadInformation = await controller.drawRoad(point1, GeoPoint(latitude: widget.latitude, longitude: widget.longitude), roadOption: RoadOption(roadWidth: 10, roadColor: Colors.green, showMarkerOfPOI: false));
 
               await showDialog(
                 context: context,
                 builder: (_) => AssetGiffyDialog(
-                  description: Text('Approximately ${(roadInformation.distance! * 0.62137).truncate()} miles from the location.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                  description: Text('Approximately ${(roadInformation.distance! * 0.62137).ceil()} miles from the location.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
                   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                   entryAnimation: EntryAnimation.DEFAULT,
@@ -99,38 +97,6 @@ class HomeBLMMapsState extends State<HomeBLMMaps>{
             onPressed: () async{
               await controller.zoomOut();
             },
-          ),
-
-          SizedBox(height: 10,),
-
-          FloatingActionButton(
-            heroTag: 'button4',
-            child: Icon(Icons.location_pin),
-            onPressed: () async{
-              context.loaderOverlay.show();
-              await controller.removeLastRoad();
-              context.loaderOverlay.hide();
-
-              GeoPoint point1 = await controller.selectPosition(icon: MarkerIcon(icon: Icon(Icons.location_history, color: Colors.blue, size: 48,),),);
-              RoadInfo roadInformation = await controller.drawRoad(point1, GeoPoint(latitude: currentController.initPosition!.latitude, longitude: currentController.initPosition!.longitude), roadOption: RoadOption(roadWidth: 10, roadColor: Colors.green, showMarkerOfPOI: false));
-
-              await showDialog(
-                context: context,
-                builder: (_) => AssetGiffyDialog(
-                  description: Text('Approximately ${(roadInformation.distance! * 0.62137).truncate()} miles from the location.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
-                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                  entryAnimation: EntryAnimation.DEFAULT,
-                  onlyOkButton: true,
-                  onOkButtonPressed: (){
-                    Navigator.pop(context, true);
-                  },
-                ),
-              );
-
-              print('The distance is ${roadInformation.distance}');
-              print('The travel time in minutes is ${Duration(seconds: roadInformation.duration!.toInt()).inMinutes}');
-            },  
           ),
 
           SizedBox(height: 10,),

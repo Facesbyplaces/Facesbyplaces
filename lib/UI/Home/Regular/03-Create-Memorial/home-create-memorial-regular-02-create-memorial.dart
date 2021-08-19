@@ -36,7 +36,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
   Future getVideo() async{
     try{
-      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickVideo(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -50,7 +50,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
   Future getSlideImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -66,7 +66,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Regular create memorial screen 2 rebuild!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

@@ -5,12 +5,11 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'home-create-memorial-blm-02-create-memorial.dart';
+import 'home-create-memorial-blm-04-locate-map.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
-import 'home-create-memorial-blm-04-locate-map.dart';
 
 class BLMCreateMemorialValues{
   final String blmName;

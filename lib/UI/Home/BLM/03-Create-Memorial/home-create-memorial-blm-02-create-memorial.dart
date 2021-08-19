@@ -37,7 +37,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
   Future getVideo() async{
     try{
-      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickVideo(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -51,7 +51,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
   Future getSlideImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -157,9 +157,9 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                       SizedBox(height: SizeConfig.blockSizeVertical! * 16.02),
                       
                       MiscBLMButtonTemplate(
+                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
                         width: 150,
                         height: 45,
-                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
                         onPressed: () async{
                           if(_key1.currentState!.controller.text == ''){
                             await showDialog(

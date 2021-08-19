@@ -37,7 +37,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
   Future getProfileImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -51,7 +51,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
   Future getBackgroundImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -66,7 +66,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Regular create memorial screen 3 rebuild!');
     return ValueListenableBuilder(
       valueListenable: backgroundImage,
       builder: (_, File backgroundImageListener, __) => ValueListenableBuilder(
@@ -295,9 +294,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                           context.loaderOverlay.show();
                           int result = await apiRegularCreateMemorial(memorial: memorial);
                           context.loaderOverlay.hide();
-
-                          print('The latitude is ${widget.latitude}');
-                          print('The longitude is ${widget.longitude}');
 
                           Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result, managed: true, newlyCreated: true, relationship: widget.relationship,),);
                           Navigator.pushReplacement(context, newRoute); 

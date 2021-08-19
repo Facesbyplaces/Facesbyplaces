@@ -182,16 +182,11 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           suffixIcon: IconButton(
                             icon: Icon(Icons.add_location), 
                             onPressed: () async{
-
                               var p = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreateMemorialLocateMap()));
 
                               if(p != null){
                                 location.value = p as GeoPoint;
-
-                              print('The location latitude is ${location.value!.latitude}');
-                              print('The location longitude is ${location.value!.latitude}');
                               }
-
                             },
                           ),
                         ),

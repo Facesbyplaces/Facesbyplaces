@@ -31,7 +31,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   void initState(){
     super.initState();
     showProfile = getProfileInformation();
-    children = [MiscRegularDraggablePost(userId: widget.userId,), MiscRegularDraggableMemorials(userId: widget.userId,)];
+    children = [MiscRegularDraggablePost(userId: widget.userId, accountType: widget.accountType,), MiscRegularDraggableMemorials(userId: widget.userId, accountType: widget.accountType,)];
   }
 
   @override

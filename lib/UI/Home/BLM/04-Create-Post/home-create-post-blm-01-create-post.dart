@@ -79,7 +79,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
   Future getVideo() async{
     try{
-      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickVideo(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -94,7 +94,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
   Future getSlideFiles() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -110,7 +110,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Create post screen rebuild!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

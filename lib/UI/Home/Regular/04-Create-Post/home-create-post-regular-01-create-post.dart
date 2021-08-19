@@ -45,14 +45,14 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   TextEditingController controller = TextEditingController();
   ValueNotifier<int> slideCount = ValueNotifier<int>(0);
   ValueNotifier<int> userCount = ValueNotifier<int>(0);
-  double latitude = 0.0;
-  double longitude = 0.0;
   List<RegularManagedPages> managedPages = [];
   List<RegularTaggedUsers> users = [];
   String currentSelection = '';
   final picker = ImagePicker();
   int currentIdSelected = 1;
   int maxLines = 5;
+  double latitude = 0.0;
+  double longitude = 0.0;
 
   void initState(){
     super.initState();
@@ -81,7 +81,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   Future getVideo() async{
     try{
-      final pickedFile = await picker.getVideo(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickVideo(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -96,7 +96,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   Future getSlideFiles() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -112,7 +112,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    print('Regular create post screen rebuild!');
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -173,8 +172,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                             if(newLocation.value == ''){
                               Location.Location location = new Location.Location();
 
-                              print('Here 1');
-
                               bool serviceEnabled = await location.serviceEnabled();
                               if(!serviceEnabled){
                                 serviceEnabled = await location.requestService();
@@ -183,15 +180,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 }
                               }
 
-                              print('Here 2');
-
                               Location.PermissionStatus permissionGranted = await location.hasPermission();
                               if(permissionGranted == Location.PermissionStatus.denied){
-                                print('Test here 1');
                                 permissionGranted = await location.requestPermission();
-                                print('Test here 2');
                                 if(permissionGranted != Location.PermissionStatus.granted){
-                                  print('Test here 3');
                                   await showDialog(
                                     context: context,
                                     builder: (_) => AssetGiffyDialog(
@@ -210,11 +202,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 }
                               }
 
-                              print('Here 3');
-
                               Location.LocationData locationData = await location.getLocation();
-
-                              print('Here 4');
 
                               post = APIRegularCreatePost(
                                 almPageType: 'Memorial',
@@ -226,8 +214,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 almLongitude: locationData.longitude!,
                                 almTagPeople: userIds,
                               );
-
-                              print('Here 5');
                             }else{
                               post = APIRegularCreatePost(
                                 almPageType: 'Memorial',

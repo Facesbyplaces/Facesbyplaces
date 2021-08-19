@@ -34,7 +34,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
   Future getProfileImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 
@@ -48,7 +48,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
   Future getBackgroundImage() async{
     try{
-      final pickedFile = await picker.getImage(source: ImageSource.gallery).then((picture){
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery).then((picture){
         return picture;
       });
 

@@ -31,13 +31,12 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
   void initState(){
     super.initState();
     showProfile = getProfileInformation();
-    children = [MiscBLMDraggablePost(userId: widget.userId,), MiscBLMDraggableMemorials(userId: widget.userId,)]; // MISCELLANEOUS - MISC-13-BLM-USER-DETAILS.DART
+    children = [MiscBLMDraggablePost(userId: widget.userId, accountType: widget.accountType,), MiscBLMDraggableMemorials(userId: widget.userId, accountType: widget.accountType,)]; // MISCELLANEOUS - MISC-13-BLM-USER-DETAILS.DART
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    print('BLM User Profile');
     return ValueListenableBuilder(
       valueListenable: currentIndex,
       builder: (_, int currentIndexListener, __) => Scaffold(

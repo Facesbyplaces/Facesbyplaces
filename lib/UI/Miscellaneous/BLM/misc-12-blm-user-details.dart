@@ -41,7 +41,8 @@ class BLMMiscDraggablePost{
 
 class MiscBLMDraggablePost extends StatefulWidget{
   final int userId;
-  const MiscBLMDraggablePost({required this.userId});
+  final int accountType;
+  const MiscBLMDraggablePost({required this.userId, required this.accountType});
 
   MiscBLMDraggablePostState createState() => MiscBLMDraggablePostState();
 }
@@ -80,7 +81,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowUserPosts(userId: widget.userId, page: page);
+      var newValue = await apiBLMShowUserPosts(userId: widget.userId, accountType: widget.accountType, page: page);
 
       itemRemaining = newValue.blmItemsRemaining;
       count.value = count.value + newValue.blmFamilyMemorialList.length;
@@ -363,15 +364,13 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
 
 class MiscBLMDraggableMemorials extends StatefulWidget{
   final int userId;
-  const MiscBLMDraggableMemorials({required this.userId});
+  final int accountType;
+  const MiscBLMDraggableMemorials({required this.userId, required this.accountType});
 
-  MiscBLMDraggableMemorialsState createState() => MiscBLMDraggableMemorialsState(userId: userId);
+  MiscBLMDraggableMemorialsState createState() => MiscBLMDraggableMemorialsState();
 }
 
 class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
-  final int userId;
-  MiscBLMDraggableMemorialsState({required this.userId});
-
   ValueNotifier<int> count = ValueNotifier<int>(0);
   ScrollController scrollController = ScrollController();
   List<Widget> finalMemorials = [];
@@ -450,7 +449,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   void onLoading1() async{
     if(ownedItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowUserMemorials(userId: userId, page: page1);
+      var newValue = await apiBLMShowUserMemorials(userId: widget.userId, accountType: widget.accountType, page: page1);
 
       ownedItemsRemaining = newValue.blmOwnedItemsRemaining;
       count.value = count.value + newValue.blmOwned.length;
@@ -487,7 +486,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   void onLoading2() async{
     if(followedItemsRemaining != 0){
       context.loaderOverlay.show();
-      var newValue = await apiBLMShowUserMemorials(userId: userId, page: page2);
+      var newValue = await apiBLMShowUserMemorials(userId: widget.userId, accountType: widget.accountType, page: page2);
 
       followedItemsRemaining = newValue.blmFollowedItemsRemaining;
       count.value = count.value + newValue.blmFollowed.length;
