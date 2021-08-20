@@ -8,21 +8,23 @@ class Api::V1::Posts::CommentsController < ApplicationController
     # before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
 
     def addComment
-        comment = Comment.new(comment_params)
-        comment.account = user()
+        comment = Posts::Comments::Create.new(comment: comment_params, user: user()).execute
 
-        return render json: {status: comment.errors}, status: 404 unless comment.save
-        notify_followers_of_a_comment(comment)
-        render json: {status: :success, comment: comment}
+        if comment 
+            render json: { status: :success, comment: Comment.last }
+        else
+            render json: { error: comment }, status: 400
+        end
     end
 
     def addReply
-        reply = Reply.new(reply_params)
-        reply.account = user()
-
-        return render json: {status: comment.errors}, status: 500 unless reply.save 
-        notify_followers_of_a_reply(reply)
-        render json: {status: :success, reply: reply}
+        reply = Posts::Comments::Replies::Create.new(reply: reply_params, user: user()).execute
+        
+        if reply
+            render json: { status: :success, reply: Reply.last }
+        else
+            render json: { error: reply }
+        end 
     end
 
     def editComment
@@ -138,108 +140,6 @@ class Api::V1::Posts::CommentsController < ApplicationController
         return render json: {}, status: 500 unless unlike.destroy 
         
         render json: {}, status: 200
-    end
-
-    def notify_followers_of_a_comment(comment)
-        # For blm followers
-        (comment.post.page.users.uniq - [user()]).each do |user|
-            if user.notifsetting.postComments == true
-                # check if user owns the post
-                if user == comment.post.account 
-                    message = "#{user().first_name} commented on your post"
-                    send_notif(user, message, comment, notif_type)
-                else comment.post.tagpeople.where(account: user).first
-                    message = "#{user().first_name} commented on a post that you're tagged in"
-                    send_notif(user, message, comment, notif_type)
-                # else
-                #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
-                #     #Push Notification
-                #     device_token = user.device_token
-                #     title = "FacesbyPlaces Notification"
-                #     message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
-                #     PushNotification(device_token, title, message)
-                end
-
-            end
-        end
-
-        # For alm followers
-        (comment.post.page.alm_users.uniq - [user()]).each do |user|
-            if user.notifsetting.postComments == true
-                # check if user owns the post
-                if user == comment.post.account 
-                    message = "#{user().first_name} commented on your post"
-                    send_notif(user, message, comment, notif_type)
-                else comment.post.tagpeople.where(account: user).first
-                    message = "#{user().first_name} commented on a post that you're tagged in"
-                    send_notif(user, message, comment, notif_type)
-                # else
-                #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
-                #     #Push Notification
-                #     device_token = user.device_token
-                #     title = "FacesbyPlaces Notification"
-                #     message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
-                #     PushNotification(device_token, title, message)
-                end
-            end
-        end
-
-        # For families and friends
-        (comment.post.page.relationships).each do |relationship|
-            if relationship.account.notifsetting.postComments == true
-                if relationship.account != user()
-                    user = relationship.account
-
-                    # check if user owns the post
-                    if user == comment.post.account 
-                        message = "#{user().first_name} commented on your post"
-                        send_notif(user, message, comment, notif_type)
-                    else comment.post.tagpeople.where(account: user).first
-                        message = "#{user().first_name} commented on a post that you're tagged in"
-                        send_notif(user, message, comment, notif_type)
-                    # else
-                    #     Notification.create(recipient: comment.post.account, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
-                    #     #Push Notification
-                    #     device_token = user.device_token
-                    #     title = "FacesbyPlaces Notification"
-                    #     message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
-                    #     PushNotification(device_token, title, message)
-                    end
-                end
-            end
-        end
-    end
-
-    def notify_followers_of_a_reply(reply)
-        if reply.comment.replies.count == 1
-            if user() != reply.comment.account
-                if reply.comment.account.notifsetting.postComments == true
-                    message = "#{user().first_name} replied to your comment"
-                    send_notif(reply.comment.account, message, reply.comment, notif_type)
-                end
-            end
-        else
-            users = reply.comment.accounts.uniq - [user()]
-            if users.count == 0
-                if reply.comment.account.notifsetting.postComments == true
-                    message = "#{user().first_name} replied to your comment"
-                    send_notif(reply.comment.account, message, reply.comment, notif_type)
-                end
-            else
-                users.each do |user|
-                    if user.notifsetting.postComments == true
-                        if reply.comment.account == user
-                            message = "#{user().first_name} replied to your comment"
-                            send_notif(user, message, reply.comment, notif_type)
-                        else
-                            message = "#{user().first_name} replied to a comment"
-                            send_notif(user, message, reply.comment, notif_type)
-                        end
-                    end
-                end
-                
-            end
-        end
     end
 
     def notify_followers_of_a like
