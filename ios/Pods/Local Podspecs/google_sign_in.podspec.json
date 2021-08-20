@@ -14,8 +14,9 @@
   "source": {
     "http": "https://github.com/flutter/plugins/tree/master/packages/google_sign_in"
   },
-  "source_files": "Classes/**/*",
+  "source_files": "Classes/**/*.{h,m}",
   "public_header_files": "Classes/**/*.h",
+  "module_map": "Classes/FLTGoogleSignInPlugin.modulemap",
   "dependencies": {
     "Flutter": [
 
@@ -30,18 +31,6 @@
   },
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES",
-    "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
-  },
-  "testspecs": [
-    {
-      "name": "Tests",
-      "test_type": "unit",
-      "source_files": "Tests/**/*",
-      "dependencies": {
-        "OCMock": [
-          "3.5"
-        ]
-      }
-    }
-  ]
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
+  }
 }

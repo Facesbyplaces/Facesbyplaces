@@ -3,4 +3,8 @@ framework module google_sign_in {
 
   export *
   module * { export * }
+
+  explicit module Test {
+    header "FLTGoogleSignInPlugin_Test.h"
+  }
 }

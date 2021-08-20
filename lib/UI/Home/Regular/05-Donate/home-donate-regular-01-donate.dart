@@ -151,7 +151,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
-
                                       MaterialButton(
                                         minWidth: 0,
                                         color: Colors.white,
@@ -495,8 +494,8 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                                                     final params = PaymentMethodParams.cardFromToken(token: newValue[1],);
 
                                                     print('The params is $params');
-                                                    
-                                                    PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPaymentMethod(newValue[0], params,);
+
+                                                    PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPayment(newValue[0], params,);
 
                                                     print('The google payment is $confirmGooglePayment');
                                                     print('The google payment status is ${confirmGooglePayment.status}');
@@ -593,7 +592,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                             );
                           }
                         );
-                        
                       },
                     ),
 

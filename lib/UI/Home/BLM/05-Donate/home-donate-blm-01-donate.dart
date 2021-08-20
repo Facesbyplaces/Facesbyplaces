@@ -147,7 +147,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
-
                                       MaterialButton(
                                         minWidth: 0,
                                         child: Icon(Icons.close, color: Colors.grey,),
@@ -182,9 +181,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                   modalSetState(() {
                                                     paymentToggle = index;
                                                   });
-
-                                                  print('The index is $index');
-                                                  print('The paymentToggle is $paymentToggle');
                                                 },
                                                 child: ((){
                                                   if(index == 0){
@@ -371,7 +367,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                                 )
                                                               );
                                                             }
-
                                                           },
                                                         ),
                                                       ],
@@ -479,7 +474,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     throw Exception('$error');
                                                   });
 
-                                                  print('heheh');
                                                   print('The newValue[0] is ${newValue[0]}');
                                                   print('The newValue[1] is ${newValue[1]}');
 
@@ -488,7 +482,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                                                     print('The params is $params');
                                                     
-                                                    PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPaymentMethod(newValue[0], params,);
+                                                    PaymentIntent confirmGooglePayment = await Stripe.instance.confirmPayment(newValue[0], params,);
 
                                                     print('The google payment is $confirmGooglePayment');
                                                     print('The google payment status is ${confirmGooglePayment.status}');
@@ -554,7 +548,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                                     ),
                                                   );
                                                 }
-
                                               },
                                               loadingIndicator: const Center(child: CircularProgressIndicator(),),
                                               onPressed: () async{},
@@ -587,7 +580,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                             );
                           }
                         );
-
                       }
                     ),
 
