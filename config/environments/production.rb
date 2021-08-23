@@ -120,7 +120,7 @@ Rails.application.configure do
     port:                 587,
     domain:               'gmail.com',
     user_name:            'facesbyplaces.mailer@gmail.com',
-    password:             'MVW@3Rk#SjN$X46q',
+    password:             'SgjgAw8wXYHkyIe', #MVW@3Rk#SjN$X46q
     authentication:       'plain'
   }  
 end
