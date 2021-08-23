@@ -21,5 +21,14 @@ class Memorials::Destroy
         @memorial.destroy()
     end
     
+    # if @type === "Blm"
+    #     User.all.each do |admin|
+    #         admin.roles.where(resource_type: 'Blm', resource_id: @id).first.destroy
+    #     end
+    # else
+    #     AlmUser.all.each do |admin|
+    #         admin.roles.where(resource_type: 'Memorial', resource_id: @id).first.destroy 
+    #     end
+    # end
     
 end
