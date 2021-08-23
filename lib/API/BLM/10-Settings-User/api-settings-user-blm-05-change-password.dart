@@ -9,7 +9,8 @@ Future<bool> apiBLMChangePassword({required String currentPassword, required Str
 
   Dio dioRequest = Dio();
   
-  var response = await dioRequest.put('http://45.33.66.25:3001/auth/password?password=$currentPassword&password_confirmation=$newPassword',
+  // var response = await dioRequest.put('http://45.33.66.25:3001/auth/password?password=$currentPassword&password_confirmation=$newPassword',
+  var response = await dioRequest.put('http://facesbyplaces.com/auth/password?password=$currentPassword&password_confirmation=$newPassword',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

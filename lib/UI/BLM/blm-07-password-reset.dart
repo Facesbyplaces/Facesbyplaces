@@ -46,8 +46,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
               child: Stack(
                 children: [
                   SingleChildScrollView(
-                    physics: const ClampingScrollPhysics(),
                     padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    physics: const ClampingScrollPhysics(),
                     child: Column(
                       children: [
                         Column(
@@ -79,8 +79,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                           child: MiscBLMInputFieldTemplate(
                             key: _key1,
                             labelText: 'New Password',
-                            type: TextInputType.emailAddress,
                             labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',color: Color(0xff000000),),
+                            type: TextInputType.emailAddress,
                             obscureText: true,
                           ),
                         ),
@@ -92,8 +92,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                           child: MiscBLMInputFieldTemplate(
                             key: _key2,
                             labelText: 'Confirm Password',
-                            type: TextInputType.emailAddress,
                             labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            type: TextInputType.emailAddress,
                             obscureText: true,
                           ),
                         ),

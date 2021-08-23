@@ -166,8 +166,8 @@ class UIGetStartedState extends State<UIGetStarted>{
               ),
 
               Container(
-                height: SizeConfig.blockSizeVertical! * 54,
                 decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background.png'),),),
+                height: SizeConfig.blockSizeVertical! * 54,
                 child: Column(
                   children: [
                     SizedBox(height: 30),
@@ -180,8 +180,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                       padding: EdgeInsets.only(left: 30, right: 30),
                       child: Center(
                         child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
-                          textAlign: TextAlign.center,
                           style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.92, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),

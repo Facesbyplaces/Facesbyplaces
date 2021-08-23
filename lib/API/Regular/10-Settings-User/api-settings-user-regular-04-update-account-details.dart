@@ -18,7 +18,8 @@ Future<bool> apiRegularUpdateAccountDetails({required String firstName, required
     MapEntry('question', MultipartFile.fromString(question)),
   ]);
 
-  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/users/updateDetails', data: formData,
+  // var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/users/updateDetails', data: formData,
+  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/users/updateDetails', data: formData,
     options: Options(
       followRedirects: false,
       validateStatus: (status){

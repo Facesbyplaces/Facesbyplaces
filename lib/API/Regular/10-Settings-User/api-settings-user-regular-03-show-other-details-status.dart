@@ -9,7 +9,8 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus({requi
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/otherDetailsStatus',
+  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/otherDetailsStatus',
+  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/users/otherDetailsStatus',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

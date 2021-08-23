@@ -9,7 +9,8 @@ Future<bool> apiBLMCheckAccount({required String email}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/check_password?account_type=1&email=$email',
+  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/check_password?account_type=1&email=$email',
+  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/users/check_password?account_type=1&email=$email',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

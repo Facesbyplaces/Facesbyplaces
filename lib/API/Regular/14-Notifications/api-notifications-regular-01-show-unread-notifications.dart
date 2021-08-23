@@ -9,7 +9,8 @@ Future<int> apiRegularShowUnreadNotifications() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/notifications/numOfUnread',
+  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/notifications/numOfUnread',
+  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/notifications/numOfUnread',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

@@ -27,7 +27,8 @@ Future<bool> apiBLMAddComment({required int postId, required dynamic commentBody
     'body': commentBody,
   });
 
-  var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/posts/comment', data: formData,
+  // var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/posts/comment', data: formData,
+  var response = await dioRequest.post('http://facesbyplaces.com/api/v1/posts/comment', data: formData,
     options: Options(
       followRedirects: false,
       validateStatus: (status){

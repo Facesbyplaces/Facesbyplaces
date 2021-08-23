@@ -9,7 +9,8 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers({required String keywords, requi
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/search/users?page=$page&keywords=$keywords',
+  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/search/users?page=$page&keywords=$keywords',
+  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/search/users?page=$page&keywords=$keywords',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

@@ -4,7 +4,8 @@ import 'package:dio/dio.dart';
 Future<bool> apiRegularSignInWithFacebook({required String firstName, required String lastName, required String email, required String username, required String facebookId, required String image}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://45.33.66.25:3001/alm_auth/sign_in?account_type=2&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
+  // var response = await dioRequest.post('http://45.33.66.25:3001/alm_auth/sign_in?account_type=2&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
+  var response = await dioRequest.post('http://facesbyplaces.com/alm_auth/sign_in?account_type=2&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

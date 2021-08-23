@@ -4,7 +4,8 @@ import 'package:dio/dio.dart';
 Future<bool> apiRegularPasswordChange({required String password, required String passwordConfirmation, required String resetToken}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://45.33.66.25:3001/alm_auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
+  // var response = await dioRequest.put('http://45.33.66.25:3001/alm_auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
+  var response = await dioRequest.put('http://facesbyplaces.com/alm_auth/password?password=$password&password_confirmation=$passwordConfirmation&reset_password_token=$resetToken',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

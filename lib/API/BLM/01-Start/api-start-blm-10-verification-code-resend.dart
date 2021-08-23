@@ -10,7 +10,8 @@ Future<bool> apiBLMVerificationCodeResend() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=1',
+  // var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=1',
+  var response = await dioRequest.post('http://facesbyplaces.com/api/v1/users/resend_verification_code?user_id=$prefsUserID&account_type=1',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

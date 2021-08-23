@@ -75,8 +75,8 @@ class BLMLogin extends StatelessWidget{
                         Spacer(),
 
                         SizedBox(
-                          width: 16.93 * SizeConfig.blockSizeHorizontal!,
                           height: 14.93 * SizeConfig.blockSizeHorizontal!,
+                          width: 16.93 * SizeConfig.blockSizeHorizontal!,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(primary: Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10),),),),
                             child: Center(child: Image.asset('assets/icons/Facebook2.png',),),

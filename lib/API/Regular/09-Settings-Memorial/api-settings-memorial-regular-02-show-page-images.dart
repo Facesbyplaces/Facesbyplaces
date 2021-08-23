@@ -9,7 +9,8 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({required int memo
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/pages/memorials/$memorialId/editImages',
+  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/pages/memorials/$memorialId/editImages',
+  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/pages/memorials/$memorialId/editImages',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

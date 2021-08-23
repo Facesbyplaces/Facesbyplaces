@@ -38,8 +38,8 @@ class BLMVerifyEmail extends StatelessWidget{
                 ),
 
                 SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                  physics: const ClampingScrollPhysics(),
                   child: Column(
                     children: [
                       Align(

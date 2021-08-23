@@ -21,7 +21,8 @@ Future<bool> apiRegularEditComment({required int commentId, required String comm
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/posts/comment',
+  // var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/posts/comment',
+  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/posts/comment',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

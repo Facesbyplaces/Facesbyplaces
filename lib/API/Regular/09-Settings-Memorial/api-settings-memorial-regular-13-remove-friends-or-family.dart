@@ -9,7 +9,8 @@ Future<String> apiRegularDeleteMemorialFriendsOrFamily({required int memorialId,
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.delete('http://45.33.66.25:3001/api/v1/pageadmin/removeFamilyorFriend?page_type=Memorial&page_id=$memorialId&user_id=$userId&account_type=$accountType',
+  // var response = await dioRequest.delete('http://45.33.66.25:3001/api/v1/pageadmin/removeFamilyorFriend?page_type=Memorial&page_id=$memorialId&user_id=$userId&account_type=$accountType',
+  var response = await dioRequest.delete('http://facesbyplaces.com/api/v1/pageadmin/removeFamilyorFriend?page_type=Memorial&page_id=$memorialId&user_id=$userId&account_type=$accountType',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

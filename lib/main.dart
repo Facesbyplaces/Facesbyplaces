@@ -131,13 +131,11 @@ void main() async{
             '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
 
             '/home/blm': (BuildContext context) => HomeBLMScreen(),
-            // '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
             '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
             '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
             '/home/blm/search': (BuildContext context) => HomeBLMSearch(), // BLM HOME SCREEN
 
             '/home/regular': (BuildContext context) => HomeRegularScreen(),
-            // '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
             '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
             '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
             '/home/regular/search': (BuildContext context) => HomeRegularSearch(), // ALM HOME SCREEN

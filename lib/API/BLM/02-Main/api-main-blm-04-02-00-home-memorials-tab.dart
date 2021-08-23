@@ -9,7 +9,8 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({required int page}) as
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/mainpages/memorials?page=$page',
+  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/mainpages/memorials?page=$page',
+  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/mainpages/memorials?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

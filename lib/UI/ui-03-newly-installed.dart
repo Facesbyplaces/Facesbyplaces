@@ -19,7 +19,7 @@ class UINewlyInstalledState extends State<UINewlyInstalled> with TickerProviderS
     sharedPrefs.setBool('newly-installed', false);
   }
 
-  void initState() {
+  void initState(){
     super.initState();
     newlyInstalled();
   }
@@ -64,17 +64,17 @@ class UINewlyInstalled01State extends State<UINewlyInstalled01>{
         children: [
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xffffffff).withOpacity(0.5),
               image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/stephen-hawking.jpeg'),),
+              color: const Color(0xffffffff).withOpacity(0.5),
             ),
             child: new BackdropFilter(
+              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0),),),
               filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0)),),
             ),
           ),
           SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            physics: const ClampingScrollPhysics(),
             child: Align(
               alignment: Alignment.center,
               child: Column(
@@ -212,17 +212,17 @@ class UINewlyInstalled02State extends State<UINewlyInstalled02>{
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5),
               image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/kobe-bryant.jpeg'),),
+              color: Colors.white.withOpacity(0.5),
             ),
             child: new BackdropFilter(
+              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0),),),
               filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0)),),
             ),
           ),
           SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            physics: const ClampingScrollPhysics(),
             child: Align(
               alignment: Alignment.center,
               child: Column(
@@ -359,12 +359,12 @@ class UINewlyInstalled03State extends State<UINewlyInstalled03>{
         children: [
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xffffffff).withOpacity(0.5),
               image: const DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/stan-lee.jpeg'),),
+              color: const Color(0xffffffff).withOpacity(0.5),
             ),
             child: new BackdropFilter(
+              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0),),),
               filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: new Container(decoration: new BoxDecoration(color: const Color(0xffffffff).withOpacity(0.0)),),
             ),
           ),
           SingleChildScrollView(

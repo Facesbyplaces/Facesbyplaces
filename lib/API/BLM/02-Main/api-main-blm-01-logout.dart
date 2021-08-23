@@ -11,7 +11,8 @@ Future<bool> apiBLMLogout() async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.delete('http://45.33.66.25:3001/auth/sign_out',
+  // var response = await dioRequest.delete('http://45.33.66.25:3001/auth/sign_out',
+  var response = await dioRequest.delete('http://facesbyplaces.com/auth/sign_out',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

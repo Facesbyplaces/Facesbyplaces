@@ -21,7 +21,8 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({required int postId, 
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/posts/index/comments/$postId?page=$page',
+  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/posts/index/comments/$postId?page=$page',
+  var response = await dioRequest.get('http://facesbyplaces.com/api/v1/posts/index/comments/$postId?page=$page',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

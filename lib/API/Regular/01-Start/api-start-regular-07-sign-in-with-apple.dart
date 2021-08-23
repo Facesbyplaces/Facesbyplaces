@@ -4,7 +4,8 @@ import 'package:dio/dio.dart';
 Future<bool> apiRegularSignInWithApple({required String userIdentification, required String identityToken}) async{
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.post('http://45.33.66.25:3001/alm_auth/sign_in?account_type=2&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken',
+  // var response = await dioRequest.post('http://45.33.66.25:3001/alm_auth/sign_in?account_type=2&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken',
+  var response = await dioRequest.post('http://facesbyplaces.com/alm_auth/sign_in?account_type=2&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

@@ -9,7 +9,8 @@ Future<bool> apiRegularUpdateNotificationAddAdmin({required bool hide}) async{
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/notifications/addAdmin?setting=$hide',
+  // var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/notifications/addAdmin?setting=$hide',
+  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/notifications/addAdmin?setting=$hide',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

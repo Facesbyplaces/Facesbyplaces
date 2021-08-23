@@ -21,7 +21,8 @@ Future<bool> apiBLMModifyFollowPage({required String pageType, required int page
 
   Dio dioRequest = Dio();
 
-  var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/followers/follow',
+  // var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/followers/follow',
+  var response = await dioRequest.put('http://facesbyplaces.com/api/v1/followers/follow',
     options: Options(
       followRedirects: false,
       validateStatus: (status){

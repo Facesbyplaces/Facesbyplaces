@@ -56,9 +56,9 @@ class BLMPasswordResetEmail extends StatelessWidget{
                       padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                       child: TextFormField(
                         controller: controller,
+                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                         keyboardType: TextInputType.emailAddress,
                         cursorColor: const Color(0xff000000),
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                         decoration: InputDecoration(
                           alignLabelWithHint: true,
                           labelText: 'Email Address',
