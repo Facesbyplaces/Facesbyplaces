@@ -4,11 +4,12 @@ body {
   background: #1b1e22;
   color: #ffffff;
 }
-.header, .header-sub {
+.header,
+.header-sub {
   float: left;
   position: absolute;
   width: 100%;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   .logo-container {
     float: left;
     margin: 15px 0 0 6%;
@@ -43,7 +44,7 @@ body {
 .footer {
   float: left;
   width: 100%;
-  background: #30343D 0% 0% no-repeat padding-box;
+  background: #30343d 0% 0% no-repeat padding-box;
   .text {
     text-align: center;
     float: left;
@@ -130,7 +131,8 @@ body {
     .social-buttons {
       float: left;
       width: 100%;
-      .googleplay, .appstore {
+      .googleplay,
+      .appstore {
         float: left;
         background-size: 100%;
         background-repeat: no-repeat;
@@ -188,7 +190,8 @@ body {
     float: left;
     width: 80%;
     padding: 0 10%;
-    .title, .main-text {
+    .title,
+    .main-text {
       float: left;
       width: 100%;
       font-size: 1.5em;
@@ -211,7 +214,8 @@ body {
         width: 80%;
         height: 300px;
       }
-      .image_1, .image_2 {
+      .image_1,
+      .image_2 {
         background-size: 100% auto;
         background-repeat: no-repeat;
         background-position: center;
@@ -235,9 +239,11 @@ body {
     }
   }
 }
+
 @media only screen and (max-width: 800px) {
   .row {
-    .col, .col-2 {
+    .col,
+    .col-2 {
       width: 90%;
       padding: 0 5%;
     }
@@ -268,7 +274,7 @@ body {
         height: 0;
       }
     }
-    .tabs-container { 
+    .tabs-container {
       padding: 0;
       // width: 100%;
       width: 170px;
@@ -327,7 +333,8 @@ body {
       }
       .section-container {
         width: 100%;
-        .image_1, .image_2 {
+        .image_1,
+        .image_2 {
           float: left;
           width: 90%;
           margin: 2% 5%;
