@@ -21,7 +21,6 @@ Future<bool> apiRegularModifyUnfollowPage({required String pageType, required in
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/followers/unfollow',
   var response = await dioRequest.put('http://facesbyplaces.com/api/v1/followers/unfollow',
     options: Options(
       followRedirects: false,

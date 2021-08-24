@@ -9,7 +9,6 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({required int userId}) asy
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/users/getOtherInfos?user_id=$userId&account_type=1',
   var response = await dioRequest.get('http://facesbyplaces.com/api/v1/users/getOtherInfos?user_id=$userId&account_type=1',
     options: Options(
       followRedirects: false,

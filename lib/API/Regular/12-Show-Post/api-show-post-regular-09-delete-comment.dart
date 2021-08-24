@@ -21,7 +21,6 @@ Future<bool> apiRegularDeleteComment({required int commentId}) async{
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.delete('http://45.33.66.25:3001/api/v1/posts/comment?comment_id=$commentId',
   var response = await dioRequest.delete('http://facesbyplaces.com/api/v1/posts/comment?comment_id=$commentId',
     options: Options(
       followRedirects: false,

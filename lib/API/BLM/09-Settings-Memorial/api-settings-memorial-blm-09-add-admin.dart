@@ -29,7 +29,6 @@ Future<String> apiBLMAddMemorialAdmin({required String pageType, required int pa
     'account_type': '1'
   });
 
-  // var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/pageadmin', data: formData,
   var response = await dioRequest.post('http://facesbyplaces.com/api/v1/pageadmin', data: formData,
     options: Options(
       followRedirects: false,

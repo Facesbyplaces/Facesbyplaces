@@ -9,7 +9,6 @@ Future<bool> apiRegularChangePassword({required String currentPassword, required
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.put('http://45.33.66.25:3001/alm_auth/password?password=$currentPassword&password_confirmation=$newPassword',
   var response = await dioRequest.put('http://facesbyplaces.com/alm_auth/password?password=$currentPassword&password_confirmation=$newPassword',
     options: Options(
       followRedirects: false,

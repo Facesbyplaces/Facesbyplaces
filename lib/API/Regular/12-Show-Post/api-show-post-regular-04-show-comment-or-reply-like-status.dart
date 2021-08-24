@@ -21,7 +21,6 @@ Future<APIRegularShowCommentOrReplyLikeStatus> apiRegularShowCommentOrReplyLikeS
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
   var response = await dioRequest.get('http://facesbyplaces.com/api/v1/posts/comment/likeCommentStatus?commentable_type=$commentableType&commentable_id=$commentableId',
     options: Options(
       followRedirects: false,

@@ -9,7 +9,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/search/posts?page=$page&keywords=$keywords',
   var response = await dioRequest.get('http://facesbyplaces.com/api/v1/search/posts?page=$page&keywords=$keywords',
     options: Options(
       followRedirects: false,

@@ -9,7 +9,6 @@ Future<APIBLMShowSwitchStatus> apiBLMShowSwitchStatus({required int memorialId})
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/pageadmin/hideStatus/Blm/$memorialId',
   var response = await dioRequest.get('http://facesbyplaces.com/api/v1/pageadmin/hideStatus/Blm/$memorialId',
     options: Options(
       followRedirects: false,

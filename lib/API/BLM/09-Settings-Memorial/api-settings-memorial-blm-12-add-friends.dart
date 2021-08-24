@@ -18,7 +18,6 @@ Future<String> apiBLMAddFriends({required int memorialId, required int userId, r
     MapEntry('account_type', MultipartFile.fromString(accountType.toString()),),
   ]);
 
-  // var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/pageadmin/addFriend', data: formData,
   var response = await dioRequest.post('http://facesbyplaces.com/api/v1/pageadmin/addFriend', data: formData,
     options: Options(
       followRedirects: false,

@@ -42,7 +42,6 @@ Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial
     }
   }
 
-  // var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/pages/memorials', data: formData,
   var response = await dioRequest.post('http://facesbyplaces.com/api/v1/pages/memorials', data: formData,
     options: Options(
       followRedirects: false,

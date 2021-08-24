@@ -19,11 +19,6 @@ Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) a
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-  print('The post id is $postId');
-
   Dio dioRequest = Dio();
   FormData formData = FormData();
 
@@ -32,7 +27,6 @@ Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) a
     'like': like,
   });
 
-  // var response = await dioRequest.put('http://45.33.66.25:3001/api/v1/posts/likePost/unlikeOrLike', data: formData,
   var response = await dioRequest.put('http://facesbyplaces.com/api/v1/posts/likePost/unlikeOrLike', data: formData,
     options: Options(
       followRedirects: false,
@@ -48,7 +42,6 @@ Future<bool> apiBLMLikeOrUnlikePost({required int postId, required bool like}) a
   );
 
   print('The status code of blm post like or unlike is ${response.statusCode}');
-  print('The status data of blm post like or unlike is ${response.data}');
 
   if(response.statusCode == 200){
     return true;

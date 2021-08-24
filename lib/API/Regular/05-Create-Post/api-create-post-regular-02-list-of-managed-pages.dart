@@ -9,7 +9,6 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.get('http://45.33.66.25:3001/api/v1/posts/listPages/show',
   var response = await dioRequest.get('http://facesbyplaces.com/api/v1/posts/listPages/show',
     options: Options(
       followRedirects: false,
@@ -26,7 +25,6 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
   );
 
   print('The status code of regular list of managed pages is ${response.statusCode}');
-  print('The status data of regular list of managed pages is ${response.data}');
 
   if(response.statusCode == 200){
     var newData = Map<String, dynamic>.from(response.data);

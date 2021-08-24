@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 Future<String> apiBLMLogin({required String email, required String password, required String deviceToken}) async{
   Dio dioRequest = Dio();
 
-  // Response<dynamic> response = await dioRequest.post('http://45.33.66.25:3001/auth/sign_in?account_type=1&password=$password&email=$email&device_token=$deviceToken',
   Response<dynamic> response = await dioRequest.post('http://facesbyplaces.com/auth/sign_in?account_type=1&password=$password&email=$email&device_token=$deviceToken',
     options: Options(
       followRedirects: false,

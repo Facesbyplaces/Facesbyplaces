@@ -10,7 +10,6 @@ Future<String> apiRegularVerifyEmail({required String verificationCode}) async{
 
   Dio dioRequest = Dio();
 
-  // var response = await dioRequest.post('http://45.33.66.25:3001/api/v1/users/verify_code?user_id=$prefsUserID&verification_code=$verificationCode&account_type=2',
   var response = await dioRequest.post('http://facesbyplaces.com/api/v1/users/verify_code?user_id=$prefsUserID&verification_code=$verificationCode&account_type=2',
     options: Options(
       followRedirects: false,
