@@ -16,6 +16,7 @@ class BLMMainPagesMemorials{
 }
 
 class HomeBLMManageTab extends StatefulWidget{
+  const HomeBLMManageTab();
 
   HomeBLMManageTabState createState() => HomeBLMManageTabState();
 }
@@ -282,8 +283,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           physics: const ClampingScrollPhysics(),
           child: Container(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 

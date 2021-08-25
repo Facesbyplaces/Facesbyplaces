@@ -158,11 +158,11 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                 widget.location != ''
                 ? Column(
                   children: [
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
 
                     Row(
                       children: [
-                        Icon(Icons.place, color: Color(0xff888888)),
+                        const Icon(Icons.place, color: const Color(0xff888888)),
 
                         Expanded(child: Text('${widget.location}', style: TextStyle(fontWeight: FontWeight.bold),),),
                       ],
@@ -180,8 +180,6 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                       label: Text('$likesCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                       onPressed: () async{
                         likePost.value = !likePost.value;
-
-                        print('post hehehehe');
 
                         if(likePost.value == true){
                           likesCount++;

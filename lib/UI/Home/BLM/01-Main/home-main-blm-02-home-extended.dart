@@ -32,7 +32,7 @@ import 'dart:async';
 
 class HomeBLMScreenExtended extends StatefulWidget{
   final int newToggleBottom;
-  HomeBLMScreenExtended({required this.newToggleBottom});
+  const HomeBLMScreenExtended({required this.newToggleBottom});
 
   HomeBLMScreenExtendedState createState() => HomeBLMScreenExtendedState();
 }
@@ -101,12 +101,12 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
       await showDialog(
         context: context, 
         builder: (_) => AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-          entryAnimation: EntryAnimation.DEFAULT,
           description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-          onlyOkButton: true,
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          entryAnimation: EntryAnimation.DEFAULT,
           buttonOkColor: const Color(0xffff0000),
+          onlyOkButton: true,
           onOkButtonPressed: (){
             Navigator.pop(context, true);
           },
@@ -158,7 +158,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             builder: (context){
                               return IconButton(
                                 icon: Container(
-                                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 2,),),
+                                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xffffffff), width: 2,),),
                                   child: profileImage.data!.showProfileInformationImage != ''
                                   ? CircleAvatar(
                                     backgroundColor: const Color(0xff888888),
@@ -192,9 +192,9 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     actions: [
                       GestureDetector(
                         child: Container(
-                          height: SizeConfig.blockSizeVertical! * 4.04,
-                          width: SizeConfig.blockSizeHorizontal! * 12.18,
                           padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal! * 5),
+                          width: SizeConfig.blockSizeHorizontal! * 12.18,
+                          height: SizeConfig.blockSizeVertical! * 4.04,
                           child: Image.asset('assets/icons/zoom.png',),
                         ),
                         onTap: (){
@@ -213,10 +213,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                       Container(
                         child: ((){
                           switch (toggleBottomListener){
-                            case 0: return HomeBLMFeedTab();
-                            case 1: return HomeBLMManageTab();
-                            case 2: return HomeBLMPostTab();
-                            case 3: return HomeBLMNotificationsTab();
+                            case 0: return const HomeBLMFeedTab();
+                            case 1: return const HomeBLMManageTab();
+                            case 2: return const HomeBLMPostTab();
+                            case 3: return const HomeBLMNotificationsTab();
                           }
                         }()),
                       ),
@@ -236,18 +236,18 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                       height: 65,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                         boxShadow: <BoxShadow>[
                           BoxShadow(color: const Color(0xff888888).withOpacity(0.5), blurRadius: 5, spreadRadius: 1, offset: const Offset(0, 0)),
                         ],
                       ),
                       child: ToggleButtons(
-                        borderWidth: 0,
-                        renderBorder: false,
                         selectedColor: const Color(0xff04ECFF),
-                        fillColor: Colors.transparent,
                         color: const Color(0xffB1B1B1),
+                        fillColor: Colors.transparent,
                         isSelected: bottomTabListener,
+                        renderBorder: false,
+                        borderWidth: 0,
                         children: [
                           Container(
                             width: SizeConfig.screenWidth! / 4,
@@ -345,7 +345,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   GestureDetector(
                                     child: manageDrawer.data!.showProfileInformationImage != ''
                                     ? Container(
-                                      decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.white, width: 3,),),
+                                      decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: const Color(0xffffffff), width: 3,),),
                                       child: CircleAvatar(
                                         radius: 100,
                                         backgroundColor: const Color(0xff888888),
@@ -360,8 +360,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                     onTap: (){
                                       showGeneralDialog(
                                         context: context,
-                                        barrierDismissible: true,
                                         barrierLabel: 'Dialog',
+                                        barrierDismissible: true,
                                         transitionDuration: const Duration(milliseconds: 0),
                                         pageBuilder: (_, __, ___){
                                           return Scaffold(
@@ -389,10 +389,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                                                     Expanded(
                                                       child: CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: manageDrawer.data!.showProfileInformationImage,
-                                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                        placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                        imageUrl: manageDrawer.data!.showProfileInformationImage,
+                                                        fit: BoxFit.cover,
                                                       ),
                                                     ),
 
@@ -462,7 +462,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   GestureDetector(
                                     child: Text('Log Out', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
-                                      bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
+                                      bool confirmResult = await showDialog(context: (context), builder: (build) => const MiscBLMConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
 
                                       if(confirmResult){
                                         context.loaderOverlay.show();
@@ -476,12 +476,12 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                              entryAnimation: EntryAnimation.DEFAULT,
                                               description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                              onlyOkButton: true,
+                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                              entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
+                                              onlyOkButton: true,
                                               onOkButtonPressed: (){
                                                 Navigator.pop(context, true);
                                               },

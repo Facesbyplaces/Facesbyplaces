@@ -30,9 +30,9 @@ class MiscBLMDropDownTemplate extends StatefulWidget{
 }
 
 class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
+  GlobalKey qrKey = new GlobalKey();
   BranchUniversalObject? buo;
   BranchLinkProperties? lp;
-  GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare(){
     buo = BranchUniversalObject(
@@ -189,22 +189,22 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: const Color(0xffffffff),
-                                      border: Border.all(color: Color(0xffffffff),),
+                                      border: Border.all(color: const Color(0xffffffff),),
                                       borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
                                     ),
                                     child: Column(
                                       children: [
-                                        Spacer(),
+                                        const Spacer(),
 
                                         Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
 
-                                        Spacer(),
+                                        const Spacer(),
 
-                                        Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                        Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
                                         Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
-                                        Spacer(),
+                                        const Spacer(),
 
                                         MiscBLMButtonTemplate(
                                           buttonText: 'Share',
@@ -217,7 +217,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                                           },
                                         ),
 
-                                        Spacer(),
+                                        const Spacer(),
                                       ],
                                     ),
                                   ),
@@ -404,7 +404,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                 showGeneralDialog(
                   context: context,
                   barrierColor: Colors.black12.withOpacity(0.7),
-                  transitionDuration: Duration(milliseconds: 0),
+                  transitionDuration: const Duration(milliseconds: 0),
                   barrierDismissible: true,
                   barrierLabel: 'Dialog',
                   pageBuilder: (_, __, ___){
@@ -433,22 +433,22 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: const Color(0xffffffff),
-                                      border: Border.all(color: Color(0xffffffff),),
+                                      border: Border.all(color: const Color(0xffffffff),),
                                       borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
                                     ),
                                     child: Column(
                                       children: [
-                                        Spacer(),
+                                        const Spacer(),
 
                                         Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
 
-                                        Spacer(),
+                                        const Spacer(),
 
-                                        Text('${widget.memorialName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                        Text('${widget.memorialName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
                                         Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
-                                        Spacer(),
+                                        const Spacer(),
 
                                         MiscBLMButtonTemplate(
                                           buttonText: 'Share',
@@ -461,7 +461,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                                           },
                                         ),
 
-                                        Spacer(),
+                                        const Spacer(),
                                       ],
                                     ),
                                   ),

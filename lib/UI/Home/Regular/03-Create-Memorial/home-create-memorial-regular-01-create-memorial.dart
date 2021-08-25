@@ -27,6 +27,7 @@ class RegularCreateMemorialValues{
 }
 
 class HomeRegularCreateMemorial1 extends StatefulWidget{
+  const HomeRegularCreateMemorial1();
 
   HomeRegularCreateMemorial1State createState() => HomeRegularCreateMemorial1State();
 }

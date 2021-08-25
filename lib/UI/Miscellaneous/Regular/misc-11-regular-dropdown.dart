@@ -78,9 +78,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
         final file = await new File('${tempDir.path}/alm-qr-code.png').create();
         file.writeAsBytesSync(list);
 
-        print('heheheh');
-
-        print('The file  is ${file.path}');
+        print('The file is ${file.path}');
 
         Share.shareFiles(['${file.path}'], text: 'QR Code');
       }else{
@@ -113,8 +111,8 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
         builder: (context, dropDownList){
           return DropdownButton<String>(
             underline: Container(height: 0),
-            icon: Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
-            style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Color(0xff888888)),
+            icon: Center(child: Icon(Icons.more_vert, color: const Color(0xffaaaaaa)),),
+            style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: const Color(0xff888888)),
             items: const <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 child: Container(child: Text(value),),
@@ -171,11 +169,11 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.only(right: 20.0),
+                              padding: const EdgeInsets.only(right: 20.0),
                               alignment: Alignment.centerRight,
                               height: 50,
                               child: GestureDetector(
-                                child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
+                                child: Icon(Icons.close_rounded, color: const Color(0xffffffff), size: 30,),
                                 onTap: (){
                                   Navigator.pop(context);
                                 },
@@ -184,42 +182,42 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
                             Expanded(
                               child: Container(
+                                padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 10, right: SizeConfig.blockSizeHorizontal! * 10, top: SizeConfig.blockSizeHorizontal! * 20, bottom: SizeConfig.blockSizeHorizontal! * 25),
                                 height: SizeConfig.screenHeight! - 400,
                                 color: Colors.black26,
-                                padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 10, right: SizeConfig.blockSizeHorizontal! * 10, top: SizeConfig.blockSizeHorizontal! * 20, bottom: SizeConfig.blockSizeHorizontal! * 25),
                                 child: Material(
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: const Color(0xffffffff),
-                                      border: Border.all(color: Color(0xffffffff),),
+                                      border: Border.all(color: const Color(0xffffffff),),
                                       borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
                                     ),
                                     child: Column(
                                       children: [
-                                        Spacer(),
+                                        const Spacer(),
 
                                         Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
 
-                                        Spacer(),
+                                        const Spacer(),
 
-                                        Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                        Text('${widget.pageName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
                                         Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
-                                        Spacer(),
+                                        const Spacer(),
 
                                         MiscRegularButtonTemplate(
                                           buttonText: 'Share',
-                                          buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+                                          buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
                                           width: SizeConfig.screenWidth! / 2,
-                                          buttonColor: Color(0xff04ECFF),
+                                          buttonColor: const Color(0xff04ECFF),
                                           height: 45,
                                           onPressed: () async{
                                             await shareQRCode(qrData);
                                           },
                                         ),
 
-                                        Spacer(),
+                                        const Spacer(),
                                       ],
                                     ),
                                   ),
@@ -271,7 +269,7 @@ class MiscRegularDropDownMemorialTemplate extends StatefulWidget{
   final int memorialId;
   final String pageType;
   final String reportType;
-  MiscRegularDropDownMemorialTemplate({required this.memorialName, required this.memorialId, required this.pageType, required this.reportType});
+  const MiscRegularDropDownMemorialTemplate({required this.memorialName, required this.memorialId, required this.pageType, required this.reportType});
 
   MiscRegularDropDownMemorialTemplateState createState() => MiscRegularDropDownMemorialTemplateState();
 }
@@ -314,7 +312,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
         final painter = QrPainter.withQr(
           qr: qrCode!,
-          color: Colors.black,
+          color: const Color(0xff000000),
           gapless: true,
           embeddedImageStyle: null,
           embeddedImage: null,
@@ -406,7 +404,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                 showGeneralDialog(
                   context: context,
                   barrierColor: Colors.black12.withOpacity(0.7),
-                  transitionDuration: Duration(milliseconds: 0),
+                  transitionDuration: const Duration(milliseconds: 0),
                   barrierDismissible: true,
                   barrierLabel: 'Dialog',
                   pageBuilder: (_, __, ___){
@@ -435,35 +433,35 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: const Color(0xffffffff),
-                                      border: Border.all(color: Color(0xffffffff),),
+                                      border: Border.all(color: const Color(0xffffffff),),
                                       borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal! * 2),
                                     ),
                                     child: Column(
                                       children: [
-                                        Spacer(),
+                                        const Spacer(),
 
                                         Center(child: RepaintBoundary(key: qrKey, child: QrImage(data: qrData, version: QrVersions.auto, size: 320, gapless: false,),),),
 
-                                        Spacer(),
+                                        const Spacer(),
 
-                                        Text('${widget.memorialName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                                        Text('${widget.memorialName}', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
                                         Text('QR Code', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
 
-                                        Spacer(),
+                                        const Spacer(),
 
                                         MiscRegularButtonTemplate(
                                           buttonText: 'Share',
-                                          buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+                                          buttonTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
+                                          buttonColor: const Color(0xff04ECFF),
                                           width: SizeConfig.screenWidth! / 2,
-                                          buttonColor: Color(0xff04ECFF),
                                           height: 45,
                                           onPressed: () async{
                                             await shareQRCode(qrData);
                                           },
                                         ),
 
-                                        Spacer(),
+                                        const Spacer(),
                                       ],
                                     ),
                                   ),

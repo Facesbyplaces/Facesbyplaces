@@ -39,6 +39,7 @@ class RegularMainPagesPosts{
 }
 
 class HomeRegularPostTab extends StatefulWidget{
+  const HomeRegularPostTab();
 
   HomeRegularPostTabState createState() => HomeRegularPostTabState();
 }

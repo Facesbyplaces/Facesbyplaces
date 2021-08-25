@@ -9,6 +9,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularNotificationsTab extends StatefulWidget{
+  const HomeRegularNotificationsTab();
 
   HomeRegularNotificationsTabState createState() => HomeRegularNotificationsTabState();
 }

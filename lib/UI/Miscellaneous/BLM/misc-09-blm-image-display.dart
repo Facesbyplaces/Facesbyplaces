@@ -13,10 +13,10 @@ class MiscBLMImageDisplayFeedTemplate extends StatelessWidget{
       radius: backSize,
       backgroundColor: backgroundColor,
       child: CircleAvatar(
-        radius: frontSize,
+        backgroundImage: const AssetImage('assets/icons/app-icon.png',),
         backgroundColor: Colors.transparent,
         foregroundImage: AssetImage(image),
-        backgroundImage: const AssetImage('assets/icons/app-icon.png',),
+        radius: frontSize,
       ),
     );
   }

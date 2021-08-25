@@ -28,6 +28,7 @@ class BLMCreateMemorialValues{
 }
 
 class HomeBLMCreateMemorial1 extends StatefulWidget{
+  const HomeBLMCreateMemorial1();
 
   HomeBLMCreateMemorial1State createState() => HomeBLMCreateMemorial1State();
 }

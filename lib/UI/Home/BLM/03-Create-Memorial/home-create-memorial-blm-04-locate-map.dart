@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 class HomeBLMCreateMemorialLocateMap extends StatefulWidget{
+  const HomeBLMCreateMemorialLocateMap();
   
   @override
   HomeBLMCreateMemorialLocateMapState createState() => HomeBLMCreateMemorialLocateMapState();

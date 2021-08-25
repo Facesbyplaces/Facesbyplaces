@@ -153,7 +153,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                       child: Image.asset('assets/icons/Collage Image.png', fit: BoxFit.contain,),
                       height: SizeConfig.blockSizeVertical!* 50,
                       width: SizeConfig.screenWidth,
-                      color: Colors.black,
+                      color: const Color(0xff000000),
                     ),
 
                     Positioned(
@@ -170,11 +170,11 @@ class UIGetStartedState extends State<UIGetStarted>{
                 height: SizeConfig.blockSizeVertical! * 54,
                 child: Column(
                   children: [
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
 
                     Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, color: Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
 
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
 
                     Container(
                       padding: EdgeInsets.only(left: 30, right: 30),
@@ -186,7 +186,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                       ),
                     ),
 
-                    Spacer(),
+                    const Spacer(),
 
                     MaterialButton(
                       child: Text('Get Started', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),

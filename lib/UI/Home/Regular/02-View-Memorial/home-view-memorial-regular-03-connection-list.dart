@@ -22,7 +22,7 @@ class RegularConnectionListItem{
 class HomeRegularConnectionList extends StatefulWidget{
   final int memorialId;
   final int newToggle;
-  HomeRegularConnectionList({required this.memorialId, required this.newToggle});
+  const HomeRegularConnectionList({required this.memorialId, required this.newToggle});
 
   HomeRegularConnectionListState createState() => HomeRegularConnectionListState();
 }

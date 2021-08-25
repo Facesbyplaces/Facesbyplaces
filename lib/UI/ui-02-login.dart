@@ -13,7 +13,7 @@ class UILogin01 extends StatelessWidget{
         child: Container(
           height: SizeConfig.screenHeight,
           width: SizeConfig.screenWidth,
-          color: Colors.white,
+          color: const Color(0xffffffff),
           child: Column(
             children: [
               SizedBox(height: SizeConfig.blockSizeVertical! * 5),
@@ -22,11 +22,11 @@ class UILogin01 extends StatelessWidget{
 
               SizedBox(height: SizeConfig.blockSizeVertical! * 2),
               
-              Text('FacesByPlaces.com', style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff2F353D), fontFamily: 'NexaBold'),),
+              Text('FacesByPlaces.com', style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff2F353D), fontFamily: 'NexaBold'),),
               
               SizedBox(height: SizeConfig.blockSizeVertical! * 4.79),
               
-              Text('Honor, Respect, Never Forget', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'NexaBold', fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), ),),
+              Text('Honor, Respect, Never Forget', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'NexaBold', fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000),),),
               
               SizedBox(height: SizeConfig.blockSizeVertical! * 4.20),
               
@@ -102,7 +102,7 @@ class UILogin01 extends StatelessWidget{
                 ),
               ),
 
-              Spacer(),
+              const Spacer(),
 
               RichText(
                 text: TextSpan(
@@ -121,7 +121,7 @@ class UILogin01 extends StatelessWidget{
                 ),
               ),
 
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),

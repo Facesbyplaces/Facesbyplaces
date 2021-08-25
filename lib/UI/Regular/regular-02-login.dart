@@ -231,13 +231,13 @@ class RegularLoginState extends State<RegularLogin>{
 
                       SizedBox(height: SizeConfig.blockSizeVertical! * 5.11),
 
-                      Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff000000), fontFamily: 'NexaRegular',),),),
+                      Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular',),),),
 
                       Padding(
                         padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
                         child: MiscRegularInputFieldTemplate(
                           key: _key1,
-                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff000000), fontFamily: 'NexaRegular',),
+                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular',),
                           type: TextInputType.emailAddress,
                           labelText: 'Email Address',
                         ),
@@ -247,7 +247,7 @@ class RegularLoginState extends State<RegularLogin>{
                         padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
                         child: MiscRegularInputFieldTemplate(
                           key: _key2,
-                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff000000), fontFamily: 'NexaRegular'),
+                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular'),
                           type: TextInputType.text,
                           labelText: 'Password',
                           obscureText: true,
@@ -359,12 +359,12 @@ class RegularLoginState extends State<RegularLogin>{
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Don\'t have an Account? ',
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff2F353D), fontFamily: 'NexaRegular',),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff2F353D), fontFamily: 'NexaRegular',),
                             ),
 
                             TextSpan(
                               text: 'Sign Up', 
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff4EC9D4), fontFamily: 'NexaRegular',), 
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff4EC9D4), fontFamily: 'NexaRegular',), 
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
                                 Navigator.pushNamed(context, '/regular/register');
@@ -377,7 +377,7 @@ class RegularLoginState extends State<RegularLogin>{
                       SizedBox(height: SizeConfig.blockSizeVertical! * 2.00),
 
                       GestureDetector(
-                        child: Text('Sign in as Guest', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaRegular', color: Color(0xff4EC9D4), decoration: TextDecoration.underline,),),
+                        child: Text('Sign in as Guest', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaRegular', color: const Color(0xff4EC9D4), decoration: TextDecoration.underline,),),
                         onTap: () async{
                           final sharedPrefs = await SharedPreferences.getInstance();
                           sharedPrefs.setBool('user-guest-session', true);

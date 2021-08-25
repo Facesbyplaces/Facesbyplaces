@@ -55,7 +55,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                             Align(
                               alignment: Alignment.centerLeft,
                               child: IconButton(
-                                icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+                                icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                                 onPressed: (){
                                   Navigator.pop(context);
                                 },
@@ -66,11 +66,11 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
 
                         const SizedBox(height: 80),
 
-                        Center(child: Text('Change Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
+                        Center(child: Text('Change Password', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
 
                         const SizedBox(height: 40,),
 
-                        Center(child: Text('Please enter your new password', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),),
+                        Center(child: Text('Please enter your new password', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                         const SizedBox(height: 80,),
 
@@ -79,7 +79,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                           child: MiscBLMInputFieldTemplate(
                             key: _key1,
                             labelText: 'New Password',
-                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular',color: Color(0xff000000),),
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                             type: TextInputType.emailAddress,
                             obscureText: true,
                           ),
@@ -92,7 +92,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                           child: MiscBLMInputFieldTemplate(
                             key: _key2,
                             labelText: 'Confirm Password',
-                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                            labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                             type: TextInputType.emailAddress,
                             obscureText: true,
                           ),
@@ -102,7 +102,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
 
                         MiscBLMButtonTemplate(
                           buttonText: 'Change',
-                          buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: Color(0xffFFFFFF),),
+                          buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
                           buttonColor: const Color(0xff04ECFF),
                           width: SizeConfig.screenWidth! / 2,
                           height: 45,

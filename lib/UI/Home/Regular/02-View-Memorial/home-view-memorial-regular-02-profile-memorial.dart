@@ -56,7 +56,7 @@ class HomeRegularMemorialProfile extends StatefulWidget{
   final int memorialId;
   final String pageType;
   final bool newJoin;
-  HomeRegularMemorialProfile({required this.memorialId, required this.pageType, required this.newJoin});
+  const HomeRegularMemorialProfile({required this.memorialId, required this.pageType, required this.newJoin});
 
   HomeRegularMemorialProfileState createState() => HomeRegularMemorialProfileState();
 }

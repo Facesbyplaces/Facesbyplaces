@@ -48,7 +48,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
           EasyRichTextPattern(
             targetString: '$actor',
             matchOption: 'first',
-            style: TextStyle(color: Color(0xff000000), fontWeight: FontWeight.bold),
+            style: TextStyle(color: const Color(0xff000000), fontWeight: FontWeight.bold),
             recognizer: TapGestureRecognizer()
             ..onTap = (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: actorId, accountType: actorAccountType)));

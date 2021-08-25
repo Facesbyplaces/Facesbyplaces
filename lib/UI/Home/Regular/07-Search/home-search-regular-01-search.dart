@@ -8,6 +8,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularSearch extends StatefulWidget{
+  const HomeRegularSearch();
 
   HomeRegularSearchState createState() => HomeRegularSearchState();
 }

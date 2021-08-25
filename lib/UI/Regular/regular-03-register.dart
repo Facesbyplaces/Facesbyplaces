@@ -40,7 +40,7 @@ class RegularRegister extends StatelessWidget{
                   height: SizeConfig.screenHeight,
                   width: SizeConfig.screenWidth,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: const Color(0xffffffff),
                     image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
                   ),
                   child: Column(
@@ -51,7 +51,7 @@ class RegularRegister extends StatelessWidget{
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: Color(0xffFFFFFF), size: SizeConfig.blockSizeVertical! * 3.65,),
+                            icon: Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: SizeConfig.blockSizeVertical! * 3.65,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -112,7 +112,7 @@ class RegularRegister extends StatelessWidget{
                         ),
                       ),
                       
-                      Spacer(),
+                      const Spacer(),
 
                       MiscRegularButtonTemplate(
                         buttonText: 'Next',
@@ -183,7 +183,7 @@ class RegularRegister extends StatelessWidget{
                         },
                       ),
 
-                      Spacer(),
+                      const Spacer(),
 
                       RichText(
                         text: TextSpan(
@@ -205,7 +205,7 @@ class RegularRegister extends StatelessWidget{
                         ),
                       ),
                       
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),

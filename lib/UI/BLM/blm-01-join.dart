@@ -14,13 +14,13 @@ class BLMJoin extends StatelessWidget{
         child: Container(
           height: SizeConfig.screenHeight,
           width: SizeConfig.screenWidth,
-          color: Colors.white,
+          color: const Color(0xffffffff),
           child: Column(
             children: [
               Align(
                 alignment: Alignment.centerLeft,
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+                  icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                   onPressed: (){
                     Navigator.pop(context);
                   },
@@ -31,7 +31,7 @@ class BLMJoin extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Spacer(),
+                    const Spacer(),
 
                     Text('BLACK', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, color: const Color(0xff000000), fontFamily: 'NexaBold',),),
 
@@ -48,7 +48,7 @@ class BLMJoin extends StatelessWidget{
 
                     Text('MATTER', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
 
-                    Spacer(),
+                    const Spacer(),
                   ],
                 ),
               ),
@@ -62,7 +62,7 @@ class BLMJoin extends StatelessWidget{
                       top: SizeConfig.blockSizeVertical! * 30,
                       child: Container(
                         height: SizeConfig.blockSizeVertical! * 30,
-                        decoration: const BoxDecoration(color: Colors.white, image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/join6.png',),),),
+                        decoration: const BoxDecoration(color: const Color(0xffffffff), image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/join6.png',),),),
                         child: Container(color: Colors.white.withOpacity(0.4),),
                       ),
                     ),

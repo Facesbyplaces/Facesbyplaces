@@ -16,12 +16,12 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Choose file to Upload:', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaLight', color: Color(0xff000000),),),
+            Text('Choose file to Upload:', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaLight', color: const Color(0xff000000),),),
 
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text(choice_1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xffC1C1C1),),),
+              child: Text(choice_1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffC1C1C1),),),
               onTap: (){
                 Navigator.pop(context, 1);
               },
@@ -30,7 +30,7 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text(choice_2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xffC1C1C1),),),
+              child: Text(choice_2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffC1C1C1),),),
               onTap: (){
                 Navigator.pop(context, 2);
               },
@@ -57,13 +57,13 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
           children: [
             Text('Choose the relationship of this person:',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff000000),),
+              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
             ),
 
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Father', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Father', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Father');
               },
@@ -72,7 +72,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Mother', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Mother', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Mother');
               },
@@ -81,7 +81,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
             SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Sister', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Sister', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Sister');
               },
@@ -90,7 +90,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
             SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Brother', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Brother', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Brother');
               },
@@ -99,7 +99,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Aunt', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Aunt', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Aunt');
               },
@@ -108,7 +108,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Uncle', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Uncle', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Uncle');
               },
@@ -117,7 +117,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Nephew', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Nephew', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Nephew');
               },
@@ -126,7 +126,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Grandfather', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Grandfather', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Grandfather');
               },
@@ -135,7 +135,7 @@ class MiscRegularRelationshipFromDialog extends StatelessWidget{
             const SizedBox(height: 40,),
 
             GestureDetector(
-              child: Text('Grandmother', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000).withOpacity(0.5),),),
+              child: Text('Grandmother', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000).withOpacity(0.5),),),
               onTap: (){
                 Navigator.pop(context, 'Grandmother');
               },
@@ -174,13 +174,13 @@ class MiscRegularConfirmDialog extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(title, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff000000),),),
+            Text(title, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
             const SizedBox(height: 20,),
 
             Padding(
               padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 11.0, right: SizeConfig.blockSizeHorizontal! * 11.0),
-              child: Text(content, textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+              child: Text(content, textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
             ),
 
             const SizedBox(height: 20,),

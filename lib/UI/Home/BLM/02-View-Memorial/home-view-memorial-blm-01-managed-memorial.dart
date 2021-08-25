@@ -206,10 +206,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                     height: SizeConfig.screenHeight! / 3,
                                     width: SizeConfig.screenWidth,
                                     child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
-                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
 
@@ -220,9 +220,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                         onTap: (){
                                           showGeneralDialog(
                                             context: context,
-                                            barrierDismissible: true,
                                             barrierLabel: 'Dialog',
-                                            transitionDuration: Duration(milliseconds: 0),
+                                            barrierDismissible: true,
+                                            transitionDuration: const Duration(milliseconds: 0),
                                             pageBuilder: (_, __, ___) {
                                               return Scaffold(
                                                 backgroundColor: Colors.black12.withOpacity(0.7),
@@ -249,10 +249,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                         Expanded(
                                                           child: CachedNetworkImage(
-                                                            fit: BoxFit.contain,
-                                                            imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
-                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
+                                                            fit: BoxFit.contain,
                                                           ),
                                                         ),
 
@@ -276,10 +276,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                             Center(
                                               child: Text(profile.data!.blmMemorial.memorialName,
+                                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
                                                 textAlign: TextAlign.center,
-                                                maxLines: 5,
                                                 overflow: TextOverflow.clip,
-                                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
+                                                maxLines: 5,
                                               ),
                                             ),
 
@@ -319,8 +319,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   onTap: (){
                                                     showGeneralDialog(
                                                       context: context,
-                                                      barrierDismissible: true,
                                                       barrierLabel: 'Dialog',
+                                                      barrierDismissible: true,
                                                       transitionDuration: const Duration(milliseconds: 0),
                                                       pageBuilder: (_, __, ___) {
                                                         return Scaffold(
@@ -355,10 +355,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                         );
                                                                       }else{
                                                                         return CachedNetworkImage(
-                                                                          fit: BoxFit.contain,
-                                                                          imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
-                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                          placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                          imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[0],
+                                                                          fit: BoxFit.contain,
                                                                         );
                                                                       }
                                                                     }()),
@@ -380,9 +380,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 ((){
                                                   if(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription != ''){
                                                     return Container(
-                                                      alignment: Alignment.center,
-                                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                       child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription, textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                                      alignment: Alignment.center,
                                                     );
                                                   }else{
                                                     return Container(height: 0,);
@@ -403,11 +403,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                     child: Padding(
                                                       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                                                       child: MaterialButton(
-                                                        padding: EdgeInsets.zero,
                                                         child: Text('Manage', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                         minWidth: SizeConfig.screenWidth! / 2,
                                                         color: const Color(0xff2F353D),
                                                         shape: const StadiumBorder(),
+                                                        padding: EdgeInsets.zero,
                                                         height: 45,
                                                         onPressed: () async{
                                                           if(widget.managed == true){

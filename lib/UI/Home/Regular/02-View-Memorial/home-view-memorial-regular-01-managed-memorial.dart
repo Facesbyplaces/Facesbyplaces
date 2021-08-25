@@ -54,7 +54,7 @@ class HomeRegularProfile extends StatefulWidget{
   final String relationship;
   final bool managed;
   final bool newlyCreated;
-  HomeRegularProfile({required this.memorialId, required this.relationship, required this.managed, required this.newlyCreated});
+  const HomeRegularProfile({required this.memorialId, required this.relationship, required this.managed, required this.newlyCreated});
 
   HomeRegularProfileState createState() => HomeRegularProfileState();
 }

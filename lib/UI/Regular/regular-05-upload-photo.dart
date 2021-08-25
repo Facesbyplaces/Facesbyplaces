@@ -41,7 +41,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
       valueListenable: image,
       builder: (_, File imageListener, __) => RepaintBoundary(
         child: Scaffold(
-          backgroundColor: Color(0xffffffff),
+          backgroundColor: const Color(0xffffffff),
           body: SingleChildScrollView(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             physics: const ClampingScrollPhysics(),
@@ -133,7 +133,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                             title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            buttonOkColor: Colors.red,
+                            buttonOkColor: const Color(0xffff0000),
                             onlyOkButton: true,
                             onOkButtonPressed: (){
                               Navigator.pop(context, true);
@@ -149,7 +149,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                           title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          buttonOkColor: Colors.red,
+                          buttonOkColor: const Color(0xffff0000),
                           onlyOkButton: true,
                           onOkButtonPressed: (){
                             Navigator.pop(context, true);

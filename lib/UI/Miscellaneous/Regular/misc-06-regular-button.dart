@@ -9,7 +9,7 @@ class MiscRegularButtonTemplate extends StatelessWidget{
   final Color buttonColor;
   const MiscRegularButtonTemplate({
     this.buttonText = 'Next',
-    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),
     required this.onPressed,
     required this.width,
     required this.height,

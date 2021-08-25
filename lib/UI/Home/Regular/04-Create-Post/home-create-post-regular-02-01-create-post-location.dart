@@ -4,6 +4,7 @@ import 'package:osm_nominatim/osm_nominatim.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularCreatePostSearchLocation extends StatefulWidget{
+  const HomeRegularCreatePostSearchLocation();
   
   @override
   HomeRegularCreatePostSearchLocationState createState() => HomeRegularCreatePostSearchLocationState();

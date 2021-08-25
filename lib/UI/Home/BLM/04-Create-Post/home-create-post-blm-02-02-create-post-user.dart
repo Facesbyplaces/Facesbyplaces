@@ -16,7 +16,7 @@ class BLMSearchUsers{
 
 class HomeBLMCreatePostSearchUser extends StatefulWidget{
   final List<BLMTaggedUsers> taggedUsers;
-  HomeBLMCreatePostSearchUser({required this.taggedUsers});
+  const HomeBLMCreatePostSearchUser({required this.taggedUsers});
 
   @override
   HomeBLMCreatePostSearchUserState createState() => HomeBLMCreatePostSearchUserState();

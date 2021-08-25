@@ -19,7 +19,7 @@ import 'dart:io';
 
 class HomeBLMMemorialPageImage extends StatefulWidget{
   final int memorialId;
-  HomeBLMMemorialPageImage({required this.memorialId});
+  const HomeBLMMemorialPageImage({required this.memorialId});
 
   HomeBLMMemorialPageImageState createState() => HomeBLMMemorialPageImageState();
 }

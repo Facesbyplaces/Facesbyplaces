@@ -204,14 +204,14 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                             }
                           }else if(posts[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 2,
                               staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 2,
                               itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -230,14 +230,14 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
                               staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                              crossAxisCount: 4,
+                              shrinkWrap: true,
+                              itemCount: 3,
                               itemBuilder: (BuildContext context, int index) => ((){
                                 if(index != 1){
                                   return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true

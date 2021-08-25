@@ -7,7 +7,7 @@ class MiscBLMButtonTemplate extends StatelessWidget{
   final double width;
   final double height;
   final Color buttonColor;
-  MiscBLMButtonTemplate({
+  const MiscBLMButtonTemplate({
     this.buttonText = 'Next',
     this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,color: const Color(0xffffffff),),
     required this.onPressed,
@@ -38,7 +38,7 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
   final double height;
   final Color buttonColor;
   final String image;
-  MiscBLMButtonSignInWithTemplate({
+  const MiscBLMButtonSignInWithTemplate({
     this.buttonText = '',
     this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300, color: const Color(0xff000000),),
     required this.onPressed,
@@ -51,12 +51,12 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return MaterialButton(
+      shape: const StadiumBorder(),
       padding: EdgeInsets.zero,
       onPressed: onPressed,
+      color: buttonColor,
       minWidth: width,
       height: height,
-      shape: const StadiumBorder(),
-      color: buttonColor,
       child: Row(
         children: [
           Expanded(child: Container(height: 30, child: Image.asset(image),),),

@@ -24,7 +24,7 @@ import 'dart:io';
 
 class HomeBLMUserProfileDetails extends StatefulWidget{
   final int userId;
-  HomeBLMUserProfileDetails({required this.userId});
+  const HomeBLMUserProfileDetails({required this.userId});
 
   HomeBLMUserProfileDetailsState createState() => HomeBLMUserProfileDetailsState();
 }

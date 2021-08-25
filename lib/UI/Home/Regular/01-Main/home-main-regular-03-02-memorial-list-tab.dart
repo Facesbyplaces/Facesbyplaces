@@ -16,6 +16,7 @@ class RegularMainPagesMemorials{
 }
 
 class HomeRegularManageTab extends StatefulWidget{
+  const HomeRegularManageTab();
 
   HomeRegularManageTabState createState() => HomeRegularManageTabState();
 }

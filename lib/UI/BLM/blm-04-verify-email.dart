@@ -54,7 +54,7 @@ class BLMVerifyEmail extends StatelessWidget{
 
                       const SizedBox(height: 40,),
 
-                      Center(child: Text('Verify Email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),),
+                      Center(child: Text('Verify Email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
 
                       const SizedBox(height: 40,),
 
@@ -62,7 +62,7 @@ class BLMVerifyEmail extends StatelessWidget{
                         padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 11.25, right: SizeConfig.blockSizeHorizontal! * 11.25),
                         child: Text('We have sent a verification code to your email address. Please enter the verification code to continue.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),
+                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                         ),
                       ),
 
@@ -86,11 +86,11 @@ class BLMVerifyEmail extends StatelessWidget{
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
-                            TextSpan(text: 'Didn\'t receive a code? ', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: Color(0xff000000),),),
+                            TextSpan(text: 'Didn\'t receive a code? ', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
 
                             TextSpan(
                               text: 'Resend',
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: Color(0xff000000),),
+                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
                               recognizer: TapGestureRecognizer()
                               ..onTap = () async{
                                 context.loaderOverlay.show();

@@ -43,6 +43,7 @@ class BLMMainPagesFeeds{
 }
 
 class HomeBLMFeedTab extends StatefulWidget{
+  const HomeBLMFeedTab();
 
   HomeBLMFeedTabState createState() => HomeBLMFeedTabState();
 }
@@ -232,22 +233,21 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                 );
                               }else{
                                 return CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: feedsListener[i].imagesOrVideos[0],
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  imageUrl: feedsListener[i].imagesOrVideos[0],
+                                  fit: BoxFit.cover,
                                 );
                               }
                             }else if(feedsListener[i].imagesOrVideos.length == 2){
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 2,
                                 staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
                                   betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -258,10 +258,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                   ),
                                 )
                                 : CachedNetworkImage(
-                                  fit: BoxFit.cover, 
-                                  imageUrl: feedsListener[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  imageUrl: feedsListener[i].imagesOrVideos[index],
+                                  fit: BoxFit.cover,
                                 ),
                               );
                             }else{
@@ -287,10 +287,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                       ),
                                     )
                                     : CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: feedsListener[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      imageUrl: feedsListener[i].imagesOrVideos[index],
+                                      fit: BoxFit.cover,
                                     );
                                   }else{
                                     return ((){
@@ -316,9 +316,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   child: Text('${feedsListener[i].imagesOrVideos.length - 3}', 
                                                     style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
                                                       color: const Color(0xffffffff),
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 40,
                                                     ),
                                                   ),
                                                 ),
@@ -330,19 +330,19 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                             fit: StackFit.expand,
                                             children: [
                                               CachedNetworkImage(
-                                                fit: BoxFit.cover,
-                                                imageUrl: feedsListener[i].imagesOrVideos[index],
-                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                imageUrl: feedsListener[i].imagesOrVideos[index],
+                                                fit: BoxFit.cover,
                                               ),
 
                                               Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  radius: 25,
-                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                  radius: 25,
                                                 ),
                                               ),
                                             ],
@@ -360,10 +360,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                           );
                                         }else{
                                           return CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl: feedsListener[i].imagesOrVideos[index],
-                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            imageUrl: feedsListener[i].imagesOrVideos[index],
+                                            fit: BoxFit.cover,
                                           );
                                         }
                                       }
@@ -405,11 +405,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                   contents: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        feedsListener[i].postBody,
+                      child: Text(feedsListener[i].postBody,
+                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 5,
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                       ),
                     ),
 
@@ -432,22 +431,22 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                 );
                               }else{
                                 return CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: feedsListener[i].imagesOrVideos[0],
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  imageUrl: feedsListener[i].imagesOrVideos[0],
+                                  fit: BoxFit.cover,
                                 );
                               }
                             }else if(feedsListener[i].imagesOrVideos.length == 2){
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 2,
                                 staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 2,
                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(feedsListener[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${feedsListener[i].imagesOrVideos[index]}',
                                   betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -458,22 +457,22 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                   ),
                                 )
                                 : CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: feedsListener[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  imageUrl: feedsListener[i].imagesOrVideos[index],
+                                  fit: BoxFit.cover,
                                 ),
                               );
                             }else{
                               return StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 4,
-                                itemCount: 3,
                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                mainAxisSpacing: 4.0,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 crossAxisSpacing: 4.0,
+                                mainAxisSpacing: 4.0,
+                                crossAxisCount: 4,
+                                shrinkWrap: true,
+                                itemCount: 3,
                                 itemBuilder: (BuildContext context, int index) =>
                                 ((){
                                   if(index != 1){
@@ -487,10 +486,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                       ),
                                     )
                                     : CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: feedsListener[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      imageUrl: feedsListener[i].imagesOrVideos[index],
+                                      fit: BoxFit.cover,
                                     );
                                   }else{
                                     return ((){
@@ -516,9 +515,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
                                                     style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
                                                       color: const Color(0xffffffff),
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 40,
                                                     ),
                                                   ),
                                                 ),
@@ -530,10 +529,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                             fit: StackFit.expand,
                                             children: [
                                               CachedNetworkImage(
-                                                fit: BoxFit.cover,
-                                                imageUrl: feedsListener[i].imagesOrVideos[index],
-                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                imageUrl: feedsListener[i].imagesOrVideos[index],
+                                                fit: BoxFit.cover,
                                               ),
 
                                               Container(color: const Color(0xff000000).withOpacity(0.5),),
@@ -544,9 +543,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                   child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
                                                     style: const TextStyle(
-                                                      fontSize: 40,
-                                                      fontWeight: FontWeight.bold,
                                                       color: const Color(0xffffffff),
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 40,
                                                     ),
                                                   ),
                                                 ),
@@ -566,10 +565,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                           );
                                         }else{
                                           return CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl: feedsListener[i].imagesOrVideos[index],
-                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                            imageUrl: feedsListener[i].imagesOrVideos[index],
+                                            fit: BoxFit.cover,
                                           );
                                         }
                                       }

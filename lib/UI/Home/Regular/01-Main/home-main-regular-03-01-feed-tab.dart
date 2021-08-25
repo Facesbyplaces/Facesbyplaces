@@ -43,6 +43,7 @@ class RegularMainPagesFeeds{
 }
 
 class HomeRegularFeedTab extends StatefulWidget{
+  const HomeRegularFeedTab();
 
   HomeRegularFeedTabState createState() => HomeRegularFeedTabState();
 }

@@ -16,7 +16,7 @@ class RegularSearchUsers{
 
 class HomeRegularCreatePostSearchUser extends StatefulWidget{
   final List<RegularTaggedUsers> taggedUsers;
-  HomeRegularCreatePostSearchUser({required this.taggedUsers});
+  const HomeRegularCreatePostSearchUser({required this.taggedUsers});
 
   @override
   HomeRegularCreatePostSearchUserState createState() => HomeRegularCreatePostSearchUserState();

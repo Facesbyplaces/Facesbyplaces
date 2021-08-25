@@ -39,8 +39,8 @@ class BLMRegister extends StatelessWidget{
                 height: SizeConfig.screenHeight,
                 width: SizeConfig.screenWidth,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
+                  color: const Color(0xffffffff),
+                  image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
                 ),
                 child: Column(
                   children: [
@@ -50,7 +50,7 @@ class BLMRegister extends StatelessWidget{
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: Color(0xffFFFFFF), size: SizeConfig.blockSizeVertical! * 3.65,),
+                          icon: Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: SizeConfig.blockSizeVertical! * 3.65,),
                           onPressed: (){
                             Navigator.pop(context);
                           },
@@ -181,7 +181,7 @@ class BLMRegister extends StatelessWidget{
                       },
                     ),
 
-                    Spacer(),
+                    const Spacer(),
 
                     RichText(
                       text: TextSpan(
@@ -203,7 +203,7 @@ class BLMRegister extends StatelessWidget{
                       ),
                     ),
 
-                    Spacer(),
+                    const Spacer(),
                   ],
                 ),
               ),

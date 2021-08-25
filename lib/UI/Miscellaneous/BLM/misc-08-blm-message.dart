@@ -67,7 +67,7 @@ class MiscBLMLoginToContinue extends StatelessWidget{
             
             const SizedBox(height: 30,),
 
-            const Text('Sign in or sign up to get the most out of the FacesbyPlaces app; list of memorials nearby, posts and much more.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16),),
+            const Text('Sign in or sign up to get the most out of the FacesbyPlaces app; list of memorials nearby, posts and much more.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16),),
 
             const SizedBox(height: 100,),
 

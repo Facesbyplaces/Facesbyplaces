@@ -45,15 +45,15 @@ class BLMLogin extends StatelessWidget{
                 height: SizeConfig.screenHeight,
                 width: SizeConfig.screenWidth,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
+                  color: const Color(0xffffffff),
+                  image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: const ColorFilter.srgbToLinearGamma(),),
                 ),
                 child: Column(
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
                       child: IconButton(
-                        icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
+                        icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
                         onPressed: (){
                           Navigator.pop(context);
                         },
@@ -65,20 +65,20 @@ class BLMLogin extends StatelessWidget{
                     Container(
                       padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75),
                       alignment: Alignment.centerLeft,
-                      child: Text('Log In', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 4.93, fontFamily: 'NexaBold', color: Color(0xff2F353D),),),
+                      child: Text('Log In', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 4.93, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
                     ),
 
                     SizedBox(height: SizeConfig.blockSizeVertical! * 3.65),
 
                     Row(
                       children: [
-                        Spacer(),
+                        const Spacer(),
 
                         SizedBox(
                           height: 14.93 * SizeConfig.blockSizeHorizontal!,
                           width: 16.93 * SizeConfig.blockSizeHorizontal!,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(primary: Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10),),),),
+                            style: ElevatedButton.styleFrom(primary: Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
                             child: Center(child: Image.asset('assets/icons/Facebook2.png',),),
                             onPressed: () async{
                               final fb = FacebookLogin();
@@ -142,14 +142,14 @@ class BLMLogin extends StatelessWidget{
                           ),
                         ),
 
-                        Spacer(),
+                        const Spacer(),
 
                         SizedBox(
                           height: 14.93 * SizeConfig.blockSizeHorizontal!,
                           width: 14.93 * SizeConfig.blockSizeHorizontal!,
                           child: ElevatedButton(
                             child: Center(child: Image.asset('assets/icons/google.png',),),
-                            style: ElevatedButton.styleFrom(primary: Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10),),),),
+                            style: ElevatedButton.styleFrom(primary: const Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
                             onPressed: () async{
                               User? user = await BLMGoogleAuthentication.signInWithGoogle(context: context);
 
@@ -162,13 +162,13 @@ class BLMLogin extends StatelessWidget{
                           ),
                         ),
 
-                        Spacer(),
+                        const Spacer(),
 
                         SizedBox(
                           height: 14.93 * SizeConfig.blockSizeHorizontal!,
                           width: 14.93 * SizeConfig.blockSizeHorizontal!,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(primary: Color(0xff000000), shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10),),),),
+                            style: ElevatedButton.styleFrom(primary: const Color(0xff000000), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
                             child: Center(child: Image.asset('assets/icons/apple.png',),),
                             onPressed: () async{
                               AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
@@ -206,13 +206,13 @@ class BLMLogin extends StatelessWidget{
                           ),
                         ),
 
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
 
                     SizedBox(height: SizeConfig.blockSizeVertical! * 5.11),
 
-                    Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff000000), fontFamily: 'NexaRegular',),)),
+                    Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular',),)),
 
                     Padding(
                       padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
@@ -220,7 +220,7 @@ class BLMLogin extends StatelessWidget{
                         key: _key1,
                         labelText: 'Email Address',
                         type: TextInputType.emailAddress,
-                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff000000), fontFamily: 'NexaRegular',),
+                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular',),
                       ),
                     ),
 
@@ -232,7 +232,7 @@ class BLMLogin extends StatelessWidget{
                         labelText: 'Password',
                         obscureText: true,
                         type: TextInputType.text,
-                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff000000), fontFamily: 'NexaRegular',),
+                        labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular',),
                       ),
                     ),
 
@@ -242,12 +242,12 @@ class BLMLogin extends StatelessWidget{
                       padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
                       child: Row(
                         children: [
-                          Spacer(),
+                          const Spacer(),
 
                           GestureDetector(
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text('Forgot Password?', style: TextStyle(color: Color(0xff2F353D), fontSize: SizeConfig.blockSizeVertical! * 2.19, fontFamily: 'NexaRegular',),),
+                              child: Text('Forgot Password?', style: TextStyle(color: const Color(0xff2F353D), fontSize: SizeConfig.blockSizeVertical! * 2.19, fontFamily: 'NexaRegular',),),
                             ),
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordResetEmail()));
@@ -257,7 +257,7 @@ class BLMLogin extends StatelessWidget{
                       ),
                     ),
 
-                    Spacer(),
+                    const Spacer(),
 
                     MiscBLMButtonTemplate(
                       buttonText: 'Log In',
@@ -338,12 +338,12 @@ class BLMLogin extends StatelessWidget{
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Don\'t have an Account? ',
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff2F353D), fontFamily: 'NexaRegular',),
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff2F353D), fontFamily: 'NexaRegular',),
                           ),
 
                           TextSpan(
                             text: 'Sign Up',
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: Color(0xff4EC9D4), fontFamily: 'NexaRegular'),
+                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff4EC9D4), fontFamily: 'NexaRegular'),
                             recognizer: TapGestureRecognizer()
                             ..onTap = (){
                               Navigator.pushNamed(context, '/blm/register');
@@ -356,7 +356,7 @@ class BLMLogin extends StatelessWidget{
                     SizedBox(height: SizeConfig.blockSizeVertical! * 2.00),
 
                     GestureDetector(
-                      child: Text('Sign in as Guest', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaRegular', color: Color(0xff4EC9D4), decoration: TextDecoration.underline,)),
+                      child: Text('Sign in as Guest', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaRegular', color: const Color(0xff4EC9D4), decoration: TextDecoration.underline,)),
                       onTap: () async{
                         final sharedPrefs = await SharedPreferences.getInstance();
                         sharedPrefs.setBool('user-guest-session', true);

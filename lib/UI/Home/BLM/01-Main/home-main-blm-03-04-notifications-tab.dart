@@ -7,6 +7,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class HomeBLMNotificationsTab extends StatefulWidget{
+  const HomeBLMNotificationsTab();
 
   HomeBLMNotificationsTabState createState() => HomeBLMNotificationsTabState();
 }
@@ -108,8 +109,8 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
           physics: const ClampingScrollPhysics(),
           child: Container(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
