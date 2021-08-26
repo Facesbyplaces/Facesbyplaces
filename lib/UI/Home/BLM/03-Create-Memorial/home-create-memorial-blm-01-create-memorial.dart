@@ -67,7 +67,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
                 onPressed: (){
                   Navigator.pop(context);
                 },
@@ -88,15 +88,15 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                       TextFormField(
                         controller: controller3,
+                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                        cursorColor: const Color(0xff000000),
                         keyboardType: TextInputType.text,
                         maxLines: 1,
-                        cursorColor: const Color(0xff000000),
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                         decoration: InputDecoration(
-                          alignLabelWithHint: true, 
-                          labelText: 'Location of the incident', 
+                          labelText: 'Location of the incident',
                           labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                          alignLabelWithHint: true,
                           suffixIcon: IconButton(
                             icon: Icon(Icons.add_location), 
                             onPressed: () async{
@@ -126,10 +126,10 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         keyboardType: TextInputType.text,
                         readOnly: true,
                         decoration: InputDecoration(
-                          alignLabelWithHint: true,
                           labelText: 'DOB',
-                          labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                          alignLabelWithHint: true,
                           focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
+                          labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.close), 
                             onPressed: (){

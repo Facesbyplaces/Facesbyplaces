@@ -255,14 +255,14 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                 leading: Container(),
                 flexibleSpace: Column(
                   children: [
-                    Spacer(),
+                    const Spacer(),
 
                     Row(
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                            icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
                             onPressed: (){
                               Navigator.pop(context);
                             },
@@ -339,7 +339,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       ],
                     ),
 
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                   ],
                 ),
               ),
@@ -347,8 +347,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             body: Column(
               children: [
                 Container(
-                  width: SizeConfig.screenWidth,
                   color: const Color(0xffffffff),
+                  width: SizeConfig.screenWidth,
                   height: 70,
                   child: DefaultTabController(
                     initialIndex: toggleListener,
@@ -466,29 +466,29 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                           if(onSearchListener){
                             if(searches[index].image != ''){
                               return CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }else{
                               return const CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }
                           }else{
                             if(listsFamily[index].image != ''){
                               return CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFamily[index].image),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }else{
                               return const CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }
                           }
@@ -500,23 +500,23 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     )
                     : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', 
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center, 
                       overflow: TextOverflow.clip, 
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
 
                     Text('${listsFamily[index].relationship}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: Color(0xffB1B1B1),),
                     ),
                   ],
                 ),
@@ -569,29 +569,29 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                           if(onSearchListener){
                             if(searches[index].image != ''){
                               return CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }else{
                               return const CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }
                           }else{
                             if(listsFriends[index].image != ''){
                               return CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFriends[index].image),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }else{
                               return CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }
                           }
@@ -603,16 +603,16 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     )
                     : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
                   ],
                 ),
@@ -665,29 +665,29 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                           if(onSearchListener){
                             if(searches[index].image != ''){
                               return CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(searches[index].image),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }else{
                               return const CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }
                           }else{
                             if(listsFollowers[index].image != ''){
                               return CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: NetworkImage(listsFollowers[index].image),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }else{
                               return const CircleAvatar(
-                                radius: 40,
-                                backgroundColor: const Color(0xff888888),
                                 foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                backgroundColor: const Color(0xff888888),
+                                radius: 40,
                               );
                             }
                           }
@@ -699,16 +699,16 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
 
                     onSearchListener
                     ? Text('${searches[index].firstName} ${searches[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     )
                     : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}',
+                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       maxLines: 1,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: Color(0xff2F353D),),
                     ),
                   ],
                 ),

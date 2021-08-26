@@ -47,6 +47,7 @@ class MiscBLMErrorMessageTemplate extends StatelessWidget{
 }
 
 class MiscBLMLoginToContinue extends StatelessWidget{
+  const MiscBLMLoginToContinue();
 
   @override
   Widget build(BuildContext context){

@@ -23,7 +23,7 @@ class HomeBLMMapsState extends State<HomeBLMMaps>{
     super.initState();
     controller = MapController(initMapWithUserPosition: false, initPosition: GeoPoint(latitude: widget.latitude, longitude: widget.longitude),);
     staticPoints.add(StaticPositionGeoPoint('Marker', MarkerIcon(icon: widget.isMemorial == true ? Icon(MdiIcons.graveStone, color: Colors.blue,) : Icon(MdiIcons.human, color: Colors.blue,)), [GeoPoint(latitude: widget.latitude, longitude: widget.longitude)],),);
-    Future.delayed(Duration(seconds: 5), () async {
+    Future.delayed(Duration(seconds: 5), () async{
       await controller.zoom(5);
     });
   }
@@ -51,7 +51,7 @@ class HomeBLMMapsState extends State<HomeBLMMaps>{
         children: [
           FloatingActionButton(
             heroTag: 'button1',
-            child: Icon(Icons.select_all),
+            child: const Icon(Icons.select_all),
             onPressed: () async{
               context.loaderOverlay.show();
               await controller.removeLastRoad();
@@ -79,27 +79,27 @@ class HomeBLMMapsState extends State<HomeBLMMaps>{
             },  
           ),
 
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
 
           FloatingActionButton(
             heroTag: 'button2',
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
             onPressed: () async{
               await controller.zoomIn();
             },
           ),
 
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
 
           FloatingActionButton(
             heroTag: 'button3',
-            child: Icon(Icons.remove),
+            child: const Icon(Icons.remove),
             onPressed: () async{
               await controller.zoomOut();
             },
           ),
 
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
         ],
       ),
     );

@@ -101,8 +101,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
       await showDialog(
         context: context, 
         builder: (_) => AssetGiffyDialog(
-          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
           description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           entryAnimation: EntryAnimation.DEFAULT,
           buttonOkColor: const Color(0xffff0000),
@@ -161,12 +161,12 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xffffffff), width: 2,),),
                                   child: profileImage.data!.showProfileInformationImage != ''
                                   ? CircleAvatar(
-                                    backgroundColor: const Color(0xff888888),
                                     foregroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                                    backgroundColor: const Color(0xff888888),
                                   )
                                   : const CircleAvatar(
-                                    backgroundColor: const Color(0xff888888),
                                     foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                    backgroundColor: const Color(0xff888888),
                                   ),
                                 ),
                                 onPressed: () async{
@@ -347,15 +347,15 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                     ? Container(
                                       decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: const Color(0xffffffff), width: 3,),),
                                       child: CircleAvatar(
-                                        radius: 100,
-                                        backgroundColor: const Color(0xff888888),
                                         foregroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                                        backgroundColor: const Color(0xff888888),
+                                        radius: 100,
                                       ),
                                     )
                                     : const CircleAvatar(
-                                      radius: 100,
-                                      backgroundColor: const Color(0xff888888),
                                       foregroundImage: const AssetImage('assets/icons/user-placeholder.png'),
+                                      backgroundColor: const Color(0xff888888),
+                                      radius: 100,
                                     ),
                                     onTap: (){
                                       showGeneralDialog(
@@ -375,9 +375,9 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                                       padding: const EdgeInsets.only(right: 20.0),
                                                       child: GestureDetector(
                                                         child: CircleAvatar(
-                                                          radius: 20,
-                                                          backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                           child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                          backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                          radius: 20,
                                                         ),
                                                         onTap: (){
                                                           Navigator.pop(context);

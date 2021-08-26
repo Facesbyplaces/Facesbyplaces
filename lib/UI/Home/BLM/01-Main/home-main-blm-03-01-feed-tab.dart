@@ -312,15 +312,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  radius: 25, 
+                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(color: const Color(0xffffffff), fontWeight: FontWeight.bold, fontSize: 40,),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', 
-                                                    style: const TextStyle(
-                                                      color: const Color(0xffffffff),
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 40,
-                                                    ),
-                                                  ),
+                                                  radius: 25,
                                                 ),
                                               ),
                                             ],
@@ -511,15 +505,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  radius: 25,
+                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(color: const Color(0xffffffff), fontWeight: FontWeight.bold, fontSize: 40,),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
-                                                    style: const TextStyle(
-                                                      color: const Color(0xffffffff),
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 40,
-                                                    ),
-                                                  ),
+                                                  radius: 25,
                                                 ),
                                               ),
                                             ],
@@ -539,15 +527,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  radius: 25,
+                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}', style: const TextStyle(color: const Color(0xffffffff), fontWeight: FontWeight.bold, fontSize: 40,),),
                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                  child: Text('${feedsListener[i].imagesOrVideos.length - 3}',
-                                                    style: const TextStyle(
-                                                      color: const Color(0xffffffff),
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 40,
-                                                    ),
-                                                  ),
+                                                  radius: 25,
                                                 ),
                                               ),
                                             ],

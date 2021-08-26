@@ -235,9 +235,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                           padding: const EdgeInsets.only(right: 20.0),
                                                           child: GestureDetector(
                                                             child: CircleAvatar(
-                                                              radius: 20,
-                                                              backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                               child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                              backgroundColor: const Color(0xff000000).withOpacity(0.8),
+                                                              radius: 20,
                                                             ),
                                                             onTap: (){
                                                               Navigator.pop(context);
@@ -330,8 +330,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                               child: Column(
                                                                 children: [
                                                                   Container(
-                                                                    alignment: Alignment.centerRight,
                                                                     padding: const EdgeInsets.only(right: 20.0),
+                                                                    alignment: Alignment.centerRight,
                                                                     child: GestureDetector(
                                                                       child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                       onTap: (){
@@ -581,9 +581,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 SizedBox(height: 20,),
 
                                                 Container(
+                                                  child: const Text('Post', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
                                                   padding: const EdgeInsets.only(left: 20.0),
                                                   alignment: Alignment.centerLeft,
-                                                  child: const Text('Post', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
                                                 ),
 
                                                 const SizedBox(height: 20,),
@@ -592,9 +592,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 ? Column(
                                                   children: [
                                                     Container(
+                                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                       width: SizeConfig.screenWidth,
                                                       height: 100,
-                                                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                                                       child: ListView.separated(
                                                         physics: const ClampingScrollPhysics(),
                                                         scrollDirection: Axis.horizontal,
@@ -607,8 +607,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                             onTap: (){
                                                               showGeneralDialog(
                                                                 context: context,
-                                                                barrierDismissible: true,
                                                                 barrierLabel: 'Dialog',
+                                                                barrierDismissible: true,
                                                                 transitionDuration: Duration(milliseconds: 0),
                                                                 pageBuilder: (_, __, ___) {
                                                                   return Scaffold(
@@ -618,8 +618,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                         child: Column(
                                                                           children: [
                                                                             Container(
-                                                                              alignment: Alignment.centerRight,
                                                                               padding: const EdgeInsets.only(right: 20.0),
+                                                                              alignment: Alignment.centerRight,
                                                                               child: GestureDetector(
                                                                                 child: CircleAvatar(radius: 20, backgroundColor: const Color(0xff000000).withOpacity(0.8), child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),),
                                                                                 onTap: (){
@@ -646,19 +646,19 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                                     );
                                                                                   }else{
                                                                                     return CachedNetworkImage(
-                                                                                      fit: BoxFit.contain,
-                                                                                      imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
-                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                                      imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[next],
+                                                                                      fit: BoxFit.contain,
                                                                                     );
                                                                                   }
                                                                                 }()),),
                                                                                 options: CarouselOptions(
-                                                                                  autoPlay: false,
                                                                                   enlargeCenterPage: true,
-                                                                                  aspectRatio: 1,
                                                                                   viewportFraction: 1,
                                                                                   initialPage: index,
+                                                                                  autoPlay: false,
+                                                                                  aspectRatio: 1,
                                                                                 ),
                                                                               ),
                                                                             ),
@@ -703,13 +703,13 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                 );
                                                               }else{
                                                                 return Container(
-                                                                  width: 100,
                                                                   height: 100,
+                                                                  width: 100,
                                                                   child: CachedNetworkImage(
-                                                                    fit: BoxFit.cover,
-                                                                    imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
-                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                    imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
+                                                                    fit: BoxFit.cover,
                                                                   ),
                                                                 );
                                                               }
@@ -744,7 +744,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               child: GestureDetector(
                                                 onTap: (){
                                                   if(widget.newlyCreated == true){
-                                                    Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMScreenExtended(newToggleBottom: 1,),);
+                                                    Route newRoute = MaterialPageRoute(builder: (context) => const HomeBLMScreenExtended(newToggleBottom: 1,),);
                                                     Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                                                   }else{
                                                     Navigator.pop(context);
@@ -754,7 +754,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   children: [
                                                     Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
 
-                                                    Text('Back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                    Text('Back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: const Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                   ],
                                                 ),
                                               ),
@@ -764,9 +764,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             child: Container(
                                               padding: const EdgeInsets.only(right: 20.0),
                                               alignment: Alignment.centerRight,
-                                              child: widget.managed == true 
+                                              child: widget.managed == true
                                               ? MaterialButton(
-                                                child: Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                child: Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: const Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                 onPressed: () async{
                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePost(name: profile.data!.blmMemorial.memorialName, memorialId: profile.data!.blmMemorial.memorialId)));
                                                 },
@@ -782,8 +782,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   Positioned(
                                     top: SizeConfig.screenHeight! / 5,
                                     child: Container(
-                                      height: 140,
                                       width: SizeConfig.screenWidth,
+                                      height: 140,
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
@@ -791,8 +791,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             onTap: (){
                                               showGeneralDialog(
                                                 context: context,
-                                                barrierDismissible: true,
                                                 barrierLabel: 'Dialog',
+                                                barrierDismissible: true,
                                                 transitionDuration: Duration(milliseconds: 0),
                                                 pageBuilder: (_, __, ___) {
                                                   return Scaffold(
@@ -816,10 +816,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                             Expanded(
                                                               child: CachedNetworkImage(
-                                                                fit: BoxFit.contain,
-                                                                imageUrl: profile.data!.blmMemorial.memorialProfileImage,
-                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                imageUrl: profile.data!.blmMemorial.memorialProfileImage,
+                                                                fit: BoxFit.contain,
                                                               ),
                                                             ),
 
@@ -833,8 +833,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               );
                                             },
                                             child: CircleAvatar( // PROFILE IMAGE - PROFILE PICTURE
-                                              radius: 100,
                                               backgroundColor: const Color(0xff04ECFF),
+                                              radius: 100,
                                               child: Padding(
                                                 padding: EdgeInsets.all(5),
                                                 child: profile.data!.blmMemorial.memorialProfileImage != ''
@@ -925,22 +925,22 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                 );
                                               }else{
                                                 return CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: posts[i].imagesOrVideos[0],
-                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  imageUrl: posts[i].imagesOrVideos[0],
+                                                  fit: BoxFit.cover,
                                                 );
                                               }
                                             }else if(posts[i].imagesOrVideos.length == 2){
                                               return StaggeredGridView.countBuilder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                crossAxisCount: 4,
-                                                itemCount: 2,
                                                 staggeredTileBuilder: (int index) => const StaggeredTile.count(2, 2),
-                                                mainAxisSpacing: 4.0,
+                                                physics: const NeverScrollableScrollPhysics(),
+                                                padding: EdgeInsets.zero,
                                                 crossAxisSpacing: 4.0,
+                                                mainAxisSpacing: 4.0,
+                                                crossAxisCount: 4,
+                                                shrinkWrap: true,
+                                                itemCount: 2,
                                                 itemBuilder: (BuildContext context, int index) => lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
@@ -951,22 +951,22 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   ),
                                                 )
                                                 : CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: posts[i].imagesOrVideos[index],
-                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  imageUrl: posts[i].imagesOrVideos[index],
+                                                  fit: BoxFit.cover,
                                                 ),
                                               );
                                             }else{
                                               return StaggeredGridView.countBuilder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                crossAxisCount: 4,
-                                                itemCount: 3,
                                                 staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                                mainAxisSpacing: 4.0,
+                                                physics: const NeverScrollableScrollPhysics(),
+                                                padding: EdgeInsets.zero,
                                                 crossAxisSpacing: 4.0,
+                                                mainAxisSpacing: 4.0,
+                                                crossAxisCount: 4,
+                                                shrinkWrap: true,
+                                                itemCount: 3,
                                                 itemBuilder: (BuildContext context, int index) => ((){
                                                   if(index != 1){
                                                     return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
@@ -979,10 +979,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                       ),
                                                     )
                                                     : CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      imageUrl: posts[i].imagesOrVideos[index],
-                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                      placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                      imageUrl: posts[i].imagesOrVideos[index],
+                                                      fit: BoxFit.cover,
                                                     );
                                                   }else{
                                                     return ((){
@@ -1004,11 +1004,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                                               Center(
                                                                 child: CircleAvatar(
-                                                                  radius: 25,
+                                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
                                                                   backgroundColor: const Color(0xffffffff).withOpacity(.5),
-                                                                  child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),
-                                                                    ),
-                                                                  ),
+                                                                  radius: 25,
                                                                 ),
                                                               ),
                                                             ],
@@ -1018,19 +1016,19 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                             fit: StackFit.expand,
                                                             children: [
                                                               CachedNetworkImage(
-                                                                fit: BoxFit.cover,
-                                                                imageUrl: posts[i].imagesOrVideos[index],
-                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                imageUrl: posts[i].imagesOrVideos[index],
+                                                                fit: BoxFit.cover,
                                                               ),
 
                                                               Container(color: const Color(0xff000000).withOpacity(0.5),),
 
                                                               Center(
                                                                 child: CircleAvatar(
-                                                                  radius: 25,
-                                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
                                                                   child: Text('${posts[i].imagesOrVideos.length - 3}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                  backgroundColor: const Color(0xffffffff).withOpacity(.5),
+                                                                  radius: 25,
                                                                 ),
                                                               ),
                                                             ],
@@ -1048,10 +1046,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                           );
                                                         }else{
                                                           return CachedNetworkImage(
-                                                            fit: BoxFit.cover,
-                                                            imageUrl: posts[i].imagesOrVideos[index],
-                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            placeholder: (context, url) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                            imageUrl: posts[i].imagesOrVideos[index],
+                                                            fit: BoxFit.cover,
                                                           );
                                                         }
                                                       }

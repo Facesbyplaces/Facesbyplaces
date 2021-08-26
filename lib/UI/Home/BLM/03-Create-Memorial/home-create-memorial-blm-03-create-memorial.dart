@@ -76,8 +76,8 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
           builder: (_, int backgroundImageToggleListener, __) => Scaffold(
             appBar: AppBar(
               title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
-              backgroundColor: Color(0xff04ECFF),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
                 onPressed: (){
@@ -90,7 +90,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                 const MiscBLMBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),
 
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: ListView(
                     physics: const ClampingScrollPhysics(),
                     children: [
@@ -101,20 +101,20 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                       const SizedBox(height: 20,),
 
                       Container(
-                        height: 200,
                         width: SizeConfig.screenWidth,
+                        height: 200,
                         child: Stack(
                           fit: StackFit.expand,
                           children: [
                             backgroundImageListener.path != ''
                             ? ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
                               child: Image.file(backgroundImageListener, fit: BoxFit.cover,),
+                              borderRadius: BorderRadius.circular(10),
                             )
                             : Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/blm-memorial-cover-1.jpeg'),),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
 
@@ -146,19 +146,19 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                             ),
 
                             Positioned(
-                              bottom: 40,
                               left: SizeConfig.screenWidth! / 2,
+                              bottom: 40,
                               child: const CircleAvatar(
-                                radius: 25,
-                                backgroundColor: const Color(0xffffffff),
                                 child: const CircleAvatar(radius: 25, backgroundColor: Colors.transparent, child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                                backgroundColor: const Color(0xffffffff),
+                                radius: 25,
                               ),
                             ),
 
                             const Positioned(
-                              top: 10,
-                              right: 10,
                               child: const CircleAvatar(radius: 25, backgroundColor: const Color(0xffffffff), child: const Icon(Icons.camera, color: const Color(0xffaaaaaa), size: 45,),),
+                              right: 10,
+                              top: 10,
                             ),
                           ],
                         ),
@@ -188,10 +188,10 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                               if(index == 2){
                                 return GestureDetector(
                                   child: Container(
-                                    width: 100,
-                                    height: 100,
-                                    child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
+                                    child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
+                                    height: 100,
+                                    width: 100,
                                   ),
                                   onTap: () async{
                                     backgroundImageToggle.value = index;
@@ -213,25 +213,25 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                                   },
                                   child: backgroundImageToggleListener == index
                                   ? Container(
-                                    padding: const EdgeInsets.all(5),
-                                    width: 100,
-                                    height: 100,
                                     decoration: BoxDecoration(color: const Color(0xff04ECFF), borderRadius: BorderRadius.circular(10),),
+                                    padding: const EdgeInsets.all(5),
+                                    height: 100,
+                                    width: 100,
                                     child: Container(
-                                      width: 100,
-                                      height: 100,
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
+                                      height: 100,
+                                      width: 100,
                                     ),
                                   )
                                   : Container(
-                                    padding: const EdgeInsets.all(5),
-                                    width: 100,
-                                    height: 100,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
+                                    padding: const EdgeInsets.all(5),
+                                    height: 100,
+                                    width: 100,
                                     child: Container(
-                                      width: 100,
-                                      height: 100,
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(fit: BoxFit.cover, image: AssetImage(backgroundImages[index]),),),
+                                      height: 100,
+                                      width: 100,
                                     ),
                                   ),
                                 );

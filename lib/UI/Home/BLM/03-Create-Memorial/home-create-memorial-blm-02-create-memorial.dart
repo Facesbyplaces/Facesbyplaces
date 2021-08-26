@@ -86,7 +86,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+                icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
                 onPressed: (){
                   Navigator.pop(context);
                 },
@@ -117,11 +117,11 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                             child: DefaultTabController(
                               length: 3,
                               child: TabBar(
-                                isScrollable: false,
+                                indicator: BoxDecoration(border: Border(left: BorderSide(width: 1, color: const Color(0xff000000)), right: const BorderSide(width: 1, color: const Color(0xff000000),),),),
                                 unselectedLabelColor: const Color(0xff000000),
                                 labelColor: const Color(0xff04ECFF),
                                 indicatorColor: Colors.transparent,
-                                indicator: BoxDecoration(border: Border(left: BorderSide(width: 1, color: Color(0xff000000)), right: BorderSide(width: 1, color: Color(0xff000000))),),
+                                isScrollable: false,
                                 tabs: [
                                   Center(child: Text('Text', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular',),),),
 
@@ -205,16 +205,16 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   shareStory1(){
     return TextFormField(
       controller: controllerStory,
+      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       keyboardType: TextInputType.text,
-      cursorColor: Color(0xff000000),
+      cursorColor: const Color(0xff000000),
       readOnly: false,
       maxLines: 10,
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),), borderRadius: BorderRadius.all(Radius.circular(10)),),
-        border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xff000000),), borderRadius: BorderRadius.all(Radius.circular(10)),),
-        labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
-        fillColor: Color(0xffffffff),
+        focusedBorder: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+        border: const OutlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+        labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
+        fillColor: const Color(0xffffffff),
         alignLabelWithHint: true,
         labelText: '',
         filled: true,
@@ -238,8 +238,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                 onTap: (){
                   showGeneralDialog(
                     context: context,
-                    barrierDismissible: true,
                     barrierLabel: 'Dialog',
+                    barrierDismissible: true,
                     transitionDuration: const Duration(milliseconds: 0),
                     pageBuilder: (_, __, ___) {
                       return Scaffold(
@@ -293,7 +293,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
               Positioned(
                 right: 0,
                 child: IconButton(
-                  icon: CircleAvatar(backgroundColor: Color(0xff000000), child: Icon(Icons.close, color: Color(0xffffffff),),),
+                  icon: const CircleAvatar(backgroundColor: const Color(0xff000000), child: const Icon(Icons.close, color: const Color(0xffffffff),),),
                   iconSize: 25,
                   onPressed: (){
                     videoFile.value = File('');
@@ -303,10 +303,10 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
             ],
           )
           : Container(
-            height: 260,
+            decoration: BoxDecoration(color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),), borderRadius: const BorderRadius.all(Radius.circular(10)),),
+            child: const Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
             width: SizeConfig.screenWidth,
-            decoration: BoxDecoration(color: Color(0xffcccccc), border: Border.all(color: Color(0xff000000),), borderRadius: BorderRadius.all(Radius.circular(10)),),
-            child: Icon(Icons.file_upload, color: const Color(0xff888888), size: 100,),
+            height: 260,
           ),
         ),
       ),
@@ -321,23 +321,23 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
         builder: (_, int slideCountListener, __) => Column(
           children: [
             Container(
-              height: 260,
               width: SizeConfig.screenWidth,
+              height: 260,
               child: Container(
                 height: 100,
                 child: GridView.count(
-                  physics: ClampingScrollPhysics(),
-                  crossAxisCount: 4,
+                  physics: const ClampingScrollPhysics(),
                   crossAxisSpacing: 4,
                   mainAxisSpacing: 4,
+                  crossAxisCount: 4,
                   children: List.generate(slideCountListener + 1, (index){
                     return ((){
                       if(index == slideCountListener){
                         return GestureDetector(
                           child: Container(
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffcccccc), border: Border.all(color: const Color(0xff000000),),),
+                            child: const Icon(Icons.add_rounded, color: const Color(0xff000000), size: 60,),
                             width: 80,
-                            child: Icon(Icons.add_rounded, color: Color(0xff000000), size: 60,),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xffcccccc), border: Border.all(color: Color(0xff000000),),),
                           ),
                           onTap: () async{
                             await getSlideImage();
@@ -370,8 +370,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                           onTap: (){
                             showGeneralDialog(
                               context: context,
-                              barrierDismissible: true,
                               barrierLabel: 'Dialog',
+                              barrierDismissible: true,
                               transitionDuration: Duration(milliseconds: 0),
                               pageBuilder: (_, __, ___){
                                 return Scaffold(
@@ -382,12 +382,12 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                         children: [
                                           Container(
                                             alignment: Alignment.centerRight,
-                                            padding: EdgeInsets.only(right: 20.0),
+                                            padding: const EdgeInsets.only(right: 20.0),
                                             child: GestureDetector(
                                               child: CircleAvatar(
+                                                child: const Icon(Icons.close_rounded, color: const Color(0xffffffff),),
+                                                backgroundColor: const Color(0xff000000).withOpacity(0.8),
                                                 radius: 20,
-                                                backgroundColor: Color(0xff000000).withOpacity(0.8),
-                                                child: Icon(Icons.close_rounded, color: Color(0xffffffff),),
                                               ),
                                               onTap: (){
                                                 Navigator.pop(context);
@@ -395,11 +395,11 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                                             ),
                                           ),
                                           
-                                          SizedBox(height: 20,),
+                                          const SizedBox(height: 20,),
                                           
                                           Expanded(child: Image.asset(slideImagesListener[index].path, fit: BoxFit.cover, scale: 1.0,),),
 
-                                          SizedBox(height: 80,),
+                                          const SizedBox(height: 80,),
                                         ],
                                       ),
                                     ),
@@ -416,7 +416,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
               ),
             ),
 
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             
             Align(
               alignment: Alignment.centerLeft,
