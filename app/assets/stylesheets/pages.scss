@@ -39,6 +39,9 @@ body {
     }
   }
 }
+.header {
+  z-index: 1000;
+}
 .header-sub,
 .header-logo,
 .header-sub-tab {
