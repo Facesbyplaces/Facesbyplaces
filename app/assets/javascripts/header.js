@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $body = $("body");
   $headerSubTab = $body.find(".header-sub-tab");
-  $headerSub = $body.find(".header-sub");
+  $headerSub = $body.find(".header-sub-menu");
   $headerSub.find(".logo-container .logo").on("click", function () {
     if ($headerSubTab.find(".tabs-container").hasClass("opened")) {
       $headerSubTab
@@ -10,7 +10,7 @@ $(document).ready(function () {
       setTimeout(function () {
         $body.find(".tabs-container").removeClass("opened").hide();
         $headerSubTab.show();
-      }, 600);
+      }, 500);
     } else {
       console.log("something");
       $headerSubTab

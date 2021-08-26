@@ -5,7 +5,7 @@ body {
   color: #ffffff;
 }
 .header,
-.header-sub,
+.header-sub-menu,
 .header-logo {
   float: left;
   position: absolute;
@@ -269,7 +269,7 @@ body {
       }
     }
   }
-  .header-sub {
+  .header-sub-menu {
     display: block;
     right: 0;
     width: auto;
