@@ -29,7 +29,7 @@ module Almable
     end
 
     def set_adminsRaw
-        @adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:page_id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
+        @adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:page_id] || params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
     end
 
     def add_view_count

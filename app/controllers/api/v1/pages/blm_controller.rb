@@ -11,7 +11,7 @@ class Api::V1::Pages::BlmController < ApplicationController
     before_action :set_families, only: [:familyIndex]
     before_action :set_friends, only: [:friendsIndex]
     before_action :set_followers, only: [:followersIndex]
-    before_action :set_adminsRaw, only: [:adminIndex]
+    before_action :set_adminsRaw, only: [:adminIndex, :delete]
     before_action :set_admins, only: [:adminIndex]
     before_action :set_family_admins, only: [:adminIndex]
     before_action :add_view_count, only: [:show]
