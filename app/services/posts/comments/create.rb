@@ -127,13 +127,6 @@ class Posts::Comments::Create
                             type:           "Post",
                             postType:       comment.post.page_type,
                         ).notify
-                    # else
-                    #     Notification.create(recipient: comment.post.account, actor: @user, action: "#{@user.first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
-                    #     #Push Notification
-                    #     device_token = user.device_token
-                    #     title = "FacesbyPlaces Notification"
-                    #     message = "#{@user.first_name} commented on #{comment.post.account.first_name}'s post"
-                    #     PushNotification(device_token, title, message)
                     end
                 end
             end

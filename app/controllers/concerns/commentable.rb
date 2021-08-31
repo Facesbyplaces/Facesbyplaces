@@ -42,4 +42,22 @@ module Commentable
     def set_reply
         @reply = Reply.find(params[:reply_id])
     end
+
+    def set_actor
+        if params[:page_type].to_i == 1
+            @actor = User.find(params[:user_id])
+        else 
+            @actor = AlmUser.find(params[:user_id])
+        end
+    end
+
+    def itemsRemaining(data)
+        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif data.total_count < numberOfPage
+            itemsremaining = data.total_count 
+        else
+            itemsremaining = data.total_count - (params[:page].to_i * numberOfPage)
+        end
+    end
 end
