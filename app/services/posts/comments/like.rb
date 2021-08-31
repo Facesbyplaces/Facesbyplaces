@@ -11,7 +11,7 @@ class Posts::Comments::Like
 
         if like.save 
             # Add to notification
-            notify_followers_of_a(@like)
+            notify_followers_of_a_like
 
             return true
         else
@@ -21,7 +21,7 @@ class Posts::Comments::Like
 
     private
 
-    def notify_followers_of_a(@like)
+    def notify_followers_of_a_like
         if @like.commentable_type == "Comment"
             if @like.commentable.account != @user && @like.commentable.account.notifsetting.postLikes == true
                 Notification::Builder.new(
