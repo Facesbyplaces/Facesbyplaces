@@ -5,7 +5,7 @@ class Api::V1::Admin::CommentsController < ApplicationController
     before_action :set_comments, only: [:commentsIndex]
     before_action :set_search_comments, only: [:searchComment]
     before_action :set_comment, only: [:editComment, :deleteComment]
-    before_action :set_actor, only: [:addComment, :editComment]
+    before_action :set_actor, only: [:addComment]
 
     def usersSelection #for create comment users selection
         render json: {success: true,  users: @users }, status: 200
@@ -41,7 +41,6 @@ class Api::V1::Admin::CommentsController < ApplicationController
     
     def editComment
         @comment.update(body: edit_comment_params[:body])
-        @comment.account = @actor
         
         if @comment
             render json: {status: :success, comment: @comment}
