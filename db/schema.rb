@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_103352) do
+ActiveRecord::Schema.define(version: 2021_08_17_014815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,8 +126,8 @@ ActiveRecord::Schema.define(version: 2021_06_29_103352) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.string "account_type"
+    t.bigint "account_id"
     t.index ["account_type", "account_id"], name: "index_comments_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
@@ -137,8 +137,8 @@ ActiveRecord::Schema.define(version: 2021_06_29_103352) do
     t.bigint "commentable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.string "account_type"
+    t.bigint "account_id"
     t.index ["account_type", "account_id"], name: "index_commentslikes_on_account_type_and_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_commentslikes_on_commentable_type_and_commentable_id"
   end
@@ -148,8 +148,8 @@ ActiveRecord::Schema.define(version: 2021_06_29_103352) do
     t.bigint "page_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.string "account_type"
+    t.bigint "account_id"
     t.index ["account_type", "account_id"], name: "index_followers_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_followers_on_page_type_and_page_id"
   end
@@ -179,10 +179,10 @@ ActiveRecord::Schema.define(version: 2021_06_29_103352) do
     t.boolean "read"
     t.string "action"
     t.integer "postId"
-    t.string "recipient_type", null: false
-    t.bigint "recipient_id", null: false
-    t.string "actor_type", null: false
-    t.bigint "actor_id", null: false
+    t.string "recipient_type"
+    t.bigint "recipient_id"
+    t.string "actor_type"
+    t.bigint "actor_id"
     t.string "notif_type"
     t.index ["actor_type", "actor_id"], name: "index_notifications_on_actor_type_and_actor_id"
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
@@ -282,8 +282,8 @@ ActiveRecord::Schema.define(version: 2021_06_29_103352) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.string "account_type"
+    t.bigint "account_id"
     t.index ["account_type", "account_id"], name: "index_replies_on_account_type_and_account_id"
     t.index ["comment_id"], name: "index_replies_on_comment_id"
   end
@@ -342,8 +342,8 @@ ActiveRecord::Schema.define(version: 2021_06_29_103352) do
     t.float "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.string "account_type"
+    t.bigint "account_id"
     t.string "status", default: "pending"
     t.index ["account_type", "account_id"], name: "index_transactions_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_transactions_on_page_type_and_page_id"
