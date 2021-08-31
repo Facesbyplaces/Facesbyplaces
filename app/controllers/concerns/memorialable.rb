@@ -49,6 +49,22 @@ module Memorialable
         @users = alm_users + blm_users
     end
 
+    def set_adminsRaw
+        if params[:page] === "Memorial"
+            @adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
+        else
+            @adminsRaw = Blm.find(params[:id]).roles.first.users.pluck('id')
+        end
+    end
+
+    def set_user
+        if params[:page_type].to_i == 2
+            @user = AlmUser.find(params[:user_id])
+        else
+            @user = User.find(params[:user_id])
+        end
+    end
+
     def set_memorial
         if (params[:page].present? && params[:page] === "Blm") || (blm_details_params[:precinct].present?)
             @memorial = Blm.find(params[:id])
@@ -67,6 +83,16 @@ module Memorialable
             @notif_type = 'Memorial'
         else
             @notif_type = 'Blm'
+        end
+    end
+
+    def itemsRemaining(data)
+        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsRemaining = 0
+        elsif data.total_count < numberOfPage
+            itemsRemaining = data.total_count 
+        else
+            itemsRemaining = data.total_count - (params[:page].to_i * numberOfPage)
         end
     end
 end
