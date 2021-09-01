@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "1032401585355",
-    "project_id": "fbp-sign-in",
-    "storage_bucket": "fbp-sign-in.appspot.com"
+    "project_number": "66527320947",
+    "project_id": "future-datum-321223",
+    "storage_bucket": "future-datum-321223.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1032401585355:android:0aa3869406faec4952474e",
+        "mobilesdk_app_id": "1:66527320947:android:7604c79a9d4b5b1fbb0306",
         "android_client_info": {
           "package_name": "com.puckproductions.facesbyplaces"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1032401585355-0bo5fqnl7qff0ld4b8hre07al0a9fb04.apps.googleusercontent.com",
+          "client_id": "66527320947-2is06fa5vf7pb6q552g2hqgjiu63i5uf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.puckproductions.facesbyplaces",
@@ -22,27 +22,27 @@
           }
         },
         {
-          "client_id": "1032401585355-3h3sa4i3fflsec9q3e4ptl00q3c5iegv.apps.googleusercontent.com",
+          "client_id": "66527320947-37jgukuon1vdbmnk6sogjj2e8hob47c6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDhOSSSX-aiBQFGZMnXJVRcSRaAWVVeoFk"
+          "current_key": "AIzaSyBT15WbQfBu_9mSViwz1EC2VnE0-fuwt84"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1032401585355-3h3sa4i3fflsec9q3e4ptl00q3c5iegv.apps.googleusercontent.com",
+              "client_id": "66527320947-37jgukuon1vdbmnk6sogjj2e8hob47c6.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "1032401585355-7v7a5ju4dncrn8nsgkqu2pn76e4e9078.apps.googleusercontent.com",
+              "client_id": "66527320947-k3ustj6k4qhdisq4f464haq5fgtkdc08.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.app.facesbyplaces"
+                "bundle_id": "com.puckproductions.facesbyplaces"
               }
             }
           ]

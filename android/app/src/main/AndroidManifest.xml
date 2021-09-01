@@ -101,7 +101,7 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDdGbn-l8EjoPZOqQoedcCzkTa-ubuL9Do"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg"/>
         <meta-data android:name="com.google.android.gms.wallet.api.enabled" android:value="true"/>
         <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_hn6mjU24QIaKTRR8HQ8NymeczriTvRAA" />
         <meta-data android:name="io.branch.sdk.TestMode" android:value="true" />

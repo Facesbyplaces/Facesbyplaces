@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1032401585355-kg7m7v40ioa3i356nc3cqcvuuu3loir3.apps.googleusercontent.com</string>
+	<string>66527320947-k3ustj6k4qhdisq4f464haq5fgtkdc08.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1032401585355-kg7m7v40ioa3i356nc3cqcvuuu3loir3</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>1032401585355-c6c5srm6h38511gucs068o578n4ldd85.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.66527320947-k3ustj6k4qhdisq4f464haq5fgtkdc08</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD2Cl5SFYu2BGFUl_o25NwLTnPv9JxOPkM</string>
+	<string>AIzaSyDcpmbriFIluWQTvPTThH-PQg66TzQ2Q6E</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1032401585355</string>
+	<string>66527320947</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.puckproductions.facesbyplaces</string>
 	<key>PROJECT_ID</key>
-	<string>fbp-sign-in</string>
+	<string>future-datum-321223</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fbp-sign-in.appspot.com</string>
+	<string>future-datum-321223.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1032401585355:ios:6d6f38d78f7a408e52474e</string>
+	<string>1:66527320947:ios:aefc66b471011ed9bb0306</string>
 </dict>
 </plist>
