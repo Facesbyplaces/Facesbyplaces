@@ -21,24 +21,21 @@ class Api::V1::Admin::PostsController < ApplicationController
     end
 
     def createPost
-        post = Post.new(post_params)
-        post.account = user
+        post = Posts::Create.new(post: post_params, user: @user, tagpeople: params[:tag_people]).execute
 
-        if post.save
-            notify_users_of_a_post(post)
-
-            render json: {post: PostSerializer.new( post ).attributes, status: :created}
+        if post 
+            render json: { post: PostSerializer.new( Post.last ).attributes, status: :created }
         else
-            render json: {errors: post.errors}, status: 500
+            render json: { error: post }, status: 400
         end
     end
     
     def allPosts  
         render json: {  itemsremaining:  itemsRemaining(@posts),
                         alm: ActiveModel::SerializableResource.new(
-                                @alm_posts, 
-                                each_serializer: PostSerializer
-                            ),
+                            @alm_posts, 
+                            each_serializer: PostSerializer
+                        ),
                         blm: ActiveModel::SerializableResource.new(
                             @blm_posts, 
                             each_serializer: PostSerializer
@@ -90,102 +87,6 @@ class Api::V1::Admin::PostsController < ApplicationController
 
     def post_image_params
         params.permit(imagesOrVideos: [])
-    end
-
-    def tag_people
-        people_tags = params[:tag_people] || []
-        people = []
-
-        people_tags.each do |key, value|
-            user_id = value[:user_id].to_i
-            account_type = value[:account_type].to_i 
-
-            if account_type == 1
-                user = User.find(user_id)
-                tag = Tagperson.new(post_id: post.id, account: user)
-                if !tag.save
-                    return render json: {errors: tag.errors}, status: 500
-                end
-            else
-                user = AlmUser.find(user_id)
-                tag = Tagperson.new(post_id: post.id, account: user)
-                if !tag.save
-                    return render json: {errors: tag.errors}, status: 500
-                end
-            end
-
-            people.push([user_id,account_type])
-        end
-
-        return people
-    end
-
-    def notify_users_of_a_post(post)
-        people = tag_people
-            
-        # Add to notification
-            # For blm followers
-            (post.page.users.uniq).each do |user|
-                # check if this user can get notification
-                if user.notifsetting.newActivities == true
-                    # check if the user is in the tag people
-                    if people.include?([user.id, user.account_type])
-                        message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                        send_notif(user, message, post)
-                    else
-                        message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
-                        send_notif(user, message, post)                        
-                    end
-                end
-            end
-
-            # For alm followers
-            (post.page.alm_users.uniq).each do |user|
-                # check if this user can get notification
-                if user.notifsetting.newActivities == true
-                    # check if the user is in the tag people
-                    if people.include?([user.id, user.account_type])
-                        message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                        send_notif(user, message, post)  
-                    else
-                        message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
-                        send_notif(user, message, post) 
-                    end
-                end
-            end
-
-            # For families and friends
-            (post.page.relationships).each do |relationship|
-                if relationship.account != @user && relationship.account.notifsetting.newActivities == true
-                    if people.include?([relationship.account.id, relationship.account.account_type])
-                        message = "#{@user.first_name} tagged you in a post in #{post.page.name} #{post.page_type}"
-                        send_notif(relationship.account, message, post)
-                    else
-                        message = "#{@user.first_name} posted in #{post.page.name} #{post.page_type}"
-                        send_notif(relationship.account, message, post)
-                    end
-                end
-            end
-    end
-
-    def send_notif(user, message, post)
-        Notification.create(recipient: user, actor: @user, action: message, postId: post.id, read: false, notif_type: "Post")
-        
-        #Push Notification
-        device_token = user.device_token
-        title = "FacesbyPlaces Notification"
-        PushNotification(device_token, title, message, user, @user, post.id, "Post", post.page_type)
-    end
-
-    def itemsRemaining(posts)
-        posts = posts.page(params[:page]).per(numberOfPage)
-        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
-            return itemsremaining = 0
-        elsif posts.total_count < numberOfPage
-            return itemsremaining = posts.total_count 
-        else
-            return itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
-        end
     end
 
 end

@@ -74,16 +74,6 @@ class Api::V1::Admin::ReportsController < ApplicationController
         params.require(:report).permit(:subject, :description, :reportable_type, :reportable_id)
     end
 
-    def itemsRemaining(reports)
-        if reports.total_count == 0 || (reports.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif reports.total_count < numberOfPage
-            itemsremaining = reports.total_count 
-        else
-            itemsremaining = reports.total_count - (params[:page].to_i * numberOfPage)
-        end
-    end 
-
     def admin_only
         unless user().has_role? :admin  
             return render json: {status: "Must be an admin to continue"}, status: 401

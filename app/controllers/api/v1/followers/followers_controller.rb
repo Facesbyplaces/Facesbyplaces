@@ -12,7 +12,7 @@ class Api::V1::Followers::FollowersController < ApplicationController
     def follow
         return render json: {success: false, errors: @follower }, status: 500 unless @follower.save 
         
-        notification = Notification::Builder.new(
+        Notification::Builder.new(
             device_tokens:   @page.pageowner.account.device_token,
             title:          "FacesbyPlaces Notification",
             message:        "#{user().first_name} followed your memorial.",
@@ -21,8 +21,7 @@ class Api::V1::Followers::FollowersController < ApplicationController
             data:           params[:page_id],
             type:           @page.page_name.capitalize,
             postType:       " ",
-        )
-        notification.notify
+        ).notify
 
         render json: {status: "Success", follower: @follower, user: user()}
     end

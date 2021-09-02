@@ -135,7 +135,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                 # add new relationship to the page
                 family = @page.relationships.new(relationship: params[:relationship], account: @user)
 
-                notification = Notification::Builder.new(
+                Notification::Builder.new(
                     device_tokens:  @user.device_token,
                     title:          "FacesbyPlaces Notification",
                     message:        "#{user().first_name} added you as family on #{@page.name}.",
@@ -144,8 +144,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                     data:           @page.id,
                     type:           params[:page_type],
                     postType:       " ",
-                )
-                notification.notify
+                ).notify
 
                 # save relationship
                 if family.save 
@@ -161,7 +160,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                 # add new relationship to the page
                 friend = @page.relationships.new(relationship: params[:relationship], account: @user)
 
-                notification = Notification::Builder.new(
+                Notification::Builder.new(
                     device_tokens:  @user.device_token,
                     title:          "FacesbyPlaces Notification",
                     message:        "#{user().first_name} added you as friend on #{@page.name}.",
@@ -170,9 +169,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                     data:           @page.id,
                     type:           params[:page_type],
                     postType:       " ",
-                )
-                notification.notify
-
+                ).notify
 
                 # save relationship
                 if friend.save 

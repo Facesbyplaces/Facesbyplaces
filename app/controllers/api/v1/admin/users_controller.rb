@@ -30,12 +30,14 @@ class Api::V1::Admin::UsersController < ApplicationController
     def editUser
         return render json: {error: "User not found"}, status: 404 unless @user != nil
         return render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404 unless @user.update(editUser_params)
+
         render json: {success: true, message: "Successfully Edited User", user: @user, status: 200}, status: 200 
     end
 
     def deleteUser
         return render json: {error: "User not found"}, status: 404 unless @user != nil
         return render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 404 unless @user.destroy!
+
         render json: {success: true, message: "Successfully Deleted User", user: @user, status: 200}, status: 200
     end
 
@@ -53,16 +55,6 @@ class Api::V1::Admin::UsersController < ApplicationController
     def admin_only
         unless user().has_role? :admin
             return render json: {status: "Must be an admin to continue"}, status: 401
-        end
-    end
-
-    def itemsRemaining(users)
-        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
-            return 0
-        elsif users.total_count < numberOfPage
-            return users.total_count 
-        else
-            return users.total_count - (params[:page].to_i * numberOfPage)
         end
     end
 

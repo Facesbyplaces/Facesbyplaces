@@ -33,4 +33,14 @@ module Userable
         @posts = posts.page(params[:page]).per(numberOfPage)
     end
 
+    def itemsRemaining(data)
+        if data.total_count == 0 || (data.total_count - (params[:page].to_i * numberOfPage)) < 0
+            return 0
+        elsif data.total_count < numberOfPage
+            return data.total_count 
+        else
+            return data.total_count - (params[:page].to_i * numberOfPage)
+        end
+    end
+
 end
