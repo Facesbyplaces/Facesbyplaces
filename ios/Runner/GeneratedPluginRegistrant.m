@@ -4,12 +4,6 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<apple_maps_flutter/AppleMapsFlutterPlugin.h>)
-#import <apple_maps_flutter/AppleMapsFlutterPlugin.h>
-#else
-@import apple_maps_flutter;
-#endif
-
 #if __has_include(<better_player/BetterPlayerPlugin.h>)
 #import <better_player/BetterPlayerPlugin.h>
 #else
@@ -187,7 +181,6 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [AppleMapsFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"AppleMapsFlutterPlugin"]];
   [BetterPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"BetterPlayerPlugin"]];
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
