@@ -588,7 +588,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               GestureDetector(
                                                                 child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 14, color: const Color(0xff3498DB),),),
                                                                 onTap: () async{
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude, isMemorial: true)));
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude, isMemorial: true, memorialName: profile.data!.almMemorial.showMemorialName, memorialImage: profile.data!.almMemorial.showMemorialProfileImage,)));
                                                                 },
                                                               ),
                                                             ],

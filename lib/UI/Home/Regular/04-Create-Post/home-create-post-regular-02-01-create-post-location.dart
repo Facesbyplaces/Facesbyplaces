@@ -173,7 +173,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
   ValueNotifier<bool> empty = ValueNotifier<bool>(true);
   TextEditingController controller = TextEditingController();
 
-  GooglePlace googlePlace = GooglePlace("AIzaSyDwu4SiF_dg2PaDxyv4AunjO2ixKlr-AeA");
+  // GooglePlace googlePlace = GooglePlace("AIzaSyDwu4SiF_dg2PaDxyv4AunjO2ixKlr-AeA");
   List<AutocompletePrediction> predictions = [];
 
   @override
@@ -253,6 +253,9 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
                           //   descriptionPlaces.value.add(searchResult[i].displayName);
                           //   locationPlaces.value.add([searchResult[i].lat, searchResult[i].lon]);
                           // }
+                          GooglePlace googlePlace = GooglePlace("AIzaSyCTPIQSGBS0cdzWRv9VGqrRuVwd2KuuhNg");
+
+
                           print('The api key is ${googlePlace.apiKEY}');
                           print('The newPlaces is $newPlaces');
 

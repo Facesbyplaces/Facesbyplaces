@@ -108,59 +108,208 @@
 
 
 
+// import 'package:facesbyplaces/Configurations/size_configuration.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:flutter/material.dart';
+// import 'dart:async';
+
+// class HomeBLMMaps extends StatefulWidget{
+//   final double latitude;
+//   final double longitude;
+//   final bool isMemorial;
+//   const HomeBLMMaps({required this.latitude, required this.longitude, required this.isMemorial});
+
+//   HomeBLMMapsState createState() => HomeBLMMapsState();
+// }
+
+// class HomeBLMMapsState extends State<HomeBLMMaps>{
+//   Completer<GoogleMapController> _controller = Completer();
+
+//   static final CameraPosition _kGooglePlex = CameraPosition(
+//     target: LatLng(37.42796133580664, -122.085749655962),
+//     zoom: 14.4746,
+//   );
+
+//   static final CameraPosition _kLake = CameraPosition(
+//       bearing: 192.8334901395799,
+//       target: LatLng(37.43296265331129, -122.08832357078792),
+//       tilt: 59.440717697143555,
+//       zoom: 19.151926040649414);
+
+//   @override
+//   Widget build(BuildContext context){
+//     SizeConfig.init(context);
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Maps', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+//         backgroundColor: const Color(0xff04ECFF),
+//       ),
+//       body: GoogleMap(
+//         mapType: MapType.hybrid,
+//         initialCameraPosition: _kGooglePlex,
+//         onMapCreated: (GoogleMapController controller) {
+//           _controller.complete(controller);
+//         },
+//       ),
+//       floatingActionButton: FloatingActionButton.extended(
+//         onPressed: _goToTheLake,
+//         label: Text('To the lake!'),
+//         icon: Icon(Icons.directions_boat),
+//       ),
+//     );
+//   }
+
+//   Future<void> _goToTheLake() async {
+//     final GoogleMapController controller = await _controller.future;
+//     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+//   }
+// }
+
+
+
+
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-05-maps.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-06-directions.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 class HomeBLMMaps extends StatefulWidget{
   final double latitude;
   final double longitude;
   final bool isMemorial;
-  const HomeBLMMaps({required this.latitude, required this.longitude, required this.isMemorial});
+  final String memorialName;
+  final String memorialImage;
+  const HomeBLMMaps({required this.latitude, required this.longitude, required this.isMemorial, required this.memorialName, required this.memorialImage});
 
-  HomeBLMMapsState createState() => HomeBLMMapsState();
+  HomeRegularMapsState createState() => HomeRegularMapsState();
 }
 
-class HomeBLMMapsState extends State<HomeBLMMaps>{
-  Completer<GoogleMapController> _controller = Completer();
+class HomeRegularMapsState extends State<HomeBLMMaps>{
+  CameraPosition? initialCameraPosition;
+  GoogleMapController? googleMapController;
+  Marker? origin;
+  Marker? destination;
+  CustomInfoWindowController customInfoWindowController = CustomInfoWindowController();
+  Set<Marker> markers = {};
+  RegularDirections? info;
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  void initState(){
+    super.initState();
+    initialCameraPosition = CameraPosition(target: LatLng(widget.latitude, widget.longitude), zoom: 14.4746,);
+    markers.add(Marker(
+      markerId: const MarkerId('origin'), 
+      position: LatLng(widget.latitude, widget.longitude),
+      onTap: (){
+        print('print hehehehe');
+        customInfoWindowController.addInfoWindow!(
+          ClipPath(
+            clipper: MessageClipper(borderRadius: 10),
+            // clipper: MiscRegularMessageClipper(),
+            child: Container(
+              color: const Color(0xffffffff),
+              child: Column(
+                children: [
+                  Text('Here Lies', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+                  ListTile(
+                    leading: widget.memorialImage != ''
+                    ? CircleAvatar(
+                      radius: 20,
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: NetworkImage(widget.memorialImage),
+                      backgroundImage: const AssetImage('assets/icons/app-icon.png'),
+                    )
+                    : const CircleAvatar(
+                      radius: 20,
+                      backgroundColor: const Color(0xff888888),
+                      foregroundImage: const AssetImage('assets/icons/app-icon.png'),
+                    ),
+                    title: Text('${widget.memorialName}', maxLines: 2,),
+                    subtitle: Text('${widget.latitude.toStringAsFixed(6)}, ${widget.longitude.toStringAsFixed(6)}'),
+                  ),
+
+                  SizedBox(height: 20,),
+                ],
+              ),
+            ),
+          ),
+
+          LatLng(widget.latitude, widget.longitude),
+        );
+      },
+    ));
+  }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Maps', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+        centerTitle: false,
+        title: Text('${widget.memorialName}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
         backgroundColor: const Color(0xff04ECFF),
+        actions: [
+          IconButton(
+            onPressed: (){
+
+            },
+            icon: Icon(Icons.send_outlined),
+          ),
+        ],
       ),
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+      body: Stack(
+        children: [
+          GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: initialCameraPosition!,
+            markers: markers,
+            onLongPress: _addMarker,
+            onTap: (LatLng position){
+              customInfoWindowController.hideInfoWindow!();
+            },
+            onCameraMove: (CameraPosition position){
+              customInfoWindowController.onCameraMove!();
+            },
+            onMapCreated: (GoogleMapController controller){
+              customInfoWindowController.googleMapController = controller;
+            },
+          ),
+
+          CustomInfoWindow(
+            controller: customInfoWindowController,
+            height: 150,
+            width: 300,
+            offset: 50,
+          ),
+        ],
       ),
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  void _addMarker(LatLng position) async{
+    print('long press');
+
+    if(markers.length == 1){
+      setState(() {
+        markers.add(Marker(
+          markerId: const MarkerId('destination'),
+          infoWindow: const InfoWindow(title: 'Chosen location'),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+          position: position,
+        ));
+      });
+
+      final directions = await RegularDirectionsRepository().getDirections(
+        origin: LatLng(widget.latitude, widget.longitude), 
+        destination: position
+      );
+
+      setState(() {
+        info = directions;
+      });
+    }
   }
 }
