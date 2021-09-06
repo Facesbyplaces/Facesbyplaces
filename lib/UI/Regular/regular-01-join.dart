@@ -10,47 +10,58 @@ class RegularJoin extends StatelessWidget{
     SizeConfig.init(context);
     return Scaffold(
       body: SafeArea(
-        bottom: false,
-        child: Container(
-          height: SizeConfig.screenHeight,
-          width: SizeConfig.screenWidth,
-          decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/All Lives Matter.png'),),),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: SizeConfig.blockSizeVertical! * 3.65,),
-                  onPressed: (){
-                    Navigator.pop(context);
-                  },
+        child: LayoutBuilder(
+          builder: (context, constraint){
+            return SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                child: IntrinsicHeight(
+                  child: Container(
+                    decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/All Lives Matter.png'),),),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back, color: const Color(0xffFFFFFF), size: 35,),
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+
+                        const SizedBox(height: 50,),
+                        
+                        Container(child: Image.asset('assets/icons/logo.png', height: 200, width: 200,),),
+
+                        const SizedBox(height: 50,),
+
+                        Expanded(child: Container()),
+
+                        Center(child: const Text('All Lives Matter', style: const TextStyle(fontSize: 42, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),),
+
+                        const SizedBox(height: 50,),
+
+                        MiscRegularButtonTemplate(
+                          buttonText: 'Next',
+                          buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                          width: SizeConfig.screenWidth! / 1.8,
+                          height: 50,
+                          buttonColor: const Color(0xff04ECFF),
+                          onPressed: (){
+                            Navigator.pushNamed(context, '/regular/login');
+                          },
+                        ),
+
+                        const SizedBox(height: 50,),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-
-              SizedBox(height: SizeConfig.blockSizeVertical! * 7.12),
-              
-              Container(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical! * 22.48, width: SizeConfig.blockSizeHorizontal! * 35.9,),),
-
-              SizedBox(height: SizeConfig.blockSizeVertical! * 35.20),
-
-              Center(child: Text('All Lives Matter', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 4.57, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),),
-
-              SizedBox(height: SizeConfig.blockSizeVertical! * 6.03),
-
-              MiscRegularButtonTemplate(
-                buttonText: 'Next',
-                buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.29, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                width: SizeConfig.blockSizeHorizontal! * 52.17,
-                height: SizeConfig.blockSizeVertical! * 7.00,
-                buttonColor: const Color(0xff04ECFF),
-                onPressed: (){
-                  Navigator.pushNamed(context, '/regular/login');
-                },
-              ),
-
-              const Spacer(),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

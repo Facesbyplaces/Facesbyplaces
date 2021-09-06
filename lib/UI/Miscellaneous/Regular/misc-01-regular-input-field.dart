@@ -46,7 +46,7 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
       readOnly: widget.readOnly,
       obscureText: widget.obscureText,
       cursorColor: const Color(0xff000000),
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(alignLabelWithHint: true, labelText: widget.labelText, labelStyle: widget.labelTextStyle, focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
     );
   }
@@ -83,7 +83,7 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
       keyboardType: widget.type,
       readOnly: widget.readOnly,
       cursorColor: const Color(0xff000000),
-      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       decoration: InputDecoration(
         filled: true,
         alignLabelWithHint: true,
@@ -136,7 +136,7 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
           items: relationship.map((String value){
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+              child: Text(value, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
             );
           }).toList(),
         ),
@@ -283,7 +283,7 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
   Widget build(BuildContext context){
     return InternationalPhoneNumberInput(
       inputDecoration: InputDecoration(alignLabelWithHint: true, labelText: widget.labelText, labelStyle: widget.labelTextStyle, focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),),
-      textStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+      textStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
       selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
       textFieldController: controller,
       onInputChanged: (PhoneNumber number){

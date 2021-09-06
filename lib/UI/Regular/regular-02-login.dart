@@ -44,74 +44,262 @@ class RegularLoginState extends State<RegularLogin>{
           },
           child: Scaffold(
             body: SafeArea(
-              bottom: false,
-              child: SingleChildScrollView(
-                child: Container(
-                  height: SizeConfig.screenHeight,
-                  width: SizeConfig.screenWidth,
-                  decoration: BoxDecoration(
-                    color: const Color(0xffffffff),
-                    image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
-                  ),
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
-                          onPressed: (){
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xffffffff),
+                  image: DecorationImage(fit: BoxFit.cover, image: const AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),
+                ),
+                child: LayoutBuilder(
+                  builder: (context, constraint){
+                    return SingleChildScrollView(
+                      physics: ClampingScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                        child: IntrinsicHeight(
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: IconButton(
+                                  icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35),
+                                  onPressed: (){
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 3.65),
+                              SizedBox(height: 30,),
 
-                      Container(
-                        child: Text('Log In', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 4.93, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
-                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75),
-                        alignment: Alignment.centerLeft,
-                      ),
+                              Container(
+                                child: const Text('Log In', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                padding: const EdgeInsets.only(left: 40),
+                                alignment: Alignment.centerLeft,
+                              ),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 3.65),
+                              const SizedBox(height: 30,),
 
-                      Row(
-                        children: [
-                          const Spacer(),
+                              Row(
+                                children: [
+                                  const Spacer(),
 
-                          SizedBox(
-                            height: 14.93 * SizeConfig.blockSizeHorizontal!,
-                            width: 16.93 * SizeConfig.blockSizeHorizontal!,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(primary: const Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
-                              child: Center(child: Image.asset('assets/icons/Facebook2.png',),),
-                              onPressed: () async{
-                                final fb = FacebookLogin();
-                                bool isLoggedIn = await fb.isLoggedIn;
+                                  SizedBox(
+                                    height: 70,
+                                    width: 70,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(primary: const Color(0xff3A559F), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
+                                      child: Center(child: Image.asset('assets/icons/Facebook2.png',),),
+                                      onPressed: () async{
+                                        final fb = FacebookLogin();
+                                        bool isLoggedIn = await fb.isLoggedIn;
 
-                                print('isLoggedIn is $isLoggedIn');
+                                        print('isLoggedIn is $isLoggedIn');
 
-                                if(isLoggedIn == true){
-                                  context.loaderOverlay.show();
-                                  FacebookUserProfile profile = (await fb.getUserProfile())!;
-                                  String email = (await fb.getUserEmail())!;
-                                  String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
-                                  FacebookAccessToken token = (await fb.accessToken)!;
-                                  bool apiResult = await apiRegularSignInWithFacebook(firstName: '${profile.name}', lastName: '',email: email, username: email, facebookId: token.token, image: image);
-                                  context.loaderOverlay.hide();
+                                        if(isLoggedIn == true){
+                                          context.loaderOverlay.show();
+                                          FacebookUserProfile profile = (await fb.getUserProfile())!;
+                                          String email = (await fb.getUserEmail())!;
+                                          String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                                          FacebookAccessToken token = (await fb.accessToken)!;
+                                          bool apiResult = await apiRegularSignInWithFacebook(firstName: '${profile.name}', lastName: '',email: email, username: email, facebookId: token.token, image: image);
+                                          context.loaderOverlay.hide();
 
-                                  if(apiResult == true){
-                                    final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
-                                    await FirebaseAuth.instance.signInWithCredential(credential);
-                                    final sharedPrefs = await SharedPreferences.getInstance();
-                                    sharedPrefs.setBool('regular-social-app-session', true);
-                                    Navigator.pushReplacementNamed(context, '/home/regular');
-                                  }else{
+                                          if(apiResult == true){
+                                            final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
+                                            await FirebaseAuth.instance.signInWithCredential(credential);
+                                            final sharedPrefs = await SharedPreferences.getInstance();
+                                            sharedPrefs.setBool('regular-social-app-session', true);
+                                            Navigator.pushReplacementNamed(context, '/home/regular');
+                                          }else{
+                                            await showDialog(
+                                              context: context,
+                                              builder: (_) => AssetGiffyDialog(
+                                                description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                entryAnimation: EntryAnimation.DEFAULT,
+                                                buttonOkColor: const Color(0xffff0000),
+                                                onlyOkButton: true,
+                                                onOkButtonPressed: (){
+                                                  Navigator.pop(context, true);
+                                                },
+                                              ),
+                                            );
+                                          }
+                                        }else{
+                                          final result = await fb.logIn(permissions: [FacebookPermission.publicProfile, FacebookPermission.email, FacebookPermission.userFriends,]);
+                                          final email = (await fb.getUserEmail())!;
+                                          final profile = (await fb.getUserProfile())!;
+                                          final image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                                          FacebookAccessToken token = (await fb.accessToken)!;
+
+                                          if(result.status != FacebookLoginStatus.cancel){
+                                            context.loaderOverlay.show();
+                                            bool apiResult = await apiRegularSignInWithFacebook(firstName: '${profile.name}', lastName: '', email: email, username: email, facebookId: result.accessToken!.token, image: image,);
+                                            context.loaderOverlay.hide();
+
+                                            if(apiResult == false){
+                                              await fb.logOut();
+                                            }else{
+                                              final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
+                                              await FirebaseAuth.instance.signInWithCredential(credential);
+                                              final sharedPrefs = await SharedPreferences.getInstance();
+                                              sharedPrefs.setBool('regular-social-app-session', true);
+                                              Navigator.pushReplacementNamed(context, '/home/regular');
+                                            }
+                                          }
+                                        }
+                                      },
+                                    ),
+                                  ),
+
+                                  const Spacer(),
+
+                                  SizedBox(
+                                    height: 70,
+                                    width: 70,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(primary: Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
+                                      child: Center(child: Image.asset('assets/icons/google.png',),),
+                                      onPressed: () async{
+                                        User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
+
+                                        if(user != null){
+                                          final sharedPrefs = await SharedPreferences.getInstance();
+                                          sharedPrefs.setBool('regular-social-app-session', true);
+                                          Navigator.pushReplacementNamed(context, '/home/regular');
+                                        }
+                                      },
+                                    ),
+                                  ),
+
+                                  const Spacer(),
+
+                                  SizedBox(
+                                    height: 70,
+                                    width: 70,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: const Color(0xff000000),
+                                        shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),
+                                      ),
+                                      child: Center(child: Image.asset('assets/icons/apple.png',),),
+                                      onPressed: () async{
+                                        AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
+                                          scopes: [
+                                            AppleIDAuthorizationScopes.email,
+                                            AppleIDAuthorizationScopes.fullName,
+                                          ],
+                                          webAuthenticationOptions: WebAuthenticationOptions(clientId: 'com.puckproductions.facesbyplaces', redirectUri: Uri.parse('https://com.app.facesbyplaces.glitch.me/callbacks/sign_in_with_apple'),),
+                                        );
+                                        final oAuthProvider = OAuthProvider('apple.com');
+                                        final newCredentials = oAuthProvider.credential(idToken: credential.identityToken, accessToken: credential.authorizationCode);
+
+                                        print('The newCredentials is $newCredentials');
+                                        print('The identification is ${credential.userIdentifier}');
+                                        print('The token is ${credential.identityToken}');
+                                        print('The state is ${credential.state}');
+                                        print('The authorization code is ${credential.authorizationCode}');
+
+                                        context.loaderOverlay.show();
+                                        bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
+                                        context.loaderOverlay.hide();
+
+                                        if(result == true){
+                                          final sharedPrefs = await SharedPreferences.getInstance();
+                                          sharedPrefs.setBool('regular-social-app-session', true);
+                                          Navigator.pushReplacementNamed(context, '/home/regular');
+                                        }else{
+                                          await showDialog(
+                                            context: context,
+                                            builder: (_) => AssetGiffyDialog(
+                                              description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                              entryAnimation: EntryAnimation.DEFAULT,
+                                              buttonOkColor: const Color(0xffff0000),
+                                              onlyOkButton: true,
+                                              onOkButtonPressed: (){
+                                                Navigator.pop(context, true);
+                                              },
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+
+                                  const Spacer(),
+                                ],
+                              ),
+
+                              const SizedBox(height: 50),
+
+                              const Center(child: const Text('or log in with email', style: const TextStyle(fontSize: 24, color: const Color(0xff000000), fontFamily: 'NexaRegular',),),),
+
+                              const SizedBox(height: 50),
+
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 40),
+                                child: MiscRegularInputFieldTemplate(
+                                  key: _key1,
+                                  labelTextStyle: const TextStyle(fontSize: 24, color: const Color(0xff000000), fontFamily: 'NexaRegular',),
+                                  type: TextInputType.emailAddress,
+                                  labelText: 'Email Address',
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 40),
+                                child: MiscRegularInputFieldTemplate(
+                                  key: _key2,
+                                  labelTextStyle: const TextStyle(fontSize: 24, color: const Color(0xff000000), fontFamily: 'NexaRegular'),
+                                  type: TextInputType.text,
+                                  labelText: 'Password',
+                                  obscureText: true,
+                                ),
+                              ),
+
+                              const SizedBox(height: 20,),
+
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 40),
+                                child: Row(
+                                  children: [
+                                    const Spacer(),
+
+                                    GestureDetector(
+                                      child: Align(
+                                        child: const Text('Forgot Password?', style: const TextStyle(color: const Color(0xff2F353D), fontSize: 20, fontFamily: 'NexaRegular', decoration: TextDecoration.underline),),
+                                        alignment: Alignment.centerRight,
+                                      ),
+                                      onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordResetEmail()));
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              Expanded(child: Container(),),
+
+                              const SizedBox(height: 30,),
+
+                              MiscRegularButtonTemplate(
+                                buttonText: 'Log In',
+                                buttonTextStyle: const TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                                buttonColor: const Color(0xff4EC9D4),
+                                width: SizeConfig.screenWidth! / 2,
+                                height: 50,
+                                onPressed: () async{
+                                  bool validEmail = false;
+                                  validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
+
+                                  if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                                     await showDialog(
                                       context: context,
                                       builder: (_) => AssetGiffyDialog(
-                                        description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16,fontFamily: 'NexaRegular'),),
+                                        description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                         entryAnimation: EntryAnimation.DEFAULT,
                                         buttonOkColor: const Color(0xffff0000),
@@ -121,290 +309,113 @@ class RegularLoginState extends State<RegularLogin>{
                                         },
                                       ),
                                     );
-                                  }
-                                }else{
-                                  final result = await fb.logIn(permissions: [FacebookPermission.publicProfile, FacebookPermission.email, FacebookPermission.userFriends,]);
-                                  final email = (await fb.getUserEmail())!;
-                                  final profile = (await fb.getUserProfile())!;
-                                  final image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
-                                  FacebookAccessToken token = (await fb.accessToken)!;
-
-                                  if(result.status != FacebookLoginStatus.cancel){
+                                  }else if (!validEmail){
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => AssetGiffyDialog(
+                                        description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        buttonOkColor: const Color(0xffff0000),
+                                        onlyOkButton: true,
+                                        onOkButtonPressed: (){
+                                          Navigator.pop(context, true);
+                                        },
+                                      ),
+                                    );
+                                  }else{
                                     context.loaderOverlay.show();
-                                    bool apiResult = await apiRegularSignInWithFacebook(firstName: '${profile.name}', lastName: '', email: email, username: email, facebookId: result.accessToken!.token, image: image,);
+                                    String deviceToken = '';
+                                    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+                                    final pushNotificationService = PushNotificationService(_firebaseMessaging, context);
+                                    pushNotificationService.initialise();
+                                    deviceToken = (await pushNotificationService.fcm.getToken())!;
+                                    print('The deviceToken is $deviceToken');
+                                    String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
                                     context.loaderOverlay.hide();
 
-                                    if(apiResult == false){
-                                      await fb.logOut();
-                                    }else{
-                                      final OAuthCredential credential = FacebookAuthProvider.credential('${token.token}');
-                                      await FirebaseAuth.instance.signInWithCredential(credential);
-                                      final sharedPrefs = await SharedPreferences.getInstance();
-                                      sharedPrefs.setBool('regular-social-app-session', true);
+                                    print('The result is $result');
+
+                                    if(result == 'Success'){
                                       Navigator.pushReplacementNamed(context, '/home/regular');
+                                    }else{
+                                      await showDialog(
+                                        context: context,
+                                        builder: (_) => AssetGiffyDialog(
+                                          description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          entryAnimation: EntryAnimation.DEFAULT,
+                                          buttonOkColor: const Color(0xffff0000),
+                                          onlyOkButton: true,
+                                          onOkButtonPressed: (){
+                                            Navigator.pop(context, true);
+                                          },
+                                        ),
+                                      );
                                     }
                                   }
-                                }
-                              },
-                            ),
-                          ),
-
-                          const Spacer(),
-
-                          SizedBox(
-                            height: 14.93 * SizeConfig.blockSizeHorizontal!,
-                            width: 14.93 * SizeConfig.blockSizeHorizontal!,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(primary: Color(0xffFFFFFF), shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),),
-                              child: Center(child: Image.asset('assets/icons/google.png',),),
-                              onPressed: () async{
-                                User? user = await RegularGoogleAuthentication.signInWithGoogle(context: context);
-
-                                if(user != null){
-                                  final sharedPrefs = await SharedPreferences.getInstance();
-                                  sharedPrefs.setBool('regular-social-app-session', true);
-                                  Navigator.pushReplacementNamed(context, '/home/regular');
-                                }
-                              },
-                            ),
-                          ),
-
-                          const Spacer(),
-
-                          SizedBox(
-                            height: 14.93 * SizeConfig.blockSizeHorizontal!,
-                            width: 14.93 * SizeConfig.blockSizeHorizontal!,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: const Color(0xff000000),
-                                shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(10),),),
+                                },
                               ),
-                              child: Center(child: Image.asset('assets/icons/apple.png',),),
-                              onPressed: () async{
-                                AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
-                                  scopes: [
-                                    AppleIDAuthorizationScopes.email,
-                                    AppleIDAuthorizationScopes.fullName,
-                                  ],
-                                  webAuthenticationOptions: WebAuthenticationOptions(clientId: 'com.puckproductions.facesbyplaces', redirectUri: Uri.parse('https://com.app.facesbyplaces.glitch.me/callbacks/sign_in_with_apple'),),
-                                );
-                                final oAuthProvider = OAuthProvider('apple.com');
-                                final newCredentials = oAuthProvider.credential(idToken: credential.identityToken, accessToken: credential.authorizationCode);
 
-                                print('The newCredentials is $newCredentials');
-                                print('The identification is ${credential.userIdentifier}');
-                                print('The token is ${credential.identityToken}');
-                                print('The state is ${credential.state}');
-                                print('The authorization code is ${credential.authorizationCode}');
+                              SizedBox(height: 30,),
 
-                                context.loaderOverlay.show();
-                                bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
-                                context.loaderOverlay.hide();
+                              RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    const TextSpan(
+                                      text: 'Don\'t have an Account? ',
+                                      style: const TextStyle(fontSize: 22, color: const Color(0xff2F353D), fontFamily: 'NexaRegular',),
+                                    ),
 
-                                if(result == true){
-                                  final sharedPrefs = await SharedPreferences.getInstance();
-                                  sharedPrefs.setBool('regular-social-app-session', true);
-                                  Navigator.pushReplacementNamed(context, '/home/regular');
-                                }else{
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                      description: Text('Invalid email or password. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      buttonOkColor: const Color(0xffff0000),
-                                      onlyOkButton: true,
-                                      onOkButtonPressed: (){
-                                        Navigator.pop(context, true);
+                                    TextSpan(
+                                      text: 'Sign Up', 
+                                      style: const TextStyle(fontSize: 22, color: const Color(0xff4EC9D4), fontFamily: 'NexaRegular',), 
+                                      recognizer: TapGestureRecognizer()
+                                      ..onTap = (){
+                                        Navigator.pushNamed(context, '/regular/register');
                                       },
                                     ),
-                                  );
-                                }
-                              },
-                            ),
-                          ),
-
-                          const Spacer(),
-                        ],
-                      ),
-
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 5.11),
-
-                      Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular',),),),
-
-                      Padding(
-                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
-                        child: MiscRegularInputFieldTemplate(
-                          key: _key1,
-                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular',),
-                          type: TextInputType.emailAddress,
-                          labelText: 'Email Address',
-                        ),
-                      ),
-
-                      Padding(
-                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
-                        child: MiscRegularInputFieldTemplate(
-                          key: _key2,
-                          labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff000000), fontFamily: 'NexaRegular'),
-                          type: TextInputType.text,
-                          labelText: 'Password',
-                          obscureText: true,
-                        ),
-                      ),
-
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 2.19),
-
-                      Container(
-                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.75, right: SizeConfig.blockSizeHorizontal! * 8.75),
-                        child: Row(
-                          children: [
-                            const Spacer(),
-
-                            GestureDetector(
-                              child: Align(
-                                child: Text('Forgot Password?', style: TextStyle(color: const Color(0xff2F353D), fontSize: SizeConfig.blockSizeVertical! * 2.19, fontFamily: 'NexaRegular',),),
-                                alignment: Alignment.centerRight,
-                              ),
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordResetEmail()));
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      const Spacer(),
-
-                      MiscRegularButtonTemplate(
-                        buttonText: 'Log In',
-                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.29, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
-                        buttonColor: const Color(0xff4EC9D4),
-                        width: SizeConfig.screenWidth! / 2,
-                        height: 45,
-                        onPressed: () async{
-                          bool validEmail = false;
-                          validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
-
-                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => AssetGiffyDialog(
-                                description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                buttonOkColor: const Color(0xffff0000),
-                                onlyOkButton: true,
-                                onOkButtonPressed: (){
-                                  Navigator.pop(context, true);
-                                },
-                              ),
-                            );
-                          }else if (!validEmail){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => AssetGiffyDialog(
-                                description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                buttonOkColor: const Color(0xffff0000),
-                                onlyOkButton: true,
-                                onOkButtonPressed: (){
-                                  Navigator.pop(context, true);
-                                },
-                              ),
-                            );
-                          }else{
-                            context.loaderOverlay.show();
-                            String deviceToken = '';
-                            final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-                            final pushNotificationService = PushNotificationService(_firebaseMessaging, context);
-                            pushNotificationService.initialise();
-                            deviceToken = (await pushNotificationService.fcm.getToken())!;
-                            print('The deviceToken is $deviceToken');
-                            String result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
-                            context.loaderOverlay.hide();
-
-                            print('The result is $result');
-
-                            if(result == 'Success'){
-                              Navigator.pushReplacementNamed(context, '/home/regular');
-                            }else{
-                              await showDialog(
-                                context: context,
-                                builder: (_) => AssetGiffyDialog(
-                                  description: Text('Error: $result', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  buttonOkColor: const Color(0xffff0000),
-                                  onlyOkButton: true,
-                                  onOkButtonPressed: (){
-                                    Navigator.pop(context, true);
-                                  },
+                                  ],
                                 ),
-                              );
-                            }
-                          }
-                        },
-                      ),
+                              ),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 3.29),
+                              const SizedBox(height: 20,),
 
-                      RichText(
-                        text: TextSpan(
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'Don\'t have an Account? ',
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff2F353D), fontFamily: 'NexaRegular',),
-                            ),
+                              GestureDetector(
+                                child: const Text('Sign in as Guest', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff4EC9D4), decoration: TextDecoration.underline,),),
+                                onTap: () async{
+                                  final sharedPrefs = await SharedPreferences.getInstance();
+                                  sharedPrefs.setBool('user-guest-session', true);
+                                  Navigator.pushReplacementNamed(context, '/home/regular');
+                                },
+                              ),
 
-                            TextSpan(
-                              text: 'Sign Up', 
-                              style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xff4EC9D4), fontFamily: 'NexaRegular',), 
-                              recognizer: TapGestureRecognizer()
-                              ..onTap = (){
-                                Navigator.pushNamed(context, '/regular/register');
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+                              SizedBox(height: 20,),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 2.00),
+                              Container(
+                                padding: const EdgeInsets.only(left: 40, right: 40),
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: <TextSpan>[
+                                      const TextSpan(text: 'Connect  /  ', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
 
-                      GestureDetector(
-                        child: Text('Sign in as Guest', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaRegular', color: const Color(0xff4EC9D4), decoration: TextDecoration.underline,),),
-                        onTap: () async{
-                          final sharedPrefs = await SharedPreferences.getInstance();
-                          sharedPrefs.setBool('user-guest-session', true);
-                          Navigator.pushReplacementNamed(context, '/home/regular');
-                        },
-                      ),
+                                      const TextSpan(text: 'Remember  /  ', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 2.00),
+                                      const TextSpan(text: 'Honor', style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                                    ],
+                                  ),
+                                ),
+                              ),
 
-                      Container(
-                        padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 8.0, right: SizeConfig.blockSizeHorizontal! * 8.0),
-                        child: RichText(
-                          text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(text: 'Connect  /  ', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.5, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
-
-                              TextSpan(text: 'Remember  /  ', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.5, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
-
-                              TextSpan(text: 'Honor', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.5, fontFamily: 'NexaRegular', color: const Color(0xffBDC3C7),),),
+                              const SizedBox(height: 10),
                             ],
                           ),
                         ),
                       ),
-
-                      SizedBox(height: SizeConfig.blockSizeVertical! * 3.00),
-                    ],
-                  ),
+                    );
+                  },
                 ),
               ),
             ),

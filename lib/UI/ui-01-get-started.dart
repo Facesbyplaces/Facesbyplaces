@@ -142,70 +142,83 @@ class UIGetStartedState extends State<UIGetStarted>{
     SizeConfig.init(context);
     return Scaffold(
       body: SafeArea(
-        bottom: false,
-        child: Container(
-          child: Column(
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    Container(
-                      child: Image.asset('assets/icons/Collage Image.png', fit: BoxFit.contain,),
-                      height: SizeConfig.blockSizeVertical!* 50,
-                      width: SizeConfig.screenWidth,
-                      color: const Color(0xff000000),
-                    ),
+        child: LayoutBuilder(
+          builder: (context, constraint){
+            return SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: SizeConfig.screenHeight! / 2,
+                        width: SizeConfig.screenWidth,
+                        child: Stack(
+                        fit: StackFit.expand,
+                          children: [
+                            Container(
+                              child: Image.asset('assets/icons/Collage Image.png', fit: BoxFit.fill,),
+                              color: const Color(0xff000000),
+                            ),
 
-                    Positioned(
-                      child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical! * 27.98, width: SizeConfig.blockSizeVertical! * 45.81,),
-                      top: SizeConfig.blockSizeVertical! * 10.0,
-                      left: SizeConfig.blockSizeVertical! * 6,
-                    ),
-                  ],
-                )
-              ),
-
-              Container(
-                decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background.png'),),),
-                height: SizeConfig.blockSizeVertical! * 54,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 30),
-
-                    Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, color: Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
-
-                    const SizedBox(height: 30),
-
-                    Container(
-                      padding: EdgeInsets.only(left: 30, right: 30),
-                      child: Center(
-                        child: Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.92, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),
-                          textAlign: TextAlign.center,
+                            Positioned(
+                              child: Image.asset('assets/icons/logo.png', height: 200, width: 200,),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
 
-                    const Spacer(),
+                      Expanded(
+                        child: Container(
+                        decoration: const BoxDecoration(image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background.png'),),),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 30),
 
-                    MaterialButton(
-                      child: Text('Get Started', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),
-                      minWidth: SizeConfig.blockSizeHorizontal! * 80,
-                      color: const Color(0xff04ECFF),
-                      shape: const StadiumBorder(),
-                      padding: EdgeInsets.zero,
-                      height: 45,
-                      onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
-                      },
-                    ),
+                            Center(child: const Text('FacesByPlaces.com', style: const TextStyle(fontSize: 28, color: const Color(0xff04ECFF), fontFamily: 'NexaBold',),),),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical! * 4),
-                  ],
+                            const SizedBox(height: 30),
+
+                            Container(
+                              padding: const EdgeInsets.only(left: 30, right: 30),
+                              child: Center(
+                                child: const Text('Create a Memorial Page for Loved Ones by Sharing Stories, photos of Special Events & Occasions. Keeping their Memories alive for Generations',
+                                  style: const TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 50),
+
+                            Expanded(child: Container(),),
+
+                            const SizedBox(height: 50),
+
+                            MaterialButton(
+                              child: const Text('Get Started', style: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),
+                              minWidth: SizeConfig.screenWidth! / 1.5,
+                              color: const Color(0xff04ECFF),
+                              shape: const StadiumBorder(),
+                              padding: EdgeInsets.zero,
+                              height: 50,
+                              onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const UILogin01()));
+                              },
+                            ),
+
+                            const SizedBox(height: 50),
+                          ],
+                        ),
+                      ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

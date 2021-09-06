@@ -10,90 +10,82 @@ class BLMJoin extends StatelessWidget{
     SizeConfig.init(context);
     return Scaffold(
       body: SafeArea(
-        bottom: false,
-        child: Container(
-          height: SizeConfig.screenHeight,
-          width: SizeConfig.screenWidth,
-          color: const Color(0xffffffff),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
-                  onPressed: (){
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Container(
-                height: SizeConfig.blockSizeVertical! * 5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Spacer(),
+        child: LayoutBuilder(
+          builder: (context, constraint){
+            return SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                child: IntrinsicHeight(
+                  child: Container(
+                    decoration: const BoxDecoration(color: const Color(0xffffffff), image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/background2.png', ), colorFilter: const ColorFilter.srgbToLinearGamma(),),),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            icon: const Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35,),
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                        Container(
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              const Spacer(),
 
-                    Text('BLACK', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, color: const Color(0xff000000), fontFamily: 'NexaBold',),),
+                              Text('BLACK', style: const TextStyle(fontSize: 32, color: const Color(0xff000000), fontFamily: 'NexaBold',),),
 
-                    SizedBox(width: SizeConfig.blockSizeHorizontal! * 2),
+                              const SizedBox(width: 20,),
 
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      alignment: Alignment.center,
-                      child: Text('LIVES', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
-                      decoration: const BoxDecoration(color: const Color(0xff000000), borderRadius: const BorderRadius.all(Radius.circular(10),),),
-                    ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                alignment: Alignment.center,
+                                child: const Text('LIVES', style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xffffffff), fontFamily: 'NexaBold',),),
+                                decoration: const BoxDecoration(color: const Color(0xff000000), borderRadius: const BorderRadius.all(Radius.circular(10),),),
+                              ),
 
-                    SizedBox(width: SizeConfig.blockSizeHorizontal! * 2),
+                              const SizedBox(width: 20,),
 
-                    Text('MATTER', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.65, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                              const Text('MATTER', style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xff000000), fontFamily: 'NexaBold',),),
 
-                    const Spacer(),
-                  ],
-                ),
-              ),
+                              const Spacer(),
+                            ],
+                          ),
+                        ),
 
-              SizedBox(height: SizeConfig.blockSizeVertical! * 5),
+                        const SizedBox(height: 50),
 
-              Expanded(
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      top: SizeConfig.blockSizeVertical! * 30,
-                      child: Container(
-                        height: SizeConfig.blockSizeVertical! * 30,
-                        decoration: const BoxDecoration(color: const Color(0xffffffff), image: const DecorationImage(fit: BoxFit.fill, image: const AssetImage('assets/icons/join6.png',),),),
-                        child: Container(color: Colors.white.withOpacity(0.4),),
-                      ),
-                    ),
+                        Container(width: SizeConfig.screenWidth, height: 600, child: Image.asset('assets/icons/BLM Matter.png', fit: BoxFit.cover,),),
 
-                    Container(width: SizeConfig.screenWidth, height: SizeConfig.blockSizeVertical! * 60, child: Image.asset('assets/icons/BLM Matter.png', fit: BoxFit.cover,),),
+                        const SizedBox(height: 20,),
 
-                    Positioned.fill(
-                      top: SizeConfig.blockSizeVertical! * 45,
-                      child: Center(child: Text('Remembering the Victims', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.29, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
-                    ),
+                        const Text('Remembering the Victims', style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
-                    Positioned.fill(
-                      top: SizeConfig.blockSizeVertical! * 60,
-                      child: Center(
-                        child:  MiscBLMButtonTemplate(
+                        const SizedBox(height: 20,),
+
+                        MiscBLMButtonTemplate(
                           buttonText: 'Join',
-                          buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.29, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                          height: SizeConfig.blockSizeVertical! * 7.31,
-                          width: SizeConfig.blockSizeHorizontal! * 55,
+                          buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                          width: SizeConfig.screenWidth! / 1.8,
+                          height: 50,
                           buttonColor: const Color(0xff4EC9D4),
                           onPressed: (){
                             Navigator.pushNamed(context, '/blm/login');
                           },
                         ),
-                      ),
+
+                        const SizedBox(height: 10,),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            );
+          }
         ),
       ),
     );

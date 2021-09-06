@@ -43,119 +43,126 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
       valueListenable: image,
       builder: (_, File imageListener, __) => Scaffold(
         backgroundColor: const Color(0xffffffff),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          physics: const ClampingScrollPhysics(),
-          child: Column(
-            children: [
-              const SizedBox(height: 40,),
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraint){
+              return SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 40,),
 
-              Center(child: Text('Upload Photo', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
+                        const Center(child: const Text('Upload Photo', style: TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
 
-              const SizedBox(height: 40,),
+                        const SizedBox(height: 40,),
 
-              GestureDetector(
-                child: Container(
-                  height: SizeConfig.screenWidth! / 1.2,
-                  width: SizeConfig.screenWidth! / 1.2,
-                  color: const Color(0xffF9F8EE),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Stack(
-                            children: [
-                              Container(color: const Color(0xffffffff),),
+                        GestureDetector(
+                          child: Container(
+                            height: SizeConfig.screenWidth! / 1.2,
+                            width: SizeConfig.screenWidth! / 1.2,
+                            color: const Color(0xffF9F8EE),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Stack(
+                                      children: [
+                                        Container(color: const Color(0xffffffff),),
 
-                              imageListener.path != ''
-                              ? Align(alignment: Alignment.center, child: Container(decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: FileImage(imageListener),),),),)
-                              : Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
-                            ],
+                                        imageListener.path != ''
+                                        ? Align(alignment: Alignment.center, child: Container(decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: FileImage(imageListener),),),),)
+                                        : Align(alignment: Alignment.center, child: const Icon(Icons.add, color: const Color(0xffE3E3E3), size: 250,),),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                
+                                Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
-                      
-                      Expanded(
-                        child: Center(
-                          child: Text('A valid photo of yourself would be a better choice because it would be worth a thousand words.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                onTap: () async{
-                  var choice = await showDialog(context: (context), builder: (build) => const MiscBLMUploadFromDialog());
+                          onTap: () async{
+                            var choice = await showDialog(context: (context), builder: (build) => const MiscBLMUploadFromDialog());
 
-                  if(choice == null){
-                    choice = 0;
-                  }else{
-                    if(choice == 1){
-                      await openCamera();
-                    }else{
-                      await getImage();
-                    }
-                  }
-                },
-              ),
-
-              const SizedBox(height: 80,),
-
-              MiscBLMButtonTemplate(
-                buttonText: imageListener.path != '' ? 'Sign Up' : 'Speak Now',
-                buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
-                buttonColor: imageListener.path != '' ? const Color(0xff04ECFF) : const Color(0xff000000),
-                width: SizeConfig.screenWidth! / 2,
-                height: 45,
-                onPressed: () async{
-                  if(imageListener.path != ''){
-                    context.loaderOverlay.show();
-                    bool result = await apiBLMUploadPhoto(image: imageListener);
-                    context.loaderOverlay.hide();
-
-                    if(result){
-                      Navigator.pushReplacementNamed(context, '/home/blm');
-                    }else{
-                      await showDialog(
-                        context: context,
-                        builder: (_) => AssetGiffyDialog(
-                          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          buttonOkColor: const Color(0xffff0000),
-                          onlyOkButton: true,
-                          onOkButtonPressed: (){
-                            Navigator.pop(context, true);
+                            if(choice == null){
+                              choice = 0;
+                            }else{
+                              if(choice == 1){
+                                await openCamera();
+                              }else{
+                                await getImage();
+                              }
+                            }
                           },
                         ),
-                      );
-                    }
-                  }else{
-                    await showDialog(
-                      context: context,
-                      builder: (_) => AssetGiffyDialog(
-                        description: Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        buttonOkColor: const Color(0xffff0000),
-                        onlyOkButton: true,
-                        onOkButtonPressed: (){
-                          Navigator.pop(context, true);
-                        },
-                      ),
-                    );
-                  }
-                },
-              ),
 
-              const SizedBox(height: 10,),
-            ],
+                        Expanded(child: Container()),
+
+                        const SizedBox(height: 50),
+
+                        MiscBLMButtonTemplate(
+                          buttonText: imageListener.path != '' ? 'Sign Up' : 'Speak Now',
+                          buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                          buttonColor: imageListener.path != '' ? const Color(0xff04ECFF) : const Color(0xff000000),
+                          width: SizeConfig.screenWidth! / 2,
+                          height: 50,
+                          onPressed: () async{
+                            if(imageListener.path != ''){
+                              context.loaderOverlay.show();
+                              bool result = await apiBLMUploadPhoto(image: imageListener);
+                              context.loaderOverlay.hide();
+
+                              if(result){
+                                Navigator.pushReplacementNamed(context, '/home/blm');
+                              }else{
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    buttonOkColor: const Color(0xffff0000),
+                                    onlyOkButton: true,
+                                    onOkButtonPressed: (){
+                                      Navigator.pop(context, true);
+                                    },
+                                  ),
+                                );
+                              }
+                            }else{
+                              await showDialog(
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                  description: Text('Please upload a photo.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  buttonOkColor: const Color(0xffff0000),
+                                  onlyOkButton: true,
+                                  onOkButtonPressed: (){
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
+                              );
+                            }
+                          },
+                        ),
+
+                        const SizedBox(height: 20,),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
           ),
         ),
       ),

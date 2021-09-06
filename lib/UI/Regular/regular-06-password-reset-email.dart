@@ -9,7 +9,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
 class RegularPasswordResetEmail extends StatelessWidget{
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context){
@@ -26,177 +26,185 @@ class RegularPasswordResetEmail extends StatelessWidget{
         },
         child: Scaffold(
           body: SafeArea(
-            bottom: false,
-            child: SingleChildScrollView(
-              child: Container(
-                color: const Color(0xffffffff),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: SizeConfig.blockSizeVertical! * 3.65,),
-                        onPressed: (){
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-
-                    const SizedBox(height: 80,),
-
-                    Center(child: Text('Verify Email', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 5.28, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
-
-                    const SizedBox(height: 40,),
-
-                    Padding(
-                      padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 11.25, right: SizeConfig.blockSizeHorizontal! * 11.25),
-                      child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
-                    ),
-
-                    const SizedBox(height: 80,),
-
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                      child: TextFormField(
-                        controller: controller,
-                        keyboardType: TextInputType.emailAddress,
-                        cursorColor: const Color(0xff000000),
-                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                        decoration: InputDecoration(
-                          alignLabelWithHint: true,
-                          labelText: 'Email Address',
-                          labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
-                          focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff), width: 0,),),
-                          border: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 80,),
-
-                    MiscRegularButtonTemplate(
-                      buttonText: 'Next',
-                      buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
-                      buttonColor: const Color(0xff04ECFF),
-                      width: SizeConfig.screenWidth! / 2,
-                      height: 45,
-                      onPressed: () async{
-                        bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.text);
-
-                        if(controller.text == ''){
-                          await showDialog(
-                            context: context,
-                            builder: (_) => AssetGiffyDialog(
-                              description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              buttonOkColor: const Color(0xffff0000),
-                              onlyOkButton: true,
-                              onOkButtonPressed: (){
-                                Navigator.pop(context, true);
+            child: LayoutBuilder(
+              builder: (context, constraint){
+                return SingleChildScrollView(
+                  physics: ClampingScrollPhysics(),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                    child: IntrinsicHeight(
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: IconButton(
+                              icon: Icon(Icons.arrow_back, color: const Color(0xff000000), size: 35,),
+                              onPressed: (){
+                                Navigator.pop(context);
                               },
                             ),
-                          );
-                        }else if(!validEmail){
-                          await showDialog(
-                            context: context,
-                            builder: (_) => AssetGiffyDialog(
-                              description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              buttonOkColor: const Color(0xffff0000),
-                              onlyOkButton: true,
-                              onOkButtonPressed: (){
-                                Navigator.pop(context, true);
-                              },
-                            ),
-                          );
-                        }else{
-                          context.loaderOverlay.show();
+                          ),
 
-                          BranchUniversalObject buo = BranchUniversalObject(
-                            canonicalIdentifier: 'FacesbyPlaces',
-                            title: 'FacesbyPlaces Link',
-                            contentDescription: 'FacesbyPlaces link to the app',
-                            keywords: ['FacesbyPlaces', 'Link', 'App'],
-                            publiclyIndex: true,
-                            locallyIndex: true,
-                            contentMetadata: BranchContentMetaData()
-                            ..addCustomMetadata('custom_string', 'fbp-link')
-                            ..addCustomMetadata('reset-type', 'Regular'),
-                          );
+                          const SizedBox(height: 80,),
 
-                          BranchLinkProperties lp = BranchLinkProperties(channel: 'facebook', feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three'],);
-                          lp.addControlParam('url','https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+                          const Center(child: const Text('Verify Email', style: const TextStyle(fontSize: 42, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),),
 
-                          FlutterBranchSdk.setIdentity('alm-user-forgot-password');
-                          BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                          const SizedBox(height: 40,),
 
-                          context.loaderOverlay.hide();
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: const Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                          ),
 
-                          if(response.success){
-                            context.loaderOverlay.show();
-                            bool result = await apiRegularPasswordReset(email: controller.text, redirectLink: response.result);
-                            context.loaderOverlay.hide();
+                          const SizedBox(height: 80,),
 
-                            FlutterClipboard.copy('${response.result}').then((value) => print('Url copied!'));
-
-                            if(result == true){
-                              await showDialog(
-                                context: context,
-                                builder: (_) => AssetGiffyDialog(
-                                  description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  onlyOkButton: true,
-                                  onOkButtonPressed: (){
-                                    Navigator.pop(context, true);
-                                  },
-                                ),
-                              );
-                            }else{
-                              await showDialog(
-                                context: context,
-                                builder: (_) => AssetGiffyDialog(
-                                  description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  buttonOkColor: const Color(0xffff0000),
-                                  onlyOkButton: true,
-                                  onOkButtonPressed: (){
-                                    Navigator.pop(context, true);
-                                  },
-                                ),
-                              );
-                            }
-                          }else{
-                            await showDialog(
-                              context: context,
-                              builder: (_) => AssetGiffyDialog(
-                                description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                buttonOkColor: const Color(0xffff0000),
-                                onlyOkButton: true,
-                                onOkButtonPressed: (){
-                                  Navigator.pop(context, true);
-                                },
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: TextFormField(
+                              controller: controller,
+                              keyboardType: TextInputType.emailAddress,
+                              cursorColor: const Color(0xff000000),
+                              style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
+                              decoration: InputDecoration(
+                                alignLabelWithHint: true,
+                                labelText: 'Email Address',
+                                labelStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xffffffff), width: 0,),),
+                                border: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
                               ),
-                            );
-                          }
-                        }
-                      },
+                            ),
+                          ),
+
+                          Expanded(child: Container()),
+
+                          const SizedBox(height: 50,),
+
+                          MiscRegularButtonTemplate(
+                            buttonText: 'Next',
+                            buttonTextStyle: const TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),
+                            buttonColor: const Color(0xff04ECFF),
+                            width: SizeConfig.screenWidth! / 2,
+                            height: 50,
+                            onPressed: () async{
+                              bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(controller.text);
+
+                              if(controller.text == ''){
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    buttonOkColor: const Color(0xffff0000),
+                                    onlyOkButton: true,
+                                    onOkButtonPressed: (){
+                                      Navigator.pop(context, true);
+                                    },
+                                  ),
+                                );
+                              }else if(!validEmail){
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                    description: Text('Invalid email address. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    buttonOkColor: const Color(0xffff0000),
+                                    onlyOkButton: true,
+                                    onOkButtonPressed: (){
+                                      Navigator.pop(context, true);
+                                    },
+                                  ),
+                                );
+                              }else{
+                                context.loaderOverlay.show();
+
+                                BranchUniversalObject buo = BranchUniversalObject(
+                                  canonicalIdentifier: 'FacesbyPlaces',
+                                  title: 'FacesbyPlaces Link',
+                                  contentDescription: 'FacesbyPlaces link to the app',
+                                  keywords: ['FacesbyPlaces', 'Link', 'App'],
+                                  publiclyIndex: true,
+                                  locallyIndex: true,
+                                  contentMetadata: BranchContentMetaData()
+                                  ..addCustomMetadata('custom_string', 'fbp-link')
+                                  ..addCustomMetadata('reset-type', 'Regular'),
+                                );
+
+                                BranchLinkProperties lp = BranchLinkProperties(channel: 'facebook', feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three'],);
+                                lp.addControlParam('url','https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+
+                                FlutterBranchSdk.setIdentity('alm-user-forgot-password');
+                                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+
+                                context.loaderOverlay.hide();
+
+                                if(response.success){
+                                  context.loaderOverlay.show();
+                                  bool result = await apiRegularPasswordReset(email: controller.text, redirectLink: response.result);
+                                  context.loaderOverlay.hide();
+
+                                  FlutterClipboard.copy('${response.result}').then((value) => print('Url copied!'));
+
+                                  if(result == true){
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => AssetGiffyDialog(
+                                        description: Text('An email has been sent to ${controller.text} containing instructions for resetting your password.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        onlyOkButton: true,
+                                        onOkButtonPressed: (){
+                                          Navigator.pop(context, true);
+                                        },
+                                      ),
+                                    );
+                                  }else{
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => AssetGiffyDialog(
+                                        description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        buttonOkColor: const Color(0xffff0000),
+                                        onlyOkButton: true,
+                                        onOkButtonPressed: (){
+                                          Navigator.pop(context, true);
+                                        },
+                                      ),
+                                    );
+                                  }
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => AssetGiffyDialog(
+                                      description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      buttonOkColor: const Color(0xffff0000),
+                                      onlyOkButton: true,
+                                      onOkButtonPressed: (){
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
+                                }
+                              }
+                            },
+                          ),
+                          
+                          const SizedBox(height: 20),
+                        ],
+                      ),
                     ),
-                    
-                    const SizedBox(height: 20),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              }  
             ),
           ),
         ),
