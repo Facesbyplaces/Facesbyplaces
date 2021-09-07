@@ -246,6 +246,85 @@ body {
   }
 }
 
+.terms {
+  float: left;
+  width: 100%;
+  background: #ffffff;
+  .title-container {
+    float: left;
+    width: 100%;
+    padding: 9% 0 4%;
+    background: #ffffff;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    .title {
+      float: left;
+      color: #3b3b3b;
+      width: 100%;
+      font-size: 2em;
+      text-align: center;
+    }
+    .title-image-container {
+      float: left;
+      width: 20%;
+      height: 20px;
+      margin: 0px 0 0 40%;
+      text-align: center;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-image: url(asset_path("title_border.png"));
+    }
+  }
+  .body {
+    float: left;
+    width: 80%;
+    padding: 0 10%;
+    .title,
+    .main-text {
+      float: left;
+      width: 100%;
+      font-size: 1em;
+      color: #000000;
+      text-align: left;
+      margin: 40px 0;
+    }
+    .footer-title {
+      float: left;
+      width: 100%;
+      font-size: 1em;
+      color: #000000;
+      text-align: center;
+      margin: 40px 0 0;
+      padding-top: 5%;
+    }
+    .main-text {
+      font-size: 0.8em;
+      margin: 10px 0;
+      line-height: 20px;
+    }
+    .sections:link {
+      text-decoration: none;
+      color: #000000;
+    }
+    .sections:visited {
+      text-decoration: none;
+    }
+    .sections:hover {
+      text-decoration: underline;
+    }
+
+    .sections:active {
+      text-decoration: underline;
+    }
+    .list-margin {
+      margin: 10px;
+      line-height: 20px;
+    }
+  }
+}
+
 @media only screen and (max-width: 800px) {
   .row {
     .col,
