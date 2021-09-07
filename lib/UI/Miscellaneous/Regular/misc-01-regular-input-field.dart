@@ -121,7 +121,7 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: 'Relationship',
-        labelStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+        labelStyle: TextStyle(fontSize: 22, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
         focusedBorder: const UnderlineInputBorder(borderSide: const BorderSide(color: const Color(0xff000000),),),
       ),
       child: DropdownButtonHideUnderline(

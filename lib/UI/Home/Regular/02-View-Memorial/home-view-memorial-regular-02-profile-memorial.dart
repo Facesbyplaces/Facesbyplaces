@@ -293,11 +293,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 decoration: const BoxDecoration(borderRadius: const BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)), color: const Color(0xffffffff),),
                                                 child: Column(
                                                   children: [
-                                                    const SizedBox(height: 120,),
+                                                    const SizedBox(height: 150,),
 
                                                     Center(
                                                       child: Text(profile.data!.almMemorial.showMemorialName,
-                                                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),
+                                                        style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),
                                                         textAlign: TextAlign.center,
                                                         overflow: TextOverflow.clip,
                                                         maxLines: 5,
@@ -307,7 +307,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                     const SizedBox(height: 20,),
 
                                                     TextButton.icon(
-                                                      label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: const Color(0xff000000),),),
+                                                      label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
                                                       icon: const CircleAvatar(radius: 15, backgroundColor: const Color(0xffE67E22), child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 18,),),
                                                       onPressed: (){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
@@ -407,7 +407,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             return Container(
                                                               alignment: Alignment.center,
                                                               padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: const Color(0xff000000),),),
+                                                              child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription, textAlign: TextAlign.center,style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                             );
                                                           }else{
                                                             return Container(height: 0,);
@@ -435,7 +435,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                             child: Padding(
                                                               padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                                                               child: MaterialButton(
-                                                                child: Text(joinListener ? 'Unjoin' : 'Join', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffffffff),),),
+                                                                child: Text(joinListener ? 'Unjoin' : 'Join', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                                 color: joinListener ? const Color(0xff888888) : const Color(0xff04ECFF),
                                                                 minWidth: SizeConfig.screenWidth! / 2,
                                                                 shape: const StadiumBorder(),
@@ -466,8 +466,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                     await showDialog(
                                                                       context: context,
                                                                       builder: (_) => AssetGiffyDialog(
-                                                                        description: Text(join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center,),
-                                                                        title: const Text('Success', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                                        description: Text(join.value != true ? 'Successfully unfollowed the page. You will no longer receive notifications from this page.' : 'Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                                                        title: const Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                                         onlyOkButton: true,
@@ -480,8 +480,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                     await showDialog(
                                                                       context: context,
                                                                       builder: (_) => AssetGiffyDialog(
-                                                                        title: const Text('Error', textAlign: TextAlign.center, style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center,),
+                                                                        title: const Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                                                                        description: const Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
                                                                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                                                         entryAnimation: EntryAnimation.DEFAULT,
                                                                         buttonOkColor: const Color(0xffff0000),
@@ -537,7 +537,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                                               const SizedBox(width: 20,),
 
-                                                              const Text('Roman Catholic', style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                                                              const Text('Roman Catholic', style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                             ],
                                                           ),
 
@@ -549,7 +549,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                                               const SizedBox(width: 20,),
 
-                                                              Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsBirthPlace, style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                                                              Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsBirthPlace, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                             ],
                                                           ),
 
@@ -561,7 +561,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                                               const SizedBox(width: 20,),
 
-                                                              Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDob, style: const TextStyle(fontSize: 14, color: const Color(0xff000000)),),
+                                                              Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDob, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                             ],
                                                           ),
 
@@ -573,7 +573,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                                               const SizedBox(width: 20,),
 
-                                                              Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsRip, style: const TextStyle(fontSize: 14, color: const Color(0xff000000),),),
+                                                              Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsRip, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                             ],
                                                           ),
 
@@ -586,7 +586,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                               const SizedBox(width: 20,),
 
                                                               GestureDetector(
-                                                                child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 14, color: const Color(0xff3498DB),),),
+                                                                child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCemetery, style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff3498DB),),),
                                                                 onTap: () async{
                                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMaps(latitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLatitude, longitude: profile.data!.almMemorial.showMemorialDetails.showMemorialLongitude, isMemorial: true, memorialName: profile.data!.almMemorial.showMemorialName, memorialImage: profile.data!.almMemorial.showMemorialProfileImage,)));
                                                                 },
@@ -609,7 +609,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                 children: [
                                                                   Text('${profile.data!.almMemorial.showMemorialPostsCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
 
-                                                                  const Text('Post', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xffaaaaaa),),),
+                                                                  const Text('Post', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
                                                                 ],
                                                               ),
                                                               onTap: (){
@@ -626,7 +626,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                 children: [
                                                                   Text('${profile.data!.almMemorial.showMemorialFamilyCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
 
-                                                                  const Text('Family', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xffaaaaaa),),),
+                                                                  const Text('Family', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
                                                                 ],
                                                               ),
                                                               onTap: (){
@@ -643,7 +643,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                 children: [
                                                                   Text('${profile.data!.almMemorial.showMemorialFriendsCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
 
-                                                                  const Text('Friends', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xffaaaaaa),),),
+                                                                  const Text('Friends', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
                                                                 ],
                                                               ),
                                                               onTap: (){
@@ -660,7 +660,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                                 children: [
                                                                   Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
 
-                                                                  const Text('Joined', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: const Color(0xffaaaaaa),),),
+                                                                  const Text('Joined', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
                                                                 ],
                                                               ),
                                                               onTap: (){
@@ -683,7 +683,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                         Container(
                                                           padding: const EdgeInsets.only(left: 20.0),
                                                           alignment: Alignment.centerLeft,
-                                                          child: const Text('Post', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xff000000),),),
+                                                          child: const Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                                         ),
 
                                                         const SizedBox(height: 20),
@@ -841,8 +841,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                               child: Row(
                                                 children: [
                                                   TextButton.icon(
-                                                    icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff),),
-                                                    label: const Text('Back', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: const Color(0xffffffff),),),
+                                                    icon: const Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35),
+                                                    label: const Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                     onPressed: (){ // BACK BUTTON
                                                       Navigator.pop(context, join.value);
                                                     },
@@ -977,7 +977,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 latitude: posts[i].latitude,
                                                 longitude: posts[i].longitude,
                                                 contents: [
-                                                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                                                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                                                   posts[i].imagesOrVideos.isNotEmpty
                                                   ? Column(
@@ -1154,7 +1154,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                       const SizedBox(height: 45,),
 
-                                      const Center(child: const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),),
+                                      const Center(child: const Text('Post is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
 
                                       const SizedBox(height: 40,),
                                     ],

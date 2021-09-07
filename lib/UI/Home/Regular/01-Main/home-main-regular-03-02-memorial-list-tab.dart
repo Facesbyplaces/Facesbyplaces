@@ -94,14 +94,14 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
             Expanded(
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('My Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                child: Text('My Family', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
               ),
             ),
             Expanded(
               child: GestureDetector(
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Text('Create', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                  child: Text('Create', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                 ),
                 onTap: (){
                   Navigator.pushNamed(context, '/home/regular/create-memorial');
@@ -118,9 +118,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     finalMemorials.add(
       Container(
         height: 80,
-        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         color: const Color(0xffeeeeee),
-        child: Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
+        child: Align(alignment: Alignment.centerLeft, child: Text('My Friends', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),),
       ),
     );
   }
@@ -293,7 +293,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
                 const SizedBox(height: 45,),
 
-                Text('Memorial is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
+                Text('Memorial is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

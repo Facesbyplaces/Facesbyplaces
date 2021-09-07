@@ -98,8 +98,8 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                     backgroundColor: const Color(0xff888888),
                     foregroundImage: const AssetImage('assets/icons/app-icon.png'),
                   ),
-                  title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-                  subtitle: Text(widget.timeCreated, maxLines: 1, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.56, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),),
+                  title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                  subtitle: Text(widget.timeCreated, maxLines: 1, style: TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xffB1B1B1),),),
                   trailing: MiscRegularDropDownTemplate(postId: widget.postId, likePost: likePostListener, likesCount: likesCount, reportType: 'Post', pageType: widget.pageType, pageName: widget.memorialName),
                   onTap: (){
                     if(widget.pageType == 'Memorial'){
@@ -177,7 +177,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                       icon: likePostListener == true
                       ? const FaIcon(FontAwesomeIcons.solidHeart, color: const Color(0xffE74C3C),)
                       : const FaIcon(FontAwesomeIcons.heart, color: const Color(0xff888888),),
-                      label: Text('$likesCount', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      label: Text('$likesCount', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                       onPressed: () async{
                         likePost.value = !likePost.value;
 
@@ -195,7 +195,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
 
                     TextButton.icon(
                       icon: const FaIcon(FontAwesomeIcons.solidComment, color: const Color(0xff4EC9D4),),
-                      label: Text('$commentsCountListener', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      label: Text('$commentsCountListener', style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                       onPressed: () async{
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: widget.postId)));
                       },
@@ -240,8 +240,8 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                           await showDialog(
                             context: context,
                             builder: (_) => AssetGiffyDialog(
-                              description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+                              description: Text('Successfully shared the link.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                               entryAnimation: EntryAnimation.DEFAULT,
                               onlyOkButton: true,

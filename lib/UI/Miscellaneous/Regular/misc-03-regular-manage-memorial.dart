@@ -74,13 +74,13 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
               backgroundColor: const Color(0xff888888),
               foregroundImage: const AssetImage('assets/icons/app-icon.png'),
             ),
-            title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
-            subtitle: Text(widget.description, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
+            title: Text(widget.memorialName, overflow: TextOverflow.ellipsis, maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+            subtitle: Text(widget.description, style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff888888),),),
             trailing: ((){
               if(widget.managed == true || widget.famOrFriends == true){
                 return MaterialButton(
                   shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
-                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                  child: Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                   splashColor: const Color(0xff4EC9D4),
                   textColor: const Color(0xffffffff),
                   color: const Color(0xff04ECFF),
@@ -91,8 +91,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: false,
@@ -121,8 +121,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
@@ -135,8 +135,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
@@ -153,7 +153,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
               }else if(followButtonListener == true){
                 return MaterialButton(
                   shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff04ECFF)),),
-                  child: Text('Leave', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                  child: Text('Leave', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                   splashColor: const Color(0xff4EC9D4),
                   textColor: const Color(0xffffffff),
                   color: const Color(0xff04ECFF),
@@ -164,8 +164,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     bool confirmResult = await showDialog(
                       context: context,
                       builder: (_) => AssetGiffyDialog(
-                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                        description: Text('Are you sure you want to leave this page?', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                        title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                         entryAnimation: EntryAnimation.DEFAULT,
                         onlyOkButton: false,
@@ -189,8 +189,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
@@ -203,8 +203,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                            description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),
@@ -221,7 +221,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
               }else{
                 return MaterialButton(
                   shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5)), side: const BorderSide(color: const Color(0xff4EC9D4)),),
-                  child: Text('Join', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold'),),
+                  child: Text('Join', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold'),),
                   splashColor: const Color(0xff4EC9D4),
                   textColor: const Color(0xff4EC9D4),
                   color: const Color(0xffffffff),
@@ -239,8 +239,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle( fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular', ),),
-                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                          description: Text('Successfully followed the page. You will receive notifications from this page.', textAlign: TextAlign.center, style: TextStyle( fontSize: 24, fontFamily: 'NexaRegular', ),),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           entryAnimation: EntryAnimation.DEFAULT,
                           onlyOkButton: true,
@@ -253,8 +253,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+                          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),

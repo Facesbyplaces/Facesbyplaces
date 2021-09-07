@@ -32,16 +32,10 @@ class HomeRegularReport extends StatelessWidget{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            centerTitle: true,
-            title: Row(
-              children: [
-                Text('Report', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-
-                Spacer(),
-              ],
-            ),
+            centerTitle: false,
+            title: Text('Report', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -54,7 +48,7 @@ class HomeRegularReport extends StatelessWidget{
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Inform us about what happened.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),),
+                  child: Text('Inform us about what happened.', style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfF000000),),),
                 ),
 
                 const SizedBox(height: 25,),
@@ -63,7 +57,7 @@ class HomeRegularReport extends StatelessWidget{
                   key: _key1,
                   labelText: 'Subject',
                   type: TextInputType.text,
-                  labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
+                  labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
                 ),
 
                 const SizedBox(height: 25,),
@@ -71,24 +65,24 @@ class HomeRegularReport extends StatelessWidget{
                 MiscRegularInputFieldMultiTextTemplate(
                   key: _key2,
                   labelText: 'Body',
-                  labelTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
+                  labelTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xfFB1B1B1),),
                 ),
 
                 const SizedBox(height: 50,),
 
                 MiscRegularButtonTemplate(
-                  buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
+                  buttonTextStyle: TextStyle(fontSize: 24, color: const Color(0xffffffff), fontFamily: 'NexaBold',),
                   buttonColor: const Color(0xff04ECFF),
                   width: SizeConfig.screenWidth! / 2,
                   buttonText: 'Report',
-                  height: 45,
+                  height: 50,
                   onPressed: () async{
                     if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                       await showDialog(
                         context: context,
                         builder: (_) => AssetGiffyDialog(
-                          description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                          description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                           entryAnimation: EntryAnimation.DEFAULT,
                           buttonOkColor: const Color(0xffff0000),
@@ -107,8 +101,8 @@ class HomeRegularReport extends StatelessWidget{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular'),),
+                            description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             onlyOkButton: true,
@@ -122,8 +116,8 @@ class HomeRegularReport extends StatelessWidget{
                         await showDialog(
                           context: context,
                           builder: (_) => AssetGiffyDialog(
-                            description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular')),
+                            description: Text('Please complete the form before submitting.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular')),
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             entryAnimation: EntryAnimation.DEFAULT,
                             buttonOkColor: const Color(0xffff0000),

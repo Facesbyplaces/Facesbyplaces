@@ -103,8 +103,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
       await showDialog(
         context: context, 
         builder: (_) => AssetGiffyDialog(
-          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-          title: Text('Error',  textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular',),),
+          description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+          title: Text('Error',  textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
           entryAnimation: EntryAnimation.DEFAULT,
           buttonOkColor: const Color(0xffff0000),
@@ -151,7 +151,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 valueListenable: isGuestLoggedIn,
                 builder: (_, bool isGuestLoggedInListener, __) => Scaffold(
                   appBar: AppBar(
-                    title: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                    title: Text('FacesByPlaces.com', style: TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
                     backgroundColor: Color(0xff4EC9D4),
                     centerTitle: true,
                     leading: FutureBuilder<APIRegularShowProfileInformation>(
@@ -195,40 +195,32 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                       },
                     ),
                     actions: [
-                      GestureDetector(
-                        child: Container(
-                          height: SizeConfig.blockSizeVertical! * 4.04,
-                          width: SizeConfig.blockSizeHorizontal! * 12.18,
-                          padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal! * 5),
-                          child: Image.asset('assets/icons/zoom.png',),
-                        ),
-                        onTap: (){
+                      IconButton(
+                        onPressed: (){
                           Navigator.pushNamed(context, '/home/regular/search');
                         },
+                        icon: Image.asset('assets/icons/zoom.png',),
                       ),
                     ],
                   ),
-                  body: SafeArea(
-                    bottom: false,
-                    child: Stack(
-                      children: [
-                        SingleChildScrollView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
-                        ),
+                  body: Stack(
+                    children: [
+                      SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        child: Container(height: SizeConfig.screenHeight, child: const MiscRegularBackgroundTemplate(image: const AssetImage('assets/icons/background2.png'),),),
+                      ),
 
-                        Container(
-                          child: ((){
-                            switch (toggleBottomListener){
-                              case 0: return HomeRegularFeedTab();
-                              case 1: return HomeRegularManageTab();
-                              case 2: return HomeRegularPostTab();
-                              case 3: return HomeRegularNotificationsTab();
-                            }
-                          }()),
-                        ),
-                      ],
-                    ),
+                      Container(
+                        child: ((){
+                          switch (toggleBottomListener){
+                            case 0: return HomeRegularFeedTab();
+                            case 1: return HomeRegularManageTab();
+                            case 2: return HomeRegularPostTab();
+                            case 3: return HomeRegularNotificationsTab();
+                          }
+                        }()),
+                      ),
+                    ],
                   ),
                   floatingActionButton: FloatingActionButton(
                     child: const Icon(Icons.qr_code, color: const Color(0xff4EC9D4),),
@@ -238,114 +230,116 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     },
                   ),
                   floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-                  bottomNavigationBar: SingleChildScrollView( // TOGGLE ICONS
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 65,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffffffff),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: const Color(0xff888888).withOpacity(0.5),
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                            offset: const Offset(0, 0),
-                          ),
-                        ],
-                      ),
-                      child: ToggleButtons(
-                        selectedColor: const Color(0xff04ECFF),
-                        color: const Color(0xffB1B1B1),
-                        isSelected: bottomTabListener,
-                        fillColor: Colors.transparent,
-                        renderBorder: false,
-                        borderWidth: 0,
-                        children: [
-                          Container(
-                            width: SizeConfig.screenWidth! / 4,
-                            child: Column(
-                              children: [
-                                const Icon(MdiIcons.fire,),
-
-                                const SizedBox(height: 5),
-
-                                Text('Feed', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaLight'),),
-                              ],
+                  bottomNavigationBar: SafeArea(
+                    child: SingleChildScrollView( // TOGGLE ICONS
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 65,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffffffff),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: const Color(0xff888888).withOpacity(0.5),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 0),
                             ),
-                          ),
-                          Container(
-                            width: SizeConfig.screenWidth! / 4,
-                            child: Column(
-                              children: [
-                                const Icon(MdiIcons.graveStone),
+                          ],
+                        ),
+                        child: ToggleButtons(
+                          selectedColor: const Color(0xff04ECFF),
+                          color: const Color(0xffB1B1B1),
+                          isSelected: bottomTabListener,
+                          fillColor: Colors.transparent,
+                          renderBorder: false,
+                          borderWidth: 0,
+                          children: [
+                            Container(
+                              width: SizeConfig.screenWidth! / 4,
+                              child: Column(
+                                children: [
+                                  const Icon(MdiIcons.fire,),
 
-                                const SizedBox(height: 5),
+                                  const SizedBox(height: 5),
 
-                                Text('Memorials', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaLight'),),
-                              ],
+                                  Text('Feed', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: SizeConfig.screenWidth! / 4,
-                            child: Column(
-                              children: [
-                                const Icon(MdiIcons.post),
+                            Container(
+                              width: SizeConfig.screenWidth! / 4,
+                              child: Column(
+                                children: [
+                                  const Icon(MdiIcons.graveStone),
 
-                                const SizedBox(height: 5),
+                                  const SizedBox(height: 5),
 
-                                Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaLight',),),
-                              ],
+                                  Text('Memorials', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight'),),
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: SizeConfig.screenWidth! / 4,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Column(
-                                  children: <Widget>[
-                                    const Icon(MdiIcons.heart),
+                            Container(
+                              width: SizeConfig.screenWidth! / 4,
+                              child: Column(
+                                children: [
+                                  const Icon(MdiIcons.post),
 
-                                    const SizedBox(height: 5),
+                                  const SizedBox(height: 5),
 
-                                    Text('Notification', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaLight',),),
-                                  ],
-                                ),
-                                Positioned(
-                                  top: 0,
-                                  right: 20,
-                                  child: CircleAvatar(
-                                    radius: 12,
-                                    backgroundColor: const Color(0xffff0000),
-                                    child: isGuestLoggedInListener == true
-                                    ? const Text('0', style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),)
-                                    : Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),),
+                                  Text('Post', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: SizeConfig.screenWidth! / 4,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Column(
+                                    children: <Widget>[
+                                      const Icon(MdiIcons.heart),
+
+                                      const SizedBox(height: 5),
+
+                                      Text('Notification', style: TextStyle(fontSize: 18, fontFamily: 'NexaLight',),),
+                                    ],
                                   ),
-                                )
-                              ],
+                                  Positioned(
+                                    top: 0,
+                                    right: 20,
+                                    child: CircleAvatar(
+                                      radius: 12,
+                                      backgroundColor: const Color(0xffff0000),
+                                      child: isGuestLoggedInListener == true
+                                      ? const Text('0', style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),)
+                                      : Text(unreadNotificationListener > 99 ? '99+' : '$unreadNotificationListener', style: const TextStyle(color: const Color(0xffffffff), fontSize: 12),),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                        onPressed: (int index) async{
-                          toggleBottom.value = index;
+                          ],
+                          onPressed: (int index) async{
+                            toggleBottom.value = index;
 
-                          for(int i = 0; i < bottomTabListener.length; i++){
-                            if(i == toggleBottom.value){
-                              bottomTabListener[i] = true;
-                            }else{
-                              bottomTabListener[i] = false;
+                            for(int i = 0; i < bottomTabListener.length; i++){
+                              if(i == toggleBottom.value){
+                                bottomTabListener[i] = true;
+                              }else{
+                                bottomTabListener[i] = false;
+                              }
                             }
-                          }
 
-                          if(toggleBottom.value == 3){
-                            if(isGuestLoggedInListener != true){
-                              await apiRegularReadUnreadNotifications();
-                              unreadNotifications.value = 0;
-                              getUnreadNotifications();
+                            if(toggleBottom.value == 3){
+                              if(isGuestLoggedInListener != true){
+                                await apiRegularReadUnreadNotifications();
+                                unreadNotifications.value = 0;
+                                getUnreadNotifications();
+                              }
                             }
-                          }
-                        },
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -362,7 +356,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               physics: ClampingScrollPhysics(),
                               child: Column(
                                 children: [
-                                  const SizedBox(height: 20),
+                                  const SizedBox(height: 50),
 
                                   GestureDetector(
                                     child: manageDrawer.data!.showProfileInformationImage != ''
@@ -426,13 +420,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   Text(
                                     manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                                    style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                                   ),
 
                                   const SizedBox(height: 45),
 
                                   GestureDetector(
-                                    child: Text('Home', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
@@ -441,7 +435,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 25),
 
                                   GestureDetector(
-                                    child: Text('Create Memorial Page', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Create Memorial Page', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: (){
                                       Navigator.pop(context);
                                       Navigator.pushNamed(context, '/home/regular/create-memorial');
@@ -451,7 +445,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Notification Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Notification Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       context.loaderOverlay.show();
                                       APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
@@ -465,7 +459,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Profile Settings', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Profile Settings', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                                     },
@@ -474,7 +468,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   const SizedBox(height: 20),
 
                                   GestureDetector(
-                                    child: Text('Log Out', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                                    child: Text('Log Out', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                                     onTap: () async{
                                       bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log Out', content: 'Are you sure you want to logout from this account?', confirmColor_1: const Color(0xff000000), confirmColor_2: const Color(0xff888888),));
 
@@ -490,8 +484,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                           await showDialog(
                                             context: context,
                                             builder: (_) => AssetGiffyDialog(
-                                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
-                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
+                                              description: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
                                               image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                               entryAnimation: EntryAnimation.DEFAULT,
                                               buttonOkColor: const Color(0xffff0000),
@@ -505,6 +499,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                       }
                                     },
                                   ),
+
+                                  const SizedBox(height: 50),
                                 ],
                               ),
                             ),
@@ -528,7 +524,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 Expanded(child: Container(),),
 
                                 GestureDetector(
-                                  child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular', color:  Color(0xffFFFFFF),), textAlign: TextAlign.center,),
+                                  child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color:  Color(0xffFFFFFF),), textAlign: TextAlign.center,),
                                   onTap: (){
                                     Navigator.pop(context);
                                   },
@@ -544,7 +540,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                                       const SizedBox(width: 20),
 
-                                      Text('Go back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
+                                      Text('Go back', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: Color(0xffFFFFFF),),),
                                     ],
                                   ),
                                   onTap: (){
@@ -581,12 +577,12 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                             const SizedBox(height: 20,),
 
-                            Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+                            Text('Guest User', textAlign: TextAlign.center, style: TextStyle(fontSize: 28, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
 
                             const SizedBox(height: 45,),
 
                             GestureDetector(
-                              child: Text('Home', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                              child: Text('Home', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                               onTap: (){
                                 Navigator.pop(context);
                               },
@@ -595,7 +591,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             const SizedBox(height: 25,),
 
                             GestureDetector(
-                              child: Text('Sign up or Sign in', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
+                              child: Text('Sign up or Sign in', style: TextStyle(fontSize: 26, fontFamily: 'NexaLight', color: const Color(0xffffffff),),),
                               onTap: () async{
                                 final sharedPrefs = await SharedPreferences.getInstance();
 

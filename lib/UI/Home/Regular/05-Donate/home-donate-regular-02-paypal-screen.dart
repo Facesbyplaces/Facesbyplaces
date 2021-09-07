@@ -34,16 +34,10 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
           backgroundColor: const Color(0xffECF0F1),
           appBar: AppBar(
             backgroundColor: const Color(0xff04ECFF),
-            title: Row(
-              children: [
-                Text('Paypal', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
-
-                Spacer(),
-              ],
-            ),
-            centerTitle: true,
+            centerTitle: false,
+            title: Text('Paypal', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.52,),
+              icon: Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
               onPressed: (){
                 Navigator.pop(context);
               },

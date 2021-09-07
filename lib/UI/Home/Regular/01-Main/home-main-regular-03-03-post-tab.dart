@@ -189,7 +189,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                 latitude: posts[i].latitude,
                 longitude: posts[i].longitude,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  // Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
 
                   posts[i].imagesOrVideos.isNotEmpty
                   ? Column(
@@ -368,7 +369,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
                 const SizedBox(height: 45,),
 
-                const Text('Post is empty', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xffB1B1B1),),),
+                const Text('Post is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
               ],

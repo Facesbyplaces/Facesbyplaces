@@ -48,15 +48,16 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
           EasyRichTextPattern(
             targetString: '$actor',
             matchOption: 'first',
-            style: TextStyle(color: const Color(0xff000000), fontWeight: FontWeight.bold),
+            style: TextStyle(color: const Color(0xff000000), fontFamily: 'NexaBold',),
             recognizer: TapGestureRecognizer()
             ..onTap = (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: actorId, accountType: actorAccountType)));
             }
           ),
         ],
+        defaultStyle: TextStyle(fontFamily: 'NexaRegular', fontSize: 18, color: const Color(0xff000000),),
       ),
-      subtitle: Text(dateCreated, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'RobotoLight', color: const Color(0xff000000),),),
+      subtitle: Text(dateCreated, style: TextStyle(fontSize: 16, fontFamily: 'RobotoLight', color: const Color(0xff000000),),),
       onTap: () async{
         if(notificationType == 'Memorial'){
           context.loaderOverlay.show();

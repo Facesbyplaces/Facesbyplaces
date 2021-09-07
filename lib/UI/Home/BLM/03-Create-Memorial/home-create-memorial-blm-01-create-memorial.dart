@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'home-create-memorial-blm-02-create-memorial.dart';
 import 'home-create-memorial-blm-04-locate-map.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -41,7 +41,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
-  ValueNotifier<GeoPoint?> location = ValueNotifier(null);
+  ValueNotifier<LatLng?> location = ValueNotifier(null);
   DateTime dob = DateTime(1000);
   DateTime rip = DateTime.now();
 
@@ -61,7 +61,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
         },
         child: ValueListenableBuilder(
           valueListenable: location,
-          builder: (_, GeoPoint? locationListener, __) => Scaffold(
+          builder: (_, LatLng? locationListener, __) => Scaffold(
             appBar: AppBar(
               title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
               backgroundColor: const Color(0xff04ECFF),
@@ -100,10 +100,12 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                           suffixIcon: IconButton(
                             icon: Icon(Icons.add_location), 
                             onPressed: () async{
-                              var p = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorialLocateMap()));
+                              var memorialLocation = await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreateMemorialLocateMap()));
 
-                              if(p != null){
-                                location.value = p as GeoPoint;
+                              if(memorialLocation != null){
+                                location.value = memorialLocation;
+                                print('The location latitude is ${location.value!.latitude}');
+                                print('The location longitude is ${location.value!.longitude}');
                               }
                             },
                           ),

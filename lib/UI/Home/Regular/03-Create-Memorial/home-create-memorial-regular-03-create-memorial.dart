@@ -74,7 +74,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
           valueListenable: backgroundImageToggle,
           builder: (_, int backgroundImageToggleListener, __) => Scaffold(
             appBar: AppBar(
-              title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
+              title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xffffffff),),),
               backgroundColor: const Color(0xff04ECFF),
               centerTitle: true,
               leading: IconButton(
@@ -95,7 +95,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     children: [
                       const SizedBox(height: 20,),
                       
-                      Text('Upload or Select an Image', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000))),
+                      Text('Upload or Select an Image', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000))),
 
                       const SizedBox(height: 20,),
 
@@ -166,11 +166,11 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                      Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
 
                       const SizedBox(height: 40,),
 
-                      Text('Choose Background', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      Text('Choose Background', style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                       
                       const SizedBox(height: 20,),
                       
@@ -243,15 +243,15 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       const SizedBox(height: 20,),
 
-                      Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
+                      Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),),
 
                       const SizedBox(height: 80,),
 
                       MiscRegularButtonTemplate(
-                        buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
+                        buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaRegular', color: const Color(0xffFFFFFF),),
                         buttonText: 'Create my Memorial Page',
                         width: 150,
-                        height: 45,
+                        height: 50,
                         onPressed: () async{
                           if(backgroundImageToggle.value == 0 || backgroundImageToggle.value == 1){
                             final ByteData bytes = await rootBundle.load(backgroundImages[backgroundImageToggle.value]);

@@ -185,9 +185,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
       builder: (_, bool showFloatingButtonListener, __) => ValueListenableBuilder(
         valueListenable: postCount,
         builder: (_, int postCountListener, __) => Scaffold(
-          body: SafeArea(
-            bottom: false,
-            child: RefreshIndicator(
+          body: RefreshIndicator(
               onRefresh: onRefresh,
               child: CustomScrollView(
                 physics: const ClampingScrollPhysics(),
@@ -271,7 +269,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                             Center(
                                               child: Text(profile.data!.almMemorial.showMemorialName,
-                                                style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),
+                                                style: const TextStyle(fontSize: 26, fontFamily: 'NexaBold', color: const Color(0xff000000),),
                                                 textAlign: TextAlign.center,
                                                 overflow: TextOverflow.clip,
                                                 maxLines: 5,
@@ -281,7 +279,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             const SizedBox(height: 20,),
 
                                             TextButton.icon(
-                                              label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
+                                              label: Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),),
                                               icon: const CircleAvatar(radius: 15, backgroundColor: const Color(0xffE67E22), child: const Icon(Icons.card_giftcard, color: const Color(0xffffffff), size: 18,),),
                                               onPressed: (){
                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularConnectionList(memorialId: widget.memorialId, newToggle: 2)));
@@ -381,7 +379,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                       alignment: Alignment.center,
                                                       child: Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDescription,
                                                         textAlign: TextAlign.center,
-                                                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                                        style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                                       ),
                                                     );
                                                   }else{
@@ -403,7 +401,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     child: Padding(
                                                       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                                                       child: MaterialButton(
-                                                        child: Text('Manage', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
+                                                        child: Text('Manage', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffFFFFFF),),),
                                                         minWidth: SizeConfig.screenWidth! / 2,
                                                         color: const Color(0xff2F353D),
                                                         shape: const StadiumBorder(),
@@ -469,7 +467,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                       Text(
                                                         profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsCountry,
-                                                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                                        style: const TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                                       ),
                                                     ],
                                                   ),
@@ -482,7 +480,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                       const SizedBox(width: 20,),
 
-                                                      Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDob, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                      Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsDob, style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                     ],
                                                   ),
 
@@ -494,7 +492,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                                       const SizedBox(width: 20,),
 
-                                                      Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsRip, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                                                      Text(profile.data!.almMemorial.showMemorialDetails.showMemorialDetailsRip, style: TextStyle(fontSize: 18, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                                                     ],
                                                   ),
                                                 ],
@@ -511,9 +509,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     child: GestureDetector(
                                                       child: Column(
                                                         children: [
-                                                          Text('${profile.data!.almMemorial.showMemorialPostsCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                          Text('${profile.data!.almMemorial.showMemorialPostsCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
-                                                          Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
+                                                          Text('Post', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
                                                         ],
                                                       ),
                                                       onTap: (){
@@ -528,9 +526,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     child: GestureDetector(
                                                       child: Column(
                                                         children: [
-                                                          Text('${profile.data!.almMemorial.showMemorialFamilyCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                          Text('${profile.data!.almMemorial.showMemorialFamilyCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
-                                                          Text('Family', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
+                                                          Text('Family', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
                                                         ],
                                                       ),
                                                       onTap: (){
@@ -545,9 +543,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     child: GestureDetector(
                                                       child: Column(
                                                         children: [
-                                                          Text('${profile.data!.almMemorial.showMemorialFriendsCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                          Text('${profile.data!.almMemorial.showMemorialFriendsCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
-                                                          Text('Friends', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
+                                                          Text('Friends', style: const TextStyle(fontSize: 16, fontFamily: 'NexaRegular', color: const Color(0xff677375),),),
                                                         ],
                                                       ),
                                                       onTap: (){
@@ -562,9 +560,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     child: GestureDetector(
                                                       child: Column(
                                                         children: [
-                                                          Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                          Text('${profile.data!.almMemorial.showMemorialFollowersCount}', style: TextStyle(fontSize: 20, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
 
-                                                          Text('Joined', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 1.76, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
+                                                          Text('Joined', style: TextStyle(fontSize: 16, fontFamily:'NexaRegular', color: const Color(0xff677375),),),
                                                         ],
                                                       ),
                                                       onTap: (){
@@ -587,7 +585,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                 Container(
                                                   padding: const EdgeInsets.only(left: 20.0),
                                                   alignment: Alignment.centerLeft,
-                                                  child: Text('Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
+                                                  child: Text('Post', style: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xff000000),),),
                                                 ),
 
                                                 const SizedBox(height: 20),
@@ -751,9 +749,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                               child: GestureDetector(
                                                 child: Row(
                                                   children: [
-                                                    Icon(Icons.arrow_back, color: const Color(0xffffffff), size: SizeConfig.blockSizeVertical! * 3.65,),
+                                                    Icon(Icons.arrow_back, color: const Color(0xffffffff), size: 35,),
 
-                                                    Text('Back', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                    Text('Back', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                   ],
                                                 ),
                                                 onTap: (){
@@ -773,7 +771,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                               alignment: Alignment.centerRight,
                                               child: widget.managed == true
                                               ? GestureDetector(
-                                                child: Text('Create Post', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
+                                                child: Text('Create Post', style: TextStyle(fontSize: 32, color: Color(0xffFFFFFF), fontFamily: 'NexaRegular'),),
                                                 onTap: () async{
                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data!.almMemorial.showMemorialName, memorialId: profile.data!.almMemorial.showMemorialId)));
                                                 },
@@ -911,7 +909,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       child: Text(posts[i].postBody,
-                                        style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
+                                        style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 5,
                                       ),
@@ -1093,7 +1091,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                         const SizedBox(height: 45,),
 
-                        Center(child: Text('Post is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
+                        Center(child: Text('Post is empty', style: const TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
 
                         const SizedBox(height: 40,),
                       ],
@@ -1102,7 +1100,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                 ],
               ),
             ),
-          ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Visibility(
             visible: showFloatingButtonListener,

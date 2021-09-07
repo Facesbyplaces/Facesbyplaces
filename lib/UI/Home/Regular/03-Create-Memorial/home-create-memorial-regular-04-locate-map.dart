@@ -1,228 +1,118 @@
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:custom_info_window/custom_info_window.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 class HomeRegularCreateMemorialLocateMap extends StatefulWidget{
-  const HomeRegularCreateMemorialLocateMap();
-  
-  @override
+
   HomeRegularCreateMemorialLocateMapState createState() => HomeRegularCreateMemorialLocateMapState();
 }
 
 class HomeRegularCreateMemorialLocateMapState extends State<HomeRegularCreateMemorialLocateMap>{
-  late TextEditingController textEditingController = TextEditingController();
-  late PickerMapController controller = PickerMapController(
-    initMapWithUserPosition: true,
-  );
+  CustomInfoWindowController customInfoWindowController = CustomInfoWindowController();
+  CameraPosition? initialCameraPosition;
+  Set<Marker> markers = {};
+  bool pinned = false;
+  LatLng? memorial;
 
-  @override
-  void initState() {
+  void initState(){
     super.initState();
-    textEditingController.addListener(textOnChanged);
-  }
-
-  void textOnChanged() {
-    controller.setSearchableText(textEditingController.text);
+    initialCameraPosition = CameraPosition(target: LatLng(37.78583400000001, -122.406417), zoom: 14.4746,);
   }
 
   @override
-  void dispose() {
-    textEditingController.removeListener(textOnChanged);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPickerLocation(
-      controller: controller,
-      appBarPicker: AppBar(
-        title: TextField(
-          controller: textEditingController,
-          onEditingComplete: () async {
-            FocusScope.of(context).requestFocus(new FocusNode());
-          },
-          decoration: InputDecoration(
-            prefixIcon: Icon(
-              Icons.search,
-              color: Colors.black,
-            ),
-            suffix: ValueListenableBuilder<TextEditingValue>(
-              valueListenable: textEditingController,
-              builder: (ctx, text, child) {
-                if (text.text.isNotEmpty) {
-                  return child!;
-                }
-                return SizedBox.shrink();
-              },
-              child: InkWell(
-                focusNode: FocusNode(),
-                onTap: () {
-                  textEditingController.clear();
-                  controller.setSearchableText("");
-                  FocusScope.of(context).requestFocus(new FocusNode());
-                },
-                child: Icon(
-                  Icons.close,
-                  size: 16,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            focusColor: Colors.black,
-            filled: true,
-            hintText: "search",
-            border: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            fillColor: Colors.grey[300],
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-            ),
+  Widget build(BuildContext context){
+    SizeConfig.init(context);
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: Text('Test', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.74, fontFamily: 'NexaBold', color: const Color(0xffffffff),),),
+        backgroundColor: const Color(0xff04ECFF),
+        actions: [
+          IconButton(
+            onPressed: (){
+              setState(() {
+                markers.clear();
+                pinned = false;
+              });
+            },
+            icon: Icon(Icons.delete),
           ),
-        ),
+
+          IconButton(
+            onPressed: () async{
+              if(!pinned){
+                await showDialog(
+                  context: context,
+                  builder: (_) => AssetGiffyDialog(
+                    description: Text('Pin the location of the cemetery first before proceeding by long pressing the location of the memorial on the map.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    buttonOkColor: const Color(0xffff0000),
+                    onlyOkButton: true,
+                    onOkButtonPressed: (){
+                      Navigator.pop(context, true);
+                    },
+                  ),
+                );
+              }else{
+                Navigator.pop(context, memorial);
+              }
+            },
+            icon: Icon(Icons.send_outlined),
+          ),
+        ],
       ),
-      topWidgetPicker: HomeRegularCreateMemorialLocateMapTopWidget(),
-      bottomWidgetPicker: Container(
-        alignment: Alignment.bottomRight,
-        padding: EdgeInsets.all(5),
-        child: FloatingActionButton(
-          onPressed: () async {
-            GeoPoint p = await controller.getCurrentPositionAdvancedPositionPicker();
-            print('The geopoint latitude is ${p.latitude}');
-            print('The geopoint longitude is ${p.longitude}');
-            Navigator.pop(context, p);
-          },
-          child: Icon(Icons.location_pin),
-        ),
+      body: Stack(
+        children: [
+          GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: initialCameraPosition!,
+            markers: markers,
+            onLongPress: _addMarker,
+            onTap: (LatLng position){
+              customInfoWindowController.hideInfoWindow!();
+            },
+            onCameraMove: (CameraPosition position){
+              customInfoWindowController.onCameraMove!();
+            },
+            onMapCreated: (GoogleMapController controller){
+              customInfoWindowController.googleMapController = controller;
+            },
+          ),
+
+          CustomInfoWindow(
+            controller: customInfoWindowController,
+            height: 150,
+            width: 300,
+            offset: 50,
+          ),
+        ],
       ),
     );
   }
-}
 
+  void _addMarker(LatLng position) async{
+    print('long press');
 
-class HomeRegularCreateMemorialLocateMapTopWidget extends StatefulWidget{
-  @override
-  
-  HomeRegularCreateMemorialLocateMapTopWidgetState createState() => HomeRegularCreateMemorialLocateMapTopWidgetState();
-}
+    print('The latitude is ${position.latitude}');
+    print('The longitude is ${position.longitude}');
 
-class HomeRegularCreateMemorialLocateMapTopWidgetState extends State<HomeRegularCreateMemorialLocateMapTopWidget>{
-  late PickerMapController controller;
-  ValueNotifier<bool> notifierAutoCompletion = ValueNotifier(false);
+    if(markers.length == 0){
+      setState(() {
+        markers.add(Marker(
+          markerId: const MarkerId('Memorial'),
+          infoWindow: const InfoWindow(title: 'Memorial'),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+          position: position,
+        ));
 
-  late StreamController<List<SearchInfo>> streamSuggestion = StreamController();
-  late Future<List<SearchInfo>> _futureSuggestionAddress;
-  String oldText = "";
-  Timer? _timerToStartSuggestionReq;
-  final Key streamKey = Key("streamAddressSug");
-
-  @override
-  void initState() {
-    super.initState();
-    controller = CustomPickerLocation.of(context);
-    controller.searchableText.addListener(onSearchableTextChanged);
-  }
-
-  void onSearchableTextChanged() async {
-    final v = controller.searchableText.value;
-    if (v.length > 3 && oldText != v) {
-      oldText = v;
-      if (_timerToStartSuggestionReq != null &&
-          _timerToStartSuggestionReq!.isActive) {
-        _timerToStartSuggestionReq!.cancel();
-      }
-      _timerToStartSuggestionReq =
-          Timer.periodic(Duration(seconds: 3), (timer) async {
-        await suggestionProcessing(v);
-        timer.cancel();
+        memorial = LatLng(position.latitude, position.longitude);
+        pinned = true;
       });
     }
-    if (v.isEmpty) {
-      await reInitStream();
-    }
-  }
-
-  Future reInitStream() async {
-    notifierAutoCompletion.value = false;
-    await streamSuggestion.close();
-    setState(() {
-      streamSuggestion = StreamController();
-    });
-  }
-
-  Future<void> suggestionProcessing(String addr) async {
-    notifierAutoCompletion.value = true;
-    _futureSuggestionAddress = addressSuggestion(
-      addr,
-      limitInformation: 5,
-    );
-    _futureSuggestionAddress.then((value) {
-      streamSuggestion.sink.add(value);
-    });
-  }
-
-  @override
-  void dispose() {
-    controller.searchableText.removeListener(onSearchableTextChanged);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: notifierAutoCompletion,
-      builder: (ctx, isVisible, child) {
-        return AnimatedContainer(
-          duration: Duration(
-            milliseconds: 500,
-          ),
-          height: isVisible ? MediaQuery.of(context).size.height / 4 : 0,
-          child: Card(
-            child: child!,
-          ),
-        );
-      },
-      child: StreamBuilder<List<SearchInfo>>(
-        stream: streamSuggestion.stream,
-        key: streamKey,
-        builder: (ctx, snap) {
-          if (snap.hasData) {
-            return ListView.builder(
-              itemExtent: 50.0,
-              itemBuilder: (ctx, index) {
-                return ListTile(
-                  title: Text(
-                    snap.data![index].address.toString(),
-                    maxLines: 1,
-                    overflow: TextOverflow.fade,
-                  ),
-                  onTap: () async {
-                    /// go to location selected by address
-                    controller.goToLocation(
-                      snap.data![index].point!,
-                    );
-
-                    /// hide suggestion card
-                    notifierAutoCompletion.value = false;
-                    await reInitStream();
-                    FocusScope.of(context).requestFocus(
-                      new FocusNode(),
-                    );
-                  },
-                );
-              },
-              itemCount: snap.data!.length,
-            );
-          }
-          if (snap.connectionState == ConnectionState.waiting) {
-            return Card(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-          return SizedBox();
-        },
-      ),
-    );
   }
 }

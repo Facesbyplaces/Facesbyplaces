@@ -5,17 +5,17 @@ import 'package:custom_info_window/custom_info_window.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMCreateMemorialLocateMap extends StatefulWidget{
+class TestMap extends StatefulWidget{
 
-  HomeBLMCreateMemorialLocateMapState createState() => HomeBLMCreateMemorialLocateMapState();
+  TestMapState createState() => TestMapState();
 }
 
-class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLocateMap>{
-  CustomInfoWindowController customInfoWindowController = CustomInfoWindowController();
+class TestMapState extends State<TestMap>{
   CameraPosition? initialCameraPosition;
+  CustomInfoWindowController customInfoWindowController = CustomInfoWindowController();
   Set<Marker> markers = {};
-  bool pinned = false;
   LatLng? memorial;
+  bool pinned = false;
 
   void initState(){
     super.initState();
@@ -37,6 +37,10 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
                 markers.clear();
                 pinned = false;
               });
+              
+              // setState(() {
+              //   memorial = {};
+              // });
             },
             icon: Icon(Icons.delete),
           ),
@@ -47,8 +51,8 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
                 await showDialog(
                   context: context,
                   builder: (_) => AssetGiffyDialog(
-                    description: Text('Pin the location of the cemetery first before proceeding by long pressing the location of the memorial on the map.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular'),),
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular'),),
+                    description: Text('Pin the location of the cemetery first before proceeding.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular'),),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaRegular'),),
                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                     entryAnimation: EntryAnimation.DEFAULT,
                     buttonOkColor: const Color(0xffff0000),
@@ -59,7 +63,7 @@ class HomeBLMCreateMemorialLocateMapState extends State<HomeBLMCreateMemorialLoc
                   ),
                 );
               }else{
-                Navigator.pop(context, memorial);
+                print('heheheh');
               }
             },
             icon: Icon(Icons.send_outlined),

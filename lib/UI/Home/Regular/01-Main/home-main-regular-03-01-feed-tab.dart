@@ -101,8 +101,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         showDialog(
           context: context,
           builder: (_) => AssetGiffyDialog(
-            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.87, fontFamily: 'NexaRegular',),),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.87, fontFamily: 'NexaRegular',),),
+            description: Text('Error: $error.', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontFamily: 'NexaRegular',),),
+            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontFamily: 'NexaRegular',),),
             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
             entryAnimation: EntryAnimation.DEFAULT,
             buttonOkColor: const Color(0xffff0000),
@@ -211,7 +211,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   latitude: feedsListener[i].latitude,
                   longitude: feedsListener[i].longitude,
                   contents: [
-                    Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+                    Container(alignment: Alignment.centerLeft, child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),),
                         
                     feedsListener[i].imagesOrVideos.isNotEmpty
                     ? Column(
@@ -398,7 +398,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   contents: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.11, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
+                      child: Text(feedsListener[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5, style: TextStyle(fontSize: 20, fontFamily: 'NexaRegular', color: const Color(0xff000000),),),
                     ),
                     
                     feedsListener[i].imagesOrVideos.isNotEmpty
@@ -577,12 +577,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                       children:  <TextSpan>[
                         TextSpan(
                           text: 'Welcome to\n',
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
+                          style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
                         ),
 
                         TextSpan(
                           text: 'Faces by Places',
-                          style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.16, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
+                          style: TextStyle(fontSize: 32, fontFamily: 'NexaBold', color: const Color(0xff2F353D),),
                         ),
                       ],
                     ),
@@ -592,34 +592,32 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 const SizedBox(height: 20),
 
                 Container(
-                  padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 2, right: SizeConfig.blockSizeHorizontal! * 2),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Image.asset('assets/icons/Welcome.png', width: SizeConfig.screenWidth, fit: BoxFit.cover,),
                 ),
 
-                SizedBox(height: SizeConfig.blockSizeVertical! * 4.04),
+                const SizedBox(height: 50,),
 
-                Center(child: Text('Feed is empty', style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 3.52, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),),
+                Text('Feed is empty', style: TextStyle(fontSize: 36, fontFamily: 'NexaBold', color: const Color(0xffB1B1B1),),),
 
                 Padding(
-                  padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal! * 6, right: SizeConfig.blockSizeHorizontal! * 6),
-                  child: Center(
-                    child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
-                    ),
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 26, fontFamily: 'NexaRegular', color: const Color(0xff2F353D),),
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 isGuestLoggedInListener
                 ? Container(height: 0,)
                 : MiscRegularButtonTemplate(
-                  buttonTextStyle: TextStyle(fontSize: SizeConfig.blockSizeVertical! * 2.64, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
+                  buttonTextStyle: TextStyle(fontSize: 24, fontFamily: 'NexaBold', color: const Color(0xffffffff),),
                   buttonColor: const Color(0xff04ECFF),
                   width: SizeConfig.screenWidth! / 2,
                   buttonText: 'Create',
-                  height: 45,
+                  height: 50,
                   onPressed: (){
                     Navigator.pushNamed(context, '/home/regular/create-memorial');
                   },
