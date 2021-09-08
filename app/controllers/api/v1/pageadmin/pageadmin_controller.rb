@@ -6,7 +6,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     before_action :set_user, except: [:editPost, :updatePost, :deletePost, :unhideOrHideFamily, :unhideOrHideFollowers, :unhideOrHideFriends, :hideStatus]
     before_action :set_post, only: [:editPost, :updatePost, :deletePost]
     before_action :verify_page_admin
-    before_action :check_is_page_admin, only: [:addAdmin, :removeAdmin, :removeFamilyorFriend]
+    before_action :check_is_page_admin, only: [:addAdmin]
     before_action :check_is_page_owner, only: [:removeAdmin, :removeFamilyorFriend]
     before_action :check_has_relationship, only: [:addFamily, :addFriend]
 
